@@ -16,7 +16,11 @@ int main() {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	//GLFWmonitor* prMonitor = glfwGetPrimaryMonitor();
+	//Para pantalla completa se debe especificar un monitor (el principal en caso de haber mas de uno) en el cuarto parametro
+	//de la funcion glfwCreateWindow()
+
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "TBA - OpenGL Viewer / Engine", nullptr, nullptr);
 	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -37,8 +41,6 @@ int main() {
 	glfwSetKeyCallback(window, key_callback);
 
 	glViewport(0, 0, width, height);
-
-
 
 	while (!glfwWindowShouldClose(window)){
 		// Check and call events
