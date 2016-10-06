@@ -52,6 +52,7 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 	RakNet::Packet *packet;
 	std::string str;
 	RakNet::BitStream bsOut;
+
 	RakNet::BitStream bsOut2;
 	RakNet::RakNetGUID servidor2;
 	int conectado = 0;
@@ -83,6 +84,7 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 				//std::cin >> str;
 				bsOut.Write("hola");
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
 				*llega = 1;
 				conectado = 1;
 				
@@ -99,11 +101,13 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 				//escribirMensaje(peer, servidor2);
 				std::cout << "Escribe tu mensaje " << std::endl;
 
-				bsOut2.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+				bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
 				
 				//std::cin >> str;
-				bsOut2.Write("hola2");
-				peer->Send(&bsOut2, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				
+				bsOut.Write("hola2");
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
 				*llega = 1;
 				conectado = 1;
 			}
