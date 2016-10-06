@@ -1,3 +1,4 @@
 ﻿  main.cpp
-  SFML+Raknet.vcxproj -> C:\Users\tonir\Documents\Visual Studio 2015\Projects\SFML+Raknet\Debug\SFML+Raknet.exe
-  SFML+Raknet.vcxproj -> C:\Users\tonir\Documents\Visual Studio 2015\Projects\SFML+Raknet\Debug\SFML+Raknet.pdb (Full PDB)
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\sfml+raknet\main.cpp(35): warning C4101: 'packet': variable local sin referencia
+  SFML+Raknet.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.exe
+  SFML+Raknet.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.pdb (Full PDB)

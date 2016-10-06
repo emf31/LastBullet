@@ -15,7 +15,7 @@ enum GameMessages
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
 };
 
-void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor) {
+void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::RakNetGUID servidor) {
 	/*MessageID useTimeStamp; // Assign this to ID_TIMESTAMP
 	RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 	MessageID typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINE
@@ -33,27 +33,31 @@ void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *serv
 	myBitStream.Write(mine->GetNetworkID()); // In the struct this is NetworkID networkId
 	myBitStream.Write(mine->GetOwner()); // In the struct this is SystemAddress systemAddress*/
 	RakNet::Packet *packet;
-	while (1) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+
 			//packet = new RakNet::Packet();
-			packet = new RakNet::Packet();
-			std::cout << "Escribe tu mensaje " << std::endl;
+			//packet = new RakNet::Packet();
+			std::cout << "Escribe tu mensaje2 " << std::endl;
 			RakNet::BitStream bsOut;
-			bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+			bsOut.Write((RakNet::MessageID)135);
 			std::string str;
 			std::cin >> str;
 			bsOut.Write(str);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, *servidor, false);
-		}
-	}
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+		
+	
 
 }
 
 void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int *llega) {
 	RakNet::Packet *packet;
+	std::string str;
+	RakNet::BitStream bsOut;
+	RakNet::BitStream bsOut2;
+	RakNet::RakNetGUID servidor2;
+	int conectado = 0;
 	while (1) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-			std::thread second(escribirMensaje, peer, servidor);
+			
 			switch (packet->data[0])
 			{
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -68,7 +72,19 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 			case ID_CONNECTION_REQUEST_ACCEPTED:
 				printf("Nuestra conexion se ha aceptado.\n");
 				servidor = &packet->systemAddress;
+				
+				std::cout << "Escribe tu mensaje " << std::endl;
+				
+				bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+				if (conectado==0) {
+					servidor2 = packet->guid;
+				}
+				
+				//std::cin >> str;
+				bsOut.Write("hola");
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
 				*llega = 1;
+				conectado = 1;
 				
 				
 				break;
@@ -76,6 +92,23 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
 			}
+		}
+		if (conectado) {
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Escribe tu mensaje " << std::endl;
+
+				bsOut2.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+				
+				//std::cin >> str;
+				bsOut2.Write("hola2");
+				peer->Send(&bsOut2, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				*llega = 1;
+				conectado = 1;
+			}
+			
+			
 		}
 	}
 }
