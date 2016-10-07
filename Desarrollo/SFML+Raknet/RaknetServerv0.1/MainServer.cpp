@@ -12,7 +12,10 @@
 #define SERVER_PORT 65535
 enum GameMessages
 {
-	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
+	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
+	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
+	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
+	OBJETO = ID_USER_PACKET_ENUM + 4
 };
 
 int main() {
@@ -54,13 +57,59 @@ int main() {
 					break;
 				case ID_GAME_MESSAGE_1:
 					{
-						RakNet::RakString rs;
 						RakNet::BitStream bsIn(packet->data, packet->length, false);
 						bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-						bsIn.Read(rs);
-						printf("%s\n", rs.C_String());
+						RakNet::RakString stringEntrante;
+						bsIn.Read(stringEntrante);
+
+						std::cout << stringEntrante.C_String() << std::endl;
 					}
 					break;
+				case MENSAJE_POSICION:
+				{
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					float x, y, z;
+					bsIn.ReadFloat16(x, 0, 9);
+					bsIn.ReadFloat16(y, 0, 9);
+					bsIn.ReadFloat16(z, 0, 9);
+					std::cout << x << ", " << y << ", " << z << std::endl;
+				}
+
+				break;
+				case MENSAJE_NOMBRE:
+				{
+					
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					RakNet::RakString stringEntrante;
+					bsIn.Read(stringEntrante);
+
+					std::cout << stringEntrante.C_String() << std::endl;
+				}
+				break;
+
+				case OBJETO:
+				{
+					typedef struct Entity
+					{
+						float x, y, z;
+						int vida;
+						int municion;
+					} TEntity;
+
+					TEntity player;
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					bsIn.Read(player);
+
+					std::cout<< "Vida: " << player.vida << std::endl;
+					std::cout << "Municion: " << player.municion << std::endl;
+					std::cout << "Posicion: " << player.x << ", "<< player.y << ", "<< player.z << std::endl;
+					std::cout << "" << std::endl;
+
+				}
+				break;
 				default:
 					printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 					break;
