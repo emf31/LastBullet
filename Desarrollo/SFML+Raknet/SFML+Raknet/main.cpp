@@ -12,7 +12,10 @@
 
 enum GameMessages
 {
-	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
+	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
+	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
+	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
+	OBJETO = ID_USER_PACKET_ENUM + 4
 };
 
 void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::RakNetGUID servidor) {
@@ -64,6 +67,9 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
 				printf("Otro cliente se ha desconectado.\n");
 				break;
+			case 22:
+				printf("EL SERVIDOR SE HA CAIDO.\n");
+				break;
 			case ID_REMOTE_CONNECTION_LOST:
 				printf("Otro cliente ha perdido la conexion.\n");
 				break;
@@ -99,24 +105,107 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
 				//escribirMensaje(peer, servidor2);
-				std::cout << "Escribe tu mensaje " << std::endl;
+				std::cout << "Envio un float " << std::endl;
 
-				bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+				bsOut.Write((RakNet::MessageID)MENSAJE_POSICION);
+				
+				struct posicion
+				{
+					float x, y, z;
+				} myVector;
+
+				//sf::Vector3f mivector(16.5f, 24.f, 5.1f);
+				//bsOut.WriteVector(mivector.x, mivector.y, mivector.z);
+				//bsOut.WriteVector(16.5f, 24.f, 5.1f);
+				//bsOut.WriteVector(16.2, 24.3, 5.4);
+				myVector.x = 1.0f;
+				myVector.y = 2.4f;
+				myVector.z = 6.1f;
+				//bsOut.WriteVector(myVector.x, myVector.y, myVector.z);
+				//std::cin >> str;
+				bsOut.WriteFloat16(7.2f, 0, 9);
+				bsOut.WriteFloat16(1.0f, 0, 9);
+				bsOut.WriteFloat16(3.5f, 0, 9);
+				
+				//bsOut.Write("hola2");
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+
+				bsOut.Reset();
+				*llega = 1;
+				conectado = 1;
+			}
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Envio un string " << std::endl;
+
+				bsOut.Write((RakNet::MessageID)MENSAJE_NOMBRE);
+				
 				
 				//std::cin >> str;
-				
-				bsOut.Write("hola2");
+
+				bsOut.Write("RuCri95");
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
 				bsOut.Reset();
 				*llega = 1;
 				conectado = 1;
 			}
 			
-			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Envio un objeto " << std::endl;
+
+				typedef struct Entity
+				{
+					float x, y,z;
+					int vida;
+					int municion;
+				} TEntity;
+
+				TEntity player;
+				player.x = 5.4f;
+				player.y = 8.4f;
+				player.z = 3.4f;
+				player.vida = 10;
+				player.municion = 100;
+				bsOut.Write((RakNet::MessageID)OBJETO);
+
+
+				//std::cin >> str;
+				bsOut.Write(player);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
+				*llega = 1;
+				conectado = 1;
+			}
 		}
 	}
 }
 
+/*
+case ID_FIRST_CONNECTION:
+{
+mServerGuid = mpPacket->guid;
+
+//set as first connected or second connected.
+setFirstConnected(true);
+setConnected(true);
+
+//get the packet's GameInfo struct and set it equal to ours
+GameInfo gameInfo = *reinterpret_cast<GameInfo*>(mpPacket->data);
+mGameInfo = gameInfo;
+
+RakNet::Time currentTime = RakNet::GetTimeMS();
+delay = 200.0f - (currentTime - gameInfo.timeStamp);
+gameInfo.firstPlayerLag = delay;
+gameInfo.mID = ID_RECIEVE_LAG;
+
+mpClient->Send((const char*)&gameInfo, sizeof(gameInfo), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, mServerGuid, false);
+
+break;
+}
+*/
 
 
 int main() {
