@@ -1,4 +1,5 @@
 #include <string.h>
+#include <string>
 #include <iostream>
 
 
@@ -22,6 +23,26 @@ int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
+	int num_conexiones = 0;
+	typedef struct Entity
+	{
+		std::string nombre;
+		float x, y, z;
+		int vida;
+		int municion;
+		
+	} TEntity;
+
+	TEntity player1;
+	TEntity player2;
+	TEntity player3;
+	TEntity player4;
+	//los guid no pueden estar dentro de la estructura de entity porque luego cuando envies otro paquete desde el cliente se cambia y ya no lo reconoce.
+	RakNet::RakNetGUID player1guid;
+	RakNet::RakNetGUID player2guid;
+	RakNet::RakNetGUID player3guid;
+	RakNet::RakNetGUID player4guid;
+
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
 
@@ -48,6 +69,19 @@ int main() {
 					break;
 				case ID_NEW_INCOMING_CONNECTION:
 					printf("Conexion entrante...\n");
+					if (num_conexiones == 0) {
+						player1guid = packet->guid;
+					}
+					else if (num_conexiones == 1) {
+						player2guid = packet->guid;
+					}
+					else if (num_conexiones == 2) {
+						player3guid = packet->guid;
+					}
+					else if (num_conexiones == 3) {
+						player4guid = packet->guid;
+					}
+					num_conexiones++;
 					break;
 				case ID_DISCONNECTION_NOTIFICATION:
 					printf("Un cliente se ha desconectado.\n");
@@ -91,23 +125,58 @@ int main() {
 
 				case OBJETO:
 				{
-					typedef struct Entity
-					{
-						float x, y, z;
-						int vida;
-						int municion;
-					} TEntity;
 
-					TEntity player;
+
+					
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-					bsIn.Read(player);
+					if (packet->guid == player1guid) {
+						TEntity leido;
+						
+						bsIn.Read(player1);
+						std::cout << "Paquete recibido del PLAYER 1 " << std::endl;
+						
+						std::cout << "Nombre del player 1: "<< player1.nombre<<std::endl;
+						
+						std::cout << "Vida: " << player1.vida << std::endl;
+						std::cout << "Municion: " << player1.municion << std::endl;
+						std::cout << "Posicion: " << player1.x << ", " << player1.y << ", " << player1.z << std::endl;
+						std::cout << "" << std::endl;
+						
+					}
+					else if (packet->guid == player2guid) {
+						bsIn.Read(player2);
+						std::cout << "Paquete recibido del PLAYER 2 " << std::endl;
 
-					std::cout<< "Vida: " << player.vida << std::endl;
-					std::cout << "Municion: " << player.municion << std::endl;
-					std::cout << "Posicion: " << player.x << ", "<< player.y << ", "<< player.z << std::endl;
-					std::cout << "" << std::endl;
+						std::cout << "Nombre del player 2: " << player2.nombre << std::endl;
+						std::cout << "Vida: " << player2.vida << std::endl;
+						std::cout << "Municion: " << player2.municion << std::endl;
+						std::cout << "Posicion: " << player2.x << ", " << player2.y << ", " << player2.z << std::endl;
+						std::cout << "" << std::endl;
 
+					}
+					else if (packet->guid == player3guid) {
+						bsIn.Read(player3);
+						std::cout << "Paquete recibido del PLAYER 3 " << std::endl;
+						std::cout << "Nombre del player 3: " << player3.nombre << std::endl;
+						std::cout << "Vida: " << player3.vida << std::endl;
+						std::cout << "Municion: " << player3.municion << std::endl;
+						std::cout << "Posicion: " << player3.x << ", " << player3.y << ", " << player3.z << std::endl;
+						std::cout << "" << std::endl;
+
+					}
+					else if (packet->guid == player4guid) {
+						bsIn.Read(player4);
+						std::cout << "Paquete recibido del PLAYER 4 " << std::endl;
+						std::cout << "Nombre del player 4: " << player4.nombre << std::endl;
+						std::cout << "Vida: " << player4.vida << std::endl;
+						std::cout << "Municion: " << player4.municion << std::endl;
+						std::cout << "Posicion: " << player4.x << ", " << player4.y << ", " << player4.z << std::endl;
+						std::cout << "" << std::endl;
+
+					}else {
+						std::cout << "Los guid no coinciden: " << std::endl;
+					}
 				}
 				break;
 				default:

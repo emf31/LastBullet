@@ -129,7 +129,7 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 				
 				//bsOut.Write("hola2");
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
-
+				
 				bsOut.Reset();
 				*llega = 1;
 				conectado = 1;
@@ -157,16 +157,23 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 
 				typedef struct Entity
 				{
+					std::string nombre;
 					float x, y,z;
 					int vida;
 					int municion;
+					
 				} TEntity;
 
 				TEntity player;
+				std::cout << "Introduce el nombre del player " << std::endl;
+				std::cin >> str;
+				player.nombre = str;
 				player.x = 5.4f;
 				player.y = 8.4f;
 				player.z = 3.4f;
+				//std::cout << "Introduce la vida " << std::endl;
 				player.vida = 10;
+				//std::cout << "Introduce la municion " << std::endl;
 				player.municion = 100;
 				bsOut.Write((RakNet::MessageID)OBJETO);
 
