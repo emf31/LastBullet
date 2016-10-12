@@ -1,0 +1,2 @@
+﻿btBroadphaseProxy.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  BulletCollision.vcxproj -> C:\Users\Enrique\Desktop\cmake\lib\Debug\BulletCollision_Debug.lib
