@@ -10,12 +10,23 @@
 
 #define SERVER_PORT 65535
 
+typedef struct Entity
+{
+	std::string nombre;
+	float x, y, z;
+	int vida;
+	int municion;
+
+} TEntity;
+
 enum GameMessages
 {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
 	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
 	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
-	OBJETO = ID_USER_PACKET_ENUM + 4
+	OBJETO = ID_USER_PACKET_ENUM + 4,
+	MOVIMIENTO = ID_USER_PACKET_ENUM + 5
+
 };
 
 void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::RakNetGUID servidor) {
@@ -51,11 +62,11 @@ void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::RakNetGUID servidor
 
 }
 
-void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int *llega) {
+void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int *llega, TEntity* playerJugador, TEntity* playerEnemigo) {
 	RakNet::Packet *packet;
 	std::string str;
 	RakNet::BitStream bsOut;
-
+	
 	RakNet::BitStream bsOut2;
 	RakNet::RakNetGUID servidor2;
 	int conectado = 0;
@@ -95,6 +106,17 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 				conectado = 1;
 				
 				
+				break;
+			case OBJETO: {
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				printf("Recibido el objeto enemigo desde el servidor.\n");
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(*playerEnemigo);
+			}
+
 				break;
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
@@ -155,31 +177,87 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 				//escribirMensaje(peer, servidor2);
 				std::cout << "Envio un objeto " << std::endl;
 
-				typedef struct Entity
-				{
-					std::string nombre;
-					float x, y,z;
-					int vida;
-					int municion;
-					
-				} TEntity;
 
-				TEntity player;
 				std::cout << "Introduce el nombre del player " << std::endl;
 				std::cin >> str;
-				player.nombre = str;
-				player.x = 5.4f;
-				player.y = 8.4f;
-				player.z = 3.4f;
+				playerJugador->nombre = str;
+				playerJugador->x = 20.0f;
+				playerJugador->y = 20.0f;
+				playerJugador->z = 3.4f;
 				//std::cout << "Introduce la vida " << std::endl;
-				player.vida = 10;
+				playerJugador->vida = 10;
 				//std::cout << "Introduce la municion " << std::endl;
-				player.municion = 100;
+				playerJugador->municion = 100;
 				bsOut.Write((RakNet::MessageID)OBJETO);
 
 
 				//std::cin >> str;
-				bsOut.Write(player);
+				bsOut.Write(*playerJugador);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
+				*llega = 1;
+				conectado = 1;
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Me muevo Arriba" << std::endl;
+
+				playerJugador->y= playerJugador->y-0.05f;
+				bsOut.Write((RakNet::MessageID)MOVIMIENTO);
+
+
+				//std::cin >> str;
+				bsOut.Write(*playerJugador);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
+				*llega = 1;
+				conectado = 1;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Me muevo Izquierda" << std::endl;
+				playerJugador->x = playerJugador->x - 0.05f;
+				//playerJugador->x--;
+				bsOut.Write((RakNet::MessageID)MOVIMIENTO);
+
+
+				//std::cin >> str;
+				bsOut.Write(*playerJugador);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
+				*llega = 1;
+				conectado = 1;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Me muevo Derecha" << std::endl;
+				playerJugador->x = playerJugador->x + 0.05f;
+				//playerJugador->x++;
+				bsOut.Write((RakNet::MessageID)MOVIMIENTO);
+
+
+				//std::cin >> str;
+				bsOut.Write(*playerJugador);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+				bsOut.Reset();
+				*llega = 1;
+				conectado = 1;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+				//escribirMensaje(peer, servidor2);
+				std::cout << "Me muevo Abajo" << std::endl;
+				playerJugador->y = playerJugador->y + 0.05f;
+				//playerJugador->y++;
+				bsOut.Write((RakNet::MessageID)MOVIMIENTO);
+
+
+				//std::cin >> str;
+				bsOut.Write(*playerJugador);
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
 				//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
 				bsOut.Reset();
@@ -218,20 +296,34 @@ break;
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Raknet Client v0.1");
 	sf::CircleShape shape(100.f);
+	sf::CircleShape shape2(100.f);
 	char str[512];
 	int llega = 0;
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd;
 	RakNet::SystemAddress *servidor;
+
+
+
+	TEntity playerJugador;
+	TEntity playerEnemigo;
+
+
+
 	printf("Introduce la IP \n");
 	std::cin >> str;
 	std::cout << "Conectando al servidor " << str << ":" << SERVER_PORT << std::endl;
 	peer->Startup(1, &sd, 1);
 	peer->Connect(str, SERVER_PORT, 0, 0);
-	std::thread first(cliente, peer, servidor, &llega);
+	std::thread first(cliente, peer, servidor, &llega, &playerJugador, &playerEnemigo);
 	
 	
 	shape.setFillColor(sf::Color::Green);
+	shape2.setFillColor(sf::Color::Red);
+	shape.setPosition(playerJugador.x, playerJugador.y);
+	shape2.setPosition(playerEnemigo.x, playerEnemigo.y);
+	//shape2.setPosition(20, 20);
+	
 
 	while (window.isOpen()){
 		sf::Event event;
@@ -239,9 +331,13 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
+		shape.setPosition(playerJugador.x, playerJugador.y);
+		shape2.setPosition(playerEnemigo.x, playerEnemigo.y);
+		//shape2.setPosition(5, 5);
 		window.clear(sf::Color(208,208,208,1));
-		//window.draw(shape);
+		window.draw(shape);
+		window.draw(shape2);
+		//std::cout << "Posicion shape x: " << playerJugador.x << " y: " << playerJugador.y << std::endl;
 		window.display();
 	}
 	return 0;

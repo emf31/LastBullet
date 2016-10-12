@@ -11,12 +11,22 @@
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
+typedef struct Entity
+{
+	std::string nombre;
+	float x, y, z;
+	int vida;
+	int municion;
+
+} TEntity;
+
 enum GameMessages
 {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
 	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
 	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
-	OBJETO = ID_USER_PACKET_ENUM + 4
+	OBJETO = ID_USER_PACKET_ENUM + 4,
+	MOVIMIENTO = ID_USER_PACKET_ENUM + 5
 };
 
 int main() {
@@ -24,14 +34,7 @@ int main() {
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
 	int num_conexiones = 0;
-	typedef struct Entity
-	{
-		std::string nombre;
-		float x, y, z;
-		int vida;
-		int municion;
-		
-	} TEntity;
+
 
 	TEntity player1;
 	TEntity player2;
@@ -179,6 +182,35 @@ int main() {
 					}
 				}
 				break;
+
+				case MOVIMIENTO: {
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					RakNet::BitStream bsOut;
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					if (packet->guid == player1guid) {
+
+						//si me llega un movimiento del player 1, actualizo el player uno con el read, y se lo envio al player 2 con el write y el send
+						bsIn.Read(player1);
+
+						bsOut.Write((RakNet::MessageID)OBJETO);
+						bsOut.Write(player1);
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, player2guid, false);
+						//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+						bsOut.Reset();
+					}
+					if (packet->guid == player2guid) {
+						bsIn.Read(player2);
+
+						bsOut.Write((RakNet::MessageID)OBJETO);
+						bsOut.Write(player2);
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, player1guid, false);
+						//peer->Send((const char*)&player, sizeof(player), HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor2, false);
+						bsOut.Reset();
+					}
+				}
+
+					break;
+
 				default:
 					printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 					break;
