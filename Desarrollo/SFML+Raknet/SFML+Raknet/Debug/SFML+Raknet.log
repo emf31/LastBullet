@@ -1,4 +1,9 @@
-﻿  main.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\sfml+raknet\main.cpp(38): warning C4101: 'packet': variable local sin referencia
-  SFML+Raknet.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.exe
-  SFML+Raknet.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.pdb (Full PDB)
+﻿  Player.cpp
+  Generando código...
+  Compilando...
+  RaknetStuff.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  main.cpp
+  SFML+Raknet.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.exe
+  SFML+Raknet.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.pdb (Full PDB)

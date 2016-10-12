@@ -2,53 +2,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
-#include <thread> 
-#include <RakPeerInterface.h>
-#include <MessageIdentifiers.h>
-#include <BitStream.h>
-#include <RakNetTypes.h>  // MessageID
 
-#define SERVER_PORT 65535
+#include "RaknetStuff.h"
+#include "Player.h"
 
-enum GameMessages
-{
-	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
-	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
-	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
-	OBJETO = ID_USER_PACKET_ENUM + 4
-};
+
 
 void escribirMensaje(RakNet::RakPeerInterface *peer, RakNet::RakNetGUID servidor) {
-	/*MessageID useTimeStamp; // Assign this to ID_TIMESTAMP
-	RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
-	MessageID typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINE
-	useTimeStamp = ID_TIMESTAMP;
-	timeStamp = RakNet::GetTime();
-	typeId = ID_SET_TIMED_MINE;
-	Bitstream myBitStream;
-	myBitStream.Write(useTimeStamp);
-	myBitStream.Write(timeStamp);
-	myBitStream.Write(typeId);
-	// Assume we have a Mine* mine object
-	myBitStream.Write(mine->GetPosition().x);
-	myBitStream.Write(mine->GetPosition().y);
-	myBitStream.Write(mine->GetPosition().z);
-	myBitStream.Write(mine->GetNetworkID()); // In the struct this is NetworkID networkId
-	myBitStream.Write(mine->GetOwner()); // In the struct this is SystemAddress systemAddress*/
 	RakNet::Packet *packet;
-
-			//packet = new RakNet::Packet();
-			//packet = new RakNet::Packet();
-			std::cout << "Escribe tu mensaje2 " << std::endl;
-			RakNet::BitStream bsOut;
-			bsOut.Write((RakNet::MessageID)135);
-			std::string str;
-			std::cin >> str;
-			bsOut.Write(str);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-		
-	
-
+	std::cout << "Escribe tu mensaje2 " << std::endl;
+	RakNet::BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)135);
+	std::string str;
+	std::cin >> str;
+	bsOut.Write(str);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 }
 
 void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int *llega) {
@@ -190,31 +158,6 @@ void cliente(RakNet::RakPeerInterface *peer, RakNet::SystemAddress *servidor,int
 	}
 }
 
-/*
-case ID_FIRST_CONNECTION:
-{
-mServerGuid = mpPacket->guid;
-
-//set as first connected or second connected.
-setFirstConnected(true);
-setConnected(true);
-
-//get the packet's GameInfo struct and set it equal to ours
-GameInfo gameInfo = *reinterpret_cast<GameInfo*>(mpPacket->data);
-mGameInfo = gameInfo;
-
-RakNet::Time currentTime = RakNet::GetTimeMS();
-delay = 200.0f - (currentTime - gameInfo.timeStamp);
-gameInfo.firstPlayerLag = delay;
-gameInfo.mID = ID_RECIEVE_LAG;
-
-mpClient->Send((const char*)&gameInfo, sizeof(gameInfo), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, mServerGuid, false);
-
-break;
-}
-*/
-
-
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Raknet Client v0.1");
 	sf::CircleShape shape(100.f);
@@ -229,7 +172,7 @@ int main() {
 	peer->Startup(1, &sd, 1);
 	peer->Connect(str, SERVER_PORT, 0, 0);
 	std::thread first(cliente, peer, servidor, &llega);
-	
+	//RaknetStuff::Conectar("127.0.0.1", 65535);
 	
 	shape.setFillColor(sf::Color::Green);
 
@@ -241,7 +184,7 @@ int main() {
 		}
 
 		window.clear(sf::Color(208,208,208,1));
-		//window.draw(shape);
+		window.draw(shape);
 		window.display();
 	}
 	return 0;
