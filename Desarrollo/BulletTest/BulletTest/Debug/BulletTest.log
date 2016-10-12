@@ -1,7 +1,8 @@
 ﻿  stdafx.cpp
   BulletTest.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+  LINK : no se encontró D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
