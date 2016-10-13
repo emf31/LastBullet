@@ -157,9 +157,9 @@ void RaknetStuff::bucleCliente() {
 
 }
 
-void RaknetStuff::Conectar(std::string address, int port) {
+std::thread RaknetStuff::Conectar(std::string address, int port) {
 	peer->Startup(1, &sd, 1);
 	peer->Connect(address.c_str(), SERVER_PORT, 0, 0);
-	bucleCliente();
-	//std::thread hiloCliente(&RaknetStuff::bucleCliente,this);
+	//bucleCliente();
+	return std::thread(&RaknetStuff::bucleCliente,this);
 }

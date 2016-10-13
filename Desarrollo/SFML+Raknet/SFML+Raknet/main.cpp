@@ -18,8 +18,8 @@ int main() {
 	std::cin >> str;
 	std::cout << "Conectando al servidor " << str << ":" << SERVER_PORT << std::endl;
 
-	raknet->Conectar(str, SERVER_PORT);
-
+	std::thread hilo = raknet->Conectar(str, SERVER_PORT);
+	
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Raknet Client v0.1");
 	
 	int i = 0;
@@ -37,5 +37,6 @@ int main() {
 		}
 		window.display();
 	}
+	hilo.join();
 	return 0;
 }
