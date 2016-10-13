@@ -21,7 +21,8 @@ enum GameMessages
 	MOVIMIENTO = ID_USER_PACKET_ENUM + 6,
 	LISTA_CLIENTES = ID_USER_PACKET_ENUM + 7,
 	NUEVO_CLIENTE = ID_USER_PACKET_ENUM + 8,
-	ELIMINAR_CLIENTE = ID_USER_PACKET_ENUM + 9
+	ELIMINAR_CLIENTE = ID_USER_PACKET_ENUM + 9,
+	ACTUALIZA_CLIENTE = ID_USER_PACKET_ENUM + 10
 };
 void muestraPlayer(Player *p) {
 
@@ -32,6 +33,23 @@ void muestraPlayer(Player *p) {
 	std::cout << "Posicion: " << p->posX << ", " << p->posY  << std::endl;
 	std::cout << "" << std::endl;
 }
+
+void updatePlayer(int movimiento, Player *p) {
+	
+	if (movimiento == 1) {
+		p->posY = p->posY + 0.1f;
+	}
+	if (movimiento == 2) {
+		p->posX = p->posX - 0.1f;
+	}
+	if (movimiento == 3) {
+		p->posX = p->posX + 0.1f;
+	}
+	if (movimiento == 4) {
+		p->posY = p->posY - 0.1f;
+	}
+}
+
 int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
@@ -201,7 +219,34 @@ int main() {
 					std::cout << stringEntrante.C_String() << std::endl;
 				}
 				break;
-				case MOVIMIENTO:
+				case MOVIMIENTO: {
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					RakNet::BitStream bsOut;
+					int movimiento = 0;
+					int pos=0;
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					bsIn.Read(movimiento);
+					for (int i = 0; i < clientArray.size(); i++) {
+						if (packet->guid == clientArray.at(i)->getGuid()) {
+							pos = i;
+							break;
+						}
+					}
+					Player *p = clientArray.at(pos);
+
+					updatePlayer(movimiento, p);
+					
+					
+					for (int i = 0; i < clientArray.size(); i++) {
+						//Enviamos una copia del player a todos los demas
+						bsOut.Write((RakNet::MessageID)ACTUALIZA_CLIENTE);
+						//UPDATE
+						bsOut.Write(*p);
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
+						bsOut.Reset();
+					}
+				}
+
 					break;
 				default:
 					printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
