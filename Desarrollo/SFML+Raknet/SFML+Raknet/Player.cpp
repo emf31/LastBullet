@@ -7,6 +7,10 @@ Player::Player(std::string name, float x, float y){
 	posX = x;
 	posY = y;
 	shape.setRadius(100.f);
+	shape.setFillColor(sf::Color::Green);
+}
+Player::Player() {
+
 }
 
 
@@ -46,7 +50,28 @@ void Player::setNombre(std::string name) {
 	nombre = name;
 }
 
-inline void Player::setGuid(RakNet::RakNetGUID rkguid) {
+ void Player::setGuid(RakNet::RakNetGUID rkguid) {
 	guid = rkguid;
 }
 
+RakNet::RakNetGUID Player::getGuid() {
+	return guid;
+}
+
+void Player::getInput() {
+	
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		posY = posY - 0.1f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		posX = posX - 0.1f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		posX = posX + 0.1f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		posY = posY + 0.1f;
+	}
+
+}

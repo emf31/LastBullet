@@ -1,11 +1,13 @@
 #pragma once
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "RaknetStuff.h"
+#include <RakNetTypes.h>
+#include <RakPeerInterface.h>
 class Player{
 
 public:
 	Player(std::string name, float x, float y);
+	Player();
 	~Player();
 
 	float getVida();
@@ -19,14 +21,17 @@ public:
 	void setNombre(std::string name);
 
 	void setGuid(RakNet::RakNetGUID rkguid);
+	RakNet::RakNetGUID getGuid();
+	void getInput();
 
-private:
+	int conectado = 0;
+	sf::CircleShape shape;
+	std::string nombre;
 	float vida;
 	float posX, posY;
 	float municion;
 
-	std::string nombre;
-	sf::CircleShape shape;
+private:
 
 	RakNet::RakNetGUID guid;
 };

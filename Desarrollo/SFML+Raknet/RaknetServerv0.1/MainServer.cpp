@@ -7,7 +7,7 @@
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h>  // MessageID
-
+#include "../SFML+Raknet/Player.h"
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -16,33 +16,26 @@ enum GameMessages
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
 	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
 	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
-	OBJETO = ID_USER_PACKET_ENUM + 4
+	NUEVO_PLAYER = ID_USER_PACKET_ENUM + 4,
+	GUID_NUESTRO = ID_USER_PACKET_ENUM + 5,
+	MOVIMIENTO = ID_USER_PACKET_ENUM + 6,
+	LISTA_CLIENTES = ID_USER_PACKET_ENUM + 7
 };
+void muestraPlayer(Player *p) {
 
+	std::cout << "Nombre del player: " << p->nombre << std::endl;
+
+	std::cout << "Vida: " << p->vida << std::endl;
+	std::cout << "Municion: " << p->municion << std::endl;
+	std::cout << "Posicion: " << p->posX << ", " << p->posY  << std::endl;
+	std::cout << "" << std::endl;
+}
 int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
-	int num_conexiones = 0;
-	typedef struct Entity
-	{
-		std::string nombre;
-		float x, y, z;
-		int vida;
-		int municion;
-		
-	} TEntity;
 
-	TEntity player1;
-	TEntity player2;
-	TEntity player3;
-	TEntity player4;
-	//los guid no pueden estar dentro de la estructura de entity porque luego cuando envies otro paquete desde el cliente se cambia y ya no lo reconoce.
-	RakNet::RakNetGUID player1guid;
-	RakNet::RakNetGUID player2guid;
-	RakNet::RakNetGUID player3guid;
-	RakNet::RakNetGUID player4guid;
-
+	std::vector<Player> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
 
@@ -64,24 +57,46 @@ int main() {
 				case ID_REMOTE_NEW_INCOMING_CONNECTION:
 					printf("Otro cliente se ha conectado.\n");
 					break;
-				case ID_CONNECTION_REQUEST_ACCEPTED:
+				case ID_CONNECTION_REQUEST_ACCEPTED: {
 					printf("Nuestra conexion se ha aceptado.\n");
+
+					
+				}
 					break;
-				case ID_NEW_INCOMING_CONNECTION:
+				case NUEVO_PLAYER: {
+
+					//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
+
+					RakNet::BitStream bsIn(packet->data,packet->length,false);
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					Player *p = new Player();
+					bsIn.Read(*p);
+					muestraPlayer(p);
+					RakNet::BitStream bsOut;
+					for (int i = 0; i < clientArray.size(); i++) {
+						bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
+						bsOut.Write(*p);
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i).getGuid(), false);
+						bsOut.Reset();
+					}
+					bsOut.Write((RakNet::MessageID)LISTA_CLIENTES);
+					bsOut.Write(clientArray);
+					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
+					bsOut.Reset();
+
+					clientArray.push_back(*p);
+				}
+					break;
+				case ID_NEW_INCOMING_CONNECTION:{
 					printf("Conexion entrante...\n");
-					if (num_conexiones == 0) {
-						player1guid = packet->guid;
-					}
-					else if (num_conexiones == 1) {
-						player2guid = packet->guid;
-					}
-					else if (num_conexiones == 2) {
-						player3guid = packet->guid;
-					}
-					else if (num_conexiones == 3) {
-						player4guid = packet->guid;
-					}
-					num_conexiones++;
+
+					RakNet::BitStream bsOut;
+					bsOut.Write((RakNet::MessageID)GUID_NUESTRO);
+					bsOut.Write(packet->guid);
+					peer->Send(&bsOut, HIGH_PRIORITY,RELIABLE_ORDERED,0,packet->guid,false);
+					bsOut.Reset();
+				}
+
 					break;
 				case ID_DISCONNECTION_NOTIFICATION:
 					printf("Un cliente se ha desconectado.\n");
@@ -120,63 +135,6 @@ int main() {
 					bsIn.Read(stringEntrante);
 
 					std::cout << stringEntrante.C_String() << std::endl;
-				}
-				break;
-
-				case OBJETO:
-				{
-
-
-					
-					RakNet::BitStream bsIn(packet->data, packet->length, false);
-					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-					if (packet->guid == player1guid) {
-						TEntity leido;
-						
-						bsIn.Read(player1);
-						std::cout << "Paquete recibido del PLAYER 1 " << std::endl;
-						
-						std::cout << "Nombre del player 1: "<< player1.nombre<<std::endl;
-						
-						std::cout << "Vida: " << player1.vida << std::endl;
-						std::cout << "Municion: " << player1.municion << std::endl;
-						std::cout << "Posicion: " << player1.x << ", " << player1.y << ", " << player1.z << std::endl;
-						std::cout << "" << std::endl;
-						
-					}
-					else if (packet->guid == player2guid) {
-						bsIn.Read(player2);
-						std::cout << "Paquete recibido del PLAYER 2 " << std::endl;
-
-						std::cout << "Nombre del player 2: " << player2.nombre << std::endl;
-						std::cout << "Vida: " << player2.vida << std::endl;
-						std::cout << "Municion: " << player2.municion << std::endl;
-						std::cout << "Posicion: " << player2.x << ", " << player2.y << ", " << player2.z << std::endl;
-						std::cout << "" << std::endl;
-
-					}
-					else if (packet->guid == player3guid) {
-						bsIn.Read(player3);
-						std::cout << "Paquete recibido del PLAYER 3 " << std::endl;
-						std::cout << "Nombre del player 3: " << player3.nombre << std::endl;
-						std::cout << "Vida: " << player3.vida << std::endl;
-						std::cout << "Municion: " << player3.municion << std::endl;
-						std::cout << "Posicion: " << player3.x << ", " << player3.y << ", " << player3.z << std::endl;
-						std::cout << "" << std::endl;
-
-					}
-					else if (packet->guid == player4guid) {
-						bsIn.Read(player4);
-						std::cout << "Paquete recibido del PLAYER 4 " << std::endl;
-						std::cout << "Nombre del player 4: " << player4.nombre << std::endl;
-						std::cout << "Vida: " << player4.vida << std::endl;
-						std::cout << "Municion: " << player4.municion << std::endl;
-						std::cout << "Posicion: " << player4.x << ", " << player4.y << ", " << player4.z << std::endl;
-						std::cout << "" << std::endl;
-
-					}else {
-						std::cout << "Los guid no coinciden: " << std::endl;
-					}
 				}
 				break;
 				default:
