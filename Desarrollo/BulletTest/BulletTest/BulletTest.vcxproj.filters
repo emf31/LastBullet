@@ -36,6 +36,12 @@
     <ClInclude Include="Otros\Timer.h">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
+    <ClInclude Include="EventReceiver.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\vec3.hpp">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

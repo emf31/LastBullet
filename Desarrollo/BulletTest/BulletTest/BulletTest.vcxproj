@@ -149,8 +149,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Otros\Timer.h" />
+    <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

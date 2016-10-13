@@ -4,6 +4,8 @@
 #else
 #include <chrono>
 #include <ostream>
+using namespace std::chrono;
+
 		class Timer {
 			typedef std::chrono::high_resolution_clock high_resolution_clock;
 			typedef std::chrono::milliseconds milliseconds;
@@ -14,17 +16,15 @@
 				if (run)
 					Reset();
 			}
-			void Reset()
+			std::chrono::milliseconds Reset()
 			{
+				auto elapsedTime = ElapsedMilliseconds();
 				_start = high_resolution_clock::now();
+				return elapsedTime;
 			}
 			milliseconds ElapsedMilliseconds() const
 			{
 				return std::chrono::duration_cast<milliseconds>(high_resolution_clock::now() - _start);
-			}
-			seconds ElapsedSeconds() const
-			{
-				return std::chrono::duration_cast<seconds>(high_resolution_clock::now() - _start);
 			}
 			template <typename T, typename Traits>
 			friend std::basic_ostream<T, Traits>& operator<<(std::basic_ostream<T, Traits>& out, const Timer& timer)
