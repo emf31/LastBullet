@@ -65,16 +65,20 @@ void Player::getInput() {
 	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		posY = posY - 0.1f;
+		//posY = posY - 0.1f;
+		movimiento = 1;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		posX = posX - 0.1f;
+		//posX = posX - 0.1f;
+		movimiento = 2;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		posX = posX + 0.1f;
+		//posX = posX + 0.1f;
+		movimiento = 3;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		posY = posY + 0.1f;
+		//posY = posY + 0.1f;
+		movimiento = 4;
 	}
 
 }

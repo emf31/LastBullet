@@ -17,6 +17,7 @@ void RaknetStuff::bucleCliente() {
 	RakNet::Packet *packet;
 	RakNet::BitStream bsOut;
 	std::string str;
+	int cont = 0;
 
 	while (1) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
@@ -137,21 +138,51 @@ void RaknetStuff::bucleCliente() {
 					//delete p;
 				}
 				break;
+				case ACTUALIZA_CLIENTE: {
+					RakNet::BitStream bsIn;
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					Player *p = new Player();
+					bsIn.Read(*p);
+
+					if (p->getGuid() == player->getGuid()) {
+						//SOY YO
+						player = p;
+					} else {
+						//ES OTRA PERSONA
+						for (int i = 0; i < clientArray.size(); i++) {
+							if (clientArray.at(i)->getGuid() == p->getGuid()) {
+								//Te actualizo
+								clientArray.at(i) = p;
+								break;
+							}
+						}
+					}
+
+
+				}
+					break;
+
 				default:
 					printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 					break;
 
 			}
 		}
-		/*if (player->conectado) {
+		if (player->conectado) {
 			//Actualizamos player en el getInput y luego lo enviamos actualizado al servidor.
-			player->getInput();
-			bsOut.Write((RakNet::MessageID)MOVIMIENTO);
-			bsOut.Write(*player);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-			bsOut.Reset();
-			
-		}*/
+			if (cont == 0) {
+				player->getInput();
+				bsOut.Write((RakNet::MessageID)MOVIMIENTO);
+				bsOut.Write(player->movimiento);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+				bsOut.Reset();
+			}
+			cont++;
+
+			if (cont >= 1000)
+				cont = 0;
+		}
+
 
 	}
 

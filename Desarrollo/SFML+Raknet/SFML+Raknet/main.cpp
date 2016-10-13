@@ -31,8 +31,10 @@ int main() {
 		}
 
 		window.clear(sf::Color(208,208,208,1));
+		player->shape->setPosition(player->getPos());
 		window.draw(*player->shape);
 		for (i = 0; i < raknet->clientArray.size(); i++) {
+			raknet->clientArray.at(i)->shape->setPosition(raknet->clientArray.at(i)->getPos());
 			window.draw(*raknet->clientArray.at(i)->shape);
 		}
 		window.display();

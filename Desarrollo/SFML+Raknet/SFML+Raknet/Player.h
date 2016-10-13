@@ -31,6 +31,8 @@ public:
 	float posX, posY;
 	float municion;
 
+	int movimiento = 0;
+
 private:
 
 	RakNet::RakNetGUID guid;
