@@ -25,7 +25,7 @@ public:
 	~RaknetStuff();
 	void bucleCliente();
 	void Conectar(std::string address, int port);
-	std::vector<Player> clientArray;
+	std::vector<Player*> clientArray;
 private:
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;

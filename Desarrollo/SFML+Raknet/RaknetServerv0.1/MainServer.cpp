@@ -35,7 +35,7 @@ int main() {
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
 
-	std::vector<Player> clientArray;
+	std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
 
@@ -76,15 +76,15 @@ int main() {
 					for (int i = 0; i < clientArray.size(); i++) {
 						bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
 						bsOut.Write(*p);
-						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i).getGuid(), false);
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
 						bsOut.Reset();
 					}
 					bsOut.Write((RakNet::MessageID)LISTA_CLIENTES);
 					bsOut.Write(clientArray);
-					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
+					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, packet->guid, false);
 					bsOut.Reset();
 
-					clientArray.push_back(*p);
+					clientArray.push_back(p);
 				}
 					break;
 				case ID_NEW_INCOMING_CONNECTION:{

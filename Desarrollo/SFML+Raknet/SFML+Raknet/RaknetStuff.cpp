@@ -1,5 +1,6 @@
 #include "RaknetStuff.h"
-
+#include <iostream>
+#include <string>
 
 
 RaknetStuff::RaknetStuff(Player *p){
@@ -57,7 +58,7 @@ void RaknetStuff::bucleCliente() {
 
 					bsIn.Read(*p);
 
-					clientArray.push_back(*p);
+					clientArray.push_back(p);
 				}
 
 					break;
@@ -67,7 +68,7 @@ void RaknetStuff::bucleCliente() {
 					RakNet::RakNetGUID g;
 					bsIn.Read(g);
 					player->setGuid(g);
-					player->conectado;
+					player->conectado = 1;
 				}
 					break;
 
@@ -84,6 +85,12 @@ void RaknetStuff::bucleCliente() {
 			bsOut.Write(*player);
 			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 			bsOut.Reset();
+			std::cout << "LISTA DE CLIENTES" << std::endl;
+			std::cout << "Num.Clientes: " << clientArray.size() << std::endl;
+			for (int i = 0; i < clientArray.size(); i++) {
+				std::cout << "Cliente " << i << ": " << clientArray.at(i)->nombre << std::endl;
+				std::cout << "Pos: " << clientArray.at(i)->getPos().x << ", " << clientArray.at(i)->getPos().y << std::endl;
+			}
 		}
 
 	}

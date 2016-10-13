@@ -1,4 +1,7 @@
 ﻿  main.cpp
 d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\main.cpp(35): warning C4018: '<': no coinciden signed/unsigned
+  RaknetStuff.cpp
+d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\raknetstuff.cpp(90): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
   SFML+Raknet.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.exe
   SFML+Raknet.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.pdb (Full PDB)
