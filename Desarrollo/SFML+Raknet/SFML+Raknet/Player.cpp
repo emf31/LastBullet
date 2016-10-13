@@ -17,6 +17,7 @@ Player::Player() {
 
 
 Player::~Player(){
+
 }
 
 float Player::getVida(){

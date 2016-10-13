@@ -2,5 +2,7 @@
 d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\raknetstuff.cpp(63): warning C4018: '<': no coinciden signed/unsigned
 d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\raknetstuff.cpp(81): warning C4018: '<': no coinciden signed/unsigned
 d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\raknetstuff.cpp(100): warning C4018: '<': no coinciden signed/unsigned
+d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\raknetstuff.cpp(123): warning C4018: '<': no coinciden signed/unsigned
+d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\sfml+raknet\raknetstuff.cpp(133): warning C4018: '<': no coinciden signed/unsigned
   SFML+Raknet.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.exe
   SFML+Raknet.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\SFML+Raknet.pdb (Full PDB)

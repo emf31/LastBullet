@@ -75,7 +75,7 @@ void RaknetStuff::bucleCliente() {
 
 					clientArray.push_back(nuevocliente);
 					std::cout << "Meto nuevo cliente en la lista de clientes (Soy el player nuevo)" << std::endl;
-
+					std::cout << "" << std::endl;
 					std::cout << "LISTA DE CLIENTES" << std::endl;
 					std::cout << "Num.Clientes: " << clientArray.size() << std::endl;
 					for (int i = 0; i < clientArray.size(); i++) {
@@ -94,7 +94,7 @@ void RaknetStuff::bucleCliente() {
 					clientArray.push_back(p);
 
 					std::cout << "Meto nuevo cliente en la lista de clientes (soy un player viejo)" << std::endl;
-
+					std::cout << "" << std::endl;
 					std::cout << "LISTA DE CLIENTES" << std::endl;
 					std::cout << "Num.Clientes: " << clientArray.size() << std::endl;
 					for (int i = 0; i < clientArray.size(); i++) {
@@ -115,20 +115,26 @@ void RaknetStuff::bucleCliente() {
 				}
 					break;
 				case ELIMINAR_CLIENTE: {
-					/*RakNet::BitStream bsIn(packet->data,packet->length,false);
+					RakNet::BitStream bsIn(packet->data,packet->length,false);
 					Player *p = new Player();
 
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(*p);
 					for (int i = 0; i < clientArray.size(); i++) {
 						if (clientArray.at(i)->getGuid() == p->getGuid()) {
-							//clientArray.erase(clientArray.begin() + i);
+							clientArray.erase(clientArray.begin() + i);
 						}
 					}
 
 					std::cout << "Elimino al cliente que se ha desconectado..." << std::endl;
-
-					delete p;*/
+					std::cout << "" << std::endl;
+					std::cout << "LISTA DE CLIENTES" << std::endl;
+					std::cout << "Num.Clientes: " << clientArray.size() << std::endl;
+					for (int i = 0; i < clientArray.size(); i++) {
+						std::cout << "Cliente " << i << ": " << clientArray.at(i)->nombre << std::endl;
+						std::cout << "Pos: " << clientArray.at(i)->getPos().x << ", " << clientArray.at(i)->getPos().y << std::endl;
+					}
+					//delete p;
 				}
 				break;
 				default:

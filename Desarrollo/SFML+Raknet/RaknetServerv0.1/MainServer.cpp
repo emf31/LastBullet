@@ -136,12 +136,13 @@ int main() {
 					break;
 				case ID_CONNECTION_LOST: {
 					printf("Un cliente ha perdido la conexión.\n");
-					/*RakNet::BitStream bsOut;
+					RakNet::BitStream bsOut;
 					Player *p = new Player();
 					int i = 0;
 					for (i = 0; i < clientArray.size(); i++) {
 						if (clientArray.at(i)->getGuid() == packet->guid) {
 							p = clientArray.at(i);
+							
 							break;
 						}
 					}
@@ -153,8 +154,17 @@ int main() {
 							bsOut.Reset();
 						}
 					}
+					clientArray.erase(clientArray.begin()+i);
 
-					delete p;*/
+					std::cout << "" << std::endl;
+					std::cout << "LISTA DE CLIENTES" << std::endl;
+					std::cout << "Num.Clientes: " << clientArray.size() << std::endl;
+					for (int i = 0; i < clientArray.size(); i++) {
+						std::cout << "Cliente " << i << ": " << clientArray.at(i)->nombre << std::endl;
+						std::cout << "Pos: " << clientArray.at(i)->getPos().x << ", " << clientArray.at(i)->getPos().y << std::endl;
+					}
+
+					//delete p;
 				}
 					
 					break;
