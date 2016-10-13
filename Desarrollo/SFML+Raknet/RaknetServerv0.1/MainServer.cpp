@@ -54,7 +54,6 @@ int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
-
 	std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
@@ -220,31 +219,38 @@ int main() {
 				}
 				break;
 				case MOVIMIENTO: {
+					
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
 					RakNet::BitStream bsOut;
 					int movimiento = 0;
 					int pos=0;
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(movimiento);
-					for (int i = 0; i < clientArray.size(); i++) {
-						if (packet->guid == clientArray.at(i)->getGuid()) {
-							pos = i;
-							break;
-						}
-					}
-					Player *p = clientArray.at(pos);
+					if (movimiento!=0) {
 
-					updatePlayer(movimiento, p);
-					
-					
-					for (int i = 0; i < clientArray.size(); i++) {
-						//Enviamos una copia del player a todos los demas
-						bsOut.Write((RakNet::MessageID)ACTUALIZA_CLIENTE);
-						//UPDATE
-						bsOut.Write(*p);
-						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
-						bsOut.Reset();
+						for (int i = 0; i < clientArray.size(); i++) {
+							if (packet->guid == clientArray.at(i)->getGuid()) {
+								pos = i;
+								break;
+							}
+						}
+						Player *p = new Player();
+						p = clientArray.at(pos);
+
+						updatePlayer(movimiento, p);
+
+
+						for (int i = 0; i < clientArray.size(); i++) {
+							//Enviamos una copia del player a todos los demas
+							bsOut.Write((RakNet::MessageID)ACTUALIZA_CLIENTE);
+							//UPDATE
+							bsOut.Write(*p);
+							peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
+							bsOut.Reset();
+						}
+				
 					}
+
 				}
 
 					break;

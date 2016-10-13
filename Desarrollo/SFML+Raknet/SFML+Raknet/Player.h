@@ -22,7 +22,7 @@ public:
 
 	void setGuid(RakNet::RakNetGUID rkguid);
 	RakNet::RakNetGUID getGuid();
-	void getInput();
+	int getInput();
 
 	int conectado = 0;
 	sf::CircleShape *shape;
@@ -30,7 +30,7 @@ public:
 	float vida;
 	float posX, posY;
 	float municion;
-
+	int actualizado = 0;
 	int movimiento = 0;
 
 private:

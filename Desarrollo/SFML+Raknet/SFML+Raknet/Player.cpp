@@ -61,8 +61,8 @@ RakNet::RakNetGUID Player::getGuid() {
 	return guid;
 }
 
-void Player::getInput() {
-	
+int Player::getInput() {
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		//posY = posY - 0.1f;
@@ -80,5 +80,5 @@ void Player::getInput() {
 		//posY = posY + 0.1f;
 		movimiento = 4;
 	}
-
+	return movimiento;
 }
