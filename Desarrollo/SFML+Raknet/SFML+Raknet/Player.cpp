@@ -6,11 +6,13 @@ Player::Player(std::string name, float x, float y){
 	nombre = name;
 	posX = x;
 	posY = y;
-	shape.setRadius(100.f);
-	shape.setFillColor(sf::Color::Green);
+	shape = new sf::CircleShape(100.f);
+	shape->setFillColor(sf::Color::Green);
 }
 Player::Player() {
-
+	
+	shape = new sf::CircleShape(100.f);
+	shape->setFillColor(sf::Color::Green);
 }
 
 

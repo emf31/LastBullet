@@ -25,7 +25,7 @@ public:
 	void getInput();
 
 	int conectado = 0;
-	sf::CircleShape shape;
+	sf::CircleShape *shape;
 	std::string nombre;
 	float vida;
 	float posX, posY;

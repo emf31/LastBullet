@@ -31,9 +31,9 @@ int main() {
 		}
 
 		window.clear(sf::Color(208,208,208,1));
-		window.draw(player->shape);
+		window.draw(*player->shape);
 		for (i = 0; i < raknet->clientArray.size(); i++) {
-			window.draw(raknet->clientArray.at(i)->shape);
+			window.draw(*raknet->clientArray.at(i)->shape);
 		}
 		window.display();
 	}

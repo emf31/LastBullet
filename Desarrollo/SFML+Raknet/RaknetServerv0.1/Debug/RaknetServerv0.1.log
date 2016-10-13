@@ -1,5 +1,5 @@
 ﻿  MainServer.cpp
-d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(76): warning C4018: '<': no coinciden signed/unsigned
+d:\ua\cuarto\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(103): warning C4018: '<': no coinciden signed/unsigned
   Player.cpp
   Generando código...
   RaknetServerv0.1.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\SFML+Raknet\Debug\RaknetServerv0.1.exe

@@ -19,7 +19,9 @@ enum GameMessages
 	NUEVO_PLAYER = ID_USER_PACKET_ENUM + 4,
 	GUID_NUESTRO = ID_USER_PACKET_ENUM + 5,
 	MOVIMIENTO = ID_USER_PACKET_ENUM + 6,
-	LISTA_CLIENTES = ID_USER_PACKET_ENUM + 7
+	LISTA_CLIENTES = ID_USER_PACKET_ENUM + 7,
+	NUEVO_CLIENTE = ID_USER_PACKET_ENUM + 8,
+	ELIMINAR_CLIENTE = ID_USER_PACKET_ENUM + 9
 };
 void muestraPlayer(Player *p) {
 
@@ -63,7 +65,7 @@ int main() {
 					
 				}
 					break;
-				case NUEVO_PLAYER: {
+				/*case NUEVO_PLAYER: {
 
 					//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
 
@@ -81,28 +83,80 @@ int main() {
 					}
 					bsOut.Write((RakNet::MessageID)LISTA_CLIENTES);
 					bsOut.Write(clientArray);
-					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, packet->guid, false);
+					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
 					bsOut.Reset();
 
 					clientArray.push_back(p);
 				}
-					break;
+					break;*/
+				case NUEVO_PLAYER: {
+
+					//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
+
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					Player *p = new Player();
+					bsIn.Read(*p);
+					muestraPlayer(p);
+					RakNet::BitStream bsOut;
+
+					for (int i = 0; i < clientArray.size(); i++) {
+
+
+						//se envia el nuevo player a los clientes para que estos actualicen su lista de clientes
+						bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
+						bsOut.Write(*p);
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
+						bsOut.Reset();
+
+						//se envia los clientes al nuevo player para que este se forme su lista de clientes
+						bsOut.Write((RakNet::MessageID)NUEVO_CLIENTE);
+						bsOut.Write(*clientArray.at(i));
+						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
+						bsOut.Reset();
+
+					}
+
+					clientArray.push_back(p);
+				}
+								   break;
 				case ID_NEW_INCOMING_CONNECTION:{
 					printf("Conexion entrante...\n");
 
-					RakNet::BitStream bsOut;
+					/*RakNet::BitStream bsOut;
 					bsOut.Write((RakNet::MessageID)GUID_NUESTRO);
 					bsOut.Write(packet->guid);
 					peer->Send(&bsOut, HIGH_PRIORITY,RELIABLE_ORDERED,0,packet->guid,false);
-					bsOut.Reset();
+					bsOut.Reset();*/
 				}
 
 					break;
 				case ID_DISCONNECTION_NOTIFICATION:
 					printf("Un cliente se ha desconectado.\n");
 					break;
-				case ID_CONNECTION_LOST:
+				case ID_CONNECTION_LOST: {
 					printf("Un cliente ha perdido la conexión.\n");
+					/*RakNet::BitStream bsOut;
+					Player *p = new Player();
+					int i = 0;
+					for (i = 0; i < clientArray.size(); i++) {
+						if (clientArray.at(i)->getGuid() == packet->guid) {
+							p = clientArray.at(i);
+							break;
+						}
+					}
+					for (int j = 0; j < clientArray.size(); j++) {
+						if (j!=i) {
+							bsOut.Write((RakNet::MessageID)ELIMINAR_CLIENTE);
+							bsOut.Write(*p);
+							peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(j)->getGuid(), false);
+							bsOut.Reset();
+						}
+					}
+
+					delete p;*/
+				}
+					
 					break;
 				case ID_GAME_MESSAGE_1:
 					{
@@ -137,6 +191,8 @@ int main() {
 					std::cout << stringEntrante.C_String() << std::endl;
 				}
 				break;
+				case MOVIMIENTO:
+					break;
 				default:
 					printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 					break;
