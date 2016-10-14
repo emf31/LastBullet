@@ -23,16 +23,16 @@ void Entity::update(Time elapsedTime)
 	Vec3<float> vector = Vec3<float>(0.f, 0.f, 0.f);
 
 	if (isMovingForward)
-		vector.addX(10.f);
+		vector.addX(50.f);
 	if (isMovingBackward)
-		vector.addX(-10.f);
+		vector.addX(-50.f);
 	if (isMovingLeft)
-		vector.addZ(10.f);
+		vector.addZ(50.f);
 	if (isMovingRight)
-		vector.addZ(-10.f);
+		vector.addZ(-50.f);
 
 	m_velocidad = vector;
-	m_posicion +=  m_velocidad;
+	m_posicion +=  m_velocidad*elapsedTime.asSeconds();
 	
 	m_nodo->setPosition(vector3df(m_posicion.getX(), m_posicion.getY(), m_posicion.getZ()));
 }

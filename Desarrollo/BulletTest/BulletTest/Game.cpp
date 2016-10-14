@@ -122,13 +122,13 @@ void Game::processEvents()
 		entities.at(0)->isMovingRight = false;
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_W)) {
-		entities.at(0)->isMovingBackward = true;
+		entities.at(0)->isMovingForward = true;
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_S)) {
-		entities.at(0)->isMovingLeft = true;
+		entities.at(0)->isMovingBackward = true;
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_A)) {
-		entities.at(0)->isMovingRight = true;
+		entities.at(0)->isMovingLeft = true;
 	} else if (MastEventReceiver::i().keyPressed(KEY_KEY_D)) {
 		entities.at(0)->isMovingRight = true;
 	}
