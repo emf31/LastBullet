@@ -42,8 +42,24 @@ void Entity::update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrSc
 			irrScene->getActiveCamera()->getTarget().Y,
 			irrScene->getActiveCamera()->getTarget().Z
 		);
-		target.normalise();
-		TObject->setLinearVelocity(btVector3(target.getX()*30.f,target.getY()*30.f, target.getZ()*30.f));
+		
+		Vec3<float> posicion = Vec3<float>(m_nodo->getPosition().X, m_nodo->getPosition().Y, m_nodo->getPosition().Z);
+		Vec3<float> speed = target - posicion;
+		speed.normalise();
+
+		if (isMovingForward) {
+			TObject->setLinearVelocity(btVector3(speed.getX()*50.f, speed.getY()*0, speed.getZ()*50.f));
+		}
+		if (isMovingBackward) {
+			TObject->setLinearVelocity(btVector3(-speed.getX()*50.f,- speed.getY() * 0, -speed.getZ()*50.f));
+		}
+		if (isMovingLeft) {
+			TObject->setLinearVelocity(btVector3(-speed.getZ()*50.f, speed.getY() * 0, speed.getX()*50.f));
+		}
+		if (isMovingRight) {
+			TObject->setLinearVelocity(btVector3(speed.getZ()*50.f, speed.getY() * 0, -speed.getX()*50.f));
+		}
+			
 	}
 	else {
 		TObject->setLinearVelocity(btVector3(vector.getX(), vector.getY(), vector.getZ()));
