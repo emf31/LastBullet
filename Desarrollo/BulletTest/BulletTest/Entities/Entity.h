@@ -1,7 +1,9 @@
 #pragma once
+
 #include "irrlicht.h"
 #include "../Otros/vec3.hpp"
 #include "../Otros/Time.hpp"
+#include "../RenderState.h"
 
 using namespace irr;
 using namespace core;
@@ -18,10 +20,7 @@ public:
 	virtual ~Entity();
 
 	void update(Time elapsedTime);
-
-	Vec3<float> m_posicion;
-	Vec3<float> m_posicion_prev;
-	Vec3<float> m_velocidad;
+	void updateRender(float interpolation);
 
 	bool isMovingBackward;
 	bool isMovingForward;
@@ -31,5 +30,6 @@ private:
 	
 
 	ISceneNode *m_nodo;
+	RenderState renderState;
 };
 

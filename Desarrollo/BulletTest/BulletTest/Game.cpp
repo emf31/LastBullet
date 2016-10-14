@@ -144,6 +144,10 @@ void Game::update(Time elapsedTime)
 
 void Game::render(float interpolation, Time elapsedTime)
 {
+	for (int i = 0; i < entities.size(); i++) {
+		entities.at(i)->updateRender(interpolation);
+	}
+
 	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
 	irrScene->drawAll();
 	irrDriver->endScene();

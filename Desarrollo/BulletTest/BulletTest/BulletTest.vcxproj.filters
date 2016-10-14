@@ -57,6 +57,9 @@
     <ClInclude Include="Otros\Win32\ClockImpl.hpp">
       <Filter>Archivos de encabezado\Otros\Win32</Filter>
     </ClInclude>
+    <ClInclude Include="RenderState.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="Otros\Win32\ClockImpl.cpp">
       <Filter>Archivos de código fuente\Otros\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderState.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

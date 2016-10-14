@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Entity.h"
+#include "../RenderState.h"
 
 
 Entity::Entity(ISceneNode *nodo)
@@ -7,9 +8,8 @@ Entity::Entity(ISceneNode *nodo)
 	m_nodo = nodo;
 
 	vector3df vec = m_nodo->getPosition();
-
-	m_posicion = Vec3<float>(vec.X,vec.Y,vec.Z);
-	m_velocidad = Vec3<float>(0.f,0.f,0.f);	//Vector velocidad
+	renderState.setPosition(Vec3<float>(vec.X, vec.Y, vec.Z));
+	renderState.setVelocity(Vec3<float>(0.f, 0.f, 0.f));
 
 }
 
@@ -18,21 +18,27 @@ Entity::~Entity()
 {
 }
 
+
 void Entity::update(Time elapsedTime)
 {
 	Vec3<float> vector = Vec3<float>(0.f, 0.f, 0.f);
 
 	if (isMovingForward)
-		vector.addX(50.f);
+		vector.addX(150.f);
 	if (isMovingBackward)
-		vector.addX(-50.f);
+		vector.addX(-150.f);
 	if (isMovingLeft)
-		vector.addZ(50.f);
+		vector.addZ(150.f);
 	if (isMovingRight)
-		vector.addZ(-50.f);
+		vector.addZ(-150.f);
 
-	m_velocidad = vector;
-	m_posicion +=  m_velocidad*elapsedTime.asSeconds();
+	renderState.setVelocity(vector);
+	renderState.update(elapsedTime);
 	
-	m_nodo->setPosition(vector3df(m_posicion.getX(), m_posicion.getY(), m_posicion.getZ()));
+	//m_nodo->setPosition(vector3df(m_posicion.getX(), m_posicion.getY(), m_posicion.getZ()));
+}
+
+void Entity::updateRender(float interpolation)
+{
+	renderState.updateRender(interpolation, m_nodo);
 }
