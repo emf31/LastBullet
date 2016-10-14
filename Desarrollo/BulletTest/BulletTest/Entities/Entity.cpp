@@ -19,7 +19,7 @@ Entity::~Entity()
 }
 
 
-void Entity::update(Time elapsedTime, btRigidBody *TObject)
+void Entity::update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrScene,int player)
 {
 	Vec3<float> vector = Vec3<float>(0.f, 0.f, 0.f);
 
@@ -36,7 +36,19 @@ void Entity::update(Time elapsedTime, btRigidBody *TObject)
 
 	renderState.setVelocity(vector);
 
-	TObject->setLinearVelocity(btVector3(vector.getX(), vector.getY(), vector.getZ()));
+	if(player){
+		Vec3<float> target=Vec3<float>(
+			irrScene->getActiveCamera()->getTarget().X,
+			irrScene->getActiveCamera()->getTarget().Y,
+			irrScene->getActiveCamera()->getTarget().Z
+		);
+		target.normalise();
+		TObject->setLinearVelocity(btVector3(target.getX()*30.f,target.getY()*30.f, target.getZ()*30.f));
+	}
+	else {
+		TObject->setLinearVelocity(btVector3(vector.getX(), vector.getY(), vector.getZ()));
+	}
+
 	//renderState.update(elapsedTime);
 
 	// Set position
@@ -57,5 +69,10 @@ void Entity::update(Time elapsedTime, btRigidBody *TObject)
 
 void Entity::updateRender(float interpolation)
 {
-	renderState.updateRender(interpolation, m_nodo);
+	renderState.updateRender(interpolation, m_nodo );
+}
+
+Vec3<float> Entity::getRenderPosition()
+{
+	return renderState.renderPos;
 }

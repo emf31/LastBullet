@@ -83,12 +83,7 @@ void Game::inicializarIrrlitch()
 	World->setGravity(btVector3(0,-80,0));
 
 
-	// Add camera
-	//camara tipo fps
-	Camera = irrScene->addCameraSceneNodeFPS();
-	Camera->setPosition(vector3df(-300,300,0));
-	Camera->setTarget(vector3df(0, 0, 0));
-	Camera->setInputReceiverEnabled(true);
+
 
 	//Creamos el suelo
 	ISceneNode *suelo = CreateBox(Vec3<double>(0, 0, 0), Vec3<float>(1000.0f, 0.5f, 1000.0f), 0.0f);
@@ -109,6 +104,13 @@ void Game::inicializarIrrlitch()
 	entities.push_back(entsuelo);
 	entities.push_back(ent);
 	entities.push_back(ent2);
+
+	// Add camera
+	//camara tipo fps
+	Camera = irrScene->addCameraSceneNodeFPS();
+	Camera->setPosition(vector3df(player1->getPosition().X, player1->getPosition().Y, player1->getPosition().Z));
+	Camera->setTarget(vector3df(0, 0, 0));
+	Camera->setInputReceiverEnabled(true);
 
 }
 
@@ -187,7 +189,12 @@ void Game::update(Time elapsedTime)
 	int i = 0;
 	// Relay the object's orientation to irrlicht
 	for (list<btRigidBody *>::Iterator Iterator = Objects.begin(); Iterator != Objects.end(); ++Iterator) {
-		entities.at(i)->update(elapsedTime, *Iterator);
+		if(i==1)
+			entities.at(i)->update(elapsedTime, *Iterator, irrScene,1);
+		else
+			entities.at(i)->update(elapsedTime, *Iterator, irrScene,0);
+
+		
 		i++;
 	}
 }
@@ -197,7 +204,8 @@ void Game::render(float interpolation, Time elapsedTime)
 	for (int i = 0; i < entities.size(); i++) {
 		entities.at(i)->updateRender(interpolation);
 	}
-
+	irrScene->getActiveCamera()->setPosition(vector3df(entities.at(1)->getRenderPosition().getX(), entities.at(1)->getRenderPosition().getY(), entities.at(1)->getRenderPosition().getZ()));
+	
 	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
 	irrScene->drawAll();
 	irrDriver->endScene();

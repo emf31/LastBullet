@@ -21,8 +21,9 @@ public:
 	Entity(ISceneNode *node);
 	virtual ~Entity();
 
-	void update(Time elapsedTime, btRigidBody *TObject);
+	void update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrScene, int player);
 	void updateRender(float interpolation);
+	Vec3<float> getRenderPosition();
 
 	bool isMovingBackward;
 	bool isMovingForward;

@@ -23,10 +23,13 @@ public:
 	Vec3<float> getVelocity();
 	void update(Time elapsedTime);
 	void updateRender(float interpolation, ISceneNode *m_nodo);
+
+	Vec3<float> renderPos;
+
 private:
 	Vec3<float> posPrev;
 	Vec3<float> posNew;
 	Vec3<float> Velocity;
-	Vec3<float> renderPos;
+	
 };
 
