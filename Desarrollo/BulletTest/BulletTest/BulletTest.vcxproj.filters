@@ -19,6 +19,12 @@
     <Filter Include="Archivos de encabezado\Otros">
       <UniqueIdentifier>{337925f3-54b8-45ee-9285-0714c4301c53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Otros\Win32">
+      <UniqueIdentifier>{e6050f0e-9f16-48be-9af8-32dd2f570b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Otros\Win32">
+      <UniqueIdentifier>{c6671359-4dd6-4e7a-aa72-cf6d31d66d8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -33,9 +39,6 @@
     <ClInclude Include="Game.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Otros\Timer.h">
-      <Filter>Archivos de encabezado\Otros</Filter>
-    </ClInclude>
     <ClInclude Include="Otros\vec3.hpp">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
@@ -44,6 +47,15 @@
     </ClInclude>
     <ClInclude Include="MastEventReceiver.hpp">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Clock.hpp">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Time.hpp">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Win32\ClockImpl.hpp">
+      <Filter>Archivos de encabezado\Otros\Win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +76,15 @@
     </ClCompile>
     <ClCompile Include="MastEventReceiver.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Clock.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Time.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Win32\ClockImpl.cpp">
+      <Filter>Archivos de código fuente\Otros\Win32</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

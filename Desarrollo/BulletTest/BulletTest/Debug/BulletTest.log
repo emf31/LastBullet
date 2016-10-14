@@ -1,5 +1,10 @@
 ﻿  Game.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(104): warning C4244: 'argumento': conversión de 'double' a 'irr::f32'; posible pérdida de datos
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(143): warning C4018: '<': no coinciden signed/unsigned
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(101): warning C4244: 'argumento': conversión de 'double' a 'irr::f32'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(140): warning C4018: '<': no coinciden signed/unsigned
+  Entity.cpp
+  Generando código...
+  Compilando...
+  main.cpp
+  Generando código...
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

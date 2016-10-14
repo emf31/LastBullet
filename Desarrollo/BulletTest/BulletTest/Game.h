@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Otros/Timer.h"
+#include "Otros\Time.hpp"
 #include "Otros/vec3.hpp"
 #include "irrlicht.h"
 #include <vector>
@@ -24,8 +24,8 @@ public:
 
 	void inicializarIrrlitch();
 	void processEvents(); // Captura y procesa eventos
-	void update(float elapsedTime);
-	void render(float interpolation, float elapsedTime);
+	void update(Time elapsedTime);
+	void render(float interpolation, Time elapsedTime);
 
 	ISceneNode* CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TScale, float TMass);
 
@@ -38,7 +38,7 @@ public:
 
 
 private:
-	static const duration<float> timePerFrame;
+	static const Time timePerFrame;
 	float interpolation;
 
 	std::vector<Entity*> entities;

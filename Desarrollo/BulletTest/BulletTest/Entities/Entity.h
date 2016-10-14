@@ -1,7 +1,7 @@
 #pragma once
 #include "irrlicht.h"
 #include "../Otros/vec3.hpp"
-#include "../Otros/Timer.h"
+#include "../Otros/Time.hpp"
 
 using namespace irr;
 using namespace core;
@@ -10,15 +10,17 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
+
 class Entity
 {
 public:
 	Entity(ISceneNode *node);
 	virtual ~Entity();
 
-	void update(float elapsedTime);
+	void update(Time elapsedTime);
 
 	Vec3<float> m_posicion;
+	Vec3<float> m_posicion_prev;
 	Vec3<float> m_velocidad;
 
 	bool isMovingBackward;

@@ -1,16 +1,17 @@
 #include "stdafx.h"
 #include <iostream>
 #include <algorithm>
-
+#include <Windows.h>
 #include "Game.h"
 #include "MastEventReceiver.hpp"
+#include "Otros\Clock.hpp"
 
 
-const duration<float> Game::timePerFrame = duration<float>(1.f / 15.f);
+const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 Game::Game()
 {
-	
+	AllocConsole();
 }
 
 
@@ -20,39 +21,35 @@ Game::~Game()
 
 void Game::run()
 {
-	Timer clock;
-	double timeSinceLastUpdate = 0;
-	
+	Clock clock;
+	Time timeSinceLastUpdate = Time::Zero;
 
 	inicializarIrrlitch();
 	
-	while (1) {
+	while (irrDevice->run()) {
 		//if (irrDevice->isWindowActive()) {
-		double elapsedTime = (double)clock.Elapsed().count();
-		clock.Reset();
-			
+			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();
 			
 			processEvents();
-			double p =  timePerFrame.count() * 1000;
 			//Llevamos control en las actualizaciones por frame
-			while (timeSinceLastUpdate > timePerFrame.count() * 1000) // 15 veces/segundo
+			while (timeSinceLastUpdate > timePerFrame) // 15 veces/segundo
 			{
-				timeSinceLastUpdate -= timePerFrame.count() * 1000;
+				timeSinceLastUpdate -= timePerFrame;
 				//Realizamos actualizaciones
-				update(timePerFrame.count() / 1000);
+				update(timePerFrame);
 			}
 			
-			interpolation = (float)std::min(1.f, ((float)timeSinceLastUpdate/1000) / (timePerFrame.count()*1000));
-			render(interpolation, timePerFrame.count());
+			interpolation = (float)min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
+			render(interpolation, timePerFrame);
 
 
-			MastEventReceiver::i().startEventProcess();
+			
 
-			irrDevice->run();
+			
 		//}
-		
+			MastEventReceiver::i().startEventProcess();
 	}
 	irrDevice->drop();
 	std::getchar();
@@ -138,14 +135,14 @@ void Game::processEvents()
 
 }
 
-void Game::update(float elapsedTime)
+void Game::update(Time elapsedTime)
 {
 	for (int i = 0; i < entities.size(); i++) {
 		entities.at(i)->update(elapsedTime);
 	}
 }
 
-void Game::render(float interpolation, float elapsedTime)
+void Game::render(float interpolation, Time elapsedTime)
 {
 	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
 	irrScene->drawAll();

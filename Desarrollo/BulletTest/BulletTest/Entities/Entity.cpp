@@ -18,21 +18,21 @@ Entity::~Entity()
 {
 }
 
-void Entity::update(float elapsedTime)
+void Entity::update(Time elapsedTime)
 {
 	Vec3<float> vector = Vec3<float>(0.f, 0.f, 0.f);
 
 	if (isMovingForward)
-		vector.addX(100.f);
+		vector.addX(10.f);
 	if (isMovingBackward)
-		vector.addX(-100.f);
+		vector.addX(-10.f);
 	if (isMovingLeft)
-		vector.addZ(100.f);
+		vector.addZ(10.f);
 	if (isMovingRight)
-		vector.addZ(-100.f);
+		vector.addZ(-10.f);
 
 	m_velocidad = vector;
-	m_posicion = (m_posicion + m_velocidad );
+	m_posicion +=  m_velocidad;
 	
 	m_nodo->setPosition(vector3df(m_posicion.getX(), m_posicion.getY(), m_posicion.getZ()));
 }
