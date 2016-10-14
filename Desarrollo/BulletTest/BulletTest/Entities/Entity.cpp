@@ -45,20 +45,26 @@ void Entity::update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrSc
 		
 		Vec3<float> posicion = Vec3<float>(m_nodo->getPosition().X, m_nodo->getPosition().Y, m_nodo->getPosition().Z);
 		Vec3<float> speed = target - posicion;
-		speed.normalise();
+		Vec3<float> speedFinal = Vec3<float>(0,0,0);
 
 		if (isMovingForward) {
-			TObject->setLinearVelocity(btVector3(speed.getX()*50.f, speed.getY()*0, speed.getZ()*50.f));
+			speedFinal.setX(speedFinal.getX() + speed.getX());
+			speedFinal.setZ(speedFinal.getZ() + speed.getZ());
 		}
 		if (isMovingBackward) {
-			TObject->setLinearVelocity(btVector3(-speed.getX()*50.f,- speed.getY() * 0, -speed.getZ()*50.f));
+			speedFinal.setX(speedFinal.getX() - speed.getX());
+			speedFinal.setZ(speedFinal.getZ() - speed.getZ());
 		}
 		if (isMovingLeft) {
-			TObject->setLinearVelocity(btVector3(-speed.getZ()*50.f, speed.getY() * 0, speed.getX()*50.f));
+			speedFinal.setX(speedFinal.getX() - speed.getZ());
+			speedFinal.setZ(speedFinal.getZ() + speed.getX());
 		}
 		if (isMovingRight) {
-			TObject->setLinearVelocity(btVector3(speed.getZ()*50.f, speed.getY() * 0, -speed.getX()*50.f));
+			speedFinal.setX(speedFinal.getX() + speed.getZ());
+			speedFinal.setZ(speedFinal.getZ() - speed.getX());
 		}
+		speedFinal.normalise();
+		TObject->setLinearVelocity(btVector3(speedFinal.getX()*50.f, speedFinal.getY(), speedFinal.getZ()*50.f));
 			
 	}
 	else {
