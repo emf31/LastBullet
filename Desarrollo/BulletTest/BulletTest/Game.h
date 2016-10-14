@@ -3,6 +3,8 @@
 #include "Otros/Timer.h"
 #include "Otros/vec3.hpp"
 #include "irrlicht.h"
+#include <vector>
+#include "Entities\Entity.h"
 
 using namespace irr;
 using namespace core;
@@ -22,8 +24,8 @@ public:
 
 	void inicializarIrrlitch();
 	void processEvents(); // Captura y procesa eventos
-	void update(milliseconds elapsedTime);
-	void render(float interpolation, milliseconds elapsedTime);
+	void update(float elapsedTime);
+	void render(float interpolation, float elapsedTime);
 
 	ISceneNode* CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TScale, float TMass);
 
@@ -32,10 +34,14 @@ public:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
+
+
+
 private:
 	static const duration<float> timePerFrame;
 	float interpolation;
 
+	std::vector<Entity*> entities;
 	
 	ICameraSceneNode *Camera;
 };

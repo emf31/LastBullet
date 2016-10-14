@@ -149,8 +149,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EventReceiver.h" />
+    <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Otros\Timer.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -158,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletTest.cpp" />
+    <ClCompile Include="Entities\Entity.cpp" />
+    <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
