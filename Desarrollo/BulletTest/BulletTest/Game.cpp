@@ -27,7 +27,7 @@ void Game::run()
 	inicializarIrrlitch();
 	
 	while (irrDevice->run()) {
-		//if (irrDevice->isWindowActive()) {
+		if (irrDevice->isWindowActive()) {
 			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();
@@ -48,7 +48,7 @@ void Game::run()
 			
 
 			
-		//}
+		}
 			MastEventReceiver::i().startEventProcess();
 	}
 	irrDevice->drop();
@@ -69,9 +69,25 @@ void Game::inicializarIrrlitch()
 
 	irrDevice->getCursorControl()->setVisible(0);
 
+
+	// Initialize bullet
+	//Configura los algoritmos que utiliza para la colision de los objetos
+	btDefaultCollisionConfiguration *CollisionConfiguration = new btDefaultCollisionConfiguration();
+	//Algoritmo que usa bullet para guardarse las parejas que colisionan(sirve tambien para controlar parejas que NO colisionan)
+	btBroadphaseInterface *BroadPhase = new btAxisSweep3(btVector3(-1000, -1000, -1000), btVector3(1000, 1000, 1000));
+	btCollisionDispatcher *Dispatcher = new btCollisionDispatcher(CollisionConfiguration);
+	//Es lo que causa las iteraciones de los objetos(gravedad, fuerzas, colisiones), segun julio es lo que tiene mas tiempo de calculo
+	btSequentialImpulseConstraintSolver *Solver = new btSequentialImpulseConstraintSolver();
+	//Crea el mundo con los parametros anteriores
+	World = new btDiscreteDynamicsWorld(Dispatcher, BroadPhase, Solver, CollisionConfiguration);
+	World->setGravity(btVector3(0,-80,0));
+
+
 	// Add camera
 	//camara tipo fps
 	Camera = irrScene->addCameraSceneNodeFPS();
+	Camera->setPosition(vector3df(-300,300,0));
+	Camera->setTarget(vector3df(0, 0, 0));
 	Camera->setInputReceiverEnabled(true);
 
 	//Creamos el suelo
@@ -80,15 +96,17 @@ void Game::inicializarIrrlitch()
 	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
 
 
-	ISceneNode *player1 = CreateBox(Vec3<double>(0, 50.5, 0), Vec3<float>(100.f, 100.f, 100.0f), 0.0f);
+	ISceneNode *player1 = CreateBox(Vec3<double>(0, 450.5, 0), Vec3<float>(100.f, 100.f, 100.0f), 1.0f);
 	player1->setMaterialTexture(0, irrDriver->getTexture("../media/rockwall.jpg"));
 
-	ISceneNode *player2 = CreateBox(Vec3<double>(150, 50.5, 0), Vec3<float>(100.f, 100.f, 100.0f), 0.0f);
+	ISceneNode *player2 = CreateBox(Vec3<double>(150, 450.5, 0), Vec3<float>(100.f, 100.f, 100.0f), 1.0f);
 	player2->setMaterialTexture(0, irrDriver->getTexture("../media/rockwall.jpg"));
 
+	Entity *entsuelo = new Entity(suelo);
 	Entity *ent = new Entity(player1);
 	Entity *ent2 = new Entity(player2);
 	
+	entities.push_back(entsuelo);
 	entities.push_back(ent);
 	entities.push_back(ent2);
 
@@ -102,6 +120,33 @@ ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TS
 	//Asi no le afectan las luces
 	Node->setMaterialFlag(EMF_LIGHTING, false);
 
+	// Set the initial position of the object
+	btTransform Transform;
+	Transform.setIdentity();
+	Transform.setOrigin(btVector3(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
+
+	btDefaultMotionState *MotionState = new btDefaultMotionState(Transform);
+
+	// Create the shape
+	btVector3 HalfExtents(TScale.getX() * 0.5f, TScale.getY() * 0.5f, TScale.getZ() * 0.5f);
+	btCollisionShape *Shape = new btBoxShape(HalfExtents);
+	
+
+	// Add mass
+	btVector3 LocalInertia;
+	Shape->calculateLocalInertia(TMass, LocalInertia);
+
+	// Create the rigid body object
+	btRigidBody *RigidBody = new btRigidBody(TMass, MotionState, Shape, LocalInertia);
+	//RigidBody->setFriction(0);
+	RigidBody->setActivationState(DISABLE_DEACTIVATION);
+	// Store a pointer to the irrlicht node so we can update it later
+	RigidBody->setUserPointer((void *)(Node));
+
+	// Add it to the world
+	World->addRigidBody(RigidBody);
+	Objects.push_back(RigidBody);
+
 	return Node;
 }
 
@@ -110,35 +155,40 @@ void Game::processEvents()
 {
 	
 	if (MastEventReceiver::i().keyReleased(KEY_KEY_W)) {
-		entities.at(0)->isMovingForward = false;
+		entities.at(1)->isMovingForward = false;
 	}
 	else if(MastEventReceiver::i().keyReleased(KEY_KEY_S)){
-		entities.at(0)->isMovingBackward = false;
+		entities.at(1)->isMovingBackward = false;
 	}
 	else if (MastEventReceiver::i().keyReleased(KEY_KEY_A)) {
-		entities.at(0)->isMovingLeft = false;
+		entities.at(1)->isMovingLeft = false;
 	}
 	else if(MastEventReceiver::i().keyReleased(KEY_KEY_D)){
-		entities.at(0)->isMovingRight = false;
+		entities.at(1)->isMovingRight = false;
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_W)) {
-		entities.at(0)->isMovingForward = true;
+		entities.at(1)->isMovingForward = true;
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_S)) {
-		entities.at(0)->isMovingBackward = true;
+		entities.at(1)->isMovingBackward = true;
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_A)) {
-		entities.at(0)->isMovingLeft = true;
+		entities.at(1)->isMovingLeft = true;
 	} else if (MastEventReceiver::i().keyPressed(KEY_KEY_D)) {
-		entities.at(0)->isMovingRight = true;
+		entities.at(1)->isMovingRight = true;
 	}
 
 }
 
 void Game::update(Time elapsedTime)
 {
-	for (int i = 0; i < entities.size(); i++) {
-		entities.at(i)->update(elapsedTime);
+	World->stepSimulation(elapsedTime.asMilliseconds(), 60);
+
+	int i = 0;
+	// Relay the object's orientation to irrlicht
+	for (list<btRigidBody *>::Iterator Iterator = Objects.begin(); Iterator != Objects.end(); ++Iterator) {
+		entities.at(i)->update(elapsedTime, *Iterator);
+		i++;
 	}
 }
 

@@ -4,6 +4,8 @@
 #include "../Otros/vec3.hpp"
 #include "../Otros/Time.hpp"
 #include "../RenderState.h"
+#include <btBulletCollisionCommon.h>
+#include <btBulletDynamicsCommon.h>
 
 using namespace irr;
 using namespace core;
@@ -19,7 +21,7 @@ public:
 	Entity(ISceneNode *node);
 	virtual ~Entity();
 
-	void update(Time elapsedTime);
+	void update(Time elapsedTime, btRigidBody *TObject);
 	void updateRender(float interpolation);
 
 	bool isMovingBackward;

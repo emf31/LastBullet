@@ -5,6 +5,9 @@
 #include "irrlicht.h"
 #include <vector>
 #include "Entities\Entity.h"
+#include <btBulletCollisionCommon.h>
+#include <btBulletDynamicsCommon.h>
+#include <cstdlib>
 
 using namespace irr;
 using namespace core;
@@ -34,8 +37,8 @@ public:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
-
-
+	btDiscreteDynamicsWorld *World;
+	list<btRigidBody *> Objects;
 
 private:
 	static const Time timePerFrame;

@@ -12,7 +12,7 @@ RenderState::~RenderState()
 }
 
 void RenderState::setPosition(Vec3<float> position) {
-	posPrev = position;
+	posPrev = posNew;
 	posNew = position;
 }
 
