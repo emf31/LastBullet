@@ -210,6 +210,7 @@ void MastEventReceiver::init()
 	mouse.wheel = 0.0f;
 }
 
+
 bool MastEventReceiver::OnEvent(SEvent const& event)
 {
 	bool eventprocessed = false;

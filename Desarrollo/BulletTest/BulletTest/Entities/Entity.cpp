@@ -71,13 +71,9 @@ void Entity::update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrSc
 		TObject->setLinearVelocity(btVector3(vector.getX(), vector.getY(), vector.getZ()));
 	}
 
-	//renderState.update(elapsedTime);
-
 	// Set position
 	btVector3 Point = TObject->getCenterOfMassPosition();
-	renderState.setPosition(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-	TObject->activate(true);
-	//m_nodo->setPosition(vector3df((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
 	// Set rotation
 	vector3df Euler;
@@ -85,16 +81,17 @@ void Entity::update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrSc
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
 	Euler *= RADTODEG;
-	m_nodo->setRotation(Euler);
-	//m_nodo->setPosition(vector3df(m_posicion.getX(), m_posicion.getY(), m_posicion.getZ()));
+
+	//m_nodo->setRotation(Euler);
+	renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 }
 
 void Entity::updateRender(float interpolation)
 {
-	renderState.updateRender(interpolation, m_nodo );
+	renderState.updateRender(interpolation, m_nodo);
 }
 
 Vec3<float> Entity::getRenderPosition()
 {
-	return renderState.renderPos;
+	return renderState.getRenderPos();
 }

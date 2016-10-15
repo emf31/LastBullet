@@ -156,29 +156,10 @@ ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TS
 void Game::processEvents()
 {
 	
-	if (MastEventReceiver::i().keyReleased(KEY_KEY_W)) {
-		entities.at(1)->isMovingForward = false;
-	}
-	else if(MastEventReceiver::i().keyReleased(KEY_KEY_S)){
-		entities.at(1)->isMovingBackward = false;
-	}
-	else if (MastEventReceiver::i().keyReleased(KEY_KEY_A)) {
-		entities.at(1)->isMovingLeft = false;
-	}
-	else if(MastEventReceiver::i().keyReleased(KEY_KEY_D)){
-		entities.at(1)->isMovingRight = false;
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_W)) {
-		entities.at(1)->isMovingForward = true;
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_S)) {
-		entities.at(1)->isMovingBackward = true;
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_A)) {
-		entities.at(1)->isMovingLeft = true;
-	} else if (MastEventReceiver::i().keyPressed(KEY_KEY_D)) {
-		entities.at(1)->isMovingRight = true;
-	}
+	entities.at(1)->isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
+	entities.at(1)->isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
+	entities.at(1)->isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
+	entities.at(1)->isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
 
 }
 
@@ -189,7 +170,7 @@ void Game::update(Time elapsedTime)
 	int i = 0;
 	// Relay the object's orientation to irrlicht
 	for (list<btRigidBody *>::Iterator Iterator = Objects.begin(); Iterator != Objects.end(); ++Iterator) {
-		if(i==1)
+		if(i==1)	//Si es igual a 1 es el jugador que controlamos por lo que hacemos el update diferente
 			entities.at(i)->update(elapsedTime, *Iterator, irrScene,1);
 		else
 			entities.at(i)->update(elapsedTime, *Iterator, irrScene,0);
