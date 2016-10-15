@@ -39,6 +39,8 @@ void RenderState::updateRender(float interpolation, ISceneNode *m_nodo)
 	m_rotationNew.setZ(result[0]);
 	m_rotationPrev.setZ(result[1]);
 
+	result = nullptr;
+
 	m_renderRotation = Vec3<float>(
 		m_rotationPrev.getX() + ((m_rotationNew.getX() - m_rotationPrev.getX()) * interpolation),
 		m_rotationPrev.getY() + ((m_rotationNew.getY() - m_rotationPrev.getY()) * interpolation),
@@ -75,8 +77,6 @@ void RenderState::updateRender(float interpolation, ISceneNode *m_nodo)
 	//m_nodo->setRotation(vector3df(final.getX(), final.getY(), final.getZ()));
 	m_nodo->setRotation(vector3df(m_renderRotation.getX(), m_renderRotation.getY(), m_renderRotation.getZ()));
 
-	delete[] result;
-	result = nullptr;
 }
 
 float RenderState::Wrap(float value, float lower, float upper)
@@ -90,7 +90,7 @@ float RenderState::Wrap(float value, float lower, float upper)
 }
 
 float* RenderState::fixAngle(float end, float start) {
-	float *result = new float[2];
+	static float result[2];
 	float difference = abs(end - start);
 
 	if (difference > 180)
