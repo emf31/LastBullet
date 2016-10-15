@@ -1,6 +1,22 @@
 ﻿  RenderState.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\renderstate.cpp(34): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\renderstate.cpp(35): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\renderstate.cpp(36): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  main.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+  Game.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(121): warning C4244: 'argumento': conversión de 'double' a 'irr::f32'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(128): warning C4244: 'argumento': conversión de 'double' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(168): warning C4244: 'argumento': conversión de 'int' a 'btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(185): warning C4018: '<': no coinciden signed/unsigned
+  Entity.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+  Generando código...
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

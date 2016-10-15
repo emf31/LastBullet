@@ -41,7 +41,11 @@ public:
 	//Updatea posiciones y angulos
 	void update(Time elapsedTime);
 	//Calcula la posición y rotación de renderizado interpoladas
-	void updateRender(float interpolation, ISceneNode *m_nodo);	
+	void updateRender(float interpolation, ISceneNode *m_nodo);
+
+	float Wrap(float value, float lower, float upper);
+	float * fixAngle(float end, float start);
+	
 	//Updatea las posiciones prev y new
 	void updatePositions(Vec3<float> position);
 	//Updatea las rotaciones prev y new
