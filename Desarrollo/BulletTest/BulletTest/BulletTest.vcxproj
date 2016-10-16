@@ -152,8 +152,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Entity.h" />
+    <ClInclude Include="Entities\PhysicsEntity.h" />
+    <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
+    <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\vec3.hpp" />
@@ -165,9 +168,12 @@
   <ItemGroup>
     <ClCompile Include="BulletTest.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
+    <ClCompile Include="Entities\PhysicsEntity.cpp" />
+    <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />

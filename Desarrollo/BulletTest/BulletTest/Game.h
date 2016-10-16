@@ -5,6 +5,8 @@
 #include "irrlicht.h"
 #include <vector>
 #include "Entities\Entity.h"
+#include "Entities\Player.h"
+
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
@@ -37,14 +39,14 @@ public:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
-	btDiscreteDynamicsWorld *World;
-	list<btRigidBody *> Objects;
 
 private:
 	static const Time timePerFrame;
 	float interpolation;
 
 	std::vector<Entity*> entities;
+
+	Player *player;
 	
 	ICameraSceneNode *Camera;
 };

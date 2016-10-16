@@ -25,6 +25,12 @@
     <Filter Include="Archivos de código fuente\Otros\Win32">
       <UniqueIdentifier>{c6671359-4dd6-4e7a-aa72-cf6d31d66d8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Motor">
+      <UniqueIdentifier>{3cb7ce98-1d9a-4300-8039-5a9d2859a440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Entities">
+      <UniqueIdentifier>{d0564159-c869-4de6-9aaa-5fafe6e667d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -60,6 +66,15 @@
     <ClInclude Include="RenderState.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Motor\PhysicsEngine.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Player.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\PhysicsEntity.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -74,9 +89,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Entity.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="MastEventReceiver.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -89,7 +101,19 @@
     <ClCompile Include="Otros\Win32\ClockImpl.cpp">
       <Filter>Archivos de código fuente\Otros\Win32</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Entity.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\PhysicsEngine.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
     <ClCompile Include="RenderState.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Player.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\PhysicsEntity.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

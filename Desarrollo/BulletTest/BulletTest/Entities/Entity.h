@@ -3,36 +3,38 @@
 #include "irrlicht.h"
 #include "../Otros/vec3.hpp"
 #include "../Otros/Time.hpp"
+#include "../Otros/Clock.hpp"
 #include "../RenderState.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 
 using namespace irr;
-using namespace core;
 using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
-
 
 class Entity
 {
 public:
-	Entity(ISceneNode *node);
+	Entity(int id, ISceneNode* nodo, const std::string& name = "");
 	virtual ~Entity();
 
-	void update(Time elapsedTime, btRigidBody *TObject, ISceneManager *irrScene, int player);
 	void updateRender(float interpolation);
 	Vec3<float> getRenderPosition();
 
-	bool isMovingBackward;
-	bool isMovingForward;
-	bool isMovingLeft;
-	bool isMovingRight;
-private:
 	
 
-	ISceneNode *m_nodo;
-	RenderState renderState;
+	virtual void inicializar() = 0;
+	virtual void update(Time elapsedTime) = 0;
+	virtual void cargarContenido() = 0;
+	virtual void borrarContenido() = 0;
+
+protected:
+	int m_id;
+	std::string m_name;
+	ISceneNode* m_nodo;
+	RenderState m_renderState;
+
+private:
+
+	
 };
 
