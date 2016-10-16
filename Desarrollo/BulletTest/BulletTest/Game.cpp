@@ -7,6 +7,7 @@
 #include "Motor\PhysicsEngine.h"
 #include "Entities\EntityManager.h"
 #include "Entities\PhysicsEntity.h"
+#include "Motor\Grafic3dEngine.h"
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -56,15 +57,6 @@ void Game::run()
 //Tenemos que hacer patron fachada
 void Game::inicializarIrrlitch()
 {
-	// Initialize irrlicht
-	irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(800, 600), 32, false, false, false, &MastEventReceiver::i());
-	irrDevice->setWindowCaption(L"Hello World! - Irrlicht Engine Demo");
-
-	irrGUI = irrDevice->getGUIEnvironment();
-	irrScene = irrDevice->getSceneManager();
-	irrDriver = irrDevice->getVideoDriver();
-
-	irrDevice->getCursorControl()->setVisible(0);
 
 	//inicializamos bullet
 	PhysicsEngine::inicializar();
@@ -89,12 +81,8 @@ void Game::inicializarIrrlitch()
 
 	player = new Player(irrScene,irrDriver);
 
-	ISceneNode *suelo = irrScene->addCubeSceneNode(1.0f);
-	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
-	suelo->setScale(vector3df(2000.f, 100.f, 2000.f));
-	suelo->setPosition(vector3df(0, 0, 0));
-	//Asi no le afectan las luces
-	suelo->setMaterialFlag(EMF_LIGHTING, false);
+	int suelo=Grafic3dEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f));
+
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
 	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
 

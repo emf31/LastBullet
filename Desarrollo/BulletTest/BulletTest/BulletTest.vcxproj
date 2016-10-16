@@ -157,6 +157,7 @@
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
+    <ClInclude Include="Motor\Grafic3dEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Motor\Grafic3dEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />

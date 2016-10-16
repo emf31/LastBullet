@@ -75,13 +75,16 @@
     <ClInclude Include="Motor\PhysicsEngine.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\PhysicsEntity.h">
-      <Filter>Archivos de encabezado\Motor</Filter>
-    </ClInclude>
     <ClInclude Include="RenderState.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Entities\EntityManager.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\Grafic3dEngine.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\PhysicsEntity.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="Entities\PhysicsEntity.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\Grafic3dEngine.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
