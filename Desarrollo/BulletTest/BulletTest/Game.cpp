@@ -118,7 +118,7 @@ void Game::inicializarIrrlitch()
 	// Add camera
 	//camara tipo fps
 	Camera = irrScene->addCameraSceneNodeFPS();
-	//Camera->setPosition(vector3df(player1->getPosition().X, player1->getPosition().Y, player1->getPosition().Z));
+	Camera->setPosition(vector3df(10,10,10));
 	Camera->setTarget(vector3df(0, 0, 0));
 	Camera->setInputReceiverEnabled(true);
 
@@ -184,12 +184,12 @@ void Game::render(float interpolation, Time elapsedTime)
 	/*for (int i = 0; i < entities.size(); i++) {
 		//entities.at(i)->updateRender(interpolation);
 	}*/
-	irrScene->getActiveCamera()->setPosition(
+	/*irrScene->getActiveCamera()->setPosition(
 		vector3df(
 			EntityManager::i().getEntity(0)->getRenderPosition().getX(),
 			EntityManager::i().getEntity(0)->getRenderPosition().getY(),
 			EntityManager::i().getEntity(0)->getRenderPosition().getZ())
-		);
+		);*/
 
 	EntityManager::i().updateRender(interpolation);
 

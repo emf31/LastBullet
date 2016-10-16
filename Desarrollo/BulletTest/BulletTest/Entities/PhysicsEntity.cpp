@@ -4,6 +4,7 @@
 
 PhysicsEntity::PhysicsEntity(ISceneNode* nodo, const std::string& name) : Entity(-1, nodo, name)
 {
+
 }
 
 

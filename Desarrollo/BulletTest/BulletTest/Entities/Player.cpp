@@ -33,9 +33,9 @@ void Player::update(Time elapsedTime)
 	if (isMovingRight)
 		vector.addZ(-1.f);
 
-	m_renderState.setVelocity(vector);
+	//m_renderState.setVelocity(vector);
 
-		Vec3<float> target = Vec3<float>(
+	/*	Vec3<float> target = Vec3<float>(
 			m_escena->getActiveCamera()->getTarget().X,
 			m_escena->getActiveCamera()->getTarget().Y,
 			m_escena->getActiveCamera()->getTarget().Z
@@ -61,8 +61,8 @@ void Player::update(Time elapsedTime)
 			speedFinal.setX(speedFinal.getX() + speed.getZ());
 			speedFinal.setZ(speedFinal.getZ() - speed.getX());
 		}
-		speedFinal.normalise();
-		m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY(), speedFinal.getZ()*m_speedFactor));
+		speedFinal.normalise();*/
+		m_rigidBody->setLinearVelocity(btVector3(vector.getX()*3, vector.getY(), vector.getZ()*3));
 
 
 	if (isJumping && tiempoSalto.getElapsedTime().asSeconds() > 3) {
@@ -90,7 +90,7 @@ void Player::handleInput()
 	isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
 	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
-	isMovingForward = true;
+	//isMovingForward = true;
 }
 
 void Player::cargarContenido()
@@ -100,6 +100,8 @@ void Player::cargarContenido()
 	m_nodo->setPosition(vector3df(0, 100, 0));
 	//Asi no le afectan las luces
 	m_nodo->setMaterialFlag(EMF_LIGHTING, false);
+
+	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 	//Node->setMaterialTexture(0, m_escena->getTexture("../media/rockwall.jpg"));
 	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(0.5f, 2.f, 0.5f), 1.0f);
 }

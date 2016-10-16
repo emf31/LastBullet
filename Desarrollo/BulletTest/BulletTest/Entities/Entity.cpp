@@ -7,9 +7,9 @@
 Entity::Entity(int id, ISceneNode* nodo, const std::string& name) :	
 	m_id(id),
 	m_nodo(nodo), 
-	m_name(name),
-	m_renderState()
+	m_name(name)
 {
+
 	if (m_nodo) {
 		vector3df vec = m_nodo->getPosition();
 		m_renderState.setPosition(Vec3<float>(vec.X, vec.Y, vec.Z));
