@@ -13,13 +13,15 @@ public:
 	PhysicsEntity(ISceneNode* nodo, const std::string& name);
 	~PhysicsEntity();
 
-	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = m_rigidBody; }
+	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
 	btRigidBody* getRigidBody() { return m_rigidBody; }
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
 
 	virtual void update(Time elapsedTime) override;
+
+	virtual void handleInput() override;
 
 	virtual void cargarContenido() override;
 

@@ -20,10 +20,19 @@ public:
 	void updateRender(float interpolation);
 	Vec3<float> getRenderPosition();
 
+	RenderState* getRenderState() { return &m_renderState; }
+
+	int getID() {
+		return m_id;
+	}
+	void setID(int id) {
+		m_id = id;
+	}
 	
 
 	virtual void inicializar() = 0;
 	virtual void update(Time elapsedTime) = 0;
+	virtual void handleInput() = 0;
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
 

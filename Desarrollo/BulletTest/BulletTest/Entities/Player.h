@@ -1,15 +1,20 @@
 #pragma once
+#include "irrlicht.h"
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
+using namespace irr;
+using namespace scene;
+
 class Player : public Entity
 {
 public:
-	Player();
+	Player(ISceneManager* escena);
 	~Player();
 
 private:
+	ISceneManager* m_escena;
 	btRigidBody* m_rigidBody;
 
 	bool isMovingBackward;
@@ -24,6 +29,7 @@ private:
 	// Heredado vía Entity
 	virtual void inicializar() override;
 	virtual void update(Time elapsedTime) override;
+	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 };

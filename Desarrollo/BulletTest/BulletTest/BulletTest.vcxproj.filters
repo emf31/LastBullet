@@ -31,6 +31,12 @@
     <Filter Include="Archivos de código fuente\Entities">
       <UniqueIdentifier>{d0564159-c869-4de6-9aaa-5fafe6e667d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Entities">
+      <UniqueIdentifier>{95a8bdf3-563c-4e71-9ba0-6a0091094bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Motor">
+      <UniqueIdentifier>{31c85979-f078-4379-b74d-2132fe3f78db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -48,9 +54,6 @@
     <ClInclude Include="Otros\vec3.hpp">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\Entity.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="MastEventReceiver.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -63,17 +66,23 @@
     <ClInclude Include="Otros\Win32\ClockImpl.hpp">
       <Filter>Archivos de encabezado\Otros\Win32</Filter>
     </ClInclude>
-    <ClInclude Include="RenderState.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor\PhysicsEngine.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Entities\Entity.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Entities\Player.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\PhysicsEngine.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Entities\PhysicsEntity.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderState.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntityManager.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="Entities\PhysicsEntity.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\EntityManager.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

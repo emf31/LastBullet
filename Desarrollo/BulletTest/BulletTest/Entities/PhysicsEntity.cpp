@@ -31,6 +31,10 @@ void PhysicsEntity::update(Time elapsedTime)
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 }
 
+void PhysicsEntity::handleInput()
+{
+}
+
 void PhysicsEntity::cargarContenido()
 {
 }

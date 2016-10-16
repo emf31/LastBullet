@@ -5,6 +5,8 @@
 #include "MastEventReceiver.hpp"
 #include "Otros\Clock.hpp"
 #include "Motor\PhysicsEngine.h"
+#include "Entities\EntityManager.h"
+#include "Entities\PhysicsEntity.h"
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -68,11 +70,12 @@ void Game::inicializarIrrlitch()
 	PhysicsEngine::inicializar();
 
 	//Creamos el suelo
-	ISceneNode *suelo = CreateBox(Vec3<double>(0, 0, 0), Vec3<float>(50.f, 0.5f, 50.f), 0.0f);
-	ISceneNode *player1 = CreateBox(Vec3<double>(0, 100, 0), Vec3<float>(0.5f, 2.f, 0.5f), 1.0f);
-	player1->setMaterialTexture(0, irrDriver->getTexture("../media/rockwall.jpg"));
+	//ISceneNode *suelo = CreateBox(Vec3<double>(0, 0, 0), Vec3<float>(50.f, 0.5f, 50.f), 0.0f);
+	// = CreateBox(Vec3<double>(0, 100, 0), Vec3<float>(0.5f, 2.f, 0.5f), 1.0f);
 
-	ISceneNode *player2 = CreateBox(Vec3<double>(5, 100, 0), Vec3<float>(0.5, 0.5, 0.5), 1.0f);
+	
+
+	/*ISceneNode *player2 = CreateBox(Vec3<double>(5, 100, 0), Vec3<float>(0.5, 0.5, 0.5), 1.0f);
 	player2->setMaterialTexture(0, irrDriver->getTexture("../media/rockwall.jpg"));
 
 	ISceneNode *plataforma1 = CreateBox(Vec3<double>(3, 3, 0), Vec3<float>(10.f, 1.5f, 10.f), 0.0f);
@@ -82,9 +85,20 @@ void Game::inicializarIrrlitch()
 	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
 	plataforma1->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
 	plataforma2->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
-	plataforma3->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
+	plataforma3->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));*/
 
-	player = new Player();
+	player = new Player(irrScene);
+
+	ISceneNode *suelo = irrScene->addCubeSceneNode(1.0f);
+	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
+	suelo->setScale(vector3df(50.f, 0.5f, 50.f));
+	suelo->setPosition(vector3df(0, 0, 0));
+	//Asi no le afectan las luces
+	suelo->setMaterialFlag(EMF_LIGHTING, false);
+	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
+	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(50.f, 0.5f, 50.f),0));
+
+	EntityManager::i().cargarContenido();
 
 	/*Entity *entsuelo = new Entity(suelo);
 	Entity *ent = new Entity(player1);
@@ -112,12 +126,8 @@ void Game::inicializarIrrlitch()
 
 ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TScale, float TMass)
 {
-	ISceneNode *Node = irrScene->addCubeSceneNode(1.0f);
-	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
-	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
-	//Asi no le afectan las luces
-	Node->setMaterialFlag(EMF_LIGHTING, false);
-
+	
+	/*
 	// Set the initial position of the object
 	btTransform Transform;
 	Transform.setIdentity();
@@ -142,20 +152,18 @@ ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TS
 	RigidBody->setUserPointer((void *)(Node));
 
 	// Add it to the world
-	World->addRigidBody(RigidBody);
-	Objects.push_back(RigidBody);
+//	World->addRigidBody(RigidBody);
+	//Objects.push_back(RigidBody);
 
-	return Node;
+	return Node;*/
+	return NULL;
 }
 
 
 void Game::processEvents()
 {
 	
-	/*entities.at(1)->isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
-	entities.at(1)->isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
-	entities.at(1)->isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
-	entities.at(1)->isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);*/
+	EntityManager::i().handleInput();
 
 	/*if (MastEventReceiver::i().keyPressed(KEY_SPACE))
 		entities.at(1)->isJumping = true;
@@ -166,28 +174,25 @@ void Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	//World->stepSimulation(elapsedTime.asMilliseconds(), 60);
+	PhysicsEngine::update(elapsedTime);
+	EntityManager::i().update(elapsedTime);
 
-	int i = 0;
-	// Relay the object's orientation to irrlicht
-	/*for (list<btRigidBody *>::Iterator Iterator = Objects.begin(); Iterator != Objects.end(); ++Iterator) {
-		if(i==1)	//Si es igual a 1 es el jugador que controlamos por lo que hacemos el update diferente
-			entities.at(i)->update(elapsedTime, *Iterator, irrScene,1);
-		else
-			entities.at(i)->update(elapsedTime, *Iterator, irrScene,0);
-
-		
-		i++;
-	}*/
 }
 
 void Game::render(float interpolation, Time elapsedTime)
 {
-	for (int i = 0; i < entities.size(); i++) {
+	/*for (int i = 0; i < entities.size(); i++) {
 		//entities.at(i)->updateRender(interpolation);
-	}
-	//irrScene->getActiveCamera()->setPosition(vector3df(entities.at(1)->getRenderPosition().getX(), entities.at(1)->getRenderPosition().getY(), entities.at(1)->getRenderPosition().getZ()));
-	
+	}*/
+	irrScene->getActiveCamera()->setPosition(
+		vector3df(
+			EntityManager::i().getEntity(0)->getRenderPosition().getX(),
+			EntityManager::i().getEntity(0)->getRenderPosition().getY(),
+			EntityManager::i().getEntity(0)->getRenderPosition().getZ())
+		);
+
+	EntityManager::i().updateRender(interpolation);
+
 	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
 	irrScene->drawAll();
 	irrDriver->endScene();

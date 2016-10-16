@@ -28,7 +28,37 @@ void PhysicsEngine::update(Time elapsedTime)
 
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa)
 {
-	return nullptr;
+	btTransform transform;
+	transform.setIdentity();
+	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	transform.setOrigin(pos);
+
+	//create the motionState of the object
+	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
+
+	//create the bounding volume
+	btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
+	btCollisionShape* shape = new btBoxShape(halfExtents);
+
+	//create intertia info for the shape
+	btVector3 localinertia;
+	if(masa != 0)	//si no tiene masa no gira
+		shape->calculateLocalInertia(masa, localinertia);
+
+	//now create the rigidBody
+	btRigidBody* rigidBody = new btRigidBody(masa, motionState, shape, localinertia);
+
+	//add a pointer to rigidBody pointing to associated Entity
+	rigidBody->setUserPointer(entity);
+
+	//add the rigidBody to the world
+	m_world->addRigidBody(rigidBody);
+
+	//and add to the list of rigidBodies
+	m_rigidBodies.push_back(rigidBody);
+
+	//finally return created body
+	return rigidBody;
 }
 
 btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius, float mass)
