@@ -1,17 +1,16 @@
 #include "stdafx.h"
 #include <iostream>
 #include <algorithm>
-#include <Windows.h>
 #include "Game.h"
 #include "MastEventReceiver.hpp"
 #include "Otros\Clock.hpp"
-
+#include "Motor\PhysicsEngine.h"
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 Game::Game()
 {
-	AllocConsole();
+	
 }
 
 
@@ -41,12 +40,8 @@ void Game::run()
 				update(timePerFrame);
 			}
 			
-			interpolation = (float)min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
+			interpolation = (float)std::min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
 			render(interpolation, timePerFrame);
-
-
-			
-
 			
 		}
 			MastEventReceiver::i().startEventProcess();
@@ -69,46 +64,47 @@ void Game::inicializarIrrlitch()
 
 	irrDevice->getCursorControl()->setVisible(0);
 
-
-	// Initialize bullet
-	//Configura los algoritmos que utiliza para la colision de los objetos
-	btDefaultCollisionConfiguration *CollisionConfiguration = new btDefaultCollisionConfiguration();
-	//Algoritmo que usa bullet para guardarse las parejas que colisionan(sirve tambien para controlar parejas que NO colisionan)
-	btBroadphaseInterface *BroadPhase = new btAxisSweep3(btVector3(-1000, -1000, -1000), btVector3(1000, 1000, 1000));
-	btCollisionDispatcher *Dispatcher = new btCollisionDispatcher(CollisionConfiguration);
-	//Es lo que causa las iteraciones de los objetos(gravedad, fuerzas, colisiones), segun julio es lo que tiene mas tiempo de calculo
-	btSequentialImpulseConstraintSolver *Solver = new btSequentialImpulseConstraintSolver();
-	//Crea el mundo con los parametros anteriores
-	World = new btDiscreteDynamicsWorld(Dispatcher, BroadPhase, Solver, CollisionConfiguration);
-	World->setGravity(btVector3(0,-80,0));
-
-
-
+	//inicializamos bullet
+	PhysicsEngine::inicializar();
 
 	//Creamos el suelo
-	ISceneNode *suelo = CreateBox(Vec3<double>(0, 0, 0), Vec3<float>(1000.0f, 0.5f, 1000.0f), 0.0f);
-
-	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
-
-
-	ISceneNode *player1 = CreateBox(Vec3<double>(0, 450.5, 0), Vec3<float>(100.f, 100.f, 100.0f), 1.0f);
+	ISceneNode *suelo = CreateBox(Vec3<double>(0, 0, 0), Vec3<float>(50.f, 0.5f, 50.f), 0.0f);
+	ISceneNode *player1 = CreateBox(Vec3<double>(0, 100, 0), Vec3<float>(0.5f, 2.f, 0.5f), 1.0f);
 	player1->setMaterialTexture(0, irrDriver->getTexture("../media/rockwall.jpg"));
 
-	ISceneNode *player2 = CreateBox(Vec3<double>(150, 450.5, 0), Vec3<float>(100.f, 100.f, 100.0f), 1.0f);
+	ISceneNode *player2 = CreateBox(Vec3<double>(5, 100, 0), Vec3<float>(0.5, 0.5, 0.5), 1.0f);
 	player2->setMaterialTexture(0, irrDriver->getTexture("../media/rockwall.jpg"));
 
-	Entity *entsuelo = new Entity(suelo);
+	ISceneNode *plataforma1 = CreateBox(Vec3<double>(3, 3, 0), Vec3<float>(10.f, 1.5f, 10.f), 0.0f);
+	ISceneNode *plataforma2 = CreateBox(Vec3<double>(8, 8, 0), Vec3<float>(10.f, 1.5f, 10.f), 0.0f);
+	ISceneNode *plataforma3 = CreateBox(Vec3<double>(13, 12, 0), Vec3<float>(10.f, 1.5f, 10.f), 0.0f);
+
+	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
+	plataforma1->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
+	plataforma2->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
+	plataforma3->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
+
+	player = new Player();
+
+	/*Entity *entsuelo = new Entity(suelo);
 	Entity *ent = new Entity(player1);
 	Entity *ent2 = new Entity(player2);
+	Entity *p1 = new Entity(plataforma1);
+	Entity *p2 = new Entity(plataforma2);
+	Entity *p3 = new Entity(plataforma3);
 	
 	entities.push_back(entsuelo);
 	entities.push_back(ent);
 	entities.push_back(ent2);
 
+	entities.push_back(p1);
+	entities.push_back(p2);
+	entities.push_back(p3);*/
+
 	// Add camera
 	//camara tipo fps
 	Camera = irrScene->addCameraSceneNodeFPS();
-	Camera->setPosition(vector3df(player1->getPosition().X, player1->getPosition().Y, player1->getPosition().Z));
+	//Camera->setPosition(vector3df(player1->getPosition().X, player1->getPosition().Y, player1->getPosition().Z));
 	Camera->setTarget(vector3df(0, 0, 0));
 	Camera->setInputReceiverEnabled(true);
 
@@ -136,7 +132,7 @@ ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TS
 
 	// Add mass
 	btVector3 LocalInertia;
-	Shape->calculateLocalInertia(TMass, LocalInertia);
+	//Shape->calculateLocalInertia(TMass, LocalInertia);
 
 	// Create the rigid body object
 	btRigidBody *RigidBody = new btRigidBody(TMass, MotionState, Shape, LocalInertia);
@@ -156,20 +152,25 @@ ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TS
 void Game::processEvents()
 {
 	
-	entities.at(1)->isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
+	/*entities.at(1)->isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
 	entities.at(1)->isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	entities.at(1)->isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
-	entities.at(1)->isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
+	entities.at(1)->isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);*/
+
+	/*if (MastEventReceiver::i().keyPressed(KEY_SPACE))
+		entities.at(1)->isJumping = true;
+	else if (MastEventReceiver::i().keyReleased(KEY_SPACE))
+		entities.at(1)->isJumping = false;*/
 
 }
 
 void Game::update(Time elapsedTime)
 {
-	World->stepSimulation(elapsedTime.asMilliseconds(), 60);
+	//World->stepSimulation(elapsedTime.asMilliseconds(), 60);
 
 	int i = 0;
 	// Relay the object's orientation to irrlicht
-	for (list<btRigidBody *>::Iterator Iterator = Objects.begin(); Iterator != Objects.end(); ++Iterator) {
+	/*for (list<btRigidBody *>::Iterator Iterator = Objects.begin(); Iterator != Objects.end(); ++Iterator) {
 		if(i==1)	//Si es igual a 1 es el jugador que controlamos por lo que hacemos el update diferente
 			entities.at(i)->update(elapsedTime, *Iterator, irrScene,1);
 		else
@@ -177,15 +178,15 @@ void Game::update(Time elapsedTime)
 
 		
 		i++;
-	}
+	}*/
 }
 
 void Game::render(float interpolation, Time elapsedTime)
 {
 	for (int i = 0; i < entities.size(); i++) {
-		entities.at(i)->updateRender(interpolation);
+		//entities.at(i)->updateRender(interpolation);
 	}
-	irrScene->getActiveCamera()->setPosition(vector3df(entities.at(1)->getRenderPosition().getX(), entities.at(1)->getRenderPosition().getY(), entities.at(1)->getRenderPosition().getZ()));
+	//irrScene->getActiveCamera()->setPosition(vector3df(entities.at(1)->getRenderPosition().getX(), entities.at(1)->getRenderPosition().getY(), entities.at(1)->getRenderPosition().getZ()));
 	
 	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
 	irrScene->drawAll();
