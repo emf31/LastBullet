@@ -4,7 +4,7 @@
 #include "../MastEventReceiver.hpp"
 
 
-Player::Player(ISceneManager* escena) : Entity(-1, NULL, "Player"), m_escena(escena), m_speedFactor(30)
+Player::Player(ISceneManager* escena, IVideoDriver* driver) : Entity(-1, NULL, "Player"), m_escena(escena), m_speedFactor(30), m_driver(driver)
 {
 }
 
@@ -62,7 +62,8 @@ void Player::update(Time elapsedTime)
 			speedFinal.setZ(speedFinal.getZ() - speed.getX());
 		}
 		speedFinal.normalise();*/
-		m_rigidBody->setLinearVelocity(btVector3(vector.getX()*3, vector.getY(), vector.getZ()*3));
+	
+		m_rigidBody->setLinearVelocity(btVector3(vector.getX()*30, vector.getY(), vector.getZ()*30));
 
 
 	if (isJumping && tiempoSalto.getElapsedTime().asSeconds() > 3) {
@@ -96,14 +97,16 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	m_nodo = m_escena->addCubeSceneNode(1.0f);
-	m_nodo->setScale(vector3df(0.5f, 2.f, 0.5f));
-	m_nodo->setPosition(vector3df(0, 100, 0));
+	m_nodo->setScale(vector3df(100.f, 100.f, 100.f));
+	m_nodo->setPosition(vector3df(0, 500, 0));
 	//Asi no le afectan las luces
 	m_nodo->setMaterialFlag(EMF_LIGHTING, false);
+	
 
-	m_renderState.setPosition(Vec3<float>(0, 100, 0));
-	//Node->setMaterialTexture(0, m_escena->getTexture("../media/rockwall.jpg"));
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(0.5f, 2.f, 0.5f), 1.0f);
+	m_renderState.setPosition(Vec3<float>(0, 500, 0));
+
+	m_nodo->setMaterialTexture(0, m_driver->getTexture("../media/rockwall.jpg"));
+	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f);
 }
 
 void Player::borrarContenido()

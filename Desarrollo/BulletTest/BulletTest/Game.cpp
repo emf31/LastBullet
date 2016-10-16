@@ -87,16 +87,16 @@ void Game::inicializarIrrlitch()
 	plataforma2->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
 	plataforma3->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));*/
 
-	player = new Player(irrScene);
+	player = new Player(irrScene,irrDriver);
 
 	ISceneNode *suelo = irrScene->addCubeSceneNode(1.0f);
 	suelo->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
-	suelo->setScale(vector3df(50.f, 0.5f, 50.f));
+	suelo->setScale(vector3df(2000.f, 100.f, 2000.f));
 	suelo->setPosition(vector3df(0, 0, 0));
 	//Asi no le afectan las luces
 	suelo->setMaterialFlag(EMF_LIGHTING, false);
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
-	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(50.f, 0.5f, 50.f),0));
+	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
 
 	EntityManager::i().cargarContenido();
 

@@ -4,10 +4,11 @@
 #include "EntityManager.h"
 
 
-Entity::Entity(int id, ISceneNode* nodo, const std::string& name) :	
+Entity::Entity(int id, ISceneNode* nodo, const std::string& name) :
 	m_id(id),
-	m_nodo(nodo), 
-	m_name(name)
+	m_nodo(nodo),
+	m_name(name),
+	m_renderState()
 {
 
 	if (m_nodo) {

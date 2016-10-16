@@ -122,10 +122,10 @@
     <ClCompile Include="Entities\Player.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\PhysicsEntity.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\EntityManager.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\PhysicsEntity.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>

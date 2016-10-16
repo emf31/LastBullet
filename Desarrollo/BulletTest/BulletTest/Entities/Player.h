@@ -10,11 +10,12 @@ using namespace scene;
 class Player : public Entity
 {
 public:
-	Player(ISceneManager* escena);
+	Player(ISceneManager* escena,IVideoDriver* driver);
 	~Player();
 
 private:
 	ISceneManager* m_escena;
+	IVideoDriver* m_driver;
 	btRigidBody* m_rigidBody;
 
 	bool isMovingBackward;
