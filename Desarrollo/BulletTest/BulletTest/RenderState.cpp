@@ -19,7 +19,7 @@ void RenderState::update(Time elapsedTime)
 	m_posNew += m_Velocity * elapsedTime.asSeconds();
 }
 
-void RenderState::updateRender(float interpolation, ISceneNode *m_nodo)
+void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
 {
 	
 	m_renderPos = Vec3<float>(
@@ -27,10 +27,7 @@ void RenderState::updateRender(float interpolation, ISceneNode *m_nodo)
 		m_posPrev.getY() + ((m_posNew.getY() - m_posPrev.getY()) * interpolation),
 		m_posPrev.getZ() + ((m_posNew.getZ() - m_posPrev.getZ()) * interpolation)
 	);
-	/*if (m_renderPos.getX() > abs(1)) {
-		m_renderPos.display();
-	}*/
-	
+
 	float shortest_angleX = ((((int)(m_rotationNew.getX() - m_rotationPrev.getX()) % 360) + 540) % 360) - 180;   //Calculamos el angulo más corto en el caso de que
 	float shortest_angleY = ((((int)(m_rotationNew.getY() - m_rotationPrev.getY()) % 360) + 540) % 360) - 180;
 	float shortest_angleZ = ((((int)(m_rotationNew.getZ() - m_rotationPrev.getZ()) % 360) + 540) % 360) - 180;
@@ -40,8 +37,8 @@ void RenderState::updateRender(float interpolation, ISceneNode *m_nodo)
 	m_renderRotation.setZ(m_rotationPrev.getZ() + (shortest_angleZ)* interpolation);
 
 
-	m_nodo->setPosition(vector3df(m_renderPos.getX(), m_renderPos.getY(), m_renderPos.getZ()));
-	m_nodo->setRotation(vector3df(m_renderRotation.getX(), m_renderRotation.getY(), m_renderRotation.getZ()));
+	m_nodo->setPosition(m_renderPos);
+	m_nodo->setRotation(m_renderRotation);
 
 }
 

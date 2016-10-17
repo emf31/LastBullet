@@ -1,12 +1,12 @@
 #pragma once
 
-#include "irrlicht.h"
 #include "../Otros/vec3.hpp"
 #include "../Otros/Time.hpp"
 #include "../Otros/Clock.hpp"
 #include "../RenderState.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
+#include "../Motor/SceneNode.h"
 
 using namespace irr;
 using namespace scene;
@@ -14,7 +14,7 @@ using namespace scene;
 class Entity
 {
 public:
-	Entity(int id, ISceneNode* nodo, const std::string& name = "");
+	Entity(int id, SceneNode* nodo, const std::string& name = "");
 	virtual ~Entity();
 
 	void updateRender(float interpolation);
@@ -39,7 +39,7 @@ public:
 protected:
 	int m_id;
 	std::string m_name;
-	ISceneNode* m_nodo;
+	SceneNode* m_nodo;
 	RenderState m_renderState;
 
 private:

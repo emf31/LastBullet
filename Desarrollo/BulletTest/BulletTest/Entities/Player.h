@@ -1,21 +1,16 @@
 #pragma once
-#include "irrlicht.h"
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
-using namespace irr;
-using namespace scene;
-
 class Player : public Entity
 {
 public:
-	Player(ISceneManager* escena,IVideoDriver* driver);
+	Player();
 	~Player();
 
 private:
-	ISceneManager* m_escena;
-	IVideoDriver* m_driver;
+	
 	btRigidBody* m_rigidBody;
 
 	bool isMovingBackward;

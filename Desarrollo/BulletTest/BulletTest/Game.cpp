@@ -7,7 +7,8 @@
 #include "Motor\PhysicsEngine.h"
 #include "Entities\EntityManager.h"
 #include "Entities\PhysicsEntity.h"
-#include "Motor\Grafic3dEngine.h"
+#include "Motor\GraphicEngine.h"
+#include "Motor\SceneNode.h"
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -60,6 +61,7 @@ void Game::inicializarIrrlitch()
 
 	//inicializamos bullet
 	PhysicsEngine::inicializar();
+	GraphicEngine::i().inicializar();
 
 	//Creamos el suelo
 	//ISceneNode *suelo = CreateBox(Vec3<double>(0, 0, 0), Vec3<float>(50.f, 0.5f, 50.f), 0.0f);
@@ -79,9 +81,9 @@ void Game::inicializarIrrlitch()
 	plataforma2->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));
 	plataforma3->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));*/
 
-	player = new Player(irrScene,irrDriver);
+	player = new Player();
 
-	int suelo=Grafic3dEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f));
+	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f));
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
 	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));

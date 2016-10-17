@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "../Motor/PhysicsEngine.h"
+#include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
 
 
-Player::Player(ISceneManager* escena, IVideoDriver* driver) : Entity(-1, NULL, "Player"), m_escena(escena), m_speedFactor(30), m_driver(driver)
+Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 {
 }
 
@@ -91,25 +92,21 @@ void Player::handleInput()
 	isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
 	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
-	//isMovingForward = true;
 }
 
 void Player::cargarContenido()
 {
-	m_nodo = m_escena->addCubeSceneNode(1.0f);
-	m_nodo->setScale(vector3df(100.f, 100.f, 100.f));
-	m_nodo->setPosition(vector3df(0, 500, 0));
-	//Asi no le afectan las luces
-	m_nodo->setMaterialFlag(EMF_LIGHTING, false);
-	
+	//Creas el nodo(grafico)
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 500, 0), Vec3<float>(100.f, 100.f, 100.f), "../media/rockwall.jpg");
 
 	m_renderState.setPosition(Vec3<float>(0, 500, 0));
 
-	m_nodo->setMaterialTexture(0, m_driver->getTexture("../media/rockwall.jpg"));
+	//Creas el body(fisico)
 	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f);
 }
 
 void Player::borrarContenido()
 {
 	//No se si aqui habria que hacer delete al nodo porque igual se encarga irrlitch
+	delete m_nodo;
 }

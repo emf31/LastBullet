@@ -10,7 +10,7 @@ using namespace scene;
 class PhysicsEntity : public Entity
 {
 public:
-	PhysicsEntity(ISceneNode* nodo, const std::string& name);
+	PhysicsEntity(SceneNode* nodo, const std::string& name);
 	~PhysicsEntity();
 
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }

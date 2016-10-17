@@ -4,7 +4,7 @@
 #include "EntityManager.h"
 
 
-Entity::Entity(int id, ISceneNode* nodo, const std::string& name) :
+Entity::Entity(int id, SceneNode* nodo, const std::string& name) :
 	m_id(id),
 	m_nodo(nodo),
 	m_name(name),
@@ -12,8 +12,7 @@ Entity::Entity(int id, ISceneNode* nodo, const std::string& name) :
 {
 
 	if (m_nodo) {
-		vector3df vec = m_nodo->getPosition();
-		m_renderState.setPosition(Vec3<float>(vec.X, vec.Y, vec.Z));
+		m_renderState.setPosition(m_nodo->getPosition());
 	}
 	else {
 		m_renderState.setPosition(Vec3<float>(0,0,0));
