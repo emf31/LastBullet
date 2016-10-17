@@ -11,6 +11,8 @@
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
+
+
 enum GameMessages
 {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
@@ -30,23 +32,23 @@ void muestraPlayer(Player *p) {
 
 	std::cout << "Vida: " << p->vida << std::endl;
 	std::cout << "Municion: " << p->municion << std::endl;
-	std::cout << "Posicion: " << p->posX << ", " << p->posY  << std::endl;
+	std::cout << "Posicion: " << p->posicion.x << ", " << p->posicion.y  << std::endl;
 	std::cout << "" << std::endl;
 }
 
 void updatePlayer(int movimiento, Player *p) {
-	
+	//si esto no funciona, es decir, el player no se mueve tendriamos que hacerlos con setPosition para que se actualizaran las variables del player 
 	if (movimiento == 1) {
-		p->posY = p->posY + 0.1f;
+		p->posicion.y = p->posicion.y -1.f;
 	}
 	if (movimiento == 2) {
-		p->posX = p->posX - 0.1f;
+		p->posicion.x = p->posicion.x - 1.f;
 	}
 	if (movimiento == 3) {
-		p->posX = p->posX + 0.1f;
+		p->posicion.x = p->posicion.x + 1.f;
 	}
 	if (movimiento == 4) {
-		p->posY = p->posY - 0.1f;
+		p->posicion.y = p->posicion.y + 1.f;
 	}
 }
 
@@ -234,21 +236,25 @@ int main() {
 								break;
 							}
 						}
-						Player *p = new Player();
-						p = clientArray.at(pos);
+						//Player *p = new Player();
+						//p = clientArray.at(pos);
 
-						updatePlayer(movimiento, p);
+						updatePlayer(movimiento, clientArray.at(pos));
 
-
+						Tposicion posicionEnviar = clientArray.at(pos)->getPos();
+						RakNet::RakNetGUID elguid = clientArray.at(pos)->getGuid();
+						
 						for (int i = 0; i < clientArray.size(); i++) {
 							//Enviamos una copia del player a todos los demas
 							bsOut.Write((RakNet::MessageID)ACTUALIZA_CLIENTE);
+							
 							//UPDATE
-							bsOut.Write(*p);
+							bsOut.Write(elguid);
+							bsOut.Write(posicionEnviar);
 							peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
 							bsOut.Reset();
 						}
-				
+						clientArray.at(pos)->restablecerMovimiento();
 					}
 
 				}

@@ -3,16 +3,19 @@
 Player::Player(std::string name, float x, float y){
 	vida = 100;
 	municion = 100;
+
+	posicion.x = x;
+	posicion.y = y;
+
 	nombre = name;
-	posX = x;
-	posY = y;
-	shape = new sf::CircleShape(100.f);
-	shape->setFillColor(sf::Color::Green);
+
+	shape.setRadius(100.f);
+	shape.setFillColor(sf::Color::Green);
 }
 Player::Player() {
 	
-	shape = new sf::CircleShape(100.f);
-	shape->setFillColor(sf::Color::Green);
+	shape.setRadius(100.f);
+	shape.setFillColor(sf::Color::Green);
 }
 
 
@@ -20,12 +23,21 @@ Player::~Player(){
 
 }
 
+
+void Player::restablecerMovimiento() {
+	movimiento = 0;
+}
+
 float Player::getVida(){
 	return 0.0f;
 }
 
-sf::Vector2f Player::getPos() {
-	return sf::Vector2f(posX,posY);
+Tposicion Player::getPos() {
+	return posicion;
+}
+
+void Player::setPosicion(Tposicion pos) {
+	posicion = pos;
 }
 
 float Player::getMunicion(){
@@ -44,10 +56,7 @@ void Player::disparar() {
 	}
 }
 
-void Player::setPosicion(float x, float y) {
-	posX = x;
-	posY = y;
-}
+
 
 void Player::setNombre(std::string name) {
 	nombre = name;

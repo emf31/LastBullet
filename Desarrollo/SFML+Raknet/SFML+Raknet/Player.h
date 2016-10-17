@@ -3,6 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include <RakNetTypes.h>
 #include <RakPeerInterface.h>
+
+typedef struct {
+	float x, y;
+}Tposicion;
+
 class Player{
 
 public:
@@ -10,14 +15,17 @@ public:
 	Player();
 	~Player();
 
+
+
 	float getVida();
-	sf::Vector2f getPos();
+	Tposicion getPos();
 	float getMunicion();
 
 	void setVida(float nVida);
 	void disparar();
 
-	void setPosicion(float x, float y);
+	void setPosicion(Tposicion pos);
+	void restablecerMovimiento();
 	void setNombre(std::string name);
 
 	void setGuid(RakNet::RakNetGUID rkguid);
@@ -25,13 +33,13 @@ public:
 	int getInput();
 
 	int conectado = 0;
-	sf::CircleShape *shape;
+	sf::CircleShape shape;
 	std::string nombre;
 	float vida;
-	float posX, posY;
 	float municion;
 	int actualizado = 0;
 	int movimiento = 0;
+	Tposicion posicion;
 
 private:
 

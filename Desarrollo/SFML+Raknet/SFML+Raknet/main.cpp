@@ -22,20 +22,24 @@ int main() {
 	
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Raknet Client v0.1");
 	
+	sf::CircleShape shape2;
+	shape2.setFillColor(sf::Color::Red);
+	shape2.setRadius(100.f);
 	int i = 0;
-	while (window.isOpen()){
+	while (window.isOpen()) {
 		sf::Event event;
-		while (window.pollEvent(event)){
+		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
 
-		window.clear(sf::Color(208,208,208,1));
-		player->shape->setPosition(player->getPos());
-		window.draw(*player->shape);
+		window.clear(sf::Color(208, 208, 208, 1));
+		player->shape.setPosition(player->getPos().x, player->getPos().y);
+		window.draw(player->shape);
 		for (i = 0; i < raknet->clientArray.size(); i++) {
-			raknet->clientArray.at(i)->shape->setPosition(raknet->clientArray.at(i)->getPos());
-			window.draw(*raknet->clientArray.at(i)->shape);
+			raknet->clientArray.at(i)->shape.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
+			shape2.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
+			window.draw(shape2);
 		}
 		window.display();
 	}

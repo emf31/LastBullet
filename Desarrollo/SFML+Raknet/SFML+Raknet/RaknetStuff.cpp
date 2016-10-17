@@ -141,21 +141,23 @@ void RaknetStuff::bucleCliente() {
 				case ACTUALIZA_CLIENTE: {
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-					Player *p = new Player();
-					bsIn.Read(*p);
+					RakNet::RakNetGUID elguid;
+					Tposicion nuevapos;
+					bsIn.Read(elguid);
+					bsIn.Read(nuevapos);
 
-					if (p->getGuid() == player->getGuid()) {
+					if (elguid == player->getGuid()) {
 						//SOY YO
 						//player = p;
 						//NOTA: NO SE PUEDEN CAMBIAR VARIABLES IGUALANDO DESDE AQUI PORQUE SINO EN EL MAIN NO SE CAMBIA, HAY QUE LLAMAR A FUNCIONES DEL PLAYER.CPP PARA CAMBIAR PARAMETROS
-						player->setPosicion(p->getPos().x, player->getPos().y);
+						player->setPosicion(nuevapos);
 						player->actualizado = 1;
 					} else {
 						//ES OTRA PERSONA
 						for (int i = 0; i < clientArray.size(); i++) {
-							if (clientArray.at(i)->getGuid() == p->getGuid()) {
+							if (clientArray.at(i)->getGuid() == elguid) {
 								//Te actualizo
-								clientArray.at(i) = p;
+								clientArray.at(i)->setPosicion(nuevapos);
 								break;
 							}
 						}
@@ -181,12 +183,13 @@ void RaknetStuff::bucleCliente() {
 					bsOut.Write(mov);
 					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 					bsOut.Reset();
+					player->restablecerMovimiento();
 				}
 
 			}
 			cont++;
 
-			if (cont >= 1000)
+			if (cont >= 200000)
 				cont = 0;
 		}
 
