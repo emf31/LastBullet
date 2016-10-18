@@ -26,8 +26,11 @@ public:
 	}
 
 	SceneNode* createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "");
-	Camera* createCamera(Vec3<float> position, Vec3<float> target);
-
+	
+	//Metodos de la camara
+	void createCamera(Vec3<float> position, Vec3<float> target);
+	void setCameraEntity(Entity* entity);
+	void updateCamera();
 	Camera* getActiveCamera();
 
 	//No hace nada aun
@@ -36,7 +39,6 @@ public:
 	
 	void renderAll();
 	void inicializar();
-
 	bool isRuning();
 	bool isWindowActive();
 	bool apagar();
@@ -47,7 +49,7 @@ private:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
-	Camera* active_camera;
+	Camera *active_camera;
 
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();

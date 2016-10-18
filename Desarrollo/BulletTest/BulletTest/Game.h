@@ -27,7 +27,6 @@ public:
 	virtual ~Game();
 
 	void run();
-
 	void inicializar();
 	void processEvents(); // Captura y procesa eventos
 	void update(Time elapsedTime);
@@ -39,7 +38,7 @@ private:
 	float interpolation;
 
 	Player *player;
-	Camera *camara;
+	
 
 };
 

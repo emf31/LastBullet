@@ -23,7 +23,7 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 }
 
 
-Camera* GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
+void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
 	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS();
@@ -32,10 +32,18 @@ Camera* GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 	cam->setInputReceiverEnabled(true);
 
 	//Creamos el objeto camara y la seteamos como la camara activa
-	Camera* camera = new Camera(cam);
-	active_camera = camera;
+	active_camera = new Camera(cam);
+	//active_camera = camera;
+}
 
-	return new Camera(cam);
+void GraphicEngine::setCameraEntity(Entity * entity)
+{
+	active_camera->asignarEntity(entity);
+}
+
+void GraphicEngine::updateCamera()
+{
+	active_camera->update();
 }
 
 
@@ -46,7 +54,7 @@ Camera * GraphicEngine::getActiveCamera()
 
 void GraphicEngine::setActiveCamera(Camera* camera)
 {
-	//irrScene->setActiveCamera();
+	active_camera = camera;
 }
 
 void GraphicEngine::renderAll()

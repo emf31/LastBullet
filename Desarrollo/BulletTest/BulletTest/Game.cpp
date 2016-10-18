@@ -106,8 +106,8 @@ void Game::inicializar()
 
 	// Add camera
 	//camara tipo fps
-	camara = GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
-	camara->asignarEntity(player);
+	GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
+	GraphicEngine::i().setCameraEntity(player);
 }
 
 void Game::processEvents()
@@ -123,7 +123,7 @@ void Game::update(Time elapsedTime)
 
 void Game::render(float interpolation, Time elapsedTime)
 {
-	camara->update();
+	GraphicEngine::i().updateCamera();
 
 	EntityManager::i().updateRender(interpolation);
 
