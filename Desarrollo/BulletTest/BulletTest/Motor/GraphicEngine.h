@@ -1,6 +1,7 @@
 #pragma once
 #include "../Otros/vec3.hpp"
 #include "SceneNode.h"
+#include "Camera.h"
 #include "irrlicht.h"
 #include <iostream>
 #include <string>
@@ -19,25 +20,26 @@ using namespace gui;
 class GraphicEngine
 {
 public:
-	
-	~GraphicEngine();
-
 	static GraphicEngine& i() {
 		static GraphicEngine singleton;
 		return singleton;
 	}
 
 	SceneNode* createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "");
+	Camera* createCamera(Vec3<float> position, Vec3<float> target);
 
+	Camera* getActiveCamera();
 
-	
-	void createCamera(Vec3<float> position, Vec3<float> target);
-	void setCameraTarget(Vec3<float> target);
-	void setCameraPosition(Vec3<float> position);
+	//No hace nada aun
+	void setActiveCamera(Camera* camera);
+
 	
 	void renderAll();
-
 	void inicializar();
+
+	bool isRuning();
+	bool isWindowActive();
+	bool apagar();
 
 private:
 	IrrlichtDevice *irrDevice;
@@ -45,7 +47,7 @@ private:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
-	ICameraSceneNode *Camera;
+	Camera* active_camera;
 
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();

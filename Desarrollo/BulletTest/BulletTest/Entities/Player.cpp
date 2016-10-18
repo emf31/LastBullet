@@ -21,50 +21,33 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 	Vec3<float> speedFinal;
-	Vec3<float> vector = Vec3<float>(0.f, 0.f, 0.f);
 
-	//isMovingRight = true;
 
-	if (isMovingForward)
-		vector.addX(1.f);
-	if (isMovingBackward)
-		vector.addX(-1.f);
-	if (isMovingLeft)
-		vector.addZ(1.f);
-	if (isMovingRight)
-		vector.addZ(-1.f);
+	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
-	//m_renderState.setVelocity(vector);
+	Vec3<float> posicion = getRenderState()->getPosition();
+	Vec3<float> speed = target - posicion;
+	speedFinal = Vec3<float>(0, 0, 0);
 
-	/*	Vec3<float> target = Vec3<float>(
-			m_escena->getActiveCamera()->getTarget().X,
-			m_escena->getActiveCamera()->getTarget().Y,
-			m_escena->getActiveCamera()->getTarget().Z
-			);
+	if (isMovingForward) {
+		speedFinal.setX(speedFinal.getX() + speed.getX());
+		speedFinal.setZ(speedFinal.getZ() + speed.getZ());
+	}
+	if (isMovingBackward) {
+		speedFinal.setX(speedFinal.getX() - speed.getX());
+		speedFinal.setZ(speedFinal.getZ() - speed.getZ());
+	}
+	if (isMovingLeft) {
+		speedFinal.setX(speedFinal.getX() - speed.getZ());
+		speedFinal.setZ(speedFinal.getZ() + speed.getX());
+	}
+	if (isMovingRight) {
+		speedFinal.setX(speedFinal.getX() + speed.getZ());
+		speedFinal.setZ(speedFinal.getZ() - speed.getX());
+	}
+	speedFinal.normalise();
 
-		Vec3<float> posicion = Vec3<float>(m_nodo->getPosition().X, m_nodo->getPosition().Y, m_nodo->getPosition().Z);
-		Vec3<float> speed = target - posicion;
-		speedFinal = Vec3<float>(0, 0, 0);
-
-		if (isMovingForward) {
-			speedFinal.setX(speedFinal.getX() + speed.getX());
-			speedFinal.setZ(speedFinal.getZ() + speed.getZ());
-		}
-		if (isMovingBackward) {
-			speedFinal.setX(speedFinal.getX() - speed.getX());
-			speedFinal.setZ(speedFinal.getZ() - speed.getZ());
-		}
-		if (isMovingLeft) {
-			speedFinal.setX(speedFinal.getX() - speed.getZ());
-			speedFinal.setZ(speedFinal.getZ() + speed.getX());
-		}
-		if (isMovingRight) {
-			speedFinal.setX(speedFinal.getX() + speed.getZ());
-			speedFinal.setZ(speedFinal.getZ() - speed.getX());
-		}
-		speedFinal.normalise();*/
-	
-		m_rigidBody->setLinearVelocity(btVector3(vector.getX()*30, vector.getY(), vector.getZ()*30));
+	m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY(), speedFinal.getZ()*m_speedFactor));
 
 
 	if (isJumping && tiempoSalto.getElapsedTime().asSeconds() > 3) {
@@ -101,8 +84,8 @@ void Player::cargarContenido()
 
 	m_renderState.setPosition(Vec3<float>(0, 500, 0));
 
-	//Creas el body(fisico)
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f);
+	//Creas el body(fisico) 
+	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_DEACTIVATION);
 }
 
 void Player::borrarContenido()

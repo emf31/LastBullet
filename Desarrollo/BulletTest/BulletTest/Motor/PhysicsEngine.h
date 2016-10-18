@@ -8,7 +8,6 @@
 class PhysicsEngine
 {
 public:
-
 	//Inicializa el motor de fisicas
 	static void inicializar();
 
@@ -16,7 +15,7 @@ public:
 	static void update(Time elapsedTime);
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
-	static btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa);
+	static btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos una esfera - asumimos que la posicion esta puesta
 	static btRigidBody* createSphereRigidBody(Entity* entity, float radius, float mass);

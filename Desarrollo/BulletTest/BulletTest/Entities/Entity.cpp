@@ -39,3 +39,8 @@ Vec3<float> Entity::getRenderPosition()
 {
 	return m_renderState.getRenderPos();
 }
+
+SceneNode * Entity::getNode()
+{
+	return m_nodo;
+}

@@ -27,10 +27,10 @@ void Game::run()
 	Clock clock;
 	Time timeSinceLastUpdate = Time::Zero;
 
-	inicializarIrrlitch();
+	inicializar();
 	
-	while (irrDevice->run()) {
-		if (irrDevice->isWindowActive()) {
+	while (GraphicEngine::i().isRuning()) {
+		if (GraphicEngine::i().isWindowActive()) {
 			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();
@@ -50,13 +50,12 @@ void Game::run()
 		}
 			MastEventReceiver::i().startEventProcess();
 	}
-	irrDevice->drop();
-	std::getchar();
+	GraphicEngine::i().apagar();
 }
 
 
 //Tenemos que hacer patron fachada
-void Game::inicializarIrrlitch()
+void Game::inicializar()
 {
 
 	//inicializamos bullet
@@ -83,7 +82,7 @@ void Game::inicializarIrrlitch()
 
 	player = new Player();
 
-	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f));
+	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg");
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
 	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
@@ -107,84 +106,27 @@ void Game::inicializarIrrlitch()
 
 	// Add camera
 	//camara tipo fps
-	Camera = irrScene->addCameraSceneNodeFPS();
-	Camera->setPosition(vector3df(10,10,10));
-	Camera->setTarget(vector3df(0, 0, 0));
-	Camera->setInputReceiverEnabled(true);
-
+	camara = GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
+	camara->asignarEntity(player);
 }
-
-ISceneNode* Game::CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TScale, float TMass)
-{
-	
-	/*
-	// Set the initial position of the object
-	btTransform Transform;
-	Transform.setIdentity();
-	Transform.setOrigin(btVector3(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
-
-	btDefaultMotionState *MotionState = new btDefaultMotionState(Transform);
-
-	// Create the shape
-	btVector3 HalfExtents(TScale.getX() * 0.5f, TScale.getY() * 0.5f, TScale.getZ() * 0.5f);
-	btCollisionShape *Shape = new btBoxShape(HalfExtents);
-	
-
-	// Add mass
-	btVector3 LocalInertia;
-	//Shape->calculateLocalInertia(TMass, LocalInertia);
-
-	// Create the rigid body object
-	btRigidBody *RigidBody = new btRigidBody(TMass, MotionState, Shape, LocalInertia);
-	//RigidBody->setFriction(0);
-	RigidBody->setActivationState(DISABLE_DEACTIVATION);
-	// Store a pointer to the irrlicht node so we can update it later
-	RigidBody->setUserPointer((void *)(Node));
-
-	// Add it to the world
-//	World->addRigidBody(RigidBody);
-	//Objects.push_back(RigidBody);
-
-	return Node;*/
-	return NULL;
-}
-
 
 void Game::processEvents()
 {
-	
 	EntityManager::i().handleInput();
-
-	/*if (MastEventReceiver::i().keyPressed(KEY_SPACE))
-		entities.at(1)->isJumping = true;
-	else if (MastEventReceiver::i().keyReleased(KEY_SPACE))
-		entities.at(1)->isJumping = false;*/
-
 }
 
 void Game::update(Time elapsedTime)
 {
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
-
 }
 
 void Game::render(float interpolation, Time elapsedTime)
 {
-	/*for (int i = 0; i < entities.size(); i++) {
-		//entities.at(i)->updateRender(interpolation);
-	}*/
-	/*irrScene->getActiveCamera()->setPosition(
-		vector3df(
-			EntityManager::i().getEntity(0)->getRenderPosition().getX(),
-			EntityManager::i().getEntity(0)->getRenderPosition().getY(),
-			EntityManager::i().getEntity(0)->getRenderPosition().getZ())
-		);*/
+	camara->update();
 
 	EntityManager::i().updateRender(interpolation);
 
-	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
-	irrScene->drawAll();
-	irrDriver->endScene();
+	GraphicEngine::i().renderAll();
 }
 

@@ -7,11 +7,6 @@ GraphicEngine::GraphicEngine()
 {
 }
 
-
-GraphicEngine::~GraphicEngine()
-{
-}
-
 SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture)
 {
 	ISceneNode *Node = irrScene->addCubeSceneNode(1.0f);
@@ -28,24 +23,30 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 }
 
 
-void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
+Camera* GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
-	// Add camera
 	//camara tipo fps
-	Camera = irrScene->addCameraSceneNodeFPS();
-	Camera->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
-	Camera->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
-	Camera->setInputReceiverEnabled(true);
+	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS();
+	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
+	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
+	cam->setInputReceiverEnabled(true);
+
+	//Creamos el objeto camara y la seteamos como la camara activa
+	Camera* camera = new Camera(cam);
+	active_camera = camera;
+
+	return new Camera(cam);
 }
 
-void GraphicEngine::setCameraTarget(Vec3<float> target)
+
+Camera * GraphicEngine::getActiveCamera()
 {
-	Camera->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
+	return active_camera;
 }
 
-void GraphicEngine::setCameraPosition(Vec3<float> position)
+void GraphicEngine::setActiveCamera(Camera* camera)
 {
-	Camera->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
+	//irrScene->setActiveCamera();
 }
 
 void GraphicEngine::renderAll()
@@ -66,4 +67,19 @@ void GraphicEngine::inicializar()
 	irrDriver = irrDevice->getVideoDriver();
 
 	irrDevice->getCursorControl()->setVisible(0);
+}
+
+bool GraphicEngine::isRuning()
+{
+	return irrDevice->run();
+}
+
+bool GraphicEngine::isWindowActive()
+{
+	return irrDevice->isWindowActive();
+}
+
+bool GraphicEngine::apagar()
+{
+	return irrDevice->drop();
 }

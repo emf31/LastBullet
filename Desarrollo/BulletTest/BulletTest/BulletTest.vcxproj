@@ -157,6 +157,7 @@
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
+    <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\SceneNode.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />

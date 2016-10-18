@@ -17,6 +17,7 @@ void PhysicsEngine::inicializar()
 	m_broadphase = new btAxisSweep3(btVector3(-1000, -1000, -1000), btVector3(1000, 1000, 1000));
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
+	m_world->setGravity(btVector3(0, -20, 0));
 }
 
 void PhysicsEngine::update(Time elapsedTime)
@@ -26,7 +27,7 @@ void PhysicsEngine::update(Time elapsedTime)
 	//Aqui calculariamos colisiones
 }
 
-btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa)
+btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
 {
 	btTransform transform;
 	transform.setIdentity();
@@ -47,7 +48,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 
 	//now create the rigidBody
 	btRigidBody* rigidBody = new btRigidBody(masa, motionState, shape, localinertia);
-	rigidBody->setActivationState(DISABLE_DEACTIVATION);
+	rigidBody->setActivationState(body_state);
 
 	//add a pointer to rigidBody pointing to associated Entity
 	rigidBody->setUserPointer(entity);
@@ -69,9 +70,35 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 {
-	return false;
+	m_rigidBodies.remove(body);
+	m_world->removeRigidBody(body);
+
+	return true;
 }
 
 void PhysicsEngine::apagar()
 {
+	//borramos todos los rigidbodies
+	for (auto iter = m_rigidBodies.begin(); iter != m_rigidBodies.end(); ++iter) {
+		//los borramos del mundo
+		m_world->removeRigidBody(*iter);
+		//borramos la memoria
+		delete *iter;
+		//iterador a null
+		*iter = NULL;
+	}
+	//ahora vaciamos la lista
+	m_rigidBodies.clear();
+
+	//hay que borrar las cosas de las fisicas
+	delete m_world;
+	m_world = NULL;
+	delete m_solver;
+	m_solver = NULL;
+	delete m_dispatcher;
+	m_dispatcher = NULL;
+	delete m_broadphase;
+	m_broadphase = NULL;
+	delete m_config;
+	m_config = NULL;
 }

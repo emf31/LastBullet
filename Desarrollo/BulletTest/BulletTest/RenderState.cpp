@@ -44,7 +44,6 @@ void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
 
 void RenderState::updatePositions(Vec3<float> position)
 {
-	position.display();
 	m_posPrev = m_posNew;
 	m_posNew = position;
 }

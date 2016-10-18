@@ -6,6 +6,7 @@
 #include <vector>
 #include "Entities\Entity.h"
 #include "Entities\Player.h"
+#include "Motor\Camera.h"
 
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
@@ -27,28 +28,19 @@ public:
 
 	void run();
 
-	void inicializarIrrlitch();
+	void inicializar();
 	void processEvents(); // Captura y procesa eventos
 	void update(Time elapsedTime);
 	void render(float interpolation, Time elapsedTime);
-
-	ISceneNode* CreateBox(const Vec3<double> &TPosition, const Vec3<float> &TScale, float TMass);
-
-	IrrlichtDevice *irrDevice;
-	IVideoDriver *irrDriver;
-	ISceneManager *irrScene;
-	IGUIEnvironment *irrGUI;
 
 
 private:
 	static const Time timePerFrame;
 	float interpolation;
 
-	std::vector<Entity*> entities;
-
 	Player *player;
-	
-	ICameraSceneNode *Camera;
+	Camera *camara;
+
 };
 
 

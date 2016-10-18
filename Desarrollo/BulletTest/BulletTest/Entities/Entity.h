@@ -29,6 +29,7 @@ public:
 		m_id = id;
 	}
 	
+	SceneNode* getNode();
 
 	virtual void inicializar() = 0;
 	virtual void update(Time elapsedTime) = 0;

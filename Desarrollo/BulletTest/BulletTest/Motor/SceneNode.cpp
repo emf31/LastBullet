@@ -11,6 +11,8 @@ SceneNode::SceneNode(ISceneNode* node, IVideoDriver* irrDriver) :
 
 SceneNode::~SceneNode()
 {
+	delete m_node;
+	m_irrDriver = nullptr;
 }
 
 void SceneNode::setTexture(const io::path & texture)
@@ -32,4 +34,10 @@ Vec3<float> SceneNode::getPosition()
 void SceneNode::setRotation(Vec3<float> rotation)
 {
 	m_node->setRotation(vector3df(rotation.getX(), rotation.getY(), rotation.getZ()));
+}
+
+Vec3<float> SceneNode::getScale()
+{
+	vector3df aux = m_node->getScale();
+	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }

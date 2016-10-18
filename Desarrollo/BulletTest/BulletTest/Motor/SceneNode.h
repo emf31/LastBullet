@@ -24,6 +24,8 @@ public:
 	Vec3<float> getPosition();
 	void setRotation(Vec3<float> rotation);
 
+	Vec3<float> getScale();
+
 private:
 	ISceneNode* m_node;
 	IVideoDriver* m_irrDriver;
