@@ -14,6 +14,9 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
 	//Asi no le afectan las luces
 	Node->setMaterialFlag(EMF_LIGHTING, false);
+
+	m_camera = 0;
+
 	//Si es diferente de "" asignamos una textura al nodo
 	if (texture != "") {
 		Node->setMaterialTexture(0,irrDriver->getTexture(texture));
@@ -31,9 +34,14 @@ void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
 	cam->setInputReceiverEnabled(true);
 
-	//Creamos el objeto camara y la seteamos como la camara activa
-	active_camera = new Camera(cam);
-	//active_camera = camera;
+	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
+	Camera* myCamera=new Camera(cam);
+	cameras[m_camera] = myCamera;
+
+	if (m_camera == 0)
+		active_camera = myCamera;
+
+	m_camera++;
 }
 
 void GraphicEngine::setCameraEntity(Entity * entity)
@@ -52,9 +60,9 @@ Camera * GraphicEngine::getActiveCamera()
 	return active_camera;
 }
 
-void GraphicEngine::setActiveCamera(Camera* camera)
+void GraphicEngine::setActiveCamera(int ID)
 {
-	active_camera = camera;
+	active_camera = cameras[ID];
 }
 
 void GraphicEngine::renderAll()

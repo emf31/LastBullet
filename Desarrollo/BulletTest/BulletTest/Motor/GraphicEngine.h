@@ -10,6 +10,7 @@
 
 
 
+
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -34,7 +35,7 @@ public:
 	Camera* getActiveCamera();
 
 	//No hace nada aun
-	void setActiveCamera(Camera* camera);
+	void setActiveCamera(int ID);
 
 	
 	void renderAll();
@@ -49,6 +50,8 @@ private:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
+	std::unordered_map<int, Camera*> cameras;
+	int m_camera;
 	Camera *active_camera;
 
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
