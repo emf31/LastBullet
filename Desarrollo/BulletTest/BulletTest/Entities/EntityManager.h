@@ -11,6 +11,10 @@ public:
 		return singleton;
 	}
 
+
+	
+	
+
 	//Inicializa todas las entities
 	void inicializar();
 	//Updatea todas las entities

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <iostream>
 #include "EntityManager.h"
 
 void EntityManager::inicializar()

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de código fuente">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Entities">
+      <UniqueIdentifier>{cfe1b382-3de4-4e3a-a924-fa2e19dab4c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Entities">
+      <UniqueIdentifier>{589181ea-4612-49d8-a0c2-8547468dbbfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Util">
+      <UniqueIdentifier>{088b101a-6434-4f5d-a447-7fc3af009385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Util">
+      <UniqueIdentifier>{dee630cc-8ba8-4e04-9822-eea404f731e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Motor">
+      <UniqueIdentifier>{44ba8f7f-8909-4598-917b-1cfd2928535b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Motor">
+      <UniqueIdentifier>{03814fb3-50b7-4793-8aef-21afd2c0da9e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainServer.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BulletTest\Otros\Time.cpp">
+      <Filter>Archivos de código fuente\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BulletTest\Otros\Win32\ClockImpl.cpp">
+      <Filter>Archivos de código fuente\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BulletTest\Otros\Clock.cpp">
+      <Filter>Archivos de código fuente\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Player.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Entity.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\EntityManager.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderState.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\BulletTest\Otros\vec3.hpp">
+      <Filter>Archivos de encabezado\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BulletTest\Otros\Time.hpp">
+      <Filter>Archivos de encabezado\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BulletTest\Otros\Win32\ClockImpl.hpp">
+      <Filter>Archivos de encabezado\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BulletTest\Otros\Clock.hpp">
+      <Filter>Archivos de encabezado\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Player.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Entity.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntityManager.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BulletTest\RenderState.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Estructuras.h">
+      <Filter>Archivos de encabezado\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="MastEventReceiver.hpp">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderState.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

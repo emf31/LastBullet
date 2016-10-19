@@ -4,12 +4,9 @@
 #include "../Otros/Time.hpp"
 #include "../Otros/Clock.hpp"
 #include "../RenderState.h"
-#include <btBulletCollisionCommon.h>
-#include <btBulletDynamicsCommon.h>
 #include "../Motor/SceneNode.h"
 
-using namespace irr;
-using namespace scene;
+#include <RakPeerInterface.h>
 
 class Entity
 {
@@ -39,6 +36,7 @@ public:
 
 protected:
 	int m_id;
+	RakNet::RakNetGUID m_guid;
 	std::string m_name;
 	SceneNode* m_nodo;
 	RenderState m_renderState;

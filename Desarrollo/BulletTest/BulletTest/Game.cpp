@@ -44,7 +44,7 @@ void Game::run()
 				update(timePerFrame);
 			}
 			
-			interpolation = (float)std::min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
+			interpolation = (float) min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
 			render(interpolation, timePerFrame);
 			
 		}
