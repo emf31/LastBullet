@@ -1,0 +1,9 @@
+﻿  MainServer.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(122): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(161): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(168): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(181): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(233): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\sfml+raknet\raknetserverv0.1\mainserver.cpp(247): warning C4018: '<': no coinciden signed/unsigned
+  RaknetServerv0.1.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\SFML+Raknet\Debug\RaknetServerv0.1.exe
+  RaknetServerv0.1.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\SFML+Raknet\Debug\RaknetServerv0.1.pdb (Full PDB)
