@@ -25,6 +25,9 @@ int main() {
 	sf::CircleShape shape2;
 	shape2.setFillColor(sf::Color::Red);
 	shape2.setRadius(100.f);
+	sf::CircleShape shape3;
+	shape3.setFillColor(sf::Color::Black);
+	shape3.setRadius(100.f);
 	int i = 0;
 	while (window.isOpen()) {
 		sf::Event event;
@@ -37,10 +40,18 @@ int main() {
 		player->shape.setPosition(player->getPos().x, player->getPos().y);
 		window.draw(player->shape);
 		for (i = 0; i < raknet->clientArray.size(); i++) {
-			raknet->clientArray.at(i)->shape.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
-			shape2.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
-			window.draw(shape2);
+			if (i == 0) {
+				//raknet->clientArray.at(i)->shape.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
+				shape2.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
+			}
+			if (i == 1) {
+				//raknet->clientArray.at(i)->shape.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
+				shape3.setPosition(raknet->clientArray.at(i)->getPos().x, raknet->clientArray.at(i)->getPos().y);
+			}
 		}
+		window.draw(shape2);
+		window.draw(shape3);
+			
 		window.display();
 	}
 	hilo.join();

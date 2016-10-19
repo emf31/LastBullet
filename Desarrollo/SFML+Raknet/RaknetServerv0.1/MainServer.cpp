@@ -39,16 +39,16 @@ void muestraPlayer(Player *p) {
 void updatePlayer(int movimiento, Player *p) {
 	//si esto no funciona, es decir, el player no se mueve tendriamos que hacerlos con setPosition para que se actualizaran las variables del player 
 	if (movimiento == 1) {
-		p->posicion.y = p->posicion.y -1.f;
+		p->posicion.y = p->posicion.y -2.f;
 	}
 	if (movimiento == 2) {
-		p->posicion.x = p->posicion.x - 1.f;
+		p->posicion.x = p->posicion.x - 2.f;
 	}
 	if (movimiento == 3) {
-		p->posicion.x = p->posicion.x + 1.f;
+		p->posicion.x = p->posicion.x + 2.f;
 	}
 	if (movimiento == 4) {
-		p->posicion.y = p->posicion.y + 1.f;
+		p->posicion.y = p->posicion.y + 2.f;
 	}
 }
 
