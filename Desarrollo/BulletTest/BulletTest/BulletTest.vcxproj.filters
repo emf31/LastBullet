@@ -37,6 +37,12 @@
     <Filter Include="Archivos de encabezado\Motor">
       <UniqueIdentifier>{31c85979-f078-4379-b74d-2132fe3f78db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Handlers">
+      <UniqueIdentifier>{5576ff5b-4b13-4f62-853b-d238096fdba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Handlers">
+      <UniqueIdentifier>{ef69c9b5-495d-4767-a4a3-37daf943a618}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -93,12 +99,15 @@
     <ClInclude Include="Motor\Camera.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="Handlers\MessageHandler.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletTest.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -145,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Motor\Camera.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\MessageHandler.cpp">
+      <Filter>Archivos de código fuente\Handlers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

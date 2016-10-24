@@ -27,6 +27,8 @@ public:
 
 	virtual void borrarContenido() override;
 
+	virtual void handleMessage(const Message& message) override;
+
 private:
 	btRigidBody* m_rigidBody;
 

@@ -28,5 +28,6 @@ private:
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
+	virtual void handleMessage(const Message& message) override;
 };
 

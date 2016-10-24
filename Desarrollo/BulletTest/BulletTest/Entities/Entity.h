@@ -7,6 +7,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/SceneNode.h"
+#include "../Handlers/Message.h"
 
 using namespace irr;
 using namespace scene;
@@ -36,6 +37,7 @@ public:
 	virtual void handleInput() = 0;
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
+	virtual void handleMessage(const Message& message) = 0;
 
 protected:
 	int m_id;

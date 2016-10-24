@@ -43,3 +43,7 @@ void PhysicsEntity::cargarContenido()
 void PhysicsEntity::borrarContenido()
 {
 }
+
+void PhysicsEntity::handleMessage(const Message & message)
+{
+}

@@ -93,3 +93,7 @@ void Player::borrarContenido()
 	//No se si aqui habria que hacer delete al nodo porque igual se encarga irrlitch
 	delete m_nodo;
 }
+
+void Player::handleMessage(const Message & message)
+{
+}
