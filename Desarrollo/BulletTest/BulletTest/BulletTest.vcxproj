@@ -151,12 +151,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Motor\Camera.h" />
@@ -168,15 +171,19 @@
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="RenderState.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\EntityManager.cpp" />
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -194,6 +201,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BulletTest.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

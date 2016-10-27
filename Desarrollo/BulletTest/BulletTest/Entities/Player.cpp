@@ -45,6 +45,11 @@ void Player::update(Time elapsedTime)
 		speedFinal.setX(speedFinal.getX() + speed.getZ());
 		speedFinal.setZ(speedFinal.getZ() - speed.getX());
 	}
+	if (isJumping) {
+		speedFinal.setY(speedFinal.getY() + speed.getY());
+		printf("Jumping\n");
+
+	}
 	speedFinal.normalise();
 
 	m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY(), speedFinal.getZ()*m_speedFactor));
@@ -75,6 +80,8 @@ void Player::handleInput()
 	isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
 	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
+
+	isJumping = MastEventReceiver::i().keyDown(KEY_SPACE);
 }
 
 void Player::cargarContenido()
@@ -96,4 +103,8 @@ void Player::borrarContenido()
 
 void Player::handleMessage(const Message & message)
 {
+}
+
+void Player::jump() {
+	printf("Ha saltado\n");
 }

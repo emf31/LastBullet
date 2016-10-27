@@ -9,6 +9,8 @@ public:
 	Player();
 	~Player();
 
+	void jump();
+
 private:
 	
 	btRigidBody* m_rigidBody;
@@ -29,5 +31,6 @@ private:
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
+
 };
 

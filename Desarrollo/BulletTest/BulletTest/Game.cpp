@@ -108,11 +108,18 @@ void Game::inicializar()
 	//camara tipo fps
 	GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
 	GraphicEngine::i().setCameraEntity(player);
+
+	/*JumpCommand commandJump(*player);
+	inputHandler = new InputHandler(commandJump);*/
+
+
 }
 
 void Game::processEvents()
 {
 	EntityManager::i().handleInput();
+
+	//inputHandler->handleInput();
 }
 
 void Game::update(Time elapsedTime)

@@ -12,6 +12,9 @@
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
 
+#include "InputHandler.h"
+#include "JumpCommand.h"
+
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -38,7 +41,7 @@ private:
 	float interpolation;
 
 	Player *player;
-	
+	InputHandler *inputHandler;
 
 };
 
