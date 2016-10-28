@@ -5,6 +5,8 @@
 #include "../MastEventReceiver.hpp"
 
 
+
+
 Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 {
 }
@@ -21,6 +23,7 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 	Vec3<float> speedFinal;
+	const float jump_gain = 200.0f;
 
 
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
@@ -45,15 +48,14 @@ void Player::update(Time elapsedTime)
 		speedFinal.setX(speedFinal.getX() + speed.getZ());
 		speedFinal.setZ(speedFinal.getZ() - speed.getX());
 	}
-	if (isJumping) {
-		speedFinal.setY(speedFinal.getY() + speed.getY());
-		printf("Jumping\n");
 
-	}
 	speedFinal.normalise();
 
-	m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY(), speedFinal.getZ()*m_speedFactor));
+	m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY()*m_speedFactor, speedFinal.getZ()*m_speedFactor));
 
+	if (isJumping) {
+
+	}
 
 	if (isJumping && tiempoSalto.getElapsedTime().asSeconds() > 3) {
 		m_rigidBody->setLinearVelocity(btVector3(0, 7, 0));
@@ -106,5 +108,12 @@ void Player::handleMessage(const Message & message)
 }
 
 void Player::jump() {
-	printf("Ha saltado\n");
+	if (!jumped) {
+		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
+
+		jumped = true;
+		printf("Ha saltado\n");
+
+	}
+
 }

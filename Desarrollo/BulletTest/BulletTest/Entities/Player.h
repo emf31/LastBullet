@@ -14,12 +14,14 @@ public:
 private:
 	
 	btRigidBody* m_rigidBody;
-
+	
 	bool isMovingBackward;
 	bool isMovingForward;
 	bool isMovingLeft;
 	bool isMovingRight;
 	bool isJumping;
+
+	bool jumped=false;
 
 	float m_speedFactor;
 	Clock tiempoSalto;
@@ -31,6 +33,7 @@ private:
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
+
 
 };
 

@@ -4,7 +4,7 @@
 
 InputHandler::InputHandler(Command& space):ButtonSpace(space)
 {
-	ButtonSpace.execute();
+
 }
 
 

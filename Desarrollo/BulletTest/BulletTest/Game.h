@@ -41,8 +41,6 @@ private:
 	float interpolation;
 
 	Player *player;
-	InputHandler *inputHandler;
-
 };
 
 

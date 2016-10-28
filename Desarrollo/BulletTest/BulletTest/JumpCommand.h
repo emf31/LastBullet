@@ -5,14 +5,14 @@ class JumpCommand :
 	public Command
 {
 public:
-	JumpCommand(Player* jugador);
+	JumpCommand(Player& jugador);
 	~JumpCommand();
 
 	virtual void execute() override;
 
 private:
 
-	Player *player;
+	Player& player;
 
 };
 

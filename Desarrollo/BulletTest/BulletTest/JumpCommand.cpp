@@ -2,9 +2,8 @@
 #include "JumpCommand.h"
 
 
-JumpCommand::JumpCommand(Player* jugador)
+JumpCommand::JumpCommand(Player& jugador) :player(jugador)
 {
-	player = jugador;
 }
 
 
@@ -13,6 +12,5 @@ JumpCommand::~JumpCommand()
 }
 
 void JumpCommand::execute() {
-	printf("Entra en el execute\n");
-	player->jump();
+	player.jump();
 }

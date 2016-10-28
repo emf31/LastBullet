@@ -12,6 +12,8 @@
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
+
+
 Game::Game()
 {
 	
@@ -109,17 +111,18 @@ void Game::inicializar()
 	GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
 	GraphicEngine::i().setCameraEntity(player);
 
-	JumpCommand commandJump(player);
-	inputHandler = new InputHandler(commandJump);
-
 
 }
 
 void Game::processEvents()
 {
+	JumpCommand commandJump(*player);
+
+	InputHandler inputHandler(commandJump);
+
 	EntityManager::i().handleInput();
 
-	inputHandler->handleInput();
+	inputHandler.handleInput();
 }
 
 void Game::update(Time elapsedTime)

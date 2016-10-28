@@ -8,6 +8,6 @@ public:
 	Command();
 	~Command();
 
-	virtual void execute();
+	virtual void execute()=0;
 };
 

@@ -11,6 +11,7 @@ public:
 	void handleInput();
 
 private:
+
 	Command& ButtonSpace;
 };
 
