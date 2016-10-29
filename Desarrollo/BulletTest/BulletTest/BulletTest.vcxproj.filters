@@ -37,6 +37,12 @@
     <Filter Include="Archivos de encabezado\Motor">
       <UniqueIdentifier>{31c85979-f078-4379-b74d-2132fe3f78db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Motor de Red">
+      <UniqueIdentifier>{e08e37d4-d101-479a-922b-0b68c09b2f11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Motor de Red">
+      <UniqueIdentifier>{ae11f59d-50fb-4bfa-8cd8-c2aa45623b38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -96,6 +102,12 @@
     <ClInclude Include="Entities\Enemy.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Motor de Red\Cliente.h">
+      <Filter>Archivos de encabezado\Motor de Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor de Red\Estructuras.h">
+      <Filter>Archivos de encabezado\Motor de Red</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -151,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="Entities\Enemy.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor de Red\Cliente.cpp">
+      <Filter>Archivos de código fuente\Motor de Red</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -19,6 +19,21 @@ public:
 
 	RenderState* getRenderState() { return &m_renderState; }
 
+	RakNet::RakNetGUID getGuid() {
+		return m_guid;
+	}
+
+	void setGUID(RakNet::RakNetGUID guid) {
+		m_guid = guid;
+	}
+	void setName(std::string& name) {
+		m_name = name;
+	 }
+	std::string getName() {
+		return m_name;
+	}
+
+
 	int getID() {
 		return m_id;
 	}

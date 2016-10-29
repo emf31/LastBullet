@@ -60,16 +60,16 @@ int main() {
 			switch (packet->data[0])
 			{
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				printf("Another client has disconnected.\n");
+				printf("vfdvdvdAnother client has disconnected.\n");
 				break;
 			case ID_REMOTE_CONNECTION_LOST:
-				printf("Otro cliente ha perdido la conexion.\n");
+				printf("vfdvdvdOtro cliente ha perdido la conexion.\n");
 				break;
 			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				printf("Otro cliente se ha conectado.\n");
+				printf("vdfvdvOtro cliente se ha conectado.\n");
 				break;
 			case ID_CONNECTION_REQUEST_ACCEPTED: {
-				printf("Nuestra conexion se ha aceptado.\n");
+				printf("vfdvdvdNuestra conexion se ha aceptado.\n");
 
 
 			}
@@ -122,6 +122,7 @@ int main() {
 			case ID_NEW_INCOMING_CONNECTION: {
 				printf("Conexion entrante...\n");
 
+				//TODO: aqui podriamos ponerle la nueva posicion al cliente.
 				/*RakNet::BitStream bsOut;
 				bsOut.Write((RakNet::MessageID)GUID_NUESTRO);
 				bsOut.Write(packet->guid);

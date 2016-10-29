@@ -10,6 +10,16 @@
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
 
+
+#include <RakPeerInterface.h>
+#include <MessageIdentifiers.h>
+#include <BitStream.h>
+#include <RakNetTypes.h>
+#include <thread> 
+#include "Motor de Red\Cliente.h"
+
+#define SERVER_PORT 65535
+
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 Game::Game()
@@ -28,6 +38,8 @@ void Game::run()
 	Time timeSinceLastUpdate = Time::Zero;
 
 	inicializar();
+
+
 	
 	while (GraphicEngine::i().isRuning()) {
 		if (GraphicEngine::i().isWindowActive()) {
@@ -50,6 +62,8 @@ void Game::run()
 		}
 			MastEventReceiver::i().startEventProcess();
 	}
+	//esta mierda no sabemos muy bien porque esta aqui, ni siquiera si funciona estando aqui
+	Cliente::i().esperar();
 	GraphicEngine::i().apagar();
 }
 
@@ -65,6 +79,7 @@ void Game::inicializar()
 
 	player = new Player();
 
+
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg");
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
@@ -77,6 +92,11 @@ void Game::inicializar()
 	//camara tipo fps
 	GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
 	GraphicEngine::i().setCameraEntity(player);
+
+	//raknet
+	Cliente::i().inicializar();
+
+	//
 }
 
 void Game::processEvents()

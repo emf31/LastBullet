@@ -5,7 +5,7 @@
 #include "../MastEventReceiver.hpp"
 
 
-Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
+Player::Player() : Entity(1, NULL), m_speedFactor(30)
 {
 }
 
@@ -13,6 +13,9 @@ Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 Player::~Player()
 {
 }
+
+
+
 
 void Player::inicializar()
 {

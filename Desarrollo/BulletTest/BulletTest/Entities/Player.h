@@ -9,6 +9,7 @@ public:
 	Player();
 	~Player();
 
+
 private:
 	
 	btRigidBody* m_rigidBody;
