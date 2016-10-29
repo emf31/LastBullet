@@ -16,8 +16,10 @@ public:
 	void setRotation(Vec3<float> rotation);
 	void setPosition(Vec3<float> position);
 	void setVelocity(Vec3<float> velocity);
+	void setDirection(Vec3<float> direction);
 	void setRenderPos(Vec3<float> renderPos);
 	void setRenderRot(Vec3<float> renderRot);
+	void setAccelerating(bool accelerating);
 
 	////////////////////////////////////////
 	//Getters
@@ -41,11 +43,14 @@ public:
 	void updatePositions(Vec3<float> position);
 	//Updatea las rotaciones prev y new
 	void updateRotations(Vec3<float> rotation);
+	void updateVelocity(float interpolation);
 
 private:
+	float m_SpeedFactor;
 	float m_MaxVelocity;
 	float m_Acceleration;	//Vector velocidad
 	Vec3<float> m_Velocity;	//Vector velocidad
+	Vec3<float> m_Direction;//Vector velocidad
 	
 
 	Vec3<float> m_renderPos;

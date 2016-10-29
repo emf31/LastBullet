@@ -15,6 +15,7 @@ Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 
 Player::~Player()
 {
+	m_renderState.setVelocity(Vec3<float>(m_speedFactor, m_speedFactor, m_speedFactor));
 }
 
 void Player::inicializar()
@@ -32,27 +33,41 @@ void Player::update(Time elapsedTime)
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
 	speedFinal = Vec3<float>(0, 0, 0);
+	bool isMoving = false;
 
 	if (isMovingForward) {
 		speedFinal.setX(speedFinal.getX() + speed.getX());
 		speedFinal.setZ(speedFinal.getZ() + speed.getZ());
+		isMoving = true;
 	}
 	if (isMovingBackward) {
 		speedFinal.setX(speedFinal.getX() - speed.getX());
 		speedFinal.setZ(speedFinal.getZ() - speed.getZ());
+		isMoving = true;
 	}
 	if (isMovingLeft) {
 		speedFinal.setX(speedFinal.getX() - speed.getZ());
 		speedFinal.setZ(speedFinal.getZ() + speed.getX());
+		isMoving = true;
 	}
 	if (isMovingRight) {
 		speedFinal.setX(speedFinal.getX() + speed.getZ());
 		speedFinal.setZ(speedFinal.getZ() - speed.getX());
+		isMoving = true;
 	}
 
-	speedFinal.normalise();
+	if (isMoving) {
+		speedFinal.normalise();
+		m_renderState.setDirection(speedFinal);
+		m_renderState.setAccelerating(true);
+	}
+	else {
+		m_renderState.setAccelerating(false);
+	}
 
-	m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY()*m_speedFactor, speedFinal.getZ()*m_speedFactor));
+	
+	m_renderState.updateVelocity(elapsedTime.asSeconds());
+	m_rigidBody->setLinearVelocity(btVector3(m_renderState.getVelocity().getX(), m_renderState.getVelocity().getY(), m_renderState.getVelocity().getZ()));
 
 	if (isJumping) {
 

@@ -7,8 +7,9 @@
 
 RenderState::RenderState()
 {
-	m_MaxVelocity = 30;
-	m_Acceleration = 0.1;
+	m_MaxVelocity = 40;
+	m_Acceleration = 80;
+	m_SpeedFactor = 1;
 }
 
 
@@ -19,16 +20,6 @@ RenderState::~RenderState()
 void RenderState::update(Time elapsedTime)
 {
 	m_posPrev = m_posNew;
-	Vec3<float> VelocityAccelerated = Vec3<float>(
-		m_Velocity.getX() + m_Acceleration*elapsedTime.asSeconds(),
-		m_Velocity.getY() + m_Acceleration*elapsedTime.asSeconds(),
-		m_Velocity.getZ() + m_Acceleration*elapsedTime.asSeconds());
-	float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(),2.0)+ pow(VelocityAccelerated.getY(),2.0)+ pow(VelocityAccelerated.getZ(),2.0));
-
-	if (VelocityAcceleratedTotal < m_MaxVelocity) {
-		m_Velocity = VelocityAccelerated;
-	}
-
 	m_posNew += m_Velocity * elapsedTime.asSeconds();
 }
 
@@ -67,6 +58,33 @@ void RenderState::updateRotations(Vec3<float> rotation)
 	m_rotationNew = rotation;
 }
 
+void RenderState::updateVelocity(float interpolation)
+{
+	Vec3<float> VelocityAccelerated = Vec3<float>(
+		(m_Velocity.getX() + m_Direction.getX()*m_Acceleration*interpolation),
+		(m_Velocity.getY() + 0*interpolation),
+		(m_Velocity.getZ() + m_Direction.getZ()*m_Acceleration*interpolation));
+
+	float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(), 2.0) + pow(VelocityAccelerated.getY(), 2.0) + pow(VelocityAccelerated.getZ(), 2.0));
+
+	if(m_Acceleration>0){
+	if (VelocityAcceleratedTotal < m_MaxVelocity ) {
+		m_Velocity = VelocityAccelerated;
+	}
+	}
+	else {
+		if (VelocityAcceleratedTotal>5){	
+			//m_Velocity = VelocityAccelerated;
+			m_Velocity = Vec3<float>(0, 0, 0);
+			m_Direction = Vec3<float>(0, 0, 0);
+		}
+		else{
+			m_Velocity = Vec3<float>(0, 0, 0);
+			m_Direction = Vec3<float>(0, 0, 0);
+		}
+	}
+}
+
 
 void RenderState::setRotation(Vec3<float> rotation)
 {
@@ -82,6 +100,10 @@ void RenderState::setPosition(Vec3<float> position) {
 void RenderState::setVelocity(Vec3<float> velocity) {
 	m_Velocity = velocity;
 }
+void RenderState::setDirection(Vec3<float> direction)
+{
+	m_Direction = direction;
+}
 void RenderState::setRenderPos(Vec3<float> renderPos)
 {
 	m_renderPos = renderPos;
@@ -89,6 +111,15 @@ void RenderState::setRenderPos(Vec3<float> renderPos)
 void RenderState::setRenderRot(Vec3<float> renderRot)
 {
 	m_renderRotation = renderRot;
+}
+void RenderState::setAccelerating(bool accelerating)
+{
+	if (accelerating && m_Acceleration < 0) {
+		m_Acceleration = m_Acceleration*-1; //se pone a acelerar y se pone la aceleracion en negativo para frenar
+	}
+	if (!accelerating && m_Acceleration > 0) {
+		m_Acceleration = m_Acceleration*-1; //deja de frenar y se pone la aceleracion en positiva para acelerar
+	}
 }
 Vec3<float> RenderState::getRotation()
 {
