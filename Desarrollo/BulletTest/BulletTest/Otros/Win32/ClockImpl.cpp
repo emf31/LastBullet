@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "stdafx.h"
 #include "ClockImpl.hpp"
 #include <windows.h>
+#include "../../stdafx.h"
 
 
 namespace
@@ -66,4 +66,3 @@ Time ClockImpl::getCurrentTime()
 }
 
 } // namespace priv
-
