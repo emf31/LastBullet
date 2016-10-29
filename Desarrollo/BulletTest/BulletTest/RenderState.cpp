@@ -3,9 +3,12 @@
 #include <math.h>
 #include "Otros\Clock.hpp"
 #include "Otros\Time.hpp"
+#include "math.h"
 
 RenderState::RenderState()
 {
+	m_MaxVelocity = 30;
+	m_Acceleration = 0.1;
 }
 
 
@@ -16,6 +19,16 @@ RenderState::~RenderState()
 void RenderState::update(Time elapsedTime)
 {
 	m_posPrev = m_posNew;
+	Vec3<float> VelocityAccelerated = Vec3<float>(
+		m_Velocity.getX() + m_Acceleration*elapsedTime.asSeconds(),
+		m_Velocity.getY() + m_Acceleration*elapsedTime.asSeconds(),
+		m_Velocity.getZ() + m_Acceleration*elapsedTime.asSeconds());
+	float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(),2.0)+ pow(VelocityAccelerated.getY(),2.0)+ pow(VelocityAccelerated.getZ(),2.0));
+
+	if (VelocityAcceleratedTotal < m_MaxVelocity) {
+		m_Velocity = VelocityAccelerated;
+	}
+
 	m_posNew += m_Velocity * elapsedTime.asSeconds();
 }
 

@@ -43,7 +43,10 @@ public:
 	void updateRotations(Vec3<float> rotation);
 
 private:
+	float m_MaxVelocity;
+	float m_Acceleration;	//Vector velocidad
 	Vec3<float> m_Velocity;	//Vector velocidad
+	
 
 	Vec3<float> m_renderPos;
 	Vec3<float>	m_renderRotation;

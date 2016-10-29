@@ -9,6 +9,7 @@
 
 Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 {
+
 }
 
 
