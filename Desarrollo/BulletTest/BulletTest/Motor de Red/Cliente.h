@@ -18,7 +18,7 @@ public:
 		return singleton;
 	}
 
-	void update(Time elapsedTime);
+	void update();
 
 	void inicializar();
 	void conectar(std::string address, int port);

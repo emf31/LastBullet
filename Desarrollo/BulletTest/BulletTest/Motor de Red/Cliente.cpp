@@ -11,7 +11,7 @@ Cliente::Cliente()
 {
 }
 
-void Cliente::update(Time elapsedTime) {
+void Cliente::update() {
 	RakNet::Packet *packet;
 	RakNet::BitStream bsOut;
 	std::string str;

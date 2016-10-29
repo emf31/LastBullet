@@ -111,12 +111,12 @@ int main() {
 				TPlayer p_struct;
 				bsIn.Read(p_struct);
 				//muestraPlayer(p);
-				RakNet::BitStream bsOut;
+				//RakNet::BitStream bsOut;
 
-				EntityManager::i().sendPlayer(p_struct, peer);
+				//EntityManager::i().sendPlayer(p_struct, peer);
 
-				Player *p = new Player();
-				p->setGUID(p_struct.guid);
+				//Player *p = new Player();
+				//p->setGUID(p_struct.guid);
 			}
 							   break;
 			case ID_NEW_INCOMING_CONNECTION: {
