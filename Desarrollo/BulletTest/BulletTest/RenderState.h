@@ -49,6 +49,8 @@ private:
 	float m_SpeedFactor;
 	float m_MaxVelocity;
 	float m_Acceleration;	//Vector velocidad
+	float m_rotated;
+
 	Vec3<float> m_Velocity;	//Vector velocidad
 	Vec3<float> m_Direction;//Vector velocidad
 	
@@ -61,6 +63,7 @@ private:
 
 	Vec3<float> m_rotationPrev;
 	Vec3<float> m_rotationNew;
+
 
 };
 

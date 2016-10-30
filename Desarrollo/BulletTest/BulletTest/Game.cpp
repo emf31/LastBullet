@@ -108,7 +108,7 @@ void Game::inicializar()
 
 	// Add camera
 	//camara tipo fps
-	GraphicEngine::i().createCamera(Vec3<float>(0,300,0), Vec3<float>(0,0,0));
+	GraphicEngine::i().createCamera(Vec3<float>(0,300,0), Vec3<float>(10,0,10));
 	GraphicEngine::i().setCameraEntity(player);
 
 

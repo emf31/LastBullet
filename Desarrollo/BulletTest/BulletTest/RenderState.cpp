@@ -10,6 +10,7 @@ RenderState::RenderState()
 	m_MaxVelocity = 40;
 	m_Acceleration = 80;
 	m_SpeedFactor = 1;
+	m_rotated = 0;
 }
 
 
@@ -40,6 +41,8 @@ void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
 	m_renderRotation.setY(m_rotationPrev.getY() + (shortest_angleY)* interpolation);
 	m_renderRotation.setZ(m_rotationPrev.getZ() + (shortest_angleZ)* interpolation);
 
+	//printf("giro en realdidad %f\n", m_renderRotation);
+
 
 	m_nodo->setPosition(m_renderPos);
 	m_nodo->setRotation(m_renderRotation);
@@ -56,6 +59,7 @@ void RenderState::updateRotations(Vec3<float> rotation)
 {
 	m_rotationPrev = m_rotationNew;
 	m_rotationNew = rotation;
+	m_rotated += rotation.getY();
 }
 
 void RenderState::updateVelocity(float interpolation)

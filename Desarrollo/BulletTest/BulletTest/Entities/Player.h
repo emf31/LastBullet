@@ -24,7 +24,12 @@ private:
 	bool jumped=false;
 
 	float m_speedFactor;
+	float giro;
 	Clock tiempoSalto;
+
+	Vec3<float> vectorPrev;
+	Vec3<float> vectorNew;
+
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
