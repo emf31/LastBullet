@@ -108,7 +108,7 @@ void Player::update(Time elapsedTime)
 	vectorNew.normalise();//normalizamos los vectores
 	vectorPrev.normalise();
 
-	if(vectorNew.getX()!=0 && vectorPrev.getX()!=0 && abs(vectorNew.getZ()- vectorPrev.getZ())>0.025){//comprobamos posibles errores matematicos(division entre 0)
+	if(vectorNew.getX()!=0 && vectorPrev.getX()!=0){//comprobamos posibles errores matematicos(division entre 0)
 	float giroactual =  atan(vectorNew.getZ()/ vectorNew.getX())- atan(vectorPrev.getZ() / vectorPrev.getX());//generamos el angulo entre los vectores
 	giroactual *= RADTODEG;//lo pasamos a grados
 
