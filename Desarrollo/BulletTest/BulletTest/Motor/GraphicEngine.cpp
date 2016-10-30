@@ -11,7 +11,7 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 {
 	ISceneNode *Node;
 	if(mesh!="")
-		Node = irrScene->addAnimatedMeshSceneNode(irrScene->getMesh(mesh));
+		Node = irrScene->addMeshSceneNode(irrScene->getMesh(mesh));
 	else
 		Node = irrScene->addCubeSceneNode(1.0f);
 
