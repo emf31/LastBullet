@@ -7,9 +7,14 @@ GraphicEngine::GraphicEngine()
 {
 }
 
-SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture)
+SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
-	ISceneNode *Node = irrScene->addCubeSceneNode(1.0f);
+	ISceneNode *Node;
+	if(mesh!="")
+		Node = irrScene->addAnimatedMeshSceneNode(irrScene->getMesh(mesh));
+	else
+		Node = irrScene->addCubeSceneNode(1.0f);
+
 	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
 	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
 	//Asi no le afectan las luces

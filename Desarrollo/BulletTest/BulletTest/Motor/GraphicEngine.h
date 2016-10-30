@@ -26,7 +26,7 @@ public:
 		return singleton;
 	}
 
-	SceneNode* createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "");
+	SceneNode* createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
 	
 	//Metodos de la camara
 	void createCamera(Vec3<float> position, Vec3<float> target);

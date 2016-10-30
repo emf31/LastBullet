@@ -20,6 +20,7 @@ void SceneNode::setTexture(const io::path & texture)
 	m_node->setMaterialTexture(0, m_irrDriver->getTexture(texture));
 }
 
+
 void SceneNode::setPosition(Vec3<float> position)
 {
 	m_node->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));

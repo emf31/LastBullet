@@ -105,7 +105,7 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 500, 0), Vec3<float>(100.f, 100.f, 100.f), "../media/rockwall.jpg");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/rockwall.jpg","../media/MeshPlayer.obj");
 
 	m_renderState.setPosition(Vec3<float>(0, 500, 0));
 

@@ -29,5 +29,6 @@ public:
 private:
 	ISceneNode* m_node;
 	IVideoDriver* m_irrDriver;
+	ISceneManager *m_irrScene;
 };
 
