@@ -43,6 +43,12 @@
     <Filter Include="Archivos de encabezado\Motor de Red">
       <UniqueIdentifier>{ae11f59d-50fb-4bfa-8cd8-c2aa45623b38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Handlers">
+      <UniqueIdentifier>{7e366cfe-ecea-4d7c-9648-44e6e5b10051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Handlers">
+      <UniqueIdentifier>{6b8627a6-288a-4cbe-b3b2-de73e5cbab98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -108,6 +114,12 @@
     <ClInclude Include="Motor de Red\Estructuras.h">
       <Filter>Archivos de encabezado\Motor de Red</Filter>
     </ClInclude>
+    <ClInclude Include="Handlers\Message.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\MessageHandler.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -169,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="Motor de Red\Cliente.cpp">
       <Filter>Archivos de código fuente\Motor de Red</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\MessageHandler.cpp">
+      <Filter>Archivos de código fuente\Handlers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

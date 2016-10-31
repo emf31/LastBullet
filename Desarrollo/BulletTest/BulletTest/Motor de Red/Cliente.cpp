@@ -8,6 +8,7 @@
 #include "../Entities/Enemy.h"
 #include "../Entities/Player.h"
 
+
 Cliente::Cliente()
 {
 }
@@ -109,7 +110,6 @@ void Cliente::update() {
 
 			case MOVIMIENTO:
 			{
-				//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
