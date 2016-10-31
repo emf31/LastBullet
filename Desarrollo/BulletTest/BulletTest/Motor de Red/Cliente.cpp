@@ -61,6 +61,15 @@ void Cliente::update() {
 
 			}
 				break;
+
+			case NUEVO_PLAYER: 
+			{
+
+
+
+
+			}
+			break;
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;

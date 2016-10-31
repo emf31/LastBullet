@@ -3,6 +3,7 @@
 
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
+	TPlayer nuevocli;
 	//TODO: CAMBIAR ESTO POR UNA LISTA QUE SOLO TE DEVUELVA PLAYERS
 	RakNet::BitStream bsOut;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
@@ -13,7 +14,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		bsOut.Reset();
 
 		//enviamos todos los clientes que habian en el servidor al nuevo player
-		TPlayer nuevocli;
+	
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
 		nuevocli.position = i->second->getRenderState()->getPosition();

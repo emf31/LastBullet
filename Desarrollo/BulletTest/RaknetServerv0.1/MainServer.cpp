@@ -46,6 +46,7 @@ int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
+	TPlayer p_struct;
 	//std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
@@ -104,19 +105,15 @@ int main() {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-				/*TODO*///////////////////////////////////////////////////////////////////////////////////////////
-				//Desde el cliente enviar la misma estructura cuando envie un mensaje con nuevo player al servidor
-				/////////////////////////////////////////////////////////////////////////////////////////////////
-				TPlayer p_struct;
+				
 				bsIn.Read(p_struct);
 				//muestraPlayer(p);
 				//RakNet::BitStream bsOut;
 
-				//EntityManager::i().sendPlayer(p_struct, peer);
+				EntityManager::i().sendPlayer(p_struct, peer);
 
-				//Player *p = new Player();
-				//p->setGUID(p_struct.guid);
+				Player *p = new Player();
+				p->setGUID(p_struct.guid);
 			}
 							   break;
 			case ID_NEW_INCOMING_CONNECTION: {

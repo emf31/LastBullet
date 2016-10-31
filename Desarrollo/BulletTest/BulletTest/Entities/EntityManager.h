@@ -3,6 +3,8 @@
 #include "../Otros/Time.hpp"
 #include "Entity.h"
 
+#define PLAYER 1
+
 class EntityManager
 {
 public:
@@ -38,10 +40,12 @@ public:
 
 private:
 	EntityManager(EntityManager const&);
-	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); }
+	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<RakNet::RakNetGUID, Entity*>();
+	}
 
 	int m_nextID;
 	std::unordered_map<int, Entity*> m_entities;
+	std::unordered_map<RakNet::RakNetGUID, Entity*> m_jugadores;
 
 };
 
