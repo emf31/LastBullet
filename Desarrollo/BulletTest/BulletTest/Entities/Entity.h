@@ -49,6 +49,8 @@ public:
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
 
+	
+
 protected:
 	int m_id;
 	RakNet::RakNetGUID m_guid;

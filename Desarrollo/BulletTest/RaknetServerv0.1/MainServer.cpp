@@ -109,7 +109,7 @@ int main() {
 				bsIn.Read(p_struct);
 				//muestraPlayer(p);
 				//RakNet::BitStream bsOut;
-
+				
 				EntityManager::i().sendPlayer(p_struct, peer);
 
 				Player *p = new Player();

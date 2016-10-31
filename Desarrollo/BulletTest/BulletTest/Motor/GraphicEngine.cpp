@@ -83,6 +83,7 @@ void GraphicEngine::inicializar()
 	irrDriver = irrDevice->getVideoDriver();
 
 	irrDevice->getCursorControl()->setVisible(0);
+	cargarTexturas();
 }
 
 bool GraphicEngine::isRuning()
@@ -98,4 +99,10 @@ bool GraphicEngine::isWindowActive()
 bool GraphicEngine::apagar()
 {
 	return irrDevice->drop();
+}
+
+void GraphicEngine::cargarTexturas() {
+	irrDriver->getTexture("../media/wall.jpg");
+	irrDriver->getTexture("../media/ice0.jpg");
+	irrDriver->getTexture("../media/earth.jpg");
 }

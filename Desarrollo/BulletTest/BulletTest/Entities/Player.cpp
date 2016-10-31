@@ -83,7 +83,7 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 500, 0), Vec3<float>(100.f, 100.f, 100.f), "../media/rockwall.jpg");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 500, 0), Vec3<float>(100.f, 100.f, 100.f), "../media/earth.jpg");
 
 	m_renderState.setPosition(Vec3<float>(0, 500, 0));
 
@@ -99,4 +99,13 @@ void Player::borrarContenido()
 {
 	//No se si aqui habria que hacer delete al nodo porque igual se encarga irrlitch
 	delete m_nodo;
+}
+
+void Player::setPosition(Vec3<float> pos) {
+	m_renderState.setPosition(pos);
+	btTransform transform = m_rigidBody->getCenterOfMassTransform();
+	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	m_rigidBody->setCenterOfMassTransform(transform);
+	m_nodo->setPosition(pos);
+
 }

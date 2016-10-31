@@ -16,6 +16,7 @@ public:
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
+	void setPosition(Vec3<float> pos);
 
 private:
 	

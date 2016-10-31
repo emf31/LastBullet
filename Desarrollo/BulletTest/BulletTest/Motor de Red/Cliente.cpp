@@ -53,7 +53,8 @@ void Cliente::update() {
 				nuevoplayer.guid = player->getGuid();
 				nuevoplayer.name = player->getName();
 				//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-				nuevoplayer.position = player->getRenderState()->getPosition();
+				nuevoplayer.position = Vec3<float> (0,100,0);
+				player->setPosition(nuevoplayer.position);
 
 				bsOut.Write(nuevoplayer);
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
@@ -73,8 +74,9 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 
 				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
-				e->getRenderState()->setPosition(nuevoplayer.position);
 				e->cargarContenido();
+				e->setPosition(nuevoplayer.position);
+				
 
 
 
@@ -95,7 +97,8 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 
 				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
-				e->getRenderState()->setPosition(nuevoplayer.position);
+				e->cargarContenido();
+				e->setPosition(nuevoplayer.position);
 
 
 

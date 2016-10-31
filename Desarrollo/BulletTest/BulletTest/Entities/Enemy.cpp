@@ -42,3 +42,12 @@ void Enemy::borrarContenido()
 
 	delete m_nodo;
 }
+
+void Enemy::setPosition(Vec3<float> pos) {
+	m_renderState.setPosition(pos);
+	btTransform transform = m_rigidBody->getCenterOfMassTransform();
+	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	m_rigidBody->setCenterOfMassTransform(transform);
+	m_nodo->setPosition(pos);
+
+}

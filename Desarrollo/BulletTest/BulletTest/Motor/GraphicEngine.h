@@ -44,6 +44,8 @@ public:
 	bool isWindowActive();
 	bool apagar();
 
+	void cargarTexturas();
+
 private:
 	IrrlichtDevice *irrDevice;
 	IVideoDriver *irrDriver;

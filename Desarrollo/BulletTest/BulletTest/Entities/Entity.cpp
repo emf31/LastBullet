@@ -42,3 +42,5 @@ SceneNode * Entity::getNode()
 {
 	return m_nodo;
 }
+
+
