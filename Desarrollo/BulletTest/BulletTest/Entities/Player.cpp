@@ -11,7 +11,6 @@
 Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 {
 	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
-	mousePrev = mouseNew = MastEventReceiver::i().mouseX();
 	giro = 0;
 }
 
@@ -100,25 +99,22 @@ void Player::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 
-	bool direccion=1;
-
-
 	vectorNew.normalise();//normalizamos los vectores
 	vectorPrev.normalise();
 
 
-		float m1 = vectorNew.getZ() / vectorNew.getX();//pendiente del 1
-		float m2 = vectorPrev.getZ() / vectorPrev.getX();//pendiente del 2
-		float giroactual3 = atan((m1-m2)/(1+(m1*m2)));//calculo del angulo entre 2 rectas
-		giroactual3 *= RADTODEG;//lo pasamos a grados
+	float m1 = vectorNew.getZ() / vectorNew.getX();//pendiente del 1
+	float m2 = vectorPrev.getZ() / vectorPrev.getX();//pendiente del 2
+	float giroactual3 = atan((m1-m2)/(1+(m1*m2)));//calculo del angulo entre 2 rectas
+	giroactual3 *= RADTODEG;//lo pasamos a grados
 
-		if(giroactual3>=-360 && giroactual3<360 ){
-			giro = giro-giroactual3;//aumentamos la variable giro acumulativa para setearla y se comprueba que esta en el rango 0 360
+	if(giroactual3>=-360 && giroactual3<360 ){
+		giro = giro-giroactual3;//aumentamos la variable giro acumulativa para setearla y se comprueba que esta en el rango 0 360
 
-			if (giro <360)
-				giro = giro + 360;
-			if (giro > 360)
-				giro = giro - 360;
+		if (giro <360)
+			giro = giro + 360;
+		if (giro > 360)
+			giro = giro - 360;
 	
 
 	}

@@ -25,8 +25,6 @@ private:
 
 	float m_speedFactor;
 	float giro;
-	float mouseNew;
-	float mousePrev;
 	Clock tiempoSalto;
 
 	Vec3<float> vectorPrev;
