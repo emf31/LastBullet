@@ -62,7 +62,9 @@ void Player::update(Time elapsedTime)
 	}
 
 	if (isMoving) {
+		
 		speedFinal.normalise();
+		printf("Direction: X=%f Y=%f\n", speedFinal.getX(), speedFinal.getZ());
 		m_renderState.setDirection(speedFinal);
 		m_renderState.setAccelerating(true);
 	}

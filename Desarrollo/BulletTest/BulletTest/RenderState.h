@@ -43,7 +43,7 @@ public:
 	void updatePositions(Vec3<float> position);
 	//Updatea las rotaciones prev y new
 	void updateRotations(Vec3<float> rotation);
-	void updateVelocity(float interpolation);
+	void updateVelocity(float elapsedTime);
 
 private:
 	float m_SpeedFactor;

@@ -7,8 +7,8 @@
 
 RenderState::RenderState()
 {
-	m_MaxVelocity = 40;
-	m_Acceleration = 80;
+	m_MaxVelocity = 30;
+	m_Acceleration = 150;
 	m_SpeedFactor = 1;
 	m_rotated = 0;
 }
@@ -62,30 +62,26 @@ void RenderState::updateRotations(Vec3<float> rotation)
 	m_rotated += rotation.getY();
 }
 
-void RenderState::updateVelocity(float interpolation)
+void RenderState::updateVelocity(float elapsedTime)
 {
 	Vec3<float> VelocityAccelerated = Vec3<float>(
-		(m_Velocity.getX() + m_Direction.getX()*m_Acceleration*interpolation),
-		(m_Velocity.getY() + 0*interpolation),
-		(m_Velocity.getZ() + m_Direction.getZ()*m_Acceleration*interpolation));
+		(m_Velocity.getX() + m_Direction.getX()*m_Acceleration*elapsedTime),
+		(m_Velocity.getY() + 0* elapsedTime),
+		(m_Velocity.getZ() + m_Direction.getZ()*m_Acceleration*elapsedTime));
 
-	float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(), 2.0) + pow(VelocityAccelerated.getY(), 2.0) + pow(VelocityAccelerated.getZ(), 2.0));
+	//float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(), 2.0) + pow(VelocityAccelerated.getY(), 2.0) + pow(VelocityAccelerated.getZ(), 2.0));
 
 	if(m_Acceleration>0){
-	if (VelocityAcceleratedTotal < m_MaxVelocity ) {
-		m_Velocity = VelocityAccelerated;
+	if (abs(VelocityAccelerated.getX()) < m_MaxVelocity ) {
+		m_Velocity.setX(VelocityAccelerated.getX());
+	}
+	if (abs(VelocityAccelerated.getZ()) < m_MaxVelocity) {
+		m_Velocity.setZ(VelocityAccelerated.getZ());
 	}
 	}
 	else {
-		if (VelocityAcceleratedTotal>5){	
-			//m_Velocity = VelocityAccelerated;
 			m_Velocity = Vec3<float>(0, 0, 0);
 			m_Direction = Vec3<float>(0, 0, 0);
-		}
-		else{
-			m_Velocity = Vec3<float>(0, 0, 0);
-			m_Direction = Vec3<float>(0, 0, 0);
-		}
 	}
 }
 
