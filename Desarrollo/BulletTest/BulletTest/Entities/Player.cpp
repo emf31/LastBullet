@@ -4,6 +4,7 @@
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
+#include "../Handlers/MessageHandler.h"
 
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1, NULL, name, guid), m_speedFactor(30)	//El player siempre tendra ID 1
@@ -79,6 +80,10 @@ void Player::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+
+	Message msg1(this, "MOVE", NULL);
+
+	MessageHandler::sendMessage(msg1);
 }
 
 void Player::handleInput()
@@ -110,6 +115,10 @@ void Player::borrarContenido()
 	delete m_nodo;
 }
 
+void Player::handleMessage(const Message & message)
+{
+}
+
 void Player::setPosition(Vec3<float> pos) {
 	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
@@ -118,3 +127,4 @@ void Player::setPosition(Vec3<float> pos) {
 	m_nodo->setPosition(pos);
 
 }
+

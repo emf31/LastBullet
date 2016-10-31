@@ -7,7 +7,8 @@
 #include "../Entities/Entity.h"
 #include "../Entities/Enemy.h"
 #include "../Entities/Player.h"
-
+#include "../Handlers/Message.h"
+#include "../Handlers/MessageHandler.h"
 
 Cliente::Cliente()
 {
@@ -118,8 +119,12 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
 				Enemy *e = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-				e->updateEnemigo(nuevoplayer.position);
-				e = nullptr;
+				//e->updateEnemigo(nuevoplayer.position);
+				//e = nullptr;
+
+				Message msg1(e, "MOVE", NULL);
+
+				MessageHandler::sendMessage(msg1);
 
 			}
 			break;

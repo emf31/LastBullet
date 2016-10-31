@@ -9,6 +9,7 @@
 #include "Entities\PhysicsEntity.h"
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
+#include "Handlers\MessageHandler.h"
 
 
 #include <RakPeerInterface.h>
@@ -76,6 +77,7 @@ void Game::inicializar()
 	PhysicsEngine::inicializar();
 	GraphicEngine::i().inicializar();
 
+
 	//Antes se hacia aqui pero ahora se hace en Cliente.cpp una vez la conexion ha sido aceptada
 	//player = new Player();
 
@@ -86,6 +88,7 @@ void Game::inicializar()
 	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
 
 	EntityManager::i().cargarContenido();
+
 
 	//raknet
 	Cliente::i().inicializar();
@@ -100,6 +103,7 @@ void Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
+	MessageHandler::update();
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
 }

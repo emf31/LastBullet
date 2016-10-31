@@ -59,3 +59,8 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
 }
+
+void Enemy::handleMessage(const Message & message)
+{
+
+}

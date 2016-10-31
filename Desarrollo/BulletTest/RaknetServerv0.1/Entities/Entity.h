@@ -4,6 +4,7 @@
 #include  "BulletTest\Otros\Time.hpp"
 #include  "BulletTest\Otros\Clock.hpp"
 #include  "BulletTest\RenderState.h"
+
 #include <RakPeerInterface.h>
 
 class Entity
@@ -43,6 +44,7 @@ public:
 	virtual void handleInput() = 0;
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
+	
 
 protected:
 	RakNet::RakNetGUID m_guid;

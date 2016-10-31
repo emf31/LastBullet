@@ -2,6 +2,9 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
+
+#include "../Handlers/Message.h"
+
 class Enemy : public Entity
 {
 public:
@@ -16,6 +19,9 @@ public:
 	virtual void borrarContenido() override;
 	void setPosition(Vec3<float> pos);
 	void updateEnemigo(Vec3<float> pos);
+
+
+	virtual void handleMessage(const Message & message) override;
 
 private:
 	btRigidBody* m_rigidBody;
