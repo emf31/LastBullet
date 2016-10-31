@@ -10,7 +10,9 @@
 
 Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 {
-	
+	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
+	mousePrev = mouseNew = MastEventReceiver::i().mouseX();
+	giro = 0;
 }
 
 
@@ -21,8 +23,7 @@ Player::~Player()
 
 void Player::inicializar()
 {
-	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
-	giro = 0;
+
 }
 
 void Player::update(Time elapsedTime)
@@ -99,33 +100,27 @@ void Player::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 
+	bool direccion=1;
 
-	//float giro = acos(
-		//( vectorNew.getX()*vectorPrev.getX() + vectorNew.getZ()*vectorPrev.getZ() ) /
-		//(sqrt(pow(vectorNew.getX(),2)+pow(vectorNew.getZ(),2)) * sqrt(pow(vectorPrev.getX(), 2) + pow(vectorPrev.getZ(), 2)))
-	//);
 
 	vectorNew.normalise();//normalizamos los vectores
 	vectorPrev.normalise();
 
-	if(vectorNew.getX()!=0 && vectorPrev.getX()!=0){//comprobamos posibles errores matematicos(division entre 0)
-	float giroactual =  atan(vectorNew.getZ()/ vectorNew.getX())- atan(vectorPrev.getZ() / vectorPrev.getX());//generamos el angulo entre los vectores
-	giroactual *= RADTODEG;//lo pasamos a grados
 
-	if (abs(giroactual) > 90)//entra aqui cuando no has girado tanto... NOSE QUE PASA
-		printf("------SE NOS VA A LA MIERDA-----\n");
+		float m1 = vectorNew.getZ() / vectorNew.getX();//pendiente del 1
+		float m2 = vectorPrev.getZ() / vectorPrev.getX();//pendiente del 2
+		float giroactual3 = atan((m1-m2)/(1+(m1*m2)));//calculo del angulo entre 2 rectas
+		giroactual3 *= RADTODEG;//lo pasamos a grados
 
-	giro = giro-giroactual;//aumentamos la variable giro acumulativa para setearla y se comprueba que esta en el rango -180 180
-	if (giro < -180)
-		giro = giro + 180;
-	if (giro > 180)
-		giro = giro - 180;
+		if(giroactual3>=-360 && giroactual3<360 ){
+			giro = giro-giroactual3;//aumentamos la variable giro acumulativa para setearla y se comprueba que esta en el rango 0 360
+
+			if (giro <360)
+				giro = giro + 360;
+			if (giro > 360)
+				giro = giro - 360;
 	
 
-
-	printf("GIRO %f\n", giro);
-	
-	//}
 	}
 	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
 }
