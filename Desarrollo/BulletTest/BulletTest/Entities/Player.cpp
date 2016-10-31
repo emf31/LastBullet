@@ -5,7 +5,7 @@
 #include "../MastEventReceiver.hpp"
 
 
-Player::Player() : Entity(1, NULL), m_speedFactor(30)
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1, NULL, name, guid), m_speedFactor(30)	//El player siempre tendra ID 1
 {
 }
 
@@ -89,6 +89,10 @@ void Player::cargarContenido()
 
 	//Creas el body(fisico) 
 	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_DEACTIVATION);
+
+	//Creamos la camara FPS
+	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	GraphicEngine::i().setCameraEntity(this);
 }
 
 void Player::borrarContenido()

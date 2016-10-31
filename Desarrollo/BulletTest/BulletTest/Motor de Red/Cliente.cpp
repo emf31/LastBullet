@@ -5,7 +5,8 @@
 #include "Estructuras.h"
 #include "../Entities/EntityManager.h"
 #include "../Entities/Entity.h"
-
+#include "../Entities/Enemy.h"
+#include "../Entities/Player.h"
 
 Cliente::Cliente()
 {
@@ -15,6 +16,7 @@ void Cliente::update() {
 	RakNet::Packet *packet;
 	RakNet::BitStream bsOut;
 	std::string str;
+	TPlayer nuevoplayer;
 	int cont = 0;
 
 	while (1) {
@@ -45,15 +47,13 @@ void Cliente::update() {
 				printf("Introduce un nombre \n");
 				std::cin >> str;
 
-				Entity* ent = EntityManager::i().getEntity(1);
-				ent->setGUID(peer->GetMyGUID());
-				ent->setName(str);
-				TPlayer nuevoplayer;
+				Player *player = new Player(str, peer->GetMyGUID());
+				player->cargarContenido();
 
-				nuevoplayer.guid = ent->getGuid();
-				nuevoplayer.name = ent->getName();
+				nuevoplayer.guid = player->getGuid();
+				nuevoplayer.name = player->getName();
 				//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-				nuevoplayer.position = ent->getRenderState()->getPosition();
+				nuevoplayer.position = player->getRenderState()->getPosition();
 
 				bsOut.Write(nuevoplayer);
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
@@ -62,8 +62,40 @@ void Cliente::update() {
 			}
 				break;
 
-			case NUEVO_PLAYER: 
+			case NUEVO_PLAYER:
 			{
+				//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				//recibo el player
+				bsIn.Read(nuevoplayer);
+
+				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->getRenderState()->setPosition(nuevoplayer.position);
+				e->cargarContenido();
+
+
+
+
+
+
+			}
+			break;
+
+			case NUEVO_CLIENTE:
+			{
+				//eres un player nuevo, te envian todos los clientes que habian en el server para que tu tambien los tengas
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				//recibo el player
+				bsIn.Read(nuevoplayer);
+
+				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->getRenderState()->setPosition(nuevoplayer.position);
 
 
 

@@ -76,8 +76,8 @@ void Game::inicializar()
 	PhysicsEngine::inicializar();
 	GraphicEngine::i().inicializar();
 
-
-	player = new Player();
+	//Antes se hacia aqui pero ahora se hace en Cliente.cpp una vez la conexion ha sido aceptada
+	//player = new Player();
 
 
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg");
@@ -86,12 +86,6 @@ void Game::inicializar()
 	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
 
 	EntityManager::i().cargarContenido();
-
-
-	// Add camera
-	//camara tipo fps
-	GraphicEngine::i().createCamera(Vec3<float>(10,10,10), Vec3<float>(0,0,0));
-	GraphicEngine::i().setCameraEntity(player);
 
 	//raknet
 	Cliente::i().inicializar();

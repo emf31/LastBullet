@@ -4,11 +4,12 @@
 #include "EntityManager.h"
 
 
-Entity::Entity(int id, SceneNode* nodo, const std::string& name) :
+Entity::Entity(int id, SceneNode* nodo, const std::string& name, RakNet::RakNetGUID guid) :
 	m_id(id),
 	m_nodo(nodo),
 	m_name(name),
-	m_renderState()
+	m_renderState(),
+	m_guid(guid)
 {
 
 	if (m_nodo) {
@@ -17,9 +18,6 @@ Entity::Entity(int id, SceneNode* nodo, const std::string& name) :
 	else {
 		m_renderState.setPosition(Vec3<float>(0,0,0));
 	}
-	
-
-	//tiempoSalto.restart();
 
 	//cada entity que se crea llama a entity manager para registrarse
 	EntityManager::i().registerEntity(this);

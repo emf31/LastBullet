@@ -37,15 +37,16 @@ public:
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
 	Entity* getEntity(int id);
+	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 
 private:
 	EntityManager(EntityManager const&);
-	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<RakNet::RakNetGUID, Entity*>();
+	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<unsigned long, Entity*>();
 	}
 
 	int m_nextID;
 	std::unordered_map<int, Entity*> m_entities;
-	std::unordered_map<RakNet::RakNetGUID, Entity*> m_jugadores;
+	std::unordered_map<unsigned long, Entity*> m_jugadores;
 
 };
 

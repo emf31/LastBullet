@@ -3,7 +3,7 @@
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
 
-Enemy::Enemy() : Entity(-1, NULL, "Enemy")
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
 }
 
@@ -28,7 +28,7 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 500, 0), Vec3<float>(100.f, 100.f, 100.f), "../media/ice0.jpg");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(200, 500, 0), Vec3<float>(100.f, 100.f, 100.f), "../media/ice0.jpg");
 
 	m_renderState.setPosition(Vec3<float>(200, 500, 0));
 

@@ -3,12 +3,19 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
+
 class Player : public Entity
 {
 public:
-	Player();
+	Player(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
+	// Heredado vía Entity
+	virtual void inicializar() override;
+	virtual void update(Time elapsedTime) override;
+	virtual void handleInput() override;
+	virtual void cargarContenido() override;
+	virtual void borrarContenido() override;
 
 private:
 	
@@ -23,11 +30,6 @@ private:
 	float m_speedFactor;
 	Clock tiempoSalto;
 
-	// Heredado vía Entity
-	virtual void inicializar() override;
-	virtual void update(Time elapsedTime) override;
-	virtual void handleInput() override;
-	virtual void cargarContenido() override;
-	virtual void borrarContenido() override;
+	
 };
 

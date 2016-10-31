@@ -5,10 +5,8 @@
 class Enemy : public Entity
 {
 public:
-	Enemy();
+	Enemy(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Enemy();
-private:
-	btRigidBody* m_rigidBody;
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -16,5 +14,10 @@ private:
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
+
+private:
+	btRigidBody* m_rigidBody;
+
+	
 };
 
