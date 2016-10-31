@@ -1,22 +1,7 @@
-﻿  GraphicEngine.cpp
+﻿  Enemy.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Player.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Enemy.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Generando código...
-  Compilando...
-  Game.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Generando código...
 BulletCollision_Debug.lib(btAxisSweep3.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btAxisSweep3.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

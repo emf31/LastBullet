@@ -34,7 +34,8 @@ void Enemy::cargarContenido()
 
 	//Al mundo de fisicas del cliente añadimos una representacion del objeto fisico pero no calcula fisicas
 	//(servira para hacer los raycast)
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_SIMULATION);
+
+	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f),0.0f, DISABLE_SIMULATION);
 }
 
 void Enemy::borrarContenido()

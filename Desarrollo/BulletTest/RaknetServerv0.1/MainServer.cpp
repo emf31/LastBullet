@@ -113,7 +113,9 @@ int main() {
 				EntityManager::i().sendPlayer(p_struct, peer);
 
 				Player *p = new Player();
+				p->getRenderState()->setPosition(p_struct.position);
 				p->setGUID(p_struct.guid);
+				p->setName(p_struct.name);
 			}
 							   break;
 			case ID_NEW_INCOMING_CONNECTION: {

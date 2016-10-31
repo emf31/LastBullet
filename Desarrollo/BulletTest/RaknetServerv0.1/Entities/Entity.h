@@ -34,6 +34,10 @@ public:
 		return m_name;
 	}
 
+	void setName(std::string name) {
+		m_name = name;
+	}
+
 	virtual void inicializar() = 0;
 	virtual void update(Time elapsedTime) = 0;
 	virtual void handleInput() = 0;
