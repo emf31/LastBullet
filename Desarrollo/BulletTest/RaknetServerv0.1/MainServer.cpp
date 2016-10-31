@@ -47,6 +47,7 @@ int main() {
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
 	TPlayer p_struct;
+	
 	//std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
@@ -112,10 +113,8 @@ int main() {
 				
 				EntityManager::i().sendPlayer(p_struct, peer);
 
-				Player *p = new Player();
+				Player *p = new Player(p_struct.name, p_struct.guid);
 				p->getRenderState()->setPosition(p_struct.position);
-				p->setGUID(p_struct.guid);
-				p->setName(p_struct.name);
 			}
 							   break;
 			case ID_NEW_INCOMING_CONNECTION: {
@@ -202,40 +201,16 @@ int main() {
 			break;
 			case MOVIMIENTO: {
 
-				/*RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				RakNet::BitStream bsOut;
-				int movimiento = 0;
-				int pos=0;
+				
+				
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(movimiento);
-				if (movimiento!=0) {
+				bsIn.Read(p_struct);
 
-					for (int i = 0; i < clientArray.size(); i++) {
-						if (packet->guid == clientArray.at(i)->getGuid()) {
-							pos = i;
-							break;
-						}
-					}
-					//Player *p = new Player();
-					//p = clientArray.at(pos);
+				EntityManager::i().getRaknetEntity(p_struct.guid)->getRenderState()->setPosition(p_struct.position);
 
-					updatePlayer(movimiento, clientArray.at(pos));
-
-					Tposicion posicionEnviar = clientArray.at(pos)->getPos();
-					RakNet::RakNetGUID elguid = clientArray.at(pos)->getGuid();
-
-					for (int i = 0; i < clientArray.size(); i++) {
-						//Enviamos una copia del player a todos los demas
-						bsOut.Write((RakNet::MessageID)ACTUALIZA_CLIENTE);
-
-						//UPDATE
-						bsOut.Write(elguid);
-						bsOut.Write(posicionEnviar);
-						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
-						bsOut.Reset();
-					}
-					clientArray.at(pos)->restablecerMovimiento();
-				}*/
+				EntityManager::i().enviaNuevaPos(p_struct, peer);
 
 			}
 

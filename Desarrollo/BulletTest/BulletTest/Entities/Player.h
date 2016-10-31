@@ -27,6 +27,7 @@ private:
 	bool isMovingLeft;
 	bool isMovingRight;
 	bool isJumping;
+	bool moviendo = false;
 
 	float m_speedFactor;
 	Clock tiempoSalto;

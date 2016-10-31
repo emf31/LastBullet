@@ -9,7 +9,7 @@
 class Entity
 {
 public:
-	Entity(int id, const std::string& name = "");
+	Entity(const std::string& name, RakNet::RakNetGUID guid);
 	virtual ~Entity();
 
 	RenderState* getRenderState() { return &m_renderState; }

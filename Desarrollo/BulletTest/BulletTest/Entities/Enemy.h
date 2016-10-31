@@ -15,6 +15,7 @@ public:
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	void setPosition(Vec3<float> pos);
+	void updateEnemigo(Vec3<float> pos);
 
 private:
 	btRigidBody* m_rigidBody;

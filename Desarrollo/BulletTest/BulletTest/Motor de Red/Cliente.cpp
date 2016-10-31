@@ -17,6 +17,7 @@ void Cliente::update() {
 	RakNet::BitStream bsOut;
 	std::string str;
 	TPlayer nuevoplayer;
+	
 	int cont = 0;
 
 	while (1) {
@@ -105,6 +106,24 @@ void Cliente::update() {
 
 			}
 			break;
+
+			case MOVIMIENTO:
+			{
+				//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				std::cout << "un enemigo se ha movido" << std::endl;
+				//recibo el player
+				bsIn.Read(nuevoplayer);
+				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
+				Enemy *e = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+				e->updateEnemigo(nuevoplayer.position);
+				e = nullptr;
+
+			}
+			break;
+
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
@@ -135,6 +154,7 @@ void Cliente::update() {
 
 		
 		*/
+
 	}
 
 }
@@ -160,4 +180,22 @@ void Cliente::conectar(std::string address, int port) {
 
 void Cliente::esperar() {
 	hilo->join();
+}
+
+void Cliente::enviarPos(Player* p) {
+
+	RakNet::BitStream bsOut;
+	TPlayer paquetemov;
+
+	bsOut.Write((RakNet::MessageID)MOVIMIENTO);
+
+	paquetemov.guid = p->getGuid();
+	paquetemov.name = p->getName();
+	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
+	paquetemov.position = p->getRenderState()->getPosition();
+	
+
+	bsOut.Write(paquetemov);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
 }

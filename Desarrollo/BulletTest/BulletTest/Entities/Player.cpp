@@ -1,5 +1,6 @@
 
 #include "Player.h"
+#include "../Motor de Red/Cliente.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
@@ -35,18 +36,22 @@ void Player::update(Time elapsedTime)
 	if (isMovingForward) {
 		speedFinal.setX(speedFinal.getX() + speed.getX());
 		speedFinal.setZ(speedFinal.getZ() + speed.getZ());
+		moviendo = true;
 	}
 	if (isMovingBackward) {
 		speedFinal.setX(speedFinal.getX() - speed.getX());
 		speedFinal.setZ(speedFinal.getZ() - speed.getZ());
+		moviendo = true;
 	}
 	if (isMovingLeft) {
 		speedFinal.setX(speedFinal.getX() - speed.getZ());
 		speedFinal.setZ(speedFinal.getZ() + speed.getX());
+		moviendo = true;
 	}
 	if (isMovingRight) {
 		speedFinal.setX(speedFinal.getX() + speed.getZ());
 		speedFinal.setZ(speedFinal.getZ() - speed.getX());
+		moviendo = true;
 	}
 	speedFinal.normalise();
 
@@ -61,6 +66,10 @@ void Player::update(Time elapsedTime)
 	// Set position
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+
+
+		Cliente::i().enviarPos(this);
+	
 
 	// Set rotation
 	vector3df Euler;

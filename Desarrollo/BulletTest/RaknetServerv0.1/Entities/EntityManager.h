@@ -17,6 +17,7 @@ public:
 	}
 	//Envia un nuevo player a todos los clientes
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void enviaNuevaPos(TPlayer &p, RakNet::RakPeerInterface *peer);
 
 
 	//Inicializa todas las entities
@@ -38,14 +39,15 @@ public:
 	void registerEntity(Entity* entity);
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	Entity* getEntity(int id);
+	Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid);
 
 private:
 	EntityManager(EntityManager const&);
-	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); }
+	EntityManager() { m_nextID = 0;  m_jugadores = std::unordered_map<unsigned long, Entity*>();
+	}
 
 	int m_nextID;
-	std::unordered_map<int, Entity*> m_entities;
+	std::unordered_map<unsigned long, Entity*> m_jugadores;
 
 };
 

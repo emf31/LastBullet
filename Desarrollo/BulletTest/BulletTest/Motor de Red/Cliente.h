@@ -6,6 +6,7 @@
 #include <RakNetTypes.h>
 #include <thread> 
 #include "../Otros/Time.hpp"
+#include "../Entities/Player.h"
 
 
 class Cliente
@@ -23,6 +24,7 @@ public:
 	void inicializar();
 	void conectar(std::string address, int port);
 	void esperar();
+	void enviarPos(Player* p);
 
 private:
 	RakNet::SocketDescriptor sd;

@@ -6,7 +6,7 @@
 class Player : public Entity
 {
 public:
-	Player();
+	Player(const std::string& name, RakNet::RakNetGUID guid);
 	~Player();
 
 private:

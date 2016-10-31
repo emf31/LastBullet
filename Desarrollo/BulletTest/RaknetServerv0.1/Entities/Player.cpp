@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player() : Entity(-1, "Player"), m_speedFactor(30)
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(name, guid), m_speedFactor(30)	//El player siempre tendra ID 1
 {
 }
 

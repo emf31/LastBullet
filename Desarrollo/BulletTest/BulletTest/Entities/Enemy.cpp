@@ -52,3 +52,10 @@ void Enemy::setPosition(Vec3<float> pos) {
 	m_nodo->setPosition(pos);
 
 }
+
+void Enemy::updateEnemigo(Vec3<float> pos) {
+	m_renderState.updatePositions(pos);
+	btTransform transform = m_rigidBody->getCenterOfMassTransform();
+	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	m_rigidBody->setCenterOfMassTransform(transform);
+}

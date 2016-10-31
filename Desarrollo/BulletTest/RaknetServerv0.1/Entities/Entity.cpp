@@ -3,8 +3,8 @@
 
 
 
-Entity::Entity(int id, const std::string& name) :
-	m_id(id),
+Entity::Entity(const std::string& name, RakNet::RakNetGUID guid) :
+	m_guid(guid),
 	m_name(name),
 	m_renderState()
 {
