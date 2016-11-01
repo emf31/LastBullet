@@ -144,7 +144,7 @@ void Player::handleMessage(const Message & message)
 
 void Player::jump() {
 
-	//if (isJumping == true){
+	if (isJumping == false){
 
 
 
@@ -182,11 +182,11 @@ void Player::jump() {
 		printf("missed\n"); 
 	}
 
-//	}
-	/*else {
+	}
+	else {
 		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 		isJumping = false;
-	}*/
+	}
 
 }
 
