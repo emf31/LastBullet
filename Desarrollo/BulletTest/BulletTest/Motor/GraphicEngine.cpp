@@ -106,3 +106,8 @@ void GraphicEngine::cargarTexturas() {
 	irrDriver->getTexture("../media/ice0.jpg");
 	irrDriver->getTexture("../media/earth.jpg");
 }
+
+void GraphicEngine::removeNode(SceneNode* nodo) {
+	
+	irrScene->addToDeletionQueue(nodo->getNodo());
+}

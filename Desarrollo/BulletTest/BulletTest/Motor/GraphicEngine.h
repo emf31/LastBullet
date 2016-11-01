@@ -45,6 +45,7 @@ public:
 	bool apagar();
 
 	void cargarTexturas();
+	void removeNode(SceneNode* nodo);
 
 private:
 	IrrlichtDevice *irrDevice;

@@ -110,9 +110,11 @@ void Game::update(Time elapsedTime)
 
 void Game::render(float interpolation, Time elapsedTime)
 {
-	GraphicEngine::i().updateCamera();
+
 
 	EntityManager::i().updateRender(interpolation);
+
+	GraphicEngine::i().updateCamera();
 
 	GraphicEngine::i().renderAll();
 }

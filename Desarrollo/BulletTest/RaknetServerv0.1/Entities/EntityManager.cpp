@@ -4,7 +4,6 @@
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	TPlayer nuevocli;
-	//TODO: CAMBIAR ESTO POR UNA LISTA QUE SOLO TE DEVUELVA PLAYERS
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 		//enviamos el nuevo player a todos los clientes que habian en el servidor
@@ -28,7 +27,6 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 void EntityManager::enviaNuevaPos(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	
-	//TODO: CAMBIAR ESTO POR UNA LISTA QUE SOLO TE DEVUELVA PLAYERS
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
@@ -44,6 +42,27 @@ void EntityManager::enviaNuevaPos(TPlayer & p, RakNet::RakPeerInterface *peer)
 
 	}
 }
+
+void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
+{
+
+	
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != guid) {
+
+			//enviamos el guid del cliente que tiene que borrar
+			bsOut.Write((RakNet::MessageID)DESCONECTADO);
+			bsOut.Write(guid);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		}
+
+	}
+}
+
 
 void EntityManager::inicializar()
 {

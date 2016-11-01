@@ -25,6 +25,7 @@ public:
 	void setRotation(Vec3<float> rotation);
 
 	Vec3<float> getScale();
+	ISceneNode* getNodo();
 
 private:
 	ISceneNode* m_node;

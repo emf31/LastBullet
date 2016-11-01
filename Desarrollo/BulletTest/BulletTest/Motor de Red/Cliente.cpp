@@ -19,6 +19,7 @@ void Cliente::update() {
 	RakNet::BitStream bsOut;
 	std::string str;
 	TPlayer nuevoplayer;
+	RakNet::RakNetGUID desconectado;
 	
 	int cont = 0;
 
@@ -124,6 +125,20 @@ void Cliente::update() {
 				Message msg1(e, "MOVE", (void*)&nuevoplayer);
 
 				MessageHandler::i().sendMessage(msg1);
+
+			}
+			break;
+
+			case DESCONECTADO:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				
+				bsIn.Read(desconectado);
+
+				EntityManager::i().getRaknetEntity(desconectado)->borrarContenido();
+				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
 
 			}
 			break;

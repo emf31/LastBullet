@@ -42,7 +42,7 @@ void Enemy::cargarContenido()
 void Enemy::borrarContenido()
 {
 
-	delete m_nodo;
+	GraphicEngine::i().removeNode(m_nodo);
 }
 
 void Enemy::setPosition(Vec3<float> pos) {

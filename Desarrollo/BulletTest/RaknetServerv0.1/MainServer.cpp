@@ -131,40 +131,18 @@ int main() {
 											 break;
 			case ID_DISCONNECTION_NOTIFICATION:
 				printf("Un cliente se ha desconectado.\n");
+				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
 				break;
 			case ID_CONNECTION_LOST: {
-				/*printf("Un cliente ha perdido la conexión.\n");
-				RakNet::BitStream bsOut;
-				Player *p = new Player();
-				int i = 0;
-				for (i = 0; i < clientArray.size(); i++) {
-					if (clientArray.at(i)->getGuid() == packet->guid) {
-						p = clientArray.at(i);
 
-						break;
-					}
-				}
-				for (int j = 0; j < clientArray.size(); j++) {
-					if (j!=i) {
-						bsOut.Write((RakNet::MessageID)ELIMINAR_CLIENTE);
-						bsOut.Write(*p);
-						peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(j)->getGuid(), false);
-						bsOut.Reset();
-					}
-				}
-				clientArray.erase(clientArray.begin()+i);
+				printf("Un cliente se ha desconectado.\n");
+				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
+				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
+				EntityManager::i().enviaDesconexion(packet->guid, peer);
+				//lo borramos de los clientes actuales del servidor
+				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
-				std::cout << "" << std::endl;
-				std::cout << "LISTA DE CLIENTES" << std::endl;
-				std::cout << "Num.Clientes: " << clientArray.size() << std::endl;
-				for (int i = 0; i < clientArray.size(); i++) {
-					std::cout << "Cliente " << i << ": " << clientArray.at(i)->nombre << std::endl;
-					std::cout << "Pos: " << clientArray.at(i)->getPos().x << ", " << clientArray.at(i)->getPos().y << std::endl;
-				}
-
-				//delete p;
 			}
-				*/
 				break;
 			case ID_GAME_MESSAGE_1:
 			{
@@ -219,7 +197,7 @@ int main() {
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
 			}
-			}
+			
 		}
 	}
 
