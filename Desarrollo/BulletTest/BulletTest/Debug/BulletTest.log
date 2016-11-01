@@ -1,69 +1,20 @@
-﻿  stdafx.cpp
-  RenderState.cpp
+﻿  InputHandler.cpp
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\renderstate.cpp(36): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\renderstate.cpp(37): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\renderstate.cpp(38): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-  ClockImpl.cpp
-  Time.cpp
-  Clock.cpp
-  SceneNode.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp(128): warning C4800: 'State': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp(133): warning C4800: 'Action': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
+  Player.cpp
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  PhysicsEngine.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\physicsengine.cpp(25): warning C4244: 'argumento': conversión de 'int' a 'btScalar'; posible pérdida de datos
-  GraphicEngine.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Camera.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+  Generando código...
+  Compilando...
   main.cpp
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
   Game.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  MastEventReceiver.cpp
-  JumpCommand.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  InputHandler.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  MessageHandler.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Player.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  PhysicsEntity.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  EntityManager.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Entity.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-  Command.cpp
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'

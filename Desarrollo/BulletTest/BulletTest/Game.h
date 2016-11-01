@@ -12,9 +12,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
 
-#include "InputHandler.h"
-#include "JumpCommand.h"
-#include "MoveCommand.h"
+#include "Handlers\InputHandler.h"
 
 using namespace irr;
 using namespace core;
@@ -42,6 +40,12 @@ private:
 	float interpolation;
 
 	Player *player;
+	//The window we'll be rendering to
+	SDL_Window* gWindow = NULL;
+	//The surface contained by the window
+	SDL_Surface* gScreenSurface = NULL;
+
+	
 };
 
 

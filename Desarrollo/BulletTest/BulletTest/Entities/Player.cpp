@@ -1,8 +1,8 @@
-#include "stdafx.h"
 #include "Player.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
+#include "../Handlers/InputHandler.h"
 #include "math.h"
 
 
@@ -22,49 +22,22 @@ Player::~Player()
 
 void Player::inicializar()
 {
-
+	//input_handler = new InputHandler();
 }
+
+
 
 void Player::update(Time elapsedTime)
 {
-	Vec3<float> speedFinal;
-	const float jump_gain = 200.0f;
-
-	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-
-	Vec3<float> posicion = getRenderState()->getPosition();
-	vectorPrev = vectorNew;
-	Vec3<float> speed = target - posicion;
-	vectorNew = speed;
-	
+	isMoving = false;
 	speedFinal = Vec3<float>(0, 0, 0);
-	bool isMoving = false;
 
-	if (isMovingForward) {
-		speedFinal.setX(speedFinal.getX() + speed.getX());
-		speedFinal.setZ(speedFinal.getZ() + speed.getZ());
-		isMoving = true;
-	}
-	if (isMovingBackward) {
-		speedFinal.setX(speedFinal.getX() - speed.getX());
-		speedFinal.setZ(speedFinal.getZ() - speed.getZ());
-		isMoving = true;
-	}
-	if (isMovingLeft) {
-		speedFinal.setX(speedFinal.getX() - speed.getZ());
-		speedFinal.setZ(speedFinal.getZ() + speed.getX());
-		isMoving = true;
-	}
-	if (isMovingRight) {
-		speedFinal.setX(speedFinal.getX() + speed.getZ());
-		speedFinal.setZ(speedFinal.getZ() - speed.getX());
-		isMoving = true;
-	}
+	// Ejecuta todos los comandos
+	InputHandler::i().excuteCommands(this);
+	
 
 	if (isMoving) {
-		
 		speedFinal.normalise();
-		//printf("Direction: X=%f Y=%f\n", speedFinal.getX(), speedFinal.getZ());
 		m_renderState.setDirection(speedFinal);
 		m_renderState.setAccelerating(true);
 	}
@@ -72,26 +45,14 @@ void Player::update(Time elapsedTime)
 		m_renderState.setAccelerating(false);
 	}
 
-	
+
 	m_renderState.updateVelocity(elapsedTime.asSeconds());
 	m_rigidBody->setLinearVelocity(btVector3(m_renderState.getVelocity().getX(), m_renderState.getVelocity().getY(), m_renderState.getVelocity().getZ()));
-
-
-
-
-
-	if (isJumping) {
-
-	}
-
-	if (isJumping && tiempoSalto.getElapsedTime().asSeconds() > 3) {
-		m_rigidBody->setLinearVelocity(btVector3(0, 7, 0));
-		tiempoSalto.restart();
-	}
 
 	// Set position
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+
 
 	// Set rotation
 	vector3df Euler;
@@ -125,12 +86,7 @@ void Player::update(Time elapsedTime)
 
 void Player::handleInput()
 {
-	//isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
-	/*isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
-	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
-	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);*/
-
-	//isJumping = MastEventReceiver::i().keyDown(KEY_SPACE);
+	InputHandler::i().handleInput();
 }
 
 void Player::cargarContenido()
@@ -201,11 +157,65 @@ void Player::jump() {
 
 }
 
-void Player::move(bool arriba, bool abajo, bool izq, bool der) {
+void Player::move_up()
+{
+	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
-		isMovingForward = arriba;
-		isMovingRight = der;
-		isMovingLeft = izq;
-		isMovingBackward = abajo;
+	Vec3<float> posicion = getRenderState()->getPosition();
+	vectorPrev = vectorNew;
+	Vec3<float> speed = target - posicion;
+	vectorNew = speed;
 
+	speedFinal.addX(speed.getX());
+	speedFinal.addZ(speed.getZ());
+
+	isMoving = true;
+
+}
+
+void Player::move_down()
+{
+	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+
+	Vec3<float> posicion = getRenderState()->getPosition();
+	vectorPrev = vectorNew;
+	Vec3<float> speed = target - posicion;
+	vectorNew = speed;
+
+	speedFinal.addX(-speed.getX());
+	speedFinal.addZ(-speed.getZ());
+
+	isMoving = true;
+}
+
+void Player::move_right()
+{
+	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+
+	Vec3<float> posicion = getRenderState()->getPosition();
+	vectorPrev = vectorNew;
+	Vec3<float> speed = target - posicion;
+	vectorNew = speed;
+
+	speedFinal.addX(speed.getZ());
+	speedFinal.addZ(-speed.getX());
+
+	isMoving = true;
+}
+
+void Player::move_left()
+{
+	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+
+	Vec3<float> posicion = getRenderState()->getPosition();
+	vectorPrev = vectorNew;
+	Vec3<float> speed = target - posicion;
+	vectorNew = speed;
+
+	speedFinal.addX(-speed.getZ());
+	speedFinal.addZ(speed.getX());
+
+
+
+	isMoving = true;
 }

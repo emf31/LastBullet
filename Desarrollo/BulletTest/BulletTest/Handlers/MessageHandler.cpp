@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "MessageHandler.h"
 
 std::queue<Message> MessageHandler::m_messages = std::queue<Message>();

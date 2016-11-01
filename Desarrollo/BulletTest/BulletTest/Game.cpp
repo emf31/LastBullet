@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include<SDL.h>
 #include <iostream>
 #include <algorithm>
 #include "Game.h"
@@ -9,6 +10,7 @@
 #include "Entities\PhysicsEntity.h"
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
+#include <Windows.h>
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -35,7 +37,7 @@ void Game::run()
 		if (GraphicEngine::i().isWindowActive()) {
 			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
-			MastEventReceiver::i().endEventProcess();
+			//MastEventReceiver::i().endEventProcess();
 			
 			processEvents();
 			//Llevamos control en las actualizaciones por frame
@@ -46,11 +48,11 @@ void Game::run()
 				update(timePerFrame);
 			}
 			
-			interpolation = (float)std::min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
+			interpolation = (float)min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
 			render(interpolation, timePerFrame);
 			
 		}
-			MastEventReceiver::i().startEventProcess();
+			//MastEventReceiver::i().startEventProcess();
 	}
 	GraphicEngine::i().apagar();
 }
@@ -59,6 +61,7 @@ void Game::run()
 //Tenemos que hacer patron fachada
 void Game::inicializar()
 {
+	
 
 	//inicializamos bullet
 	PhysicsEngine::inicializar();
@@ -83,6 +86,8 @@ void Game::inicializar()
 	plataforma3->setMaterialTexture(0, irrDriver->getTexture("../media/wall.jpg"));*/
 
 	player = new Player();
+
+	
 
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg","");
 
@@ -116,20 +121,26 @@ void Game::inicializar()
 
 void Game::processEvents()
 {
-	JumpCommand commandJump(*player);
+	int i = 0;
+	/*JumpCommand commandJump(*player);
 	MoveCommand commandMove(*player);
 
 	InputHandler inputHandler(commandJump, commandMove);
 
 	//EntityManager::i().handleInput();
+	
+	inputHandler.handleInput();*/
+	EntityManager::i().handleInput();
 
-	inputHandler.handleInput();
+
 }
 
 void Game::update(Time elapsedTime)
 {
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
+
+	
 }
 
 void Game::render(float interpolation, Time elapsedTime)
@@ -141,5 +152,7 @@ void Game::render(float interpolation, Time elapsedTime)
 
 
 	GraphicEngine::i().renderAll();
+
+	SDL_UpdateWindowSurface(gWindow);
 }
 
