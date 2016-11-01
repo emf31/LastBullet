@@ -3,10 +3,8 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
-#define Derecha 1
-#define Izquierda 2
-#define Arriba 3
-#define Abajo 4
+#include <vector>
+
 
 class Player : public Entity
 {
@@ -15,18 +13,29 @@ public:
 	~Player();
 
 	void jump();
-	void move(bool arriba, bool abajo, bool izq, bool der);
+
 	void shoot();
+
+
+	void move_up();
+	void move_down();
+	void move_right();
+	void move_left();
+
 
 private:
 	
 	btRigidBody* m_rigidBody;
 	
-	bool isMovingBackward;
-	bool isMovingForward;
-	bool isMovingLeft;
-	bool isMovingRight;
+
 	int numJumps;
+
+	bool isJumping;
+
+	bool isMoving;
+
+	bool jumped=false;
+
 
 	float m_speedFactor;
 	float giro;
@@ -34,6 +43,8 @@ private:
 
 	Vec3<float> vectorPrev;
 	Vec3<float> vectorNew;
+
+	Vec3<float> speedFinal;
 
 
 	// Heredado vía Entity

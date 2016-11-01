@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "PhysicsEngine.h"
 
 //Inicializar a NULL los valores static sino peta

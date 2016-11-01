@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
 
@@ -81,7 +81,7 @@ void GraphicEngine::inicializar()
 {
 	// Initialize irrlicht
 	irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(800, 600), 32, false, false, false, &MastEventReceiver::i());
-	irrDevice->setWindowCaption(L"Hello World! - Irrlicht Engine Demo");
+	irrDevice->setWindowCaption(L"Test");
 
 	irrGUI = irrDevice->getGUIEnvironment();
 	irrScene = irrDevice->getSceneManager();

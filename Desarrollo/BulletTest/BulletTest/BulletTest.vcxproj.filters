@@ -108,25 +108,37 @@
     <ClInclude Include="Handlers\MessageHandler.h">
       <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
-    <ClInclude Include="Message.h">
-      <Filter>Archivos de encabezado\Handlers</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
+    <ClInclude Include="Handlers\InputHandler.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\Message.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\input_constants.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Command.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
-    <ClInclude Include="JumpCommand.h">
+    <ClInclude Include="Command\MoveUp.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveCommand.h">
+    <ClInclude Include="Command\MoveDown.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
-    <ClInclude Include="ShootCommand.h">
+    <ClInclude Include="Command\MoveLeft.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveRight.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Jump.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootCommand.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
   </ItemGroup>
@@ -182,20 +194,8 @@
     <ClCompile Include="Handlers\MessageHandler.cpp">
       <Filter>Archivos de código fuente\Handlers</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Archivos de código fuente\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpCommand.cpp">
-      <Filter>Archivos de código fuente\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Archivos de código fuente\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="ShootCommand.cpp">
-      <Filter>Archivos de código fuente\Command</Filter>
+    <ClCompile Include="Handlers\InputHandler.cpp">
+      <Filter>Archivos de código fuente\Handlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

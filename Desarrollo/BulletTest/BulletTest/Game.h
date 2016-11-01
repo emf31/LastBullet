@@ -12,18 +12,6 @@
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
 
-#include "InputHandler.h"
-#include "JumpCommand.h"
-#include "MoveCommand.h"
-#include "ShootCommand.h"
-
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
-
 
 class Game
 {
@@ -43,7 +31,6 @@ private:
 	float interpolation;
 
 	Player *player;
+
+	
 };
-
-
-

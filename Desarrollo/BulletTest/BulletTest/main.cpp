@@ -14,6 +14,8 @@ int main(int, char const**)
 	freopen("conout$", "w", stdout);
 	freopen("conout$", "w", stderr);
 
+	
+
 	Game *game = new Game();
 	game->run();
 

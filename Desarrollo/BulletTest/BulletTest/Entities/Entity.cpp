@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Entity.h"
 #include "../RenderState.h"
 #include "EntityManager.h"
