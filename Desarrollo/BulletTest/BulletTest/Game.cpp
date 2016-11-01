@@ -103,7 +103,7 @@ void Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	MessageHandler::update();
+	MessageHandler::i().update();
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
 }

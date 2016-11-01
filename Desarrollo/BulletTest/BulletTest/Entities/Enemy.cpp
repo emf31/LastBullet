@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
+#include "../Motor de Red/Estructuras.h"
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
@@ -62,5 +63,8 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 
 void Enemy::handleMessage(const Message & message)
 {
-
+	if (message.mensaje == "MOVE") {
+		TPlayer* p = (TPlayer*)message.data;
+		updateEnemigo(p->position);
+	}
 }

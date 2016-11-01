@@ -114,7 +114,6 @@ void Cliente::update() {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				std::cout << "un enemigo se ha movido" << std::endl;
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
@@ -122,9 +121,9 @@ void Cliente::update() {
 				//e->updateEnemigo(nuevoplayer.position);
 				//e = nullptr;
 
-				Message msg1(e, "MOVE", NULL);
+				Message msg1(e, "MOVE", (void*)&nuevoplayer);
 
-				MessageHandler::sendMessage(msg1);
+				MessageHandler::i().sendMessage(msg1);
 
 			}
 			break;

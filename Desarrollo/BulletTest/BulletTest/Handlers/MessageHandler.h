@@ -7,12 +7,16 @@
 class MessageHandler
 {
 public:
-	static void update();
-	static void sendMessage(const Message& message);
+	static MessageHandler& i() {
+		static MessageHandler singleton;
+		return singleton;
+	}
+	void update();
+	void sendMessage(const Message& message);
 	~MessageHandler();
 
 private:
-	static std::queue<Message> m_messages;
+	std::queue<Message> m_messages;
 	MessageHandler() {}
 
 };

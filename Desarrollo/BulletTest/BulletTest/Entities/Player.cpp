@@ -81,9 +81,9 @@ void Player::update(Time elapsedTime)
 
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 
-	Message msg1(this, "MOVE", NULL);
+	/*Message msg1(this, "MOVE", NULL);
 
-	MessageHandler::sendMessage(msg1);
+	MessageHandler::sendMessage(msg1);*/
 }
 
 void Player::handleInput()
