@@ -64,7 +64,7 @@ void Player::update(Time elapsedTime)
 	if (isMoving) {
 		
 		speedFinal.normalise();
-		printf("Direction: X=%f Y=%f\n", speedFinal.getX(), speedFinal.getZ());
+		//printf("Direction: X=%f Y=%f\n", speedFinal.getX(), speedFinal.getZ());
 		m_renderState.setDirection(speedFinal);
 		m_renderState.setAccelerating(true);
 	}
@@ -125,12 +125,12 @@ void Player::update(Time elapsedTime)
 
 void Player::handleInput()
 {
-	isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
-	isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
+	//isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
+	/*isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
-	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
+	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);*/
 
-	isJumping = MastEventReceiver::i().keyDown(KEY_SPACE);
+	//isJumping = MastEventReceiver::i().keyDown(KEY_SPACE);
 }
 
 void Player::cargarContenido()
@@ -156,12 +156,56 @@ void Player::handleMessage(const Message & message)
 }
 
 void Player::jump() {
-	if (!jumped) {
+	/*if (!jumped) {
 		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 
 		jumped = true;
 		printf("Ha saltado\n");
 
 	}
+	*/
+	btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
+	btVector3 dest = start;
+
+	dest.setY(dest.getY() - 50.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
+
+
+
+	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
+	PhysicsEngine::m_world->rayTest(start, dest, ray);//hago el ray test
+
+	if (ray.hasHit())//si ray a golpeado algo entro
+	{
+		printf( "hit something\n");
+
+		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
+
+		if (hit != m_rigidBody) 
+		{
+			/*btVector3 velocity = m_rigidBody->getLinearVelocity();//DISCUTIR: Con set linear velocity queda mejor, pero he encontrado mas ejemplos que lo hacen con applyimpulse o applyforce
+
+			velocity.setY(velocity.getY() + 5.0f);
+
+			m_rigidBody->setLinearVelocity(velocity);*/
+
+			m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
+
+
+			jumped = true;
+		}
+	}
+	else
+	{
+		printf("missed\n"); 
+	}
+
+}
+
+void Player::move(bool arriba, bool abajo, bool izq, bool der) {
+
+		isMovingForward = arriba;
+		isMovingRight = der;
+		isMovingLeft = izq;
+		isMovingBackward = abajo;
 
 }

@@ -117,10 +117,11 @@ void Game::inicializar()
 void Game::processEvents()
 {
 	JumpCommand commandJump(*player);
+	MoveCommand commandMove(*player);
 
-	InputHandler inputHandler(commandJump);
+	InputHandler inputHandler(commandJump, commandMove);
 
-	EntityManager::i().handleInput();
+	//EntityManager::i().handleInput();
 
 	inputHandler.handleInput();
 }
