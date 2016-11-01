@@ -41,6 +41,18 @@ public:
 		m_id = id;
 	}
 	
+
+	void resetVida() {
+		m_vida = 5;
+	}
+	int getVida() {
+		return m_vida;
+	}
+	int restaVida() {
+		m_vida--;
+		return m_vida;
+	}
+
 	SceneNode* getNode();
 
 	virtual void inicializar() = 0;
@@ -57,6 +69,7 @@ protected:
 	std::string m_name;
 	SceneNode* m_nodo;
 	RenderState m_renderState;
+	int m_vida;
 
 private:
 

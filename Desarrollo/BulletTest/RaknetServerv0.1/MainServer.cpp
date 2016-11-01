@@ -46,6 +46,7 @@ int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	RakNet::Packet *packet;
+	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
 	
 	//std::vector<Player*> clientArray;
@@ -193,6 +194,44 @@ int main() {
 			}
 
 							 break;
+
+			case IMPACTO_BALA: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(guid_Pdisparado);
+				//notifico a ese cliente que ha sido disparado
+				EntityManager::i().enviaDisparado(guid_Pdisparado, peer);
+
+			}
+
+							 break;
+
+
+			case MUERTE: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo la estructura del cliente que ha muerto
+				bsIn.Read(p_struct);
+				//primero le cambio la posicion a ese player (le respawneo)
+				//TODO:aqui le asigno una posicion en una esquina del tablero ese raro que tenemos pero luego el servidor se tendra que encargar de poner posicion de respawneo buenas.
+				p_struct.position = Vec3<float>(900.f, 100.f, 900.f);
+				//notifico a todos que ese cliente a muerto
+				EntityManager::i().notificarMuerte(p_struct, peer);
+
+			}
+
+							   break;
+
+
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;

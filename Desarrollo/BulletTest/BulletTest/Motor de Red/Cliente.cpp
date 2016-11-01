@@ -143,6 +143,76 @@ void Cliente::update() {
 			}
 			break;
 
+			case IMPACTO_BALA:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				std::cout << "Me han disparado" << std::endl;
+
+				//TODO:ahora mismo no hace falta leer, aqui te pasan el arma con la cual disparaste.
+				//bsIn.Read(desconectado);
+
+				//el player siempre tendra ID=1 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				if (EntityManager::i().getEntity(1)->restaVida() <= 0) {
+					std::cout << "ME HAN MATADO" << std::endl;
+					std::cout << "HIJO PUTA EL CAMPERO" << std::endl;
+					//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
+
+					bsOut.Write((RakNet::MessageID)MUERTE);
+
+					nuevoplayer.guid = EntityManager::i().getEntity(1)->getGuid();
+					nuevoplayer.name = EntityManager::i().getEntity(1)->getName();
+					nuevoplayer.position = EntityManager::i().getEntity(1)->getRenderState()->getPosition();
+
+
+					bsOut.Write(nuevoplayer);
+					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+					bsOut.Reset();
+
+
+
+					
+
+				}
+
+			}
+			break;
+
+			case MUERTE:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(nuevoplayer);
+				
+				std::cout << "el player " << nuevoplayer.name << " ha muerto" << std::endl;
+
+				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==1) {
+					//es el player
+					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+					player->setPosition(nuevoplayer.position);			
+					player = nullptr;
+
+					//TODO: esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
+					//ademas que desactivara el draw de esta entetity para que no puedeas moverte ni nada mientras estas muerto.
+					EntityManager::i().getEntity(1)->resetVida();
+				}
+				else {
+					//es un enemigo
+					Enemy* enemigo= (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+					enemigo->setPosition(nuevoplayer.position);
+					enemigo = nullptr;
+				}
+				
+
+
+			}
+			break;
+
+
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
@@ -215,6 +285,29 @@ void Cliente::enviarPos(Player* p) {
 	
 
 	bsOut.Write(paquetemov);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+
+void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
+
+	RakNet::BitStream bsOut;
+
+	bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
+
+	//////////////////////////////////////////////////////
+	//TODO: asumimios que el disparo ha sido certero del jugador que dispara con un enemigo, luego simplemente habria que cambiar la logica de ahora (que es pulsar la R, esta en player)
+	//por la de que si la bala colisiona de verdad, si la bala colisiona de verdad desencadenaria toda la logica que se produce al pulsar la R ahora.
+	/////////////////////////////////////////////////////
+	//bsOut.Write(aqui pasariamos el guid del enemigo al que le hemos dado cuando sepamos con quien ha colisionado la bala)
+	//se pueden enviar 2 mensajes seguidos, luego habria que hacer 2 read en el servidor, el primero te dice el guid de quien ha recibido el disparo y el segundo el guid de quien ha disparado
+
+	//ANTES ESTABA ASI
+	//bsOut.Write(guid);
+	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
+
+	//TODO: le hemos asignado id=3 a los enemigos provisionalmente, para poder restarle vida a un enemigo puesto que no sabriamos su id.
+	bsOut.Write(EntityManager::i().getEntity(3)->getGuid());
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

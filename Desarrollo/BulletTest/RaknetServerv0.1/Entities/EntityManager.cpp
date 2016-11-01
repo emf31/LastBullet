@@ -63,6 +63,43 @@ void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerI
 	}
 }
 
+void EntityManager::enviaDisparado(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
+{
+
+
+	RakNet::BitStream bsOut;
+		//se envia unicamente al cliente que ha sido disparado
+
+			bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
+			//en verdad aqui no habria ni que pasarle nada, solo queremos notificarle que ha sido disparado
+			//TODO: en un futuro aqui podriamos pasarle el arma con el que ha sido disparado asi dependiendo del arma con el que ha sido disparado se restara mas vida o menos vida.
+			bsOut.Write("pasar el arma con la que disparas");
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+			bsOut.Reset();
+		
+
+	
+}
+
+
+void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
+{
+
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS
+		
+			//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
+			bsOut.Write((RakNet::MessageID)MUERTE);
+			bsOut.Write(p);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		
+
+	}
+}
 
 void EntityManager::inicializar()
 {

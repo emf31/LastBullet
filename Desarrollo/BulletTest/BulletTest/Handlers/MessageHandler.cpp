@@ -2,7 +2,7 @@
 
 void MessageHandler::update()
 {
-	std::cout << m_messages.size() << std::endl;
+	//std::cout << m_messages.size() << std::endl;
 	//Vamos enviando todos los mensajes
 	while (!m_messages.empty()) {
 		Message message = m_messages.front();

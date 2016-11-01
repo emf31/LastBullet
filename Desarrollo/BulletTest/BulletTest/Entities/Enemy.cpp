@@ -4,7 +4,7 @@
 #include "../Motor/GraphicEngine.h"
 #include "../Motor de Red/Estructuras.h"
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(3, NULL, name, guid)
 {
 }
 

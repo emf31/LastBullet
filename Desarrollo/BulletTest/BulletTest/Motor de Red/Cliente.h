@@ -25,6 +25,7 @@ public:
 	void conectar(std::string address, int port);
 	void esperar();
 	void enviarPos(Player* p);
+	void enviarDisparo(RakNet::RakNetGUID guid);
 
 private:
 	RakNet::SocketDescriptor sd;

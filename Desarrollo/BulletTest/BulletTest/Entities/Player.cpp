@@ -5,6 +5,7 @@
 #include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
 #include "../Handlers/MessageHandler.h"
+#include "../Motor de Red/Estructuras.h"
 
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1, NULL, name, guid), m_speedFactor(30)	//El player siempre tendra ID 1
@@ -71,6 +72,13 @@ void Player::update(Time elapsedTime)
 
 		Cliente::i().enviarPos(this);
 	
+		//TODO: mas explicacion en el cliente, en este metodo enviarDisparo
+		//si hemos disparado al darle a R, asumimos que le hemos dado, y se envia un mensaje al servidor de que hemos dado a alguien
+		if (isShooting) {
+			isShooting = false;
+			Cliente::i().enviarDisparo(m_guid);
+
+		}
 
 	// Set rotation
 	vector3df Euler;
@@ -92,6 +100,8 @@ void Player::handleInput()
 	isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
 	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
+	if(!isShooting)
+	isShooting = MastEventReceiver::i().keyDown(KEY_KEY_R);
 }
 
 void Player::cargarContenido()

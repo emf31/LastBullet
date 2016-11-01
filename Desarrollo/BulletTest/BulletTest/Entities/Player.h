@@ -29,6 +29,7 @@ private:
 	bool isMovingLeft;
 	bool isMovingRight;
 	bool isJumping;
+	bool isShooting=false;
 	bool moviendo = false;
 
 	float m_speedFactor;
