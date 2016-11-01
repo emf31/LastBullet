@@ -1,4 +1,22 @@
-﻿BulletCollision_Debug.lib(btAxisSweep3.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btAxisSweep3.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+﻿  Player.cpp
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+  Generando código...
+  Compilando...
+  Game.cpp
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  main.cpp
+  ShootCommand.cpp
+  MoveCommand.cpp
+  JumpCommand.cpp
+  InputHandler.cpp
+  Command.cpp
+BulletCollision_Debug.lib(btAxisSweep3.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btAxisSweep3.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

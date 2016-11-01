@@ -26,7 +26,7 @@ private:
 	bool isMovingForward;
 	bool isMovingLeft;
 	bool isMovingRight;
-	bool isJumping;
+	int numJumps;
 
 	float m_speedFactor;
 	float giro;

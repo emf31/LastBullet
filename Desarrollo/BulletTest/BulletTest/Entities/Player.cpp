@@ -144,29 +144,23 @@ void Player::handleMessage(const Message & message)
 
 void Player::jump() {
 
-	if (isJumping == false){
-
-
+	bool isGrounded = false;
 
 	btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
 	btVector3 dest = start;
 
 	dest.setY(dest.getY() - 50.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
 
-	/*printf("Start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
-
-	printf("Direction: X=%f Y=%f Z=%f\n", dest.getX(), dest.getZ(), dest.getY());*/
-
 	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
 	PhysicsEngine::m_world->rayTest(start, dest, ray);//hago el ray test
 
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
-		printf( "hit something\n");
+		printf("hit something\n");
 
 		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 
-		if (hit != m_rigidBody) 
+		if (hit != m_rigidBody)
 		{
 			/*btVector3 velocity = m_rigidBody->getLinearVelocity();//DISCUTIR: Con set linear velocity queda mejor, pero he encontrado mas ejemplos que lo hacen con applyimpulse o applyforce
 
@@ -174,21 +168,23 @@ void Player::jump() {
 
 			m_rigidBody->setLinearVelocity(velocity);*/
 
-			m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
-
-			isJumping = true;
+			/*btVector3 End = ray.m_hitPointWorld;
+			printf("COLISION JUMP: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
+			*/
+			numJumps = 0;
 		}
 	}
 	else
 	{
-		printf("missed\n"); 
+		printf("missed");
 	}
 
-	}
-	else {
+	if (numJumps < 2) {
 		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
-		isJumping = false;
+		numJumps++;
 	}
+
+	
 
 }
 
@@ -209,7 +205,7 @@ void Player::shoot() {
 	btVector3 end = start + (cameraDirection * SIZE_OF_WORLD);*/
 
 	printf("Shoot\n");
-	btVector3 SIZE_OF_WORLD(15000, 15000, 15000);
+	btVector3 SIZE_OF_WORLD(150000, 150000, 150000);
 	//btVector3 start = GraphicEngine::i().getActiveCamera()->getPosition();
 	btVector3 start(
 		GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -221,15 +217,26 @@ void Player::shoot() {
 
 	btVector3 targetCamera(targetWhitoutNormalise.getX(), targetWhitoutNormalise.getY(), targetWhitoutNormalise.getZ());
 
+	//start=m_rigidBody->getCenterOfMassPosition();
+	
+	//NOTA: cuando el start es la camara y el end es la misma posicion menos mucha Y, no detecta colision, pero cuando es el player si la detecta
+	//cuando la unica diferencia entre la posicion del player y la camara a simple vista son 50 unidades en Y
 
-	btVector3 end = start + (targetCamera * SIZE_OF_WORLD);
+	btVector3 dest = start;
 
-	/*printf("Start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
+	dest.setY(dest.getY() - 10000.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
 
+	//btVector3 end = dest;
+	btVector3 end = (targetCamera*SIZE_OF_WORLD);
+
+/*	printf("start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
+
+	printf("end: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(), end.getY());
+	/*
 	printf("Target: X=%f Y=%f Z=%f\n", targetCamera.getX(), targetCamera.getZ(), targetCamera.getY());
 
-	printf("Direction: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(),end.getY());
-	*/
+	printf("Direction: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(),end.getY());*/
+	
 	btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
 	PhysicsEngine::m_world->rayTest(start, end, ray);
@@ -237,10 +244,14 @@ void Player::shoot() {
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
 
+
 		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 
 		if (hit != m_rigidBody)
 		{
+
+			btVector3 End = ray.m_hitPointWorld;
+			printf("COLISION SHOOT: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
 
 			printf("hit something\n");
 
