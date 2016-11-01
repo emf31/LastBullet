@@ -80,14 +80,7 @@ void Player::update(Time elapsedTime)
 
 
 
-	if (isJumping) {
 
-	}
-
-	if (isJumping && tiempoSalto.getElapsedTime().asSeconds() > 3) {
-		m_rigidBody->setLinearVelocity(btVector3(0, 7, 0));
-		tiempoSalto.restart();
-	}
 
 	// Set position
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
@@ -156,14 +149,11 @@ void Player::handleMessage(const Message & message)
 }
 
 void Player::jump() {
-	/*if (!jumped) {
-		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 
-		jumped = true;
-		printf("Ha saltado\n");
+	if (isJumping == true){
 
-	}
-	*/
+
+
 	btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
 	btVector3 dest = start;
 
@@ -191,12 +181,18 @@ void Player::jump() {
 			m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 
 
-			jumped = true;
+			isJumping = true;
 		}
 	}
 	else
 	{
 		printf("missed\n"); 
+	}
+
+	}
+	else {
+		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
+		isJumping = false;
 	}
 
 }

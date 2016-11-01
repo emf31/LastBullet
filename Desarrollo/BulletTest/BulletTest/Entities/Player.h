@@ -27,8 +27,6 @@ private:
 	bool isMovingRight;
 	bool isJumping;
 
-	bool jumped=false;
-
 	float m_speedFactor;
 	float giro;
 	Clock tiempoSalto;
