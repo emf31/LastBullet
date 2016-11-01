@@ -3,6 +3,11 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
+#define Derecha 1
+#define Izquierda 2
+#define Arriba 3
+#define Abajo 4
+
 class Player : public Entity
 {
 public:
@@ -10,6 +15,7 @@ public:
 	~Player();
 
 	void jump();
+	void move(bool arriba, bool abajo, bool izq, bool der);
 
 private:
 	

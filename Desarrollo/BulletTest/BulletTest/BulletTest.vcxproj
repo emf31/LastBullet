@@ -166,6 +166,7 @@
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\SceneNode.h" />
+    <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\vec3.hpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
+    <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />

@@ -125,10 +125,10 @@ void Player::update(Time elapsedTime)
 
 void Player::handleInput()
 {
-	isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
-	isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
+	//isMovingForward = MastEventReceiver::i().keyDown(KEY_KEY_W);
+	/*isMovingBackward = MastEventReceiver::i().keyDown(KEY_KEY_S);
 	isMovingLeft = MastEventReceiver::i().keyDown(KEY_KEY_A);
-	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);
+	isMovingRight = MastEventReceiver::i().keyDown(KEY_KEY_D);*/
 
 	//isJumping = MastEventReceiver::i().keyDown(KEY_SPACE);
 }
@@ -196,7 +196,16 @@ void Player::jump() {
 	}
 	else
 	{
-		printf("missed\n"); // log data for debug purposes
+		printf("missed\n"); 
 	}
+
+}
+
+void Player::move(bool arriba, bool abajo, bool izq, bool der) {
+
+		isMovingForward = arriba;
+		isMovingRight = der;
+		isMovingLeft = izq;
+		isMovingBackward = abajo;
 
 }

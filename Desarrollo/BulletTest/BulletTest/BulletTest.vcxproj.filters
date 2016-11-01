@@ -123,6 +123,9 @@
     <ClInclude Include="InputHandler.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -184,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Archivos de código fuente\Command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
