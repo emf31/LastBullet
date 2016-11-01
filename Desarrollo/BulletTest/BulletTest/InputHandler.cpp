@@ -14,7 +14,7 @@ InputHandler::~InputHandler()
 
 void InputHandler::handleInput(){
 
-	if (MastEventReceiver::i().keyDown(KEY_SPACE)) {
+	if (MastEventReceiver::i().keyPressed(KEY_SPACE)) {
 		ButtonSpace.execute();
 	}
 }

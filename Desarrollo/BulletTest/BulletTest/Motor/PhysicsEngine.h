@@ -8,6 +8,9 @@
 class PhysicsEngine
 {
 public:
+
+	static btDynamicsWorld* m_world;
+
 	//Inicializa el motor de fisicas
 	static void inicializar();
 
@@ -26,8 +29,8 @@ public:
 	//aqui se borran todos los punteros
 	static void apagar();
 
+
 private:
-	static btDynamicsWorld* m_world;
 	static btDefaultCollisionConfiguration* m_config;
 	static btCollisionDispatcher* m_dispatcher;
 	static btBroadphaseInterface* m_broadphase;
