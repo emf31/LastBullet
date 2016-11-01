@@ -153,12 +153,14 @@ void Player::jump() {
 
 	dest.setY(dest.getY() - 50.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
 
+	/*printf("Start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
 
+	printf("Direction: X=%f Y=%f Z=%f\n", dest.getX(), dest.getZ(), dest.getY());*/
 
 	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
 	PhysicsEngine::m_world->rayTest(start, dest, ray);//hago el ray test
 
-	if (ray.hasHit())//si ray a golpeado algo entro
+	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
 		printf( "hit something\n");
 
@@ -207,32 +209,32 @@ void Player::shoot() {
 	btVector3 end = start + (cameraDirection * SIZE_OF_WORLD);*/
 
 	printf("Shoot\n");
-	btVector3 SIZE_OF_WORLD(150000, 150000, 150000);
+	btVector3 SIZE_OF_WORLD(15000, 15000, 15000);
 	//btVector3 start = GraphicEngine::i().getActiveCamera()->getPosition();
 	btVector3 start(
 		GraphicEngine::i().getActiveCamera()->getPosition().getX(),
 			GraphicEngine::i().getActiveCamera()->getPosition().getY(),
 				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
 
-	Vec3<float> varMolto= GraphicEngine::i().getActiveCamera()->getTarget();
-	varMolto.normalise();
+	Vec3<float> targetWhitoutNormalise = GraphicEngine::i().getActiveCamera()->getTarget();
+	targetWhitoutNormalise.normalise();
 
-	btVector3 targetCamera(varMolto.getX(), varMolto.getY(), varMolto.getZ());
+	btVector3 targetCamera(targetWhitoutNormalise.getX(), targetWhitoutNormalise.getY(), targetWhitoutNormalise.getZ());
 
 
-	btVector3 end = start+(targetCamera * SIZE_OF_WORLD);
+	btVector3 end = start + (targetCamera * SIZE_OF_WORLD);
 
-	printf("Start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
+	/*printf("Start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
 
 	printf("Target: X=%f Y=%f Z=%f\n", targetCamera.getX(), targetCamera.getZ(), targetCamera.getY());
 
 	printf("Direction: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(),end.getY());
-
+	*/
 	btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
 	PhysicsEngine::m_world->rayTest(start, end, ray);
 
-	if (ray.hasHit())//si ray a golpeado algo entro
+	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
 
 		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
