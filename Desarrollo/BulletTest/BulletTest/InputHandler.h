@@ -7,12 +7,10 @@
 #define Arriba 3
 #define Abajo 4
 
-
-
 class InputHandler
 {
 public:
-	InputHandler(Command& space, Command& move);
+	InputHandler(Command& space, Command& move, Command& shoot);
 	~InputHandler();
 
 	void handleInput();
@@ -21,5 +19,6 @@ private:
 
 	Command& ButtonSpace;
 	Command& ButtonMove;
+	Command& ButtonShoot;
 };
 

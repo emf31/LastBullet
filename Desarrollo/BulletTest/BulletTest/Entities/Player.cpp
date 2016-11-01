@@ -76,12 +76,6 @@ void Player::update(Time elapsedTime)
 	m_renderState.updateVelocity(elapsedTime.asSeconds());
 	m_rigidBody->setLinearVelocity(btVector3(m_renderState.getVelocity().getX(), m_renderState.getVelocity().getY(), m_renderState.getVelocity().getZ()));
 
-
-
-
-
-
-
 	// Set position
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
@@ -150,7 +144,7 @@ void Player::handleMessage(const Message & message)
 
 void Player::jump() {
 
-	if (isJumping == true){
+	//if (isJumping == true){
 
 
 
@@ -180,7 +174,6 @@ void Player::jump() {
 
 			m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 
-
 			isJumping = true;
 		}
 	}
@@ -189,11 +182,11 @@ void Player::jump() {
 		printf("missed\n"); 
 	}
 
-	}
-	else {
+//	}
+	/*else {
 		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 		isJumping = false;
-	}
+	}*/
 
 }
 
@@ -203,5 +196,55 @@ void Player::move(bool arriba, bool abajo, bool izq, bool der) {
 		isMovingRight = der;
 		isMovingLeft = izq;
 		isMovingBackward = abajo;
+
+}
+
+void Player::shoot() {
+
+
+
+/*	btVector3 start = cameraPosition;
+	btVector3 end = start + (cameraDirection * SIZE_OF_WORLD);*/
+
+	printf("Shoot\n");
+	btVector3 SIZE_OF_WORLD(150000, 150000, 150000);
+	//btVector3 start = GraphicEngine::i().getActiveCamera()->getPosition();
+	btVector3 start(
+		GraphicEngine::i().getActiveCamera()->getPosition().getX(),
+			GraphicEngine::i().getActiveCamera()->getPosition().getY(),
+				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
+
+	Vec3<float> varMolto= GraphicEngine::i().getActiveCamera()->getTarget();
+	varMolto.normalise();
+
+	btVector3 targetCamera(varMolto.getX(), varMolto.getY(), varMolto.getZ());
+
+
+	btVector3 end = start+(targetCamera * SIZE_OF_WORLD);
+
+	printf("Start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
+
+	printf("Target: X=%f Y=%f Z=%f\n", targetCamera.getX(), targetCamera.getZ(), targetCamera.getY());
+
+	printf("Direction: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(),end.getY());
+
+	btCollisionWorld::ClosestRayResultCallback ray(start, end);
+
+	PhysicsEngine::m_world->rayTest(start, end, ray);
+
+	if (ray.hasHit())//si ray a golpeado algo entro
+	{
+
+		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
+
+		if (hit != m_rigidBody)
+		{
+
+			printf("hit something\n");
+
+
+		}
+	}
+
 
 }

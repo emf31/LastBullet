@@ -16,6 +16,7 @@ public:
 
 	void jump();
 	void move(bool arriba, bool abajo, bool izq, bool der);
+	void shoot();
 
 private:
 	

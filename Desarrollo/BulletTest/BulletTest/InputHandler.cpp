@@ -2,7 +2,7 @@
 #include "InputHandler.h"
 
 
-InputHandler::InputHandler(Command& space, Command& move):ButtonSpace(space),ButtonMove(move)
+InputHandler::InputHandler(Command& space, Command& move, Command& shoot):ButtonSpace(space),ButtonMove(move), ButtonShoot(shoot)
 {
 
 }
@@ -16,6 +16,10 @@ void InputHandler::handleInput(){
 
 	if (MastEventReceiver::i().keyPressed(KEY_SPACE)) {
 		ButtonSpace.execute();
+	}
+
+	if (MastEventReceiver::i().leftMousePressed()) {
+		ButtonShoot.execute();
 	}
 
 	if (MastEventReceiver::i().keyDown(KEY_KEY_W)) {

@@ -126,6 +126,9 @@
     <ClInclude Include="MoveCommand.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
+    <ClInclude Include="ShootCommand.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -189,6 +192,9 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
+      <Filter>Archivos de código fuente\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootCommand.cpp">
       <Filter>Archivos de código fuente\Command</Filter>
     </ClCompile>
   </ItemGroup>

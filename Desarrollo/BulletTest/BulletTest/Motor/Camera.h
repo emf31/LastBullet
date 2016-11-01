@@ -16,6 +16,7 @@ public:
 	void setPosition(Vec3<float> position);
 
 	Vec3<float> getTarget();
+	Vec3<float> getPosition();
 
 	//La camara sigue al nodo que le asignas
 	void asignarEntity(Entity* ent);

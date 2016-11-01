@@ -15,6 +15,7 @@
 #include "InputHandler.h"
 #include "JumpCommand.h"
 #include "MoveCommand.h"
+#include "ShootCommand.h"
 
 using namespace irr;
 using namespace core;

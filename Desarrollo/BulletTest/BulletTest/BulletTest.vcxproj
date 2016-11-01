@@ -173,6 +173,7 @@
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="RenderState.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ShootCommand.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -197,6 +198,7 @@
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="RenderState.cpp" />
+    <ClCompile Include="ShootCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

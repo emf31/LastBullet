@@ -118,8 +118,9 @@ void Game::processEvents()
 {
 	JumpCommand commandJump(*player);
 	MoveCommand commandMove(*player);
+	ShootCommand commandShoot(*player);
 
-	InputHandler inputHandler(commandJump, commandMove);
+	InputHandler inputHandler(commandJump, commandMove, commandShoot);
 
 	//EntityManager::i().handleInput();
 

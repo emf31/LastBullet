@@ -28,6 +28,14 @@ Vec3<float> Camera::getTarget()
 	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }
 
+Vec3<float> Camera::getPosition()
+{
+	vector3df aux = m_camera->getPosition();
+	return Vec3<float>(aux.X, aux.Y, aux.Z);
+}
+
+
+
 void Camera::asignarEntity(Entity* ent)
 {
 	m_entity = ent;
