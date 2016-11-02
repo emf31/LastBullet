@@ -3,6 +3,7 @@
 #include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
 #include "../Handlers/InputHandler.h"
+#include "../Handlers/MessageHandler.h"
 #include "math.h"
 
 
@@ -189,29 +190,25 @@ void Player::shoot() {
 		{
 			
 			for (int i = 0; i < ray.m_hitNormalWorld.capacity(); i++) {
-				printf("SIZE OF THE ARRAY OF HITS: %d \n", ray.m_hitNormalWorld.capacity());
+				//printf("SIZE OF THE ARRAY OF HITS: %d \n", ray.m_hitNormalWorld.capacity());
 
-				/*Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-
-				std::cout << "PLAYER: " << typeid(Player).name() << '\n';
-				std::cout << "myEnt: " << typeid(myEnt).name() << '\n';*/
-
-				if (typeid(myEnt) == typeid(Player)) {
+				Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
+				Message msg(myEnt,"COLISION_BALA",NULL);
+				MessageHandler::sendMessage(msg);
 
 
-					printf("hit player\n");
+				//printf("hit something\n");
 				}
 
 			}
 
-			printf("hit something\n");
+			
 
 
 		}
 	}
 
 
-}
 void Player::move_up()
 {
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();

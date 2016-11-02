@@ -63,8 +63,7 @@ void Enemy::setPosition(Vec3<float> pos) {
 
 void Enemy::handleMessage(const Message & message)
 {
-	/*if (message.mensaje == "MOVE") {
-		TPlayer* p = (TPlayer*)message.data;
-		updateEnemigo(p->position);
-	}*/
+	if (message.mensaje == "COLISION_BALA") {
+		printf("le has dado a un enemigo\n");
+	}
 }

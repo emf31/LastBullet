@@ -10,6 +10,7 @@
 #include "Entities\PhysicsEntity.h"
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
+#include "Handlers\MessageHandler.h"
 #include <Windows.h>
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
@@ -70,7 +71,7 @@ void Game::inicializar()
 
 	player = new Player();
 
-	enemy = new Player();
+	enemy = new Enemy();
 	
 
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg","");
@@ -108,6 +109,7 @@ void Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
+	MessageHandler::update();
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
 

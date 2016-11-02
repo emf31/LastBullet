@@ -40,14 +40,14 @@
     <Filter Include="Archivos de código fuente\Handlers">
       <UniqueIdentifier>{5576ff5b-4b13-4f62-853b-d238096fdba3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Handlers">
-      <UniqueIdentifier>{ef69c9b5-495d-4767-a4a3-37daf943a618}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de código fuente\Command">
       <UniqueIdentifier>{749d8366-7933-4c95-adc3-f624fdd6b15b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Archivos de encabezado\Command">
       <UniqueIdentifier>{b4f40210-4800-4a5f-b1ef-733e23d88865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Entities\Handlers">
+      <UniqueIdentifier>{ef69c9b5-495d-4767-a4a3-37daf943a618}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,19 +106,19 @@
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\MessageHandler.h">
-      <Filter>Archivos de encabezado\Handlers</Filter>
+      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\InputHandler.h">
-      <Filter>Archivos de encabezado\Handlers</Filter>
+      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\Message.h">
-      <Filter>Archivos de encabezado\Handlers</Filter>
+      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\input_constants.h">
-      <Filter>Archivos de encabezado\Handlers</Filter>
+      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Command\Command.h">
       <Filter>Archivos de encabezado\Command</Filter>

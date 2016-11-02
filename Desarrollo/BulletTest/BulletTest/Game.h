@@ -6,6 +6,7 @@
 #include <vector>
 #include "Entities\Entity.h"
 #include "Entities\Player.h"
+#include "Entities\Enemy.h"
 #include "Motor\Camera.h"
 
 #include <btBulletCollisionCommon.h>
