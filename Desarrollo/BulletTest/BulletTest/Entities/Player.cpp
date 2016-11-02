@@ -173,22 +173,24 @@ void Player::shoot() {
 			GraphicEngine::i().getActiveCamera()->getPosition().getY(),
 				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
 
-	Vec3<float> targetWhitoutNormalise = GraphicEngine::i().getActiveCamera()->getTarget();
-	targetWhitoutNormalise.normalise();
+	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+	Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
+	direccion.normalise();
 
-	btVector3 targetCamera(targetWhitoutNormalise.getX(), targetWhitoutNormalise.getY(), targetWhitoutNormalise.getZ());
+	btVector3 targetCamera(target.getX(), target.getY(), target.getZ());
+	btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
 	//start=m_rigidBody->getCenterOfMassPosition();
 	
 	//NOTA: cuando el start es la camara y el end es la misma posicion menos mucha Y, no detecta colision, pero cuando es el player si la detecta
 	//cuando la unica diferencia entre la posicion del player y la camara a simple vista son 50 unidades en Y
 
-	btVector3 dest = start;
+	//btVector3 dest = start;
 
-	dest.setY(dest.getY() - 10000.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
+	//dest.setY(dest.getY() - 10000.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
 
 	//btVector3 end = dest;
-	btVector3 end = (targetCamera*SIZE_OF_WORLD);
+	btVector3 end = start+(direccion2*SIZE_OF_WORLD);
 
 /*	printf("start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
 
