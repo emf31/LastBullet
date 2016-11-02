@@ -140,6 +140,8 @@ void Player::jump() {
 			/*btVector3 End = ray.m_hitPointWorld;
 			printf("COLISION JUMP: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
 			*/
+
+			
 			numJumps = 0;
 		}
 	}
@@ -213,8 +215,8 @@ void Player::shoot() {
 		
 		if (hit != m_rigidBody)
 		{
-			btAlignedObjectArray<btVector3> End = ray.m_hitPointWorld;
-			//printf("COLISION SHOOT: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
+			btVector3 End = ray.m_hitPointWorld.at(0);
+			printf("COLISION SHOOT: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
 
 			printf("hit something\n");
 

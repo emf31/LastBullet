@@ -70,6 +70,8 @@ void Game::inicializar()
 
 	player = new Player();
 
+	enemy = new Player();
+
 	
 
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg","");

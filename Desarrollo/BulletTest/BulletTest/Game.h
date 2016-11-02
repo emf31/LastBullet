@@ -31,6 +31,7 @@ private:
 	float interpolation;
 
 	Player *player;
+	Entity *enemy;
 
 	
 };
