@@ -200,7 +200,7 @@ void Player::shoot() {
 
 	printf("Direction: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(),end.getY());*/
 	
-	btCollisionWorld::ClosestRayResultCallback ray(start, end);
+	btCollisionWorld::AllHitsRayResultCallback ray(start, end);
 
 	PhysicsEngine::m_world->rayTest(start, end, ray);
 
@@ -209,12 +209,12 @@ void Player::shoot() {
 
 
 		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-
+		
+		
 		if (hit != m_rigidBody)
 		{
-
-			btVector3 End = ray.m_hitPointWorld;
-			printf("COLISION SHOOT: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
+			btAlignedObjectArray<btVector3> End = ray.m_hitPointWorld;
+			//printf("COLISION SHOOT: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
 
 			printf("hit something\n");
 
