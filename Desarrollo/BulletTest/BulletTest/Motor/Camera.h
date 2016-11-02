@@ -14,6 +14,7 @@ public:
 
 	void setTarget(Vec3<float> target);
 	void setPosition(Vec3<float> position);
+	Vec3<float> getPosition();
 
 	Vec3<float> getTarget();
 

@@ -161,7 +161,6 @@
     <ClInclude Include="..\BulletTest\Otros\Time.hpp" />
     <ClInclude Include="..\BulletTest\Otros\vec3.hpp" />
     <ClInclude Include="..\BulletTest\Otros\Win32\ClockImpl.hpp" />
-    <ClInclude Include="..\BulletTest\RenderState.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="Entities\Player.h" />

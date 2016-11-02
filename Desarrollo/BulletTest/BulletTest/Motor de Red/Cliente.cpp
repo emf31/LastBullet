@@ -219,30 +219,6 @@ void Cliente::update() {
 
 			}
 		}
-		/*
-		if (player->conectado) {
-		//Actualizamos player en el getInput y luego lo enviamos actualizado al servidor.
-		if (cont == 0) {
-		int mov = 0;
-		mov = player->getInput();
-		if (mov != 0) {
-		bsOut.Write((RakNet::MessageID)MOVIMIENTO);
-		bsOut.Write(mov);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-		bsOut.Reset();
-		player->restablecerMovimiento();
-		}
-
-		}
-		cont++;
-
-		if (cont >= 200000)
-		cont = 0;
-		}
-
-
-		
-		*/
 
 	}
 
@@ -307,7 +283,7 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
 
 	//TODO: le hemos asignado id=3 a los enemigos provisionalmente, para poder restarle vida a un enemigo puesto que no sabriamos su id.
-	bsOut.Write(EntityManager::i().getEntity(3)->getGuid());
+	bsOut.Write(guid);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

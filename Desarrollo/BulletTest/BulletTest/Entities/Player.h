@@ -20,6 +20,17 @@ public:
 
 	void setPosition(Vec3<float> pos);
 
+
+	void jump();
+
+	void shoot();
+
+
+	void move_up();
+	void move_down();
+	void move_right();
+	void move_left();
+
 private:
 	
 	btRigidBody* m_rigidBody;
@@ -28,13 +39,24 @@ private:
 	bool isMovingForward;
 	bool isMovingLeft;
 	bool isMovingRight;
-	bool isJumping;
 	bool isShooting=false;
 	bool moviendo = false;
 
 	float m_speedFactor;
 	Clock tiempoSalto;
 
+
+	int numJumps;
+	bool isJumping;
+	bool isMoving;
+	bool jumped = false;
+
+	Vec3<float> vectorPrev;
+	Vec3<float> vectorNew;
+
+	Vec3<float> speedFinal;
+
+	float giro;
 	
 };
 

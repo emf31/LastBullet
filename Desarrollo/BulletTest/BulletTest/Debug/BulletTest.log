@@ -1,4 +1,4 @@
-﻿  MessageHandler.cpp
+﻿  Player.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'

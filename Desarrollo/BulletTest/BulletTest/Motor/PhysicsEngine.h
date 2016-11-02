@@ -26,8 +26,9 @@ public:
 	//aqui se borran todos los punteros
 	static void apagar();
 
-private:
 	static btDynamicsWorld* m_world;
+private:
+	
 	static btDefaultCollisionConfiguration* m_config;
 	static btCollisionDispatcher* m_dispatcher;
 	static btBroadphaseInterface* m_broadphase;

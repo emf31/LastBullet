@@ -80,9 +80,6 @@
     <ClInclude Include="Entities\EntityManager.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\BulletTest\RenderState.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Estructuras.h">
       <Filter>Archivos de encabezado\Util</Filter>
     </ClInclude>

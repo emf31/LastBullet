@@ -3,6 +3,7 @@
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
 #include "../Motor de Red/Estructuras.h"
+#include "../Motor de Red/Cliente.h"
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(3, NULL, name, guid)
 {
@@ -66,5 +67,9 @@ void Enemy::handleMessage(const Message & message)
 	if (message.mensaje == "MOVE") {
 		TPlayer* p = (TPlayer*)message.data;
 		updateEnemigo(p->position);
+	}else if (message.mensaje == "COLISION_BALA") {
+		//TODO
+		printf("le has dado a un enemigo\n");
+		Cliente::i().enviarDisparo(m_guid);
 	}
 }

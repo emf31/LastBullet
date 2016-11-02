@@ -151,12 +151,21 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command\Command.h" />
+    <ClInclude Include="Command\Jump.h" />
+    <ClInclude Include="Command\MoveDown.h" />
+    <ClInclude Include="Command\MoveLeft.h" />
+    <ClInclude Include="Command\MoveRight.h" />
+    <ClInclude Include="Command\MoveUp.h" />
+    <ClInclude Include="Command\ShootCommand.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Handlers\InputHandler.h" />
+    <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
@@ -165,12 +174,12 @@
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
+    <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
-    <ClInclude Include="RenderState.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -181,6 +190,7 @@
     <ClCompile Include="Entities\EntityManager.cpp" />
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
+    <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -189,11 +199,11 @@
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
+    <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
-    <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

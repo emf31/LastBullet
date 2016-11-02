@@ -49,6 +49,9 @@
     <Filter Include="Archivos de encabezado\Handlers">
       <UniqueIdentifier>{6b8627a6-288a-4cbe-b3b2-de73e5cbab98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Command">
+      <UniqueIdentifier>{6366a3be-4366-47b8-ad2f-b07e6cfd73b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -87,9 +90,6 @@
     <ClInclude Include="Motor\PhysicsEngine.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="RenderState.h">
-      <Filter>Archivos de encabezado\Motor</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\EntityManager.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
@@ -118,6 +118,36 @@
       <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\MessageHandler.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Command.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Jump.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveDown.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveLeft.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveRight.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveUp.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootCommand.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\RenderState.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\input_constants.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\InputHandler.h">
       <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -152,9 +182,6 @@
     <ClCompile Include="Motor\PhysicsEngine.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="RenderState.cpp">
-      <Filter>Archivos de código fuente\Motor</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\Player.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
@@ -184,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="Handlers\MessageHandler.cpp">
       <Filter>Archivos de código fuente\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\InputHandler.cpp">
+      <Filter>Archivos de código fuente\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\RenderState.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
