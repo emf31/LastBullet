@@ -136,11 +136,6 @@ void Player::jump() {
 			velocity.setY(velocity.getY() + 5.0f);
 
 			m_rigidBody->setLinearVelocity(velocity);*/
-
-			/*btVector3 End = ray.m_hitPointWorld;
-			printf("COLISION JUMP: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
-			*/
-
 			
 			numJumps = 0;
 		}
@@ -162,14 +157,9 @@ void Player::jump() {
 
 void Player::shoot() {
 
-
-
-/*	btVector3 start = cameraPosition;
-	btVector3 end = start + (cameraDirection * SIZE_OF_WORLD);*/
-
 	printf("Shoot\n");
 	btVector3 SIZE_OF_WORLD(150000, 150000, 150000);
-	//btVector3 start = GraphicEngine::i().getActiveCamera()->getPosition();
+
 	btVector3 start(
 		GraphicEngine::i().getActiveCamera()->getPosition().getX(),
 			GraphicEngine::i().getActiveCamera()->getPosition().getY(),
@@ -182,25 +172,7 @@ void Player::shoot() {
 	btVector3 targetCamera(target.getX(), target.getY(), target.getZ());
 	btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
-	//start=m_rigidBody->getCenterOfMassPosition();
-	
-	//NOTA: cuando el start es la camara y el end es la misma posicion menos mucha Y, no detecta colision, pero cuando es el player si la detecta
-	//cuando la unica diferencia entre la posicion del player y la camara a simple vista son 50 unidades en Y
-
-	//btVector3 dest = start;
-
-	//dest.setY(dest.getY() - 10000.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
-
-	//btVector3 end = dest;
 	btVector3 end = start+(direccion2*SIZE_OF_WORLD);
-
-/*	printf("start: X=%f Y=%f Z=%f\n", start.getX(), start.getZ(), start.getY());
-
-	printf("end: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(), end.getY());
-	/*
-	printf("Target: X=%f Y=%f Z=%f\n", targetCamera.getX(), targetCamera.getZ(), targetCamera.getY());
-
-	printf("Direction: X=%f Y=%f Z=%f\n", end.getX(), end.getZ(),end.getY());*/
 	
 	btCollisionWorld::AllHitsRayResultCallback ray(start, end);
 
@@ -215,8 +187,22 @@ void Player::shoot() {
 		
 		if (hit != m_rigidBody)
 		{
-			btVector3 End = ray.m_hitPointWorld.at(0);
-			printf("COLISION SHOOT: X=%f Y=%f Z=%f\n", End.getX(), End.getZ(), End.getY());
+			
+			for (int i = 0; i < ray.m_hitNormalWorld.capacity(); i++) {
+				printf("SIZE OF THE ARRAY OF HITS: %d \n", ray.m_hitNormalWorld.capacity());
+
+				/*Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
+
+				std::cout << "PLAYER: " << typeid(Player).name() << '\n';
+				std::cout << "myEnt: " << typeid(myEnt).name() << '\n';*/
+
+				if (typeid(myEnt) == typeid(Player)) {
+
+
+					printf("hit player\n");
+				}
+
+			}
 
 			printf("hit something\n");
 
@@ -289,4 +275,3 @@ void Player::move_left()
 
 	isMoving = true;
 }
-
