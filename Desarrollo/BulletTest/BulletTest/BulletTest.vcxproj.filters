@@ -141,6 +141,9 @@
     <ClInclude Include="Command\ShootCommand.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\Enemy.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -196,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="Handlers\InputHandler.cpp">
       <Filter>Archivos de código fuente\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Enemy.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
