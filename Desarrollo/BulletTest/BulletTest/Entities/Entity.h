@@ -30,6 +30,7 @@ public:
 		m_id = id;
 	}
 	
+
 	SceneNode* getNode();
 
 	virtual void inicializar() = 0;
