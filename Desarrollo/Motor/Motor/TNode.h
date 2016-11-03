@@ -1,5 +1,8 @@
 #pragma once
-
+#include "TEntity.h"
+#include <algorithm>
+#include <vector>
+#include <iterator>
 class TNode
 {
 public:

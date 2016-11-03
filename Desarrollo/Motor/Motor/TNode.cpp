@@ -1,9 +1,4 @@
 #include "TNode.h"
-#include "TEntity.h"
-#include <algorithm>
-#include <vector>
-#include <iterator>
-
 
 TNode::TNode()
 {
