@@ -69,6 +69,7 @@ void GraphicEngine::renderAll()
 {
 	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
 	irrScene->drawAll();
+	irrGUI->drawAll();
 	irrDriver->endScene();
 }
 
@@ -81,6 +82,9 @@ void GraphicEngine::inicializar()
 	irrGUI = irrDevice->getGUIEnvironment();
 	irrScene = irrDevice->getSceneManager();
 	irrDriver = irrDevice->getVideoDriver();
+
+	irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"),
+		position2d<int>(800 / 2 - 220 / 2, 600 / 2 - 165 / 2));
 
 	irrDevice->getCursorControl()->setVisible(0);
 	cargarTexturas();

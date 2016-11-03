@@ -21,6 +21,7 @@ using namespace gui;
 class GraphicEngine
 {
 public:
+	bool iniciado = false;
 	static GraphicEngine& i() {
 		static GraphicEngine singleton;
 		return singleton;

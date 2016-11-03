@@ -114,3 +114,35 @@ Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
 	return NULL;
 }
 
+void EntityManager::mostrarClientes() {
+	std::cout << "////////////////////INICIO///////////////////" << std::endl;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		i->second->getGuid();
+		
+		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
+		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+		std::cout << "GUID de la Entity: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
+		std::cout << "GUID de la Clave: " << i->first << std::endl;
+		std::cout << "ID: " << i->second->getID() << std::endl;
+		
+
+	}
+	std::cout << "//////////////////FIN/////////////////////" << std::endl;
+
+}
+
+
+void EntityManager::muestraPosClientes() {
+
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		i->second->getGuid();
+
+		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
+		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+
+
+	}
+
+}

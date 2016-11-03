@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "../Estructuras.h"
+#include <string>
 
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
@@ -32,12 +33,15 @@ void EntityManager::enviaNuevaPos(TPlayer & p, RakNet::RakPeerInterface *peer)
 
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != p.guid) {
-
+			std::cout << "///////ENVIAMOS POS INICIO////////" << std::endl;
+			std::cout << "El player: " << p.name << "se mueve desde: "<< getRaknetEntity(p.guid)->getRenderState()->getPosition().getX()<<","<< getRaknetEntity(p.guid)->getRenderState()->getPosition().getZ() <<" a la nueva pos: " << p.position.getX() << "," << p.position.getZ() << std::endl;
+			std::cout << "Enviamos esta nueva pos a: " << i->second->getName() <<"con guid: "<<RakNet::RakNetGUID::ToUint32(i->second->getGuid())<< std::endl;
 			//enviamos la posicion actualizada del player a todos los clientes
 			bsOut.Write((RakNet::MessageID)MOVIMIENTO);
 			bsOut.Write(p);
 			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 			bsOut.Reset();
+			std::cout << "///////ENVIAMOS POS FINAL////////" << std::endl;
 		}
 
 	}
@@ -184,4 +188,20 @@ Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
 		return found->second;
 	//no existe devolvemos 0
 	return NULL;
+}
+
+void EntityManager::mostrarClientes() {
+
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+	
+		i->second->getGuid();
+		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
+		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+		std::cout << "GUID de la Entity: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
+		std::cout << "GUID de la Clave: " << i->first << std::endl;
+		std::cout << "ID: " << i->second->getID() << std::endl;
+
+	}
+
+
 }

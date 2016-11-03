@@ -21,6 +21,7 @@ public:
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer); 
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void mostrarClientes();
 
 
 	//Inicializa todas las entities

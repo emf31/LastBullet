@@ -43,7 +43,8 @@ void Game::run()
 
 	
 	while (GraphicEngine::i().isRuning()) {
-		if (GraphicEngine::i().isWindowActive()) {
+		//if (GraphicEngine::i().isWindowActive()) {
+		if (GraphicEngine::i().iniciado) {
 			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();

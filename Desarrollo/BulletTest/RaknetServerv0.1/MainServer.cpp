@@ -23,7 +23,8 @@ void muestraPlayer(Player *p) {
 	//std::cout << "Vida: " << p->vida << std::endl;
 	//std::cout << "Municion: " << p->municion << std::endl;
 	std::cout << "Posicion: " << p->getRenderState()->getPosition().getX() << ", " << p->getRenderState()->getPosition().getY() << std::endl;
-	std::cout << "" << std::endl;
+	std::cout << "GUID: " << RakNet::RakNetGUID::ToUint32(p->getGuid()) << std::endl;
+	std::cout << "ID: " << p->getID() << std::endl;
 }
 
 /*void updatePlayer(int movimiento, Player *p) {
@@ -109,13 +110,14 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				
 				bsIn.Read(p_struct);
-				//muestraPlayer(p);
+				
 				//RakNet::BitStream bsOut;
 				
 				EntityManager::i().sendPlayer(p_struct, peer);
 
 				Player *p = new Player(p_struct.name, p_struct.guid);
 				p->getRenderState()->setPosition(p_struct.position);
+				EntityManager::i().mostrarClientes();
 			}
 							   break;
 			case ID_NEW_INCOMING_CONNECTION: {
@@ -187,9 +189,10 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(p_struct);
 
+				EntityManager::i().enviaNuevaPos(p_struct, peer);
 				EntityManager::i().getRaknetEntity(p_struct.guid)->getRenderState()->setPosition(p_struct.position);
 
-				EntityManager::i().enviaNuevaPos(p_struct, peer);
+				
 
 			}
 

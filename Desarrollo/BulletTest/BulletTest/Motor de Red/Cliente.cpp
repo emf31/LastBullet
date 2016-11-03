@@ -9,6 +9,7 @@
 #include "../Entities/Player.h"
 #include "../Handlers/Message.h"
 #include "../Handlers/MessageHandler.h"
+#include "../Motor/GraphicEngine.h"
 
 Cliente::Cliente()
 {
@@ -60,6 +61,7 @@ void Cliente::update() {
 				nuevoplayer.position = Vec3<float> (0,100,0);
 				player->setPosition(nuevoplayer.position);
 
+				GraphicEngine::i().iniciado = true;
 				bsOut.Write(nuevoplayer);
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 				bsOut.Reset();
@@ -81,7 +83,7 @@ void Cliente::update() {
 				e->cargarContenido();
 				e->setPosition(nuevoplayer.position);
 				
-
+				EntityManager::i().mostrarClientes();
 
 
 
@@ -121,10 +123,13 @@ void Cliente::update() {
 				Enemy *e = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 				//e->updateEnemigo(nuevoplayer.position);
 				//e = nullptr;
-
+				std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
 				Message msg1(e, "MOVE", (void*)&nuevoplayer);
 
 				MessageHandler::i().sendMessage(msg1);
+
+				EntityManager::i().muestraPosClientes();
+				std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
 
 			}
 			break;

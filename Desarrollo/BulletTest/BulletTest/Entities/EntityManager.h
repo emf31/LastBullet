@@ -15,7 +15,8 @@ public:
 
 
 	
-	
+	void mostrarClientes();
+	void muestraPosClientes();
 
 	//Inicializa todas las entities
 	void inicializar();
