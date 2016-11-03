@@ -37,26 +37,31 @@ void Player::update(Time elapsedTime)
 	InputHandler::i().excuteCommands(this);
 	
 
-	if (isMoving) {
+	/*if (isMoving) {
 		speedFinal.normalise();
 		m_renderState.setDirection(speedFinal);
 		m_renderState.setAccelerating(true);
 	}
 	else {
 		m_renderState.setAccelerating(false);
-	}
+	}*/
 
 
-	m_renderState.updateVelocity(elapsedTime.asSeconds());
-	m_rigidBody->setLinearVelocity(btVector3(m_renderState.getVelocity().getX(), m_renderState.getVelocity().getY(), m_renderState.getVelocity().getZ()));
+	//m_renderState.updateVelocity(elapsedTime.asSeconds());
+	speedFinal.normalise();
+	//m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY()*m_speedFactor, speedFinal.getZ()*m_speedFactor));
+
+	p_controller->Walk(speedFinal);
+
+	p_controller->Update(elapsedTime);
 
 	// Set position
-	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	//btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+	m_renderState.updatePositions(p_controller->GetPosition());
 
 
 	// Set rotation
-	vector3df Euler;
+	/*vector3df Euler;
 	const btQuaternion& TQuat = m_rigidBody->getOrientation();
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
@@ -82,7 +87,7 @@ void Player::update(Time elapsedTime)
 	
 
 	}
-	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
+	m_renderState.updateRotations(Vec3<float>(0, giro, 0));*/
 }
 
 void Player::handleInput()
@@ -99,7 +104,10 @@ void Player::cargarContenido()
 	m_renderState.setPosition(Vec3<float>(0, 500, 0));
 
 	//Creas el body(fisico) 
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_DEACTIVATION);
+	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_DEACTIVATION);
+
+	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
+	p_controller = new DynamicCharacterController(Vec3<float>(0, 500, 0), 20, 50, 70, 20);
 }
 
 void Player::borrarContenido()
@@ -114,7 +122,7 @@ void Player::handleMessage(const Message & message)
 
 void Player::jump() {
 
-	bool isGrounded = false;
+	/*bool isGrounded = false;
 
 	btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
 	btVector3 dest = start;
@@ -122,7 +130,7 @@ void Player::jump() {
 	dest.setY(dest.getY() - 50.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
 
 	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
-	PhysicsEngine::m_world->rayTest(start, dest, ray);//hago el ray test
+	PhysicsEngine::i().m_world->rayTest(start, dest, ray);//hago el ray test
 
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
@@ -138,7 +146,7 @@ void Player::jump() {
 
 			m_rigidBody->setLinearVelocity(velocity);*/
 			
-			numJumps = 0;
+		/*	numJumps = 0;
 		}
 	}
 	else
@@ -149,9 +157,9 @@ void Player::jump() {
 	if (numJumps < 2) {
 		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 		numJumps++;
-	}
+	}*/
 
-	
+	p_controller->Jump();
 
 }
 
@@ -177,7 +185,7 @@ void Player::shoot() {
 	
 	btCollisionWorld::AllHitsRayResultCallback ray(start, end);
 
-	PhysicsEngine::m_world->rayTest(start, end, ray);
+	PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{

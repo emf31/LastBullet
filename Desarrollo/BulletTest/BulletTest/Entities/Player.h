@@ -3,6 +3,8 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
+#include "../DynamicCharacterController.h"
+
 #include <vector>
 
 
@@ -45,6 +47,9 @@ private:
 	Vec3<float> vectorNew;
 
 	Vec3<float> speedFinal;
+
+
+	DynamicCharacterController* p_controller;
 
 
 	// Heredado vía Entity

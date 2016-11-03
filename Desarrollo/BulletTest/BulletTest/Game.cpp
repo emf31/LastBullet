@@ -65,7 +65,7 @@ void Game::inicializar()
 	
 
 	//inicializamos bullet
-	PhysicsEngine::inicializar();
+	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 
 
@@ -77,7 +77,7 @@ void Game::inicializar()
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg","");
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
-	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
+	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
 
 	EntityManager::i().cargarContenido();
 
@@ -110,7 +110,7 @@ void Game::processEvents()
 void Game::update(Time elapsedTime)
 {
 	MessageHandler::update();
-	PhysicsEngine::update(elapsedTime);
+	PhysicsEngine::i().update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
 
 	

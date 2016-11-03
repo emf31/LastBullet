@@ -46,7 +46,7 @@
     <Filter Include="Archivos de encabezado\Command">
       <UniqueIdentifier>{b4f40210-4800-4a5f-b1ef-733e23d88865}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Entities\Handlers">
+    <Filter Include="Archivos de encabezado\Handlers">
       <UniqueIdentifier>{ef69c9b5-495d-4767-a4a3-37daf943a618}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -106,19 +106,19 @@
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\MessageHandler.h">
-      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
+      <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\InputHandler.h">
-      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
+      <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\Message.h">
-      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
+      <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\input_constants.h">
-      <Filter>Archivos de encabezado\Entities\Handlers</Filter>
+      <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
     <ClInclude Include="Command\Command.h">
       <Filter>Archivos de encabezado\Command</Filter>
@@ -142,6 +142,9 @@
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
     <ClInclude Include="Entities\Enemy.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicCharacterController.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
@@ -201,6 +204,9 @@
       <Filter>Archivos de código fuente\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="Entities\Enemy.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicCharacterController.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
