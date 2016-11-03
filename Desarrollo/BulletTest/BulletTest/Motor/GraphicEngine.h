@@ -50,6 +50,8 @@ private:
 	ISceneManager *irrScene;
 	IGUIEnvironment *irrGUI;
 
+	video::ITexture* images;
+
 	std::unordered_map<int, Camera*> cameras;
 	int m_camera;
 	Camera *active_camera;
