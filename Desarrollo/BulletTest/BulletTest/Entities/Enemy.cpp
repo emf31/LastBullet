@@ -46,6 +46,7 @@ void Enemy::borrarContenido()
 
 //Teletransporta un enemigo a la posicion que le pasas
 void Enemy::setPosition(Vec3<float> pos) {
+
 	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));

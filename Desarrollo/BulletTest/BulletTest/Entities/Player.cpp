@@ -197,7 +197,7 @@ void Player::shoot() {
 				MessageHandler::sendMessage(msg);
 
 
-				//printf("hit something\n");
+				printf("hit something\n");
 				}
 
 			}

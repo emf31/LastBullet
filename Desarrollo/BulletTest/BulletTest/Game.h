@@ -7,6 +7,7 @@
 #include "Entities\Entity.h"
 #include "Entities\Player.h"
 #include "Entities\Enemy.h"
+#include "Entities\Rocket.h"
 #include "Motor\Camera.h"
 
 #include <btBulletCollisionCommon.h>
@@ -33,6 +34,7 @@ private:
 
 	Player *player;
 	Entity *enemy;
+	Rocket *rocket;
 
 	
 };

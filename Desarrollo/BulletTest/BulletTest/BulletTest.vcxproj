@@ -163,6 +163,7 @@
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
+    <ClInclude Include="Entities\Rocket.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Entities\EntityManager.cpp" />
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
+    <ClCompile Include="Entities\Rocket.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
