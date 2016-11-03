@@ -1,29 +1,19 @@
 #pragma once
-#include <vector>
+
 class TNode
 {
 public:
 	TNode();
 	~TNode();
-	int addChild(TNode* child) {
-		m_childNodes.push_back(child);
-	}
+	void addChild(TNode* child);
 
-	int removeChild(TNode *child) {
-		
-	}
+	int removeChild(TNode *child);
 
-	void setEntity(TEntity* ent) {
-		m_entity = ent;
-	}
+	void setEntity(TEntity* ent);
 
-	TEntity* getEntity() {
-		return m_entity;
-	}
+	TEntity* getEntity();
 
-	TNode* getParentNode() {
-		return m_parentNode;
-	}
+	TNode* getParentNode();
 
 	void draw();
 private:
