@@ -20,7 +20,7 @@ public:
 	void setPosition(Vec3<float> pos);
 	int getEstado() { return estado;}
 	void setEstado(int newEstado) { estado = newEstado; }
-
+	void resetRigidBody();
 	// Heredado vía Entity
 	virtual void inicializar() override;
 
