@@ -10,12 +10,11 @@ public:
 	TTransform();
 	~TTransform();
 
-	glm::mat4 getIdentidad();
 	void transpose();
 	void invert();
 
 	void translate(float x, float y, float z);
-	void rotate(float f1, float f2, float f3, float f4, int axis);
+	void rotate(float f1, float f2, float f3, float angle);
 	void scale(float s1, float s2, float s3);
 	
 
