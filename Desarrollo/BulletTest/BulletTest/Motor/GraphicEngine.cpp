@@ -2,6 +2,7 @@
 #include "GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
 
+#include "PhysicsEngine.h"
 
 GraphicEngine::GraphicEngine()
 {
@@ -77,6 +78,14 @@ void GraphicEngine::renderAll()
 
 	irrScene->drawAll();
 	irrGUI->drawAll();
+
+	if (debug_draw_bullet)
+	{
+		irrDriver->setMaterial(debugMat);
+		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
+		PhysicsEngine::i().m_world->debugDrawWorld();
+	}
+
 	irrDriver->endScene();
 }
 
@@ -95,6 +104,23 @@ void GraphicEngine::inicializar()
 
 
 	irrDevice->getCursorControl()->setVisible(0);
+
+	debugDraw = new DebugDraw(irrDevice);
+	debugDraw->setDebugMode(
+		btIDebugDraw::DBG_DrawWireframe |
+		btIDebugDraw::DBG_DrawAabb |
+		btIDebugDraw::DBG_DrawContactPoints |
+		//btIDebugDraw::DBG_DrawText |
+		//btIDebugDraw::DBG_DrawConstraintLimits |
+		btIDebugDraw::DBG_DrawConstraints //|
+	);
+	PhysicsEngine::i().m_world->setDebugDrawer(debugDraw);
+
+	
+	debugMat.Lighting = false;
+
+	debug_draw_bullet = true;
+
 }
 
 bool GraphicEngine::isRuning()

@@ -156,6 +156,9 @@
     <ClInclude Include="Motor\RenderState.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="DebugDraw.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

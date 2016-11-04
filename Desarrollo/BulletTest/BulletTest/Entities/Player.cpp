@@ -58,7 +58,7 @@ void Player::update(Time elapsedTime)
 
 	p_controller->Update(elapsedTime);
 
-	m_renderState.updatePositions(p_controller->GetPosition());
+	m_renderState.updatePositions(Vec3<float>(p_controller->GetPosition().getX(), p_controller->GetPosition().getY() - 2.5f, p_controller->GetPosition().getZ()));
 
 
 	if (rocket->getEstado() == CARGADO) {
@@ -110,12 +110,12 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(2.f, 2.f, 2.f), "../media/textureMan.bmp", "../media/MeshPlayer.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/textureMan.bmp", "../media/MeshPlayer.obj");
 
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
 	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
-	p_controller = new DynamicCharacterController(Vec3<float>(0, 100, 0), 1, 1, 70, 1);
+	p_controller = new DynamicCharacterController(Vec3<float>(0, 100, 0), 1.f, 1, 70, 1);
 }
 
 void Player::borrarContenido()

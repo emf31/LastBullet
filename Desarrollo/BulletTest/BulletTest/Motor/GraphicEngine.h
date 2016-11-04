@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <vector>
 
-
+#include "../DebugDraw.h"
 
 
 using namespace irr;
@@ -55,6 +55,12 @@ private:
 	std::unordered_map<int, Camera*> cameras;
 	int m_camera;
 	Camera *active_camera;
+
+	bool debug_draw_bullet;
+
+	irr::video::SMaterial debugMat;
+
+	DebugDraw *debugDraw;
 
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();

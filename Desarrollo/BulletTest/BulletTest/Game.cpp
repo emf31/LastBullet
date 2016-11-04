@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#include<SDL.h>
 #include <iostream>
 #include <algorithm>
 #include "Game.h"
@@ -12,6 +10,7 @@
 #include "Motor\SceneNode.h"
 #include "Handlers\MessageHandler.h"
 #include <Windows.h>
+
 
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -91,6 +90,9 @@ void Game::inicializar()
 	GraphicEngine::i().setCameraEntity(player);
 
 
+	
+
+
 }
 
 void Game::processEvents()
@@ -124,10 +126,12 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 
-	GraphicEngine::i().updateCamera();
+	//GraphicEngine::i().updateCamera();
 
 
 	GraphicEngine::i().renderAll();
+
+	
 
 }
 
