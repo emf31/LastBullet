@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "EntityManager.h"
+#include "Enemy.h"
 
 void EntityManager::inicializar()
 {
@@ -15,6 +16,15 @@ void EntityManager::update(Time elapsedTime)
 {
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		i->second->update(elapsedTime);
+	}
+}
+void EntityManager::updatePosEnemigos(Time elapsedTime) {
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+		if (i->second->getID()!=1) {
+			//no es el player
+			Enemy* e = static_cast<Enemy*>(i->second);
+			e->desEncolaPos();
+		}
 	}
 }
 
@@ -139,8 +149,8 @@ void EntityManager::muestraPosClientes() {
 
 		i->second->getGuid();
 
-		std::cout << "**Nombre del player: " << i->second->getName() << std::endl;
-		std::cout << "**Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+		//std::cout << "**Nombre del player: " << i->second->getName() << std::endl;
+		//std::cout << "**Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
 
 
 	}

@@ -123,18 +123,24 @@ void Cliente::update() {
 				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(nuevoplayer.guid));
 				//e->updateEnemigo(nuevoplayer.position);
 				//e = nullptr;
-				std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
-				std::cout << "++ENVIO MENSAJE MOVE A LA ENTITY" << e->getName() << std::endl;
+				//std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
+				//std::cout << "++ENVIO MENSAJE MOVE A LA ENTITY" << e->getName() << std::endl;
 
-				Message msg1(e, "MOVE", static_cast<void*>(&nuevoplayer));
-				MessageHandler::i().sendMessage(msg1);
+
+				//ANTEEES!!
+				//Message msg1(e, "MOVE", static_cast<void*>(&nuevoplayer));
+				//MessageHandler::i().sendMessage(msg1);
 
 				//e->updateEnemigo(nuevoplayer.position);
-				std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
+
+				//NUEVO
+				e->encolaPos(nuevoplayer.position);
+
+				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
 				
-				std::cout << "///////////////////INCIO LISTA////////////////////////" << std::endl;
-				EntityManager::i().muestraPosClientes();
-				std::cout << "///////////////////FINAL LISTA////////////////////////" << std::endl;
+				//std::cout << "///////////////////INCIO LISTA////////////////////////" << std::endl;
+				//EntityManager::i().muestraPosClientes();
+				//std::cout << "///////////////////FINAL LISTA////////////////////////" << std::endl;
 
 			}
 			break;

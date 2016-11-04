@@ -84,3 +84,27 @@ void Enemy::handleMessage(const Message & message)
 		Cliente::i().enviarDisparo(m_guid);
 	}
 }
+
+//pila posiciones
+void Enemy::encolaPos(Vec3<float> pos)
+{
+	m.lock();
+	// Añadir a la cola
+	m_positions.push(pos);
+
+	m.unlock();
+}
+
+void Enemy::desEncolaPos()
+{
+	
+	m.lock();
+	while (!m_positions.empty()) {
+		Vec3<float> new_pos = m_positions.front();
+		//lo borramos de la cola
+		m_positions.pop();
+		//llamamos al update con la nueva posicion
+		updateEnemigo(new_pos);
+	}
+	m.unlock();
+}

@@ -104,10 +104,13 @@ void Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	
+	EntityManager::i().updatePosEnemigos(elapsedTime);
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
-	MessageHandler::i().update();
+	//esto estaba antes
+	//MessageHandler::i().update();
+	//antes era global, ahora cada entity tiene la suya, entonces aqui habria que hacer un for para que cada entity recorra su pila de posiciones no?
+
 }
 
 void Game::render(float interpolation, Time elapsedTime)

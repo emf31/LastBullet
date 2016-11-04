@@ -4,6 +4,8 @@
 #include <btBulletDynamicscommon.h>
 
 #include "../Handlers/Message.h"
+#include <queue>
+#include <mutex>
 
 class Enemy : public Entity
 {
@@ -23,8 +25,15 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
+	void encolaPos(Vec3<float> pos);
+	void desEncolaPos();
+	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
+	std::mutex m;
+
+
 private:
 	btRigidBody* m_rigidBody;
+	std::queue<Vec3<float>> m_positions;
 
 	
 };
