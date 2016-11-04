@@ -5,11 +5,14 @@
 #include "../Handlers/InputHandler.h"
 #include "../Handlers/MessageHandler.h"
 #include "math.h"
+#include "../Otros/Vec3f.h"
 
 
 
 
-Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
+Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30),
+m_acceleration_walk(300.f), m_acceleration_run(2.5f), m_deceleration_walk(10.f), m_deceleration_run(0.2f), m_maxSpeed_walk(16.0f), m_maxSpeed_run(18.0f)
+
 {
 	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
 	giro = 0;
@@ -50,8 +53,13 @@ void Player::update(Time elapsedTime)
 	//m_renderState.updateVelocity(elapsedTime.asSeconds());
 	speedFinal.normalise();
 	//m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX()*m_speedFactor, speedFinal.getY()*m_speedFactor, speedFinal.getZ()*m_speedFactor));
+	p_controller->m_maxSpeed = m_maxSpeed_walk;
+	p_controller->m_deceleration = m_deceleration_walk;
 
-	p_controller->Walk(speedFinal);
+	p_controller->Walk(Vec3f(elapsedTime.asSeconds()*m_acceleration_walk *speedFinal.getX(), 
+						elapsedTime.asSeconds()*m_acceleration_walk *speedFinal.getY(), 
+						elapsedTime.asSeconds()*m_acceleration_walk*speedFinal.getZ()));
+
 
 	p_controller->Update(elapsedTime);
 
@@ -98,10 +106,10 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/textureMan.bmp","../media/MeshPlayer.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2.f, 2.f, 2.f), "../media/textureMan.bmp","../media/MeshPlayer.obj");
 	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/textureMan.jpg", "");
 
-	m_renderState.setPosition(Vec3<float>(0, 500, 0));
+	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
 	//Creas el body(fisico) 
 	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_DEACTIVATION);

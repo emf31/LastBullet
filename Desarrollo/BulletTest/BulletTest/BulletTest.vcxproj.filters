@@ -147,6 +147,12 @@
     <ClInclude Include="DynamicCharacterController.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Otros\Vec2f.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Vec3f.h">
+      <Filter>Archivos de encabezado\Otros\Win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="DynamicCharacterController.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Vec2f.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Vec3f.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

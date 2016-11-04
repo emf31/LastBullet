@@ -37,6 +37,14 @@ void PhysicsEntity::handleInput()
 
 void PhysicsEntity::cargarContenido()
 {
+	btTransform tr;
+	tr.setIdentity();
+	btQuaternion quat;
+	quat.setEulerZYX(10,0,0); //or quat.setEulerZYX depending on the ordering you want
+	tr.setRotation(quat);
+
+	m_rigidBody->setCenterOfMassTransform(tr);
+
 }
 
 void PhysicsEntity::borrarContenido()

@@ -176,7 +176,9 @@
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
+    <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />
+    <ClInclude Include="Otros\Vec3f.h" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="RenderState.h" />
     <ClInclude Include="resource.h" />
@@ -201,6 +203,8 @@
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
+    <ClCompile Include="Otros\Vec2f.cpp" />
+    <ClCompile Include="Otros\Vec3f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="stdafx.cpp">

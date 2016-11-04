@@ -60,6 +60,13 @@ private:
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
 
+	float m_acceleration_walk;
+	float m_acceleration_run;
+	float m_deceleration_walk;
+	float m_deceleration_run;
+	float m_maxSpeed_walk;
+	float m_maxSpeed_run;
+
 
 };
 

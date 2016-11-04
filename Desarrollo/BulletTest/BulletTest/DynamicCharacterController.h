@@ -2,6 +2,8 @@
 
 #include "Motor\PhysicsEngine.h"
 #include "Otros\vec3.hpp"
+#include "Otros\Vec2f.h"
+#include "Otros\Vec3f.h"
 
 #include <vector>
 
@@ -33,8 +35,8 @@ private:
 
 	btTransform m_motionTransform;
 
-	Vec3<float> m_manualVelocity;
-	std::vector<Vec3<float>> m_surfaceHitNormals;
+	Vec3f  m_manualVelocity;
+	std::vector<Vec3f> m_surfaceHitNormals;
 
 	btVector3 m_previousPosition;
 
@@ -56,10 +58,10 @@ public:
 	~DynamicCharacterController();
 
 	// Acceleration vector in XZ plane
-	void Walk(const float x, const float z);
+	void Walk(const Vec2f dir);
 
 	// Ignores y
-	void Walk(const Vec3<float> dir);
+	void Walk(const Vec3f dir);
 
 	void Update(Time elapsedTime);
 
