@@ -33,11 +33,11 @@ void Rocket::handleInput()
 void Rocket::cargarContenido()
 {
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(100, 200, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/ice0.jpg", "");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(1, 1, 1), "../media/ice0.jpg", "");
 
-	m_renderState.setPosition(Vec3<float>(100, 200, 0));
+	m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(50.f, 50.f, 50.f), 1.f, DISABLE_DEACTIVATION);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 1.f, DISABLE_DEACTIVATION);
 
 }
 

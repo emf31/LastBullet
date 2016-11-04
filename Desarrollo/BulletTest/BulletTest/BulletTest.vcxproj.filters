@@ -84,9 +84,6 @@
     <ClInclude Include="Motor\PhysicsEngine.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="RenderState.h">
-      <Filter>Archivos de encabezado\Motor</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\EntityManager.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
@@ -147,6 +144,18 @@
     <ClInclude Include="Command\ShootCommandRocket.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\DynamicCharacterController.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Vec2f.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Vec3f.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\RenderState.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -174,9 +183,6 @@
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Motor\PhysicsEngine.cpp">
-      <Filter>Archivos de código fuente\Motor</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderState.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
     <ClCompile Include="Entities\Player.cpp">
@@ -208,6 +214,18 @@
     </ClCompile>
     <ClCompile Include="Entities\Rocket.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\DynamicCharacterController.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Vec2f.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Vec3f.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\RenderState.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include <btBulletDynamicscommon.h>
 #include "Rocket.h"
 #include <vector>
+#include "DynamicCharacterController.h"
 
 
 class Player : public Entity
@@ -34,14 +35,11 @@ private:
 	float timeRecargaRocket = 3;
 
 
-	int numJumps;
 	bool isJumping;
-
 	bool isMoving;
 
 	float m_speedFactor;
 	float giro;
-	Clock tiempoSalto;
 
 	Vec3<float> vectorPrev;
 	Vec3<float> vectorNew;
@@ -57,6 +55,14 @@ private:
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
 
+	//Player controller
+	DynamicCharacterController* p_controller;
 
+	float m_acceleration_walk;
+	float m_acceleration_run;
+	float m_deceleration_walk;
+	float m_deceleration_run;
+	float m_maxSpeed_walk;
+	float m_maxSpeed_run;
 };
 

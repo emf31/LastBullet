@@ -9,23 +9,30 @@
 
 
 
-Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
+Player::Player() : Entity(-1, NULL, "Player"),
+m_acceleration_walk(10.f), 
+//m_acceleration_run(5.f), 
+m_deceleration_walk(11.f), 
+//m_deceleration_run(0.2f), 
+m_maxSpeed_walk(60.f)
+//m_maxSpeed_run(18.0f)
+
 {
-	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
-	giro = 0;
-	rocket = new Rocket();
+	
 
 }
 
 
 Player::~Player()
 {
-	m_renderState.setVelocity(Vec3<float>(m_speedFactor, m_speedFactor, m_speedFactor));
+	
 }
 
 void Player::inicializar()
 {
-	//input_handler = new InputHandler();
+	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
+	giro = 0;
+	rocket = new Rocket();
 }
 
 
@@ -39,27 +46,23 @@ void Player::update(Time elapsedTime)
 	InputHandler::i().excuteCommands(this);
 	
 
-	if (isMoving) {
-		speedFinal.normalise();
-		m_renderState.setDirection(speedFinal);
-		m_renderState.setAccelerating(true);
-	}
-	else {
-		m_renderState.setAccelerating(false);
-	}
+	speedFinal.normalise();
+
+	p_controller->m_maxSpeed = m_maxSpeed_walk;
+	p_controller->m_deceleration = m_deceleration_walk;
+
+	p_controller->Walk(Vec3f(elapsedTime.asSeconds()*m_acceleration_walk *speedFinal.getX(),
+		elapsedTime.asSeconds()*m_acceleration_walk *speedFinal.getY(),
+		elapsedTime.asSeconds()*m_acceleration_walk*speedFinal.getZ()));
 
 
-	m_renderState.updateVelocity(elapsedTime.asSeconds());
-	m_rigidBody->setLinearVelocity(btVector3(m_renderState.getVelocity().getX(), m_renderState.getVelocity().getY(), m_renderState.getVelocity().getZ()));
+	p_controller->Update(elapsedTime);
 
-	// Set position
-	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-
+	m_renderState.updatePositions(p_controller->GetPosition());
 
 
 	if (rocket->getEstado() == CARGADO) {
-		Vec3<float> posicion(getRenderState()->getPosition().getX() + 100, getRenderState()->getPosition().getY(), getRenderState()->getPosition().getZ());
+		Vec3<float> posicion(getRenderState()->getPosition().getX() + 10, getRenderState()->getPosition().getY()+2, getRenderState()->getPosition().getZ());
 		rocket->setPosition(posicion);
 	}
 	else if (rocket->getEstado() == DISPARADO) {
@@ -71,7 +74,7 @@ void Player::update(Time elapsedTime)
 
 	// Set rotation
 	vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
+	const btQuaternion& TQuat = p_controller->m_pRigidBody->getOrientation();
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
 	Euler *= RADTODEG;
@@ -107,13 +110,12 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/textureMan.bmp","../media/MeshPlayer.obj");
-	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/textureMan.jpg", "");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(2.f, 2.f, 2.f), "../media/textureMan.bmp", "../media/MeshPlayer.obj");
 
-	m_renderState.setPosition(Vec3<float>(0, 500, 0));
+	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
-	//Creas el body(fisico) 
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 1.0f, DISABLE_DEACTIVATION);
+	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
+	p_controller = new DynamicCharacterController(Vec3<float>(0, 100, 0), 1, 1, 70, 1);
 }
 
 void Player::borrarContenido()
@@ -129,13 +131,13 @@ void Player::handleMessage(const Message & message)
 void Player::jump() {
 
 
-	btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
+	/*btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
 	btVector3 dest = start;
 
 	dest.setY(dest.getY() - 50.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
 
 	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
-	PhysicsEngine::m_world->rayTest(start, dest, ray);//hago el ray test
+	PhysicsEngine::i().m_world->rayTest(start, dest, ray);//hago el ray test
 
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
@@ -149,7 +151,7 @@ void Player::jump() {
 
 			velocity.setY(velocity.getY() + 5.0f);
 
-			m_rigidBody->setLinearVelocity(velocity);*/
+			m_rigidBody->setLinearVelocity(velocity);
 			
 			numJumps = 0;
 		}
@@ -162,10 +164,10 @@ void Player::jump() {
 	if (numJumps < 2) {
 		m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
 		numJumps++;
-	}
+	}*/
 
 	
-
+	p_controller->Jump();
 }
 
 
@@ -189,7 +191,7 @@ void Player::shoot() {
 	
 	btCollisionWorld::AllHitsRayResultCallback ray(start, end);
 
-	PhysicsEngine::m_world->rayTest(start, end, ray);
+	PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{

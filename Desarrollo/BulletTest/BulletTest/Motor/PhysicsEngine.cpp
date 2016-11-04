@@ -1,15 +1,6 @@
 
 #include "PhysicsEngine.h"
 
-//Inicializar a NULL los valores static sino peta
-
-btDynamicsWorld* PhysicsEngine::m_world = NULL;
-btDefaultCollisionConfiguration* PhysicsEngine::m_config = NULL;
-btCollisionDispatcher* PhysicsEngine::m_dispatcher = NULL;
-btBroadphaseInterface* PhysicsEngine::m_broadphase = NULL;
-btSequentialImpulseConstraintSolver* PhysicsEngine::m_solver = NULL;
-std::list<btRigidBody*> PhysicsEngine::m_rigidBodies = std::list<btRigidBody*>();
-
 void PhysicsEngine::inicializar()
 {
 	m_config = new btDefaultCollisionConfiguration();
@@ -17,14 +8,29 @@ void PhysicsEngine::inicializar()
 	m_broadphase = new btAxisSweep3(btVector3(-1000, -1000, -1000), btVector3(1000, 1000, 1000));
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
-	m_world->setGravity(btVector3(0, -20, 0));
+	m_world->setGravity(btVector3(0, -2, 0));
+
+	m_pGhostPairCallBack = new btGhostPairCallback();
+
+	m_world->getPairCache()->setInternalGhostPairCallback(m_pGhostPairCallBack);
+
+	m_rigidBodies = std::list<btRigidBody*>();
 }
+
 
 void PhysicsEngine::update(Time elapsedTime)
 {
 	m_world->stepSimulation(elapsedTime.asMilliseconds(), 60);
 
 	//Aqui calculariamos colisiones
+}
+
+void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
+{
+	m_world->addRigidBody(rigid);
+	//and add to the list of rigidBodies
+	m_rigidBodies.push_back(rigid);
+
 }
 
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
