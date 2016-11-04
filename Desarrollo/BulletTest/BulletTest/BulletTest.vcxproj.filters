@@ -144,6 +144,9 @@
     <ClInclude Include="Entities\Rocket.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Command\ShootCommandRocket.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

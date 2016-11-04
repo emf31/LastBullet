@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
-
+#include "Rocket.h"
 #include <vector>
 
 
@@ -15,6 +15,7 @@ public:
 	void jump();
 
 	void shoot();
+	void shootRocket();
 
 
 	void move_up();
@@ -23,19 +24,20 @@ public:
 	void move_left();
 
 
+
 private:
 	
 	btRigidBody* m_rigidBody;
-	
+
+	Rocket* rocket;
+	Clock clockRecargaRocket;
+	float timeRecargaRocket = 3;
+
 
 	int numJumps;
-
 	bool isJumping;
 
 	bool isMoving;
-
-	bool jumped=false;
-
 
 	float m_speedFactor;
 	float giro;

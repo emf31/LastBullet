@@ -72,19 +72,12 @@ void Game::inicializar()
 	player = new Player();
 
 	enemy = new Enemy();
-	
-	rocket = new Rocket();
-
 
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(2000.f, 100.f, 2000.f), "../media/wall.jpg","");
 
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo,"");
 	sueloEnt->setRigidBody(PhysicsEngine::createBoxRigidBody(sueloEnt, Vec3<float>(2000.f, 100.f, 2000.f),0));
-
-
-
-
 
 	EntityManager::i().cargarContenido();
 

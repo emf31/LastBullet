@@ -34,7 +34,6 @@ private:
 
 	Player *player;
 	Entity *enemy;
-	Rocket *rocket;
 
 	
 };

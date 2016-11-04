@@ -13,6 +13,8 @@ Player::Player() : Entity(-1, NULL, "Player"), m_speedFactor(30)
 {
 	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
 	giro = 0;
+	rocket = new Rocket();
+
 }
 
 
@@ -54,6 +56,18 @@ void Player::update(Time elapsedTime)
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
+
+
+	if (rocket->getEstado() == CARGADO) {
+		Vec3<float> posicion(getRenderState()->getPosition().getX() + 100, getRenderState()->getPosition().getY(), getRenderState()->getPosition().getZ());
+		rocket->setPosition(posicion);
+	}
+	else if (rocket->getEstado() == DISPARADO) {
+		if (clockRecargaRocket.getElapsedTime().asSeconds()>timeRecargaRocket) {
+			rocket->setEstado(CARGADO);
+		}
+	}
+	
 
 	// Set rotation
 	vector3df Euler;
@@ -114,7 +128,6 @@ void Player::handleMessage(const Message & message)
 
 void Player::jump() {
 
-	bool isGrounded = false;
 
 	btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
 	btVector3 dest = start;
@@ -170,7 +183,6 @@ void Player::shoot() {
 	Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
 	direccion.normalise();
 
-	btVector3 targetCamera(target.getX(), target.getY(), target.getZ());
 	btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
 	btVector3 end = start+(direccion2*SIZE_OF_WORLD);
@@ -202,11 +214,35 @@ void Player::shoot() {
 
 			}
 
-			
-
-
 		}
 	}
+
+
+void Player::shootRocket() {
+
+	if (rocket->getEstado() == CARGADO) {
+
+		printf("ROCKET DISPARADO\n");
+		btVector3 SIZE_OF_WORLD(350, 350, 350);
+
+
+		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
+		direccion.normalise();
+
+		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+
+		btVector3 force = direccion2 * SIZE_OF_WORLD;
+
+		btVector3 centerOfMass = rocket->m_rigidBody->getCenterOfMassPosition();
+		rocket->m_rigidBody->activate();
+		rocket->m_rigidBody->applyCentralForce(force);
+
+		rocket->setEstado(DISPARADO);
+		clockRecargaRocket.restart();
+	}
+
+}
 
 
 void Player::move_up()
@@ -272,3 +308,4 @@ void Player::move_left()
 
 	isMoving = true;
 }
+

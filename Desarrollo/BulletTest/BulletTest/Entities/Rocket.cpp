@@ -21,6 +21,9 @@ void Rocket::inicializar()
 void Rocket::update(Time elapsedTime)
 {
 
+	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+
 }
 
 void Rocket::handleInput()
@@ -30,11 +33,11 @@ void Rocket::handleInput()
 void Rocket::cargarContenido()
 {
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(100, 200, 0), Vec3<float>(100, 100.f, 100.f), "../media/ice0.jpg", "");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(100, 200, 0), Vec3<float>(50.f, 50.f, 50.f), "../media/ice0.jpg", "");
 
 	m_renderState.setPosition(Vec3<float>(100, 200, 0));
 
-	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(100.f, 100.f, 100.f), 0.0f, DISABLE_SIMULATION);
+	m_rigidBody = PhysicsEngine::createBoxRigidBody(this, Vec3<float>(50.f, 50.f, 50.f), 1.f, DISABLE_DEACTIVATION);
 
 }
 
@@ -57,3 +60,4 @@ void Rocket::setPosition(Vec3<float> pos) {
 	m_nodo->setPosition(pos);
 
 }
+

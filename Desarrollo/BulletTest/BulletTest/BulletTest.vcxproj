@@ -158,6 +158,7 @@
     <ClInclude Include="Command\MoveRight.h" />
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\ShootCommand.h" />
+    <ClInclude Include="Command\ShootCommandRocket.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />

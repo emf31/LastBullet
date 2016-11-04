@@ -4,6 +4,10 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 
+#define CARGADO 0
+#define DISPARADO 1
+
+
 class Rocket :
 	public Entity
 {
@@ -14,7 +18,8 @@ public:
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
 
 	void setPosition(Vec3<float> pos);
-
+	int getEstado() { return estado;}
+	void setEstado(int newEstado) { estado = newEstado; }
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -29,7 +34,10 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
-private:
+
 	btRigidBody* m_rigidBody;
+
+private:
+	int estado=CARGADO;
 };
 
