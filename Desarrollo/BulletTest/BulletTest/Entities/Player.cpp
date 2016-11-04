@@ -59,6 +59,7 @@ void Player::update(Time elapsedTime)
 	p_controller->Update(elapsedTime);
 
 	m_renderState.updatePositions(Vec3<float>(p_controller->GetPosition().getX(), p_controller->GetPosition().getY() - 2.5f, p_controller->GetPosition().getZ()));
+	
 
 
 	if (rocket->getEstado() == CARGADO) {
@@ -79,6 +80,11 @@ void Player::update(Time elapsedTime)
 	q.toEuler(Euler);
 	Euler *= RADTODEG;
 
+
+	vectorPrev = vectorNew;
+	Vec3<float>target =GraphicEngine::i().getActiveCamera()->getTarget();
+	Vec3<float>pos=Vec3<float>(p_controller->GetPosition().getX(), p_controller->GetPosition().getY(), p_controller->GetPosition().getZ());
+	vectorNew = target - pos;
 
 	vectorNew.normalise();//normalizamos los vectores
 	vectorPrev.normalise();
