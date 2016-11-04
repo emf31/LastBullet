@@ -26,7 +26,7 @@ public:
 
 DynamicCharacterController::DynamicCharacterController(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight)
 	: m_bottomYOffset(height / 2.0f + radius), m_bottomRoundedRegionYOffset((height + radius) / 2.0f),
-	m_deceleration(9.f), m_maxSpeed(30.f), m_jumpImpulse(400.f),
+	m_deceleration(9.f), m_maxSpeed(30.f), m_jumpImpulse(600.f),
 	m_manualVelocity(0.0f, 0.0f, 0.0f), m_onGround(false), m_hittingWall(false),
 	m_stepHeight(stepHeight)
 {
@@ -258,54 +258,35 @@ void DynamicCharacterController::UpdatePosition()
 void DynamicCharacterController::Jump()
 {
 
-	btVector3 start = m_pRigidBody->getCenterOfMassPosition(); // posicion del player
-	btVector3 dest = start;
+	if (m_onGround )
+	{
+		m_pRigidBody->applyCentralImpulse(btVector3(0.0f, m_jumpImpulse, 0.0f));
 
-	dest.setY(dest.getY() - (m_stepHeight*2));  //destino del rayo, que es la posicion del player en y - 50 unidades
+		// Move upwards slightly so velocity isn't immediately canceled when it detects it as on ground next frame
+		const float jumpYOffset = 0.01f;
 
-	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
-	PhysicsEngine::i().m_world->rayTest(start, dest, ray);//hago el ray test
+		float previousY = m_pRigidBody->getWorldTransform().getOrigin().getY();
 
+		m_pRigidBody->getWorldTransform().getOrigin().setY(previousY + jumpYOffset);
 
-	if (numJumps >= 1) {
-		btVector3 velocity = m_pRigidBody->getLinearVelocity();//DISCUTIR: Con set linear velocity queda mejor, pero he encontrado mas ejemplos que lo hacen con applyimpulse o applyforce
+		numJumps = 1;
+		
+	}
+	else if(numJumps == 1){
 
-		velocity.setY(velocity.getY() + m_jumpImpulse);
+		m_pRigidBody->setLinearVelocity(btVector3(m_pRigidBody->getLinearVelocity().x(),0, m_pRigidBody->getLinearVelocity().z()));
 
-		m_pRigidBody->applyCentralImpulse(velocity);
+		m_pRigidBody->applyCentralImpulse(btVector3(0.0f, m_jumpImpulse, 0.0f));
+
+		// Move upwards slightly so velocity isn't immediately canceled when it detects it as on ground next frame
+		const float jumpYOffset = 0.01f;
+
+		float previousY = m_pRigidBody->getWorldTransform().getOrigin().getY();
+
+		m_pRigidBody->getWorldTransform().getOrigin().setY(previousY + jumpYOffset);
 
 		numJumps = 0;
-
-
 	}
-
-	if (ray.hasHit())//si ray ha golpeado algo entro
-	{
-		
-
-		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-
-		if (hit != m_pRigidBody)
-		{
-			printf("hit something\n");
-
-			btVector3 velocity = m_pRigidBody->getLinearVelocity();//DISCUTIR: Con set linear velocity queda mejor, pero he encontrado mas ejemplos que lo hacen con applyimpulse o applyforce
-
-			velocity.setY(velocity.getY() + m_jumpImpulse);
-
-			m_pRigidBody->applyCentralImpulse(velocity);
-
-			
-
-			numJumps++;
-		}
-	}
-	else
-	{
- 		printf("missed");
-	}
-
-	
 
 }
 
