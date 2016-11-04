@@ -5,6 +5,7 @@
 #include "../Motor de Red/Estructuras.h"
 #include "../Motor de Red/Cliente.h"
 #include "../Entities/EntityManager.h"
+#include <iostream>
 
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
@@ -67,14 +68,16 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "MOVE") {
-		TPlayer* p = (TPlayer*)message.data;
+		 
+		TPlayer* p = static_cast<TPlayer*>(message.data);
 		Entity* e = EntityManager::i().getRaknetEntity(p->guid);
+		std::cout << "++RECIBO MENSAJE MOVE SOY LA ENTITY: " << e->getName() << std::endl;
 		Vec3 <float> posantes = e->getRenderState()->getPosition();
-		std::cout << "El player: " << p->name << " se mueve desde : " << e->getRenderState()->getPosition().getX() << "," << e->getRenderState()->getPosition().getY() << "," << e->getRenderState()->getPosition().getZ() << " a: " << p->position.getX() << "," << p->position.getY() << "," << p->position.getZ() << std::endl;
+		std::cout << "++El player: " << p->name << " se mueve desde : " << e->getRenderState()->getPosition().getX() << "," << e->getRenderState()->getPosition().getY() << "," << e->getRenderState()->getPosition().getZ() << " a: " << p->position.getX() << "," << p->position.getY() << "," << p->position.getZ() << std::endl;
 		updateEnemigo(p->position);
 		Vec3 <float> posdespues = e->getRenderState()->getPosition();
-		std::cout << "Pos ANTES de mover: " << posantes.getX() << "," << posantes.getY() << "," << posantes.getZ() << std::endl;
-		std::cout << "Pos DESPUES de mover: " << posantes.getX() << "," << posantes.getY() << "," << posantes.getZ() << std::endl;
+		std::cout << "++Pos ANTES de mover: " << posantes.getX() << "," << posantes.getY() << "," << posantes.getZ() << std::endl;
+		std::cout << "++Pos DESPUES de mover: " << posantes.getX() << "," << posantes.getY() << "," << posantes.getZ() << std::endl;
 	}else if (message.mensaje == "COLISION_BALA") {
 		//TODO
 		printf("le has dado a un enemigo\n");

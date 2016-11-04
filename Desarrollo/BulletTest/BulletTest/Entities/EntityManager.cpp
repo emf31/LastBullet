@@ -139,8 +139,8 @@ void EntityManager::muestraPosClientes() {
 
 		i->second->getGuid();
 
-		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
-		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+		std::cout << "**Nombre del player: " << i->second->getName() << std::endl;
+		std::cout << "**Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
 
 
 	}

@@ -104,9 +104,10 @@ void Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	MessageHandler::i().update();
+	
 	PhysicsEngine::update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
+	MessageHandler::i().update();
 }
 
 void Game::render(float interpolation, Time elapsedTime)

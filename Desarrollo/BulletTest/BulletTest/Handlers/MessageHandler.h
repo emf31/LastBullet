@@ -3,6 +3,7 @@
 #include <string>
 #include <queue>
 #include "Message.h"
+#include <mutex>
 
 class MessageHandler
 {
@@ -13,11 +14,16 @@ public:
 	}
 	void update();
 	void sendMessage(const Message& message);
-	~MessageHandler();
+	
+	void borrarContenido();
+
+	std::mutex m;
 
 private:
 	std::queue<Message> m_messages;
 	MessageHandler() {}
+
+	
 
 };
 
