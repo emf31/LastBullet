@@ -34,13 +34,17 @@ void Rocket::cargarContenido()
 {
 
 	m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(1, 1, 1), "../media/ice0.jpg", "");
-
 	m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 1.f, DISABLE_DEACTIVATION);
 
 }
 
+void Rocket::resetRigidBody()
+{
+	PhysicsEngine::i().removeRigidBody(m_rigidBody);//EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 1.f, DISABLE_DEACTIVATION);
+}
 
 
 void Rocket::borrarContenido()

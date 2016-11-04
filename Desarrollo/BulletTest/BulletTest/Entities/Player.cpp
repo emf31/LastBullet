@@ -62,7 +62,7 @@ void Player::update(Time elapsedTime)
 
 
 	if (rocket->getEstado() == CARGADO) {
-		Vec3<float> posicion(getRenderState()->getPosition().getX() + 10, getRenderState()->getPosition().getY()+2, getRenderState()->getPosition().getZ());
+		Vec3<float> posicion(p_controller->GetPosition().getX()+5, p_controller->GetPosition().getY(), p_controller->GetPosition().getZ());
 		rocket->setPosition(posicion);
 	}
 	else if (rocket->getEstado() == DISPARADO) {
@@ -222,22 +222,26 @@ void Player::shoot() {
 
 void Player::shootRocket() {
 
+
 	if (rocket->getEstado() == CARGADO) {
 
 		printf("ROCKET DISPARADO\n");
-		btVector3 SIZE_OF_WORLD(350, 350, 350);
+		btVector3 SIZE_OF_WORLD(70, 70, 70);
 
 
 		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
 		direccion.normalise();
 
+
 		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
 		btVector3 force = direccion2 * SIZE_OF_WORLD;
 
-		btVector3 centerOfMass = rocket->m_rigidBody->getCenterOfMassPosition();
+		rocket->resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+
 		rocket->m_rigidBody->activate();
+
 		rocket->m_rigidBody->applyCentralForce(force);
 
 		rocket->setEstado(DISPARADO);
