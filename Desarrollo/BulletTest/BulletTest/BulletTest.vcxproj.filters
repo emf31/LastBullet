@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de código fuente">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Otros">
+      <UniqueIdentifier>{fa26d78d-4a1d-4144-8b37-be2b7e6b326a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Otros">
+      <UniqueIdentifier>{337925f3-54b8-45ee-9285-0714c4301c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Otros\Win32">
+      <UniqueIdentifier>{e6050f0e-9f16-48be-9af8-32dd2f570b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Otros\Win32">
+      <UniqueIdentifier>{c6671359-4dd6-4e7a-aa72-cf6d31d66d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Motor">
+      <UniqueIdentifier>{3cb7ce98-1d9a-4300-8039-5a9d2859a440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Entities">
+      <UniqueIdentifier>{d0564159-c869-4de6-9aaa-5fafe6e667d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Entities">
+      <UniqueIdentifier>{95a8bdf3-563c-4e71-9ba0-6a0091094bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Motor">
+      <UniqueIdentifier>{31c85979-f078-4379-b74d-2132fe3f78db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Handlers">
+      <UniqueIdentifier>{5576ff5b-4b13-4f62-853b-d238096fdba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Command">
+      <UniqueIdentifier>{b4f40210-4800-4a5f-b1ef-733e23d88865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Handlers">
+      <UniqueIdentifier>{ef69c9b5-495d-4767-a4a3-37daf943a618}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\vec3.hpp">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="MastEventReceiver.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Clock.hpp">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Time.hpp">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Win32\ClockImpl.hpp">
+      <Filter>Archivos de encabezado\Otros\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Entity.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Player.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\PhysicsEngine.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntityManager.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\PhysicsEntity.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\GraphicEngine.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\SceneNode.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\Camera.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\MessageHandler.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\InputHandler.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\Message.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\input_constants.h">
+      <Filter>Archivos de encabezado\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Command.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveUp.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveDown.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveLeft.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\MoveRight.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Jump.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootCommand.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Enemy.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Rocket.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootCommandRocket.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\DynamicCharacterController.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Vec2f.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Vec3f.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\RenderState.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDraw.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="MastEventReceiver.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Clock.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Time.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Win32\ClockImpl.cpp">
+      <Filter>Archivos de código fuente\Otros\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Entity.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\PhysicsEngine.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Player.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\EntityManager.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\PhysicsEntity.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\GraphicEngine.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\SceneNode.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\Camera.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\MessageHandler.cpp">
+      <Filter>Archivos de código fuente\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\InputHandler.cpp">
+      <Filter>Archivos de código fuente\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Enemy.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Rocket.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\DynamicCharacterController.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Vec2f.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Vec3f.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\RenderState.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BulletTest.rc">
+      <Filter>Archivos de recursos</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
