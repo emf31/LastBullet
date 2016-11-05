@@ -1,6 +1,40 @@
 
 #include "PhysicsEngine.h"
 
+#include <unordered_map>
+#include <set>
+
+#include "../Handlers/MessageHandler.h"
+
+std::unordered_map<Entity*, std::set<Entity*>> contacts;
+
+
+//Tenemos un unordered maps de contactos, donde la key es un entity.
+//El value es un std::set(igual que un array pero no admite duplicados)
+//Este es el metodo al que llama bullet cuando se produce un contacto
+bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisionObject* body1) {
+	//Cogemos las 2 entities que colisionan 
+	Entity* entity0 = (Entity*)body0->getUserPointer();
+	Entity* entity1 = (Entity*)body1->getUserPointer();
+
+	//En la key guardamos una entity y en su value un array con las entities con las que colisiona
+	//comprobamos si entity 0 esta en el mapa
+	auto found = contacts.find(entity0);
+	if (found != contacts.end()) {
+		//Entity en mapa. Añadimod entity2 al set.
+		//Como set no admite duplicados si ya esta dentro no se añade.
+		found->second.insert(entity1);
+	}
+	else {
+		//entity1 no esta en el mapa. Creamos nuevo set y añadimos entity1
+		std::set<Entity*> set;
+		set.insert(entity1);
+		//añadimos entity0 al nuevo set
+		contacts[entity0] = set;
+	}
+	return true;
+}
+
 void PhysicsEngine::inicializar()
 {
 	m_config = new btDefaultCollisionConfiguration();
@@ -14,6 +48,9 @@ void PhysicsEngine::inicializar()
 
 	m_world->getPairCache()->setInternalGhostPairCallback(m_pGhostPairCallBack);
 
+	//asi le decidmos a bullet que llame a handle contacts
+	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;
+
 	m_rigidBodies = std::list<btRigidBody*>();
 }
 
@@ -23,6 +60,26 @@ void PhysicsEngine::update(Time elapsedTime)
 	m_world->stepSimulation(elapsedTime.asMilliseconds(), 60);
 
 	//Aqui calculariamos colisiones
+	for (auto contactsIter = contacts.begin(); contactsIter != contacts.end(); ++contactsIter) {
+		//coger la key 
+		Entity* collider0 = contactsIter->first;
+		//obtenemos el set con las entities que colisiona
+		std::set<Entity*>& set = contactsIter->second;
+		//iteramos todas las entities en el set
+		for (auto entityIter = set.begin(); entityIter != set.end(); ++entityIter) {
+			Entity* collider1 = *entityIter;
+			//enviamos 2 mensajes uno para la entity que colisiona y otra a la entity con la que colisiona
+
+			Message msg1(collider0, "COLLISION", collider1);
+			Message msg2(collider1, "COLLISION", collider0);
+
+			MessageHandler::i().sendMessage(msg1);
+			MessageHandler::i().sendMessage(msg2);
+			
+		}
+	}
+
+	contacts.clear();
 }
 
 void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)

@@ -27,8 +27,8 @@ public:
 
 
 private:
-	
-	btRigidBody* m_rigidBody;
+	//Se usa el body del character controller
+	//btRigidBody* m_rigidBody;
 
 	Rocket* rocket;
 	Clock clockRecargaRocket;
@@ -38,7 +38,7 @@ private:
 	bool isJumping;
 	bool isMoving;
 
-	float m_speedFactor;
+	
 	float giro;
 
 	Vec3<float> vectorPrev;

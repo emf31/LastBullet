@@ -16,6 +16,8 @@ public:
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
 	btRigidBody* getRigidBody() { return m_rigidBody; }
 
+	void rotate(Vec3<float> rot);
+
 	// Heredado vía Entity
 	virtual void inicializar() override;
 

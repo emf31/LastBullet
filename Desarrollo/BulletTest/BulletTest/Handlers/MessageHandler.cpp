@@ -1,10 +1,10 @@
-#include "MessageHandler.h"
-
-std::queue<Message> MessageHandler::m_messages = std::queue<Message>();
+ï»¿#include "MessageHandler.h"
 
 void MessageHandler::update()
 {
+	//std::cout << m_messages.size() << std::endl;
 	//Vamos enviando todos los mensajes
+	m.lock();
 	while (!m_messages.empty()) {
 		Message message = m_messages.front();
 		//lo borramos de la cola
@@ -12,15 +12,19 @@ void MessageHandler::update()
 		//Enviamos el mensaje a la entity
 		message.entity->handleMessage(message);
 	}
+	m.unlock();
 }
 
 void MessageHandler::sendMessage(const Message & message)
 {
-	// Añadir a la cola
+	m.lock();
+	// Aï¿½adir a la cola
 	m_messages.push(message);
+
+	m.unlock();
 }
 
-MessageHandler::~MessageHandler()
+void MessageHandler::borrarContenido()
 {
 	while (!m_messages.empty()) {
 		m_messages.pop();

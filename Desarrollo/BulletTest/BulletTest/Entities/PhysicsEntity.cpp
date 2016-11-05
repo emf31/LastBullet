@@ -11,6 +11,17 @@ PhysicsEntity::~PhysicsEntity()
 {
 }
 
+void PhysicsEntity::rotate(Vec3<float> rot)
+{
+	btTransform tr;
+	tr.setIdentity();
+	btQuaternion quat;
+	quat.setEulerZYX(btScalar(rot.getX()), btScalar(rot.getY()), btScalar(rot.getZ())); //or quat.setEulerZYX depending on the ordering you want
+	tr.setRotation(quat);
+
+	m_rigidBody->setCenterOfMassTransform(tr);
+}
+
 void PhysicsEntity::inicializar()
 {
 }

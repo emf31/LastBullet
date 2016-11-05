@@ -24,7 +24,7 @@ public:
 };
 
 
-DynamicCharacterController::DynamicCharacterController(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight)
+DynamicCharacterController::DynamicCharacterController(Entity* ent, const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight)
 	: m_bottomYOffset(height / 2.0f + radius), m_bottomRoundedRegionYOffset((height + radius) / 2.0f),
 	m_deceleration(9.f), m_maxSpeed(30.f), m_jumpImpulse(600.f),
 	m_manualVelocity(0.0f, 0.0f, 0.0f), m_onGround(false), m_hittingWall(false),
@@ -53,6 +53,9 @@ DynamicCharacterController::DynamicCharacterController(const Vec3<float> spawnPo
 	// Keep upright
 	m_pRigidBody->setAngularFactor(0.0f);
 
+	//Pointer to entity
+	m_pRigidBody->setUserPointer(ent);
+
 	// No sleeping (or else setLinearVelocity won't work)
 	m_pRigidBody->setActivationState(DISABLE_DEACTIVATION);
 
@@ -62,7 +65,7 @@ DynamicCharacterController::DynamicCharacterController(const Vec3<float> spawnPo
 	m_pGhostObject = new btPairCachingGhostObject();
 
 	m_pGhostObject->setCollisionShape(m_pCollisionShape);
-	m_pGhostObject->setUserPointer(this);
+	m_pGhostObject->setUserPointer(ent);
 	m_pGhostObject->setCollisionFlags(btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
 	// Specify filters manually, otherwise ghost doesn't collide with statics for some reason
@@ -71,11 +74,9 @@ DynamicCharacterController::DynamicCharacterController(const Vec3<float> spawnPo
 
 DynamicCharacterController::~DynamicCharacterController()
 {
-	/*if (!m_pScene->IsClearing_SceneObjects())
-	{
-	m_pPhysicsWorld->m_pDynamicsWorld->removeRigidBody(m_pRigidBody);
-	m_pPhysicsWorld->m_pDynamicsWorld->removeCollisionObject(m_pGhostObject);
-	}*/
+
+	PhysicsEngine::i().removeRigidBody(m_pRigidBody);
+	PhysicsEngine::i().m_world->removeCollisionObject(m_pGhostObject);
 
 	delete m_pCollisionShape;
 	delete m_pMotionState;
@@ -110,7 +111,7 @@ void DynamicCharacterController::Update(Time elapsedTime)
 	//m_pGhostObject->getWorldTransform().getOrigin().setY(m_pGhostObject->getWorldTransform().getOrigin().getY() - 0.01f);
 
 	// Update transform
-	m_pMotionState->getWorldTransform(m_motionTransform);
+	//m_pMotionState->getWorldTransform(m_motionTransform);
 
 	m_onGround = false;
 

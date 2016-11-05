@@ -16,7 +16,7 @@
 class DynamicCharacterController
 {
 public:
-	DynamicCharacterController(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
+	DynamicCharacterController(Entity* ent, const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
 	~DynamicCharacterController();
 
 	float m_deceleration;

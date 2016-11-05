@@ -37,7 +37,7 @@ void Game::run()
 		if (GraphicEngine::i().isWindowActive()) {
 			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
-			//MastEventReceiver::i().endEventProcess();
+			MastEventReceiver::i().endEventProcess();
 			
 			processEvents();
 			//Llevamos control en las actualizaciones por frame
@@ -52,7 +52,7 @@ void Game::run()
 			render(interpolation, timePerFrame);
 			
 		}
-			//MastEventReceiver::i().startEventProcess();
+			MastEventReceiver::i().startEventProcess();
 	}
 	GraphicEngine::i().apagar();
 }
@@ -72,11 +72,26 @@ void Game::inicializar()
 
 	enemy = new Enemy();
 
+	///////////////////////////////////////////////////////////////
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "");
 	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 1.f, 100), 0));
-	sueloEnt->cargarContenido();
+	sueloEnt->rotate(Vec3<float>(0.4, 0, 0));
+	///////////////////////////////////////////////////////////////
+
+	/*SceneNode* suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
+
+	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "");
+	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 1.f, 100), 0));
+	sueloEnt2->rotate(Vec3<float>(0.2,0,0));
+	///////////////////////////////////////////////////////////////
+
+	SceneNode* suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
+
+	PhysicsEntity *sueloEnt3 = new PhysicsEntity(suelo3, "");
+	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 1.f, 100), 0));
+	sueloEnt3->rotate(Vec3<float>(0, 0, 0.9));*/
 
 
 	EntityManager::i().inicializar();
@@ -89,36 +104,19 @@ void Game::inicializar()
 	GraphicEngine::i().createCamera(Vec3<float>(0,300,0), Vec3<float>(10,0,10));
 	GraphicEngine::i().setCameraEntity(player);
 
-
-	
-
-
 }
 
 void Game::processEvents()
 {
-	int i = 0;
-	/*JumpCommand commandJump(*player);
-	MoveCommand commandMove(*player);
-	ShootCommand commandShoot(*player);
-
-	InputHandler inputHandler(commandJump, commandMove, commandShoot);
-
-	//EntityManager::i().handleInput();
-	
-	inputHandler.handleInput();*/
 	EntityManager::i().handleInput();
-
-
 }
 
 void Game::update(Time elapsedTime)
 {
-	MessageHandler::update();
+	
 	PhysicsEngine::i().update(elapsedTime);
 	EntityManager::i().update(elapsedTime);
-
-	
+	MessageHandler::i().update();
 }
 
 void Game::render(float interpolation, Time elapsedTime)
@@ -130,8 +128,6 @@ void Game::render(float interpolation, Time elapsedTime)
 
 
 	GraphicEngine::i().renderAll();
-
-	
 
 }
 

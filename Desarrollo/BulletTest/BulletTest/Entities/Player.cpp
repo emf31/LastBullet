@@ -9,7 +9,7 @@
 
 
 
-Player::Player() : Entity(-1, NULL, "Player"),
+Player::Player() : Entity(2, NULL, "Player"),
 m_acceleration_walk(10.f), 
 //m_acceleration_run(5.f), 
 m_deceleration_walk(11.f), 
@@ -121,7 +121,7 @@ void Player::cargarContenido()
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
 	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
-	p_controller = new DynamicCharacterController(Vec3<float>(0, 100, 0), 1.f, 1, 70, 1);
+	p_controller = new DynamicCharacterController(this,Vec3<float>(0, 100, 0), 1.f, 1, 70, 1);
 }
 
 void Player::borrarContenido()
@@ -132,6 +132,9 @@ void Player::borrarContenido()
 
 void Player::handleMessage(const Message & message)
 {
+	if (message.mensaje == "COLLISION") {
+		//std::cout << "Colisiono" << std::endl;
+	}
 }
 
 void Player::jump() {
@@ -205,16 +208,17 @@ void Player::shoot() {
 
 		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 		
-		
-		if (hit != m_rigidBody)
-		{
+		////////////////////////////////////////////////////////////
+		//TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
+		//if (hit != m_rigidBody)
+		//{
 			
 			for (int i = 0; i < ray.m_hitNormalWorld.capacity(); i++) {
 				//printf("SIZE OF THE ARRAY OF HITS: %d \n", ray.m_hitNormalWorld.capacity());
 
 				Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
 				Message msg(myEnt,"COLISION_BALA",NULL);
-				MessageHandler::sendMessage(msg);
+				MessageHandler::i().sendMessage(msg);
 
 
 				printf("hit something\n");
@@ -222,7 +226,7 @@ void Player::shoot() {
 
 			}
 
-		}
+		//}
 	}
 
 

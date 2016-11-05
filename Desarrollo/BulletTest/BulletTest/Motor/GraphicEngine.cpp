@@ -81,9 +81,9 @@ void GraphicEngine::renderAll()
 
 	if (debug_draw_bullet)
 	{
-		irrDriver->setMaterial(debugMat);
+		/*irrDriver->setMaterial(debugMat);
 		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
-		PhysicsEngine::i().m_world->debugDrawWorld();
+		PhysicsEngine::i().m_world->debugDrawWorld();*/
 	}
 
 	irrDriver->endScene();
