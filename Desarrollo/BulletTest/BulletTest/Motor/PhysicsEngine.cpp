@@ -39,14 +39,17 @@ void PhysicsEngine::inicializar()
 {
 	m_config = new btDefaultCollisionConfiguration();
 	m_dispatcher = new btCollisionDispatcher(m_config);
-	m_broadphase = new btAxisSweep3(btVector3(-1000, -1000, -1000), btVector3(1000, 1000, 1000));
+	m_broadphase = new btDbvtBroadphase();
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 	m_world->setGravity(btVector3(0, -2, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
-	m_world->getPairCache()->setInternalGhostPairCallback(m_pGhostPairCallBack);
+	m_broadphase->getOverlappingPairCache()->setInternalGhostPairCallback(m_pGhostPairCallBack);
+
+
+
 
 	//asi le decidmos a bullet que llame a handle contacts
 	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;

@@ -2,11 +2,11 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
+#include "KinematicCharacterController.h"
+//#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
 #include <vector>
-#include "DynamicCharacterController.h"
-
-
+//#include "DynamicCharacterController.h"
 class Player : public Entity
 {
 public:
@@ -56,7 +56,15 @@ private:
 	virtual void handleMessage(const Message& message) override;
 
 	//Player controller
-	DynamicCharacterController* p_controller;
+	KinematicCharacterController* p_controller;
+
+	btCollisionShape* m_pCollisionShape;
+	btDefaultMotionState* m_pMotionState;
+	btPairCachingGhostObject* m_pGhostObject;
+
+	float radius;
+	float height;
+	float mass;
 
 	float m_acceleration_walk;
 	float m_acceleration_run;

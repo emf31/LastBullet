@@ -27,3 +27,5 @@
 # Executables
 *.out
 *.app
+*.obj
+*.obj

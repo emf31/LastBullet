@@ -31,6 +31,16 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
+	void setPosition(Vec3<float> pos) {
+
+		m_renderState.setPosition(pos);
+		btTransform transform = m_rigidBody->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+		m_rigidBody->setCenterOfMassTransform(transform);
+		m_nodo->setPosition(pos);
+
+	}
+
 private:
 	btRigidBody* m_rigidBody;
 

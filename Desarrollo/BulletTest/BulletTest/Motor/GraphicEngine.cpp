@@ -35,7 +35,7 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
-	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS();
+	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,100,0.05);
 	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
 	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
 	cam->setInputReceiverEnabled(true);
@@ -90,6 +90,19 @@ void GraphicEngine::renderAll()
 	}
 
 	irrDriver->endScene();
+	int fps = irrDriver->getFPS();
+
+	if (lastFPS != fps)
+	{
+		core::stringw str = L"LAST BULLET PRE ALPHA MECHANICS [";
+		str += irrDriver->getName();
+		str += "] FPS:";
+		str += fps;
+
+		irrDevice->setWindowCaption(str.c_str());
+		lastFPS = fps;
+	}
+
 }
 
 void GraphicEngine::inicializar()
