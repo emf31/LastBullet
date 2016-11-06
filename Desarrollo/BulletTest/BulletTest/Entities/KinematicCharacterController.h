@@ -37,6 +37,7 @@ ATTRIBUTE_ALIGNED16(class) KinematicCharacterController : public btCharacterCont
 {
 protected:
 
+
 	btScalar m_halfHeight;
 
 	btPairCachingGhostObject* m_ghostObject;
@@ -173,7 +174,7 @@ public:
 	void setJumpSpeed(btScalar jumpSpeed);
 	btScalar getJumpSpeed() const { return m_jumpSpeed; }
 	void setMaxJumpHeight(btScalar maxJumpHeight);
-	bool canJump() const;
+	bool canJump();
 
 	void jump(const btVector3& v = btVector3());
 
@@ -198,6 +199,9 @@ public:
 
 	bool onGround() const;
 	void setUpInterpolate(bool value);
+
+	int numJumps;
+
 };
 
 #endif // BT_KINEMATIC_CHARACTER_CONTROLLER_H

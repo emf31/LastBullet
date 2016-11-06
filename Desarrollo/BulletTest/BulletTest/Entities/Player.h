@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
-#include "../KinematicCharacterController.h"
+#include "KinematicCharacterController.h"
 //#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
 #include <vector>

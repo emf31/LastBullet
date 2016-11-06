@@ -22,6 +22,7 @@ subject to the following restrictions:
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
 #include "LinearMath/btDefaultMotionState.h"
+
 #include "KinematicCharacterController.h"
 
 
@@ -875,13 +876,22 @@ void KinematicCharacterController::setMaxJumpHeight(btScalar maxJumpHeight)
 	m_maxJumpHeight = maxJumpHeight;
 }
 
-bool KinematicCharacterController::canJump() const
+bool KinematicCharacterController::canJump()
 {
-	return onGround();
+	if (onGround()) {
+		numJumps = 1;
+		return true;
+	}
+	else if (numJumps == 1) {
+		numJumps = 0;
+		return true;
+	}
+	return false;
 }
 
 void KinematicCharacterController::jump(const btVector3& v)
 {
+	if(canJump()){
 	m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
 	m_verticalVelocity = m_jumpSpeed;
 	m_wasJumping = true;
@@ -899,6 +909,7 @@ void KinematicCharacterController::jump(const btVector3& v)
 	btScalar magnitude = (btScalar(1.0) / m_rigidBody->getInvMass()) * btScalar(8.0);
 	m_rigidBody->applyCentralImpulse(up * magnitude);
 #endif
+	}
 }
 
 void KinematicCharacterController::setGravity(const btVector3& gravity)

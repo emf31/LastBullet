@@ -1,27 +1,16 @@
-﻿  Player.cpp
+﻿  KinematicCharacterController.cpp
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\kinematiccharactercontroller.cpp(144): warning C4305: '=': truncamiento de 'double' a 'btScalar'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\kinematiccharactercontroller.cpp(154): warning C4305: '=': truncamiento de 'double' a 'btScalar'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\kinematiccharactercontroller.cpp(163): warning C4305: '=': truncamiento de 'double' a 'btScalar'
   Generando código...
-  Compilando...
+  Omitiendo... (no se detectaron cambios relevantes)
   main.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
   InputHandler.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp(133): warning C4800: 'State': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp(138): warning C4800: 'Action': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
   Game.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(80): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(87): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(94): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  Generando código...
+  Player.cpp
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

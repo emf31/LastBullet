@@ -87,9 +87,6 @@
     <ClInclude Include="Entities\EntityManager.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\PhysicsEntity.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\GraphicEngine.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
@@ -159,7 +156,10 @@
     <ClInclude Include="DebugDraw.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="KinematicCharacterController.h">
+    <ClInclude Include="Entities\PhysicsEntity.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\KinematicCharacterController.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
@@ -197,9 +197,6 @@
     <ClCompile Include="Entities\EntityManager.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\PhysicsEntity.cpp">
-      <Filter>Archivos de código fuente\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Motor\GraphicEngine.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
@@ -233,7 +230,10 @@
     <ClCompile Include="Motor\RenderState.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="KinematicCharacterController.cpp">
+    <ClCompile Include="Entities\KinematicCharacterController.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\PhysicsEntity.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
