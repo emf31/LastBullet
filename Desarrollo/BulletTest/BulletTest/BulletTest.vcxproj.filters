@@ -159,6 +159,9 @@
     <ClInclude Include="DebugDraw.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="KinematicCharacterController.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -229,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="Motor\RenderState.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicCharacterController.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -172,6 +172,7 @@
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
+    <ClInclude Include="KinematicCharacterController.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="Entities\Rocket.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
+    <ClCompile Include="KinematicCharacterController.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />

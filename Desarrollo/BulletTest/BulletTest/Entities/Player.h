@@ -2,7 +2,8 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
-#include <BulletDynamics\Character\btKinematicCharacterController.h>
+#include "../KinematicCharacterController.h"
+//#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
 #include <vector>
 #include "DynamicCharacterController.h"
@@ -69,7 +70,7 @@ private:
 	virtual void handleMessage(const Message& message) override;
 
 	//Player controller
-	btKinematicCharacterController* p_controller;
+	KinematicCharacterController* p_controller;
 
 	btCollisionShape* m_pCollisionShape;
 	btDefaultMotionState* m_pMotionState;
