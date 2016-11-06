@@ -52,6 +52,8 @@ private:
 
 	video::ITexture* images;
 
+	int lastFPS;
+
 	std::unordered_map<int, Camera*> cameras;
 	int m_camera;
 	Camera *active_camera;
