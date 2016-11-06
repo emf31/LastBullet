@@ -28,7 +28,7 @@ DynamicCharacterController::DynamicCharacterController(Entity* ent, const Vec3<f
 	: m_bottomYOffset(height / 2.0f + radius), m_bottomRoundedRegionYOffset((height + radius) / 2.0f),
 	m_deceleration(9.f), m_maxSpeed(30.f), m_jumpImpulse(600.f),
 	m_manualVelocity(0.0f, 0.0f, 0.0f), m_onGround(false), m_hittingWall(false),
-	m_stepHeight(stepHeight)
+	m_stepHeight(stepHeight), m_floorNormal(0.0f, 1.0f, 0.0f)
 {
 	m_pCollisionShape = new btCapsuleShape(radius, height);
 
@@ -114,10 +114,11 @@ void DynamicCharacterController::Update(Time elapsedTime)
 	//m_pMotionState->getWorldTransform(m_motionTransform);
 
 	m_onGround = false;
+	m_floorNormal = Vec3f(0.0f, 1.0f, 0.0f);
 
 	ParseGhostContacts();
 
-	UpdatePosition();
+	UpdatePosition(elapsedTime);
 	UpdateVelocity(elapsedTime);
 
 	// Update jump timer
@@ -211,7 +212,7 @@ void DynamicCharacterController::UpdateVelocity(Time elapsedTime)
 	}
 }
 
-void DynamicCharacterController::UpdatePosition()
+void DynamicCharacterController::UpdatePosition(Time elapsedTime)
 {
 	// Ray cast, ignore rigid body
 	IgnoreBodyAndGhostCast rayCallBack_bottom(m_pRigidBody, m_pGhostObject);
@@ -222,19 +223,27 @@ void DynamicCharacterController::UpdatePosition()
 	if (rayCallBack_bottom.hasHit())
 	{
 		float previousY = m_pRigidBody->getWorldTransform().getOrigin().getY();
+		if (m_pRigidBody->getLinearVelocity().getY() < 0.01f) {
+			m_pRigidBody->getWorldTransform().getOrigin().setY(previousY + (m_bottomYOffset + m_stepHeight) * (1.0f - rayCallBack_bottom.m_closestHitFraction) * 0.5f * elapsedTime.asSeconds());
 
-		m_pRigidBody->getWorldTransform().getOrigin().setY(previousY + (m_bottomYOffset + m_stepHeight) * (1.0f - rayCallBack_bottom.m_closestHitFraction));
+			Vec3f vel(m_pRigidBody->getLinearVelocity().x(), m_pRigidBody->getLinearVelocity().y(), m_pRigidBody->getLinearVelocity().z());
 
-		btVector3 vel(m_pRigidBody->getLinearVelocity());
+			// Cancel velocity across normal
+			m_floorNormal = Vec3f(rayCallBack_bottom.m_hitNormalWorld.x(), rayCallBack_bottom.m_hitNormalWorld.y(), rayCallBack_bottom.m_hitNormalWorld.z());
 
-		//vel.setY(0.0f);
+			Vec3f velInNormalDir(vel.Project(m_floorNormal));
 
-		m_pRigidBody->setLinearVelocity(vel);
+			// Apply correction
+			m_manualVelocity -= velInNormalDir * 1.05f;
+
+			m_pRigidBody->setLinearVelocity(btVector3(m_manualVelocity.x, m_manualVelocity.y, m_manualVelocity.z));
+		}
+
 
 		m_onGround = true;
 	}
 
-	float testOffset = 0.07f;
+	float testOffset = 0.01f;
 
 	// Ray cast, ignore rigid body
 	IgnoreBodyAndGhostCast rayCallBack_top(m_pRigidBody, m_pGhostObject);
@@ -246,11 +255,16 @@ void DynamicCharacterController::UpdatePosition()
 	{
 		m_pRigidBody->getWorldTransform().setOrigin(m_previousPosition);
 
-		btVector3 vel(m_pRigidBody->getLinearVelocity());
+		Vec3f vel(m_pRigidBody->getLinearVelocity().x(), m_pRigidBody->getLinearVelocity().y(), m_pRigidBody->getLinearVelocity().z());
 
-		//vel.setY(0.0f);
+		// Cancel velocity across normal
+		Vec3f velInNormalDir(vel.Project(Vec3f(rayCallBack_top.m_hitNormalWorld.x(), rayCallBack_top.m_hitNormalWorld.y(), rayCallBack_top.m_hitNormalWorld.z())));
 
-		m_pRigidBody->setLinearVelocity(vel);
+		// Apply correction
+		m_manualVelocity -= velInNormalDir * 1.05f;
+
+		m_pRigidBody->setLinearVelocity(btVector3(m_manualVelocity.x, m_manualVelocity.y, m_manualVelocity.z));
+
 	}
 
 	m_previousPosition = m_pRigidBody->getWorldTransform().getOrigin();

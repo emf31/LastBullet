@@ -113,6 +113,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 	btRigidBody* rigidBody = new btRigidBody(masa, motionState, shape, localinertia);
 	rigidBody->setActivationState(body_state);
 
+
 	//add a pointer to rigidBody pointing to associated Entity
 	rigidBody->setUserPointer(entity);
 

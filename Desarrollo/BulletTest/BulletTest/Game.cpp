@@ -77,7 +77,7 @@ void Game::inicializar()
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "");
 	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 1.f, 100), 0));
-	sueloEnt->rotate(Vec3<float>(0.4, 0, 0));
+	sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
 	///////////////////////////////////////////////////////////////
 
 	/*SceneNode* suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
@@ -124,7 +124,7 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 
-	GraphicEngine::i().updateCamera();
+	//GraphicEngine::i().updateCamera();
 
 
 	GraphicEngine::i().renderAll();

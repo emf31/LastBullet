@@ -58,9 +58,13 @@ void Player::update(Time elapsedTime)
 
 	p_controller->Update(elapsedTime);
 
+	//if (!isMoving && p_controller->IsOnGround()) {
+		//p_controller->m_pRigidBody->setLinearVelocity(btVector3(0, 0, 0));
+	//}
+
 	m_renderState.updatePositions(Vec3<float>(p_controller->GetPosition().getX(), p_controller->GetPosition().getY() - 2.5f, p_controller->GetPosition().getZ()));
 	
-
+	
 
 	if (rocket->getEstado() == CARGADO) {
 		Vec3<float> posicion(p_controller->GetPosition().getX()+5, p_controller->GetPosition().getY(), p_controller->GetPosition().getZ());
