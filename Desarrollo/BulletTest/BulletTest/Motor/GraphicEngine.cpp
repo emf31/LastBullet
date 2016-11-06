@@ -82,11 +82,13 @@ void GraphicEngine::renderAll()
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	if (debug_draw_bullet)
 	{
+
 		//material de irrlicht al que no le afectan las luces
 		irrDriver->setMaterial(debugMat);
 		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
 		//mandas que se dibuje el debug a las fisicas
 		PhysicsEngine::i().m_world->debugDrawWorld();
+
 	}
 
 	irrDriver->endScene();

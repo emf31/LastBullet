@@ -84,15 +84,54 @@ void Game::inicializar()
 
 	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "");
 	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt2->rotate(Vec3<float>(90 * PI / 180.0,0,0));
+	sueloEnt2->rotate(Vec3<float>(90 * PI / 180.0,0, 0));
+	sueloEnt2->setPosition(Vec3<float>(-50, 0, 0));
 	///////////////////////////////////////////////////////////////
 
 	SceneNode* suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt3 = new PhysicsEntity(suelo3, "");
 	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt3->rotate(Vec3<float>(0, 0, 35));
-	sueloEnt3->setPosition(Vec3<float>(0, 0, 60));
+	sueloEnt3->rotate(Vec3<float>(0, 0, 90 * PI / 180.0));
+	sueloEnt3->setPosition(Vec3<float>(0, 0, -50));
+
+	//////////////////////////////////////////////////////////////////////
+
+	SceneNode* suelo4 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 100), "../media/wall.jpg", "");
+
+	PhysicsEntity *sueloEnt4 = new PhysicsEntity(suelo4, "");
+	sueloEnt4->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt4, Vec3<float>(25, 5.f, 100), 0));
+	sueloEnt4->rotate(Vec3<float>(0, 0, 30 * PI / 180.0));
+	sueloEnt4->setPosition(Vec3<float>(60, -25, 40));
+
+	///////////////////////////////////////////////////////////////////////
+
+	SceneNode* suelo5 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 50), "../media/wall.jpg", "");
+
+	PhysicsEntity *sueloEnt5 = new PhysicsEntity(suelo5, "");
+	sueloEnt5->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt5, Vec3<float>(25, 5.f, 50), 0));
+	sueloEnt5->rotate(Vec3<float>(0, 0, 0));
+	sueloEnt5->setPosition(Vec3<float>(60, 0, -25));
+
+
+	///////////////////////////////////////////////////////////////
+
+	SceneNode* suelo6 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
+
+	PhysicsEntity *sueloEnt6 = new PhysicsEntity(suelo6, "");
+	sueloEnt6->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt6, Vec3<float>(100, 5.f, 100), 0));
+	sueloEnt6->rotate(Vec3<float>(90 * PI / 180.0, 0, 0));
+	sueloEnt6->setPosition(Vec3<float>(75, 0, 0));
+	///////////////////////////////////////////////////////////////
+
+	SceneNode* suelo7 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
+
+	PhysicsEntity *sueloEnt7 = new PhysicsEntity(suelo7, "");
+	sueloEnt7->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(100, 5.f, 100), 0));
+	sueloEnt7->rotate(Vec3<float>(0, 0, 90 * PI / 180.0));
+	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
+
+	//////////////////////////////////////////////////////////////////////
 
 	EntityManager::i().inicializar();
 
@@ -124,7 +163,7 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 
-	//GraphicEngine::i().updateCamera();
+	GraphicEngine::i().updateCamera();
 
 
 	GraphicEngine::i().renderAll();
