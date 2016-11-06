@@ -96,6 +96,7 @@ void Game::inicializar()
 
 	EntityManager::i().inicializar();
 
+
 	EntityManager::i().cargarContenido();
 
 

@@ -5,6 +5,7 @@
 #include "KinematicCharacterController.h"
 //#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
+
 #include <vector>
 //#include "DynamicCharacterController.h"
 class Player : public Entity
@@ -55,6 +56,7 @@ private:
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
 
+
 	//Player controller
 	KinematicCharacterController* p_controller;
 
@@ -65,6 +67,7 @@ private:
 	float radius;
 	float height;
 	float mass;
+
 
 	float m_acceleration_walk;
 	float m_acceleration_run;
