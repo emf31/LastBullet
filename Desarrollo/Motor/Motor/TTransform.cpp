@@ -36,5 +36,9 @@ void TTransform::multiply(glm::mat4 mat) {
 void TTransform::multiply(glm::vec4 vec) {
 	//m_matrix = vec * m_matrix ;
 	//TODO
+	
+}
+void TTransform::loadMatrix(glm::mat4 mat) {
+	m_matrix = mat;
 }
 

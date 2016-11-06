@@ -95,7 +95,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32d.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32d.lib;assimp-vc140-mt.lib;SOIL.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -150,18 +150,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TCamera.cpp" />
     <ClCompile Include="TEntity.cpp" />
     <ClCompile Include="TMesh.cpp" />
+    <ClCompile Include="TModel.cpp" />
     <ClCompile Include="TNode.cpp" />
     <ClCompile Include="TSpotLight.cpp" />
     <ClCompile Include="TTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EngineDevice.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="TCamera.h" />
     <ClInclude Include="TEntity.h" />
     <ClInclude Include="TMesh.h" />
+    <ClInclude Include="TModel.h" />
     <ClInclude Include="TNode.h" />
     <ClInclude Include="TSpotLight.h" />
     <ClInclude Include="TTransform.h" />

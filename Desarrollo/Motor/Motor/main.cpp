@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#include "EngineDevice.h"
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 int main() {
@@ -43,6 +45,12 @@ int main() {
 
 	glViewport(0, 0, width, height);
 
+	EngineDevice engine;
+	SceneManager *sm = engine.getSceneManager();
+
+	sm->addMesh(sm->getMesh("../resources/MeshPlayer.obj"));
+	
+
 	while (!glfwWindowShouldClose(window)){
 		// Check and call events
 		glfwPollEvents();
@@ -50,6 +58,8 @@ int main() {
 		//RENDER
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		sm->draw();
 
 		//Swap Buffers
 		glfwSwapBuffers(window);

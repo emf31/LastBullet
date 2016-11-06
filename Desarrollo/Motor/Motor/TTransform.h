@@ -21,6 +21,8 @@ public:
 	void multiply(glm::mat4 mat);
 	void multiply(glm::vec4 vec);
 
+	void loadMatrix(glm::mat4 mat);
+
 	glm::mat4 m_matrix;
 	
 };

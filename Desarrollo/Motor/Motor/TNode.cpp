@@ -37,3 +37,13 @@ TEntity * TNode::getEntity() {
 TNode * TNode::getParentNode() {
 	return m_parentNode;
 }
+
+void TNode::draw() {
+	if (m_entity != nullptr) {
+		m_entity->beginDraw();
+	}
+	
+	for (int i = 0; i < m_childNodes.size(); i++) {
+		m_childNodes.at(i)->draw();
+	}
+}
