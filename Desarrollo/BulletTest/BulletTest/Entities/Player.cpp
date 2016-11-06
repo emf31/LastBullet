@@ -56,13 +56,13 @@ void Player::update(Time elapsedTime)
 	
 	//p_controller->setFallSpeed(2.f);
 
-	p_controller->setVelocityForTimeInterval(
-		btVector3(speedFinal.getX()*30,
-				  speedFinal.getY()*30,
-				  speedFinal.getZ()*30), elapsedTime.asSeconds());
+	p_controller->setWalkDirection(
+		btVector3(speedFinal.getX(),
+			speedFinal.getY(),
+			speedFinal.getZ()));
 
-	p_controller->setMaxPenetrationDepth(0.6f);
-
+	//p_controller->setMaxPenetrationDepth(0.f);
+	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 
 	//p_controller->Update(elapsedTime);
@@ -180,14 +180,16 @@ void Player::cargarContenido()
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
 	p_controller = new btKinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 0.5f);
-	p_controller->setGravity(btVector3(0,-10,0));
-	p_controller->setJumpSpeed(5);
+	//p_controller->setGravity(btVector3(0,-9.8*3,0));
+	//p_controller->setJumpSpeed(5);
 	p_controller->setUp(btVector3(0,1,0));
-	p_controller->setMaxJumpHeight(20);
+	//p_controller->setFallSpeed(55);
+	//p_controller->setMaxJumpHeight(20);
+	//p_controller->setLinearDamping(0.1);
 
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
 		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
-	PhysicsEngine::i().m_world->addAction(p_controller);
+	//PhysicsEngine::i().m_world->addAction(p_controller);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
@@ -246,7 +248,7 @@ void Player::jump() {
 	}*/
 
 	
-	p_controller->jump();
+	p_controller->jump(btVector3(0,20,0));
 }
 
 
