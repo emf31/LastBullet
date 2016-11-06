@@ -137,8 +137,8 @@ btVector3 KinematicCharacterController::perpindicularComponent(const btVector3& 
 KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObject* ghostObject, btConvexShape* convexShape, btScalar stepHeight, const btVector3& up)
 {
 	m_ghostObject = ghostObject;
-	m_up.setValue(0.0f, 0.0f, 1.0f);
-	m_jumpAxis.setValue(0.0f, 0.0f, 1.0f);
+	m_up.setValue(0.0f, 1.0f, 0.0f);
+	m_jumpAxis.setValue(0.0f, 1.0f, 0.0f);
 	setUp(up);
 	setStepHeight(stepHeight);
 	m_addedMargin = 0.02;
@@ -1015,4 +1015,5 @@ btQuaternion KinematicCharacterController::getRotation(btVector3& v0, btVector3&
 
 	return shortestArcQuatNormalize2(v0, v1);
 }
+
 

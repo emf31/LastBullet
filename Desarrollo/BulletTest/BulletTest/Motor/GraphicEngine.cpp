@@ -35,7 +35,7 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
-	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS();
+	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,100,0.05);
 	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
 	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
 	cam->setInputReceiverEnabled(true);
@@ -81,9 +81,9 @@ void GraphicEngine::renderAll()
 
 	if (debug_draw_bullet)
 	{
-		/*irrDriver->setMaterial(debugMat);
+		irrDriver->setMaterial(debugMat);
 		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
-		PhysicsEngine::i().m_world->debugDrawWorld();*/
+		PhysicsEngine::i().m_world->debugDrawWorld();
 	}
 
 	irrDriver->endScene();
