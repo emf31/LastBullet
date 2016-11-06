@@ -124,7 +124,7 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 
-	GraphicEngine::i().updateCamera();
+	//GraphicEngine::i().updateCamera();
 
 
 	GraphicEngine::i().renderAll();

@@ -33,7 +33,7 @@ class btPairCachingGhostObject;
 ///btKinematicCharacterController is an object that supports a sliding motion in a world.
 ///It uses a ghost object and convex sweep test to test for upcoming collisions. This is combined with discrete collision detection to recover from penetrations.
 ///Interaction between btKinematicCharacterController and dynamic rigid bodies needs to be explicity implemented by the user.
-ATTRIBUTE_ALIGNED16(class) KinematicCharacterController : public btCharacterControllerInterface
+ATTRIBUTE_ALIGNED16(class) KinematicCharacterController
 {
 protected:
 
@@ -107,7 +107,7 @@ protected:
 	void stepForwardAndStrafe(btCollisionWorld* collisionWorld, const btVector3& walkMove);
 	void stepDown(btCollisionWorld* collisionWorld, btScalar dt);
 
-	virtual bool needsCollision(const btCollisionObject* body0, const btCollisionObject* body1);
+	bool needsCollision(const btCollisionObject* body0, const btCollisionObject* body1);
 
 	void setUpVector(const btVector3& up);
 
@@ -122,7 +122,7 @@ public:
 
 
 	///btActionInterface interface
-	virtual void updateAction(btCollisionWorld* collisionWorld,btScalar deltaTime)
+	void updateAction(btCollisionWorld* collisionWorld,btScalar deltaTime)
 	{
 		preStep(collisionWorld);
 		playerStep(collisionWorld, deltaTime);
@@ -140,21 +140,21 @@ public:
 	///	increment the position each simulation iteration, regardless
 	///	of dt.
 	/// This call will reset any velocity set by setVelocityForTimeInterval().
-	virtual void	setWalkDirection(const btVector3& walkDirection);
+	 void	setWalkDirection(const btVector3& walkDirection);
 
 	/// Caller provides a velocity with which the character should move for
 	///	the given time period.  After the time period, velocity is reset
 	///	to zero.
 	/// This call will reset any walk direction set by setWalkDirection().
 	/// Negative time intervals will result in no motion.
-	virtual void setVelocityForTimeInterval(const btVector3& velocity,
+	 void setVelocityForTimeInterval(const btVector3& velocity,
 		btScalar timeInterval);
 
-	virtual void setAngularVelocity(const btVector3& velocity);
-	virtual const btVector3& getAngularVelocity() const;
+	 void setAngularVelocity(const btVector3& velocity);
+	 const btVector3& getAngularVelocity() const;
 
-	virtual void setLinearVelocity(const btVector3& velocity);
-	virtual btVector3 getLinearVelocity() const;
+	 void setLinearVelocity(const btVector3& velocity);
+	 btVector3 getLinearVelocity() const;
 
 	void setLinearDamping(btScalar d) { m_linearDamping = btClamped(d, (btScalar)btScalar(0.0), (btScalar)btScalar(1.0)); }
 	btScalar getLinearDamping() const { return  m_linearDamping; }

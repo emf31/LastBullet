@@ -71,8 +71,9 @@ void Player::update(Time elapsedTime)
 		//p_controller->m_pRigidBody->setLinearVelocity(btVector3(0, 0, 0));
 	//}
 
-	m_renderState.updatePositions(Vec3<float>(p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-												p_controller->getGhostObject()->getWorldTransform().getOrigin().y(),
+	m_renderState.updatePositions(Vec3<float>(
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y()-(height/2)-radius,
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 	
 	
@@ -138,8 +139,8 @@ void Player::cargarContenido()
 
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
-	radius = 1.f;
-	height = 2.f;
+	radius = 1.2f;
+	height = 3.3f;
 	mass = 70.f;
 
 	m_pCollisionShape = new btCapsuleShape(radius, height);
@@ -148,22 +149,6 @@ void Player::cargarContenido()
 
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(mass, intertia);
-	
-	///////////////////////////////////////////////GHOST//////////////////////////////////////////////////////////
-	/*btTransform transform;
-	transform.setIdentity();
-	transform.setOrigin(btVector3(0.0f, 10.0f, 0.0f));
-
-	btPairCachingGhostObject* ghostObject = new btPairCachingGhostObject();
-	ghostObject->setWorldTransform(transform);
-
-	ghostObject->setUserPointer(this);
-
-
-	ghostObject->setCollisionShape(m_pCollisionShape
-	ghostObject->setCollisionFlags(ghostObject->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);*/
-
-	///////////////////////////////////////////////////CHARACTER/////////////////////////////////////////////////////////
 
 	btTransform startTransform;
 	startTransform.setIdentity();
@@ -172,9 +157,6 @@ void Player::cargarContenido()
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(this);
 	actorGhost->setWorldTransform(startTransform);
-
-	/*btGhostPairCallback* actorGhostPairCallback = new btGhostPairCallback();
-	overlappingPairCache->getOverlappingPairCache()->setInternalGhostPairCallback(actorGhostPairCallback);*/
 
 	actorGhost->setCollisionShape(m_pCollisionShape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
