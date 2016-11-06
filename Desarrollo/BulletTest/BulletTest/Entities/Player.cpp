@@ -1,4 +1,4 @@
-#include "Player.h"
+﻿#include "Player.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor/GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
@@ -48,25 +48,36 @@ void Player::update(Time elapsedTime)
 
 	speedFinal.normalise();
 
-	p_controller->m_maxSpeed = m_maxSpeed_walk;
-	p_controller->m_deceleration = m_deceleration_walk;
+	/*p_controller->m_maxSpeed = m_maxSpeed_walk;
+	p_controller->m_deceleration = m_deceleration_walk;*/
 
-	p_controller->Walk(Vec3f(elapsedTime.asSeconds()*m_acceleration_walk *speedFinal.getX(),
-		elapsedTime.asSeconds()*m_acceleration_walk *speedFinal.getY(),
-		elapsedTime.asSeconds()*m_acceleration_walk*speedFinal.getZ()));
+	//p_controller->setVelocityForTimeInterval(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ(),elapsedTime.asSeconds()));
+
+	
+	//p_controller->setFallSpeed(2.f);
+
+	p_controller->setVelocityForTimeInterval(
+		btVector3(speedFinal.getX()*30,
+				  speedFinal.getY()*30,
+				  speedFinal.getZ()*30), elapsedTime.asSeconds());
+
+	p_controller->setMaxPenetrationDepth(0.6f);
 
 
-	p_controller->Update(elapsedTime);
+
+	//p_controller->Update(elapsedTime);
 
 	//if (!isMoving && p_controller->IsOnGround()) {
 		//p_controller->m_pRigidBody->setLinearVelocity(btVector3(0, 0, 0));
 	//}
 
-	m_renderState.updatePositions(Vec3<float>(p_controller->GetPosition().getX(), p_controller->GetPosition().getY() - 2.5f, p_controller->GetPosition().getZ()));
+	m_renderState.updatePositions(Vec3<float>(p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
+												p_controller->getGhostObject()->getWorldTransform().getOrigin().y(),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 	
 	
 
-	if (rocket->getEstado() == CARGADO) {
+	/*if (rocket->getEstado() == CARGADO) {
 		Vec3<float> posicion(p_controller->GetPosition().getX()+5, p_controller->GetPosition().getY(), p_controller->GetPosition().getZ());
 		rocket->setPosition(posicion);
 	}
@@ -74,11 +85,11 @@ void Player::update(Time elapsedTime)
 		if (clockRecargaRocket.getElapsedTime().asSeconds()>timeRecargaRocket) {
 			rocket->setEstado(CARGADO);
 		}
-	}
+	}*/
 	
 
 	// Set rotation
-	vector3df Euler;
+	/*vector3df Euler;
 	const btQuaternion& TQuat = p_controller->m_pRigidBody->getOrientation();
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
@@ -109,7 +120,7 @@ void Player::update(Time elapsedTime)
 	
 
 	}
-	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
+	m_renderState.updateRotations(Vec3<float>(0, giro, 0));*/
 }
 
 void Player::handleInput()
@@ -124,8 +135,63 @@ void Player::cargarContenido()
 
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
+
+	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
+
+	radius = 1.f;
+	height = 2.f;
+	mass = 70.f;
+
+	m_pCollisionShape = new btCapsuleShape(radius, height);
+
+	m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(0,10,0)));
+
+	btVector3 intertia;
+	m_pCollisionShape->calculateLocalInertia(mass, intertia);
+	
+	///////////////////////////////////////////////GHOST//////////////////////////////////////////////////////////
+	/*btTransform transform;
+	transform.setIdentity();
+	transform.setOrigin(btVector3(0.0f, 10.0f, 0.0f));
+
+	btPairCachingGhostObject* ghostObject = new btPairCachingGhostObject();
+	ghostObject->setWorldTransform(transform);
+
+	ghostObject->setUserPointer(this);
+
+
+	ghostObject->setCollisionShape(m_pCollisionShape
+	ghostObject->setCollisionFlags(ghostObject->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);*/
+
+	///////////////////////////////////////////////////CHARACTER/////////////////////////////////////////////////////////
+
+	btTransform startTransform;
+	startTransform.setIdentity();
+	startTransform.setOrigin(btVector3(0, 10, 0)); // check
+
+	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
+	actorGhost->setUserPointer(this);
+	actorGhost->setWorldTransform(startTransform);
+
+	/*btGhostPairCallback* actorGhostPairCallback = new btGhostPairCallback();
+	overlappingPairCache->getOverlappingPairCache()->setInternalGhostPairCallback(actorGhostPairCallback);*/
+
+	actorGhost->setCollisionShape(m_pCollisionShape);
+	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+
+	p_controller = new btKinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 0.5f);
+	p_controller->setGravity(btVector3(0,-10,0));
+	p_controller->setJumpSpeed(5);
+	p_controller->setUp(btVector3(0,1,0));
+	p_controller->setMaxJumpHeight(20);
+
+	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
+		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
+	PhysicsEngine::i().m_world->addAction(p_controller);
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
-	p_controller = new DynamicCharacterController(this,Vec3<float>(0, 100, 0), 1.f, 1, 70, 1);
+	//p_controller = new btKinematicCharacterController(Vec3<float>(0, 100, 0),);
 }
 
 void Player::borrarContenido()
@@ -180,7 +246,7 @@ void Player::jump() {
 	}*/
 
 	
-	p_controller->Jump();
+	p_controller->jump();
 }
 
 

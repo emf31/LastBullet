@@ -2,10 +2,23 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
+#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
 #include <vector>
 #include "DynamicCharacterController.h"
 
+enum EPhysicsCollisionMask {
+
+	E_Static = 1 << 0,
+	E_Riggid = 1 << 1,
+	E_Actor = 1 << 2,
+	E_Trigger = 1 << 3,
+
+	E_StaticGroup = E_Riggid | E_Actor,
+	E_ActorGroup = E_Static | E_Riggid | E_Actor | E_Trigger,
+	E_RiggidGroup = E_Static | E_Riggid | E_Actor | E_Trigger,
+	E_TriggerGroup = E_Riggid | E_Actor
+};
 
 class Player : public Entity
 {
@@ -56,7 +69,15 @@ private:
 	virtual void handleMessage(const Message& message) override;
 
 	//Player controller
-	DynamicCharacterController* p_controller;
+	btKinematicCharacterController* p_controller;
+
+	btCollisionShape* m_pCollisionShape;
+	btDefaultMotionState* m_pMotionState;
+	btPairCachingGhostObject* m_pGhostObject;
+
+	float radius;
+	float height;
+	float mass;
 
 	float m_acceleration_walk;
 	float m_acceleration_run;
