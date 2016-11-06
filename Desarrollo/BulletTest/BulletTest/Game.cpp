@@ -73,26 +73,26 @@ void Game::inicializar()
 	enemy = new Enemy();
 
 	///////////////////////////////////////////////////////////////
-	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
+	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "");
-	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 1.f, 100), 0));
-	sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
+	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 5.f, 100), 0));
+	//sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
 	///////////////////////////////////////////////////////////////
 
-	SceneNode* suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
+	SceneNode* suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "");
-	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 1.f, 100), 0));
-	sueloEnt2->rotate(Vec3<float>(0.2,0,0));
+	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 5.f, 100), 0));
+	sueloEnt2->rotate(Vec3<float>(0,35,0));
 	///////////////////////////////////////////////////////////////
 
-	SceneNode* suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 1.f, 100), "../media/wall.jpg", "");
+	SceneNode* suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt3 = new PhysicsEntity(suelo3, "");
-	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 1.f, 100), 0));
-	sueloEnt3->rotate(Vec3<float>(0, 0, 0.9));
-
+	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 5.f, 100), 0));
+	sueloEnt3->rotate(Vec3<float>(0, 0, 35));
+	sueloEnt3->setPosition(Vec3<float>(0, 0, 60));
 
 	EntityManager::i().inicializar();
 

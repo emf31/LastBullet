@@ -87,6 +87,19 @@ void GraphicEngine::renderAll()
 	}
 
 	irrDriver->endScene();
+	int fps = irrDriver->getFPS();
+
+	if (lastFPS != fps)
+	{
+		core::stringw str = L"LAST BULLET PRE ALPHA MECHANICS [";
+		str += irrDriver->getName();
+		str += "] FPS:";
+		str += fps;
+
+		irrDevice->setWindowCaption(str.c_str());
+		lastFPS = fps;
+	}
+
 }
 
 void GraphicEngine::inicializar()
