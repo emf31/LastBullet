@@ -79,11 +79,14 @@ void GraphicEngine::renderAll()
 	irrScene->drawAll();
 	irrGUI->drawAll();
 
+	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	if (debug_draw_bullet)
 	{
-		/*irrDriver->setMaterial(debugMat);
+		//material de irrlicht al que no le afectan las luces
+		irrDriver->setMaterial(debugMat);
 		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
-		PhysicsEngine::i().m_world->debugDrawWorld();*/
+		//mandas que se dibuje el debug a las fisicas
+		PhysicsEngine::i().m_world->debugDrawWorld();
 	}
 
 	irrDriver->endScene();
@@ -104,6 +107,10 @@ void GraphicEngine::inicializar()
 
 
 	irrDevice->getCursorControl()->setVisible(0);
+
+	//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
+	//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
+	//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
 
 	debugDraw = new DebugDraw(irrDevice);
 	debugDraw->setDebugMode(

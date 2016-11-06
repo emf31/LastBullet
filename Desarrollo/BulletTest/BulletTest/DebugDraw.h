@@ -14,6 +14,8 @@ public:
 
 	}
 
+	//drawLine es un metodo virtual de btIDebugDraw que es lo que enlaza en este caso Bullet con Irrlicht
+	//para pintar por pantalla el modo debug(habra que cambiarlo al cambiar el motor grafico...)
 	void drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 	{
 		//workaround to bullet's inconsistent debug colors which are either from 0.0 - 1.0 or from 0.0 - 255.0
