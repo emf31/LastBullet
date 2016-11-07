@@ -44,6 +44,14 @@ public:
 	bool isWindowActive();
 	bool apagar();
 
+	void toggleDebug() {
+		debug_draw_bullet = !debug_draw_bullet;
+	}
+
+	void toggleCamera() {
+		debug_camera = !debug_camera;
+	}
+
 private:
 	IrrlichtDevice *irrDevice;
 	IVideoDriver *irrDriver;
@@ -59,6 +67,7 @@ private:
 	Camera *active_camera;
 
 	bool debug_draw_bullet;
+	bool debug_camera;
 
 	irr::video::SMaterial debugMat;
 

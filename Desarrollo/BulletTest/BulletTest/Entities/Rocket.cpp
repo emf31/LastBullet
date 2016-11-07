@@ -21,8 +21,8 @@ void Rocket::inicializar()
 void Rocket::update(Time elapsedTime)
 {
 
-	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));*/
 
 }
 

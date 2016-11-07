@@ -65,11 +65,6 @@ void Player::update(Time elapsedTime)
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 
-	//p_controller->Update(elapsedTime);
-
-	//if (!isMoving && p_controller->IsOnGround()) {
-		//p_controller->m_pRigidBody->setLinearVelocity(btVector3(0, 0, 0));
-	//}
 
 	m_renderState.updatePositions(Vec3<float>(
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
@@ -78,15 +73,23 @@ void Player::update(Time elapsedTime)
 	
 	
 
-	/*if (rocket->getEstado() == CARGADO) {
-		Vec3<float> posicion(p_controller->GetPosition().getX()+5, p_controller->GetPosition().getY(), p_controller->GetPosition().getZ());
-		rocket->setPosition(posicion);
+	if (rocket->getEstado() == CARGADO) {
+		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() +5, p_controller->getGhostObject()->getWorldTransform().getOrigin().y(), p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
+		btTransform transform = rocket->m_rigidBody->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
+
+
+		rocket->getRenderState()->updatePositions(posicion);
+
+		//rocket->m_rigidBody->set
 	}
 	else if (rocket->getEstado() == DISPARADO) {
+		btVector3 Point = rocket->m_rigidBody->getCenterOfMassPosition();
+		rocket->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 		if (clockRecargaRocket.getElapsedTime().asSeconds()>timeRecargaRocket) {
 			rocket->setEstado(CARGADO);
 		}
-	}*/
+	}
 	
 
 	// Set rotation

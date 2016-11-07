@@ -141,9 +141,6 @@
     <ClInclude Include="Command\ShootCommandRocket.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\DynamicCharacterController.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Otros\Vec2f.h">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
@@ -216,9 +213,6 @@
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Entities\Rocket.cpp">
-      <Filter>Archivos de código fuente\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\DynamicCharacterController.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Otros\Vec2f.cpp">

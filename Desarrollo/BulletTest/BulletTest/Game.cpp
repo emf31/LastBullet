@@ -148,6 +148,14 @@ void Game::inicializar()
 void Game::processEvents()
 {
 	EntityManager::i().handleInput();
+
+	//Teclas debug
+	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
+		GraphicEngine::i().toggleDebug();
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
+		GraphicEngine::i().toggleCamera();
+	}
 }
 
 void Game::update(Time elapsedTime)

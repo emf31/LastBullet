@@ -4,7 +4,7 @@
 
 #include "PhysicsEngine.h"
 
-GraphicEngine::GraphicEngine()
+GraphicEngine::GraphicEngine() : debug_camera(true)
 {
 }
 
@@ -57,7 +57,8 @@ void GraphicEngine::setCameraEntity(Entity * entity)
 
 void GraphicEngine::updateCamera()
 {
-	active_camera->update();
+	if(debug_camera)
+		active_camera->update();
 }
 
 
