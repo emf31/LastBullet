@@ -6,8 +6,10 @@
 #include "Motor\PhysicsEngine.h"
 #include "Entities\EntityManager.h"
 #include "Entities\PhysicsEntity.h"
+#include "Entities\LifeObject.h"
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
+
 #include "Handlers\MessageHandler.h"
 #include <Windows.h>
 
@@ -132,6 +134,15 @@ void Game::inicializar()
 	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
 
 	//////////////////////////////////////////////////////////////////////
+	////////         Creamos un paquete de vida        //////////////////
+
+	SceneNode* vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/life.png", "");
+	LifeObject *vidaEnt = new LifeObject(vida, "");
+	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(1.f, 1.f, 1.f)));
+	vidaEnt->setPosition(Vec3<float>(0, 0, 80));
+	vidaEnt->setPosition(Vec3<float>(10, 5, 0));
+
+	/////////////////////////////////////////////////////////////////////
 
 	EntityManager::i().inicializar();
 

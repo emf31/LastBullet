@@ -96,14 +96,6 @@ void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
 
 }
 
-void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
-{
-	m_world->addRigidBody(rigid);
-	//and add to the list of rigidBodies
-	m_rigidBodies.push_back(rigid);
-	
-}
-
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
 {
 	btTransform transform;
@@ -144,6 +136,30 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius, float mass)
 {
 	return nullptr;
+}
+
+btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<float>& scale)
+{
+	btGhostObject* ghostObj = new btGhostObject();
+
+	btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
+	btCollisionShape* shape = new btBoxShape(halfExtents);
+
+	btTransform transform;
+	transform.setIdentity();
+	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	transform.setOrigin(pos);
+	//ghostObj->setWorldTransform(transform);
+
+	ghostObj->setCollisionFlags(ghostObj->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+
+	ghostObj->setUserPointer(entity);
+
+	//add the rigidBody to the world
+	//m_world->addCollisionObject(rigidBody);
+
+	 //m_world->addCollisionObject(ghostObj);
+	return ghostObj;
 }
 
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)

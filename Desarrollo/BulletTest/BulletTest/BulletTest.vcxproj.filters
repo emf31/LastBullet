@@ -159,6 +159,9 @@
     <ClInclude Include="Entities\KinematicCharacterController.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\LifeObject.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -228,6 +231,9 @@
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Entities\PhysicsEntity.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\LifeObject.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
