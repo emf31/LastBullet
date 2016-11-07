@@ -34,7 +34,7 @@ public:
 	//creamos y registramos una esfera - asumimos que la posicion esta puesta
 	btRigidBody* createSphereRigidBody(Entity* entity, float radius, float mass);
 
-	btGhostObject* createBoxGhostObject(Entity * entity, const Vec3<float>& scale);
+	btPairCachingGhostObject* createBoxGhostObject(Entity * entity, const Vec3<float>& scale);
 
 
 	//borra un rigidbody de la simulacion

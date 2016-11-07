@@ -138,9 +138,8 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	return nullptr;
 }
 
-btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<float>& scale)
+btPairCachingGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<float>& scale)
 {
-	btGhostObject* ghostObj = new btGhostObject();
 
 	btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
 	btCollisionShape* shape = new btBoxShape(halfExtents);
@@ -149,16 +148,28 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 	transform.setIdentity();
 	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
 	transform.setOrigin(pos);
+
+	btPairCachingGhostObject* ghostObj = new btPairCachingGhostObject();
+	ghostObj->setUserPointer(this);
+	ghostObj->setWorldTransform(transform);
+
+	ghostObj->setCollisionShape(shape);
+
+	ghostObj->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+
+
 	//ghostObj->setWorldTransform(transform);
 
-	ghostObj->setCollisionFlags(ghostObj->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	
 
 	ghostObj->setUserPointer(entity);
 
 	//add the rigidBody to the world
 	//m_world->addCollisionObject(rigidBody);
 
-	 //m_world->addCollisionObject(ghostObj);
+	m_world->addCollisionObject(ghostObj, btBroadphaseProxy::CharacterFilter,
+		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
+
 	return ghostObj;
 }
 
