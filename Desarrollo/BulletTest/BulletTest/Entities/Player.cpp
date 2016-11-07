@@ -32,20 +32,20 @@ void Player::update(Time elapsedTime)
 
 	// Ejecuta todos los comandos
 	InputHandler::i().excuteCommands(this);
+	speedFinal.normalise();
 
-
-	if (isMoving) {
-		speedFinal.normalise();
+	/*if (isMoving) {
+		
 		m_renderState.setDirection(speedFinal);
 		m_renderState.setAccelerating(true);
 	}
 	else {
 		m_renderState.setAccelerating(false);
-	}
+	}*/
 
 
-	m_renderState.updateVelocity(elapsedTime.asSeconds());
-	m_rigidBody->setLinearVelocity(btVector3(m_renderState.getVelocity().getX(), m_renderState.getVelocity().getY(), m_renderState.getVelocity().getZ()));
+	//m_renderState.updateVelocity(elapsedTime.asSeconds());
+	m_rigidBody->setLinearVelocity(btVector3(speedFinal.getX() * 30, speedFinal.getY() * 30, speedFinal.getZ() * 30));
 
 	// Set position
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
