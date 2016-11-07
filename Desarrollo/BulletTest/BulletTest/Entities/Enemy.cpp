@@ -110,5 +110,9 @@ void Enemy::desEncolaPos()
 
 		updateEnemigo(new_pos);
 	}
+	else {
+		updateEnemigo(m_renderState.getPosition());
+		
+	}
 	m.unlock();
 }
