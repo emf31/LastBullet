@@ -14,8 +14,8 @@ public:
 	//void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
 	//btRigidBody* getRigidBody() { return m_rigidBody; }
 
-	void setGhostObject(btPairCachingGhostObject* ghostObject) { m_ghostObject = ghostObject; }
-	btPairCachingGhostObject* getGhostObject() { return m_ghostObject; }
+	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
+	btGhostObject* getGhostObject() { return m_ghostObject; }
 
 	void rotate(Vec3<float> rot);
 
@@ -32,6 +32,8 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
+	virtual std::string getClassName() { return "LifeObject"; }
+
 	void setPosition(Vec3<float> pos) {
 
 		m_renderState.setPosition(pos);
@@ -46,7 +48,7 @@ public:
 
 private:
 	//btGhostPairCallback* m_ghostPairCallback = NULL;				// Needed once to enable ghost objects inside Bullet
-	//btGhostObject* m_ghostObject;							// simple aabb ghost object (keeps track of the objects whose aabbs intersect its own collision shape aabb: this is called "broadphase stage collision detection")
-	btPairCachingGhostObject* m_ghostObject ;		// full shape ghost object (keeps track of the objects whose collision shape intersect its own collision shape: this is called "narrowphase stage collision detection")
+	btGhostObject* m_ghostObject;							// simple aabb ghost object (keeps track of the objects whose aabbs intersect its own collision shape aabb: this is called "broadphase stage collision detection")
+	//btPairCachingGhostObject* m_ghostObject;		// full shape ghost object (keeps track of the objects whose collision shape intersect its own collision shape: this is called "narrowphase stage collision detection")
 	btVector3 m_currentPosition;
 };

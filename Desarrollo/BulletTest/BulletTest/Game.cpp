@@ -140,7 +140,7 @@ void Game::inicializar()
 	LifeObject *vidaEnt = new LifeObject(vida, "");
 	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(1.f, 1.f, 1.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	vidaEnt->setPosition(Vec3<float>(10, 5, 0));
+	vidaEnt->setPosition(Vec3<float>(10, 3, 0));
 
 	/////////////////////////////////////////////////////////////////////
 

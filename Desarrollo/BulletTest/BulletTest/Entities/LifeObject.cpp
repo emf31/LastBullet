@@ -1,5 +1,5 @@
 #include "LifeObject.h"
-
+#include "../Motor/PhysicsEngine.h"
 
 LifeObject::LifeObject(SceneNode* nodo, const std::string& name) : Entity(-1, nodo, name)
 {
@@ -40,6 +40,12 @@ void LifeObject::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));*/
+	
+	/*PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+
+
+	PhysicsEngine::i().m_world->addCollisionObject(m_ghostObject);*/
+	
 }
 
 void LifeObject::handleInput()
@@ -58,4 +64,9 @@ void LifeObject::borrarContenido()
 
 void LifeObject::handleMessage(const Message & message)
 {
+	if (message.mensaje == "COLLISION") {
+		////TODO: AQUI ES SEGURO QUE HA COLISIONADO CON EL PLAYER, HABRIA QUE BORRAR EL PAQUETE DE VIDA Y RESPAWNEARLO EN X TIEMPO
+		PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+		//std::cout << "Te has curado" << std::endl;
+	}
 }

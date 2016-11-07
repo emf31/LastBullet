@@ -31,6 +31,8 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
+	virtual std::string getClassName() { return "PhysicsEntity"; }
+
 	void setPosition(Vec3<float> pos) {
 
 		m_renderState.setPosition(pos);

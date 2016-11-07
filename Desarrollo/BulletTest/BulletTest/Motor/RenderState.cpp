@@ -58,7 +58,7 @@ void RenderState::updateRotations(Vec3<float> rotation)
 {
 	m_rotationPrev = m_rotationNew;
 	m_rotationNew = rotation;
-	m_rotated += rotation.getY();
+	//m_rotated += rotation.getY();
 }
 
 void RenderState::updateVelocity(float elapsedTime)

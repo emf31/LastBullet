@@ -34,6 +34,8 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
+	virtual std::string getClassName() { return "Rocket"; }
+
 
 	btRigidBody* m_rigidBody;
 

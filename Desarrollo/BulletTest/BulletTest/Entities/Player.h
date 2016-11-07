@@ -27,9 +27,10 @@ public:
 
 	float calcularDistancia(btVector3& start, btVector3& end);
 
+	void sumarVida() { m_vida++; }
+
 private:
-	//Se usa el body del character controller
-	//btRigidBody* m_rigidBody;
+	float m_vida;
 
 	Rocket* rocket;
 	Clock clockRecargaRocket;
@@ -55,7 +56,7 @@ private:
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
-
+	virtual std::string getClassName() { return "Player"; }
 
 	//Player controller
 	KinematicCharacterController* p_controller;

@@ -33,6 +33,8 @@ void Player::inicializar()
 	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
 	giro = 0;
 	rocket = new Rocket();
+
+	m_vida = 5;
 }
 
 
@@ -92,19 +94,21 @@ void Player::update(Time elapsedTime)
 
 	// Set rotation
 	/*vector3df Euler;
-<<<<<<< HEAD
-	const btQuaternion& TQuat = p_controller->m_pRigidBody->getOrientation();
-=======
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
->>>>>>> refs/heads/Player-Controller
+
+	const btQuaternion& TQuat = p_controller->getGhostObject()->get();
+
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
-	Euler *= RADTODEG;
+	Euler *= RADTODEG;*/
 
 
 	vectorPrev = vectorNew;
 	Vec3<float>target =GraphicEngine::i().getActiveCamera()->getTarget();
-	Vec3<float>pos=Vec3<float>(p_controller->GetPosition().getX(), p_controller->GetPosition().getY(), p_controller->GetPosition().getZ());
+	Vec3<float>pos=Vec3<float>(
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(), 
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y(), 
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()
+	);
 	vectorNew = target - pos;
 
 	vectorNew.normalise();//normalizamos los vectores
@@ -126,7 +130,7 @@ void Player::update(Time elapsedTime)
 	
 
 	}
-	m_renderState.updateRotations(Vec3<float>(0, giro, 0));*/
+	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
 }
 
 void Player::handleInput()
@@ -137,7 +141,7 @@ void Player::handleInput()
 void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/textureMan.bmp", "../media/MeshPlayer.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "../media/Dif_2.tga", "../media/Raptor.obj");
 
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
@@ -175,7 +179,7 @@ void Player::cargarContenido()
 	//p_controller->setLinearDamping(0.1);
 
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
-		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
+		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter | btBroadphaseProxy::SensorTrigger);
 	//PhysicsEngine::i().m_world->addAction(p_controller);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +197,9 @@ void Player::borrarContenido()
 void Player::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		//std::cout << "Colisiono" << std::endl;
+		/*if (static_cast<Entity*>(message.data)->getClassName() == "LifeObject") {
+			std::cout << "Has cogido vida" << std::endl;
+		}*/
 	}
 }
 
@@ -335,9 +341,9 @@ void Player::move_up()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	vectorPrev = vectorNew;
+	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	vectorNew = speed;
+	//vectorNew = speed;
 
 	speedFinal.addX(speed.getX());
 	speedFinal.addZ(speed.getZ());
@@ -352,9 +358,9 @@ void Player::move_down()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	vectorPrev = vectorNew;
+	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	vectorNew = speed;
+	//vectorNew = speed;
 
 	speedFinal.addX(-speed.getX());
 	speedFinal.addZ(-speed.getZ());
@@ -367,9 +373,9 @@ void Player::move_right()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	vectorPrev = vectorNew;
+	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	vectorNew = speed;
+	//vectorNew = speed;
 
 	speedFinal.addX(speed.getZ());
 	speedFinal.addZ(-speed.getX());
@@ -382,9 +388,9 @@ void Player::move_left()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	vectorPrev = vectorNew;
+	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	vectorNew = speed;
+	//vectorNew = speed;
 
 	speedFinal.addX(-speed.getZ());
 	speedFinal.addZ(speed.getX());

@@ -24,6 +24,8 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
+	virtual std::string getClassName() { return "Enemy"; }
+
 private:
 	btRigidBody* m_rigidBody;
 
