@@ -96,15 +96,18 @@ void Enemy::encolaPos(Vec3<float> pos)
 }
 
 void Enemy::desEncolaPos()
-{
-	
+{	
 	m.lock();
+	std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
+	Vec3<float> new_pos;
 	while (!m_positions.empty()) {
-		Vec3<float> new_pos = m_positions.front();
+		new_pos = m_positions.front();
 		//lo borramos de la cola
 		m_positions.pop();
 		//llamamos al update con la nueva posicion
-		updateEnemigo(new_pos);
 	}
+
+	updateEnemigo(new_pos);
+
 	m.unlock();
 }
