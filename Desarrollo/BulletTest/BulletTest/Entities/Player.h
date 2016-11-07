@@ -25,7 +25,7 @@ public:
 	void move_right();
 	void move_left();
 
-
+	float calcularDistancia(btVector3& start, btVector3& end);
 
 private:
 	//Se usa el body del character controller

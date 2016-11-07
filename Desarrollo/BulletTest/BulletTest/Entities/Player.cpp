@@ -247,7 +247,7 @@ void Player::jump() {
 void Player::shoot() {
 
 	printf("Shoot\n");
-	btVector3 SIZE_OF_WORLD(150000, 150000, 150000);
+	btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
 
 	btVector3 start(
 		GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -266,12 +266,17 @@ void Player::shoot() {
 
 	PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
+
+
+
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
 
 
 		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-		
+
+		//calcularDistancia(start, end);
+
 		////////////////////////////////////////////////////////////
 		//TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
 		//if (hit != m_rigidBody)
@@ -389,3 +394,10 @@ void Player::move_left()
 	isMoving = true;
 }
 
+float Player::calcularDistancia(btVector3& start, btVector3& end) {
+
+	btVector3 vecDiferencia(end.x() - start.x(), end.y() - start.y(), end.z() - start.z());
+	float distancia = sqrtf(pow(vecDiferencia.x(), 2) + pow(vecDiferencia.y(), 2) + pow(vecDiferencia.z(), 2));
+	printf("DISTANCIA: %f", distancia);
+	return 0.5f;
+}
