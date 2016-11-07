@@ -49,7 +49,9 @@ void Game::run()
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();
 			
-			processEvents();
+			if (processEvents()) {
+				break;
+			}
 			//Llevamos control en las actualizaciones por frame
 			while (timeSinceLastUpdate > timePerFrame) // 15 veces/segundo
 			{
@@ -64,7 +66,7 @@ void Game::run()
 		}
 			MastEventReceiver::i().startEventProcess();
 	}
-	Cliente::i().enviarDesconexion();
+	
 	//esta mierda no sabemos muy bien porque esta aqui, ni siquiera si funciona estando aqui
 	Cliente::i().esperar();
 	GraphicEngine::i().apagar();
@@ -98,9 +100,13 @@ void Game::inicializar()
 	//
 }
 
-void Game::processEvents()
+bool Game::processEvents()
 {
 	EntityManager::i().handleInput();
+	if (MastEventReceiver::i().keyPressed(KEY_KEY_Z)) {
+		Cliente::i().enviarDesconexion();
+		return true;
+	}
 }
 
 void Game::update(Time elapsedTime)

@@ -15,6 +15,8 @@ Cliente::Cliente()
 {
 }
 
+
+int salir = false;
 void Cliente::update() {
 	RakNet::Packet *packet;
 	RakNet::BitStream bsOut;
@@ -24,7 +26,9 @@ void Cliente::update() {
 	
 	int cont = 0;
 
-	while (1) {
+	
+
+	while (!salir) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 			switch (packet->data[0]) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -309,9 +313,10 @@ void Cliente::enviarDesconexion() {
 
 	RakNet::BitStream bsOut;
 
-	bsOut.Write((RakNet::MessageID)ID_CONNECTION_LOST);
+	bsOut.Write((RakNet::MessageID)MENSAJE_NOMBRE);
 	bsOut.Write(1);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 
+	salir = true;
 }

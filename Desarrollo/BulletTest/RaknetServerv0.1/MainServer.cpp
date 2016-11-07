@@ -174,10 +174,13 @@ int main() {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				RakNet::RakString stringEntrante;
-				bsIn.Read(stringEntrante);
-
-				std::cout << stringEntrante.C_String() << std::endl;
+				std::cout << "HOLAAAAAAAAA ME VOY" << std::endl;
+				printf("Un cliente se ha desconectado.\n");
+				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
+				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
+				EntityManager::i().enviaDesconexion(packet->guid, peer);
+				//lo borramos de los clientes actuales del servidor
+				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 			}
 			break;
 			case MOVIMIENTO: {

@@ -28,7 +28,7 @@ public:
 
 	void run();
 	void inicializar();
-	void processEvents(); // Captura y procesa eventos
+	bool processEvents(); // Captura y procesa eventos
 	void update(Time elapsedTime);
 	void render(float interpolation, Time elapsedTime);
 
