@@ -81,7 +81,7 @@ void Player::update(Time elapsedTime)
 	}
 	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
 
-		Cliente::i().enviarPos(this);
+	Cliente::i().enviarPos(this);
 
 
 	

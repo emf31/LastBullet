@@ -86,11 +86,12 @@ void Enemy::handleMessage(const Message & message)
 }
 
 //pila posiciones
-void Enemy::encolaPos(Vec3<float> pos)
+void Enemy::encolaPos(TPlayer pos)
 {
 	m.lock();
 	// Añadir a la cola
-	m_positions.push(pos);
+	m_positions.push(pos.position);
+	m_renderState.setVelocity(pos.velocidad);
 
 	m.unlock();
 }
@@ -111,7 +112,7 @@ void Enemy::desEncolaPos()
 		updateEnemigo(new_pos);
 	}
 	else {
-		updateEnemigo(m_renderState.getPosition());
+		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * 1.f / 15.f);
 		
 	}
 	m.unlock();

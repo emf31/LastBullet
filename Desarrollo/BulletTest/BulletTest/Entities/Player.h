@@ -20,6 +20,8 @@ public:
 
 	void setPosition(Vec3<float> pos);
 
+	btRigidBody* getRigidBody() { return m_rigidBody; }
+
 
 	void jump();
 

@@ -53,11 +53,11 @@ private:
 	float m_rotated;
 
 	Vec3<float> m_Velocity;    //Vector velocidad
-	Vec3<float> m_Direction;//Vector velocidad
+	Vec3<float> m_Direction;	//Vector velocidad
 
 
 	Vec3<float> m_renderPos;
-	Vec3<float>    m_renderRotation;
+	Vec3<float> m_renderRotation;
 
 	Vec3<float> m_posPrev;
 	Vec3<float> m_posNew;

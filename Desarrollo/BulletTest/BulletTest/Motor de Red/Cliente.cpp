@@ -138,7 +138,7 @@ void Cliente::update() {
 				//e->updateEnemigo(nuevoplayer.position);
 
 				//NUEVO
-				e->encolaPos(nuevoplayer.position);
+				e->encolaPos(nuevoplayer);
 
 				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
 				
@@ -274,10 +274,12 @@ void Cliente::enviarPos(Player* p) {
 
 	bsOut.Write((RakNet::MessageID)MOVIMIENTO);
 
-	paquetemov.guid = p->getGuid();
-	paquetemov.name = p->getName();
 	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
 	paquetemov.position = p->getRenderState()->getPosition();
+	paquetemov.velocidad = Vec3<float>(p->getRigidBody()->getLinearVelocity().x(), p->getRigidBody()->getLinearVelocity().y(), p->getRigidBody()->getLinearVelocity().z());
+	paquetemov.guid = p->getGuid();
+	paquetemov.name = p->getName();
+	
 	
 
 	bsOut.Write(paquetemov);

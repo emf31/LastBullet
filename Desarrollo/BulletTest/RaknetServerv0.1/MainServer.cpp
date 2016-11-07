@@ -77,31 +77,8 @@ int main() {
 
 
 			}
-												 break;
-												 /*case NUEVO_PLAYER: {
+			break;
 
-													 //Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
-
-													 RakNet::BitStream bsIn(packet->data,packet->length,false);
-													 bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-													 Player *p = new Player();
-													 bsIn.Read(*p);
-													 muestraPlayer(p);
-													 RakNet::BitStream bsOut;
-													 for (int i = 0; i < clientArray.size(); i++) {
-														 bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
-														 bsOut.Write(*p);
-														 peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, clientArray.at(i)->getGuid(), false);
-														 bsOut.Reset();
-													 }
-													 bsOut.Write((RakNet::MessageID)LISTA_CLIENTES);
-													 bsOut.Write(clientArray);
-													 peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
-													 bsOut.Reset();
-
-													 clientArray.push_back(p);
-												 }
-													 break;*/
 			case NUEVO_PLAYER: {
 
 				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
