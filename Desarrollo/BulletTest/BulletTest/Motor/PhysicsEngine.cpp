@@ -35,6 +35,7 @@ bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisio
 	return true;
 }
 
+
 void PhysicsEngine::inicializar()
 {
 	m_config = new btDefaultCollisionConfiguration();
@@ -42,6 +43,7 @@ void PhysicsEngine::inicializar()
 	m_broadphase = new btDbvtBroadphase();
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
+
 	m_world->setGravity(btVector3(0, -2, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
@@ -53,6 +55,7 @@ void PhysicsEngine::inicializar()
 
 	//asi le decidmos a bullet que llame a handle contacts
 	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;
+
 
 	m_rigidBodies = std::list<btRigidBody*>();
 }
@@ -91,6 +94,14 @@ void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigid);
 
+}
+
+void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
+{
+	m_world->addRigidBody(rigid);
+	//and add to the list of rigidBodies
+	m_rigidBodies.push_back(rigid);
+	
 }
 
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
@@ -169,3 +180,5 @@ void PhysicsEngine::apagar()
 	delete m_config;
 	m_config = NULL;
 }
+
+

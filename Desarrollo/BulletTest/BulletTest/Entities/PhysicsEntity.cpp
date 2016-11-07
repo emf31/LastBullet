@@ -48,6 +48,8 @@ void PhysicsEntity::handleInput()
 
 void PhysicsEntity::cargarContenido()
 {
+
+
 }
 
 void PhysicsEntity::borrarContenido()

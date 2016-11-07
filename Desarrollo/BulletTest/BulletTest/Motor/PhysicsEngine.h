@@ -3,6 +3,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
+
 #include "../Entities/Entity.h"
 #include "../Otros/Time.hpp"
 
@@ -23,13 +24,16 @@ public:
 	//Updatea las fisicas
 	void update(Time elapsedTime);
 
+
+	void createBoxDynamicCharacter(btRigidBody* rigid);
+
+
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
 	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos una esfera - asumimos que la posicion esta puesta
 	btRigidBody* createSphereRigidBody(Entity* entity, float radius, float mass);
 
-	void createBoxDynamicCharacter(btRigidBody* rigid);
 
 	//borra un rigidbody de la simulacion
 	bool removeRigidBody(btRigidBody* body);

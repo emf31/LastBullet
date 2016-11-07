@@ -5,7 +5,7 @@
 #include "../Handlers/InputHandler.h"
 #include "../Handlers/MessageHandler.h"
 #include "math.h"
-
+#include "../Otros/Vec3f.h"
 
 
 
@@ -45,7 +45,6 @@ void Player::update(Time elapsedTime)
 	// Ejecuta todos los comandos
 	InputHandler::i().excuteCommands(this);
 	
-
 	speedFinal.normalise();
 
 	/*p_controller->m_maxSpeed = m_maxSpeed_walk;
@@ -63,7 +62,6 @@ void Player::update(Time elapsedTime)
 
 	//p_controller->setMaxPenetrationDepth(0.f);
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
-
 
 
 	m_renderState.updatePositions(Vec3<float>(
@@ -94,7 +92,11 @@ void Player::update(Time elapsedTime)
 
 	// Set rotation
 	/*vector3df Euler;
+<<<<<<< HEAD
 	const btQuaternion& TQuat = p_controller->m_pRigidBody->getOrientation();
+=======
+	const btQuaternion& TQuat = m_rigidBody->getOrientation();
+>>>>>>> refs/heads/Player-Controller
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
 	Euler *= RADTODEG;
@@ -179,6 +181,7 @@ void Player::cargarContenido()
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
 	//p_controller = new btKinematicCharacterController(Vec3<float>(0, 100, 0),);
+
 }
 
 void Player::borrarContenido()
@@ -196,6 +199,8 @@ void Player::handleMessage(const Message & message)
 
 void Player::jump() {
 
+	/*bool isGrounded = false;
+>>>>>>> refs/heads/Player-Controller
 
 	/*btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
 	btVector3 dest = start;
@@ -219,7 +224,7 @@ void Player::jump() {
 
 			m_rigidBody->setLinearVelocity(velocity);
 			
-			numJumps = 0;
+		/*	numJumps = 0;
 		}
 	}
 	else
@@ -232,8 +237,10 @@ void Player::jump() {
 		numJumps++;
 	}*/
 
+
 	
 	p_controller->jump(btVector3(0,20,0));
+
 }
 
 
