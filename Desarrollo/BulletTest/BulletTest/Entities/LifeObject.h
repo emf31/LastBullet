@@ -35,10 +35,12 @@ public:
 	void setPosition(Vec3<float> pos) {
 
 		m_renderState.setPosition(pos);
-		m_currentPosition=m_ghostObject->getWorldTransform().getOrigin();
-		//btTransform transform = m_ghostObject->;
-		//transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-		//m_ghostObject->setCenterOfMassTransform(transform);
+		//m_currentPosition = m_ghostObject->getWorldTransform().getOrigin();
+
+		btTransform transform = m_ghostObject->getWorldTransform();
+		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+		m_ghostObject->setWorldTransform(transform);
+
 		m_nodo->setPosition(pos);
 	}
 

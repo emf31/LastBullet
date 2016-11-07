@@ -139,7 +139,7 @@ void Game::inicializar()
 	SceneNode* vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/life.png", "");
 	LifeObject *vidaEnt = new LifeObject(vida, "");
 	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(1.f, 1.f, 1.f)));
-	vidaEnt->setPosition(Vec3<float>(0, 0, 80));
+	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	vidaEnt->setPosition(Vec3<float>(10, 5, 0));
 
 	/////////////////////////////////////////////////////////////////////
