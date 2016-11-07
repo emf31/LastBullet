@@ -26,6 +26,7 @@ public:
 	void esperar();
 	void enviarPos(Player* p);
 	void enviarDisparo(RakNet::RakNetGUID guid);
+	void enviarDesconexion();
 
 private:
 	RakNet::SocketDescriptor sd;

@@ -303,3 +303,15 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }
+
+
+void Cliente::enviarDesconexion() {
+
+	RakNet::BitStream bsOut;
+
+	bsOut.Write((RakNet::MessageID)ID_CONNECTION_LOST);
+	bsOut.Write(1);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+
+}

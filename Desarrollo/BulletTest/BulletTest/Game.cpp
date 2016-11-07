@@ -64,6 +64,7 @@ void Game::run()
 		}
 			MastEventReceiver::i().startEventProcess();
 	}
+	Cliente::i().enviarDesconexion();
 	//esta mierda no sabemos muy bien porque esta aqui, ni siquiera si funciona estando aqui
 	Cliente::i().esperar();
 	GraphicEngine::i().apagar();
