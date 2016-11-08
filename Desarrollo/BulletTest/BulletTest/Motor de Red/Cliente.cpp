@@ -156,9 +156,11 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				
 				bsIn.Read(desconectado);
-
+				Entity* e = EntityManager::i().getRaknetEntity(desconectado);
 				EntityManager::i().getRaknetEntity(desconectado)->borrarContenido();
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
+				EntityManager::i().removeRaknetEntity(EntityManager::i().getRaknetEntity(desconectado));
+				
 
 			}
 			break;
@@ -315,7 +317,7 @@ void Cliente::enviarDesconexion() {
 
 	RakNet::BitStream bsOut;
 
-	bsOut.Write((RakNet::MessageID)MENSAJE_NOMBRE);
+	bsOut.Write((RakNet::MessageID)DESCONECTADO);
 	bsOut.Write(1);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
