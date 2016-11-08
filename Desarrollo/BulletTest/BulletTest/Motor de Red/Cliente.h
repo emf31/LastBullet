@@ -28,6 +28,10 @@ public:
 	void enviarDisparo(RakNet::RakNetGUID guid);
 	void enviarDesconexion();
 
+	void cerrar() {
+		hilo->detach();
+	}
+
 private:
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;

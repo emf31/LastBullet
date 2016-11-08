@@ -28,7 +28,7 @@ void Cliente::update() {
 
 	
 
-	while (!salir) {
+	while (1) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 			switch (packet->data[0]) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -320,5 +320,7 @@ void Cliente::enviarDesconexion() {
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 
-	salir = true;
+	
+
+	//salir = true;
 }

@@ -50,6 +50,7 @@ void Game::run()
 			MastEventReceiver::i().endEventProcess();
 			
 			if (processEvents()) {
+				//Cliente::i().cerrar();
 				break;
 			}
 			//Llevamos control en las actualizaciones por frame
@@ -67,8 +68,9 @@ void Game::run()
 			MastEventReceiver::i().startEventProcess();
 	}
 	
-	//esta mierda no sabemos muy bien porque esta aqui, ni siquiera si funciona estando aqui
-	Cliente::i().esperar();
+	//Espera a que termine el otro hilo para finalizar el programa
+	//Cliente::i().esperar();
+	Cliente::i().cerrar();
 	GraphicEngine::i().apagar();
 }
 
