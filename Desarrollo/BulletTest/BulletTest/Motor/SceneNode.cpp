@@ -11,7 +11,7 @@ SceneNode::SceneNode(ISceneNode* node, IVideoDriver* irrDriver) :
 
 SceneNode::~SceneNode()
 {
-	delete m_node;
+	m_node = nullptr;
 	m_irrDriver = nullptr;
 }
 

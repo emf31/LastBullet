@@ -144,7 +144,9 @@ void Player::update(Time elapsedTime)
 	}
 	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
 
-	Cliente::i().enviarPos(this);
+	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+		Cliente::i().enviarPos(this);
+	}
 
 
 	
@@ -162,7 +164,7 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "../media/Dif_2.tga", "../media/Raptor.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/Raptor.obj");
 	//TODO esto igual es que se ha rayado ese set position pinta raro
 	Vec3<float> pos= Vec3<float>(0, 100, 0);
 	m_renderState.setPosition(pos);

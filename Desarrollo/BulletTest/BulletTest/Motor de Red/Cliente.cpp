@@ -16,16 +16,13 @@ Cliente::Cliente()
 }
 
 
-int salir = false;
+
 void Cliente::update() {
-	RakNet::Packet *packet;
+	
 	RakNet::BitStream bsOut;
 	std::string str;
 	TPlayer nuevoplayer;
 	RakNet::RakNetGUID desconectado;
-	
-	int cont = 0;
-
 	
 
 	while (1) {
@@ -57,8 +54,9 @@ void Cliente::update() {
 				std::cin >> str;
 
 				Player *player = new Player(str, peer->GetMyGUID());
-				player->cargarContenido();
 				player->inicializar();
+				player->cargarContenido();
+				
 
 				nuevoplayer.guid = player->getGuid();
 				nuevoplayer.name = player->getName();
@@ -66,7 +64,9 @@ void Cliente::update() {
 				nuevoplayer.position = Vec3<float> (0,100,0);
 				player->setPosition(nuevoplayer.position);
 
-				GraphicEngine::i().iniciado = true;
+				//Esta variable indica que el servidor a aceptado la conexion
+				conectado = true;
+
 				bsOut.Write(nuevoplayer);
 				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 				bsOut.Reset();
@@ -248,6 +248,8 @@ void Cliente::update() {
 }
 
 void Cliente::inicializar() {
+	conectado = false;
+
 	peer = RakNet::RakPeerInterface::GetInstance();
 
 	printf("Introduce la IP \n");
@@ -261,9 +263,9 @@ void Cliente::inicializar() {
 void Cliente::conectar(std::string address, int port) {
 	peer->Startup(1, &sd, 1);
 	peer->Connect(address.c_str(), SERVER_PORT, 0, 0);
-	//bucleCliente();
-	//return std::thread(&Cliente::bucleCliente, this);
-	hilo= new std::thread(&Cliente::update, this);
+
+
+	hilo = new std::thread(&Cliente::update, this);
 }
 
 void Cliente::esperar() {
@@ -326,4 +328,13 @@ void Cliente::enviarDesconexion() {
 	
 
 	//salir = true;
+}
+
+void Cliente::apagar() {
+	if (conectado) {
+		hilo->detach();
+	}
+	//Borrar todas las cosas de raknet
+	//delete packet;
+	//delete peer;
 }

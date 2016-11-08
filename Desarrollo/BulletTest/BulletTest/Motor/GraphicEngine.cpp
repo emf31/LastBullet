@@ -57,7 +57,7 @@ void GraphicEngine::setCameraEntity(Entity * entity)
 
 void GraphicEngine::updateCamera()
 {
-	if(debug_camera)
+	if(debug_camera && active_camera != NULL)
 		active_camera->update();
 }
 

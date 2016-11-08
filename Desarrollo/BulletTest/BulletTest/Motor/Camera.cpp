@@ -42,7 +42,7 @@ void Camera::asignarEntity(Entity* ent)
 
 void Camera::update()
 {
-	if (m_entity != NULL) {
+	if (m_entity != nullptr) {
 		setPosition(Vec3<float>(
 			m_entity->getRenderPosition().getX(),
 			m_entity->getRenderPosition().getY() + m_entity->getNode()->getScale().getY()+2,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)

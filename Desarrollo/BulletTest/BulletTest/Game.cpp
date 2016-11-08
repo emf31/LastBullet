@@ -50,7 +50,7 @@ void Game::run()
 	
 	while (GraphicEngine::i().isRuning()) {
 		//if (GraphicEngine::i().isWindowActive()) {
-		if (GraphicEngine::i().iniciado) {
+		//if (Cliente::i().isConected() ) {
 			Time elapsedTime = clock.restart();
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();
@@ -69,13 +69,12 @@ void Game::run()
 
 			render(interpolation, timePerFrame);
 			
-		}
+		//}
 			MastEventReceiver::i().startEventProcess();
 	}
 	
 	//Espera a que termine el otro hilo para finalizar el programa
-	Cliente::i().esperar();
-	//Cliente::i().cerrar();
+	Cliente::i().apagar();
 	GraphicEngine::i().apagar();
 }
 
@@ -169,15 +168,45 @@ void Game::inicializar()
 
 	/////////////////////////////////////////////////////////////////////
 
+
+	int a;
+	do {
+		std::cout << "Elige un modo:" << std::endl;
+		std::cout << "1 - Un jugador" << std::endl;
+		std::cout << "2 - Multijugador" << std::endl;
+
+		std::cin >> a;
+	} while (a != 1 && a != 2);
 	
 
-	//EntityManager::i().inicializar();
+	if (a == 1) {
+		//Si no le pasas GUID es que es un jugador
+		player = new Player("Batman");
+
+		EntityManager::i().inicializar();
+
+		EntityManager::i().cargarContenido();
+	}
+	else {
+		EntityManager::i().inicializar();
+
+		EntityManager::i().cargarContenido();
+		
+
+		//raknet
+		Cliente::i().inicializar();
+
+		
+		//Bucle infinito hasta que se conecte
+		while (Cliente::i().isConected() == false);
+
+		
 
 
-	EntityManager::i().cargarContenido();
+	}
 
-	//raknet
-	Cliente::i().inicializar();
+	
+	
 
 }
 
