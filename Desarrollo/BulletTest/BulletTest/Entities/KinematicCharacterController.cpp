@@ -165,6 +165,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	bounce_fix = false;
 	m_linearDamping = btScalar(0.0);
 	m_angularDamping = btScalar(0.0);
+	m_speed = btScalar(1.3);
 }
 
 KinematicCharacterController::~KinematicCharacterController()
@@ -807,7 +808,7 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 	//}
 
 	if (m_useWalkDirection) {
-		stepForwardAndStrafe(collisionWorld, m_walkDirection);
+		stepForwardAndStrafe(collisionWorld, m_walkDirection * m_speed);
 	}
 	else {
 		//printf("  time: %f", m_velocityTimeInterval);

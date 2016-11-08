@@ -54,6 +54,8 @@ protected:
 	btScalar m_maxSlopeCosine;  // Cosine equivalent of m_maxSlopeRadians (calculated once when set, for optimization)
 	btScalar m_gravity;
 
+	btScalar m_speed;
+
 	btScalar m_turnAngle;
 
 	btScalar m_stepHeight;

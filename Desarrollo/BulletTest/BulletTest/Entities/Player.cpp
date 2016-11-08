@@ -170,10 +170,11 @@ void Player::cargarContenido()
 	actorGhost->setCollisionShape(m_pCollisionShape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
-	p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 0.5f);
+	p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 4.f);
 	//p_controller->setGravity(btVector3(0,-9.8*3,0));
 	//p_controller->setJumpSpeed(5);
 	p_controller->setUp(btVector3(0,1,0));
+	//p_controller->setMaxSlope(btRadians(30.0));
 	//p_controller->setFallSpeed(55);
 	//p_controller->setMaxJumpHeight(20);
 	//p_controller->setLinearDamping(0.1);
