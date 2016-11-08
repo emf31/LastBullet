@@ -108,7 +108,7 @@ void EntityManager::removeEntity(Entity * entity)
 
 void EntityManager::removeRaknetEntity(Entity * entity)
 {
-	auto found = m_jugadores.find(entity->getID());
+	auto found = m_jugadores.find(RakNet::RakNetGUID::ToUint32( entity->getGuid()));
 	//Si es diferente de m_entities.end() es que lo ha encontrado
 	if (found != m_jugadores.end()) {
 		m_jugadores.erase(found);

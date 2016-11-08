@@ -49,10 +49,8 @@ void Game::run()
 			timeSinceLastUpdate += elapsedTime;
 			MastEventReceiver::i().endEventProcess();
 			
-			if (processEvents()) {
-				//Cliente::i().cerrar();
-				break;
-			}
+			processEvents();
+
 			//Llevamos control en las actualizaciones por frame
 			while (timeSinceLastUpdate > timePerFrame) // 15 veces/segundo
 			{
@@ -69,8 +67,8 @@ void Game::run()
 	}
 	
 	//Espera a que termine el otro hilo para finalizar el programa
-	//Cliente::i().esperar();
-	Cliente::i().cerrar();
+	Cliente::i().esperar();
+	//Cliente::i().cerrar();
 	GraphicEngine::i().apagar();
 }
 
@@ -105,10 +103,11 @@ void Game::inicializar()
 bool Game::processEvents()
 {
 	EntityManager::i().handleInput();
-	if (MastEventReceiver::i().keyPressed(KEY_KEY_Z)) {
+	/*if (MastEventReceiver::i().keyPressed(KEY_KEY_Z)) {
 		Cliente::i().enviarDesconexion();
 		return true;
-	}
+	}*/
+	return true;
 }
 
 void Game::update(Time elapsedTime)
