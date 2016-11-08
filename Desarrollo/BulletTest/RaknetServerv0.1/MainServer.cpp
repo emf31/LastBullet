@@ -146,7 +146,7 @@ int main() {
 			}
 
 			break;
-			case MENSAJE_NOMBRE:
+			case DESCONECTADO:
 			{
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
