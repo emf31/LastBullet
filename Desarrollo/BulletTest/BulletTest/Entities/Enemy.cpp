@@ -101,7 +101,7 @@ void Enemy::desEncolaPos()
 	m.lock();
 	std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
 	
-	if (m_positions.size() > 0) {
+	if (m_positions.size() > 3) {
 		Vec3<float> new_pos;
 		while (!m_positions.empty()) {
 			new_pos = m_positions.front();
@@ -109,11 +109,18 @@ void Enemy::desEncolaPos()
 			m_positions.pop();
 			//llamamos al update con la nueva posicion
 		}
-
 		updateEnemigo(new_pos);
 	}
-	else {
-		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
+
+	else if (m_positions.size() > 0) {
+		Vec3<float> new_pos;
+			new_pos = m_positions.front();
+			//lo borramos de la cola
+			m_positions.pop();
+			//llamamos al update con la nueva posicion
+		updateEnemigo(new_pos);
+	}else {
+		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 7.f));
 		
 	}
 	m.unlock();
