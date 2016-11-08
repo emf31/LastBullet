@@ -78,6 +78,25 @@ public:
 		}
 	}
 
+
+
+	Vec3 Project(const Vec3 &other) const
+	{
+		float res = (dotProduct(other) / other.MagnitudeSquared());
+		return Vec3<float>(res * other.getX(), res * other.getY(), res * other.getZ());
+	}
+
+	float MagnitudeSquared() const
+	{
+		return x * x + y * y + z * z;
+	}
+
+
+	float Magnitude() const
+	{
+		return sqrtf(x * x + y * y + z * z);
+	}
+
 	// Static method to calculate and return the scalar dot product of two vectors
 	//
 	// Note: The dot product of two vectors tell us things about the angle between

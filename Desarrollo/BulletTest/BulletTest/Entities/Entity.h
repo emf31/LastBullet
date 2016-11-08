@@ -4,9 +4,15 @@
 #include "../Otros/Time.hpp"
 #include "../Otros/Clock.hpp"
 #include "../Motor/RenderState.h"
+
 #include "../Motor/SceneNode.h"
 #include "../Handlers/Message.h"
 #include <RakPeerInterface.h>
+
+#include <btBulletCollisionCommon.h>
+#include <btBulletDynamicsCommon.h>
+
+
 
 class Entity
 {
@@ -53,6 +59,7 @@ public:
 		return m_vida;
 	}
 
+
 	SceneNode* getNode();
 
 	virtual void inicializar() = 0;
@@ -60,8 +67,11 @@ public:
 	virtual void handleInput() = 0;
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
+
 	virtual void handleMessage(const Message& message) = 0;
 	
+	virtual std::string getClassName() = 0;
+
 
 protected:
 	int m_id;

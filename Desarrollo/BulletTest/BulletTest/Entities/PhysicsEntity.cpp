@@ -12,6 +12,17 @@ PhysicsEntity::~PhysicsEntity()
 {
 }
 
+void PhysicsEntity::rotate(Vec3<float> rot)
+{
+	btTransform tr;
+	tr.setIdentity();
+	btQuaternion quat;
+	quat.setEulerZYX(rot.getX(), rot.getY(), rot.getZ()); //or quat.setEulerZYX depending on the ordering you want
+	tr.setRotation(quat);
+
+	m_rigidBody->setCenterOfMassTransform(tr);
+}
+
 void PhysicsEntity::inicializar()
 {
 }
@@ -38,6 +49,8 @@ void PhysicsEntity::handleInput()
 
 void PhysicsEntity::cargarContenido()
 {
+
+
 }
 
 void PhysicsEntity::borrarContenido()
@@ -46,4 +59,5 @@ void PhysicsEntity::borrarContenido()
 
 void PhysicsEntity::handleMessage(const Message & message)
 {
+
 }

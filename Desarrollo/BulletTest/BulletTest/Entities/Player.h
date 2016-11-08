@@ -2,13 +2,18 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
+#include "KinematicCharacterController.h"
+//#include <BulletDynamics\Character\btKinematicCharacterController.h>
+#include "Rocket.h"
 
-
+#include <vector>
 class Player : public Entity
 {
 public:
 	Player(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
+
+	void setPosition(Vec3<float> pos);
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -16,49 +21,67 @@ public:
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
-	virtual void handleMessage(const Message & message) override;
-
-	void setPosition(Vec3<float> pos);
-
-	btRigidBody* getRigidBody() { return m_rigidBody; }
+	virtual void handleMessage(const Message& message) override;
+	virtual std::string getClassName() { return "Player"; }
 
 
 	void jump();
 
 	void shoot();
-
+	void shootRocket();
 
 	void move_up();
 	void move_down();
 	void move_right();
 	void move_left();
 
+	float calcularDistancia(btVector3& start, btVector3& end);
+
+	void sumarVida() { m_vida++; }
+
+	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
+
 private:
-	
-	btRigidBody* m_rigidBody;
+	float m_vida;
 
-	bool isMovingBackward;
-	bool isMovingForward;
-	bool isMovingLeft;
-	bool isMovingRight;
+	Rocket* rocket;
+	Clock clockRecargaRocket;
+	float timeRecargaRocket = 3;
+
+
+
 	bool isShooting=false;
-	bool moviendo = false;
 
-	float m_speedFactor;
-	Clock tiempoSalto;
-
-
-	int numJumps;
 	bool isJumping;
 	bool isMoving;
-	bool jumped = false;
+
+	
+	float giro;
 
 	Vec3<float> vectorPrev;
 	Vec3<float> vectorNew;
 
 	Vec3<float> speedFinal;
 
-	float giro;
 	
+
+	//Player controller
+	KinematicCharacterController* p_controller;
+
+	btCollisionShape* m_pCollisionShape;
+	btDefaultMotionState* m_pMotionState;
+	btPairCachingGhostObject* m_pGhostObject;
+
+	float radius;
+	float height;
+	float mass;
+
+
+	float m_acceleration_walk;
+	float m_acceleration_run;
+	float m_deceleration_walk;
+	float m_deceleration_run;
+	float m_maxSpeed_walk;
+	float m_maxSpeed_run;
 };
 

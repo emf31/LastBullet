@@ -2,38 +2,55 @@
 #include <list>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
+#include <BulletCollision/CollisionDispatch/btGhostObject.h>
+
 #include "../Entities/Entity.h"
 #include "../Otros/Time.hpp"
 
 class PhysicsEngine
 {
 public:
+
+	static PhysicsEngine& i() {
+		static PhysicsEngine singleton;
+		return singleton;
+	}
+
+	btDynamicsWorld* m_world;
+
 	//Inicializa el motor de fisicas
-	static void inicializar();
+	void inicializar();
 
 	//Updatea las fisicas
-	static void update(Time elapsedTime);
+	void update(Time elapsedTime);
+
+
+	void createBoxDynamicCharacter(btRigidBody* rigid);
+
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
-	static btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa, int body_state = ACTIVE_TAG);
+	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos una esfera - asumimos que la posicion esta puesta
-	static btRigidBody* createSphereRigidBody(Entity* entity, float radius, float mass);
+	btRigidBody* createSphereRigidBody(Entity* entity, float radius, float mass);
+
+	btGhostObject* createBoxGhostObject(Entity * entity, const Vec3<float>& scale);
+
 
 	//borra un rigidbody de la simulacion
-	static bool removeRigidBody(btRigidBody* body);
+	bool removeRigidBody(btRigidBody* body);
 
 	//aqui se borran todos los punteros
-	static void apagar();
+	void apagar();
 
-	static btDynamicsWorld* m_world;
 private:
-	
-	static btDefaultCollisionConfiguration* m_config;
-	static btCollisionDispatcher* m_dispatcher;
-	static btBroadphaseInterface* m_broadphase;
-	static btSequentialImpulseConstraintSolver* m_solver;
-	static std::list<btRigidBody*> m_rigidBodies;
+	btDefaultCollisionConfiguration* m_config;
+	btCollisionDispatcher* m_dispatcher;
+	btBroadphaseInterface* m_broadphase;
+	btSequentialImpulseConstraintSolver* m_solver;
+	btGhostPairCallback* m_pGhostPairCallBack;
+
+	std::list<btRigidBody*> m_rigidBodies;
 
 	//Constructor privado para que no se pueda llamar
 	PhysicsEngine() { }

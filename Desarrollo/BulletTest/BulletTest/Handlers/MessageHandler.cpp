@@ -1,3 +1,4 @@
+
 #include "MessageHandler.h"
 
 void MessageHandler::update()
@@ -18,15 +19,17 @@ void MessageHandler::update()
 void MessageHandler::sendMessage(const Message & message)
 {
 	m.lock();
-	// Añadir a la cola
+
 	m_messages.push(message);
 
 	m.unlock();
 }
+
 
  void MessageHandler::borrarContenido()
 {
 	while (!m_messages.empty()) {
 		m_messages.pop();
 	}
+
 }

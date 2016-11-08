@@ -1,0 +1,36 @@
+# Blender MTL File: 'SpaceMan_Rigged_and Textured.blend'
+# Material Count: 3
+
+newmtl Black
+Ns 7.843137
+Ka 1.000000 1.000000 1.000000
+Kd 0.009772 0.009772 0.009772
+Ks 0.748386 0.008823 0.000000
+Ke 0.012216 0.012216 0.012216
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl InfinitePlane
+Ns 52.941176
+Ka 0.009259 0.009259 0.009259
+Kd 0.346656 0.346656 0.346656
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 5
+
+newmtl basemesh
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.072668 0.072668 0.072668
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\Enrique\Desktop\detail.tga
+map_Bump -bm 0.025000 C:\\Users\\Enrique\\Desktop\\LIGHTMAP01.tga
+map_Ks C:\\Users\\Enrique\\Desktop\\Specular.tga
+map_Ns C:\\Users\\Enrique\\Desktop\\Specular.tga

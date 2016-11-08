@@ -1,8 +1,7 @@
-
 #pragma once
-#include "..\Otros\vec3.hpp"
-#include "..\Otros\Time.hpp"
-#include "SceneNode.h"
+#include "../Otros\vec3.hpp"
+#include "../Otros\Time.hpp"
+#include "../Motor\SceneNode.h"
 
 
 class RenderState
@@ -39,7 +38,7 @@ public:
 	void update(Time elapsedTime);
 	//Calcula la posición y rotación de renderizado interpoladas
 	void updateRender(float interpolation, SceneNode *m_nodo);
-
+	
 	//Updatea las posiciones prev y new
 	void updatePositions(Vec3<float> position);
 	//Updatea las rotaciones prev y new
@@ -49,15 +48,15 @@ public:
 private:
 	float m_SpeedFactor;
 	float m_MaxVelocity;
-	float m_Acceleration;    //Vector velocidad
+	float m_Acceleration;	//Vector velocidad
 	float m_rotated;
 
-	Vec3<float> m_Velocity;    //Vector velocidad
-	Vec3<float> m_Direction;	//Vector velocidad
-
+	Vec3<float> m_Velocity;	//Vector velocidad
+	Vec3<float> m_Direction;//Vector velocidad
+	
 
 	Vec3<float> m_renderPos;
-	Vec3<float> m_renderRotation;
+	Vec3<float>	m_renderRotation;
 
 	Vec3<float> m_posPrev;
 	Vec3<float> m_posNew;
@@ -67,3 +66,4 @@ private:
 
 
 };
+

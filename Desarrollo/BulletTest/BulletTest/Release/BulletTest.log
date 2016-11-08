@@ -1,0 +1,46 @@
+﻿  stdafx.cpp
+  DynamicCharacterController.cpp
+Entities\DynamicCharacterController.cpp(308): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Enemy.cpp
+Entities\Enemy.cpp(71): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Entity.cpp
+Entities\Entity.cpp(46): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  EntityManager.cpp
+Entities\EntityManager.cpp(100): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  PhysicsEntity.cpp
+Entities\PhysicsEntity.cpp(49): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Player.cpp
+Entities\Player.cpp(314): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Rocket.cpp
+Entities\Rocket.cpp(64): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  InputHandler.cpp
+Handlers\InputHandler.cpp(148): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  MessageHandler.cpp
+Handlers\MessageHandler.cpp(29): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  MastEventReceiver.cpp
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\MastEventReceiver.hpp(27): fatal error C1083: No se puede abrir el archivo incluir: 'irrlicht.h': No such file or directory
+  Game.cpp
+Game.cpp(138): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  main.cpp
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\Otros/vec3.hpp(6): fatal error C1083: No se puede abrir el archivo incluir: 'irrlicht.h': No such file or directory
+  Camera.cpp
+Motor\Camera.cpp(54): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  GraphicEngine.cpp
+Motor\GraphicEngine.cpp(140): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  PhysicsEngine.cpp
+Motor\PhysicsEngine.cpp(111): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  RenderState.cpp
+Motor\RenderState.cpp(142): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  SceneNode.cpp
+Motor\SceneNode.cpp(45): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Clock.cpp
+Otros\Clock.cpp(61): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Time.cpp
+Otros\Time.cpp(258): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Vec2f.cpp
+Otros\Vec2f.cpp(149): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Compilando...
+  Vec3f.cpp
+Otros\Vec3f.cpp(168): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  ClockImpl.cpp
+Otros\Win32\ClockImpl.cpp(69): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?

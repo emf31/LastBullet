@@ -6,18 +6,13 @@
 #include <vector>
 #include "Entities\Entity.h"
 #include "Entities\Player.h"
+#include "Entities\Enemy.h"
+#include "Entities\Rocket.h"
 #include "Motor\Camera.h"
 
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
-
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
 
 
 class Game
@@ -38,9 +33,7 @@ private:
 	float interpolation;
 
 	Player *player;
+	Entity *enemy;
+
 	
-
 };
-
-
-

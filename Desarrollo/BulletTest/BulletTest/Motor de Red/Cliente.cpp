@@ -58,6 +58,7 @@ void Cliente::update() {
 
 				Player *player = new Player(str, peer->GetMyGUID());
 				player->cargarContenido();
+				player->inicializar();
 
 				nuevoplayer.guid = player->getGuid();
 				nuevoplayer.name = player->getName();
@@ -177,16 +178,16 @@ void Cliente::update() {
 				//bsIn.Read(desconectado);
 
 				//el player siempre tendra ID=1 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				if (EntityManager::i().getEntity(1)->restaVida() <= 0) {
+				if (EntityManager::i().getEntity(1000)->restaVida() <= 0) {
 					std::cout << "ME HAN MATADO" << std::endl;
 					std::cout << "HIJO PUTA EL CAMPERO" << std::endl;
 					//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
 
 					bsOut.Write((RakNet::MessageID)MUERTE);
 
-					nuevoplayer.guid = EntityManager::i().getEntity(1)->getGuid();
-					nuevoplayer.name = EntityManager::i().getEntity(1)->getName();
-					nuevoplayer.position = EntityManager::i().getEntity(1)->getRenderState()->getPosition();
+					nuevoplayer.guid = EntityManager::i().getEntity(1000)->getGuid();
+					nuevoplayer.name = EntityManager::i().getEntity(1000)->getName();
+					nuevoplayer.position = EntityManager::i().getEntity(1000)->getRenderState()->getPosition();
 
 
 					bsOut.Write(nuevoplayer);
@@ -212,7 +213,7 @@ void Cliente::update() {
 				
 				std::cout << "el player " << nuevoplayer.name << " ha muerto" << std::endl;
 
-				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==1) {
+				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==1000) {
 					//es el player
 					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 					player->setPosition(nuevoplayer.position);			
@@ -220,7 +221,7 @@ void Cliente::update() {
 
 					//TODO: esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
 					//ademas que desactivara el draw de esta entetity para que no puedeas moverte ni nada mientras estas muerto.
-					EntityManager::i().getEntity(1)->resetVida();
+					EntityManager::i().getEntity(1000)->resetVida();
 				}
 				else {
 					//es un enemigo
@@ -278,7 +279,7 @@ void Cliente::enviarPos(Player* p) {
 
 	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
 	paquetemov.position = p->getRenderState()->getPosition();
-	paquetemov.velocidad = Vec3<float>(p->getRigidBody()->getLinearVelocity().x(), p->getRigidBody()->getLinearVelocity().y(), p->getRigidBody()->getLinearVelocity().z());
+	paquetemov.velocidad = p->getVelocity();
 	paquetemov.guid = p->getGuid();
 	paquetemov.name = p->getName();
 	

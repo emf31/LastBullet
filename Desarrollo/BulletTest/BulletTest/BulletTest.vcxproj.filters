@@ -52,6 +52,9 @@
     <Filter Include="Archivos de encabezado\Command">
       <UniqueIdentifier>{6366a3be-4366-47b8-ad2f-b07e6cfd73b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Command">
+      <UniqueIdentifier>{de81fb05-842d-46df-bbe6-3ea8282e30bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -150,6 +153,18 @@
     <ClInclude Include="Handlers\InputHandler.h">
       <Filter>Archivos de encabezado\Handlers</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\KinematicCharacterController.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\LifeObject.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Rocket.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootCommandRocket.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -217,6 +232,15 @@
     </ClCompile>
     <ClCompile Include="Motor\RenderState.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\KinematicCharacterController.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\LifeObject.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Rocket.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

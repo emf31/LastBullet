@@ -14,7 +14,6 @@ public:
 	}
 	void update();
 	void sendMessage(const Message& message);
-	
 	void borrarContenido();
 
 	std::mutex m;
@@ -22,8 +21,4 @@ public:
 private:
 	std::queue<Message> m_messages;
 	MessageHandler() {}
-
-	
-
 };
-

@@ -5,6 +5,7 @@
 #include "../Command/MoveLeft.h"
 #include "../Command/Jump.h"
 #include "../Command/ShootCommand.h"
+#include "../Command/ShootCommandRocket.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
 
@@ -27,6 +28,7 @@ InputHandler::InputHandler()
 	move_right = new MoveRight();
 	jump = new Jump();
 	shoot_command = new ShootCommand();
+	shoot_commandRocket = new ShootCommandRocket();
 
 	// Player
 	commands[KEY_KEY_W] = move_up;
@@ -35,6 +37,7 @@ InputHandler::InputHandler()
 	commands[KEY_KEY_D] = move_right;
 	commands[KEY_SPACE] = jump;
 	commands[KEY_LBUTTON] = shoot_command;
+	commands[KEY_RBUTTON] = shoot_commandRocket;
 }
 
 void InputHandler::bind(EKEY_CODE key, Command *command)
@@ -84,6 +87,7 @@ bool InputHandler::input_mapping()
 
 	/*SDL_Event event;
 	while (SDL_PollEvent(&event) != 0) {
+<<<<<<< HEAD
 	if (event.type == SDL_QUIT) {
 	return true;
 	} else if (event.type == SDL_KEYDOWN) {
@@ -98,6 +102,22 @@ bool InputHandler::input_mapping()
 
 	}
 
+=======
+		if (event.type == SDL_QUIT) {
+			return true;
+		} else if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_ESCAPE) {
+				return true;
+			}
+			keydown(event);
+		}
+		else if (event.type == SDL_KEYUP) {
+			keyup(event);
+		}
+			
+	}
+		
+>>>>>>> refs/remotes/origin/Irrlitch+Bullet
 
 	return false;*/
 }
