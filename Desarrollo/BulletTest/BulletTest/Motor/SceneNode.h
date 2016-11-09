@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include "../Otros/vec3.hpp"
-
+#include "SceneNode.h"
 
 
 using namespace irr;
@@ -16,20 +16,21 @@ using namespace gui;
 class SceneNode
 {
 public:
-	SceneNode(ISceneNode* node, IVideoDriver* irrDriver);
+	SceneNode(IVideoDriver* irrDriver);
 	~SceneNode();
 
-	void setTexture(const io::path& texture);
-	void setPosition(Vec3<float> position);
-	Vec3<float> getPosition();
-	void setRotation(Vec3<float> rotation);
+	virtual void setTexture(const io::path& texture) = 0;
+	virtual void setPosition(Vec3<float> position) = 0;
+	virtual void setRotation(Vec3<float> rotation) = 0;
+	virtual Vec3<float> getPosition() = 0;
+	virtual Vec3<float> getScale() = 0;
 
-	Vec3<float> getScale();
-	ISceneNode* getNodo();
+	virtual ISceneNode* getNodo() = 0;
 
-private:
-	ISceneNode* m_node;
+
+protected:
 	IVideoDriver* m_irrDriver;
 	ISceneManager *m_irrScene;
+	
 };
 

@@ -8,7 +8,7 @@ GraphicEngine::GraphicEngine() : debug_camera(true)
 {
 }
 
-SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+BasicSceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
 	ISceneNode *Node;
 	if(mesh!="")
@@ -28,7 +28,31 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 		Node->setMaterialTexture(0,irrDriver->getTexture(texture));
 	}
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return new SceneNode(Node, irrDriver);
+	return new BasicSceneNode(Node, irrDriver);
+}
+
+AnimatedSceneNode * GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+{
+	IAnimatedMeshSceneNode *Node;
+
+	Node = irrScene->addAnimatedMeshSceneNode(irrScene->getMesh(mesh));
+	
+	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
+	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
+	//Asi no le afectan las luces
+	Node->setMaterialFlag(EMF_LIGHTING, false);
+
+	m_camera = 0;
+
+	//Si es diferente de "" asignamos una textura al nodo
+	if (texture != "") {
+		Node->setMaterialTexture(0, irrDriver->getTexture(texture));
+	}
+
+	Node->setMD2Animation(scene::EMAT_STAND);
+
+	//Le pasamos irrDriver para que se encargue el de asignar la textura
+	return new AnimatedSceneNode(Node, irrDriver);
 }
 
 

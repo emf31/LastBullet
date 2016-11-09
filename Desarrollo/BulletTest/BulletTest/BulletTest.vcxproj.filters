@@ -102,9 +102,6 @@
     <ClInclude Include="Motor\GraphicEngine.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="Motor\SceneNode.h">
-      <Filter>Archivos de encabezado\Motor</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\Camera.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
@@ -165,6 +162,15 @@
     <ClInclude Include="Command\ShootCommandRocket.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Motor\AnimatedSceneNode.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\BasicSceneNode.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\SceneNode.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -209,9 +215,6 @@
     <ClCompile Include="Motor\GraphicEngine.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="Motor\SceneNode.cpp">
-      <Filter>Archivos de código fuente\Motor</Filter>
-    </ClCompile>
     <ClCompile Include="Motor\Camera.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
@@ -241,6 +244,15 @@
     </ClCompile>
     <ClCompile Include="Entities\Rocket.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\AnimatedSceneNode.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\BasicSceneNode.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\SceneNode.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

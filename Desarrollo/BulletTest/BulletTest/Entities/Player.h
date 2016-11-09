@@ -5,7 +5,7 @@
 #include "KinematicCharacterController.h"
 //#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
-
+#include "../Motor/AnimatedSceneNode.h"
 #include <vector>
 class Player : public Entity
 {
@@ -63,7 +63,8 @@ private:
 
 	Vec3<float> speedFinal;
 
-	
+	//Animated Nodo
+	//AnimatedSceneNode *m_animated;
 
 	//Player controller
 	KinematicCharacterController* p_controller;

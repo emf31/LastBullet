@@ -10,6 +10,8 @@
 #include <queue>
 #include <mutex>
 
+#include "../Motor/BasicSceneNode.h"
+
 class Enemy : public Entity
 {
 public:
@@ -38,6 +40,8 @@ public:
 
 
 private:
+
+
 	btRigidBody* m_rigidBody;
 	std::queue<Vec3<float>> m_positions;
 

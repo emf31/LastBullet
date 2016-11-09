@@ -32,6 +32,7 @@ void Player::setPosition(Vec3<float> pos)
 {
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	//m_nodo->setPosition(pos);
 	m_nodo->setPosition(pos);
 }
 
@@ -164,7 +165,8 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/Raptor.obj");
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+
 	//TODO esto igual es que se ha rayado ese set position pinta raro
 	Vec3<float> pos= Vec3<float>(0, 100, 0);
 	m_renderState.setPosition(pos);
@@ -221,8 +223,7 @@ void Player::cargarContenido()
 
 void Player::borrarContenido()
 {
-	//No se si aqui habria que hacer delete al nodo porque igual se encarga irrlitch
-	delete m_nodo;
+
 }
 
 void Player::handleMessage(const Message & message)

@@ -175,10 +175,12 @@
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor de Red\Cliente.h" />
     <ClInclude Include="Motor de Red\Estructuras.h" />
+    <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\RenderState.h" />
+    <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
@@ -203,10 +205,12 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motor de Red\Cliente.cpp" />
+    <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\RenderState.cpp" />
+    <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
