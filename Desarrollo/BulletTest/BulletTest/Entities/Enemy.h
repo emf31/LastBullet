@@ -47,7 +47,8 @@ private:
 	float height;
 	float mass;
 	Animation* animation;
-	enum PlayerState { quieto, andando, corriendo, saltando, saltando2 } m_playerState;
+
+	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 	bool isMoving;
 
 	btRigidBody* m_rigidBody;

@@ -13,9 +13,9 @@ void Animation::addAnimation(std::string name, int start, int end)
 		f.start = start;
 		f.end = end;
 		m_animations[name] = f;
-		}
-		
 	}
+		
+}
 
 void Animation::removeAnimation(std::string name)
 {

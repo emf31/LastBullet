@@ -193,6 +193,10 @@ void GraphicEngine::cargarTexturas() {
 	irrDriver->getTexture("../media/earth.jpg");
 	irrDriver->getTexture("../media/Dif_2.tga");
 	irrScene->getMesh("../media/ArmyPilot.b3d");
+	irrScene->getMesh("../media/sf2arms.obj");
+	irrScene->getMesh("../media/body01.png");
+	irrScene->getMesh("../media/head01.png");
+	irrScene->getMesh("../media/m4tex.png");
 }
 
 void GraphicEngine::removeNode(SceneNode* nodo) {

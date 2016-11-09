@@ -58,7 +58,7 @@ void Enemy::cargarContenido()
 	animation->addAnimation("Idle", 220, 472);
 	animation->addAnimation("AimRunning", 473, 524);
 
-	m_playerState = quieto;
+	m_animState = quieto;
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -150,7 +150,7 @@ void Enemy::desEncolaPos()
 }
 void Enemy::updateAnimation()
 {
-	switch (m_playerState)
+	switch (m_animState)
 	{
 	case quieto:
 		if (animation->getActualAnimation() != "Idle") {
@@ -187,9 +187,9 @@ void Enemy::updateState()
 		m_playerState = saltando2;
 	}
 	else*/ if (isMoving) {
-		m_playerState = andando;
+		m_animState = andando;
 	}
 	else {
-		m_playerState = quieto;
+		m_animState = quieto;
 	}
 }
