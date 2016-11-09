@@ -31,6 +31,7 @@ int Animation::getAnimationStart(std::string name)
 	auto found = m_animations.find(name);
 	//Si es diferente de m_entities.end() es que lo ha encontrado
 	if (found != m_animations.end()) {
+		actualAnimation = name;
 		return found->second.start;
 	}
 }
@@ -39,6 +40,7 @@ int Animation::getAnimationEnd(std::string name)
 	auto found = m_animations.find(name);
 	//Si es diferente de m_entities.end() es que lo ha encontrado
 	if (found != m_animations.end()) {
+		actualAnimation = name;
 		return found->second.end;
 	}
 }
