@@ -192,10 +192,10 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
-	m_nodo->setTexture("../media/body01.png", 1);
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "", "../media/sf2arms.obj");
+	/*m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
-	m_nodo->setTexture("../media/m4tex.png", 2);
+	m_nodo->setTexture("../media/m4tex.png", 2);*/
 
 	//TODO esto igual es que se ha rayado ese set position pinta raro
 	Vec3<float> pos= Vec3<float>(0, 100, 0);

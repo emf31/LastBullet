@@ -29,6 +29,9 @@ public:
 	Vec3<float> getVelocity();
 	Vec3<float> getRenderPos();
 	Vec3<float> getRenderRotation();
+	Vec3<float> getPreviousPosition() { return m_posPrev; }
+
+
 
 	////////////////////////////////////////
 	//Update methods

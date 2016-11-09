@@ -261,6 +261,13 @@ public:
 		y /= value;
 		z /= value;
 	}
+	bool operator!=(const T &value) const
+	{
+		if (x == value.x && y == value.y && z == value.z)
+			return false;
+
+		return true;
+	}
 
 };
 

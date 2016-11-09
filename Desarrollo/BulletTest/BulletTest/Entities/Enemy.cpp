@@ -10,20 +10,29 @@
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
+	animation = new Animation();
 }
 
 
 Enemy::~Enemy()
 {
+
 }
 
 void Enemy::inicializar()
 {
+	
 }
 
 void Enemy::update(Time elapsedTime)
 {
-
+	updateState();
+	updateAnimation();
+	isMoving = true;
+	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
+		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
+		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
+		isMoving = false;
 }
 
 void Enemy::handleInput()
@@ -33,12 +42,23 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
 	m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
 	m_nodo->setTexture("../media/m4tex.png", 2);
 
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
+
+	animation->addAnimation("Default", 0, 0);
+	animation->addAnimation("Run_Forwards", 1, 69);
+	animation->addAnimation("Run_backwards", 70, 138);
+	animation->addAnimation("Walk", 139, 183);
+	animation->addAnimation("Jump", 184, 219);
+	animation->addAnimation("Jump2", 184, 219);
+	animation->addAnimation("Idle", 220, 472);
+	animation->addAnimation("AimRunning", 473, 524);
+
+	m_playerState = quieto;
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -128,4 +148,48 @@ void Enemy::desEncolaPos()
 	m.unlock();
 
 }
+void Enemy::updateAnimation()
+{
+	switch (m_playerState)
+	{
+	case quieto:
+		if (animation->getActualAnimation() != "Idle") {
+			m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
+		}
+		break;
 
+	case andando:
+		if (animation->getActualAnimation() != "Walk") {
+			m_nodo->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
+		}
+		break;
+
+	case saltando:
+		if (animation->getActualAnimation() != "Jump") {
+			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
+		}
+		break;
+	case saltando2:
+		if (animation->getActualAnimation() != "Jump2") {
+			m_nodo->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
+		}
+		break;
+
+	}
+}
+
+void Enemy::updateState()
+{
+	/*if (!p_controller->onGround() && p_controller->numJumps == 0) {
+		m_playerState = saltando;
+	}
+	else if (!p_controller->onGround() && p_controller->numJumps == 1) {
+		m_playerState = saltando2;
+	}
+	else*/ if (isMoving) {
+		m_playerState = andando;
+	}
+	else {
+		m_playerState = quieto;
+	}
+}
