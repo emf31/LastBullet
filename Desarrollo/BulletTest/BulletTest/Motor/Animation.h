@@ -13,6 +13,7 @@ public:
 	void removeAnimation(std::string name);
 	int getAnimationStart(std::string name);
 	int getAnimationEnd(std::string name);
+	std::string getActualAnimation() { return actualAnimation; };
 
 private:
 
@@ -21,6 +22,6 @@ private:
 	};
 
 	std::unordered_map<std::string, frames> m_animations;
-
+	std::string actualAnimation;
 
 };

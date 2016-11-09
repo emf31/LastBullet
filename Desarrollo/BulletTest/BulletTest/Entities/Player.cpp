@@ -66,6 +66,19 @@ void Player::update(Time elapsedTime)
 	InputHandler::i().excuteCommands(this);
 	
 	speedFinal.normalise();
+	if (animation->getActualAnimation() != "Idle") {
+		m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
+	}
+	if (speedFinal.Magnitude() > 0) {
+		if(animation->getActualAnimation()!="Run_Forwards")
+			m_nodo->setAnimation(animation->getAnimationStart("Run_Forwards"), animation->getAnimationEnd("Run_Forwards"));
+	}
+
+
+	if (p_controller->onGround()) {
+		if (animation->getActualAnimation() != "Jump")
+			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
+	}
 
 	/*p_controller->m_maxSpeed = m_maxSpeed_walk;
 	p_controller->m_deceleration = m_deceleration_walk;*/
@@ -294,7 +307,7 @@ void Player::jump() {
 	}*/
 
 
-
+	
 	p_controller->jump(btVector3(0, 20, 0));
 
 }
