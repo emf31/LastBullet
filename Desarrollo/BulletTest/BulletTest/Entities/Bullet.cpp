@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "../Handlers/MessageHandler.h"
 #include "../Motor/GraphicEngine.h"
 
 
@@ -24,8 +25,12 @@ void Bullet::inicializar()
 void Bullet::update(Time elapsedTime)
 {
 	m_renderState.updateVelocity(elapsedTime.asSeconds(), (m_direction*m_velocity));
-	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 20) {
-		EntityManager::i().removeEntity(this);
+	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 5) {
+		//EntityManager::i().removeEntity(this);
+
+		Message msg1(this, "BORRATE", NULL);
+
+		MessageHandler::i().sendMessage(msg1);
 	}
 	
 }
@@ -46,6 +51,11 @@ void Bullet::borrarContenido()
 
 void Bullet::handleMessage(const Message & message)
 {
+	if (message.mensaje == "BORRATE") {
+		EntityManager::i().removeEntity(this);
+		GraphicEngine::i().removeNode(m_nodo);
+		delete this;
+	}
 }
 
 std::string Bullet::getClassName()
