@@ -166,6 +166,9 @@ void Player::cargarContenido()
 	//Creas el nodo(grafico)
 
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo->setTexture("../media/body01.png", 1);
+	m_nodo->setTexture("../media/head01.png", 0);
+	m_nodo->setTexture("../media/m4tex.png", 2);
 
 	//TODO esto igual es que se ha rayado ese set position pinta raro
 	Vec3<float> pos= Vec3<float>(0, 100, 0);
@@ -177,7 +180,7 @@ void Player::cargarContenido()
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
 	radius = 1.2f;
-	height = 3.3f;
+	height = 4.3f;
 	mass = 70.f;
 
 	m_pCollisionShape = new btCapsuleShape(radius, height);
@@ -209,7 +212,7 @@ void Player::cargarContenido()
 
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
 		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter | btBroadphaseProxy::SensorTrigger);
-	//PhysicsEngine::i().m_world->addAction(p_controller);
+
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);

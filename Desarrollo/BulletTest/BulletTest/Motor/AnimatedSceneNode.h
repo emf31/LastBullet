@@ -20,7 +20,7 @@ public:
 	AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver* irrDriver);
 	~AnimatedSceneNode();
 
-	virtual void setTexture(const io::path& texture) override;
+	virtual void setTexture(const io::path & texture, int material) override;
 	virtual void setPosition(Vec3<float> position) override;
 	virtual void setRotation(Vec3<float> rotation) override;
 
@@ -32,7 +32,5 @@ public:
 private:
 	IAnimatedMeshSceneNode* m_node;
 
-	IVideoDriver* m_irrDriver;
-	ISceneManager *m_irrScene;
 };
 

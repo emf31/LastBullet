@@ -19,7 +19,7 @@ public:
 	SceneNode(IVideoDriver* irrDriver);
 	~SceneNode();
 
-	virtual void setTexture(const io::path& texture) = 0;
+	virtual void setTexture(const io::path& texture, int material) = 0;
 	virtual void setPosition(Vec3<float> position) = 0;
 	virtual void setRotation(Vec3<float> rotation) = 0;
 	virtual Vec3<float> getPosition() = 0;

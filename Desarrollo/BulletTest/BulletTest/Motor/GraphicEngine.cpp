@@ -192,6 +192,7 @@ void GraphicEngine::cargarTexturas() {
 	irrDriver->getTexture("../media/ice0.jpg");
 	irrDriver->getTexture("../media/earth.jpg");
 	irrDriver->getTexture("../media/Dif_2.tga");
+	irrScene->getMesh("../media/ArmyPilot.b3d");
 }
 
 void GraphicEngine::removeNode(SceneNode* nodo) {

@@ -19,7 +19,7 @@ public:
 	BasicSceneNode(ISceneNode* node, IVideoDriver* irrDriver);
 	~BasicSceneNode();
 
-	virtual void setTexture(const io::path& texture) override;
+	virtual void setTexture(const io::path& texture, int material) override;
 	virtual void setPosition(Vec3<float> position) override;
 	virtual void setRotation(Vec3<float> rotation) override;
 

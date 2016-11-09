@@ -14,9 +14,9 @@ BasicSceneNode::~BasicSceneNode()
 
 }
 
-void BasicSceneNode::setTexture(const io::path & texture)
+void BasicSceneNode::setTexture(const io::path & texture, int material)
 {
-	m_node->setMaterialTexture(0, m_irrDriver->getTexture(texture));
+	m_node->getMaterial(material).setTexture(0, m_irrDriver->getTexture(texture));
 }
 
 
