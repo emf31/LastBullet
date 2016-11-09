@@ -37,6 +37,9 @@ public:
 	void move_left();
 
 	float calcularDistancia(btVector3& start, btVector3& end);
+	void updateAnimation();
+	void updateState();
+
 
 	void sumarVida() { m_vida++; }
 
@@ -50,6 +53,8 @@ private:
 	Clock clockRecargaRocket;
 
 	float timeRecargaRocket = 3;
+
+	enum PlayerState {quieto,andando,corriendo,saltando} m_playerState;
 
 
 
