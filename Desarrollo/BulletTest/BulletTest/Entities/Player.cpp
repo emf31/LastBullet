@@ -132,6 +132,7 @@ void Player::update(Time elapsedTime)
 	Euler *= RADTODEG;*/
 
 
+/*
 
 	vectorPrev = vectorNew;
 	Vec3<float>target = GraphicEngine::i().getActiveCamera()->getTarget();
@@ -161,7 +162,9 @@ void Player::update(Time elapsedTime)
 
 
 	}
-	m_renderState.updateRotations(Vec3<float>(0, giro, 0));
+
+	*/
+	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(),0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		Cliente::i().enviarPos(this);
@@ -370,7 +373,8 @@ void Player::shoot() {
 	
 	//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
 	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
-	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(),direccion,posicionImpacto);
+	
+	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(),direccion,posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 
 	//}
 }

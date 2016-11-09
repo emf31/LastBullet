@@ -42,11 +42,16 @@ void Camera::asignarEntity(Entity* ent)
 
 void Camera::update()
 {
+
 	if (m_entity != nullptr) {
 		setPosition(Vec3<float>(
 			m_entity->getRenderPosition().getX(),
-			m_entity->getRenderPosition().getY() + m_entity->getNode()->getScale().getY()+2,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)
-			m_entity->getRenderPosition().getZ() )
+			m_entity->getRenderPosition().getY() + m_entity->getNode()->getScale().getY()+8,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)
+			m_entity->getRenderPosition().getZ())
 		);
 	}
+}
+
+Vec3<float> Camera::getRotation() {
+	return Vec3<float> (m_camera->getRotation().X, m_camera->getRotation().Y, m_camera->getRotation().Z);
 }
