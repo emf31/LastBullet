@@ -48,6 +48,10 @@ void Player::inicializar()
 	rocket = new Rocket();
 	rocket->cargarContenido();
 
+	animation = new Animation;
+
+
+
 	m_vida = 5;
 }
 
@@ -176,7 +180,17 @@ void Player::cargarContenido()
 	m_renderState.setPosition(pos);
 	//p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	//m_nodo->setPosition(pos); 
+	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
 
+	animation->addAnimation("Default", 0, 0);
+	animation->addAnimation("Run_Forwards", 1, 69);
+	animation->addAnimation("Run_backwards", 70, 138);
+	animation->addAnimation("Walk", 139, 183);
+	animation->addAnimation("Jump", 184, 219);
+	animation->addAnimation("Idle", 220, 472);
+	animation->addAnimation("AimRunning", 473, 524);
+
+	m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
 
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 

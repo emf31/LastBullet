@@ -29,6 +29,8 @@ public:
 
 	virtual ISceneNode* getNodo() override;
 
+	virtual void setAnimation(int start,int end) override;
+
 private:
 	IAnimatedMeshSceneNode* m_node;
 

@@ -46,3 +46,9 @@ Vec3<float> AnimatedSceneNode::getScale()
 ISceneNode* AnimatedSceneNode::getNodo() {
 	return m_node;
 }
+
+void AnimatedSceneNode::setAnimation(int start, int end)
+{
+	m_node->setMD2Animation(scene::EMAT_STAND);
+	m_node->setFrameLoop(start, end);
+}
