@@ -206,6 +206,7 @@ void Player::cargarContenido()
 	animation->addAnimation("Run_backwards", 70, 138);
 	animation->addAnimation("Walk", 139, 183);
 	animation->addAnimation("Jump", 184, 219);
+	animation->addAnimation("Jump2", 184, 219);
 	animation->addAnimation("Idle", 220, 472);
 	animation->addAnimation("AimRunning", 473, 524);
 
@@ -242,7 +243,7 @@ void Player::cargarContenido()
 	//p_controller->setJumpSpeed(5);
 	p_controller->setUp(btVector3(0,1,0));
 	//p_controller->setMaxSlope(btRadians(30.0));
-	//p_controller->setFallSpeed(55);
+	//p_controller->setFallSpeed(200);
 	//p_controller->setMaxJumpHeight(20);
 	//p_controller->setLinearDamping(0.1);
 
@@ -508,14 +509,22 @@ void Player::updateAnimation()
 			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
 		}
 		break;
+	case saltando2:
+		if (animation->getActualAnimation() != "Jump2") {
+			m_nodo->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
+		}
+		break;
 
 	}
 }
 
 void Player::updateState()
 {
-	if(!p_controller->onGround()){
+	if(!p_controller->onGround() && p_controller->numJumps==0){
 		m_playerState = saltando;
+	}
+	else if (!p_controller->onGround() && p_controller->numJumps ==1) {
+		m_playerState = saltando2;
 	}
 	else if (isMoving) {
 		m_playerState = andando;

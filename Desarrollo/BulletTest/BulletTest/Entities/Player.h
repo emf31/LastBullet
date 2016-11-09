@@ -54,7 +54,7 @@ private:
 
 	float timeRecargaRocket = 3;
 
-	enum PlayerState {quieto,andando,corriendo,saltando} m_playerState;
+	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
 
 
 
