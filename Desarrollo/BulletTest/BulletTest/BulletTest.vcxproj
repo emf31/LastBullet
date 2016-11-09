@@ -176,6 +176,7 @@
     <ClInclude Include="Motor de Red\Cliente.h" />
     <ClInclude Include="Motor de Red\Estructuras.h" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
+    <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motor de Red\Cliente.cpp" />
     <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
+    <ClCompile Include="Motor\Animation.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />

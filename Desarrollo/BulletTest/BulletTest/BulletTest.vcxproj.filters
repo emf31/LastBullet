@@ -171,6 +171,9 @@
     <ClInclude Include="Motor\SceneNode.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="Motor\Animation.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -252,6 +255,9 @@
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
     <ClCompile Include="Motor\SceneNode.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\Animation.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
   </ItemGroup>
