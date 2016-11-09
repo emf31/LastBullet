@@ -61,27 +61,10 @@ void RenderState::updateRotations(Vec3<float> rotation)
 	//m_rotated += rotation.getY();
 }
 
-void RenderState::updateVelocity(float elapsedTime)
+void RenderState::updateVelocity(float elapsedTime, Vec3<float> direccion)
 {
-	Vec3<float> VelocityAccelerated = Vec3<float>(
-		(m_Velocity.getX() + m_Direction.getX()*m_Acceleration*elapsedTime),
-		(m_Velocity.getY() + 0* elapsedTime),
-		(m_Velocity.getZ() + m_Direction.getZ()*m_Acceleration*elapsedTime));
-
-	//float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(), 2.0) + pow(VelocityAccelerated.getY(), 2.0) + pow(VelocityAccelerated.getZ(), 2.0));
-
-	if(m_Acceleration>0){
-	if (abs(VelocityAccelerated.getX()) < m_MaxVelocity ) {
-		m_Velocity.setX(VelocityAccelerated.getX());
-	}
-	if (abs(VelocityAccelerated.getZ()) < m_MaxVelocity) {
-		m_Velocity.setZ(VelocityAccelerated.getZ());
-	}
-	}
-	else {
-			m_Velocity = Vec3<float>(0, 0, 0);
-			m_Direction = Vec3<float>(0, 0, 0);
-	}
+	m_posPrev = m_posNew;
+	m_posNew += direccion*elapsedTime;
 }
 
 

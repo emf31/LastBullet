@@ -171,6 +171,9 @@
     <ClInclude Include="Motor\SceneNode.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\Bullet.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="Motor\SceneNode.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Bullet.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
