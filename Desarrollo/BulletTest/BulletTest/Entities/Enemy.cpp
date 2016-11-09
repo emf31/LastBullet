@@ -33,15 +33,22 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "../media/Dif_2.tga", "../media/Raptor.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo->setTexture("../media/body01.png", 1);
+	m_nodo->setTexture("../media/head01.png", 0);
+	m_nodo->setTexture("../media/m4tex.png", 2);
 
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
+
+	radius = 1.2f;
+	height = 7.3f;
+	mass = 0.f;
 
 	//Al mundo de fisicas del cliente añadimos una representacion del objeto fisico pero no calcula fisicas
 	//(servira para hacer los raycast)
 
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.5f, 4.5f, 3.5f),0.f, DISABLE_SIMULATION);
+	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this,height, radius, mass, DISABLE_SIMULATION);
 
 }
 
@@ -66,7 +73,7 @@ void Enemy::setPosition(Vec3<float> pos) {
 void Enemy::updateEnemigo(Vec3<float> pos) {
 	m_renderState.updatePositions(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
-	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2) + radius, pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
 
 }

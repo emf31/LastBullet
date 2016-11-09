@@ -219,7 +219,7 @@ void Player::cargarContenido()
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
 	radius = 1.2f;
-	height = 4.3f;
+	height = 7.3f;
 	mass = 70.f;
 
 	m_pCollisionShape = new btCapsuleShape(radius, height);

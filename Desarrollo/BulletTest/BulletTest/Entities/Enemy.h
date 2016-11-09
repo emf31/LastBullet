@@ -41,6 +41,9 @@ public:
 
 private:
 
+	float radius;
+	float height;
+	float mass;
 
 	btRigidBody* m_rigidBody;
 	std::queue<Vec3<float>> m_positions;
