@@ -49,7 +49,7 @@ AnimatedSceneNode * GraphicEngine::createAnimatedNode(const Vec3<float>& TPositi
 		Node->setMaterialTexture(0, irrDriver->getTexture(texture));
 	}
 
-	Node->setMD2Animation(scene::EMAT_STAND);
+	
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
 	return new AnimatedSceneNode(Node, irrDriver);

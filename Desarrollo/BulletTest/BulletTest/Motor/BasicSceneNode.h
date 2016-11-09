@@ -27,6 +27,7 @@ public:
 	virtual Vec3<float> getScale() override;
 
 	virtual ISceneNode* getNodo() override;
+	virtual void setAnimation(int start, int end) override {};
 
 private:
 	ISceneNode* m_node;

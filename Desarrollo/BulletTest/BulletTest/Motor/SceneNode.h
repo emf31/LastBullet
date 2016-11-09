@@ -26,6 +26,7 @@ public:
 	virtual Vec3<float> getScale() = 0;
 
 	virtual ISceneNode* getNodo() = 0;
+	virtual void setAnimation(int start, int end)=0;
 
 
 protected:

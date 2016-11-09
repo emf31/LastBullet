@@ -6,6 +6,7 @@
 //#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Rocket.h"
 #include "../Motor/AnimatedSceneNode.h"
+#include "../Motor/Animation.h"
 #include <vector>
 class Player : public Entity
 {
@@ -44,8 +45,10 @@ public:
 private:
 	float m_vida;
 
+	Animation* animation;
 	Rocket* rocket;
 	Clock clockRecargaRocket;
+
 	float timeRecargaRocket = 3;
 
 
