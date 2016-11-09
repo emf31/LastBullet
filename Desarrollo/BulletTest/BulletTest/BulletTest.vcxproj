@@ -159,6 +159,7 @@
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\ShootCommand.h" />
     <ClInclude Include="Command\ShootCommandRocket.h" />
+    <ClInclude Include="Entities\Bullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
@@ -192,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletTest.cpp" />
+    <ClCompile Include="Entities\Bullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\EntityManager.cpp" />

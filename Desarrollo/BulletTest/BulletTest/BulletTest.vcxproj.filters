@@ -171,8 +171,8 @@
     <ClInclude Include="Motor\SceneNode.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="Motor\Animation.h">
-      <Filter>Archivos de encabezado\Motor</Filter>
+    <ClInclude Include="Entities\Bullet.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,8 +257,8 @@
     <ClCompile Include="Motor\SceneNode.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="Motor\Animation.cpp">
-      <Filter>Archivos de código fuente\Motor</Filter>
+    <ClCompile Include="Entities\Bullet.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #include "../Handlers/InputHandler.h"
 #include "math.h"
 #include "../Otros/Vec3f.h"
+#include "Bullet.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid),
 m_acceleration_walk(10.f),
@@ -335,7 +336,7 @@ void Player::shoot() {
 
 	PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-
+	Vec3<float> posicionImpacto(1500, 1500, 1500);
 
 
 	if (ray.hasHit())//si ray ha golpeado algo entro
@@ -358,11 +359,18 @@ void Player::shoot() {
 			Message msg(myEnt, "COLISION_BALA", NULL);
 			MessageHandler::i().sendMessage(msg);
 
-
 			printf("hit something\n");
+			//imaginamos que este es el punto de colision
+			posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
+			
+
 		}
 
 	}
+	
+	//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
+	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
+	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(),direccion,posicionImpacto);
 
 	//}
 }
