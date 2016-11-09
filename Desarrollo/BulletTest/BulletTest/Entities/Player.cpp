@@ -67,19 +67,25 @@ void Player::update(Time elapsedTime)
 	InputHandler::i().excuteCommands(this);
 	
 	speedFinal.normalise();
-	if (animation->getActualAnimation() != "Idle") {
-		m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
-	}
-	if (speedFinal.Magnitude() > 0) {
+
+	updateState();
+	updateAnimation();
+	
+	/*if (speedFinal.Magnitude() > 0) {
 		if(animation->getActualAnimation()!="Run_Forwards")
 			m_nodo->setAnimation(animation->getAnimationStart("Run_Forwards"), animation->getAnimationEnd("Run_Forwards"));
 	}
+	else {
+		if (animation->getActualAnimation() != "Idle") {
+			m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
+		}
+	}*/
 
 
-	if (p_controller->onGround()) {
+	/*if (p_controller->onGround()) {
 		if (animation->getActualAnimation() != "Jump")
 			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
-	}
+	}*/
 
 	/*p_controller->m_maxSpeed = m_maxSpeed_walk;
 	p_controller->m_deceleration = m_deceleration_walk;*/
@@ -206,7 +212,9 @@ void Player::cargarContenido()
 	animation->addAnimation("Idle", 220, 472);
 	animation->addAnimation("AimRunning", 473, 524);
 
-	m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
+	m_playerState = quieto;
+
+	//m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
 
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
@@ -482,3 +490,42 @@ float Player::calcularDistancia(btVector3& start, btVector3& end) {
 	printf("DISTANCIA: %f", distancia);
 	return 0.5f;
 }
+
+void Player::updateAnimation()
+{
+	switch (m_playerState)
+	{
+	case quieto:
+		if (animation->getActualAnimation() != "Idle") {
+			m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
+		}
+		break;
+
+	case andando:
+		if (animation->getActualAnimation() != "Walk") {
+			m_nodo->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
+		}
+		break;
+
+	case saltando:
+		if (animation->getActualAnimation() != "Jump") {
+			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
+		}
+		break;
+
+	}
+}
+
+void Player::updateState()
+{
+	if(!p_controller->onGround()){
+		m_playerState = saltando;
+	}
+	else if (isMoving) {
+		m_playerState = andando;
+	}
+	else {
+		m_playerState = quieto;
+	}
+}
+
