@@ -15,9 +15,11 @@ void EntityManager::inicializar()
 
 void EntityManager::update(Time elapsedTime)
 {
+
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		i->second->update(elapsedTime);
 	}
+
 }
 void EntityManager::updatePosEnemigos(Time elapsedTime) {
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
@@ -101,10 +103,12 @@ void EntityManager::registerEntity(Entity * entity)
 void EntityManager::removeEntity(Entity * entity)
 {
 	auto found = m_entities.find(entity->getID());
+
 	//Si es diferente de m_entities.end() es que lo ha encontrado
 	if (found != m_entities.end()) {
 		m_entities.erase(found);
 	}
+
 }
 
 void EntityManager::removeRaknetEntity(Entity * entity)
