@@ -9,12 +9,13 @@
 class Bullet : public Entity
 {
 public:
-	Bullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition);
+	Bullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
 	~Bullet();
 	
 private:
 	Vec3<float> m_direction;
 	Vec3<float> m_position;
+	Vec3<float> m_rotation;
 	float m_velocity;
 	Time m_lifetime;
 	Clock timelifeclock;

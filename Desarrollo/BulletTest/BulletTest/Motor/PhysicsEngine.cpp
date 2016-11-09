@@ -133,6 +133,33 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 	return rigidBody;
 }
 
+btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float height, float radius, float masa, int body_state)
+{
+	btCollisionShape* m_pCollisionShape = new btCapsuleShape(radius, height);
+	//create the motionState of the object
+	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getRenderState()->getPosition().getX(), entity->getRenderState()->getPosition().getY(), entity->getRenderState()->getPosition().getZ())));
+
+	btVector3 intertia;
+	m_pCollisionShape->calculateLocalInertia(masa, intertia);
+
+	//now create the rigidBody
+	btRigidBody* rigidBody = new btRigidBody(masa, m_pMotionState, m_pCollisionShape, intertia);
+	rigidBody->setActivationState(body_state);
+
+	//add a pointer to rigidBody pointing to associated Entity
+	rigidBody->setUserPointer(entity);
+
+	//add the rigidBody to the world
+	m_world->addRigidBody(rigidBody);
+
+	//and add to the list of rigidBodies
+	m_rigidBodies.push_back(rigidBody);
+
+	//finally return created body
+	return rigidBody;
+	
+}
+
 btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius, float mass)
 {
 	return nullptr;
