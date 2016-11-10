@@ -163,6 +163,9 @@ void Cliente::update() {
 				EntityManager::i().getRaknetEntity(desconectado)->borrarContenido();
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
 				EntityManager::i().removeRaknetEntity(EntityManager::i().getRaknetEntity(desconectado));
+
+				//TODO IMPORTANTE: esto a veces da un error pork borra el entity justo cuando en el otro hilo esta haciendo el update del entity que aqui se elimina
+				//habria que enviarle un mensaje borrate igual que la bala para que lo borre despues del update.
 				
 
 			}
@@ -175,7 +178,10 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(balaDisparada);
-				Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
+				Message msg1(EntityManager::i().getEntity(1000), "DIBUJARBALA", static_cast<void*>(&balaDisparada));
+				MessageHandler::i().sendMessage(msg1);
 
 
 			}
