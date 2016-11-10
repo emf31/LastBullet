@@ -1,16 +1,16 @@
 #pragma once
-#include "Weapon.h"
+#include "WeaponDrop.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
-class RocketLauncher :
-	public Weapon
+class RocketLauncherDrop :
+	public WeaponDrop
 {
 public:
 
-	RocketLauncher(SceneNode* nodo, const std::string& name);
-	~RocketLauncher();
+	RocketLauncherDrop(SceneNode* nodo, const std::string& name);
+	~RocketLauncherDrop();
 
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
@@ -29,7 +29,7 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
-	virtual std::string getClassName() { return "RocketLauncher"; }
+	virtual std::string getClassName() { return "RocketLauncherDrop"; }
 
 
 };

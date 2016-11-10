@@ -1,18 +1,18 @@
 #pragma once
-#include "Entity.h"
+#include "../Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
-#include "Player.h"
-#include "../Motor/PhysicsEngine.h"
+#include "../Player.h"
+#include "../../Motor/PhysicsEngine.h"
 
 
-class Weapon :
+class WeaponDrop :
 	public Entity
 {
 public:
-	Weapon(SceneNode* nodo, const std::string& name);
-	~Weapon();
+	WeaponDrop(SceneNode* nodo, const std::string& name);
+	~WeaponDrop();
 
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
@@ -31,7 +31,7 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
-	virtual std::string getClassName() { return "Weapon"; }
+	virtual std::string getClassName() { return "WeaponDrop"; }
 
 	void setPosition(Vec3<float> pos) {
 

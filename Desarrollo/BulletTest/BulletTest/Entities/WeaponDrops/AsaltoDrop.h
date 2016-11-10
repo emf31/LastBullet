@@ -1,11 +1,11 @@
 #pragma once
-#include "Weapon.h"
-class Pistola :
-	public Weapon
+#include "WeaponDrop.h"
+class AsaltoDrop :
+	public WeaponDrop
 {
 public:
-	Pistola(SceneNode* nodo, const std::string& name);
-	~Pistola();
+	AsaltoDrop(SceneNode* nodo, const std::string& name);
+	~AsaltoDrop();
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
 	btGhostObject* getGhostObject() { return m_ghostObject; }
@@ -23,6 +23,6 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
-	virtual std::string getClassName() { return "Pistola"; }
+	virtual std::string getClassName() { return "AsaltoDrop"; }
 };
 

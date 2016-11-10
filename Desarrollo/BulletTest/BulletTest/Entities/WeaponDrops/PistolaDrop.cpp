@@ -1,20 +1,20 @@
-#include "Asalto.h"
+#include "PistolaDrop.h"
 
 
-Asalto::Asalto(SceneNode* nodo, const std::string& name) : Weapon(nodo, name)
+PistolaDrop::PistolaDrop(SceneNode* nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
 }
 
 
-Asalto::~Asalto()
+PistolaDrop::~PistolaDrop()
 {
 }
 
-void Asalto::inicializar()
+void PistolaDrop::inicializar()
 {
 }
 
-void Asalto::update(Time elapsedTime)
+void PistolaDrop::update(Time elapsedTime)
 {
 	if (estado == USADO) {
 		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
@@ -25,21 +25,21 @@ void Asalto::update(Time elapsedTime)
 	}
 }
 
-void Asalto::handleInput()
+void PistolaDrop::handleInput()
 {
 }
 
-void Asalto::cargarContenido()
+void PistolaDrop::cargarContenido()
 {
 
 
 }
 
-void Asalto::borrarContenido()
+void PistolaDrop::borrarContenido()
 {
 }
 
-void Asalto::handleMessage(const Message & message)
+void PistolaDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
 		if (estado == DISPONIBLE) {
@@ -47,7 +47,7 @@ void Asalto::handleMessage(const Message & message)
 			estado = USADO;
 			clockRecargaLife.restart();
 
-			static_cast<Player*>(message.data)->setWeapon(ASALTO);
+			static_cast<Player*>(message.data)->setWeapon(PISTOLA);
 
 		}
 	}

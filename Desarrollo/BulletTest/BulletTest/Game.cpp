@@ -7,9 +7,9 @@
 #include "Entities\EntityManager.h"
 #include "Entities\PhysicsEntity.h"
 #include "Entities\LifeObject.h"
-#include "Entities\RocketLauncher.h"
-#include "Entities\Pistola.h"
-#include "Entities\Asalto.h"
+#include "Entities\WeaponDrops\RocketLauncherDrop.h"
+#include "Entities\WeaponDrops\PistolaDrop.h"
+#include "Entities\WeaponDrops\AsaltoDrop.h"
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
 #include "Handlers\MessageHandler.h"
@@ -172,23 +172,23 @@ void Game::inicializar()
 	/////////////////////////////////////////////////////////////////////
 
 	SceneNode* lanzacohete = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/lanzacohetes.jpg", "");
-	RocketLauncher *RocketLauncherEnt = new RocketLauncher(lanzacohete, "lanzacohetes");
-	RocketLauncherEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherEnt, Vec3<float>(5.f, 5.f, 5.f)));
+	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(lanzacohete, "lanzacohetes");
+	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, Vec3<float>(5.f, 5.f, 5.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	RocketLauncherEnt->setPosition(Vec3<float>(20, 7, 0));
+	RocketLauncherDropEnt->setPosition(Vec3<float>(20, 7, 0));
 
 	/////////////////////////////////////////////////////////////////////
 
-	SceneNode* asalto = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/asalto.jpg", "");
-	Asalto *AsaltoEnt = new Asalto(asalto, "asalto");
-	AsaltoEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoEnt, Vec3<float>(5.f, 5.f, 5.f)));
+	SceneNode* asaltodrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/Asalto.jpg", "");
+	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(asaltodrop, "asalto");
+	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, Vec3<float>(5.f, 5.f, 5.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	AsaltoEnt->setPosition(Vec3<float>(20, 7, 15));
+	AsaltoDropEnt->setPosition(Vec3<float>(20, 7, 15));
 
 	/////////////////////////////////////////////////////////////////////
 
-	SceneNode* pistola = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/pistola.jpg", "");
-	Pistola *pistolaEnt = new Pistola(pistola, "pistola");
+	SceneNode* pistoladrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/pistola.jpg", "");
+	PistolaDrop *pistolaEnt = new PistolaDrop(pistoladrop, "pistola");
 	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, Vec3<float>(5.f, 5.f, 5.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	pistolaEnt->setPosition(Vec3<float>(20, 7, -15));

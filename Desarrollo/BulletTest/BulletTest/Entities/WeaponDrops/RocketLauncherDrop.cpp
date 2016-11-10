@@ -1,20 +1,20 @@
-#include "RocketLauncher.h"
+#include "RocketLauncherDrop.h"
 
 
-RocketLauncher::RocketLauncher(SceneNode* nodo, const std::string& name) : Weapon(nodo, name)
+RocketLauncherDrop::RocketLauncherDrop(SceneNode* nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
 }
 
 
-RocketLauncher::~RocketLauncher()
+RocketLauncherDrop::~RocketLauncherDrop()
 {
 }
 
-void RocketLauncher::inicializar()
+void RocketLauncherDrop::inicializar()
 {
 }
 
-void RocketLauncher::update(Time elapsedTime)
+void RocketLauncherDrop::update(Time elapsedTime)
 {
 	if (estado == USADO) {
 		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
@@ -25,21 +25,21 @@ void RocketLauncher::update(Time elapsedTime)
 	}
 }
 
-void RocketLauncher::handleInput()
+void RocketLauncherDrop::handleInput()
 {
 }
 
-void RocketLauncher::cargarContenido()
+void RocketLauncherDrop::cargarContenido()
 {
 
 
 }
 
-void RocketLauncher::borrarContenido()
+void RocketLauncherDrop::borrarContenido()
 {
 }
 
-void RocketLauncher::handleMessage(const Message & message)
+void RocketLauncherDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
 		if (estado == DISPONIBLE) {
