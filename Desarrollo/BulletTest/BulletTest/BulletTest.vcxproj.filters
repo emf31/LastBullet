@@ -55,6 +55,12 @@
     <Filter Include="Archivos de código fuente\Command">
       <UniqueIdentifier>{de81fb05-842d-46df-bbe6-3ea8282e30bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Entities\WeaponDrops">
+      <UniqueIdentifier>{2aed0ec4-4608-4e54-9ae5-9ffe62f6f96d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Entities\Weapondrops">
+      <UniqueIdentifier>{38e12eb3-66e1-4263-8b86-f3550dfeb6b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -180,6 +186,18 @@
     <ClInclude Include="Command\RunCommand.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\WeaponDrops\AsaltoDrop.h">
+      <Filter>Archivos de encabezado\Entities\Weapondrops</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\WeaponDrops\PistolaDrop.h">
+      <Filter>Archivos de encabezado\Entities\Weapondrops</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\WeaponDrops\WeaponDrop.h">
+      <Filter>Archivos de encabezado\Entities\Weapondrops</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h">
+      <Filter>Archivos de encabezado\Entities\Weapondrops</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -268,6 +286,18 @@
     </ClCompile>
     <ClCompile Include="Motor\Animation.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\AsaltoDrop.cpp">
+      <Filter>Archivos de código fuente\Entities\WeaponDrops</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\PistolaDrop.cpp">
+      <Filter>Archivos de código fuente\Entities\WeaponDrops</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\WeaponDrop.cpp">
+      <Filter>Archivos de código fuente\Entities\WeaponDrops</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp">
+      <Filter>Archivos de código fuente\Entities\WeaponDrops</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
