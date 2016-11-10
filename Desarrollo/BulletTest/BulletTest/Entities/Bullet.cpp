@@ -3,8 +3,8 @@
 #include "../Motor/GraphicEngine.h"
 
 
-Bullet::Bullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : Entity(-1, NULL),
-m_position(position), m_direction(direction), m_velocity(2), m_rotation(rotation)
+Bullet::Bullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
+m_position(position), m_direction(direction), m_velocity(15), m_rotation(rotation)
 {
 	float distancia = Vec3<float>::getDistance(position, finalposition);
 	m_lifetime = seconds(distancia / m_velocity);
@@ -25,7 +25,7 @@ void Bullet::inicializar()
 void Bullet::update(Time elapsedTime)
 {
 	m_renderState.updateVelocity(elapsedTime.asSeconds(), (m_direction*m_velocity));
-	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 5) {
+	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 20) {
 		//EntityManager::i().removeEntity(this);
 
 		Message msg1(this, "BORRATE", NULL);
@@ -56,7 +56,7 @@ void Bullet::handleMessage(const Message & message)
 	if (message.mensaje == "BORRATE") {
 		EntityManager::i().removeEntity(this);
 		GraphicEngine::i().removeNode(m_nodo);
-		delete this;
+		//delete this;
 	}
 }
 

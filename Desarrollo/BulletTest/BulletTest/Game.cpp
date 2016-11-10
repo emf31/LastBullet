@@ -103,14 +103,14 @@ void Game::inicializar()
 	///////////////////////////////////////////////////////////////
 	SceneNode* suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "");
+	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "suelo");
 	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 5.f, 100), 0));
 	//sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
 	///////////////////////////////////////////////////////////////
 
 	SceneNode* suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "");
+	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "suelo");
 	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt2->rotate(Vec3<float>(90 * PI / 180.0,0, 0));
 	sueloEnt2->setPosition(Vec3<float>(-50, 0, 0));
@@ -118,7 +118,7 @@ void Game::inicializar()
 
 	SceneNode* suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt3 = new PhysicsEntity(suelo3, "");
+	PhysicsEntity *sueloEnt3 = new PhysicsEntity(suelo3, "suelo1");
 	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt3->rotate(Vec3<float>(0, 0, 90 * PI / 180.0));
 	sueloEnt3->setPosition(Vec3<float>(0, 0, -50));
@@ -128,7 +128,7 @@ void Game::inicializar()
 
 	SceneNode* suelo4 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 100), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt4 = new PhysicsEntity(suelo4, "");
+	PhysicsEntity *sueloEnt4 = new PhysicsEntity(suelo4, "suelo1");
 	sueloEnt4->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt4, Vec3<float>(25, 5.f, 100), 0));
 	sueloEnt4->rotate(Vec3<float>(0, 0, 30 * PI / 180.0));
 	sueloEnt4->setPosition(Vec3<float>(60, -25, 40));
@@ -137,7 +137,7 @@ void Game::inicializar()
 
 	SceneNode* suelo5 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 50), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt5 = new PhysicsEntity(suelo5, "");
+	PhysicsEntity *sueloEnt5 = new PhysicsEntity(suelo5, "suelo1");
 	sueloEnt5->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt5, Vec3<float>(25, 5.f, 50), 0));
 	sueloEnt5->rotate(Vec3<float>(0, 0, 0));
 	sueloEnt5->setPosition(Vec3<float>(60, 0, -25));
@@ -147,7 +147,7 @@ void Game::inicializar()
 
 	SceneNode* suelo6 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt6 = new PhysicsEntity(suelo6, "");
+	PhysicsEntity *sueloEnt6 = new PhysicsEntity(suelo6, "suelo1");
 	sueloEnt6->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt6, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt6->rotate(Vec3<float>(90 * PI / 180.0, 0, 0));
 	sueloEnt6->setPosition(Vec3<float>(75, 0, 0));
@@ -155,7 +155,7 @@ void Game::inicializar()
 
 	SceneNode* suelo7 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
-	PhysicsEntity *sueloEnt7 = new PhysicsEntity(suelo7, "");
+	PhysicsEntity *sueloEnt7 = new PhysicsEntity(suelo7, "suelo1");
 	sueloEnt7->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt7->rotate(Vec3<float>(0, 0, 90 * PI / 180.0));
 	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
@@ -164,7 +164,7 @@ void Game::inicializar()
 	////////         Creamos un paquete de vida        //////////////////
 
 	SceneNode* vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/life.png", "");
-	LifeObject *vidaEnt = new LifeObject(vida, "");
+	LifeObject *vidaEnt = new LifeObject(vida, "vida");
 	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(1.f, 1.f, 1.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	vidaEnt->setPosition(Vec3<float>(10, 3, 0));
@@ -172,7 +172,7 @@ void Game::inicializar()
 	/////////////////////////////////////////////////////////////////////
 
 	SceneNode* lanzacohete = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/lanzacohetes.jpg", "");
-	RocketLauncher *RocketLauncherEnt = new RocketLauncher(lanzacohete, "");
+	RocketLauncher *RocketLauncherEnt = new RocketLauncher(lanzacohete, "lanzacohetes");
 	RocketLauncherEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherEnt, Vec3<float>(5.f, 5.f, 5.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	RocketLauncherEnt->setPosition(Vec3<float>(20, 7, 0));
@@ -180,7 +180,7 @@ void Game::inicializar()
 	/////////////////////////////////////////////////////////////////////
 
 	SceneNode* asalto = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/asalto.jpg", "");
-	Asalto *AsaltoEnt = new Asalto(asalto, "");
+	Asalto *AsaltoEnt = new Asalto(asalto, "asalto");
 	AsaltoEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoEnt, Vec3<float>(5.f, 5.f, 5.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	AsaltoEnt->setPosition(Vec3<float>(20, 7, 15));
@@ -188,7 +188,7 @@ void Game::inicializar()
 	/////////////////////////////////////////////////////////////////////
 
 	SceneNode* pistola = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/pistola.jpg", "");
-	Pistola *pistolaEnt = new Pistola(pistola, "");
+	Pistola *pistolaEnt = new Pistola(pistola, "pistola");
 	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, Vec3<float>(5.f, 5.f, 5.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	pistolaEnt->setPosition(Vec3<float>(20, 7, -15));

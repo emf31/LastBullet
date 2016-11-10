@@ -34,7 +34,9 @@ void EntityManager::updatePosEnemigos(Time elapsedTime) {
 void EntityManager::updateRender(float interpolation)
 {
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		std::cout << "Entity ANTES: " << i->second->getName() << std::endl;
 		i->second->updateRender(interpolation);
+		std::cout << "Entity DESPUES: " << i->second->getName() << std::endl;
 	}
 }
 

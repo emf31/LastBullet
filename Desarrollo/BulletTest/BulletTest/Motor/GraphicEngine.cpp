@@ -197,6 +197,7 @@ void GraphicEngine::cargarTexturas() {
 	irrScene->getMesh("../media/body01.png");
 	irrScene->getMesh("../media/head01.png");
 	irrScene->getMesh("../media/m4tex.png");
+	irrScene->getMesh("../media/bullet.obj");
 }
 
 void GraphicEngine::removeNode(SceneNode* nodo) {
