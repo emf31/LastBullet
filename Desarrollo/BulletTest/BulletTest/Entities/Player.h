@@ -52,9 +52,7 @@ private:
 
 	Animation* animation;
 	Rocket* rocket;
-	Clock clockRecargaRocket;
 
-	float timeRecargaRocket = 3;
 
 	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
 

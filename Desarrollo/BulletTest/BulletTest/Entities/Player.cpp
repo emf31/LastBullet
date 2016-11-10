@@ -118,13 +118,16 @@ void Player::update(Time elapsedTime)
 
 		rocket->getRenderState()->updatePositions(posicion);
 
-		//rocket->m_rigidBody->set
+		rocket->setPosition(posicion);
+
 	}
 	else if (rocket->getEstado() == DISPARADO) {
 		btVector3 Point = rocket->m_rigidBody->getCenterOfMassPosition();
 		rocket->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-		if (clockRecargaRocket.getElapsedTime().asSeconds()>timeRecargaRocket) {
+		if (rocket->clockRecargaRocket.getElapsedTime().asSeconds()>rocket->timeRecargaRocket) {
 			rocket->setEstado(CARGADO);
+			PhysicsEngine::i().removeRigidBody(rocket->m_rigidBody);
+
 		}
 	}
 	
@@ -431,7 +434,7 @@ void Player::shootRocket() {
 		rocket->m_rigidBody->setCollisionFlags(4);
 
 		rocket->setEstado(DISPARADO);
-		clockRecargaRocket.restart();
+		rocket->clockRecargaRocket.restart();
 	}
 
 }
