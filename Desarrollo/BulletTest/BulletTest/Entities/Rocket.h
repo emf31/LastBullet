@@ -39,6 +39,10 @@ public:
 
 	btRigidBody* m_rigidBody;
 
+	Clock clockRecargaRocket;
+
+	float timeRecargaRocket = 3;
+
 private:
 	int estado=CARGADO;
 };

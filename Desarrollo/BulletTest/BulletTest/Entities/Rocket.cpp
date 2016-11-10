@@ -37,12 +37,14 @@ void Rocket::cargarContenido()
 	m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 1.f, DISABLE_DEACTIVATION);
-
+	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 }
 
 void Rocket::resetRigidBody()
 {
+
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 1.f, DISABLE_DEACTIVATION);
+
 }
 
 
@@ -54,10 +56,10 @@ void Rocket::handleMessage(const Message & message)
 {
 
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
-		//	std::cout << "EL MISIL HA CHOCADO CONTRA LA PARED" << std::endl;
-			//PhysicsEngine::i().removeRigidBody(m_rigidBody);
-			
+		if (static_cast<Entity*>(message.data)->getClassName() != "Player" && estado==DISPARADO) {
+			std::cout << "EL MISIL HA CHOCADO CONTRA LA PARED" << std::endl;
+			PhysicsEngine::i().removeRigidBody(m_rigidBody);
+
 		}
 		
 	}
