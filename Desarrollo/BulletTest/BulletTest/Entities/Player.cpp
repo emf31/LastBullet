@@ -279,6 +279,13 @@ void Player::handleMessage(const Message & message)
 
 		}
 	}
+
+	if (message.mensaje == "DIBUJARBALA") {
+		//TBala* tBala= static_cast<TBala*>(message.data);
+			//std::cout << "Has cogido vida" << std::endl;
+		Bullet* bala = new Bullet(static_cast<TBala*>(message.data)->position, static_cast<TBala*>(message.data)->direction, static_cast<TBala*>(message.data)->finalposition, static_cast<TBala*>(message.data)->rotation);
+		
+	}
 }
 
 void Player::run()
