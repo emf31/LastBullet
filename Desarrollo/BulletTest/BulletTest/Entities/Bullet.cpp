@@ -4,7 +4,7 @@
 
 
 Bullet::Bullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(300), m_rotation(rotation)
+m_position(position), m_direction(direction), m_velocity(450), m_rotation(rotation)
 {
 	float distancia = Vec3<float>::getDistance(position, finalposition);
 	m_lifetime = seconds(distancia / m_velocity);

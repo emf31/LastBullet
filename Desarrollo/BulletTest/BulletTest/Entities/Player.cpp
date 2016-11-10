@@ -344,7 +344,8 @@ void Player::jump() {
 
 void Player::shoot() {
 
-	printf("Shoot\n");
+	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+		printf("Shoot\n");
 	btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
 
 	btVector3 start(
@@ -399,11 +400,18 @@ void Player::shoot() {
 	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
 	
 	//disparamos la bala en nuestro cliente
-	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(),direccion,posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-	//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-	Cliente::i().dispararBala(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-
+	
+	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+		//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+		Cliente::i().dispararBala(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	}
 	//}
+
+		relojCadencia.restart();
+	}
+
+	
 }
 
 
