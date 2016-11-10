@@ -10,6 +10,7 @@
 #include "../Handlers/Message.h"
 #include "../Handlers/MessageHandler.h"
 #include "../Motor/GraphicEngine.h"
+#include "../Entities/Bullet.h"
 
 Cliente::Cliente()
 {
@@ -22,6 +23,7 @@ void Cliente::update() {
 	RakNet::BitStream bsOut;
 	std::string str;
 	TPlayer nuevoplayer;
+	TBala balaDisparada;
 	RakNet::RakNetGUID desconectado;
 	
 
@@ -162,6 +164,19 @@ void Cliente::update() {
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
 				EntityManager::i().removeRaknetEntity(EntityManager::i().getRaknetEntity(desconectado));
 				
+
+			}
+			break;
+
+			case DISPARAR_BALA:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(balaDisparada);
+				Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
 
 			}
 			break;
@@ -329,6 +344,24 @@ void Cliente::enviarDesconexion() {
 
 	//salir = true;
 }
+
+void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) {
+
+	RakNet::BitStream bsOut;
+
+	bsOut.Write((RakNet::MessageID)DISPARAR_BALA);
+	TBala bala;
+	bala.direction = direction;
+	bala.position = position;
+	bala.finalposition = finalposition;
+	bala.rotation = rotation;
+	bala.guid = EntityManager::i().getEntity(1000)->getGuid();
+	bsOut.Write(bala);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+
+}
+
 
 void Cliente::apagar() {
 	if (conectado) {

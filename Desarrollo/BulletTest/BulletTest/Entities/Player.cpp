@@ -390,7 +390,10 @@ void Player::shoot() {
 	//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
 	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
 	
+	//disparamos la bala en nuestro cliente
 	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(),direccion,posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+	Cliente::i().dispararBala(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 
 	//}
 }

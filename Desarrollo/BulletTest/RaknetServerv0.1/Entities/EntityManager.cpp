@@ -105,6 +105,26 @@ void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
+void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *peer)
+{
+
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != b.guid) {
+
+			//enviamos el guid del cliente que tiene que borrar
+			bsOut.Write((RakNet::MessageID)DISPARAR_BALA);
+			bsOut.Write(b);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		}
+
+	}
+}
+
 void EntityManager::inicializar()
 {
 	std::unordered_map<unsigned long, Entity*>::iterator iter = m_jugadores.begin();

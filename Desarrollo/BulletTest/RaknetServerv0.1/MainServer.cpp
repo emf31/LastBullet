@@ -49,6 +49,7 @@ int main() {
 	RakNet::Packet *packet;
 	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
+	TBala p_bala;
 	
 	//std::vector<Player*> clientArray;
 
@@ -194,6 +195,22 @@ int main() {
 
 							 break;
 
+
+			case DISPARAR_BALA: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(p_bala);
+				//notifico a ese cliente que ha sido disparado
+				EntityManager::i().enviarDisparoCliente(p_bala, peer);
+
+			}
+
+							   break;
 
 			case MUERTE: {
 

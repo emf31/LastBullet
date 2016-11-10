@@ -11,6 +11,15 @@ typedef struct {
 	std::string name;
 }TPlayer;
 
+
+typedef struct {
+	Vec3<float> position;
+	Vec3<float> direction;
+	Vec3<float> finalposition;
+	Vec3<float> rotation;
+	RakNet::RakNetGUID guid;
+}TBala;
+
 enum GameMessages
 {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
@@ -25,5 +34,6 @@ enum GameMessages
 	ACTUALIZA_CLIENTE = ID_USER_PACKET_ENUM + 10,
 	DESCONECTADO = ID_USER_PACKET_ENUM + 11,
 	IMPACTO_BALA = ID_USER_PACKET_ENUM + 12,
-	MUERTE = ID_USER_PACKET_ENUM + 13
+	MUERTE = ID_USER_PACKET_ENUM + 13,
+	DISPARAR_BALA = ID_USER_PACKET_ENUM + 14
 };

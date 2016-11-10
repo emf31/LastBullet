@@ -28,6 +28,7 @@ public:
 	void enviarPos(Player* p);
 	void enviarDisparo(RakNet::RakNetGUID guid);
 	void enviarDesconexion();
+	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
 
 	//Como si fuera el delete
 	void apagar();
