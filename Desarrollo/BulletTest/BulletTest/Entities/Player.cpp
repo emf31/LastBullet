@@ -112,7 +112,7 @@ void Player::update(Time elapsedTime)
 	
 
 	if (rocket->getEstado() == CARGADO) {
-		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() +5, p_controller->getGhostObject()->getWorldTransform().getOrigin().y(), p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
+		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() +3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y()+5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
 		btTransform transform = rocket->m_rigidBody->getCenterOfMassTransform();
 		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
 
@@ -424,7 +424,7 @@ void Player::shootRocket() {
 	if (rocket->getEstado() == CARGADO) {
 
 		printf("ROCKET DISPARADO\n");
-		btVector3 SIZE_OF_WORLD(70, 70, 70);
+		btVector3 FUERZA(1.5, 1.5, 1.5);
 
 
 		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
@@ -434,13 +434,13 @@ void Player::shootRocket() {
 
 		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
-		btVector3 force = direccion2 * SIZE_OF_WORLD;
+		btVector3 force = direccion2 * FUERZA;
 
 		rocket->resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
 
 
 		rocket->m_rigidBody->applyCentralForce(force);
-		rocket->m_rigidBody->setCollisionFlags(4);
+		//rocket->m_rigidBody->setCollisionFlags(4);
 
 		rocket->setEstado(DISPARADO);
 		rocket->clockRecargaRocket.restart();
