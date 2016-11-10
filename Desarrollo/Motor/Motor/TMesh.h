@@ -41,16 +41,16 @@ public:
 	vector<GLuint> indices;
 	vector<Texture> textures;
 
-	TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
+	TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures, Shader *shader);
 	~TMesh();
 
-	void beginDraw(Shader Shader);
+	void beginDraw();
 	void endDraw();
 
 private:
 	/*  Render data  */
+	Shader *shader;
 	GLuint VAO, VBO, EBO;
-
 	void setupMesh();
 
 };

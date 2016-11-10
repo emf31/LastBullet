@@ -2,11 +2,11 @@
 
 
 
-TMesh::TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) {
+TMesh::TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures, Shader *shader) {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
-
+	this->shader = shader;
 	// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 	this->setupMesh();
 }
@@ -16,7 +16,7 @@ TMesh::~TMesh() {
 }
 
 
-void TMesh::beginDraw(Shader shader) {
+void TMesh::beginDraw() {
 	// Bind appropriate textures
 	GLuint diffuseNr = 1;
 	GLuint specularNr = 1;
@@ -32,13 +32,13 @@ void TMesh::beginDraw(Shader shader) {
 			ss << specularNr++; // Transfer GLuint to stream
 		number = ss.str();
 		// Now set the sampler to the correct texture unit
-		glUniform1i(glGetUniformLocation(shader.Program, (name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(shader->Program, (name + number).c_str()), i);
 		// And finally bind the texture
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 	}
 
 	// Also set each mesh's shininess property to a default value (if you want you could extend this to another mesh property and possibly change this value)
-	glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"), 16.0f);
+	glUniform1f(glGetUniformLocation(shader->Program, "material.shininess"), 16.0f);
 
 	// Draw mesh
 	glBindVertexArray(this->VAO);

@@ -3,16 +3,15 @@
 
 
 SceneManager::SceneManager() {
-	rm = new ResourceManager();
 }
 
 
 SceneManager::~SceneManager() {
 }
 
-TModel* SceneManager::getMesh(std::string path) {
+TModel* SceneManager::getMesh(std::string path,std::string shader) {
 	if (path != "") {
-		return rm->getMesh(path);
+		return ResourceManager::i().getMesh(path,shader);
 	}
 	return NULL;
 }

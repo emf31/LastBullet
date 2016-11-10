@@ -1,17 +1,25 @@
 #include "TModel.h"
+#include "ResourceManager.h"
 
 
-
-TModel::TModel(GLchar * path) {
+TModel::TModel(GLchar * path, GLchar* shaderPath) {
+	Shader* shader;
+	if (*shaderPath) {
+		shader = ResourceManager::i().getShader(shaderPath);
+	} else {
+		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
+	}
+	
+	this->shader = shader;
 	this->loadModel(path);
 }
 
 TModel::~TModel() {
 }
 
-void TModel::beginDraw(Shader shader) {
+void TModel::beginDraw() {
 	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i].beginDraw(shader);
+		this->meshes[i].beginDraw();
 }
 
 void TModel::loadModel(string path) {
@@ -104,7 +112,7 @@ TMesh TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	}
 
 	// Return a mesh object created from the extracted mesh data
-	return TMesh(vertices, indices, textures);
+	return TMesh(vertices, indices, textures, shader);
 }
 
 vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType type, string typeName) {
@@ -132,4 +140,8 @@ vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType typ
 	}
 	return textures;
 
+}
+
+
+void TModel::endDraw() {
 }

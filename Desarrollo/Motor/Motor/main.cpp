@@ -6,7 +6,7 @@
 #include <GLFW\glfw3.h>
 
 #include <iostream>
-
+using namespace std;
 #include "EngineDevice.h"
 
 #include "Shader.h"
@@ -22,81 +22,33 @@
 #include <soil/SOIL.h>
 
 // Properties
-GLuint screenWidth = 800, screenHeight = 600;
+GLuint screenWidth = 1280, screenHeight = 720;
+EngineDevice engine;
 
-// Function prototypes
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+
 void Do_Movement();
-
-// Camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-bool keys[1024];
-GLfloat lastX = 400, lastY = 300;
-bool firstMouse = true;
-
-GLfloat deltaTime = 0.0f;
-GLfloat lastFrame = 0.0f;
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 int main() {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-	//GLFWmonitor* prMonitor = glfwGetPrimaryMonitor();
-	//Para pantalla completa se debe especificar un monitor (el principal en caso de haber mas de uno) en el cuarto parametro
-	//de la funcion glfwCreateWindow()
-
-	GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "TBA - OpenGL Viewer / Engine", nullptr, nullptr);
-	if (window == nullptr)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);
-
-	
-
-	// Set the required callback functions
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, mouse_callback);
-	glfwSetScrollCallback(window, scroll_callback);
-
-	// Options
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK) {
-		std::cout << "Failed to initialize GLEW" << std::endl;
+	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
 		return -1;
 	}
 
-	glViewport(0, 0, screenWidth, screenHeight);
-
-	// Setup some OpenGL options
-	glEnable(GL_DEPTH_TEST);
+	glfwSetKeyCallback(engine.getWindow(), key_callback);
+	glfwSetCursorPosCallback(engine.getWindow(), mouse_callback);
+	glfwSetScrollCallback(engine.getWindow(), scroll_callback);
 
 	// Setup and compile our shaders
-	Shader shader("model_loading.vs", "model_loading.frag");
-
-	// Load models
-	TModel ourModel("nanosuit2.obj");
-
-	EngineDevice engine;
+	//Shader shader("model_loading.vs", "model_loading.frag");
 	SceneManager *sm = engine.getSceneManager();
-
-	//sm->addMesh(sm->getMesh("../resources/MeshPlayer.obj"));
+	Shader* shader;
+	sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 	
 
-	while (!glfwWindowShouldClose(window)){
-		// Set frame time
-		GLfloat currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+	while (!glfwWindowShouldClose(engine.getWindow())){
+		engine.updateCurrentFrame();
 
 		glfwPollEvents();
 		Do_Movement();
@@ -105,43 +57,42 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-		shader.Use();   // <-- Don't forget this one!
+		shader = ResourceManager::i().getShader("assets/model_loading.vs");
+		shader->Use();   // <-- Don't forget this one!
 						// Transformation matrices
-		glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+		glm::mat4 projection = glm::perspective(engine.camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+		glm::mat4 view = engine.camera.GetViewMatrix();
+		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
 		// Draw the loaded model
 		glm::mat4 model;
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
-		ourModel.beginDraw(shader);
+		//ourModel.beginDraw(shader);
 
+		sm->draw();
 		// Swap the buffers
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(engine.getWindow());
 	}
 
 	glfwTerminate();
 	return 0;
 }
 
-#pragma region "User input"
 
-// Moves/alters the camera positions based on user input
 void Do_Movement() {
 	// Camera controls
-	if (keys[GLFW_KEY_W])
-		camera.ProcessKeyboard(FORWARD, deltaTime);
-	if (keys[GLFW_KEY_S])
-		camera.ProcessKeyboard(BACKWARD, deltaTime);
-	if (keys[GLFW_KEY_A])
-		camera.ProcessKeyboard(LEFT, deltaTime);
-	if (keys[GLFW_KEY_D])
-		camera.ProcessKeyboard(RIGHT, deltaTime);
+	if (engine.keys[GLFW_KEY_W])
+		engine.camera.ProcessKeyboard(FORWARD, engine.deltaTime);
+	if (engine.keys[GLFW_KEY_S])
+		engine.camera.ProcessKeyboard(BACKWARD, engine.deltaTime);
+	if (engine.keys[GLFW_KEY_A])
+		engine.camera.ProcessKeyboard(LEFT, engine.deltaTime);
+	if (engine.keys[GLFW_KEY_D])
+		engine.camera.ProcessKeyboard(RIGHT, engine.deltaTime);
 }
 
 // Is called whenever a key is pressed/released via GLFW
@@ -150,29 +101,27 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
 	if (action == GLFW_PRESS)
-		keys[key] = true;
+		engine.keys[key] = true;
 	else if (action == GLFW_RELEASE)
-		keys[key] = false;
+		engine.keys[key] = false;
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-	if (firstMouse) {
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
+	if (engine.firstMouse) {
+		engine.lastX = xpos;
+		engine.lastY = ypos;
+		engine.firstMouse = false;
 	}
 
-	GLfloat xoffset = xpos - lastX;
-	GLfloat yoffset = lastY - ypos;
+	GLfloat xoffset = xpos - engine.lastX;
+	GLfloat yoffset = engine.lastY - ypos;
 
-	lastX = xpos;
-	lastY = ypos;
+	engine.lastX = xpos;
+	engine.lastY = ypos;
 
-	camera.ProcessMouseMovement(xoffset, yoffset);
+	engine.camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-	camera.ProcessMouseScroll(yoffset);
+	engine.camera.ProcessMouseScroll(yoffset);
 }
-
-#pragma endregion

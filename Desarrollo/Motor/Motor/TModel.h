@@ -25,16 +25,15 @@ class TModel : TEntity {
 public:
 	/*  Functions   */
 	// Constructor, expects a filepath to a 3D model.
-	TModel(GLchar* path);
+	TModel(GLchar* path, GLchar* shader);
 	~TModel();
-
-	void beginDraw(Shader shader);
 
 
 	static GLint TextureFromFile(const char* path, string directory) {
 		//Generate texture ID and load texture data 
 		string filename = string(path);
 		filename = directory + '/' + filename;
+		cout << filename << endl;
 		GLuint textureID;
 		glGenTextures(1, &textureID);
 		int width, height;
@@ -59,7 +58,7 @@ private:
 	vector<TMesh> meshes;
 	string directory;
 	vector<Texture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
-
+	Shader *shader;
 	/*  Functions   */
 	// Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
 	void loadModel(string path);
@@ -71,6 +70,11 @@ private:
 	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
 
 	
+
+	// Heredado vía TEntity
+	virtual void beginDraw() override;
+
+	virtual void endDraw() override;
 
 };
 
