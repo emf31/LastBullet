@@ -32,6 +32,7 @@ private:
 	Command *jump;
 	Command *shoot_command;
 	Command *shoot_commandRocket;
+	Command *run_command;
 
 	std::map <EKEY_CODE, Command*> commands;
 

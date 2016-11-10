@@ -177,6 +177,9 @@
     <ClInclude Include="Motor\Animation.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="Command\RunCommand.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

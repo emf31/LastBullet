@@ -168,6 +168,10 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_speed = btScalar(1.3);
 }
 
+void KinematicCharacterController::setSpeed(float speed) {
+	m_speed = btScalar(speed);
+}
+
 KinematicCharacterController::~KinematicCharacterController()
 {
 }

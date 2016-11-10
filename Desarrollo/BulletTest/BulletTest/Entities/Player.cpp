@@ -60,6 +60,8 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 	isMoving = false;
+	p_controller->setSpeed(1.3);//seteamos la velocidad para andar, si corre se cambiara a una mayor
+
 	speedFinal = Vec3<float>(0, 0, 0);
 
 
@@ -277,6 +279,11 @@ void Player::handleMessage(const Message & message)
 
 		}
 	}
+}
+
+void Player::run()
+{
+	p_controller->setSpeed(3.0);
 }
 
 void Player::jump() {

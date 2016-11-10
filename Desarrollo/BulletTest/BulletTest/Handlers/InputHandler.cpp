@@ -6,6 +6,7 @@
 #include "../Command/Jump.h"
 #include "../Command/ShootCommand.h"
 #include "../Command/ShootCommandRocket.h"
+#include "../Command/RunCommand.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
 
@@ -29,8 +30,9 @@ InputHandler::InputHandler()
 	jump = new Jump();
 	shoot_command = new ShootCommand();
 	shoot_commandRocket = new ShootCommandRocket();
-
+	run_command = new RunCommand();
 	// Player
+	
 	commands[KEY_KEY_W] = move_up;
 	commands[KEY_KEY_A] = move_left;
 	commands[KEY_KEY_S] = move_down;
@@ -38,6 +40,9 @@ InputHandler::InputHandler()
 	commands[KEY_SPACE] = jump;
 	commands[KEY_LBUTTON] = shoot_command;
 	commands[KEY_RBUTTON] = shoot_commandRocket;
+	commands[KEY_LSHIFT] = run_command;
+	
+	
 }
 
 void InputHandler::bind(EKEY_CODE key, Command *command)

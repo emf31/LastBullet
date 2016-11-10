@@ -25,6 +25,7 @@ public:
 	virtual void handleMessage(const Message& message) override;
 	virtual std::string getClassName() { return "Player"; }
 
+	void run();
 
 	void jump();
 
@@ -62,6 +63,7 @@ private:
 
 	bool isJumping;
 	bool isMoving;
+	bool isRunning=false;
 
 	
 	float giro;

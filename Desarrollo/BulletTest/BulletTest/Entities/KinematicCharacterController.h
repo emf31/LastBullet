@@ -203,6 +203,7 @@ public:
 	void setUpInterpolate(bool value);
 
 	int numJumps;
+	void setSpeed(float speed);
 
 };
 
