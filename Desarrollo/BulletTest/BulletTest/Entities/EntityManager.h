@@ -3,7 +3,7 @@
 #include "../Otros/Time.hpp"
 #include "Entity.h"
 
-#define PLAYER 1
+#define PLAYER 1000
 
 class EntityManager
 {

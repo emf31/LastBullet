@@ -199,16 +199,16 @@ void Cliente::update() {
 				//bsIn.Read(desconectado);
 
 				//el player siempre tendra ID=1 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				if (EntityManager::i().getEntity(1000)->restaVida() <= 0) {
+				if (EntityManager::i().getEntity(PLAYER)->restaVida() <= 0) {
 					std::cout << "ME HAN MATADO" << std::endl;
 					std::cout << "HIJO PUTA EL CAMPERO" << std::endl;
 					//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
 
 					bsOut.Write((RakNet::MessageID)MUERTE);
 
-					nuevoplayer.guid = EntityManager::i().getEntity(1000)->getGuid();
-					nuevoplayer.name = EntityManager::i().getEntity(1000)->getName();
-					nuevoplayer.position = EntityManager::i().getEntity(1000)->getRenderState()->getPosition();
+					nuevoplayer.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+					nuevoplayer.name = EntityManager::i().getEntity(PLAYER)->getName();
+					nuevoplayer.position = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 
 
 					bsOut.Write(nuevoplayer);
@@ -332,6 +332,7 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 
 	//TODO: le hemos asignado id=3 a los enemigos provisionalmente, para poder restarle vida a un enemigo puesto que no sabriamos su id.
 	bsOut.Write(guid);
+	printf("envio mensaje del disparo\n");
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }
