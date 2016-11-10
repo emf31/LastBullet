@@ -3,6 +3,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
+#include "Player.h"
 
 
 class LifeObject : public Entity
@@ -45,7 +46,10 @@ public:
 
 		m_nodo->setPosition(pos);
 	}
+	Clock clockRecargaLife;
+	float timeRecargaLife = 3;
 
+	int estado = DISPONIBLE;
 private:
 	//btGhostPairCallback* m_ghostPairCallback = NULL;				// Needed once to enable ghost objects inside Bullet
 	btGhostObject* m_ghostObject;							// simple aabb ghost object (keeps track of the objects whose aabbs intersect its own collision shape aabb: this is called "broadphase stage collision detection")
