@@ -16,8 +16,9 @@ m_acceleration_walk(10.f),
 //m_acceleration_run(5.f), 
 m_deceleration_walk(11.f),
 //m_deceleration_run(0.2f), 
-m_maxSpeed_walk(60.f)
-//m_maxSpeed_run(18.0f)
+m_maxSpeed_walk(60.f),
+//m_maxSpeed_run(18.0f),
+m_vida(5)
 {
 	
 
@@ -266,6 +267,7 @@ void Player::cargarContenido()
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	GraphicEngine::i().setCameraEntity(this);
+	resetVida();
 
 }
 
@@ -345,7 +347,8 @@ void Player::jump() {
 
 void Player::shoot() {
 
-	printf("Shoot\n");
+	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+		printf("Shoot\n");
 	btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
 
 	btVector3 start(
@@ -384,16 +387,15 @@ void Player::shoot() {
 		for (int i = 0; i < ray.m_hitNormalWorld.capacity(); i++) {
 			//printf("SIZE OF THE ARRAY OF HITS: %d \n", ray.m_hitNormalWorld.capacity());
 
-			Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-			Message msg(myEnt, "COLISION_BALA", NULL);
-			MessageHandler::i().sendMessage(msg);
-
 			printf("hit something\n");
-			//imaginamos que este es el punto de colision
-			posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
+
 			
 
 		}
+		Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
+		Message msg(myEnt, "COLISION_BALA", NULL);
+		MessageHandler::i().sendMessage(msg);
+		posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 
 	}
 	
@@ -401,11 +403,18 @@ void Player::shoot() {
 	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
 	
 	//disparamos la bala en nuestro cliente
-	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(),direccion,posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-	//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-	Cliente::i().dispararBala(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-
+	
+	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+		//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+		Cliente::i().dispararBala(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	}
 	//}
+
+		relojCadencia.restart();
+	}
+
+	
 }
 
 

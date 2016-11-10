@@ -56,7 +56,9 @@ private:
 
 	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
 
-
+	//esta no deberia estar aqui acordarse de borrarla
+	Time cadencia = milliseconds(100);
+	Clock relojCadencia;
 
 	bool isShooting=false;
 

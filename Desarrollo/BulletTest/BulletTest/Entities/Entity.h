@@ -61,6 +61,7 @@ public:
 		return m_vida;
 	}
 	int restaVida() {
+		printf("me resto 1 de vida\n");
 		m_vida--;
 		return m_vida;
 	}
