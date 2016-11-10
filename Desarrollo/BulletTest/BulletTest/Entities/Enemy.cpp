@@ -148,6 +148,48 @@ void Enemy::desEncolaPos()
 	m.unlock();
 
 }
+/////////
+
+//pila rotaciones
+
+void Enemy::encolaRot(TPlayer rot)
+{
+	m.lock();
+	// Añadir a la cola
+	m_rotations.push(rot.position);
+
+	m.unlock();
+}
+
+void Enemy::desEncolaRot()
+{
+	m.lock();
+
+	if (m_rotations.size() > 3) {
+		Vec3<float> new_rot;
+		while (!m_rotations.empty()) {
+			new_rot = m_rotations.front();
+			//lo borramos de la cola
+			m_rotations.pop();
+			//llamamos al update con la nueva posicion
+		}
+		
+		m_renderState.updateRotations(new_rot);
+	}
+
+	else if (m_positions.size() > 0) {
+		Vec3<float> new_rot;
+		new_rot = m_rotations.front();
+		//lo borramos de la cola
+		m_rotations.pop();
+		//llamamos al update con la nueva posicion
+		m_renderState.updateRotations(new_rot);
+	}
+	m.unlock();
+
+}
+/////////
+
 void Enemy::updateAnimation()
 {
 	switch (m_animState)

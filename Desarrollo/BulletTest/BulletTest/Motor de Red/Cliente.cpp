@@ -152,6 +152,39 @@ void Cliente::update() {
 			}
 			break;
 
+			case ROTACION:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el player
+				bsIn.Read(nuevoplayer);
+				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
+				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(nuevoplayer.guid));
+				//e->updateEnemigo(nuevoplayer.position);
+				//e = nullptr;
+				//std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
+				//std::cout << "++ENVIO MENSAJE MOVE A LA ENTITY" << e->getName() << std::endl;
+
+
+				//ANTEEES!!
+				//Message msg1(e, "MOVE", static_cast<void*>(&nuevoplayer));
+				//MessageHandler::i().sendMessage(msg1);
+
+				//e->updateEnemigo(nuevoplayer.position);
+
+				//NUEVO
+				e->encolaRot(nuevoplayer);
+
+				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
+
+				//std::cout << "///////////////////INCIO LISTA////////////////////////" << std::endl;
+				//EntityManager::i().muestraPosClientes();
+				//std::cout << "///////////////////FINAL LISTA////////////////////////" << std::endl;
+
+			}
+			break;
+
 			case DESCONECTADO:
 			{
 
@@ -307,6 +340,25 @@ void Cliente::enviarPos(Player* p) {
 	paquetemov.name = p->getName();
 	
 	
+
+	bsOut.Write(paquetemov);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+void Cliente::enviarRot(Player* p) {
+
+	RakNet::BitStream bsOut;
+	TPlayer paquetemov;
+
+	bsOut.Write((RakNet::MessageID)ROTACION);
+
+	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
+	paquetemov.position = p->getRenderState()->getRotation();
+	paquetemov.velocidad = p->getVelocity();
+	paquetemov.guid = p->getGuid();
+	paquetemov.name = p->getName();
+
+
 
 	bsOut.Write(paquetemov);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);

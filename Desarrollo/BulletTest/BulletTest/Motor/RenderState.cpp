@@ -105,7 +105,7 @@ void RenderState::setAccelerating(bool accelerating)
 }
 Vec3<float> RenderState::getRotation()
 {
-	return Vec3<float>();
+	return m_rotationNew;
 }
 Vec3<float> RenderState::getPosition() {
 	return m_posNew;

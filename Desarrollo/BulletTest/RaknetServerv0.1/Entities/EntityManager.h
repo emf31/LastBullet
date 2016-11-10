@@ -18,6 +18,7 @@ public:
 	//Envia un nuevo player a todos los clientes
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaNuevaPos(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void enviaNuevaRot(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer); 
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);

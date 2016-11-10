@@ -47,6 +47,28 @@ void EntityManager::enviaNuevaPos(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
+void EntityManager::enviaNuevaRot(TPlayer & p, RakNet::RakPeerInterface *peer)
+{
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != p.guid) {
+			//std::cout << "///////ENVIAMOS POS INICIO////////" << std::endl;
+			//std::cout << "El player: " << p.name << "se mueve desde: "<< getRaknetEntity(p.guid)->getRenderState()->getPosition().getX()<<","<< getRaknetEntity(p.guid)->getRenderState()->getPosition().getZ() <<" a la nueva pos: " << p.position.getX() << "," << p.position.getZ() << std::endl;
+			//std::cout << "Enviamos esta nueva pos a: " << i->second->getName() <<"con guid: "<<RakNet::RakNetGUID::ToUint32(i->second->getGuid())<< std::endl;
+			//enviamos la posicion actualizada del player a todos los clientes
+			bsOut.Write((RakNet::MessageID)ROTACION);
+			bsOut.Write(p);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+			//std::cout << "///////ENVIAMOS POS FINAL////////" << std::endl;
+		}
+
+	}
+}
+
 void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
 {
 
