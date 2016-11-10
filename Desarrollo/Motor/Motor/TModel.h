@@ -25,7 +25,7 @@ class TModel : TEntity {
 public:
 	/*  Functions   */
 	// Constructor, expects a filepath to a 3D model.
-	TModel(GLchar* path, GLchar* shader);
+	TModel(GLchar* path, Shader* shader=NULL);
 	~TModel();
 
 
@@ -52,6 +52,8 @@ public:
 		SOIL_free_image_data(image);
 		return textureID;
 	}
+
+	
 
 private:
 	/*  Model Data  */

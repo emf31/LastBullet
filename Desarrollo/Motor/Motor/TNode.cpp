@@ -41,9 +41,12 @@ TNode * TNode::getParentNode() {
 void TNode::draw() {
 	if (m_entity != nullptr) {
 		m_entity->beginDraw();
+		m_entity->endDraw();
+
 	}
 	
 	for (int i = 0; i < m_childNodes.size(); i++) {
 		m_childNodes.at(i)->draw();
 	}
+	
 }

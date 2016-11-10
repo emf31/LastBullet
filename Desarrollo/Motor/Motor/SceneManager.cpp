@@ -9,7 +9,7 @@ SceneManager::SceneManager() {
 SceneManager::~SceneManager() {
 }
 
-TModel* SceneManager::getMesh(std::string path,std::string shader) {
+TModel* SceneManager::getMesh(std::string path,Shader* shader) {
 	if (path != "") {
 		return ResourceManager::i().getMesh(path,shader);
 	}
@@ -26,5 +26,8 @@ TNode* SceneManager::addMesh(TModel * model) {
 }
 
 void SceneManager::draw() {
+	//Update matrices
+	/*glm::mat4 projection = glm::perspective(engine.camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+	glm::mat4 view = engine.camera.GetViewMatrix();*/
 	scene.draw();
 }

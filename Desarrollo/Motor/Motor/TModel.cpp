@@ -2,15 +2,18 @@
 #include "ResourceManager.h"
 
 
-TModel::TModel(GLchar * path, GLchar* shaderPath) {
-	Shader* shader;
+TModel::TModel(GLchar * path, Shader* shaderPath) {
+	/*Shader* shader;
 	if (*shaderPath) {
 		shader = ResourceManager::i().getShader(shaderPath);
 	} else {
 		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
+	}*/
+	if (shaderPath == NULL) {
+		this->shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
+	} else {
+		this->shader = shaderPath;
 	}
-	
-	this->shader = shader;
 	this->loadModel(path);
 }
 
@@ -144,4 +147,6 @@ vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType typ
 
 
 void TModel::endDraw() {
+	//std::cout << u8"Adiós" << std::endl;
+	//TEntity::endDraw();
 }

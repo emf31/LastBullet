@@ -40,35 +40,31 @@ int main() {
 	glfwSetCursorPosCallback(engine.getWindow(), mouse_callback);
 	glfwSetScrollCallback(engine.getWindow(), scroll_callback);
 
-	// Setup and compile our shaders
-	//Shader shader("model_loading.vs", "model_loading.frag");
 	SceneManager *sm = engine.getSceneManager();
 	Shader* shader;
-	sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
-	
-
+	TNode* n = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
+	//TModel * modelo = (TModel*)n->getEntity();
+	//modelo->setShader();
 	while (!glfwWindowShouldClose(engine.getWindow())){
 		engine.updateCurrentFrame();
 
 		glfwPollEvents();
 		Do_Movement();
-
 		//RENDER
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader = ResourceManager::i().getShader("assets/model_loading.vs");
 		shader->Use();   // <-- Don't forget this one!
-						// Transformation matrices
-		glm::mat4 projection = glm::perspective(engine.camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
-		glm::mat4 view = engine.camera.GetViewMatrix();
-		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
+		
+		/*glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));*/
 
 		// Draw the loaded model
 		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
+		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
 		//ourModel.beginDraw(shader);

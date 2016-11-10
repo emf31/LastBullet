@@ -8,7 +8,7 @@ public:
 	~SceneManager();
 
 	void getTexture(std::string path);
-	TModel* getMesh(std::string path, std::string shader="");
+	TModel* getMesh(std::string path, Shader* shader=NULL);
 	TNode* addMesh(TModel* model);
 
 	void draw();

@@ -12,7 +12,7 @@ public:
 	}
 	~ResourceManager();
 	//TODO Métodos para añadr resources, para buscar resources, meterlos al árbol de la escena...
-	TModel* getMesh(std::string path, std::string shader="");
+	TModel* getMesh(std::string path, Shader* shader=NULL);
 	Shader* getShader(std::string vertexShader, std::string fragmentShader="");
 	void getTexture(std::string path);
 private:

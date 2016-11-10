@@ -7,7 +7,7 @@ ResourceManager::ResourceManager() {
 
 
 ResourceManager::~ResourceManager() {
-	for (auto i = models.begin(); i != models.end(); ++i) { 
+	/*for (auto i = models.begin(); i != models.end(); ++i) { 
 		delete i->second;
 		models.erase(i->first);
 	}
@@ -15,17 +15,17 @@ ResourceManager::~ResourceManager() {
 	for (auto i = shaders.begin(); i != shaders.end(); ++i) {
 		delete i->second;
 		shaders.erase(i->first);
-	}
+	}*/
 }
 
-TModel* ResourceManager::getMesh(std::string path,std::string shader) {
+TModel* ResourceManager::getMesh(std::string path,Shader* shader) {
 	if (path != "") {
 		if (models.find(path) != models.end()) {
 			//Si ya esta en el mapa lo devolvemos al instante. No lo cargamos dos veces!
 			return models[path];
 		} else {
 			//Creamos un modelo nuevo y le pasamos el path
-			TModel *model = new TModel((GLchar*)path.c_str(), (GLchar*)shader.c_str());
+			TModel *model = new TModel((GLchar*)path.c_str(), shader);
 			//Guardamos el puntero en el mapa de models
 			models[path] = model;
 			//Devolvemos el puntero del modelo en el mapa
