@@ -37,6 +37,8 @@ public:
 
 	void encolaPos(TPlayer pos);
 	void desEncolaPos();
+	void encolaRot(TPlayer rot);
+	void desEncolaRot();
 	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
 	std::mutex m;
 
@@ -53,6 +55,7 @@ private:
 
 	btRigidBody* m_rigidBody;
 	std::queue<Vec3<float>> m_positions;
+	std::queue<Vec3<float>> m_rotations;
 
 	virtual std::string getClassName() { return "Enemy"; }
 	

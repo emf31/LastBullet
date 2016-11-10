@@ -178,6 +178,23 @@ int main() {
 			}
 
 							 break;
+			case ROTACION:{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(p_struct);
+
+				EntityManager::i().enviaNuevaRot(p_struct, peer);
+				//tityManager::i().getRaknetEntity(p_struct.guid)->getRenderState()->setPosition(p_struct.position);
+
+
+
+			}
+
+			 break;
 
 			case IMPACTO_BALA: {
 

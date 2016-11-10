@@ -177,6 +177,7 @@ void Player::update(Time elapsedTime)
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		Cliente::i().enviarPos(this);
+		Cliente::i().enviarRot(this);
 	}
 
 
