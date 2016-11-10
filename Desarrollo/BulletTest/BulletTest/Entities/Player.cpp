@@ -416,9 +416,9 @@ void Player::shootRocket() {
 
 		rocket->resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
 
-		rocket->m_rigidBody->activate();
 
 		rocket->m_rigidBody->applyCentralForce(force);
+		rocket->m_rigidBody->setCollisionFlags(4);
 
 		rocket->setEstado(DISPARADO);
 		clockRecargaRocket.restart();
@@ -545,3 +545,18 @@ void Player::updateState()
 	}
 }
 
+void Player::setWeapon(int weapon) {
+	arma = weapon;
+
+	switch (weapon) {
+		case LANZACOHETES:
+			printf("TE HAS EQUIPADO UN LANZACOHETES\n");
+		break;
+		case ASALTO:
+			printf("TE HAS EQUIPADO UN FUSIL DE ASALTO\n");
+		break;
+		case PISTOLA:
+			printf("TE HAS EQUIPADO UNA PISTOLA\n");
+		break;
+	}
+}

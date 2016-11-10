@@ -28,6 +28,15 @@ void LifeObject::inicializar()
 
 void LifeObject::update(Time elapsedTime)
 {
+
+
+	if (estado == USADO) {
+		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
+			estado = DISPONIBLE;
+			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(1.f, 1.f, 1.f));
+
+		}
+	}
 	// Set position
 	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
@@ -66,7 +75,13 @@ void LifeObject::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
 		////TODO: AQUI ES SEGURO QUE HA COLISIONADO CON EL PLAYER, HABRIA QUE BORRAR EL PAQUETE DE VIDA Y RESPAWNEARLO EN X TIEMPO
-		PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-		//std::cout << "Te has curado" << std::endl;
+		if (estado == DISPONIBLE) {
+			PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+			estado = USADO;
+			clockRecargaLife.restart();
+
+			static_cast<Player*>(message.data)->sumarVida();
+
+		}
 	}
 }

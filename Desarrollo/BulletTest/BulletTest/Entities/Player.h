@@ -26,6 +26,7 @@ public:
 	virtual std::string getClassName() { return "Player"; }
 
 	void run();
+	void setWeapon(int weapon);
 
 	void jump();
 
@@ -42,7 +43,7 @@ public:
 	void updateState();
 
 
-	void sumarVida() { m_vida++; }
+	void sumarVida() { m_vida++; printf("ME HE CURADO\n"); }
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
@@ -87,6 +88,7 @@ private:
 	float height;
 	float mass;
 
+	int arma;
 
 	float m_acceleration_walk;
 	float m_acceleration_run;

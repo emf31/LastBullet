@@ -13,6 +13,12 @@
 #include <btBulletDynamicsCommon.h>
 
 
+#define DISPONIBLE 0
+#define USADO 1
+
+#define LANZACOHETES 10
+#define ASALTO 11
+#define PISTOLA 12
 
 class Entity
 {

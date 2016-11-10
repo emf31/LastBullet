@@ -160,6 +160,7 @@
     <ClInclude Include="Command\RunCommand.h" />
     <ClInclude Include="Command\ShootCommand.h" />
     <ClInclude Include="Command\ShootCommandRocket.h" />
+    <ClInclude Include="Entities\Asalto.h" />
     <ClInclude Include="Entities\Bullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
@@ -167,8 +168,11 @@
     <ClInclude Include="Entities\KinematicCharacterController.h" />
     <ClInclude Include="Entities\LifeObject.h" />
     <ClInclude Include="Entities\PhysicsEntity.h" />
+    <ClInclude Include="Entities\Pistola.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Entities\Rocket.h" />
+    <ClInclude Include="Entities\RocketLauncher.h" />
+    <ClInclude Include="Entities\Weapon.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
@@ -194,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletTest.cpp" />
+    <ClCompile Include="Entities\Asalto.cpp" />
     <ClCompile Include="Entities\Bullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
@@ -201,8 +206,11 @@
     <ClCompile Include="Entities\KinematicCharacterController.cpp" />
     <ClCompile Include="Entities\LifeObject.cpp" />
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
+    <ClCompile Include="Entities\Pistola.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Entities\Rocket.cpp" />
+    <ClCompile Include="Entities\RocketLauncher.cpp" />
+    <ClCompile Include="Entities\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
