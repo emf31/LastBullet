@@ -162,12 +162,6 @@
     <ClInclude Include="Entities\LifeObject.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\Rocket.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Command\ShootCommandRocket.h">
-      <Filter>Archivos de encabezado\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\AnimatedSceneNode.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
@@ -202,6 +196,12 @@
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Entities\RocketBullet.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootCommandGranada.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Granada.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,9 +275,6 @@
     <ClCompile Include="Entities\LifeObject.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Rocket.cpp">
-      <Filter>Archivos de código fuente\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Motor\AnimatedSceneNode.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
@@ -309,6 +306,9 @@
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Entities\RocketBullet.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Granada.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>

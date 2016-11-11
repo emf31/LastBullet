@@ -31,7 +31,7 @@ private:
 	Command *move_right;
 	Command *jump;
 	Command *shoot_command;
-	Command *shoot_commandRocket;
+	Command *shoot_commandGranada;
 	Command *run_command;
 
 	std::map <EKEY_CODE, Command*> commands;

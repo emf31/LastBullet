@@ -159,7 +159,8 @@
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\RunCommand.h" />
     <ClInclude Include="Command\ShootCommand.h" />
-    <ClInclude Include="Command\ShootCommandRocket.h" />
+    <ClInclude Include="Command\ShootCommandGranada.h" />
+    <ClInclude Include="Entities\Granada.h" />
     <ClInclude Include="Entities\GunBullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
@@ -168,7 +169,6 @@
     <ClInclude Include="Entities\LifeObject.h" />
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
-    <ClInclude Include="Entities\Rocket.h" />
     <ClInclude Include="Entities\RocketBullet.h" />
     <ClInclude Include="Entities\WeaponDrops\AsaltoDrop.h" />
     <ClInclude Include="Entities\WeaponDrops\PistolaDrop.h" />
@@ -200,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletTest.cpp" />
+    <ClCompile Include="Entities\Granada.cpp" />
     <ClCompile Include="Entities\GunBullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
@@ -208,7 +209,6 @@
     <ClCompile Include="Entities\LifeObject.cpp" />
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
-    <ClCompile Include="Entities\Rocket.cpp" />
     <ClCompile Include="Entities\RocketBullet.cpp" />
     <ClCompile Include="Entities\WeaponDrops\AsaltoDrop.cpp" />
     <ClCompile Include="Entities\WeaponDrops\PistolaDrop.cpp" />
