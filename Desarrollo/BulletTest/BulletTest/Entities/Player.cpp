@@ -47,8 +47,8 @@ void Player::inicializar()
 	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
 	giro = 0;
 
-	rocket = new Rocket();
-	rocket->cargarContenido();
+	granada = new Granada();
+	granada->cargarContenido();
 
 	animation = new Animation;
 
@@ -112,23 +112,23 @@ void Player::update(Time elapsedTime)
 	
 	
 
-	if (rocket->getEstado() == CARGADO) {
+	if (granada->getEstado() == CARGADO) {
 		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() +3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y()+5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
-		btTransform transform = rocket->m_rigidBody->getCenterOfMassTransform();
+		btTransform transform = granada->m_rigidBody->getCenterOfMassTransform();
 		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
 
 
-		rocket->getRenderState()->updatePositions(posicion);
+		granada->getRenderState()->updatePositions(posicion);
 
-		rocket->setPosition(posicion);
+		granada->setPosition(posicion);
 
 	}
-	else if (rocket->getEstado() == DISPARADO) {
-		btVector3 Point = rocket->m_rigidBody->getCenterOfMassPosition();
-		rocket->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-		if (rocket->clockRecargaRocket.getElapsedTime().asSeconds()>rocket->timeRecargaRocket) {
-			rocket->setEstado(CARGADO);
-			PhysicsEngine::i().removeRigidBody(rocket->m_rigidBody);
+	else if (granada->getEstado() == DISPARADO) {
+		btVector3 Point = granada->m_rigidBody->getCenterOfMassPosition();
+		granada->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+		if (granada->clockRecargaGranada.getElapsedTime().asSeconds()>granada->timeRecargaGranada) {
+			granada->setEstado(CARGADO);
+			PhysicsEngine::i().removeRigidBody(granada->m_rigidBody);
 
 		}
 	}
@@ -419,10 +419,10 @@ void Player::shoot() {
 }
 
 
-void Player::shootRocket() {
+void Player::shootGranada() {
 
 
-	if (rocket->getEstado() == CARGADO) {
+	if (granada->getEstado() == CARGADO) {
 
 		printf("ROCKET DISPARADO\n");
 		btVector3 FUERZA(1.5, 1.5, 1.5);
@@ -437,14 +437,14 @@ void Player::shootRocket() {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		rocket->resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+		granada->resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
 
 
-		rocket->m_rigidBody->applyCentralForce(force);
+		granada->m_rigidBody->applyCentralForce(force);
 		//rocket->m_rigidBody->setCollisionFlags(4);
 
-		rocket->setEstado(DISPARADO);
-		rocket->clockRecargaRocket.restart();
+		granada->setEstado(DISPARADO);
+		granada->clockRecargaGranada.restart();
 	}
 
 }

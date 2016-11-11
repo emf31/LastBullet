@@ -5,7 +5,7 @@
 #include "../Command/MoveLeft.h"
 #include "../Command/Jump.h"
 #include "../Command/ShootCommand.h"
-#include "../Command/ShootCommandRocket.h"
+#include "../Command/ShootCommandGranada.h"
 #include "../Command/RunCommand.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
@@ -29,7 +29,7 @@ InputHandler::InputHandler()
 	move_right = new MoveRight();
 	jump = new Jump();
 	shoot_command = new ShootCommand();
-	shoot_commandRocket = new ShootCommandRocket();
+	shoot_commandRocket = new ShootCommandGranada();
 	run_command = new RunCommand();
 	// Player
 	
