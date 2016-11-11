@@ -175,6 +175,8 @@
     <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h" />
     <ClInclude Include="Entities\WeaponDrops\WeaponDrop.h" />
     <ClInclude Include="Entities\Weapons\Asalto.h" />
+    <ClInclude Include="Entities\Weapons\Pistola.h" />
+    <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
     <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
@@ -217,6 +219,8 @@
     <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp" />
     <ClCompile Include="Entities\WeaponDrops\WeaponDrop.cpp" />
     <ClCompile Include="Entities\Weapons\Asalto.cpp" />
+    <ClCompile Include="Entities\Weapons\Pistola.cpp" />
+    <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />

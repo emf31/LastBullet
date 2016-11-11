@@ -210,10 +210,16 @@
     <ClInclude Include="Entities\Granada.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\Weapons\Weapon.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\Weapons\Asalto.h">
+      <Filter>Archivos de encabezado\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Weapons\Weapon.h">
+      <Filter>Archivos de encabezado\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Weapons\Pistola.h">
+      <Filter>Archivos de encabezado\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Weapons\RocketLauncher.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -323,10 +329,16 @@
     <ClCompile Include="Entities\Granada.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Weapons\Weapon.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\Weapons\Asalto.cpp">
+      <Filter>Archivos de código fuente\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\Weapon.cpp">
+      <Filter>Archivos de código fuente\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\Pistola.cpp">
+      <Filter>Archivos de código fuente\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\RocketLauncher.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

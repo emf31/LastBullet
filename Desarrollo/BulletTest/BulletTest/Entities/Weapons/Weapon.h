@@ -1,5 +1,14 @@
 #pragma once
+#include "irrlicht.h"
+#include "../../Motor/GraphicEngine.h"
+#include "../../Motor/PhysicsEngine.h"
 #include "../Entity.h"
+#include "../../Handlers/MessageHandler.h"
+#include "../GunBullet.h"
+#include "../RocketBullet.h"
+#include "math.h"
+#include "../../Otros/Vec3f.h"
+#include "../../Otros/Util.h"
 
 class Weapon :
 	public Entity
@@ -23,5 +32,9 @@ public:
 	virtual std::string getClassName() { return "Weapon"; }
 
 	virtual void shoot();
+
+protected:
+	Time cadencia = milliseconds(100);
+	Clock relojCadencia;
 };
 

@@ -23,5 +23,7 @@ public:
 	virtual std::string getClassName() { return "Asalto"; }
 
 	virtual void shoot();
+
+
 };
 

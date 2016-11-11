@@ -39,7 +39,6 @@ public:
 	void move_right();
 	void move_left();
 
-	float calcularDistancia(btVector3& start, btVector3& end);
 	void updateAnimation();
 	void updateState();
 
@@ -53,13 +52,12 @@ private:
 
 	Animation* animation;
 	Granada* granada;
-	Weapon* wp;
+	Weapon* weapon;
 
 	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
 
 	//esta no deberia estar aqui acordarse de borrarla
-	Time cadencia = milliseconds(100);
-	Clock relojCadencia;
+
 
 	bool isShooting=false;
 
@@ -88,8 +86,6 @@ private:
 	float radius;
 	float height;
 	float mass;
-
-	int arma;
 
 	float m_acceleration_walk;
 	float m_acceleration_run;

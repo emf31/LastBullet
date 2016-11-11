@@ -13,6 +13,8 @@
 #include "GunBullet.h"
 #include "RocketBullet.h"
 #include "Weapons/Asalto.h"
+#include "Weapons/Pistola.h"
+#include "Weapons/RocketLauncher.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid),
 m_acceleration_walk(10.f),
@@ -54,7 +56,9 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	//wp = new Asalto();
+//	weapon = new Asalto();
+	weapon = new Pistola();
+	weapon = new RocketLauncher();
 
 
 	m_vida = 5;
@@ -343,78 +347,7 @@ void Player::jump() {
 
 void Player::shoot() {
 
-	//weapon->shoot();
-
-	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
-		printf("Shoot\n");
-	btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
-
-	btVector3 start(
-		GraphicEngine::i().getActiveCamera()->getPosition().getX(),
-		GraphicEngine::i().getActiveCamera()->getPosition().getY(),
-		GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
-
-	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-	Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
-	direccion.normalise();
-
-	btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
-
-	btVector3 end = start + (direccion2*SIZE_OF_WORLD);
-
-	btCollisionWorld::AllHitsRayResultCallback ray(start, end);
-
-	PhysicsEngine::i().m_world->rayTest(start, end, ray);
-
-	Vec3<float> posicionImpacto(1500, 1500, 1500);
-
-
-	if (ray.hasHit())//si ray ha golpeado algo entro
-	{
-
-
-		const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-
-																			 //calcularDistancia(start, end);
-
-																			 ////////////////////////////////////////////////////////////
-																			 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
-																			 //if (hit != m_rigidBody)
-																			 //{
-		
-		Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-		if (myEnt->getClassName() == "Enemy") {
-			Message msg(myEnt, "COLISION_BALA", NULL);
-			MessageHandler::i().sendMessage(msg);
-		}
-		
-		posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
-
-	}
-	
-	//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
-	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
-	
-	//disparamos la bala en nuestro cliente
-	Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
-	posDisparo += Vec3<float>(Randf(-1.f,1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
-
-	if(arma != LANZACOHETES)
-	GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-	else{
-	RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-	}
-	
-	
-	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
-		//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-		Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-	}
-	//}
-
-		relojCadencia.restart();
-	}
-
+	weapon->shoot();
 	
 }
 
@@ -523,14 +456,6 @@ void Player::move_left()
 	isMoving = true;
 }
 
-float Player::calcularDistancia(btVector3& start, btVector3& end) {
-
-	btVector3 vecDiferencia(end.x() - start.x(), end.y() - start.y(), end.z() - start.z());
-	float distancia = sqrtf(pow(vecDiferencia.x(), 2) + pow(vecDiferencia.y(), 2) + pow(vecDiferencia.z(), 2));
-	printf("DISTANCIA: %f", distancia);
-	return 0.5f;
-}
-
 void Player::updateAnimation()
 {
 	switch (m_playerState)
@@ -577,18 +502,23 @@ void Player::updateState()
 	}
 }
 
-void Player::setWeapon(int weapon) {
-	arma = weapon;
+void Player::setWeapon(int newWeapon) {
 
-	switch (weapon) {
+	switch (newWeapon) {
 		case LANZACOHETES:
 			printf("TE HAS EQUIPADO UN LANZACOHETES\n");
+			delete weapon;
+			weapon = new RocketLauncher();
 		break;
 		case ASALTO:
 			printf("TE HAS EQUIPADO UN FUSIL DE ASALTO\n");
+			delete weapon;
+			weapon = new Asalto();
 		break;
 		case PISTOLA:
 			printf("TE HAS EQUIPADO UNA PISTOLA\n");
+			delete weapon;
+			weapon = new Pistola();
 		break;
 	}
 }

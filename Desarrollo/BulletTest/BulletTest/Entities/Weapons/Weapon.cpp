@@ -39,5 +39,5 @@ void Weapon::handleMessage(const Message & message)
 }
 
 void Weapon::shoot() {
-
+	printf("WEAPON PADRE\n");
 }

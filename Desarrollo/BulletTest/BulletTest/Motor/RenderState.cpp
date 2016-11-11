@@ -42,9 +42,11 @@ void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
 
 	//printf("giro en realdidad %f\n", m_renderRotation);
 
+	if (m_nodo != NULL) {
+		m_nodo->setPosition(m_renderPos);
+		m_nodo->setRotation(m_renderRotation);
+	}
 
-	m_nodo->setPosition(m_renderPos);
-	m_nodo->setRotation(m_renderRotation);
 
 }
 
