@@ -11,13 +11,13 @@ public:
 	Lista();
 	~Lista();
 
-	void insertar(int tipo);
+	void insertar(Weapon* v);
 	bool ListaVacia() { return actual == NULL; }
 	void Mostrar();
 	void Siguiente();
 	void Anterior();
 	bool Actual() { return actual != NULL; }
-	Weapon valorActual() { return *actual->valor; }
+	Weapon* valorActual() { return actual->valor; }
 	void dispararArmaActual();
 
 private:

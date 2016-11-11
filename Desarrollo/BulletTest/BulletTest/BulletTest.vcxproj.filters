@@ -350,11 +350,11 @@
     <ClCompile Include="Entities\Weapons\Pistola.cpp">
       <Filter>Archivos de código fuente\Entities\Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Weapons\RocketLauncher.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Lista.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\RocketLauncher.cpp">
+      <Filter>Archivos de código fuente\Entities\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

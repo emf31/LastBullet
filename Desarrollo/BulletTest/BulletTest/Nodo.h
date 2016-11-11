@@ -12,21 +12,8 @@
 class Nodo
 {
 public:
-	Nodo(int tipo, Nodo *next = NULL, Nodo *pre = NULL)
-	{
-		if (tipo == LANZACOHETES) {
-			valor = new RocketLauncher();
-		}
-		else if (tipo == ASALTO) {
-			valor = new Asalto();
-		}
-		else if (tipo == PISTOLA) {
-			valor = new Pistola();
-		}
-		else {
-			valor = new Weapon();
-		}
-	};
+	Nodo(Weapon* v, Nodo *next = NULL, Nodo *pre = NULL) : valor(v), siguiente(next), anterior(pre) {}
+	
 	~Nodo();
 
 private:

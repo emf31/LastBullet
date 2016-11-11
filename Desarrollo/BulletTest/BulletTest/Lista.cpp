@@ -11,13 +11,11 @@ Lista::~Lista()
 {
 }
 
-void Lista::insertar(int tipo) {
-
-	Weapon* ve = new Asalto();
+void Lista::insertar(Weapon* v) {
 
 
 	pnodo nodo;
-	nodo = new Nodo(tipo);
+	nodo = new Nodo(v);
 
 	
 	if (actual == NULL) {

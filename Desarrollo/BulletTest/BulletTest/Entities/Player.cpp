@@ -58,13 +58,13 @@ void Player::inicializar()
 
 	Weapon* asalto = new Asalto();
 	Weapon* pistola = new Pistola();
-	Weapon* weapon= new RocketLauncher();
+	Weapon* lanzacohetes= new RocketLauncher();
 
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(ASALTO);
-	listaWeapons->insertar(PISTOLA);
-	listaWeapons->insertar(LANZACOHETES);
+	listaWeapons->insertar(asalto);
+	listaWeapons->insertar(pistola);
+	listaWeapons->insertar(lanzacohetes);
 
 	m_vida = 5;
 }

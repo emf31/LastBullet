@@ -17,7 +17,7 @@ public:
 	Weapon();
 	~Weapon();
 
-	virtual void inicializar() override;
+	virtual void inicializar() override ;
 
 	virtual void update(Time elapsedTime) override;
 
@@ -31,7 +31,7 @@ public:
 
 	virtual std::string getClassName() { return "Weapon"; }
 
-	virtual void shoot();
+	virtual void shoot() = 0;
 
 protected:
 	Time cadencia = milliseconds(100);
