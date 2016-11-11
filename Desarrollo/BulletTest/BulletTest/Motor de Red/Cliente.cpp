@@ -10,7 +10,7 @@
 #include "../Handlers/Message.h"
 #include "../Handlers/MessageHandler.h"
 #include "../Motor/GraphicEngine.h"
-#include "../Entities/Bullet.h"
+#include "../Entities/GunBullet.h"
 
 Cliente::Cliente()
 {

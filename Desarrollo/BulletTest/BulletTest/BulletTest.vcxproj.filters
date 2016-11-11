@@ -177,9 +177,6 @@
     <ClInclude Include="Motor\SceneNode.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\Bullet.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\Animation.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
@@ -200,6 +197,12 @@
     </ClInclude>
     <ClInclude Include="Otros\Util.h">
       <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\GunBullet.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\RocketBullet.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +287,6 @@
     <ClCompile Include="Motor\SceneNode.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Bullet.cpp">
-      <Filter>Archivos de código fuente\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Motor\Animation.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
@@ -304,6 +304,12 @@
     </ClCompile>
     <ClCompile Include="Otros\Util.cpp">
       <Filter>Archivos de código fuente\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\GunBullet.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\RocketBullet.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

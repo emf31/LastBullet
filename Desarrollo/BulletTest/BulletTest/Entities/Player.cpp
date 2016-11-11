@@ -10,7 +10,8 @@
 #include "math.h"
 #include "../Otros/Vec3f.h"
 #include "../Otros/Util.h"
-#include "Bullet.h"
+#include "GunBullet.h"
+#include "RocketBullet.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid),
 m_acceleration_walk(10.f),
@@ -292,7 +293,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "DIBUJARBALA") {
 		//TBala* tBala= static_cast<TBala*>(message.data);
 			//std::cout << "Has cogido vida" << std::endl;
-		Bullet* bala = new Bullet(static_cast<TBala*>(message.data)->position, static_cast<TBala*>(message.data)->direction, static_cast<TBala*>(message.data)->finalposition, static_cast<TBala*>(message.data)->rotation);
+		GunBullet* bala = new GunBullet(static_cast<TBala*>(message.data)->position, static_cast<TBala*>(message.data)->direction, static_cast<TBala*>(message.data)->finalposition, static_cast<TBala*>(message.data)->rotation);
 		
 	}
 }
@@ -405,7 +406,13 @@ void Player::shoot() {
 	Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
 	posDisparo += Vec3<float>(Randf(-1.f,1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-	Bullet* bala = new Bullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	if(arma != LANZACOHETES)
+	GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	else{
+	RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	}
+	
+	
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 		Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
