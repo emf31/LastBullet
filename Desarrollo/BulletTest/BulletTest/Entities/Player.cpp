@@ -12,6 +12,7 @@
 #include "../Otros/Util.h"
 #include "GunBullet.h"
 #include "RocketBullet.h"
+#include "Weapons/Asalto.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid),
 m_acceleration_walk(10.f),
@@ -53,6 +54,7 @@ void Player::inicializar()
 
 	animation = new Animation;
 
+	//wp = new Asalto();
 
 
 	m_vida = 5;
@@ -113,18 +115,7 @@ void Player::update(Time elapsedTime)
 	
 	
 
-	if (granada->getEstado() == CARGADO) {
-		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() +3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y()+5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
-		btTransform transform = granada->m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
-
-
-		granada->getRenderState()->updatePositions(posicion);
-
-		granada->setPosition(posicion);
-
-	}
-	else if (granada->getEstado() == DISPARADO) {
+	if (granada->getEstado() == DISPARADO) {
 		btVector3 Point = granada->m_rigidBody->getCenterOfMassPosition();
 		granada->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 		if (granada->clockRecargaGranada.getElapsedTime().asSeconds()>granada->timeRecargaGranada) {
@@ -134,7 +125,7 @@ void Player::update(Time elapsedTime)
 		}
 	}
 	
-
+	
 
 	// Set rotation
 	/*vector3df Euler;
@@ -352,6 +343,8 @@ void Player::jump() {
 
 void Player::shoot() {
 
+	//weapon->shoot();
+
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 		printf("Shoot\n");
 	btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
@@ -431,7 +424,16 @@ void Player::shootGranada() {
 
 	if (granada->getEstado() == CARGADO) {
 
-		printf("ROCKET DISPARADO\n");
+		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() + 3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y() + 5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
+		btTransform transform = granada->m_rigidBody->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
+
+
+		granada->getRenderState()->updatePositions(posicion);
+
+		granada->setPosition(posicion);
+
+		printf("GRANADA DISPARADO\n");
 		btVector3 FUERZA(1.5, 1.5, 1.5);
 
 

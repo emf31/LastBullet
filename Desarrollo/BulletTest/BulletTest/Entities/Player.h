@@ -5,6 +5,7 @@
 #include "KinematicCharacterController.h"
 //#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Granada.h"
+#include "Weapons/Weapon.h"
 #include "../Motor/AnimatedSceneNode.h"
 #include "../Motor/Animation.h"
 #include <vector>
@@ -52,7 +53,7 @@ private:
 
 	Animation* animation;
 	Granada* granada;
-
+	Weapon* wp;
 
 	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
 

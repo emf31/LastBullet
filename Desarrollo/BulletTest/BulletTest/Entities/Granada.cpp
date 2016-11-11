@@ -33,7 +33,8 @@ void Granada::handleInput()
 void Granada::cargarContenido()
 {
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
+	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
+	m_nodo= GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "");
 
 
 	m_renderState.setPosition(Vec3<float>(2, 100, 0));

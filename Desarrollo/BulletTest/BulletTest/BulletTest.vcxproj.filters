@@ -61,6 +61,12 @@
     <Filter Include="Archivos de encabezado\Entities\Weapondrops">
       <UniqueIdentifier>{38e12eb3-66e1-4263-8b86-f3550dfeb6b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Entities\Weapons">
+      <UniqueIdentifier>{319a7cf9-83eb-4913-8280-ad4260bca960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Entities\Weapons">
+      <UniqueIdentifier>{550f04a8-a050-46c8-a75d-7656fa02207b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -204,6 +210,12 @@
     <ClInclude Include="Entities\Granada.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\Weapons\Weapon.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Weapons\Asalto.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -310,6 +322,12 @@
     </ClCompile>
     <ClCompile Include="Entities\Granada.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\Weapon.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\Asalto.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
