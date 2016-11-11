@@ -56,10 +56,15 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-//	weapon = new Asalto();
-	weapon = new Pistola();
-	weapon = new RocketLauncher();
+	Weapon* asalto = new Asalto();
+	Weapon* pistola = new Pistola();
+	Weapon* weapon= new RocketLauncher();
 
+	listaWeapons = new Lista();
+
+	listaWeapons->insertar(ASALTO);
+	listaWeapons->insertar(PISTOLA);
+	listaWeapons->insertar(LANZACOHETES);
 
 	m_vida = 5;
 }
@@ -347,8 +352,8 @@ void Player::jump() {
 
 void Player::shoot() {
 
-	weapon->shoot();
-	
+	listaWeapons->dispararArmaActual();
+
 }
 
 
@@ -507,18 +512,18 @@ void Player::setWeapon(int newWeapon) {
 	switch (newWeapon) {
 		case LANZACOHETES:
 			printf("TE HAS EQUIPADO UN LANZACOHETES\n");
-			delete weapon;
-			weapon = new RocketLauncher();
+			/*delete weapon;
+			weapon = new RocketLauncher();*/
 		break;
 		case ASALTO:
 			printf("TE HAS EQUIPADO UN FUSIL DE ASALTO\n");
-			delete weapon;
-			weapon = new Asalto();
+		/*	delete weapon;
+			weapon = new Asalto();*/
 		break;
 		case PISTOLA:
 			printf("TE HAS EQUIPADO UNA PISTOLA\n");
-			delete weapon;
-			weapon = new Pistola();
+			/*delete weapon;
+			weapon = new Pistola();*/
 		break;
 	}
 }

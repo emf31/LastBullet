@@ -33,6 +33,8 @@ private:
 	Command *shoot_command;
 	Command *shoot_commandGranada;
 	Command *run_command;
+	Command *list_up;
+	Command *list_down;
 
 	std::map <EKEY_CODE, Command*> commands;
 

@@ -3,6 +3,8 @@
 #include "../Command/MoveUp.h"
 #include "../Command/MoveRight.h"
 #include "../Command/MoveLeft.h"
+#include "../Command/ListWeaponUp.h"
+#include "../Command/ListWeaponDown.h"
 #include "../Command/Jump.h"
 #include "../Command/ShootCommand.h"
 #include "../Command/ShootCommandGranada.h"
@@ -27,6 +29,8 @@ InputHandler::InputHandler()
 	move_down = new MoveDown();
 	move_left = new MoveLeft();
 	move_right = new MoveRight();
+	list_up = new ListWeaponUp();
+	list_down = new ListWeaponDown();
 	jump = new Jump();
 	shoot_command = new ShootCommand();
 	shoot_commandGranada = new ShootCommandGranada();
@@ -37,6 +41,8 @@ InputHandler::InputHandler()
 	commands[KEY_KEY_A] = move_left;
 	commands[KEY_KEY_S] = move_down;
 	commands[KEY_KEY_D] = move_right;
+	commands[KEY_KEY_O] = list_up;
+	commands[KEY_KEY_P] = list_down;
 	commands[KEY_SPACE] = jump;
 	commands[KEY_LBUTTON] = shoot_command;
 	commands[KEY_RBUTTON] = shoot_commandGranada;

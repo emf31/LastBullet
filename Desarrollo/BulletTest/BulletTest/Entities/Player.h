@@ -9,6 +9,8 @@
 #include "../Motor/AnimatedSceneNode.h"
 #include "../Motor/Animation.h"
 #include <vector>
+#include "../Lista.h"
+
 class Player : public Entity
 {
 public:
@@ -42,6 +44,9 @@ public:
 	void updateAnimation();
 	void updateState();
 
+	void UpWeapon() { listaWeapons->Siguiente(); }
+	void DownWeapon() { listaWeapons->Anterior(); }
+
 
 	void sumarVida() { m_vida++; printf("ME HE CURADO\n"); }
 
@@ -52,7 +57,9 @@ private:
 
 	Animation* animation;
 	Granada* granada;
-	Weapon* weapon;
+//	Weapon* weapon;
+
+	Lista* listaWeapons;
 
 	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
 

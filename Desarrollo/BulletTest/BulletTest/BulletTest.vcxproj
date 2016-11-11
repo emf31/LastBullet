@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
+    <ClInclude Include="Command\ListWeaponDown.h" />
+    <ClInclude Include="Command\ListWeaponUp.h" />
     <ClInclude Include="Command\MoveDown.h" />
     <ClInclude Include="Command\MoveLeft.h" />
     <ClInclude Include="Command\MoveRight.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
+    <ClInclude Include="Lista.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor de Red\Cliente.h" />
     <ClInclude Include="Motor de Red\Estructuras.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
+    <ClInclude Include="Nodo.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\Util.h" />
@@ -224,6 +228,7 @@
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
+    <ClCompile Include="Lista.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />

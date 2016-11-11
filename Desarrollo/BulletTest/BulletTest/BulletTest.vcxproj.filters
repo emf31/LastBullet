@@ -219,8 +219,20 @@
     <ClInclude Include="Entities\Weapons\Pistola.h">
       <Filter>Archivos de encabezado\Entities\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\Weapons\RocketLauncher.h">
+    <ClInclude Include="Nodo.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Lista.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Weapons\RocketLauncher.h">
+      <Filter>Archivos de encabezado\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ListWeaponUp.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ListWeaponDown.h">
+      <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +351,9 @@
       <Filter>Archivos de código fuente\Entities\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Lista.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
