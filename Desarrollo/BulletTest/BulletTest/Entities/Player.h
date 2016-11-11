@@ -4,7 +4,7 @@
 #include <btBulletDynamicscommon.h>
 #include "KinematicCharacterController.h"
 //#include <BulletDynamics\Character\btKinematicCharacterController.h>
-#include "Rocket.h"
+#include "Granada.h"
 #include "../Motor/AnimatedSceneNode.h"
 #include "../Motor/Animation.h"
 #include <vector>
@@ -31,7 +31,7 @@ public:
 	void jump();
 
 	void shoot();
-	void shootRocket();
+	void shootGranada();
 
 	void move_up();
 	void move_down();
@@ -51,7 +51,7 @@ private:
 	float m_vida;
 
 	Animation* animation;
-	Rocket* rocket;
+	Granada* granada;
 
 
 	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
