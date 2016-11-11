@@ -9,6 +9,7 @@
 #include "../Handlers/InputHandler.h"
 #include "math.h"
 #include "../Otros/Vec3f.h"
+#include "../Otros/Util.h"
 #include "Bullet.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid),
@@ -106,7 +107,7 @@ void Player::update(Time elapsedTime)
 
 	m_renderState.updatePositions(Vec3<float>(
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y()-(height/2)-radius,
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y()-(height/2),
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 	
 	
@@ -176,7 +177,7 @@ void Player::update(Time elapsedTime)
 	}
 
 	*/
-	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(),0));
+	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		Cliente::i().enviarPos(this);
@@ -199,10 +200,12 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "", "../media/sf2arms.obj");
-	/*m_nodo->setTexture("../media/body01.png", 1);
-	m_nodo->setTexture("../media/head01.png", 0);
-	m_nodo->setTexture("../media/m4tex.png", 2);*/
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj");
+	//m_nodo->setTexture("../media/arma/car4_scope.tga", 1);
+	//m_nodo->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
+	m_nodo->setTexture("../media/arma/weapon.png", 0);
+	m_nodo->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
+	//m_nodo->setTexture("../media//arma/m4tex.png", 2);
 
 	//TODO esto igual es que se ha rayado ese set position pinta raro
 	Vec3<float> pos= Vec3<float>(0, 100, 0);
@@ -249,9 +252,9 @@ void Player::cargarContenido()
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
 	p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
+	p_controller->setUp(btVector3(0, 1, 0));
 	//p_controller->setGravity(btVector3(0,-9.8*3,0));
 	//p_controller->setJumpSpeed(5);
-	p_controller->setUp(btVector3(0,1,0));
 	//p_controller->setMaxSlope(btRadians(30.0));
 	//p_controller->setFallSpeed(200);
 	//p_controller->setMaxJumpHeight(20);
@@ -384,18 +387,13 @@ void Player::shoot() {
 																			 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
 																			 //if (hit != m_rigidBody)
 																			 //{
-
-		for (int i = 0; i < ray.m_hitNormalWorld.capacity(); i++) {
-			//printf("SIZE OF THE ARRAY OF HITS: %d \n", ray.m_hitNormalWorld.capacity());
-
-			printf("hit something\n");
-
-			
-
-		}
+		
 		Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-		Message msg(myEnt, "COLISION_BALA", NULL);
-		MessageHandler::i().sendMessage(msg);
+		if (myEnt->getClassName() == "Enemy") {
+			Message msg(myEnt, "COLISION_BALA", NULL);
+			MessageHandler::i().sendMessage(msg);
+		}
+		
 		posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 
 	}
@@ -404,11 +402,13 @@ void Player::shoot() {
 	//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
 	
 	//disparamos la bala en nuestro cliente
-	
-	Bullet* bala = new Bullet(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+	Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
+	posDisparo += Vec3<float>(Randf(-1.f,1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
+
+	Bullet* bala = new Bullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-		Cliente::i().dispararBala(GraphicEngine::i().getActiveCamera()->getPosition(), direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+		Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 	}
 	//}
 

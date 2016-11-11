@@ -198,6 +198,9 @@
     <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h">
       <Filter>Archivos de encabezado\Entities\Weapondrops</Filter>
     </ClInclude>
+    <ClInclude Include="Otros\Util.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -298,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp">
       <Filter>Archivos de código fuente\Entities\WeaponDrops</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Util.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
