@@ -34,7 +34,7 @@ public:
 	btRigidBody* createCapsuleRigidBody(Entity* entity, float height, float radius, float masa, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos una esfera - asumimos que la posicion esta puesta
-	btRigidBody* createSphereRigidBody(Entity* entity, float radius, float mass);
+	btRigidBody * createSphereRigidBody(Entity * entity, float radius, float mass, int body_state);
 
 	btGhostObject* createBoxGhostObject(Entity * entity, const Vec3<float>& scale);
 

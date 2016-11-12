@@ -39,7 +39,7 @@ void Granada::cargarContenido()
 
 	m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 0.7f, 1.f, 0.1f, DISABLE_DEACTIVATION);
+	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 0.7f, 2.f, DISABLE_DEACTIVATION);
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 }
