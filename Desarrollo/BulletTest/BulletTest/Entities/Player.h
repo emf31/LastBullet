@@ -52,6 +52,18 @@ public:
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
+
+	std::string getCurrentWeapon() {
+		if (tienePistola) {
+			return "Pistola";
+		}
+		else if (tieneAsalto) {
+			return "Asalto";
+		}
+		else {
+			return "Lanzacohetes";
+		}
+	};
 private:
 	float m_vida;
 

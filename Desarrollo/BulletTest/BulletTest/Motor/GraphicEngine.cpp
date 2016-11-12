@@ -1,8 +1,12 @@
 
 #include "GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
-
+#include "../Entities/EntityManager.h"
+#include "../Entities/Player.h"
 #include "PhysicsEngine.h"
+#include <string>
+#include <sstream>
+
 
 GraphicEngine::GraphicEngine() : debug_camera(true)
 {
@@ -89,6 +93,48 @@ void GraphicEngine::updateCamera()
 Camera * GraphicEngine::getActiveCamera()
 {
 	return active_camera;
+}
+
+void GraphicEngine::mostrarInterfaz()
+{
+	
+	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
+	irrGUI->getSkin()->setFont(fnt);
+
+	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	float v = p->getVida();
+
+	std::ostringstream oss;
+	oss << "Vida: " << v;
+	std::string vstring = oss.str();
+
+	vida = irrGUI->addStaticText(GetWC(vstring.c_str()), rect<int>(0, 0, 100, 100));
+	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
+	balas = irrGUI->addStaticText(L"0 / 50", rect<int>(0, 60, 100, 50));
+}	
+const wchar_t * GraphicEngine::GetWC(const char *c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
+}
+void GraphicEngine::actualizarInterfaz()
+{
+	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	float v = p->getVida();
+
+	std::ostringstream oss;
+	oss << "Vida: " << v;
+	std::string vstring = oss.str();
+
+	vida->setText(GetWC(vstring.c_str()));
+
+	arma_actual->setText(GetWC(p->getCurrentWeapon().c_str())); 
+
+
+	//balas = irrGUI->addStaticText(L"0 / 50", rect<int>(0, 60, 100, 50));
 }
 
 void GraphicEngine::setActiveCamera(int ID)

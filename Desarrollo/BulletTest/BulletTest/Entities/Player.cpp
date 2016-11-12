@@ -85,6 +85,8 @@ void Player::inicializar()
 	listaWeapons->insertar(firstWeapon);
 
 	m_vida = 5;
+
+	GraphicEngine::i().mostrarInterfaz();
 }
 
 
@@ -100,29 +102,11 @@ void Player::update(Time elapsedTime)
 	// Ejecuta todos los comandos
 	InputHandler::i().excuteCommands(this);
 	
+
 	speedFinal.normalise();
 
 	updateState();
 	updateAnimation();
-	
-	/*if (speedFinal.Magnitude() > 0) {
-		if(animation->getActualAnimation()!="Run_Forwards")
-			m_nodo->setAnimation(animation->getAnimationStart("Run_Forwards"), animation->getAnimationEnd("Run_Forwards"));
-	}
-	else {
-		if (animation->getActualAnimation() != "Idle") {
-			m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
-		}
-	}*/
-
-
-	/*if (p_controller->onGround()) {
-		if (animation->getActualAnimation() != "Jump")
-			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
-	}*/
-
-	/*p_controller->m_maxSpeed = m_maxSpeed_walk;
-	p_controller->m_deceleration = m_deceleration_walk;*/
 
 
 	p_controller->setWalkDirection(
@@ -154,48 +138,7 @@ void Player::update(Time elapsedTime)
 	
 	
 
-	// Set rotation
-	/*vector3df Euler;
-
-	const btQuaternion& TQuat = p_controller->getGhostObject()->get();
-
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;*/
-
-
-/*
-
-	vectorPrev = vectorNew;
-	Vec3<float>target = GraphicEngine::i().getActiveCamera()->getTarget();
-	Vec3<float>pos = Vec3<float>(
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()
-		);
-	vectorNew = target - pos;
-
-	vectorNew.normalise();//normalizamos los vectores
-	vectorPrev.normalise();
-
-
-	float m1 = vectorNew.getZ() / vectorNew.getX();//pendiente del 1
-	float m2 = vectorPrev.getZ() / vectorPrev.getX();//pendiente del 2
-	float giroactual3 = atan((m1 - m2) / (1 + (m1*m2)));//calculo del angulo entre 2 rectas
-	giroactual3 *= RADTODEG;//lo pasamos a grados
-
-	if (giroactual3 >= -360 && giroactual3<360) {
-		giro = giro - giroactual3;//aumentamos la variable giro acumulativa para setearla y se comprueba que esta en el rango 0 360
-
-		if (giro <360)
-			giro = giro + 360;
-		if (giro > 360)
-			giro = giro - 360;
-
-
-	}
-
-	*/
+	
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
@@ -203,7 +146,7 @@ void Player::update(Time elapsedTime)
 		Cliente::i().enviarRot(this);
 	}
 
-
+	GraphicEngine::i().actualizarInterfaz();
 	
 }
 
@@ -220,17 +163,9 @@ void Player::cargarContenido()
 	//Creas el nodo(grafico)
 
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj");
-	//m_nodo->setTexture("../media/arma/car4_scope.tga", 1);
-	//m_nodo->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
 	m_nodo->setTexture("../media/arma/weapon.png", 0);
 	m_nodo->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
-	//m_nodo->setTexture("../media//arma/m4tex.png", 2);
 
-	//TODO esto igual es que se ha rayado ese set position pinta raro
-	Vec3<float> pos= Vec3<float>(0, 100, 0);
-	m_renderState.setPosition(pos);
-	//p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-	//m_nodo->setPosition(pos); 
 	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
 
 	animation->addAnimation("Default", 0, 0);

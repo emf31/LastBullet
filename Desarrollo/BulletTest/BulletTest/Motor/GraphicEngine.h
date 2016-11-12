@@ -8,6 +8,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+//#include "../Entities/Player.h"
 
 #include "../DebugDraw.h"
 
@@ -36,6 +37,13 @@ public:
 	void setCameraEntity(Entity* entity);
 	void updateCamera();
 	Camera* getActiveCamera();
+
+	void mostrarInterfaz(/*Player* player*/);
+	void actualizarInterfaz(/*Player* player*/);
+	const wchar_t *GetWC(const char *c);
+	IGUIStaticText* vida;
+	IGUIStaticText* arma_actual;
+	IGUIStaticText* balas;
 
 	//No hace nada aun
 	void setActiveCamera(int ID);

@@ -30,7 +30,7 @@ InputHandler::InputHandler()
 	move_left = new MoveLeft();
 	move_right = new MoveRight();
 	list_up = new ListWeaponUp();
-	list_down = new ListWeaponDown();
+	/*list_down = new ListWeaponDown();*/
 	jump = new Jump();
 	shoot_command = new ShootCommand();
 	shoot_commandGranada = new ShootCommandGranada();
@@ -41,8 +41,8 @@ InputHandler::InputHandler()
 	commands[KEY_KEY_A] = move_left;
 	commands[KEY_KEY_S] = move_down;
 	commands[KEY_KEY_D] = move_right;
-	commands[KEY_KEY_O] = list_up;
-	commands[KEY_KEY_P] = list_down;
+	commands[KEY_MBUTTON] = list_up;
+	//commands[KEY_KEY_2] = list_down;
 	commands[KEY_SPACE] = jump;
 	commands[KEY_LBUTTON] = shoot_command;
 	commands[KEY_RBUTTON] = shoot_commandGranada;

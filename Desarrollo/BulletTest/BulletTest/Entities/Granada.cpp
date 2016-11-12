@@ -37,7 +37,7 @@ void Granada::cargarContenido()
 	m_nodo= GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "");
 
 
-	m_renderState.setPosition(Vec3<float>(2, 100, 0));
+	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 0.7f, 2.f, DISABLE_DEACTIVATION);
 

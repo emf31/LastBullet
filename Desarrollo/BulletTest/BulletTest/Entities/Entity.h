@@ -57,10 +57,10 @@ public:
 	void resetVida() {
 		m_vida = 5;
 	}
-	int getVida() {
+	float getVida() {
 		return m_vida;
 	}
-	int restaVida() {
+	float restaVida() {
 		printf("me resto 1 de vida\n");
 		m_vida--;
 		return m_vida;
@@ -86,7 +86,7 @@ protected:
 	std::string m_name;
 	SceneNode* m_nodo;
 	RenderState m_renderState;
-	int m_vida;
+	float m_vida;
 
 private:
 
