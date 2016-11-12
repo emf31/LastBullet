@@ -318,6 +318,7 @@ void Player::handleMessage(const Message & message)
 
 void Player::run()
 {
+	if(p_controller->onGround())
 	p_controller->setSpeed(3.0);
 }
 
