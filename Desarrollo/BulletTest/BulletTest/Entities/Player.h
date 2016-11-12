@@ -65,6 +65,9 @@ private:
 
 	//esta no deberia estar aqui acordarse de borrarla
 
+	bool tieneAsalto = false;
+	bool tieneRocketLauncher = false;
+	bool tienePistola = false;
 
 	bool isShooting=false;
 

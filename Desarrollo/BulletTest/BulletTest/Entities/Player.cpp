@@ -56,15 +56,33 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	Weapon* asalto = new Asalto();
+	Weapon* firstWeapon;
 	Weapon* pistola = new Pistola();
 	Weapon* lanzacohetes= new RocketLauncher();
 
+
+	float RandomNumber = Randf(0, 3);
+	std::cout << RandomNumber << std::endl;
+
+	if (RandomNumber >= 0 && RandomNumber < 1) {
+		firstWeapon = new Asalto();
+		tieneAsalto = true;
+	}
+	else if (RandomNumber >= 1 && RandomNumber < 2) {
+		firstWeapon = new Pistola();
+		tienePistola = true;
+	}
+	else if (RandomNumber >= 2 && RandomNumber <= 3) {
+		firstWeapon = new RocketLauncher();
+		tieneRocketLauncher = true;
+	}
+	else {
+		firstWeapon = new Asalto();
+	}
+
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(asalto);
-	listaWeapons->insertar(pistola);
-	listaWeapons->insertar(lanzacohetes);
+	listaWeapons->insertar(firstWeapon);
 
 	m_vida = 5;
 }
@@ -509,21 +527,34 @@ void Player::updateState()
 
 void Player::setWeapon(int newWeapon) {
 
+	Weapon* weapon;
+
 	switch (newWeapon) {
 		case LANZACOHETES:
-			printf("TE HAS EQUIPADO UN LANZACOHETES\n");
-			/*delete weapon;
-			weapon = new RocketLauncher();*/
+			if (!tieneRocketLauncher) {
+				printf("TE HAS EQUIPADO UN LANZACOHETES\n");
+				weapon = new RocketLauncher();
+				listaWeapons->insertar(weapon);
+				tieneRocketLauncher = true;
+			}
 		break;
 		case ASALTO:
-			printf("TE HAS EQUIPADO UN FUSIL DE ASALTO\n");
-		/*	delete weapon;
-			weapon = new Asalto();*/
+			if (!tieneAsalto) {
+				printf("TE HAS EQUIPADO UN ASALTO\n");
+				weapon = new Asalto();
+				listaWeapons->insertar(weapon);
+				tieneAsalto = true;
+			}
 		break;
 		case PISTOLA:
-			printf("TE HAS EQUIPADO UNA PISTOLA\n");
-			/*delete weapon;
-			weapon = new Pistola();*/
+			if (!tienePistola) {
+				printf("TE HAS EQUIPADO UNA PISTOLA\n");
+				weapon = new Pistola();
+				listaWeapons->insertar(weapon);
+				tienePistola = true;
+			}
 		break;
 	}
+
+
 }
