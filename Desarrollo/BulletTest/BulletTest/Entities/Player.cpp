@@ -313,40 +313,7 @@ void Player::shoot() {
 
 void Player::shootGranada() {
 
-
-	if (granada->getEstado() == CARGADO) {
-
-		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() + 3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y() + 5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
-		btTransform transform = granada->m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
-
-
-		granada->getRenderState()->updatePositions(posicion);
-
-		granada->setPosition(posicion);
-
-		printf("GRANADA DISPARADO\n");
-		btVector3 FUERZA(1.5, 1.5, 1.5);
-
-
-		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
-		direccion.normalise();
-
-
-		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
-
-		btVector3 force = direccion2 * FUERZA;
-
-		granada->resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
-
-
-		granada->m_rigidBody->applyCentralForce(force);
-		//rocket->m_rigidBody->setCollisionFlags(4);
-
-		granada->setEstado(DISPARADO);
-		granada->clockRecargaGranada.restart();
-	}
+	granada->shoot(p_controller->getGhostObject()->getWorldTransform().getOrigin());
 
 }
 

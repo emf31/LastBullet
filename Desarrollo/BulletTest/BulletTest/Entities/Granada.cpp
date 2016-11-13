@@ -80,3 +80,41 @@ void Granada::setPosition(Vec3<float> pos) {
 
 }
 
+
+void Granada::shoot(const btVector3& posicionPlayer) {
+
+	if (estado== CARGADO) {
+
+		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
+		btTransform transform = m_rigidBody->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
+
+
+		getRenderState()->updatePositions(posicion);
+
+		setPosition(posicion);
+
+		printf("GRANADA DISPARADO\n");
+		btVector3 FUERZA(1.5, 1.5, 1.5);
+
+
+		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
+		direccion.normalise();
+
+
+		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+
+		btVector3 force = direccion2 * FUERZA;
+
+		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+
+
+		m_rigidBody->applyCentralForce(force);
+		//rocket->m_rigidBody->setCollisionFlags(4);
+
+		setEstado(DISPARADO);
+		clockRecargaGranada.restart();
+	}
+
+}

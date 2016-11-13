@@ -36,6 +36,8 @@ public:
 
 	virtual std::string getClassName() { return "Granada"; }
 
+	void shoot(const btVector3& posicionPlayer);
+
 
 	btRigidBody* m_rigidBody;
 
