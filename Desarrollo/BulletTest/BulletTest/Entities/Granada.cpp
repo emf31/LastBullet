@@ -20,15 +20,7 @@ void Granada::inicializar()
 
 void Granada::update(Time elapsedTime)
 {
-	if (estado == DISPARADO) {
-		btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-		getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
-			estado=CARGADO;
-			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-		}
-	}
 	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));*/
 
@@ -58,43 +50,6 @@ void Granada::resetRigidBody()
 
 	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 0.1f, DISABLE_DEACTIVATION);
 	//m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1, 0.1f);
-}
-
-void Granada::shoot()
-{
-	if (estado == CARGADO) {
-
-		//Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() + 3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y() + 5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
-		Vec3<float> posicion = GraphicEngine::i().getActiveCamera()->getPosition();
-		btTransform transform = m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));
-
-
-		getRenderState()->updatePositions(posicion);
-		setPosition(posicion);
-
-		printf("GRANADA DISPARADO\n");
-		btVector3 FUERZA(1.5, 1.5, 1.5);
-
-
-		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
-		direccion.normalise();
-
-
-		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
-
-		btVector3 force = direccion2 * FUERZA;
-
-		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
-
-
-		m_rigidBody->applyCentralForce(force);
-		//rocket->m_rigidBody->setCollisionFlags(4);
-
-		setEstado(DISPARADO);
-		clockRecargaGranada.restart();
-	}
 }
 
 

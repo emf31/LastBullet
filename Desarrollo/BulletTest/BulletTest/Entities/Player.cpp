@@ -125,9 +125,16 @@ void Player::update(Time elapsedTime)
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 	
 	
-	granada->update(elapsedTime);
 
+	if (granada->getEstado() == DISPARADO) {
+		btVector3 Point = granada->m_rigidBody->getCenterOfMassPosition();
+		granada->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+		if (granada->clockRecargaGranada.getElapsedTime().asSeconds()>granada->timeRecargaGranada) {
+			granada->setEstado(CARGADO);
+			PhysicsEngine::i().removeRigidBody(granada->m_rigidBody);
 
+		}
+	}
 	
 	
 
@@ -306,8 +313,8 @@ void Player::shoot() {
 
 void Player::shootGranada() {
 
-	granada->shoot();
-	/*if (granada->getEstado() == CARGADO) {
+
+	if (granada->getEstado() == CARGADO) {
 
 		Vec3<float> posicion(p_controller->getGhostObject()->getWorldTransform().getOrigin().x() + 3, p_controller->getGhostObject()->getWorldTransform().getOrigin().y() + 5, p_controller->getGhostObject()->getWorldTransform().getOrigin().z());
 		btTransform transform = granada->m_rigidBody->getCenterOfMassTransform();
@@ -339,7 +346,7 @@ void Player::shootGranada() {
 
 		granada->setEstado(DISPARADO);
 		granada->clockRecargaGranada.restart();
-	}*/
+	}
 
 }
 

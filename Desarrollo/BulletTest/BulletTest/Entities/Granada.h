@@ -21,7 +21,6 @@ public:
 	int getEstado() { return estado;}
 	void setEstado(int newEstado) { estado = newEstado; }
 	void resetRigidBody();
-	void shoot();
 	// Heredado vía Entity
 	virtual void inicializar() override;
 
