@@ -20,10 +20,20 @@ void Granada::inicializar()
 
 void Granada::update(Time elapsedTime)
 {
+	if (estado == DISPARADO) {
+		
+
+
+		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
+			setEstado(CARGADO);
+			PhysicsEngine::i().removeRigidBody(m_rigidBody);
+
+		
+		}
+	}
 
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-
+	getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 	// Set rotation
 	vector3df Euler;
 	const btQuaternion& TQuat = m_rigidBody->getOrientation();
@@ -32,6 +42,7 @@ void Granada::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+	
 }
 
 void Granada::handleInput()
@@ -89,3 +100,41 @@ void Granada::setPosition(Vec3<float> pos) {
 
 }
 
+
+void Granada::shoot(const btVector3& posicionPlayer) {
+
+	if (estado== CARGADO) {
+
+		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
+		/*btTransform transform = m_rigidBody->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));*/
+
+
+		//getRenderState()->updatePositions(posicion);
+
+		setPosition(posicion);
+
+		printf("GRANADA DISPARADO\n");
+		btVector3 FUERZA(20.f,20.f,20.f);
+
+
+		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
+		direccion.normalise();
+
+
+		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+
+		btVector3 force = direccion2 * FUERZA;
+
+		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+
+
+		m_rigidBody->applyCentralForce(force);
+		//rocket->m_rigidBody->setCollisionFlags(4);
+
+		setEstado(DISPARADO);
+		clockRecargaGranada.restart();
+	}
+
+}
