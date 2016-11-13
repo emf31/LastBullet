@@ -20,7 +20,15 @@ void Granada::inicializar()
 
 void Granada::update(Time elapsedTime)
 {
+	if (estado == DISPARADO) {
+		btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+		getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
+			setEstado(CARGADO);
+			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
+		}
+	}
 	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));*/
 
