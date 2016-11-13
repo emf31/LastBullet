@@ -127,8 +127,8 @@ void Player::update(Time elapsedTime)
 	
 
 	if (granada->getEstado() == DISPARADO) {
-		btVector3 Point = granada->m_rigidBody->getCenterOfMassPosition();
-		granada->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+		/*btVector3 Point = granada->m_rigidBody->getCenterOfMassPosition();
+		granada->getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));*/
 		if (granada->clockRecargaGranada.getElapsedTime().asSeconds()>granada->timeRecargaGranada) {
 			granada->setEstado(CARGADO);
 			PhysicsEngine::i().removeRigidBody(granada->m_rigidBody);
@@ -326,7 +326,7 @@ void Player::shootGranada() {
 		granada->setPosition(posicion);
 
 		printf("GRANADA DISPARADO\n");
-		btVector3 FUERZA(1.5, 1.5, 1.5);
+		btVector3 FUERZA(20, 20, 20);
 
 
 		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
@@ -334,7 +334,7 @@ void Player::shootGranada() {
 		direccion.normalise();
 
 
-		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+		btVector3 direccion2(direccion.getX(), direccion.getY() + 0.2, direccion.getZ());
 
 		btVector3 force = direccion2 * FUERZA;
 

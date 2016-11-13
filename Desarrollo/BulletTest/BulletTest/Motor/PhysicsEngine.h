@@ -7,6 +7,18 @@
 #include "../Entities/Entity.h"
 #include "../Otros/Time.hpp"
 
+#define BIT(x) (1<<(x))
+namespace col {
+	enum Collisions {
+		COL_NOTHING = 0, //<Collide with nothing
+		Granada = BIT(0), //<Collide with ships
+		Suelo = BIT(1), //<Collide with walls
+		Object = BIT(2) //<Collide with powerups
+	};
+}
+
+
+
 class PhysicsEngine
 {
 public:
@@ -34,7 +46,7 @@ public:
 	btRigidBody* createCapsuleRigidBody(Entity* entity, float height, float radius, float masa, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos una esfera - asumimos que la posicion esta puesta
-	btRigidBody * createSphereRigidBody(Entity * entity, float radius, float mass, int body_state);
+	btRigidBody * createSphereRigidBody(Entity * entity, float radius, float mass, int body_state = ACTIVE_TAG);
 
 	btGhostObject* createBoxGhostObject(Entity * entity, const Vec3<float>& scale);
 

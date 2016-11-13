@@ -44,7 +44,7 @@ void PhysicsEngine::inicializar()
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 
-	m_world->setGravity(btVector3(0, -2, 0));
+	m_world->setGravity(btVector3(0, -3, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
@@ -63,7 +63,11 @@ void PhysicsEngine::inicializar()
 
 void PhysicsEngine::update(Time elapsedTime)
 {
-	m_world->stepSimulation(elapsedTime.asMilliseconds(), 60);
+	/*int maxSubsteps = 1;
+	while (maxSubsteps * (timeSinceLastUpdate.asSeconds()) < elapsedTime.asSeconds()) {
+		maxSubsteps++;
+	}*/
+	m_world->stepSimulation(elapsedTime.asMilliseconds(), 30);
 
 	//Aqui calculariamos colisiones
 	for (auto contactsIter = contacts.begin(); contactsIter != contacts.end(); ++contactsIter) {
@@ -173,12 +177,13 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	//now create the rigidBody
 	btRigidBody* rigidBody = new btRigidBody(mass, m_pMotionState, m_pCollisionShape, intertia);
 	rigidBody->setActivationState(body_state);
-	//rigidBody->setRestitution(3.f);
+	//rigidBody->setRestitution(100.f);
+	//rigidBody->setSpinningFriction(100.f);
 	//add a pointer to rigidBody pointing to associated Entity
 	rigidBody->setUserPointer(entity);
 
 	//add the rigidBody to the world
-	m_world->addRigidBody(rigidBody);
+	m_world->addCollisionObject(rigidBody);
 
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigidBody);

@@ -54,15 +54,7 @@ public:
 
 
 	std::string getCurrentWeapon() {
-		if (tienePistola) {
-			return "Pistola";
-		}
-		else if (tieneAsalto) {
-			return "Asalto";
-		}
-		else {
-			return "Lanzacohetes";
-		}
+		return listaWeapons->valorActual()->getClassName();
 	};
 private:
 	float m_vida;

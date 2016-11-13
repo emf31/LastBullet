@@ -1,9 +1,7 @@
-﻿  GraphicEngine.cpp
+﻿  PhysicsEngine.cpp
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(169): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(170): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\bullet\linearmath\btidebugdraw.h(171): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\nodo.h(3): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\lista.h(4): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(66): warning C4305: 'argumento': truncamiento de 'double' a 'irr::f32'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\physicsengine.cpp(70): warning C4244: 'argumento': conversión de 'int' a 'btScalar'; posible pérdida de datos
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

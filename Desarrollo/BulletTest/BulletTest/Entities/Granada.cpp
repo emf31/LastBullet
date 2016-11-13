@@ -21,9 +21,17 @@ void Granada::inicializar()
 void Granada::update(Time elapsedTime)
 {
 
-	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));*/
+	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
+	// Set rotation
+	vector3df Euler;
+	const btQuaternion& TQuat = m_rigidBody->getOrientation();
+	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
+	q.toEuler(Euler);
+	Euler *= RADTODEG;
+
+	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 }
 
 void Granada::handleInput()
@@ -34,19 +42,20 @@ void Granada::cargarContenido()
 {
 
 	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
-	m_nodo= GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "");
+	m_nodo= GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "../media/plasma grenade.obj");
 
 
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
-	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 0.7f, 2.f, DISABLE_DEACTIVATION);
+	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 2.5f, 0.3f, 0.5f);
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 }
 
 void Granada::resetRigidBody()
 {
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 0.7f, 1.f, 0.1f, DISABLE_DEACTIVATION);
+	PhysicsEngine::i().removeRigidBody(m_rigidBody);
+	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.2f, 1.f, 0.5f);
 
 	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 0.1f, DISABLE_DEACTIVATION);
 	//m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1, 0.1f);

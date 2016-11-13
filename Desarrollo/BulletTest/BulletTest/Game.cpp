@@ -55,22 +55,34 @@ void Game::run()
 		//if (GraphicEngine::i().isWindowActive()) {
 		//if (Cliente::i().isConected() ) {
 			Time elapsedTime = clock.restart();
+			
 			timeSinceLastUpdate += elapsedTime;
+
+			
+			
 			MastEventReceiver::i().endEventProcess();
 			
 			processEvents();
+
+			
+			
 
 			//Llevamos control en las actualizaciones por frame
 			while (timeSinceLastUpdate > timePerFrame) // 15 veces/segundo
 			{
 				timeSinceLastUpdate -= timePerFrame;
+
 				//Realizamos actualizaciones
 				update(timePerFrame);
 			}
+
+			
 			
 			interpolation = (float) min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
 
 			render(interpolation, timePerFrame);
+
+			
 			
 		//}
 			MastEventReceiver::i().startEventProcess();
@@ -255,8 +267,9 @@ void Game::update(Time elapsedTime)
 {
 	EntityManager::i().updatePosEnemigos(elapsedTime);
 	EntityManager::i().updateRotEnemigos(elapsedTime);
-	PhysicsEngine::i().update(elapsedTime);
 	
+	PhysicsEngine::i().update(timePerFrame);
+
 	EntityManager::i().update(elapsedTime);
 	MessageHandler::i().update();
 	//antes era global, ahora cada entity tiene la suya, entonces aqui habria que hacer un for para que cada
