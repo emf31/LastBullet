@@ -30,7 +30,7 @@ public:
 	}
 
 	BasicSceneNode* createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
-	AnimatedSceneNode* createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
+	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
 	
 	//Metodos de la camara
 	void createCamera(Vec3<float> position, Vec3<float> target);

@@ -96,7 +96,7 @@ void Granada::setPosition(Vec3<float> pos) {
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo->setPosition(pos);
+	m_nodo.get()->setPosition(pos);
 
 }
 
