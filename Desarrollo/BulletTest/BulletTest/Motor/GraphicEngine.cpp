@@ -12,7 +12,7 @@ GraphicEngine::GraphicEngine() : debug_camera(true)
 {
 }
 
-BasicSceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
 	ISceneNode *Node;
 	if(mesh!="")
@@ -32,10 +32,10 @@ BasicSceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Ve
 		Node->setMaterialTexture(0,irrDriver->getTexture(texture));
 	}
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return new BasicSceneNode(Node, irrDriver);
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(Node, irrDriver));
 }
 
-AnimatedSceneNode * GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
 	IAnimatedMeshSceneNode *Node;
 
@@ -56,7 +56,7 @@ AnimatedSceneNode * GraphicEngine::createAnimatedNode(const Vec3<float>& TPositi
 	
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return new AnimatedSceneNode(Node, irrDriver);
+	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDriver));
 }
 
 
@@ -244,6 +244,10 @@ void GraphicEngine::cargarTexturas() {
 	irrScene->getMesh("../media/head01.png");
 	irrScene->getMesh("../media/m4tex.png");
 	irrScene->getMesh("../media/bullet.obj");
+	irrScene->getMesh("../media/arma/ak.obj");
+
+	irrDriver->getTexture("../media/arma/weapon.png");
+	irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
 }
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {

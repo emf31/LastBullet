@@ -2,7 +2,7 @@
 #include "PhysicsEntity.h"
 
 
-PhysicsEntity::PhysicsEntity(SceneNode* nodo, const std::string& name) : Entity(-1, nodo, name)
+PhysicsEntity::PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
 
 }

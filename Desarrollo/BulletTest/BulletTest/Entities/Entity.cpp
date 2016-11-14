@@ -4,7 +4,7 @@
 #include "EntityManager.h"
 
 
-Entity::Entity(int id, SceneNode* nodo, const std::string& name, RakNet::RakNetGUID guid) :
+Entity::Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name, RakNet::RakNetGUID guid) :
 	m_id(id),
 	m_nodo(nodo),
 	m_name(name),
@@ -13,7 +13,7 @@ Entity::Entity(int id, SceneNode* nodo, const std::string& name, RakNet::RakNetG
 {
 
 	if (m_nodo) {
-		m_renderState.setPosition(m_nodo->getPosition());
+		m_renderState.setPosition(m_nodo.get()->getPosition());
 	}
 	else {
 		m_renderState.setPosition(Vec3<float>(0,0,0));

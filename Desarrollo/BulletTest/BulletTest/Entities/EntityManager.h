@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "../Otros/Time.hpp"
 #include "Entity.h"
+#include <mutex>
 
 #define PLAYER 1000
 
@@ -13,7 +14,7 @@ public:
 		return singleton;
 	}
 
-
+	
 	
 	void mostrarClientes();
 	void muestraPosClientes();
@@ -53,6 +54,8 @@ private:
 	int m_nextID;
 	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
+
+	std::mutex m;
 
 };
 

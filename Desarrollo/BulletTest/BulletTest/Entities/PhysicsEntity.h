@@ -2,12 +2,12 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
-
+#include "../Motor/BasicSceneNode.h"
 
 class PhysicsEntity : public Entity
 {
 public:
-	PhysicsEntity(SceneNode* nodo, const std::string& name);
+	PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
 	~PhysicsEntity();
 
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }

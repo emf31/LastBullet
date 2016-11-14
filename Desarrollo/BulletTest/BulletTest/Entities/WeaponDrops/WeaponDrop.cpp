@@ -1,7 +1,7 @@
 #include "WeaponDrop.h"
 
 
-WeaponDrop::WeaponDrop(SceneNode* nodo, const std::string& name) : Entity(-1, nodo, name)
+WeaponDrop::WeaponDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
 }
 

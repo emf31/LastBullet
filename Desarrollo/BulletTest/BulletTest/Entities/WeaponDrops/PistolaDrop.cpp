@@ -1,7 +1,7 @@
 #include "PistolaDrop.h"
 
 
-PistolaDrop::PistolaDrop(SceneNode* nodo, const std::string& name) : WeaponDrop(nodo, name)
+PistolaDrop::PistolaDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
 }
 

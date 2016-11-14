@@ -28,8 +28,8 @@ void Enemy::inicializar()
 
 void Enemy::update(Time elapsedTime)
 {
-	updateState();
-	updateAnimation();
+	//updateState();
+	//updateAnimation();
 	isMoving = true;
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
@@ -44,10 +44,10 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d"));
-	m_nodo->setTexture("../media/body01.png", 1);
-	m_nodo->setTexture("../media/head01.png", 0);
-	m_nodo->setTexture("../media/m4tex.png", 2);
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo.get()->setTexture("../media/body01.png", 1);
+	m_nodo.get()->setTexture("../media/head01.png", 0);
+	m_nodo.get()->setTexture("../media/m4tex.png", 2);
 
 	m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
@@ -88,7 +88,7 @@ void Enemy::setPosition(Vec3<float> pos) {
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo->setPosition(pos);
+	m_nodo.get()->setPosition(pos);
 
 }
 
@@ -207,24 +207,24 @@ void Enemy::updateAnimation()
 	{
 	case quieto:
 		if (animation->getActualAnimation() != "Idle") {
-			m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
+			m_nodo.get()->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
 		}
 		break;
 
 	case andando:
 		if (animation->getActualAnimation() != "Walk") {
-			m_nodo->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
+			m_nodo.get()->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
 		}
 		break;
 
 	case saltando:
 		if (animation->getActualAnimation() != "Jump") {
-			m_nodo->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
+			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
 		}
 		break;
 	case saltando2:
 		if (animation->getActualAnimation() != "Jump2") {
-			m_nodo->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
+			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
 		}
 		break;
 

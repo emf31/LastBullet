@@ -87,6 +87,8 @@ void EntityManager::apagar()
 
 void EntityManager::registerEntity(Entity * entity)
 {
+	m.lock();
+
 	// comprobamos si la Entity tiene un ID
 	if (entity->getID() == -1) {
 		//Si no tiene, le damos una que este disponible
@@ -110,6 +112,7 @@ void EntityManager::registerEntity(Entity * entity)
 		m_jugadores[RakNet::RakNetGUID::ToUint32(entity->getGuid())] = entity;
 	}
 
+	m.unlock();
 }
 
 void EntityManager::removeEntity(Entity * entity)

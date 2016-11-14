@@ -24,7 +24,7 @@
 class Entity
 {
 public:
-	Entity(int id, SceneNode* nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	virtual ~Entity();
 
 	void updateRender(float interpolation);
