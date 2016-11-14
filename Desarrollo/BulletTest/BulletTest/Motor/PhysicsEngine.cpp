@@ -183,7 +183,7 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	rigidBody->setUserPointer(entity);
 
 	//add the rigidBody to the world
-	m_world->addCollisionObject(rigidBody);
+	m_world->addRigidBody(rigidBody);
 
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigidBody);
