@@ -9,6 +9,11 @@
 #include "math.h"
 #include "../../Otros/Vec3f.h"
 #include "../../Otros/Util.h"
+#include "../../Handlers/MessageHandler.h"
+#include "../../Handlers/Message.h"
+
+#define CARGADA 0
+#define DESCARGADA 1
 
 class Weapon :
 	public Entity
@@ -33,8 +38,21 @@ public:
 
 	virtual void shoot() = 0;
 
+	virtual int getEstadoWeapon() { return estadoWeapon; }
+
+	virtual int getAmmo() { return capacidadAmmo - disparos; }
+	virtual int getCargadorWeapon() { return capacidadAmmo; }
+
 protected:
-	Time cadencia = milliseconds(100);
+	Time cadencia;
 	Clock relojCadencia;
+
+	int capacidadAmmo;
+	int disparos;
+
+	Time recarga;
+	Clock relojrecarga;
+
+	int estadoWeapon;
 };
 

@@ -56,6 +56,3 @@ void Lista::Anterior() {
 	}
 }
 
-void Lista::dispararArmaActual() {
-	actual->valor->shoot();
-}

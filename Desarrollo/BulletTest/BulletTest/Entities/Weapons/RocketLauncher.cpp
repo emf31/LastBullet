@@ -4,6 +4,10 @@
 
 RocketLauncher::RocketLauncher() : Weapon()
 {
+	capacidadAmmo = 5;
+	disparos = 0;
+	recarga = milliseconds(1000);
+	cadencia = milliseconds(400);
 }
 
 
@@ -17,6 +21,15 @@ void RocketLauncher::inicializar()
 
 void RocketLauncher::update(Time elapsedTime)
 {
+	if (estadoWeapon == DESCARGADA) {
+		if (relojrecarga.getElapsedTime() < recarga) {
+			printf("recargando\n");
+		}
+		else {
+			estadoWeapon = CARGADA;
+			disparos = 0;
+		}
+	}
 
 }
 
@@ -41,7 +54,11 @@ void RocketLauncher::handleMessage(const Message & message)
 
 void RocketLauncher::shoot() {
 
+	if (disparos < capacidadAmmo) {
+
+
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+		disparos++;
 		printf("DISPARANDO ROCKETLAUNCHER\n");
 		btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
 
@@ -110,4 +127,12 @@ void RocketLauncher::shoot() {
 
 		relojCadencia.restart();
 	}
+
+	}
+
+	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
+	}
+
 }

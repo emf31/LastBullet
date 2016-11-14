@@ -5,8 +5,8 @@
 #include <btBulletDynamicsCommon.h>
 #include "../Motor de Red/Estructuras.h"
 
-#define CARGADO 0
-#define DISPARADO 1
+#define GRANADACARGADA 0
+#define GRANADADISPARADA 1
 
 
 class Granada :
@@ -48,6 +48,6 @@ public:
 	float timeRecargaGranada = 3;
 
 private:
-	int estado=CARGADO;
+	int estado=GRANADACARGADA;
 };
 

@@ -56,6 +56,9 @@ public:
 	std::string getCurrentWeapon() {
 		return listaWeapons->valorActual()->getClassName();
 	};
+
+	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
+	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
 private:
 	float m_vida;
 
@@ -77,6 +80,7 @@ private:
 	bool isJumping;
 	bool isMoving;
 	bool isRunning=false;
+	bool isReloading = false;
 
 	Vec3<float> speedFinal;
 

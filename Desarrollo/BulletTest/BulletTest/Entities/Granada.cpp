@@ -21,7 +21,7 @@ void Granada::inicializar()
 
 void Granada::update(Time elapsedTime)
 {
-	if (estado == DISPARADO) {
+	if (estado == GRANADADISPARADA) {
 		btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 		getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 		// Set rotation
@@ -35,7 +35,7 @@ void Granada::update(Time elapsedTime)
 
 
 		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
-			setEstado(CARGADO);
+			setEstado(GRANADACARGADA);
 			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
 		
@@ -82,7 +82,7 @@ void Granada::handleMessage(const Message & message)
 {
 
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() != "Player" && estado==DISPARADO) {
+		if (static_cast<Entity*>(message.data)->getClassName() != "Player" && estado==GRANADADISPARADA) {
 			//std::cout << "EL MISIL HA CHOCADO CONTRA LA PARED" << std::endl;
 			//PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
@@ -104,7 +104,7 @@ void Granada::setPosition(Vec3<float> pos) {
 
 void Granada::shoot(const btVector3& posicionPlayer) {
 
-	if (estado== CARGADO) {
+	if (estado== GRANADACARGADA) {
 
 		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
 		/*btTransform transhobbitform = m_rigidBody->getCenterOfMassTransform();
@@ -149,7 +149,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		//esta granada seria un entity entonces se añaderia a la lista de entities y se haria su update en cada unpdate.
 		//rocket->m_rigidBody->setCollisionFlags(4);
 
-		setEstado(DISPARADO);
+		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
 	}
 
@@ -157,7 +157,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 void Granada::serverShoot(TGranada g) {
 
-	if (estado == CARGADO) {
+	if (estado == GRANADACARGADA) {
 
 		setPosition(g.origen);
 
@@ -174,7 +174,7 @@ void Granada::serverShoot(TGranada g) {
 		m_rigidBody->applyCentralForce(force);
 		//rocket->m_rigidBody->setCollisionFlags(4);
 
-		setEstado(DISPARADO);
+		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
 	}
 

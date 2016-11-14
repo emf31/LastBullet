@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Nodo.h"
-#include "Entities/Weapons/Weapon.h";
+#include "Entities/Weapons/Weapon.h"
 
 typedef Nodo *pnodo;
 
@@ -18,7 +18,6 @@ public:
 	void Anterior();
 	bool Actual() { return actual != NULL; }
 	Weapon* valorActual() { return actual->valor; }
-	void dispararArmaActual();
 
 private:
 	pnodo actual;

@@ -158,12 +158,16 @@ void InputHandler::keyup(EKEY_CODE keyCode)
 
 bool InputHandler::is_held(EKEY_CODE key)
 {
-	return state_map[key];
+	if(state_map[key])
+		return true;
+	return false;
 }
 
 bool InputHandler::was_pressed(EKEY_CODE key)
 {
-	return action_map[key];
+	if(action_map[key])
+		return true;
+	return false;
 }
 
 void InputHandler::borrarContenido()
