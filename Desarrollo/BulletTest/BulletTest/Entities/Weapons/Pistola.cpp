@@ -4,6 +4,10 @@
 
 Pistola::Pistola() : Weapon()
 {
+	capacidadAmmo = 6;
+	disparos = 0;
+	recarga = milliseconds(1000);
+	cadencia = milliseconds(350);
 }
 
 
@@ -17,6 +21,15 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
+	if (estadoWeapon == DESCARGADA) {
+		if (relojrecarga.getElapsedTime() < recarga) {
+			printf("recargando\n");
+		}
+		else {
+			estadoWeapon = CARGADA;
+			disparos = 0;
+		}
+	}
 
 }
 
@@ -41,7 +54,11 @@ void Pistola::handleMessage(const Message & message)
 
 void Pistola::shoot() {
 
+	if (disparos < capacidadAmmo) {
+
+
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+		disparos++;
 		printf("DISPARANDO PISTOLA\n");
 		btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
 
@@ -110,4 +127,12 @@ void Pistola::shoot() {
 
 		relojCadencia.restart();
 	}
+
+	}
+
+	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
+	}
+
 }

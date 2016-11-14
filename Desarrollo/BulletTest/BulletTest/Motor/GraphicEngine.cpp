@@ -103,14 +103,21 @@ void GraphicEngine::mostrarInterfaz()
 
 	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 	float v = p->getVida();
+	int a = p->getAmmoActual();
+	int b = p->getCargadorActual();
 
 	std::ostringstream oss;
 	oss << "Vida: " << v;
 	std::string vstring = oss.str();
 
+
+	std::ostringstream oss2;
+	oss2 << "AMMO: " << a << " / " << b;
+	std::string vstring2 = oss2.str();
+
 	vida = irrGUI->addStaticText(GetWC(vstring.c_str()), rect<int>(0, 0, 100, 100));
+	ammo = irrGUI->addStaticText(GetWC(vstring2.c_str()), rect<int>(0, 60, 100, 100));
 	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
-	balas = irrGUI->addStaticText(L"0 / 50", rect<int>(0, 60, 100, 50));
 }	
 const wchar_t * GraphicEngine::GetWC(const char *c)
 {
@@ -124,17 +131,23 @@ void GraphicEngine::actualizarInterfaz()
 {
 	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 	float v = p->getVida();
+	int a = p->getAmmoActual();
+	int b = p->getCargadorActual();
 
 	std::ostringstream oss;
 	oss << "Vida: " << v;
 	std::string vstring = oss.str();
 
+	std::ostringstream oss2;
+	oss2 << "AMMO: " << a << " / " << b;
+	std::string vstring2 = oss2.str();
+
 	vida->setText(GetWC(vstring.c_str()));
+	ammo->setText(GetWC(vstring2.c_str()));
 
 	arma_actual->setText(GetWC(p->getCurrentWeapon().c_str())); 
 
 
-	//balas = irrGUI->addStaticText(L"0 / 50", rect<int>(0, 60, 100, 50));
 }
 
 void GraphicEngine::setActiveCamera(int ID)

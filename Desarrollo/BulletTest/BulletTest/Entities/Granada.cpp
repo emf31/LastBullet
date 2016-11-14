@@ -20,12 +20,12 @@ void Granada::inicializar()
 
 void Granada::update(Time elapsedTime)
 {
-	if (estado == DISPARADO) {
+	if (estado == GRANADADISPARADA) {
 		
 
 
 		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
-			setEstado(CARGADO);
+			setEstado(GRANADACARGADA);
 			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
 		
@@ -81,7 +81,7 @@ void Granada::handleMessage(const Message & message)
 {
 
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() != "Player" && estado==DISPARADO) {
+		if (static_cast<Entity*>(message.data)->getClassName() != "Player" && estado==GRANADADISPARADA) {
 			//std::cout << "EL MISIL HA CHOCADO CONTRA LA PARED" << std::endl;
 			//PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
@@ -103,7 +103,7 @@ void Granada::setPosition(Vec3<float> pos) {
 
 void Granada::shoot(const btVector3& posicionPlayer) {
 
-	if (estado== CARGADO) {
+	if (estado== GRANADACARGADA) {
 
 		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
 		/*btTransform transform = m_rigidBody->getCenterOfMassTransform();
@@ -133,7 +133,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		m_rigidBody->applyCentralForce(force);
 		//rocket->m_rigidBody->setCollisionFlags(4);
 
-		setEstado(DISPARADO);
+		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
 	}
 

@@ -3,6 +3,7 @@
 
 Weapon::Weapon() : Entity(-1, NULL)
 {
+	estadoWeapon = CARGADA;
 }
 
 
@@ -38,6 +39,3 @@ void Weapon::handleMessage(const Message & message)
 
 }
 
-void Weapon::shoot() {
-	printf("WEAPON PADRE\n");
-}

@@ -49,11 +49,8 @@ void Player::inicializar()
 	animation = new Animation;
 
 	Weapon* firstWeapon;
-	Weapon* pistola = new Pistola();
-	Weapon* lanzacohetes= new RocketLauncher();
 
-
-	float RandomNumber = Randf(0, 3);
+	/*float RandomNumber = Randf(0, 3);
 	std::cout << RandomNumber << std::endl;
 
 	if (RandomNumber >= 0 && RandomNumber < 1) {
@@ -70,8 +67,18 @@ void Player::inicializar()
 	}
 	else {
 		firstWeapon = new Asalto();
-	}
+	}*/
+	firstWeapon = new Pistola();
 
+
+	//TODO: saber si estoy recargando desde el player
+	/*
+	if (listaWeapons->valorActual()->getEstadoWeapon()==CARGADA) { //TODO: ponerEnEstadoAnimacionRecargando
+		printf("ZIMU");
+	}
+	else {
+
+	}*/
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(firstWeapon);
@@ -292,7 +299,7 @@ void Player::jump() {
 
 void Player::shoot() {
 
-	listaWeapons->dispararArmaActual();
+	listaWeapons->valorActual()->shoot();
 
 }
 

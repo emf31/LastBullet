@@ -42,6 +42,7 @@ public:
 	void actualizarInterfaz(/*Player* player*/);
 	const wchar_t *GetWC(const char *c);
 	IGUIStaticText* vida;
+	IGUIStaticText* ammo;
 	IGUIStaticText* arma_actual;
 	IGUIStaticText* balas;
 
