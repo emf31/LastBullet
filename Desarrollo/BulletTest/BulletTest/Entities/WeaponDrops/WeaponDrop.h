@@ -11,7 +11,7 @@ class WeaponDrop :
 	public Entity
 {
 public:
-	WeaponDrop(SceneNode* nodo, const std::string& name);
+	WeaponDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
 	~WeaponDrop();
 
 

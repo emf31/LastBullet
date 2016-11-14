@@ -1,7 +1,7 @@
 #include "LifeObject.h"
 #include "../Motor/PhysicsEngine.h"
 
-LifeObject::LifeObject(SceneNode* nodo, const std::string& name) : Entity(-1, nodo, name)
+LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
 
 }

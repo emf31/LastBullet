@@ -9,7 +9,7 @@
 class LifeObject : public Entity
 {
 public:
-	LifeObject(SceneNode* nodo, const std::string& name);
+	LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~LifeObject();
 
 	//void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }

@@ -78,7 +78,7 @@ void Player::inicializar()
 
 	m_vida = 5;
 
-	GraphicEngine::i().mostrarInterfaz();
+	//GraphicEngine::i().mostrarInterfaz();
 }
 
 
@@ -129,7 +129,7 @@ void Player::update(Time elapsedTime)
 		Cliente::i().enviarRot(this);
 	}
 
-	GraphicEngine::i().actualizarInterfaz();
+	//GraphicEngine::i().actualizarInterfaz();
 	
 }
 

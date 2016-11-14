@@ -1,7 +1,7 @@
 #include "RocketLauncherDrop.h"
 
 
-RocketLauncherDrop::RocketLauncherDrop(SceneNode* nodo, const std::string& name) : WeaponDrop(nodo, name)
+RocketLauncherDrop::RocketLauncherDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
 }
 

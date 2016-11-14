@@ -1,7 +1,7 @@
 #include "AsaltoDrop.h"
 
 
-AsaltoDrop::AsaltoDrop(SceneNode* nodo, const std::string& name) : WeaponDrop(nodo, name)
+AsaltoDrop::AsaltoDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
 }
 

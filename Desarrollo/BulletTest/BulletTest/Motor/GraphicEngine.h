@@ -29,7 +29,7 @@ public:
 		return singleton;
 	}
 
-	BasicSceneNode* createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
+	std::shared_ptr<BasicSceneNode> createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
 	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
 	
 	//Metodos de la camara

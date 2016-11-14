@@ -4,7 +4,7 @@ class AsaltoDrop :
 	public WeaponDrop
 {
 public:
-	AsaltoDrop(SceneNode* nodo, const std::string& name);
+	AsaltoDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
 	~AsaltoDrop();
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
