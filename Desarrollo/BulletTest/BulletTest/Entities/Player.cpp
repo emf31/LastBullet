@@ -49,7 +49,7 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	Weapon* firstWeapon;
+	Pistola* firstWeapon;
 
 	/*float RandomNumber = Randf(0, 3);
 	std::cout << RandomNumber << std::endl;
@@ -69,7 +69,8 @@ void Player::inicializar()
 	else {
 		firstWeapon = new Asalto();
 	}*/
-	firstWeapon = new Pistola();
+	firstWeapon = new Pistola(); 
+	tienePistola = true;
 
 
 	//TODO: saber si estoy recargando desde el player
@@ -86,7 +87,7 @@ void Player::inicializar()
 
 	m_vida = 5;
 
-	//GraphicEngine::i().mostrarInterfaz();
+	GraphicEngine::i().mostrarInterfaz();
 }
 
 
@@ -127,9 +128,6 @@ void Player::update(Time elapsedTime)
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 	
 	
-	//granada->update(elapsedTime);
-	
-	
 
 	
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
@@ -140,7 +138,7 @@ void Player::update(Time elapsedTime)
 		//Cliente::i().enviarRot(this);
 	}
 
-	//GraphicEngine::i().actualizarInterfaz();
+	GraphicEngine::i().actualizarInterfaz();
 	
 }
 
@@ -173,7 +171,6 @@ void Player::cargarContenido()
 
 	m_playerState = quieto;
 
-	//m_nodo->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
 
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
@@ -211,11 +208,6 @@ void Player::cargarContenido()
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
 		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter | btBroadphaseProxy::SensorTrigger);
 
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
-	//p_controller = new btKinematicCharacterController(Vec3<float>(0, 100, 0),);
-
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	GraphicEngine::i().setCameraEntity(this);
@@ -249,50 +241,10 @@ void Player::handleMessage(const Message & message)
 void Player::run()
 {
 	if(p_controller->onGround())
-	p_controller->setSpeed(3.0);
+		p_controller->setSpeed(3.0);
 }
 
 void Player::jump() {
-
-	/*bool isGrounded = false;
-	>>>>>>> refs/heads/Player-Controller
-
-	/*btVector3 start = m_rigidBody->getCenterOfMassPosition(); // posicion del player
-	btVector3 dest = start;
-
-	dest.setY(dest.getY() - 50.0f);  //destino del rayo, que es la posicion del player en y - 50 unidades
-
-	btCollisionWorld::ClosestRayResultCallback ray(start, dest); // Creo el rayo con inicio y destino
-	PhysicsEngine::i().m_world->rayTest(start, dest, ray);//hago el ray test
-
-	if (ray.hasHit())//si ray ha golpeado algo entro
-	{
-	printf("hit something\n");
-
-	const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-
-	if (hit != m_rigidBody)
-	{
-	/*btVector3 velocity = m_rigidBody->getLinearVelocity();//DISCUTIR: Con set linear velocity queda mejor, pero he encontrado mas ejemplos que lo hacen con applyimpulse o applyforce
-
-	velocity.setY(velocity.getY() + 5.0f);
-
-	m_rigidBody->setLinearVelocity(velocity);
-
-	/*	numJumps = 0;
-	}
-	}
-	else
-	{
-	printf("missed");
-	}
-
-	if (numJumps < 2) {
-	m_rigidBody->applyCentralForce(btVector3(0, 400, 0));
-	numJumps++;
-	}*/
-
-
 	
 	p_controller->jump(btVector3(0, 20, 0));
 

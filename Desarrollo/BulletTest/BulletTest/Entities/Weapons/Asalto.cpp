@@ -54,7 +54,8 @@ void Asalto::handleMessage(const Message & message)
 
 }
 
-void Asalto::shoot() {
+void Asalto::shoot()
+{
 
 	if (disparos < capacidadAmmo) {
 
@@ -122,17 +123,17 @@ void Asalto::shoot() {
 			//	  }
 
 
-		if (Cliente::i().isConected()) {
-			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-			Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+			if (Cliente::i().isConected()) {
+				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+				Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+			}
+
 		}
 
+
+		if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+			relojrecarga.restart();
+			estadoWeapon = DESCARGADA;
+		}
 	}
-
-
-	if (disparos == capacidadAmmo && estadoWeapon==CARGADA) {
-		relojrecarga.restart();
-		estadoWeapon = DESCARGADA;
-	}
-
 }
