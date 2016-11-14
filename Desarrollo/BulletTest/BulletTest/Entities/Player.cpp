@@ -44,6 +44,7 @@ void Player::inicializar()
 {
 
 	granada = new Granada();
+	granada->inicializar();
 	granada->cargarContenido();
 
 	animation = new Animation;

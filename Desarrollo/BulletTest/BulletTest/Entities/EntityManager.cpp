@@ -27,19 +27,11 @@ void EntityManager::updatePosEnemigos(Time elapsedTime) {
 			//no es el player
 			Enemy* e = static_cast<Enemy*>(i->second);
 			e->desEncolaPos();
-		}
-	}
-}
-
-void EntityManager::updateRotEnemigos(Time elapsedTime) {
-	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-		if (i->second->getID() != 1000) {
-			//no es el player
-			Enemy* e = static_cast<Enemy*>(i->second);
 			e->desEncolaRot();
 		}
 	}
 }
+
 
 void EntityManager::updateRender(float interpolation)
 {

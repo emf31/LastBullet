@@ -12,6 +12,7 @@
 #include <mutex>
 
 #include "../Motor/BasicSceneNode.h"
+#include "../Entities/Granada.h"
 
 class Enemy : public Entity
 {

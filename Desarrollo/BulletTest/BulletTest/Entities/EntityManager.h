@@ -25,10 +25,9 @@ public:
 	void update(Time elapsedTime);
 	//Updatea la posicion de render de todas las entities
 	void updateRender(float interpolation);
-	//update la posicion de los enemigos ya que ahora cada enemigo tiene una pila de posiciones
+	//update la posicion y rotacion de los enemigos ya que ahora cada enemigo tiene una pila de posiciones
 	void updatePosEnemigos(Time elapsedTime);
-	//update la rotacion de los enemigos ya que ahora cada enemigo tiene una pila de rotaciones
-	void updateRotEnemigos(Time elapsedTime);
+
 
 	void handleInput();
 	//Carga el contenido de todas las entities

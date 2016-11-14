@@ -265,8 +265,8 @@ bool Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	EntityManager::i().updatePosEnemigos(elapsedTime);
-	EntityManager::i().updateRotEnemigos(elapsedTime);
+	/*EntityManager::i().updatePosEnemigos(elapsedTime);
+	EntityManager::i().updateRotEnemigos(elapsedTime);*/
 	
 	PhysicsEngine::i().update(timePerFrame);
 

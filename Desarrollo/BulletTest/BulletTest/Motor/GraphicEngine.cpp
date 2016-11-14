@@ -245,7 +245,9 @@ void GraphicEngine::cargarTexturas() {
 	irrScene->getMesh("../media/m4tex.png");
 	irrScene->getMesh("../media/bullet.obj");
 	irrScene->getMesh("../media/arma/ak.obj");
-
+	irrScene->getMesh("../media/WPN_MK2Grenade.obj");
+	
+	irrDriver->getTexture("../media/WPNT_MK2Grenade_Base_Color.tga");
 	irrDriver->getTexture("../media/arma/weapon.png");
 	irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
 }

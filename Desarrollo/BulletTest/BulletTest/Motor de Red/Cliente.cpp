@@ -88,6 +88,7 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 
 				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->inicializar();
 				e->cargarContenido();
 				e->setPosition(nuevoplayer.position);
 				
@@ -111,6 +112,7 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 
 				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->inicializar();
 				e->cargarContenido();
 				e->setPosition(nuevoplayer.position);
 

@@ -10,8 +10,7 @@
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
-	animation = new Animation();
-	granada = new Granada();
+	
 	
 }
 
@@ -23,18 +22,24 @@ Enemy::~Enemy()
 
 void Enemy::inicializar()
 {
-	
+	animation = new Animation();
+	granada = new Granada();
 }
 
 void Enemy::update(Time elapsedTime)
 {
-	//updateState();
-	//updateAnimation();
+	desEncolaPos();
+	desEncolaRot();
+
+	updateState();
+	updateAnimation();
+
 	isMoving = true;
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
 		isMoving = false;
+
 }
 
 void Enemy::handleInput()
@@ -59,6 +64,10 @@ void Enemy::cargarContenido()
 	animation->addAnimation("Jump2", 184, 219);
 	animation->addAnimation("Idle", 220, 472);
 	animation->addAnimation("AimRunning", 473, 524);
+
+
+
+
 	granada->cargarContenido();
 
 	m_animState = quieto;
