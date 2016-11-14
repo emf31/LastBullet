@@ -13,6 +13,8 @@ using namespace std;
 #include "Camera.h"
 #include "TModel.h"
 
+#include "TModelNode.h"
+
 // GLM Mathemtics
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -35,6 +37,9 @@ int main() {
 	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
 		return -1;
 	}
+
+	TModelNode modelNode;
+	modelNode.setEntity();
 
 	glfwSetKeyCallback(engine.getWindow(), key_callback);
 	glfwSetCursorPosCallback(engine.getWindow(), mouse_callback);

@@ -16,6 +16,9 @@
     <Filter Include="Archivos de código fuente\Nodes">
       <UniqueIdentifier>{640bd803-3fdf-490d-80c2-5722a230d926}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Nodes">
+      <UniqueIdentifier>{03499c56-6c34-4185-b4be-f3022bacef4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,11 +54,20 @@
     <ClCompile Include="TNode.cpp">
       <Filter>Archivos de código fuente\Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="TMeshNode.cpp">
+      <Filter>Archivos de código fuente\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="TCameraNode.cpp">
+      <Filter>Archivos de código fuente\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="TModelNode.cpp">
+      <Filter>Archivos de código fuente\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="TLightNode.cpp">
+      <Filter>Archivos de código fuente\Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TNode.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="TEntity.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -88,6 +100,21 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TNode.h">
+      <Filter>Archivos de encabezado\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TMeshNode.h">
+      <Filter>Archivos de encabezado\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TCameraNode.h">
+      <Filter>Archivos de encabezado\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TModelNode.h">
+      <Filter>Archivos de encabezado\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TLightNode.h">
+      <Filter>Archivos de encabezado\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
