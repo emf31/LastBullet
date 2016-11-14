@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
+#include "../Motor de Red/Estructuras.h"
 
 #define CARGADO 0
 #define DISPARADO 1
@@ -37,6 +38,7 @@ public:
 	virtual std::string getClassName() { return "Granada"; }
 
 	void shoot(const btVector3& posicionPlayer);
+	void serverShoot(TGranada g);
 
 
 	btRigidBody* m_rigidBody;

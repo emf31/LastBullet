@@ -50,6 +50,7 @@ int main() {
 	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
 	TBala p_bala;
+	TGranada p_granada;
 	
 	//std::vector<Player*> clientArray;
 
@@ -178,23 +179,24 @@ int main() {
 			}
 
 							 break;
-			case ROTACION:{
+
+			case LANZAR_GRANADA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(p_struct);
+				bsIn.Read(p_granada);
 
-				EntityManager::i().enviaNuevaRot(p_struct, peer);
-				//tityManager::i().getRaknetEntity(p_struct.guid)->getRenderState()->setPosition(p_struct.position);
+				EntityManager::i().lanzarGranda(p_granada, peer);
+				
 
 
 
 			}
 
-			 break;
+							 break;
 
 			case IMPACTO_BALA: {
 

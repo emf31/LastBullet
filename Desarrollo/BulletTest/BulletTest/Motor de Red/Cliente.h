@@ -26,7 +26,7 @@ public:
 	void conectar(std::string address, int port);
 	void esperar();
 	void enviarPos(Player* p); 
-	void enviarRot(Player* p);
+	void lanzarGranada(TGranada g);
 	void enviarDisparo(RakNet::RakNetGUID guid);
 	void enviarDesconexion();
 	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);

@@ -24,6 +24,7 @@ void Cliente::update() {
 	std::string str;
 	TPlayer nuevoplayer;
 	TBala balaDisparada;
+	TGranada granada;
 	RakNet::RakNetGUID desconectado;
 	
 
@@ -142,6 +143,7 @@ void Cliente::update() {
 
 				//NUEVO
 				e->encolaPos(nuevoplayer);
+				e->encolaRot(nuevoplayer);
 
 				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
 				
@@ -152,38 +154,6 @@ void Cliente::update() {
 			}
 			break;
 
-			case ROTACION:
-			{
-
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el player
-				bsIn.Read(nuevoplayer);
-				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
-				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(nuevoplayer.guid));
-				//e->updateEnemigo(nuevoplayer.position);
-				//e = nullptr;
-				//std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
-				//std::cout << "++ENVIO MENSAJE MOVE A LA ENTITY" << e->getName() << std::endl;
-
-
-				//ANTEEES!!
-				//Message msg1(e, "MOVE", static_cast<void*>(&nuevoplayer));
-				//MessageHandler::i().sendMessage(msg1);
-
-				//e->updateEnemigo(nuevoplayer.position);
-
-				//NUEVO
-				e->encolaRot(nuevoplayer);
-
-				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
-
-				//std::cout << "///////////////////INCIO LISTA////////////////////////" << std::endl;
-				//EntityManager::i().muestraPosClientes();
-				//std::cout << "///////////////////FINAL LISTA////////////////////////" << std::endl;
-
-			}
-			break;
 
 			case DESCONECTADO:
 			{
@@ -214,6 +184,22 @@ void Cliente::update() {
 				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 
 				Message msg1(EntityManager::i().getEntity(1000), "DIBUJARBALA", static_cast<void*>(&balaDisparada));
+				MessageHandler::i().sendMessage(msg1);
+
+
+			}
+			break;
+
+			case LANZAR_GRANADA:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(granada);
+				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
+				Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "LAZARGRANADA", static_cast<void*>(&granada));
 				MessageHandler::i().sendMessage(msg1);
 
 
@@ -335,6 +321,7 @@ void Cliente::enviarPos(Player* p) {
 
 	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
 	paquetemov.position = p->getRenderState()->getPosition();
+	paquetemov.rotation = p->getRenderState()->getRotation();
 	paquetemov.velocidad = p->getVelocity();
 	paquetemov.guid = p->getGuid();
 	paquetemov.name = p->getName();
@@ -345,22 +332,17 @@ void Cliente::enviarPos(Player* p) {
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }
-void Cliente::enviarRot(Player* p) {
+
+
+
+void Cliente::lanzarGranada(TGranada g) {
 
 	RakNet::BitStream bsOut;
-	TPlayer paquetemov;
+	
 
-	bsOut.Write((RakNet::MessageID)ROTACION);
+	bsOut.Write((RakNet::MessageID)LANZAR_GRANADA);
 
-	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-	paquetemov.position = p->getRenderState()->getRotation();
-	paquetemov.velocidad = p->getVelocity();
-	paquetemov.guid = p->getGuid();
-	paquetemov.name = p->getName();
-
-
-
-	bsOut.Write(paquetemov);
+	bsOut.Write(g);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

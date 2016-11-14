@@ -125,8 +125,9 @@ void Player::update(Time elapsedTime)
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+		//ahora posicion y rotacion se envian en el mismo
 		Cliente::i().enviarPos(this);
-		Cliente::i().enviarRot(this);
+		//Cliente::i().enviarRot(this);
 	}
 
 	GraphicEngine::i().actualizarInterfaz();

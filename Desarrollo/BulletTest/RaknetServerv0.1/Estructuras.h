@@ -7,6 +7,7 @@
 typedef struct {
 	Vec3<float> position;
 	Vec3<float> velocidad;
+	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
 	std::string name;
 }TPlayer;
@@ -18,6 +19,12 @@ typedef struct {
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
 }TBala;
+
+typedef struct {
+	Vec3<float> origen;
+	Vec3<float> direction;
+	RakNet::RakNetGUID guid;
+}TGranada;
 
 enum GameMessages
 {
@@ -35,6 +42,6 @@ enum GameMessages
 	IMPACTO_BALA = ID_USER_PACKET_ENUM + 12,
 	MUERTE = ID_USER_PACKET_ENUM + 13,
 	DISPARAR_BALA = ID_USER_PACKET_ENUM + 14,
-	ROTACION = ID_USER_PACKET_ENUM + 15
+	LANZAR_GRANADA = ID_USER_PACKET_ENUM + 15
 
 };

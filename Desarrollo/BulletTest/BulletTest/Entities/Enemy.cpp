@@ -11,6 +11,8 @@
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
 	animation = new Animation();
+	granada = new Granada();
+	
 }
 
 
@@ -57,6 +59,7 @@ void Enemy::cargarContenido()
 	animation->addAnimation("Jump2", 184, 219);
 	animation->addAnimation("Idle", 220, 472);
 	animation->addAnimation("AimRunning", 473, 524);
+	granada->cargarContenido();
 
 	m_animState = quieto;
 
@@ -104,6 +107,14 @@ void Enemy::handleMessage(const Message & message)
 		//TODO
 		printf("le has dado a un enemigo\n");
 		Cliente::i().enviarDisparo(m_guid);
+	}
+	if (message.mensaje == "LAZARGRANADA") {
+
+		TGranada* tGranada = static_cast<TGranada*>(message.data);
+
+		printf("ENEMIGO LANZA GRANADA\n");
+
+		granada->serverShoot(*tGranada);
 	}
 }
 
