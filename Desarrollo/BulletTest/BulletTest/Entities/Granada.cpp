@@ -58,7 +58,7 @@ void Granada::cargarContenido()
 
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 2.5f, 0.3f, 0.5f);
+	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1.25f, 0.5f);
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 }
@@ -66,7 +66,7 @@ void Granada::cargarContenido()
 void Granada::resetRigidBody()
 {
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.2f, 1.f, 0.5f);
+	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1.25f, 0.5f);
 
 	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 0.1f, DISABLE_DEACTIVATION);
 	//m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1, 0.1f);
