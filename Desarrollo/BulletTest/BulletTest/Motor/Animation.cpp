@@ -34,6 +34,7 @@ int Animation::getAnimationStart(std::string name)
 		actualAnimation = name;
 		return found->second.start;
 	}
+	return NULL;
 }
 int Animation::getAnimationEnd(std::string name)
 {
@@ -43,6 +44,7 @@ int Animation::getAnimationEnd(std::string name)
 		actualAnimation = name;
 		return found->second.end;
 	}
+	return NULL;
 }
 
 

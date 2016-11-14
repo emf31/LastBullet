@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entities/Weapons/Weapon.h";
+#include "Entities/Weapons/Weapon.h"
 #include "Entities/Weapons/Asalto.h"
 #include "Entities/Weapons/Pistola.h"
 #include "Entities/Weapons/RocketLauncher.h"

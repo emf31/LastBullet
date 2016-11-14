@@ -32,9 +32,9 @@ void RenderState::updateRender(float interpolation, std::shared_ptr<SceneNode> m
 		m_posPrev.getZ() + ((m_posNew.getZ() - m_posPrev.getZ()) * interpolation)
 	);
 
-	float shortest_angleX = ((((int)(m_rotationNew.getX() - m_rotationPrev.getX()) % 360) + 540) % 360) - 180;   //Calculamos el angulo más corto en el caso de que
-	float shortest_angleY = ((((int)(m_rotationNew.getY() - m_rotationPrev.getY()) % 360) + 540) % 360) - 180;
-	float shortest_angleZ = ((((int)(m_rotationNew.getZ() - m_rotationPrev.getZ()) % 360) + 540) % 360) - 180;
+	float shortest_angleX = float(((((int)(m_rotationNew.getX() - m_rotationPrev.getX()) % 360) + 540) % 360) - 180);   //Calculamos el angulo más corto en el caso de que
+	float shortest_angleY = float(((((int)(m_rotationNew.getY() - m_rotationPrev.getY()) % 360) + 540) % 360) - 180);
+	float shortest_angleZ = float(((((int)(m_rotationNew.getZ() - m_rotationPrev.getZ()) % 360) + 540) % 360) - 180);
 
 	m_renderRotation.setX(m_rotationPrev.getX() + (shortest_angleX)* interpolation);
 	m_renderRotation.setY(m_rotationPrev.getY() + (shortest_angleY)* interpolation);

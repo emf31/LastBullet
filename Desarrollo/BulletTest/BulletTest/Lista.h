@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Nodo.h"
-#include "Entities/Weapons/Weapon.h";
+#include "Entities/Weapons/Weapon.h"
 
 typedef Nodo *pnodo;
 

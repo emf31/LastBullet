@@ -67,7 +67,7 @@ void PhysicsEngine::update(Time elapsedTime)
 	while (maxSubsteps * (timeSinceLastUpdate.asSeconds()) < elapsedTime.asSeconds()) {
 		maxSubsteps++;
 	}*/
-	m_world->stepSimulation(elapsedTime.asMilliseconds(), 30);
+	m_world->stepSimulation(btScalar(elapsedTime.asMilliseconds()), 30);
 
 	//Aqui calculariamos colisiones
 	for (auto contactsIter = contacts.begin(); contactsIter != contacts.end(); ++contactsIter) {

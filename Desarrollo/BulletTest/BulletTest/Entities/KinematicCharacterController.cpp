@@ -141,7 +141,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_jumpAxis.setValue(0.0f, 1.0f, 0.0f);
 	setUp(up);
 	setStepHeight(stepHeight);
-	m_addedMargin = 0.02;
+	m_addedMargin = btScalar(0.02);
 	m_walkDirection.setValue(0.0, 0.0, 0.0);
 	m_AngVel.setValue(0.0, 0.0, 0.0);
 	m_useGhostObjectSweepTest = true;
@@ -151,7 +151,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = 9.8 * 3.5; // 3G acceleration.
+	m_gravity = btScalar(9.8 * 3.5); // 3G acceleration.
 	m_fallSpeed = 55.0; // Terminal velocity of a sky diver in m/s.
 	m_jumpSpeed = 10.0; // ?
 	m_SetjumpSpeed = m_jumpSpeed;
@@ -160,7 +160,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_interpolateUp = true;
 	setMaxSlope(btRadians(45.0));
 	m_currentStepOffset = 0.0;
-	m_maxPenetrationDepth = 0.2;
+	m_maxPenetrationDepth = btScalar(0.2);
 	full_drop = false;
 	bounce_fix = false;
 	m_linearDamping = btScalar(0.0);

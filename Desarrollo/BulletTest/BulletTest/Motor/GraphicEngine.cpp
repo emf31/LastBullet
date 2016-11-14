@@ -63,7 +63,7 @@ AnimatedSceneNode * GraphicEngine::createAnimatedNode(const Vec3<float>& TPositi
 void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
-	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,100,0.05);
+	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,irr::f32(100), irr::f32(0.05));
 	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
 	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
 	cam->setInputReceiverEnabled(true);

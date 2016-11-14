@@ -88,7 +88,7 @@ void Player::update(Time elapsedTime)
 	isMoving = false;
 
 	if(p_controller->onGround())
-	p_controller->setSpeed(1.3);//seteamos la velocidad para andar, si corre se cambiara a una mayor
+	p_controller->setSpeed(1.3f);//seteamos la velocidad para andar, si corre se cambiara a una mayor
 
 	speedFinal = Vec3<float>(0, 0, 0);
 
