@@ -2,6 +2,7 @@
 #include "../Otros\vec3.hpp"
 #include "../Otros\Time.hpp"
 #include "../Motor\SceneNode.h"
+#include <memory>
 
 
 class RenderState
@@ -40,7 +41,7 @@ public:
 	//Updatea posiciones y angulos
 	void update(Time elapsedTime);
 	//Calcula la posición y rotación de renderizado interpoladas
-	void updateRender(float interpolation, SceneNode *m_nodo);
+	void updateRender(float interpolation, std::shared_ptr<SceneNode> m_nodo);
 	
 	//Updatea las posiciones prev y new
 	void updatePositions(Vec3<float> position);

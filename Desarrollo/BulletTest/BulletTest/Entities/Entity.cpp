@@ -38,7 +38,7 @@ Vec3<float> Entity::getRenderPosition()
 	return m_renderState.getRenderPos();
 }
 
-SceneNode * Entity::getNode()
+std::shared_ptr<SceneNode> Entity::getNode()
 {
 	return m_nodo;
 }

@@ -56,7 +56,7 @@ public:
 	bool apagar();
 
 	void cargarTexturas();
-	void removeNode(SceneNode* nodo);
+	void removeNode(std::shared_ptr<SceneNode> nodo);
 	void toggleDebug() {
 		debug_draw_bullet = !debug_draw_bullet;
 	}

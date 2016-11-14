@@ -23,7 +23,7 @@ void RenderState::update(Time elapsedTime)
 	m_posNew += m_Velocity * elapsedTime.asSeconds();
 }
 
-void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
+void RenderState::updateRender(float interpolation, std::shared_ptr<SceneNode> m_nodo)
 {
 	
 	m_renderPos = Vec3<float>(

@@ -8,6 +8,7 @@
 #include "../Motor de Red/Estructuras.h"
 #include "../Handlers/InputHandler.h"
 #include "math.h"
+#include<memory>
 #include "../Otros/Vec3f.h"
 #include "../Otros/Util.h"
 #include "GunBullet.h"
@@ -16,14 +17,7 @@
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid),
-m_acceleration_walk(10.f),
-//m_acceleration_run(5.f), 
-m_deceleration_walk(11.f),
-//m_deceleration_run(0.2f), 
-m_maxSpeed_walk(60.f),
-//m_maxSpeed_run(18.0f),
-m_vida(5)
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid)
 {
 	
 
@@ -48,8 +42,6 @@ void Player::setPosition(Vec3<float> pos)
 
 void Player::inicializar()
 {
-	vectorPrev = vectorNew = Vec3<float>(0, 0, 0);
-	giro = 0;
 
 	granada = new Granada();
 	granada->cargarContenido();
@@ -153,7 +145,7 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj");
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj"));
 	m_nodo->setTexture("../media/arma/weapon.png", 0);
 	m_nodo->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
 
@@ -216,6 +208,7 @@ void Player::cargarContenido()
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	GraphicEngine::i().setCameraEntity(this);
+
 	resetVida();
 
 }
@@ -235,9 +228,9 @@ void Player::handleMessage(const Message & message)
 	}
 
 	if (message.mensaje == "DIBUJARBALA") {
-		//TBala* tBala= static_cast<TBala*>(message.data);
-			//std::cout << "Has cogido vida" << std::endl;
-		GunBullet* bala = new GunBullet(static_cast<TBala*>(message.data)->position, static_cast<TBala*>(message.data)->direction, static_cast<TBala*>(message.data)->finalposition, static_cast<TBala*>(message.data)->rotation);
+		TBala* tBala= static_cast<TBala*>(message.data);
+
+		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
 		
 	}
 }

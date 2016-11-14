@@ -246,7 +246,7 @@ void GraphicEngine::cargarTexturas() {
 	irrScene->getMesh("../media/bullet.obj");
 }
 
-void GraphicEngine::removeNode(SceneNode* nodo) {
+void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	
 	irrScene->addToDeletionQueue(nodo->getNodo());
 }

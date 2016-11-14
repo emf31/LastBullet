@@ -61,11 +61,10 @@ private:
 
 	Animation* animation;
 	Granada* granada;
-//	Weapon* weapon;
 
 	Lista* listaWeapons;
 
-	enum PlayerState {quieto,andando,corriendo,saltando,saltando2} m_playerState;
+	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
 
 	//esta no deberia estar aqui acordarse de borrarla
 
@@ -79,16 +78,7 @@ private:
 	bool isMoving;
 	bool isRunning=false;
 
-	
-	float giro;
-
-	Vec3<float> vectorPrev;
-	Vec3<float> vectorNew;
-
 	Vec3<float> speedFinal;
-
-	//Animated Nodo
-	//AnimatedSceneNode *m_animated;
 
 	//Player controller
 	KinematicCharacterController* p_controller;
@@ -101,11 +91,5 @@ private:
 	float height;
 	float mass;
 
-	float m_acceleration_walk;
-	float m_acceleration_run;
-	float m_deceleration_walk;
-	float m_deceleration_run;
-	float m_maxSpeed_walk;
-	float m_maxSpeed_run;
 };
 

@@ -11,6 +11,7 @@
 
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
+#include <memory>
 
 
 #define DISPONIBLE 0
@@ -67,7 +68,7 @@ public:
 	}
 
 
-	SceneNode* getNode();
+	std::shared_ptr<SceneNode> getNode();
 
 	virtual void inicializar() = 0;
 	virtual void update(Time elapsedTime) = 0;
@@ -84,7 +85,7 @@ protected:
 	int m_id;
 	RakNet::RakNetGUID m_guid;
 	std::string m_name;
-	SceneNode* m_nodo;
+	std::shared_ptr<SceneNode> m_nodo;
 	RenderState m_renderState;
 	float m_vida;
 
