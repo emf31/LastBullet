@@ -151,7 +151,7 @@ btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float heigh
 	btRigidBody* rigidBody = new btRigidBody(masa, m_pMotionState, m_pCollisionShape, intertia);
 	rigidBody->setActivationState(body_state);
 
-	rigidBody->setRestitution(1.f);
+	rigidBody->setRestitution(0.7f);
 
 	//add a pointer to rigidBody pointing to associated Entity
 	rigidBody->setUserPointer(entity);
