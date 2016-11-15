@@ -130,17 +130,17 @@ void Enemy::handleMessage(const Message & message)
 //pila posiciones
 void Enemy::encolaPos(TPlayer pos)
 {
-	m.lock();
+	//m.lock();
 	// Añadir a la cola
 	m_positions.push(pos.position);
 	m_renderState.setVelocity(pos.velocidad);
 
-	m.unlock();
+	//m.unlock();
 }
 
 void Enemy::desEncolaPos()
 {	
-	m.lock();
+	//m.lock();
 	//std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
 	
 	if (m_positions.size() > 3) {
@@ -165,7 +165,7 @@ void Enemy::desEncolaPos()
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 7.f));
 		
 	}
-	m.unlock();
+	//m.unlock();
 
 }
 /////////
@@ -174,16 +174,16 @@ void Enemy::desEncolaPos()
 
 void Enemy::encolaRot(TPlayer rot)
 {
-	m.lock();
+	//m.lock();
 	// Añadir a la cola
 	m_rotations.push(rot.position);
 
-	m.unlock();
+	//m.unlock();
 }
 
 void Enemy::desEncolaRot()
 {
-	m.lock();
+	//m.lock();
 
 	if (m_rotations.size() > 3) {
 		Vec3<float> new_rot;
@@ -205,7 +205,7 @@ void Enemy::desEncolaRot()
 		//llamamos al update con la nueva posicion
 		m_renderState.updateRotations(new_rot);
 	}
-	m.unlock();
+	//m.unlock();
 
 }
 /////////

@@ -247,24 +247,29 @@ bool GraphicEngine::apagar()
 }
 
 void GraphicEngine::cargarTexturas() {
+	//CARGAR TEXTURAS
 	irrDriver->getTexture("../media/wall.jpg");
 	irrDriver->getTexture("../media/ice0.jpg");
 	irrDriver->getTexture("../media/earth.jpg");
 	irrDriver->getTexture("../media/Dif_2.tga");
+	irrDriver->getTexture("../media/body01.png");
+	irrDriver->getTexture("../media/head01.png");
+	irrDriver->getTexture("../media/m4tex.png");
+	irrDriver->getTexture("../media/WPNT_MK2Grenade_Base_Color.tga");
+	irrDriver->getTexture("../media/arma/weapon.png");
+	//irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
+
+
 	irrScene->getMesh("../media/ArmyPilot.b3d");
 	irrScene->getMesh("../media/sf2arms.obj");
-	irrScene->getMesh("../media/body01.png");
-	irrScene->getMesh("../media/head01.png");
-	irrScene->getMesh("../media/m4tex.png");
+	
 	irrScene->getMesh("../media/bullet.obj");
 	irrScene->getMesh("../media/arma/ak.obj");
 	irrScene->getMesh("../media/WPN_MK2Grenade.obj");
 
 	irrGUI->getFont("../media/lucida.xml");
 	
-	irrDriver->getTexture("../media/WPNT_MK2Grenade_Base_Color.tga");
-	irrDriver->getTexture("../media/arma/weapon.png");
-	irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
+	
 }
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {

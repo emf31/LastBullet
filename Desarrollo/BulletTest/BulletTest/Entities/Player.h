@@ -63,13 +63,23 @@ private:
 	float m_vida;
 
 	Animation* animation;
+
+	//EQUIPO
 	Granada* granada;
 
+	//ARMAS
+	RocketLauncher* rocket;
+	Pistola* pistola;
+	Asalto* asalto;
+
+	//LISTA DE ARMAS
 	Lista* listaWeapons;
 
+
+
+	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
 
-	//esta no deberia estar aqui acordarse de borrarla
 
 	bool tieneAsalto = false;
 	bool tieneRocketLauncher = false;
@@ -82,7 +92,7 @@ private:
 	bool isRunning=false;
 	bool isReloading = false;
 
-	Vec3<float> speedFinal;
+	
 
 	//Player controller
 	KinematicCharacterController* p_controller;
@@ -94,6 +104,8 @@ private:
 	float radius;
 	float height;
 	float mass;
+
+	Vec3<float> speedFinal;
 
 };
 

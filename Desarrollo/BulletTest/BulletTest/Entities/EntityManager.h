@@ -14,7 +14,9 @@ public:
 		return singleton;
 	}
 
-	
+	int numClientes() {
+		return m_jugadores.size();
+	}
 	
 	void mostrarClientes();
 	void muestraPosClientes();
@@ -25,8 +27,6 @@ public:
 	void update(Time elapsedTime);
 	//Updatea la posicion de render de todas las entities
 	void updateRender(float interpolation);
-	//update la posicion y rotacion de los enemigos ya que ahora cada enemigo tiene una pila de posiciones
-	void updatePosEnemigos(Time elapsedTime);
 
 
 	void handleInput();

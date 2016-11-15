@@ -199,6 +199,7 @@
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="Otros\Clock.hpp" />
+    <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\vec3.hpp" />

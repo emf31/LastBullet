@@ -8,7 +8,6 @@
 #include "../Motor de Red/Estructuras.h"
 #include "../Handlers/InputHandler.h"
 #include "math.h"
-#include<memory>
 #include "../Otros/Vec3f.h"
 #include "../Otros/Util.h"
 #include "GunBullet.h"
@@ -16,6 +15,8 @@
 #include "Weapons/Asalto.h"
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
+#include <memory>
+#include "Enemy.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid)
 {
@@ -49,7 +50,30 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	Pistola* firstWeapon;
+	/*****************************/
+	/*******INICILAZAR ARMAS******/
+	asalto = new Asalto();
+	asalto->inicializar();
+	asalto->cargarContenido();
+
+	rocket = new RocketLauncher();
+	rocket->inicializar();
+	rocket->cargarContenido();
+
+	pistola = new Pistola();
+	pistola->inicializar();
+	pistola->cargarContenido();
+
+	listaWeapons = new Lista();
+
+	listaWeapons->insertar(pistola);
+
+	tienePistola = true;
+
+	/********************************/
+	/********************************/
+
+	/*Pistola* firstWeapon;*/
 
 	/*float RandomNumber = Randf(0, 3);
 	std::cout << RandomNumber << std::endl;
@@ -69,8 +93,8 @@ void Player::inicializar()
 	else {
 		firstWeapon = new Asalto();
 	}*/
-	firstWeapon = new Pistola(); 
-	tienePistola = true;
+	//firstWeapon = new Pistola(); 
+	
 
 
 	//TODO: saber si estoy recargando desde el player
@@ -81,9 +105,7 @@ void Player::inicializar()
 	else {
 
 	}*/
-	listaWeapons = new Lista();
-
-	listaWeapons->insertar(firstWeapon);
+	
 
 	m_vida = 5;
 
@@ -97,7 +119,7 @@ void Player::update(Time elapsedTime)
 	isMoving = false;
 
 	if(p_controller->onGround())
-	p_controller->setSpeed(1.3f);//seteamos la velocidad para andar, si corre se cambiara a una mayor
+		p_controller->setSpeed(1.3f);//seteamos la velocidad para andar, si corre se cambiara a una mayor
 
 	speedFinal = Vec3<float>(0, 0, 0);
 
@@ -135,7 +157,6 @@ void Player::update(Time elapsedTime)
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
 		Cliente::i().enviarPos(this);
-		//Cliente::i().enviarRot(this);
 	}
 
 	GraphicEngine::i().actualizarInterfaz();
@@ -156,7 +177,7 @@ void Player::cargarContenido()
 
 	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj"));
 	m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
-	m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
+	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
 
 	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
 
@@ -224,17 +245,22 @@ void Player::borrarContenido()
 void Player::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "LifeObject") {
-			//std::cout << "Has cogido vida" << std::endl;
-
-		}
+		
 	}
-
-	if (message.mensaje == "DIBUJARBALA") {
-		TBala* tBala= static_cast<TBala*>(message.data);
+	else if(message.mensaje == "DIBUJARBALA"){
+		TBala* tBala = static_cast<TBala*>(message.data);
 
 		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
-		
+	}
+	else if (message.mensaje == "NUEVO_ENEMIGO") {
+		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);
+
+		Enemy *e = new Enemy(nuevoplayer->name, nuevoplayer->guid);
+		e->inicializar();
+		e->cargarContenido();
+		e->setPosition(nuevoplayer->position);
+
+		EntityManager::i().mostrarClientes();
 	}
 }
 
@@ -270,9 +296,7 @@ void Player::move_up()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	//vectorNew = speed;
 
 	speedFinal.addX(speed.getX());
 	speedFinal.addZ(speed.getZ());
@@ -287,9 +311,7 @@ void Player::move_down()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	//vectorNew = speed;
 
 	speedFinal.addX(-speed.getX());
 	speedFinal.addZ(-speed.getZ());
@@ -302,9 +324,7 @@ void Player::move_right()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	//vectorNew = speed;
 
 	speedFinal.addX(speed.getZ());
 	speedFinal.addZ(-speed.getX());
@@ -317,9 +337,7 @@ void Player::move_left()
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
-	//vectorPrev = vectorNew;
 	Vec3<float> speed = target - posicion;
-	//vectorNew = speed;
 
 	speedFinal.addX(-speed.getZ());
 	speedFinal.addZ(speed.getX());
@@ -377,30 +395,25 @@ void Player::updateState()
 
 void Player::setWeapon(int newWeapon) {
 
-	Weapon* weapon;
-
 	switch (newWeapon) {
 		case LANZACOHETES:
 			if (!tieneRocketLauncher) {
 				printf("TE HAS EQUIPADO UN LANZACOHETES\n");
-				weapon = new RocketLauncher();
-				listaWeapons->insertar(weapon);
+				listaWeapons->insertar(rocket);
 				tieneRocketLauncher = true;
 			}
 		break;
 		case ASALTO:
 			if (!tieneAsalto) {
 				printf("TE HAS EQUIPADO UN ASALTO\n");
-				weapon = new Asalto();
-				listaWeapons->insertar(weapon);
+				listaWeapons->insertar(asalto);
 				tieneAsalto = true;
 			}
 		break;
 		case PISTOLA:
 			if (!tienePistola) {
 				printf("TE HAS EQUIPADO UNA PISTOLA\n");
-				weapon = new Pistola();
-				listaWeapons->insertar(weapon);
+				listaWeapons->insertar(pistola);
 				tienePistola = true;
 			}
 		break;

@@ -87,16 +87,8 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
-				e->inicializar();
-				e->cargarContenido();
-				e->setPosition(nuevoplayer.position);
-				
-				EntityManager::i().mostrarClientes();
-
-
-
-
+				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(&nuevoplayer));
+				MessageHandler::i().sendMessage(msg);
 
 			}
 			break;
@@ -111,13 +103,8 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
-				e->inicializar();
-				e->cargarContenido();
-				e->setPosition(nuevoplayer.position);
-
-
-
+				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(&nuevoplayer));
+				MessageHandler::i().sendMessage(msg);
 
 			}
 			break;
@@ -144,8 +131,11 @@ void Cliente::update() {
 				//e->updateEnemigo(nuevoplayer.position);
 
 				//NUEVO
-				e->encolaPos(nuevoplayer);
-				e->encolaRot(nuevoplayer);
+				if (e != NULL) {
+					e->encolaPos(nuevoplayer);
+					e->encolaRot(nuevoplayer);
+				}
+				
 
 				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
 				

@@ -267,7 +267,10 @@ void Game::update(Time elapsedTime)
 {
 	/*EntityManager::i().updatePosEnemigos(elapsedTime);
 	EntityManager::i().updateRotEnemigos(elapsedTime);*/
-	
+	int b = EntityManager::i().numClientes();
+	if (b > 1) {
+		int a = 0;
+	}
 	PhysicsEngine::i().update(timePerFrame);
 
 	EntityManager::i().update(elapsedTime);

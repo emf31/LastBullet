@@ -234,6 +234,9 @@
     <ClInclude Include="Command\ListWeaponDown.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Otros\SafeQueue.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -1,9 +1,8 @@
 #pragma once
 #include "../Entities/Entity.h"
 #include <string>
-#include <queue>
 #include "Message.h"
-#include <mutex>
+#include "../Otros/SafeQueue.h"
 
 class MessageHandler
 {
@@ -16,9 +15,7 @@ public:
 	void sendMessage(const Message& message);
 	void borrarContenido();
 
-	std::mutex m;
-
 private:
-	std::queue<Message> m_messages;
+	SafeQueue<Message> m_messages;
 	MessageHandler() {}
 };

@@ -116,11 +116,8 @@ void Asalto::shoot()
 			Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
 			posDisparo += Vec3<float>(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-			//	  if (arma != LANZACOHETES)
+
 			GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-			//	else {
-			//		RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-			//	  }
 
 
 			if (Cliente::i().isConected()) {
@@ -128,12 +125,12 @@ void Asalto::shoot()
 				Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 			}
 
-		}
+			relojCadencia.restart();
 
-
-		if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-			relojrecarga.restart();
-			estadoWeapon = DESCARGADA;
 		}
+	}
+	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
 	}
 }

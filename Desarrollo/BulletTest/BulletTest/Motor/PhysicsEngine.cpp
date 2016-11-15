@@ -80,11 +80,11 @@ void PhysicsEngine::update(Time elapsedTime)
 			Entity* collider1 = *entityIter;
 			//enviamos 2 mensajes uno para la entity que colisiona y otra a la entity con la que colisiona
 
-			Message msg1(collider0, "COLLISION", collider1);
+			/*Message msg1(collider0, "COLLISION", collider1);
 			Message msg2(collider1, "COLLISION", collider0);
 
 			MessageHandler::i().sendMessage(msg1);
-			MessageHandler::i().sendMessage(msg2);
+			MessageHandler::i().sendMessage(msg2);*/
 			
 		}
 	}

@@ -36,13 +36,9 @@ void Granada::update(Time elapsedTime)
 
 		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
 			setEstado(GRANADACARGADA);
-			PhysicsEngine::i().removeRigidBody(m_rigidBody);
-
-		
+			PhysicsEngine::i().removeRigidBody(m_rigidBody);	
 		}
 	}
-
-	
 	
 }
 
