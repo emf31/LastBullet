@@ -146,7 +146,7 @@ void GraphicEngine::actualizarInterfaz()
 	ammo->setText(GetWC(vstring2.c_str()));
 
 	arma_actual->setText(GetWC(p->getCurrentWeapon().c_str())); 
-
+	
 
 }
 
