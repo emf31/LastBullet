@@ -62,11 +62,9 @@ void RocketBullet::handleMessage(const Message & message)
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
 
-		list<Entity*>::Iterator it = characters.begin();
-		while (it != characters.end()){
-			//aqui hay que llamar al metodo explosion
-			//explosion(m_position,*it,10);
-			it++;
+		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
+			Entity* myentity = *it;
+			explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 50.f);	
 		}
 
 		EntityManager::i().removeEntity(this);
@@ -85,5 +83,7 @@ void RocketBullet::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter,
 	Vec3<float> vector = posExplosion - posCharacter;
 	float distancia = vector.Magnitude();
 	if (distancia < radio)
-		printf("Te ha dado la explosion");
+		printf("Te ha dado la explosion\n");
+	else
+		printf("NO te ha dado la explosion\n");
 }
