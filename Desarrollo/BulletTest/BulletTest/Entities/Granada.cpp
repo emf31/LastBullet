@@ -36,8 +36,11 @@ void Granada::update(Time elapsedTime)
 
 		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
 			setEstado(GRANADACARGADA);
-			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
+			Message msg1(this, "BORRATE", NULL);
+
+			MessageHandler::i().sendMessage(msg1);
+			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		
 		}
 	}
@@ -79,6 +82,21 @@ void Granada::handleMessage(const Message & message)
 
 		}
 		
+	}
+
+	if (message.mensaje == "BORRATE") {
+
+
+		list<Entity*>characters = EntityManager::i().getCharacters();
+		///Explosion
+
+		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
+			Entity* myentity = *it;
+			explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 25.f);
+		}
+
+//		GraphicEngine::i().removeNode(m_nodo);
+
 	}
 }
 
@@ -168,5 +186,17 @@ void Granada::serverShoot(TGranada g) {
 		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
 	}
+
+}
+
+void Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
+{
+
+	Vec3<float> vector = posExplosion - posCharacter;
+	float distancia = vector.Magnitude();
+	if (distancia < radio)
+		printf("Te ha dado la explosion\n");
+	else
+		printf("NO te ha dado la explosion\n");
 
 }

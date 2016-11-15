@@ -64,7 +64,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 			Entity* myentity = *it;
-			explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 50.f);	
+			explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 40.f);	
 		}
 
 		EntityManager::i().removeEntity(this);
