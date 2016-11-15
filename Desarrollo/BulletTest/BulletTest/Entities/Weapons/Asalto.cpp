@@ -4,7 +4,10 @@
 
 Asalto::Asalto() : Weapon()
 {
-	
+	capacidadAmmo = 30;
+	disparos = 0;
+	cadencia = milliseconds(50);
+	recarga = milliseconds(1000);
 }
 
 
@@ -15,10 +18,7 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-	capacidadAmmo = 30;
-	disparos = 0;
-	cadencia = milliseconds(50);
-	recarga = milliseconds(1000);
+
 }
 
 void Asalto::update(Time elapsedTime)
@@ -127,13 +127,16 @@ void Asalto::shoot()
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 				Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 			}
+			relojCadencia.restart();
 
 		}
 
 
-		if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-			relojrecarga.restart();
-			estadoWeapon = DESCARGADA;
-		}
+
+	}
+
+	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
 	}
 }

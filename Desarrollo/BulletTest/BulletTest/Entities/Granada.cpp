@@ -61,17 +61,8 @@ void Granada::cargarContenido()
 
 	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 
-	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 }
 
-void Granada::resetRigidBody()
-{
-	PhysicsEngine::i().removeRigidBody(m_rigidBody);
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-
-	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 0.1f, DISABLE_DEACTIVATION);
-	//m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1, 0.1f);
-}
 
 
 void Granada::borrarContenido()
@@ -128,7 +119,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 
 
 		m_rigidBody->applyCentralForce(force);
@@ -168,7 +159,7 @@ void Granada::serverShoot(TGranada g) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 
 
 		m_rigidBody->applyCentralForce(force);
