@@ -38,10 +38,9 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
-	void encolaPos(TPlayer pos);
-	void desEncolaPos();
-	void encolaRot(TPlayer rot);
-	void desEncolaRot();
+	void encolaMovimiento(TPlayer pos);
+	void desencolaMovimiento();
+
 	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
 	std::mutex m;
 
@@ -58,8 +57,8 @@ private:
 	bool isMoving;
 
 	btRigidBody* m_rigidBody;
-	SafeQueue<Vec3<float>> m_positions;
-	std::queue<Vec3<float>> m_rotations;
+	std::queue<TMovimiento> m_positions;
+	//std::queue<Vec3<float>> m_rotations;
 
 	virtual std::string getClassName() { return "Enemy"; }
 	

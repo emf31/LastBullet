@@ -87,7 +87,14 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(&nuevoplayer));
+				TPlayer *p = new TPlayer();
+				p->position = nuevoplayer.position;
+				p->guid = nuevoplayer.guid;
+				p->name = nuevoplayer.name;
+				p->rotation = nuevoplayer.rotation;
+				p->velocidad = nuevoplayer.velocidad;
+
+				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
 				MessageHandler::i().sendMessage(msg);
 
 			}
@@ -103,7 +110,14 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(&nuevoplayer));
+				TPlayer *p = new TPlayer();
+				p->position = nuevoplayer.position;
+				p->guid = nuevoplayer.guid;
+				p->name = nuevoplayer.name;
+				p->rotation = nuevoplayer.rotation;
+				p->velocidad = nuevoplayer.velocidad;
+
+				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
 				MessageHandler::i().sendMessage(msg);
 
 			}
@@ -132,8 +146,15 @@ void Cliente::update() {
 
 				//NUEVO
 				if (e != NULL) {
-					e->encolaPos(nuevoplayer);
-					//e->encolaRot(nuevoplayer);
+					TPlayer *p = new TPlayer();
+					p->position = nuevoplayer.position;
+					p->guid = nuevoplayer.guid;
+					p->name = nuevoplayer.name;
+					p->rotation = nuevoplayer.rotation;
+					p->velocidad = nuevoplayer.velocidad;
+
+					Message msg(e, "MOVIMIENTO", static_cast<void*>(p));
+					MessageHandler::i().sendMessage(msg);
 				}
 				
 

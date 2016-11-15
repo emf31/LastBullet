@@ -260,6 +260,8 @@ void Player::handleMessage(const Message & message)
 		e->cargarContenido();
 		e->setPosition(nuevoplayer->position);
 
+		delete nuevoplayer;
+
 		EntityManager::i().mostrarClientes();
 	}
 }

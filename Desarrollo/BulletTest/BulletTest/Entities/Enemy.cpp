@@ -28,8 +28,7 @@ void Enemy::inicializar()
 
 void Enemy::update(Time elapsedTime)
 {
-	desEncolaPos();
-	//desEncolaRot();
+	desencolaMovimiento();
 
 	updateState();
 	updateAnimation();
@@ -124,43 +123,57 @@ void Enemy::handleMessage(const Message & message)
 		printf("ENEMIGO LANZA GRANADA\n");
 
 		granada->serverShoot(*tGranada);
+	} else if (message.mensaje == "MOVIMIENTO") {
+
+		TPlayer* tPlayer = static_cast<TPlayer*>(message.data);
+
+		encolaMovimiento(*tPlayer);
+
+		delete tPlayer;
+
 	}
 }
 
 //pila posiciones
-void Enemy::encolaPos(TPlayer pos)
+void Enemy::encolaMovimiento(TPlayer pos)
 {
 	//m.lock();
 	// Añadir a la cola
-	m_positions.push(pos.position);
+	TMovimiento mov;
+	mov.position = pos.position;
+	mov.rotation = pos.rotation;
+
+	m_positions.push(mov);
 	m_renderState.setVelocity(pos.velocidad);
 
 	//m.unlock();
 }
 
-void Enemy::desEncolaPos()
+void Enemy::desencolaMovimiento()
 {	
 	//m.lock();
-	//std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
+	std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
 	
 	if (m_positions.size() > 3) {
-		Vec3<float> new_pos;
+		TMovimiento mov;
 		while (!m_positions.empty()) {
-			 m_positions.pop(new_pos);
+			mov = m_positions.front();
 			//lo borramos de la cola
-			//m_positions.pop();
+			m_positions.pop();
 			//llamamos al update con la nueva posicion
 		}
-		updateEnemigo(new_pos);
+		updateEnemigo(mov.position);
+		m_renderState.updateRotations(mov.rotation);
 	}
 
 	else if (m_positions.size() > 0) {
-		Vec3<float> new_pos;
-			m_positions.pop(new_pos);
-			//lo borramos de la cola
-			//m_positions.pop();
-			//llamamos al update con la nueva posicion
-		updateEnemigo(new_pos);
+		TMovimiento mov;
+		mov = m_positions.front();
+		//lo borramos de la cola
+		m_positions.pop();
+		//llamamos al update con la nueva posicion
+		updateEnemigo(mov.position);
+		m_renderState.updateRotations(mov.rotation);
 	}else {
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 		
@@ -171,7 +184,7 @@ void Enemy::desEncolaPos()
 /////////
 
 //pila rotaciones
-
+/*
 void Enemy::encolaRot(TPlayer rot)
 {
 	//m.lock();
@@ -207,7 +220,7 @@ void Enemy::desEncolaRot()
 	}
 	//m.unlock();
 
-}
+}*/
 /////////
 
 void Enemy::updateAnimation()

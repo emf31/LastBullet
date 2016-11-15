@@ -12,6 +12,11 @@ typedef struct {
 	std::string name;
 }TPlayer;
 
+typedef struct {
+	Vec3<float> position;
+	Vec3<float> rotation;
+}TMovimiento;
+
 
 typedef struct {
 	Vec3<float> position;
