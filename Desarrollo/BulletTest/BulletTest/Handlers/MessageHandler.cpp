@@ -7,7 +7,8 @@ void MessageHandler::update()
 	//Vamos enviando todos los mensajes
 	//m.lock();
 	while (!m_messages.empty()) {
-		Message message = m_messages.dequeue();
+		Message message;
+		m_messages.pop(message);
 		//Enviamos el mensaje a la entity
 		message.entity->handleMessage(message);
 	}
@@ -16,7 +17,7 @@ void MessageHandler::update()
 
 void MessageHandler::sendMessage(const Message & message)
 {
-	m_messages.enqueue(message);
+	m_messages.push(message);
 }
 
 

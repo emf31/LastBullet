@@ -133,7 +133,7 @@ void Cliente::update() {
 				//NUEVO
 				if (e != NULL) {
 					e->encolaPos(nuevoplayer);
-					e->encolaRot(nuevoplayer);
+					//e->encolaRot(nuevoplayer);
 				}
 				
 

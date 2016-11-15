@@ -14,6 +14,8 @@
 #include "../Motor/BasicSceneNode.h"
 #include "../Entities/Granada.h"
 
+#include "../Otros/SafeQueue.h"
+
 class Enemy : public Entity
 {
 public:
@@ -56,7 +58,7 @@ private:
 	bool isMoving;
 
 	btRigidBody* m_rigidBody;
-	std::queue<Vec3<float>> m_positions;
+	SafeQueue<Vec3<float>> m_positions;
 	std::queue<Vec3<float>> m_rotations;
 
 	virtual std::string getClassName() { return "Enemy"; }

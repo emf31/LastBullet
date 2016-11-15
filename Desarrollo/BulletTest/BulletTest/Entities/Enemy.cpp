@@ -29,7 +29,7 @@ void Enemy::inicializar()
 void Enemy::update(Time elapsedTime)
 {
 	desEncolaPos();
-	desEncolaRot();
+	//desEncolaRot();
 
 	updateState();
 	updateAnimation();
@@ -146,9 +146,9 @@ void Enemy::desEncolaPos()
 	if (m_positions.size() > 3) {
 		Vec3<float> new_pos;
 		while (!m_positions.empty()) {
-			new_pos = m_positions.front();
+			 m_positions.pop(new_pos);
 			//lo borramos de la cola
-			m_positions.pop();
+			//m_positions.pop();
 			//llamamos al update con la nueva posicion
 		}
 		updateEnemigo(new_pos);
@@ -156,13 +156,13 @@ void Enemy::desEncolaPos()
 
 	else if (m_positions.size() > 0) {
 		Vec3<float> new_pos;
-			new_pos = m_positions.front();
+			m_positions.pop(new_pos);
 			//lo borramos de la cola
-			m_positions.pop();
+			//m_positions.pop();
 			//llamamos al update con la nueva posicion
 		updateEnemigo(new_pos);
 	}else {
-		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 7.f));
+		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 		
 	}
 	//m.unlock();

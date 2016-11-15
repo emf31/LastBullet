@@ -16,4 +16,7 @@ struct Message {
 		data(data) {
 
 	}
+	Message() {
+
+	}
 };
