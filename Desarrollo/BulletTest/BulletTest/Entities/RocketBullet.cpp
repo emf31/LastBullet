@@ -1,6 +1,8 @@
 #include "RocketBullet.h"
 #include "../Handlers/MessageHandler.h"
 #include "../Motor/GraphicEngine.h"
+#include <list>
+
 
 
 RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
@@ -55,17 +57,33 @@ void RocketBullet::borrarContenido()
 void RocketBullet::handleMessage(const Message & message)
 {
 	if (message.mensaje == "BORRATE") {
+
+		
+		list<Entity*>characters = EntityManager::i().getCharacters();
+		///Explosion
+
+		list<Entity*>::Iterator it = characters.begin();
+		while (it != characters.end()){
+			//aqui hay que llamar al metodo explosion
+			//explosion(m_position,*it,10);
+			it++;
+		}
+
 		EntityManager::i().removeEntity(this);
 		GraphicEngine::i().removeNode(m_nodo);
-
-		///Explosion
-		//EntityManager::i().getEntity()
-
-		//delete this;
+			
 	}
 }
 
 std::string RocketBullet::getClassName()
 {
 	return "RocketBullet";
+}
+
+void RocketBullet::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
+{
+	Vec3<float> vector = posExplosion - posCharacter;
+	float distancia = vector.Magnitude();
+	if (distancia < radio)
+		printf("Te ha dado la explosion");
 }

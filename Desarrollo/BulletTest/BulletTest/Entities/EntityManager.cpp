@@ -3,6 +3,7 @@
 
 #include "EntityManager.h"
 #include "Enemy.h"
+#include <list>
 
 void EntityManager::inicializar()
 {
@@ -134,6 +135,16 @@ Entity * EntityManager::getEntity(int id)
 		return found->second;
 	//no existe devolvemos 0
 	return NULL;
+}
+
+list<Entity*> EntityManager::getCharacters()
+{
+	list<Entity*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy")
+			characters.push_back(i->second);
+	}
+	return characters;
 }
 
 Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
