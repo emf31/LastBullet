@@ -51,6 +51,7 @@ void Player::inicializar()
 
 	Pistola* firstWeapon;
 
+
 	/*float RandomNumber = Randf(0, 3);
 	std::cout << RandomNumber << std::endl;
 
@@ -69,7 +70,8 @@ void Player::inicializar()
 	else {
 		firstWeapon = new Asalto();
 	}*/
-	firstWeapon = new Pistola(); 
+	firstWeapon = new Pistola();
+
 	tienePistola = true;
 
 

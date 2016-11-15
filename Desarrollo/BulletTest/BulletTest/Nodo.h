@@ -14,7 +14,11 @@ class Nodo
 public:
 	Nodo(Weapon* v, Nodo *next = NULL, Nodo *pre = NULL) : valor(v), siguiente(next), anterior(pre) {}
 	
-	~Nodo();
+	~Nodo() {};
+
+	void borrar() {
+		delete this;
+	}
 
 private:
 	Weapon* valor;

@@ -56,3 +56,22 @@ void Lista::Anterior() {
 	}
 }
 
+void Lista::Vaciar() {
+
+	while (actual != NULL) {
+		if (actual->siguiente == actual) {//Solo hay un arma en la lista
+			delete actual;
+			actual = NULL;
+		}
+		else {//Hay mas de un arma en la lista
+			pnodo nodo;
+			nodo = actual->siguiente;
+			actual->siguiente->anterior = actual->anterior;//Modificamos los nodos siguientes y anteriores para que la lista no se desestabilice
+			actual->anterior->siguiente = actual->siguiente;
+			delete actual;
+			actual = nodo;
+		}
+	}
+
+}
+
