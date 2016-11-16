@@ -49,7 +49,7 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	Pistola* firstWeapon;
+	RocketLauncher* firstWeapon;
 
 
 	/*float RandomNumber = Randf(0, 3);
@@ -70,9 +70,9 @@ void Player::inicializar()
 	else {
 		firstWeapon = new Asalto();
 	}*/
-	firstWeapon = new Pistola();
+	firstWeapon = new RocketLauncher();
 
-	tienePistola = true;
+	tieneRocketLauncher = true;
 
 
 	//TODO: saber si estoy recargando desde el player

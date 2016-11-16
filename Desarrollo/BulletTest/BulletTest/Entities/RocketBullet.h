@@ -10,7 +10,7 @@
 class RocketBullet : public Entity
 {
 public:
-	RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
+	RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	~RocketBullet();
 
 private:
@@ -23,9 +23,8 @@ private:
 
 	float radioExplosion;
 
-	btGhostObject* m_explosion;
-
-
+//	btGhostObject* m_explosion;
+	btGhostObject* m_ghostObject;
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -43,5 +42,17 @@ private:
 	virtual std::string getClassName() override;
 
 	float explosion(Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
+
+	void setPosition() {
+
+		Vec3<float> pos=m_renderState.getPosition();
+		//m_currentPosition = m_ghostObject->getWorldTransform().getOrigin();
+
+		btTransform transform = m_ghostObject->getWorldTransform();
+		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+		m_ghostObject->setWorldTransform(transform);
+
+		m_nodo->setPosition(pos);
+	}
 
 };

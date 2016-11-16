@@ -96,8 +96,7 @@ void Granada::handleMessage(const Message & message)
 
 		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 			Entity* myentity = *it;
-			float k=explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f);
-			myentity->restaVida(k);
+			myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f));
 		}
 
 //		GraphicEngine::i().removeNode(m_nodo);
