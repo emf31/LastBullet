@@ -28,7 +28,7 @@
 #include <Windows.h>
 
 
-const Time Game::timePerFrame = seconds(1.f / 15.f);
+const Time Game::timePerFrame = seconds(1.f / 30.f);
 
 
 
@@ -45,49 +45,65 @@ Game::~Game()
 void Game::run()
 {
 	Clock clock;
-	Time timeSinceLastUpdate = Time::Zero;
 
 	inicializar();
 
+	/// The physics clock is just used to run the physics and runs asynchronously with the gameclock
+	Time time_physics_prev, time_physics_curr;
 
-	
+	/// There's an inner loop in here where things happen once every TickMs. These variables are for that.
+	Time time_gameclock;
+
+	/// Reset all of our timers
+	time_physics_prev = time_physics_curr = clock.restart();
+	time_gameclock = clock.getElapsedTime();
+
+
 	while (GraphicEngine::i().isRuning()) {
 		//if (GraphicEngine::i().isWindowActive()) {
 		//if (Cliente::i().isConected() ) {
-			Time elapsedTime = clock.restart();
-			
-			timeSinceLastUpdate += elapsedTime;
 
-			
-			
-			MastEventReceiver::i().endEventProcess();
-			
-			processEvents();
 
-			
-			
 
-			//Llevamos control en las actualizaciones por frame
-			while (timeSinceLastUpdate > timePerFrame) // 15 veces/segundo
-			{
-				timeSinceLastUpdate -= timePerFrame;
+		MastEventReceiver::i().endEventProcess();
 
-				//Realizamos actualizaciones
-				update(timePerFrame);
-			}
+		processEvents();
 
-			
-			
-			interpolation = (float) min(1.f, timeSinceLastUpdate.asSeconds() / timePerFrame.asSeconds());
+		///Las fisicas se ejecutan 80 veces por segundo
 
-			render(interpolation, timePerFrame);
+		time_physics_curr = clock.getElapsedTime();
 
-			
-			
+		PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
+
+		time_physics_prev = time_physics_curr;
+
+
+		// Game Clock part of the loop
+		/*  This ticks once every TickMs milliseconds on average */
+		Time dt = clock.getElapsedTime() - time_gameclock;
+
+		//Llevamos control en las actualizaciones por frame
+		while (dt >= timePerFrame) // 30 veces/segundo
+		{
+			dt -= timePerFrame;
+			time_gameclock += timePerFrame;
+
+
+			//Realizamos actualizaciones
+			update(timePerFrame);
+		}
+
+
+		interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
+
+		render(interpolation, timePerFrame);
+
+
+
 		//}
-			MastEventReceiver::i().startEventProcess();
+		MastEventReceiver::i().startEventProcess();
 	}
-	
+
 	//Espera a que termine el otro hilo para finalizar el programa
 	Cliente::i().apagar();
 	GraphicEngine::i().apagar();

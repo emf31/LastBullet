@@ -49,5 +49,7 @@ public:
 
 private:
 	int estado=GRANADACARGADA;
+
+	Vec3<float> fuerza;
 };
 

@@ -68,6 +68,8 @@ private:
 
 	std::list<btRigidBody*> m_rigidBodies;
 
+	static const Time tickPhysics;
+
 	//Constructor privado para que no se pueda llamar
 	PhysicsEngine() { }
 };

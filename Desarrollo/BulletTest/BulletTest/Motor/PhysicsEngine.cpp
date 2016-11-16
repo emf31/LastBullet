@@ -8,6 +8,8 @@
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
+const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
+
 
 //Tenemos un unordered maps de contactos, donde la key es un entity.
 //El value es un std::set(igual que un array pero no admite duplicados)
@@ -44,7 +46,7 @@ void PhysicsEngine::inicializar()
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 
-	m_world->setGravity(btVector3(0, -3, 0));
+	m_world->setGravity(btVector3(0, -55, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
@@ -67,7 +69,7 @@ void PhysicsEngine::update(Time elapsedTime)
 	while (maxSubsteps * (timeSinceLastUpdate.asSeconds()) < elapsedTime.asSeconds()) {
 		maxSubsteps++;
 	}*/
-	m_world->stepSimulation(btScalar(elapsedTime.asMilliseconds()), 30);
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 12, tickPhysics.asSeconds());
 
 	//Aqui calculariamos colisiones
 	for (auto contactsIter = contacts.begin(); contactsIter != contacts.end(); ++contactsIter) {
@@ -80,11 +82,11 @@ void PhysicsEngine::update(Time elapsedTime)
 			Entity* collider1 = *entityIter;
 			//enviamos 2 mensajes uno para la entity que colisiona y otra a la entity con la que colisiona
 
-			/*Message msg1(collider0, "COLLISION", collider1);
+			Message msg1(collider0, "COLLISION", collider1);
 			Message msg2(collider1, "COLLISION", collider0);
 
 			MessageHandler::i().sendMessage(msg1);
-			MessageHandler::i().sendMessage(msg2);*/
+			MessageHandler::i().sendMessage(msg2);
 			
 		}
 	}

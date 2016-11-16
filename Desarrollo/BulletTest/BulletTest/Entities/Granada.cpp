@@ -17,6 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
+	fuerza = Vec3<float>(160.f, 160.f, 160.f);
 }
 
 void Granada::update(Time elapsedTime)
@@ -112,7 +113,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		setPosition(posicion);
 
 		printf("GRANADA DISPARADO\n");
-		btVector3 FUERZA(90.f, 90.f, 90.f);
+		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 
 		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
@@ -127,7 +128,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
 
 
-		m_rigidBody->applyCentralForce(force);
+		m_rigidBody->applyCentralImpulse(force);
 		
 
 		if (Cliente::i().isConected()) {
@@ -158,7 +159,7 @@ void Granada::serverShoot(TGranada g) {
 		setPosition(g.origen);
 
 		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		btVector3 FUERZA(20.f, 20.f, 20.f);
+		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 		btVector3 direccion2(g.direction.getX(), g.direction.getY(), g.direction.getZ());
 
@@ -167,7 +168,7 @@ void Granada::serverShoot(TGranada g) {
 		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
 
 
-		m_rigidBody->applyCentralForce(force);
+		m_rigidBody->applyCentralImpulse(force);
 		//rocket->m_rigidBody->setCollisionFlags(4);
 
 		setEstado(GRANADADISPARADA);
