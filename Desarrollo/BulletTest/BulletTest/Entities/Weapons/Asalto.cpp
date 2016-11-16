@@ -4,7 +4,10 @@
 
 Asalto::Asalto() : Weapon()
 {
-	
+	capacidadAmmo = 30;
+	disparos = 0;
+	cadencia = milliseconds(50);
+	recarga = milliseconds(1000);
 }
 
 
@@ -15,10 +18,7 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-	capacidadAmmo = 30;
-	disparos = 0;
-	cadencia = milliseconds(50);
-	recarga = milliseconds(1000);
+
 }
 
 void Asalto::update(Time elapsedTime)
@@ -127,7 +127,9 @@ void Asalto::shoot()
 
 			relojCadencia.restart();
 
-		}
+	}
+
+
 	}
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();

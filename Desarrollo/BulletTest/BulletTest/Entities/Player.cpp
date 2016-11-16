@@ -70,32 +70,6 @@ void Player::inicializar()
 
 	tienePistola = true;
 
-	/********************************/
-	/********************************/
-
-	/*Pistola* firstWeapon;*/
-
-	/*float RandomNumber = Randf(0, 3);
-	std::cout << RandomNumber << std::endl;
-
-	if (RandomNumber >= 0 && RandomNumber < 1) {
-		firstWeapon = new Asalto();
-		tieneAsalto = true;
-	}
-	else if (RandomNumber >= 1 && RandomNumber < 2) {
-		firstWeapon = new Pistola();
-		tienePistola = true;
-	}
-	else if (RandomNumber >= 2 && RandomNumber <= 3) {
-		firstWeapon = new RocketLauncher();
-		tieneRocketLauncher = true;
-	}
-	else {
-		firstWeapon = new Asalto();
-	}*/
-	//firstWeapon = new Pistola(); 
-	
-
 
 	//TODO: saber si estoy recargando desde el player
 	/*
@@ -251,6 +225,7 @@ void Player::handleMessage(const Message & message)
 		TBala* tBala = static_cast<TBala*>(message.data);
 
 		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
+
 	}
 	else if (message.mensaje == "NUEVO_ENEMIGO") {
 		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);

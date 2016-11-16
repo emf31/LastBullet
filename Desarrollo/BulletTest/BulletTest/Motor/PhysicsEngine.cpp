@@ -85,6 +85,7 @@ void PhysicsEngine::update(Time elapsedTime)
 			Message msg1(collider0, "COLLISION", collider1);
 			Message msg2(collider1, "COLLISION", collider0);
 
+
 			MessageHandler::i().sendMessage(msg1);
 			MessageHandler::i().sendMessage(msg2);
 			
@@ -234,6 +235,38 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 	return ghostObj;
 }
 
+btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
+	btCollisionShape *m_pCollisionShape = new btSphereShape(radio);
+
+	btTransform transform;
+	transform.setIdentity();
+	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	transform.setOrigin(pos);
+
+	btGhostObject* ghostObj = new btGhostObject();
+	ghostObj->setUserPointer(entity);
+	ghostObj->setWorldTransform(transform);
+
+	ghostObj->setCollisionShape(m_pCollisionShape);
+
+	//ghostObj->setCollisionFlags(btCollisionObject::CF_NO_CONTACT_RESPONSE);
+	ghostObj->setCollisionFlags(btGhostObject::CF_NO_CONTACT_RESPONSE);
+
+	//ghostObj->setWorldTransform(transform);
+
+
+
+	//ghostObj->setUserPointer(entity);
+
+	//add the rigidBody to the world
+	//m_world->addCollisionObject(rigidBody);
+
+	m_world->addCollisionObject(ghostObj, btBroadphaseProxy::SensorTrigger,
+		btBroadphaseProxy::CharacterFilter);
+
+	return ghostObj;
+}
+
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 {
 	
@@ -242,6 +275,15 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 
 	return true;
 }
+bool PhysicsEngine::removeGhostObject(btGhostObject * body)
+{
+
+	//m_rigidBodies.remove(body);
+	m_world->removeCollisionObject(body);
+
+	return true;
+}
+
 
 void PhysicsEngine::apagar()
 {

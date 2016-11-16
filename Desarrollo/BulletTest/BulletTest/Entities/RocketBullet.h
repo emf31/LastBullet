@@ -5,14 +5,16 @@
 #include "EntityManager.h"
 #include "../Otros/Time.hpp"
 #include "../Otros/Clock.hpp"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
 class RocketBullet : public Entity
 {
 public:
-	RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
+	RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	~RocketBullet();
 
 private:
+	float radioExplosion;
 	Vec3<float> m_direction;
 	Vec3<float> m_position;
 	Vec3<float> m_rotation;
@@ -20,10 +22,8 @@ private:
 	Time m_lifetime;
 	Clock timelifeclock;
 
-	float radioExplosion;
-
-
-
+//	btGhostObject* m_explosion;
+	btRigidBody* m_rigidBody;
 
 
 	// Heredado vía Entity
@@ -40,5 +40,8 @@ private:
 	virtual void handleMessage(const Message & message) override;
 
 	virtual std::string getClassName() override;
+
+	float explosion(Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
+
 
 };
