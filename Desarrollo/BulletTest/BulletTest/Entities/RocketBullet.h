@@ -23,8 +23,7 @@ private:
 
 	float radioExplosion;
 
-	btGhostObject* m_ghostObject;
-	bool primeraExplosion;
+	btGhostObject* m_explosion;
 
 
 

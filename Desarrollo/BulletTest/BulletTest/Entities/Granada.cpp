@@ -86,6 +86,10 @@ void Granada::handleMessage(const Message & message)
 
 	if (message.mensaje == "BORRATE") {
 
+		if (m_explosion != NULL)
+			PhysicsEngine::i().removeGhostObject(m_explosion);
+
+		m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
 
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion

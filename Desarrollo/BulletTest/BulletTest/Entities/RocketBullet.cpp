@@ -13,7 +13,6 @@ m_position(position), m_direction(direction), m_velocity(300), m_rotation(rotati
 	float distancia = Vec3<float>::getDistance(position, finalposition);
 	m_lifetime = seconds(distancia / m_velocity);
 	timelifeclock.restart();
-	primeraExplosion = true;
 	//NOTA: llevar cuidado con esto puede que pete aqui
 	cargarContenido();
 }
@@ -61,13 +60,9 @@ void RocketBullet::handleMessage(const Message & message)
 {
 	if (message.mensaje == "BORRATE") {
 
-		if (!primeraExplosion) {
-			PhysicsEngine::i().removeGhostObject(m_ghostObject);
-			printf("DEBERIA ELIMINAR GHOSTO OBJ\n");
-		}
 			
 
-		m_ghostObject=PhysicsEngine::i().createSphereShape(this,40.f);
+		m_explosion =PhysicsEngine::i().createSphereShape(this,40.f);
 
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
