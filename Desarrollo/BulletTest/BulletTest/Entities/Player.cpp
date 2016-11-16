@@ -49,43 +49,35 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	Pistola* firstWeapon;
+	/*****************************/
+	/*******INICILAZAR ARMAS******/
+	asalto = new Asalto();
+	asalto->inicializar();
+	asalto->cargarContenido();
 
+	rocket = new RocketLauncher();
+	rocket->inicializar();
+	rocket->cargarContenido();
 
-	/*float RandomNumber = Randf(0, 3);
-	std::cout << RandomNumber << std::endl;
+	pistola = new Pistola();
+	pistola->inicializar();
+	pistola->cargarContenido();
+	//pistola->getNode()->setVisible(true);
 
-	if (RandomNumber >= 0 && RandomNumber < 1) {
-		firstWeapon = new Asalto();
-		tieneAsalto = true;
-	}
-	else if (RandomNumber >= 1 && RandomNumber < 2) {
-		firstWeapon = new Pistola();
-		tienePistola = true;
-	}
-	else if (RandomNumber >= 2 && RandomNumber <= 3) {
-		firstWeapon = new RocketLauncher();
-		tieneRocketLauncher = true;
-	}
-	else {
-		firstWeapon = new Asalto();
-	}*/
-	firstWeapon = new Pistola();
-
-	tienePistola = true;
-
-
-	//TODO: saber si estoy recargando desde el player
-	/*
-	if (listaWeapons->valorActual()->getEstadoWeapon()==CARGADA) { //TODO: ponerEnEstadoAnimacionRecargando
-		printf("ZIMU");
-	}
-	else {
-
-	}*/
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(firstWeapon);
+	listaWeapons->insertar(pistola);
+	/*listaWeapons->insertar(asalto);
+	listaWeapons->insertar(rocket);*/
+
+	//tieneAsalto = true;
+	tienePistola = true;
+	//tieneRocketLauncher = true;
+	
+
+	/********************************/
+	/********************************/
+
 
 	m_vida = 5;
 
@@ -156,9 +148,15 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj"));
-	m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
-	m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", ""));
+	//m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
+	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
+	//m_nodo->addChild(asalto->getNode());
+	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+	
+	//m_nodo->addChild(rocket->getNode());
+
+	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
 
@@ -379,6 +377,24 @@ void Player::updateState()
 	}
 }
 
+void Player::UpWeapon()
+{
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->Siguiente();
+	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+}
+
+void Player::DownWeapon()
+{
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->Anterior();
+	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+}
+
 void Player::setWeapon(int newWeapon) {
 
 	Weapon* weapon;
@@ -387,24 +403,21 @@ void Player::setWeapon(int newWeapon) {
 		case LANZACOHETES:
 			if (!tieneRocketLauncher) {
 				printf("TE HAS EQUIPADO UN LANZACOHETES\n");
-				weapon = new RocketLauncher();
-				listaWeapons->insertar(weapon);
+				listaWeapons->insertar(rocket);
 				tieneRocketLauncher = true;
 			}
 		break;
 		case ASALTO:
 			if (!tieneAsalto) {
 				printf("TE HAS EQUIPADO UN ASALTO\n");
-				weapon = new Asalto();
-				listaWeapons->insertar(weapon);
+				listaWeapons->insertar(asalto);
 				tieneAsalto = true;
 			}
 		break;
 		case PISTOLA:
 			if (!tienePistola) {
 				printf("TE HAS EQUIPADO UNA PISTOLA\n");
-				weapon = new Pistola();
-				listaWeapons->insertar(weapon);
+				listaWeapons->insertar(pistola);
 				tienePistola = true;
 			}
 		break;

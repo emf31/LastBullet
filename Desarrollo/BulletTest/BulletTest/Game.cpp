@@ -218,18 +218,20 @@ void Game::inicializar()
 	
 
 	if (a == 1) {
-		//Si no le pasas GUID es que es un jugador
-		player = new Player("Batman");
 
 		EntityManager::i().inicializar();
 
 		EntityManager::i().cargarContenido();
+
+		//Si no le pasas GUID es que es un jugador
+		player = new Player("Batman");
+		player->inicializar();
+		player->cargarContenido();
 	}
 	else {
 		EntityManager::i().inicializar();
 
 		EntityManager::i().cargarContenido();
-		
 
 		//raknet
 		Cliente::i().inicializar();

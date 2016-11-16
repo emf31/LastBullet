@@ -23,6 +23,9 @@ void Asalto::inicializar()
 
 void Asalto::update(Time elapsedTime)
 {
+	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()));
+
 	if (estadoWeapon == DESCARGADA) {
 		if (relojrecarga.getElapsedTime() < recarga) {
 			printf("recargando\n");
@@ -41,7 +44,11 @@ void Asalto::handleInput()
 
 void Asalto::cargarContenido()
 {
-
+	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(10.f, 10.f, 10.f), "", "../media/arma/asalto.obj"));
+	m_nodo->setVisible(false);
+	m_nodo->setTexture("../media/ice0.jpg", 0);
+	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
 
 }
 

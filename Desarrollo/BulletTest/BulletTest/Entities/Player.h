@@ -44,8 +44,8 @@ public:
 	void updateAnimation();
 	void updateState();
 
-	void UpWeapon() { listaWeapons->Siguiente(); }
-	void DownWeapon() { listaWeapons->Anterior(); }
+	void UpWeapon();
+	void DownWeapon();
 
 
 	void sumarVida() { m_vida++; printf("ME HE CURADO\n"); }
@@ -66,6 +66,9 @@ private:
 	Granada* granada;
 
 	Lista* listaWeapons;
+	Asalto* asalto;
+	Pistola* pistola;
+	RocketLauncher* rocket;
 
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
 
