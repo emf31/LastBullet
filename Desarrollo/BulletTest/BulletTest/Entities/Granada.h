@@ -50,6 +50,7 @@ public:
 
 private:
 	int estado=GRANADACARGADA;
+	float radioExplosion;
 	btGhostObject* m_explosion;
 };
 

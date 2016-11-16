@@ -63,6 +63,8 @@ void Granada::cargarContenido()
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+	radioExplosion=30.f;
+
 
 }
 
@@ -89,7 +91,8 @@ void Granada::handleMessage(const Message & message)
 		if (m_explosion != NULL)
 			PhysicsEngine::i().removeGhostObject(m_explosion);
 
-		m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
+
+		m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
@@ -97,6 +100,7 @@ void Granada::handleMessage(const Message & message)
 		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 			Entity* myentity = *it;
 			myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f));
+
 		}
 
 //		GraphicEngine::i().removeNode(m_nodo);

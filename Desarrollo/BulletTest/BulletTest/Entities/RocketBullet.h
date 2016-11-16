@@ -14,6 +14,7 @@ public:
 	~RocketBullet();
 
 private:
+	float radioExplosion;
 	Vec3<float> m_direction;
 	Vec3<float> m_position;
 	Vec3<float> m_rotation;
@@ -25,6 +26,7 @@ private:
 
 //	btGhostObject* m_explosion;
 	btGhostObject* m_ghostObject;
+
 
 	// Heredado vía Entity
 	virtual void inicializar() override;

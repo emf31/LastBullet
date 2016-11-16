@@ -52,6 +52,7 @@ void RocketBullet::cargarContenido()
 
 	m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(1.f, 1.f, 1.f));
 
+	radioExplosion = 40.f;
 }
 
 void RocketBullet::borrarContenido()
@@ -65,6 +66,7 @@ void RocketBullet::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 
 	//	m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
+		//m_explosion =PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
@@ -72,6 +74,7 @@ void RocketBullet::handleMessage(const Message & message)
 		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 			Entity* myentity = *it;
 			myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 40.f));
+
 		}
 
 		EntityManager::i().removeEntity(this);
