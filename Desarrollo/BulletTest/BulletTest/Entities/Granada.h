@@ -39,7 +39,7 @@ public:
 	void shoot(const btVector3& posicionPlayer);
 	void serverShoot(TGranada g);
 
-	void explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio);
+	float explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio);
 
 	btRigidBody* m_rigidBody;
 

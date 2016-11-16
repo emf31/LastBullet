@@ -56,14 +56,13 @@ public:
 	
 
 	void resetVida() {
-		m_vida = 5;
+		m_vida = 100;
 	}
 	float getVida() {
 		return m_vida;
 	}
-	float restaVida() {
-		printf("me resto 1 de vida\n");
-		m_vida--;
+	float restaVida(float cantidad) {
+		m_vida -= cantidad;
 		return m_vida;
 	}
 
