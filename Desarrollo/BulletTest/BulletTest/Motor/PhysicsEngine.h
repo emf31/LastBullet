@@ -50,11 +50,12 @@ public:
 
 	btGhostObject* createBoxGhostObject(Entity * entity, const Vec3<float>& scale);
 
-	
+	btGhostObject* createSphereShape(Entity* entity, float radio);
 
 
 	//borra un rigidbody de la simulacion
 	bool removeRigidBody(btRigidBody* body);
+	bool removeGhostObject(btGhostObject * body);
 
 	//aqui se borran todos los punteros
 	void apagar();

@@ -5,6 +5,7 @@
 #include "EntityManager.h"
 #include "../Otros/Time.hpp"
 #include "../Otros/Clock.hpp"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
 class RocketBullet : public Entity
 {
@@ -22,7 +23,8 @@ private:
 
 	float radioExplosion;
 
-
+	btGhostObject* m_ghostObject;
+	bool primeraExplosion;
 
 
 

@@ -226,10 +226,12 @@ void Player::borrarContenido()
 void Player::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
+	
 		if (static_cast<Entity*>(message.data)->getClassName() == "LifeObject") {
 			//std::cout << "Has cogido vida" << std::endl;
 
 		}
+
 	}
 
 	if (message.mensaje == "DIBUJARBALA") {
