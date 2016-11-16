@@ -81,19 +81,22 @@ void RocketBullet::handleMessage(const Message & message)
 	//	m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
 		//m_explosion =PhysicsEngine::i().createSphereShape(this, radioExplosion);
 		if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
+			if (estado == DISPONIBLE) {
 
-			list<Entity*>characters = EntityManager::i().getCharacters();
-			///Explosion
-			for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
+				list<Entity*>characters = EntityManager::i().getCharacters();
+				///Explosion
+				for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 
-				Entity* myentity = *it;
-				myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), radioExplosion));
+					Entity* myentity = *it;
+					myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), radioExplosion));
 
+				}
+
+				PhysicsEngine::i().removeRigidBody(m_rigidBody);
+
+				EntityManager::i().removeEntity(this);
+				estado = USADO;
 			}
-
-			PhysicsEngine::i().removeRigidBody(m_rigidBody);
-
-			EntityManager::i().removeEntity(this);
 		}
 
 	}

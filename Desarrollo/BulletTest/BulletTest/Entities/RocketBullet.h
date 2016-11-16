@@ -24,7 +24,7 @@ private:
 
 //	btGhostObject* m_explosion;
 	btRigidBody* m_rigidBody;
-
+	int estado=DISPONIBLE;
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
