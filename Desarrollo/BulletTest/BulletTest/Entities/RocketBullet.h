@@ -14,14 +14,13 @@ public:
 	~RocketBullet();
 
 private:
+	float radioExplosion;
 	Vec3<float> m_direction;
 	Vec3<float> m_position;
 	Vec3<float> m_rotation;
 	float m_velocity;
 	Time m_lifetime;
 	Clock timelifeclock;
-
-	float radioExplosion;
 
 	btGhostObject* m_explosion;
 

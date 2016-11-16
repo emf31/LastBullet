@@ -50,6 +50,7 @@ void RocketBullet::cargarContenido()
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
+	radioExplosion = 40.f;
 }
 
 void RocketBullet::borrarContenido()
@@ -62,14 +63,14 @@ void RocketBullet::handleMessage(const Message & message)
 
 			
 
-		m_explosion =PhysicsEngine::i().createSphereShape(this,40.f);
+		m_explosion =PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
 
 		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 			Entity* myentity = *it;
-			float k = explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 40.f);
+			float k = explosion(m_renderState.getPosition(), myentity->getRenderPosition(), radioExplosion);
 			myentity->restaVida(k);
 		}
 
