@@ -85,7 +85,7 @@ void RocketLauncher::shoot() {
 
 		PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-		Vec3<float> posicionImpacto(1500, 1500, 1500);
+		/*Vec3<float> posicionImpacto(1500, 1500, 1500);
 
 
 		if (ray.hasHit())//si ray ha golpeado algo entro
@@ -109,7 +109,7 @@ void RocketLauncher::shoot() {
 
 			posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 
-		}
+		}*/
 
 		//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
 		//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
@@ -121,14 +121,14 @@ void RocketLauncher::shoot() {
 		//	  if (arma != LANZACOHETES)
 		//GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 		//	else {
-		RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+		RocketBullet* bala = new RocketBullet(posDisparo, direccion, GraphicEngine::i().getActiveCamera()->getRotation());
 		//	  }
 
 
-		if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+	/*	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 			Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-		}
+		}*/
 		//}
 
 		relojCadencia.restart();

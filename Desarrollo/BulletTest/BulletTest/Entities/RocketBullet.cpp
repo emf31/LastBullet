@@ -7,12 +7,10 @@
 
 
 
-RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
+RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(300), m_rotation(rotation), radioExplosion(10)
 {
-	float distancia = Vec3<float>::getDistance(position, finalposition);
-	m_lifetime = seconds(distancia / m_velocity);
-	timelifeclock.restart();
+
 	//NOTA: llevar cuidado con esto puede que pete aqui
 	cargarContenido();
 }
@@ -29,7 +27,8 @@ void RocketBullet::inicializar()
 void RocketBullet::update(Time elapsedTime)
 {
 	m_renderState.updateVelocity(elapsedTime.asSeconds(), (m_direction*m_velocity));
-	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
+	setPosition();
+	/*if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
 		//EntityManager::i().removeEntity(this);
 		printf("Explosion en %f %f %f\n",m_renderState.getPosition().getX(), m_renderState.getPosition().getY(), m_renderState.getPosition().getZ());
 
@@ -37,7 +36,7 @@ void RocketBullet::update(Time elapsedTime)
 
 		MessageHandler::i().sendMessage(msg1);
 	}
-
+	*/
 }
 
 void RocketBullet::handleInput()
@@ -50,6 +49,9 @@ void RocketBullet::cargarContenido()
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
+
+	m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(1.f, 1.f, 1.f));
+
 	radioExplosion = 40.f;
 }
 
@@ -59,24 +61,25 @@ void RocketBullet::borrarContenido()
 
 void RocketBullet::handleMessage(const Message & message)
 {
-	if (message.mensaje == "BORRATE") {
 
-			
 
-		m_explosion =PhysicsEngine::i().createSphereShape(this, radioExplosion);
+	if (message.mensaje == "COLLISION") {
+
+	//	m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
+		//m_explosion =PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
 		list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
 
 		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 			Entity* myentity = *it;
-			float k = explosion(m_renderState.getPosition(), myentity->getRenderPosition(), radioExplosion);
-			myentity->restaVida(k);
+			myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 40.f));
+
 		}
 
 		EntityManager::i().removeEntity(this);
-		GraphicEngine::i().removeNode(m_nodo);
-			
+		PhysicsEngine::i().removeGhostObject(m_ghostObject);
+
 	}
 }
 
