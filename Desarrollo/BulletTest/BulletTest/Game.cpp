@@ -223,6 +223,15 @@ void Game::inicializar()
 
 	/////////////////////////////////////////////////////////////////////
 
+	/////////////////////////////////////////////////////////////////////
+	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/ice0.jpg", "");
+
+	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
+	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(5.f, 5.f, 5.f), 1, DISABLE_DEACTIVATION));
+	cajaEnt->setPosition(Vec3<float>(0, 100, 0));
+
+	/////////////////////////////////////////////////////////////////////
+
 	int a;
 	do {
 		std::cout << "Elige un modo:" << std::endl;

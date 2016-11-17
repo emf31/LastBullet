@@ -65,6 +65,12 @@ public:
 		m_vida -= cantidad;
 		return m_vida;
 	}
+	void sumarVida() {
+		m_vida += 40;
+		if (m_vida > 100)
+			m_vida = 100;
+		printf("ME HE CURADO\n");
+	}
 
 
 	std::shared_ptr<SceneNode> getNode();

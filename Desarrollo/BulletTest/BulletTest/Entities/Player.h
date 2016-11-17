@@ -48,11 +48,6 @@ public:
 	void DownWeapon() { listaWeapons->Anterior(); }
 
 
-	void sumarVida() { 
-		m_vida+=40;
-		if (m_vida > 100)
-			m_vida = 100;
-		printf("ME HE CURADO\n"); }
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 

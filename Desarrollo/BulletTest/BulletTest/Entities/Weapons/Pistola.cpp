@@ -70,6 +70,7 @@ void Pistola::shoot() {
 			disparos++;
 			printf("DISPARANDO PISTOLA\n");
 			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
+			btVector3 FUERZA(10, 10, 10);
 
 			btVector3 start(
 				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -95,7 +96,7 @@ void Pistola::shoot() {
 			{
 
 
-				const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
+				btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 
 																					 //calcularDistancia(start, end);
 
@@ -110,8 +111,14 @@ void Pistola::shoot() {
 					MessageHandler::i().sendMessage(msg);
 				}
 
+
 				posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 
+
+				if (myEnt->getClassName() == "PhysicsEntity") {
+					hit->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
+					std::cout << myEnt->getName() << std::endl;
+				}
 			}
 
 			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final

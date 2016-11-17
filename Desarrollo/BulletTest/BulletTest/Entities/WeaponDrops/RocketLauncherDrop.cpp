@@ -56,3 +56,4 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 		}
 	}
 }
+
