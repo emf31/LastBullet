@@ -44,8 +44,8 @@ public:
 	void updateAnimation();
 	void updateState();
 
-	void UpWeapon() { listaWeapons->Siguiente(); }
-	void DownWeapon() { listaWeapons->Anterior(); }
+	void UpWeapon();
+	void DownWeapon();
 
 
 
@@ -68,13 +68,11 @@ private:
 	//EQUIPO
 	Granada* granada;
 
-	//ARMAS
-	RocketLauncher* rocket;
-	Pistola* pistola;
-	Asalto* asalto;
-
 	//LISTA DE ARMAS
 	Lista* listaWeapons;
+	Asalto* asalto;
+	Pistola* pistola;
+	RocketLauncher* rocket;
 
 
 

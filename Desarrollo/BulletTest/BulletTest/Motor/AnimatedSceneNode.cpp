@@ -23,6 +23,7 @@ void AnimatedSceneNode::setTexture(const io::path & texture, int material)
 void AnimatedSceneNode::setPosition(Vec3<float> position)
 {
 	m_node->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
+
 }
 
 Vec3<float> AnimatedSceneNode::getPosition()
@@ -47,8 +48,24 @@ ISceneNode* AnimatedSceneNode::getNodo() {
 	return m_node;
 }
 
+void AnimatedSceneNode::addChild(std::shared_ptr<SceneNode> child) {
+	m_node->addChild(child->getNodo());
+}
+
+void AnimatedSceneNode::removeChild(std::shared_ptr<SceneNode> child)
+{
+	child->getNodo()->grab();
+	m_node->removeChild(child->getNodo());
+}
+
+
 void AnimatedSceneNode::setAnimation(int start, int end)
 {
 	m_node->setMD2Animation(scene::EMAT_STAND);
 	m_node->setFrameLoop(start, end);
+}
+
+void AnimatedSceneNode::setVisible(bool visible)
+{
+	m_node->setVisible(visible);
 }

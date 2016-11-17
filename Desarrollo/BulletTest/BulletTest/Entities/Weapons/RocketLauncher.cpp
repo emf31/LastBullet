@@ -24,6 +24,10 @@ void RocketLauncher::inicializar()
 void RocketLauncher::update(Time elapsedTime)
 {
 	if (equipada) {
+		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5, player_pos.getZ()));
+		m_renderState.updateRotations(player_rot);
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -39,6 +43,7 @@ void RocketLauncher::update(Time elapsedTime)
 			else {
 				relojrecarga.restart();
 			}
+
 		}
 	}
 
@@ -50,7 +55,10 @@ void RocketLauncher::handleInput()
 
 void RocketLauncher::cargarContenido()
 {
-
+	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(10.f, 10.f, 10.f), "", "../media/arma/rocket.obj"));
+	m_nodo->setVisible(false);
+	m_nodo->setTexture("../media/ice0.jpg", 0);
 
 }
 

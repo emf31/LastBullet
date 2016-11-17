@@ -4,6 +4,7 @@
 #include <string>
 #include "../Otros/vec3.hpp"
 #include "SceneNode.h"
+#include <memory>
 
 
 using namespace irr;
@@ -19,6 +20,9 @@ public:
 	SceneNode(IVideoDriver* irrDriver);
 	~SceneNode();
 
+	virtual void setVisible(bool visible) = 0;
+	virtual void addChild(std::shared_ptr<SceneNode> child) = 0;
+	virtual void removeChild(std::shared_ptr<SceneNode> child) = 0;
 	virtual void setTexture(const io::path& texture, int material) = 0;
 	virtual void setPosition(Vec3<float> position) = 0;
 	virtual void setRotation(Vec3<float> rotation) = 0;

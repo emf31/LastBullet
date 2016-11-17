@@ -43,6 +43,21 @@ Vec3<float> BasicSceneNode::getScale()
 	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }
 
+void BasicSceneNode::addChild(std::shared_ptr<SceneNode> child) {
+	m_node->addChild(child->getNodo());
+}
+
+void BasicSceneNode::removeChild(std::shared_ptr<SceneNode> child)
+{
+	child->getNodo()->grab();
+	m_node->removeChild(child->getNodo());
+}
+
 ISceneNode* BasicSceneNode::getNodo() {
 	return m_node;
+}
+
+void BasicSceneNode::setVisible(bool visible)
+{
+	m_node->setVisible(visible);
 }

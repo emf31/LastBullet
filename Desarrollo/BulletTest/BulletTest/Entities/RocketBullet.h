@@ -22,7 +22,6 @@ private:
 	Time m_lifetime;
 	Clock timelifeclock;
 
-//	btGhostObject* m_explosion;
 	btRigidBody* m_rigidBody;
 	int estado=DISPONIBLE;
 
