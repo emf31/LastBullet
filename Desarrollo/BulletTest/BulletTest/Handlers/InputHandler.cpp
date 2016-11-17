@@ -3,9 +3,12 @@
 #include "../Command/MoveUp.h"
 #include "../Command/MoveRight.h"
 #include "../Command/MoveLeft.h"
+#include "../Command/ListWeaponUp.h"
+#include "../Command/ListWeaponDown.h"
 #include "../Command/Jump.h"
 #include "../Command/ShootCommand.h"
-#include "../Command/ShootCommandRocket.h"
+#include "../Command/ShootCommandGranada.h"
+#include "../Command/RunCommand.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
 
@@ -26,18 +29,26 @@ InputHandler::InputHandler()
 	move_down = new MoveDown();
 	move_left = new MoveLeft();
 	move_right = new MoveRight();
+	list_up = new ListWeaponUp();
+	list_down = new ListWeaponDown();
 	jump = new Jump();
 	shoot_command = new ShootCommand();
-	shoot_commandRocket = new ShootCommandRocket();
-
+	shoot_commandGranada = new ShootCommandGranada();
+	run_command = new RunCommand();
 	// Player
+	
 	commands[KEY_KEY_W] = move_up;
 	commands[KEY_KEY_A] = move_left;
 	commands[KEY_KEY_S] = move_down;
 	commands[KEY_KEY_D] = move_right;
+	commands[KEY_KEY_3] = list_up;
+	commands[KEY_KEY_4] = list_down;
 	commands[KEY_SPACE] = jump;
 	commands[KEY_LBUTTON] = shoot_command;
-	commands[KEY_RBUTTON] = shoot_commandRocket;
+	commands[KEY_RBUTTON] = shoot_commandGranada;
+	commands[KEY_LSHIFT] = run_command;
+	
+	
 }
 
 void InputHandler::bind(EKEY_CODE key, Command *command)
@@ -60,12 +71,12 @@ void InputHandler::excuteCommands(Player* p)
 
 bool InputHandler::generate_input_commands(std::vector<Command*> &command_queue)
 {
-	bool exit = input_mapping();    
+	bool exit = input_mapping();
 
 	if (exit) return true;
 	else {
-		fill_command_queue(command_queue);  
-		action_map.clear();         
+		fill_command_queue(command_queue);
+		action_map.clear();
 		return false;
 	}
 }
@@ -87,6 +98,22 @@ bool InputHandler::input_mapping()
 
 	/*SDL_Event event;
 	while (SDL_PollEvent(&event) != 0) {
+<<<<<<< HEAD
+	if (event.type == SDL_QUIT) {
+	return true;
+	} else if (event.type == SDL_KEYDOWN) {
+	if (event.key.keysym.sym == SDLK_ESCAPE) {
+	return true;
+	}
+	keydown(event);
+	}
+	else if (event.type == SDL_KEYUP) {
+	keyup(event);
+	}
+
+	}
+
+=======
 		if (event.type == SDL_QUIT) {
 			return true;
 		} else if (event.type == SDL_KEYDOWN) {
@@ -101,6 +128,7 @@ bool InputHandler::input_mapping()
 			
 	}
 		
+>>>>>>> refs/remotes/origin/Irrlitch+Bullet
 
 	return false;*/
 }
@@ -130,12 +158,16 @@ void InputHandler::keyup(EKEY_CODE keyCode)
 
 bool InputHandler::is_held(EKEY_CODE key)
 {
-	return state_map[key];
+	if(state_map[key])
+		return true;
+	return false;
 }
 
 bool InputHandler::was_pressed(EKEY_CODE key)
 {
-	return action_map[key];
+	if(action_map[key])
+		return true;
+	return false;
 }
 
 void InputHandler::borrarContenido()

@@ -2,50 +2,22 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
-#include "Rocket.h"
+#include "KinematicCharacterController.h"
+//#include <BulletDynamics\Character\btKinematicCharacterController.h>
+#include "Granada.h"
+#include "Weapons/Weapon.h"
+#include "../Motor/AnimatedSceneNode.h"
+#include "../Motor/Animation.h"
 #include <vector>
-#include "DynamicCharacterController.h"
-
+#include "../Lista.h"
 
 class Player : public Entity
 {
 public:
-	Player();
+	Player(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
-	void jump();
-
-	void shoot();
-	void shootRocket();
-
-
-	void move_up();
-	void move_down();
-	void move_right();
-	void move_left();
-
-
-
-private:
-	
-	btRigidBody* m_rigidBody;
-
-	Rocket* rocket;
-	Clock clockRecargaRocket;
-	float timeRecargaRocket = 3;
-
-
-	bool isJumping;
-	bool isMoving;
-
-	float m_speedFactor;
-	float giro;
-
-	Vec3<float> vectorPrev;
-	Vec3<float> vectorNew;
-
-	Vec3<float> speedFinal;
-
+	void setPosition(Vec3<float> pos);
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -54,15 +26,85 @@ private:
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
+	virtual std::string getClassName() { return "Player"; }
+
+	void run();
+	void setWeapon(int weapon);
+
+	void jump();
+
+	void shoot();
+	void shootGranada();
+
+	void move_up();
+	void move_down();
+	void move_right();
+	void move_left();
+
+	void updateAnimation();
+	void updateState();
+
+	void UpWeapon();
+	void DownWeapon();
+
+
+
+	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
+
+
+	std::string getCurrentWeapon() {
+		return listaWeapons->valorActual()->getClassName();
+	};
+
+	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
+	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
+	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal(); }
+
+private:
+	float m_vida;
+
+	Animation* animation;
+
+	//EQUIPO
+	Granada* granada;
+
+	//LISTA DE ARMAS
+	Lista* listaWeapons;
+	Asalto* asalto;
+	Pistola* pistola;
+	RocketLauncher* rocket;
+
+
+
+	//ESTADOS DEL PLAYER
+	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
+
+
+	bool tieneAsalto = false;
+	bool tieneRocketLauncher = false;
+	bool tienePistola = false;
+
+	bool isShooting=false;
+
+	bool isJumping;
+	bool isMoving;
+	bool isRunning=false;
+	bool isReloading = false;
+
+	
 
 	//Player controller
-	DynamicCharacterController* p_controller;
+	KinematicCharacterController* p_controller;
 
-	float m_acceleration_walk;
-	float m_acceleration_run;
-	float m_deceleration_walk;
-	float m_deceleration_run;
-	float m_maxSpeed_walk;
-	float m_maxSpeed_run;
+	btCollisionShape* m_pCollisionShape;
+	btDefaultMotionState* m_pMotionState;
+	btPairCachingGhostObject* m_pGhostObject;
+
+	float radius;
+	float height;
+	float mass;
+
+	Vec3<float> speedFinal;
+
 };
 

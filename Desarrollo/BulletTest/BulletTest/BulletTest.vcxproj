@@ -88,14 +88,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\include\sdl;..\include\irrlitch;..\include\bullet</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib\sdl;..\lib\irrlitch;..\lib\bullet;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;Irrlicht.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletSoftBody_Debug.lib;LinearMath_Debug.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Irrlicht.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletSoftBody_Debug.lib;LinearMath_Debug.lib;RakNetDLL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -153,73 +153,106 @@
   <ItemGroup>
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
+    <ClInclude Include="Command\ListWeaponDown.h" />
+    <ClInclude Include="Command\ListWeaponUp.h" />
     <ClInclude Include="Command\MoveDown.h" />
     <ClInclude Include="Command\MoveLeft.h" />
     <ClInclude Include="Command\MoveRight.h" />
     <ClInclude Include="Command\MoveUp.h" />
+    <ClInclude Include="Command\RunCommand.h" />
     <ClInclude Include="Command\ShootCommand.h" />
-    <ClInclude Include="Command\ShootCommandRocket.h" />
-    <ClInclude Include="DebugDraw.h" />
-    <ClInclude Include="Entities\DynamicCharacterController.h" />
+    <ClInclude Include="Command\ShootCommandGranada.h" />
+    <ClInclude Include="Entities\Granada.h" />
+    <ClInclude Include="Entities\GunBullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
+    <ClInclude Include="Entities\KinematicCharacterController.h" />
+    <ClInclude Include="Entities\LifeObject.h" />
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
-    <ClInclude Include="Entities\Rocket.h" />
+    <ClInclude Include="Entities\RocketBullet.h" />
+    <ClInclude Include="Entities\WeaponDrops\AsaltoDrop.h" />
+    <ClInclude Include="Entities\WeaponDrops\PistolaDrop.h" />
+    <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h" />
+    <ClInclude Include="Entities\WeaponDrops\WeaponDrop.h" />
+    <ClInclude Include="Entities\Weapons\Asalto.h" />
+    <ClInclude Include="Entities\Weapons\Pistola.h" />
+    <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
+    <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
+    <ClInclude Include="Lista.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
+    <ClInclude Include="Motor de Red\Cliente.h" />
+    <ClInclude Include="Motor de Red\Estructuras.h" />
+    <ClInclude Include="Motor\AnimatedSceneNode.h" />
+    <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\RenderState.h" />
+    <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
+    <ClInclude Include="Nodo.h" />
     <ClInclude Include="Otros\Clock.hpp" />
+    <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Time.hpp" />
-    <ClInclude Include="Otros\Vec2f.h" />
+    <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\vec3.hpp" />
-    <ClInclude Include="Otros\Vec3f.h" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Entities\DynamicCharacterController.cpp" />
+    <ClCompile Include="BulletTest.cpp" />
+    <ClCompile Include="Entities\Granada.cpp" />
+    <ClCompile Include="Entities\GunBullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\EntityManager.cpp" />
+    <ClCompile Include="Entities\KinematicCharacterController.cpp" />
+    <ClCompile Include="Entities\LifeObject.cpp" />
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
-    <ClCompile Include="Entities\Rocket.cpp" />
+    <ClCompile Include="Entities\RocketBullet.cpp" />
+    <ClCompile Include="Entities\WeaponDrops\AsaltoDrop.cpp" />
+    <ClCompile Include="Entities\WeaponDrops\PistolaDrop.cpp" />
+    <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp" />
+    <ClCompile Include="Entities\WeaponDrops\WeaponDrop.cpp" />
+    <ClCompile Include="Entities\Weapons\Asalto.cpp" />
+    <ClCompile Include="Entities\Weapons\Pistola.cpp" />
+    <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
+    <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
+    <ClCompile Include="Lista.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Motor de Red\Cliente.cpp" />
+    <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
+    <ClCompile Include="Motor\Animation.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\RenderState.cpp" />
+    <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
-    <ClCompile Include="Otros\Vec2f.cpp" />
-    <ClCompile Include="Otros\Vec3f.cpp" />
+    <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="BulletTest.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

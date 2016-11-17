@@ -22,6 +22,8 @@ public:
 	void asignarEntity(Entity* ent);
 	void update();
 
+	Vec3<float> getRotation();
+
 private:
 	ICameraSceneNode* m_camera;
 	Entity* m_entity;

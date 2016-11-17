@@ -23,7 +23,7 @@ void RenderState::update(Time elapsedTime)
 	m_posNew += m_Velocity * elapsedTime.asSeconds();
 }
 
-void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
+void RenderState::updateRender(float interpolation, std::shared_ptr<SceneNode> m_nodo)
 {
 	
 	m_renderPos = Vec3<float>(
@@ -32,9 +32,9 @@ void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
 		m_posPrev.getZ() + ((m_posNew.getZ() - m_posPrev.getZ()) * interpolation)
 	);
 
-	float shortest_angleX = ((((int)(m_rotationNew.getX() - m_rotationPrev.getX()) % 360) + 540) % 360) - 180;   //Calculamos el angulo más corto en el caso de que
-	float shortest_angleY = ((((int)(m_rotationNew.getY() - m_rotationPrev.getY()) % 360) + 540) % 360) - 180;
-	float shortest_angleZ = ((((int)(m_rotationNew.getZ() - m_rotationPrev.getZ()) % 360) + 540) % 360) - 180;
+	float shortest_angleX = float(((((int)(m_rotationNew.getX() - m_rotationPrev.getX()) % 360) + 540) % 360) - 180);   //Calculamos el angulo más corto en el caso de que
+	float shortest_angleY = float(((((int)(m_rotationNew.getY() - m_rotationPrev.getY()) % 360) + 540) % 360) - 180);
+	float shortest_angleZ = float(((((int)(m_rotationNew.getZ() - m_rotationPrev.getZ()) % 360) + 540) % 360) - 180);
 
 	m_renderRotation.setX(m_rotationPrev.getX() + (shortest_angleX)* interpolation);
 	m_renderRotation.setY(m_rotationPrev.getY() + (shortest_angleY)* interpolation);
@@ -42,9 +42,11 @@ void RenderState::updateRender(float interpolation, SceneNode *m_nodo)
 
 	//printf("giro en realdidad %f\n", m_renderRotation);
 
+	if (m_nodo != NULL) {
+		m_nodo->setPosition(m_renderPos);
+		m_nodo->setRotation(m_renderRotation);
+	}
 
-	m_nodo->setPosition(m_renderPos);
-	m_nodo->setRotation(m_renderRotation);
 
 }
 
@@ -58,30 +60,13 @@ void RenderState::updateRotations(Vec3<float> rotation)
 {
 	m_rotationPrev = m_rotationNew;
 	m_rotationNew = rotation;
-	m_rotated += rotation.getY();
+	//m_rotated += rotation.getY();
 }
 
-void RenderState::updateVelocity(float elapsedTime)
+void RenderState::updateVelocity(float elapsedTime, Vec3<float> direccion)
 {
-	Vec3<float> VelocityAccelerated = Vec3<float>(
-		(m_Velocity.getX() + m_Direction.getX()*m_Acceleration*elapsedTime),
-		(m_Velocity.getY() + 0* elapsedTime),
-		(m_Velocity.getZ() + m_Direction.getZ()*m_Acceleration*elapsedTime));
-
-	//float VelocityAcceleratedTotal = sqrt(pow(VelocityAccelerated.getX(), 2.0) + pow(VelocityAccelerated.getY(), 2.0) + pow(VelocityAccelerated.getZ(), 2.0));
-
-	if(m_Acceleration>0){
-	if (abs(VelocityAccelerated.getX()) < m_MaxVelocity ) {
-		m_Velocity.setX(VelocityAccelerated.getX());
-	}
-	if (abs(VelocityAccelerated.getZ()) < m_MaxVelocity) {
-		m_Velocity.setZ(VelocityAccelerated.getZ());
-	}
-	}
-	else {
-			m_Velocity = Vec3<float>(0, 0, 0);
-			m_Direction = Vec3<float>(0, 0, 0);
-	}
+	m_posPrev = m_posNew;
+	m_posNew += direccion*elapsedTime;
 }
 
 
@@ -122,7 +107,7 @@ void RenderState::setAccelerating(bool accelerating)
 }
 Vec3<float> RenderState::getRotation()
 {
-	return Vec3<float>();
+	return m_rotationNew;
 }
 Vec3<float> RenderState::getPosition() {
 	return m_posNew;

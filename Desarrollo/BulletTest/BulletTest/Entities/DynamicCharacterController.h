@@ -16,7 +16,7 @@
 class DynamicCharacterController
 {
 public:
-	DynamicCharacterController(const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
+	DynamicCharacterController(Entity* ent, const Vec3<float> spawnPos, float radius, float height, float mass, float stepHeight);
 	~DynamicCharacterController();
 
 	float m_deceleration;
@@ -42,9 +42,7 @@ public:
 
 	bool IsOnGround() const;
 private:
-	// Physics
-	//SceneObject_PhysicsWorld* m_pPhysicsWorld;
-	//Scene* m_pScene;
+	Vec3f m_floorNormal;
 
 	btCollisionShape* m_pCollisionShape;
 	btDefaultMotionState* m_pMotionState;
@@ -69,6 +67,6 @@ private:
 
 	void ParseGhostContacts();
 
-	void UpdatePosition();
+	void UpdatePosition(Time elapsedTime);
 	void UpdateVelocity(Time elapsedTime);
 };

@@ -1,19 +1,21 @@
 #pragma once
 #include "../Entities/Entity.h"
 #include <string>
-#include <queue>
 #include "Message.h"
+#include "../Otros/SafeQueue.h"
 
 class MessageHandler
 {
 public:
-	static void update();
-	static void sendMessage(const Message& message);
-	~MessageHandler();
+	static MessageHandler& i() {
+		static MessageHandler singleton;
+		return singleton;
+	}
+	void update();
+	void sendMessage(const Message& message);
+	void borrarContenido();
 
 private:
-	static std::queue<Message> m_messages;
+	SafeQueue<Message> m_messages;
 	MessageHandler() {}
-
 };
-

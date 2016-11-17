@@ -1,7 +1,6 @@
+
 #pragma once
 
-#include <SDL.h>
-#undef main
 #include <map>
 #include <vector>
 
@@ -21,7 +20,6 @@ public:
 	void excuteCommands(Player* p);
 	void borrarContenido();
 
-	
 	bool generate_input_commands(std::vector<Command*> &command_queue);
 	void bind(EKEY_CODE key, Command *command);
 
@@ -33,7 +31,10 @@ private:
 	Command *move_right;
 	Command *jump;
 	Command *shoot_command;
-	Command *shoot_commandRocket;
+	Command *shoot_commandGranada;
+	Command *run_command;
+	Command *list_up;
+	Command *list_down;
 
 	std::map <EKEY_CODE, Command*> commands;
 
@@ -53,7 +54,6 @@ private:
 	std::vector<Command*> command_queue;
 
 	InputHandler();
+
 };
-
-
 

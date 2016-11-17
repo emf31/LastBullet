@@ -22,18 +22,17 @@ void Camera::setPosition(Vec3<float> position)
 	m_camera->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
 }
 
-Vec3<float> Camera::getTarget()
-{
-	vector3df aux = m_camera->getTarget();
-	return Vec3<float>(aux.X, aux.Y, aux.Z);
-}
-
 Vec3<float> Camera::getPosition()
 {
 	vector3df aux = m_camera->getPosition();
 	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }
 
+Vec3<float> Camera::getTarget()
+{
+	vector3df aux = m_camera->getTarget();
+	return Vec3<float>(aux.X, aux.Y, aux.Z);
+}
 
 
 void Camera::asignarEntity(Entity* ent)
@@ -43,11 +42,16 @@ void Camera::asignarEntity(Entity* ent)
 
 void Camera::update()
 {
-	if (m_entity != NULL) {
+
+	if (m_entity != nullptr) {
 		setPosition(Vec3<float>(
 			m_entity->getRenderPosition().getX(),
-			m_entity->getRenderPosition().getY() + m_entity->getNode()->getScale().getY()+2,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)
-			m_entity->getRenderPosition().getZ() )
+			m_entity->getRenderPosition().getY() + m_entity->getNode()->getScale().getY()+8,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)
+			m_entity->getRenderPosition().getZ())
 		);
 	}
+}
+
+Vec3<float> Camera::getRotation() {
+	return Vec3<float> (m_camera->getRotation().X, m_camera->getRotation().Y, m_camera->getRotation().Z);
 }

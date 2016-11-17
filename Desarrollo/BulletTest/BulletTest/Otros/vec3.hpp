@@ -3,9 +3,11 @@
 #define VEC3_HPP
 
 #include <iostream>
-#include "irrlicht.h"
+#include <irrlicht.h>
+
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
+
 
 using namespace irr;
 using namespace core;
@@ -74,6 +76,25 @@ public:
 			y /= magnitude;
 			z /= magnitude;
 		}
+	}
+
+
+
+	Vec3 Project(const Vec3 &other) const
+	{
+		float res = (dotProduct(other) / other.MagnitudeSquared());
+		return Vec3<float>(res * other.getX(), res * other.getY(), res * other.getZ());
+	}
+
+	float MagnitudeSquared() const
+	{
+		return x * x + y * y + z * z;
+	}
+
+
+	float Magnitude() const
+	{
+		return sqrtf(x * x + y * y + z * z);
 	}
 
 	// Static method to calculate and return the scalar dot product of two vectors
@@ -239,6 +260,13 @@ public:
 		x /= value;
 		y /= value;
 		z /= value;
+	}
+	bool operator!=(const T &value) const
+	{
+		if (x == value.x && y == value.y && z == value.z)
+			return false;
+
+		return true;
 	}
 
 };

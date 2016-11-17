@@ -1,14 +1,18 @@
 
 #include "GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
-
+#include "../Entities/EntityManager.h"
+#include "../Entities/Player.h"
 #include "PhysicsEngine.h"
+#include <string>
+#include <sstream>
 
-GraphicEngine::GraphicEngine()
+
+GraphicEngine::GraphicEngine() : debug_camera(true)
 {
 }
 
-SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
 	ISceneNode *Node;
 	if(mesh!="")
@@ -28,14 +32,38 @@ SceneNode* GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<fl
 		Node->setMaterialTexture(0,irrDriver->getTexture(texture));
 	}
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return new SceneNode(Node, irrDriver);
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(Node, irrDriver));
+}
+
+std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+{
+	IAnimatedMeshSceneNode *Node;
+
+	Node = irrScene->addAnimatedMeshSceneNode(irrScene->getMesh(mesh));
+	
+	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
+	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
+	//Asi no le afectan las luces
+	Node->setMaterialFlag(EMF_LIGHTING, false);
+
+	m_camera = 0;
+
+	//Si es diferente de "" asignamos una textura al nodo
+	if (texture != "") {
+		Node->setMaterialTexture(0, irrDriver->getTexture(texture));
+	}
+
+	
+
+	//Le pasamos irrDriver para que se encargue el de asignar la textura
+	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDriver));
 }
 
 
 void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
-	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS();
+	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,irr::f32(100), irr::f32(0.05));
 	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
 	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
 	cam->setInputReceiverEnabled(true);
@@ -57,13 +85,82 @@ void GraphicEngine::setCameraEntity(Entity * entity)
 
 void GraphicEngine::updateCamera()
 {
-	active_camera->update();
+	if(debug_camera && active_camera != NULL)
+		active_camera->update();
 }
 
 
 Camera * GraphicEngine::getActiveCamera()
 {
 	return active_camera;
+}
+
+void GraphicEngine::mostrarInterfaz()
+{
+	
+	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
+	irrGUI->getSkin()->setFont(fnt);
+
+	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	float v = p->getVida();
+	int a = p->getAmmoActual();
+	int b = p->getCargadorActual();
+	int c = p->getAmmoTotal()*b;
+
+	std::ostringstream oss;
+	oss << "Vida: " << v;
+	std::string vstring = oss.str();
+
+
+	std::ostringstream oss2;
+	oss2 << "AMMO: " << a << " / " << b;
+	std::string vstring2 = oss2.str();
+
+	std::ostringstream oss3;
+	oss3 << "AMMO TOTAL: " << c;
+	std::string vstring3 = oss3.str();
+
+
+	vida = irrGUI->addStaticText(GetWC(vstring.c_str()), rect<int>(0, 0, 100, 100));
+	ammo = irrGUI->addStaticText(GetWC(vstring2.c_str()), rect<int>(0, 60, 100, 100));
+	ammototal = irrGUI->addStaticText(GetWC(vstring3.c_str()), rect<int>(0, 90, 160, 160));
+	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
+}	
+const wchar_t * GraphicEngine::GetWC(const char *c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
+}
+void GraphicEngine::actualizarInterfaz()
+{
+	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	float v = p->getVida();
+	int a = p->getAmmoActual();
+	int b = p->getCargadorActual();
+	int c = p->getAmmoTotal()*b;
+
+	std::ostringstream oss;
+	oss << "Vida: " << v;
+	std::string vstring = oss.str();
+
+	std::ostringstream oss2;
+	oss2 << "AMMO: " << a << " / " << b;
+	std::string vstring2 = oss2.str();
+
+	std::ostringstream oss3;
+	oss3 << "AMMO TOTAL: " << c;
+	std::string vstring3 = oss3.str();
+
+	vida->setText(GetWC(vstring.c_str()));
+	ammo->setText(GetWC(vstring2.c_str()));
+	ammototal->setText(GetWC(vstring3.c_str()));
+
+	arma_actual->setText(GetWC(p->getCurrentWeapon().c_str())); 
+	
+
 }
 
 void GraphicEngine::setActiveCamera(int ID)
@@ -79,14 +176,32 @@ void GraphicEngine::renderAll()
 	irrScene->drawAll();
 	irrGUI->drawAll();
 
+	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	if (debug_draw_bullet)
 	{
+
+		//material de irrlicht al que no le afectan las luces
 		irrDriver->setMaterial(debugMat);
 		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
+		//mandas que se dibuje el debug a las fisicas
 		PhysicsEngine::i().m_world->debugDrawWorld();
+
 	}
 
 	irrDriver->endScene();
+	int fps = irrDriver->getFPS();
+
+	if (lastFPS != fps)
+	{
+		core::stringw str = L"LAST BULLET PRE ALPHA MECHANICS [";
+		str += irrDriver->getName();
+		str += "] FPS:";
+		str += fps;
+
+		irrDevice->setWindowCaption(str.c_str());
+		lastFPS = fps;
+	}
+
 }
 
 void GraphicEngine::inicializar()
@@ -99,11 +214,17 @@ void GraphicEngine::inicializar()
 	irrScene = irrDevice->getSceneManager();
 	irrDriver = irrDevice->getVideoDriver();
 
-	irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"),
-		position2d<int>(800/2 - 220/2, 600/2 - 165/2));
+	irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(800 / 2 - 220 / 2, 600 / 2 - 165 / 2));
 
 
 	irrDevice->getCursorControl()->setVisible(0);
+	cargarTexturas();
+
+	irrDevice->getCursorControl()->setVisible(0);
+
+	//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
+	//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
+	//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
 
 	debugDraw = new DebugDraw(irrDevice);
 	debugDraw->setDebugMode(
@@ -136,4 +257,35 @@ bool GraphicEngine::isWindowActive()
 bool GraphicEngine::apagar()
 {
 	return irrDevice->drop();
+}
+
+void GraphicEngine::cargarTexturas() {
+	//CARGAR TEXTURAS
+	irrDriver->getTexture("../media/wall.jpg");
+	irrDriver->getTexture("../media/ice0.jpg");
+	irrDriver->getTexture("../media/earth.jpg");
+	irrDriver->getTexture("../media/Dif_2.tga");
+	irrDriver->getTexture("../media/body01.png");
+	irrDriver->getTexture("../media/head01.png");
+	irrDriver->getTexture("../media/m4tex.png");
+	irrDriver->getTexture("../media/WPNT_MK2Grenade_Base_Color.tga");
+	irrDriver->getTexture("../media/arma/weapon.png");
+	//irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
+
+
+	irrScene->getMesh("../media/ArmyPilot.b3d");
+	irrScene->getMesh("../media/sf2arms.obj");
+	
+	irrScene->getMesh("../media/bullet.obj");
+	irrScene->getMesh("../media/arma/ak.obj");
+	irrScene->getMesh("../media/WPN_MK2Grenade.obj");
+
+	irrGUI->getFont("../media/lucida.xml");
+	
+	
+}
+
+void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
+	
+	irrScene->addToDeletionQueue(nodo->getNodo());
 }
