@@ -22,7 +22,7 @@ private:
 	Time m_lifetime;
 	Clock timelifeclock;
 
-	float radioExplosion;
+//	float radioExplosion;
 
 //	btGhostObject* m_explosion;
 	btGhostObject* m_ghostObject;
