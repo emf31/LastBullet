@@ -105,6 +105,7 @@ void GraphicEngine::mostrarInterfaz()
 	float v = p->getVida();
 	int a = p->getAmmoActual();
 	int b = p->getCargadorActual();
+	int c = p->getAmmoTotal()*b;
 
 	std::ostringstream oss;
 	oss << "Vida: " << v;
@@ -115,8 +116,14 @@ void GraphicEngine::mostrarInterfaz()
 	oss2 << "AMMO: " << a << " / " << b;
 	std::string vstring2 = oss2.str();
 
+	std::ostringstream oss3;
+	oss3 << "AMMO TOTAL: " << c;
+	std::string vstring3 = oss3.str();
+
+
 	vida = irrGUI->addStaticText(GetWC(vstring.c_str()), rect<int>(0, 0, 100, 100));
 	ammo = irrGUI->addStaticText(GetWC(vstring2.c_str()), rect<int>(0, 60, 100, 100));
+	ammototal = irrGUI->addStaticText(GetWC(vstring3.c_str()), rect<int>(0, 90, 160, 160));
 	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
 }	
 const wchar_t * GraphicEngine::GetWC(const char *c)
@@ -133,6 +140,7 @@ void GraphicEngine::actualizarInterfaz()
 	float v = p->getVida();
 	int a = p->getAmmoActual();
 	int b = p->getCargadorActual();
+	int c = p->getAmmoTotal()*b;
 
 	std::ostringstream oss;
 	oss << "Vida: " << v;
@@ -142,8 +150,13 @@ void GraphicEngine::actualizarInterfaz()
 	oss2 << "AMMO: " << a << " / " << b;
 	std::string vstring2 = oss2.str();
 
+	std::ostringstream oss3;
+	oss3 << "AMMO TOTAL: " << c;
+	std::string vstring3 = oss3.str();
+
 	vida->setText(GetWC(vstring.c_str()));
 	ammo->setText(GetWC(vstring2.c_str()));
+	ammototal->setText(GetWC(vstring3.c_str()));
 
 	arma_actual->setText(GetWC(p->getCurrentWeapon().c_str())); 
 	

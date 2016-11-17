@@ -379,6 +379,9 @@ void Player::setWeapon(int newWeapon) {
 				listaWeapons->insertar(rocket);
 				tieneRocketLauncher = true;
 			}
+			else {
+				rocket->resetAmmoTotal();
+			}
 		break;
 		case ASALTO:
 			if (!tieneAsalto) {
@@ -386,12 +389,18 @@ void Player::setWeapon(int newWeapon) {
 				listaWeapons->insertar(asalto);
 				tieneAsalto = true;
 			}
+			else {
+				asalto->resetAmmoTotal();
+			}
 		break;
 		case PISTOLA:
 			if (!tienePistola) {
 				printf("TE HAS EQUIPADO UNA PISTOLA\n");
 				listaWeapons->insertar(pistola);
 				tienePistola = true;
+			}
+			else {
+				pistola->resetAmmoTotal();
 			}
 		break;
 	}

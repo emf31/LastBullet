@@ -43,6 +43,7 @@ public:
 	const wchar_t *GetWC(const char *c);
 	IGUIStaticText* vida;
 	IGUIStaticText* ammo;
+	IGUIStaticText* ammototal;
 	IGUIStaticText* arma_actual;
 	IGUIStaticText* balas;
 

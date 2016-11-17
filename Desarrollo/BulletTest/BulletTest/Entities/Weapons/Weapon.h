@@ -42,12 +42,16 @@ public:
 
 	virtual int getAmmo() { return capacidadAmmo - disparos; }
 	virtual int getCargadorWeapon() { return capacidadAmmo; }
+	virtual int getAmmoTotal() { return numCargadores; }
+
+	virtual void resetAmmoTotal()=0;
 
 protected:
 	Time cadencia;
 	Clock relojCadencia;
 
 	int capacidadAmmo;
+	int numCargadores;
 	int disparos;
 
 	Time recarga;

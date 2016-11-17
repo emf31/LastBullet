@@ -63,6 +63,8 @@ public:
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
+	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal(); }
+
 private:
 	float m_vida;
 

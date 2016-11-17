@@ -8,6 +8,8 @@ Asalto::Asalto() : Weapon()
 	disparos = 0;
 	cadencia = milliseconds(50);
 	recarga = milliseconds(1000);
+	numCargadores = numCargadoresAsalto;
+
 }
 
 
@@ -23,15 +25,23 @@ void Asalto::inicializar()
 
 void Asalto::update(Time elapsedTime)
 {
+
 	if (estadoWeapon == DESCARGADA) {
-		if (relojrecarga.getElapsedTime() < recarga) {
-			printf("recargando\n");
+		if (numCargadores > 0) {
+			if (relojrecarga.getElapsedTime() < recarga) {
+				printf("recargando\n");
+			}
+			else {
+				estadoWeapon = CARGADA;
+				disparos = 0;
+				numCargadores--;
+			}
 		}
 		else {
-			estadoWeapon = CARGADA;
-			disparos = 0;
+			relojrecarga.restart();
 		}
 	}
+
 
 }
 
@@ -132,7 +142,9 @@ void Asalto::shoot()
 
 	}
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-		relojrecarga.restart();
+		if (numCargadores > 0) {
+			relojrecarga.restart();
+		}
 		estadoWeapon = DESCARGADA;
 	}
 }

@@ -8,6 +8,7 @@ Pistola::Pistola() : Weapon()
 	disparos = 0;
 	recarga = milliseconds(1000);
 	cadencia = milliseconds(350);
+	numCargadores = numCargadoresPistola;
 }
 
 
@@ -22,12 +23,18 @@ void Pistola::inicializar()
 void Pistola::update(Time elapsedTime)
 {
 	if (estadoWeapon == DESCARGADA) {
-		if (relojrecarga.getElapsedTime() < recarga) {
-			printf("recargando\n");
+		if (numCargadores > 0) {
+			if (relojrecarga.getElapsedTime() < recarga) {
+				printf("recargando\n");
+			}
+			else {
+				estadoWeapon = CARGADA;
+				disparos = 0;
+				numCargadores--;
+			}
 		}
 		else {
-			estadoWeapon = CARGADA;
-			disparos = 0;
+			relojrecarga.restart();
 		}
 	}
 
@@ -131,7 +138,9 @@ void Pistola::shoot() {
 	}
 
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-		relojrecarga.restart();
+		if (numCargadores > 0) {
+			relojrecarga.restart();
+		}
 		estadoWeapon = DESCARGADA;
 	}
 
