@@ -74,14 +74,17 @@ void LifeObject::borrarContenido()
 void LifeObject::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		////TODO: AQUI ES SEGURO QUE HA COLISIONADO CON EL PLAYER, HABRIA QUE BORRAR EL PAQUETE DE VIDA Y RESPAWNEARLO EN X TIEMPO
-		if (estado == DISPONIBLE) {
-			PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-			estado = USADO;
-			clockRecargaLife.restart();
+		if (static_cast<Entity*>(message.data)->getClassName() == "Player" || static_cast<Entity*>(message.data)->getClassName() == "Enemy") {
 
-			static_cast<Player*>(message.data)->sumarVida();
+			if (estado == DISPONIBLE) {
+				PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+				estado = USADO;
+				clockRecargaLife.restart();
 
+				static_cast<Player*>(message.data)->sumarVida();
+
+			}
 		}
 	}
+
 }
