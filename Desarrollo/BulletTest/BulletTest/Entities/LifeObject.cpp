@@ -35,7 +35,7 @@ void LifeObject::update(Time elapsedTime)
 		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
 			estado = DISPONIBLE;
 			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(1.f, 1.f, 1.f));
-
+			m_nodo->setVisible(true);
 		}
 	}
 	// Set position
@@ -75,19 +75,22 @@ void LifeObject::borrarContenido()
 void LifeObject::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		////TODO: AQUI ES SEGURO QUE HA COLISIONADO CON EL PLAYER, HABRIA QUE BORRAR EL PAQUETE DE VIDA Y RESPAWNEARLO EN X TIEMPO
-		if (estado == DISPONIBLE) {
-			
-			PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-			estado = USADO;
-			clockRecargaLife.restart();
-			//se envia un mensaje al servidor de que la vida con m_id ha sido cogida
-			if (Cliente::i().isConected())
-			Cliente::i().vidaCogida(m_id);
-			//TODO: aqui hacer el nodo invisible!
+		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
 
-			
-			static_cast<Player*>(message.data)->sumarVida();
+			if (estado == DISPONIBLE) {
+				PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+				estado = USADO;
+				clockRecargaLife.restart();
+
+				if (Cliente::i().isConected())
+					Cliente::i().vidaCogida(m_id);
+
+				//TODO: aqui hacer el nodo invisible
+				m_nodo->setVisible(false);
+
+				static_cast<Player*>(message.data)->sumarVida();
+
+			}
 
 
 		}

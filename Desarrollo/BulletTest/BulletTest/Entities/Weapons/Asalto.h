@@ -1,6 +1,9 @@
 #pragma once
 #include "Weapon.h"
 
+#define numCargadoresAsalto 5
+
+
 class Asalto : public Weapon
 {
 public:
@@ -24,5 +27,8 @@ public:
 	virtual void shoot();
 
 
+	virtual void resetAmmoTotal() {
+		numCargadores= numCargadoresAsalto;
+	}
 };
 

@@ -67,47 +67,12 @@ void Player::inicializar()
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);
-
+	pistola->setEquipada(true);
 	tienePistola = true;
 
-	/********************************/
-	/********************************/
-
-	/*Pistola* firstWeapon;*/
-
-	/*float RandomNumber = Randf(0, 3);
-	std::cout << RandomNumber << std::endl;
-
-	if (RandomNumber >= 0 && RandomNumber < 1) {
-		firstWeapon = new Asalto();
-		tieneAsalto = true;
-	}
-	else if (RandomNumber >= 1 && RandomNumber < 2) {
-		firstWeapon = new Pistola();
-		tienePistola = true;
-	}
-	else if (RandomNumber >= 2 && RandomNumber <= 3) {
-		firstWeapon = new RocketLauncher();
-		tieneRocketLauncher = true;
-	}
-	else {
-		firstWeapon = new Asalto();
-	}*/
-	//firstWeapon = new Pistola(); 
+	listaWeapons->insertar(pistola);
 	
-
-
-	//TODO: saber si estoy recargando desde el player
-	/*
-	if (listaWeapons->valorActual()->getEstadoWeapon()==CARGADA) { //TODO: ponerEnEstadoAnimacionRecargando
-		printf("ZIMU");
-	}
-	else {
-
-	}*/
-	
-
-	m_vida = 5;
+	m_vida = 100;
 
 	GraphicEngine::i().mostrarInterfaz();
 }
@@ -130,8 +95,8 @@ void Player::update(Time elapsedTime)
 
 	speedFinal.normalise();
 
-	updateState();
-	updateAnimation();
+	/*updateState();
+	updateAnimation();*/
 
 
 	p_controller->setWalkDirection(
@@ -175,22 +140,28 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/arma/ak.obj"));
-	m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", ""));
+	//m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
 	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
+	//m_nodo->addChild(asalto->getNode());
+	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+	
+	//m_nodo->addChild(rocket->getNode());
+
+	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
 
-	animation->addAnimation("Default", 0, 0);
+	/*animation->addAnimation("Default", 0, 0);
 	animation->addAnimation("Run_Forwards", 1, 69);
 	animation->addAnimation("Run_backwards", 70, 138);
 	animation->addAnimation("Walk", 139, 183);
 	animation->addAnimation("Jump", 184, 219);
 	animation->addAnimation("Jump2", 184, 219);
 	animation->addAnimation("Idle", 220, 472);
-	animation->addAnimation("AimRunning", 473, 524);
+	animation->addAnimation("AimRunning", 473, 524);*/
 
-	m_playerState = quieto;
+	//m_playerState = quieto;
 
 
 	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
@@ -251,6 +222,7 @@ void Player::handleMessage(const Message & message)
 		TBala* tBala = static_cast<TBala*>(message.data);
 
 		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
+
 	}
 	else if (message.mensaje == "NUEVO_ENEMIGO") {
 		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);
@@ -395,6 +367,24 @@ void Player::updateState()
 	}
 }
 
+void Player::UpWeapon()
+{
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->Siguiente();
+	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+}
+
+void Player::DownWeapon()
+{
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->Anterior();
+	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+}
+
 void Player::setWeapon(int newWeapon) {
 
 	switch (newWeapon) {
@@ -404,6 +394,9 @@ void Player::setWeapon(int newWeapon) {
 				listaWeapons->insertar(rocket);
 				tieneRocketLauncher = true;
 			}
+			else {
+				rocket->resetAmmoTotal();
+			}
 		break;
 		case ASALTO:
 			if (!tieneAsalto) {
@@ -411,12 +404,18 @@ void Player::setWeapon(int newWeapon) {
 				listaWeapons->insertar(asalto);
 				tieneAsalto = true;
 			}
+			else {
+				asalto->resetAmmoTotal();
+			}
 		break;
 		case PISTOLA:
 			if (!tienePistola) {
 				printf("TE HAS EQUIPADO UNA PISTOLA\n");
 				listaWeapons->insertar(pistola);
 				tienePistola = true;
+			}
+			else {
+				pistola->resetAmmoTotal();
 			}
 		break;
 	}

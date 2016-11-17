@@ -37,7 +37,13 @@ void Granada::update(Time elapsedTime)
 
 		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
 			setEstado(GRANADACARGADA);
-			PhysicsEngine::i().removeRigidBody(m_rigidBody);	
+
+
+			Message msg1(this, "BORRATE", NULL);
+
+			MessageHandler::i().sendMessage(msg1);
+			PhysicsEngine::i().removeRigidBody(m_rigidBody);
+		
 		}
 	}
 	
@@ -57,18 +63,11 @@ void Granada::cargarContenido()
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+	radioExplosion=30.f;
 
-	PhysicsEngine::i().removeRigidBody(m_rigidBody);
+
 }
 
-void Granada::resetRigidBody()
-{
-	PhysicsEngine::i().removeRigidBody(m_rigidBody);
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-
-	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1, 1, 1), 0.1f, DISABLE_DEACTIVATION);
-	//m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 1, 0.1f);
-}
 
 
 void Granada::borrarContenido()
@@ -85,6 +84,27 @@ void Granada::handleMessage(const Message & message)
 
 		}
 		
+	}
+
+	if (message.mensaje == "BORRATE") {
+
+		if (m_explosion != NULL)
+			PhysicsEngine::i().removeGhostObject(m_explosion);
+
+
+		m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
+
+		list<Entity*>characters = EntityManager::i().getCharacters();
+		///Explosion
+
+		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
+			Entity* myentity = *it;
+			myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f));
+
+		}
+
+//		GraphicEngine::i().removeNode(m_nodo);
+
 	}
 }
 
@@ -125,7 +145,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 
 
 		m_rigidBody->applyCentralImpulse(force);
@@ -165,7 +185,7 @@ void Granada::serverShoot(TGranada g) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		resetRigidBody();//DEBATIR: EL RIGID BODY SE VUELVE LOCO, ASI QUE LO RESETEO 
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 
 
 		m_rigidBody->applyCentralImpulse(force);
@@ -174,5 +194,32 @@ void Granada::serverShoot(TGranada g) {
 		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
 	}
+
+}
+
+float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
+{
+
+	float vidaRestada = 0;
+
+	Vec3<float> vector = posExplosion - posCharacter;
+	float distancia = vector.Magnitude();
+	if (distancia < radio) {
+		printf("Te ha dado la explosion\n");
+		if (distancia < radio / 3) {
+			vidaRestada = 100;
+		}
+		else {
+			//(radio-distancia)/((2*radio)/3)
+			vidaRestada = 100*((radio - distancia) / ((2 * radio) / 3));
+
+		}
+	}
+	else {
+		printf("NO te ha dado la explosion\n");
+
+	}
+
+	return vidaRestada;
 
 }

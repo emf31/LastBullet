@@ -1,6 +1,7 @@
 #include "Pistola.h"
 #include "../../Motor de Red/Cliente.h"
 #include "../../Motor de Red/Estructuras.h"
+#include "../EntityManager.h"
 
 Pistola::Pistola() : Weapon()
 {
@@ -8,6 +9,7 @@ Pistola::Pistola() : Weapon()
 	disparos = 0;
 	recarga = milliseconds(1000);
 	cadencia = milliseconds(350);
+	numCargadores = numCargadoresPistola;
 }
 
 
@@ -21,13 +23,26 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
-	if (estadoWeapon == DESCARGADA) {
-		if (relojrecarga.getElapsedTime() < recarga) {
-			printf("recargando\n");
-		}
-		else {
-			estadoWeapon = CARGADA;
-			disparos = 0;
+	if (equipada) {
+		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5, player_pos.getZ()));
+		m_renderState.updateRotations(player_rot);
+
+		if (estadoWeapon == DESCARGADA) {
+			if (numCargadores > 0) {
+				if (relojrecarga.getElapsedTime() < recarga) {
+					printf("recargando\n");
+				}
+				else {
+					estadoWeapon = CARGADA;
+					disparos = 0;
+					numCargadores--;
+				}
+			}
+			else {
+				relojrecarga.restart();
+			}
 		}
 	}
 
@@ -39,7 +54,10 @@ void Pistola::handleInput()
 
 void Pistola::cargarContenido()
 {
-
+	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.2f, 0.2f, 0.2f), "", "../media/arma/pistola.obj"));
+	m_nodo->setVisible(false);
+	m_nodo->setTexture("../media/ice0.jpg", 0);
 
 }
 
@@ -61,6 +79,7 @@ void Pistola::shoot() {
 			disparos++;
 			printf("DISPARANDO PISTOLA\n");
 			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
+			btVector3 FUERZA(10, 10, 10);
 
 			btVector3 start(
 				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -86,7 +105,7 @@ void Pistola::shoot() {
 			{
 
 
-				const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
+				btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 
 																					 //calcularDistancia(start, end);
 
@@ -101,8 +120,14 @@ void Pistola::shoot() {
 					MessageHandler::i().sendMessage(msg);
 				}
 
+
 				posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 
+
+				if (myEnt->getClassName() == "PhysicsEntity") {
+					hit->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
+					std::cout << myEnt->getName() << std::endl;
+				}
 			}
 
 			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
@@ -131,7 +156,9 @@ void Pistola::shoot() {
 	}
 
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-		relojrecarga.restart();
+		if (numCargadores > 0) {
+			relojrecarga.restart();
+		}
 		estadoWeapon = DESCARGADA;
 	}
 

@@ -4,6 +4,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor de Red/Estructuras.h"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
 #define GRANADACARGADA 0
 #define GRANADADISPARADA 1
@@ -21,7 +22,6 @@ public:
 	void setPosition(Vec3<float> pos);
 	int getEstado() { return estado;}
 	void setEstado(int newEstado) { estado = newEstado; }
-	void resetRigidBody();
 	// Heredado vía Entity
 	virtual void inicializar() override;
 
@@ -40,6 +40,7 @@ public:
 	void shoot(const btVector3& posicionPlayer);
 	void serverShoot(TGranada g);
 
+	float explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio);
 
 	btRigidBody* m_rigidBody;
 
@@ -51,5 +52,7 @@ private:
 	int estado=GRANADACARGADA;
 
 	Vec3<float> fuerza;
+	float radioExplosion;
+	btGhostObject* m_explosion;
 };
 

@@ -42,17 +42,26 @@ public:
 
 	virtual int getAmmo() { return capacidadAmmo - disparos; }
 	virtual int getCargadorWeapon() { return capacidadAmmo; }
+	virtual int getAmmoTotal() { return numCargadores; }
+
+	virtual void resetAmmoTotal()=0;
+
+	virtual void setEquipada(bool nuevoEquipada) { equipada = nuevoEquipada; }
+	virtual void resetRecarga() { relojrecarga.restart(); }
 
 protected:
 	Time cadencia;
 	Clock relojCadencia;
 
 	int capacidadAmmo;
+	int numCargadores;
 	int disparos;
 
 	Time recarga;
 	Clock relojrecarga;
 
 	int estadoWeapon;
+
+	bool equipada=false;
 };
 

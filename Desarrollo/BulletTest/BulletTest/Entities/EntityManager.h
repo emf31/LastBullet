@@ -3,6 +3,7 @@
 #include "../Otros/Time.hpp"
 #include "Entity.h"
 #include <mutex>
+#include <list>
 
 #define PLAYER 1000
 
@@ -44,6 +45,7 @@ public:
 	void removeRaknetEntity(Entity* entity);
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
+	list<Entity*> getCharacters();
 
 private:
 	EntityManager(EntityManager const&);

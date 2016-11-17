@@ -44,11 +44,10 @@ public:
 	void updateAnimation();
 	void updateState();
 
-	void UpWeapon() { listaWeapons->Siguiente(); }
-	void DownWeapon() { listaWeapons->Anterior(); }
+	void UpWeapon();
+	void DownWeapon();
 
 
-	void sumarVida() { m_vida++; printf("ME HE CURADO\n"); }
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
@@ -59,6 +58,8 @@ public:
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
+	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal(); }
+
 private:
 	float m_vida;
 
@@ -67,13 +68,11 @@ private:
 	//EQUIPO
 	Granada* granada;
 
-	//ARMAS
-	RocketLauncher* rocket;
-	Pistola* pistola;
-	Asalto* asalto;
-
 	//LISTA DE ARMAS
 	Lista* listaWeapons;
+	Asalto* asalto;
+	Pistola* pistola;
+	RocketLauncher* rocket;
 
 
 

@@ -266,7 +266,7 @@ void Cliente::update() {
 				//bsIn.Read(desconectado);
 
 				//el player siempre tendra ID=1 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				if (EntityManager::i().getEntity(PLAYER)->restaVida() <= 0) {
+				if (EntityManager::i().getEntity(PLAYER)->restaVida(20) <= 0) {
 					std::cout << "ME HAN MATADO" << std::endl;
 					std::cout << "HIJO PUTA EL CAMPERO" << std::endl;
 					//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.

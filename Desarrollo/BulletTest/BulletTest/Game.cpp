@@ -229,6 +229,15 @@ void Game::inicializar()
 
 	/////////////////////////////////////////////////////////////////////
 
+	/////////////////////////////////////////////////////////////////////
+	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/ice0.jpg", "");
+
+	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
+	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(5.f, 5.f, 5.f), 1, DISABLE_DEACTIVATION));
+	cajaEnt->setPosition(Vec3<float>(0, 100, 0));
+
+	/////////////////////////////////////////////////////////////////////
+
 	int a;
 	do {
 		std::cout << "Elige un modo:" << std::endl;
@@ -240,18 +249,19 @@ void Game::inicializar()
 	
 
 	if (a == 1) {
-		//Si no le pasas GUID es que es un jugador
-		player = new Player("Bootstrap");
-
 		EntityManager::i().inicializar();
 
 		EntityManager::i().cargarContenido();
+
+		//Si no le pasas GUID es que es un jugador
+		player = new Player("Pepi");
+		player->inicializar();
+		player->cargarContenido();
 	}
 	else {
 		EntityManager::i().inicializar();
 
 		EntityManager::i().cargarContenido();
-		
 
 		//raknet
 		Cliente::i().inicializar();

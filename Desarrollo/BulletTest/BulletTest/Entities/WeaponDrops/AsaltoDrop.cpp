@@ -42,13 +42,16 @@ void AsaltoDrop::borrarContenido()
 void AsaltoDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (estado == DISPONIBLE) {
-			PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-			estado = USADO;
-			clockRecargaLife.restart();
+		if (static_cast<Entity*>(message.data)->getClassName() == "Player" || static_cast<Entity*>(message.data)->getClassName() == "Enemy") {
 
-			static_cast<Player*>(message.data)->setWeapon(ASALTO);
+			if (estado == DISPONIBLE) {
+				PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+				estado = USADO;
+				clockRecargaLife.restart();
 
+				static_cast<Player*>(message.data)->setWeapon(ASALTO);
+
+			}
 		}
-	}
+		}
 }

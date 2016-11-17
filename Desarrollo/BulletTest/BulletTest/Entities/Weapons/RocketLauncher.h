@@ -1,6 +1,9 @@
 #pragma once
 #include "Weapon.h"
 
+#define numCargadoresRocket 3
+
+
 class RocketLauncher :
 	public Weapon
 {
@@ -25,5 +28,8 @@ public:
 	virtual void shoot();
 
 
+	virtual void resetAmmoTotal() {
+		numCargadores = numCargadoresRocket;
+	}
 };
 

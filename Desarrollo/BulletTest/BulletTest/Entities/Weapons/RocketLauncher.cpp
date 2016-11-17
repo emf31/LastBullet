@@ -8,6 +8,8 @@ RocketLauncher::RocketLauncher() : Weapon()
 	disparos = 0;
 	recarga = milliseconds(1000);
 	cadencia = milliseconds(400);
+	numCargadores = numCargadoresRocket;
+
 }
 
 
@@ -21,13 +23,27 @@ void RocketLauncher::inicializar()
 
 void RocketLauncher::update(Time elapsedTime)
 {
-	if (estadoWeapon == DESCARGADA) {
-		if (relojrecarga.getElapsedTime() < recarga) {
-			printf("recargando\n");
-		}
-		else {
-			estadoWeapon = CARGADA;
-			disparos = 0;
+	if (equipada) {
+		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5, player_pos.getZ()));
+		m_renderState.updateRotations(player_rot);
+
+		if (estadoWeapon == DESCARGADA) {
+			if (numCargadores > 0) {
+				if (relojrecarga.getElapsedTime() < recarga) {
+					printf("recargando\n");
+				}
+				else {
+					estadoWeapon = CARGADA;
+					disparos = 0;
+					numCargadores--;
+				}
+			}
+			else {
+				relojrecarga.restart();
+			}
+
 		}
 	}
 
@@ -39,7 +55,10 @@ void RocketLauncher::handleInput()
 
 void RocketLauncher::cargarContenido()
 {
-
+	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(10.f, 10.f, 10.f), "", "../media/arma/rocket.obj"));
+	m_nodo->setVisible(false);
+	m_nodo->setTexture("../media/ice0.jpg", 0);
 
 }
 
@@ -79,7 +98,7 @@ void RocketLauncher::shoot() {
 
 		PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-		Vec3<float> posicionImpacto(1500, 1500, 1500);
+		/*Vec3<float> posicionImpacto(1500, 1500, 1500);
 
 
 		if (ray.hasHit())//si ray ha golpeado algo entro
@@ -103,7 +122,7 @@ void RocketLauncher::shoot() {
 
 			posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 
-		}
+		}*/
 
 		//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
 		//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
@@ -115,14 +134,14 @@ void RocketLauncher::shoot() {
 		//	  if (arma != LANZACOHETES)
 		//GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 		//	else {
-		RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+		RocketBullet* bala = new RocketBullet(posDisparo, direccion, GraphicEngine::i().getActiveCamera()->getRotation());
 		//	  }
 
 
-		if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+	/*	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 			Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-		}
+		}*/
 		//}
 
 		relojCadencia.restart();
@@ -131,8 +150,9 @@ void RocketLauncher::shoot() {
 	}
 
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-		relojrecarga.restart();
+		if (numCargadores > 0) {
+			relojrecarga.restart();
+		}
 		estadoWeapon = DESCARGADA;
 	}
-
 }
