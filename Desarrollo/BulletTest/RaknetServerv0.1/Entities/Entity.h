@@ -10,7 +10,7 @@
 class Entity
 {
 public:
-	Entity(const std::string& name, RakNet::RakNetGUID guid);
+	Entity(const std::string& name, RakNet::RakNetGUID guid, int id=-1);
 	virtual ~Entity();
 
 	RenderState* getRenderState() { return &m_renderState; }

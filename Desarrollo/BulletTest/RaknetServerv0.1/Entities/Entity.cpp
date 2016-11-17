@@ -3,9 +3,10 @@
 
 
 
-Entity::Entity(const std::string& name, RakNet::RakNetGUID guid) :
+Entity::Entity(const std::string& name, RakNet::RakNetGUID guid, int id) :
 	m_guid(guid),
 	m_name(name),
+	m_id(id),
 	m_renderState()
 {
 	//De momento se generan en el 0,0

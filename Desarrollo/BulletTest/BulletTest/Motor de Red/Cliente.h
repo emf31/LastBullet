@@ -26,6 +26,8 @@ public:
 	void conectar(std::string address, int port);
 	void esperar();
 	void enviarPos(Player* p); 
+	void vidaCogida(int id);
+	void nuevaVida(int id);
 	void lanzarGranada(TGranada g);
 	void enviarDisparo(RakNet::RakNetGUID guid);
 	void enviarDesconexion();

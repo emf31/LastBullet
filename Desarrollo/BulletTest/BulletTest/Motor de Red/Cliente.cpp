@@ -11,6 +11,7 @@
 #include "../Handlers/MessageHandler.h"
 #include "../Motor/GraphicEngine.h"
 #include "../Entities/GunBullet.h"
+#include "../Entities/LifeObject.h"
 
 Cliente::Cliente()
 {
@@ -25,7 +26,9 @@ void Cliente::update() {
 	TPlayer nuevoplayer;
 	TBala balaDisparada;
 	TGranada granada;
+	TVidaServer vidaServer;
 	RakNet::RakNetGUID desconectado;
+	int idVida;
 	
 
 	while (1) {
@@ -119,6 +122,38 @@ void Cliente::update() {
 
 				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
 				MessageHandler::i().sendMessage(msg);
+
+			}
+			break;
+
+			case NUEVA_VIDA:
+			{
+				
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(vidaServer);
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
+				v->asignaTiempo(vidaServer.tiempo);
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
+
+			}
+			break;
+
+			case VIDA_COGIDA:
+			{
+
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(idVida);
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida));
+				v->VidaCogida();
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
 
 			}
 			break;
@@ -342,6 +377,32 @@ void Cliente::enviarPos(Player* p) {
 	
 
 	bsOut.Write(paquetemov);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+
+void Cliente::vidaCogida(int id)
+{
+	RakNet::BitStream bsOut;
+	TPlayer paquetemov;
+
+	bsOut.Write((RakNet::MessageID)VIDA_COGIDA);
+	//enviamos un mensaje al server con la vida que ha sido cogida
+	bsOut.Write(id);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+
+}
+
+void Cliente::nuevaVida(int id)
+{
+
+	RakNet::BitStream bsOut;
+	
+
+	bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
+
+	bsOut.Write(id);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

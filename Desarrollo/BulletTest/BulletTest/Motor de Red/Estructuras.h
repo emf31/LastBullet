@@ -32,6 +32,12 @@ typedef struct {
 	RakNet::RakNetGUID guid;
 }TGranada;
 
+typedef struct {
+	int id;
+	Clock tiempo;
+}TVidaServer;
+
+
 enum GameMessages
 {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
@@ -48,5 +54,8 @@ enum GameMessages
 	IMPACTO_BALA = ID_USER_PACKET_ENUM + 12,
 	MUERTE = ID_USER_PACKET_ENUM + 13,
 	DISPARAR_BALA = ID_USER_PACKET_ENUM + 14,
-	LANZAR_GRANADA = ID_USER_PACKET_ENUM + 15
+	LANZAR_GRANADA = ID_USER_PACKET_ENUM + 15,
+	VIDA_COGIDA = ID_USER_PACKET_ENUM + 16,
+	NUEVA_VIDA = ID_USER_PACKET_ENUM + 17,
+	TIEMPO_VIDA = ID_USER_PACKET_ENUM + 18
 };

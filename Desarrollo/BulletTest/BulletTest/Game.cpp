@@ -189,13 +189,19 @@ void Game::inicializar()
 	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
 
 	//////////////////////////////////////////////////////////////////////
-	////////         Creamos un paquete de vida        //////////////////
+	////////         Creamos 2 paquete de vida        //////////////////
 
-	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/life.png", "");
+	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
 	LifeObject *vidaEnt = new LifeObject(vida, "vida");
-	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(1.f, 1.f, 1.f)));
+	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(3.f, 3.f, 3.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	vidaEnt->setPosition(Vec3<float>(10, 3, 0));
+	vidaEnt->setPosition(Vec3<float>(10, 9, 0));
+	
+	std::shared_ptr<BasicSceneNode> vida2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
+	LifeObject *vidaEnt2 = new LifeObject(vida2, "vida2");
+	vidaEnt2->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt2, Vec3<float>(3.f, 3.f, 3.f)));
+	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
+	vidaEnt2->setPosition(Vec3<float>(40, 9, 0));
 
 	/////////////////////////////////////////////////////////////////////
 
@@ -235,7 +241,7 @@ void Game::inicializar()
 
 	if (a == 1) {
 		//Si no le pasas GUID es que es un jugador
-		player = new Player("Batman");
+		player = new Player("Bootstrap");
 
 		EntityManager::i().inicializar();
 
@@ -254,7 +260,10 @@ void Game::inicializar()
 		//Bucle infinito hasta que se conecte
 		while (Cliente::i().isConected() == false);
 
-		
+		//enviamos los paquetes del vida al servidor para que los cree
+		Cliente::i().nuevaVida(vidaEnt->getID());
+		Cliente::i().nuevaVida(vidaEnt2->getID());
+
 
 
 	}

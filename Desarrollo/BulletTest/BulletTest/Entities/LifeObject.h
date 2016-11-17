@@ -20,6 +20,8 @@ public:
 
 	void rotate(Vec3<float> rot);
 
+	void asignaTiempo(Clock tiempo);
+	void VidaCogida();
 	// Heredado vía Entity
 	virtual void inicializar() override;
 

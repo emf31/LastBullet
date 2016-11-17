@@ -275,7 +275,7 @@ void Player::run()
 void Player::jump() {
 	
 	p_controller->jump(btVector3(0, 20, 0));
-
+	
 }
 
 

@@ -2,6 +2,7 @@
 #include "../Estructuras.h"
 #include <string>
 
+
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	TPlayer nuevocli;
@@ -126,6 +127,27 @@ void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
+void EntityManager::enviaTiempoActualVida(Life * l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer)
+{
+	RakNet::BitStream bsOut;
+	TVidaServer vida;
+	vida.id = l->getID();
+	vida.tiempo = l->clockRecargaLife;
+
+
+		//se envia a SOLO al nuevo cliente que se ha conectado
+
+		//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
+		bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
+		bsOut.Write(vida);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+		bsOut.Reset();
+
+
+	
+
+}
+
 void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *peer)
 {
 
@@ -142,6 +164,22 @@ void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *pe
 			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 			bsOut.Reset();
 		}
+
+	}
+}
+
+void EntityManager::VidaCogida(int idVida, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos sepan que la vida con idVida ha sido cogida
+		bsOut.Write((RakNet::MessageID)VIDA_COGIDA);
+		bsOut.Write(idVida);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
 
 	}
 }
@@ -207,7 +245,28 @@ void EntityManager::apagar()
 void EntityManager::registerEntity(Entity * entity)
 {
 
+	//Si la entity tiene GUID la añadimos a la lista de jugadores
+	if (entity->getGuid() != RakNet::UNASSIGNED_RAKNET_GUID) {
 		m_jugadores[RakNet::RakNetGUID::ToUint32(entity->getGuid())] = entity;
+	}
+	else {
+		if (m_entities.find(entity->getID()) != m_entities.end()) {
+			//mostramos error
+			std::cout << "ESA VIDA YA HA SIDO CREADA " + entity->getID() << std::endl;
+
+		}
+		else {
+			//si todo ha ido bien le asignamos el entity al map
+			std::cout << "CREO UNA VIDA CON ID : " + entity->getID() << std::endl;
+			m_entities[entity->getID()] = entity;
+		}
+
+
+	}
+
+
+
+
 	
 }
 
@@ -228,6 +287,17 @@ Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
 	if (found != m_jugadores.end())
 		return found->second;
 	//no existe devolvemos 0
+	return NULL;
+}
+
+Entity * EntityManager::getEntityID(int id)
+{
+	auto found = m_entities.find(id);
+	if (found != m_entities.end())
+		return found->second;
+	//no existe devolvemos 0
+
+
 	return NULL;
 }
 

@@ -57,6 +57,9 @@
     <ClCompile Include="RenderState.cpp">
       <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Life.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\BulletTest\Otros\vec3.hpp">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="RenderState.h">
       <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Life.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

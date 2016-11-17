@@ -7,6 +7,7 @@
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h> 
+#include "Life.h"
 
 class EntityManager
 {
@@ -23,7 +24,9 @@ public:
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer); 
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
+	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 
 
@@ -47,6 +50,7 @@ public:
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
 	Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid);
+	Entity * EntityManager::getEntityID(int id);
 
 private:
 	EntityManager(EntityManager const&);
@@ -55,6 +59,7 @@ private:
 
 	int m_nextID;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
+	std::unordered_map<int, Entity*> m_entities;
 
 };
 

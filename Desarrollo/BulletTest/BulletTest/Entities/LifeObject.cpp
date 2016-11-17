@@ -1,5 +1,6 @@
 #include "LifeObject.h"
 #include "../Motor/PhysicsEngine.h"
+#include "../Motor de Red/Cliente.h"
 
 LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
@@ -76,12 +77,35 @@ void LifeObject::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		////TODO: AQUI ES SEGURO QUE HA COLISIONADO CON EL PLAYER, HABRIA QUE BORRAR EL PAQUETE DE VIDA Y RESPAWNEARLO EN X TIEMPO
 		if (estado == DISPONIBLE) {
+			
 			PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 			estado = USADO;
 			clockRecargaLife.restart();
+			//se envia un mensaje al servidor de que la vida con m_id ha sido cogida
+			if (Cliente::i().isConected())
+			Cliente::i().vidaCogida(m_id);
+			//TODO: aqui hacer el nodo invisible!
 
+			
 			static_cast<Player*>(message.data)->sumarVida();
+
 
 		}
 	}
+}
+
+void LifeObject::asignaTiempo(Clock tiempo) {
+	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
+	clockRecargaLife = tiempo;
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	estado = USADO;
+}
+
+void LifeObject::VidaCogida()
+{
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	estado = USADO;
+	clockRecargaLife.restart();
+	//TODO: aqui hacer el nodo invisible!
+
 }

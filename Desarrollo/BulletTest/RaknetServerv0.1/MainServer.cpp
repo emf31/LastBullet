@@ -8,6 +8,7 @@
 #include <RakNetTypes.h>  // MessageID
 
 #include "Entities\Player.h"
+#include "Entities\Life.h"
 #include "Estructuras.h"
 #include "Entities\EntityManager.h"
 
@@ -51,6 +52,8 @@ int main() {
 	TPlayer p_struct;
 	TBala p_bala;
 	TGranada p_granada;
+	Clock tiempoRestartVida;
+	int idVida=0;
 	
 	//std::vector<Player*> clientArray;
 
@@ -231,6 +234,61 @@ int main() {
 
 							   break;
 
+
+			case NUEVA_VIDA: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(idVida);
+				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida));
+				if (vida != NULL) {
+					//existe esa vida ya (un cliente que se conecto antes ya la creo)
+					
+					//ACLARACION: la vida ya existe se le envia un mensaje a ese cliente de que esa vida ya ha sido creada y si ha sido cogida se le envia el tiempo que queda hasta reaparecer
+					//si la vida no ha sida cogida aun no se hace nada porque cuando alguien la coja ya se enviaran los mensajes necesarios
+					if (vida->disponible != true) {
+						//enviamos un mensaje con el tiempo porque la vida ha sido cogida
+						EntityManager::i().enviaTiempoActualVida(vida, packet->guid,peer);		
+					}
+
+
+				}
+				else {
+					//no existe la vida aun (este es el primer cliente que se conecta)
+					Life *l = new Life(idVida);
+				}
+				
+				
+				
+			}
+
+								break;
+
+
+			case VIDA_COGIDA: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(idVida);
+				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida));
+				vida->resetTiempoRecargar();
+
+				EntityManager::i().VidaCogida(idVida, peer);
+
+
+
+
+			}
+
+							 break;
 			case MUERTE: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
