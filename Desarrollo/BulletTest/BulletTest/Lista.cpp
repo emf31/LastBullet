@@ -46,13 +46,20 @@ void Lista::Mostrar() {
 
 void Lista::Siguiente() {
 	if (actual) {
+		actual->valor->setEquipada(false);
 		actual = actual->siguiente;
+		actual->valor->setEquipada(true);
+		actual->valor->resetRecarga();
+
 	}
 }
 
 void Lista::Anterior() {
 	if (actual) {
+		actual->valor->setEquipada(false);
 		actual = actual->anterior;
+		actual->valor->setEquipada(true);
+		actual->valor->resetRecarga();
 	}
 }
 

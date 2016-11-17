@@ -46,6 +46,9 @@ public:
 
 	virtual void resetAmmoTotal()=0;
 
+	virtual void setEquipada(bool nuevoEquipada) { equipada = nuevoEquipada; }
+	virtual void resetRecarga() { relojrecarga.restart(); }
+
 protected:
 	Time cadencia;
 	Clock relojCadencia;
@@ -58,5 +61,7 @@ protected:
 	Clock relojrecarga;
 
 	int estadoWeapon;
+
+	bool equipada=false;
 };
 

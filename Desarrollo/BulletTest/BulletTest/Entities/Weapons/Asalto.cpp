@@ -25,23 +25,24 @@ void Asalto::inicializar()
 
 void Asalto::update(Time elapsedTime)
 {
+	if (equipada) {
 
-	if (estadoWeapon == DESCARGADA) {
-		if (numCargadores > 0) {
-			if (relojrecarga.getElapsedTime() < recarga) {
-				printf("recargando\n");
+		if (estadoWeapon == DESCARGADA) {
+			if (numCargadores > 0) {
+				if (relojrecarga.getElapsedTime() < recarga) {
+					printf("recargando\n");
+				}
+				else {
+					estadoWeapon = CARGADA;
+					disparos = 0;
+					numCargadores--;
+				}
 			}
 			else {
-				estadoWeapon = CARGADA;
-				disparos = 0;
-				numCargadores--;
+				relojrecarga.restart();
 			}
 		}
-		else {
-			relojrecarga.restart();
-		}
 	}
-
 
 }
 

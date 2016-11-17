@@ -22,19 +22,21 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
-	if (estadoWeapon == DESCARGADA) {
-		if (numCargadores > 0) {
-			if (relojrecarga.getElapsedTime() < recarga) {
-				printf("recargando\n");
+	if (equipada) {
+		if (estadoWeapon == DESCARGADA) {
+			if (numCargadores > 0) {
+				if (relojrecarga.getElapsedTime() < recarga) {
+					printf("recargando\n");
+				}
+				else {
+					estadoWeapon = CARGADA;
+					disparos = 0;
+					numCargadores--;
+				}
 			}
 			else {
-				estadoWeapon = CARGADA;
-				disparos = 0;
-				numCargadores--;
+				relojrecarga.restart();
 			}
-		}
-		else {
-			relojrecarga.restart();
 		}
 	}
 
