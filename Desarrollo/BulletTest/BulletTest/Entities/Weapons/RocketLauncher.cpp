@@ -32,7 +32,7 @@ void RocketLauncher::update(Time elapsedTime)
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
 				if (relojrecarga.getElapsedTime() < recarga) {
-					printf("recargando\n");
+					//printf("recargando\n");
 				}
 				else {
 					estadoWeapon = CARGADA;
@@ -78,7 +78,7 @@ void RocketLauncher::shoot() {
 
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 		disparos++;
-		printf("DISPARANDO ROCKETLAUNCHER\n");
+		//printf("DISPARANDO ROCKETLAUNCHER\n");
 		btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
 
 		btVector3 start(

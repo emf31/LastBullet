@@ -77,9 +77,9 @@ void Pistola::shoot() {
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 			disparos++;
-			printf("DISPARANDO PISTOLA\n");
+			//printf("DISPARANDO PISTOLA\n");
 			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
-			btVector3 FUERZA(10, 10, 10);
+			btVector3 FUERZA(10,10,10);
 
 			btVector3 start(
 				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -92,42 +92,46 @@ void Pistola::shoot() {
 
 			btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
-			btVector3 end = start + (direccion2*SIZE_OF_WORLD);
+			btVector3 end = /*start +*/ (direccion2*SIZE_OF_WORLD);
 
-			btCollisionWorld::AllHitsRayResultCallback ray(start, end);
+			btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
 			PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-			Vec3<float> posicionImpacto(1500, 1500, 1500);
+			Vec3<float> posicionImpacto;
 
 
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
+			
 
+				//Entity* ent = static_cast<Entity*>(ray.m_collisionObjects[nearestObject]->getUserPointer());
 
-				btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
+				// = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 
 																					 //calcularDistancia(start, end);
 
 																					 ////////////////////////////////////////////////////////////
 																					 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
-																					 //if (hit != m_rigidBody)
-																					 //{
+				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+				if (ent != EntityManager::i().getEntity(PLAYER))
+				{
+					//Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
+					if (ent->getClassName() == "Enemy") {
+						Message msg(ent, "COLISION_BALA", NULL);
+						MessageHandler::i().sendMessage(msg);
+					}
 
-				Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-				if (myEnt->getClassName() == "Enemy") {
-					Message msg(myEnt, "COLISION_BALA", NULL);
-					MessageHandler::i().sendMessage(msg);
+
+					posicionImpacto = Vec3<float>(ray.m_hitPointWorld.x(), ray.m_hitPointWorld.y(), ray.m_hitPointWorld.z());
+
+					if (ent->getName() == "caja") {
+						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
+						std::cout << ent->getName() << std::endl;
+					}
 				}
 
-
-				posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
-
-
-				if (myEnt->getClassName() == "PhysicsEntity") {
-					hit->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
-					std::cout << myEnt->getName() << std::endl;
-				}
+				
 			}
 
 			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
@@ -144,7 +148,7 @@ void Pistola::shoot() {
 			//	  }
 
 
-			if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+			if (Cliente::i().isConected()) {
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 				Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 			}

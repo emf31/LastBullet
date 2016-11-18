@@ -152,7 +152,7 @@ void Enemy::encolaMovimiento(TPlayer pos)
 void Enemy::desencolaMovimiento()
 {	
 	//m.lock();
-	std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
+	//std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
 	
 	if (m_positions.size() > 3) {
 		TMovimiento mov;

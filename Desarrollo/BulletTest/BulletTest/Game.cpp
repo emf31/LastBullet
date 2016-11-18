@@ -233,7 +233,9 @@ void Game::inicializar()
 	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/ice0.jpg", "");
 
 	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
-	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(5.f, 5.f, 5.f), 1, DISABLE_DEACTIVATION));
+	btRigidBody* rigid = PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(5.f, 5.f, 5.f), 3.f, DISABLE_DEACTIVATION);
+	rigid->setCollisionFlags(rigid->getCollisionFlags()/* | btCollisionObject::CF_STATIC_OBJECT*/);
+	cajaEnt->setRigidBody(rigid);
 	cajaEnt->setPosition(Vec3<float>(0, 100, 0));
 
 	/////////////////////////////////////////////////////////////////////

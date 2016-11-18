@@ -60,6 +60,11 @@ public:
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
 	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal(); }
 
+
+	btPairCachingGhostObject* getGhostObject() {
+		return p_controller->getGhostObject();
+	}
+
 private:
 	float m_vida;
 
