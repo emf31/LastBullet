@@ -28,7 +28,7 @@ void Asalto::update(Time elapsedTime)
 	if (equipada) {
 		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5, player_pos.getZ()));
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5, player_pos.getZ()));
 		m_renderState.updateRotations(player_rot);
 
 		if (estadoWeapon == DESCARGADA) {
@@ -58,7 +58,7 @@ void Asalto::handleInput()
 void Asalto::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(10.f, 10.f, 10.f), "", "../media/arma/asalto.obj"));
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.8f, 0.8f, 0.8f), "", "../media/arma/asalto.obj"));
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
 	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
@@ -85,6 +85,7 @@ void Asalto::shoot()
 
 			//printf("DISPARANDO ASALTO\n");
 			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
+			btVector3 FUERZA(10, 10, 10);
 
 			btVector3 start(
 				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -99,33 +100,34 @@ void Asalto::shoot()
 
 			btVector3 end = start + (direccion2*SIZE_OF_WORLD);
 
-			btCollisionWorld::AllHitsRayResultCallback ray(start, end);
+			btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
 			PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-			Vec3<float> posicionImpacto(1500, 1500, 1500);
+			Vec3<float> posicionImpacto;
 
 
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
 
+				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+				if (ent != EntityManager::i().getEntity(PLAYER))
+				{
+					//Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
+					if (ent->getClassName() == "Enemy") {
+						Message msg(ent, "COLISION_BALA", NULL);
+						MessageHandler::i().sendMessage(msg);
+					}
 
-				const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
 
-																					 //calcularDistancia(start, end);
+					posicionImpacto = Vec3<float>(ray.m_hitPointWorld.x(), ray.m_hitPointWorld.y(), ray.m_hitPointWorld.z());
 
-																					 ////////////////////////////////////////////////////////////
-																					 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
-																					 //if (hit != m_rigidBody)
-																					 //{
-
-				Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-				if (myEnt->getClassName() == "Enemy") {
-					Message msg(myEnt, "COLISION_BALA", NULL);
-					MessageHandler::i().sendMessage(msg);
+					if (ent->getClassName() == "PhysicsEntity") {
+						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
+						std::cout << ent->getName() << std::endl;
+					}
 				}
-
-				posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 			}
 
 			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final

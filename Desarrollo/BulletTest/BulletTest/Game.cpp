@@ -28,7 +28,7 @@
 #include <Windows.h>
 
 
-const Time Game::timePerFrame = seconds(1.f / 30.f);
+const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 
@@ -55,7 +55,7 @@ void Game::run()
 	Time time_gameclock;
 
 	/// Reset all of our timers
-	time_physics_prev = time_physics_curr = clock.restart();
+	time_physics_prev = time_physics_curr = clock.getElapsedTime();
 	time_gameclock = clock.getElapsedTime();
 
 
@@ -65,9 +65,9 @@ void Game::run()
 
 
 
-		MastEventReceiver::i().endEventProcess();
+		
 
-		processEvents();
+	
 
 		///Las fisicas se ejecutan 80 veces por segundo
 
@@ -77,17 +77,21 @@ void Game::run()
 
 		time_physics_prev = time_physics_curr;
 
+		
 
 		// Game Clock part of the loop
 		/*  This ticks once every TickMs milliseconds on average */
 		Time dt = clock.getElapsedTime() - time_gameclock;
 
 		//Llevamos control en las actualizaciones por frame
-		while (dt >= timePerFrame) // 30 veces/segundo
+		while (dt >= timePerFrame) // 15 veces/segundo
 		{
 			dt -= timePerFrame;
 			time_gameclock += timePerFrame;
-
+			
+			MastEventReceiver::i().endEventProcess();
+			processEvents();
+			MastEventReceiver::i().startEventProcess();
 
 			//Realizamos actualizaciones
 			update(timePerFrame);
@@ -101,7 +105,7 @@ void Game::run()
 
 
 		//}
-		MastEventReceiver::i().startEventProcess();
+		
 	}
 
 	//Espera a que termine el otro hilo para finalizar el programa
@@ -233,10 +237,12 @@ void Game::inicializar()
 	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/ice0.jpg", "");
 
 	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
-	btRigidBody* rigid = PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(5.f, 5.f, 5.f), 3.f, DISABLE_DEACTIVATION);
-	rigid->setCollisionFlags(rigid->getCollisionFlags()/* | btCollisionObject::CF_STATIC_OBJECT*/);
+	btRigidBody* rigid = PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(5.f, 5.f, 5.f), 10.f);
+	//rigid->setCollisionFlags(rigid->getCollisionFlags()/* | btCollisionObject::CF_STATIC_OBJECT*/);
+	//rigid->se
+	//rigid->
 	cajaEnt->setRigidBody(rigid);
-	cajaEnt->setPosition(Vec3<float>(0, 100, 0));
+	//cajaEnt->setPosition(Vec3<float>(0, 100, 0));
 
 	/////////////////////////////////////////////////////////////////////
 

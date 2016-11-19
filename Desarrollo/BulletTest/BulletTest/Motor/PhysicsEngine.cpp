@@ -8,7 +8,7 @@
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
-const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
+const Time PhysicsEngine::tickPhysics = seconds(1.f / 60.f);
 
 
 //Tenemos un unordered maps de contactos, donde la key es un entity.
@@ -46,7 +46,7 @@ void PhysicsEngine::inicializar()
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 
-	m_world->setGravity(btVector3(0, -55, 0));
+	m_world->setGravity(btVector3(0, -40, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
@@ -69,7 +69,7 @@ void PhysicsEngine::update(Time elapsedTime)
 	while (maxSubsteps * (timeSinceLastUpdate.asSeconds()) < elapsedTime.asSeconds()) {
 		maxSubsteps++;
 	}*/
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 12, tickPhysics.asSeconds());
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 20, tickPhysics.asSeconds());
 	
 
 	//Aqui calculariamos colisiones

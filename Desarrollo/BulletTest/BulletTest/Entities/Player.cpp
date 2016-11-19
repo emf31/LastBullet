@@ -196,7 +196,7 @@ void Player::cargarContenido()
 	//p_controller->setFallSpeed(200);
 	//p_controller->setMaxJumpHeight(20);
 	//p_controller->setLinearDamping(0.1);
-
+	//p_controller->setLinearDamping();
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
 		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter | btBroadphaseProxy::SensorTrigger);
 

@@ -92,7 +92,7 @@ void Pistola::shoot() {
 
 			btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
-			btVector3 end = /*start +*/ (direccion2*SIZE_OF_WORLD);
+			btVector3 end = start + (direccion2*SIZE_OF_WORLD);
 
 			btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
@@ -125,7 +125,7 @@ void Pistola::shoot() {
 
 					posicionImpacto = Vec3<float>(ray.m_hitPointWorld.x(), ray.m_hitPointWorld.y(), ray.m_hitPointWorld.z());
 
-					if (ent->getName() == "caja") {
+					if (ent->getClassName() == "PhysicsEntity") {
 						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
 						std::cout << ent->getName() << std::endl;
 					}
