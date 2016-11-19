@@ -61,10 +61,10 @@ public:
 	float getVida() {
 		return m_vida;
 	}
-	float restaVida(float cantidad) {
-		m_vida -= cantidad;
-		return m_vida;
-	}
+	void restaVida(float cantidad);
+		
+		
+	
 	void sumarVida() {
 		m_vida += 40;
 		if (m_vida > 100)

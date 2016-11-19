@@ -68,6 +68,7 @@ void Enemy::cargarContenido()
 
 
 	granada->cargarContenido();
+	granada->inicializar();
 
 	m_animState = quieto;
 

@@ -265,28 +265,8 @@ void Cliente::update() {
 				//TODO:ahora mismo no hace falta leer, aqui te pasan el arma con la cual disparaste.
 				//bsIn.Read(desconectado);
 
-				//el player siempre tendra ID=1 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				if (EntityManager::i().getEntity(PLAYER)->restaVida(20) <= 0) {
-					std::cout << "ME HAN MATADO" << std::endl;
-					std::cout << "HIJO PUTA EL CAMPERO" << std::endl;
-					//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
-
-					bsOut.Write((RakNet::MessageID)MUERTE);
-
-					nuevoplayer.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-					nuevoplayer.name = EntityManager::i().getEntity(PLAYER)->getName();
-					nuevoplayer.position = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-
-
-					bsOut.Write(nuevoplayer);
-					peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-					bsOut.Reset();
-
-
-
-					
-
-				}
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				EntityManager::i().getEntity(PLAYER)->restaVida(20);
 
 			}
 			break;
@@ -301,7 +281,7 @@ void Cliente::update() {
 				
 				std::cout << "el player " << nuevoplayer.name << " ha muerto" << std::endl;
 
-				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==1000) {
+				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==PLAYER) {
 					//es el player
 					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 					player->setPosition(nuevoplayer.position);			
@@ -309,7 +289,7 @@ void Cliente::update() {
 
 					//TODO: esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
 					//ademas que desactivara el draw de esta entetity para que no puedeas moverte ni nada mientras estas muerto.
-					EntityManager::i().getEntity(1000)->resetVida();
+					EntityManager::i().getEntity(PLAYER)->resetVida();
 				}
 				else {
 					//es un enemigo
@@ -475,6 +455,25 @@ void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<flo
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 
+}
+
+
+void Cliente::playerMuerto()
+{
+	//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
+
+	RakNet::BitStream bsOut;
+	TPlayer nuevoplayer;
+	bsOut.Write((RakNet::MessageID)MUERTE);
+
+	nuevoplayer.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+	nuevoplayer.name = EntityManager::i().getEntity(PLAYER)->getName();
+	nuevoplayer.position = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+
+
+	bsOut.Write(nuevoplayer);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
 }
 
 

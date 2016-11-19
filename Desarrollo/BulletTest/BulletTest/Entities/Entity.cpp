@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "../Motor/RenderState.h"
 #include "EntityManager.h"
+#include "../Motor de Red/Cliente.h"
 
 
 Entity::Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name, RakNet::RakNetGUID guid) :
@@ -42,5 +43,16 @@ std::shared_ptr<SceneNode> Entity::getNode()
 {
 	return m_nodo;
 }
+
+
+void Entity::restaVida(float cantidad)
+{
+	m_vida -= cantidad;
+	if (m_vida <= 0) {
+		if (Cliente::i().isConected())
+		Cliente::i().playerMuerto();
+	}
+}
+
 
 
