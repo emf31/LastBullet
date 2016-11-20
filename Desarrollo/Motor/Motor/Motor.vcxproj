@@ -163,7 +163,6 @@
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshNode.cpp" />
     <ClCompile Include="TModel.cpp" />
-    <ClCompile Include="TModelNode.cpp" />
     <ClCompile Include="TNode.cpp" />
     <ClCompile Include="TSpotLight.cpp" />
     <ClCompile Include="TTransform.cpp" />
@@ -181,10 +180,10 @@
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshNode.h" />
     <ClInclude Include="TModel.h" />
-    <ClInclude Include="TModelNode.h" />
     <ClInclude Include="TNode.h" />
     <ClInclude Include="TSpotLight.h" />
     <ClInclude Include="TTransform.h" />
+    <ClInclude Include="vec3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
-#include "TEntity.h"
+#include "TModel.h"
+#include "vec3.hpp"
 #include <algorithm>
 #include <vector>
 #include <iterator>
@@ -9,20 +10,30 @@ public:
 	TNode();
 	~TNode();
 	
-	void setEntity(TEntity* ent);
+	void setModel(TModel* model);
 
-	TEntity* getEntity();
+	TModel* getModel();
 
 	TNode* getParentNode();
 
-	int removeChild(TNode *child);
+	bool removeChild(TNode *child);
 	void addChild(TNode* child);
 
-	void draw();
+	virtual void beginDraw(glm::mat4 projection, glm::mat4 view);
+	virtual void endDraw();
+
+	void setScale(Vec3<float> scale);
+	void setPosition(Vec3<float> position);
+	void rotate(Vec3<float> rotation);
 	
+	//SceneManager *sceneManager_ptr;
 private:
-	TEntity *m_entity;
-	std::vector<TNode*> m_childNodes;
+	TModel *m_model;
 	TNode *m_parentNode;
+	std::vector<TNode*> m_childNodes;
+	
+	glm::vec3 scale;
+	glm::vec3 position;
+	
 };
 

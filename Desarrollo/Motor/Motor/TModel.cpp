@@ -1,5 +1,6 @@
 #include "TModel.h"
 #include "ResourceManager.h"
+#include <glm/gtc/type_ptr.hpp>
 
 
 TModel::TModel(GLchar * path, Shader* shaderPath) {
@@ -20,7 +21,13 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 TModel::~TModel() {
 }
 
-void TModel::beginDraw() {
+void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model) {
+	shader->Use();
+
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
 	for (GLuint i = 0; i < this->meshes.size(); i++)
 		this->meshes[i].beginDraw();
 }

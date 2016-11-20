@@ -15,6 +15,10 @@ SceneManager* EngineDevice::getSceneManager() {
 		return sm;
 	} else {
 		sm = new SceneManager();
+		sm->camera_ptr = &camera;
+		sm->screenWidth = &screenWidth;
+		sm->screenHeight = &screenHeight;
+		return sm;
 	}
 }
 
@@ -52,7 +56,9 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	glfwSwapInterval(-1); //vSync adaptativa!
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	
+
+	this->screenHeight = screenHeight;
+	this->screenWidth = screenWidth;
 	return 1;
 }
 

@@ -1,0 +1,16 @@
+﻿  main.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.h(38): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(83): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(84): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(88): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(89): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(91): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(92): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\main.cpp(98): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  EngineDevice.cpp
+  Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe
+  Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.pdb (Full PDB)

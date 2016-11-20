@@ -5,6 +5,7 @@
 #include <GLEW/glew.h>
 //GLFW
 #include <GLFW/glfw3.h>
+
 #include "SceneManager.h"
 
 #include "Camera.h"
@@ -14,7 +15,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
+
 class EngineDevice {
+
+
+
 public:
 	EngineDevice();
 	~EngineDevice();
@@ -34,19 +40,24 @@ public:
 		lastFrame = currentFrame;
 	}
 	
+
+	//TODO: Mover esto a otro sitio
 	bool keys[1024];
 	GLfloat lastX = 400, lastY = 300;
 	bool firstMouse = true;
 
-
-
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
+
+
+
+	
+
 private:
 	SceneManager *sm;
 	GLFWwindow *window;
 
-	
+	float screenWidth, screenHeight;
 
 };
 

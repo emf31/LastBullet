@@ -1,9 +1,9 @@
 //GLEW
 #define GLEW_STATIC
-#include <GLEW\glew.h>
+#include <GLEW/glew.h>
 
 //GLFW
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 #include <iostream>
 using namespace std;
@@ -13,13 +13,6 @@ using namespace std;
 #include "Camera.h"
 #include "TModel.h"
 
-#include "TModelNode.h"
-
-// GLM Mathemtics
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
 // Other Libs
 #include <soil/SOIL.h>
 
@@ -27,56 +20,34 @@ using namespace std;
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
 
-
-void Do_Movement();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
+void Do_Movement();
 int main() {
 	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
 		return -1;
 	}
-
-	TModelNode modelNode;
-	modelNode.setEntity();
 
 	glfwSetKeyCallback(engine.getWindow(), key_callback);
 	glfwSetCursorPosCallback(engine.getWindow(), mouse_callback);
 	glfwSetScrollCallback(engine.getWindow(), scroll_callback);
 
 	SceneManager *sm = engine.getSceneManager();
-	Shader* shader;
 	TNode* n = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
-	//TModel * modelo = (TModel*)n->getEntity();
-	//modelo->setShader();
+
+	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
+	n->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
+
 	while (!glfwWindowShouldClose(engine.getWindow())){
 		engine.updateCurrentFrame();
 
+		//TODO: Mover esto a otro sitio
 		glfwPollEvents();
 		Do_Movement();
-		//RENDER
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shader = ResourceManager::i().getShader("assets/model_loading.vs");
-		shader->Use();   // <-- Don't forget this one!
-
-		
-		/*glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));*/
-
-		// Draw the loaded model
-		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
-		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
-		//ourModel.beginDraw(shader);
-
-		sm->draw();
-		// Swap the buffers
-		glfwSwapBuffers(engine.getWindow());
+		sm->draw(engine.getWindow());
 	}
 
 	glfwTerminate();

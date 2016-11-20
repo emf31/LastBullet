@@ -21,7 +21,7 @@ using namespace std;
 //GLint TextureFromFile(const char* path, string directory);
 
 
-class TModel : TEntity {
+class TModel {
 public:
 	/*  Functions   */
 	// Constructor, expects a filepath to a 3D model.
@@ -53,6 +53,9 @@ public:
 		return textureID;
 	}
 
+	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model);
+
+	virtual void endDraw();
 	
 
 private:
@@ -70,13 +73,6 @@ private:
 	TMesh processMesh(aiMesh* mesh, const aiScene* scene);
 
 	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
-
-	
-
-	// Heredado vía TEntity
-	virtual void beginDraw() override;
-
-	virtual void endDraw() override;
 
 };
 
