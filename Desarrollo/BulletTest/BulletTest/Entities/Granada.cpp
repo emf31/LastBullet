@@ -17,7 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(160.f, 160.f, 160.f);
+	fuerza = Vec3<float>(120.f, 120.f, 120.f);
 }
 
 void Granada::update(Time elapsedTime)
@@ -63,6 +63,13 @@ void Granada::cargarContenido()
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterGroup = col::Collisions::Granada;
+	proxy->m_collisionFilterMask = col::Collisions::Suelo;
+
+	proxy = NULL;
+
 	radioExplosion=30.f;
 
 

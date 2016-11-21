@@ -3,14 +3,20 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/BasicSceneNode.h"
-
+#include "../Motor/PhysicsEngine.h"
 class PhysicsEntity : public Entity
 {
 public:
 	PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
 	~PhysicsEntity();
 
-	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
+	void setRigidBody(btRigidBody* rigidBody) { 
+		m_rigidBody = rigidBody;
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Suelo;
+		proxy->m_collisionFilterMask = col::Collisions::Granada | btBroadphaseProxy::CharacterFilter | col::Collisions::Suelo | col::Collisions::Rocket;
+
+	}
 	btRigidBody* getRigidBody() { return m_rigidBody; }
 
 	void rotate(Vec3<float> rot);

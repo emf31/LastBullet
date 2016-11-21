@@ -2,6 +2,8 @@
 #include "../Handlers/MessageHandler.h"
 #include "../Motor/GraphicEngine.h"
 #include "../Motor/PhysicsEngine.h"
+#include "../Otros/Util.h"
+
 
 #include <list>
 
@@ -26,30 +28,20 @@ void RocketBullet::inicializar()
 
 void RocketBullet::update(Time elapsedTime)
 {
-	//m_renderState.updateVelocity(elapsedTime.asSeconds(), (m_direction*m_velocity));
-	btVector3 aux(m_direction.getX(), m_direction.getY(), m_direction.getZ());
-	m_rigidBody->setLinearVelocity(aux*m_velocity);
+		btVector3 aux(m_direction.getX(), m_direction.getY(), m_direction.getZ());
+		m_rigidBody->setLinearVelocity(aux*m_velocity);
 
-	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+		btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+		m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
-	// Set rotation
-	vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;
+		// Set rotation
+		vector3df Euler;
+		const btQuaternion& TQuat = m_rigidBody->getOrientation();
+		quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
+		q.toEuler(Euler);
+		Euler *= RADTODEG;
 
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
-	/*if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
-		//EntityManager::i().removeEntity(this);
-		printf("Explosion en %f %f %f\n",m_renderState.getPosition().getX(), m_renderState.getPosition().getY(), m_renderState.getPosition().getZ());
-
-		Message msg1(this, "BORRATE", NULL);
-
-		MessageHandler::i().sendMessage(msg1);
-	}
-	*/
+		m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 }
 
 void RocketBullet::handleInput()
@@ -64,7 +56,10 @@ void RocketBullet::cargarContenido()
 	m_renderState.setRenderRot(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
-
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+	proxy->m_collisionFilterMask =  col::Collisions::Suelo;
+	//m_rigidBody->setCollisionFlags(4);
 	radioExplosion = 40.f;
 }
 
@@ -88,15 +83,19 @@ void RocketBullet::handleMessage(const Message & message)
 				for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 
 					Entity* myentity = *it;
-					myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), radioExplosion));
+					myentity->restaVida(explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion));
 
 				}
 
+				btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+				m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+
 				PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-				EntityManager::i().removeEntity(this);
+				//EntityManager::i().removeEntity(this);
 				estado = USADO;
 			}
+			
 		}
 
 	}

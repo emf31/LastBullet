@@ -13,7 +13,8 @@ namespace col {
 		COL_NOTHING = 0, //<Collide with nothing
 		Granada = BIT(0), //<Collide with ships
 		Suelo = BIT(1), //<Collide with walls
-		Object = BIT(2) //<Collide with powerups
+		Object = BIT(2), //<Collide with powerups
+		Rocket = BIT(3)
 	};
 }
 
@@ -22,6 +23,7 @@ namespace col {
 class PhysicsEngine
 {
 public:
+	
 
 	static PhysicsEngine& i() {
 		static PhysicsEngine singleton;
