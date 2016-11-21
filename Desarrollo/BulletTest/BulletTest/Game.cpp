@@ -74,6 +74,7 @@ void Game::run()
 		time_physics_curr = clock.getElapsedTime();
 
 		PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
+		
 
 		time_physics_prev = time_physics_curr;
 
@@ -308,13 +309,8 @@ bool Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	/*EntityManager::i().updatePosEnemigos(elapsedTime);
-	EntityManager::i().updateRotEnemigos(elapsedTime);*/
-	int b = EntityManager::i().numClientes();
-	if (b > 1) {
-		int a = 0;
-	}
-	PhysicsEngine::i().update(timePerFrame);
+	
+	PhysicsEngine::i().m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 20);
 
 	EntityManager::i().update(elapsedTime);
 	MessageHandler::i().update();
