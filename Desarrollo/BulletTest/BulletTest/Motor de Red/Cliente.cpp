@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
 #include "Cliente.h"
 #include "Estructuras.h"
 #include "../Entities/EntityManager.h"
@@ -310,6 +311,7 @@ void Cliente::update() {
 
 			}
 		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 	}
 

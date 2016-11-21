@@ -1,6 +1,6 @@
 
 #include "PhysicsEngine.h"
-
+#include "Serialize/BulletWorldImporter\btBulletWorldImporter.h"
 #include <unordered_map>
 #include <set>
 
@@ -60,6 +60,23 @@ void PhysicsEngine::inicializar()
 
 
 	m_rigidBodies = std::list<btRigidBody*>();
+
+
+	// TODO 3.a Importa la maya de colision del escenario a partir de datos exportador por Blender
+	fileLoader->loadFile("../windmill.bullet");
+
+	btCollisionObjectArray &objects = m_world->getCollisionObjectArray();
+
+	// TODO 3.b Recorre los objetos del mundo
+	// TODO 3.b En caso de encontrar un SCALED_TRIANGLE_MESH_SHAPE, construye su BVH optimizado si no lo tiene
+	for (int i = 0; i<objects.size(); i++) {
+		btCollisionObject *obj = objects[i];
+		if (obj->getCollisionShape()->getShapeType() == SCALED_TRIANGLE_MESH_SHAPE_PROXYTYPE) {
+			btScaledBvhTriangleMeshShape *shape = static_cast<btScaledBvhTriangleMeshShape *>(obj->getCollisionShape());
+			if (!shape->getChildShape()->getOwnsBvh()) {
+				shape->getChildShape()->buildOptimizedBvh();
+			}
+		}
 }
 
 
@@ -80,12 +97,12 @@ void PhysicsEngine::update(Time elapsedTime)
 			Entity* collider1 = *entityIter;
 			//enviamos 2 mensajes uno para la entity que colisiona y otra a la entity con la que colisiona
 
-			Message msg1(collider0, "COLLISION", collider1);
+			/*Message msg1(collider0, "COLLISION", collider1);
 			Message msg2(collider1, "COLLISION", collider0);
 
 
 			MessageHandler::i().sendMessage(msg1);
-			MessageHandler::i().sendMessage(msg2);
+			MessageHandler::i().sendMessage(msg2);*/
 			
 		}
 	}

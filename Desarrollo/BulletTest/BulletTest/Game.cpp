@@ -103,7 +103,7 @@ void Game::run()
 		render(interpolation, timePerFrame);
 
 
-
+		
 		//}
 		
 	}
@@ -124,14 +124,6 @@ void Game::inicializar()
 	GraphicEngine::i().inicializar();
 
 
-	//Antes se hacia aqui pero ahora se hace en Cliente.cpp una vez la conexion ha sido aceptada
-	//player = new Player();
-
-
-	//player = new Player();
-
-	//enemy = new Enemy();
-
 	///////////////////////////////////////////////////////////////
 	std::shared_ptr<BasicSceneNode> suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
@@ -139,7 +131,7 @@ void Game::inicializar()
 	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 5.f, 100), 0));
 	//sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
 	///////////////////////////////////////////////////////////////
-
+	
 	std::shared_ptr<BasicSceneNode> suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "suelo2");
@@ -191,7 +183,7 @@ void Game::inicializar()
 	sueloEnt7->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt7->rotate(Vec3<float>(0, 0, float( 90 * PI / 180.0)));
 	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
-
+	
 	//////////////////////////////////////////////////////////////////////
 	////////         Creamos 2 paquete de vida        //////////////////
 
