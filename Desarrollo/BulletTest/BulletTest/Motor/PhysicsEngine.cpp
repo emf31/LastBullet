@@ -65,11 +65,8 @@ void PhysicsEngine::inicializar()
 
 void PhysicsEngine::update(Time elapsedTime)
 {
-	/*int maxSubsteps = 1;
-	while (maxSubsteps * (timeSinceLastUpdate.asSeconds()) < elapsedTime.asSeconds()) {
-		maxSubsteps++;
-	}*/
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 20, tickPhysics.asSeconds());
+	//Como la simulacion va lenta multiplicamos por 2
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds())*2, 20, tickPhysics.asSeconds());
 	
 
 	//Aqui calculariamos colisiones

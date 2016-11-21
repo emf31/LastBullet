@@ -75,7 +75,6 @@ void Game::run()
 
 		PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
 		
-
 		time_physics_prev = time_physics_curr;
 
 		
@@ -309,8 +308,7 @@ bool Game::processEvents()
 
 void Game::update(Time elapsedTime)
 {
-	
-	PhysicsEngine::i().m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 20);
+
 
 	EntityManager::i().update(elapsedTime);
 	MessageHandler::i().update();
