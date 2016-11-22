@@ -10,11 +10,13 @@
 #define BIT(x) (1<<(x))
 namespace col {
 	enum Collisions {
-		COL_NOTHING = 0, //<Collide with nothing
-		Granada = BIT(0), //<Collide with ships
-		Suelo = BIT(1), //<Collide with walls
-		Object = BIT(2), //<Collide with powerups
-		Rocket = BIT(3)
+		COL_NOTHING = 0,
+		Granada = BIT(0),
+		Suelo = BIT(1),
+		Object = BIT(2),
+		Rocket = BIT(3),
+		Caja = BIT(4),
+		COL_ALL = Granada | Suelo | Object | Object | Rocket
 	};
 }
 
