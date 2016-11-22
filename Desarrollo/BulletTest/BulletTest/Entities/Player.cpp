@@ -250,11 +250,6 @@ void Player::jump() {
 	
 }
 
-void Player::exit()
-{
-	printf("Comando de salida\n");
-}
-
 
 void Player::shoot() {
 

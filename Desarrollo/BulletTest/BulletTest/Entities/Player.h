@@ -32,7 +32,6 @@ public:
 	void setWeapon(int weapon);
 
 	void jump();
-	void exit();
 
 	void shoot();
 	void shootGranada();

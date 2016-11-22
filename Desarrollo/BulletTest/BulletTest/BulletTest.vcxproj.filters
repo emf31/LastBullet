@@ -237,9 +237,6 @@
     <ClInclude Include="Otros\SafeQueue.h">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
-    <ClInclude Include="Command\Exit.h">
-      <Filter>Archivos de encabezado\Command</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

@@ -152,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h" />
-    <ClInclude Include="Command\Exit.h" />
     <ClInclude Include="Command\Jump.h" />
     <ClInclude Include="Command\ListWeaponDown.h" />
     <ClInclude Include="Command\ListWeaponUp.h" />
