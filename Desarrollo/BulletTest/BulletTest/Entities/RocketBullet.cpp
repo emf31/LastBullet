@@ -73,11 +73,11 @@ void RocketBullet::handleMessage(const Message & message)
 
 	if (message.mensaje == "COLLISION") {
 
-	//	m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
-		//m_explosion =PhysicsEngine::i().createSphereShape(this, radioExplosion);
+
 		if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
 			if (estado == DISPONIBLE) {
-
+				m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
+				m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
 				list<Entity*>characters = EntityManager::i().getCharacters();
 				///Explosion
 				for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
