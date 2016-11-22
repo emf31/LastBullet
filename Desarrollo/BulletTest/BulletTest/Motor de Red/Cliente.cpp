@@ -30,6 +30,7 @@ void Cliente::update() {
 	TVidaServer vidaServer;
 	RakNet::RakNetGUID desconectado;
 	int idVida;
+	float danyo = 0.0f;
 	
 
 	while (1) {
@@ -232,7 +233,23 @@ void Cliente::update() {
 				bsIn.Read(balaDisparada);
 				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 
-				Message msg1(EntityManager::i().getEntity(1000), "DIBUJARBALA", static_cast<void*>(&balaDisparada));
+				Message msg1(EntityManager::i().getEntity(PLAYER), "DIBUJARBALA", static_cast<void*>(&balaDisparada));
+				MessageHandler::i().sendMessage(msg1);
+
+
+			}
+			break;
+
+			case DISPARAR_ROCKET:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(balaDisparada);
+				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
+				Message msg1(EntityManager::i().getEntity(PLAYER), "DIBUJAR_ROCKET", static_cast<void*>(&balaDisparada));
 				MessageHandler::i().sendMessage(msg1);
 
 
@@ -268,6 +285,23 @@ void Cliente::update() {
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
 				EntityManager::i().getEntity(PLAYER)->restaVida(20);
+
+			}
+			break;
+
+			case IMPACTO_ROCKET:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				std::cout << "ME HAN DADO CON EL ROCKET" << std::endl;
+
+				
+				bsIn.Read(danyo);
+
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				EntityManager::i().getEntity(PLAYER)->restaVida(danyo);
 
 			}
 			break;
@@ -451,11 +485,26 @@ void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<flo
 	bala.position = position;
 	bala.finalposition = finalposition;
 	bala.rotation = rotation;
-	bala.guid = EntityManager::i().getEntity(1000)->getGuid();
+	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
 	bsOut.Write(bala);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 
+}
+
+void Cliente::dispararRrocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
+{
+	RakNet::BitStream bsOut;
+
+	bsOut.Write((RakNet::MessageID)DISPARAR_ROCKET);
+	TBala bala;
+	bala.direction = direction;
+	bala.position = position;
+	bala.rotation = rotation;
+	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+	bsOut.Write(bala);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
 }
 
 
@@ -476,6 +525,21 @@ void Cliente::playerMuerto()
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }
+
+void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo)
+{
+
+	RakNet::BitStream bsOut;
+
+	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
+
+	bsOut.Write(palayerDanyado);
+	bsOut.Write(danyo);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+
+
 
 
 void Cliente::apagar() {

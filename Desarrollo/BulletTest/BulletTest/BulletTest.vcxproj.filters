@@ -237,6 +237,9 @@
     <ClInclude Include="Otros\SafeQueue.h">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\RocketBulletEnemy.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -358,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp">
       <Filter>Archivos de código fuente\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\RocketBulletEnemy.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

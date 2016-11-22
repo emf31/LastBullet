@@ -172,6 +172,7 @@
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Entities\RocketBullet.h" />
+    <ClInclude Include="Entities\RocketBulletEnemy.h" />
     <ClInclude Include="Entities\WeaponDrops\AsaltoDrop.h" />
     <ClInclude Include="Entities\WeaponDrops\PistolaDrop.h" />
     <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Entities\RocketBullet.cpp" />
+    <ClCompile Include="Entities\RocketBulletEnemy.cpp" />
     <ClCompile Include="Entities\WeaponDrops\AsaltoDrop.cpp" />
     <ClCompile Include="Entities\WeaponDrops\PistolaDrop.cpp" />
     <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp" />

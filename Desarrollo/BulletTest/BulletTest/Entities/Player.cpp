@@ -12,6 +12,7 @@
 #include "../Otros/Util.h"
 #include "GunBullet.h"
 #include "RocketBullet.h"
+#include "RocketBulletEnemy.h"
 #include "Weapons/Asalto.h"
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
@@ -222,6 +223,16 @@ void Player::handleMessage(const Message & message)
 		TBala* tBala = static_cast<TBala*>(message.data);
 
 		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
+
+		//delete tBala;
+
+	}
+	else if (message.mensaje == "DIBUJAR_ROCKET") {
+		TBala* tRocket = static_cast<TBala*>(message.data);
+
+		RocketBulletEnemy* balaRocket = new RocketBulletEnemy(tRocket->position, tRocket->direction, tRocket->rotation);
+		
+		//delete tRocket;
 
 	}
 	else if (message.mensaje == "NUEVO_ENEMIGO") {

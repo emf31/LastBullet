@@ -54,6 +54,7 @@ int main() {
 	TGranada p_granada;
 	Clock tiempoRestartVida;
 	int idVida=0;
+	int danyo = 0;
 	
 	//std::vector<Player*> clientArray;
 
@@ -217,6 +218,24 @@ int main() {
 
 							 break;
 
+			case IMPACTO_ROCKET: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(guid_Pdisparado);
+				bsIn.Read(danyo);
+				
+				//notifico a ese cliente que ha sido disparado
+				EntityManager::i().enviaDisparadoRocket(guid_Pdisparado, danyo, peer);
+
+			}
+
+							   break;
+
 
 			case DISPARAR_BALA: {
 
@@ -233,6 +252,23 @@ int main() {
 			}
 
 							   break;
+
+
+			case DISPARAR_ROCKET: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(p_bala);
+				//notifico a ese cliente que ha sido disparado
+				EntityManager::i().enviarDisparoClienteRocket(p_bala, peer);
+
+			}
+
+			break;
 
 
 			case NUEVA_VIDA: {

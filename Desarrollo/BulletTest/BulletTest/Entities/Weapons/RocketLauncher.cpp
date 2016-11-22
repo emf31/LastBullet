@@ -138,10 +138,10 @@ void RocketLauncher::shoot() {
 		//	  }
 
 
-	/*	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+		if (Cliente::i().isConected()) {
 			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-			Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-		}*/
+			Cliente::i().dispararRrocket(posDisparo, direccion, GraphicEngine::i().getActiveCamera()->getRotation());
+		}
 		//}
 
 		relojCadencia.restart();

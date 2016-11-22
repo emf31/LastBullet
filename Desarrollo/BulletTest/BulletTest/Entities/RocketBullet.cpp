@@ -3,6 +3,7 @@
 #include "../Motor/GraphicEngine.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Otros/Util.h"
+#include "../Motor de Red/Cliente.h"
 
 
 #include <list>
@@ -69,7 +70,7 @@ void RocketBullet::borrarContenido()
 
 void RocketBullet::handleMessage(const Message & message)
 {
-
+	int danyo = 0;
 
 	if (message.mensaje == "COLLISION") {
 
@@ -83,7 +84,15 @@ void RocketBullet::handleMessage(const Message & message)
 				for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 
 					Entity* myentity = *it;
-					myentity->restaVida(explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion));
+					//myentity->restaVida(explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion));
+					danyo = explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
+					std::cout << "Le resto " << danyo << " a " << myentity->getName() << std::endl;
+					if (Cliente::i().isConected() && danyo>0) {
+						Cliente::i().impactoRocket(myentity->getGuid(),danyo);
+					}
+					else {
+						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
+					}
 
 				}
 

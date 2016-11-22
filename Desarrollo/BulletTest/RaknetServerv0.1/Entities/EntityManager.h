@@ -23,9 +23,11 @@ public:
 	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer); 
+	void enviaDisparadoRocket(RakNet::RakNetGUID &guid,int danyo, RakNet::RakPeerInterface *peer);
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
+	void enviarDisparoClienteRocket(TBala &b, RakNet::RakPeerInterface *peer);
 	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 

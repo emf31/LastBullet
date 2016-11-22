@@ -107,6 +107,21 @@ void EntityManager::enviaDisparado(RakNet::RakNetGUID & guid, RakNet::RakPeerInt
 	
 }
 
+void EntityManager::enviaDisparadoRocket(RakNet::RakNetGUID & guid, int danyo, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	//se envia unicamente al cliente que ha sido disparado
+
+	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
+	bsOut.Write(danyo);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
+
+
+
+}
+
 
 void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
@@ -160,6 +175,27 @@ void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *pe
 
 			//enviamos el guid del cliente que tiene que borrar
 			bsOut.Write((RakNet::MessageID)DISPARAR_BALA);
+			bsOut.Write(b);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		}
+
+	}
+}
+
+
+void EntityManager::enviarDisparoClienteRocket(TBala & b, RakNet::RakPeerInterface *peer)
+{
+
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != b.guid) {
+
+			//enviamos el guid del cliente que tiene que borrar
+			bsOut.Write((RakNet::MessageID)DISPARAR_ROCKET);
 			bsOut.Write(b);
 			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 			bsOut.Reset();
