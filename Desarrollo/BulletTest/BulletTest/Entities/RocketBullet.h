@@ -42,5 +42,6 @@ private:
 
 	float explosion(Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
 
+	btGhostObject* m_explosion;
 
 };
