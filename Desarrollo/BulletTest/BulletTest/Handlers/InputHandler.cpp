@@ -9,6 +9,7 @@
 #include "../Command/ShootCommand.h"
 #include "../Command/ShootCommandGranada.h"
 #include "../Command/RunCommand.h"
+#include "../Command/Exit.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
 
@@ -35,6 +36,7 @@ InputHandler::InputHandler()
 	shoot_command = new ShootCommand();
 	shoot_commandGranada = new ShootCommandGranada();
 	run_command = new RunCommand();
+	exit_command = new Exit();
 	// Player
 	
 	commands[KEY_KEY_W] = move_up;
@@ -47,6 +49,7 @@ InputHandler::InputHandler()
 	commands[KEY_LBUTTON] = shoot_command;
 	commands[KEY_RBUTTON] = shoot_commandGranada;
 	commands[KEY_LSHIFT] = run_command;
+	commands[KEY_ESCAPE] = exit_command;
 	
 	
 }

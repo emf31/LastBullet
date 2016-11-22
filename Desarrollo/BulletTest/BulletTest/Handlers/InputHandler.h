@@ -35,6 +35,7 @@ private:
 	Command *run_command;
 	Command *list_up;
 	Command *list_down;
+	Command *exit_command;
 
 	std::map <EKEY_CODE, Command*> commands;
 
