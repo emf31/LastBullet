@@ -36,8 +36,23 @@ public:
 
 	void updateCurrentFrame() {
 		GLfloat currentFrame = glfwGetTime();
+
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
+		numFrames++;
+	}
+	int getFPS() {
+		
+		
+		GLfloat currentFrame = glfwGetTime();
+
+		if (currentFrame - lastTime >= 1.0) {
+			fps = numFrames;
+			numFrames = 0;
+			lastTime += 1.0;
+		}
+		return fps;
+		
 	}
 	
 
@@ -49,15 +64,13 @@ public:
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 
-
-
-	
-
 private:
 	SceneManager *sm;
 	GLFWwindow *window;
-
+	GLfloat lastTime;
+	int numFrames = 0;
+	int fps;
 	float screenWidth, screenHeight;
-
+	
 };
 

@@ -1,9 +1,4 @@
-//GLEW
-#define GLEW_STATIC
-#include <GLEW/glew.h>
 
-//GLFW
-#include <GLFW/glfw3.h>
 
 #include <iostream>
 using namespace std;
@@ -13,8 +8,6 @@ using namespace std;
 #include "Camera.h"
 #include "TModel.h"
 
-// Other Libs
-#include <soil/SOIL.h>
 
 // Properties
 GLuint screenWidth = 1280, screenHeight = 720;
@@ -40,9 +33,15 @@ int main() {
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
 	n->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 
+
 	while (!glfwWindowShouldClose(engine.getWindow())){
 		engine.updateCurrentFrame();
 
+		int fps = engine.getFPS();
+		std::ostringstream title;
+		title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
+		engine.setWindowTitle(title.str());
+		
 		//TODO: Mover esto a otro sitio
 		glfwPollEvents();
 		Do_Movement();

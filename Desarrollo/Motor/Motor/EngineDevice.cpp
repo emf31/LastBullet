@@ -1,5 +1,6 @@
 #include "EngineDevice.h"
 #include <functional>
+#include <SDL/SDL.h>
 
 EngineDevice::EngineDevice() {
 }
@@ -41,7 +42,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-
+	
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
 		std::cout << "Failed to initialize GLEW" << std::endl;
@@ -50,7 +51,6 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 
 	glViewport(0, 0, screenWidth, screenHeight);
 
-	// Setup some OpenGL options
 	glEnable(GL_DEPTH_TEST);
 	
 	glfwSwapInterval(-1); //vSync adaptativa!
