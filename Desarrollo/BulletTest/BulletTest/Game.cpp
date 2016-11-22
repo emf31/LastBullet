@@ -283,6 +283,12 @@ void Game::inicializar()
 
 }
 
+void Game::deleteall()
+{
+	EntityManager::i().borrarContenido();
+	printf("Borro las entidades\n");
+}
+
 bool Game::processEvents()
 {
 	EntityManager::i().handleInput();
@@ -293,6 +299,9 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 		GraphicEngine::i().toggleCamera();
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_ESCAPE)) {
+		deleteall();
 	}
 
 	return true;
