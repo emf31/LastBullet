@@ -80,7 +80,6 @@ public:
 	virtual void handleInput() = 0;
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
-
 	virtual void handleMessage(const Message& message) = 0;
 	
 	virtual std::string getClassName() = 0;
