@@ -65,6 +65,8 @@ public:
 		return p_controller->getGhostObject();
 	}
 
+	void resetAll();
+
 private:
 	float m_vida;
 

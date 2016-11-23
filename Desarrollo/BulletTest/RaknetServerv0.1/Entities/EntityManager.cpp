@@ -163,6 +163,27 @@ void EntityManager::enviaTiempoActualVida(Life * l, RakNet::RakNetGUID &guid, Ra
 
 }
 
+void EntityManager::enviaTiempoActualArma(DropObject * o, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer)
+{
+	RakNet::BitStream bsOut;
+	TVidaServer weapondrop;
+	weapondrop.id = o->getID();
+	weapondrop.tiempo = o->clockRecargaLife;
+
+
+	//se envia a SOLO al nuevo cliente que se ha conectado
+
+	//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
+	bsOut.Write((RakNet::MessageID)NUEVA_ARMA);
+	bsOut.Write(weapondrop);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
+
+
+
+
+}
+
 void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *peer)
 {
 
@@ -213,6 +234,22 @@ void EntityManager::VidaCogida(int idVida, RakNet::RakPeerInterface * peer)
 		//se envia a TODOS para que todos sepan que la vida con idVida ha sido cogida
 		bsOut.Write((RakNet::MessageID)VIDA_COGIDA);
 		bsOut.Write(idVida);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
+
+	}
+}
+
+void EntityManager::ArmaCogida(int idArma, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos sepan que el arma con idArma ha sido cogida y a todos le reaparezca a la vez
+		bsOut.Write((RakNet::MessageID)ARMA_COGIDA);
+		bsOut.Write(idArma);
 		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 		bsOut.Reset();
 
@@ -288,12 +325,12 @@ void EntityManager::registerEntity(Entity * entity)
 	else {
 		if (m_entities.find(entity->getID()) != m_entities.end()) {
 			//mostramos error
-			std::cout << "ESA VIDA YA HA SIDO CREADA " + entity->getID() << std::endl;
+			std::cout << "ESA VIDA o ARMA YA HA SIDO CREADA " + entity->getID() << std::endl;
 
 		}
 		else {
 			//si todo ha ido bien le asignamos el entity al map
-			std::cout << "CREO UNA VIDA CON ID : " + entity->getID() << std::endl;
+			std::cout << "CREO UNA VIDA o ARMA CON ID : " + entity->getID() << std::endl;
 			m_entities[entity->getID()] = entity;
 		}
 

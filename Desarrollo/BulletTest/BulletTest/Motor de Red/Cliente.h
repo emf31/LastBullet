@@ -28,6 +28,8 @@ public:
 	void enviarPos(Player* p); 
 	void vidaCogida(int id);
 	void nuevaVida(int id);
+	void armaCogida(int id);
+	void nuevaArma(int id);
 	void lanzarGranada(TGranada g);
 	void enviarDisparo(RakNet::RakNetGUID guid);
 	void enviarDesconexion();

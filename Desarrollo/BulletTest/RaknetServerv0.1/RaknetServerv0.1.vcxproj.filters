@@ -60,6 +60,9 @@
     <ClCompile Include="Entities\Life.cpp">
       <Filter>Archivos de código fuente\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="DropObject.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\BulletTest\Otros\vec3.hpp">
@@ -93,6 +96,9 @@
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Entities\Life.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="DropObject.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>

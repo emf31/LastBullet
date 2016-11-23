@@ -93,6 +93,7 @@ void RocketBullet::handleMessage(const Message & message)
 						Cliente::i().impactoRocket(myentity->getGuid(), damage);
 					}
 					else {
+						myentity->restaVida(danyo);
 						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
 					}
 

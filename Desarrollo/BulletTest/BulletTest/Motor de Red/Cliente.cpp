@@ -13,6 +13,8 @@
 #include "../Motor/GraphicEngine.h"
 #include "../Entities/GunBullet.h"
 #include "../Entities/LifeObject.h"
+#include "../Entities/WeaponDrops/WeaponDrop.h"
+#include "../Entities/WeaponDrops/AsaltoDrop.h"
 
 Cliente::Cliente()
 {
@@ -144,6 +146,47 @@ void Cliente::update() {
 			}
 			break;
 
+			case NUEVA_ARMA:
+			{
+
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(vidaServer);
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(vidaServer.id));
+				w->asignaTiempo(vidaServer.tiempo);
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
+
+			}
+			break;
+
+			case ARMA_COGIDA:
+			{
+
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(idVida);
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idVida));
+				w->ArmaCogida();
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
+
+
+				
+
+
+
+				Message msg(w, "cogida", NULL);
+				MessageHandler::i().sendMessage(msg);
+
+
+			}
+			break;
+
 			case VIDA_COGIDA:
 			{
 
@@ -153,6 +196,7 @@ void Cliente::update() {
 				bsIn.Read(idVida);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				//TODO: esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
 				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida));
 				v->VidaCogida();
 				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
@@ -319,7 +363,8 @@ void Cliente::update() {
 				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==PLAYER) {
 					//es el player
 					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-					player->setPosition(nuevoplayer.position);			
+					player->setPosition(nuevoplayer.position);		
+					player->resetAll();
 					player = nullptr;
 
 					//TODO: esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
@@ -422,7 +467,30 @@ void Cliente::nuevaVida(int id)
 	bsOut.Reset();
 }
 
+void Cliente::nuevaArma(int id)
+{
 
+	RakNet::BitStream bsOut;
+
+
+	bsOut.Write((RakNet::MessageID)NUEVA_ARMA);
+
+	bsOut.Write(id);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+
+void Cliente::armaCogida(int id)
+{
+	RakNet::BitStream bsOut;
+
+	bsOut.Write((RakNet::MessageID)ARMA_COGIDA);
+	//enviamos un mensaje al server con la vida que ha sido cogida
+	bsOut.Write(id);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+
+}
 
 void Cliente::lanzarGranada(TGranada g) {
 

@@ -70,8 +70,6 @@ void Player::inicializar()
 	listaWeapons->insertar(pistola);
 	pistola->setEquipada(true);
 	tienePistola = true;
-
-	listaWeapons->insertar(pistola);
 	
 	m_vida = 100;
 
@@ -431,5 +429,34 @@ void Player::setWeapon(int newWeapon) {
 		break;
 	}
 
+
+}
+
+void Player::resetAll() {
+
+	listaWeapons->Vaciar();
+
+	tieneRocketLauncher = false;
+	tienePistola = false;
+	tieneAsalto = false;
+
+
+	asalto = new Asalto();
+	asalto->inicializar();
+	asalto->cargarContenido();
+
+	rocket = new RocketLauncher();
+	rocket->inicializar();
+	rocket->cargarContenido();
+
+	pistola = new Pistola();
+	pistola->inicializar();
+	pistola->cargarContenido();
+
+	listaWeapons = new Lista();
+
+	listaWeapons->insertar(pistola);
+	pistola->setEquipada(true);
+	tienePistola = true;
 
 }

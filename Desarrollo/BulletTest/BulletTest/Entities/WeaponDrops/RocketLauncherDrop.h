@@ -9,7 +9,7 @@ class RocketLauncherDrop :
 {
 public:
 
-	RocketLauncherDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	RocketLauncherDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~RocketLauncherDrop();
 
 

@@ -85,7 +85,7 @@ void LifeObject::handleMessage(const Message & message)
 				if (Cliente::i().isConected())
 					Cliente::i().vidaCogida(m_id);
 
-				//TODO: aqui hacer el nodo invisible
+				
 				m_nodo->setVisible(false);
 
 				static_cast<Player*>(message.data)->sumarVida();
@@ -102,13 +102,15 @@ void LifeObject::asignaTiempo(Clock tiempo) {
 	clockRecargaLife = tiempo;
 	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 	estado = USADO;
+	m_nodo->setVisible(false);
 }
 
 void LifeObject::VidaCogida()
 {
 	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 	estado = USADO;
+	m_nodo->setVisible(false);
 	clockRecargaLife.restart();
-	//TODO: aqui hacer el nodo invisible!
+	
 
 }

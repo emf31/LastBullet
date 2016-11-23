@@ -1,7 +1,8 @@
 #include "WeaponDrop.h"
+#include "../../Motor/PhysicsEngine.h"
 
 
-WeaponDrop::WeaponDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
+WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
 }
 
@@ -10,30 +11,23 @@ WeaponDrop::~WeaponDrop()
 {
 }
 
-void WeaponDrop::inicializar()
-{
+
+
+void WeaponDrop::asignaTiempo(Clock tiempo) {
+	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
+	clockRecargaLife = tiempo;
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	estado = USADO;
+	m_nodo->setVisible(false);
 }
 
-void WeaponDrop::update(Time elapsedTime)
+void WeaponDrop::ArmaCogida()
 {
 
-}
-
-void WeaponDrop::handleInput()
-{
-}
-
-void WeaponDrop::cargarContenido()
-{
-
-
-}
-
-void WeaponDrop::borrarContenido()
-{
-}
-
-void WeaponDrop::handleMessage(const Message & message)
-{
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	estado = USADO;
+	clockRecargaLife.restart();
+	m_nodo->setVisible(false);
+	
 
 }
