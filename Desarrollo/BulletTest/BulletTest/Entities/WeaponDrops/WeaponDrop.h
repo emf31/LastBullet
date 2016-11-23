@@ -4,14 +4,13 @@
 #include <btBulletDynamicsCommon.h>
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
 #include "../Player.h"
-#include "../../Motor/PhysicsEngine.h"
 
 
-class WeaponDrop :
-	public Entity
+
+class WeaponDrop : public Entity
 {
 public:
-	WeaponDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~WeaponDrop();
 
 
@@ -19,17 +18,17 @@ public:
 	btGhostObject* getGhostObject() { return m_ghostObject; }
 
 
-	virtual void inicializar() override;
+	virtual void inicializar() = 0;
 
-	virtual void update(Time elapsedTime) override;
+	virtual void update(Time elapsedTime) = 0;
 
-	virtual void handleInput() override;
+	virtual void handleInput() = 0;
 
-	virtual void cargarContenido() override;
+	virtual void cargarContenido() = 0;
 
-	virtual void borrarContenido() override;
+	virtual void borrarContenido() = 0;
 
-	virtual void handleMessage(const Message& message) override;
+	virtual void handleMessage(const Message& message) =0;
 
 	virtual std::string getClassName() { return "WeaponDrop"; }
 
@@ -44,10 +43,13 @@ public:
 
 		m_nodo->setPosition(pos);
 	}
+	void asignaTiempo(Clock tiempo);
+	void ArmaCogida();
 
 protected:
 	Clock clockRecargaLife;
 	float timeRecargaLife =3;
+	
 
 	int estado = DISPONIBLE;
 	//btGhostPairCallback* m_ghostPairCallback = NULL;				// Needed once to enable ghost objects inside Bullet

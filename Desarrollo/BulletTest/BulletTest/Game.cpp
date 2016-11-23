@@ -273,6 +273,10 @@ void Game::inicializar()
 		//enviamos los paquetes del vida al servidor para que los cree
 		Cliente::i().nuevaVida(vidaEnt->getID());
 		Cliente::i().nuevaVida(vidaEnt2->getID());
+		//enviamos los paquetes de armas al servidor para que los cree
+		Cliente::i().nuevaArma(RocketLauncherDropEnt->getID());
+		Cliente::i().nuevaArma(AsaltoDropEnt->getID());
+		Cliente::i().nuevaArma(pistolaEnt->getID());
 
 
 

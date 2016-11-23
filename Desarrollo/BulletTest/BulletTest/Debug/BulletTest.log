@@ -1,17 +1,18 @@
-﻿  Cliente.cpp
-  RocketBullet.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\entities\rocketbullet.cpp(88): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+﻿  WeaponDrop.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
   Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
+  Compilando...
+  Cliente.cpp
   Game.cpp
-  RocketLauncher.cpp
-  Pistola.cpp
-  Asalto.cpp
-  Player.cpp
-  LifeObject.cpp
-  Granada.cpp
-  Entity.cpp
-  Enemy.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\game.cpp(191): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\game.cpp(197): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\game.cpp(205): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\game.cpp(213): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\game.cpp(221): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+  AsaltoDrop.cpp
+  Generando código...
+Source.obj : warning LNK4020: un registro de tipo de 'e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\vc140.pdb' está dañado; puede que algunos símbolos y tipos no sean accesibles desde el depurador
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

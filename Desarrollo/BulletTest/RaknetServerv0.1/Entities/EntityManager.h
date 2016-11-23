@@ -8,6 +8,7 @@
 #include <BitStream.h>
 #include <RakNetTypes.h> 
 #include "Life.h"
+#include "../DropObject.h"
 
 class EntityManager
 {
@@ -26,9 +27,11 @@ public:
 	void enviaDisparadoRocket(RakNet::RakNetGUID &guid,int danyo, RakNet::RakPeerInterface *peer);
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
+	void enviaTiempoActualArma(DropObject *d, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
 	void enviarDisparoClienteRocket(TBala &b, RakNet::RakPeerInterface *peer);
 	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
+	void ArmaCogida(int idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 
 

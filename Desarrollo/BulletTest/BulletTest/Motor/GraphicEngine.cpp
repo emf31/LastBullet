@@ -270,6 +270,10 @@ void GraphicEngine::cargarTexturas() {
 	irrDriver->getTexture("../media/m4tex.png");
 	irrDriver->getTexture("../media/WPNT_MK2Grenade_Base_Color.tga");
 	irrDriver->getTexture("../media/arma/weapon.png");
+	irrDriver->getTexture("../media/lanzacohetes.jpg");
+	irrDriver->getTexture("../media/Asalto.jpg");
+	irrDriver->getTexture("../media/pistola.jpg");
+	irrDriver->getTexture("../media/life.jpg");
 	//irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
 
 

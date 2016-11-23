@@ -303,7 +303,38 @@ int main() {
 			}
 
 								break;
+			case NUEVA_ARMA: {
 
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(idVida);
+				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idVida));
+				if (arma != NULL) {
+					//existe esa vida ya (un cliente que se conecto antes ya la creo)
+
+					//ACLARACION: la vida ya existe se le envia un mensaje a ese cliente de que esa vida ya ha sido creada y si ha sido cogida se le envia el tiempo que queda hasta reaparecer
+					//si la vida no ha sida cogida aun no se hace nada porque cuando alguien la coja ya se enviaran los mensajes necesarios
+					if (arma->disponible != true) {
+						//enviamos un mensaje con el tiempo porque la vida ha sido cogida
+						EntityManager::i().enviaTiempoActualArma(arma, packet->guid, peer);
+					}
+
+
+				}
+				else {
+					//no existe la vida aun (este es el primer cliente que se conecta)
+					DropObject *d = new DropObject(idVida);
+				}
+
+
+
+			}
+
+			 break;
 
 			case VIDA_COGIDA: {
 
@@ -325,6 +356,26 @@ int main() {
 			}
 
 							 break;
+			case ARMA_COGIDA: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(idVida);
+				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idVida));
+				arma->resetTiempoRecargar();
+
+				EntityManager::i().ArmaCogida(idVida, peer);
+
+
+
+
+			}
+
+							  break;
 			case MUERTE: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
