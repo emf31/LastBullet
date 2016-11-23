@@ -363,7 +363,8 @@ void Cliente::update() {
 				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==PLAYER) {
 					//es el player
 					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-					player->setPosition(nuevoplayer.position);			
+					player->setPosition(nuevoplayer.position);		
+					player->resetAll();
 					player = nullptr;
 
 					//TODO: esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer

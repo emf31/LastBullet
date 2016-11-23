@@ -67,6 +67,12 @@
     <Filter Include="Archivos de encabezado\Entities\Weapons">
       <UniqueIdentifier>{550f04a8-a050-46c8-a75d-7656fa02207b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\States">
+      <UniqueIdentifier>{f20df27d-6940-4e22-9b2e-e12d2c138fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\States">
+      <UniqueIdentifier>{f784fe67-e100-454f-bc50-3495b34a3ca4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -119,12 +125,6 @@
     </ClInclude>
     <ClInclude Include="Entities\Enemy.h">
       <Filter>Archivos de encabezado\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor de Red\Cliente.h">
-      <Filter>Archivos de encabezado\Motor de Red</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor de Red\Estructuras.h">
-      <Filter>Archivos de encabezado\Motor de Red</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\Message.h">
       <Filter>Archivos de encabezado\Handlers</Filter>
@@ -239,6 +239,21 @@
     </ClInclude>
     <ClInclude Include="Entities\RocketBulletEnemy.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor de Red\Estructuras.h">
+      <Filter>Archivos de encabezado\Motor de Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor de Red\Cliente.h">
+      <Filter>Archivos de encabezado\Motor de Red</Filter>
+    </ClInclude>
+    <ClInclude Include="States\State.hpp">
+      <Filter>Archivos de encabezado\States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\StateFactory.hpp">
+      <Filter>Archivos de encabezado\States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\StateStack.hpp">
+      <Filter>Archivos de encabezado\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +379,15 @@
     </ClCompile>
     <ClCompile Include="Entities\RocketBulletEnemy.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="States\State.cpp">
+      <Filter>Archivos de código fuente\States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\StateFactory.cpp">
+      <Filter>Archivos de código fuente\States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\StateStack.cpp">
+      <Filter>Archivos de código fuente\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

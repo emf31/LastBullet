@@ -13,6 +13,7 @@
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
 #include "Handlers\MessageHandler.h"
+#include "States\StateStack.hpp"
 
 
 #include <RakPeerInterface.h>
@@ -297,6 +298,11 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 		GraphicEngine::i().toggleCamera();
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_KEY_9)) {
+		if (StateStack::i().currentState == States::ID::Menu) {
+			printf("Estado Menu\n");
+		}
 	}
 
 	return true;
