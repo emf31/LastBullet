@@ -205,6 +205,9 @@
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
+    <ClInclude Include="States\State.hpp" />
+    <ClInclude Include="States\StateFactory.hpp" />
+    <ClInclude Include="States\StateStack.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -249,6 +252,9 @@
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="States\State.cpp" />
+    <ClCompile Include="States\StateFactory.cpp" />
+    <ClCompile Include="States\StateStack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
