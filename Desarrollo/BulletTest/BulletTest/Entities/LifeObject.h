@@ -18,6 +18,7 @@ public:
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
 	btGhostObject* getGhostObject() { return m_ghostObject; }
 
+
 	void rotate(Vec3<float> rot);
 
 	void asignaTiempo(Clock tiempo);

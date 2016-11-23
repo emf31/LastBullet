@@ -27,7 +27,6 @@
 ////////////////////////////////////////////////////////////
 #include "ClockImpl.hpp"
 #include <windows.h>
-#include "../../stdafx.h"
 
 
 namespace

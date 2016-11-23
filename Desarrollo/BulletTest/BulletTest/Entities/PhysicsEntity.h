@@ -12,9 +12,14 @@ public:
 
 	void setRigidBody(btRigidBody* rigidBody) { 
 		m_rigidBody = rigidBody;
+	}
+	void setCollisionGroup(const int &group) {
 		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = col::Collisions::Suelo;
-		proxy->m_collisionFilterMask = col::Collisions::Granada | btBroadphaseProxy::CharacterFilter | col::Collisions::Suelo | col::Collisions::Rocket;
+		proxy->m_collisionFilterGroup = group;
+	}
+	void setCollisionMask(const int &mask) {
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterMask = mask;
 
 	}
 	btRigidBody* getRigidBody() { return m_rigidBody; }

@@ -11,16 +11,22 @@
 namespace col {
 	enum Collisions {
 		COL_NOTHING = 0,
-		Granada = BIT(0),
-		Suelo = BIT(1),
-		Object = BIT(2),
+		Static = BIT(0),
+		Granada = BIT(1),
+		Character = BIT(2),
 		Rocket = BIT(3),
 		Caja = BIT(4),
-		COL_ALL = Granada | Suelo | Object | Object | Rocket
+		Enemy = BIT(5),
+		Sensor = BIT(6)
 	};
+
+	const int staticCollidesWith = Collisions::Character | Collisions::Rocket | Collisions::Caja;
+	const int characterCollidesWith = Collisions::Static | Collisions::Sensor;
+	const int rocketCollidesWith = Collisions::Static | Collisions::Caja;
+	const int sensorCollidesWith = Collisions::Character;
+	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static;
+	
 }
-
-
 
 class PhysicsEngine
 {
@@ -43,6 +49,7 @@ public:
 
 	void createBoxDynamicCharacter(btRigidBody* rigid);
 
+	void notifyCollisions();
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
 	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa, int body_state = ACTIVE_TAG);

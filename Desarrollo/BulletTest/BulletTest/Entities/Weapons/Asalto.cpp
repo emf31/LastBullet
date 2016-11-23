@@ -85,7 +85,7 @@ void Asalto::shoot()
 
 			//printf("DISPARANDO ASALTO\n");
 			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
-			btVector3 FUERZA(10, 10, 10);
+			btVector3 FUERZA(60.f, 60.f, 60.f);
 
 			btVector3 start(
 				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
@@ -125,7 +125,6 @@ void Asalto::shoot()
 					if (ent->getClassName() == "PhysicsEntity") {
 						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
 						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
-						std::cout << ent->getName() << std::endl;
 					}
 				}
 			}

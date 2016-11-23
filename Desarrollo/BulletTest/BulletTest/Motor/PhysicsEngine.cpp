@@ -16,25 +16,30 @@ const Time PhysicsEngine::tickPhysics = seconds(1.f / 60.f);
 //El value es un std::set(igual que un array pero no admite duplicados)
 //Este es el metodo al que llama bullet cuando se produce un contacto
 bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisionObject* body1) {
+	
 	//Cogemos las 2 entities que colisionan 
 	Entity* entity0 = (Entity*)body0->getUserPointer();
 	Entity* entity1 = (Entity*)body1->getUserPointer();
 
-	//En la key guardamos una entity y en su value un array con las entities con las que colisiona
-	//comprobamos si entity 0 esta en el mapa
-	auto found = contacts.find(entity0);
-	if (found != contacts.end()) {
-		//Entity en mapa. Añadimod entity2 al set.
-		//Como set no admite duplicados si ya esta dentro no se añade.
-		found->second.insert(entity1);
+	if (entity0 != NULL && entity1 != NULL) {
+		//En la key guardamos una entity y en su value un array con las entities con las que colisiona
+		//comprobamos si entity 0 esta en el mapa
+		auto found = contacts.find(entity0);
+		if (found != contacts.end()) {
+			//Entity en mapa. Añadimod entity2 al set.
+			//Como set no admite duplicados si ya esta dentro no se añade.
+			found->second.insert(entity1);
+		}
+		else {
+			//entity1 no esta en el mapa. Creamos nuevo set y añadimos entity1
+			std::set<Entity*> set;
+			set.insert(entity1);
+			//añadimos entity0 al nuevo set
+			contacts[entity0] = set;
+		}
 	}
-	else {
-		//entity1 no esta en el mapa. Creamos nuevo set y añadimos entity1
-		std::set<Entity*> set;
-		set.insert(entity1);
-		//añadimos entity0 al nuevo set
-		contacts[entity0] = set;
-	}
+
+	
 	return true;
 }
 
@@ -73,6 +78,10 @@ void PhysicsEngine::update(Time elapsedTime)
 	m_world->stepSimulation(btScalar(elapsedTime.asSeconds())*2, 20, tickPhysics.asSeconds());
 	
 
+	
+}
+
+void PhysicsEngine::notifyCollisions() {
 	//Aqui calculariamos colisiones
 	for (auto contactsIter = contacts.begin(); contactsIter != contacts.end(); ++contactsIter) {
 		//coger la key 
@@ -90,7 +99,7 @@ void PhysicsEngine::update(Time elapsedTime)
 
 			MessageHandler::i().sendMessage(msg1);
 			MessageHandler::i().sendMessage(msg2);
-			
+
 		}
 	}
 
@@ -230,9 +239,8 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 
 	//add the rigidBody to the world
 	//m_world->addCollisionObject(rigidBody);
-
-	m_world->addCollisionObject(ghostObj, btBroadphaseProxy::SensorTrigger,
-		btBroadphaseProxy::CharacterFilter);
+	m_world->addCollisionObject(ghostObj, col::Collisions::Sensor,
+		col::sensorCollidesWith);
 
 	return ghostObj;
 }

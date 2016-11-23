@@ -12,6 +12,7 @@ void MessageHandler::update()
 
 		//Enviamos el mensaje a la entity
 		message.entity->handleMessage(message);
+		
 	}
 	//m.unlock();
 }

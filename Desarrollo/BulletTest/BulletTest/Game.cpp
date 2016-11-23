@@ -129,6 +129,9 @@ void Game::inicializar()
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "suelo");
 	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 5.f, 100), 0));
+	sueloEnt->setCollisionGroup(col::Collisions::Static);
+	sueloEnt->setCollisionMask(col::staticCollidesWith);
+	sueloEnt->getRigidBody()->setFriction(0.7f);
 	//sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
 	///////////////////////////////////////////////////////////////
 	
@@ -138,6 +141,9 @@ void Game::inicializar()
 	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt2->rotate(Vec3<float>(float(90 * PI / 180.0),0, 0));
 	sueloEnt2->setPosition(Vec3<float>(-50, 0, 0));
+	sueloEnt2->setCollisionGroup(col::Collisions::Static);
+	sueloEnt2->setCollisionMask(col::staticCollidesWith);
+	sueloEnt2->getRigidBody()->setFriction(0.7f);
 	///////////////////////////////////////////////////////////////
 
 	std::shared_ptr<BasicSceneNode> suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
@@ -146,8 +152,9 @@ void Game::inicializar()
 	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt3->rotate(Vec3<float>(0, 0, float( 90 * PI / 180.0)));
 	sueloEnt3->setPosition(Vec3<float>(0, 0, -50));
-
-
+	sueloEnt3->setCollisionGroup(col::Collisions::Static);
+	sueloEnt3->setCollisionMask(col::staticCollidesWith);
+	sueloEnt3->getRigidBody()->setFriction(0.7f);
 	//////////////////////////////////////////////////////////////////////
 
 	std::shared_ptr<BasicSceneNode> suelo4 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 100), "../media/wall.jpg", "");
@@ -156,7 +163,9 @@ void Game::inicializar()
 	sueloEnt4->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt4, Vec3<float>(25, 5.f, 100), 0));
 	sueloEnt4->rotate(Vec3<float>(0, 0, float(30 * PI / 180.0)));
 	sueloEnt4->setPosition(Vec3<float>(60, -25, 40));
-
+	sueloEnt4->setCollisionGroup(col::Collisions::Static);
+	sueloEnt4->setCollisionMask(col::staticCollidesWith);
+	sueloEnt4->getRigidBody()->setFriction(0.7f);
 	///////////////////////////////////////////////////////////////////////
 
 	std::shared_ptr<BasicSceneNode> suelo5 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 50), "../media/wall.jpg", "");
@@ -165,8 +174,9 @@ void Game::inicializar()
 	sueloEnt5->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt5, Vec3<float>(25, 5.f, 50), 0));
 	sueloEnt5->rotate(Vec3<float>(0, 0, 0));
 	sueloEnt5->setPosition(Vec3<float>(60, 0, -25));
-
-
+	sueloEnt5->setCollisionGroup(col::Collisions::Static);
+	sueloEnt5->setCollisionMask(col::staticCollidesWith);
+	sueloEnt5->getRigidBody()->setFriction(0.7f);
 	///////////////////////////////////////////////////////////////
 
 	std::shared_ptr<BasicSceneNode> suelo6 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
@@ -175,6 +185,9 @@ void Game::inicializar()
 	sueloEnt6->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt6, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt6->rotate(Vec3<float>(float(90 * PI / 180.0), 0, 0));
 	sueloEnt6->setPosition(Vec3<float>(75, 0, 0));
+	sueloEnt6->setCollisionGroup(col::Collisions::Static);
+	sueloEnt6->setCollisionMask(col::staticCollidesWith);
+	sueloEnt6->getRigidBody()->setFriction(0.7f);
 	///////////////////////////////////////////////////////////////
 
 	std::shared_ptr<BasicSceneNode> suelo7 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
@@ -183,7 +196,9 @@ void Game::inicializar()
 	sueloEnt7->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(100, 5.f, 100), 0));
 	sueloEnt7->rotate(Vec3<float>(0, 0, float( 90 * PI / 180.0)));
 	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
-	
+	sueloEnt7->setCollisionGroup(col::Collisions::Static);
+	sueloEnt7->setCollisionMask(col::staticCollidesWith);
+	sueloEnt7->getRigidBody()->setFriction(0.7f);
 	//////////////////////////////////////////////////////////////////////
 	////////         Creamos 2 paquete de vida        //////////////////
 
@@ -192,6 +207,7 @@ void Game::inicializar()
 	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(3.f, 3.f, 3.f)));
 	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
 	vidaEnt->setPosition(Vec3<float>(10, 9, 0));
+	
 	
 	std::shared_ptr<BasicSceneNode> vida2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
 	LifeObject *vidaEnt2 = new LifeObject(vida2, "vida2");
@@ -226,16 +242,16 @@ void Game::inicializar()
 	/////////////////////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////////////////////
-	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/ice0.jpg", "");
+	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "");
 
 	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
-	btRigidBody* rigid = PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(5.f, 5.f, 5.f), 10.f);
-	//rigid->setCollisionFlags(rigid->getCollisionFlags()/* | btCollisionObject::CF_STATIC_OBJECT*/);
-	//rigid->se
-	//rigid->
-	cajaEnt->setRigidBody(rigid);
-	//cajaEnt->setPosition(Vec3<float>(0, 100, 0));
-
+	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(1.f, 1.f, 1.f), 10.f));
+	cajaEnt->setCollisionGroup(col::Collisions::Caja);
+	cajaEnt->setCollisionMask(col::cajaCollidesWith);
+	cajaEnt->getRigidBody()->setDamping(btScalar(0.f),btScalar(0.85f));
+	//cajaEnt->getRigidBody()->setRollingFriction(btScalar(0.8f));
+	cajaEnt->getRigidBody()->setFriction(btScalar(0.8f));
+	cajaEnt->getRigidBody()->setAngularFactor(btScalar(0.3f));
 	/////////////////////////////////////////////////////////////////////
 
 	int a;
@@ -301,7 +317,7 @@ bool Game::processEvents()
 void Game::update(Time elapsedTime)
 {
 
-
+	PhysicsEngine::i().notifyCollisions();
 	EntityManager::i().update(elapsedTime);
 	MessageHandler::i().update();
 	//antes era global, ahora cada entity tiene la suya, entonces aqui habria que hacer un for para que cada

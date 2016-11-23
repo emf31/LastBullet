@@ -120,11 +120,6 @@ void EntityManager::removeRaknetEntity(Entity * entity)
 
 Entity * EntityManager::getEntity(int id)
 {
-	/*for_each(s.begin(), s.end(), [=](string str)
-	{
-		some_list.push_back(str);
-	}*/
-	
 	auto found = m_entities.find(id);
 	if (found != m_entities.end())
 		return found->second;

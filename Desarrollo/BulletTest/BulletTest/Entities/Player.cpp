@@ -198,8 +198,8 @@ void Player::cargarContenido()
 	//p_controller->setMaxJumpHeight(20);
 	//p_controller->setLinearDamping(0.1);
 	//p_controller->setLinearDamping();
-	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
-		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter | btBroadphaseProxy::SensorTrigger);
+	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
+		col::characterCollidesWith);
 
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));

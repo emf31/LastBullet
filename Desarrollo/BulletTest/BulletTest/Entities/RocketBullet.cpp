@@ -59,8 +59,9 @@ void RocketBullet::cargarContenido()
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-	proxy->m_collisionFilterMask =  col::Collisions::Suelo;
-	//m_rigidBody->setCollisionFlags(4);
+	proxy->m_collisionFilterMask =  col::rocketCollidesWith;
+	//Sin respuesta a la colision mejor asi porque es mas optimo
+	m_rigidBody->setCollisionFlags(4);
 	radioExplosion = 40.f;
 }
 
@@ -70,25 +71,26 @@ void RocketBullet::borrarContenido()
 
 void RocketBullet::handleMessage(const Message & message)
 {
-	int danyo = 0;
+	int damage = 0;
 
 	if (message.mensaje == "COLLISION") {
-
+		
 
 		if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
+			
 			if (estado == DISPONIBLE) {
-				m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
-				m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
+				/*m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
+				m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);*/
 				list<Entity*>characters = EntityManager::i().getCharacters();
 				///Explosion
 				for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
 
 					Entity* myentity = *it;
-					//myentity->restaVida(explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion));
-					danyo = explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
-					std::cout << "Le resto " << danyo << " a " << myentity->getName() << std::endl;
-					if (Cliente::i().isConected() && danyo>0) {
-						Cliente::i().impactoRocket(myentity->getGuid(),danyo);
+					
+					damage = explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
+					//std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
+					if (Cliente::i().isConected() && damage>0) {
+						Cliente::i().impactoRocket(myentity->getGuid(), damage);
 					}
 					else {
 						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
@@ -99,15 +101,19 @@ void RocketBullet::handleMessage(const Message & message)
 				btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 				m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
+				m_rigidBody->setUserPointer(NULL);
+
 				PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-				//EntityManager::i().removeEntity(this);
-				estado = USADO;
+				EntityManager::i().removeEntity(this);
+				
+				delete this;
 			}
 			
 		}
 
 	}
+
 }
 
 std::string RocketBullet::getClassName()
@@ -122,7 +128,7 @@ float RocketBullet::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter
 	Vec3<float> vector = posExplosion - posCharacter;
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
-		printf("Te ha dado la explosion\n");
+		//printf("Te ha dado la explosion\n");
 		if (distancia < radio / 3) {
 			vidaRestada = 100;
 		}
@@ -133,7 +139,7 @@ float RocketBullet::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter
 		}
 	}
 	else {
-		printf("NO te ha dado la explosion\n");
+		//printf("NO te ha dado la explosion\n");
 
 	}
 
