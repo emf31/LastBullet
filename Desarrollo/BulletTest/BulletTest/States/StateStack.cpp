@@ -13,15 +13,6 @@
 
 #include "StateStack.hpp"
 
-StateStack* StateStack::instance = 0;
-
-StateStack* StateStack::Instance() {
-	if(instance == 0){
-            instance = new StateStack();
-        }
-        
-	return instance;
-}
 
 StateStack::StateStack() {
     mapStates = new std::map<States::ID, State*>();
@@ -29,7 +20,9 @@ StateStack::StateStack() {
     
     CreateStates();
     //Solo inicializamos el estado menu
-    GetCurrentState()->Inicializar();
+
+	//TODO cuando haya estados hechos hay que inicializar el primero como aqui pero esta comentado porque el currentstate es null por ahora
+    //GetCurrentState()->Inicializar();
 }
 
 StateStack::StateStack(const StateStack& orig) {

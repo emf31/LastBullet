@@ -20,7 +20,11 @@
 
 class StateStack {
 public:
-    static StateStack* Instance();
+	static StateStack& i() {
+		static StateStack singleton;
+		return singleton;
+	}
+
     
     void   CreateStates();
     State* GetState(States::ID id) const;
