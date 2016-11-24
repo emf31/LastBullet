@@ -256,7 +256,12 @@ bool GraphicEngine::isWindowActive()
 
 bool GraphicEngine::apagar()
 {
-	return irrDevice->drop();
+	irrDevice->setEventReceiver(NULL);
+	irrDevice->closeDevice();
+	irrDevice->run();
+	irrDevice->drop();
+	irrDevice = NULL;
+	return true;
 }
 
 void GraphicEngine::cargarTexturas() {

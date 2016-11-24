@@ -25,8 +25,8 @@ void MessageHandler::sendMessage(const Message & message)
 
  void MessageHandler::borrarContenido()
 {
-	/*while (!m_messages.empty()) {
-		m_messages.pop();
-	}*/
+	while (!m_messages.empty()) {
+		m_messages.dequeue();
+	}
 
 }

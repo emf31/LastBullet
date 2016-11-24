@@ -59,6 +59,8 @@ void Game::run()
 	time_physics_prev = time_physics_curr = clock.getElapsedTime();
 	time_gameclock = clock.getElapsedTime();
 
+	bool wantToExit = false;
+
 
 	while (GraphicEngine::i().isRuning()) {
 		//if (GraphicEngine::i().isWindowActive()) {
@@ -91,7 +93,9 @@ void Game::run()
 			time_gameclock += timePerFrame;
 			
 			MastEventReceiver::i().endEventProcess();
-			processEvents();
+			if (processEvents()) {
+				wantToExit = true;
+			}
 			MastEventReceiver::i().startEventProcess();
 
 			//Realizamos actualizaciones
@@ -104,7 +108,9 @@ void Game::run()
 		render(interpolation, timePerFrame);
 
 
-		
+		if (wantToExit) {
+			break;
+		}
 		//}
 		
 	}
@@ -112,6 +118,9 @@ void Game::run()
 	//Espera a que termine el otro hilo para finalizar el programa
 	Cliente::i().apagar();
 	GraphicEngine::i().apagar();
+	EntityManager::i().apagar();
+	PhysicsEngine::i().apagar();
+	MessageHandler::i().borrarContenido();
 }
 
 
@@ -316,12 +325,13 @@ bool Game::processEvents()
 		GraphicEngine::i().toggleCamera();
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_9)) {
-		if (StateStack::i().currentState == States::ID::Menu) {
+		/*if (StateStack::i().currentState == States::ID::Menu) {
 			printf("Estado Menu\n");
-		}
+		}*/
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 void Game::update(Time elapsedTime)

@@ -16,7 +16,10 @@ int main(int, char const**)
 	
 
 	Game *game = new Game();
-	game->run();
+	while (1) {
+		game->run();
+	}
+	
 
 	return 0;
 
