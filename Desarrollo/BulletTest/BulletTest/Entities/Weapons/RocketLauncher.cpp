@@ -100,6 +100,7 @@ void RocketLauncher::shoot() {
 
 		//disparamos la bala en nuestro cliente
 		Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
+		posDisparo.addY(3.f);	//esto es para no dispararlo desde el suelo y que no detecte colision con el suelo
 		posDisparo += Vec3<float>(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
 

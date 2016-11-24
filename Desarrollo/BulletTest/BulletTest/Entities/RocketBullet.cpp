@@ -54,7 +54,7 @@ void RocketBullet::cargarContenido()
 	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", ""));
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
-	m_renderState.setRenderRot(m_rotation);
+
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
@@ -74,9 +74,9 @@ void RocketBullet::handleMessage(const Message & message)
 	int damage = 0;
 
 	if (message.mensaje == "COLLISION") {
-		
+		std::cout << "Llego" << std::endl;
 
-		if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
+		//if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
 			
 			if (estado == DISPONIBLE) {
 				/*m_explosion = PhysicsEngine::i().createSphereShape(this, 40.f);
@@ -93,7 +93,7 @@ void RocketBullet::handleMessage(const Message & message)
 						Cliente::i().impactoRocket(myentity->getGuid(), damage);
 					}
 					else {
-						myentity->restaVida(danyo);
+						myentity->restaVida(damage);
 						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
 					}
 
@@ -102,16 +102,12 @@ void RocketBullet::handleMessage(const Message & message)
 				btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 				m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
-				m_rigidBody->setUserPointer(NULL);
-
 				PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
 				EntityManager::i().removeEntity(this);
-				
-				delete this;
 			}
 			
-		}
+		//}
 
 	}
 

@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "../Otros/Time.hpp"
 #include "Entity.h"
-#include <mutex>
+#include <set>
 #include <list>
 
 #define PLAYER 1000
@@ -43,6 +43,9 @@ public:
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
 	void removeRaknetEntity(Entity* entity);
+
+	void cleanDeleteQueue();
+
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
@@ -55,8 +58,7 @@ private:
 	int m_nextID;
 	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
-
-	std::mutex m;
+	std::set<Entity*> delete_set;
 
 };
 

@@ -205,6 +205,9 @@
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
+    <ClInclude Include="States\State.hpp" />
+    <ClInclude Include="States\StateFactory.hpp" />
+    <ClInclude Include="States\StateStack.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Granada.cpp" />
@@ -245,6 +248,9 @@
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
+    <ClCompile Include="States\State.cpp" />
+    <ClCompile Include="States\StateFactory.cpp" />
+    <ClCompile Include="States\StateStack.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

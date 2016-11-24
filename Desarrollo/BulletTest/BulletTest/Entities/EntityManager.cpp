@@ -107,6 +107,8 @@ void EntityManager::removeEntity(Entity * entity)
 		m_entities.erase(found);
 	}
 
+	delete_set.insert(entity);
+
 }
 
 void EntityManager::removeRaknetEntity(Entity * entity)
@@ -116,6 +118,20 @@ void EntityManager::removeRaknetEntity(Entity * entity)
 	if (found != m_jugadores.end()) {
 		m_jugadores.erase(found);
 	}
+
+	removeEntity(entity);
+}
+
+void EntityManager::cleanDeleteQueue()
+{
+	std::set<Entity*>::iterator it;
+	for (it = delete_set.begin(); it != delete_set.end(); ++it)
+	{
+		Entity* f = *it; // Note the "*" here
+		f->borrarContenido();
+		delete f;
+	}
+	delete_set.clear();
 }
 
 Entity * EntityManager::getEntity(int id)

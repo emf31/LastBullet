@@ -18,6 +18,7 @@ GunBullet::~GunBullet()
 {
 }
 
+
 void GunBullet::inicializar()
 {
 }
@@ -57,7 +58,7 @@ void GunBullet::handleMessage(const Message & message)
 	if (message.mensaje == "BORRATE") {
 		EntityManager::i().removeEntity(this);
 		GraphicEngine::i().removeNode(m_nodo);
-		delete this;
+		//delete this;
 	}
 }
 
