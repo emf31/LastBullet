@@ -60,7 +60,7 @@ void Game::run()
 	time_gameclock = clock.getElapsedTime();
 
 	bool wantToExit = false;
-
+	
 
 	while (GraphicEngine::i().isRuning()) {
 		//if (GraphicEngine::i().isWindowActive()) {

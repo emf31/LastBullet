@@ -79,6 +79,7 @@ private:
 	btGhostPairCallback* m_pGhostPairCallBack;
 
 	std::list<btRigidBody*> m_rigidBodies;
+	std::list<btCollisionShape*> m_collisionShapes;
 
 	static const Time tickPhysics;
 

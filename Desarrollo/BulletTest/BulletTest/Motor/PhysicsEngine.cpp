@@ -147,6 +147,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigidBody);
+	m_collisionShapes.push_back(shape);
 
 	//finally return created body
 	return rigidBody;
@@ -175,6 +176,7 @@ btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float heigh
 
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigidBody);
+	m_collisionShapes.push_back(m_pCollisionShape);
 
 	//finally return created body
 	return rigidBody;
@@ -205,7 +207,7 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigidBody);
-
+	m_collisionShapes.push_back(m_pCollisionShape);
 	//finally return created body
 	return rigidBody;
 
@@ -238,6 +240,7 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 	ghostObj->setUserPointer(entity);
 
 	//add the rigidBody to the world
+	m_collisionShapes.push_back(shape);
 	//m_world->addCollisionObject(rigidBody);
 	m_world->addCollisionObject(ghostObj, col::Collisions::Sensor,
 		col::sensorCollidesWith);
@@ -270,7 +273,7 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 
 	//add the rigidBody to the world
 	//m_world->addCollisionObject(rigidBody);
-
+	m_collisionShapes.push_back(m_pCollisionShape);
 	m_world->addCollisionObject(ghostObj, btBroadphaseProxy::SensorTrigger,
 		btBroadphaseProxy::CharacterFilter);
 
@@ -279,12 +282,13 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 {
-	
 	m_rigidBodies.remove(body);
 	m_world->removeRigidBody(body);
 
 	return true;
 }
+
+
 bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 {
 
@@ -325,6 +329,19 @@ void PhysicsEngine::apagar()
 	
 
 	int a = m_world->getNumCollisionObjects();
+
+
+
+	//borramos todas las collisionshapes
+	for (auto iter = m_collisionShapes.begin(); iter != m_collisionShapes.end(); ++iter) {
+		//borramos la memoria
+		delete *iter;
+		//iterador a null
+		*iter = NULL;
+	}
+	//ahora vaciamos la lista
+	m_collisionShapes.clear();
+
 
 	//hay que borrar las cosas de las fisicas
 	delete m_world;

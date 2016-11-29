@@ -439,6 +439,9 @@ void Player::setWeapon(int newWeapon) {
 
 void Player::resetAll() {
 
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+
+
 	listaWeapons->Vaciar();
 
 	tieneRocketLauncher = false;
@@ -461,6 +464,11 @@ void Player::resetAll() {
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	rocket->setEquipada(false);
+	asalto->setEquipada(false);
+
 	pistola->setEquipada(true);
 	tienePistola = true;
 
