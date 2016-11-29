@@ -71,7 +71,7 @@ void RocketBullet::borrarContenido()
 
 void RocketBullet::handleMessage(const Message & message)
 {
-	int damage = 0;
+	float damage = 0;
 
 	if (message.mensaje == "COLLISION") {
 
@@ -88,12 +88,21 @@ void RocketBullet::handleMessage(const Message & message)
 					
 					damage = explosion(myentity,cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
 					//std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
-					std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
+				
 
-					if (Cliente::i().isConected() && damage>0) {
-						Cliente::i().impactoRocket(myentity->getGuid(), damage);
-					}
-					else {
+					if (Cliente::i().isConected() ) {
+						if (damage > 0) {
+							
+							if (myentity->getID() == PLAYER) {
+								Cliente::i().impactoRocket(myentity->getGuid(), damage/2);
+							}
+							else {
+								Cliente::i().impactoRocket(myentity->getGuid(), damage);
+							}
+							
+						}
+					}else {
+						
 						myentity->restaVida(damage);
 
 						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA

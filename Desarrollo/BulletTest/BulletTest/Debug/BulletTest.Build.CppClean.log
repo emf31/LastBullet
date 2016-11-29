@@ -1,99 +1,57 @@
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\vc140.pdb
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\vc140.idb
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\weapon.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\inputhandler.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\messagehandler.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\lista.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\masteventreceiver.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\game.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\main.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\cliente.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\animatedscenenode.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\animation.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\camera.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\graphicengine.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\physicsengine.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\renderstate.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\basicscenenode.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\scenenode.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\clock.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\time.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\util.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\clockimpl.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\granada.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\gunbullet.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\enemy.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\entity.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\entitymanager.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\kinematiccharactercontroller.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\lifeobject.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\physicsentity.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\player.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\rocketbullet.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\rocketbulletenemy.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\asaltodrop.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\pistoladrop.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\rocketlauncherdrop.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\weapondrop.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\asalto.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\pistola.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\rocketlauncher.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\state.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\statefactory.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\debug\statestack.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\debug\bullettest.ilk
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\debug\bullettest.exe
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\debug\bullettest.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\vc140.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\vc140.idb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\lista.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\masteventreceiver.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\game.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\main.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\cliente.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\animatedscenenode.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\animation.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\asalto.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\asaltodrop.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\basicscenenode.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\camera.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\cliente.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\clock.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\clockimpl.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\enemy.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\entity.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\entitymanager.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\game.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\granada.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\graphicengine.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\gunbullet.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\inputhandler.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\kinematiccharactercontroller.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\lifeobject.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\lista.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\main.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\masteventreceiver.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\messagehandler.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\physicsengine.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\physicsentity.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\pistola.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\pistoladrop.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\player.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\renderstate.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketbullet.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketbulletenemy.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketlauncher.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketlauncherdrop.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\basicscenenode.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\scenenode.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\clock.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\time.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\util.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\clockimpl.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\state.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\statefactory.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\statestack.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\time.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\util.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\weapon.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\gunbullet.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\enemy.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\entity.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\entitymanager.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\kinematiccharactercontroller.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\lifeobject.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\physicsentity.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\player.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketbullet.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketbulletenemy.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\asaltodrop.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\pistoladrop.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketlauncherdrop.obj
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\weapondrop.obj
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.pch
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\vc140.idb
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\vc140.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\asalto.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\pistola.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\rocketlauncher.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\weapon.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\inputhandler.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\messagehandler.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\granada.obj
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\debug\bullettest.ilk
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\debug\bullettest.exe
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\debug\bullettest.pdb
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\debug\bullettest.pdb
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\debug\bullettest.exe
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\debug\bullettest.ilk
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\cl.command.1.tlog
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\cl.read.1.tlog
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\cl.write.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link-cvtres.read.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link-cvtres.write.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link-rc.read.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link-rc.write.1.tlog
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link.command.1.tlog
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link.read.1.tlog
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\debug\bullettest.tlog\link.write.1.tlog

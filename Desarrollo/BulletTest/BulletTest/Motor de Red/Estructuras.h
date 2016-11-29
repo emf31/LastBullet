@@ -37,6 +37,11 @@ typedef struct {
 	Clock tiempo;
 }TVidaServer;
 
+typedef struct {
+	float damage;
+	RakNet::RakNetGUID guid;
+}TImpactoRocket;
+
 
 enum GameMessages
 {

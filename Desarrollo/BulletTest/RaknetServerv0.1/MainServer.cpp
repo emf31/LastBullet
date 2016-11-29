@@ -51,10 +51,11 @@ int main() {
 	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
 	TBala p_bala;
+	TImpactoRocket impact;
 	TGranada p_granada;
 	Clock tiempoRestartVida;
 	int idVida=0;
-	int danyo = 0;
+	float danyo = 0;
 	
 	//std::vector<Player*> clientArray;
 
@@ -226,11 +227,11 @@ int main() {
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(guid_Pdisparado);
-				bsIn.Read(danyo);
+				
+				bsIn.Read(impact);
 				
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviaDisparadoRocket(guid_Pdisparado, danyo, peer);
+				EntityManager::i().enviaDisparadoRocket(impact, peer);
 
 			}
 

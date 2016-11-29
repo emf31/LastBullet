@@ -32,6 +32,13 @@ typedef struct {
 }TVidaServer;
 
 
+typedef struct {
+	float damage;
+	RakNet::RakNetGUID guid;
+}TImpactoRocket;
+
+
+
 enum GameMessages
 {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
