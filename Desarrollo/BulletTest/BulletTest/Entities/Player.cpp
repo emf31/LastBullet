@@ -209,7 +209,12 @@ void Player::cargarContenido()
 
 void Player::borrarContenido()
 {
-
+	//Estas cosas se borran aqui y no en el physics engine porque el player es especial
+	delete m_pCollisionShape;
+	delete m_pMotionState;
+	//PhysicsEngine::i().m_world->removeCollisionObject(btPairCachingGhostObject::upcast(m_pGhostObject));
+	//delete m_pGhostObject;
+	delete p_controller;
 }
 
 void Player::handleMessage(const Message & message)
@@ -434,6 +439,9 @@ void Player::setWeapon(int newWeapon) {
 
 void Player::resetAll() {
 
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+
+
 	listaWeapons->Vaciar();
 
 	tieneRocketLauncher = false;
@@ -456,6 +464,11 @@ void Player::resetAll() {
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	rocket->setEquipada(false);
+	asalto->setEquipada(false);
+
 	pistola->setEquipada(true);
 	tienePistola = true;
 

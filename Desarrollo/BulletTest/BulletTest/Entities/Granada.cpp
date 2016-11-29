@@ -93,8 +93,10 @@ void Granada::handleMessage(const Message & message)
 
 	if (message.mensaje == "BORRATE") {
 
-		if (m_explosion != NULL)
+		if (m_explosion != NULL) {
 			PhysicsEngine::i().removeGhostObject(m_explosion);
+		}
+			
 
 
 		m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
@@ -157,10 +159,10 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		/*m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;*/
 
 		m_rigidBody->applyCentralImpulse(force);
 		

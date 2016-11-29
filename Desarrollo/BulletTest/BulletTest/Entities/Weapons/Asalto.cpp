@@ -27,7 +27,7 @@ void Asalto::update(Time elapsedTime)
 {
 	if (equipada) {
 		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
+		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
 		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5, player_pos.getZ()));
 		m_renderState.updateRotations(player_rot);
 
@@ -58,7 +58,7 @@ void Asalto::handleInput()
 void Asalto::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.8f, 0.8f, 0.8f), "", "../media/arma/asalto.obj"));
+	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj"));
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
 	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);

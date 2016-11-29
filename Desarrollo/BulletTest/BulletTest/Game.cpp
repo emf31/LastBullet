@@ -60,7 +60,7 @@ void Game::run()
 	time_gameclock = clock.getElapsedTime();
 
 	bool wantToExit = false;
-
+	
 
 	while (GraphicEngine::i().isRuning()) {
 		//if (GraphicEngine::i().isWindowActive()) {
@@ -121,6 +121,7 @@ void Game::run()
 	EntityManager::i().apagar();
 	PhysicsEngine::i().apagar();
 	MessageHandler::i().borrarContenido();
+	
 }
 
 
@@ -132,7 +133,7 @@ void Game::inicializar()
 	//inicializamos bullet
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
-
+	EntityManager::i().inicializarEntityManager();
 
 	///////////////////////////////////////////////////////////////
 	std::shared_ptr<BasicSceneNode> suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");

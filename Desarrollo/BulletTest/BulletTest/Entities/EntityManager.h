@@ -22,6 +22,10 @@ public:
 	void mostrarClientes();
 	void muestraPosClientes();
 
+	void inicializarEntityManager() {
+		m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<unsigned long, Entity*>();
+	}
+
 	//Inicializa todas las entities
 	void inicializar();
 	//Updatea todas las entities
@@ -50,13 +54,15 @@ public:
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
 
+	std::unordered_map<int, Entity*> m_entities;
+
 private:
 	EntityManager(EntityManager const&);
-	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<unsigned long, Entity*>();
+	EntityManager() { 
 	}
 
 	int m_nextID;
-	std::unordered_map<int, Entity*> m_entities;
+	
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	std::set<Entity*> delete_set;
 
