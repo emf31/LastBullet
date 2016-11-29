@@ -18,7 +18,7 @@ ResourceManager::~ResourceManager() {
 	}*/
 }
 
-TModel* ResourceManager::getMesh(std::string path,Shader* shader) {
+TModel* ResourceManager::getMesh(const std::string& path,Shader* shader) {
 	if (path != "") {
 		if (models.find(path) != models.end()) {
 			//Si ya esta en el mapa lo devolvemos al instante. No lo cargamos dos veces!
@@ -42,7 +42,7 @@ TModel* ResourceManager::getMesh(std::string path,Shader* shader) {
 
 /*Si se pasan los dos paths, primero se busca por el vertexShader y lo devuelve si está en el mapa. Si no está, se crea
 Si solo se pasa el vertex simplemente se busca en el mapa y se devuelve si está*/
-Shader* ResourceManager::getShader(std::string vertexShader, std::string fragmentShader) {
+Shader* ResourceManager::getShader(const std::string& vertexShader, std::string fragmentShader) {
 	if (vertexShader != "" && fragmentShader != "") {
 		if (shaders.find(vertexShader) != shaders.end()) {
 			return shaders[vertexShader];
@@ -59,5 +59,17 @@ Shader* ResourceManager::getShader(std::string vertexShader, std::string fragmen
 	}
 	return NULL;
 }
-void ResourceManager::getTexture(std::string path) {
+
+Texture ResourceManager::getTexture(const std::string& path, const std::string& type, const std::string& directory) {
+	if (path != "") {
+		if (textures.find(path) != textures.end()) {
+			return textures[path];
+		} else {
+			Texture texture;
+			texture.id = TModel::TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
+			texture.type = type;
+			textures[path] = texture;
+			return textures[path];
+		}
+	}
 }

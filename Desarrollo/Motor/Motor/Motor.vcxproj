@@ -160,6 +160,7 @@
     <ClCompile Include="TCamera.cpp" />
     <ClCompile Include="TCameraNode.cpp" />
     <ClCompile Include="TEntity.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TLightNode.cpp" />
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshNode.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="TCamera.h" />
     <ClInclude Include="TCameraNode.h" />
     <ClInclude Include="TEntity.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TLightNode.h" />
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshNode.h" />

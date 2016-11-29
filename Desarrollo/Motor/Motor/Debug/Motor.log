@@ -1,7 +1,5 @@
-﻿  main.cpp
+﻿  TModel.cpp
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.h(36): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.h(44): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.pdb (Full PDB)

@@ -119,6 +119,9 @@ TMesh TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 		// 2. Specular maps
 		vector<Texture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		//3. Normal maps
+		vector<Texture> normalMaps = this->loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 	}
 
 	// Return a mesh object created from the extracted mesh data
@@ -131,25 +134,11 @@ vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType typ
 		aiString str;
 		mat->GetTexture(type, i, &str);
 		// Check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
-		GLboolean skip = false;
-		for (GLuint j = 0; j < textures_loaded.size(); j++) {
-			if (textures_loaded[j].path == str) {
-				textures.push_back(textures_loaded[j]);
-				skip = true; // A texture with the same filepath has already been loaded, continue to next one. (optimization)
-				break;
-			}
-		}
-		if (!skip) {   // If texture hasn't been loaded already, load it
-			Texture texture;
-			texture.id = TextureFromFile(str.C_Str(), this->directory);
-			texture.type = typeName;
-			texture.path = str;
-			textures.push_back(texture);
-			this->textures_loaded.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
-		}
+		ResourceManager rm = ResourceManager::i();
+		Texture text = rm.getTexture(str.C_Str(), typeName, this->directory);
+		textures.push_back(text);
 	}
 	return textures;
-
 }
 
 

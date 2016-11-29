@@ -17,6 +17,8 @@ using namespace std;
 
 #include "Shader.h"
 
+#include "Texture.h"
+
 struct Vertex {
 	// Position
 	glm::vec3 Position;
@@ -25,13 +27,6 @@ struct Vertex {
 	// TexCoords
 	glm::vec2 TexCoords;
 };
-
-struct Texture {
-	GLuint id;
-	string type;
-	aiString path;
-};
-
 
 class TMesh : public TEntity {
 public:
