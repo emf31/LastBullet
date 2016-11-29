@@ -209,7 +209,12 @@ void Player::cargarContenido()
 
 void Player::borrarContenido()
 {
-
+	//Estas cosas se borran aqui y no en el physics engine porque el player es especial
+	delete m_pCollisionShape;
+	delete m_pMotionState;
+	//PhysicsEngine::i().m_world->removeCollisionObject(btPairCachingGhostObject::upcast(m_pGhostObject));
+	//delete m_pGhostObject;
+	delete p_controller;
 }
 
 void Player::handleMessage(const Message & message)

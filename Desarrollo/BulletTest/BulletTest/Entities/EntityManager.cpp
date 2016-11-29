@@ -5,8 +5,12 @@
 #include "Enemy.h"
 #include <list>
 
+
+
 void EntityManager::inicializar()
 {
+	
+
 	std::unordered_map<int, Entity*>::iterator iter = m_entities.begin();
 	for (; iter != m_entities.end(); ++iter) {
 		iter->second->inicializar();
@@ -67,6 +71,7 @@ void EntityManager::apagar()
 	}
 	//vaciamos el contenido del mapa
 	m_entities.clear();
+
 }
 
 void EntityManager::registerEntity(Entity * entity)

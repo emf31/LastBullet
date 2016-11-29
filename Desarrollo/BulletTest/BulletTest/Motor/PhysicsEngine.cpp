@@ -297,6 +297,8 @@ bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 
 void PhysicsEngine::apagar()
 {
+	contacts.clear();
+
 	//borramos todos los rigidbodies
 	for (auto iter = m_rigidBodies.begin(); iter != m_rigidBodies.end(); ++iter) {
 		//los borramos del mundo
@@ -309,6 +311,21 @@ void PhysicsEngine::apagar()
 	//ahora vaciamos la lista
 	m_rigidBodies.clear();
 
+	//Si ha quedado algun objeto tambien lo borramos(ghost objects o cualquier cosa)
+	int i;
+	for (i = m_world->getNumCollisionObjects() - 1; i >= 0; i--)
+	{
+		btCollisionObject* obj = m_world->getCollisionObjectArray()[i];
+		
+		//btGhostObject* body = btGhostObject::upcast(obj);
+		
+		m_world->removeCollisionObject(obj);
+		delete obj;
+	}
+	
+
+	int a = m_world->getNumCollisionObjects();
+
 	//hay que borrar las cosas de las fisicas
 	delete m_world;
 	m_world = NULL;
@@ -320,6 +337,9 @@ void PhysicsEngine::apagar()
 	m_broadphase = NULL;
 	delete m_config;
 	m_config = NULL;
+	delete m_pGhostPairCallBack;
+	m_pGhostPairCallBack = NULL;
+
 }
 
 
