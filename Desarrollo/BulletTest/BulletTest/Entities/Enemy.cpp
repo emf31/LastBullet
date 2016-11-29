@@ -122,6 +122,8 @@ void Enemy::handleMessage(const Message & message)
 		TGranada* tGranada = static_cast<TGranada*>(message.data);
 
 		printf("ENEMIGO LANZA GRANADA\n");
+		printf("ENEMIGO LANZA GRANADA\n");
+		printf("ENEMIGO LANZA GRANADA\n");
 
 		granada->serverShoot(*tGranada);
 	} else if (message.mensaje == "MOVIMIENTO") {

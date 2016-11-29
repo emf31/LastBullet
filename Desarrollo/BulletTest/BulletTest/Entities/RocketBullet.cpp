@@ -88,7 +88,7 @@ void RocketBullet::handleMessage(const Message & message)
 					Entity* myentity = *it;
 					
 					damage = explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
-					//std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
+					std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
 					if (Cliente::i().isConected() && damage>0) {
 						Cliente::i().impactoRocket(myentity->getGuid(), damage);
 					}
