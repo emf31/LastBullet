@@ -66,6 +66,9 @@
     <ClCompile Include="TLightNode.cpp">
       <Filter>Archivos de código fuente\Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TEntity.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="vec3.hpp">
       <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

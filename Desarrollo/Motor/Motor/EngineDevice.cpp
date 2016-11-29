@@ -1,8 +1,8 @@
 #include "EngineDevice.h"
 #include <functional>
-#include <SDL/SDL.h>
 
 EngineDevice::EngineDevice() {
+
 }
 
 
@@ -16,7 +16,7 @@ SceneManager* EngineDevice::getSceneManager() {
 		return sm;
 	} else {
 		sm = new SceneManager();
-		sm->camera_ptr = &camera;
+		sm->camera_ptr = &input.camera;
 		sm->screenWidth = &screenWidth;
 		sm->screenHeight = &screenHeight;
 		return sm;
@@ -59,7 +59,17 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 
 	this->screenHeight = screenHeight;
 	this->screenWidth = screenWidth;
+
+	//KeyCallbacks
+	setKeyCallbacks();
+
 	return 1;
+}
+
+void EngineDevice::setKeyCallbacks() {
+	glfwSetKeyCallback(window, &Input::key_callback);
+	glfwSetCursorPosCallback(window, &Input::mouse_callback);
+	glfwSetScrollCallback(window, &Input::scroll_callback);
 }
 
 GLFWwindow* EngineDevice::getWindow() {

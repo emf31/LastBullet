@@ -15,7 +15,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-
+// Input
+#include "Input.h"
 
 class EngineDevice {
 
@@ -26,11 +27,8 @@ public:
 	~EngineDevice();
 	SceneManager* getSceneManager();
 	bool createEngineDevice(int screenWidth, int screenHeight, std::string titleWindow);
+	
 	GLFWwindow * getWindow();
-
-	// Camera
-	Camera camera;
-	// Moves/alters the camera positions based on user input
 	
 	void setWindowTitle(std::string title);
 
@@ -43,7 +41,6 @@ public:
 	}
 	int getFPS() {
 		
-		
 		GLfloat currentFrame = glfwGetTime();
 
 		if (currentFrame - lastTime >= 1.0) {
@@ -55,11 +52,15 @@ public:
 		
 	}
 	
-
+	void doMovement() {
+		glfwPollEvents();
+		input.Do_Movement(deltaTime);
+	}
 	//TODO: Mover esto a otro sitio
-	bool keys[1024];
-	GLfloat lastX = 400, lastY = 300;
-	bool firstMouse = true;
+	
+	void end() {
+		glfwTerminate();
+	}
 
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
@@ -71,6 +72,7 @@ private:
 	int numFrames = 0;
 	int fps;
 	float screenWidth, screenHeight;
-	
+	Input &input = Input::getInstance();
+	void setKeyCallbacks();
 };
 
