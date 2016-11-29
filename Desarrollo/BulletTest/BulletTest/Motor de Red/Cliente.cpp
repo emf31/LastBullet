@@ -33,6 +33,7 @@ void Cliente::update() {
 	RakNet::RakNetGUID desconectado;
 	int idVida;
 	float danyo = 0.0f;
+	Vec3<float> fuerza;
 	
 
 	while (1) {
@@ -350,6 +351,22 @@ void Cliente::update() {
 			}
 			break;
 
+			case APLICAR_IMPULSO:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(fuerza);
+
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
+				player->impulsar(fuerza);
+				player = nullptr;
+
+			}
+			break;
+
 			case MUERTE:
 			{
 
@@ -604,6 +621,18 @@ void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo)
 	impact.damage = danyo;
 	impact.guid = palayerDanyado;
 	bsOut.Write(impact);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+
+void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
+{
+	RakNet::BitStream bsOut;
+	TImpulso impulso;
+	impulso.fuerza = force;
+	impulso.guid = guid;
+	bsOut.Write((RakNet::MessageID)APLICAR_IMPULSO);
+	bsOut.Write(impulso);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

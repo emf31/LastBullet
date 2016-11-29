@@ -56,6 +56,7 @@ int main() {
 	Clock tiempoRestartVida;
 	int idVida=0;
 	float danyo = 0;
+	TImpulso impulso;
 	
 	//std::vector<Player*> clientArray;
 
@@ -218,6 +219,22 @@ int main() {
 			}
 
 							 break;
+
+			case APLICAR_IMPULSO: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(impulso);
+				//notifico a ese cliente que ha sido disparado
+				EntityManager::i().enviaImpulso(impulso, peer);
+
+			}
+
+			 break;
 
 			case IMPACTO_ROCKET: {
 

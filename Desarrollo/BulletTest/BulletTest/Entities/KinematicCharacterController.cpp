@@ -151,8 +151,8 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = btScalar(9.8 * 3.5); // 3G acceleration.
-	m_fallSpeed = 55.0; // Terminal velocity of a sky diver in m/s.
+	m_gravity = btScalar(9.8 * 5.5); // 3G acceleration.
+	m_fallSpeed = 105.0; // Terminal velocity of a sky diver in m/s.
 	m_jumpSpeed = 10.0; // ?
 	m_SetjumpSpeed = m_jumpSpeed;
 	m_wasOnGround = false;

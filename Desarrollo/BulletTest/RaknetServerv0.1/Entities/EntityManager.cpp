@@ -389,3 +389,17 @@ void EntityManager::mostrarClientes() {
 
 
 }
+
+void EntityManager::enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer)
+{
+
+	RakNet::BitStream bsOut;
+
+
+	bsOut.Write((RakNet::MessageID)APLICAR_IMPULSO);
+	bsOut.Write(impulso.fuerza);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, impulso.guid, false);
+	bsOut.Reset();
+
+
+}

@@ -93,6 +93,10 @@ protected:
 	RenderState m_renderState;
 	float m_vida;
 
+	//TODO:esto estaria en player
+	bool isDying = false;
+	Clock relojMuerte;
+
 private:
 
 	

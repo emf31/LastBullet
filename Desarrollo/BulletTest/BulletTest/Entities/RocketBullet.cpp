@@ -164,7 +164,14 @@ float RocketBullet::explosion(Entity* player,Vec3<float> posExplosion, Vec3<floa
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 		proxy->m_collisionFilterMask = col::rocketCollidesWith;*/
 
-		static_cast<Player*>(player)->p_controller->applyImpulse(force);
+		if (player->getClassName() == "Player") {
+			static_cast<Player*>(player)->p_controller->applyImpulse(force);
+		}
+		else if (Cliente::i().isConected()) {
+			
+			Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
+		}
+		
 	}
 	else {
 		//printf("NO te ha dado la explosion\n");

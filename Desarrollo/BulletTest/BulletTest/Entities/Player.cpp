@@ -80,9 +80,13 @@ void Player::inicializar()
 
 void Player::update(Time elapsedTime)
 {
+
+	if (isDying == false) {
+
+	
 	isMoving = false;
 
-	if(p_controller->onGround())
+	if (p_controller->onGround())
 		p_controller->setSpeed(1.3f);//seteamos la velocidad para andar, si corre se cambiara a una mayor
 
 	speedFinal = Vec3<float>(0, 0, 0);
@@ -90,7 +94,7 @@ void Player::update(Time elapsedTime)
 
 	// Ejecuta todos los comandos
 	InputHandler::i().excuteCommands(this);
-	
+
 
 	speedFinal.normalise();
 
@@ -105,17 +109,30 @@ void Player::update(Time elapsedTime)
 
 
 	//p_controller->setMaxPenetrationDepth(0.f);
-	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
+	//p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
+
+	
+	GraphicEngine::i().actualizarInterfaz();
+
+	}
+	else {
+		//estas muerto
+		if (relojMuerte.getElapsedTime().asSeconds() > 3) {
+			isDying = false;
+		}
+	}
+	//TODO: esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
+	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 	m_renderState.updatePositions(Vec3<float>(
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y()-(height/2),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-	
-	
 
-	
+
+
+
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
@@ -123,8 +140,6 @@ void Player::update(Time elapsedTime)
 		Cliente::i().enviarPos(this);
 	}
 
-	GraphicEngine::i().actualizarInterfaz();
-	
 }
 
 
@@ -397,6 +412,13 @@ void Player::DownWeapon()
 	listaWeapons->Anterior();
 	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->valorActual()->getNode()->setVisible(true);
+}
+
+void Player::impulsar(Vec3<float> force)
+{
+	printf("ME IMPULSO\n");
+	btVector3 fuerza(force.getX(), force.getY(), force.getZ());
+	p_controller->applyImpulse(fuerza);
 }
 
 void Player::setWeapon(int newWeapon) {

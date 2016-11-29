@@ -47,6 +47,8 @@ public:
 	void UpWeapon();
 	void DownWeapon();
 
+	void impulsar(Vec3<float> force);
+
 
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }

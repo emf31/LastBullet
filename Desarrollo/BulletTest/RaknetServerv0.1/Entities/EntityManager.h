@@ -33,6 +33,7 @@ public:
 	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
 	void ArmaCogida(int idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
+	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
 
 
 	//Inicializa todas las entities

@@ -42,6 +42,11 @@ typedef struct {
 	RakNet::RakNetGUID guid;
 }TImpactoRocket;
 
+typedef struct {
+	Vec3<float> fuerza;
+	RakNet::RakNetGUID guid;
+}TImpulso;
+
 
 enum GameMessages
 {
@@ -66,5 +71,6 @@ enum GameMessages
 	DISPARAR_ROCKET = ID_USER_PACKET_ENUM + 19,
 	IMPACTO_ROCKET = ID_USER_PACKET_ENUM + 20,
 	NUEVA_ARMA = ID_USER_PACKET_ENUM + 21,
-	ARMA_COGIDA = ID_USER_PACKET_ENUM + 22
+	ARMA_COGIDA = ID_USER_PACKET_ENUM + 22,
+	APLICAR_IMPULSO = ID_USER_PACKET_ENUM + 23
 };
