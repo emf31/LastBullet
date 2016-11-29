@@ -179,8 +179,9 @@ public:
 	bool canJump();
 
 	void jump(const btVector3& v = btVector3());
+	void Rocketjump(const btVector3& v = btVector3());
 
-	void applyImpulse(const btVector3& v) { jump(v); }
+	void applyImpulse(const btVector3& v) { Rocketjump(v); }
 
 	void setGravity(const btVector3& gravity);
 	btVector3 getGravity() const;

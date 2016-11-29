@@ -66,6 +66,7 @@ public:
 	}
 
 	void resetAll();
+	KinematicCharacterController* p_controller;
 
 private:
 	float m_vida;
@@ -101,7 +102,6 @@ private:
 	
 
 	//Player controller
-	KinematicCharacterController* p_controller;
 
 	btCollisionShape* m_pCollisionShape;
 	btDefaultMotionState* m_pMotionState;
