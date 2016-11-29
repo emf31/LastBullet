@@ -195,6 +195,8 @@ void Granada::serverShoot(TGranada g) {
 		setPosition(g.origen);
 
 		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
+		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
+		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 		btVector3 direccion2(g.direction.getX(), g.direction.getY(), g.direction.getZ());
@@ -202,6 +204,9 @@ void Granada::serverShoot(TGranada g) {
 		btVector3 force = direccion2 * FUERZA;
 
 		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
 
 		m_rigidBody->applyCentralImpulse(force);
@@ -216,12 +221,13 @@ void Granada::serverShoot(TGranada g) {
 float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
 {
 
-	float vidaRestada = 0;
+	int vidaRestada = 0;
 
 	Vec3<float> vector = posExplosion - posCharacter;
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
-		printf("Te ha dado la explosion\n");
+		
+		std::cout << "Soy: " << m_name << "Te ha dado la explosion" << std::endl;
 		if (distancia < radio / 3) {
 			vidaRestada = 100;
 		}
@@ -232,7 +238,7 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 		}
 	}
 	else {
-		printf("NO te ha dado la explosion\n");
+		std::cout << "Soy: " << m_name << "NO te ha dado la explosion" << std::endl;
 
 	}
 

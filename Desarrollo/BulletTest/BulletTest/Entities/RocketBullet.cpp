@@ -88,11 +88,12 @@ void RocketBullet::handleMessage(const Message & message)
 					
 					damage = explosion(myentity,cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
 					//std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
+					std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
+
 					if (Cliente::i().isConected() && damage>0) {
 						Cliente::i().impactoRocket(myentity->getGuid(), damage);
 					}
 					else {
-						std::cout << "Me ha restado " << damage << std::endl;
 						myentity->restaVida(damage);
 
 						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
