@@ -16,13 +16,11 @@ TModel* SceneManager::getMesh(std::string path,Shader* shader) {
 }
 
 TNode* SceneManager::addMesh(TModel * model) {
-
 	TNode *node = new TNode();
 	//node->sceneManager_ptr = this;
 	node->setModel(model);
 	scene.addChild(node);
 	return node;
-
 }
 
 void SceneManager::draw(GLFWwindow* window) {

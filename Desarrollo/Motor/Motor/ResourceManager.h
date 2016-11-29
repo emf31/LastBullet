@@ -18,6 +18,6 @@ public:
 private:
 	std::unordered_map<std::string, TModel*> models;
 	std::unordered_map<std::string, Shader*> shaders;
-	//std::unordered_map<std::string, Texture> textures
+	//std::unordered_map<std::string, Texture*> textures
 };
 

@@ -8,7 +8,7 @@
 class Input {
 public:
 
-	// Camera
+	// Camara
 	Camera camera;
 
 	bool keys[1024];

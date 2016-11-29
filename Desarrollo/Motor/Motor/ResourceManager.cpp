@@ -38,6 +38,8 @@ TModel* ResourceManager::getMesh(std::string path,Shader* shader) {
 	return NULL;
 }
 
+
+
 /*Si se pasan los dos paths, primero se busca por el vertexShader y lo devuelve si está en el mapa. Si no está, se crea
 Si solo se pasa el vertex simplemente se busca en el mapa y se devuelve si está*/
 Shader* ResourceManager::getShader(std::string vertexShader, std::string fragmentShader) {

@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 using namespace std;
 #include "EngineDevice.h"
@@ -16,11 +15,14 @@ int main() {
 		return -1;
 	}
 	SceneManager *sm = engine.getSceneManager();
-	TNode* n = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 
+	TNode* n = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
 	n->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 
+	TNode* bike = sm->addMesh(sm->getMesh("assets/bike.FBX"));
+	bike->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
+	bike->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 
 	while (!glfwWindowShouldClose(engine.getWindow())){
 		engine.updateCurrentFrame();
