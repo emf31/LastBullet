@@ -40,7 +40,7 @@ private:
 
 	virtual std::string getClassName() override;
 
-	float explosion(Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
+	float explosion(Entity* player,Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
 
 	btGhostObject* m_explosion;
 

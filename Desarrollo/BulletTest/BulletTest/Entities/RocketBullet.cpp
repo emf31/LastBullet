@@ -74,7 +74,6 @@ void RocketBullet::handleMessage(const Message & message)
 	int damage = 0;
 
 	if (message.mensaje == "COLLISION") {
-		std::cout << "Llego" << std::endl;
 
 		//if (static_cast<Entity*>(message.data)->getClassName() != "Player") {
 			
@@ -87,13 +86,15 @@ void RocketBullet::handleMessage(const Message & message)
 
 					Entity* myentity = *it;
 					
-					damage = explosion(cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
+					damage = explosion(myentity,cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
 					//std::cout << "Le resto " << damage << " a " << myentity->getName() << std::endl;
 					if (Cliente::i().isConected() && damage>0) {
 						Cliente::i().impactoRocket(myentity->getGuid(), damage);
 					}
 					else {
+						std::cout << "Me ha restado " << damage << std::endl;
 						myentity->restaVida(damage);
+
 						//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
 					}
 
@@ -118,7 +119,7 @@ std::string RocketBullet::getClassName()
 	return "RocketBullet";
 }
 
-float RocketBullet::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
+float RocketBullet::explosion(Entity* player,Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
 {
 	float vidaRestada = 0;
 
@@ -132,8 +133,28 @@ float RocketBullet::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter
 		else {
 			//(radio-distancia)/((2*radio)/3)
 			vidaRestada = 100 * ((radio - distancia) / ((2 * radio) / 3));
-
 		}
+
+
+		btVector3 FUERZA(vidaRestada/2.3, vidaRestada/2.3, vidaRestada/2.3);
+
+		Vec3<float> posExplosion = cons(m_rigidBody->getCenterOfMassPosition());
+		Vec3<float> posPlayer = player->getRenderPosition();
+
+		Vec3<float> direccion = posPlayer - posExplosion;
+
+		direccion.normalise();
+
+		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+
+		btVector3 force = direccion2 * FUERZA;
+
+		/*m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;*/
+
+		static_cast<Player*>(player)->p_controller->applyImpulse(force);
 	}
 	else {
 		//printf("NO te ha dado la explosion\n");
