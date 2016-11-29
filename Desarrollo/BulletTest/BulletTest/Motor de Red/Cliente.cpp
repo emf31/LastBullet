@@ -596,13 +596,14 @@ void Cliente::playerMuerto()
 
 void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo)
 {
-
+	TImpactoRocket impact;
 	RakNet::BitStream bsOut;
 
 	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
 
-	bsOut.Write(palayerDanyado);
-	bsOut.Write(danyo);
+	impact.damage = danyo;
+	impact.guid = palayerDanyado;
+	bsOut.Write(impact);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

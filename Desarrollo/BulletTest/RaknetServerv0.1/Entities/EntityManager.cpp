@@ -107,15 +107,15 @@ void EntityManager::enviaDisparado(RakNet::RakNetGUID & guid, RakNet::RakPeerInt
 	
 }
 
-void EntityManager::enviaDisparadoRocket(RakNet::RakNetGUID & guid, int danyo, RakNet::RakPeerInterface * peer)
+void EntityManager::enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface * peer)
 {
 
 	RakNet::BitStream bsOut;
 	//se envia unicamente al cliente que ha sido disparado
 
 	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
-	bsOut.Write(danyo);
-	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Write(impact.damage);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, impact.guid, false);
 	bsOut.Reset();
 
 
