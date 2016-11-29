@@ -894,7 +894,7 @@ bool KinematicCharacterController::canJump()
 	return false;
 }
 
-void KinematicCharacterController::jump(const btVector3& v)
+void KinematicCharacterController::jump(const btVector3& v)//Este jump es el jump del salto
 {
 	if(canJump()){
 	m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
@@ -915,6 +915,28 @@ void KinematicCharacterController::jump(const btVector3& v)
 	m_rigidBody->applyCentralImpulse(up * magnitude);
 #endif
 	}
+}
+
+void KinematicCharacterController::Rocketjump(const btVector3& v)//Este jump es el jump del rocketJump
+{
+		m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
+		m_verticalVelocity = m_jumpSpeed;
+		m_wasJumping = true;
+
+		m_jumpAxis = v.length2() == 0 ? m_up : v.normalized();
+
+		m_jumpPosition = m_ghostObject->getWorldTransform().getOrigin();
+
+#if 0
+		currently no jumping.
+			btTransform xform;
+		m_rigidBody->getMotionState()->getWorldTransform(xform);
+		btVector3 up = xform.getBasis()[1];
+		up.normalize();
+		btScalar magnitude = (btScalar(1.0) / m_rigidBody->getInvMass()) * btScalar(8.0);
+		m_rigidBody->applyCentralImpulse(up * magnitude);
+#endif
+	
 }
 
 void KinematicCharacterController::setGravity(const btVector3& gravity)

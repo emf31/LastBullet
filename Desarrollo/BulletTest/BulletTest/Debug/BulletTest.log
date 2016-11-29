@@ -1,7 +1,29 @@
-﻿  RocketBullet.cpp
+﻿  Enemy.cpp
+  Generando código...
+  Compilando...
+  RocketBullet.cpp
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\rocketbullet.cpp(89): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\rocketbullet.cpp(96): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\rocketbullet.cpp(139): warning C4244: 'argumento': conversión de 'double' a 'const btScalar'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\rocketbullet.cpp(97): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\rocketbullet.cpp(140): warning C4244: 'argumento': conversión de 'double' a 'const btScalar'; posible pérdida de datos
+  KinematicCharacterController.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  main.cpp
+  GraphicEngine.cpp
+  Cliente.cpp
+  InputHandler.cpp
+  Game.cpp
+  RocketLauncher.cpp
+  Pistola.cpp
+  Asalto.cpp
+  WeaponDrop.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
+  AsaltoDrop.cpp
+  Player.cpp
+  LifeObject.cpp
+  Granada.cpp
+  Entity.cpp
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
