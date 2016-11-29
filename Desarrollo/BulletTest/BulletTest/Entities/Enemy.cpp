@@ -82,6 +82,10 @@ void Enemy::cargarContenido()
 
 	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this,height, radius, mass, DISABLE_SIMULATION);
 
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
+	proxy->m_collisionFilterMask = col::enemyCollidesWith;
+
 }
 
 void Enemy::borrarContenido()

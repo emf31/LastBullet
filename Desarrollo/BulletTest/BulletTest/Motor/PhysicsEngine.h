@@ -17,15 +17,17 @@ namespace col {
 		Rocket = BIT(3),
 		Caja = BIT(4),
 		Enemy = BIT(5),
-		Sensor = BIT(6)
+		Sensor = BIT(6),
+		RocketEnemy = BIT(7)
 	};
 
-	const int staticCollidesWith = Collisions::Character | Collisions::Rocket | Collisions::Caja;
-	const int characterCollidesWith = Collisions::Static | Collisions::Sensor;
+	const int staticCollidesWith = Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
+	const int characterCollidesWith = Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy;
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja;
+	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
 	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static;
-	
+	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket;
 }
 
 class PhysicsEngine

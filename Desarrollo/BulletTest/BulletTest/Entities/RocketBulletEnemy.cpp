@@ -58,8 +58,8 @@ void RocketBulletEnemy::cargarContenido()
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-	proxy->m_collisionFilterMask = col::rocketCollidesWith;
+	proxy->m_collisionFilterGroup = col::Collisions::RocketEnemy;
+	proxy->m_collisionFilterMask = col::rocketenemyCollidesWith;
 	//m_rigidBody->setCollisionFlags(4);
 	radioExplosion = 40.f;
 }
