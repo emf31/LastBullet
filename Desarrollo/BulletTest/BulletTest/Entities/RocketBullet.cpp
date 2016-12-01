@@ -94,10 +94,10 @@ void RocketBullet::handleMessage(const Message & message)
 						if (damage > 0) {
 							
 							if (myentity->getID() == PLAYER) {
-								Cliente::i().impactoRocket(myentity->getGuid(), damage/2);
+								Cliente::i().impactoRocket(myentity->getGuid(), int(damage/2));
 							}
 							else {
-								Cliente::i().impactoRocket(myentity->getGuid(), damage);
+								Cliente::i().impactoRocket(myentity->getGuid(), int(damage));
 							}
 							
 						}
@@ -146,7 +146,7 @@ float RocketBullet::explosion(Entity* player,Vec3<float> posExplosion, Vec3<floa
 		}
 
 
-		btVector3 FUERZA(vidaRestada/2.3, vidaRestada/2.3, vidaRestada/2.3);
+		btVector3 FUERZA(btScalar(vidaRestada/2.3),btScalar(vidaRestada/2.3), btScalar(vidaRestada/2.3));
 
 		Vec3<float> posExplosion = cons(m_rigidBody->getCenterOfMassPosition());
 		Vec3<float> posPlayer = player->getRenderPosition();

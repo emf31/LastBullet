@@ -28,7 +28,7 @@ void Asalto::update(Time elapsedTime)
 	if (equipada) {
 		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5, player_pos.getZ()));
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
 		m_renderState.updateRotations(player_rot);
 
 		if (estadoWeapon == DESCARGADA) {

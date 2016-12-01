@@ -618,7 +618,7 @@ void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo)
 
 	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
 
-	impact.damage = danyo;
+	impact.damage = float(danyo);
 	impact.guid = palayerDanyado;
 	bsOut.Write(impact);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);

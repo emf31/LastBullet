@@ -40,5 +40,5 @@ State* StateFactory::CreateState(States::ID id){
         //return new Muerte();
 		return NULL;
     }
-
+	return NULL;
 }

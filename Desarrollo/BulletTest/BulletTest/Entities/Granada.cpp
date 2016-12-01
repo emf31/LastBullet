@@ -233,7 +233,7 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 		}
 		else {
 			//(radio-distancia)/((2*radio)/3)
-			vidaRestada = 100*((radio - distancia) / ((2 * radio) / 3));
+			vidaRestada = int(100*((radio - distancia) / ((2 * radio) / 3)));
 
 		}
 	}
@@ -242,6 +242,6 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 
 	}
 
-	return vidaRestada;
+	return float(vidaRestada);
 
 }

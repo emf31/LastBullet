@@ -26,7 +26,7 @@ void RocketLauncher::update(Time elapsedTime)
 	if (equipada) {
 		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 7.3, player_pos.getZ()));
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 7.3f, player_pos.getZ()));
 		m_renderState.updateRotations(player_rot);
 
 		if (estadoWeapon == DESCARGADA) {
