@@ -285,6 +285,8 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 	m_rigidBodies.remove(body);
 	m_world->removeRigidBody(body);
 
+	delete body;
+
 	return true;
 }
 

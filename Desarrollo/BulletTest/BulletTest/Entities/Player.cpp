@@ -52,7 +52,7 @@ void Player::inicializar()
 	animation = new Animation;
 
 	/*****************************/
-	/*******INICILAZAR ARMAS******/
+	/*******INICIALIZAR ARMAS******/
 	asalto = new Asalto();
 	asalto->inicializar();
 	asalto->cargarContenido();
@@ -80,17 +80,15 @@ void Player::inicializar()
 
 void Player::update(Time elapsedTime)
 {
-
-	if (isDying == false) {
-
-	
 	isMoving = false;
 
-	if (p_controller->onGround())
-		p_controller->setSpeed(1.3f);//seteamos la velocidad para andar, si corre se cambiara a una mayor
+
+	if (p_controller->onGround()) {
+		//seteamos la velocidad para andar, si corre se cambiara a una mayor
+		p_controller->setSpeed(1.3f);
+	}
 
 	speedFinal = Vec3<float>(0, 0, 0);
-
 
 	// Ejecuta todos los comandos
 	InputHandler::i().excuteCommands(this);
@@ -98,30 +96,22 @@ void Player::update(Time elapsedTime)
 
 	speedFinal.normalise();
 
-	/*updateState();
-	updateAnimation();*/
-
-
-	p_controller->setWalkDirection(
-		btVector3(speedFinal.getX(),
-			speedFinal.getY(),
-			speedFinal.getZ()));
-
-
-	//p_controller->setMaxPenetrationDepth(0.f);
-	//p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
-
-
-	
-	GraphicEngine::i().actualizarInterfaz();
-
+	if (isDying == false) {
+		p_controller->setWalkDirection(
+			btVector3(speedFinal.getX(),
+				speedFinal.getY(),
+				speedFinal.getZ()));
 	}
 	else {
-		//estas muerto
-		if (relojMuerte.getElapsedTime().asSeconds() > 3) {
-			isDying = false;
-		}
+		p_controller->setWalkDirection(
+			btVector3(0.f,0.f,0.f));
 	}
+
+	
+
+	GraphicEngine::i().actualizarInterfaz();
+
+
 	//TODO: esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
@@ -137,7 +127,12 @@ void Player::update(Time elapsedTime)
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
-		Cliente::i().enviarPos(this);
+		Cliente::i().enviarMovimiento(this);
+	}
+
+	//Una vez termine la nimacion de muerte, volvemos a movernos
+	if (relojMuerte.getElapsedTime().asSeconds() > 3) {
+		isDying = false;
 	}
 
 }
@@ -154,13 +149,7 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", ""));
-	//m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
-	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
-	//m_nodo->addChild(asalto->getNode());
-	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
-	
-	//m_nodo->addChild(rocket->getNode());
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
@@ -185,8 +174,6 @@ void Player::cargarContenido()
 	mass = 70.f;
 
 	m_pCollisionShape = new btCapsuleShape(radius, height);
-
-	m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(0,100,0)));
 
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(mass, intertia);
@@ -224,11 +211,8 @@ void Player::cargarContenido()
 
 void Player::borrarContenido()
 {
-	//Estas cosas se borran aqui y no en el physics engine porque el player es especial
+	//Estas cosas se borran aqui y no en el physics engine porque el player es especial(ghost object)
 	delete m_pCollisionShape;
-	delete m_pMotionState;
-	//PhysicsEngine::i().m_world->removeCollisionObject(btPairCachingGhostObject::upcast(m_pGhostObject));
-	//delete m_pGhostObject;
 	delete p_controller;
 }
 
@@ -350,73 +334,23 @@ void Player::move_left()
 	isMoving = true;
 }
 
-void Player::updateAnimation()
-{
-	switch (m_playerState)
-	{
-	case quieto:
-		if (animation->getActualAnimation() != "Idle") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
-		}
-		break;
-
-	case andando:
-		if (animation->getActualAnimation() != "Walk") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
-		}
-		break;
-
-	case saltando:
-		if (animation->getActualAnimation() != "Jump") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
-		}
-		break;
-	case saltando2:
-		if (animation->getActualAnimation() != "Jump2") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
-		}
-		break;
-
-	}
-}
-
-void Player::updateState()
-{
-	if(!p_controller->onGround() && p_controller->numJumps==0){
-		m_playerState = saltando;
-	}
-	else if (!p_controller->onGround() && p_controller->numJumps ==1) {
-		m_playerState = saltando2;
-	}
-	else if (isMoving) {
-		m_playerState = andando;
-	}
-	else {
-		m_playerState = quieto;
-	}
-}
 
 void Player::UpWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
-	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->Siguiente();
-	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 }
 
 void Player::DownWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
-	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->Anterior();
-	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 }
 
 void Player::impulsar(Vec3<float> force)
 {
-	printf("ME IMPULSO\n");
 	btVector3 fuerza(force.getX(), force.getY(), force.getZ());
 	p_controller->applyImpulse(fuerza);
 }

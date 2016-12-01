@@ -6,6 +6,7 @@
 #include "PhysicsEngine.h"
 #include <string>
 #include <sstream>
+#include <exception>
 
 
 GraphicEngine::GraphicEngine() : debug_camera(true)
@@ -206,41 +207,44 @@ void GraphicEngine::renderAll()
 
 void GraphicEngine::inicializar()
 {
-	// Initialize irrlicht
-	irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(800, 600), 32, false, false, false, &MastEventReceiver::i());
-	irrDevice->setWindowCaption(L"Test");
+	//if(!irrDevice){
+		// Initialize irrlicht
+		irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(800, 600), 32, false, false, false, &MastEventReceiver::i());
+		irrDevice->setWindowCaption(L"Test");
 
-	irrGUI = irrDevice->getGUIEnvironment();
-	irrScene = irrDevice->getSceneManager();
-	irrDriver = irrDevice->getVideoDriver();
+		irrGUI = irrDevice->getGUIEnvironment();
+		irrScene = irrDevice->getSceneManager();
+		irrDriver = irrDevice->getVideoDriver();
 
-	irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(800 / 2 - 220 / 2, 600 / 2 - 165 / 2));
+		irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(800 / 2 - 220 / 2, 600 / 2 - 165 / 2));
 
 
-	irrDevice->getCursorControl()->setVisible(0);
-	cargarTexturas();
+		irrDevice->getCursorControl()->setVisible(0);
+		cargarTexturas();
 
-	irrDevice->getCursorControl()->setVisible(0);
 
-	//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
-	//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
-	//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
 
-	debugDraw = new DebugDraw(irrDevice);
-	debugDraw->setDebugMode(
-		btIDebugDraw::DBG_DrawWireframe |
-		btIDebugDraw::DBG_DrawAabb |
-		btIDebugDraw::DBG_DrawContactPoints |
-		//btIDebugDraw::DBG_DrawText |
-		//btIDebugDraw::DBG_DrawConstraintLimits |
-		btIDebugDraw::DBG_DrawConstraints //|
-	);
-	PhysicsEngine::i().m_world->setDebugDrawer(debugDraw);
+		//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
+		//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
+		//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
 
+		debugDraw = new DebugDraw(irrDevice);
+		debugDraw->setDebugMode(
+			btIDebugDraw::DBG_DrawWireframe |
+			btIDebugDraw::DBG_DrawAabb |
+			btIDebugDraw::DBG_DrawContactPoints |
+			//btIDebugDraw::DBG_DrawText |
+			//btIDebugDraw::DBG_DrawConstraintLimits |
+			btIDebugDraw::DBG_DrawConstraints //|
+		);
+		PhysicsEngine::i().m_world->setDebugDrawer(debugDraw);
+
+
+		debugMat.Lighting = false;
+
+		debug_draw_bullet = true;
+	//}
 	
-	debugMat.Lighting = false;
-
-	debug_draw_bullet = true;
 
 }
 
@@ -256,15 +260,22 @@ bool GraphicEngine::isWindowActive()
 
 bool GraphicEngine::apagar()
 {
+	delete debugDraw;
+
 	irrDevice->setEventReceiver(NULL);
 	irrDevice->closeDevice();
 	irrDevice->run();
 	irrDevice->drop();
+
+
+
 	irrDevice = NULL;
+	
 	return true;
 }
 
 void GraphicEngine::cargarTexturas() {
+
 	//CARGAR TEXTURAS
 	irrDriver->getTexture("../media/wall.jpg");
 	irrDriver->getTexture("../media/ice0.jpg");
@@ -275,19 +286,22 @@ void GraphicEngine::cargarTexturas() {
 	irrDriver->getTexture("../media/m4tex.png");
 	irrDriver->getTexture("../media/WPNT_MK2Grenade_Base_Color.tga");
 	irrDriver->getTexture("../media/arma/weapon.png");
+	irrDriver->getTexture("../media/mirilla.png");
 	irrDriver->getTexture("../media/lanzacohetes.jpg");
 	irrDriver->getTexture("../media/Asalto.jpg");
 	irrDriver->getTexture("../media/pistola.jpg");
 	irrDriver->getTexture("../media/life.jpg");
-	//irrDriver->getTexture("../media/arma/v_hands_gloves_sf2 d.tga");
-
 
 	irrScene->getMesh("../media/ArmyPilot.b3d");
 	irrScene->getMesh("../media/sf2arms.obj");
 	
 	irrScene->getMesh("../media/bullet.obj");
-	irrScene->getMesh("../media/arma/ak.obj");
 	irrScene->getMesh("../media/WPN_MK2Grenade.obj");
+	irrScene->getMesh("../media/arma/asalto.obj");
+	irrScene->getMesh("../media/arma/pistola.obj");
+	irrScene->getMesh("../media/arma/rocket.obj");
+	
+	
 
 	irrGUI->getFont("../media/lucida.xml");
 	
@@ -295,6 +309,5 @@ void GraphicEngine::cargarTexturas() {
 }
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
-	
 	irrScene->addToDeletionQueue(nodo->getNodo());
 }

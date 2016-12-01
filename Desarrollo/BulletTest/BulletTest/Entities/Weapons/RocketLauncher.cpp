@@ -56,7 +56,7 @@ void RocketLauncher::handleInput()
 void RocketLauncher::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(2.2f, 2.2f, 2.2f), "", "../media/arma/rocket.obj"));
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(2.2f, 2.2f, 2.2f), "", "../media/arma/rocket.obj");
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
 

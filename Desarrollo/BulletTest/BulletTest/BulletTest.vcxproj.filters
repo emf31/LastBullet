@@ -213,12 +213,6 @@
     <ClInclude Include="Entities\Weapons\Pistola.h">
       <Filter>Archivos de encabezado\Entities\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="Nodo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Lista.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\Weapons\RocketLauncher.h">
       <Filter>Archivos de encabezado\Entities\Weapons</Filter>
     </ClInclude>
@@ -230,9 +224,6 @@
     </ClInclude>
     <ClInclude Include="Otros\SafeQueue.h">
       <Filter>Archivos de encabezado\Otros</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\RocketBulletEnemy.h">
-      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Motor de Red\Estructuras.h">
       <Filter>Archivos de encabezado\Motor de Red</Filter>
@@ -248,6 +239,18 @@
     </ClInclude>
     <ClInclude Include="States\StateStack.hpp">
       <Filter>Archivos de encabezado\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\DebugDraw.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Lista.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\RocketBulletEnemy.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Nodo.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -356,14 +359,8 @@
     <ClCompile Include="Entities\Weapons\Pistola.cpp">
       <Filter>Archivos de código fuente\Entities\Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="Lista.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp">
       <Filter>Archivos de código fuente\Entities\Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\RocketBulletEnemy.cpp">
-      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="States\State.cpp">
       <Filter>Archivos de código fuente\States</Filter>
@@ -373,6 +370,12 @@
     </ClCompile>
     <ClCompile Include="States\StateStack.cpp">
       <Filter>Archivos de código fuente\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\RocketBulletEnemy.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Lista.cpp">
+      <Filter>Archivos de código fuente\Otros</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

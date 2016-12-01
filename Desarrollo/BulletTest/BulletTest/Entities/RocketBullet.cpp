@@ -51,7 +51,7 @@ void RocketBullet::handleInput()
 
 void RocketBullet::cargarContenido()
 {
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", ""));
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", "");
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 

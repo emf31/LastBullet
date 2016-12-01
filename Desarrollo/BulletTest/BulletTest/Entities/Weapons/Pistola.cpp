@@ -55,7 +55,7 @@ void Pistola::handleInput()
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.2f, 0.2f, 0.2f), "", "../media/arma/pistola.obj"));
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.2f, 0.2f, 0.2f), "", "../media/arma/pistola.obj");
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
 

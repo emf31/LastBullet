@@ -9,7 +9,7 @@
 #include "../Motor/AnimatedSceneNode.h"
 #include "../Motor/Animation.h"
 #include <vector>
-#include "../Lista.h"
+#include "../Otros/Lista.h"
 
 class Player : public Entity
 {
@@ -40,9 +40,6 @@ public:
 	void move_down();
 	void move_right();
 	void move_left();
-
-	void updateAnimation();
-	void updateState();
 
 	void UpWeapon();
 	void DownWeapon();
@@ -104,9 +101,7 @@ private:
 	
 
 	//Player controller
-
 	btCollisionShape* m_pCollisionShape;
-	btDefaultMotionState* m_pMotionState;
 	btPairCachingGhostObject* m_pGhostObject;
 
 	float radius;

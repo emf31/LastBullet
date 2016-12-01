@@ -36,7 +36,7 @@ void Cliente::update() {
 	Vec3<float> fuerza;
 	
 
-	while (1) {
+	while (!shutdown) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 			switch (packet->data[0]) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -58,29 +58,10 @@ void Cliente::update() {
 
 				printf("Nuestra conexion se ha aceptado.\n");
 				servidor = packet->guid;
-				//Al conectarnos le enviamos nuestro objeto Player tal cual
-				bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
-
-				printf("Introduce un nombre \n");
-				std::cin >> str;
-
-				Player *player = new Player(str, peer->GetMyGUID());
-				player->inicializar();
-				player->cargarContenido();
-				
-
-				nuevoplayer.guid = player->getGuid();
-				nuevoplayer.name = player->getName();
-				//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-				nuevoplayer.position = Vec3<float> (0,100,0);
-				player->setPosition(nuevoplayer.position);
 
 				//Esta variable indica que el servidor a aceptado la conexion
 				conectado = true;
 
-				bsOut.Write(nuevoplayer);
-				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-				bsOut.Reset();
 
 			}
 				break;
@@ -102,8 +83,8 @@ void Cliente::update() {
 				p->rotation = nuevoplayer.rotation;
 				p->velocidad = nuevoplayer.velocidad;
 
-				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
-				MessageHandler::i().sendMessage(msg);
+				//Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
+				//MessageHandler::i().sendMessage(msg);
 
 			}
 			break;
@@ -125,8 +106,8 @@ void Cliente::update() {
 				p->rotation = nuevoplayer.rotation;
 				p->velocidad = nuevoplayer.velocidad;
 
-				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
-				MessageHandler::i().sendMessage(msg);
+				//Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
+				//MessageHandler::i().sendMessage(msg);
 
 			}
 			break;
@@ -134,7 +115,7 @@ void Cliente::update() {
 			case NUEVA_VIDA:
 			{
 				
-
+/*
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(vidaServer);
@@ -142,7 +123,7 @@ void Cliente::update() {
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 				LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
 				v->asignaTiempo(vidaServer.tiempo);
-				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler*/
 
 			}
 			break;
@@ -150,7 +131,7 @@ void Cliente::update() {
 			case NUEVA_ARMA:
 			{
 
-
+/*
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(vidaServer);
@@ -158,7 +139,7 @@ void Cliente::update() {
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(vidaServer.id));
 				w->asignaTiempo(vidaServer.tiempo);
-				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler*/
 
 			}
 			break;
@@ -167,7 +148,7 @@ void Cliente::update() {
 			{
 
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				/*RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(idVida);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
@@ -182,7 +163,7 @@ void Cliente::update() {
 
 
 				Message msg(w, "cogida", NULL);
-				MessageHandler::i().sendMessage(msg);
+				MessageHandler::i().sendMessage(msg);*/
 
 
 			}
@@ -192,7 +173,7 @@ void Cliente::update() {
 			{
 
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+			/*	RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(idVida);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
@@ -200,7 +181,7 @@ void Cliente::update() {
 				//TODO: esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
 				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida));
 				v->VidaCogida();
-				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler*/
 
 			}
 			break;
@@ -227,7 +208,7 @@ void Cliente::update() {
 				//e->updateEnemigo(nuevoplayer.position);
 
 				//NUEVO
-				if (e != NULL) {
+			/*	if (e != NULL) {
 					TPlayer *p = new TPlayer();
 					p->position = nuevoplayer.position;
 					p->guid = nuevoplayer.guid;
@@ -237,7 +218,7 @@ void Cliente::update() {
 
 					Message msg(e, "MOVIMIENTO", static_cast<void*>(p));
 					MessageHandler::i().sendMessage(msg);
-				}
+				}*/
 				
 
 				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
@@ -257,10 +238,10 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				
 				bsIn.Read(desconectado);
-				Entity* e = EntityManager::i().getRaknetEntity(desconectado);
-				EntityManager::i().getRaknetEntity(desconectado)->borrarContenido();
+				//Entity* e = EntityManager::i().getRaknetEntity(desconectado);
+				//EntityManager::i().getRaknetEntity(desconectado)->borrarContenido();
+				//EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
-				EntityManager::i().removeRaknetEntity(EntityManager::i().getRaknetEntity(desconectado));
 
 				//TODO IMPORTANTE: esto a veces da un error pork borra el entity justo cuando en el otro hilo esta haciendo el update del entity que aqui se elimina
 				//habria que enviarle un mensaje borrate igual que la bala para que lo borre despues del update.
@@ -410,10 +391,32 @@ void Cliente::update() {
 
 	}
 
+	//Borrar todas las cosas de raknet
+	// Shutdown stuff.  It's ok to call disconnect on the server if we are a client and vice-versa
+	//peer->Shutdown(300);
+	//delete peer;
+	/*delete packet;*/
+
+	//RakNet::RakPeerInterface::DestroyInstance(peer);
+
+	//hilo->detach();
+	//delete hilo;
+
+	peer->Shutdown(500);
+
+	RakNet::RakPeerInterface::DestroyInstance(peer);
+
+	packet = nullptr;
+
+	
+	//hilo->detach();
+	//shutdown = false;
 }
 
 void Cliente::inicializar() {
 	conectado = false;
+	shutdown = false;
+
 
 	peer = RakNet::RakPeerInterface::GetInstance();
 
@@ -437,7 +440,7 @@ void Cliente::esperar() {
 	hilo->join();
 }
 
-void Cliente::enviarPos(Player* p) {
+void Cliente::enviarMovimiento(Player* p) {
 
 	RakNet::BitStream bsOut;
 	TPlayer paquetemov;
@@ -540,7 +543,7 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 
 	//TODO: le hemos asignado id=3 a los enemigos provisionalmente, para poder restarle vida a un enemigo puesto que no sabriamos su id.
 	bsOut.Write(guid);
-	printf("envio mensaje del disparo\n");
+	//printf("envio mensaje del disparo\n");
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }
@@ -555,9 +558,6 @@ void Cliente::enviarDesconexion() {
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 
-	
-
-	//salir = true;
 }
 
 void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) {
@@ -641,10 +641,18 @@ void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
 
 
 void Cliente::apagar() {
-	if (conectado) {
-		hilo->detach();
-	}
-	//Borrar todas las cosas de raknet
-	//delete packet;
-	//delete peer;
+	
+	conectado = false;
+	shutdown = true;
+
+	//esperar();
+	
+	
+
+	
+	//delete hilo;
+	//hilo->detach();
+//	delete hilo;
+	
+
 }
