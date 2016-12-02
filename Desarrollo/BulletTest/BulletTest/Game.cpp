@@ -94,12 +94,19 @@ void Game::run()
 
 			//Realizamos actualizaciones
 			update(timePerFrame);
+
+			if (Cliente::i().isConected()) {
+				Cliente::i().update();
+			}
+			
 		}
 
 
 		interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 		render(interpolation, timePerFrame);
+
+		
 
 
 		if (wantToExit) {
@@ -111,15 +118,15 @@ void Game::run()
 
 	//Cliente::i().esperar();
 	//GraphicEngine::i().apagar();
-	
-
-	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
+	EntityManager::i().apagar();
 	PhysicsEngine::i().apagar();
+	
+	
+	
 	if (Cliente::i().isConected()) {
 		Cliente::i().apagar();
 	}
-	Cliente::i().esperar();
 	
 	
 	
@@ -298,7 +305,9 @@ void Game::inicializar()
 
 		
 		//Bucle infinito hasta que se conecte
-		while (Cliente::i().isConected() == false);
+		while (Cliente::i().isConected() == false) {
+			Cliente::i().update();
+		}
 
 		Cliente::i().createPlayer();
 

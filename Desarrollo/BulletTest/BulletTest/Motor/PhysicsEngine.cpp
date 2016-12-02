@@ -75,7 +75,7 @@ void PhysicsEngine::inicializar()
 void PhysicsEngine::update(Time elapsedTime)
 {
 	//Como la simulacion va lenta multiplicamos por 2
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds())*2, 20, tickPhysics.asSeconds());
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 20, tickPhysics.asSeconds());
 	
 
 	
@@ -285,7 +285,7 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 	m_rigidBodies.remove(body);
 	m_world->removeRigidBody(body);
 
-	delete body;
+	//delete body;
 
 	return true;
 }

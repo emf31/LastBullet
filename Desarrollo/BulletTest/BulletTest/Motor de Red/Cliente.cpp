@@ -24,19 +24,10 @@ Cliente::Cliente()
 
 void Cliente::update() {
 	
-	RakNet::BitStream bsOut;
-	std::string str;
-	TPlayer nuevoplayer;
-	TBala balaDisparada;
-	TGranada granada;
-	TVidaServer vidaServer;
-	RakNet::RakNetGUID desconectado;
-	int idVida;
-	float danyo = 0.0f;
-	Vec3<float> fuerza;
+	
 	
 
-	while (!shutdown) {
+	//while (!shutdown) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 			switch (packet->data[0]) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -83,8 +74,8 @@ void Cliente::update() {
 				p->rotation = nuevoplayer.rotation;
 				p->velocidad = nuevoplayer.velocidad;
 
-				//Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
-				//MessageHandler::i().sendMessage(msg);
+				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
+				MessageHandler::i().sendMessage(msg);
 
 			}
 			break;
@@ -106,8 +97,8 @@ void Cliente::update() {
 				p->rotation = nuevoplayer.rotation;
 				p->velocidad = nuevoplayer.velocidad;
 
-				//Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
-				//MessageHandler::i().sendMessage(msg);
+				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
+				MessageHandler::i().sendMessage(msg);
 
 			}
 			break;
@@ -115,7 +106,7 @@ void Cliente::update() {
 			case NUEVA_VIDA:
 			{
 				
-/*
+
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(vidaServer);
@@ -123,7 +114,7 @@ void Cliente::update() {
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 				LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
 				v->asignaTiempo(vidaServer.tiempo);
-				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler*/
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
 
 			}
 			break;
@@ -131,15 +122,13 @@ void Cliente::update() {
 			case NUEVA_ARMA:
 			{
 
-/*
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(vidaServer);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(vidaServer.id));
-				w->asignaTiempo(vidaServer.tiempo);
-				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler*/
+				
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
 
 			}
 			break;
@@ -148,7 +137,7 @@ void Cliente::update() {
 			{
 
 
-				/*RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(idVida);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
@@ -163,7 +152,7 @@ void Cliente::update() {
 
 
 				Message msg(w, "cogida", NULL);
-				MessageHandler::i().sendMessage(msg);*/
+				MessageHandler::i().sendMessage(msg);
 
 
 			}
@@ -173,7 +162,7 @@ void Cliente::update() {
 			{
 
 
-			/*	RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(idVida);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
@@ -181,7 +170,7 @@ void Cliente::update() {
 				//TODO: esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
 				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida));
 				v->VidaCogida();
-				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler*/
+				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
 
 			}
 			break;
@@ -208,7 +197,7 @@ void Cliente::update() {
 				//e->updateEnemigo(nuevoplayer.position);
 
 				//NUEVO
-			/*	if (e != NULL) {
+				if (e != NULL) {
 					TPlayer *p = new TPlayer();
 					p->position = nuevoplayer.position;
 					p->guid = nuevoplayer.guid;
@@ -218,7 +207,7 @@ void Cliente::update() {
 
 					Message msg(e, "MOVIMIENTO", static_cast<void*>(p));
 					MessageHandler::i().sendMessage(msg);
-				}*/
+				}
 				
 
 				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
@@ -389,7 +378,7 @@ void Cliente::update() {
 			}
 		}
 
-	}
+	//}
 
 	//Borrar todas las cosas de raknet
 	// Shutdown stuff.  It's ok to call disconnect on the server if we are a client and vice-versa
@@ -402,11 +391,11 @@ void Cliente::update() {
 	//hilo->detach();
 	//delete hilo;
 
-	peer->Shutdown(500);
+	//peer->Shutdown(500);
 
-	RakNet::RakPeerInterface::DestroyInstance(peer);
+	//RakNet::RakPeerInterface::DestroyInstance(peer);
 
-	packet = nullptr;
+	//packet = nullptr;
 
 	
 	//hilo->detach();
@@ -433,7 +422,8 @@ void Cliente::conectar(std::string address, int port) {
 	peer->Connect(address.c_str(), SERVER_PORT, 0, 0);
 
 
-	hilo = new std::thread(&Cliente::update, this);
+	//hilo = new std::thread(&Cliente::update, this);
+	//update();
 }
 
 void Cliente::esperar() {

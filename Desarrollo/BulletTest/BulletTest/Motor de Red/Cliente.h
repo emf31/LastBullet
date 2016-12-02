@@ -93,5 +93,17 @@ private:
 
 	std::atomic<bool> conectado;
 	std::atomic<bool> shutdown;
+
+
+	RakNet::BitStream bsOut;
+	std::string str;
+	TPlayer nuevoplayer;
+	TBala balaDisparada;
+	TGranada granada;
+	TVidaServer vidaServer;
+	RakNet::RakNetGUID desconectado;
+	int idVida;
+	float danyo = 0.0f;
+	Vec3<float> fuerza;
 };
 

@@ -90,7 +90,7 @@ void Enemy::borrarContenido()
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 	//delete m_rigidBody;
 
-	GraphicEngine::i().removeNode(m_nodo);
+	//GraphicEngine::i().removeNode(m_nodo);
 }
 
 //Teletransporta un enemigo a la posicion que le pasas
