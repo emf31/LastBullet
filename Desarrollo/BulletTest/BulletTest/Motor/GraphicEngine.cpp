@@ -283,6 +283,8 @@ void GraphicEngine::cargarTexturas() {
 
 
 	irrScene->getMesh("../media/ArmyPilot.b3d");
+	irrScene->getMesh("../media/CapitanAmerica.obj"); 
+	irrScene->getMesh("../media/edf_soldier_a.b3d");
 	irrScene->getMesh("../media/sf2arms.obj");
 	
 	irrScene->getMesh("../media/bullet.obj");

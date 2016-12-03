@@ -53,10 +53,12 @@ int main() {
 	TBala p_bala;
 	TImpactoRocket impact;
 	TGranada p_granada;
+	TImpulso impulso;
+	TCambioArma cambioArma;
 	Clock tiempoRestartVida;
 	int idVida=0;
 	float danyo = 0;
-	TImpulso impulso;
+	
 	
 	//std::vector<Player*> clientArray;
 
@@ -131,7 +133,7 @@ int main() {
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
 			}
-				break;
+			break;
 			case ID_GAME_MESSAGE_1:
 			{
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
@@ -183,8 +185,7 @@ int main() {
 				
 
 			}
-
-							 break;
+			break;
 
 			case LANZAR_GRANADA: {
 
@@ -201,8 +202,7 @@ int main() {
 
 
 			}
-
-							 break;
+			break;
 
 			case IMPACTO_BALA: {
 
@@ -217,8 +217,7 @@ int main() {
 				EntityManager::i().enviaDisparado(guid_Pdisparado, peer);
 
 			}
-
-							 break;
+			break;
 
 			case APLICAR_IMPULSO: {
 
@@ -233,8 +232,7 @@ int main() {
 				EntityManager::i().enviaImpulso(impulso, peer);
 
 			}
-
-			 break;
+			break;
 
 			case IMPACTO_ROCKET: {
 
@@ -251,8 +249,7 @@ int main() {
 				EntityManager::i().enviaDisparadoRocket(impact, peer);
 
 			}
-
-							   break;
+			break;
 
 
 			case DISPARAR_BALA: {
@@ -268,8 +265,7 @@ int main() {
 				EntityManager::i().enviarDisparoCliente(p_bala, peer);
 
 			}
-
-							   break;
+			break;
 
 
 			case DISPARAR_ROCKET: {
@@ -285,7 +281,6 @@ int main() {
 				EntityManager::i().enviarDisparoClienteRocket(p_bala, peer);
 
 			}
-
 			break;
 
 
@@ -319,8 +314,7 @@ int main() {
 				
 				
 			}
-
-								break;
+			break;
 			case NUEVA_ARMA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
@@ -351,8 +345,7 @@ int main() {
 
 
 			}
-
-			 break;
+			break;
 
 			case VIDA_COGIDA: {
 
@@ -372,8 +365,7 @@ int main() {
 
 
 			}
-
-							 break;
+			break;
 			case ARMA_COGIDA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
@@ -392,8 +384,21 @@ int main() {
 
 
 			}
+			break;
+			case CAMBIO_ARMA: {
 
-							  break;
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(cambioArma);
+				//notifico a ese cliente que ha sido disparado
+				EntityManager::i().enviaCambioArma(cambioArma, peer);
+
+			}
+			break;
 			case MUERTE: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
@@ -410,8 +415,7 @@ int main() {
 				EntityManager::i().notificarMuerte(p_struct, peer);
 
 			}
-
-							   break;
+			break;
 
 
 			default:

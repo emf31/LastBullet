@@ -38,6 +38,7 @@ public:
 	void playerMuerto();
 	void impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo);
 	void aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid);
+	void cambioArma(int cambio, RakNet::RakNetGUID guid);
 
 	//Como si fuera el delete
 	void apagar();

@@ -121,13 +121,10 @@ void Enemy::handleMessage(const Message & message)
 		printf("le has dado a un enemigo\n");
 		Cliente::i().enviarDisparo(m_guid);
 	}
-	if (message.mensaje == "LAZARGRANADA") {
+	else if (message.mensaje == "LAZARGRANADA") {
 
 		TGranada* tGranada = static_cast<TGranada*>(message.data);
 
-		printf("ENEMIGO LANZA GRANADA\n");
-		printf("ENEMIGO LANZA GRANADA\n");
-		printf("ENEMIGO LANZA GRANADA\n");
 
 		granada->serverShoot(*tGranada);
 	} else if (message.mensaje == "MOVIMIENTO") {
@@ -137,6 +134,14 @@ void Enemy::handleMessage(const Message & message)
 		encolaMovimiento(*tPlayer);
 
 		delete tPlayer;
+
+	}
+	else if (message.mensaje == "ARMAUP") {
+		//TODO poner el codigo de cambiar el modelo del arma hacia arriba
+
+	}
+	else if (message.mensaje == "ARMADOWN") {
+		//TODO poner el codigo de cambiar el modelo del arma hacia abajo
 
 	}
 }

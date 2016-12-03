@@ -47,6 +47,12 @@ typedef struct {
 	RakNet::RakNetGUID guid;
 }TImpulso;
 
+typedef struct {
+	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
+	int cambio;
+	RakNet::RakNetGUID guid;
+}TCambioArma;
+
 
 enum GameMessages
 {
@@ -72,5 +78,6 @@ enum GameMessages
 	IMPACTO_ROCKET = ID_USER_PACKET_ENUM + 20,
 	NUEVA_ARMA = ID_USER_PACKET_ENUM + 21,
 	ARMA_COGIDA = ID_USER_PACKET_ENUM + 22,
-	APLICAR_IMPULSO = ID_USER_PACKET_ENUM + 23
+	APLICAR_IMPULSO = ID_USER_PACKET_ENUM + 23,
+	CAMBIO_ARMA = ID_USER_PACKET_ENUM + 24
 };
