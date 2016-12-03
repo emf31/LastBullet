@@ -403,3 +403,23 @@ void EntityManager::enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *pe
 
 
 }
+
+void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != cambio.guid) {
+
+			//enviamos el guid del cliente que tiene que borrar
+			bsOut.Write((RakNet::MessageID)CAMBIO_ARMA);
+			bsOut.Write(cambio);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		}
+
+	}
+
+}

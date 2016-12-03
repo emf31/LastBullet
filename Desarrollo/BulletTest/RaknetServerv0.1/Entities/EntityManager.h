@@ -34,6 +34,7 @@ public:
 	void ArmaCogida(int idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
+	void enviaCambioArma(TCambioArma &cambio, RakNet::RakPeerInterface *peer);
 
 
 	//Inicializa todas las entities

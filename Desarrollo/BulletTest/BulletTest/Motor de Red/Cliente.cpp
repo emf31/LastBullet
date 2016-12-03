@@ -30,6 +30,7 @@ void Cliente::update() {
 	TBala balaDisparada;
 	TGranada granada;
 	TVidaServer vidaServer;
+	TCambioArma cambioArma;
 	RakNet::RakNetGUID desconectado;
 	int idVida;
 	float danyo = 0.0f;
@@ -312,6 +313,27 @@ void Cliente::update() {
 
 				Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "LAZARGRANADA", static_cast<void*>(&granada));
 				MessageHandler::i().sendMessage(msg1);
+
+
+			}
+			break;
+
+			case CAMBIO_ARMA:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(cambioArma);
+				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+				if (cambioArma.cambio == 1) {
+					Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "ARMAUP", static_cast<void*>(&granada));
+					MessageHandler::i().sendMessage(msg1);
+				}else {
+					Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "ARMADOWN", static_cast<void*>(&granada));
+					MessageHandler::i().sendMessage(msg1);
+				}
+
 
 
 			}
@@ -633,6 +655,18 @@ void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
 	impulso.guid = guid;
 	bsOut.Write((RakNet::MessageID)APLICAR_IMPULSO);
 	bsOut.Write(impulso);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+}
+
+void Cliente::cambioArma(int cambio, RakNet::RakNetGUID guid)
+{
+	RakNet::BitStream bsOut;
+	TCambioArma swap;
+	swap.cambio = cambio;
+	swap.guid = guid;
+	bsOut.Write((RakNet::MessageID)CAMBIO_ARMA);
+	bsOut.Write(swap);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

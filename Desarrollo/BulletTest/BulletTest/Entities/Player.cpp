@@ -403,6 +403,10 @@ void Player::UpWeapon()
 	listaWeapons->Siguiente();
 	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->valorActual()->getNode()->setVisible(true);
+	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
+	if (Cliente::i().isConected()) {
+		Cliente::i().cambioArma(1,m_guid);
+	}
 }
 
 void Player::DownWeapon()
@@ -412,6 +416,11 @@ void Player::DownWeapon()
 	listaWeapons->Anterior();
 	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
+	if (Cliente::i().isConected()) {
+		Cliente::i().cambioArma(2, m_guid);
+	}
 }
 
 void Player::impulsar(Vec3<float> force)
