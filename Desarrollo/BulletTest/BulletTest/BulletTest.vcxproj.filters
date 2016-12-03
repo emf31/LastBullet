@@ -249,6 +249,9 @@
     <ClInclude Include="States\StateStack.hpp">
       <Filter>Archivos de encabezado\States</Filter>
     </ClInclude>
+    <ClInclude Include="Motor\MapLoader.h">
+      <Filter>Archivos de encabezado\Motor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -373,6 +376,9 @@
     </ClCompile>
     <ClCompile Include="States\StateStack.cpp">
       <Filter>Archivos de código fuente\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\MapLoader.cpp">
+      <Filter>Archivos de código fuente\Motor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

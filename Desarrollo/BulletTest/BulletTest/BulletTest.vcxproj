@@ -194,6 +194,7 @@
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
+    <ClInclude Include="Motor\MapLoader.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="Motor\Animation.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
+    <ClCompile Include="Motor\MapLoader.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />

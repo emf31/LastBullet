@@ -14,6 +14,7 @@
 #include "Motor\SceneNode.h"
 #include "Handlers\MessageHandler.h"
 #include "States\StateStack.hpp"
+#include "Motor\MapLoader.h"
 
 
 #include <RakPeerInterface.h>
@@ -134,6 +135,10 @@ void Game::inicializar()
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 	EntityManager::i().inicializarEntityManager();
+
+	MapLoader *map = new MapLoader();
+	map->readMap("..\rust_export.txt");
+
 
 	///////////////////////////////////////////////////////////////
 	std::shared_ptr<BasicSceneNode> suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
