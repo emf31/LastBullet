@@ -140,7 +140,7 @@ void Game::inicializar()
 	map->readMap("..\rust_export.txt");
 
 
-	///////////////////////////////////////////////////////////////
+	/*///////////////////////////////////////////////////////////////
 	std::shared_ptr<BasicSceneNode> suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
 
 	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "suelo");
@@ -215,7 +215,7 @@ void Game::inicializar()
 	sueloEnt7->setCollisionGroup(col::Collisions::Static);
 	sueloEnt7->setCollisionMask(col::staticCollidesWith);
 	sueloEnt7->getRigidBody()->setFriction(0.7f);
-	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////*/
 	////////         Creamos 2 paquete de vida        //////////////////
 
 	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
@@ -289,6 +289,7 @@ void Game::inicializar()
 		player = new Player("Pepi");
 		player->inicializar();
 		player->cargarContenido();
+
 	}
 	else {
 		EntityManager::i().inicializar();
@@ -361,4 +362,5 @@ void Game::render(float interpolation, Time elapsedTime)
 	GraphicEngine::i().renderAll();
 
 }
+
 

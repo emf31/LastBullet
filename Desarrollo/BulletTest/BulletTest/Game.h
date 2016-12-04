@@ -26,7 +26,7 @@ public:
 	bool processEvents(); // Captura y procesa eventos
 	void update(Time elapsedTime);
 	void render(float interpolation, Time elapsedTime);
-
+	
 
 private:
 	static const Time timePerFrame;
