@@ -20,7 +20,7 @@ void MapLoader::readMap(const std::string & name)
 				//std::cout << "Entro?" << '\n';
 				cont++;
 				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
-				Vec3<float> rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
+				Vec3<float> rot = Vec3<float>(obj["rotZ"], obj["rotY"], obj["rotX"]);
 				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 				float mass = obj["masa"];
 				std::string s = std::to_string(cont);
@@ -41,7 +41,7 @@ void MapLoader::readMap(const std::string & name)
 void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, const io::path & mesh, std::string &name, float mass)
 {
 
-	std::shared_ptr<BasicSceneNode> sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "");
+	std::shared_ptr<BasicSceneNode> sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "../media/cubo.obj");
 	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
 	physicent->setRigidBody(PhysicsEngine::i().createBoxRigidBody(physicent, escala, 0));
 	physicent->setPosition(posicion);

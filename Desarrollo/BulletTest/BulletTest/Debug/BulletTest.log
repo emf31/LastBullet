@@ -1,7 +1,4 @@
-﻿  MapLoader.cpp
-  PhysicsEntity.cpp
-  Generando código...
-StateStack.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'StateStack.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+﻿StateStack.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'StateStack.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 StateFactory.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'StateFactory.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 State.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'State.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 ClockImpl.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'ClockImpl.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
