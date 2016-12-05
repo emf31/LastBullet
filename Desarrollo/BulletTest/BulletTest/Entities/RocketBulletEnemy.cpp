@@ -56,7 +56,7 @@ void RocketBulletEnemy::cargarContenido()
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1,false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::RocketEnemy;
 	proxy->m_collisionFilterMask = col::rocketenemyCollidesWith;

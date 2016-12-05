@@ -114,19 +114,30 @@ void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
 
 }
 
-btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
+btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, int body_state)
 {
 	btTransform transform;
 	transform.setIdentity();
 	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
-	transform.setOrigin(pos);
+	std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
+	transform.setOrigin((pos));
 
 	//create the motionState of the object
 	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
 
 	//create the bounding volume
-	btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
-	btCollisionShape* shape = new btBoxShape(halfExtents);
+	btCollisionShape* shape;
+	if (!haveMesh) {
+		btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
+		 shape = new btBoxShape(halfExtents);
+	}	
+	else {
+		btVector3 halfExtents(scale.getX(), scale.getY(), scale.getZ());
+		 shape = new btBoxShape(halfExtents);
+	}
+		
+
+	
 
 	//create intertia info for the shape
 	btVector3 localinertia;
