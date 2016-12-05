@@ -131,8 +131,10 @@ void Player::update(Time elapsedTime)
 	}
 
 	//Una vez termine la nimacion de muerte, volvemos a movernos
-	if (relojMuerte.getElapsedTime().asSeconds() > 3) {
+	if (relojMuerte.getElapsedTime().asSeconds() > 3 && isDying) {
 		isDying = false;
+		//TODO la posicion de respawn será un array de posiciones que se leen del mapa
+		setPosition(Vec3<float>(0,10,0));
 	}
 
 }

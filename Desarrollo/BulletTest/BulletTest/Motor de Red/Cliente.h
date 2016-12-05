@@ -23,40 +23,9 @@ public:
 
 	void update();
 
-	void createPlayer() {
-		RakNet::BitStream bsOut;
-		std::string str;
-		TPlayer nuevoplayer;
-
-		
-		//Al conectarnos le enviamos nuestro objeto Player tal cual
-		bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
-
-		printf("Introduce un nombre \n");
-		std::cin >> str;
-
-
-		Player *player = new Player(str, peer->GetMyGUID());
-		player->inicializar();
-		player->cargarContenido();
-
-
-		nuevoplayer.guid = player->getGuid();
-		nuevoplayer.name = player->getName();
-		//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-		nuevoplayer.position = Vec3<float>(0, 100, 0);
-		player->setPosition(nuevoplayer.position);
-
-
-
-		bsOut.Write(nuevoplayer);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-		bsOut.Reset();
-
-	}
+	void createPlayer();
 	void inicializar();
 	void conectar(std::string address, int port);
-	void esperar();
 	void enviarMovimiento(Player* p); 
 	void vidaCogida(int id);
 	void nuevaVida(int id);
@@ -85,14 +54,9 @@ private:
 
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
-	std::thread* hilo;
-
-	std::mutex m;
-	
 	Cliente();
 
-	std::atomic<bool> conectado;
-	std::atomic<bool> shutdown;
+	bool conectado;
 
 
 	RakNet::BitStream bsOut;

@@ -88,9 +88,8 @@ void Enemy::borrarContenido()
 	delete animation;
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
-	//delete m_rigidBody;
-
-	//GraphicEngine::i().removeNode(m_nodo);
+	delete m_rigidBody;
+	GraphicEngine::i().removeNode(m_nodo);
 }
 
 //Teletransporta un enemigo a la posicion que le pasas
@@ -117,23 +116,6 @@ void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
 		Cliente::i().enviarDisparo(m_guid);
-	}
-	if (message.mensaje == "LAZARGRANADA") {
-
-		TGranada* tGranada = static_cast<TGranada*>(message.data);
-
-		granada->serverShoot(*tGranada);
-
-		//delete tGranada;
-
-	} else if (message.mensaje == "MOVIMIENTO") {
-
-		TPlayer* tPlayer = static_cast<TPlayer*>(message.data);
-
-		encolaMovimiento(*tPlayer);
-
-		//delete tPlayer;
-
 	}
 }
 
@@ -212,13 +194,8 @@ void Enemy::updateAnimation()
 
 void Enemy::updateState()
 {
-	/*if (!p_controller->onGround() && p_controller->numJumps == 0) {
-		m_playerState = saltando;
-	}
-	else if (!p_controller->onGround() && p_controller->numJumps == 1) {
-		m_playerState = saltando2;
-	}
-	else*/ if (isMoving) {
+
+	if (isMoving) {
 		m_animState = andando;
 	}
 	else {

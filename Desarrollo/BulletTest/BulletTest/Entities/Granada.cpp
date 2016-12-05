@@ -17,7 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(120.f, 120.f, 120.f);
+	fuerza = Vec3<float>(135.f, 135.f, 135.f);
 }
 
 void Granada::update(Time elapsedTime)
@@ -194,9 +194,6 @@ void Granada::serverShoot(TGranada g) {
 
 		setPosition(g.origen);
 
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 		btVector3 direccion2(g.direction.getX(), g.direction.getY(), g.direction.getZ());

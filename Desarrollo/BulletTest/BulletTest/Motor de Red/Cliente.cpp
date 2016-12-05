@@ -198,15 +198,7 @@ void Cliente::update() {
 
 				//NUEVO
 				if (e != NULL) {
-					TPlayer *p = new TPlayer();
-					p->position = nuevoplayer.position;
-					p->guid = nuevoplayer.guid;
-					p->name = nuevoplayer.name;
-					p->rotation = nuevoplayer.rotation;
-					p->velocidad = nuevoplayer.velocidad;
-
-					Message msg(e, "MOVIMIENTO", static_cast<void*>(p));
-					MessageHandler::i().sendMessage(msg);
+					e->encolaMovimiento(nuevoplayer);
 				}
 				
 
@@ -278,10 +270,8 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(granada);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
-
-				Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "LAZARGRANADA", static_cast<void*>(&granada));
-				MessageHandler::i().sendMessage(msg1);
+				
+				static_cast<Granada*>(EntityManager::i().getRaknetEntity(granada.guid))->serverShoot(granada);
 
 
 			}
@@ -292,8 +282,6 @@ void Cliente::update() {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-				std::cout << "Me han disparado" << std::endl;
 
 				//TODO:ahora mismo no hace falta leer, aqui te pasan el arma con la cual disparaste.
 				//bsIn.Read(desconectado);
@@ -347,10 +335,10 @@ void Cliente::update() {
 				
 				std::cout << "el player " << nuevoplayer.name << " ha muerto" << std::endl;
 
-				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID()==PLAYER) {
+				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
 					//es el player
 					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-					player->setPosition(nuevoplayer.position);		
+					//player->setPosition(nuevoplayer.position);		
 					player->resetAll();
 					player = nullptr;
 
@@ -404,7 +392,6 @@ void Cliente::update() {
 
 void Cliente::inicializar() {
 	conectado = false;
-	shutdown = false;
 
 
 	peer = RakNet::RakPeerInterface::GetInstance();
@@ -421,13 +408,38 @@ void Cliente::conectar(std::string address, int port) {
 	peer->Startup(1, &sd, 1);
 	peer->Connect(address.c_str(), SERVER_PORT, 0, 0);
 
-
-	//hilo = new std::thread(&Cliente::update, this);
-	//update();
 }
 
-void Cliente::esperar() {
-	hilo->join();
+void Cliente::createPlayer() {
+	RakNet::BitStream bsOut;
+	std::string str;
+	TPlayer nuevoplayer;
+
+
+	//Al conectarnos le enviamos nuestro objeto Player tal cual
+	bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
+
+	printf("Introduce un nombre \n");
+	std::cin >> str;
+
+
+	Player *player = new Player(str, peer->GetMyGUID());
+	player->inicializar();
+	player->cargarContenido();
+
+
+	nuevoplayer.guid = player->getGuid();
+	nuevoplayer.name = player->getName();
+	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
+	nuevoplayer.position = Vec3<float>(0, 100, 0);
+	player->setPosition(nuevoplayer.position);
+
+
+
+	bsOut.Write(nuevoplayer);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+
 }
 
 void Cliente::enviarMovimiento(Player* p) {
@@ -633,16 +645,7 @@ void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
 void Cliente::apagar() {
 	
 	conectado = false;
-	shutdown = true;
 
-	//esperar();
-	
-	
-
-	
-	//delete hilo;
-	//hilo->detach();
-//	delete hilo;
-	
+	RakNet::RakPeerInterface::DestroyInstance(peer);
 
 }

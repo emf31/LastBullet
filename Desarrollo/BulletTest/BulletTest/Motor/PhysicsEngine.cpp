@@ -75,7 +75,7 @@ void PhysicsEngine::inicializar()
 void PhysicsEngine::update(Time elapsedTime)
 {
 	//Como la simulacion va lenta multiplicamos por 2
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 20, tickPhysics.asSeconds());
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
 	
 
 	
@@ -294,7 +294,6 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 {
 
-	//m_rigidBodies.remove(body);
 	m_world->removeCollisionObject(body);
 
 	return true;
@@ -318,8 +317,8 @@ void PhysicsEngine::apagar()
 	m_rigidBodies.clear();
 
 	//Si ha quedado algun objeto tambien lo borramos(ghost objects o cualquier cosa)
-	int i;
-	for (i = m_world->getNumCollisionObjects() - 1; i >= 0; i--)
+	
+	for (int i = m_world->getNumCollisionObjects() - 1; i >= 0; i--)
 	{
 		btCollisionObject* obj = m_world->getCollisionObjectArray()[i];
 		
@@ -328,10 +327,6 @@ void PhysicsEngine::apagar()
 		m_world->removeCollisionObject(obj);
 		delete obj;
 	}
-	
-
-	int a = m_world->getNumCollisionObjects();
-
 
 
 	//borramos todas las collisionshapes

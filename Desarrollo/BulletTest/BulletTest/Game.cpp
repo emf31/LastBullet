@@ -66,7 +66,7 @@ void Game::run()
 		//if (GraphicEngine::i().isWindowActive()) {
 		//if (Cliente::i().isConected() ) {
 
-		///Las fisicas se ejecutan 80 veces por segundo
+		///Las fisicas se ejecutan 60 veces por segundo
 
 		time_physics_curr = clock.getElapsedTime();
 
@@ -115,11 +115,9 @@ void Game::run()
 		//}
 		
 	}
-
-	//Cliente::i().esperar();
-	//GraphicEngine::i().apagar();
-	GraphicEngine::i().apagar();
+	
 	EntityManager::i().apagar();
+	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
 	
 	
