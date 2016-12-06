@@ -1,11 +1,37 @@
-﻿  main.cpp
-  Cliente.cpp
+﻿  StateStack.cpp
+  StateFactory.cpp
+  State.cpp
+  ClockImpl.cpp
+  Util.cpp
+  Time.cpp
   Lista.cpp
+  Clock.cpp
+  SceneNode.cpp
+  BasicSceneNode.cpp
+  RenderState.cpp
+  PhysicsEngine.cpp
+  MapLoader.cpp
+  GraphicEngine.cpp
+  Camera.cpp
+  Animation.cpp
+  AnimatedSceneNode.cpp
+  Cliente.cpp
+  main.cpp
+  Game.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(230): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(237): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(245): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(253): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(261): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+  Generando código...
+  Compilando...
+  MastEventReceiver.cpp
   MessageHandler.cpp
   InputHandler.cpp
   Weapon.cpp
   RocketLauncher.cpp
   Pistola.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(60): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
   Asalto.cpp
   WeaponDrop.cpp
   RocketLauncherDrop.cpp
@@ -13,40 +39,19 @@
   AsaltoDrop.cpp
   RocketBulletEnemy.cpp
   RocketBullet.cpp
+  Player.cpp
+  PhysicsEntity.cpp
   LifeObject.cpp
-  Granada.cpp
+  KinematicCharacterController.cpp
+  EntityManager.cpp
   Entity.cpp
   Enemy.cpp
   Generando código...
   Compilando...
-  PhysicsEngine.cpp
-  MapLoader.cpp
-  GraphicEngine.cpp
-  Game.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(222): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(229): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(237): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(245): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(253): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-  Player.cpp
-  PhysicsEntity.cpp
+  GunBullet.cpp
+  Granada.cpp
   Generando código...
-StateStack.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'StateStack.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-StateFactory.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'StateFactory.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-State.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'State.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-ClockImpl.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'ClockImpl.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Util.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'Util.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Time.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'Time.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Clock.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'Clock.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SceneNode.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'SceneNode.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-BasicSceneNode.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'BasicSceneNode.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RenderState.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'RenderState.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Camera.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'Camera.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Animation.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'Animation.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-AnimatedSceneNode.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'AnimatedSceneNode.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-MastEventReceiver.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'MastEventReceiver.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-KinematicCharacterController.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'KinematicCharacterController.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-GunBullet.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'GunBullet.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  LINK : no se encontró C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

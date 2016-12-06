@@ -2,6 +2,10 @@
 
 #include "Animation.h"
 
+Animation::~Animation()
+{
+}
+
 void Animation::addAnimation(std::string name, int start, int end)
 {
 	if (name!="") {

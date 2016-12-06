@@ -22,17 +22,17 @@ public:
 	Weapon();
 	~Weapon();
 
-	virtual void inicializar() override ;
+	virtual void inicializar() = 0;
 
-	virtual void update(Time elapsedTime) override;
+	virtual void update(Time elapsedTime) = 0;
 
-	virtual void handleInput() override;
+	virtual void handleInput() = 0;
 
-	virtual void cargarContenido() override;
+	virtual void cargarContenido() = 0;
 
-	virtual void borrarContenido() override;
+	virtual void borrarContenido() = 0;
 
-	virtual void handleMessage(const Message& message) override;
+	virtual void handleMessage(const Message& message) = 0;
 
 	virtual std::string getClassName() { return "Weapon"; }
 
@@ -44,7 +44,7 @@ public:
 	virtual int getCargadorWeapon() { return capacidadAmmo; }
 	virtual int getAmmoTotal() { return numCargadores; }
 
-	virtual void resetAmmoTotal()=0;
+	virtual void resetAmmoTotal() = 0;
 
 	virtual void setEquipada(bool nuevoEquipada) { equipada = nuevoEquipada; }
 	virtual void resetRecarga() { relojrecarga.restart(); }
@@ -56,6 +56,8 @@ protected:
 	int capacidadAmmo;
 	int numCargadores;
 	int disparos;
+
+	float damage;
 
 	Time recarga;
 	Clock relojrecarga;

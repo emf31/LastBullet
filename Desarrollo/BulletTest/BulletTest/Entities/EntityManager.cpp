@@ -72,6 +72,8 @@ void EntityManager::apagar()
 	//vaciamos el contenido del mapa
 	m_entities.clear();
 
+	m_jugadores.clear();
+
 }
 
 void EntityManager::registerEntity(Entity * entity)
@@ -113,20 +115,22 @@ void EntityManager::removeEntity(Entity * entity)
 		m_entities.erase(found);
 	}
 
+	auto found_raknet = m_jugadores.find(RakNet::RakNetGUID::ToUint32(entity->getGuid()));
+	//Si es diferente de m_entities.end() es que lo ha encontrado
+	if (found_raknet != m_jugadores.end()) {
+		m_jugadores.erase(found_raknet);
+	}
+
 	delete_set.insert(entity);
 
 }
 
-void EntityManager::removeRaknetEntity(Entity * entity)
+/*void EntityManager::removeRaknetEntity(Entity * entity)
 {
-	auto found = m_jugadores.find(RakNet::RakNetGUID::ToUint32( entity->getGuid()));
-	//Si es diferente de m_entities.end() es que lo ha encontrado
-	if (found != m_jugadores.end()) {
-		m_jugadores.erase(found);
-	}
+	
 
 	removeEntity(entity);
-}
+}*/
 
 void EntityManager::cleanDeleteQueue()
 {

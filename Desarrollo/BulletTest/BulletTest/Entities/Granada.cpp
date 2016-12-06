@@ -17,7 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(120.f, 120.f, 120.f);
+	fuerza = Vec3<float>(135.f, 135.f, 135.f);
 }
 
 void Granada::update(Time elapsedTime)
@@ -57,7 +57,7 @@ void Granada::cargarContenido()
 {
 
 	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/WPN_MK2Grenade.obj"));
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/WPN_MK2Grenade.obj");
 
 
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
@@ -122,13 +122,13 @@ void Granada::handleMessage(const Message & message)
 	}
 }
 
-void Granada::setPosition(Vec3<float> pos) {
+void Granada::setPosition(const Vec3<float>& pos) {
 
 	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo.get()->setPosition(pos);
+	m_nodo->setPosition(pos);
 
 }
 
@@ -136,17 +136,16 @@ void Granada::setPosition(Vec3<float> pos) {
 void Granada::shoot(const btVector3& posicionPlayer) {
 
 	if (estado== GRANADACARGADA) {
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
 
 		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
-		/*btTransform transhobbitform = m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));*/
-
-
-		//getRenderState()->updatePositions(posicion);
 
 		setPosition(posicion);
 
-		printf("GRANADA DISPARADO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 
@@ -158,11 +157,6 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
 		btVector3 force = direccion2 * FUERZA;
-
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
 		m_rigidBody->applyCentralImpulse(force);
 		
@@ -188,29 +182,23 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 }
 
-void Granada::serverShoot(TGranada g) {
+void Granada::serverShoot(TGranada& g) {
 
 	if (estado == GRANADACARGADA) {
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
 		setPosition(g.origen);
 
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 		btVector3 direccion2(g.direction.getX(), g.direction.getY(), g.direction.getZ());
 
 		btVector3 force = direccion2 * FUERZA;
 
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-		proxy->m_collisionFilterMask = col::rocketCollidesWith;
-
-
 		m_rigidBody->applyCentralImpulse(force);
-		//rocket->m_rigidBody->setCollisionFlags(4);
 
 		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
@@ -227,7 +215,7 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
 		
-		std::cout << "Soy: " << m_name << "Te ha dado la explosion" << std::endl;
+		
 		if (distancia < radio / 3) {
 			vidaRestada = 100;
 		}
@@ -237,10 +225,7 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 
 		}
 	}
-	else {
-		std::cout << "Soy: " << m_name << "NO te ha dado la explosion" << std::endl;
-
-	}
+	
 
 	return float(vidaRestada);
 

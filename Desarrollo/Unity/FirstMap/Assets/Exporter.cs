@@ -43,24 +43,24 @@ public class Exporter : MonoBehaviour {
 					if (rb = g.GetComponent<Rigidbody>()){
 						objeto.masa = rb.mass;
 						BoxCollider col = g.GetComponent<BoxCollider>();
-                        objeto.colliderX = col.center.x;
-                        objeto.colliderY = col.center.y;
-                        objeto.colliderZ = col.center.z;
+						objeto.colliderX = col.center.x;
+						objeto.colliderY = col.center.y;
+						objeto.colliderZ = col.center.z;
 
-                        objeto.colliderSizeX = col.size.x;
-                        objeto.colliderSizeY = col.size.y;
-                        objeto.colliderSizeZ = col.size.z;
-                        }
+						objeto.colliderSizeX = col.size.x;
+						objeto.colliderSizeY = col.size.y;
+						objeto.colliderSizeZ = col.size.z;
+						}
 						else {
 						objeto.masa = 0;
-                        objeto.colliderX = objeto.posX;
-                        objeto.colliderY = objeto.posY;
-                        objeto.colliderZ = objeto.posZ;
+						objeto.colliderX = objeto.posX;
+						objeto.colliderY = objeto.posY;
+						objeto.colliderZ = objeto.posZ;
 
-                        objeto.colliderSizeX = objeto.sizeX;
-                        objeto.colliderSizeY = objeto.sizeY;
-                        objeto.colliderSizeZ = objeto.sizeZ;
-                        }
+						objeto.colliderSizeX = objeto.sizeX;
+						objeto.colliderSizeY = objeto.sizeY;
+						objeto.colliderSizeZ = objeto.sizeZ;
+						}
 					   // g.scene.path.ToString();
 
 					if (g.name.Equals("terminal"))
@@ -96,9 +96,9 @@ public class Objeto {
 	public float masa;
 
 	public float colliderX, colliderY, colliderZ;
-    public float colliderSizeX, colliderSizeY, colliderSizeZ;
+	public float colliderSizeX, colliderSizeY, colliderSizeZ;
 
-    public bool hasChild;
+	public bool hasChild;
 
 	public Objeto() {
 

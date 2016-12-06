@@ -19,7 +19,7 @@ public:
 
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
 
-	void setPosition(Vec3<float> pos);
+	void setPosition(const Vec3<float>& pos);
 	int getEstado() { return estado;}
 	void setEstado(int newEstado) { estado = newEstado; }
 	// Heredado vía Entity
@@ -38,7 +38,7 @@ public:
 	virtual std::string getClassName() { return "Granada"; }
 
 	void shoot(const btVector3& posicionPlayer);
-	void serverShoot(TGranada g);
+	void serverShoot(TGranada& g);
 
 	float explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio);
 

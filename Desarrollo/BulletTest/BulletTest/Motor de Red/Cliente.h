@@ -5,6 +5,7 @@
 #include <BitStream.h>
 #include <RakNetTypes.h>
 #include <thread> 
+#include <atomic>
 #include <mutex>
 #include "../Otros/Time.hpp"
 #include "../Entities/Player.h"
@@ -22,10 +23,10 @@ public:
 
 	void update();
 
+	void createPlayer();
 	void inicializar();
 	void conectar(std::string address, int port);
-	void esperar();
-	void enviarPos(Player* p); 
+	void enviarMovimiento(Player* p); 
 	void vidaCogida(int id);
 	void nuevaVida(int id);
 	void armaCogida(int id);
@@ -45,9 +46,7 @@ public:
 
 
 	bool isConected() {
-		//m.lock();
 		return conectado;
-		//m.unlock();
 	}
 
 private:
@@ -56,13 +55,21 @@ private:
 
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
-	std::thread* hilo;
-
-	std::mutex m;
-	
 	Cliente();
 
 	bool conectado;
 
+
+	RakNet::BitStream bsOut;
+	std::string str;
+	TPlayer nuevoplayer;
+	TBala balaDisparada;
+	TGranada granada;
+	TCambioArma t_cambioArma;
+	TVidaServer vidaServer;
+	RakNet::RakNetGUID desconectado;
+	int idVida;
+	float danyo = 0.0f;
+	Vec3<float> fuerza;
 };
 
