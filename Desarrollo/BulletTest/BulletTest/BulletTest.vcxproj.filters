@@ -144,9 +144,6 @@
     <ClInclude Include="Command\MoveUp.h">
       <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Command\ShootCommand.h">
-      <Filter>Archivos de encabezado\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\RenderState.h">
       <Filter>Archivos de encabezado\Motor</Filter>
     </ClInclude>
@@ -251,6 +248,15 @@
     </ClInclude>
     <ClInclude Include="Otros\Nodo.h">
       <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootAsalto.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootRocket.h">
+      <Filter>Archivos de encabezado\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootPistola.h">
+      <Filter>Archivos de encabezado\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,5 +383,8 @@
     <ClCompile Include="Otros\Lista.cpp">
       <Filter>Archivos de código fuente\Otros</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

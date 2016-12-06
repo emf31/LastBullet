@@ -18,6 +18,9 @@
 #include "Weapons/RocketLauncher.h"
 #include <memory>
 #include "Enemy.h"
+#include "../Command/ShootAsalto.h"
+#include "../Command/ShootRocket.h"
+#include "../Command/ShootPistola.h"
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid)
 {
@@ -155,21 +158,7 @@ void Player::cargarContenido()
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
-	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
 
-	/*animation->addAnimation("Default", 0, 0);
-	animation->addAnimation("Run_Forwards", 1, 69);
-	animation->addAnimation("Run_backwards", 70, 138);
-	animation->addAnimation("Walk", 139, 183);
-	animation->addAnimation("Jump", 184, 219);
-	animation->addAnimation("Jump2", 184, 219);
-	animation->addAnimation("Idle", 220, 472);
-	animation->addAnimation("AimRunning", 473, 524);*/
-
-	//m_playerState = quieto;
-
-
-	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -193,13 +182,7 @@ void Player::cargarContenido()
 
 	p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
 	p_controller->setUp(btVector3(0, 1, 0));
-	//p_controller->setGravity(btVector3(0,-9.8*3,0));
-	//p_controller->setJumpSpeed(5);
-	//p_controller->setMaxSlope(btRadians(30.0));
-	//p_controller->setFallSpeed(200);
-	//p_controller->setMaxJumpHeight(20);
-	//p_controller->setLinearDamping(0.1);
-	//p_controller->setLinearDamping();
+
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
 		col::characterCollidesWith);
 
@@ -228,7 +211,7 @@ void Player::handleMessage(const Message & message)
 
 		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
 
-		//delete tBala;
+		delete tBala;
 
 	}
 	else if (message.mensaje == "DIBUJAR_ROCKET") {
@@ -236,7 +219,7 @@ void Player::handleMessage(const Message & message)
 
 		RocketBulletEnemy* balaRocket = new RocketBulletEnemy(tRocket->position, tRocket->direction, tRocket->rotation);
 		
-		//delete tRocket;
+		delete tRocket;
 
 	}
 	else if (message.mensaje == "NUEVO_ENEMIGO") {
@@ -341,6 +324,17 @@ void Player::UpWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Siguiente();
+
+	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootAsalto()));
+	}
+	else if(listaWeapons->valorActual()->getClassName() == "Pistola"){
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootPistola()));
+	}
+	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
+	}
+
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 }
 

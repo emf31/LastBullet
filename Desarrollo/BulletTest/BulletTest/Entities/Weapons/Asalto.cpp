@@ -92,6 +92,9 @@ void Asalto::shoot()
 				GraphicEngine::i().getActiveCamera()->getPosition().getY(),
 				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
 
+			//añadimos un poco de desvio en el arma
+			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
+
 			Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 			Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
 			direccion.normalise();

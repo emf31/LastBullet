@@ -122,7 +122,7 @@ void Granada::handleMessage(const Message & message)
 	}
 }
 
-void Granada::setPosition(const Vec3<float> pos) {
+void Granada::setPosition(const Vec3<float>& pos) {
 
 	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
@@ -136,17 +136,16 @@ void Granada::setPosition(const Vec3<float> pos) {
 void Granada::shoot(const btVector3& posicionPlayer) {
 
 	if (estado== GRANADACARGADA) {
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
 
 		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
-		/*btTransform transhobbitform = m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));*/
-
-
-		//getRenderState()->updatePositions(posicion);
 
 		setPosition(posicion);
 
-		printf("GRANADA DISPARADO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 
@@ -158,11 +157,6 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
 		btVector3 force = direccion2 * FUERZA;
-
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
 		m_rigidBody->applyCentralImpulse(force);
 		
@@ -188,9 +182,13 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 }
 
-void Granada::serverShoot(TGranada g) {
+void Granada::serverShoot(TGranada& g) {
 
 	if (estado == GRANADACARGADA) {
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
 		setPosition(g.origen);
 
@@ -200,14 +198,7 @@ void Granada::serverShoot(TGranada g) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-		proxy->m_collisionFilterMask = col::rocketCollidesWith;
-
-
 		m_rigidBody->applyCentralImpulse(force);
-		//rocket->m_rigidBody->setCollisionFlags(4);
 
 		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
@@ -224,7 +215,7 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
 		
-		std::cout << "Soy: " << m_name << "Te ha dado la explosion" << std::endl;
+		
 		if (distancia < radio / 3) {
 			vidaRestada = 100;
 		}
@@ -234,10 +225,7 @@ float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, flo
 
 		}
 	}
-	else {
-		std::cout << "Soy: " << m_name << "NO te ha dado la explosion" << std::endl;
-
-	}
+	
 
 	return vidaRestada;
 

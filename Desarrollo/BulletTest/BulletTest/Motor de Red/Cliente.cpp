@@ -273,7 +273,8 @@ void Cliente::update() {
 
 				bsIn.Read(g);
 				
-				static_cast<Granada*>(EntityManager::i().getRaknetEntity(g.guid))->serverShoot(g);
+				Granada* ent = static_cast<Granada*>(EntityManager::i().getRaknetEntity(g.guid));
+				ent->serverShoot(g);
 
 
 			}
@@ -368,28 +369,7 @@ void Cliente::update() {
 			}
 		}
 
-	//}
 
-	//Borrar todas las cosas de raknet
-	// Shutdown stuff.  It's ok to call disconnect on the server if we are a client and vice-versa
-	//peer->Shutdown(300);
-	//delete peer;
-	/*delete packet;*/
-
-	//RakNet::RakPeerInterface::DestroyInstance(peer);
-
-	//hilo->detach();
-	//delete hilo;
-
-	//peer->Shutdown(500);
-
-	//RakNet::RakPeerInterface::DestroyInstance(peer);
-
-	//packet = nullptr;
-
-	
-	//hilo->detach();
-	//shutdown = false;
 }
 
 void Cliente::inicializar() {

@@ -3,10 +3,13 @@
 
 #include <map>
 #include <vector>
+#include <memory>
 
 #include "input_constants.h"
 #include "../Entities/Player.h"
 #include "../Command/Command.h"
+
+typedef std::shared_ptr<Command> CommandPtr;
 
 class InputHandler
 {
@@ -20,30 +23,34 @@ public:
 	void excuteCommands(Player* p);
 	void borrarContenido();
 
-	bool generate_input_commands(std::vector<Command*> &command_queue);
-	void bind(EKEY_CODE key, Command *command);
+	bool generate_input_commands(std::vector<CommandPtr> &command_queue);
+	void bind(EKEY_CODE key, CommandPtr command);
+
+	
 
 private:
 	// Punteros a todos los comandos
-	Command *move_up;
-	Command *move_down;
-	Command *move_left;
-	Command *move_right;
-	Command *jump;
-	Command *shoot_command;
-	Command *shoot_commandGranada;
-	Command *run_command;
-	Command *list_up;
-	Command *list_down;
+	CommandPtr move_up;
+	CommandPtr move_down;
+	CommandPtr move_left;
+	CommandPtr move_right;
+	CommandPtr jump;
+	CommandPtr shoot_asalto;
+	CommandPtr shoot_rocket;
+	CommandPtr shoot_pistola;
+	CommandPtr shoot_commandGranada;
+	CommandPtr run_command;
+	CommandPtr list_up;
+	CommandPtr list_down;
 
-	std::map <EKEY_CODE, Command*> commands;
+	std::map <EKEY_CODE, CommandPtr> commands;
 
 
 	std::map <EKEY_CODE, State> state_map;
 	std::map <EKEY_CODE, Action> action_map;
 
 	bool input_mapping();
-	void fill_command_queue(std::vector<Command*> &command_queue);
+	void fill_command_queue(std::vector<CommandPtr> &command_queue);
 
 	void keydown(EKEY_CODE keyCode);
 	void keyup(EKEY_CODE keyCode);
@@ -51,7 +58,7 @@ private:
 	bool is_held(EKEY_CODE key);
 	bool was_pressed(EKEY_CODE key);
 
-	std::vector<Command*> command_queue;
+	std::vector<CommandPtr> command_queue;
 
 	InputHandler();
 

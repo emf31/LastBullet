@@ -6,7 +6,9 @@
 #include "../Command/ListWeaponUp.h"
 #include "../Command/ListWeaponDown.h"
 #include "../Command/Jump.h"
-#include "../Command/ShootCommand.h"
+#include "../Command/ShootAsalto.h"
+#include "../Command/ShootRocket.h"
+#include "../Command/ShootPistola.h"
 #include "../Command/ShootCommandGranada.h"
 #include "../Command/RunCommand.h"
 #include "../MastEventReceiver.hpp"
@@ -25,18 +27,20 @@ InputHandler::InputHandler()
 {
 
 	// Creamos punteros para todos los commands
-	move_up = new MoveUp();
-	move_down = new MoveDown();
-	move_left = new MoveLeft();
-	move_right = new MoveRight();
-	list_up = new ListWeaponUp();
-	list_down = new ListWeaponDown();
-	jump = new Jump();
-	shoot_command = new ShootCommand();
-	shoot_commandGranada = new ShootCommandGranada();
-	run_command = new RunCommand();
-	// Player
+	move_up = CommandPtr(new MoveUp());
+	move_down = CommandPtr(new MoveDown());
+	move_left = CommandPtr(new MoveLeft());
+	move_right = CommandPtr(new MoveRight());
+	list_up = CommandPtr(new ListWeaponUp());
+	list_down = CommandPtr(new ListWeaponDown());
+	jump = CommandPtr(new Jump());
+	shoot_asalto = CommandPtr(new ShootAsalto());
+	shoot_rocket = CommandPtr(new ShootRocket());
+	shoot_pistola = CommandPtr(new ShootPistola());
+	shoot_commandGranada = CommandPtr(new ShootCommandGranada());
+	run_command = CommandPtr(new RunCommand());
 	
+	// Player
 	commands[KEY_KEY_W] = move_up;
 	commands[KEY_KEY_A] = move_left;
 	commands[KEY_KEY_S] = move_down;
@@ -44,21 +48,21 @@ InputHandler::InputHandler()
 	commands[KEY_KEY_3] = list_up;
 	commands[KEY_KEY_4] = list_down;
 	commands[KEY_SPACE] = jump;
-	commands[KEY_LBUTTON] = shoot_command;
+	commands[KEY_LBUTTON] = shoot_pistola;
 	commands[KEY_RBUTTON] = shoot_commandGranada;
 	commands[KEY_LSHIFT] = run_command;
 	
 	
 }
 
-void InputHandler::bind(EKEY_CODE key, Command *command)
+void InputHandler::bind(EKEY_CODE key, CommandPtr command)
 {
 	commands[key] = command;    // guardamos las teclas asignadas
 }
 
 void InputHandler::handleInput()
 {
-	InputHandler::i().generate_input_commands(command_queue);
+	generate_input_commands(command_queue);
 }
 
 void InputHandler::excuteCommands(Player* p)
@@ -69,7 +73,7 @@ void InputHandler::excuteCommands(Player* p)
 	}
 }
 
-bool InputHandler::generate_input_commands(std::vector<Command*> &command_queue)
+bool InputHandler::generate_input_commands(std::vector<CommandPtr> &command_queue)
 {
 	bool exit = input_mapping();
 
@@ -83,7 +87,7 @@ bool InputHandler::generate_input_commands(std::vector<Command*> &command_queue)
 
 bool InputHandler::input_mapping()
 {
-	std::map<EKEY_CODE, Command*>::iterator iter;
+	std::map<EKEY_CODE, CommandPtr>::iterator iter;
 	for (iter = commands.begin(); iter != commands.end(); iter++) {
 		if (MastEventReceiver::i().keyDown(iter->first)) {
 			keydown(iter->first);
@@ -133,9 +137,9 @@ bool InputHandler::input_mapping()
 	return false;*/
 }
 
-void InputHandler::fill_command_queue(std::vector<Command*> &command_queue)
+void InputHandler::fill_command_queue(std::vector<CommandPtr> &command_queue)
 {
-	std::map<EKEY_CODE, Command*>::iterator iter;
+	std::map<EKEY_CODE, CommandPtr>::iterator iter;
 	for (iter = commands.begin(); iter != commands.end(); iter++) {
 		if (is_held(iter->first) && iter->second->get_input_type() == STATE)
 			command_queue.push_back(iter->second);
@@ -172,8 +176,5 @@ bool InputHandler::was_pressed(EKEY_CODE key)
 
 void InputHandler::borrarContenido()
 {
-	// Delete all command pointers    
-	std::map<EKEY_CODE, Command*>::iterator iter;
-	for (iter = commands.begin(); iter != commands.end(); iter++)
-		delete iter->second;
+
 }

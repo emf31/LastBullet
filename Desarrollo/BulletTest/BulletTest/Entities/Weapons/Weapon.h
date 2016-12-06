@@ -22,17 +22,17 @@ public:
 	Weapon();
 	~Weapon();
 
-	virtual void inicializar() override ;
+	virtual void inicializar() = 0;
 
-	virtual void update(Time elapsedTime) override;
+	virtual void update(Time elapsedTime) = 0;
 
-	virtual void handleInput() override;
+	virtual void handleInput() = 0;
 
-	virtual void cargarContenido() override;
+	virtual void cargarContenido() = 0;
 
-	virtual void borrarContenido() override;
+	virtual void borrarContenido() = 0;
 
-	virtual void handleMessage(const Message& message) override;
+	virtual void handleMessage(const Message& message) = 0;
 
 	virtual std::string getClassName() { return "Weapon"; }
 

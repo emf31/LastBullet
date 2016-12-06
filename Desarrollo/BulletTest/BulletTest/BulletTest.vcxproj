@@ -160,8 +160,10 @@
     <ClInclude Include="Command\MoveRight.h" />
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\RunCommand.h" />
-    <ClInclude Include="Command\ShootCommand.h" />
+    <ClInclude Include="Command\ShootAsalto.h" />
     <ClInclude Include="Command\ShootCommandGranada.h" />
+    <ClInclude Include="Command\ShootPistola.h" />
+    <ClInclude Include="Command\ShootRocket.h" />
     <ClInclude Include="Entities\Granada.h" />
     <ClInclude Include="Entities\GunBullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
@@ -252,6 +254,9 @@
     <ClCompile Include="States\State.cpp" />
     <ClCompile Include="States\StateFactory.cpp" />
     <ClCompile Include="States\StateStack.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

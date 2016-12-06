@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="btKinematicClosestNotMeRayResultCallback" Collapsed="true">
+    <Position X="37" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAAQAAAAA=</HashCode>
+      <FileName>Entities\KinematicCharacterController.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="btKinematicClosestNotMeConvexResultCallback" Collapsed="true">
+    <Position X="35.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAEAAAAAAAAAAAAAABAAAIAAAAAAQAAAAA=</HashCode>
+      <FileName>Entities\KinematicCharacterController.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="40.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAABAQiAAAABQAAAAAIUAAI=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MastEventReceiver" Collapsed="true">
+    <Position X="38.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VAAAAAAAAAIBKAAAAOSAKEAQAAAggAIIIEAFAAAQAAg=</HashCode>
+      <FileName>MastEventReceiver.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clock" Collapsed="true">
+    <Position X="33.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAgAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Otros\Clock.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lista" Collapsed="true">
+    <Position X="37" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAEQAAAAQgAAAgAAAAAAgEAAgABAIAAAAAAA=</HashCode>
+      <FileName>Otros\Lista.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nodo" Collapsed="true">
+    <Position X="1.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAACAACAAABAAAAABAAAAAEAA=</HashCode>
+      <FileName>Otros\Nodo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SafeQueue&lt;T&gt;" Collapsed="true">
+    <Position X="37" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAGAAAAAACAAiAACAAEQAA=</HashCode>
+      <FileName>Otros\SafeQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Time" Collapsed="true">
+    <Position X="35.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAIAAIAAAQAAEAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Otros\Time.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vec3&lt;T&gt;" Collapsed="true">
+    <Position X="37" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAOQAAAAAQXCQAAAAEAAgBQQABgAWEBAAI=</HashCode>
+      <FileName>Otros\vec3.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Granada" Collapsed="true">
+    <Position X="13" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACBIEQAAARAAAAAAAAIgiACAQBAAIioAAAAIEAAA=</HashCode>
+      <FileName>Entities\Granada.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GunBullet" Collapsed="true">
+    <Position X="17.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAQCAAQAAAgAAAAAAiAAIQEAQAAAAAAAMEAAA=</HashCode>
+      <FileName>Entities\GunBullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="19.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AogAAgIASAIAQAQAEAAABYAiEAAQAAAAAgAhAAIEAAg=</HashCode>
+      <FileName>Entities\Enemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entity" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EJAAAAAIQAAAYACAGAAAEBQhAGAQAJRgAAgEAAIEKAA=</HashCode>
+      <FileName>Entities\Entity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityManager" Collapsed="true">
+    <Position X="38.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gJABAABAQYAIAAAgABAIAAAAAQQQAQECMAAAQAIEAAI=</HashCode>
+      <FileName>Entities\EntityManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LifeObject" Collapsed="true">
+    <Position X="28.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAQAAAQAAAAAARAAAiAgAQAAAIACBAhAIECIA=</HashCode>
+      <FileName>Entities\LifeObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhysicsEntity" Collapsed="true">
+    <Position X="31" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AaAAAAIAQAAAQAAACAAQQAAiAACQAAAAAIAAAAIEAAA=</HashCode>
+      <FileName>Entities\PhysicsEntity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>aIASAsAESAQIQERAAJQAAYAiAgKQQICAAABBqQIEIzg=</HashCode>
+      <FileName>Entities\Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RocketBullet" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAACBIAQCAAQAAAgAAIAAAgAAIQBAQACAAAAAMEAAA=</HashCode>
+      <FileName>Entities\RocketBullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RocketBulletEnemy" Collapsed="true">
+    <Position X="15.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACBIAQCAAQAgAgAAAAAAgAAIQBAQABAAAAAMEAAA=</HashCode>
+      <FileName>Entities\RocketBulletEnemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsaltoDrop" Collapsed="true">
+    <Position X="22" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAEAARAAAUAAAAAAAAAAgAAAQAAAAAAAAgAIECAA=</HashCode>
+      <FileName>Entities\WeaponDrops\AsaltoDrop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PistolaDrop" Collapsed="true">
+    <Position X="24.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAQAAAQAAAAAAAAAAgAAAQAAAAAgAAgAIECAA=</HashCode>
+      <FileName>Entities\WeaponDrops\PistolaDrop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RocketLauncherDrop" Collapsed="true">
+    <Position X="26.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAQAAAQAAAAAAAAAAgAAAQQAAAAAAAgAIECAI=</HashCode>
+      <FileName>Entities\WeaponDrops\RocketLauncherDrop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponDrop" Collapsed="true">
+    <Position X="24.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACAACQAIAQAAAAAAAAAAiAgAQAAAIACAQhAIECIA=</HashCode>
+      <FileName>Entities\WeaponDrops\WeaponDrop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Asalto" Collapsed="true">
+    <Position X="8.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAEQAAAQAAAABAAAAAgAAAQAAAAAEAAAAoEAAA=</HashCode>
+      <FileName>Entities\Weapons\Asalto.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pistola" Collapsed="true">
+    <Position X="10.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAEQAAAQAAAABAAAAAgAAAQAAAAAAACAAIEAAA=</HashCode>
+      <FileName>Entities\Weapons\Pistola.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RocketLauncher" Collapsed="true">
+    <Position X="6.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAEQAAAQAABABAAAAAgAAAQAAAAAAQAAAIEAAA=</HashCode>
+      <FileName>Entities\Weapons\RocketLauncher.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BKAAQAQEQgAAQgAAABAAoBBoAAQQACgAAAAQAAIEAQA=</HashCode>
+      <FileName>Entities\Weapons\Weapon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatedSceneNode" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAhAAAAAAAAAABAAAAACCAAgQAAgAAAAAAAAAAY=</HashCode>
+      <FileName>Motor\AnimatedSceneNode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Animation" Collapsed="true">
+    <Position X="33.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAACAAggAEAAAAAAAQAAAAAAAAgAAAAgAE=</HashCode>
+      <FileName>Motor\Animation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="38.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACIqAAAAAAAIAAQAAAAAACAAAAAAAAAAAAAAAEAAg=</HashCode>
+      <FileName>Motor\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DebugDraw" Collapsed="true">
+    <Position X="37" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAACCAAAACECAAAABQAAQAAAAAACAAAA=</HashCode>
+      <FileName>Motor\DebugDraw.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicEngine" Collapsed="true">
+    <Position X="33.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAdGTAAUAAEAAJAAAgAAQKiAEACAACEAIEsAEAIwRQA=</HashCode>
+      <FileName>Motor\GraphicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhysicsEngine" Collapsed="true">
+    <Position X="33.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iQBAAAICAQABGAAAAAAAAAAwAAAABAAQIABIAgLECAA=</HashCode>
+      <FileName>Motor\PhysicsEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RenderState" Collapsed="true">
+    <Position X="35.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAIIAEAAAABQAAqADAAAQCCQIAgKYAAAJCEABEAgA=</HashCode>
+      <FileName>Motor\RenderState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicSceneNode" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAgAAAAAAAAAABAAAAACCAAgQEAggAAAAAAAAAI=</HashCode>
+      <FileName>Motor\BasicSceneNode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneNode" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAJAgAAAAAAAAACBAAAAACCAEgQAAgAAAAAAAAEAI=</HashCode>
+      <FileName>Motor\SceneNode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cliente" Collapsed="true">
+    <Position X="40.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>mEICAABCAAIBAAQIBgCAAADAASAIDCEIIQAAICIUEAg=</HashCode>
+      <FileName>Motor de Red\Cliente.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputHandler" Collapsed="true">
+    <Position X="35.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIBCAJAIEIYAgAAAAhwAAQCQAAAQAAAAYCAAAEIBACA=</HashCode>
+      <FileName>Handlers\InputHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="State" Collapsed="true">
+    <Position X="38.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAAAAAAAAAAAAAAAAAAAEAAAAAABAAAABAAgA=</HashCode>
+      <FileName>States\State.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessageHandler" Collapsed="true">
+    <Position X="40.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAgAQAQAAAAIAAAAAAEAAA=</HashCode>
+      <FileName>Handlers\MessageHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\Command.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jump" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\Jump.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListWeaponDown" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\ListWeaponDown.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListWeaponUp" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\ListWeaponUp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveDown" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\MoveDown.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveLeft" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\MoveLeft.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveRight" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\MoveRight.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveUp" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\MoveUp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RunCommand" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\RunCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShootCommand" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\ShootCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShootCommandGranada" Collapsed="true">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command\ShootCommandGranada.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateFactory" Collapsed="true">
+    <Position X="40.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>States\StateFactory.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateStack" Collapsed="true">
+    <Position X="33.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAIAAABAAAAAJgAAAAIAAAAAABAAA=</HashCode>
+      <FileName>States\StateStack.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="priv::ClockImpl" Collapsed="true">
+    <Position X="35.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Otros\Win32\ClockImpl.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="__unnamed_struct_089b_1" Collapsed="true">
+    <Position X="14.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABACAIAAEAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089b_2" Collapsed="true">
+    <Position X="9.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089b_3" Collapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAACAIgAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089b_4" Collapsed="true">
+    <Position X="5.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAEAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089b_5" Collapsed="true">
+    <Position X="10.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAgA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089b_6" Collapsed="true">
+    <Position X="1.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_089b_7" Collapsed="true">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Message" Collapsed="true">
+    <Position X="33.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAAAACA=</HashCode>
+      <FileName>Handlers\Message.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="pnodo" Collapsed="true">
+    <Position X="1.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Otros\Lista.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TPlayer" Collapsed="true">
+    <Position X="14.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TMovimiento" Collapsed="true">
+    <Position X="9.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TBala" Collapsed="true">
+    <Position X="14.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TGranada" Collapsed="true">
+    <Position X="5.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TVidaServer" Collapsed="true">
+    <Position X="10.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TImpactoRocket" Collapsed="true">
+    <Position X="1.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TImpulso" Collapsed="true">
+    <Position X="6.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="GameMessages" Collapsed="true">
+    <Position X="37" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAAAAAYAEAAEABMIQCACAwAAAAAAAAgIBQQBEBAA=</HashCode>
+      <FileName>Motor de Red\Estructuras.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="InputType" Collapsed="true">
+    <Position X="40.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Handlers\input_constants.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Action" Collapsed="true">
+    <Position X="33.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Handlers\input_constants.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="col::Collisions" Collapsed="true">
+    <Position X="35.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACgAAAQAAAAAAAAAAAIAAAAAAAAAEAAAABAAAGAA=</HashCode>
+      <FileName>Motor\PhysicsEngine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="States::ID" Collapsed="true">
+    <Position X="38.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAEAAAAAAAAAABICAQAAAAAAAAAAAA=</HashCode>
+      <FileName>States\State.hpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
