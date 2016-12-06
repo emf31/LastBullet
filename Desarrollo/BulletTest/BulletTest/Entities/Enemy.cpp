@@ -194,7 +194,6 @@ void Enemy::updateAnimation()
 
 void Enemy::updateState()
 {
-
 	if (isMoving) {
 		m_animState = andando;
 	}

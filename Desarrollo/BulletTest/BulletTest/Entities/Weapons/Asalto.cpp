@@ -4,11 +4,7 @@
 
 Asalto::Asalto() : Weapon()
 {
-	capacidadAmmo = 30;
-	disparos = 0;
-	cadencia = milliseconds(50);
-	recarga = milliseconds(1000);
-	numCargadores = numCargadoresAsalto;
+	
 
 }
 
@@ -20,7 +16,12 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-
+	damage = 15;
+	capacidadAmmo = 30;
+	disparos = 0;
+	cadencia = milliseconds(50);
+	recarga = milliseconds(1000);
+	numCargadores = numCargadoresAsalto;
 }
 
 void Asalto::update(Time elapsedTime)

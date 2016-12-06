@@ -5,11 +5,7 @@
 
 Pistola::Pistola() : Weapon()
 {
-	capacidadAmmo = 6;
-	disparos = 0;
-	recarga = milliseconds(1000);
-	cadencia = milliseconds(350);
-	numCargadores = numCargadoresPistola;
+	
 }
 
 
@@ -19,6 +15,12 @@ Pistola::~Pistola()
 
 void Pistola::inicializar()
 {
+	damage = 20;
+	capacidadAmmo = 6;
+	disparos = 0;
+	recarga = milliseconds(1000);
+	cadencia = milliseconds(350);
+	numCargadores = numCargadoresPistola;
 }
 
 void Pistola::update(Time elapsedTime)
