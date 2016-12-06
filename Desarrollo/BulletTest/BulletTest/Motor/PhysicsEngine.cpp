@@ -119,7 +119,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 	btTransform transform;
 	transform.setIdentity();
 	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
-	std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
+	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
 	transform.setOrigin((pos));
 
 	//create the motionState of the object

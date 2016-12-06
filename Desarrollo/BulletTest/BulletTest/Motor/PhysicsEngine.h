@@ -22,12 +22,12 @@ namespace col {
 	};
 
 	const int staticCollidesWith = Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
-	const int characterCollidesWith = Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy;
+	const int characterCollidesWith = Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
-	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static;
-	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket;
+	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character;
+	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja;
 }
 
 class PhysicsEngine

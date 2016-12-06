@@ -16,41 +16,64 @@ void MapLoader::readMap(const std::string & name)
 			
 			json obj = *it;
 			//std::cout << "Nombre " << obj["nombre"] << '\n';
-			if (obj["nombre"] == "cubo") {
+			//if (obj["nombre"] = "cubo") {
 				//std::cout << "Entro?" << '\n';
 				cont++;
 				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
 				Vec3<float> rot = Vec3<float>(obj["rotZ"], obj["rotY"], obj["rotX"]);
 				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
+
+				Vec3<float> centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]);
+				Vec3<float> sizeColllider = Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
 				float mass = obj["masa"];
 				std::string s = std::to_string(cont);
 				std::string nombre = "cubo"+s;
-				io::path mesh="../media/cubo.obj";
+
+				std::string nameMesh = obj["nombre"];
+				nameMesh = "../media/" +nameMesh+".obj";
+				io::path mesh=nameMesh.c_str();
 				std::cout << "----------------------------" << '\n';
-				std::cout << "Nombre " << nombre << '\n';
+				std::cout << "Nombre " << obj["nombre"] << '\n';
 				std::cout << "Posicion " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 				std::cout << "Rotacion " << obj["rotX"] << ',' << obj["rotY"] << ',' << obj["rotZ"] << '\n';
 				std::cout << "Escalado " << obj["sizeX"] << ',' << obj["sizeY"] << ',' << obj["sizeZ"] << '\n';
-				createPhysicEntity(pos, es, rot, mesh, nombre, mass);
-			}
+				std::cout << "Collider " << obj["colliderSizeX"] << ',' << obj["colliderSizeX"] << ',' << obj["colliderSizeX"] << '\n';
+				std::cout << "Masa " << obj["masa"] << '\n';
+				createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
+		//	}
 		}
 	}
 
 	//std::cout << j.dump() << std::endl;
 }
-void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, const io::path & mesh, std::string &name, float mass)
+void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const io::path & mesh, std::string &name, float mass)
 {
 
-	std::shared_ptr<BasicSceneNode> sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "../media/cubo.obj");
+	std::shared_ptr<BasicSceneNode> sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
 	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
-	physicent->setRigidBody(PhysicsEngine::i().createBoxRigidBody(physicent, escala, 0,true));
-	std::cout<<"WorldTransform: "<<physicent->getRigidBody()->getWorldTransform().getOrigin().x()<<","<< physicent->getRigidBody()->getWorldTransform().getOrigin().y()<<","<< physicent->getRigidBody()->getWorldTransform().getOrigin().z()<<'\n';
-	//physicent->setPosition(posicion);
+	if (mass != 0)
+		sizeCol = sizeCol*(escala/2);
+
+	physicent->setRigidBody(PhysicsEngine::i().createBoxRigidBody(physicent, sizeCol, mass,true));
+	//std::cout<<"WorldTransform: "<<physicent->getRigidBody()->getWorldTransform().getOrigin().x()<<","<< physicent->getRigidBody()->getWorldTransform().getOrigin().y()<<","<< physicent->getRigidBody()->getWorldTransform().getOrigin().z()<<'\n';
+	physicent->setPosition(posicion);
 	physicent->rotate(Vec3<float>(float(rotacion.getX()* PI / 180.0), float(rotacion.getY() * PI / 180.0), float(rotacion.getZ()* PI / 180.0)));
-	physicent->setCollisionGroup(col::Collisions::Static);
-	physicent->setCollisionMask(col::staticCollidesWith);
-	physicent->getRigidBody()->setFriction(0.7f);
-	std::cout << "WorldTransform: " << physicent->getRigidBody()->getWorldTransform().getOrigin().x() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().y() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().z() << '\n';
+	
+	if(mass==0){
+		physicent->setCollisionGroup(col::Collisions::Static);
+		physicent->setCollisionMask(col::staticCollidesWith);
+		physicent->getRigidBody()->setFriction(0.7f);
+	}
+	else{
+		physicent->setCollisionGroup(col::Collisions::Caja);
+		physicent->setCollisionMask(col::cajaCollidesWith);
+		physicent->getRigidBody()->setDamping(btScalar(0.f), btScalar(0.85f));
+		//cajaEnt->getRigidBody()->setRollingFriction(btScalar(0.8f));
+		physicent->getRigidBody()->setFriction(btScalar(0.8f));
+		physicent->getRigidBody()->setAngularFactor(btScalar(0.3f));
+	}
+	
+	//std::cout << "WorldTransform: " << physicent->getRigidBody()->getWorldTransform().getOrigin().x() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().y() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().z() << '\n';
 	//std::cout << sceneNode->getPosition().getX() << '\n';
 }
 

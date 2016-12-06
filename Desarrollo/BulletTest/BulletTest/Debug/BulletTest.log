@@ -1,4 +1,34 @@
-﻿  MapLoader.cpp
+﻿  main.cpp
+  Cliente.cpp
+  Lista.cpp
+  MessageHandler.cpp
+  InputHandler.cpp
+  Weapon.cpp
+  RocketLauncher.cpp
+  Pistola.cpp
+  Asalto.cpp
+  WeaponDrop.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
+  AsaltoDrop.cpp
+  RocketBulletEnemy.cpp
+  RocketBullet.cpp
+  LifeObject.cpp
+  Granada.cpp
+  Entity.cpp
+  Enemy.cpp
+  Generando código...
+  Compilando...
+  PhysicsEngine.cpp
+  MapLoader.cpp
+  GraphicEngine.cpp
+  Game.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(222): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(229): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(237): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(245): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(253): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+  Player.cpp
   PhysicsEntity.cpp
   Generando código...
 StateStack.obj : warning LNK4099: no se encontró PDB 'vc140.pdb' con 'StateStack.obj' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\vc140.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
