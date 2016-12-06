@@ -269,9 +269,11 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				bsIn.Read(granada);
+				TGranada g;
+
+				bsIn.Read(g);
 				
-				static_cast<Granada*>(EntityManager::i().getRaknetEntity(granada.guid))->serverShoot(granada);
+				static_cast<Granada*>(EntityManager::i().getRaknetEntity(g.guid))->serverShoot(g);
 
 
 			}
