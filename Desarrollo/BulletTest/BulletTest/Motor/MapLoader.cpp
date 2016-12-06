@@ -49,7 +49,7 @@ void MapLoader::readMap(const std::string & name)
 void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const io::path & mesh, std::string &name, float mass)
 {
 
-	std::shared_ptr<BasicSceneNode> sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
+	std::shared_ptr<BasicSceneNode> sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
 	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
 	if (mass != 0)
 		sizeCol = sizeCol*(escala/2);
