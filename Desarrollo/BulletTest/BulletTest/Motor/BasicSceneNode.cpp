@@ -49,7 +49,7 @@ void BasicSceneNode::addChild(std::shared_ptr<SceneNode> child) {
 
 void BasicSceneNode::removeChild(std::shared_ptr<SceneNode> child)
 {
-	child->getNodo()->grab();
+	//child->getNodo()->grab();
 	m_node->removeChild(child->getNodo());
 }
 

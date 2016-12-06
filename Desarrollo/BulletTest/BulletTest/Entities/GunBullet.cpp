@@ -43,7 +43,7 @@ void GunBullet::handleInput()
 
 void GunBullet::cargarContenido()
 {
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(m_position, Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/bullet.obj"));
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/bullet.obj");
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);

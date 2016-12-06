@@ -4,11 +4,7 @@
 
 Asalto::Asalto() : Weapon()
 {
-	capacidadAmmo = 30;
-	disparos = 0;
-	cadencia = milliseconds(50);
-	recarga = milliseconds(1000);
-	numCargadores = numCargadoresAsalto;
+	
 
 }
 
@@ -20,7 +16,12 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-
+	damage = 15;
+	capacidadAmmo = 30;
+	disparos = 0;
+	cadencia = milliseconds(50);
+	recarga = milliseconds(1000);
+	numCargadores = numCargadoresAsalto;
 }
 
 void Asalto::update(Time elapsedTime)
@@ -58,7 +59,7 @@ void Asalto::handleInput()
 void Asalto::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj"));
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
 	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
@@ -91,6 +92,9 @@ void Asalto::shoot()
 				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
 				GraphicEngine::i().getActiveCamera()->getPosition().getY(),
 				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
+
+			//añadimos un poco de desvio en el arma
+			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
 			Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 			Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();

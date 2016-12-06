@@ -51,11 +51,13 @@ void Entity::restaVida(float cantidad)
 {
 	m_vida -= cantidad;
 	if (m_vida <= 0) {
+
 		isDying = true;
 		relojMuerte.restart();
-		if (Cliente::i().isConected())
-		Cliente::i().playerMuerto();
 
+		if (Cliente::i().isConected()) {
+			Cliente::i().playerMuerto();
+		}
 	}
 }
 
