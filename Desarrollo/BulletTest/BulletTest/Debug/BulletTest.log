@@ -1,24 +1,4 @@
-﻿  Cliente.cpp
-  Game.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(230): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(237): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(245): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(253): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(261): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-  RocketLauncher.cpp
-  Pistola.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(60): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  Asalto.cpp
-  RocketLauncherDrop.cpp
-  PistolaDrop.cpp
-  AsaltoDrop.cpp
-  RocketBullet.cpp
-  Player.cpp
-  LifeObject.cpp
-  Granada.cpp
-  Entity.cpp
-  Enemy.cpp
-  Generando código...
+﻿  PhysicsEngine.cpp
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
