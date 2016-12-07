@@ -1,5 +1,15 @@
 ﻿  Enemy.cpp
-  LINK : no se encontró C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  Generando código...
+  Compilando...
+  Patrullar.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  main.cpp
+  Cliente.cpp
+  MachineState.cpp
+  Game.cpp
+  Player.cpp
+  EntityManager.cpp
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

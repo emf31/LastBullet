@@ -5,19 +5,24 @@ class Patrullar :
 {
 public:
 
-	Patrullar* Patrullar::i()
-	{
-		static Patrullar instance;
-		return &instance;
+	static Patrullar& i() {
+		static Patrullar singleton;
+		return singleton;
 	}
+	virtual void Enter(Entity* pEnemy) {
+		std::cout << "ZIZU" << std::endl;
+	}
+	virtual void Execute(Entity* pEnemy) {
+		std::cout << "ZIZU" << std::endl;
 
-	virtual void Enter(Entity* pEnemy);
-	virtual void Execute(Entity* pEnemy);
-	virtual void Exit(Entity* pEnemy);
+	}
+	virtual void Exit(Entity* pEnemy) {
+		std::cout << "ZIZU" << std::endl;
+
+	}
 
 private:
 	Patrullar() {};
-
 
 };
 
