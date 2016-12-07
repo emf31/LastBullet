@@ -54,7 +54,7 @@ void AnimatedSceneNode::addChild(std::shared_ptr<SceneNode> child) {
 
 void AnimatedSceneNode::removeChild(std::shared_ptr<SceneNode> child)
 {
-	child->getNodo()->grab();
+	//child->getNodo()->grab();
 	m_node->removeChild(child->getNodo());
 }
 

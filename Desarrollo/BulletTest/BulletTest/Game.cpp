@@ -67,13 +67,7 @@ void Game::run()
 		//if (GraphicEngine::i().isWindowActive()) {
 		//if (Cliente::i().isConected() ) {
 
-
-
-		
-
-	
-
-		///Las fisicas se ejecutan 80 veces por segundo
+		///Las fisicas se ejecutan 60 veces por segundo
 
 		time_physics_curr = clock.getElapsedTime();
 
@@ -101,12 +95,19 @@ void Game::run()
 
 			//Realizamos actualizaciones
 			update(timePerFrame);
+
+			if (Cliente::i().isConected()) {
+				Cliente::i().update();
+			}
+			
 		}
 
 
 		interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 		render(interpolation, timePerFrame);
+
+		
 
 
 		if (wantToExit) {
@@ -116,12 +117,19 @@ void Game::run()
 		
 	}
 
-	//Espera a que termine el otro hilo para finalizar el programa
-	Cliente::i().apagar();
 	
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
+	
+	
+	
+	if (Cliente::i().isConected()) {
+		Cliente::i().apagar();
+	}
+	
+	
+	
 	MessageHandler::i().borrarContenido();
 	
 }
@@ -262,7 +270,7 @@ void Game::inicializar()
 	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "");
 
 	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
-	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(1.f, 1.f, 1.f), 10.f));
+	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(1.f, 1.f, 1.f), 10.f,false));
 	cajaEnt->setCollisionGroup(col::Collisions::Caja);
 	cajaEnt->setCollisionMask(col::cajaCollidesWith);
 	cajaEnt->getRigidBody()->setDamping(btScalar(0.f),btScalar(0.85f));
@@ -302,7 +310,11 @@ void Game::inicializar()
 
 		
 		//Bucle infinito hasta que se conecte
-		while (Cliente::i().isConected() == false);
+		while (Cliente::i().isConected() == false) {
+			Cliente::i().update();
+		}
+
+		Cliente::i().createPlayer();
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		Cliente::i().nuevaVida(vidaEnt->getID());

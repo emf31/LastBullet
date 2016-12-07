@@ -116,19 +116,26 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Irrlicht.lib;BulletDynamics.lib;BulletCollision.lib;LinearMath.lib;BulletSoftBody.lib;BulletFileLoader.lib;BulletWorldImporter.lib;RakNetDLL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;</AdditionalLibraryDirectories>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -160,8 +167,10 @@
     <ClInclude Include="Command\MoveRight.h" />
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\RunCommand.h" />
-    <ClInclude Include="Command\ShootCommand.h" />
+    <ClInclude Include="Command\ShootAsalto.h" />
     <ClInclude Include="Command\ShootCommandGranada.h" />
+    <ClInclude Include="Command\ShootPistola.h" />
+    <ClInclude Include="Command\ShootRocket.h" />
     <ClInclude Include="Entities\Granada.h" />
     <ClInclude Include="Entities\GunBullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
@@ -186,21 +195,25 @@
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
-    <ClInclude Include="Lista.h" />
+    <ClInclude Include="IA\MachineState.h" />
+    <ClInclude Include="IA\StatesIA\Patrullar.h" />
+    <ClInclude Include="IA\StatesIA\StateIA.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor de Red\Cliente.h" />
     <ClInclude Include="Motor de Red\Estructuras.h" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
+    <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\MapLoader.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
-    <ClInclude Include="Nodo.h" />
     <ClInclude Include="Otros\Clock.hpp" />
+    <ClInclude Include="Otros\Lista.h" />
+    <ClInclude Include="Otros\Nodo.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\Util.h" />
@@ -232,7 +245,7 @@
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
-    <ClCompile Include="Lista.cpp" />
+    <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -247,6 +260,7 @@
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
+    <ClCompile Include="Otros\Lista.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />

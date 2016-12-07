@@ -5,11 +5,7 @@
 
 Pistola::Pistola() : Weapon()
 {
-	capacidadAmmo = 6;
-	disparos = 0;
-	recarga = milliseconds(1000);
-	cadencia = milliseconds(350);
-	numCargadores = numCargadoresPistola;
+	
 }
 
 
@@ -19,6 +15,12 @@ Pistola::~Pistola()
 
 void Pistola::inicializar()
 {
+	damage = 20;
+	capacidadAmmo = 6;
+	disparos = 0;
+	recarga = milliseconds(1000);
+	cadencia = milliseconds(350);
+	numCargadores = numCargadoresPistola;
 }
 
 void Pistola::update(Time elapsedTime)
@@ -55,7 +57,7 @@ void Pistola::handleInput()
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5f, player_pos.getZ()), Vec3<float>(0.2f, 0.2f, 0.2f), "", "../media/arma/pistola.obj"));
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.2f, 0.2f, 0.2f), "", "../media/arma/pistola.obj");
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
 

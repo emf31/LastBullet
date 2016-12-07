@@ -67,9 +67,9 @@ public:
 	
 	void sumarVida() {
 		m_vida += 40;
-		if (m_vida > 100)
+		if (m_vida > 100) {
 			m_vida = 100;
-		printf("ME HE CURADO\n");
+		}
 	}
 
 

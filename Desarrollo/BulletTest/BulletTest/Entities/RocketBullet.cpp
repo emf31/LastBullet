@@ -51,15 +51,16 @@ void RocketBullet::handleInput()
 
 void RocketBullet::cargarContenido()
 {
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", ""));
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", "");
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1,false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 	proxy->m_collisionFilterMask =  col::rocketCollidesWith;
+
 	//Sin respuesta a la colision mejor asi porque es mas optimo
 	m_rigidBody->setCollisionFlags(4);
 	radioExplosion = 40.f;
@@ -158,11 +159,6 @@ float RocketBullet::explosion(Entity* player,Vec3<float> posExplosion, Vec3<floa
 		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
 
 		btVector3 force = direccion2 * FUERZA;
-
-		/*m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-		proxy->m_collisionFilterMask = col::rocketCollidesWith;*/
 
 		if (player->getClassName() == "Player") {
 			static_cast<Player*>(player)->p_controller->applyImpulse(force);

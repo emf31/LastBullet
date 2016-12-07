@@ -51,12 +51,12 @@ void RocketBulletEnemy::handleInput()
 
 void RocketBulletEnemy::cargarContenido()
 {
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", ""));
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", "");
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1,false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::RocketEnemy;
 	proxy->m_collisionFilterMask = col::rocketenemyCollidesWith;

@@ -10,7 +10,7 @@
 #include <vector>
 //#include "../Entities/Player.h"
 
-#include "../DebugDraw.h"
+#include "DebugDraw.h"
 
 
 using namespace irr;

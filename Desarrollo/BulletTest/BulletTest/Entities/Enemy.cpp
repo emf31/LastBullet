@@ -11,7 +11,9 @@
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
 	
-	
+	//m_pStateMachine = new MachineState<Enemy>(this);
+/*	m_pStateMachine->SetCurrentState(Patrullar::i());
+	m_pStateMachine->SetGlobalState(Patrullar::i());*/
 }
 
 
@@ -39,6 +41,9 @@ void Enemy::update(Time elapsedTime)
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
 		isMoving = false;
 
+
+	//m_pStateMachine->Update();
+
 }
 
 void Enemy::handleInput()
@@ -65,22 +70,17 @@ void Enemy::cargarContenido()
 	animation->addAnimation("AimRunning", 473, 524);
 
 
-
-
-	granada->cargarContenido();
 	granada->inicializar();
+	granada->cargarContenido();
 
 	m_animState = quieto;
 
 	radius = 1.2f;
 	height = 7.3f;
-	mass = 0.f;
-
-	//Al mundo de fisicas del cliente añadimos una representacion del objeto fisico pero no calcula fisicas
-	//(servira para hacer los raycast)
+	mass = 1000.f;
 
 
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this,height, radius, mass, DISABLE_SIMULATION);
+	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, height, radius, mass, DISABLE_SIMULATION);
 
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
@@ -90,7 +90,10 @@ void Enemy::cargarContenido()
 
 void Enemy::borrarContenido()
 {
+	delete animation;
 
+	PhysicsEngine::i().removeRigidBody(m_rigidBody);
+	delete m_rigidBody;
 	GraphicEngine::i().removeNode(m_nodo);
 }
 
@@ -117,24 +120,7 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		//TODO
-		printf("le has dado a un enemigo\n");
 		Cliente::i().enviarDisparo(m_guid);
-	}
-	else if (message.mensaje == "LAZARGRANADA") {
-
-		TGranada* tGranada = static_cast<TGranada*>(message.data);
-
-
-		granada->serverShoot(*tGranada);
-	} else if (message.mensaje == "MOVIMIENTO") {
-
-		TPlayer* tPlayer = static_cast<TPlayer*>(message.data);
-
-		encolaMovimiento(*tPlayer);
-
-		delete tPlayer;
-
 	}
 	else if (message.mensaje == "ARMAUP") {
 		//TODO poner el codigo de cambiar el modelo del arma hacia arriba
@@ -149,7 +135,6 @@ void Enemy::handleMessage(const Message & message)
 //pila posiciones
 void Enemy::encolaMovimiento(TPlayer pos)
 {
-	//m.lock();
 	// Añadir a la cola
 	TMovimiento mov;
 	mov.position = pos.position;
@@ -157,14 +142,10 @@ void Enemy::encolaMovimiento(TPlayer pos)
 
 	m_positions.push(mov);
 	m_renderState.setVelocity(pos.velocidad);
-
-	//m.unlock();
 }
 
 void Enemy::desencolaMovimiento()
 {	
-	//m.lock();
-	//std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
 	
 	if (m_positions.size() > 3) {
 		TMovimiento mov;
@@ -190,50 +171,9 @@ void Enemy::desencolaMovimiento()
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 		
 	}
-	//m.unlock();
 
 }
-/////////
 
-//pila rotaciones
-/*
-void Enemy::encolaRot(TPlayer rot)
-{
-	//m.lock();
-	// Añadir a la cola
-	m_rotations.push(rot.position);
-
-	//m.unlock();
-}
-
-void Enemy::desEncolaRot()
-{
-	//m.lock();
-
-	if (m_rotations.size() > 3) {
-		Vec3<float> new_rot;
-		while (!m_rotations.empty()) {
-			new_rot = m_rotations.front();
-			//lo borramos de la cola
-			m_rotations.pop();
-			//llamamos al update con la nueva posicion
-		}
-		
-		m_renderState.updateRotations(new_rot);
-	}
-
-	else if (m_positions.size() > 0) {
-		Vec3<float> new_rot;
-		new_rot = m_rotations.front();
-		//lo borramos de la cola
-		m_rotations.pop();
-		//llamamos al update con la nueva posicion
-		m_renderState.updateRotations(new_rot);
-	}
-	//m.unlock();
-
-}*/
-/////////
 
 void Enemy::updateAnimation()
 {
@@ -267,13 +207,7 @@ void Enemy::updateAnimation()
 
 void Enemy::updateState()
 {
-	/*if (!p_controller->onGround() && p_controller->numJumps == 0) {
-		m_playerState = saltando;
-	}
-	else if (!p_controller->onGround() && p_controller->numJumps == 1) {
-		m_playerState = saltando2;
-	}
-	else*/ if (isMoving) {
+	if (isMoving) {
 		m_animState = andando;
 	}
 	else {

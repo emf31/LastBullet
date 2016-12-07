@@ -9,7 +9,7 @@
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
-const Time PhysicsEngine::tickPhysics = seconds(1.f / 60.f);
+const Time PhysicsEngine::tickPhysics = seconds(1.f / 120.f);
 
 
 //Tenemos un unordered maps de contactos, donde la key es un entity.
@@ -75,7 +75,7 @@ void PhysicsEngine::inicializar()
 void PhysicsEngine::update(Time elapsedTime)
 {
 	//Como la simulacion va lenta multiplicamos por 2
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds())*2, 20, tickPhysics.asSeconds());
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
 	
 
 	
@@ -114,19 +114,30 @@ void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
 
 }
 
-btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
+btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, int body_state)
 {
 	btTransform transform;
 	transform.setIdentity();
 	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
-	transform.setOrigin(pos);
+	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
+	transform.setOrigin((pos));
 
 	//create the motionState of the object
 	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
 
 	//create the bounding volume
-	btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
-	btCollisionShape* shape = new btBoxShape(halfExtents);
+	btCollisionShape* shape;
+	if (!haveMesh) {
+		btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
+		 shape = new btBoxShape(halfExtents);
+	}	
+	else {
+		btVector3 halfExtents(scale.getX(), scale.getY(), scale.getZ());
+		 shape = new btBoxShape(halfExtents);
+	}
+		
+
+	
 
 	//create intertia info for the shape
 	btVector3 localinertia;
@@ -285,6 +296,8 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 	m_rigidBodies.remove(body);
 	m_world->removeRigidBody(body);
 
+	//delete body;
+
 	return true;
 }
 
@@ -292,7 +305,6 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 {
 
-	//m_rigidBodies.remove(body);
 	m_world->removeCollisionObject(body);
 
 	return true;
@@ -316,8 +328,8 @@ void PhysicsEngine::apagar()
 	m_rigidBodies.clear();
 
 	//Si ha quedado algun objeto tambien lo borramos(ghost objects o cualquier cosa)
-	int i;
-	for (i = m_world->getNumCollisionObjects() - 1; i >= 0; i--)
+	
+	for (int i = m_world->getNumCollisionObjects() - 1; i >= 0; i--)
 	{
 		btCollisionObject* obj = m_world->getCollisionObjectArray()[i];
 		
@@ -326,10 +338,6 @@ void PhysicsEngine::apagar()
 		m_world->removeCollisionObject(obj);
 		delete obj;
 	}
-	
-
-	int a = m_world->getNumCollisionObjects();
-
 
 
 	//borramos todas las collisionshapes

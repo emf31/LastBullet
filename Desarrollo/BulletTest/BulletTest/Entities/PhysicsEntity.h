@@ -49,7 +49,6 @@ public:
 		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 		m_rigidBody->setCenterOfMassTransform(transform);
 		m_nodo->setPosition(pos);
-		std::cout << m_nodo->getPosition().getX()<<'\n';
 
 	}
 
