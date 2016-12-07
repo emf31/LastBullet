@@ -15,6 +15,7 @@
 #include "../Entities/LifeObject.h"
 #include "../Entities/WeaponDrops/WeaponDrop.h"
 #include "../Entities/WeaponDrops/AsaltoDrop.h"
+#include "../Entities/RocketBulletEnemy.h"
 
 Cliente::Cliente()
 {
@@ -184,29 +185,12 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
 				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(nuevoplayer.guid));
-				//e->updateEnemigo(nuevoplayer.position);
-				//e = nullptr;
-				//std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
-				//std::cout << "++ENVIO MENSAJE MOVE A LA ENTITY" << e->getName() << std::endl;
 
-
-				//ANTEEES!!
-				//Message msg1(e, "MOVE", static_cast<void*>(&nuevoplayer));
-				//MessageHandler::i().sendMessage(msg1);
-
-				//e->updateEnemigo(nuevoplayer.position);
-
-				//NUEVO
 				if (e != NULL) {
 					e->encolaMovimiento(nuevoplayer);
 				}
 				
-
-				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
-				
-				//std::cout << "///////////////////INCIO LISTA////////////////////////" << std::endl;
-				//EntityManager::i().muestraPosClientes();
-				//std::cout << "///////////////////FINAL LISTA////////////////////////" << std::endl;
+				e = nullptr;
 
 			}
 			break;
@@ -238,11 +222,9 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(balaDisparada);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 
-				Message msg1(EntityManager::i().getEntity(PLAYER), "DIBUJARBALA", static_cast<void*>(&balaDisparada));
-				MessageHandler::i().sendMessage(msg1);
-
+				GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+				bala->cargarContenido();
 
 			}
 			break;
@@ -254,10 +236,8 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(balaDisparada);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 
-				Message msg1(EntityManager::i().getEntity(PLAYER), "DIBUJAR_ROCKET", static_cast<void*>(&balaDisparada));
-				MessageHandler::i().sendMessage(msg1);
+				RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
 
 			}
@@ -269,12 +249,10 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				TGranada g;
-
-				bsIn.Read(g);
+				bsIn.Read(granada);
 				
-				Granada* ent = static_cast<Granada*>(EntityManager::i().getRaknetEntity(g.guid));
-				ent->serverShoot(g);
+				Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
+				ent->lanzarGranada(granada);
 
 
 			}
@@ -287,12 +265,12 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(t_cambioArma);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
 				if (t_cambioArma.cambio == 1) {
-					Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "ARMAUP", static_cast<void*>(&granada));
+					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
 					MessageHandler::i().sendMessage(msg1);
 				}else {
-					Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "ARMADOWN", static_cast<void*>(&granada));
+					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
 					MessageHandler::i().sendMessage(msg1);
 				}
 
@@ -357,7 +335,7 @@ void Cliente::update() {
 
 				bsIn.Read(nuevoplayer);
 				
-				std::cout << "el player " << nuevoplayer.name << " ha muerto" << std::endl;
+				//std::cout << "el player " << p.name << " ha muerto" << std::endl;
 
 				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
 					//es el player
@@ -372,7 +350,7 @@ void Cliente::update() {
 				}
 				else {
 					//es un enemigo
-					Enemy* enemigo= (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 					enemigo->setPosition(nuevoplayer.position);
 					enemigo = nullptr;
 				}
@@ -582,7 +560,7 @@ void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<flo
 
 }
 
-void Cliente::dispararRrocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
+void Cliente::dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
 {
 	RakNet::BitStream bsOut;
 

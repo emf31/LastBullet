@@ -165,7 +165,7 @@ float RocketBullet::explosion(Entity* player,Vec3<float> posExplosion, Vec3<floa
 		}
 		else if (Cliente::i().isConected()) {
 			
-			Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
+			//Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
 		}
 		
 	}

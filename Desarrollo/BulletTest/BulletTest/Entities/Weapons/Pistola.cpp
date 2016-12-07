@@ -145,6 +145,7 @@ void Pistola::shoot() {
 
 			//	  if (arma != LANZACOHETES)
 			GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+			bala->cargarContenido();
 			//	else {
 			//		RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
 			//	  }

@@ -5,7 +5,9 @@
 #include <set>
 #include <list>
 
-#define PLAYER 1000
+
+
+static const int PLAYER = 1000;
 
 class EntityManager
 {
@@ -46,7 +48,6 @@ public:
 	void registerEntity(Entity* entity);
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	void removeRaknetEntity(Entity* entity);
 
 	void cleanDeleteQueue();
 
@@ -54,7 +55,7 @@ public:
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
 
-	std::unordered_map<int, Entity*> m_entities;
+	
 
 private:
 	EntityManager(EntityManager const&);
@@ -63,6 +64,7 @@ private:
 
 	int m_nextID;
 	
+	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	std::set<Entity*> delete_set;
 

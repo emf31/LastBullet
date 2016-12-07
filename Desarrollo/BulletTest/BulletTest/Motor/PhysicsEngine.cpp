@@ -21,7 +21,7 @@ bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisio
 	Entity* entity0 = (Entity*)body0->getUserPointer();
 	Entity* entity1 = (Entity*)body1->getUserPointer();
 
-	if (entity0 != NULL && entity1 != NULL) {
+	if (body0->getUserPointer() != NULL && body1->getUserPointer() != NULL) {
 		//En la key guardamos una entity y en su value un array con las entities con las que colisiona
 		//comprobamos si entity 0 esta en el mapa
 		auto found = contacts.find(entity0);

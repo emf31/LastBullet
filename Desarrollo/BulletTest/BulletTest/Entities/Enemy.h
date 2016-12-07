@@ -41,8 +41,7 @@ public:
 	void encolaMovimiento(TPlayer pos);
 	void desencolaMovimiento();
 
-	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
-	std::mutex m;
+	void lanzarGranada(TGranada g);
 
 
 private:

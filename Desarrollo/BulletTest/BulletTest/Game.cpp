@@ -356,12 +356,12 @@ bool Game::processEvents()
 void Game::update(Time elapsedTime)
 {
 
-	PhysicsEngine::i().notifyCollisions();
-	EntityManager::i().update(elapsedTime);
-	MessageHandler::i().update();
-	//antes era global, ahora cada entity tiene la suya, entonces aqui habria que hacer un for para que cada
-	//entity recorra su pila de posiciones no?
+	
 	EntityManager::i().cleanDeleteQueue();
+	EntityManager::i().update(elapsedTime);
+	
+	PhysicsEngine::i().notifyCollisions();
+	MessageHandler::i().update();
 }
 
 void Game::render(float interpolation, Time elapsedTime)
