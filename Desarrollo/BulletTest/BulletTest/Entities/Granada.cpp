@@ -115,7 +115,10 @@ void Granada::handleMessage(const Message & message)
 
 		//solo se comprueba si te han quitado vida a ti mismo ya que la granada esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
 		Entity* myentity = EntityManager::i().getEntity(PLAYER);
-		myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f));
+		myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
+
+		//volvemos a resetear el guidLanzador
+		guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
 
 //		GraphicEngine::i().removeNode(m_nodo);
 
@@ -192,11 +195,12 @@ void Granada::serverShoot(TGranada g) {
 
 	if (estado == GRANADACARGADA) {
 
+		//nos guardamos el guid de la persona que lanza por si luego lo mata poder actualizar la tabla
+		guidLanzador = g.guid;
+
 		setPosition(g.origen);
 
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
+		
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 		btVector3 direccion2(g.direction.getX(), g.direction.getY(), g.direction.getZ());

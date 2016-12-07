@@ -55,9 +55,12 @@ int main() {
 	TGranada p_granada;
 	TImpulso impulso;
 	TCambioArma cambioArma;
+	TFilaTabla filaTabla;
 	Clock tiempoRestartVida;
+	TKill kill;
 	int idVida=0;
 	float danyo = 0;
+	
 	
 	
 	//std::vector<Player*> clientArray;
@@ -105,17 +108,22 @@ int main() {
 				Player *p = new Player(p_struct.name, p_struct.guid);
 				p->getRenderState()->setPosition(p_struct.position);
 				EntityManager::i().mostrarClientes();
+
+				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
+				filaTabla.guid = p_struct.guid;
+				filaTabla.name = p_struct.name;
+				filaTabla.kills = 0;
+				filaTabla.deaths = 0;
+				filaTabla.puntuacion = 0;
+				EntityManager::i().nuevaFila(filaTabla);
+
+				
 			}
 							   break;
 			case ID_NEW_INCOMING_CONNECTION: {
 				printf("Conexion entrante...\n");
 
-				//TODO: aqui podriamos ponerle la nueva posicion al cliente.
-				/*RakNet::BitStream bsOut;
-				bsOut.Write((RakNet::MessageID)GUID_NUESTRO);
-				bsOut.Write(packet->guid);
-				peer->Send(&bsOut, HIGH_PRIORITY,RELIABLE_ORDERED,0,packet->guid,false);
-				bsOut.Reset();*/
+
 			}
 
 											 break;
@@ -214,7 +222,7 @@ int main() {
 				//recibo el guid del cliente que ha sido disparado
 				bsIn.Read(guid_Pdisparado);
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviaDisparado(guid_Pdisparado, peer);
+				EntityManager::i().enviaDisparado(guid_Pdisparado, packet->guid, peer);
 
 			}
 			break;
@@ -409,7 +417,7 @@ int main() {
 				//recibo la estructura del cliente que ha muerto
 				bsIn.Read(p_struct);
 				//primero le cambio la posicion a ese player (le respawneo)
-				//TODO:aqui le asigno una posicion en una esquina del tablero ese raro que tenemos pero luego el servidor se tendra que encargar de poner posicion de respawneo buenas.
+				//TODO aqui le asigno una posicion en una esquina del tablero ese raro que tenemos pero luego el servidor se tendra que encargar de poner posicion de respawneo buenas.
 				p_struct.position = Vec3<float>(0.f, 0.f, 0.f);
 				//notifico a todos que ese cliente a muerto
 				EntityManager::i().notificarMuerte(p_struct, peer);
@@ -417,6 +425,26 @@ int main() {
 			}
 			break;
 
+			case ACTUALIZA_TABLA: {
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				RakNet::BitStream bsOut;
+
+
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//recibo el guid del cliente que ha sido disparado
+				bsIn.Read(kill);
+				EntityManager::i().aumentaKill(kill.guidKill);
+				EntityManager::i().aumentaMuerte(kill.guidDeath);
+				EntityManager::i().enviaTabla(peer);
+
+			}
+			break;
+
+			case MOSTRAR_TABLA: {
+
+			}
+			break;
 
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);

@@ -118,8 +118,9 @@ void Game::run()
 
 	//Espera a que termine el otro hilo para finalizar el programa
 	Cliente::i().apagar();
-	GraphicEngine::i().apagar();
+	
 	EntityManager::i().apagar();
+	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
 	MessageHandler::i().borrarContenido();
 	
@@ -331,11 +332,8 @@ bool Game::processEvents()
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 		GraphicEngine::i().toggleCamera();
 	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_9)) {
-		/*if (StateStack::i().currentState == States::ID::Menu) {
-			printf("Estado Menu\n");
-		}*/
-		return true;
+	else if (MastEventReceiver::i().keyPressed(KEY_TAB)) {
+		EntityManager::i().muestraTabla();
 	}
 
 	return false;

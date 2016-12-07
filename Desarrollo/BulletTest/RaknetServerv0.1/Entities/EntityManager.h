@@ -23,7 +23,7 @@ public:
 	void enviaNuevaPos(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
-	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer); 
+	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
 	void enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface *peer);
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
@@ -35,6 +35,10 @@ public:
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
 	void enviaCambioArma(TCambioArma &cambio, RakNet::RakPeerInterface *peer);
+	void nuevaFila(TFilaTabla fila);
+	void aumentaKill(RakNet::RakNetGUID &guid);
+	void aumentaMuerte(RakNet::RakNetGUID &guid);
+	void enviaTabla(RakNet::RakPeerInterface *peer);
 
 
 	//Inicializa todas las entities
@@ -67,6 +71,7 @@ private:
 	int m_nextID;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	std::unordered_map<int, Entity*> m_entities;
+	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 
 };
 

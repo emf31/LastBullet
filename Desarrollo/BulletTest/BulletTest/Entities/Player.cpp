@@ -122,7 +122,7 @@ void Player::update(Time elapsedTime)
 			isDying = false;
 		}
 	}
-	//TODO: esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
+	//TODO esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 	m_renderState.updatePositions(Vec3<float>(

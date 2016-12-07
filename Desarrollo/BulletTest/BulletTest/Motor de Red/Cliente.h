@@ -36,9 +36,10 @@ public:
 	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
 	void dispararRrocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	void playerMuerto();
-	void impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo);
+	void impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo, RakNet::RakNetGUID guidKill);
 	void aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid);
 	void cambioArma(int cambio, RakNet::RakNetGUID guid);
+	void actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath);
 
 	//Como si fuera el delete
 	void apagar();
@@ -57,6 +58,7 @@ private:
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
 	std::thread* hilo;
+	std::unordered_map <unsigned long, TFilaTabla> tablaProvisional;
 
 	std::mutex m;
 	

@@ -140,6 +140,24 @@ void EntityManager::cleanDeleteQueue()
 	delete_set.clear();
 }
 
+void EntityManager::muestraTabla()
+{
+	
+	std::cout << "*****************************************************************" << std::endl;
+	for (auto i = m_tabla.begin(); i != m_tabla.end(); ++i) {
+
+		std::cout << "//////////" << std::endl;
+		std::cout << "Nombre del player: " << i->second.name << std::endl;
+		std::cout << "Kills: " << i->second.kills << std::endl;
+		std::cout << "Death: " << i->second.deaths << std::endl;
+		std::cout << "Puntuacion: " << i->second.puntuacion << std::endl;
+		std::cout << "//////////" << std::endl;
+		
+
+	}
+	std::cout << "*****************************************************************" << std::endl;
+}
+
 Entity * EntityManager::getEntity(int id)
 {
 	auto found = m_entities.find(id);

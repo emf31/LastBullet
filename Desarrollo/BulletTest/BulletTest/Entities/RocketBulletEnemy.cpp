@@ -84,7 +84,7 @@ std::string RocketBulletEnemy::getClassName()
 float RocketBulletEnemy::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
 {
 
-	//TODO: aqui podriamos dibujar la shape
+	//TODO aqui podriamos dibujar la shape
 
 	return 0;
 

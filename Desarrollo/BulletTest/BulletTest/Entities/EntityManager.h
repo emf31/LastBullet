@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include <set>
 #include <list>
+#include "../Motor de Red/Estructuras.h"
 
 #define PLAYER 1000
 
@@ -50,6 +51,11 @@ public:
 
 	void cleanDeleteQueue();
 
+	void cambiaTabla(std::unordered_map <unsigned long, TFilaTabla> tabla) {
+		m_tabla = tabla;
+	}
+	void muestraTabla();
+
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
@@ -64,6 +70,8 @@ private:
 	int m_nextID;
 	
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
+	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
+	
 	std::set<Entity*> delete_set;
 
 };

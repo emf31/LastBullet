@@ -34,7 +34,8 @@ typedef struct {
 
 typedef struct {
 	float damage;
-	RakNet::RakNetGUID guid;
+	RakNet::RakNetGUID guidImpactado;
+	RakNet::RakNetGUID guidDisparado;
 }TImpactoRocket;
 
 typedef struct {
@@ -43,10 +44,23 @@ typedef struct {
 }TImpulso;
 
 typedef struct {
+	RakNet::RakNetGUID guidKill;
+	RakNet::RakNetGUID guidDeath;
+}TKill;
+
+typedef struct {
 	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
 	int cambio;
 	RakNet::RakNetGUID guid;
 }TCambioArma;
+
+typedef struct {
+	std::string name;
+	RakNet::RakNetGUID guid;
+	int kills;
+	int deaths;
+	int puntuacion;
+}TFilaTabla;
 
 
 
@@ -75,6 +89,8 @@ enum GameMessages
 	NUEVA_ARMA = ID_USER_PACKET_ENUM + 21,
 	ARMA_COGIDA = ID_USER_PACKET_ENUM + 22,
 	APLICAR_IMPULSO = ID_USER_PACKET_ENUM + 23,
-	CAMBIO_ARMA = ID_USER_PACKET_ENUM + 24
+	CAMBIO_ARMA = ID_USER_PACKET_ENUM + 24,
+	ACTUALIZA_TABLA = ID_USER_PACKET_ENUM + 25,
+	MOSTRAR_TABLA = ID_USER_PACKET_ENUM + 26
 
 };

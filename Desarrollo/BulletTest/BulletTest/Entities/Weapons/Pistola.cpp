@@ -111,8 +111,8 @@ void Pistola::shoot() {
 
 																					 //calcularDistancia(start, end);
 
-																					 ////////////////////////////////////////////////////////////
-																					 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
+				 ////////////////////////////////////////////////////////////
+				 //TODO CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
 				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
 				if (ent != EntityManager::i().getEntity(PLAYER))
 				{
@@ -135,7 +135,7 @@ void Pistola::shoot() {
 			}
 
 			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
-			//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
+			//TODO mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
 
 			//disparamos la bala en nuestro cliente
 			Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();

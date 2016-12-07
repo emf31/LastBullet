@@ -130,7 +130,9 @@ void Asalto::shoot()
 			}
 
 			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
-			//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
+			//TODO mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma 
+			//NOTA: aunque en verdad en el counter lo haces que el rayo de disparo sale desde la camara (los ojos) y no desde el arma, (ver una partida en modo espectador activando rayos X)
+			
 
 			//disparamos la bala en nuestro cliente
 			Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();

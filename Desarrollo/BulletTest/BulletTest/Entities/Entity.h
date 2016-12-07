@@ -61,7 +61,7 @@ public:
 	float getVida() {
 		return m_vida;
 	}
-	void restaVida(float cantidad);
+	void restaVida(float cantidad, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 		
 		
 	
@@ -93,7 +93,7 @@ protected:
 	RenderState m_renderState;
 	float m_vida;
 
-	//TODO:esto estaria en player
+	//TODO esto estaria en player
 	bool isDying = false;
 	Clock relojMuerte;
 
