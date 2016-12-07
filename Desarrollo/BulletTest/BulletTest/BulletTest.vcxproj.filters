@@ -127,6 +127,9 @@
     <ClCompile Include="Entities\WeaponDrops\WeaponDrop.cpp">
       <Filter>Source Code\Entities\WeaponDrops</Filter>
     </ClCompile>
+    <ClCompile Include="IA\MachineState.cpp">
+      <Filter>Source Code\IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -312,47 +315,20 @@
     <ClInclude Include="Entities\WeaponDrops\WeaponDrop.h">
       <Filter>Headers\Entities\WeaponDrops</Filter>
     </ClInclude>
+    <ClInclude Include="IA\StatesIA\StateIA.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Patrullar.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\MachineState.h">
+      <Filter>Headers\IA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Source Code">
-      <UniqueIdentifier>{45330646-68e3-4070-9cba-ab95ad9e1531}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Command">
-      <UniqueIdentifier>{19b770d7-4bf4-4d32-9771-852de22f8970}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Entities">
-      <UniqueIdentifier>{cce5d9bc-6499-4e8a-8e91-cb0fe7f217f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Handlers">
-      <UniqueIdentifier>{c89799ad-f92c-483d-8c10-0de76020f415}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Network">
-      <UniqueIdentifier>{c4d4e0b3-e8c2-448a-9df5-da24e4d4f7b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Motor">
-      <UniqueIdentifier>{6214818f-61dd-472d-82f5-1e6cdb48b327}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Otros">
-      <UniqueIdentifier>{d839b23e-7ffc-4cab-8409-51c9646cabb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Entities\WeaponDrops">
-      <UniqueIdentifier>{332778ab-9a11-4308-b2f0-3ba71dd16899}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Entities\Weapons">
-      <UniqueIdentifier>{b9705a29-9e16-4425-9040-aea8d679bb35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Otros\Unix">
-      <UniqueIdentifier>{db50364c-ef27-4cfc-959b-243759b67d8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Otros\Win32">
-      <UniqueIdentifier>{338acc5a-cf6b-4950-9f67-4ad50c96aff0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\States">
-      <UniqueIdentifier>{febefd0d-7a70-4874-b759-d053f123f209}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers">
       <UniqueIdentifier>{7e5cb38e-df18-4383-b886-8922cba7640f}</UniqueIdentifier>
     </Filter>
@@ -388,6 +364,51 @@
     </Filter>
     <Filter Include="Headers\Otros\Win32">
       <UniqueIdentifier>{1567c3a2-e20c-496e-924b-37d854ee5f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code">
+      <UniqueIdentifier>{45330646-68e3-4070-9cba-ab95ad9e1531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Command">
+      <UniqueIdentifier>{19b770d7-4bf4-4d32-9771-852de22f8970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Entities">
+      <UniqueIdentifier>{cce5d9bc-6499-4e8a-8e91-cb0fe7f217f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Entities\WeaponDrops">
+      <UniqueIdentifier>{332778ab-9a11-4308-b2f0-3ba71dd16899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Entities\Weapons">
+      <UniqueIdentifier>{b9705a29-9e16-4425-9040-aea8d679bb35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Handlers">
+      <UniqueIdentifier>{c89799ad-f92c-483d-8c10-0de76020f415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Network">
+      <UniqueIdentifier>{c4d4e0b3-e8c2-448a-9df5-da24e4d4f7b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Motor">
+      <UniqueIdentifier>{6214818f-61dd-472d-82f5-1e6cdb48b327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Otros">
+      <UniqueIdentifier>{d839b23e-7ffc-4cab-8409-51c9646cabb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Otros\Unix">
+      <UniqueIdentifier>{db50364c-ef27-4cfc-959b-243759b67d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Otros\Win32">
+      <UniqueIdentifier>{338acc5a-cf6b-4950-9f67-4ad50c96aff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\States">
+      <UniqueIdentifier>{febefd0d-7a70-4874-b759-d053f123f209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA">
+      <UniqueIdentifier>{50008096-fcb1-4d85-84ff-a10d8622be9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA">
+      <UniqueIdentifier>{fff18ddd-9e65-47e4-a079-82db5326020f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\StatesIA">
+      <UniqueIdentifier>{7bb3c964-ee1d-4eda-91e3-ac8afea02647}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

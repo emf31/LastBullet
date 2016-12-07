@@ -188,6 +188,9 @@
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
+    <ClInclude Include="IA\MachineState.h" />
+    <ClInclude Include="IA\StatesIA\Patrullar.h" />
+    <ClInclude Include="IA\StatesIA\StateIA.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor de Red\Cliente.h" />
     <ClInclude Include="Motor de Red\Estructuras.h" />
@@ -235,6 +238,7 @@
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
+    <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
