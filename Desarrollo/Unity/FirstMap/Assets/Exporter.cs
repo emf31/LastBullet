@@ -16,46 +16,63 @@ public class Exporter : MonoBehaviour {
 
 		foreach (object o in obj) {
 			GameObject g = (GameObject)o;
-            if (!g.name.Equals("Script")) {
-            GameObject parent=g.transform.parent.gameObject;
-            if (parent!=null)
-            {
-                if (parent.name.Equals("Script"))
-                {
-                    Objeto objeto = new Objeto();
+			if (!g.name.Equals("Script")&& !g.name.Equals("Main Camera") && !g.name.Equals("Directional Light")) {
+			GameObject parent=g.transform.parent.gameObject;
+			if (parent!=null)
+			{
+				if (parent.name.Equals("Script"))
+				{
+					Objeto objeto = new Objeto();
 
-                    objeto.nombre = g.name;
-                    objeto.posX = g.transform.position.x;
-                    objeto.posY = g.transform.position.y;
-                    objeto.posZ = g.transform.position.z;
+					objeto.nombre = g.name;
+					objeto.posX = g.transform.position.x;
+					objeto.posY = g.transform.position.y;
+					objeto.posZ = g.transform.position.z;
 
-                        //g.transform.sca
-                    objeto.sizeX = g.transform.lossyScale.x;
-                    objeto.sizeY = g.transform.lossyScale.y;
-                    objeto.sizeZ = g.transform.lossyScale.z;
+						//g.transform.sca
+					objeto.sizeX = g.transform.lossyScale.x;
+					objeto.sizeY = g.transform.lossyScale.y;
+					objeto.sizeZ = g.transform.lossyScale.z;
 
-                    //var a = ;
-                    objeto.rotX = g.transform.rotation.eulerAngles.x;
-                    objeto.rotY = g.transform.rotation.eulerAngles.y;
-                    objeto.rotZ = g.transform.rotation.eulerAngles.z;
+					//var a = ;
+					objeto.rotX = g.transform.rotation.eulerAngles.x;
+					objeto.rotY = g.transform.rotation.eulerAngles.y;
+					objeto.rotZ = g.transform.rotation.eulerAngles.z;
 
-                    Rigidbody rb;
-                    if (rb = g.GetComponent<Rigidbody>())
-                        objeto.masa = rb.mass;
-                    else
-                        objeto.masa = 0;
-                    g.scene.path.ToString();
+					Rigidbody rb;
+					if (rb = g.GetComponent<Rigidbody>()){
+						objeto.masa = rb.mass;
+						BoxCollider col = g.GetComponent<BoxCollider>();
+						objeto.colliderX = col.center.x;
+						objeto.colliderY = col.center.y;
+						objeto.colliderZ = col.center.z;
 
-                    if (g.name.Equals("terminal"))
-                        Debug.Log(AssetDatabase.GetAssetPath(g.gameObject));
+						objeto.colliderSizeX = col.size.x;
+						objeto.colliderSizeY = col.size.y;
+						objeto.colliderSizeZ = col.size.z;
+						}
+						else {
+						objeto.masa = 0;
+						objeto.colliderX = objeto.posX;
+						objeto.colliderY = objeto.posY;
+						objeto.colliderZ = objeto.posZ;
 
-                    raiz.addChild(objeto);
-                }
-            }
+						objeto.colliderSizeX = objeto.sizeX;
+						objeto.colliderSizeY = objeto.sizeY;
+						objeto.colliderSizeZ = objeto.sizeZ;
+						}
+					   // g.scene.path.ToString();
+
+					if (g.name.Equals("terminal"))
+						Debug.Log(AssetDatabase.GetAssetPath(g.gameObject));
+
+					raiz.addChild(objeto);
+				}
+			}
 		}
-        }
+		}
 
-        if (fileName == "") {
+		if (fileName == "") {
 			fileName = "C:\\defaultMapName.lbmap";
 		}
 		var sr = File.CreateText(fileName);
@@ -76,7 +93,10 @@ public class Objeto {
 	public float posX, posY, posZ;
 	public float sizeX, sizeY, sizeZ;
 	public float rotX, rotY, rotZ;
-    public float masa;
+	public float masa;
+
+	public float colliderX, colliderY, colliderZ;
+	public float colliderSizeX, colliderSizeY, colliderSizeZ;
 
 	public bool hasChild;
 
@@ -99,14 +119,14 @@ public class Raiz {
 
 	public string toJson() {
 		string json="[";
-        for (int i = 0; i < children.Count; i++) {
+		for (int i = 0; i < children.Count; i++) {
 			string objeto = JsonUtility.ToJson(children[i]);
 			if(i < children.Count-1) {
-                json += objeto + ",";
-            }else
-            {
-                json += objeto;
-            }
+				json += objeto + ",";
+			}else
+			{
+				json += objeto;
+			}
 		}
 		json = json + "]";
 		return json;
