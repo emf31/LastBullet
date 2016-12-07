@@ -7,13 +7,13 @@
 #include "../Entities/EntityManager.h"
 #include <iostream>
 
+#include "../IA/StatesIA/Patrullar.h"
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
-	
-	//m_pStateMachine = new MachineState<Enemy>(this);
-/*	m_pStateMachine->SetCurrentState(Patrullar::i());
-	m_pStateMachine->SetGlobalState(Patrullar::i());*/
+	m_pStateMachine = new MachineState(this);
+	m_pStateMachine->SetCurrentState(&Patrullar::i());
+	m_pStateMachine->SetGlobalState(&Patrullar::i());
 }
 
 
@@ -42,7 +42,7 @@ void Enemy::update(Time elapsedTime)
 		isMoving = false;
 
 
-	//m_pStateMachine->Update();
+	m_pStateMachine->Update();
 
 }
 

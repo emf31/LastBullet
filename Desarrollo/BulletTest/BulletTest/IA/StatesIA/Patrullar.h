@@ -1,31 +1,28 @@
 #pragma once
 #include "StateIA.h"
-
-class Patrullar 
-//	public StateIA<Enemy*>
+class Patrullar :
+	public StateIA
 {
 public:
 
-/*	static Patrullar& i() {
+	static Patrullar& i() {
 		static Patrullar singleton;
 		return singleton;
-	}*/
-
-/*	virtual void Enter(Enemy* pEnemy) {
-		std::cout << "Entra en Patrullar" << std::endl;
 	}
-	virtual void Execute(Enemy* pEnemy) {
-		std::cout << "Ejecuta Patrullar" << std::endl;
+	virtual void Enter(Entity* pEnemy) {
+		std::cout << "ZIZU" << std::endl;
+	}
+	virtual void Execute(Entity* pEnemy) {
+		std::cout << "ZIZU" << std::endl;
 
 	}
-	virtual void Exit(Enemy* pEnemy) {
-		std::cout << "Sale de Patrullar" << std::endl;
+	virtual void Exit(Entity* pEnemy) {
+		std::cout << "ZIZU" << std::endl;
 
-	}*/
+	}
 
 private:
-	Patrullar(){};
-
+	Patrullar() {};
 
 };
 

@@ -2,12 +2,11 @@
 
 #include "../IA/StatesIA/StateIA.h"
 
-template <class entity_type>
 class MachineState
 {
 public:
 
-	MachineState(entity_type* owner) :m_pOwner(owner),
+	MachineState(Entity* owner) :m_pOwner(owner),
 		m_pCurrentState(NULL),
 		m_pPreviousState(NULL),
 		m_pGlobalState(NULL)
@@ -15,9 +14,9 @@ public:
 	~MachineState();
 
 	//use these methods to initialize the FSM
-	/*void SetCurrentState(StateIA<entity_type>* s) { m_pCurrentState = s; }
-	void SetGlobalState(StateIA<entity_type>* s) { m_pGlobalState = s; }
-	void SetPreviousState(StateIA<entity_type>* s) { m_pPreviousState = s; }
+	void SetCurrentState(StateIA* s) { m_pCurrentState = s; }
+	void SetGlobalState(StateIA* s) { m_pGlobalState = s; }
+	void SetPreviousState(StateIA* s) { m_pPreviousState = s; }
 
 	//call this to update the FSM
 	void Update()const
@@ -29,10 +28,9 @@ public:
 	}
 
 	//change to a new state
-	void ChangeState(StateIA<entity_type>* pNewState)
+	void ChangeState(StateIA* pNewState)
 	{
-		assert(pNewState &&
-			"<StateMachine::ChangeState>: trying to change to a null state");
+
 		//keep a record of the previous state
 		m_pPreviousState = m_pCurrentState;
 		//call the exit method of the existing state
@@ -49,22 +47,23 @@ public:
 		ChangeState(m_pPreviousState);
 	}
 	//accessors
-	StateIA<entity_type>* CurrentState() const { return m_pCurrentState; }
-	StateIA<entity_type>* GlobalState() const { return m_pGlobalState; }
-	StateIA<entity_type>* PreviousState() const { return m_pPreviousState; }
+	StateIA* CurrentState()  { return m_pCurrentState; }
+	StateIA* GlobalState()  { return m_pGlobalState; }
+	StateIA* PreviousState()  { return m_pPreviousState; }
 	//returns true if the current state’s type is equal to the type of the
 	//class passed as a parameter.
-	bool isInState(const State<entity_type>& st)const;*/
+	bool isInState(const StateIA& st)const;
 
 private:
 
 	//a pointer to the agent that owns this instance
-/*	entity_type* m_pOwner;
-	StateIA<entity_type>* m_pCurrentState;
+	Entity* m_pOwner;
+	StateIA* m_pCurrentState;
 	//a record of the last state the agent was in
-	StateIA<entity_type>* m_pPreviousState;
+	StateIA* m_pPreviousState;
 	//this state logic is called every time the FSM is updated
-	StateIA<entity_type>* m_pGlobalState;	*/
+	StateIA* m_pGlobalState;
+	
 
 };
 

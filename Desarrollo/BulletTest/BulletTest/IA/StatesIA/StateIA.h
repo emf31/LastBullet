@@ -1,15 +1,14 @@
 #pragma once
-#include "../../Entities/Enemy.h"
+#include "../../Entities/Entity.h"
 
-//template <class entity_type>
 class StateIA
 {
 public:
 
-	/*virtual void Enter(entity_type*) = 0;
-	virtual void Execute(entity_type*) = 0;
-	virtual void Exit(entity_type*) = 0;*/
+	virtual void Enter(Entity* e) = 0;
+	virtual void Execute(Entity* e) = 0;
+	virtual void Exit(Entity* e) = 0;
 
-
+	StateIA() {};
 };
 
