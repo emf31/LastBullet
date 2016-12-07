@@ -1,17 +1,5 @@
-﻿  main.cpp
-  Cliente.cpp
-  Game.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(230): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(237): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(245): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(253): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(261): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-  Player.cpp
-  EntityManager.cpp
-  Enemy.cpp
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  MachineState.cpp
+﻿  Enemy.cpp
+  LINK : no se encontró C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

@@ -130,6 +130,9 @@
     <ClCompile Include="IA\MachineState.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
+    <ClCompile Include="IA\StatesIA\Patrullar.cpp">
+      <Filter>Source Code\IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -318,10 +321,10 @@
     <ClInclude Include="IA\StatesIA\StateIA.h">
       <Filter>Headers\IA\StatesIA</Filter>
     </ClInclude>
-    <ClInclude Include="IA\StatesIA\Patrullar.h">
-      <Filter>Headers\IA\StatesIA</Filter>
-    </ClInclude>
     <ClInclude Include="IA\MachineState.h">
+      <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Patrullar.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
   </ItemGroup>
