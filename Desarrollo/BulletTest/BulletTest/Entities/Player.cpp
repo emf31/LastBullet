@@ -206,14 +206,6 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}
-	else if (message.mensaje == "DIBUJAR_ROCKET") {
-		TBala* tRocket = static_cast<TBala*>(message.data);
-
-		RocketBulletEnemy* balaRocket = new RocketBulletEnemy(tRocket->position, tRocket->direction, tRocket->rotation);
-		
-		delete tRocket;
-
-	}
 	else if (message.mensaje == "NUEVO_ENEMIGO") {
 		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);
 

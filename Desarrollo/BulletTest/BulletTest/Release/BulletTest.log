@@ -1,12 +1,13 @@
-﻿  Granada.cpp
-  GunBullet.cpp
-  Enemy.cpp
+﻿  Enemy.cpp
   Entity.cpp
   EntityManager.cpp
-  KinematicCharacterController.cpp
+  Granada.cpp
+  GunBullet.cpp
   LifeObject.cpp
   PhysicsEntity.cpp
   Player.cpp
+Entities\Player.cpp(59): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(413): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
   RocketBullet.cpp
   RocketBulletEnemy.cpp
   AsaltoDrop.cpp
@@ -18,36 +19,23 @@
 Entities\Weapons\Pistola.cpp(60): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
   RocketLauncher.cpp
   Weapon.cpp
-  InputHandler.cpp
-  Compilando...
-  MessageHandler.cpp
-  MastEventReceiver.cpp
   Game.cpp
 Game.cpp(230): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
 Game.cpp(237): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
 Game.cpp(245): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
 Game.cpp(253): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
 Game.cpp(261): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-  main.cpp
+  InputHandler.cpp
+  Compilando...
+  MessageHandler.cpp
   Cliente.cpp
-  AnimatedSceneNode.cpp
-  Animation.cpp
   Camera.cpp
   GraphicEngine.cpp
   MapLoader.cpp
   PhysicsEngine.cpp
   RenderState.cpp
-  BasicSceneNode.cpp
-  SceneNode.cpp
-  Clock.cpp
   Lista.cpp
-  Time.cpp
-  Util.cpp
-  ClockImpl.cpp
-  State.cpp
-  Compilando...
-  StateFactory.cpp
-  StateStack.cpp
+  main.cpp
 BulletDynamics.lib(btRigidBody.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
 BulletDynamics.lib(btRigidBody.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletDynamics.lib(btDiscreteDynamicsWorld.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
@@ -64,14 +52,14 @@ BulletCollision.lib(btCollisionWorld.obj) : error LNK2038: se detectaron diferen
 BulletCollision.lib(btCollisionWorld.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletCollision.lib(btGhostObject.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
 BulletCollision.lib(btGhostObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
-BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
-BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletCollision.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
 BulletCollision.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletCollision.lib(btCollisionShape.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
 BulletCollision.lib(btCollisionShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletCollision.lib(btDbvtBroadphase.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
 BulletCollision.lib(btDbvtBroadphase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletCollision.lib(btConvexShape.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
 BulletCollision.lib(btConvexShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
 BulletCollision.lib(btCollisionDispatcher.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj

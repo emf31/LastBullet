@@ -30,5 +30,9 @@ public:
 	virtual void resetAmmoTotal() {
 		numCargadores= numCargadoresAsalto;
 	}
+
+private:
+	btVector3 SIZE_OF_WORLD;
+	btVector3 FUERZA;
 };
 

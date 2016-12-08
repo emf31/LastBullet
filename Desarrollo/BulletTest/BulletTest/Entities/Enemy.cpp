@@ -174,6 +174,11 @@ void Enemy::desencolaMovimiento()
 
 }
 
+void Enemy::lanzarGranada(TGranada g)
+{
+	granada->serverShoot(g);
+}
+
 
 void Enemy::updateAnimation()
 {

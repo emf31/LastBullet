@@ -30,5 +30,8 @@ public:
 		numCargadores= numCargadoresPistola;
 	}
 
+private:
+	btVector3 SIZE_OF_WORLD;
+	btVector3 FUERZA;
 };
 
