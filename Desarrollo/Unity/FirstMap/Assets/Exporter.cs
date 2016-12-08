@@ -53,9 +53,9 @@ public class Exporter : MonoBehaviour {
 						}
 						else {
 						objeto.masa = 0;
-						objeto.colliderX = objeto.posX;
-						objeto.colliderY = objeto.posY;
-						objeto.colliderZ = objeto.posZ;
+						objeto.colliderX = 0;
+						objeto.colliderY = 0;
+						objeto.colliderZ = 0;
 
 						objeto.colliderSizeX = objeto.sizeX;
 						objeto.colliderSizeY = objeto.sizeY;

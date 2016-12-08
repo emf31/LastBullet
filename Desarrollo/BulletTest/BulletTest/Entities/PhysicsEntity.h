@@ -42,6 +42,7 @@ public:
 	virtual std::string getClassName() { return "PhysicsEntity"; }
 
 
+
 	void setPosition(Vec3<float> pos) {
 
 		m_renderState.setPosition(pos);
@@ -51,8 +52,9 @@ public:
 		m_nodo->setPosition(pos);
 
 	}
-
+	Vec3<float> centerCollision;
 private:
 	btRigidBody* m_rigidBody;
+	
 };
 

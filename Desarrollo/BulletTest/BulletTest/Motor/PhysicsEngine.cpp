@@ -114,11 +114,11 @@ void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
 
 }
 
-btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, int body_state)
+btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, Vec3<float>centerCol , int body_state)
 {
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition()+centerCol);
 	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
 	transform.setOrigin((pos));
 

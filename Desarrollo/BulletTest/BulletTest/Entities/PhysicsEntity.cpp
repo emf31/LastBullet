@@ -45,7 +45,10 @@ void PhysicsEntity::update(Time elapsedTime)
 	//m_rigidBody->setm
 	//btVector3 Point2 = m_rigidBody->getCenterOfMassTransform().getOrigin();
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	//if(centerCollision==NULL)
+
+
+	m_renderState.updatePositions(Vec3<float>((f32)Point[0]-centerCollision.getX(), (f32)Point[1]-centerCollision.getY(), (f32)Point[2]-centerCollision.getX()));
 
 	//m_rigidBody->pos
 }

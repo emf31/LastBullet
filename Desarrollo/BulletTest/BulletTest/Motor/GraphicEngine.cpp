@@ -279,6 +279,7 @@ void GraphicEngine::cargarTexturas() {
 	//CARGAR TEXTURAS
 	irrDriver->getTexture("../media/wall.jpg");
 	irrDriver->getTexture("../media/ice0.jpg");
+	irrDriver->getTexture("../media/juliyotexture.jpg");
 	irrDriver->getTexture("../media/earth.jpg");
 	irrDriver->getTexture("../media/Dif_2.tga");
 	irrDriver->getTexture("../media/body01.png");
