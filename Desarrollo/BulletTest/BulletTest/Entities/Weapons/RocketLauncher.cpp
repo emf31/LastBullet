@@ -9,7 +9,7 @@ RocketLauncher::RocketLauncher() : Weapon()
 	recarga = milliseconds(1000);
 	cadencia = milliseconds(400);
 	numCargadores = numCargadoresRocket;
-
+	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 }
 
 
@@ -31,10 +31,7 @@ void RocketLauncher::update(Time elapsedTime)
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
-				if (relojrecarga.getElapsedTime() < recarga) {
-					//printf("recargando\n");
-				}
-				else {
+				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
 					disparos = 0;
 					numCargadores--;
@@ -76,43 +73,31 @@ void RocketLauncher::shoot() {
 	if (disparos < capacidadAmmo) {
 
 
-	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
-		disparos++;
-		//printf("DISPARANDO ROCKETLAUNCHER\n");
-		btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
+		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+			//aumentamos en uno el numero de disparos, para reducir la municion
+			disparos++;
 
-		btVector3 start(
-			GraphicEngine::i().getActiveCamera()->getPosition().getX(),
-			GraphicEngine::i().getActiveCamera()->getPosition().getY(),
-			GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
+			// posicion de la camara
+			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			start.setY(start.getY() + 3.f);
 
-		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-		Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
-		direccion.normalise();
+			//añadimos un poco de desvio en el arma
+			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-		btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+			btVector3 target = bt(GraphicEngine::i().getActiveCamera()->getTarget());
+			btVector3 direccion = target - bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			direccion.normalize();
 
-		btVector3 end = start + (direccion2*SIZE_OF_WORLD);
+			RocketBullet* bala = new RocketBullet(cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());
+			bala->cargarContenido();
 
-		btCollisionWorld::AllHitsRayResultCallback ray(start, end);
+			if (Cliente::i().isConected()) {
+				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+				Cliente::i().dispararRocket(cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());
+			}
 
-		PhysicsEngine::i().m_world->rayTest(start, end, ray);
-
-		//disparamos la bala en nuestro cliente
-		Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
-		posDisparo.addY(3.f);	//esto es para no dispararlo desde el suelo y que no detecte colision con el suelo
-		posDisparo += Vec3<float>(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
-
-
-		RocketBullet* bala = new RocketBullet(posDisparo, direccion, GraphicEngine::i().getActiveCamera()->getRotation());
-
-		if (Cliente::i().isConected()) {
-			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-			Cliente::i().dispararRocket(posDisparo, direccion, GraphicEngine::i().getActiveCamera()->getRotation());
+			relojCadencia.restart();
 		}
-
-		relojCadencia.restart();
-	}
 
 	}
 

@@ -356,7 +356,7 @@ bool Game::processEvents()
 void Game::update(Time elapsedTime)
 {
 
-	
+	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
 	EntityManager::i().update(elapsedTime);
 	

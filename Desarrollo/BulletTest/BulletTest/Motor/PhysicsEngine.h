@@ -7,6 +7,8 @@
 #include "../Entities/Entity.h"
 #include "../Otros/Time.hpp"
 
+#include <unordered_set>
+
 #define BIT(x) (1<<(x))
 namespace col {
 	enum Collisions {
@@ -29,6 +31,8 @@ namespace col {
 	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character;
 	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja;
 }
+
+typedef std::shared_ptr<btRigidBody> RigidPtr;
 
 class PhysicsEngine
 {
@@ -70,6 +74,8 @@ public:
 	bool removeRigidBody(btRigidBody* body);
 	bool removeGhostObject(btGhostObject * body);
 
+	void cleanDeleteObjects();
+
 	//aqui se borran todos los punteros
 	void apagar();
 
@@ -81,7 +87,9 @@ private:
 	btGhostPairCallback* m_pGhostPairCallBack;
 
 	std::list<btRigidBody*> m_rigidBodies;
-	std::list<btCollisionShape*> m_collisionShapes;
+	//std::list<btCollisionShape*> m_collisionShapes;
+
+	std::unordered_set<btCollisionObject*> collisions_set;
 
 	static const Time tickPhysics;
 

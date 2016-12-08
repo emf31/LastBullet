@@ -37,10 +37,7 @@ void Asalto::update(Time elapsedTime)
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
-				if (relojrecarga.getElapsedTime() < recarga) {
-					//printf("recargando\n");
-				}
-				else {
+				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
 					disparos = 0;
 					numCargadores--;
@@ -65,7 +62,11 @@ void Asalto::cargarContenido()
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
-
+	m_nodo->setTexture("../media/ice0.jpg", 1);
+	m_nodo->setTexture("../media/ice0.jpg", 2);
+	m_nodo->setTexture("../media/ice0.jpg", 3);
+	m_nodo->setTexture("../media/ice0.jpg", 4);
+	m_nodo->setTexture("../media/ice0.jpg", 5);
 }
 
 void Asalto::borrarContenido()
@@ -126,17 +127,12 @@ void Asalto::shoot()
 				}
 			}
 
-			//disparamos la bala en nuestro cliente
-			Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
-			posDisparo += Vec3<float>(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
-
-
-			GunBullet* bala = new GunBullet(posDisparo, cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
 			if (Cliente::i().isConected()) {
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispararBala(posDisparo, cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			}
 
 			relojCadencia.restart();

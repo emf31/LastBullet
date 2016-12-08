@@ -21,6 +21,8 @@ void Pistola::inicializar()
 	recarga = milliseconds(1000);
 	cadencia = milliseconds(350);
 	numCargadores = numCargadoresPistola;
+	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
+	FUERZA = btVector3(10, 10, 10);
 }
 
 void Pistola::update(Time elapsedTime)
@@ -78,84 +80,59 @@ void Pistola::shoot() {
 
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
-			//printf("DISPARANDO PISTOLA\n");
-			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
-			btVector3 FUERZA(10,10,10);
 
-			btVector3 start(
-				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
-				GraphicEngine::i().getActiveCamera()->getPosition().getY(),
-				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
+			// posicion de la camara
+			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition());
 
-			Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-			Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
-			direccion.normalise();
+			//añadimos un poco de desvio en el arma
+			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-			btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+			btVector3 target = bt(GraphicEngine::i().getActiveCamera()->getTarget());
+			btVector3 direccion = target - bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			direccion.normalize();
 
-			btVector3 end = start + (direccion2*SIZE_OF_WORLD);
+			btVector3 end = start + (direccion*SIZE_OF_WORLD);
 
 			btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
 			PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-			Vec3<float> posicionImpacto;
+			btVector3 posicionImpacto;
 
 
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
 			
-
-				//Entity* ent = static_cast<Entity*>(ray.m_collisionObjects[nearestObject]->getUserPointer());
-
-				// = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-
-																					 //calcularDistancia(start, end);
-
-																					 ////////////////////////////////////////////////////////////
-																					 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
+				//Veo la entity que colisiona
 				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+
 				if (ent != EntityManager::i().getEntity(PLAYER))
 				{
-					//Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
 					if (ent->getClassName() == "Enemy") {
 						Message msg(ent, "COLISION_BALA", NULL);
 						MessageHandler::i().sendMessage(msg);
 					}
-
-
-					posicionImpacto = Vec3<float>(ray.m_hitPointWorld.x(), ray.m_hitPointWorld.y(), ray.m_hitPointWorld.z());
+					//Para mover objetos del mapa
+					posicionImpacto = ray.m_hitPointWorld;
 
 					if (ent->getClassName() == "PhysicsEntity") {
-						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion2*FUERZA, btVector3(posicionImpacto.getX(), posicionImpacto.getY(), posicionImpacto.getZ()));
-						std::cout << ent->getName() << std::endl;
+						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
 					}
 				}
 
 				
 			}
 
-			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
-			//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
-
-			//disparamos la bala en nuestro cliente
-			Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
-			posDisparo += Vec3<float>(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
-
-			//	  if (arma != LANZACOHETES)
-			GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
-			//	else {
-			//		RocketBullet* bala = new RocketBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-			//	  }
-
 
 			if (Cliente::i().isConected()) {
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			}
-			//}
 
 			relojCadencia.restart();
 		}
