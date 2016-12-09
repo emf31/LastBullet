@@ -53,7 +53,7 @@ void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<
 		 sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
 	}
 	else{
-		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", "");
+		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "");
 	}
 	
 	
