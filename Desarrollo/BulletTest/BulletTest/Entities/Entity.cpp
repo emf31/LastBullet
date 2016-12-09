@@ -24,6 +24,7 @@ Entity::Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name,
 
 	//cada entity que se crea llama a entity manager para registrarse
 	EntityManager::i().registerEntity(this);
+
 }
 
 
