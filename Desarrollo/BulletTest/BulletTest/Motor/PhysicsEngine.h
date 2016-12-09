@@ -28,7 +28,7 @@ namespace col {
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
-	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character;
+	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
 	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja;
 }
 
@@ -58,7 +58,7 @@ public:
 	void notifyCollisions();
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
-	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa,bool haveMesh ,int body_state = ACTIVE_TAG);
+	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa,bool haveMesh , Vec3<float> centerCol = Vec3<float>(0, 0, 0),int body_state = ACTIVE_TAG);
 
 	btRigidBody* createCapsuleRigidBody(Entity* entity, float height, float radius, float masa, int body_state = ACTIVE_TAG);
 
