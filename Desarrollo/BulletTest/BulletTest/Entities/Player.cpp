@@ -154,7 +154,7 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
@@ -171,7 +171,7 @@ void Player::cargarContenido()
 
 	btTransform startTransform;
 	startTransform.setIdentity();
-	startTransform.setOrigin(btVector3(0, 100, 0)); // check
+	startTransform.setOrigin(btVector3(0, 30, 0)); // check
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(this);

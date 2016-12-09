@@ -19,7 +19,7 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	if(mesh!="")
 		Node = irrScene->addMeshSceneNode(irrScene->getMesh(mesh));
 	else
-		Node = irrScene->addCubeSceneNode(1.0f);
+		Node = irrScene->addCubeSceneNode(2.0f);
 
 	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
 	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
