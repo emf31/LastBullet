@@ -15,6 +15,7 @@
 #include "../Entities/LifeObject.h"
 #include "../Entities/WeaponDrops/WeaponDrop.h"
 #include "../Entities/WeaponDrops/AsaltoDrop.h"
+#include "../Entities/RocketBulletEnemy.h"
 
 Cliente::Cliente()
 {
@@ -23,11 +24,9 @@ Cliente::Cliente()
 
 
 void Cliente::update() {
-	
+		
 
 	
-
-	//while (!shutdown) {
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 			switch (packet->data[0]) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -49,6 +48,7 @@ void Cliente::update() {
 
 				printf("Nuestra conexion se ha aceptado.\n");
 				servidor = packet->guid;
+
 
 				//Esta variable indica que el servidor a aceptado la conexion
 				conectado = true;
@@ -167,7 +167,7 @@ void Cliente::update() {
 				bsIn.Read(idVida);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-				//TODO: esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
+				//TODO esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
 				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida));
 				v->VidaCogida();
 				//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
@@ -184,29 +184,12 @@ void Cliente::update() {
 				bsIn.Read(nuevoplayer);
 				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
 				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(nuevoplayer.guid));
-				//e->updateEnemigo(nuevoplayer.position);
-				//e = nullptr;
-				//std::cout << "///////////////////INICIO MOVIMIENTO////////////////////////" << std::endl;
-				//std::cout << "++ENVIO MENSAJE MOVE A LA ENTITY" << e->getName() << std::endl;
 
-
-				//ANTEEES!!
-				//Message msg1(e, "MOVE", static_cast<void*>(&nuevoplayer));
-				//MessageHandler::i().sendMessage(msg1);
-
-				//e->updateEnemigo(nuevoplayer.position);
-
-				//NUEVO
 				if (e != NULL) {
 					e->encolaMovimiento(nuevoplayer);
 				}
 				
-
-				//std::cout << "///////////////////FINAL MOVIMIENTO////////////////////////" << std::endl;
-				
-				//std::cout << "///////////////////INCIO LISTA////////////////////////" << std::endl;
-				//EntityManager::i().muestraPosClientes();
-				//std::cout << "///////////////////FINAL LISTA////////////////////////" << std::endl;
+				e = nullptr;
 
 			}
 			break;
@@ -238,11 +221,10 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(balaDisparada);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 
-				Message msg1(EntityManager::i().getEntity(PLAYER), "DIBUJARBALA", static_cast<void*>(&balaDisparada));
-				MessageHandler::i().sendMessage(msg1);
 
+				GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+				bala->cargarContenido();
 
 			}
 			break;
@@ -254,10 +236,8 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(balaDisparada);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 
-				Message msg1(EntityManager::i().getEntity(PLAYER), "DIBUJAR_ROCKET", static_cast<void*>(&balaDisparada));
-				MessageHandler::i().sendMessage(msg1);
+				RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
 
 			}
@@ -269,12 +249,10 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				TGranada g;
-
-				bsIn.Read(g);
+				bsIn.Read(granada);
 				
-				Granada* ent = static_cast<Granada*>(EntityManager::i().getRaknetEntity(g.guid));
-				ent->serverShoot(g);
+				Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
+				ent->lanzarGranada(granada);
 
 
 			}
@@ -287,12 +265,12 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
 				bsIn.Read(t_cambioArma);
-				//Bullet* bala = new Bullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
 				if (t_cambioArma.cambio == 1) {
-					Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "ARMAUP", static_cast<void*>(&granada));
+					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
 					MessageHandler::i().sendMessage(msg1);
 				}else {
-					Message msg1(EntityManager::i().getRaknetEntity(granada.guid), "ARMADOWN", static_cast<void*>(&granada));
+					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
 					MessageHandler::i().sendMessage(msg1);
 				}
 
@@ -306,12 +284,13 @@ void Cliente::update() {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
+				bsIn.Read(guidDispara);
 
-				//TODO:ahora mismo no hace falta leer, aqui te pasan el arma con la cual disparaste.
-				//bsIn.Read(desconectado);
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				EntityManager::i().getEntity(PLAYER)->restaVida(20);
+				EntityManager::i().getEntity(PLAYER)->restaVida(20, guidDispara);
+				//TODO ahora le quitamos siempre 20 de vida en un futuro podriamos pensar en quitar vida dependiendo de donde impacte la bala
 
 			}
 			break;
@@ -325,10 +304,11 @@ void Cliente::update() {
 				std::cout << "ME HAN DADO CON EL ROCKET" << std::endl;
 
 				
-				bsIn.Read(danyo);
+				bsIn.Read(impacto);
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				EntityManager::i().getEntity(PLAYER)->restaVida(danyo);
+				//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
+				EntityManager::i().getEntity(PLAYER)->restaVida(impacto.damage,impacto.guidDisparado);
 
 			}
 			break;
@@ -349,6 +329,22 @@ void Cliente::update() {
 			}
 			break;
 
+
+			case ACTUALIZA_TABLA:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(tablaProvisional);
+
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				EntityManager::i().cambiaTabla(tablaProvisional);
+
+			}
+			break;
+
+
 			case MUERTE:
 			{
 
@@ -357,7 +353,7 @@ void Cliente::update() {
 
 				bsIn.Read(nuevoplayer);
 				
-				std::cout << "el player " << nuevoplayer.name << " ha muerto" << std::endl;
+				//std::cout << "el player " << p.name << " ha muerto" << std::endl;
 
 				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
 					//es el player
@@ -366,13 +362,13 @@ void Cliente::update() {
 					player->resetAll();
 					player = nullptr;
 
-					//TODO: esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
+					//TODO esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
 					//ademas que desactivara el draw de esta entetity para que no puedeas moverte ni nada mientras estas muerto.
 					EntityManager::i().getEntity(PLAYER)->resetVida();
 				}
 				else {
 					//es un enemigo
-					Enemy* enemigo= (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 					enemigo->setPosition(nuevoplayer.position);
 					enemigo = nullptr;
 				}
@@ -452,7 +448,7 @@ void Cliente::enviarMovimiento(Player* p) {
 
 	bsOut.Write((RakNet::MessageID)MOVIMIENTO);
 
-	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
+	//TODO asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
 	paquetemov.position = p->getRenderState()->getPosition();
 	paquetemov.rotation = p->getRenderState()->getRotation();
 	paquetemov.velocidad = p->getVelocity();
@@ -536,7 +532,7 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 	bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
 
 	//////////////////////////////////////////////////////
-	//TODO: asumimios que el disparo ha sido certero del jugador que dispara con un enemigo, luego simplemente habria que cambiar la logica de ahora (que es pulsar la R, esta en player)
+	//TODO asumimios que el disparo ha sido certero del jugador que dispara con un enemigo, luego simplemente habria que cambiar la logica de ahora (que es pulsar la R, esta en player)
 	//por la de que si la bala colisiona de verdad, si la bala colisiona de verdad desencadenaria toda la logica que se produce al pulsar la R ahora.
 	/////////////////////////////////////////////////////
 	//bsOut.Write(aqui pasariamos el guid del enemigo al que le hemos dado cuando sepamos con quien ha colisionado la bala)
@@ -546,7 +542,7 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 	//bsOut.Write(guid);
 	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
 
-	//TODO: le hemos asignado id=3 a los enemigos provisionalmente, para poder restarle vida a un enemigo puesto que no sabriamos su id.
+
 	bsOut.Write(guid);
 	//printf("envio mensaje del disparo\n");
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
@@ -582,7 +578,7 @@ void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<flo
 
 }
 
-void Cliente::dispararRrocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
+void Cliente::dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
 {
 	RakNet::BitStream bsOut;
 
@@ -616,7 +612,7 @@ void Cliente::playerMuerto()
 	bsOut.Reset();
 }
 
-void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo)
+void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo, RakNet::RakNetGUID guidKill)
 {
 	TImpactoRocket impact;
 	RakNet::BitStream bsOut;
@@ -624,7 +620,8 @@ void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo)
 	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
 
 	impact.damage = float(danyo);
-	impact.guid = palayerDanyado;
+	impact.guidImpactado = palayerDanyado;
+	impact.guidDisparado = guidKill;
 	bsOut.Write(impact);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
@@ -652,6 +649,19 @@ void Cliente::cambioArma(int cambio, RakNet::RakNetGUID guid)
 	bsOut.Write(swap);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
+}
+
+void Cliente::actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath)
+{
+	RakNet::BitStream bsOut;
+	TKill kill;
+	kill.guidKill = guidKill;
+	kill.guidDeath = guidDeath;
+	bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
+	bsOut.Write(kill);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	bsOut.Reset();
+
 }
 
 

@@ -115,7 +115,7 @@ void Player::update(Time elapsedTime)
 	GraphicEngine::i().actualizarInterfaz();
 
 
-	//TODO: esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
+	//TODO esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 	m_renderState.updatePositions(Vec3<float>(
@@ -205,22 +205,6 @@ void Player::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
 		
-	}
-	else if(message.mensaje == "DIBUJARBALA"){
-		TBala* tBala = static_cast<TBala*>(message.data);
-
-		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
-
-		delete tBala;
-
-	}
-	else if (message.mensaje == "DIBUJAR_ROCKET") {
-		TBala* tRocket = static_cast<TBala*>(message.data);
-
-		RocketBulletEnemy* balaRocket = new RocketBulletEnemy(tRocket->position, tRocket->direction, tRocket->rotation);
-		
-		delete tRocket;
-
 	}
 	else if (message.mensaje == "NUEVO_ENEMIGO") {
 		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);

@@ -1,46 +1,118 @@
-﻿  stdafx.cpp
-  DynamicCharacterController.cpp
-Entities\DynamicCharacterController.cpp(308): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  Enemy.cpp
-Entities\Enemy.cpp(71): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+﻿  Enemy.cpp
   Entity.cpp
-Entities\Entity.cpp(46): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
   EntityManager.cpp
-Entities\EntityManager.cpp(100): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  Granada.cpp
+  GunBullet.cpp
+  LifeObject.cpp
   PhysicsEntity.cpp
-Entities\PhysicsEntity.cpp(49): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
   Player.cpp
-Entities\Player.cpp(314): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  Rocket.cpp
-Entities\Rocket.cpp(64): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  InputHandler.cpp
-Handlers\InputHandler.cpp(148): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  MessageHandler.cpp
-Handlers\MessageHandler.cpp(29): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  MastEventReceiver.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\MastEventReceiver.hpp(27): fatal error C1083: No se puede abrir el archivo incluir: 'irrlicht.h': No such file or directory
+Entities\Player.cpp(59): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(413): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+  RocketBullet.cpp
+  RocketBulletEnemy.cpp
+  AsaltoDrop.cpp
+  PistolaDrop.cpp
+  RocketLauncherDrop.cpp
+  WeaponDrop.cpp
+  Asalto.cpp
+  Pistola.cpp
+Entities\Weapons\Pistola.cpp(60): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  RocketLauncher.cpp
+  Weapon.cpp
   Game.cpp
-Game.cpp(138): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  main.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\Otros/vec3.hpp(6): fatal error C1083: No se puede abrir el archivo incluir: 'irrlicht.h': No such file or directory
-  Camera.cpp
-Motor\Camera.cpp(54): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  GraphicEngine.cpp
-Motor\GraphicEngine.cpp(140): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  PhysicsEngine.cpp
-Motor\PhysicsEngine.cpp(111): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  RenderState.cpp
-Motor\RenderState.cpp(142): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  SceneNode.cpp
-Motor\SceneNode.cpp(45): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  Clock.cpp
-Otros\Clock.cpp(61): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  Time.cpp
-Otros\Time.cpp(258): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  Vec2f.cpp
-Otros\Vec2f.cpp(149): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+Game.cpp(230): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(237): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(245): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(253): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(261): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+  InputHandler.cpp
   Compilando...
-  Vec3f.cpp
-Otros\Vec3f.cpp(168): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
-  ClockImpl.cpp
-Otros\Win32\ClockImpl.cpp(69): fatal error C1010: final de archivo inesperado al buscar la directiva de encabezado precompilado. Compruebe si olvidó agregar '#include "stdafx.h"' al código fuente?
+  MessageHandler.cpp
+  Cliente.cpp
+  Camera.cpp
+  GraphicEngine.cpp
+  MapLoader.cpp
+  PhysicsEngine.cpp
+  RenderState.cpp
+  Lista.cpp
+  main.cpp
+BulletDynamics.lib(btRigidBody.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletDynamics.lib(btRigidBody.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletDynamics.lib(btDiscreteDynamicsWorld.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletDynamics.lib(btDiscreteDynamicsWorld.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletDynamics.lib(btSequentialImpulseConstraintSolver.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletDynamics.lib(btSequentialImpulseConstraintSolver.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletDynamics.lib(btTypedConstraint.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletDynamics.lib(btTypedConstraint.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletDynamics.lib(btConeTwistConstraint.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletDynamics.lib(btConeTwistConstraint.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletDynamics.lib(btGeneric6DofConstraint.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletDynamics.lib(btGeneric6DofConstraint.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCollisionWorld.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCollisionWorld.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btGhostObject.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btGhostObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCollisionShape.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCollisionShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btDbvtBroadphase.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btDbvtBroadphase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btConvexShape.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btConvexShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCollisionDispatcher.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCollisionDispatcher.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btManifoldResult.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btManifoldResult.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btSimulationIslandManager.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btSimulationIslandManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btBvhTriangleMeshShape.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btBvhTriangleMeshShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btOverlappingPairCache.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btOverlappingPairCache.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btConvexConvexAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btConvexConvexAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btEmptyCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btEmptyCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btConvexConcaveCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btConvexConcaveCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCompoundCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCompoundCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCompoundCompoundCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCompoundCompoundCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btConvexPlaneCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btConvexPlaneCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btBoxBoxCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btBoxBoxCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btSphereSphereCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btSphereSphereCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btSphereTriangleCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btSphereTriangleCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btDbvt.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btDbvt.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btPolyhedralConvexShape.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btPolyhedralConvexShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btUnionFind.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btUnionFind.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btQuantizedBvh.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btQuantizedBvh.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btOptimizedBvh.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btOptimizedBvh.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btActivatingCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btActivatingCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btPolyhedralContactClipping.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btPolyhedralContactClipping.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btHashedSimplePairCache.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btHashedSimplePairCache.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+BulletCollision.lib(btConvexPolyhedron.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+BulletCollision.lib(btConvexPolyhedron.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+LinearMath.lib(btConvexHullComputer.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+LinearMath.lib(btConvexHullComputer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+LinearMath.lib(btGeometryUtil.obj) : error LNK2038: se detectaron diferencias para '_ITERATOR_DEBUG_LEVEL': el valor '0' no coincide con el valor '2' en Granada.obj
+LinearMath.lib(btGeometryUtil.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MD_DynamicRelease' no coincide con el valor 'MDd_DynamicDebug' en Granada.obj
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1319: diferencias detectadas: 78

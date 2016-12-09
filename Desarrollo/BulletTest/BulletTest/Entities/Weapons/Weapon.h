@@ -20,7 +20,7 @@ class Weapon :
 {
 public:
 	Weapon();
-	~Weapon();
+	virtual ~Weapon();
 
 	virtual void inicializar() = 0;
 

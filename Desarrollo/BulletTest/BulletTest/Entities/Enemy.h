@@ -16,6 +16,8 @@
 
 #include "../Otros/SafeQueue.h"
 
+#include "../IA/MachineState.h"
+
 class Enemy : public Entity
 {
 public:
@@ -38,14 +40,18 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
+
+
 	void encolaMovimiento(TPlayer pos);
 	void desencolaMovimiento();
 
-	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
-	std::mutex m;
+//	MachineState* GetFSM()const { return m_pStateMachine; }
+	void lanzarGranada(TGranada g);
 
 
 private:
+
+	MachineState* m_pStateMachine;
 
 	float radius;
 	float height;

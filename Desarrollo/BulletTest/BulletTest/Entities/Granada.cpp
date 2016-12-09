@@ -42,6 +42,8 @@ void Granada::update(Time elapsedTime)
 			Message msg1(this, "BORRATE", NULL);
 
 			MessageHandler::i().sendMessage(msg1);
+
+
 			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		
 		}
@@ -115,7 +117,10 @@ void Granada::handleMessage(const Message & message)
 
 		//solo se comprueba si te han quitado vida a ti mismo ya que la granada esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
 		Entity* myentity = EntityManager::i().getEntity(PLAYER);
-		myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f));
+		myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
+
+		//volvemos a resetear el guidLanzador
+		guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
 
 //		GraphicEngine::i().removeNode(m_nodo);
 
@@ -189,6 +194,9 @@ void Granada::serverShoot(TGranada& g) {
 		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
+		//nos guardamos el guid de la persona que lanza por si luego lo mata poder actualizar la tabla
+		guidLanzador = g.guid;
 
 		setPosition(g.origen);
 

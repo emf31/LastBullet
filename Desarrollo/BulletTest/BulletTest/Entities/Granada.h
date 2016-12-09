@@ -50,7 +50,7 @@ public:
 
 private:
 	int estado=GRANADACARGADA;
-
+	RakNet::RakNetGUID guidLanzador=RakNet::UNASSIGNED_RAKNET_GUID;
 	Vec3<float> fuerza;
 	float radioExplosion;
 	btGhostObject* m_explosion;

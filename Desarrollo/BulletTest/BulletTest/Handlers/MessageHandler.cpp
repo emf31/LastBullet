@@ -13,8 +13,12 @@ void MessageHandler::update()
 		Message message;
 		message = m_messages.dequeue();
 
+		Entity* ent = static_cast<Entity*>(message.data);
+
 		//Enviamos el mensaje a la entity
 		message.entity->handleMessage(message);
+
+		
 		
 	}
 	//m.unlock();

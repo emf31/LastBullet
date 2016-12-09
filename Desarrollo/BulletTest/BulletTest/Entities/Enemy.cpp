@@ -7,11 +7,13 @@
 #include "../Entities/EntityManager.h"
 #include <iostream>
 
+#include "../IA/StatesIA/Patrullar.h"
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
-	
-	
+	m_pStateMachine = new MachineState(this);
+	m_pStateMachine->SetCurrentState(&Patrullar::i());
+	m_pStateMachine->SetGlobalState(&Patrullar::i());
 }
 
 
@@ -38,6 +40,9 @@ void Enemy::update(Time elapsedTime)
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
 		isMoving = false;
+
+
+	m_pStateMachine->Update();
 
 }
 
@@ -167,6 +172,11 @@ void Enemy::desencolaMovimiento()
 		
 	}
 
+}
+
+void Enemy::lanzarGranada(TGranada g)
+{
+	granada->serverShoot(g);
 }
 
 

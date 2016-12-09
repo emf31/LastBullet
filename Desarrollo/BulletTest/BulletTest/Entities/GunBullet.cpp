@@ -9,8 +9,6 @@ m_position(position), m_direction(direction), m_velocity(450), m_rotation(rotati
 	float distancia = Vec3<float>::getDistance(position, finalposition);
 	m_lifetime = seconds(distancia / m_velocity);
 	timelifeclock.restart();
-	//NOTA: llevar cuidado con esto puede que pete aqui
-	cargarContenido();
 }
 
 
@@ -27,11 +25,9 @@ void GunBullet::update(Time elapsedTime)
 {
 	m_renderState.updateVelocity(elapsedTime.asSeconds(), (m_direction*m_velocity));
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
-		//EntityManager::i().removeEntity(this);
-		
 
+		//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
 		Message msg1(this, "BORRATE", NULL);
-
 		MessageHandler::i().sendMessage(msg1);
 	}
 	
@@ -58,7 +54,6 @@ void GunBullet::handleMessage(const Message & message)
 	if (message.mensaje == "BORRATE") {
 		EntityManager::i().removeEntity(this);
 		GraphicEngine::i().removeNode(m_nodo);
-		//delete this;
 	}
 }
 

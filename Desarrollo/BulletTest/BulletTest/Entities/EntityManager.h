@@ -4,8 +4,11 @@
 #include "Entity.h"
 #include <set>
 #include <list>
+#include "../Motor de Red/Estructuras.h"
 
-#define PLAYER 1000
+
+
+static const int PLAYER = 1000;
 
 class EntityManager
 {
@@ -46,15 +49,19 @@ public:
 	void registerEntity(Entity* entity);
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	void removeRaknetEntity(Entity* entity);
 
 	void cleanDeleteQueue();
+
+	void cambiaTabla(std::unordered_map <unsigned long, TFilaTabla> tabla) {
+		m_tabla = tabla;
+	}
+	void muestraTabla();
 
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
 
-	std::unordered_map<int, Entity*> m_entities;
+	
 
 private:
 	EntityManager(EntityManager const&);
@@ -63,7 +70,10 @@ private:
 
 	int m_nextID;
 	
+	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
+	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
+	
 	std::set<Entity*> delete_set;
 
 };
