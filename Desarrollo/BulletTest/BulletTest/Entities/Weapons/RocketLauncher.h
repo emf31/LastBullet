@@ -31,5 +31,7 @@ public:
 	virtual void resetAmmoTotal() {
 		numCargadores = numCargadoresRocket;
 	}
+private:
+	btVector3 SIZE_OF_WORLD;
 };
 

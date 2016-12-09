@@ -42,17 +42,16 @@ public:
 
 
 
-	void encolaMovimiento(TPlayer pos);
+	void encolaMovimiento(TMovimiento mov);
 	void desencolaMovimiento();
 
-	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
-	std::mutex m;
 //	MachineState* GetFSM()const { return m_pStateMachine; }
+	void lanzarGranada(TGranada g);
 
 
 private:
 
-	MachineState* m_pStateMachine;
+	//MachineState* m_pStateMachine;
 
 	float radius;
 	float height;

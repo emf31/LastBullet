@@ -42,6 +42,8 @@ void Granada::update(Time elapsedTime)
 			Message msg1(this, "BORRATE", NULL);
 
 			MessageHandler::i().sendMessage(msg1);
+
+
 			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		
 		}

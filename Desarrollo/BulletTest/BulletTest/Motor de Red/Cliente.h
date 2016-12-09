@@ -35,7 +35,7 @@ public:
 	void enviarDisparo(RakNet::RakNetGUID guid);
 	void enviarDesconexion();
 	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
-	void dispararRrocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
+	void dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	void playerMuerto();
 	void impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo, RakNet::RakNetGUID guidKill);
 	void aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid);
@@ -56,7 +56,7 @@ private:
 
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
-	std::unordered_map <unsigned long, TFilaTabla> tablaProvisional;
+	
 
 	Cliente();
 
@@ -65,6 +65,7 @@ private:
 
 	RakNet::BitStream bsOut;
 	std::string str;
+	TMovimiento movimiento;
 	TPlayer nuevoplayer;
 	TBala balaDisparada;
 	TGranada granada;
@@ -73,6 +74,8 @@ private:
 	TImpactoRocket impacto;
 	RakNet::RakNetGUID desconectado;
 	RakNet::RakNetGUID guidDispara;
+	RakNet::RakNetGUID guidTabla;
+	TFilaTabla nuevaFila;
 	int idVida;
 	float danyo = 0.0f;
 	Vec3<float> fuerza;

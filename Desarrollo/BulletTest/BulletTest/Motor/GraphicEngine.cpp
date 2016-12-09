@@ -32,6 +32,8 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	if (texture != "") {
 		Node->setMaterialTexture(0,irrDriver->getTexture(texture));
 	}
+	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
+
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
 	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(Node, irrDriver));
 }
@@ -126,6 +128,8 @@ void GraphicEngine::mostrarInterfaz()
 	ammo = irrGUI->addStaticText(GetWC(vstring2.c_str()), rect<int>(0, 60, 100, 100));
 	ammototal = irrGUI->addStaticText(GetWC(vstring3.c_str()), rect<int>(0, 90, 160, 160));
 	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
+
+
 }	
 const wchar_t * GraphicEngine::GetWC(const char *c)
 {
@@ -155,11 +159,21 @@ void GraphicEngine::actualizarInterfaz()
 	oss3 << "AMMO TOTAL: " << c;
 	std::string vstring3 = oss3.str();
 
-	vida->setText(GetWC(vstring.c_str()));
-	ammo->setText(GetWC(vstring2.c_str()));
-	ammototal->setText(GetWC(vstring3.c_str()));
+	const wchar_t* aux1 = GetWC(vstring.c_str());
+	vida->setText(aux1);
+	delete[] aux1;
 
-	arma_actual->setText(GetWC(p->getCurrentWeapon().c_str())); 
+	aux1 = GetWC(vstring2.c_str());
+	ammo->setText(aux1);
+	delete[] aux1;
+
+	aux1 = GetWC(vstring3.c_str());
+	ammototal->setText(aux1);
+	delete[] aux1;
+
+	aux1 = GetWC(p->getCurrentWeapon().c_str());
+	arma_actual->setText(aux1);
+	delete[] aux1;
 	
 
 }

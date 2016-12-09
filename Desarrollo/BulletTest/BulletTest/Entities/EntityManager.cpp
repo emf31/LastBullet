@@ -7,6 +7,7 @@
 
 
 
+
 void EntityManager::inicializar()
 {
 	
@@ -78,7 +79,6 @@ void EntityManager::apagar()
 
 void EntityManager::registerEntity(Entity * entity)
 {
-	//m.lock();
 
 	// comprobamos si la Entity tiene un ID
 	if (entity->getID() == -1) {
@@ -103,7 +103,6 @@ void EntityManager::registerEntity(Entity * entity)
 		m_jugadores[RakNet::RakNetGUID::ToUint32(entity->getGuid())] = entity;
 	}
 
-	//m.unlock();
 }
 
 void EntityManager::removeEntity(Entity * entity)
@@ -115,31 +114,25 @@ void EntityManager::removeEntity(Entity * entity)
 		m_entities.erase(found);
 	}
 
-	auto found_raknet = m_jugadores.find(RakNet::RakNetGUID::ToUint32(entity->getGuid()));
-	//Si es diferente de m_entities.end() es que lo ha encontrado
-	if (found_raknet != m_jugadores.end()) {
-		m_jugadores.erase(found_raknet);
+	if (entity->getGuid() != RakNet::UNASSIGNED_RAKNET_GUID) {
+		auto found_raknet = m_jugadores.find(RakNet::RakNetGUID::ToUint32(entity->getGuid()));
+		//Si es diferente de m_entities.end() es que lo ha encontrado
+		if (found_raknet != m_jugadores.end()) {
+			m_jugadores.erase(found_raknet);
+		}
 	}
+	
 
 	delete_set.insert(entity);
 
 }
 
-/*void EntityManager::removeRaknetEntity(Entity * entity)
-{
-	
-
-	removeEntity(entity);
-}*/
-
 void EntityManager::cleanDeleteQueue()
 {
-	std::set<Entity*>::iterator it;
-	for (it = delete_set.begin(); it != delete_set.end(); ++it)
+	for (auto it = delete_set.begin(); it != delete_set.end(); ++it)
 	{
-		Entity* f = *it; // Note the "*" here
-		f->borrarContenido();
-		delete f;
+		(*it)->borrarContenido();
+		delete (*it);
 	}
 	delete_set.clear();
 }

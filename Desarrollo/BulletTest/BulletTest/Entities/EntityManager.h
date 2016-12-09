@@ -5,8 +5,11 @@
 #include <set>
 #include <list>
 #include "../Motor de Red/Estructuras.h"
+#include <string>
 
-#define PLAYER 1000
+
+
+static const int PLAYER = 1000;
 
 class EntityManager
 {
@@ -47,20 +50,28 @@ public:
 	void registerEntity(Entity* entity);
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	void removeRaknetEntity(Entity* entity);
 
 	void cleanDeleteQueue();
 
-	void cambiaTabla(std::unordered_map <unsigned long, TFilaTabla> tabla) {
-		m_tabla = tabla;
+	void cambiaTabla(TFilaTabla fila) {
+		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
+		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 	}
 	void muestraTabla();
+	void aumentaKill(RakNet::RakNetGUID &guid) {
+		/*TFilaTabla fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila.kills++;*/
+	}
+	void aumentaMuerte(RakNet::RakNetGUID &guid) {
+		/*TFilaTabla fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila.deaths++;*/
+	}
 
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
 
-	std::unordered_map<int, Entity*> m_entities;
+	
 
 private:
 	EntityManager(EntityManager const&);
@@ -69,6 +80,7 @@ private:
 
 	int m_nextID;
 	
+	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 	

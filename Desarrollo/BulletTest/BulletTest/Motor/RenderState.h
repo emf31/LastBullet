@@ -20,7 +20,6 @@ public:
 	void setDirection(Vec3<float> direction);
 	void setRenderPos(Vec3<float> renderPos);
 	void setRenderRot(Vec3<float> renderRot);
-	void setAccelerating(bool accelerating);
 
 	////////////////////////////////////////
 	//Getters
@@ -50,10 +49,6 @@ public:
 	void updateVelocity(float elapsedTime, Vec3<float> direccion);
 
 private:
-	float m_SpeedFactor;
-	float m_MaxVelocity;
-	float m_Acceleration;	//Vector velocidad
-	float m_rotated;
 
 	Vec3<float> m_Velocity;	//Vector velocidad
 	Vec3<float> m_Direction;//Vector velocidad

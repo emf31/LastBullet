@@ -26,7 +26,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
-void EntityManager::enviaNuevaPos(TPlayer & p, RakNet::RakPeerInterface *peer)
+void EntityManager::enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer)
 {
 	
 	RakNet::BitStream bsOut;
@@ -423,25 +423,49 @@ void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterfa
 
 }
 
-void EntityManager::nuevaFila(TFilaTabla fila)
-{
-	m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
-}
 
-void EntityManager::aumentaKill(RakNet::RakNetGUID & guid)
+void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
 {
 	m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second.kills += 1;
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos actualicen la tabla de puntuacion
+		bsOut.Write((RakNet::MessageID)AUMENTA_KILL);
+		bsOut.Write(guid);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
+
+	}
 }
 
-void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid)
+void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
 {
 	m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second.deaths += 1;
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos actualicen la tabla de puntuacion
+		bsOut.Write((RakNet::MessageID)AUMENTA_MUERTE);
+		bsOut.Write(guid);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
+
+	}
+
 }
 
-void EntityManager::enviaTabla(RakNet::RakPeerInterface * peer)
+void EntityManager::enviaFila(RakNet::RakPeerInterface * peer, TFilaTabla fila)
 {
 
 	RakNet::BitStream bsOut;
+
+	m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
+
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a TODOS para que todos actualicen la tabla de puntuacion

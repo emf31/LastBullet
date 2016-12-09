@@ -11,9 +11,9 @@
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
-	m_pStateMachine = new MachineState(this);
+	/*m_pStateMachine = new MachineState(this);
 	m_pStateMachine->SetCurrentState(&Patrullar::i());
-	m_pStateMachine->SetGlobalState(&Patrullar::i());
+	m_pStateMachine->SetGlobalState(&Patrullar::i());*/
 }
 
 
@@ -42,7 +42,7 @@ void Enemy::update(Time elapsedTime)
 		isMoving = false;
 
 
-	m_pStateMachine->Update();
+	//m_pStateMachine->Update();
 
 }
 
@@ -133,15 +133,10 @@ void Enemy::handleMessage(const Message & message)
 }
 
 //pila posiciones
-void Enemy::encolaMovimiento(TPlayer pos)
+void Enemy::encolaMovimiento(TMovimiento mov)
 {
 	// Añadir a la cola
-	TMovimiento mov;
-	mov.position = pos.position;
-	mov.rotation = pos.rotation;
-
 	m_positions.push(mov);
-	m_renderState.setVelocity(pos.velocidad);
 }
 
 void Enemy::desencolaMovimiento()
@@ -172,6 +167,11 @@ void Enemy::desencolaMovimiento()
 		
 	}
 
+}
+
+void Enemy::lanzarGranada(TGranada g)
+{
+	granada->serverShoot(g);
 }
 
 

@@ -15,6 +15,7 @@ typedef struct {
 typedef struct {
 	Vec3<float> position;
 	Vec3<float> rotation;
+	RakNet::RakNetGUID guid;
 }TMovimiento;
 
 
@@ -96,5 +97,7 @@ enum GameMessages
 	APLICAR_IMPULSO = ID_USER_PACKET_ENUM + 23,
 	CAMBIO_ARMA = ID_USER_PACKET_ENUM + 24,
 	ACTUALIZA_TABLA = ID_USER_PACKET_ENUM + 25,
-	MOSTRAR_TABLA = ID_USER_PACKET_ENUM + 26
+	MOSTRAR_TABLA = ID_USER_PACKET_ENUM + 26,
+	AUMENTA_KILL = ID_USER_PACKET_ENUM + 27,
+	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28
 };
