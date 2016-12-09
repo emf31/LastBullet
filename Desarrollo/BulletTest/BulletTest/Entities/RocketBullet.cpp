@@ -90,10 +90,10 @@ void RocketBullet::handleMessage(const Message & message)
 					if (damage > 0) {
 
 						if (myentity->getID() == PLAYER) {
-							Cliente::i().impactoRocket(myentity->getGuid(), int(damage / 2));
+							Cliente::i().impactoRocket(myentity->getGuid(), int(damage / 3), RakNet::UNASSIGNED_RAKNET_GUID);
 						}
 						else {
-							Cliente::i().impactoRocket(myentity->getGuid(), int(damage));
+							Cliente::i().impactoRocket(myentity->getGuid(), int(damage), EntityManager::i().getEntity(PLAYER)->getGuid());
 						}
 
 					}

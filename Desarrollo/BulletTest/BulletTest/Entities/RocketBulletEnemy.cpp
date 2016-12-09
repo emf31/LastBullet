@@ -74,9 +74,10 @@ void RocketBulletEnemy::handleMessage(const Message & message)
 {
 
 	if (message.mensaje == "COLLISION") {
-		//m_rigidBody->setUserPointer(NULL);
+		
 		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		EntityManager::i().removeEntity(this);
+		GraphicEngine::i().removeNode(m_nodo);
 	}
 }
 

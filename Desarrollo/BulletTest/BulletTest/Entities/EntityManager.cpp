@@ -7,6 +7,7 @@
 
 
 
+
 void EntityManager::inicializar()
 {
 	
@@ -170,6 +171,15 @@ list<Entity*> EntityManager::getCharacters()
 	list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy")
+			characters.push_back(i->second);
+	}
+	return characters;
+}
+
+list<Entity*> EntityManager::getAllEntitiesTriggerables()
+{
+	list<Entity*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 			characters.push_back(i->second);
 	}
 	return characters;

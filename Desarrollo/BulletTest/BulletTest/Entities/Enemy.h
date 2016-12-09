@@ -42,7 +42,7 @@ public:
 
 
 
-	void encolaMovimiento(TPlayer pos);
+	void encolaMovimiento(TMovimiento mov);
 	void desencolaMovimiento();
 
 //	MachineState* GetFSM()const { return m_pStateMachine; }
@@ -51,7 +51,7 @@ public:
 
 private:
 
-	MachineState* m_pStateMachine;
+	//MachineState* m_pStateMachine;
 
 	float radius;
 	float height;

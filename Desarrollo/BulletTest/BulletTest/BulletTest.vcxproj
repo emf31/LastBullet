@@ -123,14 +123,14 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Irrlicht.lib;BulletDynamics.lib;BulletCollision.lib;LinearMath.lib;BulletSoftBody.lib;BulletFileLoader.lib;BulletWorldImporter.lib;RakNetDLL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Irrlicht.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;BulletFileLoader.lib;BulletWorldImporter.lib;RakNetDLL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
@@ -222,6 +222,8 @@
     <ClInclude Include="States\State.hpp" />
     <ClInclude Include="States\StateFactory.hpp" />
     <ClInclude Include="States\StateStack.hpp" />
+    <ClInclude Include="TriggerRecordStruct.h" />
+    <ClInclude Include="TriggerSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Granada.cpp" />
@@ -268,6 +270,7 @@
     <ClCompile Include="States\State.cpp" />
     <ClCompile Include="States\StateFactory.cpp" />
     <ClCompile Include="States\StateStack.cpp" />
+    <ClCompile Include="TriggerSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
