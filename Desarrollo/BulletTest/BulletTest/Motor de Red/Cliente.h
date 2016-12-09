@@ -56,7 +56,7 @@ private:
 
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
-	std::unordered_map <unsigned long, TFilaTabla> tablaProvisional;
+	
 
 	Cliente();
 
@@ -65,6 +65,7 @@ private:
 
 	RakNet::BitStream bsOut;
 	std::string str;
+	TMovimiento movimiento;
 	TPlayer nuevoplayer;
 	TBala balaDisparada;
 	TGranada granada;
@@ -73,6 +74,8 @@ private:
 	TImpactoRocket impacto;
 	RakNet::RakNetGUID desconectado;
 	RakNet::RakNetGUID guidDispara;
+	RakNet::RakNetGUID guidTabla;
+	TFilaTabla nuevaFila;
 	int idVida;
 	float danyo = 0.0f;
 	Vec3<float> fuerza;

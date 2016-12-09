@@ -28,21 +28,6 @@ void muestraPlayer(Player *p) {
 	std::cout << "ID: " << p->getID() << std::endl;
 }
 
-/*void updatePlayer(int movimiento, Player *p) {
-	//si esto no funciona, es decir, el player no se mueve tendriamos que hacerlos con setPosition para que se actualizaran las variables del player 
-	if (movimiento == 1) {
-		p->posicion.y = p->posicion.y -2.f;
-	}
-	if (movimiento == 2) {
-		p->posicion.x = p->posicion.x - 2.f;
-	}
-	if (movimiento == 3) {
-		p->posicion.x = p->posicion.x + 2.f;
-	}
-	if (movimiento == 4) {
-		p->posicion.y = p->posicion.y + 2.f;
-	}
-}*/
 
 int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
@@ -50,6 +35,7 @@ int main() {
 	RakNet::Packet *packet;
 	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
+	TMovimiento movimiento;
 	TBala p_bala;
 	TImpactoRocket impact;
 	TGranada p_granada;
@@ -115,7 +101,7 @@ int main() {
 				filaTabla.kills = 0;
 				filaTabla.deaths = 0;
 				filaTabla.puntuacion = 0;
-				EntityManager::i().nuevaFila(filaTabla);
+				EntityManager::i().enviaFila(peer, filaTabla);
 
 				
 			}
@@ -181,14 +167,13 @@ int main() {
 			case MOVIMIENTO: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 				
 				
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(p_struct);
+				bsIn.Read(movimiento);
 
-				EntityManager::i().enviaNuevaPos(p_struct, peer);
-				EntityManager::i().getRaknetEntity(p_struct.guid)->getRenderState()->setPosition(p_struct.position);
+				EntityManager::i().enviaNuevaPos(movimiento, peer);
+				EntityManager::i().getRaknetEntity(movimiento.guid)->getRenderState()->setPosition(movimiento.position);
 
 				
 
@@ -198,7 +183,6 @@ int main() {
 			case LANZAR_GRANADA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -215,7 +199,6 @@ int main() {
 			case IMPACTO_BALA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -230,7 +213,6 @@ int main() {
 			case APLICAR_IMPULSO: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -245,7 +227,6 @@ int main() {
 			case IMPACTO_ROCKET: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -263,7 +244,6 @@ int main() {
 			case DISPARAR_BALA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -279,7 +259,6 @@ int main() {
 			case DISPARAR_ROCKET: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -295,7 +274,6 @@ int main() {
 			case NUEVA_VIDA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -326,7 +304,6 @@ int main() {
 			case NUEVA_ARMA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -358,7 +335,6 @@ int main() {
 			case VIDA_COGIDA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -377,8 +353,6 @@ int main() {
 			case ARMA_COGIDA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
-
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
@@ -396,7 +370,6 @@ int main() {
 			case CAMBIO_ARMA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -410,7 +383,6 @@ int main() {
 			case MUERTE: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -428,15 +400,14 @@ int main() {
 			case ACTUALIZA_TABLA: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				RakNet::BitStream bsOut;
 
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
 				bsIn.Read(kill);
-				EntityManager::i().aumentaKill(kill.guidKill);
-				EntityManager::i().aumentaMuerte(kill.guidDeath);
-				EntityManager::i().enviaTabla(peer);
+				EntityManager::i().aumentaKill(kill.guidKill, peer);
+				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+				
 
 			}
 			break;

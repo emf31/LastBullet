@@ -7,6 +7,7 @@
 
 
 
+
 void EntityManager::inicializar()
 {
 	

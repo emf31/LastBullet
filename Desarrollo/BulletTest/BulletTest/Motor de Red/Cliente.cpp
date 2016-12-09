@@ -181,12 +181,12 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el player
-				bsIn.Read(nuevoplayer);
+				bsIn.Read(movimiento);
 				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
-				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(nuevoplayer.guid));
+				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(movimiento.guid));
 
 				if (e != NULL) {
-					e->encolaMovimiento(nuevoplayer);
+					e->encolaMovimiento(movimiento);
 				}
 				
 				e = nullptr;
@@ -336,10 +336,38 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				bsIn.Read(tablaProvisional);
+				bsIn.Read(guidTabla);
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				EntityManager::i().cambiaTabla(tablaProvisional);
+				EntityManager::i().cambiaTabla(nuevaFila);
+
+			}
+			break;
+
+			case AUMENTA_KILL:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(guidTabla);
+
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				//EntityManager::i().aumentaKill(guidTabla);
+
+			}
+			break;
+
+			case AUMENTA_MUERTE:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(nuevaFila);
+
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				//EntityManager::i().aumentaMuerte(guidTabla);
 
 			}
 			break;
@@ -369,7 +397,7 @@ void Cliente::update() {
 				else {
 					//es un enemigo
 					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-					enemigo->setPosition(nuevoplayer.position);
+					//enemigo->setPosition(nuevoplayer.position);
 					enemigo = nullptr;
 				}
 				
@@ -444,18 +472,14 @@ void Cliente::createPlayer() {
 void Cliente::enviarMovimiento(Player* p) {
 
 	RakNet::BitStream bsOut;
-	TPlayer paquetemov;
+	TMovimiento paquetemov;
 
 	bsOut.Write((RakNet::MessageID)MOVIMIENTO);
 
 	//TODO asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
 	paquetemov.position = p->getRenderState()->getPosition();
 	paquetemov.rotation = p->getRenderState()->getRotation();
-	paquetemov.velocidad = p->getVelocity();
 	paquetemov.guid = p->getGuid();
-	paquetemov.name = p->getName();
-	
-	
 
 	bsOut.Write(paquetemov);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
@@ -653,10 +677,11 @@ void Cliente::cambioArma(int cambio, RakNet::RakNetGUID guid)
 
 void Cliente::actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath)
 {
-	RakNet::BitStream bsOut;
 	TKill kill;
 	kill.guidKill = guidKill;
 	kill.guidDeath = guidDeath;
+
+	RakNet::BitStream bsOut;
 	bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
 	bsOut.Write(kill);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);

@@ -5,6 +5,7 @@
 #include <set>
 #include <list>
 #include "../Motor de Red/Estructuras.h"
+#include <string>
 
 
 
@@ -52,10 +53,19 @@ public:
 
 	void cleanDeleteQueue();
 
-	void cambiaTabla(std::unordered_map <unsigned long, TFilaTabla> tabla) {
-		m_tabla = tabla;
+	void cambiaTabla(TFilaTabla fila) {
+		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
+		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 	}
 	void muestraTabla();
+	void aumentaKill(RakNet::RakNetGUID &guid) {
+		/*TFilaTabla fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila.kills++;*/
+	}
+	void aumentaMuerte(RakNet::RakNetGUID &guid) {
+		/*TFilaTabla fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila.deaths++;*/
+	}
 
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
