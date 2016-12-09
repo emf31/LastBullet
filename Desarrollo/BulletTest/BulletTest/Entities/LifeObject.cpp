@@ -38,23 +38,6 @@ void LifeObject::update(Time elapsedTime)
 			m_nodo->setVisible(true);
 		}
 	}
-	// Set position
-	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-
-	// Set rotation
-	vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;
-
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));*/
-	
-	/*PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-
-
-	PhysicsEngine::i().m_world->addCollisionObject(m_ghostObject);*/
 	
 }
 
@@ -78,7 +61,7 @@ void LifeObject::handleMessage(const Message & message)
 		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
 
 			if (estado == DISPONIBLE) {
-				PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+				PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRecargaLife.restart();
 

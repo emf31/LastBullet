@@ -48,6 +48,7 @@ void PhysicsEngine::inicializar()
 {
 	m_config = new btDefaultCollisionConfiguration();
 	m_dispatcher = new btCollisionDispatcher(m_config);
+
 	m_broadphase = new btDbvtBroadphase();
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);

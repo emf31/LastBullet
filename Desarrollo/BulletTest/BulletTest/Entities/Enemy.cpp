@@ -93,7 +93,7 @@ void Enemy::borrarContenido()
 	delete animation;
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
-	delete m_rigidBody;
+	
 	GraphicEngine::i().removeNode(m_nodo);
 }
 
