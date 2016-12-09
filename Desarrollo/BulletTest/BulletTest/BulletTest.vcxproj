@@ -222,6 +222,8 @@
     <ClInclude Include="States\State.hpp" />
     <ClInclude Include="States\StateFactory.hpp" />
     <ClInclude Include="States\StateStack.hpp" />
+    <ClInclude Include="TriggerRecordStruct.h" />
+    <ClInclude Include="TriggerSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Granada.cpp" />
@@ -268,6 +270,7 @@
     <ClCompile Include="States\State.cpp" />
     <ClCompile Include="States\StateFactory.cpp" />
     <ClCompile Include="States\StateStack.cpp" />
+    <ClCompile Include="TriggerSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

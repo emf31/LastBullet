@@ -70,6 +70,7 @@ public:
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	list<Entity*> getCharacters();
+	list<Entity*> getAllEntitiesTriggerables();
 
 	
 

@@ -13,6 +13,8 @@
 #include <btBulletDynamicsCommon.h>
 #include <memory>
 
+#include "../TriggerRecordStruct.h"
+
 
 #define DISPONIBLE 0
 #define USADO 1
@@ -21,9 +23,13 @@
 #define ASALTO 11
 #define PISTOLA 12
 
+
+
 class Entity
 {
 public:
+	
+
 	Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	virtual ~Entity();
 
@@ -72,6 +78,17 @@ public:
 		}
 	}
 
+	byte getTriggerFlags() {
+		return dwTriggerFlags;
+	}
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) {
+
+
+		return true;
+
+
+	}
 
 	std::shared_ptr<SceneNode> getNode();
 
@@ -96,6 +113,9 @@ protected:
 	//TODO esto estaria en player
 	bool isDying = false;
 	Clock relojMuerte;
+
+	byte dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear;
+
 
 private:
 

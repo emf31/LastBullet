@@ -176,6 +176,15 @@ list<Entity*> EntityManager::getCharacters()
 	return characters;
 }
 
+list<Entity*> EntityManager::getAllEntitiesTriggerables()
+{
+	list<Entity*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+			characters.push_back(i->second);
+	}
+	return characters;
+}
+
 Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
 {
 	auto found = m_jugadores.find(RakNet::RakNetGUID::ToUint32(guid));

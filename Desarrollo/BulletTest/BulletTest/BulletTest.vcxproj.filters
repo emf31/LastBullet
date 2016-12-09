@@ -133,6 +133,9 @@
     <ClCompile Include="IA\StatesIA\Patrullar.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
+    <ClCompile Include="TriggerSystem.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -326,6 +329,12 @@
     </ClInclude>
     <ClInclude Include="IA\StatesIA\Patrullar.h">
       <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerRecordStruct.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSystem.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
