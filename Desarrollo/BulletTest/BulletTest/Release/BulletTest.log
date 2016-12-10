@@ -1,5 +1,7 @@
 ﻿  Generando código
-  All 5154 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  4761 of 5474 functions (87.0%) were compiled, the rest were copied from previous compilation.
+    321 functions were new in current compilation
+    22 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
