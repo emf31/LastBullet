@@ -1,7 +1,44 @@
-﻿  Generando código
-  4761 of 5474 functions (87.0%) were compiled, the rest were copied from previous compilation.
-    321 functions were new in current compilation
-    22 functions had inline decision re-evaluated but remain unchanged
+﻿  Enemy.cpp
+  Entity.cpp
+  Granada.cpp
+  GunBullet.cpp
+  LifeObject.cpp
+  Player.cpp
+Entities\Player.cpp(59): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(63): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(67): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(397): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(401): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(405): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+  RocketBullet.cpp
+  RocketBulletEnemy.cpp
+  AsaltoDrop.cpp
+  PistolaDrop.cpp
+  RocketLauncherDrop.cpp
+  WeaponDrop.cpp
+  Asalto.cpp
+  Pistola.cpp
+Entities\Weapons\Pistola.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  RocketLauncher.cpp
+  Weapon.cpp
+  Game.cpp
+Game.cpp(231): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(238): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(246): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(254): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Game.cpp(262): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+  InputHandler.cpp
+  Cliente.cpp
+  GraphicEngine.cpp
+  Compilando...
+  MapLoader.cpp
+  Lista.cpp
+  main.cpp
+LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Generando código
+  0 of 17597 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)

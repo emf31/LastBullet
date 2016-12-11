@@ -3,19 +3,6 @@
 #define VEC3_HPP
 
 #include <iostream>
-#include <irrlicht.h>
-
-#include <btBulletCollisionCommon.h>
-#include <btBulletDynamicsCommon.h>
-
-
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
-
 
 template <class T> class Vec3
 {
@@ -155,14 +142,7 @@ public:
 	//      return dx+dy+dz;
 	// }
 	//
-	static btVector3 convertVec(const Vec3 &v1)
-	{
-		return btVector3(v1.getX(), v1.getY(), v1.getZ());
-	}
-	static Vec3<float> convertVec(const btVector3 &v1)
-	{
-		return Vec3<float>(v1.getX(), v1.getY(), v1.getZ());
-	}
+
 
 	static T getDistance(const Vec3 &v1, const Vec3 &v2)
 	{

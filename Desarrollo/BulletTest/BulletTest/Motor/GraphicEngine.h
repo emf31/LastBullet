@@ -3,6 +3,7 @@
 #include "BasicSceneNode.h"
 #include "AnimatedSceneNode.h"
 #include "Camera.h"
+
 #include "irrlicht.h"
 #include <iostream>
 #include <string>
@@ -19,6 +20,23 @@ using namespace scene;
 using namespace video;
 using namespace io;
 using namespace gui;
+
+
+#define _IRR_WINDOWS_
+
+#ifdef DEBUG
+#ifdef _IRR_WINDOWS_
+#pragma comment(lib, "IrrlichtStatic_DEBUG.lib")
+#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+#endif
+#else
+#ifdef _IRR_WINDOWS_
+#pragma comment(lib, "IrrlichtStatic_RELEASE.lib")
+#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+#endif
+#endif
+
+
 
 class GraphicEngine
 {

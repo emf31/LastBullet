@@ -19,8 +19,6 @@ d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\entity.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\enemy.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\gunbullet.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\granada.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\state.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\clockimpl.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\util.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\time.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\lista.obj
@@ -38,13 +36,10 @@ d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\cliente.ob
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\main.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\game.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\masteventreceiver.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\messagehandler.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\statestack.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\statefactory.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\patrullar.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\machinestate.obj
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\release\bullettest.exe
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\release\bullettest.pdb
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\messagehandler.obj
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\clockimpl.obj
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\bullettest.tlog\cl.command.1.tlog
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\bullettest.tlog\cl.read.1.tlog
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\release\bullettest.tlog\cl.write.1.tlog

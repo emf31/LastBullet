@@ -1,5 +1,4 @@
 #pragma once
-#include "irrlicht.h"
 #include "../../Motor/GraphicEngine.h"
 #include "../../Motor/PhysicsEngine.h"
 #include "../Entity.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BulletTest/BulletTest/Otros/Time.hpp"
+#include "../Otros/Time.hpp"
 #include "Entity.h"
 
 class Player : public Entity
