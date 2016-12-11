@@ -16,7 +16,7 @@ WeaponDrop::~WeaponDrop()
 void WeaponDrop::asignaTiempo(Clock tiempo) {
 	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
 	clockRecargaLife = tiempo;
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	PhysicsEngine::i().removeGhostObject(m_ghostObject);
 	estado = USADO;
 	m_nodo->setVisible(false);
 }
@@ -24,7 +24,7 @@ void WeaponDrop::asignaTiempo(Clock tiempo) {
 void WeaponDrop::ArmaCogida()
 {
 
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	PhysicsEngine::i().removeGhostObject(m_ghostObject);
 	estado = USADO;
 	clockRecargaLife.restart();
 	m_nodo->setVisible(false);

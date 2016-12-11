@@ -11,7 +11,7 @@ class WeaponDrop : public Entity
 {
 public:
 	WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
-	~WeaponDrop();
+	virtual ~WeaponDrop();
 
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }

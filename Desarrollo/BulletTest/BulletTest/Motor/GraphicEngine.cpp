@@ -19,7 +19,7 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	if(mesh!="")
 		Node = irrScene->addMeshSceneNode(irrScene->getMesh(mesh));
 	else
-		Node = irrScene->addCubeSceneNode(1.0f);
+		Node = irrScene->addCubeSceneNode(2.0f);
 
 	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
 	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
@@ -293,6 +293,7 @@ void GraphicEngine::cargarTexturas() {
 	//CARGAR TEXTURAS
 	irrDriver->getTexture("../media/wall.jpg");
 	irrDriver->getTexture("../media/ice0.jpg");
+	irrDriver->getTexture("../media/juliyotexture.jpg");
 	irrDriver->getTexture("../media/earth.jpg");
 	irrDriver->getTexture("../media/Dif_2.tga");
 	irrDriver->getTexture("../media/body01.png");
