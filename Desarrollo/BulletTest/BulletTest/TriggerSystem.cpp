@@ -15,7 +15,7 @@ TriggerSystem::~TriggerSystem()
 
 unsigned long TriggerSystem::RegisterTrigger(EnumTriggerType _eTriggerType, unsigned long nPriority, int idSource, Vec3<float> vPos, float fRadius, Time fDuration, bool bDynamicSourcePos) {
 
-	TriggerRecordStruct* pTriggerRecord = new TriggerRecordStruct( _eTriggerType, IDTriggers++, idSource, vPos, fRadius, fDuration, bDynamicSourcePos);//Creamos un nuevo triggerRecord, y lo rellenamos
+	TriggerRecordStruct* pTriggerRecord = new TriggerRecordStruct( _eTriggerType, ++IDTriggers, idSource, vPos, fRadius, fDuration, bDynamicSourcePos);//Creamos un nuevo triggerRecord, y lo rellenamos
 
 	m_mapTriggerMap.insert(TRIGGER_MAP::value_type(nPriority, pTriggerRecord));//Ordenamos los triggersRecords por prioridad
 
@@ -91,6 +91,7 @@ void TriggerSystem::Update() {
 	for (list<Entity*>::Iterator it2 = lista.begin(); it2 != lista.end(); it2++) {
 
 		for (it = m_mapTriggerMap.begin(); it != m_mapTriggerMap.end(); ++it) {
+
 			pRec = it->second;
 
 			if (!(pRec->eTriggerType & (*it2)->getTriggerFlags())) {

@@ -1,5 +1,4 @@
-﻿  main.cpp
-  TriggerSystem.cpp
+﻿  TriggerSystem.cpp
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
   c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\triggersystem.cpp(20): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
           with
@@ -17,48 +16,7 @@ c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(172): war
               _Other1=unsigned long &,
               _Other2=TriggerRecordStruct *&
           ]
-  Lista.cpp
-  PhysicsEngine.cpp
-  MapLoader.cpp
-  GraphicEngine.cpp
-  Camera.cpp
-  Cliente.cpp
-  Patrullar.cpp
-  MachineState.cpp
-  MessageHandler.cpp
-  InputHandler.cpp
-  Game.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(231): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(238): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(246): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(254): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(262): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-  Weapon.cpp
-  RocketLauncher.cpp
-  Pistola.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  Asalto.cpp
-  WeaponDrop.cpp
-  RocketLauncherDrop.cpp
-  PistolaDrop.cpp
-  Generando código...
-  Compilando...
-  AsaltoDrop.cpp
-  RocketBulletEnemy.cpp
-  RocketBullet.cpp
-  Player.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(59): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(63): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(67): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(397): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(401): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(405): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-  PhysicsEntity.cpp
-  LifeObject.cpp
-  GunBullet.cpp
-  Granada.cpp
-  EntityManager.cpp
-  Generando código...
+cl : Línea de comandos warning D9028: error de recompilación mínimo, revirtiendo a la compilación normal
 BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

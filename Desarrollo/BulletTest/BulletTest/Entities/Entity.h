@@ -87,7 +87,6 @@ public:
 
 		return true;
 
-
 	}
 
 	std::shared_ptr<SceneNode> getNode();
