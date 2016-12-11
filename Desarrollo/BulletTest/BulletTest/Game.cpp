@@ -23,6 +23,7 @@
 #include <RakNetTypes.h>
 #include <thread> 
 #include "Motor de Red\Cliente.h"
+#include "TriggerSystem.h"
 
 #define SERVER_PORT 65535
 
@@ -366,6 +367,8 @@ void Game::update(Time elapsedTime)
 	EntityManager::i().cleanDeleteQueue();
 	EntityManager::i().update(elapsedTime);
 	
+	TriggerSystem::i().Update();
+
 	PhysicsEngine::i().notifyCollisions();
 	MessageHandler::i().update();
 }
