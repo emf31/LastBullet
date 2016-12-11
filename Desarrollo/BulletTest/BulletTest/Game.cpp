@@ -224,7 +224,7 @@ void Game::inicializar()
 	sueloEnt7->setCollisionGroup(col::Collisions::Static);
 	sueloEnt7->setCollisionMask(col::staticCollidesWith);
 	sueloEnt7->getRigidBody()->setFriction(0.7f);
-	//////////////////////////////////////////////////////////////////////*/
+	//////////////////////////////////////////////////////////////////////
 	////////         Creamos 2 paquete de vida        //////////////////
 
 	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
@@ -276,7 +276,7 @@ void Game::inicializar()
 	cajaEnt->getRigidBody()->setDamping(btScalar(0.f),btScalar(0.85f));
 	//cajaEnt->getRigidBody()->setRollingFriction(btScalar(0.8f));
 	cajaEnt->getRigidBody()->setFriction(btScalar(0.8f));
-	cajaEnt->getRigidBody()->setAngularFactor(btScalar(0.3f));
+	cajaEnt->getRigidBody()->setAngularFactor(btScalar(0.3f));*/
 	/////////////////////////////////////////////////////////////////////
 
 	int a;
@@ -317,12 +317,20 @@ void Game::inicializar()
 		Cliente::i().createPlayer();
 
 		//enviamos los paquetes del vida al servidor para que los cree
-		Cliente::i().nuevaVida(vidaEnt->getID());
-		Cliente::i().nuevaVida(vidaEnt2->getID());
+		list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
+		for (list<Entity*>::Iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
+			Cliente::i().nuevaVida((*it)->getID());
+		}
+			
 		//enviamos los paquetes de armas al servidor para que los cree
-		Cliente::i().nuevaArma(RocketLauncherDropEnt->getID());
-		Cliente::i().nuevaArma(AsaltoDropEnt->getID());
-		Cliente::i().nuevaArma(pistolaEnt->getID());
+
+		list<Entity*>weapon = EntityManager::i().getWeapons();
+		for (list<Entity*>::Iterator it = weapon.begin(); it != weapon.end(); ++it) {
+			Cliente::i().nuevaArma((*it)->getID());
+		}
+		//Cliente::i().nuevaArma(RocketLauncherDropEnt->getID());
+		//Cliente::i().nuevaArma(AsaltoDropEnt->getID());
+		//Cliente::i().nuevaArma(pistolaEnt->getID());
 
 
 

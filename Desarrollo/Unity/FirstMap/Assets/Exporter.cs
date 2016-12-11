@@ -29,15 +29,16 @@ public class Exporter : MonoBehaviour {
 					objeto.posY = g.transform.position.y;
 					objeto.posZ = g.transform.position.z;
 
-						//g.transform.sca
 					objeto.sizeX = g.transform.lossyScale.x;
 					objeto.sizeY = g.transform.lossyScale.y;
 					objeto.sizeZ = g.transform.lossyScale.z;
 
-					//var a = ;
 					objeto.rotX = g.transform.rotation.eulerAngles.x;
 					objeto.rotY = g.transform.rotation.eulerAngles.y;
 					objeto.rotZ = g.transform.rotation.eulerAngles.z;
+
+                    objeto.tag = g.tag;
+                        Debug.Log(objeto.tag);
 
 					Rigidbody rb;
 					if (rb = g.GetComponent<Rigidbody>()){
@@ -98,6 +99,7 @@ public class Objeto {
 	public float colliderX, colliderY, colliderZ;
 	public float colliderSizeX, colliderSizeY, colliderSizeZ;
 
+    public string tag;
 	public bool hasChild;
 
 	public Objeto() {
