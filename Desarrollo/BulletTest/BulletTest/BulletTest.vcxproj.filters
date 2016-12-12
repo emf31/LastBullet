@@ -124,6 +124,9 @@
     <ClCompile Include="IA\StatesIA\Patrullar.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
+    <ClCompile Include="TriggerSystem.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
