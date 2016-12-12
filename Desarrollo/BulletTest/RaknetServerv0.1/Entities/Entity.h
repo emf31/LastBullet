@@ -1,9 +1,9 @@
 #pragma once
 
-#include "RaknetServerv0.1\Otros\vec3.hpp"
-#include  "RaknetServerv0.1\Otros\Time.hpp"
-#include  "RaknetServerv0.1\Otros\Clock.hpp"
-#include  "RaknetServerv0.1/RenderState.h"
+#include "../Otros\vec3.hpp"
+#include  "../Otros\Time.hpp"
+#include  "../Otros\Clock.hpp"
+#include  "../RenderState.h"
 
 #include <RakPeerInterface.h>
 

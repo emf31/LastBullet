@@ -106,15 +106,6 @@
     <ClCompile Include="Motor\SceneNode.cpp">
       <Filter>Source Code\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="States\State.cpp">
-      <Filter>Source Code\States</Filter>
-    </ClCompile>
-    <ClCompile Include="States\StateFactory.cpp">
-      <Filter>Source Code\States</Filter>
-    </ClCompile>
-    <ClCompile Include="States\StateStack.cpp">
-      <Filter>Source Code\States</Filter>
-    </ClCompile>
     <ClCompile Include="Otros\Time.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>

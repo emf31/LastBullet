@@ -46,7 +46,7 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
 
 			if (estado == DISPONIBLE) {
-				PhysicsEngine::i().removeGhostObject(m_ghostObject);
+				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRecargaLife.restart();
 

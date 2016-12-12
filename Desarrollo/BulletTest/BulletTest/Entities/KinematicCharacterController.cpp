@@ -22,7 +22,7 @@ subject to the following restrictions:
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
 #include "LinearMath/btDefaultMotionState.h"
-
+#include <iostream>
 #include "KinematicCharacterController.h"
 
 
@@ -151,8 +151,8 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = btScalar(9.8 * 5.5); // 3G acceleration.
-	m_fallSpeed = 105.0; // Terminal velocity of a sky diver in m/s.
+	m_gravity = btScalar(9.8 * 15.5); // 3G acceleration.
+	m_fallSpeed = 205.0; // Terminal velocity of a sky diver in m/s.
 	m_jumpSpeed = 10.0; // ?
 	m_SetjumpSpeed = m_jumpSpeed;
 	m_wasOnGround = false;
@@ -166,6 +166,10 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_linearDamping = btScalar(0.0);
 	m_angularDamping = btScalar(0.0);
 	m_speed = btScalar(1.3);
+}
+
+float KinematicCharacterController::getSpeedFactor() const {
+	return m_speed;
 }
 
 void KinematicCharacterController::setSpeed(float speed) {
@@ -624,8 +628,11 @@ void KinematicCharacterController::setWalkDirection
 	const btVector3& walkDirection
 )
 {
+	
+
 	m_useWalkDirection = true;
 	m_walkDirection = walkDirection;
+	
 	m_normalizedDirection = getNormalizedVector(m_walkDirection);
 }
 
@@ -812,7 +819,22 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 	//}
 
 	if (m_useWalkDirection) {
-		stepForwardAndStrafe(collisionWorld, m_walkDirection * m_speed);
+
+		m_walkDirection += prev_walkDirection;
+
+		m_walkDirection += m_walkDirection * m_acceleration_walk * dt;
+
+		
+
+
+		float speedXZ = m_walkDirection.length();
+
+		if (speedXZ > m_maxSpeed_walk) {
+			m_walkDirection = m_walkDirection / speedXZ * m_maxSpeed_walk;
+		}
+			
+
+		stepForwardAndStrafe(collisionWorld, m_walkDirection);
 	}
 	else {
 		//printf("  time: %f", m_velocityTimeInterval);
@@ -823,6 +845,11 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 
 		// how far will we move while we are moving?
 		btVector3 move = m_walkDirection * dtMoving;
+		// Prevent from going over maximum speed
+		/*float speedXZ = move.length();
+
+		if (speedXZ > 360.f)
+			move = move / speedXZ * 360.f;*/
 
 		//printf("  dtMoving: %f", dtMoving);
 
@@ -863,6 +890,11 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 			break;
 		}
 	}
+
+	// Decelerate
+	m_walkDirection -= m_walkDirection * m_deceleration_walk *dt;
+
+	prev_walkDirection = m_walkDirection;
 }
 
 void KinematicCharacterController::setFallSpeed(btScalar fallSpeed)

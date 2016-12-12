@@ -79,6 +79,8 @@ void Player::inicializar()
 	
 	m_vida = 100;
 
+	
+
 	GraphicEngine::i().mostrarInterfaz();
 }
 
@@ -87,11 +89,15 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 	isMoving = false;
-
+	
 
 	if (p_controller->onGround()) {
 		//seteamos la velocidad para andar, si corre se cambiara a una mayor
-		p_controller->setSpeed(1.3f);
+		//p_controller->setSpeed(1.3f);
+
+		
+		
+
 	}
 
 	speedFinal = Vec3<float>(0, 0, 0);
@@ -101,6 +107,13 @@ void Player::update(Time elapsedTime)
 
 
 	speedFinal.normalise();
+
+	//p_controller->m_speed += p_controller->m_speed * m_acceleration_walk;
+
+	
+	/*if (p_controller->getSpeedFactor() > m_maxSpeed_walk) {
+		p_controller->setSpeed(m_maxSpeed_walk);
+	}*/
 
 	if (isDying == false) {
 		p_controller->setWalkDirection(
@@ -113,7 +126,6 @@ void Player::update(Time elapsedTime)
 			btVector3(0.f,0.f,0.f));
 	}
 
-	
 
 	GraphicEngine::i().actualizarInterfaz();
 
@@ -121,12 +133,12 @@ void Player::update(Time elapsedTime)
 	//TODO esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
+	
+
 	m_renderState.updatePositions(Vec3<float>(
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-
-
 
 
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
@@ -189,6 +201,10 @@ void Player::cargarContenido()
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
 		col::characterCollidesWith);
 
+	p_controller->m_acceleration_walk = 1.3f;
+	p_controller->m_deceleration_walk = 5.5f;
+	p_controller->m_maxSpeed_walk = 3.f;
+
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	GraphicEngine::i().setCameraEntity(this);
@@ -231,7 +247,7 @@ void Player::run()
 
 void Player::jump() {
 	
-	p_controller->jump(btVector3(0, 20, 0));
+	p_controller->jump(btVector3(0, 90, 0));
 	
 }
 
