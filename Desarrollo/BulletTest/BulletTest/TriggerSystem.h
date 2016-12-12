@@ -13,7 +13,12 @@ public:
 	TriggerSystem();
 	~TriggerSystem();
 
-	unsigned long RegisterTrigger(EnumTriggerType _eTriggerType, unsigned long nPriority, int idSource, Vec3<float> vPos, float fRadius, Time fDuration, bool bDynamicSourcePos);
+	static TriggerSystem& i() {
+		static TriggerSystem singleton;
+		return singleton;
+	}
+
+	unsigned long RegisterTrigger(EnumTriggerType _eTriggerType, unsigned long nPriority, int idSource, Vec3<float> vPos, float fRadius, Time nExpirationTime, bool bDynamicSourcePos);
 	
 
 	void RemoveTrigger(unsigned long nTriggerID);

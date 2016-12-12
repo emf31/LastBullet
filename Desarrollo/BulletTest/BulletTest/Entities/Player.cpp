@@ -22,6 +22,9 @@
 #include "../Command/ShootRocket.h"
 #include "../Command/ShootPistola.h"
 
+#include "../TriggerSystem.h"
+
+
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid)
 {
 	
@@ -250,6 +253,12 @@ void Player::jump() {
 
 
 void Player::shoot() {
+
+	enum EnumTriggerType explosion = kTrig_Explosion;
+
+	Time k;
+
+	TriggerSystem::i().RegisterTrigger(explosion, 1000, this->getID(), this->getRenderPosition(), 50,k, false);
 
 	listaWeapons->valorActual()->shoot();
 

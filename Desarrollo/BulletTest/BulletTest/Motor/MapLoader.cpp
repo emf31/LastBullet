@@ -1,6 +1,10 @@
 #include "MapLoader.h"
 #include "../json/json.hpp"
 #include "../Entities\PhysicsEntity.h"
+#include "../Entities\LifeObject.h"
+#include "../Entities\WeaponDrops/AsaltoDrop.h"
+#include "../Entities\WeaponDrops/PistolaDrop.h"
+#include "../Entities/WeaponDrops/RocketLauncherDrop.h"
 #include "GraphicEngine.h"
 
 // for convenience
@@ -32,15 +36,19 @@ void MapLoader::readMap(const std::string & name)
 				std::string nameMesh = obj["nombre"];
 				nameMesh = "../media/" +nameMesh+".obj";
 				io::path mesh=nameMesh.c_str();
-				/*std::cout << "----------------------------" << '\n';
-				std::cout << "Nombre " << obj["nombre"] << '\n';
-				std::cout << "Posicion " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
-				std::cout << "Rotacion " << obj["rotX"] << ',' << obj["rotY"] << ',' << obj["rotZ"] << '\n';
-				std::cout << "Escalado " << obj["sizeX"] << ',' << obj["sizeY"] << ',' << obj["sizeZ"] << '\n';
-				std::cout << "Collider " << obj["colliderSizeX"] << ',' << obj["colliderSizeX"] << ',' << obj["colliderSizeX"] << '\n';
-				std::cout << "Masa " << obj["masa"] << '\n';*/
-				createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
-		//	}
+
+				if(obj["tag"]=="PhysicEntity")
+					createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
+				if (obj["tag"] == "LifeObject")
+					createLifeObject(pos, es, mesh, nombre);
+				if (obj["tag"] == "PistolaDrop")
+					createPistolaDrop(pos, es, mesh, nombre);
+				if (obj["tag"] == "AsaltoDrop")
+					createAsaltoDrop(pos, es, mesh, nombre);
+				if (obj["tag"] == "RocketLauncherDrop")
+					createRocektLauncherDrop(pos, es, mesh, nombre);
+				if (obj["tag"] == "Grafo")
+					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 		}
 	}
 
@@ -53,7 +61,7 @@ void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<
 		 sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
 	}
 	else{
-		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", "");
+		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "");
 	}
 	
 	
@@ -88,4 +96,35 @@ void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<
 	//std::cout << sceneNode->getPosition().getX() << '\n';
 }
 
+void MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+{
+	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/life.png", "");
+	LifeObject *vidaEnt = new LifeObject(vida, name);
+	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt,escala));
+	vidaEnt->setPosition(posicion);
+}
+
+void MapLoader::createAsaltoDrop(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+{
+	std::shared_ptr<BasicSceneNode> asaltodrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/Asalto.jpg", "");
+	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(asaltodrop, name);
+	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, escala));
+	AsaltoDropEnt->setPosition(posicion);
+}
+
+void MapLoader::createPistolaDrop(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+{
+	std::shared_ptr<BasicSceneNode> pistoladrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/pistola.jpg", "");
+	PistolaDrop *pistolaEnt = new PistolaDrop(pistoladrop, name);
+	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, escala));
+	pistolaEnt->setPosition(posicion);
+}
+
+void MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+{
+	std::shared_ptr<BasicSceneNode> lanzacohete = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/lanzacohetes.jpg", "");
+	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(lanzacohete,name);
+	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, escala));
+	RocketLauncherDropEnt->setPosition(posicion);
+}
 

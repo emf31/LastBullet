@@ -176,6 +176,26 @@ list<Entity*> EntityManager::getCharacters()
 	return characters;
 }
 
+list<Entity*> EntityManager::getLifeObjects()
+{
+	list<Entity*>lifeObjects;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "LifeObject")
+			lifeObjects.push_back(i->second);
+	}
+	return lifeObjects;
+}
+
+list<Entity*> EntityManager::getWeapons()
+{
+	list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "RocketLauncher" || i->second->getClassName() == "Pistola" || i->second->getClassName() == "Asalto")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+
 list<Entity*> EntityManager::getAllEntitiesTriggerables()
 {
 	list<Entity*>characters;

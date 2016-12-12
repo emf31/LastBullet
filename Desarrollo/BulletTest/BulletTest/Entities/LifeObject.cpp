@@ -80,6 +80,12 @@ void LifeObject::handleMessage(const Message & message)
 	}
 }
 
+bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
+
+	printf("Has disparado cerca de un lifeObject\n");
+	return true;
+}
+
 void LifeObject::asignaTiempo(Clock tiempo) {
 	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
 	clockRecargaLife = tiempo;
@@ -97,3 +103,4 @@ void LifeObject::VidaCogida()
 	
 
 }
+
