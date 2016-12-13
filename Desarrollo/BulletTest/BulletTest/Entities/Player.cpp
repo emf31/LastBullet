@@ -246,6 +246,12 @@ void Player::run()
 }
 
 void Player::jump() {
+
+	enum EnumTriggerType explosion = kTrig_EnemyNear;
+
+	Time k = milliseconds(800);
+
+	TriggerSystem::i().RegisterTrigger(explosion, 1001, this->getID(), this->getRenderPosition(), 50, k, false);
 	
 	p_controller->jump(btVector3(0, 90, 0));
 	
@@ -256,7 +262,7 @@ void Player::shoot() {
 
 	enum EnumTriggerType explosion = kTrig_Explosion;
 
-	Time k;
+	Time k = milliseconds(500);
 
 	TriggerSystem::i().RegisterTrigger(explosion, 1000, this->getID(), this->getRenderPosition(), 50,k, false);
 
