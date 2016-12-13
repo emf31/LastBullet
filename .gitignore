@@ -63,6 +63,9 @@ sysinfo.txt
 *.idb
 *.pdb
 
+Desarrollo/BulletTest/Release
+Desarrollo/BulletTest/Debug
+
 Desarrollo/BulletTest/BulletTest.VC.db
 Desarrollo/BulletTest/BulletTest.VC.VC.opendb
 Desarrollo/BulletTest/.vs/BulletTest/v14/.suo
