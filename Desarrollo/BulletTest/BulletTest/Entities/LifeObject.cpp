@@ -61,7 +61,7 @@ void LifeObject::handleMessage(const Message & message)
 		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
 
 			if (estado == DISPONIBLE) {
-				PhysicsEngine::i().removeGhostObject(m_ghostObject);
+				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRecargaLife.restart();
 
@@ -96,18 +96,17 @@ bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
 void LifeObject::asignaTiempo(Clock tiempo) {
 	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
 	clockRecargaLife = tiempo;
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	
 	estado = USADO;
 	m_nodo->setVisible(false);
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 }
 
 void LifeObject::VidaCogida()
 {
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 	estado = USADO;
 	m_nodo->setVisible(false);
 	clockRecargaLife.restart();
-	
-
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 }
 
