@@ -3,6 +3,7 @@
 #include <iostream>
 #include<fstream>
 #include "../Otros/vec3.hpp"
+#include <vector>
 
 
 
@@ -21,6 +22,6 @@ public:
 
 	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 
 
-private:
 	std::vector<Vec3<float>> spawnPoints;
+
 };

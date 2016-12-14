@@ -53,6 +53,8 @@ void MapLoader::readMap(const std::string & name)
 					createRocektLauncherDrop(pos, es, mesh, nombre);
 				if (obj["tag"] == "Grafo")
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
+				if (obj["tag"] == "Spawn")
+					spawnPoints.push_back(pos);
 		}
 	}
 

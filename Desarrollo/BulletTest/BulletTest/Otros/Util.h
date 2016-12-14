@@ -25,7 +25,7 @@ float Randf(float min, float max);
 
 int Randi();
 
-int Randi(float min, float max);
+int Randi(int min, int max);
 
 
 

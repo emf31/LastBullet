@@ -16,7 +16,7 @@ public:
 	Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
-	void setPosition(Vec3<float> pos);
+	void setPosition(Vec3<float> &pos);
 	void searchSpawnPoint();
 
 	// Heredado vía Entity

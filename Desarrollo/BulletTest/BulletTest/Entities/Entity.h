@@ -67,6 +67,9 @@ public:
 	float getVida() {
 		return m_vida;
 	}
+
+	bool isGrouped() { return isGroup; }
+
 	void restaVida(float cantidad, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 		
 		
@@ -82,13 +85,7 @@ public:
 		return dwTriggerFlags;
 	}
 
-	virtual bool handleTrigger(TriggerRecordStruct* Trigger) {
-
-
-		return true;
-
-	}
-
+	
 	std::shared_ptr<SceneNode> getNode();
 
 	virtual void inicializar() = 0;
@@ -97,7 +94,8 @@ public:
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
 	virtual void handleMessage(const Message& message) = 0;
-	
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger);
+
 	virtual std::string getClassName() = 0;
 
 
@@ -115,7 +113,8 @@ protected:
 
 	byte dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear;
 
-
+	//Sirve para identificar que una entity sea un grupo de entities, siempre se crea a false
+	bool isGroup;
 private:
 
 	

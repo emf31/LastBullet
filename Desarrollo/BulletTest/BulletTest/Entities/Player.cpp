@@ -28,7 +28,8 @@
 Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
 	m_spawns(spawnPoints)
 {
-	
+	//Registramos la entity en el trigger system
+	TriggerSystem::i().RegisterEntity(this);
 
 }
 
@@ -38,7 +39,7 @@ Player::~Player()
 	
 }
 
-void Player::setPosition(Vec3<float> pos)
+void Player::setPosition(Vec3<float> &pos)
 {
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
@@ -48,8 +49,9 @@ void Player::setPosition(Vec3<float> pos)
 
 void Player::searchSpawnPoint()
 {
+	int spawn;
 	//Elegimos aleatoriamente un punto de spawn
-	int spawn = Randi(0,m_spawns.size());
+	spawn = Randi(0, m_spawns.size() - 1);
 
 	setPosition(m_spawns.at(spawn));
 }
@@ -59,6 +61,8 @@ void Player::searchSpawnPoint()
 
 void Player::inicializar()
 {
+
+
 
 	granada = new Granada();
 	granada->inicializar();
@@ -160,8 +164,8 @@ void Player::update(Time elapsedTime)
 	//Una vez termine la nimacion de muerte, volvemos a movernos
 	if (relojMuerte.getElapsedTime().asSeconds() > 3 && isDying) {
 		isDying = false;
-		//TODO la posicion de respawn será un array de posiciones que se leen del mapa
-		setPosition(Vec3<float>(0,10,0));
+		searchSpawnPoint();
+		m_vida = 100;
 	}
 
 }

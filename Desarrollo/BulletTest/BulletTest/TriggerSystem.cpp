@@ -11,6 +11,7 @@ TriggerSystem::TriggerSystem()
 
 TriggerSystem::~TriggerSystem()
 {
+
 }
 
 unsigned long TriggerSystem::RegisterTrigger(EnumTriggerType _eTriggerType, unsigned long nPriority, int idSource, Vec3<float> vPos, float fRadius, Time fDuration, bool bDynamicSourcePos) {
@@ -21,6 +22,13 @@ unsigned long TriggerSystem::RegisterTrigger(EnumTriggerType _eTriggerType, unsi
 
 	return pTriggerRecord->nTriggerID;//Devolvemos el identificador del trigger
 
+}
+
+void TriggerSystem::RegisterEntity(Entity * ent)
+{
+	{
+		m_entities.push_back(ent);
+	}
 }
 
 void TriggerSystem::RemoveTrigger(unsigned long IDTrigger) {
@@ -58,6 +66,16 @@ void TriggerSystem::UpdatePos(TriggerRecordStruct *trigger) {
 
 }
 
+void TriggerSystem::clearTriggers()
+{
+	m_entities.clear();
+	for (auto i = m_mapTriggerMap.begin(); i != m_mapTriggerMap.end(); ++i) {
+		delete i->second;
+	}
+
+	m_mapTriggerMap.clear();
+}
+
 
 void TriggerSystem::Update() {
 
@@ -86,9 +104,8 @@ void TriggerSystem::Update() {
 
 	}
 
-	list<Entity*> lista = EntityManager::i().getAllEntitiesTriggerables();
 
-	for (list<Entity*>::Iterator it2 = lista.begin(); it2 != lista.end(); it2++) {
+	for (std::vector<Entity*>::iterator it2 = m_entities.begin(); it2 != m_entities.end(); ++it2) {
 
 		for (it = m_mapTriggerMap.begin(); it != m_mapTriggerMap.end(); ++it) {
 

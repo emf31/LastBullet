@@ -173,6 +173,7 @@
     <ClInclude Include="Command\ShootPistola.h" />
     <ClInclude Include="Command\ShootRocket.h" />
     <ClInclude Include="Entities\Granada.h" />
+    <ClInclude Include="Entities\GroupEntity.h" />
     <ClInclude Include="Entities\GunBullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
@@ -228,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Granada.cpp" />
+    <ClCompile Include="Entities\GroupEntity.cpp" />
     <ClCompile Include="Entities\GunBullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
