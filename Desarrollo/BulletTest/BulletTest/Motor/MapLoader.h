@@ -3,6 +3,7 @@
 #include <iostream>
 #include<fstream>
 #include "../Otros/vec3.hpp"
+#include <vector>
 
 
 
@@ -19,6 +20,6 @@ public:
 	void createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
 	void createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
 
-
+	std::vector<Vec3<float>> Spawns;
 
 };
