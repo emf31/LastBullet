@@ -23,6 +23,10 @@ float Randf();
 
 float Randf(float min, float max);
 
+int Randi();
+
+int Randi(float min, float max);
+
 
 
 btVector3 bt(const Vec3<float> &vec);

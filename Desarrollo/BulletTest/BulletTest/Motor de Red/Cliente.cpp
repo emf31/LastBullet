@@ -385,7 +385,7 @@ void Cliente::update() {
 
 				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
 					//es el player
-					Player* player= (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+					Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 					//player->setPosition(nuevoplayer.position);		
 					player->resetAll();
 					player = nullptr;
@@ -437,7 +437,7 @@ void Cliente::conectar(std::string address, int port) {
 
 }
 
-void Cliente::createPlayer() {
+void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 	RakNet::BitStream bsOut;
 	std::string str;
 	TPlayer nuevoplayer;
@@ -450,7 +450,7 @@ void Cliente::createPlayer() {
 	std::cin >> str;
 
 
-	Player *player = new Player(str, peer->GetMyGUID());
+	Player *player = new Player(str, spawnPoints, peer->GetMyGUID());
 	player->inicializar();
 	player->cargarContenido();
 

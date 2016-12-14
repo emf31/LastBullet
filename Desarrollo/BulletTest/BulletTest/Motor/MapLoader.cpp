@@ -10,6 +10,10 @@
 // for convenience
 using json = nlohmann::json;
 
+MapLoader::~MapLoader()
+{
+}
+
 void MapLoader::readMap(const std::string & name)
 {	
 	std::ifstream i("../media/map1.json");

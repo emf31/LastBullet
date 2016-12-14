@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "../Otros/Time.hpp"
 #include "Entity.h"
-#include <set>
+#include <unordered_set>
 #include <list>
 #include "../Motor de Red/Estructuras.h"
 #include <string>
@@ -27,7 +27,7 @@ public:
 	void muestraPosClientes();
 
 	void inicializarEntityManager() {
-		m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<unsigned long, Entity*>();
+		m_nextID = 0;
 	}
 
 	//Inicializa todas las entities
@@ -48,9 +48,11 @@ public:
 
 	//Registra una entity en el mapa
 	void registerEntity(Entity* entity);
+
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
 
+	//Borra la cola de borrado de entities, se llama en cada iteracion
 	void cleanDeleteQueue();
 
 	void cambiaTabla(TFilaTabla fila) {
@@ -87,7 +89,7 @@ private:
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 	
-	std::set<Entity*> delete_set;
+	std::unordered_set<Entity*> delete_set;
 
 };
 

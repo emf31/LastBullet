@@ -3,7 +3,6 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 #include "KinematicCharacterController.h"
-//#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Granada.h"
 #include "Weapons/Weapon.h"
 #include "../Motor/AnimatedSceneNode.h"
@@ -14,10 +13,11 @@
 class Player : public Entity
 {
 public:
-	Player(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
 	void setPosition(Vec3<float> pos);
+	void searchSpawnPoint();
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -27,6 +27,7 @@ public:
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
 	virtual std::string getClassName() { return "Player"; }
+
 
 	void run();
 	void setWeapon(int weapon);
@@ -99,7 +100,6 @@ private:
 	bool isReloading = false;
 
 	
-
 	//Player controller
 	btCollisionShape* m_pCollisionShape;
 	btPairCachingGhostObject* m_pGhostObject;
@@ -110,7 +110,6 @@ private:
 
 	Vec3<float> speedFinal;
 
-	
-
+	std::vector<Vec3<float>> m_spawns;
 };
 

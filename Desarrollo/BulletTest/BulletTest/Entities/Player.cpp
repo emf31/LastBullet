@@ -25,7 +25,8 @@
 #include "../TriggerSystem.h"
 
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid)
+Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
+	m_spawns(spawnPoints)
 {
 	
 
@@ -43,6 +44,14 @@ void Player::setPosition(Vec3<float> pos)
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	//m_nodo->setPosition(pos);
 	m_nodo.get()->setPosition(pos);
+}
+
+void Player::searchSpawnPoint()
+{
+	//Elegimos aleatoriamente un punto de spawn
+	int spawn = Randi(0,m_spawns.size());
+
+	setPosition(m_spawns.at(spawn));
 }
 
 
@@ -425,18 +434,19 @@ void Player::resetAll() {
 	tieneAsalto = false;
 
 
-	asalto = new Asalto();
+	asalto->borrarContenido();
 	asalto->inicializar();
 	asalto->cargarContenido();
 
-	rocket = new RocketLauncher();
+	rocket->borrarContenido();
 	rocket->inicializar();
 	rocket->cargarContenido();
 
-	pistola = new Pistola();
+	pistola->borrarContenido();
 	pistola->inicializar();
 	pistola->cargarContenido();
 
+	//esto esta mal
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);

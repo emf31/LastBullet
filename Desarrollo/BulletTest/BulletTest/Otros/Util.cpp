@@ -32,6 +32,16 @@ float Randf(float min, float max)
 	return min + Randf() * (max - min);
 }
 
+int Randi()
+{
+	return rand() / static_cast<int>(RAND_MAX);
+}
+
+int Randi(float min, float max)
+{
+	return min + Randi() * (max - min);
+}
+
 btVector3 bt(const Vec3<float>& vec)
 {
 	return btVector3(vec.getX(), vec.getY(), vec.getZ());
