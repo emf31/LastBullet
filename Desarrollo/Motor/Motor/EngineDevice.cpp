@@ -11,17 +11,6 @@ EngineDevice::~EngineDevice() {
 	delete sm;
 }
 
-SceneManager* EngineDevice::getSceneManager() {
-	if (sm != nullptr) {
-		return sm;
-	} else {
-		sm = new SceneManager();
-		sm->camera_ptr = &input.camera;
-		sm->screenWidth = &screenWidth;
-		sm->screenHeight = &screenHeight;
-		return sm;
-	}
-}
 
 
 bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::string titleWindow) {
@@ -66,14 +55,61 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	return 1;
 }
 
-void EngineDevice::setKeyCallbacks() {
-	glfwSetKeyCallback(window, &Input::key_callback);
-	glfwSetCursorPosCallback(window, &Input::mouse_callback);
-	glfwSetScrollCallback(window, &Input::scroll_callback);
+
+
+SceneManager* EngineDevice::getSceneManager() {
+	if (sm != nullptr) {
+		return sm;
+	} else {
+		sm = new SceneManager();
+		sm->camera_ptr = &input.camera;
+		sm->screenWidth = &screenWidth;
+		sm->screenHeight = &screenHeight;
+		return sm;
+	}
 }
 
 GLFWwindow* EngineDevice::getWindow() {
 	return window;
+}
+
+void EngineDevice::updateCurrentFrame() {
+	GLfloat currentFrame = glfwGetTime();
+
+	deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
+	numFrames++;
+}
+
+int EngineDevice::getFPS() {
+
+	GLfloat currentFrame = glfwGetTime();
+
+	if (currentFrame - lastTime >= 1.0) {
+		fps = numFrames;
+		numFrames = 0;
+		lastTime += 1.0;
+	}
+	return fps;
+}
+
+void EngineDevice::doMovement() {
+	glfwPollEvents();
+	input.Do_Movement(deltaTime);
+}
+
+void EngineDevice::end() {
+	glfwTerminate();
+}
+
+bool  EngineDevice::shouldCloseWindw() {
+	return glfwWindowShouldClose(window);
+}
+
+void EngineDevice::setKeyCallbacks() {
+	glfwSetKeyCallback(window, &Input::key_callback);
+	glfwSetCursorPosCallback(window, &Input::mouse_callback);
+	glfwSetScrollCallback(window, &Input::scroll_callback);
 }
 
 void EngineDevice::setWindowTitle(std::string title) {

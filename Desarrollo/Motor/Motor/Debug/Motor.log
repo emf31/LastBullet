@@ -1,5 +1,7 @@
-﻿  TModel.cpp
+﻿  main.cpp
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+c:\program files (x86)\windows kits\8.1\include\shared\minwindef.h(130): warning C4005: 'APIENTRY': redefinición de macro
+  d:\ua\cuarto\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.pdb (Full PDB)
