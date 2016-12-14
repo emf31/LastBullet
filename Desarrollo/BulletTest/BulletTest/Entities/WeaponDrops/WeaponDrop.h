@@ -47,8 +47,8 @@ public:
 	void ArmaCogida();
 
 protected:
-	Clock clockRecargaLife;
-	float timeRecargaLife =3;
+	Clock clockRespawnWeapon;
+	float timeRespawnWeapon =3;
 	
 
 	int estado = DISPONIBLE;

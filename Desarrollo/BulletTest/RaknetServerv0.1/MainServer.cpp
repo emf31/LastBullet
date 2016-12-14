@@ -52,8 +52,8 @@ int main() {
 	//std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
-
-	std::cout << "Creando el servidor en el puerto "<< SERVER_PORT << std::endl;
+	;
+	std::cout << "Escuchando conexiones en el puerto: " << SERVER_PORT <<"\nTu IP es: "<< peer->GetLocalIP(0) << std::endl;
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
 
 	while (1) {
@@ -296,9 +296,6 @@ int main() {
 					//no existe la vida aun (este es el primer cliente que se conecta)
 					Life *l = new Life(idVida);
 				}
-				
-				
-				
 			}
 			break;
 			case NUEVA_ARMA: {
@@ -358,13 +355,7 @@ int main() {
 				//recibo el guid del cliente que ha sido disparado
 				bsIn.Read(idVida);
 				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idVida));
-				arma->resetTiempoRecargar();
-
 				EntityManager::i().ArmaCogida(idVida, peer);
-
-
-
-
 			}
 			break;
 			case CAMBIO_ARMA: {
