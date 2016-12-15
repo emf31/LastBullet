@@ -146,8 +146,8 @@ void Game::inicializar()
 	GraphicEngine::i().inicializar();
 	EntityManager::i().inicializarEntityManager();
 
-	MapLoader *map = new MapLoader();
-	map->readMap("..\rust_export.txt");
+	MapLoader map;
+	map.readMap("..\rust_export.txt");
 
 
 	/*///////////////////////////////////////////////////////////////
