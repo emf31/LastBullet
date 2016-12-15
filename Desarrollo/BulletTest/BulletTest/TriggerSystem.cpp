@@ -1,5 +1,6 @@
 #include "TriggerSystem.h"
 #include "Entities/EntityManager.h"
+#include "Entities/GroupEntity.h"
 
 TriggerSystem::TriggerSystem()
 {
@@ -118,13 +119,23 @@ void TriggerSystem::Update() {
 			if (pRec->idSource == (*it2)->getID()) {
 				continue;
 			}
-
-			Vec3<float> vector = (*it2)->getRenderPosition() - pRec->vPos;
+			
+			Vec3<float> vector = (*it2)->getRenderState()->getPosition() - pRec->vPos;
 			fDistance = vector.Magnitude();
-
-			if (fDistance > pRec->fradius) {
-				continue;
+			
+			//Si es Entity con trigger punto - radio
+			if ((*it2)->getClassName() != "GroupEntity") {
+				if (fDistance > pRec->fradius) {
+					continue;
+				}
 			}
+			else {
+				if (fDistance > pRec->fradius + static_cast<GroupEntity*>(*it2)->getRadius()) {
+					continue;
+				}
+			}
+
+			
 
 			if ((*it2)->handleTrigger(pRec)) {
 				break;

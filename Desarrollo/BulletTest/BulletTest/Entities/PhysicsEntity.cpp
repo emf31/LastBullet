@@ -71,3 +71,8 @@ void PhysicsEntity::handleMessage(const Message & message)
 {
 
 }
+
+bool PhysicsEntity::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}

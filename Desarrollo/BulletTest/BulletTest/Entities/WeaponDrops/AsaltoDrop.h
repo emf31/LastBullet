@@ -9,7 +9,6 @@ public:
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
 	btGhostObject* getGhostObject() { return m_ghostObject; }
-	void ArmaCogida2();
 
 	virtual void inicializar() override;
 
@@ -24,5 +23,7 @@ public:
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "AsaltoDrop"; }
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 };
 

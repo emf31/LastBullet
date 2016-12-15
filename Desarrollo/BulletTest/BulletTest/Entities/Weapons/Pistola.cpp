@@ -74,6 +74,11 @@ void Pistola::handleMessage(const Message & message)
 
 }
 
+bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void Pistola::shoot() {
 
 	if (disparos < capacidadAmmo) {

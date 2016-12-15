@@ -81,6 +81,11 @@ void RocketBulletEnemy::handleMessage(const Message & message)
 	}
 }
 
+bool RocketBulletEnemy::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 std::string RocketBulletEnemy::getClassName()
 {
 	return "RocketBulletEnemy";

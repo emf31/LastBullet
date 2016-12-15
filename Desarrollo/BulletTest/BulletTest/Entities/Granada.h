@@ -37,6 +37,8 @@ public:
 
 	virtual std::string getClassName() { return "Granada"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	void shoot(const btVector3& posicionPlayer);
 	void serverShoot(TGranada& g);
 

@@ -32,6 +32,8 @@ public:
 
 	virtual std::string getClassName() { return "WeaponDrop"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
+
 	void setPosition(Vec3<float> pos) {
 
 		m_renderState.setPosition(pos);
@@ -52,9 +54,7 @@ protected:
 	
 
 	int estado = DISPONIBLE;
-	//btGhostPairCallback* m_ghostPairCallback = NULL;				// Needed once to enable ghost objects inside Bullet
-	btGhostObject* m_ghostObject;							// simple aabb ghost object (keeps track of the objects whose aabbs intersect its own collision shape aabb: this is called "broadphase stage collision detection")
-															//btPairCachingGhostObject* m_ghostObject;		// full shape ghost object (keeps track of the objects whose collision shape intersect its own collision shape: this is called "narrowphase stage collision detection")
+	btGhostObject* m_ghostObject;							
 	btVector3 m_currentPosition;
 };
 

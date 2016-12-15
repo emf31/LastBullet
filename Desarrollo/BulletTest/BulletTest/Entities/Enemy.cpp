@@ -132,6 +132,11 @@ void Enemy::handleMessage(const Message & message)
 	}
 }
 
+bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 //pila posiciones
 void Enemy::encolaMovimiento(TMovimiento mov)
 {
