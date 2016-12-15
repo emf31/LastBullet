@@ -1,4 +1,5 @@
 #include "Util.h"
+#include <ctime>
 
 float DegToRad(float deg)
 {
@@ -30,6 +31,17 @@ float Randf()
 float Randf(float min, float max)
 {
 	return min + Randf() * (max - min);
+}
+
+int Randi()
+{
+	std::srand(std::time(0));
+	return std::rand();
+}
+
+int Randi(int min, int max)
+{
+	return Randi() % (max - min + 1) + min;
 }
 
 btVector3 bt(const Vec3<float>& vec)

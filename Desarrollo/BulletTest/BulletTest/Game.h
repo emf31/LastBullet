@@ -31,9 +31,5 @@ public:
 private:
 	static const Time timePerFrame;
 	float interpolation;
-
-	Player *player;
-	Entity *enemy;
-
 	
 };

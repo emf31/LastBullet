@@ -1,10 +1,11 @@
 #include "LifeObject.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor de Red/Cliente.h"
+#include "../TriggerSystem.h"
 
 LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
-
+	TriggerSystem::i().RegisterEntity(this);
 }
 
 

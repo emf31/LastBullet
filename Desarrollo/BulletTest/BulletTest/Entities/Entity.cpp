@@ -10,7 +10,8 @@ Entity::Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name,
 	m_nodo(nodo),
 	m_name(name),
 	m_renderState(),
-	m_guid(guid)
+	m_guid(guid),
+	isGroup(false)
 {
 
 	if (m_nodo) {

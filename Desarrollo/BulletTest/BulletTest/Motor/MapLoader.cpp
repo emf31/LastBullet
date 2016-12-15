@@ -10,6 +10,10 @@
 // for convenience
 using json = nlohmann::json;
 
+MapLoader::~MapLoader()
+{
+}
+
 void MapLoader::readMap(const std::string & name)
 {	
 	std::ifstream i("../media/map1.json");
@@ -50,7 +54,7 @@ void MapLoader::readMap(const std::string & name)
 				if (obj["tag"] == "Grafo")
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 				if (obj["tag"] == "Spawn")
-					Spawns.push_back(pos);
+					spawnPoints.push_back(pos);
 		}
 	}
 

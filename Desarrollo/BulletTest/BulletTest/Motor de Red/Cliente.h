@@ -23,7 +23,7 @@ public:
 
 	void update();
 
-	void createPlayer();
+	void createPlayer(std::vector<Vec3<float>> &spawnPoints);
 	void inicializar();
 	void conectar(std::string address, int port);
 	void enviarMovimiento(Player* p); 

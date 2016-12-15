@@ -1,1 +1,72 @@
-﻿
+﻿  Granada.cpp
+  GunBullet.cpp
+  Enemy.cpp
+  Entity.cpp
+  EntityManager.cpp
+  KinematicCharacterController.cpp
+  LifeObject.cpp
+  PhysicsEntity.cpp
+  Player.cpp
+Entities\Player.cpp(52): warning C4244: 'argumento': conversión de 'unsigned int' a 'float'; posible pérdida de datos
+Entities\Player.cpp(71): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(75): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(79): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+  RocketBullet.cpp
+  RocketBulletEnemy.cpp
+  AsaltoDrop.cpp
+  PistolaDrop.cpp
+  RocketLauncherDrop.cpp
+  WeaponDrop.cpp
+  Asalto.cpp
+  Pistola.cpp
+Entities\Weapons\Pistola.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  RocketLauncher.cpp
+  Weapon.cpp
+  InputHandler.cpp
+  Compilando...
+  MessageHandler.cpp
+  MachineState.cpp
+  Patrullar.cpp
+  MastEventReceiver.cpp
+  Game.cpp
+  main.cpp
+  Cliente.cpp
+  AnimatedSceneNode.cpp
+  Animation.cpp
+  Camera.cpp
+  GraphicEngine.cpp
+  MapLoader.cpp
+Motor\MapLoader.cpp(108): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(116): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(124): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(132): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+  PhysicsEngine.cpp
+  RenderState.cpp
+  BasicSceneNode.cpp
+  SceneNode.cpp
+  Clock.cpp
+  Lista.cpp
+  Time.cpp
+  Util.cpp
+Otros\Util.cpp(42): warning C4244: 'return': conversión de 'float' a 'int'; posible pérdida de datos
+  Compilando...
+  ClockImpl.cpp
+  TriggerSystem.cpp
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
+  TriggerSystem.cpp(20): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+          with
+          [
+              _Kty=unsigned short,
+              _Ty=TriggerRecordStruct *,
+              _Other1=unsigned long &,
+              _Other2=TriggerRecordStruct *&
+          ]
+  TriggerSystem.cpp(20): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+          with
+          [
+              _Kty=unsigned short,
+              _Ty=TriggerRecordStruct *,
+              _Other1=unsigned long &,
+              _Other2=TriggerRecordStruct *&
+          ]
+LINK : fatal error LNK1181: no se puede abrir el archivo de entrada 'IrrlichtStatic_RELEASE.lib'

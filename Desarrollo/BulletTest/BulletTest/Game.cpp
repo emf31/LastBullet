@@ -122,14 +122,10 @@ void Game::run()
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
-	
-	
-	
+
 	if (Cliente::i().isConected()) {
 		Cliente::i().apagar();
 	}
-	
-	
 	
 	MessageHandler::i().borrarContenido();
 	
@@ -144,141 +140,14 @@ void Game::inicializar()
 	//inicializamos bullet
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
+	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
 	MapLoader map;
 	map.readMap("..\rust_export.txt");
 
 
-	/*///////////////////////////////////////////////////////////////
-	std::shared_ptr<BasicSceneNode> suelo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt = new PhysicsEntity(suelo, "suelo");
-	sueloEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt->setCollisionGroup(col::Collisions::Static);
-	sueloEnt->setCollisionMask(col::staticCollidesWith);
-	sueloEnt->getRigidBody()->setFriction(0.7f);
-	//sueloEnt->rotate(Vec3<float>(0.1, 0, 0));
-	///////////////////////////////////////////////////////////////
 	
-	std::shared_ptr<BasicSceneNode> suelo2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt2 = new PhysicsEntity(suelo2, "suelo2");
-	sueloEnt2->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt2, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt2->rotate(Vec3<float>(float(90 * PI / 180.0),0, 0));
-	sueloEnt2->setPosition(Vec3<float>(-50, 0, 0));
-	sueloEnt2->setCollisionGroup(col::Collisions::Static);
-	sueloEnt2->setCollisionMask(col::staticCollidesWith);
-	sueloEnt2->getRigidBody()->setFriction(0.7f);
-	///////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> suelo3 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt3 = new PhysicsEntity(suelo3, "suelo3");
-	sueloEnt3->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt3, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt3->rotate(Vec3<float>(0, 0, float( 90 * PI / 180.0)));
-	sueloEnt3->setPosition(Vec3<float>(0, 0, -50));
-	sueloEnt3->setCollisionGroup(col::Collisions::Static);
-	sueloEnt3->setCollisionMask(col::staticCollidesWith);
-	sueloEnt3->getRigidBody()->setFriction(0.7f);
-	//////////////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> suelo4 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 100), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt4 = new PhysicsEntity(suelo4, "suelo4");
-	sueloEnt4->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt4, Vec3<float>(25, 5.f, 100), 0));
-	sueloEnt4->rotate(Vec3<float>(0, 0, float(30 * PI / 180.0)));
-	sueloEnt4->setPosition(Vec3<float>(60, -25, 40));
-	sueloEnt4->setCollisionGroup(col::Collisions::Static);
-	sueloEnt4->setCollisionMask(col::staticCollidesWith);
-	sueloEnt4->getRigidBody()->setFriction(0.7f);
-	///////////////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> suelo5 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(25, 5.f, 50), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt5 = new PhysicsEntity(suelo5, "suelo5");
-	sueloEnt5->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt5, Vec3<float>(25, 5.f, 50), 0));
-	sueloEnt5->rotate(Vec3<float>(0, 0, 0));
-	sueloEnt5->setPosition(Vec3<float>(60, 0, -25));
-	sueloEnt5->setCollisionGroup(col::Collisions::Static);
-	sueloEnt5->setCollisionMask(col::staticCollidesWith);
-	sueloEnt5->getRigidBody()->setFriction(0.7f);
-	///////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> suelo6 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt6 = new PhysicsEntity(suelo6, "suelo6");
-	sueloEnt6->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt6, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt6->rotate(Vec3<float>(float(90 * PI / 180.0), 0, 0));
-	sueloEnt6->setPosition(Vec3<float>(75, 0, 0));
-	sueloEnt6->setCollisionGroup(col::Collisions::Static);
-	sueloEnt6->setCollisionMask(col::staticCollidesWith);
-	sueloEnt6->getRigidBody()->setFriction(0.7f);
-	///////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> suelo7 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(100, 5.f, 100), "../media/wall.jpg", "");
-
-	PhysicsEntity *sueloEnt7 = new PhysicsEntity(suelo7, "suelo7");
-	sueloEnt7->setRigidBody(PhysicsEngine::i().createBoxRigidBody(sueloEnt7, Vec3<float>(100, 5.f, 100), 0));
-	sueloEnt7->rotate(Vec3<float>(0, 0, float( 90 * PI / 180.0)));
-	sueloEnt7->setPosition(Vec3<float>(0, 0, 50));
-	sueloEnt7->setCollisionGroup(col::Collisions::Static);
-	sueloEnt7->setCollisionMask(col::staticCollidesWith);
-	sueloEnt7->getRigidBody()->setFriction(0.7f);
-	//////////////////////////////////////////////////////////////////////
-	////////         Creamos 2 paquete de vida        //////////////////
-
-	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
-	LifeObject *vidaEnt = new LifeObject(vida, "vida");
-	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(3.f, 3.f, 3.f)));
-	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	vidaEnt->setPosition(Vec3<float>(10, 9, 0));
-	
-	
-	std::shared_ptr<BasicSceneNode> vida2 = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(3.f, 3.f, 3.f), "../media/life.png", "");
-	LifeObject *vidaEnt2 = new LifeObject(vida2, "vida2");
-	vidaEnt2->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt2, Vec3<float>(3.f, 3.f, 3.f)));
-	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	vidaEnt2->setPosition(Vec3<float>(40, 9, 0));
-
-	/////////////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> lanzacohete = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/lanzacohetes.jpg", "");
-	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(lanzacohete, "lanzacohetes");
-	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, Vec3<float>(5.f, 5.f, 5.f)));
-	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	RocketLauncherDropEnt->setPosition(Vec3<float>(20, 7, 0));
-
-	/////////////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> asaltodrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/Asalto.jpg", "");
-	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(asaltodrop, "asalto");
-	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, Vec3<float>(5.f, 5.f, 5.f)));
-	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	AsaltoDropEnt->setPosition(Vec3<float>(20, 7, 15));
-
-	/////////////////////////////////////////////////////////////////////
-
-	std::shared_ptr<BasicSceneNode> pistoladrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(5.f, 5.f, 5.f), "../media/pistola.jpg", "");
-	PistolaDrop *pistolaEnt = new PistolaDrop(pistoladrop, "pistola");
-	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, Vec3<float>(5.f, 5.f, 5.f)));
-	//vidaEnt->setPosition(Vec3<float>(0, 0, 80));
-	pistolaEnt->setPosition(Vec3<float>(20, 7, -15));
-
-	/////////////////////////////////////////////////////////////////////
-
-	/////////////////////////////////////////////////////////////////////
-	std::shared_ptr<BasicSceneNode> caja = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(1.f, 1.f, 1.f), "../media/ice0.jpg", "");
-
-	PhysicsEntity *cajaEnt = new PhysicsEntity(caja, "caja");
-	cajaEnt->setRigidBody(PhysicsEngine::i().createBoxRigidBody(cajaEnt, Vec3<float>(1.f, 1.f, 1.f), 10.f,false));
-	cajaEnt->setCollisionGroup(col::Collisions::Caja);
-	cajaEnt->setCollisionMask(col::cajaCollidesWith);
-	cajaEnt->getRigidBody()->setDamping(btScalar(0.f),btScalar(0.85f));
-	//cajaEnt->getRigidBody()->setRollingFriction(btScalar(0.8f));
-	cajaEnt->getRigidBody()->setFriction(btScalar(0.8f));
-	cajaEnt->getRigidBody()->setAngularFactor(btScalar(0.3f));*/
-	/////////////////////////////////////////////////////////////////////
 
 	int a;
 	do {
@@ -291,12 +160,13 @@ void Game::inicializar()
 	
 
 	if (a == 1) {
+		//LLama al inicializar de todas las entities
 		EntityManager::i().inicializar();
 
 		EntityManager::i().cargarContenido();
 
-		//Si no le pasas GUID es que es un jugador
-		player = new Player("Pepi");
+		//Creamos el player
+		Player* player = new Player("Pepi", map->getSpawnPoints());
 		player->inicializar();
 		player->cargarContenido();
 
@@ -315,7 +185,7 @@ void Game::inicializar()
 			Cliente::i().update();
 		}
 
-		Cliente::i().createPlayer();
+		Cliente::i().createPlayer(map->getSpawnPoints());
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
@@ -329,10 +199,6 @@ void Game::inicializar()
 		for (list<Entity*>::Iterator it = weapon.begin(); it != weapon.end(); ++it) {
 			Cliente::i().nuevaArma((*it)->getID());
 		}
-		//Cliente::i().nuevaArma(RocketLauncherDropEnt->getID());
-		//Cliente::i().nuevaArma(AsaltoDropEnt->getID());
-		//Cliente::i().nuevaArma(pistolaEnt->getID());
-
 
 
 	}
@@ -365,6 +231,7 @@ void Game::update(Time elapsedTime)
 
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
+
 	EntityManager::i().update(elapsedTime);
 	
 	TriggerSystem::i().Update();

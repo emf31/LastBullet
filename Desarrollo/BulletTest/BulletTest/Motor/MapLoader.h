@@ -22,6 +22,8 @@ public:
 	void createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
 	void createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
 
-	std::vector<Vec3<float>> Spawns;
+	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 
+
+	std::vector<Vec3<float>> spawnPoints;
 
 };

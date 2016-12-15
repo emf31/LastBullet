@@ -127,6 +127,9 @@
     <ClCompile Include="TriggerSystem.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\GroupEntity.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -326,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="TriggerSystem.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\GroupEntity.h">
+      <Filter>Headers\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
