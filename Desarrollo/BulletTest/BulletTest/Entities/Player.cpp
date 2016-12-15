@@ -47,15 +47,52 @@ void Player::setPosition(Vec3<float> &pos)
 	m_nodo.get()->setPosition(pos);
 }
 
+//Busca en la lista de puntos de spawn alguno que no intersecte con ningún enemigo de radio x,
+//luego con la lista que queda se coge un punto aleatorio
 void Player::searchSpawnPoint()
 {
-	int spawn;
-	//Elegimos aleatoriamente un punto de spawn
-	spawn = Randi(0, m_spawns.size() - 1);
-
+	float radio = 100;
+	float fDistance = 0;
+	int spawn = 0;
+	
 	std::list<Entity*> enemies = EntityManager::i().getEnemies();
 
-	setPosition(m_spawns.at(spawn));
+	std::vector<Vec3<float>> auxSpawns;
+
+	std::list<Entity*>::iterator it;
+	std::vector<Vec3<float>>::iterator it2;
+
+	for (it2 = m_spawns.begin(); it2 != m_spawns.end(); ++it2) {
+		bool valid = true;
+		for (it = enemies.begin(); it != enemies.end(); ++it) {
+			Vec3<float> vector = (*it)->getRenderState()->getPosition() - (*it2);
+			fDistance = vector.Magnitude();
+
+			if (fDistance < 100) {
+				valid = false;
+				break;
+			}
+
+		}
+		if (valid) {
+			auxSpawns.push_back(*it2);
+		}	
+
+	}
+
+	//Si hay mas de 1 elegimos uno aleatorio
+	if (auxSpawns.size() > 1) {
+		spawn = Randi(0, auxSpawns.size() - 1);
+	}
+	
+	//Si no esta vacio es que hemos encontrado uno
+	if (!auxSpawns.empty()) {
+		setPosition(auxSpawns.at(spawn));
+	}
+	else {
+		setPosition(m_spawns.at(Randi(0, m_spawns.size() - 1)));
+	}
+	
 }
 
 
@@ -168,6 +205,7 @@ void Player::update(Time elapsedTime)
 		isDying = false;
 		searchSpawnPoint();
 		m_vida = 100;
+		resetAll();
 	}
 
 }
@@ -216,9 +254,9 @@ void Player::cargarContenido()
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
 		col::characterCollidesWith);
 
-	p_controller->m_acceleration_walk = 2.3f;
+	p_controller->m_acceleration_walk = 6.3f;
 	p_controller->m_deceleration_walk = 8.5f;
-	p_controller->m_maxSpeed_walk = 5.f;
+	p_controller->m_maxSpeed_walk = 6.f;
 
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
@@ -457,8 +495,6 @@ void Player::resetAll() {
 	pistola->inicializar();
 	pistola->cargarContenido();
 
-	//esto esta mal
-	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);
 	listaWeapons->valorActual()->getNode()->setVisible(true);

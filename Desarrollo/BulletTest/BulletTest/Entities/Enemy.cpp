@@ -58,7 +58,7 @@ void Enemy::cargarContenido()
 	m_nodo.get()->setTexture("../media/head01.png", 0);
 	m_nodo.get()->setTexture("../media/m4tex.png", 2);
 
-	m_renderState.setPosition(Vec3<float>(0, 100, 0));
+	//m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
 	animation->addAnimation("Default", 0, 0);
 	animation->addAnimation("Run_Forwards", 1, 69);

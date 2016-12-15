@@ -71,7 +71,6 @@ public:
 	KinematicCharacterController* p_controller;
 
 private:
-	float m_vida;
 
 	Animation* animation;
 
