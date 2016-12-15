@@ -143,8 +143,8 @@ void Game::inicializar()
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
-	MapLoader *map = new MapLoader();
-	map->readMap("..\rust_export.txt");
+	MapLoader map;
+	map.readMap("..\rust_export.txt");
 
 
 	
