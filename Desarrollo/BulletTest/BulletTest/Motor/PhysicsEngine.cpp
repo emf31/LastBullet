@@ -9,7 +9,7 @@
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
-const Time PhysicsEngine::tickPhysics = seconds(1.f / 120.f);
+const Time PhysicsEngine::tickPhysics = seconds(1.f / 60.f);
 
 
 //Tenemos un unordered maps de contactos, donde la key es un entity.

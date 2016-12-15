@@ -38,6 +38,8 @@ private:
 
 	virtual void handleMessage(const Message & message) override;
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual std::string getClassName() override;
 
 	float explosion(Vec3<float>posExplosion, Vec3<float>posCharacter, float radio);

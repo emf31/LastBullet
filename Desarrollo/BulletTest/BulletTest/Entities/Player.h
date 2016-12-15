@@ -28,6 +28,8 @@ public:
 	virtual void handleMessage(const Message& message) override;
 	virtual std::string getClassName() { return "Player"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 
 	void run();
 	void setWeapon(int weapon);
@@ -69,7 +71,6 @@ public:
 	KinematicCharacterController* p_controller;
 
 private:
-	float m_vida;
 
 	Animation* animation;
 

@@ -39,6 +39,8 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual std::string getClassName() { return "PhysicsEntity"; }
 
 

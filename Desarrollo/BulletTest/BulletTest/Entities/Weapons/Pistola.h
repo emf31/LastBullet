@@ -24,6 +24,8 @@ public:
 
 	virtual std::string getClassName() { return "Pistola"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual void shoot();
 
 	virtual void resetAmmoTotal() {

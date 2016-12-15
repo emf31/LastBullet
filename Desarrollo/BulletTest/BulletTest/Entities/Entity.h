@@ -94,7 +94,7 @@ public:
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
 	virtual void handleMessage(const Message& message) = 0;
-	virtual bool handleTrigger(TriggerRecordStruct* Trigger);
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
 
 	virtual std::string getClassName() = 0;
 

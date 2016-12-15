@@ -29,6 +29,8 @@ public:
 	void addEntity(Entity* ent);
 
 	void removeEntity(Entity* ent);
+
+	float getRadius() const { return radio; }
 private:
 	std::unordered_set<Entity*> lista_entities;
 	float radio;

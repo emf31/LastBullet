@@ -59,3 +59,8 @@ void PistolaDrop::handleMessage(const Message & message)
 		}
 		}
 }
+
+bool PistolaDrop::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}

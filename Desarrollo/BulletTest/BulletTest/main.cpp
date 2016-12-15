@@ -15,7 +15,7 @@ int main(int, char const**)
 	while (1) {
 		game->run();
 	}
-	
+	delete game;
 
 	return 0;
 

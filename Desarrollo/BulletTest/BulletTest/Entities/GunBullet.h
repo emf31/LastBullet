@@ -26,6 +26,8 @@ public:
 	virtual void handleMessage(const Message & message) override;
 
 	virtual std::string getClassName() override;
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 	
 private:
 	Vec3<float> m_direction;

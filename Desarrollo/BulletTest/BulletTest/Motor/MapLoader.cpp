@@ -10,9 +10,10 @@
 // for convenience
 using json = nlohmann::json;
 
-MapLoader::~MapLoader()
-{
+MapLoader::~MapLoader(){
+
 }
+
 
 void MapLoader::readMap(const std::string & name)
 {	

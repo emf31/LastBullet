@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <RakNetTime.h>
 #include "Cliente.h"
 #include "Estructuras.h"
 #include "../Entities/EntityManager.h"
@@ -406,7 +407,14 @@ void Cliente::update() {
 			}
 			break;
 
-
+			case ID_UNCONNECTED_PONG:
+			{
+				RakNet::TimeMS time;
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(1);
+				bsIn.Read(time);
+				printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::Time() - time);
+			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
@@ -419,19 +427,41 @@ void Cliente::update() {
 
 void Cliente::inicializar() {
 	conectado = false;
-
-
-	peer = RakNet::RakPeerInterface::GetInstance();
-
-	printf("Introduce la IP \n");
+	char eleccion;
+	int elec;
 	std::string str;
-	std::cin >> str;
-	std::cout << "Conectando al servidor " << str << ":" << SERVER_PORT << std::endl;
 
+	do {
+		searchServersOnLAN();
+
+		//Lista de servidores en la red
+		std::cout << m_servers.size() << " servidor(es) encontrado(s): " << std::endl;
+		for (std::size_t i = 0; i < m_servers.size(); ++i) {
+			std::cout << "\t[" << i << "] - " << m_servers.at(i) << std::endl;
+		}
+		std::cout << "\t[a] - Actualizar" << std::endl;
+		if (m_servers.size() != 0) {
+			std::cout << "Selecciona un servidor: ";
+			std::cin >> eleccion;
+			if (eleccion != 'a') {
+				elec = eleccion - '0';
+				std::string ipConPuerto = m_servers.at((elec));
+				std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
+				str = ip;
+			}
+			
+		} else {
+			printf("Introduce la IP \n");
+			std::cin >> str;
+		}
+	}while (eleccion == 'a');
+	
+	std::cout << "Conectando al servidor " << str << ":" << SERVER_PORT << std::endl;
 	conectar(str, SERVER_PORT);
 }
 
 void Cliente::conectar(std::string address, int port) {
+	peer = RakNet::RakPeerInterface::GetInstance();
 	peer->Startup(1, &sd, 1);
 	peer->Connect(address.c_str(), SERVER_PORT, 0, 0);
 
@@ -689,7 +719,34 @@ void Cliente::actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID gui
 
 }
 
+void Cliente::searchServersOnLAN() {
+	//Creo un RakPeer para lanzar un paquete de búsqueda
+	RakNet::RakPeerInterface *client;
+	client = RakNet::RakPeerInterface::GetInstance();
 
+	RakNet::SocketDescriptor socketDescriptor(65534, 0);
+	socketDescriptor.socketFamily = AF_INET;
+
+	client->Startup(1, &socketDescriptor, 1);
+
+	//Hacemos ping a bradcast en el puerto en el que sabemos que está escuchando el server
+	client->Ping("255.255.255.255", 65535, 0);
+	std::cout << "Buscando servidores en la red local..." << std::endl;
+
+	RakNet::Packet *packet;
+	//Limpiamos la lista de servidores primero.
+	m_servers.clear();
+	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
+		if (packet->data[0] == ID_UNCONNECTED_PONG) {
+			RakNet::TimeMS time;
+			RakNet::BitStream bsIn(packet->data, packet->length, false);
+			bsIn.IgnoreBytes(1);
+			m_servers.push_back(packet->systemAddress.ToString());
+		}
+	}
+	//Destruyo el RakPeer. Ya no hace falta
+	RakNet::RakPeerInterface::DestroyInstance(client);
+}
 
 
 void Cliente::apagar() {

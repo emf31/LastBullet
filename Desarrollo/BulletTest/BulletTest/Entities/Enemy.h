@@ -40,6 +40,8 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 
 
 	void encolaMovimiento(TMovimiento mov);

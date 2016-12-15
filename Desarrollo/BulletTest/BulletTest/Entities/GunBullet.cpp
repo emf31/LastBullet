@@ -61,3 +61,8 @@ std::string GunBullet::getClassName()
 {
 	return "Bullet";
 }
+
+bool GunBullet::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}

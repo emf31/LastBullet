@@ -42,6 +42,8 @@ public:
 	void cambioArma(int cambio, RakNet::RakNetGUID guid);
 	void actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath);
 
+	void searchServersOnLAN();
+
 	//Como si fuera el delete
 	void apagar();
 
@@ -79,5 +81,8 @@ private:
 	int idVida;
 	float danyo = 0.0f;
 	Vec3<float> fuerza;
+
+	//Lista de servidores disponibles
+	std::vector<std::string> m_servers;
 };
 
