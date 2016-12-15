@@ -73,6 +73,11 @@ void Asalto::handleMessage(const Message & message)
 
 }
 
+bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void Asalto::shoot()
 {
 

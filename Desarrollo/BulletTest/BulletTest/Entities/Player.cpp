@@ -53,6 +53,8 @@ void Player::searchSpawnPoint()
 	//Elegimos aleatoriamente un punto de spawn
 	spawn = Randi(0, m_spawns.size() - 1);
 
+	std::list<Entity*> enemies = EntityManager::i().getEnemies();
+
 	setPosition(m_spawns.at(spawn));
 }
 
@@ -214,9 +216,9 @@ void Player::cargarContenido()
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
 		col::characterCollidesWith);
 
-	p_controller->m_acceleration_walk = 1.3f;
-	p_controller->m_deceleration_walk = 5.5f;
-	p_controller->m_maxSpeed_walk = 3.f;
+	p_controller->m_acceleration_walk = 2.3f;
+	p_controller->m_deceleration_walk = 8.5f;
+	p_controller->m_maxSpeed_walk = 5.f;
 
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
@@ -252,6 +254,11 @@ void Player::handleMessage(const Message & message)
 	}
 }
 
+bool Player::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void Player::run()
 {
 	if(p_controller->onGround())
@@ -266,7 +273,7 @@ void Player::jump() {
 
 	TriggerSystem::i().RegisterTrigger(explosion, 1001, this->getID(), this->getRenderPosition(), 50, k, false);
 	
-	p_controller->jump(btVector3(0, 90, 0));
+	p_controller->jump(btVector3(0, 50, 0));
 	
 }
 

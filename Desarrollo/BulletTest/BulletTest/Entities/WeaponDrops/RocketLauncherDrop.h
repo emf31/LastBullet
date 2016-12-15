@@ -31,6 +31,8 @@ public:
 
 	virtual std::string getClassName() { return "RocketLauncherDrop"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 
 };
 

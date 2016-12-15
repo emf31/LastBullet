@@ -138,6 +138,11 @@ void Granada::setPosition(const Vec3<float>& pos) {
 }
 
 
+bool Granada::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void Granada::shoot(const btVector3& posicionPlayer) {
 
 	if (estado== GRANADACARGADA) {

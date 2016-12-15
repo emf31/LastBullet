@@ -119,6 +119,11 @@ void RocketBullet::handleMessage(const Message & message)
 
 }
 
+bool RocketBullet::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 std::string RocketBullet::getClassName()
 {
 	return "RocketBullet";

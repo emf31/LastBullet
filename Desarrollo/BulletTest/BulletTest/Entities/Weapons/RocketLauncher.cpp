@@ -68,6 +68,11 @@ void RocketLauncher::handleMessage(const Message & message)
 
 }
 
+bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void RocketLauncher::shoot() {
 
 	if (disparos < capacidadAmmo) {

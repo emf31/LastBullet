@@ -24,5 +24,7 @@ public:
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "PistolaDrop"; }
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 };
 
