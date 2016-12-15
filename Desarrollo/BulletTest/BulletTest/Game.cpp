@@ -146,14 +146,11 @@ void Game::inicializar()
 	MapLoader map;
 	map.readMap("..\rust_export.txt");
 
-
-	
-
 	int a;
 	do {
 		std::cout << "Elige un modo:" << std::endl;
-		std::cout << "1 - Un jugador" << std::endl;
-		std::cout << "2 - Multijugador" << std::endl;
+		std::cout << "[1] - Un jugador" << std::endl;
+		std::cout << "[2] - Multijugador" << std::endl;
 
 		std::cin >> a;
 	} while (a != 1 && a != 2);
@@ -166,7 +163,7 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("Pepi", map->getSpawnPoints());
+		Player* player = new Player("Pepi", map.getSpawnPoints());
 		player->inicializar();
 		player->cargarContenido();
 
@@ -185,7 +182,7 @@ void Game::inicializar()
 			Cliente::i().update();
 		}
 
-		Cliente::i().createPlayer(map->getSpawnPoints());
+		Cliente::i().createPlayer(map.getSpawnPoints());
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
