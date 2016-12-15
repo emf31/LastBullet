@@ -146,6 +146,31 @@ void Game::inicializar()
 	MapLoader map;
 	map.readMap("..\rust_export.txt");
 
+	Enemy *e = new Enemy("Rambo");
+	e->inicializar();
+	e->cargarContenido();
+	e->setPosition(Vec3<float>(-4,-55, 400));
+
+	Enemy *e1 = new Enemy("Chuck Norris");
+	e1->inicializar();
+	e1->cargarContenido();
+	e1->setPosition(Vec3<float>(216, -2.6, 156.3));
+
+	Enemy *e2 = new Enemy("Batman");
+	e2->inicializar();
+	e2->cargarContenido();
+	e2->setPosition(Vec3<float>(74.06, 17.6, -66.41));
+
+	/*Enemy *e = new Enemy("Son Goku");
+	e->inicializar();
+	e->cargarContenido();
+	e->setPosition();
+
+	Enemy *e = new Enemy("Bruce Lee");
+	e->inicializar();
+	e->cargarContenido();
+	e->setPosition();*/
+
 
 	
 
@@ -166,7 +191,7 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("Pepi", map->getSpawnPoints());
+		Player* player = new Player("Pepi", map.getSpawnPoints());
 		player->inicializar();
 		player->cargarContenido();
 
@@ -185,7 +210,7 @@ void Game::inicializar()
 			Cliente::i().update();
 		}
 
-		Cliente::i().createPlayer(map->getSpawnPoints());
+		Cliente::i().createPlayer(map.getSpawnPoints());
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
