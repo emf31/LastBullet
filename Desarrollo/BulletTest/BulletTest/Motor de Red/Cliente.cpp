@@ -3,6 +3,7 @@
 #include <string>
 #include <chrono>
 #include <RakNetTime.h>
+#include <RakSleep.h>
 #include "Cliente.h"
 #include "Estructuras.h"
 #include "../Entities/EntityManager.h"
@@ -68,15 +69,12 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				TPlayer *p = new TPlayer();
-				p->position = nuevoplayer.position;
-				p->guid = nuevoplayer.guid;
-				p->name = nuevoplayer.name;
-				p->rotation = nuevoplayer.rotation;
-				p->velocidad = nuevoplayer.velocidad;
 
-				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
-				MessageHandler::i().sendMessage(msg);
+				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->inicializar();
+				e->cargarContenido();
+				e->setPosition(nuevoplayer.position);
+				EntityManager::i().mostrarClientes();
 
 			}
 			break;
@@ -91,15 +89,11 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				TPlayer *p = new TPlayer();
-				p->position = nuevoplayer.position;
-				p->guid = nuevoplayer.guid;
-				p->name = nuevoplayer.name;
-				p->rotation = nuevoplayer.rotation;
-				p->velocidad = nuevoplayer.velocidad;
-
-				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
-				MessageHandler::i().sendMessage(msg);
+				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->inicializar();
+				e->cargarContenido();
+				e->setPosition(nuevoplayer.position);
+				EntityManager::i().mostrarClientes();
 
 			}
 			break;
@@ -440,19 +434,22 @@ void Cliente::inicializar() {
 			std::cout << "\t[" << i << "] - " << m_servers.at(i) << std::endl;
 		}
 		std::cout << "\t[a] - Actualizar" << std::endl;
-		if (m_servers.size() != 0) {
-			std::cout << "Selecciona un servidor: ";
-			std::cin >> eleccion;
-			if (eleccion != 'a') {
-				elec = eleccion - '0';
-				std::string ipConPuerto = m_servers.at((elec));
-				std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
-				str = ip;
-			}
-			
-		} else {
+		std::cout << "\t[m] - Introducir IP manualmente" << std::endl;
+		std::cout << "Elige una opcion: ";
+		std::cin >> eleccion;
+		if (eleccion != 'a' && eleccion != 'm') {
+			elec = eleccion - '0';
+			std::string ipConPuerto = m_servers.at((elec));
+			std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
+			str = ip;
+		} else if (eleccion == 'm') {
 			printf("Introduce la IP \n");
 			std::cin >> str;
+			if (str != "a") {
+				break;
+			} else {
+				eleccion = 'a';
+			}
 		}
 	}while (eleccion == 'a');
 	
@@ -487,9 +484,6 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 
 	nuevoplayer.guid = player->getGuid();
 	nuevoplayer.name = player->getName();
-	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-	nuevoplayer.position = Vec3<float>(0, 100, 0);
-	player->setPosition(nuevoplayer.position);
 
 
 
@@ -730,19 +724,26 @@ void Cliente::searchServersOnLAN() {
 	client->Startup(1, &socketDescriptor, 1);
 
 	//Hacemos ping a bradcast en el puerto en el que sabemos que está escuchando el server
-	client->Ping("255.255.255.255", 65535, 0);
+	client->Ping("255.255.255.255", 65535, false);
 	std::cout << "Buscando servidores en la red local..." << std::endl;
-
+	RakSleep(1000);
 	RakNet::Packet *packet;
 	//Limpiamos la lista de servidores primero.
 	m_servers.clear();
+
 	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
+		if (packet == 0) {
+			RakSleep(1000);
+			continue;
+		}
 		if (packet->data[0] == ID_UNCONNECTED_PONG) {
 			RakNet::TimeMS time;
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
 			bsIn.IgnoreBytes(1);
 			m_servers.push_back(packet->systemAddress.ToString());
 		}
+
+		RakSleep(1000);
 	}
 	//Destruyo el RakPeer. Ya no hace falta
 	RakNet::RakPeerInterface::DestroyInstance(client);

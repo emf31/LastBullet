@@ -1,8 +1,8 @@
 
 #include "RenderState.h"
 #include <math.h>
-#include "Otros\Clock.hpp"
-#include "Otros\Time.hpp"
+#include "Otros/Clock.hpp"
+#include "Otros/Time.hpp"
 
 RenderState::RenderState()
 {

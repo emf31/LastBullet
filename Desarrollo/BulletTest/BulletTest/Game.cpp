@@ -146,7 +146,7 @@ void Game::inicializar()
 	MapLoader map;
 	map.readMap("..\rust_export.txt");
 
-	Enemy *e = new Enemy("Rambo");
+	/*Enemy *e = new Enemy("Rambo");
 	e->inicializar();
 	e->cargarContenido();
 	e->setPosition(Vec3<float>(-4,-55, 400));
@@ -159,7 +159,7 @@ void Game::inicializar()
 	Enemy *e2 = new Enemy("Messi");
 	e2->inicializar();
 	e2->cargarContenido();
-	e2->setPosition(Vec3<float>(74.06, 17.6, -66.41));
+	e2->setPosition(Vec3<float>(74.06, 17.6, -66.41));*/
 
 	/*Enemy *e = new Enemy("Son Goku");
 	e->inicializar();

@@ -426,7 +426,9 @@ void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterfa
 
 void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
 {
-	m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second.kills += 1;
+	TFilaTabla fila;
+	fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila.kills++;
 
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
@@ -443,7 +445,9 @@ void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterf
 
 void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
 {
-	m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second.deaths += 1;
+	TFilaTabla fila;
+	fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila.deaths++;
 
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {

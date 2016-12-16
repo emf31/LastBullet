@@ -1,6 +1,6 @@
 #pragma once
-#include "Otros\vec3.hpp"
-#include "Otros\Time.hpp"
+#include "Otros/vec3.hpp"
+#include "Otros/Time.hpp"
 
 
 class RenderState

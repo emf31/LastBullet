@@ -7,10 +7,10 @@
 #include <BitStream.h>
 #include <RakNetTypes.h>  // MessageID
 
-#include "Entities\Player.h"
-#include "Entities\Life.h"
+#include "Entities/Player.h"
+#include "Entities/Life.h"
 #include "Estructuras.h"
-#include "Entities\EntityManager.h"
+#include "Entities/EntityManager.h"
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -52,7 +52,7 @@ int main() {
 	
 	//std::vector<Player*> clientArray;
 
-	peer->Startup(MAX_CLIENTS, &sd, 1);
+	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
 	;
 	std::cout << "Escuchando conexiones en el puerto: " << SERVER_PORT <<"\nTu IP es: "<< peer->GetLocalIP(0) << std::endl;
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
@@ -380,9 +380,6 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo la estructura del cliente que ha muerto
 				bsIn.Read(p_struct);
-				//primero le cambio la posicion a ese player (le respawneo)
-				//TODO aqui le asigno una posicion en una esquina del tablero ese raro que tenemos pero luego el servidor se tendra que encargar de poner posicion de respawneo buenas.
-				p_struct.position = Vec3<float>(0.f, 0.f, 0.f);
 				//notifico a todos que ese cliente a muerto
 				EntityManager::i().notificarMuerte(p_struct, peer);
 
@@ -397,8 +394,8 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
 				bsIn.Read(kill);
-				EntityManager::i().aumentaKill(kill.guidKill, peer);
-				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+				//EntityManager::i().aumentaKill(kill.guidKill, peer);
+				//EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
 				
 
 			}
@@ -408,7 +405,10 @@ int main() {
 
 			}
 			break;
-
+			case ID_UNCONNECTED_PING:{
+				printf("Ping...Pong\n");
+				break;
+			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;

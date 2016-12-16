@@ -1,3 +1,7 @@
-﻿  LifeObject.cpp
+﻿  Cliente.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor de red\cliente.cpp(410): warning C4477: 'printf' : la cadena de formato '%i' requiere un argumento de tipo 'int', pero el argumento variádico 2 tiene el tipo 'RakNet::Time'
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor de red\cliente.cpp(410): note: considere el uso de ' %lli' en la cadena de formato
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor de red\cliente.cpp(410): note: considere el uso de ' %I64i' en la cadena de formato
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor de red\cliente.cpp(738): warning C4101: 'time': variable local sin referencia
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
