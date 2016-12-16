@@ -52,7 +52,7 @@ int main() {
 	
 	//std::vector<Player*> clientArray;
 
-	peer->Startup(MAX_CLIENTS, &sd, 1);
+	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
 	;
 	std::cout << "Escuchando conexiones en el puerto: " << SERVER_PORT <<"\nTu IP es: "<< peer->GetLocalIP(0) << std::endl;
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
