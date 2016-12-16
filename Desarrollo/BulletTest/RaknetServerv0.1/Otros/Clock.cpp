@@ -28,7 +28,8 @@
 #include "Clock.hpp"
 
 //#if defined(SFML_SYSTEM_WINDOWS)
-    #include "Win32\ClockImpl.hpp"
+    //#include "Win32/ClockImpl.hpp"
+#include "Unix/ClockImpl.hpp"
 /*#else
     #include <SFML/System/Unix/ClockImpl.hpp>
 #endif*/

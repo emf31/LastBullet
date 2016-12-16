@@ -60,7 +60,6 @@ void Player::searchSpawnPoint()
 		return;
 	}
 
-
 	std::list<Entity*> enemies = EntityManager::i().getEnemies();
 
 	std::vector<Vec3<float>> auxSpawns;
@@ -284,18 +283,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}
-	else if (message.mensaje == "NUEVO_ENEMIGO") {
-		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);
 
-		Enemy *e = new Enemy(nuevoplayer->name, nuevoplayer->guid);
-		e->inicializar();
-		e->cargarContenido();
-		e->setPosition(nuevoplayer->position);
-
-		delete nuevoplayer;
-
-		EntityManager::i().mostrarClientes();
-	}
 }
 
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)

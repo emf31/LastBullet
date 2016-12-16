@@ -59,8 +59,8 @@ public:
 	void registerEntity(Entity* entity);
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid);
-	Entity * EntityManager::getEntityID(int id);
+	Entity * getRaknetEntity(RakNet::RakNetGUID guid);
+	Entity * getEntityID(int id);
 
 private:
 	EntityManager(EntityManager const&);

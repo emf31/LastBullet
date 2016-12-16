@@ -11,7 +11,7 @@
 
 
 RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(65), m_rotation(rotation), radioExplosion(40)
+m_position(position), m_direction(direction), m_velocity(125), m_rotation(rotation), radioExplosion(30)
 {
 }
 
@@ -62,7 +62,6 @@ void RocketBullet::cargarContenido()
 
 	//Sin respuesta a la colision mejor asi porque es mas optimo
 	m_rigidBody->setCollisionFlags(4);
-	radioExplosion = 40.f;
 }
 
 void RocketBullet::borrarContenido()
@@ -144,7 +143,7 @@ float RocketBullet::explosion(Entity* player, Vec3<float> posExplosion, Vec3<flo
 		}
 
 
-		btVector3 FUERZA(btScalar(vidaRestada / 2.3), btScalar(vidaRestada / 2.3), btScalar(vidaRestada / 2.3));
+		btVector3 FUERZA(vidaRestada, vidaRestada, vidaRestada);
 
 		Vec3<float> posExplosion = cons(m_rigidBody->getCenterOfMassPosition());
 		Vec3<float> posPlayer = player->getRenderPosition();
