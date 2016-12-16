@@ -441,19 +441,22 @@ void Cliente::inicializar() {
 			std::cout << "\t[" << i << "] - " << m_servers.at(i) << std::endl;
 		}
 		std::cout << "\t[a] - Actualizar" << std::endl;
-		if (m_servers.size() != 0) {
-			std::cout << "Selecciona un servidor: ";
-			std::cin >> eleccion;
-			if (eleccion != 'a') {
-				elec = eleccion - '0';
-				std::string ipConPuerto = m_servers.at((elec));
-				std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
-				str = ip;
-			}
-			
-		} else {
+		std::cout << "\t[m] - Introducir IP manualmente" << std::endl;
+		std::cout << "Elige una opcion: ";
+		std::cin >> eleccion;
+		if (eleccion != 'a' && eleccion != 'm') {
+			elec = eleccion - '0';
+			std::string ipConPuerto = m_servers.at((elec));
+			std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
+			str = ip;
+		} else if (eleccion == 'm') {
 			printf("Introduce la IP \n");
 			std::cin >> str;
+			if (str != "a") {
+				break;
+			} else {
+				eleccion = 'a';
+			}
 		}
 	}while (eleccion == 'a');
 	
@@ -732,9 +735,8 @@ void Cliente::searchServersOnLAN() {
 
 	//Hacemos ping a bradcast en el puerto en el que sabemos que está escuchando el server
 	client->Ping("255.255.255.255", 65535, false);
-	RakSleep(1000);
 	std::cout << "Buscando servidores en la red local..." << std::endl;
-
+	RakSleep(1000);
 	RakNet::Packet *packet;
 	//Limpiamos la lista de servidores primero.
 	m_servers.clear();
