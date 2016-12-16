@@ -380,9 +380,6 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo la estructura del cliente que ha muerto
 				bsIn.Read(p_struct);
-				//primero le cambio la posicion a ese player (le respawneo)
-				//TODO aqui le asigno una posicion en una esquina del tablero ese raro que tenemos pero luego el servidor se tendra que encargar de poner posicion de respawneo buenas.
-				p_struct.position = Vec3<float>(0.f, 0.f, 0.f);
 				//notifico a todos que ese cliente a muerto
 				EntityManager::i().notificarMuerte(p_struct, peer);
 
@@ -397,8 +394,8 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
 				bsIn.Read(kill);
-				EntityManager::i().aumentaKill(kill.guidKill, peer);
-				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+				//EntityManager::i().aumentaKill(kill.guidKill, peer);
+				//EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
 				
 
 			}

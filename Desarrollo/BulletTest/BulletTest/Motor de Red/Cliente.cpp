@@ -481,9 +481,6 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 
 	nuevoplayer.guid = player->getGuid();
 	nuevoplayer.name = player->getName();
-	//TODO: asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-	nuevoplayer.position = Vec3<float>(0, 100, 0);
-	player->setPosition(nuevoplayer.position);
 
 
 
