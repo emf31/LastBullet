@@ -149,3 +149,10 @@ void TriggerSystem::Update() {
 
 
 }
+
+void TriggerSystem::apagar()
+{
+	clearTriggers();
+
+	m_entities.clear();
+}

@@ -122,6 +122,7 @@ void Game::run()
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
+	TriggerSystem::i().apagar();
 
 	if (Cliente::i().isConected()) {
 		Cliente::i().apagar();

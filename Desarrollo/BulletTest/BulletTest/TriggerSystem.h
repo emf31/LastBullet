@@ -29,6 +29,7 @@ public:
 	void UpdatePos(TriggerRecordStruct *trigger);
 
 	void clearTriggers();
+	void apagar();
 private:
 	std::vector<Entity*> m_entities;
 	TRIGGER_MAP m_mapTriggerMap;
