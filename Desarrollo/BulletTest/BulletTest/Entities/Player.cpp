@@ -59,7 +59,7 @@ void Player::searchSpawnPoint()
 		setPosition(m_spawns.at(0));
 		return;
 	}
-	
+
 	std::list<Entity*> enemies = EntityManager::i().getEnemies();
 
 	std::vector<Vec3<float>> auxSpawns;
@@ -136,7 +136,6 @@ void Player::inicializar()
 	
 	m_vida = 100;
 
-	
 
 	GraphicEngine::i().mostrarInterfaz();
 }
@@ -269,6 +268,7 @@ void Player::cargarContenido()
 
 	resetVida();
 	searchSpawnPoint();
+
 }
 
 void Player::borrarContenido()
@@ -299,24 +299,18 @@ void Player::run()
 
 void Player::jump() {
 
-	enum EnumTriggerType explosion = kTrig_EnemyNear;
 
-	Time k = milliseconds(800);
-
-	TriggerSystem::i().RegisterTrigger(explosion, 1001, this->getID(), this->getRenderPosition(), 50, k, false);
+	TriggerSystem::i().RegisterTrigger(kTrig_EnemyNear, 1001, this->getID(), this->getRenderPosition(), 50, milliseconds(800), false);
 	
-	p_controller->jump(btVector3(0, 50, 0));
+	p_controller->jump(btVector3(0, 60, 0));
 	
 }
 
 
 void Player::shoot() {
 
-	enum EnumTriggerType explosion = kTrig_Explosion;
 
-	Time k = milliseconds(500);
-
-	TriggerSystem::i().RegisterTrigger(explosion, 1000, this->getID(), this->getRenderPosition(), 50,k, false);
+	TriggerSystem::i().RegisterTrigger(kTrig_Explosion, 1000, this->getID(), this->getRenderPosition(), 50, milliseconds(500), false);
 
 	listaWeapons->valorActual()->shoot();
 

@@ -7,10 +7,10 @@
 #include <BitStream.h>
 #include <RakNetTypes.h>  // MessageID
 
-#include "Entities\Player.h"
-#include "Entities\Life.h"
+#include "Entities/Player.h"
+#include "Entities/Life.h"
 #include "Estructuras.h"
-#include "Entities\EntityManager.h"
+#include "Entities/EntityManager.h"
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -32,6 +32,7 @@ void muestraPlayer(Player *p) {
 int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
+	sd.socketFamily = AF_INET;
 	RakNet::Packet *packet;
 	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
@@ -51,7 +52,7 @@ int main() {
 	
 	//std::vector<Player*> clientArray;
 
-	peer->Startup(MAX_CLIENTS, &sd, 1);
+	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
 	;
 	std::cout << "Escuchando conexiones en el puerto: " << SERVER_PORT <<"\nTu IP es: "<< peer->GetLocalIP(0) << std::endl;
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
@@ -407,7 +408,10 @@ int main() {
 
 			}
 			break;
-
+			case ID_UNCONNECTED_PING:{
+				printf("Ping...Pong\n");
+				break;
+			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;

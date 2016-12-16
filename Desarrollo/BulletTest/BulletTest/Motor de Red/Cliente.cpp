@@ -3,6 +3,7 @@
 #include <string>
 #include <chrono>
 #include <RakNetTime.h>
+#include <RakSleep.h>
 #include "Cliente.h"
 #include "Estructuras.h"
 #include "../Entities/EntityManager.h"
@@ -723,19 +724,27 @@ void Cliente::searchServersOnLAN() {
 	client->Startup(1, &socketDescriptor, 1);
 
 	//Hacemos ping a bradcast en el puerto en el que sabemos que está escuchando el server
-	client->Ping("255.255.255.255", 65535, 0);
+	client->Ping("255.255.255.255", 65535, false);
+	RakSleep(1000);
 	std::cout << "Buscando servidores en la red local..." << std::endl;
 
 	RakNet::Packet *packet;
 	//Limpiamos la lista de servidores primero.
 	m_servers.clear();
+
 	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
+		if (packet == 0) {
+			RakSleep(1000);
+			continue;
+		}
 		if (packet->data[0] == ID_UNCONNECTED_PONG) {
 			RakNet::TimeMS time;
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
 			bsIn.IgnoreBytes(1);
 			m_servers.push_back(packet->systemAddress.ToString());
 		}
+
+		RakSleep(1000);
 	}
 	//Destruyo el RakPeer. Ya no hace falta
 	RakNet::RakPeerInterface::DestroyInstance(client);

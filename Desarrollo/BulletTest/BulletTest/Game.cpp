@@ -156,7 +156,7 @@ void Game::inicializar()
 	e1->cargarContenido();
 	e1->setPosition(Vec3<float>(216, -2.6, 156.3));
 
-	Enemy *e2 = new Enemy("Batman");
+	Enemy *e2 = new Enemy("Messi");
 	e2->inicializar();
 	e2->cargarContenido();
 	e2->setPosition(Vec3<float>(74.06, 17.6, -66.41));*/
@@ -188,7 +188,7 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("Pepi", map.getSpawnPoints());
+		Player* player = new Player("Batman", map.getSpawnPoints());
 		player->inicializar();
 		player->cargarContenido();
 
