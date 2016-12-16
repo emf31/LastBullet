@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Otros\vec3.hpp"
-#include  "../Otros\Time.hpp"
-#include  "../Otros\Clock.hpp"
+#include "../Otros/vec3.hpp"
+#include  "../Otros/Time.hpp"
+#include  "../Otros/Clock.hpp"
 #include  "../RenderState.h"
 
 #include <RakPeerInterface.h>

@@ -7,10 +7,10 @@
 #include <BitStream.h>
 #include <RakNetTypes.h>  // MessageID
 
-#include "Entities\Player.h"
-#include "Entities\Life.h"
+#include "Entities/Player.h"
+#include "Entities/Life.h"
 #include "Estructuras.h"
-#include "Entities\EntityManager.h"
+#include "Entities/EntityManager.h"
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -408,7 +408,10 @@ int main() {
 
 			}
 			break;
-
+			case ID_UNCONNECTED_PING:{
+				printf("Ping...Pong\n");
+				break;
+			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
