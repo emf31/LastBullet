@@ -32,6 +32,7 @@ void muestraPlayer(Player *p) {
 int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
+	sd.socketFamily = AF_INET;
 	RakNet::Packet *packet;
 	RakNet::RakNetGUID guid_Pdisparado;
 	TPlayer p_struct;
@@ -51,7 +52,7 @@ int main() {
 	
 	//std::vector<Player*> clientArray;
 
-	peer->Startup(MAX_CLIENTS, &sd, 1);
+	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
 	;
 	std::cout << "Escuchando conexiones en el puerto: " << SERVER_PORT <<"\nTu IP es: "<< peer->GetLocalIP(0) << std::endl;
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
