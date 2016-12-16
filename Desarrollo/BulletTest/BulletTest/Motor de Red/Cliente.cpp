@@ -68,15 +68,12 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				TPlayer *p = new TPlayer();
-				p->position = nuevoplayer.position;
-				p->guid = nuevoplayer.guid;
-				p->name = nuevoplayer.name;
-				p->rotation = nuevoplayer.rotation;
-				p->velocidad = nuevoplayer.velocidad;
 
-				Message msg(EntityManager::i().getEntity(PLAYER),"NUEVO_ENEMIGO", static_cast<void*>(p));
-				MessageHandler::i().sendMessage(msg);
+				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->inicializar();
+				e->cargarContenido();
+				e->setPosition(nuevoplayer.position);
+				EntityManager::i().mostrarClientes();
 
 			}
 			break;
@@ -91,15 +88,11 @@ void Cliente::update() {
 				//recibo el player
 				bsIn.Read(nuevoplayer);
 
-				TPlayer *p = new TPlayer();
-				p->position = nuevoplayer.position;
-				p->guid = nuevoplayer.guid;
-				p->name = nuevoplayer.name;
-				p->rotation = nuevoplayer.rotation;
-				p->velocidad = nuevoplayer.velocidad;
-
-				Message msg(EntityManager::i().getEntity(PLAYER), "NUEVO_ENEMIGO", static_cast<void*>(p));
-				MessageHandler::i().sendMessage(msg);
+				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				e->inicializar();
+				e->cargarContenido();
+				e->setPosition(nuevoplayer.position);
+				EntityManager::i().mostrarClientes();
 
 			}
 			break;

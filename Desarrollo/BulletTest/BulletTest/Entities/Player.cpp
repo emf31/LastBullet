@@ -54,6 +54,11 @@ void Player::searchSpawnPoint()
 	float radio = 100;
 	float fDistance = 0;
 	int spawn = 0;
+
+	if (m_spawns.size() == 1) {
+		setPosition(m_spawns.at(0));
+		return;
+	}
 	
 	std::list<Entity*> enemies = EntityManager::i().getEnemies();
 
@@ -263,7 +268,7 @@ void Player::cargarContenido()
 	GraphicEngine::i().setCameraEntity(this);
 
 	resetVida();
-
+	searchSpawnPoint();
 }
 
 void Player::borrarContenido()
@@ -278,18 +283,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}
-	else if (message.mensaje == "NUEVO_ENEMIGO") {
-		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);
 
-		Enemy *e = new Enemy(nuevoplayer->name, nuevoplayer->guid);
-		e->inicializar();
-		e->cargarContenido();
-		e->setPosition(nuevoplayer->position);
-
-		delete nuevoplayer;
-
-		EntityManager::i().mostrarClientes();
-	}
 }
 
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)

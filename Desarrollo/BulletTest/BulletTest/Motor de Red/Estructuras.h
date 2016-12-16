@@ -6,8 +6,6 @@
 
 typedef struct {
 	Vec3<float> position;
-	Vec3<float> velocidad;
-	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
 	std::string name;
 }TPlayer;
