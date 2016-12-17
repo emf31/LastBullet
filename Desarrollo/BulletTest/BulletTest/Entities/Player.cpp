@@ -150,6 +150,7 @@ void Player::update(Time elapsedTime)
 	if (p_controller->onGround()) {
 		//seteamos la velocidad para andar, si corre se cambiara a una mayor
 		//p_controller->setSpeed(1.3f);
+		p_controller->jumpedOnAir = false;
 
 		
 		

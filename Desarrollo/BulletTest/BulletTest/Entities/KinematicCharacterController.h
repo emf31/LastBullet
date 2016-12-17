@@ -213,7 +213,7 @@ public:
 	bool onGround() const;
 	void setUpInterpolate(bool value);
 
-	int numJumps;
+	bool jumpedOnAir;
 	void setSpeed(float speed);
 
 };

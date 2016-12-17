@@ -166,6 +166,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_linearDamping = btScalar(0.0);
 	m_angularDamping = btScalar(0.0);
 	m_speed = btScalar(1.3);
+	jumpedOnAir = false;
 }
 
 float KinematicCharacterController::getSpeedFactor() const {
@@ -915,15 +916,16 @@ void KinematicCharacterController::setMaxJumpHeight(btScalar maxJumpHeight)
 
 bool KinematicCharacterController::canJump()
 {
-	if (onGround()) {
-		numJumps = 1;
+	if (onGround())
+		return true;
+
+	if (!onGround() && !jumpedOnAir) {
+		jumpedOnAir = true;
 		return true;
 	}
-	else if (numJumps == 1) {
-		numJumps = 0;
-		return true;
-	}
+
 	return false;
+
 }
 
 void KinematicCharacterController::jump(const btVector3& v)//Este jump es el jump del salto
