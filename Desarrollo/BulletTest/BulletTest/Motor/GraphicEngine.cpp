@@ -105,7 +105,7 @@ void GraphicEngine::mostrarInterfaz()
 	irrGUI->getSkin()->setFont(fnt);
 
 	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-	float v = p->getVida();
+	float v = p->getLifeComponent()->getVida();
 	int a = p->getAmmoActual();
 	int b = p->getCargadorActual();
 	int c = p->getAmmoTotal()*b;
@@ -142,7 +142,7 @@ const wchar_t * GraphicEngine::GetWC(const char *c)
 void GraphicEngine::actualizarInterfaz()
 {
 	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-	float v = p->getVida();
+	float v = p->getLifeComponent()->getVida();
 	int a = p->getAmmoActual();
 	int b = p->getCargadorActual();
 	int c = p->getAmmoTotal()*b;

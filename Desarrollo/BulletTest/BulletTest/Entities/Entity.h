@@ -61,25 +61,10 @@ public:
 	}
 	
 
-	void resetVida() {
-		m_vida = 100;
-	}
-	float getVida() {
-		return m_vida;
-	}
-
-	bool isGrouped() { return isGroup; }
-
-	void restaVida(float cantidad, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
-		
+	
 		
 	
-	void sumarVida() {
-		m_vida += 40;
-		if (m_vida > 100) {
-			m_vida = 100;
-		}
-	}
+	
 
 	byte getTriggerFlags() {
 		return dwTriggerFlags;
@@ -105,11 +90,7 @@ protected:
 	std::string m_name;
 	std::shared_ptr<SceneNode> m_nodo;
 	RenderState m_renderState;
-	float m_vida;
-
-	//TODO esto estaria en player
-	bool isDying = false;
-	Clock relojMuerte;
+	
 
 	byte dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear;
 

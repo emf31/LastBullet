@@ -26,7 +26,8 @@
 
 
 Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
-	m_spawns(spawnPoints)
+	m_spawns(spawnPoints),
+	life_component(this)
 {
 	//Registramos la entity en el trigger system
 	TriggerSystem::i().RegisterEntity(this);
@@ -105,8 +106,12 @@ void Player::searchSpawnPoint()
 
 void Player::inicializar()
 {
-
-
+	isRunning = false;
+	isReloading = false;
+	isShooting = false;
+	tieneAsalto = false;
+	tieneRocketLauncher = false;
+	tienePistola = false;
 
 	granada = new Granada();
 	granada->inicializar();
@@ -127,14 +132,12 @@ void Player::inicializar()
 	pistola = new Pistola();
 	pistola->inicializar();
 	pistola->cargarContenido();
-
+	
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);
 	pistola->setEquipada(true);
 	tienePistola = true;
-	
-	m_vida = 100;
 
 
 	GraphicEngine::i().mostrarInterfaz();
@@ -148,46 +151,29 @@ void Player::update(Time elapsedTime)
 	
 
 	if (p_controller->onGround()) {
-		//seteamos la velocidad para andar, si corre se cambiara a una mayor
-		//p_controller->setSpeed(1.3f);
 		p_controller->jumpedOnAir = false;
-
-		
-		
-
 	}
 
 	speedFinal = Vec3<float>(0, 0, 0);
 
-	// Ejecuta todos los comandos
-	InputHandler::i().excuteCommands(this);
+	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
+	if (life_component.update() == false) {
 
+		// Ejecuta todos los comandos
+		InputHandler::i().excuteCommands(this);
+		speedFinal.normalise();
+		p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
 
-	speedFinal.normalise();
-
-	//p_controller->m_speed += p_controller->m_speed * m_acceleration_walk;
-
-	
-	/*if (p_controller->getSpeedFactor() > m_maxSpeed_walk) {
-		p_controller->setSpeed(m_maxSpeed_walk);
-	}*/
-
-	if (isDying == false) {
+	} else {
 		p_controller->setWalkDirection(
-			btVector3(speedFinal.getX(),
-				speedFinal.getY(),
-				speedFinal.getZ()));
-	}
-	else {
-		p_controller->setWalkDirection(
-			btVector3(0.f,0.f,0.f));
+			btVector3(0.f, 0.f, 0.f));
 	}
 
 
 	GraphicEngine::i().actualizarInterfaz();
 
 
-	//TODO esto hay que arreglarlo pero queremos jugar y lo hacemos asi de sucio ahora xD
+	
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 	
@@ -203,14 +189,6 @@ void Player::update(Time elapsedTime)
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
 		Cliente::i().enviarMovimiento(this);
-	}
-
-	//Una vez termine la nimacion de muerte, volvemos a movernos
-	if (relojMuerte.getElapsedTime().asSeconds() > 3 && isDying) {
-		isDying = false;
-		searchSpawnPoint();
-		m_vida = 100;
-		resetAll();
 	}
 
 }
@@ -232,7 +210,6 @@ void Player::cargarContenido()
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 
-
 	radius = 1.2f;
 	height = 7.3f;
 	mass = 70.f;
@@ -242,13 +219,9 @@ void Player::cargarContenido()
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(mass, intertia);
 
-	btTransform startTransform;
-	startTransform.setIdentity();
-	startTransform.setOrigin(btVector3(0, 30, 0)); // check
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(this);
-	actorGhost->setWorldTransform(startTransform);
 
 	actorGhost->setCollisionShape(m_pCollisionShape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
@@ -267,7 +240,7 @@ void Player::cargarContenido()
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	GraphicEngine::i().setCameraEntity(this);
 
-	resetVida();
+	life_component.resetVida();
 	searchSpawnPoint();
 
 }
@@ -381,21 +354,25 @@ void Player::move_left()
 	isMoving = true;
 }
 
+void Player::bindWeapon() {
+	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootAsalto()));
+	}
+	else if (listaWeapons->valorActual()->getClassName() == "Pistola") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootPistola()));
+	}
+	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
+	}
+}
+
 
 void Player::UpWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Siguiente();
 
-	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootAsalto()));
-	}
-	else if(listaWeapons->valorActual()->getClassName() == "Pistola"){
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootPistola()));
-	}
-	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
-	}
+	bindWeapon();
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
@@ -408,6 +385,9 @@ void Player::DownWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Anterior();
+
+	bindWeapon();
+	
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
@@ -495,3 +475,4 @@ void Player::resetAll() {
 	tienePistola = true;
 
 }
+

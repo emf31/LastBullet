@@ -284,7 +284,8 @@ void Cliente::update() {
 
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				EntityManager::i().getEntity(PLAYER)->restaVida(20, guidDispara);
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(20, guidDispara);
+
 				//TODO ahora le quitamos siempre 20 de vida en un futuro podriamos pensar en quitar vida dependiendo de donde impacte la bala
 
 			}
@@ -303,7 +304,7 @@ void Cliente::update() {
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
 				//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
-				EntityManager::i().getEntity(PLAYER)->restaVida(impacto.damage,impacto.guidDisparado);
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(impacto.damage,impacto.guidDisparado);
 
 			}
 			break;
@@ -387,11 +388,13 @@ void Cliente::update() {
 
 					//TODO esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
 					//ademas que desactivara el draw de esta entetity para que no puedeas moverte ni nada mientras estas muerto.
-					EntityManager::i().getEntity(PLAYER)->resetVida();
+					static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->resetVida();
 				}
 				else {
 					//es un enemigo
 					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+					enemigo->setIsDying(true);
+					//enemigo->
 					//enemigo->setPosition(nuevoplayer.position);
 					enemigo = nullptr;
 				}

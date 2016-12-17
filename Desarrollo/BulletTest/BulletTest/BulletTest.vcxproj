@@ -214,6 +214,7 @@
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Otros\Clock.hpp" />
+    <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
+    <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />

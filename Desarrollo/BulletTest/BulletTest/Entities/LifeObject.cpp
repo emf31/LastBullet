@@ -72,7 +72,7 @@ void LifeObject::handleMessage(const Message & message)
 				
 				m_nodo->setVisible(false);
 
-				static_cast<Player*>(message.data)->sumarVida();
+				static_cast<Player*>(message.data)->getLifeComponent()->sumarVida();
 
 			}
 

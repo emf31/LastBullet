@@ -50,6 +50,8 @@ public:
 //	MachineState* GetFSM()const { return m_pStateMachine; }
 	void lanzarGranada(TGranada g);
 
+	bool isDying() { return m_isDying; }
+	void setIsDying(bool die) { m_isDying = die; }
 
 private:
 
@@ -64,9 +66,15 @@ private:
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 	bool isMoving;
 
+	bool m_isDying;
+	Clock relojMuerte;
+	
+
+
 	btRigidBody* m_rigidBody;
 	std::queue<TMovimiento> m_positions;
-	//std::queue<Vec3<float>> m_rotations;
+	
+	
 
 	virtual std::string getClassName() { return "Enemy"; }
 	

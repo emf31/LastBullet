@@ -9,6 +9,7 @@
 #include "../Motor/Animation.h"
 #include <vector>
 #include "../Otros/Lista.h"
+#include "../Otros/LifeComponent.h"
 
 class Player : public Entity
 {
@@ -44,15 +45,17 @@ public:
 	void move_right();
 	void move_left();
 
+	void bindWeapon();
 	void UpWeapon();
 	void DownWeapon();
 
 	void impulsar(Vec3<float> force);
 
 
-
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
+
+	LifeComponent* getLifeComponent() { return &life_component; }
 
 	std::string getCurrentWeapon() {
 		return listaWeapons->valorActual()->getClassName();
@@ -83,22 +86,24 @@ private:
 	Pistola* pistola;
 	RocketLauncher* rocket;
 
-
+	LifeComponent life_component;
 
 	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
 
 
-	bool tieneAsalto = false;
-	bool tieneRocketLauncher = false;
-	bool tienePistola = false;
+	bool tieneAsalto;
+	bool tieneRocketLauncher;
+	bool tienePistola;
 
-	bool isShooting=false;
+	bool isShooting;
 
 	bool isJumping;
 	bool isMoving;
-	bool isRunning=false;
-	bool isReloading = false;
+	bool isRunning;
+	bool isReloading;
+
+	
 
 	
 	//Player controller

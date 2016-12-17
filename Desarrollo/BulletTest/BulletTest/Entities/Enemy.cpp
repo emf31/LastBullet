@@ -26,6 +26,7 @@ void Enemy::inicializar()
 {
 	animation = new Animation();
 	granada = new Granada();
+	m_isDying = false;
 }
 
 void Enemy::update(Time elapsedTime)
@@ -43,6 +44,10 @@ void Enemy::update(Time elapsedTime)
 
 
 	//m_pStateMachine->Update();
+
+	if (relojMuerte.getElapsedTime().asSeconds() > 3 && m_isDying) {
+		m_isDying = false;
+	}
 
 }
 

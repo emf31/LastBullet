@@ -130,6 +130,9 @@
     <ClCompile Include="Entities\GroupEntity.cpp">
       <Filter>Source Code\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Otros\LifeComponent.cpp">
+      <Filter>Source Code\Otros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -332,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="Entities\GroupEntity.h">
       <Filter>Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\LifeComponent.h">
+      <Filter>Headers\Otros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

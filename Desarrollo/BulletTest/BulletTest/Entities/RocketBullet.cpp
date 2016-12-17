@@ -99,9 +99,10 @@ void RocketBullet::handleMessage(const Message & message)
 				}
 				else {
 
-					myentity->restaVida(damage);
+					//TODO cuando haya IA habra que hacer una comprobacion extra
+					static_cast<Player*>(myentity)->getLifeComponent()->restaVida(damage);
 
-					//TODO: si estas jugando en un solo player aqui tendras que quitarle vida a la IA
+					//TODO si estas jugando en un solo player aqui tendras que quitarle vida a la IA
 				}
 
 			}
