@@ -426,9 +426,9 @@ void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterfa
 
 void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
 {
-	TFilaTabla fila;
-	fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-	fila.kills++;
+	TFilaTabla *fila;
+	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila->kills++;
 
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
@@ -445,9 +445,9 @@ void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterf
 
 void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
 {
-	TFilaTabla fila;
-	fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-	fila.deaths++;
+	TFilaTabla *fila;
+	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila->deaths++;
 
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
@@ -467,18 +467,32 @@ void EntityManager::enviaFila(RakNet::RakPeerInterface * peer, TFilaTabla fila)
 {
 
 	RakNet::BitStream bsOut;
+	TFilaTabla fila2;
 
 	m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
-		//se envia a TODOS para que todos actualicen la tabla de puntuacion
-		bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
-		bsOut.Write(m_tabla);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-		bsOut.Reset();
+		
+		if (i->second->getGuid() != fila.guid) {
+			//se envia la fila del nuevo jugador a todos los clientes menos a el
+			bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
+			bsOut.Write(fila);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
 
-
+		}
+		else {
+			//se envian todas las filas que ya hay en la tabla al nuevo cliente (incluyendo su propia fila que antes no se envio)
+			for (auto j = m_tabla.begin(); j != m_tabla.end(); ++j) {
+				
+				fila2 = j->second;
+				bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
+				bsOut.Write(fila2);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, fila.guid, false);
+				bsOut.Reset();
+			}
+		}
 	}
 
 }
