@@ -256,6 +256,9 @@ void Player::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
 		
+	}else if (message.mensaje == "COLISION_ROCKET") {
+		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		delete message.data;
 	}
 
 }

@@ -89,10 +89,25 @@ void RocketBullet::handleMessage(const Message & message)
 					if (damage > 0) {
 
 						if (myentity->getID() == PLAYER) {
-							Cliente::i().impactoRocket(myentity->getGuid(), int(damage / 3), RakNet::UNASSIGNED_RAKNET_GUID);
+							TImpactoRocket* impact = new TImpactoRocket();
+							impact->damage = damage / 3;
+							impact->guidImpactado = myentity->getGuid();
+							impact->guidDisparado = RakNet::UNASSIGNED_RAKNET_GUID;
+							
+							Message msg(myentity, "COLISION_ROCKET", impact);
+							MessageHandler::i().sendMessage(msg);
+
+							
 						}
 						else {
-							Cliente::i().impactoRocket(myentity->getGuid(), int(damage), EntityManager::i().getEntity(PLAYER)->getGuid());
+							TImpactoRocket* impact = new TImpactoRocket();
+							impact->damage = damage / 3;
+							impact->guidImpactado = myentity->getGuid();
+							impact->guidDisparado = RakNet::UNASSIGNED_RAKNET_GUID;
+
+							Message msg(myentity, "COLISION_ROCKET", impact);
+							MessageHandler::i().sendMessage(msg);
+
 						}
 
 					}

@@ -23,7 +23,7 @@ public:
 	void enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
-	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
+	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
 	void enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface *peer);
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);

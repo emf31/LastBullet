@@ -41,6 +41,7 @@ int main() {
 	TImpactoRocket impact;
 	TGranada p_granada;
 	TImpulso impulso;
+	TImpactoBala imp_bala;
 	TCambioArma cambioArma;
 	TFilaTabla filaTabla;
 	Clock tiempoRestartVida;
@@ -204,9 +205,9 @@ int main() {
 
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(guid_Pdisparado);
+				bsIn.Read(imp_bala);
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviaDisparado(guid_Pdisparado, packet->guid, peer);
+				EntityManager::i().enviaDisparado(imp_bala, packet->guid, peer);
 
 			}
 			break;

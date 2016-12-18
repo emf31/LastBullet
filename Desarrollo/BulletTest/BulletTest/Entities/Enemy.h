@@ -67,6 +67,7 @@ private:
 	bool isMoving;
 
 	bool m_isDying;
+
 	Clock relojMuerte;
 	
 

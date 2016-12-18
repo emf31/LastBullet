@@ -280,11 +280,11 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
-				bsIn.Read(guidDispara);
+				bsIn.Read(imp_bala);
 
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(20, guidDispara);
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(imp_bala.damage, imp_bala.guid);
 
 				//TODO ahora le quitamos siempre 20 de vida en un futuro podriamos pensar en quitar vida dependiendo de donde impacte la bala
 
@@ -576,7 +576,7 @@ void Cliente::lanzarGranada(TGranada g) {
 	bsOut.Reset();
 }
 
-void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
+void Cliente::enviarDisparo(RakNet::RakNetGUID guid, float* damage) {
 
 	RakNet::BitStream bsOut;
 
@@ -592,9 +592,11 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid) {
 	//ANTES ESTABA ASI
 	//bsOut.Write(guid);
 	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
+	TImpactoBala imp_bala;
+	imp_bala.damage = *damage;
+	imp_bala.guid = guid;
 
-
-	bsOut.Write(guid);
+	bsOut.Write(imp_bala);
 	//printf("envio mensaje del disparo\n");
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
@@ -663,17 +665,13 @@ void Cliente::playerMuerto()
 	bsOut.Reset();
 }
 
-void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo, RakNet::RakNetGUID guidKill)
+void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket* impact)
 {
-	TImpactoRocket impact;
 	RakNet::BitStream bsOut;
 
 	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
 
-	impact.damage = float(danyo);
-	impact.guidImpactado = palayerDanyado;
-	impact.guidDisparado = guidKill;
-	bsOut.Write(impact);
+	bsOut.Write(*impact);
 	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
 	bsOut.Reset();
 }

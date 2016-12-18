@@ -125,7 +125,10 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		Cliente::i().enviarDisparo(m_guid);
+		if (!m_isDying) {
+			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
+		}
+		
 	}
 	else if (message.mensaje == "ARMAUP") {
 		//TODO poner el codigo de cambiar el modelo del arma hacia arriba
@@ -134,6 +137,10 @@ void Enemy::handleMessage(const Message & message)
 	else if (message.mensaje == "ARMADOWN") {
 		//TODO poner el codigo de cambiar el modelo del arma hacia abajo
 
+	}
+	else if (message.mensaje == "COLISION_ROCKET") {
+		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		delete message.data;
 	}
 }
 

@@ -25,6 +25,11 @@ typedef struct {
 }TBala;
 
 typedef struct {
+	float damage;
+	RakNet::RakNetGUID guid;
+}TImpactoBala;
+
+typedef struct {
 	Vec3<float> origen;
 	Vec3<float> direction;
 	RakNet::RakNetGUID guid;

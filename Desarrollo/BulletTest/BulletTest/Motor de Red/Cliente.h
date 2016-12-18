@@ -32,12 +32,12 @@ public:
 	void armaCogida(int id);
 	void nuevaArma(int id);
 	void lanzarGranada(TGranada g);
-	void enviarDisparo(RakNet::RakNetGUID guid);
+	void enviarDisparo(RakNet::RakNetGUID guid, float* damage);
 	void enviarDesconexion();
 	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
 	void dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	void playerMuerto();
-	void impactoRocket(RakNet::RakNetGUID palayerDanyado, int danyo, RakNet::RakNetGUID guidKill);
+	void impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket* impact);
 	void aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid);
 	void cambioArma(int cambio, RakNet::RakNetGUID guid);
 	void actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath);
@@ -74,6 +74,7 @@ private:
 	TCambioArma t_cambioArma;
 	TVidaServer vidaServer;
 	TImpactoRocket impacto;
+	TImpactoBala imp_bala;
 	RakNet::RakNetGUID desconectado;
 	RakNet::RakNetGUID guidDispara;
 	RakNet::RakNetGUID guidTabla;

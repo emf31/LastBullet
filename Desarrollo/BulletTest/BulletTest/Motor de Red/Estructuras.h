@@ -16,6 +16,10 @@ typedef struct {
 	RakNet::RakNetGUID guid;
 }TMovimiento;
 
+typedef struct {
+	float damage;
+	RakNet::RakNetGUID guid;
+}TImpactoBala;
 
 typedef struct {
 	Vec3<float> position;

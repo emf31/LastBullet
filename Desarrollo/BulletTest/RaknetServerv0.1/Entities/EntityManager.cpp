@@ -15,7 +15,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		bsOut.Reset();
 
 		//enviamos todos los clientes que habian en el servidor al nuevo player
-	
+
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
 		nuevocli.position = i->second->getRenderState()->getPosition();
@@ -28,7 +28,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 
 void EntityManager::enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer)
 {
-	
+
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
@@ -72,7 +72,7 @@ void EntityManager::lanzarGranda(TGranada & g, RakNet::RakPeerInterface * peer)
 void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
 {
 
-	
+
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
@@ -88,22 +88,25 @@ void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerI
 
 	}
 }
-
-void EntityManager::enviaDisparado(RakNet::RakNetGUID & guid, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer)
+//imp tiene el daño del arma y el guid del que han dado, dispara es el guid de quien lo dispara
+void EntityManager::enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer)
 {
 
+	RakNet::RakNetGUID guid = imp.guid;
+	imp.guid = dispara;
 
 	RakNet::BitStream bsOut;
-		//se envia unicamente al cliente que ha sido disparado
+	//se envia unicamente al cliente que ha sido disparado
 
-			bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
-			
-			bsOut.Write(dispara);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
-			bsOut.Reset();
-		
+	bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
 
-	
+
+	bsOut.Write(imp);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
+
+
+
 }
 
 void EntityManager::enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface * peer)
@@ -130,13 +133,13 @@ void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a TODOS
-		
+
 			//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
-			bsOut.Write((RakNet::MessageID)MUERTE);
-			bsOut.Write(p);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-			bsOut.Reset();
-		
+		bsOut.Write((RakNet::MessageID)MUERTE);
+		bsOut.Write(p);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
 
 	}
 }
@@ -149,16 +152,16 @@ void EntityManager::enviaTiempoActualVida(Life * l, RakNet::RakNetGUID &guid, Ra
 	vida.tiempo = l->clockRecargaLife;
 
 
-		//se envia a SOLO al nuevo cliente que se ha conectado
+	//se envia a SOLO al nuevo cliente que se ha conectado
 
-		//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
-		bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
-		bsOut.Write(vida);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
-		bsOut.Reset();
+	//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
+	bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
+	bsOut.Write(vida);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
 
 
-	
+
 
 }
 
@@ -339,7 +342,7 @@ void EntityManager::registerEntity(Entity * entity)
 
 
 
-	
+
 }
 
 void EntityManager::removeEntity(Entity * entity)
@@ -376,7 +379,7 @@ Entity * EntityManager::getEntityID(int id)
 void EntityManager::mostrarClientes() {
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-	
+
 		i->second->getGuid();
 		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
 		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
