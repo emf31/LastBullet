@@ -332,9 +332,9 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				bsIn.Read(guidTabla);
+				bsIn.Read(nuevaFila);
 
-				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				
 				EntityManager::i().cambiaTabla(nuevaFila);
 
 			}
@@ -348,8 +348,8 @@ void Cliente::update() {
 
 				bsIn.Read(guidTabla);
 
-				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				//EntityManager::i().aumentaKill(guidTabla);
+				
+				EntityManager::i().aumentaKill(guidTabla);
 
 			}
 			break;
@@ -360,10 +360,9 @@ void Cliente::update() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
-				bsIn.Read(nuevaFila);
+				bsIn.Read(guidTabla);
 
-				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				//EntityManager::i().aumentaMuerte(guidTabla);
+				EntityManager::i().aumentaMuerte(guidTabla);
 
 			}
 			break;

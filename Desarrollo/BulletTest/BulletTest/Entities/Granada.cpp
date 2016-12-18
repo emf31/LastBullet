@@ -161,8 +161,9 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		
 
 		if (Cliente::i().isConected()) {
+			guidLanzador = EntityManager::i().getEntity(PLAYER)->getGuid();
 			TGranada granada;
-			granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			granada.guid = guidLanzador;
 			granada.origen = posicion;
 			granada.direction = direccion;
 			Cliente::i().lanzarGranada(granada);

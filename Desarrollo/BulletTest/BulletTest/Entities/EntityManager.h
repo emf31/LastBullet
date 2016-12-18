@@ -61,12 +61,14 @@ public:
 	}
 	void muestraTabla();
 	void aumentaKill(RakNet::RakNetGUID &guid) {
-		/*TFilaTabla fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-		fila.kills++;*/
+		TFilaTabla *fila;
+		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila->kills++;
 	}
 	void aumentaMuerte(RakNet::RakNetGUID &guid) {
-		/*TFilaTabla fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-		fila.deaths++;*/
+		TFilaTabla *fila;
+		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila->deaths++;
 	}
 
 	Entity* getEntity(int id);

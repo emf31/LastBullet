@@ -97,7 +97,6 @@ void RocketBullet::handleMessage(const Message & message)
 							Message msg(myentity, "COLISION_ROCKET", impact);
 							MessageHandler::i().sendMessage(msg);
 
-							
 						}
 						else {
 							TImpactoRocket* impact = new TImpactoRocket();
