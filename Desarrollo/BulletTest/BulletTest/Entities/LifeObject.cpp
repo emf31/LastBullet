@@ -84,10 +84,10 @@ void LifeObject::handleMessage(const Message & message)
 bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
 
 	if (Trigger->eTriggerType == kTrig_Explosion) {
-		printf("Has disparado cerca de un lifeObject\n");
+		//printf("Has disparado cerca de un lifeObject\n");
 	}
 	else if (Trigger->eTriggerType == kTrig_EnemyNear) {
-		printf("Has saltado cerca de un lifeObject\n");
+		//printf("Has saltado cerca de un lifeObject\n");
 
 	}
 

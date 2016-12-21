@@ -18,7 +18,7 @@ TriggerSystem::~TriggerSystem()
 unsigned long TriggerSystem::RegisterTrigger(EnumTriggerType _eTriggerType, unsigned long nPriority, int idSource, Vec3<float> vPos, float fRadius, Time fDuration, bool bDynamicSourcePos) {
 
 	TriggerRecordStruct* pTriggerRecord = new TriggerRecordStruct( _eTriggerType, ++IDTriggers, idSource, vPos, fRadius, fDuration, bDynamicSourcePos);//Creamos un nuevo triggerRecord, y lo rellenamos
-	printf("He creado un trigger\n");
+	//printf("He creado un trigger\n");
 	m_mapTriggerMap.insert(TRIGGER_MAP::value_type(nPriority, pTriggerRecord));//Ordenamos los triggersRecords por prioridad
 
 	return pTriggerRecord->nTriggerID;//Devolvemos el identificador del trigger

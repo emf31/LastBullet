@@ -45,9 +45,9 @@ void Enemy::update(Time elapsedTime)
 
 	//m_pStateMachine->Update();
 
-	if (relojMuerte.getElapsedTime().asSeconds() > 3 && m_isDying) {
+	/*if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
 		m_isDying = false;
-	}
+	}*/
 
 }
 
@@ -125,6 +125,7 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
+		std::cout << m_isDying << std::endl;
 		if (!m_isDying) {
 			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
 		}
@@ -169,6 +170,7 @@ void Enemy::desencolaMovimiento()
 		}
 		updateEnemigo(mov.position);
 		m_renderState.updateRotations(mov.rotation);
+		m_isDying = mov.isDying;
 	}
 
 	else if (m_positions.size() > 0) {
@@ -179,6 +181,7 @@ void Enemy::desencolaMovimiento()
 		//llamamos al update con la nueva posicion
 		updateEnemigo(mov.position);
 		m_renderState.updateRotations(mov.rotation);
+		m_isDying = mov.isDying;
 	}else {
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 		

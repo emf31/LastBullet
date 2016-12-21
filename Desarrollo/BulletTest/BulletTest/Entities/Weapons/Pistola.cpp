@@ -115,7 +115,7 @@ void Pistola::shoot() {
 				if (ent != EntityManager::i().getEntity(PLAYER))
 				{
 					if (ent->getClassName() == "Enemy") {
-						Message msg(ent, "COLISION_BALA", NULL);
+						Message msg(ent, "COLISION_BALA", &damage);
 						MessageHandler::i().sendMessage(msg);
 					}
 					//Para mover objetos del mapa

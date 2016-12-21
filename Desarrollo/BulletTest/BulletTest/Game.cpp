@@ -72,48 +72,52 @@ void Game::run()
 
 		time_physics_curr = clock.getElapsedTime();
 
-		PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
-		
+		if (GraphicEngine::i().isWindowActive()) {
+			PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
+		}
+
 		time_physics_prev = time_physics_curr;
 
 		
+			// Game Clock part of the loop
+			/*  This ticks once every TickMs milliseconds on average */
+			Time dt = clock.getElapsedTime() - time_gameclock;
 
-		// Game Clock part of the loop
-		/*  This ticks once every TickMs milliseconds on average */
-		Time dt = clock.getElapsedTime() - time_gameclock;
+			//Llevamos control en las actualizaciones por frame
+			while (dt >= timePerFrame) // 15 veces/segundo
+			{
+				dt -= timePerFrame;
+				time_gameclock += timePerFrame;
 
-		//Llevamos control en las actualizaciones por frame
-		while (dt >= timePerFrame) // 15 veces/segundo
-		{
-			dt -= timePerFrame;
-			time_gameclock += timePerFrame;
-			
-			MastEventReceiver::i().endEventProcess();
-			if (processEvents()) {
-				wantToExit = true;
+				MastEventReceiver::i().endEventProcess();
+				if (processEvents()) {
+					wantToExit = true;
+				}
+				MastEventReceiver::i().startEventProcess();
+
+				//Realizamos actualizaciones
+				update(timePerFrame);
+
+				if (Cliente::i().isConected()) {
+					Cliente::i().update();
+				}
+
 			}
-			MastEventReceiver::i().startEventProcess();
+		if (GraphicEngine::i().isWindowActive()) {
 
-			//Realizamos actualizaciones
-			update(timePerFrame);
+			interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
-			if (Cliente::i().isConected()) {
-				Cliente::i().update();
+			render(interpolation, timePerFrame);
+
+
+
+
+			if (wantToExit) {
+				break;
 			}
-			
 		}
-
-
-		interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
-
-		render(interpolation, timePerFrame);
 
 		
-
-
-		if (wantToExit) {
-			break;
-		}
 		//}
 		
 	}

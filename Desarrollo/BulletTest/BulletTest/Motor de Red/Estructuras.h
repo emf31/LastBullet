@@ -11,6 +11,7 @@ typedef struct {
 }TPlayer;
 
 typedef struct {
+	bool isDying;
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;

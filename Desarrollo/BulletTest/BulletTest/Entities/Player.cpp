@@ -93,9 +93,11 @@ void Player::searchSpawnPoint()
 	
 	//Si no esta vacio es que hemos encontrado uno
 	if (!auxSpawns.empty()) {
+		p_controller->reset(PhysicsEngine::i().m_world);
 		setPosition(auxSpawns.at(spawn));
 	}
 	else {
+		p_controller->reset(PhysicsEngine::i().m_world);
 		setPosition(m_spawns.at(Randi(0, m_spawns.size() - 1)));
 	}
 	
@@ -189,6 +191,10 @@ void Player::update(Time elapsedTime)
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
 		Cliente::i().enviarMovimiento(this);
+	}
+
+	if (m_renderState.getPosition().getY() < -200) {
+		getLifeComponent()->restaVida(100, m_guid);
 	}
 
 }

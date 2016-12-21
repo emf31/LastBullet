@@ -14,7 +14,7 @@ LifeComponent::~LifeComponent()
 void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 {
 	m_vida -= cantidad;
-	if (m_vida <= 0) {
+	if (m_vida <= 0 && m_isDying == false) {
 
 		m_isDying = true;
 		relojMuerte.restart();
