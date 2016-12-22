@@ -19,6 +19,7 @@ public:
 	void createAsaltoDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
 	void createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
 	void createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
+	void createTriggerButton(Vec3<float> posicion, float radio);
 
 	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 
 

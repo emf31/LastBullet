@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/firstMap.unity
+- path: Assets/TriggerMap.unity
   isLoaded: 1
   isActive: 1

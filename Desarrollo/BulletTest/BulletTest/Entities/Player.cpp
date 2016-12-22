@@ -271,7 +271,10 @@ void Player::handleMessage(const Message & message)
 
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	return false;
+	if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
+		searchSpawnPoint();
+	}
+	return true;
 }
 
 void Player::run()

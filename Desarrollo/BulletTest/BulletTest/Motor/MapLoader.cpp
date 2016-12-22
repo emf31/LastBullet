@@ -6,6 +6,7 @@
 #include "../Entities\WeaponDrops/PistolaDrop.h"
 #include "../Entities/WeaponDrops/RocketLauncherDrop.h"
 #include "GraphicEngine.h"
+#include "../Entities/Button.h"
 
 // for convenience
 using json = nlohmann::json;
@@ -56,6 +57,8 @@ void MapLoader::readMap(const std::string & name)
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 				if (obj["tag"] == "Spawn")
 					spawnPoints.push_back(pos);
+				if (obj["tag"] == "TriggerButton")
+					createTriggerButton(pos,5);
 		}
 	}
 
@@ -135,3 +138,7 @@ void MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escal
 	RocketLauncherDropEnt->setPosition(posicion);
 }
 
+void MapLoader::createTriggerButton(Vec3<float> posicion, float radio) {
+	Button *btn = new Button(nullptr, "Boton");
+	btn->setPosition(posicion);
+}
