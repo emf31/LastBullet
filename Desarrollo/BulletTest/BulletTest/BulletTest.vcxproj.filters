@@ -133,6 +133,9 @@
     <ClCompile Include="Otros\LifeComponent.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Button.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -337,6 +340,12 @@
       <Filter>Headers\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Otros\LifeComponent.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Button.h">
+      <Filter>Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\EnumParser.h">
       <Filter>Headers\Otros</Filter>
     </ClInclude>
   </ItemGroup>

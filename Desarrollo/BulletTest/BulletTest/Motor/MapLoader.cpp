@@ -7,6 +7,7 @@
 #include "../Entities/WeaponDrops/RocketLauncherDrop.h"
 #include "GraphicEngine.h"
 #include "../Entities/Button.h"
+#include "../Otros/EnumParser.h"
 
 // for convenience
 using json = nlohmann::json;
@@ -18,7 +19,7 @@ MapLoader::~MapLoader(){
 
 void MapLoader::readMap(const std::string & name)
 {	
-	std::ifstream i("../media/map1.json");
+	std::ifstream i("../media/TriggerMap.json");
 	if(i){
 		json j = json::parse(i);
 		int cont = 0;
@@ -40,6 +41,7 @@ void MapLoader::readMap(const std::string & name)
 				std::string nombre = "cubo"+s;
 
 				std::string nameMesh = obj["nombre"];
+				std::cout << nameMesh << std::endl;
 				nameMesh = "../media/" +nameMesh+".obj";
 				io::path mesh=nameMesh.c_str();
 
@@ -57,8 +59,12 @@ void MapLoader::readMap(const std::string & name)
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 				if (obj["tag"] == "Spawn")
 					spawnPoints.push_back(pos);
-				if (obj["tag"] == "TriggerButton")
-					createTriggerButton(pos,5);
+				if (obj["tag"] == "TriggerButton") {
+					EnumParser<EnumTriggerType> parser;
+					EnumTriggerType type = parser.parseEnum(obj["nombre"]);
+					createTriggerButton(pos, 5, type);
+				}
+					
 		}
 	}
 
@@ -138,7 +144,14 @@ void MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escal
 	RocketLauncherDropEnt->setPosition(posicion);
 }
 
-void MapLoader::createTriggerButton(Vec3<float> posicion, float radio) {
-	Button *btn = new Button(nullptr, "Boton");
+void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type) {
+	int id;
+	if (type == EnumTriggerType::Button_Spawn) {
+		id = 65534;
+	} else {
+		id = 65535;
+	}
+	std::cout << id << std::endl;
+	Button *btn = new Button(nullptr, "Boton", type, id);
 	btn->setPosition(posicion);
 }

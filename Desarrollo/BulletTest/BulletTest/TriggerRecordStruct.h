@@ -3,12 +3,24 @@
 #include "Otros/vec3.hpp"
 #include "Otros/Time.hpp"
 #include "Otros/Clock.hpp"
+#include "Otros/EnumParser.h"
 
 enum EnumTriggerType {
 	kTrig_None = 0,
 	kTrig_Explosion = (1 << 0),
-	kTrig_EnemyNear = (1 << 1)
+	kTrig_EnemyNear = (1 << 1),
+	Button_Spawn = (1 << 2),
+	Button_Trig_Ent = (1 << 3)
 };
+
+EnumParser<EnumTriggerType>::EnumParser() {
+	enumMap["kTrig_None"] = kTrig_None;
+	enumMap["kTrig_Explosion"] = kTrig_Explosion;
+	enumMap["kTrig_EnemyNear"] = kTrig_EnemyNear;
+	enumMap["Button_Spawn"] = Button_Spawn;
+	enumMap["Button_Trig_Ent"] = Button_Trig_Ent;
+}
+
 
 struct TriggerRecordStruct {
 
@@ -23,6 +35,7 @@ struct TriggerRecordStruct {
 	bool bDynamicSourcePos;//Booleano para saber si es un trigger dinamico o no
 	Clock tiempoDeVida;
 
+
 	TriggerRecordStruct(EnumTriggerType eTriggerType,unsigned long nTriggerID, int idSource, Vec3<float> vPos, float fradius,  Time nExpirationTime, bool bDynamicSourcePos) :
 		eTriggerType(eTriggerType),
 		nTriggerID(nTriggerID),
@@ -33,8 +46,8 @@ struct TriggerRecordStruct {
 		bDynamicSourcePos(bDynamicSourcePos){
 
 		tiempoDeVida.restart();
-
 	}
+
 
 
 };

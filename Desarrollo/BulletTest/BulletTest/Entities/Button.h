@@ -3,7 +3,7 @@
 #include "../Motor/BasicSceneNode.h"
 class Button : public Entity {
 public:
-	Button(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	Button(std::shared_ptr<BasicSceneNode> nodo, const std::string& name, EnumTriggerType type, int id);
 	~Button();
 
 	void setPosition(Vec3<float> &pos);
@@ -17,5 +17,7 @@ public:
 	virtual void handleMessage(const Message & message) override;
 	virtual bool handleTrigger(TriggerRecordStruct * Trigger) override;
 	virtual std::string getClassName() override;
+private:
+	EnumTriggerType m_triggerType;
 };
 

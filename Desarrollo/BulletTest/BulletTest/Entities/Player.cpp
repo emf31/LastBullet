@@ -30,7 +30,9 @@ Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, Ra
 	life_component(this)
 {
 	//Registramos la entity en el trigger system
+	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent;
 	TriggerSystem::i().RegisterEntity(this);
+	
 
 }
 
@@ -141,6 +143,7 @@ void Player::inicializar()
 	pistola->setEquipada(true);
 	tienePistola = true;
 
+	
 
 	GraphicEngine::i().mostrarInterfaz();
 }
@@ -271,9 +274,17 @@ void Player::handleMessage(const Message & message)
 
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
-		searchSpawnPoint();
+	Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
+	if (ent->getID() == 65534) {
+		if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
+			searchSpawnPoint();
+		}
+	} else {
+		if (ent->getID() == 65535) {
+
+		}
 	}
+	
 	return true;
 }
 
