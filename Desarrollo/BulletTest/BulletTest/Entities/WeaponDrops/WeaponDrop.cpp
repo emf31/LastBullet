@@ -23,11 +23,10 @@ void WeaponDrop::asignaTiempo(Clock tiempo) {
 
 void WeaponDrop::ArmaCogida()
 {
-
-	PhysicsEngine::i().removeGhostObject(m_ghostObject);
-	estado = USADO;
-	clockRespawnWeapon.restart();
-	m_nodo->setVisible(false);
-	
-
+	if (estado == DISPONIBLE) {
+		PhysicsEngine::i().removeGhostObject(m_ghostObject);
+		estado = USADO;
+		clockRespawnWeapon.restart();
+		m_nodo->setVisible(false);
+	}
 }

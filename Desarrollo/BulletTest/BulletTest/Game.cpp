@@ -10,6 +10,7 @@
 #include "Entities\WeaponDrops\RocketLauncherDrop.h"
 #include "Entities\WeaponDrops\PistolaDrop.h"
 #include "Entities\WeaponDrops\AsaltoDrop.h"
+#include "Entities/GroupEntity.h"
 #include "Motor\GraphicEngine.h"
 #include "Motor\SceneNode.h"
 #include "Handlers\MessageHandler.h"
@@ -151,6 +152,23 @@ void Game::inicializar()
 	MapLoader map;
 	map.readMap("..\rust_export.txt");
 
+	GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
+	ge->addEntityList(EntityManager::i().getLifeObjects());
+	TriggerSystem::i().RegisterEntity(ge);
+
+	GroupEntity *grupoAsaltos = new GroupEntity("grupoAsalto", 9001);
+	grupoAsaltos->addEntityList(EntityManager::i().getAsalto());
+	TriggerSystem::i().RegisterEntity(grupoAsaltos);
+
+	GroupEntity *grupoPistolas = new GroupEntity("grupoPistolas", 9002);
+	grupoPistolas->addEntityList(EntityManager::i().getPistolas());
+	TriggerSystem::i().RegisterEntity(grupoPistolas);
+
+	GroupEntity *grupoRockets = new GroupEntity("grupoRockets", 9003);
+	grupoRockets->addEntityList(EntityManager::i().getRockets());
+	TriggerSystem::i().RegisterEntity(grupoRockets);
+
+
 	/*Enemy *e = new Enemy("Rambo");
 	e->inicializar();
 	e->cargarContenido();
@@ -185,7 +203,6 @@ void Game::inicializar()
 		std::cin >> a;
 	} while (a != 1 && a != 2);
 	
-
 	if (a == 1) {
 		//LLama al inicializar de todas las entities
 		EntityManager::i().inicializar();
@@ -193,7 +210,7 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("Batman", map.getSpawnPoints());
+		Player* player = new Player("NombreA", map.getSpawnPoints());
 		player->inicializar();
 		player->cargarContenido();
 
@@ -215,15 +232,15 @@ void Game::inicializar()
 		Cliente::i().createPlayer(map.getSpawnPoints());
 
 		//enviamos los paquetes del vida al servidor para que los cree
-		list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
-		for (list<Entity*>::Iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
+		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
+		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
 			Cliente::i().nuevaVida((*it)->getID());
 		}
 			
 		//enviamos los paquetes de armas al servidor para que los cree
 
-		list<Entity*>weapon = EntityManager::i().getWeapons();
-		for (list<Entity*>::Iterator it = weapon.begin(); it != weapon.end(); ++it) {
+		std::list<Entity*>weapon = EntityManager::i().getWeapons();
+		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
 			Cliente::i().nuevaArma((*it)->getID());
 		}
 

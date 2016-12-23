@@ -1,9 +1,9 @@
 #include "Button.h"
 #include "../TriggerSystem.h"
+#include "../Motor/PhysicsEngine.h"
 
-
-Button::Button(std::shared_ptr<BasicSceneNode> nodo, const std::string & name):Entity(-1, nodo, name) {
-
+Button::Button(std::shared_ptr<BasicSceneNode> nodo, const std::string & name, EnumTriggerType type, int id):Entity(id, nodo, name) {
+	m_triggerType = type;
 }
 
 Button::~Button() {
@@ -14,8 +14,8 @@ void Button::setPosition(Vec3<float>& pos) {
 }
 
 void Button::inicializar() {
-	TriggerSystem::i().RegisterTrigger(EnumTriggerType::kTrig_Explosion, 10, m_id, m_renderState.getPosition(), 5, Time::Zero, false);
-
+	TriggerSystem::i().RegisterTrigger(m_triggerType, 10, m_id, m_renderState.getPosition(), 5, Time::Zero, false);
+	m_ghostTrigger = PhysicsEngine::i().createSphereShape(this, 5);
 }
 
 void Button::update(Time elapsedTime) {

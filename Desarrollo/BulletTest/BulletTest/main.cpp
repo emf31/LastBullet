@@ -12,9 +12,9 @@ int main(int, char const**)
 	
 
 	Game *game = new Game();
-	while (1) {
+	//while (1) {
 		game->run();
-	}
+	//}
 	delete game;
 
 	return 0;

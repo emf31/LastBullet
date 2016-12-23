@@ -4,7 +4,7 @@
 
 class GroupEntity : public Entity {
 public:
-	GroupEntity(const std::string &name);
+	GroupEntity(const std::string &name,int id=-1);
 	~GroupEntity();
 
 	// Heredado vía Entity
@@ -30,7 +30,10 @@ public:
 
 	void removeEntity(Entity* ent);
 
+	void addEntityList(std::list<Entity*> entityList);
+
 	float getRadius() const { return radio; }
+
 private:
 	std::unordered_set<Entity*> lista_entities;
 	float radio;

@@ -73,11 +73,14 @@ public:
 
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
-	list<Entity*> getCharacters();
+	std::list<Entity*> getCharacters();
 	std::list<Entity*> getEnemies();
-	list<Entity*> getLifeObjects();
-	list<Entity*> getWeapons();
-	list<Entity*> getAllEntitiesTriggerables();
+	std::list<Entity*> getLifeObjects();
+	std::list<Entity*> getWeapons();
+	std::list<Entity*> getRockets();
+	std::list<Entity*> getPistolas();
+	std::list<Entity*> getAsalto();
+	std::list<Entity*> getAllEntitiesTriggerables();
 
 	
 

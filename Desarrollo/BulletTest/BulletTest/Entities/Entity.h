@@ -92,7 +92,7 @@ protected:
 	RenderState m_renderState;
 	
 
-	byte dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear;
+	byte dwTriggerFlags = kTrig_None;
 
 	//Sirve para identificar que una entity sea un grupo de entities, siempre se crea a false
 	bool isGroup;

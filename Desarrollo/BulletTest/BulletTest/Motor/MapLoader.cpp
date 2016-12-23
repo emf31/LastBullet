@@ -7,6 +7,7 @@
 #include "../Entities/WeaponDrops/RocketLauncherDrop.h"
 #include "GraphicEngine.h"
 #include "../Entities/Button.h"
+#include "../Otros/EnumParser.h"
 
 // for convenience
 using json = nlohmann::json;
@@ -43,8 +44,21 @@ void MapLoader::readMap(const std::string & name)
 				nameMesh = "../media/" +nameMesh+".obj";
 				io::path mesh=nameMesh.c_str();
 
-				if(obj["tag"]=="PhysicEntity")
-					createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
+				std::string extraTags = obj["extraTags"];
+				//std::cout << "ExtraTags: " << extraTags << std::endl;
+				if (obj["tag"] == "PhysicEntity") {
+					std::shared_ptr<BasicSceneNode> node =createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
+					if (extraTags == "life") {
+						node->setTexture("../media/life.png",0);
+					} else if (extraTags == "pistola") {
+						node->setTexture("../media/pistola.jpg", 0);
+					} else if (extraTags == "rocket") {
+						node->setTexture("../media/lanzacohetes.jpg", 0);
+					} else if (extraTags == "asalto") {
+						node->setTexture("../media/asalto.jpg", 0);
+					}
+				}
+					
 				if (obj["tag"] == "LifeObject")
 					createLifeObject(pos, es, mesh, nombre);
 				if (obj["tag"] == "PistolaDrop")
@@ -55,16 +69,23 @@ void MapLoader::readMap(const std::string & name)
 					createRocektLauncherDrop(pos, es, mesh, nombre);
 				if (obj["tag"] == "Grafo")
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
-				if (obj["tag"] == "Spawn")
+				if (obj["tag"] == "Spawn") {
+				
 					spawnPoints.push_back(pos);
-				if (obj["tag"] == "TriggerButton")
-					createTriggerButton(pos,5);
+				}
+				if (obj["tag"] == "TriggerButton") {
+					EnumParser<EnumTriggerType> parser;
+					EnumTriggerType type = parser.parseEnum(obj["nombre"]);
+					
+					createTriggerButton(pos, 5, type);
+				}
+					
 		}
 	}
 
 	//std::cout << j.dump() << std::endl;
 }
-void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const io::path & mesh, std::string &name, float mass)
+std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const io::path & mesh, std::string &name, float mass)
 {
 	std::shared_ptr<BasicSceneNode> sceneNode;
 	if (mesh != "../media/cubo.obj"){
@@ -104,6 +125,7 @@ void MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<
 	
 	//std::cout << "WorldTransform: " << physicent->getRigidBody()->getWorldTransform().getOrigin().x() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().y() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().z() << '\n';
 	//std::cout << sceneNode->getPosition().getX() << '\n';
+	return sceneNode;
 }
 
 void MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
@@ -138,7 +160,19 @@ void MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escal
 	RocketLauncherDropEnt->setPosition(posicion);
 }
 
-void MapLoader::createTriggerButton(Vec3<float> posicion, float radio) {
-	Button *btn = new Button(nullptr, "Boton");
+void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type) {
+	int id=-1;
+	if (type == EnumTriggerType::Button_Spawn) {
+		id = 65534;
+	} else if(type == EnumTriggerType::Button_Trig_Ent) {
+		id = 65535;
+	} else if (type == EnumTriggerType::Button_Trig_Ent_Asalto) {
+		id = 65536;
+	} else if (type == EnumTriggerType::Button_Trig_Ent_Pistola) {
+		id = 65537;
+	} else if (type == EnumTriggerType::Button_Trig_Ent_Rocket) {
+		id = 65538;
+	}
+	Button *btn = new Button(nullptr, "Boton", type, id);
 	btn->setPosition(posicion);
 }

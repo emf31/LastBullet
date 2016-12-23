@@ -1,6 +1,6 @@
 #include "GroupEntity.h"
 
-GroupEntity::GroupEntity(const std::string &name) : Entity(-1, NULL, name) 
+GroupEntity::GroupEntity(const std::string &name, int id) : Entity(id, NULL, name) 
 {
 	isGroup = true;
 }
@@ -73,4 +73,10 @@ void GroupEntity::addEntity(Entity * ent)
 void GroupEntity::removeEntity(Entity * ent)
 {
 	lista_entities.erase(ent);
+}
+
+void GroupEntity::addEntityList(std::list<Entity*> entityList) {
+	for (auto i = entityList.begin(); i != entityList.end(); ++i) {
+		addEntity(*i);
+	}
 }

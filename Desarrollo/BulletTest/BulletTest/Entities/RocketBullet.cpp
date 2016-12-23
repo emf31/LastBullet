@@ -77,9 +77,9 @@ void RocketBullet::handleMessage(const Message & message)
 
 		if (estado == DISPONIBLE) {
 
-			list<Entity*>characters = EntityManager::i().getCharacters();
+			std::list<Entity*>characters = EntityManager::i().getCharacters();
 			///Explosion
-			for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
+			for (std::list<Entity*>::iterator it = characters.begin(); it != characters.end(); it++) {
 
 				Entity* myentity = *it;
 

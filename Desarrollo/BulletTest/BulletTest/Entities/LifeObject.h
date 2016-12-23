@@ -41,6 +41,16 @@ public:
 
 	virtual std::string getClassName() { return "LifeObject"; }
 
+	void setCollisionGroup(const int &group) {
+		btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
+		proxy->m_collisionFilterGroup = group;
+	}
+	void setCollisionMask(const int &mask) {
+		btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
+		proxy->m_collisionFilterMask = mask;
+
+	}
+
 	void setPosition(Vec3<float> pos) {
 
 		m_renderState.setPosition(pos);

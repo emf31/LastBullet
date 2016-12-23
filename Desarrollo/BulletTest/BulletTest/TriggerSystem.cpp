@@ -27,9 +27,7 @@ unsigned long TriggerSystem::RegisterTrigger(EnumTriggerType _eTriggerType, unsi
 
 void TriggerSystem::RegisterEntity(Entity * ent)
 {
-	{
-		m_entities.push_back(ent);
-	}
+	m_entities.push_back(ent);
 }
 
 void TriggerSystem::RemoveTrigger(unsigned long IDTrigger) {

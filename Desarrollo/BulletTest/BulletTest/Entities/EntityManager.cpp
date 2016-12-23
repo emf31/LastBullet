@@ -166,9 +166,9 @@ Entity * EntityManager::getEntity(int id)
 	return NULL;
 }
 
-list<Entity*> EntityManager::getCharacters()
+std::list<Entity*> EntityManager::getCharacters()
 {
-	list<Entity*>characters;
+	std::list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy")
 			characters.push_back(i->second);
@@ -186,9 +186,9 @@ std::list<Entity*> EntityManager::getEnemies()
 	return characters;
 }
 
-list<Entity*> EntityManager::getLifeObjects()
+std::list<Entity*> EntityManager::getLifeObjects()
 {
-	list<Entity*>lifeObjects;
+	std::list<Entity*>lifeObjects;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "LifeObject")
 			lifeObjects.push_back(i->second);
@@ -196,19 +196,46 @@ list<Entity*> EntityManager::getLifeObjects()
 	return lifeObjects;
 }
 
-list<Entity*> EntityManager::getWeapons()
+std::list<Entity*> EntityManager::getWeapons()
 {
-	list<Entity*>weapons;
+	std::list<Entity*>weapons;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-		if (i->second->getClassName() == "RocketLauncher" || i->second->getClassName() == "Pistola" || i->second->getClassName() == "Asalto")
+		if (i->second->getClassName() == "RocketLauncherDrop" || i->second->getClassName() == "PistolaDrop" || i->second->getClassName() == "AsaltoDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+std::list<Entity*> EntityManager::getRockets() {
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "RocketLauncherDrop")
 			weapons.push_back(i->second);
 	}
 	return weapons;
 }
 
-list<Entity*> EntityManager::getAllEntitiesTriggerables()
+std::list<Entity*> EntityManager::getPistolas() {
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "PistolaDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+
+
+std::list<Entity*> EntityManager::getAsalto() {
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "AsaltoDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+
+std::list<Entity*> EntityManager::getAllEntitiesTriggerables()
 {
-	list<Entity*>characters;
+	std::list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 			characters.push_back(i->second);
 	}
