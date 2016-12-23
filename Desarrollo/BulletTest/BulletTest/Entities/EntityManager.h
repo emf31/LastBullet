@@ -2,10 +2,14 @@
 #include <unordered_map>
 #include "../Otros/Time.hpp"
 #include "Entity.h"
-#include <mutex>
+#include <unordered_set>
 #include <list>
+#include "../Motor de Red/Estructuras.h"
+#include <string>
 
-#define PLAYER 1000
+
+
+static const int PLAYER = 1000;
 
 class EntityManager
 {
@@ -21,6 +25,10 @@ public:
 	
 	void mostrarClientes();
 	void muestraPosClientes();
+
+	void inicializarEntityManager() {
+		m_nextID = 0;
+	}
 
 	//Inicializa todas las entities
 	void inicializar();
@@ -40,23 +48,54 @@ public:
 
 	//Registra una entity en el mapa
 	void registerEntity(Entity* entity);
+
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	void removeRaknetEntity(Entity* entity);
+
+	//Borra la cola de borrado de entities, se llama en cada iteracion
+	void cleanDeleteQueue();
+
+	void cambiaTabla(TFilaTabla fila) {
+		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
+		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
+	}
+	void muestraTabla();
+	void aumentaKill(RakNet::RakNetGUID &guid) {
+		TFilaTabla *fila;
+		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila->kills++;
+	}
+	void aumentaMuerte(RakNet::RakNetGUID &guid) {
+		TFilaTabla *fila;
+		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+		fila->deaths++;
+	}
+
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
-	list<Entity*> getCharacters();
+	std::list<Entity*> getCharacters();
+	std::list<Entity*> getEnemies();
+	std::list<Entity*> getLifeObjects();
+	std::list<Entity*> getWeapons();
+	std::list<Entity*> getRockets();
+	std::list<Entity*> getPistolas();
+	std::list<Entity*> getAsalto();
+	std::list<Entity*> getAllEntitiesTriggerables();
+
+	
 
 private:
 	EntityManager(EntityManager const&);
-	EntityManager() { m_nextID = 0; m_entities = std::unordered_map<int, Entity*>(); m_jugadores = std::unordered_map<unsigned long, Entity*>();
+	EntityManager() { 
 	}
 
 	int m_nextID;
+	
 	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
-
-	std::mutex m;
+	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
+	
+	std::unordered_set<Entity*> delete_set;
 
 };
 

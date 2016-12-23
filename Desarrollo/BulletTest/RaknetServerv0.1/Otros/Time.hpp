@@ -29,7 +29,17 @@
 // Headers
 ////////////////////////////////////////////////////////////
 //#include <SFML/System/Export.hpp>
+ #include <inttypes.h>
 
+
+ /*  typedef signed __int8     int8_t;
+   typedef signed __int16    int16_t;
+   typedef signed int32_t    int32_t;
+   typedef unsigned __int8   uint8_t;
+   typedef unsigned __int16  uint16_t;
+   typedef unsigned int32_t  uint32_t;
+typedef signed int64_t       int64_t;
+typedef unsigned int64_t     uint64_t; */ 
 
 ////////////////////////////////////////////////////////////
 /// \brief Represents a time value
@@ -65,7 +75,7 @@ public:
     /// \see asSeconds, asMicroseconds
     ///
     ////////////////////////////////////////////////////////////
-    __int32 asMilliseconds() const;
+    int32_t asMilliseconds() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Return the time value as a number of microseconds
@@ -75,7 +85,7 @@ public:
     /// \see asSeconds, asMilliseconds
     ///
     ////////////////////////////////////////////////////////////
-	__int64 asMicroseconds() const;
+	int64_t asMicroseconds() const;
 
     ////////////////////////////////////////////////////////////
     // Static member data
@@ -85,8 +95,8 @@ public:
 private:
 
     friend Time seconds(float);
-    friend Time milliseconds(__int32);
-    friend Time microseconds(__int64);
+    friend Time milliseconds(int32_t);
+    friend Time microseconds(int64_t);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct from a number of microseconds
@@ -97,14 +107,14 @@ private:
     /// \param microseconds Number of microseconds
     ///
     ////////////////////////////////////////////////////////////
-    explicit Time(__int64 microseconds);
+    explicit Time(int64_t microseconds);
 
 private:
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-	__int64 m_microseconds; ///< Time value stored as microseconds
+	int64_t m_microseconds; ///< Time value stored as microseconds
 };
 
 ////////////////////////////////////////////////////////////
@@ -131,7 +141,7 @@ Time seconds(float amount);
 /// \see seconds, microseconds
 ///
 ////////////////////////////////////////////////////////////
-Time milliseconds(__int32 amount);
+Time milliseconds(int32_t amount);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time
@@ -144,7 +154,7 @@ Time milliseconds(__int32 amount);
 /// \see seconds, milliseconds
 ///
 ////////////////////////////////////////////////////////////
-Time microseconds(__int64 amount);
+Time microseconds(int64_t amount);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time
@@ -299,7 +309,7 @@ Time operator *(Time left, float right);
 /// \return \a left multiplied by \a right
 ///
 ////////////////////////////////////////////////////////////
-Time operator *(Time left, __int64 right);
+Time operator *(Time left, int64_t right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time
@@ -323,7 +333,7 @@ Time operator *(float left, Time right);
 /// \return \a left multiplied by \a right
 ///
 ////////////////////////////////////////////////////////////
-Time operator *(__int64 left, Time right);
+Time operator *(int64_t left, Time right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time
@@ -347,7 +357,7 @@ Time& operator *=(Time& left, float right);
 /// \return \a left multiplied by \a right
 ///
 ////////////////////////////////////////////////////////////
-Time& operator *=(Time& left, __int64 right);
+Time& operator *=(Time& left, int64_t right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time
@@ -371,7 +381,7 @@ Time operator /(Time left, float right);
 /// \return \a left divided by \a right
 ///
 ////////////////////////////////////////////////////////////
-Time operator /(Time left, __int64 right);
+Time operator /(Time left, int64_t right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time
@@ -395,7 +405,7 @@ Time& operator /=(Time& left, float right);
 /// \return \a left divided by \a right
 ///
 ////////////////////////////////////////////////////////////
-Time& operator /=(Time& left, __int64 right);
+Time& operator /=(Time& left, int64_t right);
 
 ////////////////////////////////////////////////////////////
 /// \relates Time

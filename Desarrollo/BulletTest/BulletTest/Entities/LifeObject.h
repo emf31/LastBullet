@@ -18,6 +18,7 @@ public:
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
 	btGhostObject* getGhostObject() { return m_ghostObject; }
 
+
 	void rotate(Vec3<float> rot);
 
 	void asignaTiempo(Clock tiempo);
@@ -35,7 +36,20 @@ public:
 
 	virtual void handleMessage(const Message& message) override;
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
+
 	virtual std::string getClassName() { return "LifeObject"; }
+
+	void setCollisionGroup(const int &group) {
+		btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
+		proxy->m_collisionFilterGroup = group;
+	}
+	void setCollisionMask(const int &mask) {
+		btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
+		proxy->m_collisionFilterMask = mask;
+
+	}
 
 	void setPosition(Vec3<float> pos) {
 

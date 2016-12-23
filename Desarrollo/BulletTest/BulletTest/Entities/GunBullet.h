@@ -11,18 +11,6 @@ class GunBullet : public Entity
 public:
 	GunBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
 	~GunBullet();
-	
-private:
-	Vec3<float> m_direction;
-	Vec3<float> m_position;
-	Vec3<float> m_rotation;
-	float m_velocity;
-	Time m_lifetime;
-	Clock timelifeclock;
-
-
-
-
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -38,6 +26,16 @@ private:
 	virtual void handleMessage(const Message & message) override;
 
 	virtual std::string getClassName() override;
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+	
+private:
+	Vec3<float> m_direction;
+	Vec3<float> m_position;
+	Vec3<float> m_rotation;
+	float m_velocity;
+	Time m_lifetime;
+	Clock timelifeclock;
 
 };
 

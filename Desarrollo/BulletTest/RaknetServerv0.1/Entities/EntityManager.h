@@ -1,6 +1,6 @@
 #pragma once
 #include <unordered_map>
-#include "../BulletTest/BulletTest/Otros/Time.hpp"
+#include "../Otros/Time.hpp"
 #include "Entity.h"
 #include "../Estructuras.h"
 #include <RakPeerInterface.h>
@@ -8,6 +8,7 @@
 #include <BitStream.h>
 #include <RakNetTypes.h> 
 #include "Life.h"
+#include "../DropObject.h"
 
 class EntityManager
 {
@@ -19,15 +20,24 @@ public:
 	//Envia un nuevo player a todos los clientes
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
 	//este metodo ahora envia la posicion y la rotacion del jugador
-	void enviaNuevaPos(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
-	void enviaDisparado(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer); 
+	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
+	void enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface *peer);
 	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
+	void enviaTiempoActualArma(DropObject *d, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
+	void enviarDisparoClienteRocket(TBala &b, RakNet::RakPeerInterface *peer);
 	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
+	void ArmaCogida(int idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
+	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
+	void enviaCambioArma(TCambioArma &cambio, RakNet::RakPeerInterface *peer);
+	void aumentaKill(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
+	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
+	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
 
 
 	//Inicializa todas las entities
@@ -49,8 +59,8 @@ public:
 	void registerEntity(Entity* entity);
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);
-	Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid);
-	Entity * EntityManager::getEntityID(int id);
+	Entity * getRaknetEntity(RakNet::RakNetGUID guid);
+	Entity * getEntityID(int id);
 
 private:
 	EntityManager(EntityManager const&);
@@ -60,6 +70,7 @@ private:
 	int m_nextID;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	std::unordered_map<int, Entity*> m_entities;
+	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 
 };
 

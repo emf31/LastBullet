@@ -13,18 +13,6 @@ public:
 	RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	~RocketBullet();
 
-private:
-	float radioExplosion;
-	Vec3<float> m_direction;
-	Vec3<float> m_position;
-	Vec3<float> m_rotation;
-	float m_velocity;
-	Time m_lifetime;
-	Clock timelifeclock;
-
-	btRigidBody* m_rigidBody;
-	int estado=DISPONIBLE;
-
 	// Heredado vía Entity
 	virtual void inicializar() override;
 
@@ -38,9 +26,24 @@ private:
 
 	virtual void handleMessage(const Message & message) override;
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual std::string getClassName() override;
 
-	float explosion(Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
+private:
+	float radioExplosion;
+	Vec3<float> m_direction;
+	Vec3<float> m_position;
+	Vec3<float> m_rotation;
+	float m_velocity;
+	Time m_lifetime;
+	Clock timelifeclock;
 
+	btRigidBody* m_rigidBody;
+	int estado=DISPONIBLE;
+
+	
+
+	float explosion(Entity* player,Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
 
 };

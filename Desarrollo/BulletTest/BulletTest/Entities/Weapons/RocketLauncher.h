@@ -25,11 +25,15 @@ public:
 
 	virtual std::string getClassName() { return "RocketLauncher"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual void shoot();
 
 
 	virtual void resetAmmoTotal() {
 		numCargadores = numCargadoresRocket;
 	}
+private:
+	btVector3 SIZE_OF_WORLD;
 };
 

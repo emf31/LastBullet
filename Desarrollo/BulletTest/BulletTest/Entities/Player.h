@@ -3,21 +3,22 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 #include "KinematicCharacterController.h"
-//#include <BulletDynamics\Character\btKinematicCharacterController.h>
 #include "Granada.h"
 #include "Weapons/Weapon.h"
 #include "../Motor/AnimatedSceneNode.h"
 #include "../Motor/Animation.h"
 #include <vector>
-#include "../Lista.h"
+#include "../Otros/Lista.h"
+#include "../Otros/LifeComponent.h"
 
 class Player : public Entity
 {
 public:
-	Player(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
-	void setPosition(Vec3<float> pos);
+	void setPosition(Vec3<float> &pos);
+	void searchSpawnPoint();
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -27,6 +28,9 @@ public:
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
 	virtual std::string getClassName() { return "Player"; }
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 
 	void run();
 	void setWeapon(int weapon);
@@ -41,16 +45,17 @@ public:
 	void move_right();
 	void move_left();
 
-	void updateAnimation();
-	void updateState();
-
+	void bindWeapon();
 	void UpWeapon();
 	void DownWeapon();
 
+	void impulsar(Vec3<float> force);
 
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
+
+	LifeComponent* getLifeComponent() { return &life_component; }
 
 	std::string getCurrentWeapon() {
 		return listaWeapons->valorActual()->getClassName();
@@ -60,8 +65,15 @@ public:
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
 	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal(); }
 
+
+	btPairCachingGhostObject* getGhostObject() {
+		return p_controller->getGhostObject();
+	}
+
+	void resetAll();
+	KinematicCharacterController* p_controller;
+
 private:
-	float m_vida;
 
 	Animation* animation;
 
@@ -74,30 +86,28 @@ private:
 	Pistola* pistola;
 	RocketLauncher* rocket;
 
-
+	LifeComponent life_component;
 
 	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
 
 
-	bool tieneAsalto = false;
-	bool tieneRocketLauncher = false;
-	bool tienePistola = false;
+	bool tieneAsalto;
+	bool tieneRocketLauncher;
+	bool tienePistola;
 
-	bool isShooting=false;
+	bool isShooting;
 
 	bool isJumping;
 	bool isMoving;
-	bool isRunning=false;
-	bool isReloading = false;
+	bool isRunning;
+	bool isReloading;
 
 	
 
+	
 	//Player controller
-	KinematicCharacterController* p_controller;
-
 	btCollisionShape* m_pCollisionShape;
-	btDefaultMotionState* m_pMotionState;
 	btPairCachingGhostObject* m_pGhostObject;
 
 	float radius;
@@ -106,5 +116,6 @@ private:
 
 	Vec3<float> speedFinal;
 
+	std::vector<Vec3<float>> m_spawns;
 };
 

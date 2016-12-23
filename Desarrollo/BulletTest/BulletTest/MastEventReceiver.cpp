@@ -19,7 +19,6 @@
 // yeah I know it's confusing, but it makes alot more sense in the internals of the class.
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-#include "stdafx.h"
 #include "MastEventReceiver.hpp"
 
 

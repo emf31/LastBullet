@@ -24,11 +24,16 @@ public:
 
 	virtual std::string getClassName() { return "Pistola"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual void shoot();
 
 	virtual void resetAmmoTotal() {
 		numCargadores= numCargadoresPistola;
 	}
 
+private:
+	btVector3 SIZE_OF_WORLD;
+	btVector3 FUERZA;
 };
 

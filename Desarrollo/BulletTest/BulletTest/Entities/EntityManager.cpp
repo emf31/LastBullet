@@ -5,8 +5,13 @@
 #include "Enemy.h"
 #include <list>
 
+
+
+
 void EntityManager::inicializar()
 {
+	
+
 	std::unordered_map<int, Entity*>::iterator iter = m_entities.begin();
 	for (; iter != m_entities.end(); ++iter) {
 		iter->second->inicializar();
@@ -61,16 +66,19 @@ void EntityManager::apagar()
 {
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		//borramos la entities
+		i->second->borrarContenido();
 		delete i->second;
 		i->second = 0;
 	}
 	//vaciamos el contenido del mapa
 	m_entities.clear();
+
+	m_jugadores.clear();
+
 }
 
 void EntityManager::registerEntity(Entity * entity)
 {
-	//m.lock();
 
 	// comprobamos si la Entity tiene un ID
 	if (entity->getID() == -1) {
@@ -95,7 +103,6 @@ void EntityManager::registerEntity(Entity * entity)
 		m_jugadores[RakNet::RakNetGUID::ToUint32(entity->getGuid())] = entity;
 	}
 
-	//m.unlock();
 }
 
 void EntityManager::removeEntity(Entity * entity)
@@ -107,24 +114,49 @@ void EntityManager::removeEntity(Entity * entity)
 		m_entities.erase(found);
 	}
 
+	if (entity->getGuid() != RakNet::UNASSIGNED_RAKNET_GUID) {
+		auto found_raknet = m_jugadores.find(RakNet::RakNetGUID::ToUint32(entity->getGuid()));
+		//Si es diferente de m_entities.end() es que lo ha encontrado
+		if (found_raknet != m_jugadores.end()) {
+			m_jugadores.erase(found_raknet);
+		}
+	}
+	
+
+	delete_set.insert(entity);
+
 }
 
-void EntityManager::removeRaknetEntity(Entity * entity)
+void EntityManager::cleanDeleteQueue()
 {
-	auto found = m_jugadores.find(RakNet::RakNetGUID::ToUint32( entity->getGuid()));
-	//Si es diferente de m_entities.end() es que lo ha encontrado
-	if (found != m_jugadores.end()) {
-		m_jugadores.erase(found);
+	for (auto it = delete_set.begin(); it != delete_set.end(); ++it)
+	{
+		(*it)->borrarContenido();
+		delete (*it);
 	}
+	delete_set.clear();
+}
+
+void EntityManager::muestraTabla()
+{
+	
+	std::cout << "*****************************************************************" << std::endl;
+	for (auto i = m_tabla.begin(); i != m_tabla.end(); ++i) {
+
+		std::cout << "//////////" << std::endl;
+		std::cout << "Nombre del player: " << i->second.name << std::endl;
+		std::cout << "Kills: " << i->second.kills << std::endl;
+		std::cout << "Death: " << i->second.deaths << std::endl;
+		std::cout << "Puntuacion: " << i->second.puntuacion << std::endl;
+		std::cout << "//////////" << std::endl;
+		
+
+	}
+	std::cout << "*****************************************************************" << std::endl;
 }
 
 Entity * EntityManager::getEntity(int id)
 {
-	/*for_each(s.begin(), s.end(), [=](string str)
-	{
-		some_list.push_back(str);
-	}*/
-	
 	auto found = m_entities.find(id);
 	if (found != m_entities.end())
 		return found->second;
@@ -134,11 +166,77 @@ Entity * EntityManager::getEntity(int id)
 	return NULL;
 }
 
-list<Entity*> EntityManager::getCharacters()
+std::list<Entity*> EntityManager::getCharacters()
 {
-	list<Entity*>characters;
+	std::list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy")
+			characters.push_back(i->second);
+	}
+	return characters;
+}
+
+std::list<Entity*> EntityManager::getEnemies()
+{
+	std::list<Entity*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "Enemy")
+			characters.push_back(i->second);
+	}
+	return characters;
+}
+
+std::list<Entity*> EntityManager::getLifeObjects()
+{
+	std::list<Entity*>lifeObjects;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "LifeObject")
+			lifeObjects.push_back(i->second);
+	}
+	return lifeObjects;
+}
+
+std::list<Entity*> EntityManager::getWeapons()
+{
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "RocketLauncherDrop" || i->second->getClassName() == "PistolaDrop" || i->second->getClassName() == "AsaltoDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+std::list<Entity*> EntityManager::getRockets() {
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "RocketLauncherDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+
+std::list<Entity*> EntityManager::getPistolas() {
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "PistolaDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+
+
+std::list<Entity*> EntityManager::getAsalto() {
+	std::list<Entity*>weapons;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "AsaltoDrop")
+			weapons.push_back(i->second);
+	}
+	return weapons;
+}
+
+std::list<Entity*> EntityManager::getAllEntitiesTriggerables()
+{
+	std::list<Entity*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 			characters.push_back(i->second);
 	}
 	return characters;

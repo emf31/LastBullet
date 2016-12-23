@@ -22,7 +22,7 @@ subject to the following restrictions:
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
 #include "LinearMath/btDefaultMotionState.h"
-
+#include <iostream>
 #include "KinematicCharacterController.h"
 
 
@@ -151,8 +151,8 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_velocityTimeInterval = 0.0;
 	m_verticalVelocity = 0.0;
 	m_verticalOffset = 0.0;
-	m_gravity = btScalar(9.8 * 3.5); // 3G acceleration.
-	m_fallSpeed = 55.0; // Terminal velocity of a sky diver in m/s.
+	m_gravity = btScalar(9.8 * 10.5); // 3G acceleration.
+	m_fallSpeed = 130.0; // Terminal velocity of a sky diver in m/s.
 	m_jumpSpeed = 10.0; // ?
 	m_SetjumpSpeed = m_jumpSpeed;
 	m_wasOnGround = false;
@@ -166,6 +166,11 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_linearDamping = btScalar(0.0);
 	m_angularDamping = btScalar(0.0);
 	m_speed = btScalar(1.3);
+	jumpedOnAir = false;
+}
+
+float KinematicCharacterController::getSpeedFactor() const {
+	return m_speed;
 }
 
 void KinematicCharacterController::setSpeed(float speed) {
@@ -624,8 +629,11 @@ void KinematicCharacterController::setWalkDirection
 	const btVector3& walkDirection
 )
 {
+	
+
 	m_useWalkDirection = true;
 	m_walkDirection = walkDirection;
+	
 	m_normalizedDirection = getNormalizedVector(m_walkDirection);
 }
 
@@ -812,7 +820,22 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 	//}
 
 	if (m_useWalkDirection) {
-		stepForwardAndStrafe(collisionWorld, m_walkDirection * m_speed);
+
+		m_walkDirection += prev_walkDirection;
+
+		m_walkDirection += m_walkDirection * m_acceleration_walk * dt;
+
+		
+
+
+		float speedXZ = m_walkDirection.length();
+
+		if (speedXZ > m_maxSpeed_walk) {
+			m_walkDirection = m_walkDirection / speedXZ * m_maxSpeed_walk;
+		}
+			
+
+		stepForwardAndStrafe(collisionWorld, m_walkDirection);
 	}
 	else {
 		//printf("  time: %f", m_velocityTimeInterval);
@@ -823,6 +846,11 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 
 		// how far will we move while we are moving?
 		btVector3 move = m_walkDirection * dtMoving;
+		// Prevent from going over maximum speed
+		/*float speedXZ = move.length();
+
+		if (speedXZ > 360.f)
+			move = move / speedXZ * 360.f;*/
 
 		//printf("  dtMoving: %f", dtMoving);
 
@@ -863,6 +891,11 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 			break;
 		}
 	}
+
+	// Decelerate
+	m_walkDirection -= m_walkDirection * m_deceleration_walk *dt;
+
+	prev_walkDirection = m_walkDirection;
 }
 
 void KinematicCharacterController::setFallSpeed(btScalar fallSpeed)
@@ -883,18 +916,19 @@ void KinematicCharacterController::setMaxJumpHeight(btScalar maxJumpHeight)
 
 bool KinematicCharacterController::canJump()
 {
-	if (onGround()) {
-		numJumps = 1;
+	if (onGround())
+		return true;
+
+	if (!onGround() && !jumpedOnAir) {
+		jumpedOnAir = true;
 		return true;
 	}
-	else if (numJumps == 1) {
-		numJumps = 0;
-		return true;
-	}
+
 	return false;
+
 }
 
-void KinematicCharacterController::jump(const btVector3& v)
+void KinematicCharacterController::jump(const btVector3& v)//Este jump es el jump del salto
 {
 	if(canJump()){
 	m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
@@ -915,6 +949,28 @@ void KinematicCharacterController::jump(const btVector3& v)
 	m_rigidBody->applyCentralImpulse(up * magnitude);
 #endif
 	}
+}
+
+void KinematicCharacterController::Rocketjump(const btVector3& v)//Este jump es el jump del rocketJump
+{
+		m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
+		m_verticalVelocity = m_jumpSpeed;
+		m_wasJumping = true;
+
+		m_jumpAxis = v.length2() == 0 ? m_up : v.normalized();
+
+		m_jumpPosition = m_ghostObject->getWorldTransform().getOrigin();
+
+#if 0
+		currently no jumping.
+			btTransform xform;
+		m_rigidBody->getMotionState()->getWorldTransform(xform);
+		btVector3 up = xform.getBasis()[1];
+		up.normalize();
+		btScalar magnitude = (btScalar(1.0) / m_rigidBody->getInvMass()) * btScalar(8.0);
+		m_rigidBody->applyCentralImpulse(up * magnitude);
+#endif
+	
 }
 
 void KinematicCharacterController::setGravity(const btVector3& gravity)

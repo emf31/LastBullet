@@ -15,7 +15,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		bsOut.Reset();
 
 		//enviamos todos los clientes que habian en el servidor al nuevo player
-	
+
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
 		nuevocli.position = i->second->getRenderState()->getPosition();
@@ -26,9 +26,9 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
-void EntityManager::enviaNuevaPos(TPlayer & p, RakNet::RakPeerInterface *peer)
+void EntityManager::enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer)
 {
-	
+
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
@@ -72,7 +72,7 @@ void EntityManager::lanzarGranda(TGranada & g, RakNet::RakPeerInterface * peer)
 void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
 {
 
-	
+
 	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
@@ -88,23 +88,40 @@ void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerI
 
 	}
 }
-
-void EntityManager::enviaDisparado(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
+//imp tiene el daño del arma y el guid del que han dado, dispara es el guid de quien lo dispara
+void EntityManager::enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer)
 {
 
+	RakNet::RakNetGUID guid = imp.guid;
+	imp.guid = dispara;
 
 	RakNet::BitStream bsOut;
-		//se envia unicamente al cliente que ha sido disparado
+	//se envia unicamente al cliente que ha sido disparado
 
-			bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
-			//en verdad aqui no habria ni que pasarle nada, solo queremos notificarle que ha sido disparado
-			//TODO: en un futuro aqui podriamos pasarle el arma con el que ha sido disparado asi dependiendo del arma con el que ha sido disparado se restara mas vida o menos vida.
-			bsOut.Write("pasar el arma con la que disparas");
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
-			bsOut.Reset();
-		
+	bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
 
-	
+
+	bsOut.Write(imp);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
+
+
+
+}
+
+void EntityManager::enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	//se envia unicamente al cliente que ha sido disparado
+
+	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
+	bsOut.Write(impact);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, impact.guidImpactado, false);
+	bsOut.Reset();
+
+
+
 }
 
 
@@ -116,13 +133,13 @@ void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a TODOS
-		
+
 			//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
-			bsOut.Write((RakNet::MessageID)MUERTE);
-			bsOut.Write(p);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-			bsOut.Reset();
-		
+		bsOut.Write((RakNet::MessageID)MUERTE);
+		bsOut.Write(p);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
 
 	}
 }
@@ -135,16 +152,37 @@ void EntityManager::enviaTiempoActualVida(Life * l, RakNet::RakNetGUID &guid, Ra
 	vida.tiempo = l->clockRecargaLife;
 
 
-		//se envia a SOLO al nuevo cliente que se ha conectado
+	//se envia a SOLO al nuevo cliente que se ha conectado
 
-		//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
-		bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
-		bsOut.Write(vida);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
-		bsOut.Reset();
+	//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
+	bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
+	bsOut.Write(vida);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
 
 
-	
+
+
+}
+
+void EntityManager::enviaTiempoActualArma(DropObject * o, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer)
+{
+	RakNet::BitStream bsOut;
+	TVidaServer weapondrop;
+	weapondrop.id = o->getID();
+	weapondrop.tiempo = o->clockRecargaLife;
+
+
+	//se envia a SOLO al nuevo cliente que se ha conectado
+
+	//enviamos la estructura del cliente muerto para que todos cambien la posicion de ese cliente a la nueva pos asignada por el servidor
+	bsOut.Write((RakNet::MessageID)NUEVA_ARMA);
+	bsOut.Write(weapondrop);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, guid, false);
+	bsOut.Reset();
+
+
+
 
 }
 
@@ -168,6 +206,27 @@ void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *pe
 	}
 }
 
+
+void EntityManager::enviarDisparoClienteRocket(TBala & b, RakNet::RakPeerInterface *peer)
+{
+
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != b.guid) {
+
+			//enviamos el guid del cliente que tiene que borrar
+			bsOut.Write((RakNet::MessageID)DISPARAR_ROCKET);
+			bsOut.Write(b);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		}
+
+	}
+}
+
 void EntityManager::VidaCogida(int idVida, RakNet::RakPeerInterface * peer)
 {
 
@@ -177,6 +236,22 @@ void EntityManager::VidaCogida(int idVida, RakNet::RakPeerInterface * peer)
 		//se envia a TODOS para que todos sepan que la vida con idVida ha sido cogida
 		bsOut.Write((RakNet::MessageID)VIDA_COGIDA);
 		bsOut.Write(idVida);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
+
+	}
+}
+
+void EntityManager::ArmaCogida(int idArma, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos sepan que el arma con idArma ha sido cogida y a todos le reaparezca a la vez
+		bsOut.Write((RakNet::MessageID)ARMA_COGIDA);
+		bsOut.Write(idArma);
 		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 		bsOut.Reset();
 
@@ -252,12 +327,12 @@ void EntityManager::registerEntity(Entity * entity)
 	else {
 		if (m_entities.find(entity->getID()) != m_entities.end()) {
 			//mostramos error
-			std::cout << "ESA VIDA YA HA SIDO CREADA " + entity->getID() << std::endl;
+			std::cout << "ESA VIDA o ARMA YA HA SIDO CREADA " + entity->getID() << std::endl;
 
 		}
 		else {
 			//si todo ha ido bien le asignamos el entity al map
-			std::cout << "CREO UNA VIDA CON ID : " + entity->getID() << std::endl;
+			std::cout << "CREO UNA VIDA o ARMA CON ID : " + entity->getID() << std::endl;
 			m_entities[entity->getID()] = entity;
 		}
 
@@ -267,7 +342,7 @@ void EntityManager::registerEntity(Entity * entity)
 
 
 
-	
+
 }
 
 void EntityManager::removeEntity(Entity * entity)
@@ -304,7 +379,7 @@ Entity * EntityManager::getEntityID(int id)
 void EntityManager::mostrarClientes() {
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-	
+
 		i->second->getGuid();
 		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
 		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
@@ -314,5 +389,113 @@ void EntityManager::mostrarClientes() {
 
 	}
 
+
+}
+
+void EntityManager::enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer)
+{
+
+	RakNet::BitStream bsOut;
+
+
+	bsOut.Write((RakNet::MessageID)APLICAR_IMPULSO);
+	bsOut.Write(impulso.fuerza);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, impulso.guid, false);
+	bsOut.Reset();
+
+
+}
+
+void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterface * peer)
+{
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a todos menos a nosotros mismos
+		if (i->second->getGuid() != cambio.guid) {
+
+			//enviamos el guid del cliente que tiene que borrar
+			bsOut.Write((RakNet::MessageID)CAMBIO_ARMA);
+			bsOut.Write(cambio);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+		}
+
+	}
+
+}
+
+
+void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
+{
+	TFilaTabla *fila;
+	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila->kills++;
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos actualicen la tabla de puntuacion
+		bsOut.Write((RakNet::MessageID)AUMENTA_KILL);
+		bsOut.Write(guid);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
+
+	}
+}
+
+void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
+{
+	TFilaTabla *fila;
+	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila->deaths++;
+
+	RakNet::BitStream bsOut;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		//se envia a TODOS para que todos actualicen la tabla de puntuacion
+		bsOut.Write((RakNet::MessageID)AUMENTA_MUERTE);
+		bsOut.Write(guid);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		bsOut.Reset();
+
+
+	}
+
+}
+
+void EntityManager::enviaFila(RakNet::RakPeerInterface * peer, TFilaTabla fila)
+{
+
+	RakNet::BitStream bsOut;
+	TFilaTabla fila2;
+
+	m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
+
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		
+		if (i->second->getGuid() != fila.guid) {
+			//se envia la fila del nuevo jugador a todos los clientes menos a el
+			bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
+			bsOut.Write(fila);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+
+		}
+		else {
+			//se envian todas las filas que ya hay en la tabla al nuevo cliente (incluyendo su propia fila que antes no se envio)
+			for (auto j = m_tabla.begin(); j != m_tabla.end(); ++j) {
+				
+				fila2 = j->second;
+				bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
+				bsOut.Write(fila2);
+				peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, fila.guid, false);
+				bsOut.Reset();
+			}
+		}
+	}
 
 }

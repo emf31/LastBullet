@@ -1,14 +1,11 @@
 #include "Asalto.h"
 #include "../../Motor de Red/Cliente.h"
 #include "../../Motor de Red/Estructuras.h"
+#include "../../Otros/Util.h"
 
 Asalto::Asalto() : Weapon()
 {
-	capacidadAmmo = 30;
-	disparos = 0;
-	cadencia = milliseconds(50);
-	recarga = milliseconds(1000);
-	numCargadores = numCargadoresAsalto;
+	
 
 }
 
@@ -20,23 +17,27 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-
+	damage = 15;
+	capacidadAmmo = 30;
+	disparos = 0;
+	cadencia = milliseconds(50);
+	recarga = milliseconds(1000);
+	numCargadores = numCargadoresAsalto;
+	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
+	FUERZA = btVector3(60.f, 60.f, 60.f);
 }
 
 void Asalto::update(Time elapsedTime)
 {
 	if (equipada) {
 		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5, player_pos.getZ()));
+		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
+		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
 		m_renderState.updateRotations(player_rot);
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
-				if (relojrecarga.getElapsedTime() < recarga) {
-					printf("recargando\n");
-				}
-				else {
+				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
 					disparos = 0;
 					numCargadores--;
@@ -58,11 +59,9 @@ void Asalto::handleInput()
 void Asalto::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(10.f, 10.f, 10.f), "", "../media/arma/asalto.obj"));
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
 	m_nodo->setTexture("../media/ice0.jpg", 0);
-	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
-
 }
 
 void Asalto::borrarContenido()
@@ -74,6 +73,11 @@ void Asalto::handleMessage(const Message & message)
 
 }
 
+bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void Asalto::shoot()
 {
 
@@ -81,67 +85,54 @@ void Asalto::shoot()
 
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
 
-			printf("DISPARANDO ASALTO\n");
-			btVector3 SIZE_OF_WORLD(1500, 1500, 1500);
+			// posicion de la camara
+			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition()); 
 
-			btVector3 start(
-				GraphicEngine::i().getActiveCamera()->getPosition().getX(),
-				GraphicEngine::i().getActiveCamera()->getPosition().getY(),
-				GraphicEngine::i().getActiveCamera()->getPosition().getZ()); // posicion de la camara
+			//añadimos un poco de desvio en el arma
+			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-			Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
-			Vec3<float> direccion = target - GraphicEngine::i().getActiveCamera()->getPosition();
-			direccion.normalise();
+			btVector3 target = bt(GraphicEngine::i().getActiveCamera()->getTarget());
+			btVector3 direccion = target - bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			direccion.normalize();
 
-			btVector3 direccion2(direccion.getX(), direccion.getY(), direccion.getZ());
+			btVector3 end = start + (direccion*SIZE_OF_WORLD);
 
-			btVector3 end = start + (direccion2*SIZE_OF_WORLD);
-
-			btCollisionWorld::AllHitsRayResultCallback ray(start, end);
+			btCollisionWorld::ClosestRayResultCallback ray(start, end);
 
 			PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-			Vec3<float> posicionImpacto(1500, 1500, 1500);
+			btVector3 posicionImpacto;
 
 
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
+				//Veo la entity que colisiona
+				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+				if (ent != EntityManager::i().getEntity(PLAYER))
+				{
+					if (ent->getClassName() == "Enemy") {
+						Message msg(ent, "COLISION_BALA", &damage);
+						MessageHandler::i().sendMessage(msg);
+					}
+					//Para mover objetos del mapa
+					posicionImpacto = ray.m_hitPointWorld;
 
-
-				const btRigidBody* hit = btRigidBody::upcast(ray.m_collisionObject); // Miro que ha golpeado el rayo y compruebo si no es el player, si no lo es salto
-
-																					 //calcularDistancia(start, end);
-
-																					 ////////////////////////////////////////////////////////////
-																					 //TODO:CAMBIAR ESTO POR EL RIGID BODY DEL PLAYER CONTROLLER
-																					 //if (hit != m_rigidBody)
-																					 //{
-
-				Entity* myEnt = static_cast<Entity*>(hit->getUserPointer());
-				if (myEnt->getClassName() == "Enemy") {
-					Message msg(myEnt, "COLISION_BALA", NULL);
-					MessageHandler::i().sendMessage(msg);
+					if (ent->getClassName() == "PhysicsEntity") {
+						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+					}
 				}
-
-				posicionImpacto = Vec3<float>(ray.m_hitPointWorld.at(0).x(), ray.m_hitPointWorld.at(0).y(), ray.m_hitPointWorld.at(0).z());
 			}
 
-			//creamos la bala cuando disparamos, le pasamos la posicion de inicio, el vector direccion por el cual se movera y la posicion final
-			//TODO: mas adelante la posicion inicial no sera la posicion de la camara sino que sera la posicion del arma.
-
-			//disparamos la bala en nuestro cliente
-			Vec3<float> posDisparo = GraphicEngine::i().getActiveCamera()->getPosition();
-			posDisparo += Vec3<float>(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
-
-
-			GunBullet* bala = new GunBullet(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
-
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			bala->cargarContenido();
 
 			if (Cliente::i().isConected()) {
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispararBala(posDisparo, direccion, posicionImpacto, GraphicEngine::i().getActiveCamera()->getRotation());
+				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			}
 
 			relojCadencia.restart();

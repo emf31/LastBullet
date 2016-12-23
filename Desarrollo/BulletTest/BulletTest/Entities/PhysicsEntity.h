@@ -3,14 +3,25 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/BasicSceneNode.h"
-
+#include "../Motor/PhysicsEngine.h"
 class PhysicsEntity : public Entity
 {
 public:
 	PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
 	~PhysicsEntity();
 
-	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
+	void setRigidBody(btRigidBody* rigidBody) { 
+		m_rigidBody = rigidBody;
+	}
+	void setCollisionGroup(const int &group) {
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = group;
+	}
+	void setCollisionMask(const int &mask) {
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterMask = mask;
+
+	}
 	btRigidBody* getRigidBody() { return m_rigidBody; }
 
 	void rotate(Vec3<float> rot);
@@ -28,7 +39,10 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual std::string getClassName() { return "PhysicsEntity"; }
+
 
 
 	void setPosition(Vec3<float> pos) {
@@ -40,8 +54,9 @@ public:
 		m_nodo->setPosition(pos);
 
 	}
-
+	Vec3<float> centerCollision;
 private:
 	btRigidBody* m_rigidBody;
+	
 };
 

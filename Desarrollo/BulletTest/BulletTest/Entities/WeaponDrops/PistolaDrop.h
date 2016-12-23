@@ -4,7 +4,7 @@ class PistolaDrop:
 	public WeaponDrop
 {
 public:
-	PistolaDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	PistolaDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~PistolaDrop();
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
@@ -24,5 +24,7 @@ public:
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "PistolaDrop"; }
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 };
 

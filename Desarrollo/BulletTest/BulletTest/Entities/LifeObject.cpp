@@ -1,10 +1,11 @@
 #include "LifeObject.h"
 #include "../Motor/PhysicsEngine.h"
 #include "../Motor de Red/Cliente.h"
+#include "../TriggerSystem.h"
 
 LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
-
+	//TriggerSystem::i().RegisterEntity(this);
 }
 
 
@@ -38,23 +39,6 @@ void LifeObject::update(Time elapsedTime)
 			m_nodo->setVisible(true);
 		}
 	}
-	// Set position
-	/*btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
-
-	// Set rotation
-	vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;
-
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));*/
-	
-	/*PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-
-
-	PhysicsEngine::i().m_world->addCollisionObject(m_ghostObject);*/
 	
 }
 
@@ -78,17 +62,17 @@ void LifeObject::handleMessage(const Message & message)
 		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
 
 			if (estado == DISPONIBLE) {
-				PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRecargaLife.restart();
 
 				if (Cliente::i().isConected())
 					Cliente::i().vidaCogida(m_id);
 
-				//TODO: aqui hacer el nodo invisible
+				
 				m_nodo->setVisible(false);
 
-				static_cast<Player*>(message.data)->sumarVida();
+				static_cast<Player*>(message.data)->getLifeComponent()->sumarVida();
 
 			}
 
@@ -97,18 +81,39 @@ void LifeObject::handleMessage(const Message & message)
 	}
 }
 
+bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
+
+	if (Trigger->eTriggerType == kTrig_Explosion) {
+		//printf("Has disparado cerca de un lifeObject\n");
+	}
+	else if (Trigger->eTriggerType == kTrig_EnemyNear) {
+		//printf("Has saltado cerca de un lifeObject\n");
+
+	}
+	
+	//m_nodo->setVisible(false);
+
+	VidaCogida();
+
+	return true;
+}
+
 void LifeObject::asignaTiempo(Clock tiempo) {
 	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
 	clockRecargaLife = tiempo;
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	
 	estado = USADO;
+	m_nodo->setVisible(false);
+	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
 }
 
 void LifeObject::VidaCogida()
 {
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
-	estado = USADO;
-	clockRecargaLife.restart();
-	//TODO: aqui hacer el nodo invisible!
-
+	if (estado == DISPONIBLE) {
+		PhysicsEngine::i().removeGhostObject(m_ghostObject);
+		estado = USADO;
+		m_nodo->setVisible(false);
+		clockRecargaLife.restart();
+	}
 }
+

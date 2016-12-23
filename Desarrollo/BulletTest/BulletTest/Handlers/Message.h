@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-
 //Fordward declaration (es mejor porque solo declara el tipo y no incluye todo el fichero)
 class Entity;
 
@@ -17,6 +16,7 @@ struct Message {
 
 	}
 	Message() {
-
+		
 	}
 };
+

@@ -13,6 +13,8 @@
 #include <btBulletDynamicsCommon.h>
 #include <memory>
 
+#include "../TriggerRecordStruct.h"
+
 
 #define DISPONIBLE 0
 #define USADO 1
@@ -21,9 +23,13 @@
 #define ASALTO 11
 #define PISTOLA 12
 
+
+
 class Entity
 {
 public:
+	
+
 	Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	virtual ~Entity();
 
@@ -55,24 +61,16 @@ public:
 	}
 	
 
-	void resetVida() {
-		m_vida = 100;
-	}
-	float getVida() {
-		return m_vida;
-	}
-	float restaVida(float cantidad) {
-		m_vida -= cantidad;
-		return m_vida;
-	}
-	void sumarVida() {
-		m_vida += 40;
-		if (m_vida > 100)
-			m_vida = 100;
-		printf("ME HE CURADO\n");
+	
+		
+	
+	
+
+	byte getTriggerFlags() {
+		return dwTriggerFlags;
 	}
 
-
+	
 	std::shared_ptr<SceneNode> getNode();
 
 	virtual void inicializar() = 0;
@@ -80,9 +78,9 @@ public:
 	virtual void handleInput() = 0;
 	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
-
 	virtual void handleMessage(const Message& message) = 0;
-	
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
+
 	virtual std::string getClassName() = 0;
 
 
@@ -92,8 +90,12 @@ protected:
 	std::string m_name;
 	std::shared_ptr<SceneNode> m_nodo;
 	RenderState m_renderState;
-	float m_vida;
+	
 
+	byte dwTriggerFlags = kTrig_None;
+
+	//Sirve para identificar que una entity sea un grupo de entities, siempre se crea a false
+	bool isGroup;
 private:
 
 	

@@ -17,7 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(160.f, 160.f, 160.f);
+	fuerza = Vec3<float>(135.f, 135.f, 135.f);
 }
 
 void Granada::update(Time elapsedTime)
@@ -42,6 +42,8 @@ void Granada::update(Time elapsedTime)
 			Message msg1(this, "BORRATE", NULL);
 
 			MessageHandler::i().sendMessage(msg1);
+
+
 			PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		
 		}
@@ -57,12 +59,17 @@ void Granada::cargarContenido()
 {
 
 	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/WPN_MK2Grenade.obj"));
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/WPN_MK2Grenade.obj");
 
 
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
 	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+	proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
 	radioExplosion=30.f;
 
 
@@ -88,51 +95,56 @@ void Granada::handleMessage(const Message & message)
 
 	if (message.mensaje == "BORRATE") {
 
-		if (m_explosion != NULL)
+		if (m_explosion != NULL) {
 			PhysicsEngine::i().removeGhostObject(m_explosion);
+		}
+			
 
 
 		m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
-		list<Entity*>characters = EntityManager::i().getCharacters();
-		///Explosion
 
-		for (list<Entity*>::Iterator it = characters.begin(); it != characters.end(); it++) {
-			Entity* myentity = *it;
-			myentity->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f));
+		//solo se comprueba si te han quitado vida a ti mismo ya que la granada esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
+		Player* myentity = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+		myentity->getLifeComponent()->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
 
-		}
+		//volvemos a resetear el guidLanzador
+		guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
 
 //		GraphicEngine::i().removeNode(m_nodo);
 
 	}
 }
 
-void Granada::setPosition(Vec3<float> pos) {
+void Granada::setPosition(const Vec3<float>& pos) {
 
 	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo.get()->setPosition(pos);
+	m_nodo->setPosition(pos);
 
 }
 
 
+bool Granada::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
+}
+
 void Granada::shoot(const btVector3& posicionPlayer) {
 
 	if (estado== GRANADACARGADA) {
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
 
 		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
-		/*btTransform transhobbitform = m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(posicion.getX(), posicion.getY(), posicion.getZ()));*/
-
-
-		//getRenderState()->updatePositions(posicion);
 
 		setPosition(posicion);
 
-		printf("GRANADA DISPARADO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 
@@ -145,15 +157,13 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 		btVector3 force = direccion2 * FUERZA;
 
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-
-
 		m_rigidBody->applyCentralImpulse(force);
 		
 
 		if (Cliente::i().isConected()) {
+			guidLanzador = EntityManager::i().getEntity(PLAYER)->getGuid();
 			TGranada granada;
-			granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			granada.guid = guidLanzador;
 			granada.origen = posicion;
 			granada.direction = direccion;
 			Cliente::i().lanzarGranada(granada);
@@ -172,24 +182,26 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 }
 
-void Granada::serverShoot(TGranada g) {
+void Granada::serverShoot(TGranada& g) {
 
 	if (estado == GRANADACARGADA) {
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
+		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
+		//nos guardamos el guid de la persona que lanza por si luego lo mata poder actualizar la tabla
+		guidLanzador = g.guid;
 
 		setPosition(g.origen);
 
-		printf("GRANADA DISPARADA DESDE ENEMIGO\n");
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
 		btVector3 direccion2(g.direction.getX(), g.direction.getY(), g.direction.getZ());
 
 		btVector3 force = direccion2 * FUERZA;
 
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-
-
 		m_rigidBody->applyCentralImpulse(force);
-		//rocket->m_rigidBody->setCollisionFlags(4);
 
 		setEstado(GRANADADISPARADA);
 		clockRecargaGranada.restart();
@@ -200,26 +212,24 @@ void Granada::serverShoot(TGranada g) {
 float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
 {
 
-	float vidaRestada = 0;
+	int vidaRestada = 0;
 
 	Vec3<float> vector = posExplosion - posCharacter;
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
-		printf("Te ha dado la explosion\n");
+		
+		
 		if (distancia < radio / 3) {
 			vidaRestada = 100;
 		}
 		else {
 			//(radio-distancia)/((2*radio)/3)
-			vidaRestada = 100*((radio - distancia) / ((2 * radio) / 3));
+			vidaRestada = int(100*((radio - distancia) / ((2 * radio) / 3)));
 
 		}
 	}
-	else {
-		printf("NO te ha dado la explosion\n");
+	
 
-	}
-
-	return vidaRestada;
+	return float(vidaRestada);
 
 }

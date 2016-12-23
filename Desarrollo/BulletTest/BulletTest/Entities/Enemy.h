@@ -16,6 +16,8 @@
 
 #include "../Otros/SafeQueue.h"
 
+#include "../IA/MachineState.h"
+
 class Enemy : public Entity
 {
 public:
@@ -38,14 +40,22 @@ public:
 
 	virtual void handleMessage(const Message & message) override;
 
-	void encolaMovimiento(TPlayer pos);
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
+
+
+	void encolaMovimiento(TMovimiento mov);
 	void desencolaMovimiento();
 
-	//esto es un semaforo para cuando accedamos de diferentes hilos no intenten escribir y leer a la vez
-	std::mutex m;
+//	MachineState* GetFSM()const { return m_pStateMachine; }
+	void lanzarGranada(TGranada g);
 
+	bool isDying() { return m_isDying; }
+	void setIsDying(bool die) { m_isDying = die; }
 
 private:
+
+	//MachineState* m_pStateMachine;
 
 	float radius;
 	float height;
@@ -56,9 +66,16 @@ private:
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 	bool isMoving;
 
+	bool m_isDying;
+
+	Clock relojMuerte;
+	
+
+
 	btRigidBody* m_rigidBody;
 	std::queue<TMovimiento> m_positions;
-	//std::queue<Vec3<float>> m_rotations;
+	
+	
 
 	virtual std::string getClassName() { return "Enemy"; }
 	

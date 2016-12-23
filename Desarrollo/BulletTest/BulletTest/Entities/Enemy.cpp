@@ -7,11 +7,13 @@
 #include "../Entities/EntityManager.h"
 #include <iostream>
 
+#include "../IA/StatesIA/Patrullar.h"
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
-	
-	
+	/*m_pStateMachine = new MachineState(this);
+	m_pStateMachine->SetCurrentState(&Patrullar::i());
+	m_pStateMachine->SetGlobalState(&Patrullar::i());*/
 }
 
 
@@ -24,6 +26,7 @@ void Enemy::inicializar()
 {
 	animation = new Animation();
 	granada = new Granada();
+	m_isDying = false;
 }
 
 void Enemy::update(Time elapsedTime)
@@ -39,6 +42,13 @@ void Enemy::update(Time elapsedTime)
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
 		isMoving = false;
 
+
+	//m_pStateMachine->Update();
+
+	/*if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
+		m_isDying = false;
+	}*/
+
 }
 
 void Enemy::handleInput()
@@ -53,7 +63,7 @@ void Enemy::cargarContenido()
 	m_nodo.get()->setTexture("../media/head01.png", 0);
 	m_nodo.get()->setTexture("../media/m4tex.png", 2);
 
-	m_renderState.setPosition(Vec3<float>(0, 100, 0));
+	//m_renderState.setPosition(Vec3<float>(0, 100, 0));
 
 	animation->addAnimation("Default", 0, 0);
 	animation->addAnimation("Run_Forwards", 1, 69);
@@ -65,27 +75,30 @@ void Enemy::cargarContenido()
 	animation->addAnimation("AimRunning", 473, 524);
 
 
-
-
+	granada->inicializar();
 	granada->cargarContenido();
 
 	m_animState = quieto;
 
 	radius = 1.2f;
 	height = 7.3f;
-	mass = 0.f;
-
-	//Al mundo de fisicas del cliente añadimos una representacion del objeto fisico pero no calcula fisicas
-	//(servira para hacer los raycast)
+	mass = 1000.f;
 
 
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this,height, radius, mass, DISABLE_SIMULATION);
+	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, height, radius, mass, DISABLE_SIMULATION);
+
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
+	proxy->m_collisionFilterMask = col::enemyCollidesWith;
 
 }
 
 void Enemy::borrarContenido()
 {
+	delete animation;
 
+	PhysicsEngine::i().removeRigidBody(m_rigidBody);
+	
 	GraphicEngine::i().removeNode(m_nodo);
 }
 
@@ -112,47 +125,40 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		//TODO
-		printf("le has dado a un enemigo\n");
-		Cliente::i().enviarDisparo(m_guid);
+		std::cout << m_isDying << std::endl;
+		if (!m_isDying) {
+			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
+		}
+		
 	}
-	if (message.mensaje == "LAZARGRANADA") {
+	else if (message.mensaje == "ARMAUP") {
+		//TODO poner el codigo de cambiar el modelo del arma hacia arriba
 
-		TGranada* tGranada = static_cast<TGranada*>(message.data);
+	}
+	else if (message.mensaje == "ARMADOWN") {
+		//TODO poner el codigo de cambiar el modelo del arma hacia abajo
 
-		printf("ENEMIGO LANZA GRANADA\n");
-
-		granada->serverShoot(*tGranada);
-	} else if (message.mensaje == "MOVIMIENTO") {
-
-		TPlayer* tPlayer = static_cast<TPlayer*>(message.data);
-
-		encolaMovimiento(*tPlayer);
-
-		delete tPlayer;
-
+	}
+	else if (message.mensaje == "COLISION_ROCKET") {
+		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		delete message.data;
 	}
 }
 
-//pila posiciones
-void Enemy::encolaMovimiento(TPlayer pos)
+bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	//m.lock();
+	return false;
+}
+
+//pila posiciones
+void Enemy::encolaMovimiento(TMovimiento mov)
+{
 	// Añadir a la cola
-	TMovimiento mov;
-	mov.position = pos.position;
-	mov.rotation = pos.rotation;
-
 	m_positions.push(mov);
-	m_renderState.setVelocity(pos.velocidad);
-
-	//m.unlock();
 }
 
 void Enemy::desencolaMovimiento()
 {	
-	//m.lock();
-	std::cout << "Numero Paquetes: " << m_positions.size() << std::endl;
 	
 	if (m_positions.size() > 3) {
 		TMovimiento mov;
@@ -164,6 +170,7 @@ void Enemy::desencolaMovimiento()
 		}
 		updateEnemigo(mov.position);
 		m_renderState.updateRotations(mov.rotation);
+		m_isDying = mov.isDying;
 	}
 
 	else if (m_positions.size() > 0) {
@@ -174,54 +181,19 @@ void Enemy::desencolaMovimiento()
 		//llamamos al update con la nueva posicion
 		updateEnemigo(mov.position);
 		m_renderState.updateRotations(mov.rotation);
+		m_isDying = mov.isDying;
 	}else {
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 		
 	}
-	//m.unlock();
 
 }
-/////////
 
-//pila rotaciones
-/*
-void Enemy::encolaRot(TPlayer rot)
+void Enemy::lanzarGranada(TGranada g)
 {
-	//m.lock();
-	// Añadir a la cola
-	m_rotations.push(rot.position);
-
-	//m.unlock();
+	granada->serverShoot(g);
 }
 
-void Enemy::desEncolaRot()
-{
-	//m.lock();
-
-	if (m_rotations.size() > 3) {
-		Vec3<float> new_rot;
-		while (!m_rotations.empty()) {
-			new_rot = m_rotations.front();
-			//lo borramos de la cola
-			m_rotations.pop();
-			//llamamos al update con la nueva posicion
-		}
-		
-		m_renderState.updateRotations(new_rot);
-	}
-
-	else if (m_positions.size() > 0) {
-		Vec3<float> new_rot;
-		new_rot = m_rotations.front();
-		//lo borramos de la cola
-		m_rotations.pop();
-		//llamamos al update con la nueva posicion
-		m_renderState.updateRotations(new_rot);
-	}
-	//m.unlock();
-
-}*/
-/////////
 
 void Enemy::updateAnimation()
 {
@@ -255,13 +227,7 @@ void Enemy::updateAnimation()
 
 void Enemy::updateState()
 {
-	/*if (!p_controller->onGround() && p_controller->numJumps == 0) {
-		m_playerState = saltando;
-	}
-	else if (!p_controller->onGround() && p_controller->numJumps == 1) {
-		m_playerState = saltando2;
-	}
-	else*/ if (isMoving) {
+	if (isMoving) {
 		m_animState = andando;
 	}
 	else {

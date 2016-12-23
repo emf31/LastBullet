@@ -6,17 +6,21 @@
 
 typedef struct {
 	Vec3<float> position;
-	Vec3<float> velocidad;
-	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
 	std::string name;
 }TPlayer;
 
 typedef struct {
+	bool isDying;
 	Vec3<float> position;
 	Vec3<float> rotation;
+	RakNet::RakNetGUID guid;
 }TMovimiento;
 
+typedef struct {
+	float damage;
+	RakNet::RakNetGUID guid;
+}TImpactoBala;
 
 typedef struct {
 	Vec3<float> position;
@@ -36,6 +40,37 @@ typedef struct {
 	int id;
 	Clock tiempo;
 }TVidaServer;
+
+typedef struct {
+	float damage;
+	RakNet::RakNetGUID guidImpactado;
+	RakNet::RakNetGUID guidDisparado;
+}TImpactoRocket;
+
+typedef struct {
+	Vec3<float> fuerza;
+	RakNet::RakNetGUID guid;
+}TImpulso;
+
+typedef struct {
+	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
+	int cambio;
+	RakNet::RakNetGUID guid;
+}TCambioArma;
+
+typedef struct {
+	std::string name;
+	RakNet::RakNetGUID guid;
+	int kills;
+	int deaths;
+	int puntuacion;
+}TFilaTabla;
+
+
+typedef struct {
+	RakNet::RakNetGUID guidKill;
+	RakNet::RakNetGUID guidDeath;
+}TKill;
 
 
 enum GameMessages
@@ -57,5 +92,15 @@ enum GameMessages
 	LANZAR_GRANADA = ID_USER_PACKET_ENUM + 15,
 	VIDA_COGIDA = ID_USER_PACKET_ENUM + 16,
 	NUEVA_VIDA = ID_USER_PACKET_ENUM + 17,
-	TIEMPO_VIDA = ID_USER_PACKET_ENUM + 18
+	TIEMPO_VIDA = ID_USER_PACKET_ENUM + 18,
+	DISPARAR_ROCKET = ID_USER_PACKET_ENUM + 19,
+	IMPACTO_ROCKET = ID_USER_PACKET_ENUM + 20,
+	NUEVA_ARMA = ID_USER_PACKET_ENUM + 21,
+	ARMA_COGIDA = ID_USER_PACKET_ENUM + 22,
+	APLICAR_IMPULSO = ID_USER_PACKET_ENUM + 23,
+	CAMBIO_ARMA = ID_USER_PACKET_ENUM + 24,
+	ACTUALIZA_TABLA = ID_USER_PACKET_ENUM + 25,
+	MOSTRAR_TABLA = ID_USER_PACKET_ENUM + 26,
+	AUMENTA_KILL = ID_USER_PACKET_ENUM + 27,
+	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28,
 };

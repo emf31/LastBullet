@@ -47,21 +47,21 @@ float Time::asSeconds() const
 
 
 ////////////////////////////////////////////////////////////
-__int32 Time::asMilliseconds() const
+int32_t Time::asMilliseconds() const
 {
-    return static_cast<__int32>(m_microseconds / 1000);
+    return static_cast<int32_t>(m_microseconds / 1000);
 }
 
 
 ////////////////////////////////////////////////////////////
-__int64 Time::asMicroseconds() const
+int64_t Time::asMicroseconds() const
 {
     return m_microseconds;
 }
 
 
 ////////////////////////////////////////////////////////////
-Time::Time(__int64 microseconds) :
+Time::Time(int64_t microseconds) :
 m_microseconds(microseconds)
 {
 }
@@ -70,19 +70,19 @@ m_microseconds(microseconds)
 ////////////////////////////////////////////////////////////
 Time seconds(float amount)
 {
-    return Time(static_cast<__int64>(amount * 1000000));
+    return Time(static_cast<int64_t>(amount * 1000000));
 }
 
 
 ////////////////////////////////////////////////////////////
-Time milliseconds(__int32 amount)
+Time milliseconds(int32_t amount)
 {
-    return Time(static_cast<__int64>(amount) * 1000);
+    return Time(static_cast<int64_t>(amount) * 1000);
 }
 
 
 ////////////////////////////////////////////////////////////
-Time microseconds(__int64 amount)
+Time microseconds(int64_t amount)
 {
     return Time(amount);
 }
@@ -173,7 +173,7 @@ Time operator *(Time left, float right)
 
 
 ////////////////////////////////////////////////////////////
-Time operator *(Time left, __int64 right)
+Time operator *(Time left, int64_t right)
 {
     return microseconds(left.asMicroseconds() * right);
 }
@@ -187,7 +187,7 @@ Time operator *(float left, Time right)
 
 
 ////////////////////////////////////////////////////////////
-Time operator *(__int64 left, Time right)
+Time operator *(int64_t left, Time right)
 {
     return right * left;
 }
@@ -201,7 +201,7 @@ Time& operator *=(Time& left, float right)
 
 
 ////////////////////////////////////////////////////////////
-Time& operator *=(Time& left, __int64 right)
+Time& operator *=(Time& left, int64_t right)
 {
     return left = left * right;
 }
@@ -215,7 +215,7 @@ Time operator /(Time left, float right)
 
 
 ////////////////////////////////////////////////////////////
-Time operator /(Time left, __int64 right)
+Time operator /(Time left, int64_t right)
 {
     return microseconds(left.asMicroseconds() / right);
 }
@@ -229,7 +229,7 @@ Time& operator /=(Time& left, float right)
 
 
 ////////////////////////////////////////////////////////////
-Time& operator /=(Time& left, __int64 right)
+Time& operator /=(Time& left, int64_t right)
 {
     return left = left / right;
 }

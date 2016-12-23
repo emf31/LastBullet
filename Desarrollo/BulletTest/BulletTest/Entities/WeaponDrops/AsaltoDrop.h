@@ -4,12 +4,11 @@ class AsaltoDrop :
 	public WeaponDrop
 {
 public:
-	AsaltoDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	AsaltoDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~AsaltoDrop();
 
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
 	btGhostObject* getGhostObject() { return m_ghostObject; }
-
 
 	virtual void inicializar() override;
 
@@ -24,5 +23,7 @@ public:
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "AsaltoDrop"; }
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 };
 

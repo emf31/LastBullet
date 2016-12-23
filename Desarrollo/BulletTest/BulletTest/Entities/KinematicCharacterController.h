@@ -54,7 +54,7 @@ protected:
 	btScalar m_maxSlopeCosine;  // Cosine equivalent of m_maxSlopeRadians (calculated once when set, for optimization)
 	btScalar m_gravity;
 
-	btScalar m_speed;
+	
 
 	btScalar m_turnAngle;
 
@@ -64,6 +64,10 @@ protected:
 
 							  ///this is the desired walk direction, set by the user
 	btVector3	m_walkDirection;
+	btVector3	prev_walkDirection;
+
+	
+
 	btVector3	m_normalizedDirection;
 	btVector3	m_AngVel;
 
@@ -122,6 +126,11 @@ public:
 	KinematicCharacterController(btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, const btVector3& up = btVector3(1.0,0.0,0.0));
 	~KinematicCharacterController();
 
+	btScalar m_speed;
+
+	float m_acceleration_walk;
+	float m_deceleration_walk;
+	float m_maxSpeed_walk;
 
 	///btActionInterface interface
 	void updateAction(btCollisionWorld* collisionWorld,btScalar deltaTime)
@@ -157,6 +166,7 @@ public:
 
 	 void setLinearVelocity(const btVector3& velocity);
 	 btVector3 getLinearVelocity() const;
+	 float getSpeedFactor() const;
 
 	void setLinearDamping(btScalar d) { m_linearDamping = btClamped(d, (btScalar)btScalar(0.0), (btScalar)btScalar(1.0)); }
 	btScalar getLinearDamping() const { return  m_linearDamping; }
@@ -179,8 +189,9 @@ public:
 	bool canJump();
 
 	void jump(const btVector3& v = btVector3());
+	void Rocketjump(const btVector3& v = btVector3());
 
-	void applyImpulse(const btVector3& v) { jump(v); }
+	void applyImpulse(const btVector3& v) { Rocketjump(v); }
 
 	void setGravity(const btVector3& gravity);
 	btVector3 getGravity() const;
@@ -202,7 +213,7 @@ public:
 	bool onGround() const;
 	void setUpInterpolate(bool value);
 
-	int numJumps;
+	bool jumpedOnAir;
 	void setSpeed(float speed);
 
 };

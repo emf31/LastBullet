@@ -4,7 +4,7 @@
 
 PhysicsEntity::PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
-
+	
 }
 
 
@@ -20,7 +20,8 @@ void PhysicsEntity::rotate(Vec3<float> rot)
 	quat.setEulerZYX(rot.getX(), rot.getY(), rot.getZ()); //or quat.setEulerZYX depending on the ordering you want
 	tr.setRotation(quat);
 
-	m_rigidBody->setCenterOfMassTransform(tr);
+	m_rigidBody->getWorldTransform().setRotation(quat);
+	//m_rigidBody->setCenterOfMassTransform(tr);
 }
 
 void PhysicsEntity::inicializar()
@@ -29,9 +30,7 @@ void PhysicsEntity::inicializar()
 
 void PhysicsEntity::update(Time elapsedTime)
 {
-	// Set position
-	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+
 
 	// Set rotation
 	vector3df Euler;
@@ -41,6 +40,17 @@ void PhysicsEntity::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+
+	// Set position
+	//m_rigidBody->setm
+	//btVector3 Point2 = m_rigidBody->getCenterOfMassTransform().getOrigin();
+	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+	//if(centerCollision==NULL)
+
+
+	m_renderState.updatePositions(Vec3<float>((f32)Point[0]-centerCollision.getX(), (f32)Point[1]-centerCollision.getY(), (f32)Point[2]-centerCollision.getX()));
+
+	//m_rigidBody->pos
 }
 
 void PhysicsEntity::handleInput()
@@ -60,4 +70,9 @@ void PhysicsEntity::borrarContenido()
 void PhysicsEntity::handleMessage(const Message & message)
 {
 
+}
+
+bool PhysicsEntity::handleTrigger(TriggerRecordStruct * Trigger)
+{
+	return false;
 }

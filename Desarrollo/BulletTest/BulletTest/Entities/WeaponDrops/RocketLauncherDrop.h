@@ -9,7 +9,7 @@ class RocketLauncherDrop :
 {
 public:
 
-	RocketLauncherDrop(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	RocketLauncherDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~RocketLauncherDrop();
 
 
@@ -30,6 +30,8 @@ public:
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "RocketLauncherDrop"; }
+
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 
 };

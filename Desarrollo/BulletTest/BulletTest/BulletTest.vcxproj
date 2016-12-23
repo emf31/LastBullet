@@ -85,17 +85,18 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Irrlicht.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletSoftBody_Debug.lib;LinearMath_Debug.lib;RakNetDLL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Irrlicht.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletSoftBody_Debug.lib;LinearMath_Debug.lib;ws2_32.lib;RakNet.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -116,19 +117,26 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_IRR_STATIC_LIB_;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>IrrlichtStatic_RELEASE.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;ws2_32.lib;RakNetLibStatic_RELEASE.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;</AdditionalLibraryDirectories>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -160,9 +168,13 @@
     <ClInclude Include="Command\MoveRight.h" />
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\RunCommand.h" />
-    <ClInclude Include="Command\ShootCommand.h" />
+    <ClInclude Include="Command\ShootAsalto.h" />
     <ClInclude Include="Command\ShootCommandGranada.h" />
+    <ClInclude Include="Command\ShootPistola.h" />
+    <ClInclude Include="Command\ShootRocket.h" />
+    <ClInclude Include="Entities\Button.h" />
     <ClInclude Include="Entities\Granada.h" />
+    <ClInclude Include="Entities\GroupEntity.h" />
     <ClInclude Include="Entities\GunBullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Entities\Entity.h" />
@@ -172,6 +184,7 @@
     <ClInclude Include="Entities\PhysicsEntity.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Entities\RocketBullet.h" />
+    <ClInclude Include="Entities\RocketBulletEnemy.h" />
     <ClInclude Include="Entities\WeaponDrops\AsaltoDrop.h" />
     <ClInclude Include="Entities\WeaponDrops\PistolaDrop.h" />
     <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h" />
@@ -185,31 +198,42 @@
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
-    <ClInclude Include="Lista.h" />
+    <ClInclude Include="IA\MachineState.h" />
+    <ClInclude Include="IA\StatesIA\Patrullar.h" />
+    <ClInclude Include="IA\StatesIA\StateIA.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor de Red\Cliente.h" />
     <ClInclude Include="Motor de Red\Estructuras.h" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
+    <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
+    <ClInclude Include="Motor\MapLoader.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
-    <ClInclude Include="Nodo.h" />
     <ClInclude Include="Otros\Clock.hpp" />
+    <ClInclude Include="Otros\EnumParser.h" />
+    <ClInclude Include="Otros\LifeComponent.h" />
+    <ClInclude Include="Otros\Lista.h" />
+    <ClInclude Include="Otros\Nodo.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="States\State.hpp" />
+    <ClInclude Include="States\StateFactory.hpp" />
+    <ClInclude Include="States\StateStack.hpp" />
+    <ClInclude Include="TriggerRecordStruct.h" />
+    <ClInclude Include="TriggerSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BulletTest.cpp" />
+    <ClCompile Include="Entities\Button.cpp" />
     <ClCompile Include="Entities\Granada.cpp" />
+    <ClCompile Include="Entities\GroupEntity.cpp" />
     <ClCompile Include="Entities\GunBullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
@@ -219,6 +243,7 @@
     <ClCompile Include="Entities\PhysicsEntity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Entities\RocketBullet.cpp" />
+    <ClCompile Include="Entities\RocketBulletEnemy.cpp" />
     <ClCompile Include="Entities\WeaponDrops\AsaltoDrop.cpp" />
     <ClCompile Include="Entities\WeaponDrops\PistolaDrop.cpp" />
     <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp" />
@@ -229,7 +254,8 @@
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
-    <ClCompile Include="Lista.cpp" />
+    <ClCompile Include="IA\MachineState.cpp" />
+    <ClCompile Include="IA\StatesIA\Patrullar.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -238,21 +264,18 @@
     <ClCompile Include="Motor\Animation.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
+    <ClCompile Include="Motor\MapLoader.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
+    <ClCompile Include="Otros\LifeComponent.cpp" />
+    <ClCompile Include="Otros\Lista.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="TriggerSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

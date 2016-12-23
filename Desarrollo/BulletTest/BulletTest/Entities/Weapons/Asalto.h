@@ -24,11 +24,17 @@ public:
 
 	virtual std::string getClassName() { return "Asalto"; }
 
+	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 	virtual void shoot();
 
 
 	virtual void resetAmmoTotal() {
 		numCargadores= numCargadoresAsalto;
 	}
+
+private:
+	btVector3 SIZE_OF_WORLD;
+	btVector3 FUERZA;
 };
 

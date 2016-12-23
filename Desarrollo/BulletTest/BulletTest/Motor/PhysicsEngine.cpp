@@ -1,39 +1,45 @@
 
 #include "PhysicsEngine.h"
-
+#include "Serialize/BulletWorldImporter\btBulletWorldImporter.h"
 #include <unordered_map>
 #include <set>
+#include "BulletCollision\CollisionDispatch\btCollisionObject.h"
 
 #include "../Handlers/MessageHandler.h"
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
-const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
+const Time PhysicsEngine::tickPhysics = seconds(1.f / 60.f);
 
 
 //Tenemos un unordered maps de contactos, donde la key es un entity.
 //El value es un std::set(igual que un array pero no admite duplicados)
 //Este es el metodo al que llama bullet cuando se produce un contacto
 bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisionObject* body1) {
+	
 	//Cogemos las 2 entities que colisionan 
 	Entity* entity0 = (Entity*)body0->getUserPointer();
 	Entity* entity1 = (Entity*)body1->getUserPointer();
 
-	//En la key guardamos una entity y en su value un array con las entities con las que colisiona
-	//comprobamos si entity 0 esta en el mapa
-	auto found = contacts.find(entity0);
-	if (found != contacts.end()) {
-		//Entity en mapa. Añadimod entity2 al set.
-		//Como set no admite duplicados si ya esta dentro no se añade.
-		found->second.insert(entity1);
+	if (body0->getUserPointer() != NULL && body1->getUserPointer() != NULL) {
+		//En la key guardamos una entity y en su value un array con las entities con las que colisiona
+		//comprobamos si entity 0 esta en el mapa
+		auto found = contacts.find(entity0);
+		if (found != contacts.end()) {
+			//Entity en mapa. Añadimod entity2 al set.
+			//Como set no admite duplicados si ya esta dentro no se añade.
+			found->second.insert(entity1);
+		}
+		else {
+			//entity1 no esta en el mapa. Creamos nuevo set y añadimos entity1
+			std::set<Entity*> set;
+			set.insert(entity1);
+			//añadimos entity0 al nuevo set
+			contacts[entity0] = set;
+		}
 	}
-	else {
-		//entity1 no esta en el mapa. Creamos nuevo set y añadimos entity1
-		std::set<Entity*> set;
-		set.insert(entity1);
-		//añadimos entity0 al nuevo set
-		contacts[entity0] = set;
-	}
+
+	
 	return true;
 }
 
@@ -42,11 +48,12 @@ void PhysicsEngine::inicializar()
 {
 	m_config = new btDefaultCollisionConfiguration();
 	m_dispatcher = new btCollisionDispatcher(m_config);
+
 	m_broadphase = new btDbvtBroadphase();
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 
-	m_world->setGravity(btVector3(0, -55, 0));
+	m_world->setGravity(btVector3(0, -40, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
@@ -60,17 +67,22 @@ void PhysicsEngine::inicializar()
 
 
 	m_rigidBodies = std::list<btRigidBody*>();
+
+
+	
 }
 
 
 void PhysicsEngine::update(Time elapsedTime)
 {
-	/*int maxSubsteps = 1;
-	while (maxSubsteps * (timeSinceLastUpdate.asSeconds()) < elapsedTime.asSeconds()) {
-		maxSubsteps++;
-	}*/
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()), 12, tickPhysics.asSeconds());
+	//Como la simulacion va lenta multiplicamos por 2
+	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
+	
 
+	
+}
+
+void PhysicsEngine::notifyCollisions() {
 	//Aqui calculariamos colisiones
 	for (auto contactsIter = contacts.begin(); contactsIter != contacts.end(); ++contactsIter) {
 		//coger la key 
@@ -88,7 +100,7 @@ void PhysicsEngine::update(Time elapsedTime)
 
 			MessageHandler::i().sendMessage(msg1);
 			MessageHandler::i().sendMessage(msg2);
-			
+
 		}
 	}
 
@@ -103,19 +115,30 @@ void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
 
 }
 
-btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, int body_state)
+btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, Vec3<float>centerCol , int body_state)
 {
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
-	transform.setOrigin(pos);
+	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition()+centerCol);
+	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
+	transform.setOrigin((pos));
 
 	//create the motionState of the object
 	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
 
 	//create the bounding volume
-	btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
-	btCollisionShape* shape = new btBoxShape(halfExtents);
+	btCollisionShape* shape;
+	if (!haveMesh) {
+		btVector3 halfExtents(scale.getX()*0.5f, scale.getY()*0.5f, scale.getZ()*0.5f);
+		 shape = new btBoxShape(halfExtents);
+	}	
+	else {
+		btVector3 halfExtents(scale.getX(), scale.getY(), scale.getZ());
+		 shape = new btBoxShape(halfExtents);
+	}
+		
+
+	
 
 	//create intertia info for the shape
 	btVector3 localinertia;
@@ -194,7 +217,6 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 
 	//and add to the list of rigidBodies
 	m_rigidBodies.push_back(rigidBody);
-
 	//finally return created body
 	return rigidBody;
 
@@ -219,18 +241,14 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 
 	ghostObj->setCollisionFlags(btCollisionObject::CF_NO_CONTACT_RESPONSE);
 
-
 	//ghostObj->setWorldTransform(transform);
 
 	
 
 	ghostObj->setUserPointer(entity);
 
-	//add the rigidBody to the world
-	//m_world->addCollisionObject(rigidBody);
-
-	m_world->addCollisionObject(ghostObj, btBroadphaseProxy::SensorTrigger,
-		btBroadphaseProxy::CharacterFilter);
+	m_world->addCollisionObject(ghostObj, col::Collisions::Sensor,
+		col::sensorCollidesWith);
 
 	return ghostObj;
 }
@@ -249,17 +267,8 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 
 	ghostObj->setCollisionShape(m_pCollisionShape);
 
-	//ghostObj->setCollisionFlags(btCollisionObject::CF_NO_CONTACT_RESPONSE);
+
 	ghostObj->setCollisionFlags(btGhostObject::CF_NO_CONTACT_RESPONSE);
-
-	//ghostObj->setWorldTransform(transform);
-
-
-
-	//ghostObj->setUserPointer(entity);
-
-	//add the rigidBody to the world
-	//m_world->addCollisionObject(rigidBody);
 
 	m_world->addCollisionObject(ghostObj, btBroadphaseProxy::SensorTrigger,
 		btBroadphaseProxy::CharacterFilter);
@@ -269,28 +278,52 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 {
-	
 	m_rigidBodies.remove(body);
 	m_world->removeRigidBody(body);
 
+	//Insertamos el cuerpo en el set de borrado
+	collisions_set.insert(body);
+
 	return true;
 }
+
+
 bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 {
 
-	//m_rigidBodies.remove(body);
 	m_world->removeCollisionObject(body);
 
+	//Insertamos el cuerpo en el set de borrado
+	collisions_set.insert(body);
+
 	return true;
+}
+
+void PhysicsEngine::cleanDeleteObjects()
+{
+	for (auto it = collisions_set.begin(); it != collisions_set.end(); ++it)
+	{
+		delete (*it)->getCollisionShape();
+		btRigidBody* body = btRigidBody::upcast(*it);
+		if (body != NULL) {
+			delete body->getMotionState();
+		}
+		delete (*it);
+	}
+	collisions_set.clear();
 }
 
 
 void PhysicsEngine::apagar()
 {
+	contacts.clear();
+
 	//borramos todos los rigidbodies
 	for (auto iter = m_rigidBodies.begin(); iter != m_rigidBodies.end(); ++iter) {
 		//los borramos del mundo
 		m_world->removeRigidBody(*iter);
+		delete (*iter)->getCollisionShape();
+		delete (*iter)->getMotionState();
 		//borramos la memoria
 		delete *iter;
 		//iterador a null
@@ -298,6 +331,20 @@ void PhysicsEngine::apagar()
 	}
 	//ahora vaciamos la lista
 	m_rigidBodies.clear();
+
+	//Si ha quedado algun objeto tambien lo borramos(ghost objects o cualquier cosa)
+	
+	for (int i = m_world->getNumCollisionObjects() - 1; i >= 0; i--)
+	{
+		btCollisionObject* obj = m_world->getCollisionObjectArray()[i];
+		
+		m_world->removeCollisionObject(obj);
+
+		//delete obj->getCollisionShape();
+		delete obj;
+	}
+
+
 
 	//hay que borrar las cosas de las fisicas
 	delete m_world;
@@ -310,6 +357,9 @@ void PhysicsEngine::apagar()
 	m_broadphase = NULL;
 	delete m_config;
 	m_config = NULL;
+	delete m_pGhostPairCallBack;
+	m_pGhostPairCallBack = NULL;
+
 }
 
 

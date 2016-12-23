@@ -12,14 +12,26 @@
 #include "../Otros/Util.h"
 #include "GunBullet.h"
 #include "RocketBullet.h"
+#include "RocketBulletEnemy.h"
 #include "Weapons/Asalto.h"
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
 #include <memory>
 #include "Enemy.h"
+#include "../Command/ShootAsalto.h"
+#include "../Command/ShootRocket.h"
+#include "../Command/ShootPistola.h"
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid)
+#include "../TriggerSystem.h"
+
+
+Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
+	m_spawns(spawnPoints),
+	life_component(this)
 {
+	//Registramos la entity en el trigger system
+	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
+	TriggerSystem::i().RegisterEntity(this);
 	
 
 }
@@ -30,7 +42,7 @@ Player::~Player()
 	
 }
 
-void Player::setPosition(Vec3<float> pos)
+void Player::setPosition(Vec3<float> &pos)
 {
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
@@ -38,11 +50,72 @@ void Player::setPosition(Vec3<float> pos)
 	m_nodo.get()->setPosition(pos);
 }
 
+//Busca en la lista de puntos de spawn alguno que no intersecte con ningún enemigo de radio x,
+//luego con la lista que queda se coge un punto aleatorio
+void Player::searchSpawnPoint()
+{
+	float radio = 100;
+	float fDistance = 0;
+	int spawn = 0;
+
+	if (m_spawns.size() == 1) {
+		setPosition(m_spawns.at(0));
+		return;
+	}
+
+	std::list<Entity*> enemies = EntityManager::i().getEnemies();
+
+	std::vector<Vec3<float>> auxSpawns;
+
+	std::list<Entity*>::iterator it;
+	std::vector<Vec3<float>>::iterator it2;
+
+	for (it2 = m_spawns.begin(); it2 != m_spawns.end(); ++it2) {
+		bool valid = true;
+		for (it = enemies.begin(); it != enemies.end(); ++it) {
+			Vec3<float> vector = (*it)->getRenderState()->getPosition() - (*it2);
+			fDistance = vector.Magnitude();
+
+			if (fDistance < 100) {
+				valid = false;
+				break;
+			}
+
+		}
+		if (valid) {
+			auxSpawns.push_back(*it2);
+		}	
+
+	}
+
+	//Si hay mas de 1 elegimos uno aleatorio
+	if (auxSpawns.size() > 1) {
+		spawn = Randi(0, auxSpawns.size() - 1);
+	}
+	
+	//Si no esta vacio es que hemos encontrado uno
+	if (!auxSpawns.empty()) {
+		p_controller->reset(PhysicsEngine::i().m_world);
+		setPosition(auxSpawns.at(spawn));
+	}
+	else {
+		p_controller->reset(PhysicsEngine::i().m_world);
+		setPosition(m_spawns.at(Randi(0, m_spawns.size() - 1)));
+	}
+	
+}
+
 
 
 
 void Player::inicializar()
 {
+	isRunning = false;
+	isReloading = false;
+	isShooting = false;
+	tieneAsalto = false;
+	tieneRocketLauncher = false;
+	tienePistola = false;
 
 	granada = new Granada();
 	granada->inicializar();
@@ -51,7 +124,7 @@ void Player::inicializar()
 	animation = new Animation;
 
 	/*****************************/
-	/*******INICILAZAR ARMAS******/
+	/*******INICIALIZAR ARMAS******/
 	asalto = new Asalto();
 	asalto->inicializar();
 	asalto->cargarContenido();
@@ -63,16 +136,14 @@ void Player::inicializar()
 	pistola = new Pistola();
 	pistola->inicializar();
 	pistola->cargarContenido();
-
+	
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(pistola);
 	pistola->setEquipada(true);
 	tienePistola = true;
 
-	listaWeapons->insertar(pistola);
 	
-	m_vida = 100;
 
 	GraphicEngine::i().mostrarInterfaz();
 }
@@ -82,50 +153,53 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 	isMoving = false;
+	
 
-	if(p_controller->onGround())
-		p_controller->setSpeed(1.3f);//seteamos la velocidad para andar, si corre se cambiara a una mayor
+	if (p_controller->onGround()) {
+		p_controller->jumpedOnAir = false;
+	}
 
 	speedFinal = Vec3<float>(0, 0, 0);
 
+	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
+	if (life_component.update() == false) {
 
-	// Ejecuta todos los comandos
-	InputHandler::i().excuteCommands(this);
+		// Ejecuta todos los comandos
+		InputHandler::i().excuteCommands(this);
+		speedFinal.normalise();
+		p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
+
+	} else {
+		p_controller->setWalkDirection(
+			btVector3(0.f, 0.f, 0.f));
+	}
+
+
+	GraphicEngine::i().actualizarInterfaz();
+
+
 	
-
-	speedFinal.normalise();
-
-	/*updateState();
-	updateAnimation();*/
-
-
-	p_controller->setWalkDirection(
-		btVector3(speedFinal.getX(),
-			speedFinal.getY(),
-			speedFinal.getZ()));
-
-
-	//p_controller->setMaxPenetrationDepth(0.f);
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
+	
 
 	m_renderState.updatePositions(Vec3<float>(
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y()-(height/2),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-	
-	
 
-	
+
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
-		Cliente::i().enviarPos(this);
+		Cliente::i().enviarMovimiento(this);
 	}
 
-	GraphicEngine::i().actualizarInterfaz();
-	
+	if (m_renderState.getPosition().getY() < -200) {
+		getLifeComponent()->restaVida(100, m_guid);
+	}
+
 }
 
 
@@ -140,31 +214,10 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = std::shared_ptr<SceneNode>(GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", ""));
-	//m_nodo.get()->setTexture("../media/arma/weapon.png", 0);
-	//m_nodo.get()->setTexture("../media/arma/v_hands_gloves_sf2 d.tga", 1);
-	//m_nodo->addChild(asalto->getNode());
-	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
-	
-	//m_nodo->addChild(rocket->getNode());
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
-	//////////////////////////////////////añades animaciones//////////////////////////////////////////////////
-
-	/*animation->addAnimation("Default", 0, 0);
-	animation->addAnimation("Run_Forwards", 1, 69);
-	animation->addAnimation("Run_backwards", 70, 138);
-	animation->addAnimation("Walk", 139, 183);
-	animation->addAnimation("Jump", 184, 219);
-	animation->addAnimation("Jump2", 184, 219);
-	animation->addAnimation("Idle", 220, 472);
-	animation->addAnimation("AimRunning", 473, 524);*/
-
-	//m_playerState = quieto;
-
-
-	////////////////////////////////////////////SHAPE///////////////////////////////////////////////////////////
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -172,70 +225,83 @@ void Player::cargarContenido()
 
 	m_pCollisionShape = new btCapsuleShape(radius, height);
 
-	m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(0,100,0)));
-
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(mass, intertia);
 
-	btTransform startTransform;
-	startTransform.setIdentity();
-	startTransform.setOrigin(btVector3(0, 100, 0)); // check
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(this);
-	actorGhost->setWorldTransform(startTransform);
 
 	actorGhost->setCollisionShape(m_pCollisionShape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
 	p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
 	p_controller->setUp(btVector3(0, 1, 0));
-	//p_controller->setGravity(btVector3(0,-9.8*3,0));
-	//p_controller->setJumpSpeed(5);
-	//p_controller->setMaxSlope(btRadians(30.0));
-	//p_controller->setFallSpeed(200);
-	//p_controller->setMaxJumpHeight(20);
-	//p_controller->setLinearDamping(0.1);
 
-	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), btBroadphaseProxy::CharacterFilter,
-		btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter | btBroadphaseProxy::SensorTrigger);
+	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
+		col::characterCollidesWith);
+
+	p_controller->m_acceleration_walk = 6.3f;
+	p_controller->m_deceleration_walk = 8.5f;
+	p_controller->m_maxSpeed_walk = 6.f;
 
 	//Creamos la camara FPS
 	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	GraphicEngine::i().setCameraEntity(this);
 
-	resetVida();
+	life_component.resetVida();
+	searchSpawnPoint();
 
 }
 
 void Player::borrarContenido()
 {
-
+	//Estas cosas se borran aqui y no en el physics engine porque el player es especial(ghost object)
+	delete m_pCollisionShape;
+	delete p_controller;
 }
 
 void Player::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
 		
+	}else if (message.mensaje == "COLISION_ROCKET") {
+		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		delete message.data;
 	}
-	else if(message.mensaje == "DIBUJARBALA"){
-		TBala* tBala = static_cast<TBala*>(message.data);
 
-		GunBullet* bala = new GunBullet(tBala->position, tBala->direction, tBala->finalposition, tBala->rotation);
+}
 
+bool Player::handleTrigger(TriggerRecordStruct * Trigger)
+{
+
+	if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
+		Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
+		if (ent->getID() == 65534) {
+			//Respawns
+			searchSpawnPoint();
+		} else if (ent->getID() == 65535) {
+			//LifeObjects
+			Entity *ge = EntityManager::i().getEntity(9000);
+			ge->handleTrigger(Trigger);
+		} else if (ent->getID() == 65536) {
+			//Button_Trig_Ent_Asalto
+			Entity *grupoAsaltos = EntityManager::i().getEntity(9001);
+			grupoAsaltos->handleTrigger(Trigger);
+
+		} else if (ent->getID() == 65537) {
+			//Button_Trig_Ent_Pistola
+			Entity *grupoPistola = EntityManager::i().getEntity(9002);
+			grupoPistola->handleTrigger(Trigger);
+
+		} else if (ent->getID() == 65538) {
+			//Button_Trig_Ent_Rocket
+			Entity *grupoRocket = EntityManager::i().getEntity(9003);
+			grupoRocket->handleTrigger(Trigger);
+
+		}
 	}
-	else if (message.mensaje == "NUEVO_ENEMIGO") {
-		TPlayer* nuevoplayer = static_cast<TPlayer*>(message.data);
-
-		Enemy *e = new Enemy(nuevoplayer->name, nuevoplayer->guid);
-		e->inicializar();
-		e->cargarContenido();
-		e->setPosition(nuevoplayer->position);
-
-		delete nuevoplayer;
-
-		EntityManager::i().mostrarClientes();
-	}
+	return true;
 }
 
 void Player::run()
@@ -245,13 +311,19 @@ void Player::run()
 }
 
 void Player::jump() {
+
+
+	TriggerSystem::i().RegisterTrigger(kTrig_EnemyNear, 1001, this->getID(), this->getRenderPosition(), 50, milliseconds(800), false);
 	
-	p_controller->jump(btVector3(0, 20, 0));
+	p_controller->jump(btVector3(0, 60, 0));
 	
 }
 
 
 void Player::shoot() {
+
+
+	TriggerSystem::i().RegisterTrigger(kTrig_Explosion, 1000, this->getID(), this->getRenderPosition(), 50, milliseconds(500), false);
 
 	listaWeapons->valorActual()->shoot();
 
@@ -321,68 +393,52 @@ void Player::move_left()
 	isMoving = true;
 }
 
-void Player::updateAnimation()
-{
-	switch (m_playerState)
-	{
-	case quieto:
-		if (animation->getActualAnimation() != "Idle") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
-		}
-		break;
-
-	case andando:
-		if (animation->getActualAnimation() != "Walk") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
-		}
-		break;
-
-	case saltando:
-		if (animation->getActualAnimation() != "Jump") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
-		}
-		break;
-	case saltando2:
-		if (animation->getActualAnimation() != "Jump2") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
-		}
-		break;
-
+void Player::bindWeapon() {
+	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootAsalto()));
+	}
+	else if (listaWeapons->valorActual()->getClassName() == "Pistola") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootPistola()));
+	}
+	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
 	}
 }
 
-void Player::updateState()
-{
-	if(!p_controller->onGround() && p_controller->numJumps==0){
-		m_playerState = saltando;
-	}
-	else if (!p_controller->onGround() && p_controller->numJumps ==1) {
-		m_playerState = saltando2;
-	}
-	else if (isMoving) {
-		m_playerState = andando;
-	}
-	else {
-		m_playerState = quieto;
-	}
-}
 
 void Player::UpWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
-	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->Siguiente();
-	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+
+	bindWeapon();
+
 	listaWeapons->valorActual()->getNode()->setVisible(true);
+	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
+	if (Cliente::i().isConected()) {
+		Cliente::i().cambioArma(1,m_guid);
+	}
 }
 
 void Player::DownWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
-	//m_nodo->removeChild(listaWeapons->valorActual()->getNode());
 	listaWeapons->Anterior();
-	//m_nodo->addChild(listaWeapons->valorActual()->getNode());
+
+	bindWeapon();
+	
 	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
+	if (Cliente::i().isConected()) {
+		Cliente::i().cambioArma(2, m_guid);
+	}
+}
+
+void Player::impulsar(Vec3<float> force)
+{
+	btVector3 fuerza(force.getX(), force.getY(), force.getZ());
+	p_controller->applyImpulse(fuerza);
 }
 
 void Player::setWeapon(int newWeapon) {
@@ -422,3 +478,40 @@ void Player::setWeapon(int newWeapon) {
 
 
 }
+
+void Player::resetAll() {
+
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+
+
+	listaWeapons->Vaciar();
+
+	tieneRocketLauncher = false;
+	tienePistola = false;
+	tieneAsalto = false;
+
+
+	asalto->borrarContenido();
+	asalto->inicializar();
+	asalto->cargarContenido();
+
+	rocket->borrarContenido();
+	rocket->inicializar();
+	rocket->cargarContenido();
+
+	pistola->borrarContenido();
+	pistola->inicializar();
+	pistola->cargarContenido();
+
+
+	listaWeapons->insertar(pistola);
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	rocket->setEquipada(false);
+	asalto->setEquipada(false);
+
+	pistola->setEquipada(true);
+	tienePistola = true;
+
+}
+
