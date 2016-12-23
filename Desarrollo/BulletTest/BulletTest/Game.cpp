@@ -203,7 +203,7 @@ void Game::inicializar()
 		std::cin >> a;
 	} while (a != 1 && a != 2);*/
 	
-	a = 2;
+	a = 1;
 	if (a == 1) {
 		//LLama al inicializar de todas las entities
 		EntityManager::i().inicializar();
