@@ -1,0 +1,31 @@
+///////////////////////////////////
+/////////PARADOX STUDIOS///////////
+///////////////////////////////////
+
+Los controles del juego son los siguientes:
+
+•	WASD: movimiento del jugador
+•	Botón izquierdo del ratón: disparar
+•	Botón derecho del ratón: lanzar granada
+•	3: retroceder arma
+•	4: avanzar arma
+•	Barra espaciadora: saltar
+•	1: debug de las físicas
+•	2: separar cámara del player
+
+Algunas cosas que se puede hacer en el prototipo:
+
+•	Disparar.
+•	Lanzar granadas.
+•	Coger vida y más armas.
+•	RocketJump: puedes saltar más que con un salto si te lanzas un misil del rocket contra el suelo.
+•	Doble salto: una vez saltes, en el aire puedes darle una vez más al espacio y saltar otra vez.
+
+Instrucciones para ejecutar:
+
+•	Está preparado actualmente para ejecutar una versión del juego en Release, para ello descomprimir 
+el archivo TriggerSystem.zip y en la carpeta Release ejecutar el archivo “BulletTest.exe”.
+
+•	Para compilar ir a la rama "TriggerEntregable". Se puede compilar un ejecutable en Debug ya que en el repositorio están las librerías necesarias para ello. 
+En caso de querer compilar en Release, primero habría que ir a la carpeta lib/irrlitch y descomprimir el archivo IrrlichtStatic_RELEASE.zip, 
+ya que, sin comprimirse, el .lib supera el tamaño máximo por fichero en github.
