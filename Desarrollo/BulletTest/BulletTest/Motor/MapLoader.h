@@ -4,7 +4,7 @@
 #include<fstream>
 #include "../Otros/vec3.hpp"
 #include <vector>
-#include "../TriggerRecordStruct.h"
+#include "../TriggerSystem/TriggerRecordStruct.h"
 #include <memory>
 #include "../Motor/BasicSceneNode.h"
 

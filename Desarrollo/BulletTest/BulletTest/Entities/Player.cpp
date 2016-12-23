@@ -22,7 +22,7 @@
 #include "../Command/ShootRocket.h"
 #include "../Command/ShootPistola.h"
 
-#include "../TriggerSystem.h"
+#include "../TriggerSystem/TriggerSystem.h"
 
 
 Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,

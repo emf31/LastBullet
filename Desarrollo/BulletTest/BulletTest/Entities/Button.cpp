@@ -1,5 +1,5 @@
 #include "Button.h"
-#include "../TriggerSystem.h"
+#include "../TriggerSystem/TriggerSystem.h"
 #include "../Motor/PhysicsEngine.h"
 
 Button::Button(std::shared_ptr<BasicSceneNode> nodo, const std::string & name, EnumTriggerType type, int id):Entity(id, nodo, name) {

@@ -124,9 +124,6 @@
     <ClCompile Include="IA\StatesIA\Patrullar.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
-    <ClCompile Include="TriggerSystem.cpp">
-      <Filter>Source Code</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\GroupEntity.cpp">
       <Filter>Source Code\Entities</Filter>
     </ClCompile>
@@ -135,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="Entities\Button.cpp">
       <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSystem\TriggerSystem.cpp">
+      <Filter>Source Code\TriggerSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +348,12 @@
     <ClInclude Include="Otros\EnumParser.h">
       <Filter>Headers\Otros</Filter>
     </ClInclude>
+    <ClInclude Include="TriggerSystem\TriggerSystem.h">
+      <Filter>Headers\TriggerSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSystem\TriggerRecordStruct.h">
+      <Filter>Headers\TriggerSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -433,6 +439,12 @@
     </Filter>
     <Filter Include="Headers\IA\StatesIA">
       <UniqueIdentifier>{7bb3c964-ee1d-4eda-91e3-ac8afea02647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\TriggerSystem">
+      <UniqueIdentifier>{2a75b9e6-d069-4dc5-b169-5a8658a366ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\TriggerSystem">
+      <UniqueIdentifier>{13ca1333-1669-49d4-8af6-66848d20827b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

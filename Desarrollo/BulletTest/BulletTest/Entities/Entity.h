@@ -13,7 +13,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <memory>
 
-#include "../TriggerRecordStruct.h"
+#include "../TriggerSystem/TriggerRecordStruct.h"
 
 
 #define DISPONIBLE 0

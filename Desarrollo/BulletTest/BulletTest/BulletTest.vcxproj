@@ -229,6 +229,8 @@
     <ClInclude Include="States\StateStack.hpp" />
     <ClInclude Include="TriggerRecordStruct.h" />
     <ClInclude Include="TriggerSystem.h" />
+    <ClInclude Include="TriggerSystem\TriggerRecordStruct.h" />
+    <ClInclude Include="TriggerSystem\TriggerSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Button.cpp" />
@@ -275,7 +277,7 @@
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
-    <ClCompile Include="TriggerSystem.cpp" />
+    <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

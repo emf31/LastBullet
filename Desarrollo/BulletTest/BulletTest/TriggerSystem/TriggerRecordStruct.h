@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Otros/vec3.hpp"
-#include "Otros/Time.hpp"
-#include "Otros/Clock.hpp"
-#include "Otros/EnumParser.h"
+#include "../Otros/vec3.hpp"
+#include "../Otros/Time.hpp"
+#include "../Otros/Clock.hpp"
+#include "../Otros/EnumParser.h"
 
 enum EnumTriggerType {
 	kTrig_None = 0,

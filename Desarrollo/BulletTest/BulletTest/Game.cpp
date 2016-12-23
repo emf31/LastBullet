@@ -24,7 +24,7 @@
 #include <RakNetTypes.h>
 #include <thread> 
 #include "Motor de Red\Cliente.h"
-#include "TriggerSystem.h"
+#include "TriggerSystem/TriggerSystem.h"
 
 #define SERVER_PORT 65535
 

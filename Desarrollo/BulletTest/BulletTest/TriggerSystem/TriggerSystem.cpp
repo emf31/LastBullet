@@ -1,6 +1,6 @@
 #include "TriggerSystem.h"
-#include "Entities/EntityManager.h"
-#include "Entities/GroupEntity.h"
+#include "../Entities/EntityManager.h"
+#include "../Entities/GroupEntity.h"
 
 TriggerSystem::TriggerSystem()
 {
