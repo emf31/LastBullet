@@ -30,7 +30,7 @@ Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, Ra
 	life_component(this)
 {
 	//Registramos la entity en el trigger system
-	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent;
+	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
 	TriggerSystem::i().RegisterEntity(this);
 	
 
@@ -274,21 +274,33 @@ void Player::handleMessage(const Message & message)
 
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
-	if (ent->getID() == 65534) {
-		if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
-			searchSpawnPoint();
-		}
-	} else {
-		if (ent->getID() == 65535) {
-			if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
-				Entity *ge = EntityManager::i().getEntity(9000);
 
-				ge->handleTrigger(Trigger);
-			}
+	if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
+		Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
+		if (ent->getID() == 65534) {
+			//Respawns
+			searchSpawnPoint();
+		} else if (ent->getID() == 65535) {
+			//LifeObjects
+			Entity *ge = EntityManager::i().getEntity(9000);
+			ge->handleTrigger(Trigger);
+		} else if (ent->getID() == 65536) {
+			//Button_Trig_Ent_Asalto
+			Entity *grupoAsaltos = EntityManager::i().getEntity(9001);
+			grupoAsaltos->handleTrigger(Trigger);
+
+		} else if (ent->getID() == 65537) {
+			//Button_Trig_Ent_Pistola
+			Entity *grupoPistola = EntityManager::i().getEntity(9002);
+			grupoPistola->handleTrigger(Trigger);
+
+		} else if (ent->getID() == 65538) {
+			//Button_Trig_Ent_Rocket
+			Entity *grupoRocket = EntityManager::i().getEntity(9003);
+			grupoRocket->handleTrigger(Trigger);
+
 		}
 	}
-	
 	return true;
 }
 

@@ -41,12 +41,11 @@ void MapLoader::readMap(const std::string & name)
 				std::string nombre = "cubo"+s;
 
 				std::string nameMesh = obj["nombre"];
-				std::cout << nameMesh << std::endl;
 				nameMesh = "../media/" +nameMesh+".obj";
 				io::path mesh=nameMesh.c_str();
 
 				std::string extraTags = obj["extraTags"];
-				std::cout << "ExtraTags: " << extraTags << std::endl;
+				//std::cout << "ExtraTags: " << extraTags << std::endl;
 				if (obj["tag"] == "PhysicEntity") {
 					std::shared_ptr<BasicSceneNode> node =createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
 					if (extraTags == "life") {
@@ -167,6 +166,12 @@ void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTrigg
 		id = 65534;
 	} else if(type == EnumTriggerType::Button_Trig_Ent) {
 		id = 65535;
+	} else if (type == EnumTriggerType::Button_Trig_Ent_Asalto) {
+		id = 65536;
+	} else if (type == EnumTriggerType::Button_Trig_Ent_Pistola) {
+		id = 65537;
+	} else if (type == EnumTriggerType::Button_Trig_Ent_Rocket) {
+		id = 65538;
 	}
 	Button *btn = new Button(nullptr, "Boton", type, id);
 	btn->setPosition(posicion);

@@ -109,9 +109,11 @@ void LifeObject::asignaTiempo(Clock tiempo) {
 
 void LifeObject::VidaCogida()
 {
-	estado = USADO;
-	m_nodo->setVisible(false);
-	clockRecargaLife.restart();
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	if (estado == DISPONIBLE) {
+		PhysicsEngine::i().removeGhostObject(m_ghostObject);
+		estado = USADO;
+		m_nodo->setVisible(false);
+		clockRecargaLife.restart();
+	}
 }
 

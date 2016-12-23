@@ -77,6 +77,9 @@ public:
 	std::list<Entity*> getEnemies();
 	std::list<Entity*> getLifeObjects();
 	std::list<Entity*> getWeapons();
+	std::list<Entity*> getRockets();
+	std::list<Entity*> getPistolas();
+	std::list<Entity*> getAsalto();
 	std::list<Entity*> getAllEntitiesTriggerables();
 
 	

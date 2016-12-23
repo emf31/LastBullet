@@ -156,6 +156,19 @@ void Game::inicializar()
 	ge->addEntityList(EntityManager::i().getLifeObjects());
 	TriggerSystem::i().RegisterEntity(ge);
 
+	GroupEntity *grupoAsaltos = new GroupEntity("grupoAsalto", 9001);
+	grupoAsaltos->addEntityList(EntityManager::i().getAsalto());
+	TriggerSystem::i().RegisterEntity(grupoAsaltos);
+
+	GroupEntity *grupoPistolas = new GroupEntity("grupoPistolas", 9002);
+	grupoPistolas->addEntityList(EntityManager::i().getPistolas());
+	TriggerSystem::i().RegisterEntity(grupoPistolas);
+
+	GroupEntity *grupoRockets = new GroupEntity("grupoRockets", 9003);
+	grupoRockets->addEntityList(EntityManager::i().getRockets());
+	TriggerSystem::i().RegisterEntity(grupoRockets);
+
+
 	/*Enemy *e = new Enemy("Rambo");
 	e->inicializar();
 	e->cargarContenido();
@@ -190,7 +203,7 @@ void Game::inicializar()
 		std::cin >> a;
 	} while (a != 1 && a != 2);*/
 	
-	a = 1;
+	a = 2;
 	if (a == 1) {
 		//LLama al inicializar de todas las entities
 		EntityManager::i().inicializar();
