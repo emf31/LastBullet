@@ -3,3 +3,4 @@ Los plugins se pueden descargar de este enlace: https://drive.google.com/open?id
 
 -Para el primero deberas copiar la carpeta de optical flares que se adjunta tanto en la carpeta plug-ins donde tengas after effects instalado y tambien en la carpeta presets.
 -Para el segundo plug-in abrir el instalador y cuando te pidan un serial tienes que poner este: 9260-8846-3456-4404-8269
+-Instalar la fuente couture que viene el el zip de la carpeta
