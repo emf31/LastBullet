@@ -23,8 +23,7 @@ public class Exporter : MonoBehaviour {
 				if (parent.name.Equals("Script"))
 				{
 					Objeto objeto = new Objeto();
-
-					objeto.nombre = g.name;
+                    objeto.nombre = g.name;
 					objeto.posX = g.transform.position.x;
 					objeto.posY = g.transform.position.y;
 					objeto.posZ = g.transform.position.z;
@@ -37,10 +36,16 @@ public class Exporter : MonoBehaviour {
 					objeto.rotY = g.transform.rotation.eulerAngles.y;
 					objeto.rotZ = g.transform.rotation.eulerAngles.z;
 
+                    
+                    
                     objeto.tag = g.tag;
-                        Debug.Log(objeto.tag);
+                    Debug.Log(objeto.tag);
+                    multipleTags mt = g.GetComponent<multipleTags>();
+                    if (mt != null) {
+                        objeto.extraTags = mt.extratags.ToString();
+                    }
 
-					Rigidbody rb;
+                        Rigidbody rb;
 					if (rb = g.GetComponent<Rigidbody>()){
 						objeto.masa = rb.mass;
 						BoxCollider col = g.GetComponent<BoxCollider>();
@@ -98,9 +103,10 @@ public class Objeto {
 
 	public float colliderX, colliderY, colliderZ;
 	public float colliderSizeX, colliderSizeY, colliderSizeZ;
-
+    
     public string tag;
-	public bool hasChild;
+    public string extraTags;
+    public bool hasChild;
 
 	public Objeto() {
 

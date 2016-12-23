@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "../Motor/BasicSceneNode.h"
+#include "../Motor/PhysicsEngine.h"
 class Button : public Entity {
 public:
 	Button(std::shared_ptr<BasicSceneNode> nodo, const std::string& name, EnumTriggerType type, int id);
@@ -19,5 +20,7 @@ public:
 	virtual std::string getClassName() override;
 private:
 	EnumTriggerType m_triggerType;
+
+	btGhostObject *m_ghostTrigger;
 };
 

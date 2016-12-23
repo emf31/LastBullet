@@ -1,7 +1,11 @@
-﻿  MapLoader.cpp
-d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(118): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(126): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(134): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(142): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+﻿  Button.cpp
+  Generando código...
+  Compilando...
+  MapLoader.cpp
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(135): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(143): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(151): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(159): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+  Generando código...
   BulletTest.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

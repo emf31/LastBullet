@@ -281,7 +281,11 @@ bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 		}
 	} else {
 		if (ent->getID() == 65535) {
+			if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
+				Entity *ge = EntityManager::i().getEntity(9000);
 
+				ge->handleTrigger(Trigger);
+			}
 		}
 	}
 	

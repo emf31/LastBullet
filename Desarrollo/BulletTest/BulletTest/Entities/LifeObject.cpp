@@ -5,7 +5,7 @@
 
 LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
-	TriggerSystem::i().RegisterEntity(this);
+	//TriggerSystem::i().RegisterEntity(this);
 }
 
 
@@ -90,6 +90,10 @@ bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
 		//printf("Has saltado cerca de un lifeObject\n");
 
 	}
+	
+	//m_nodo->setVisible(false);
+
+	VidaCogida();
 
 	return true;
 }
