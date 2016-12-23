@@ -1,0 +1,5 @@
+Se han utilizado 2 plugins el optical flares y el trapcode suite.
+Los plugins se pueden descargar de este enlace: https://drive.google.com/open?id=0B43XdrN27eARR0lKMVJqUXNoZnM
+
+-Para el primero deberas copiar la carpeta de optical flares que se adjunta tanto en la carpeta plug-ins donde tengas after effects instalado y tambien en la carpeta presets.
+-Para el segundo plug-in abrir el instalador y cuando te pidan un serial tienes que poner este: 9260-8846-3456-4404-8269
