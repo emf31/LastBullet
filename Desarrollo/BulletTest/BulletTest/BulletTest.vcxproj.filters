@@ -349,6 +349,18 @@
     <ClInclude Include="Network\Lobby.h">
       <Filter>Headers\Network</Filter>
     </ClInclude>
+    <ClInclude Include="Graph\GraphNode.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\NavGraphNode.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\GraphEdge.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\SparseGraph.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -440,6 +452,12 @@
     </Filter>
     <Filter Include="Source Code\Triggers">
       <UniqueIdentifier>{17dd4573-bcb8-417e-8853-2db89b04696f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Graph">
+      <UniqueIdentifier>{099bf12f-7bcc-4e03-aaf8-9a544966d8e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Graph">
+      <UniqueIdentifier>{95a495db-6776-44d6-a5eb-5307bd595c3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

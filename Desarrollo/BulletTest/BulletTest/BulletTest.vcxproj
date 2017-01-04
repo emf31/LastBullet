@@ -197,6 +197,10 @@
     <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
     <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graph\GraphEdge.h" />
+    <ClInclude Include="Graph\GraphNode.h" />
+    <ClInclude Include="Graph\NavGraphNode.h" />
+    <ClInclude Include="Graph\SparseGraph.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
