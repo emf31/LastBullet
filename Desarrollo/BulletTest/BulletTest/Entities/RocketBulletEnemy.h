@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../Otros/vec3.hpp"
-#include "Entity.h"
-#include "EntityManager.h"
-#include "../Otros/Time.hpp"
-#include "../Otros/Clock.hpp"
-#include "BulletCollision\CollisionDispatch\btGhostObject.h"
+#include <vec3.hpp>
+#include <Entity.h>
+#include <EntityManager.h>
+#include <Time.hpp>
+#include <Clock.hpp>
+#include <BulletCollision\CollisionDispatch\btGhostObject.h>
 
 class RocketBulletEnemy : public Entity
 {

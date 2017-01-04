@@ -1,5 +1,5 @@
 #pragma once
-#include "../Entities/Player.h"
+#include <Player.h>
 #include "../Handlers/input_constants.h"
 
 class Command

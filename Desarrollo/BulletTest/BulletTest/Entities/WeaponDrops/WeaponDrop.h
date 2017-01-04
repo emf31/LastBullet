@@ -1,9 +1,9 @@
 #pragma once
-#include "../Entity.h"
+#include <Entity.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
-#include "BulletCollision\CollisionDispatch\btGhostObject.h"
-#include "../Player.h"
+#include <BulletCollision\CollisionDispatch\btGhostObject.h>
+#include <Player.h>
 
 
 

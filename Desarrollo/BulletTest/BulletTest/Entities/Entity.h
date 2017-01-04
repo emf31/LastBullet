@@ -1,19 +1,19 @@
 #pragma once
 
-#include "../Otros/vec3.hpp"
-#include "../Otros/Time.hpp"
-#include "../Otros/Clock.hpp"
+#include <vec3.hpp>
+#include <Time.hpp>
+#include <Clock.hpp>
 #include "../Motor/RenderState.h"
 
-#include "../Motor/SceneNode.h"
-#include "../Handlers/Message.h"
+#include <SceneNode.h>
+#include <Message.h>
 #include <RakPeerInterface.h>
 
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <memory>
 
-#include "../TriggerRecordStruct.h"
+#include <TriggerRecordStruct.h>
 
 
 #define DISPONIBLE 0

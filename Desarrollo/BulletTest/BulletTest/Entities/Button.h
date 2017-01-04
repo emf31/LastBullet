@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "../Motor/BasicSceneNode.h"
-#include "../Motor/PhysicsEngine.h"
+#include <PhysicsEngine.h>
 class Button : public Entity {
 public:
 	Button(std::shared_ptr<BasicSceneNode> nodo, const std::string& name, EnumTriggerType type, int id);

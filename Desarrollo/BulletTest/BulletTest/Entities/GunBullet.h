@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../Otros/vec3.hpp"
+#include <vec3.hpp>
 #include "Entity.h"
 #include "EntityManager.h"
-#include "../Otros/Time.hpp"
-#include "../Otros/Clock.hpp"
+#include <Time.hpp>
+#include <Clock.hpp>
 
 class GunBullet : public Entity
 {

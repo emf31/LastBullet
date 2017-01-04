@@ -1,22 +1,22 @@
 #pragma once
-#include "Entity.h"
+#include <Entity.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
 
-#include "../Motor de Red/Estructuras.h"
-#include "../Handlers/Message.h"
-#include "../Motor/Animation.h"
+#include <Estructuras.h>
+#include <Message.h>
+#include <Animation.h>
 
 #include <queue>
 #include <mutex>
 
-#include "../Motor/BasicSceneNode.h"
-#include "../Entities/Granada.h"
+#include <BasicSceneNode.h>
+#include <Granada.h>
 
-#include "../Otros/SafeQueue.h"
+#include <SafeQueue.h>
 
-#include "../IA/MachineState.h"
+#include <MachineState.h>
 
 class Enemy : public Entity
 {

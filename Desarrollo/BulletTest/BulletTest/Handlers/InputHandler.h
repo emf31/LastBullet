@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "input_constants.h"
-#include "../Entities/Player.h"
+#include <Player.h>
 #include "../Command/Command.h"
 
 typedef std::shared_ptr<Command> CommandPtr;

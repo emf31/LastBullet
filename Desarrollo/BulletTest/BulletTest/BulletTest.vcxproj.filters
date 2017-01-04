@@ -19,9 +19,6 @@
     <ClCompile Include="Motor\Camera.cpp">
       <Filter>Source Code\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="Motor de Red\Cliente.cpp">
-      <Filter>Source Code\Network</Filter>
-    </ClCompile>
     <ClCompile Include="Otros\Clock.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
@@ -124,9 +121,6 @@
     <ClCompile Include="IA\StatesIA\Patrullar.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
-    <ClCompile Include="TriggerSystem.cpp">
-      <Filter>Source Code</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\GroupEntity.cpp">
       <Filter>Source Code\Entities</Filter>
     </ClCompile>
@@ -135,6 +129,15 @@
     </ClCompile>
     <ClCompile Include="Entities\Button.cpp">
       <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSystem\TriggerSystem.cpp">
+      <Filter>Source Code\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Cliente.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby.cpp">
+      <Filter>Source Code\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -216,12 +219,6 @@
     <ClInclude Include="Handlers\MessageHandler.h">
       <Filter>Headers\Handlers</Filter>
     </ClInclude>
-    <ClInclude Include="Motor de Red\Cliente.h">
-      <Filter>Headers\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor de Red\Estructuras.h">
-      <Filter>Headers\Network</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\AnimatedSceneNode.h">
       <Filter>Headers\Motor</Filter>
     </ClInclude>
@@ -262,9 +259,6 @@
       <Filter>Headers\Otros</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MastEventReceiver.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Entities\RocketBulletEnemy.h">
@@ -330,12 +324,6 @@
     <ClInclude Include="IA\StatesIA\Patrullar.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
-    <ClInclude Include="TriggerRecordStruct.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerSystem.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\GroupEntity.h">
       <Filter>Headers\Entities</Filter>
     </ClInclude>
@@ -344,6 +332,22 @@
     </ClInclude>
     <ClInclude Include="Entities\Button.h">
       <Filter>Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\EnumParser.h" />
+    <ClInclude Include="TriggerSystem\TriggerRecordStruct.h">
+      <Filter>Headers\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSystem\TriggerSystem.h">
+      <Filter>Headers\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Cliente.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Estructuras.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby.h">
+      <Filter>Headers\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +434,12 @@
     </Filter>
     <Filter Include="Headers\IA\StatesIA">
       <UniqueIdentifier>{7bb3c964-ee1d-4eda-91e3-ac8afea02647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Triggers">
+      <UniqueIdentifier>{9bd96187-52c6-4ad2-958b-bd988f214669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Triggers">
+      <UniqueIdentifier>{17dd4573-bcb8-417e-8853-2db89b04696f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

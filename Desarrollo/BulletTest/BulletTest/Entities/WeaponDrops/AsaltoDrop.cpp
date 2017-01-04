@@ -1,5 +1,5 @@
 #include "AsaltoDrop.h"
-#include "../../Motor de Red/Cliente.h"
+#include <Cliente.h>
 
 
 AsaltoDrop::AsaltoDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)

@@ -1,6 +1,6 @@
 #include "LifeComponent.h"
-#include "../Entities/Player.h"
-#include "../Motor de Red/Cliente.h"
+#include <Player.h>
+#include <Cliente.h>
 
 LifeComponent::LifeComponent(Player * player)
 {

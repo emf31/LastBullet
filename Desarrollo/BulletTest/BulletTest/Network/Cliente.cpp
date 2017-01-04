@@ -6,20 +6,20 @@
 #include <RakSleep.h>
 #include "Cliente.h"
 #include "Estructuras.h"
-#include "../Entities/EntityManager.h"
+#include <EntityManager.h>
 #include "../Entities/Entity.h"
 #include "../Entities/Enemy.h"
-#include "../Entities/Player.h"
-#include "../Handlers/Message.h"
-#include "../Handlers/MessageHandler.h"
-#include "../Motor/GraphicEngine.h"
+#include <Player.h>
+#include <Message.h>
+#include <MessageHandler.h>
+#include <GraphicEngine.h>
 #include "../Entities/GunBullet.h"
 #include "../Entities/LifeObject.h"
 #include "../Entities/WeaponDrops/WeaponDrop.h"
 #include "../Entities/WeaponDrops/AsaltoDrop.h"
 #include "../Entities/RocketBulletEnemy.h"
 
-Cliente::Cliente()
+Cliente::Cliente() : lobby(peer)
 {
 }
 
@@ -453,9 +453,13 @@ void Cliente::inicializar() {
 			}
 		}
 	}while (eleccion == 'a');
+
 	
-	std::cout << "Conectando al servidor " << str << ":" << SERVER_PORT << std::endl;
-	conectar(str, SERVER_PORT);
+	//Nos conectamos a la lobby del servidor
+	//lobby.join(str, SERVER_PORT);
+
+	Cliente::i().conectar(str, SERVER_PORT);
+	
 }
 
 void Cliente::conectar(std::string address, int port) {

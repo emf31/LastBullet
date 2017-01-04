@@ -1,6 +1,6 @@
-#include "RocketLauncher.h"
-#include "../../Motor de Red/Cliente.h"
-#include "../../Motor de Red/Estructuras.h"
+#include <Weapons/RocketLauncher.h>
+#include <Cliente.h>
+#include <Estructuras.h>
 
 RocketLauncher::RocketLauncher() : Weapon()
 {

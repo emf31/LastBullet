@@ -1,7 +1,7 @@
 #include "Asalto.h"
-#include "../../Motor de Red/Cliente.h"
-#include "../../Motor de Red/Estructuras.h"
-#include "../../Otros/Util.h"
+#include <Cliente.h>
+#include <Estructuras.h>
+#include <Util.h>
 
 Asalto::Asalto() : Weapon()
 {

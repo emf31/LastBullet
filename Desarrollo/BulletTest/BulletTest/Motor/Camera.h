@@ -1,6 +1,6 @@
 #pragma once
 #include "irrlicht.h"
-#include "../Otros/vec3.hpp"
+#include <vec3.hpp>
 #include "../Entities/Entity.h"
 
 using namespace irr;

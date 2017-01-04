@@ -1,6 +1,6 @@
 #include "GunBullet.h"
-#include "../Handlers/MessageHandler.h"
-#include "../Motor/GraphicEngine.h"
+#include <MessageHandler.h>
+#include <GraphicEngine.h>
 
 
 GunBullet::GunBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : Entity(-1, NULL, "bala"),

@@ -2,7 +2,7 @@
 #include "irrlicht.h"
 #include <iostream>
 #include <string>
-#include "../Otros/vec3.hpp"
+#include <vec3.hpp>
 #include "SceneNode.h"
 
 

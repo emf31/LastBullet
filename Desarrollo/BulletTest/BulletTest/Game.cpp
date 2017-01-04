@@ -2,36 +2,31 @@
 #include <algorithm>
 #include "Game.h"
 #include "MastEventReceiver.hpp"
-#include "Otros\Clock.hpp"
-#include "Motor\PhysicsEngine.h"
-#include "Entities\EntityManager.h"
-#include "Entities\PhysicsEntity.h"
-#include "Entities\LifeObject.h"
-#include "Entities\WeaponDrops\RocketLauncherDrop.h"
-#include "Entities\WeaponDrops\PistolaDrop.h"
-#include "Entities\WeaponDrops\AsaltoDrop.h"
-#include "Entities/GroupEntity.h"
-#include "Motor\GraphicEngine.h"
-#include "Motor\SceneNode.h"
-#include "Handlers\MessageHandler.h"
-#include "States\StateStack.hpp"
-#include "Motor\MapLoader.h"
-
-
+#include <Clock.hpp>
+#include <PhysicsEngine.h>
+#include <EntityManager.h>
+#include <PhysicsEntity.h>
+#include <LifeObject.h>
+#include <WeaponDrops/RocketLauncherDrop.h>
+#include <WeaponDrops/PistolaDrop.h>
+#include <WeaponDrops/AsaltoDrop.h>
+#include <GroupEntity.h>
+#include <GraphicEngine.h>
+#include <SceneNode.h>
+#include <MessageHandler.h>
+#include <StateStack.hpp>
+#include <MapLoader.h>
 #include <RakPeerInterface.h>
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h>
 #include <thread> 
-#include "Motor de Red\Cliente.h"
-#include "TriggerSystem.h"
-
-#define SERVER_PORT 65535
-
-#include "Handlers\MessageHandler.h"
+#include <Cliente.h>
+#include <TriggerSystem.h>
+#include <MessageHandler.h>
 #include <Windows.h>
 
-
+const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
@@ -66,8 +61,6 @@ void Game::run()
 	
 
 	while (GraphicEngine::i().isRuning()) {
-		//if (GraphicEngine::i().isWindowActive()) {
-		//if (Cliente::i().isConected() ) {
 
 		///Las fisicas se ejecutan 60 veces por segundo
 
@@ -118,8 +111,6 @@ void Game::run()
 			}
 		}
 
-		
-		//}
 		
 	}
 

@@ -1,6 +1,6 @@
 #include "Pistola.h"
-#include "../../Motor de Red/Cliente.h"
-#include "../../Motor de Red/Estructuras.h"
+#include <Cliente.h>
+#include <Estructuras.h>
 #include "../EntityManager.h"
 
 Pistola::Pistola() : Weapon()

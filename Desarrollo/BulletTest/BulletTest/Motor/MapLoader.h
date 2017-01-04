@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include<fstream>
-#include "../Otros/vec3.hpp"
+#include <vec3.hpp>
 #include <vector>
-#include "../TriggerRecordStruct.h"
+#include <TriggerRecordStruct.h>
 #include <memory>
 #include "../Motor/BasicSceneNode.h"
 

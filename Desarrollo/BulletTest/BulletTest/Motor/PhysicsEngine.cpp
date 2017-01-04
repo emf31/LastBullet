@@ -1,11 +1,11 @@
 
 #include "PhysicsEngine.h"
-#include "Serialize/BulletWorldImporter\btBulletWorldImporter.h"
+#include <Serialize/BulletWorldImporter\btBulletWorldImporter.h>
 #include <unordered_map>
 #include <set>
-#include "BulletCollision\CollisionDispatch\btCollisionObject.h"
+#include <BulletCollision\CollisionDispatch\btCollisionObject.h>
 
-#include "../Handlers/MessageHandler.h"
+#include <MessageHandler.h>
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 

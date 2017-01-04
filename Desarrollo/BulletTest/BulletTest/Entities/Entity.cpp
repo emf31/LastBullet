@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include "../Motor/RenderState.h"
 #include "EntityManager.h"
-#include "../Motor de Red/Cliente.h"
+#include <Cliente.h>
 
 
 Entity::Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name, RakNet::RakNetGUID guid) :

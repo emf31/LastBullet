@@ -1,7 +1,7 @@
 #include "Granada.h"
-#include "../Motor/GraphicEngine.h"
-#include "../Motor/PhysicsEngine.h"
-#include "../Motor de Red/Cliente.h"
+#include <GraphicEngine.h>
+#include <PhysicsEngine.h>
+#include <Cliente.h>
 
 
 Granada::Granada() : Entity(-1, NULL)

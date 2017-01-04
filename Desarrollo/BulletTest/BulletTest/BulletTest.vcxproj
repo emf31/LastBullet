@@ -77,6 +77,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -88,7 +89,7 @@
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -123,8 +124,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_IRR_STATIC_LIB_;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\include\irrlitch;..\include\bullet;..\include\Raknet;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Motor de Red;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -201,9 +204,6 @@
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />
-    <ClInclude Include="MastEventReceiver.hpp" />
-    <ClInclude Include="Motor de Red\Cliente.h" />
-    <ClInclude Include="Motor de Red\Estructuras.h" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
@@ -214,6 +214,9 @@
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
+    <ClInclude Include="Network\Cliente.h" />
+    <ClInclude Include="Network\Estructuras.h" />
+    <ClInclude Include="Network\Lobby.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\EnumParser.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
@@ -227,8 +230,8 @@
     <ClInclude Include="States\State.hpp" />
     <ClInclude Include="States\StateFactory.hpp" />
     <ClInclude Include="States\StateStack.hpp" />
-    <ClInclude Include="TriggerRecordStruct.h" />
-    <ClInclude Include="TriggerSystem.h" />
+    <ClInclude Include="TriggerSystem\TriggerRecordStruct.h" />
+    <ClInclude Include="TriggerSystem\TriggerSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Button.cpp" />
@@ -259,7 +262,6 @@
     <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Motor de Red\Cliente.cpp" />
     <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
     <ClCompile Include="Motor\Animation.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
@@ -269,13 +271,15 @@
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
+    <ClCompile Include="Network\Cliente.cpp" />
+    <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
-    <ClCompile Include="TriggerSystem.cpp" />
+    <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

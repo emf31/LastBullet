@@ -1,9 +1,9 @@
-#include "RocketBullet.h"
-#include "../Handlers/MessageHandler.h"
-#include "../Motor/GraphicEngine.h"
-#include "../Motor/PhysicsEngine.h"
-#include "../Otros/Util.h"
-#include "../Motor de Red/Cliente.h"
+#include <RocketBullet.h>
+#include <MessageHandler.h>
+#include <GraphicEngine.h>
+#include <PhysicsEngine.h>
+#include <Util.h>
+#include <Cliente.h>
 
 
 #include <list>

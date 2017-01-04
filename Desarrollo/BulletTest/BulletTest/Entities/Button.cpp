@@ -1,6 +1,6 @@
 #include "Button.h"
-#include "../TriggerSystem.h"
-#include "../Motor/PhysicsEngine.h"
+#include <TriggerSystem.h>
+#include <PhysicsEngine.h>
 
 Button::Button(std::shared_ptr<BasicSceneNode> nodo, const std::string & name, EnumTriggerType type, int id):Entity(id, nodo, name) {
 	m_triggerType = type;

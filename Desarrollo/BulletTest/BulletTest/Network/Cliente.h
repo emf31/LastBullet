@@ -4,12 +4,9 @@
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h>
-#include <thread> 
-#include <atomic>
-#include <mutex>
-#include "../Otros/Time.hpp"
-#include "../Entities/Player.h"
-
+#include <Time.hpp>
+#include <Player.h>
+#include <Lobby.h>
 
 class Cliente
 {
@@ -48,7 +45,7 @@ public:
 	void apagar();
 
 
-	bool isConected() {
+	bool isConected() const {
 		return conectado;
 	}
 
@@ -85,5 +82,8 @@ private:
 
 	//Lista de servidores disponibles
 	std::vector<std::string> m_servers;
+
+	//Lobby de la partida
+	LobbyClient lobby;
 };
 

@@ -1,10 +1,10 @@
 
 #include "Enemy.h"
-#include "../Motor/PhysicsEngine.h"
-#include "../Motor/GraphicEngine.h"
-#include "../Motor de Red/Estructuras.h"
-#include "../Motor de Red/Cliente.h"
-#include "../Entities/EntityManager.h"
+#include <PhysicsEngine.h>
+#include <GraphicEngine.h>
+#include <Estructuras.h>
+#include <Cliente.h>
+#include <EntityManager.h>
 #include <iostream>
 
 #include "../IA/StatesIA/Patrullar.h"

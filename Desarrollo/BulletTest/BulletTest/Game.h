@@ -27,9 +27,11 @@ public:
 	void update(Time elapsedTime);
 	void render(float interpolation, Time elapsedTime);
 	
+	static const int server_port;
+	static const Time timePerFrame;
 
 private:
-	static const Time timePerFrame;
+	
 	float interpolation;
 	
 };

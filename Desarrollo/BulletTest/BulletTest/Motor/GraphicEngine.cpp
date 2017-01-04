@@ -1,8 +1,8 @@
 
 #include "GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
-#include "../Entities/EntityManager.h"
-#include "../Entities/Player.h"
+#include <EntityManager.h>
+#include <Player.h>
 #include "PhysicsEngine.h"
 #include <string>
 #include <sstream>

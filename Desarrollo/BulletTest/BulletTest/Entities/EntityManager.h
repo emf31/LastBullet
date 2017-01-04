@@ -1,10 +1,10 @@
 #pragma once
 #include <unordered_map>
-#include "../Otros/Time.hpp"
+#include <Time.hpp>
 #include "Entity.h"
 #include <unordered_set>
 #include <list>
-#include "../Motor de Red/Estructuras.h"
+#include <Estructuras.h>
 #include <string>
 
 

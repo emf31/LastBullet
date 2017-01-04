@@ -2,8 +2,8 @@
 #include <map>
 #include <functional>  
 #include "TriggerRecordStruct.h"
-#include "Entities/Entity.h"
-#include "Otros/vec3.hpp"
+#include "../Entities/Entity.h"
+#include <vec3.hpp>
 #include <vector>
 
 typedef std::multimap<unsigned short, TriggerRecordStruct*, std::greater<unsigned short> > TRIGGER_MAP;

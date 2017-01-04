@@ -3,8 +3,8 @@
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
-#include "../Motor de Red/Estructuras.h"
-#include "BulletCollision\CollisionDispatch\btGhostObject.h"
+#include <Estructuras.h>
+#include <BulletCollision\CollisionDispatch\btGhostObject.h>
 
 #define GRANADACARGADA 0
 #define GRANADADISPARADA 1

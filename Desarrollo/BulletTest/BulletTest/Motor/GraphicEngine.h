@@ -1,5 +1,5 @@
 #pragma once
-#include "../Otros/vec3.hpp"
+#include <vec3.hpp>
 #include "BasicSceneNode.h"
 #include "AnimatedSceneNode.h"
 #include "Camera.h"
@@ -9,7 +9,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-//#include "../Entities/Player.h"
+//#include <Player.h>
 
 #include "DebugDraw.h"
 

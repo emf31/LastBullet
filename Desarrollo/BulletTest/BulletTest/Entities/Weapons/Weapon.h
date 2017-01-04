@@ -1,15 +1,14 @@
 #pragma once
-#include "../../Motor/GraphicEngine.h"
-#include "../../Motor/PhysicsEngine.h"
-#include "../Entity.h"
-#include "../../Handlers/MessageHandler.h"
+#include <GraphicEngine.h>
+#include <PhysicsEngine.h>
+#include <Entity.h>
+#include <MessageHandler.h>
 #include "../GunBullet.h"
 #include "../RocketBullet.h"
 #include "math.h"
 #include "../../Otros/Vec3f.h"
-#include "../../Otros/Util.h"
-#include "../../Handlers/MessageHandler.h"
-#include "../../Handlers/Message.h"
+#include <Util.h>
+#include <Message.h>
 
 #define CARGADA 0
 #define DESCARGADA 1

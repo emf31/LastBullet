@@ -3,7 +3,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/BasicSceneNode.h"
-#include "../Motor/PhysicsEngine.h"
+#include <PhysicsEngine.h>
 class PhysicsEntity : public Entity
 {
 public:

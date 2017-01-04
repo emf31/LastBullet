@@ -1,8 +1,9 @@
 #pragma once
-#include "../../BulletTest/Otros/vec3.hpp"
+#include <vec3.hpp>
 #include <RakPeerInterface.h>
 #include <iostream>
 #include <MessageIdentifiers.h>
+#include <Clock.hpp>
 
 typedef struct {
 	Vec3<float> position;

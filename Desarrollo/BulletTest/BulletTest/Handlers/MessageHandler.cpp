@@ -1,7 +1,7 @@
 
 #include "MessageHandler.h"
-#include "../Motor/PhysicsEngine.h"
-#include "../Entities/EntityManager.h"
+#include <PhysicsEngine.h>
+#include <EntityManager.h>
 void MessageHandler::update()
 {
 	//std::cout << m_messages.size() << std::endl;
