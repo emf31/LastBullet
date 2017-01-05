@@ -13,8 +13,6 @@ private:
 
 public:
 
-
-
 	SparseGraph(bool digraph) :m_digraph(digraph),m_nextNodeIndex(0) {};
 	//const NavGraphNode& GetNode(int idx) { return m_nodes.at(idx); };
 	NavGraphNode& getNode(int idx) { return m_nodes.at(idx); };

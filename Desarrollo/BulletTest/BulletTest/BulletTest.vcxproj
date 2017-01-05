@@ -198,6 +198,7 @@
     <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph\GraphEdge.h" />
+    <ClInclude Include="Graph\GraphEnumeration.h" />
     <ClInclude Include="Graph\GraphNode.h" />
     <ClInclude Include="Graph\NavGraphNode.h" />
     <ClInclude Include="Graph\SparseGraph.h" />

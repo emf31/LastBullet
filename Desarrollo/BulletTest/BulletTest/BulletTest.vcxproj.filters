@@ -364,6 +364,9 @@
     <ClInclude Include="Graph\SparseGraph.h">
       <Filter>Headers\Graph</Filter>
     </ClInclude>
+    <ClInclude Include="Graph\GraphEnumeration.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

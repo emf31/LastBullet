@@ -65,4 +65,9 @@ void SparseGraph::removeNode(int node)
 	}
 }
 
+void SparseGraph::addEdge(GraphEdge edge)
+{
+
+}
+
 
