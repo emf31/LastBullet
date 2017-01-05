@@ -139,6 +139,9 @@
     <ClCompile Include="Network\Lobby.cpp">
       <Filter>Source Code\Network</Filter>
     </ClCompile>
+    <ClCompile Include="Graph\SparseGraph.cpp">
+      <Filter>Source Code\Graph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">

@@ -259,6 +259,7 @@
     <ClCompile Include="Entities\Weapons\Pistola.cpp" />
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
+    <ClCompile Include="Graph\SparseGraph.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
