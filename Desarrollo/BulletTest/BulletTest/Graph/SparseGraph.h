@@ -1,10 +1,12 @@
 #pragma once
-#include "vector"
-#include "list"
-#include "GraphEdge.h"
-#include "NavGraphNode.h"
+#include <vector>
+#include <list>
+#include <cassert>
+#include <GraphEdge.h>
+#include <NavGraphNode.h>
+#include <GraphEnumeration.h>
 
-class GraphEdge {
+class SparseGraph {
 private:
 	std::vector<NavGraphNode> m_nodes;
 	std::vector<std::list<GraphEdge>> m_Edges;
@@ -13,22 +15,38 @@ private:
 
 public:
 
-	SparseGraph(bool digraph) :m_digraph(digraph),m_nextNodeIndex(0) {};
+	SparseGraph(bool digraph) : m_digraph(digraph), m_nextNodeIndex(0) {};
 	//const NavGraphNode& GetNode(int idx) { return m_nodes.at(idx); };
-	NavGraphNode& getNode(int idx) { return m_nodes.at(idx); };
-	GraphEdge& getEdge(int from,int to);
+	NavGraphNode& getNode(int idx);;
+	GraphEdge& getEdge(int from, int to);
 	int getNextFreeNodeIndex() const { return m_nextNodeIndex; };
 	int addNode(NavGraphNode node);
 	void removeNode(int node);
 	void addEdge(GraphEdge edge);
 	void removeEdge(int from, int to);
 
-	int numNodes()const;
-	int numActiveNodes()const;
-	int numEdges()const;
+	//returns true if an edge is not already present in the graph. Used
+	//when adding edges to make sure no duplicates are created.
+	bool  UniqueEdge(int from, int to)const;
+
+	//returns the number of active + inactive nodes present in the graph
+	int numNodes() const { return m_nodes.size(); };
+
+	//returns the number of active nodes present in the graph
+	int numActiveNodes() const;;
+
+	//returns the total number of edges present in the graph
+	int numEdges();
+
 	bool isDigraph()const { return m_digraph; };
-	bool isEmpty()const;
-	bool isPresent(int node)const;//devuelve true si el nodo esta presente en el grafo
+	bool isEmpty()const { return m_nodes.empty(); };
+
+	//devuelve true si el nodo esta presente en el grafo
+	bool isNodePresent(int node)const;
+
+	//devuelve true si la arista presente en el grafo
+	bool isEdgePresent(int from, int to);
+
 	void clear();
 
 
@@ -50,17 +68,17 @@ public:
 			invalid there will be no associated edges
 			*/
 
-			curEdge = G.m_ed[NodeIndex].begin();
+			curEdge = G.m_Edges[NodeIndex].begin();
 		}
 
-		EdgeType*  begin()
+		GraphEdge*  begin()
 		{
 			curEdge = G.m_Edges[NodeIndex].begin();
 
 			return &(*curEdge);
 		}
 
-		EdgeType*  next()
+		GraphEdge*  next()
 		{
 			++curEdge;
 
@@ -75,7 +93,69 @@ public:
 		}
 
 	};
+	//Esto sirve para que la clase EdgeIterator
+	//acceda a los private de SparseGraph
 	friend class EdgeIterator;
+
+	//non const class used to iterate through the nodes in the graph
+	class NodeIterator
+	{
+	private:
+
+		typename std::vector<NavGraphNode>::iterator curNode;
+
+		SparseGraph& G;
+
+		//if a graph node is removed, it is not removed from the 
+		//vector of nodes (because that would mean changing all the indices of 
+		//all the nodes that have a higher index). This method takes a node
+		//iterator as a parameter and assigns the next valid element to it.
+		void GetNextValidNode(typename std::vector<NavGraphNode>::iterator& it)
+		{
+			if (curNode == G.m_nodes.end() || it->Index() != invalid_node_index) return;
+
+			while ((it->Index() == invalid_node_index))
+			{
+				++it;
+
+				if (curNode == G.m_nodes.end()) break;
+			}
+		}
+
+	public:
+
+		NodeIterator(SparseGraph &graph) :G(graph)
+		{
+			curNode = G.m_nodes.begin();
+		}
+
+
+		NavGraphNode* begin()
+		{
+			curNode = G.m_nodes.begin();
+
+			GetNextValidNode(curNode);
+
+			return &(*curNode);
+		}
+
+		NavGraphNode* next()
+		{
+			++curNode;
+
+			GetNextValidNode(curNode);
+
+			return &(*curNode);
+		}
+
+		bool end()
+		{
+			return (curNode == G.m_nodes.end());
+		}
+	};
+
+
+	friend class NodeIterator;
 };
 
 

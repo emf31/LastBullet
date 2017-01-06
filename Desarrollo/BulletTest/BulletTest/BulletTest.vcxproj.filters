@@ -142,6 +142,7 @@
     <ClCompile Include="Graph\SparseGraph.cpp">
       <Filter>Source Code\Graph</Filter>
     </ClCompile>
+    <ClCompile Include="Graph\GraphEdge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
