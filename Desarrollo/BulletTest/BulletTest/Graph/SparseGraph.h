@@ -115,6 +115,54 @@ public:
 	//acceda a los private de SparseGraph
 	friend class EdgeIterator;
 
+	//const class used to iterate through all the edges connected to a specific node. 
+	class ConstEdgeIterator
+	{
+	private:
+
+		typename std::list<GraphEdge>::const_iterator curEdge;
+
+		const SparseGraph&  G;
+
+		const int   NodeIndex;
+
+	public:
+
+		ConstEdgeIterator(const SparseGraph & graph,
+			int                           node) : G(graph),
+			NodeIndex(node)
+		{
+			/* we don't need to check for an invalid node index since if the node is
+			invalid there will be no associated edges
+			*/
+
+			curEdge = G.m_Edges[NodeIndex].begin();
+		}
+
+		const GraphEdge*  begin()
+		{
+			curEdge = G.m_Edges[NodeIndex].begin();
+
+			return &(*curEdge);
+		}
+
+		const GraphEdge*  next()
+		{
+			++curEdge;
+
+			return &(*curEdge);
+
+		}
+
+		//return true if we are at the end of the edge list
+		bool end()
+		{
+			return (curEdge == G.m_Edges[NodeIndex].end());
+		}
+	};
+
+	friend class ConstEdgeIterator;
+
 	//non const class used to iterate through the nodes in the graph
 	class NodeIterator
 	{

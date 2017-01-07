@@ -19,8 +19,8 @@ private:
 	//iPQ indexes into.
 	std::vector<double>             m_FCosts;
 
-	std::vector<GraphEdge*>       m_ShortestPathTree;
-	std::vector<GraphEdge*>       m_SearchFrontier;
+	 std::vector<const GraphEdge*>       m_ShortestPathTree;
+	 std::vector<const GraphEdge*>       m_SearchFrontier;
 
 	int                            m_iSource;
 	int                            m_iTarget;
@@ -44,7 +44,7 @@ public:
 	}
 
 	//returns the vector of edges that the algorithm has examined
-	std::vector<GraphEdge*> GetSPT()const { return m_ShortestPathTree; }
+	std::vector<const GraphEdge*> GetSPT()const { return m_ShortestPathTree; }
 
 	//returns a vector of node indexes that comprise the shortest path
 	//from the source to the target
@@ -77,9 +77,9 @@ void AStarSearch::Search()
 		if (NextClosestNode == m_iTarget) return;
 
 		//now to test all the edges attached to this node
-		SparseGraph::EdgeIterator ConstEdgeItr(m_Graph, NextClosestNode);
+		SparseGraph::ConstEdgeIterator ConstEdgeItr(m_Graph, NextClosestNode);
 
-		for (GraphEdge* pE = ConstEdgeItr.begin(); !ConstEdgeItr.end(); pE = ConstEdgeItr.next())
+		for (const GraphEdge* pE = ConstEdgeItr.begin(); !ConstEdgeItr.end(); pE = ConstEdgeItr.next())
 		{
 			//calculate the heuristic cost from this node to the target (H)                       
 			double HCost = Heuristic_Euclid::Calculate(m_Graph, m_iTarget, pE->To());
