@@ -143,6 +143,13 @@
       <Filter>Source Code\Graph</Filter>
     </ClCompile>
     <ClCompile Include="Graph\GraphEdge.cpp" />
+    <ClCompile Include="Graph\GraphNode.cpp" />
+    <ClCompile Include="Otros\Vec2f.cpp">
+      <Filter>Source Code\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\PriorityQueue.cpp">
+      <Filter>Source Code\Otros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -366,6 +373,18 @@
       <Filter>Headers\Graph</Filter>
     </ClInclude>
     <ClInclude Include="Graph\GraphEnumeration.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Vec2f.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\PriorityQueue.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\AStarSearch.h">
+      <Filter>Headers\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\Heuristic.h">
       <Filter>Headers\Graph</Filter>
     </ClInclude>
   </ItemGroup>

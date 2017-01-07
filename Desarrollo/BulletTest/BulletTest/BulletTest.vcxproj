@@ -86,7 +86,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
@@ -197,9 +197,11 @@
     <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
     <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graph\AStarSearch.h" />
     <ClInclude Include="Graph\GraphEdge.h" />
     <ClInclude Include="Graph\GraphEnumeration.h" />
     <ClInclude Include="Graph\GraphNode.h" />
+    <ClInclude Include="Graph\Heuristic.h" />
     <ClInclude Include="Graph\NavGraphNode.h" />
     <ClInclude Include="Graph\SparseGraph.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
@@ -227,9 +229,11 @@
     <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
+    <ClInclude Include="Otros\PriorityQueue.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\Util.h" />
+    <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="States\State.hpp" />
@@ -261,6 +265,7 @@
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Graph\GraphEdge.cpp" />
+    <ClCompile Include="Graph\GraphNode.cpp" />
     <ClCompile Include="Graph\SparseGraph.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
@@ -283,8 +288,10 @@
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
+    <ClCompile Include="Otros\PriorityQueue.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
+    <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
   </ItemGroup>

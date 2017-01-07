@@ -1,4 +1,5 @@
 #pragma once
+#include <GraphEnumeration.h>
 class GraphEdge {
 protected:
 	int m_from;

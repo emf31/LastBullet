@@ -17,4 +17,7 @@ public:
 	{}
 	void* extraInfo()const { return m_extraInfo; };
 
+	void setExtraInfo(void* extra_inf) { m_extraInfo = extra_inf; }
+
+	Vec2f getPosition() const { return m_position; }
 };

@@ -25,6 +25,22 @@ public:
 	void addEdge(GraphEdge edge);
 	void removeEdge(int from, int to);
 
+	void printGrafo() {
+		for (std::vector<std::list<GraphEdge>>::iterator curEdgeList = m_Edges.begin(); curEdgeList != m_Edges.end(); ++curEdgeList)
+		{
+			std::cout << "Nodo " << (*curEdgeList).begin()->From() << std::endl;
+
+			for (std::list<GraphEdge>::iterator curEdge = (*curEdgeList).begin(); curEdge != (*curEdgeList).end(); ++curEdge)
+			{
+				std::cout << "  " << curEdge->To();
+			}
+
+			std::cout << std::endl;
+		}
+
+		
+	}
+
 	//returns true if an edge is not already present in the graph. Used
 	//when adding edges to make sure no duplicates are created.
 	bool  UniqueEdge(int from, int to)const;
