@@ -79,9 +79,7 @@ void AStarSearch::Search()
 		//now to test all the edges attached to this node
 		SparseGraph::EdgeIterator ConstEdgeItr(m_Graph, NextClosestNode);
 
-		for (GraphEdge* pE = ConstEdgeItr.begin();
-			ConstEdgeItr.end();
-			pE = ConstEdgeItr.next())
+		for (GraphEdge* pE = ConstEdgeItr.begin(); !ConstEdgeItr.end(); pE = ConstEdgeItr.next())
 		{
 			//calculate the heuristic cost from this node to the target (H)                       
 			double HCost = Heuristic_Euclid::Calculate(m_Graph, m_iTarget, pE->To());

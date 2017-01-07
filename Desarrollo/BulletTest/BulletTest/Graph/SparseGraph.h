@@ -96,6 +96,7 @@ public:
 
 		GraphEdge*  next()
 		{
+			//if(!end())
 			++curEdge;
 
 			return &(*curEdge);
@@ -105,6 +106,7 @@ public:
 		//return true if we are at the end of the edge list
 		bool end()
 		{
+			//std::cout << G.m_Edges[NodeIndex].size();
 			return (curEdge == G.m_Edges[NodeIndex].end());
 		}
 
