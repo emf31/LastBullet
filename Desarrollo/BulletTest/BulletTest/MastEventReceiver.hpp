@@ -28,7 +28,6 @@
 /// ==============================
 /// MastEventReceiver
 /// ==============================
-
 class MastEventReceiver : public irr::IEventReceiver
 {
 protected:

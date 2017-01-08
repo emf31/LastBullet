@@ -212,6 +212,7 @@
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />
+    <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />

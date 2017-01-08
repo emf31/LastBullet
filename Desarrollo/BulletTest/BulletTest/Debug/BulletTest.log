@@ -1,3 +1,7 @@
-﻿  Game.cpp
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+﻿  GraphicEngine.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  BulletTest.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

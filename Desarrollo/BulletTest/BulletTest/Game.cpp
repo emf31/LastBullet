@@ -316,8 +316,12 @@ bool Game::processEvents()
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		GraphicEngine::i().getGui().showMouseCursor(GraphicEngine::i().getGui().debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!GraphicEngine::i().getGui().debugInput);
+		GraphicEngine::i().getGui().getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+	} else if (MastEventReceiver::i().leftMouseDown()) {
+		GraphicEngine::i().getGui().injectLeftMouseButton();
+	} else if (MastEventReceiver::i().leftMouseUp()) {
+		GraphicEngine::i().getGui().injectLeftMouseButtonUp();
 	}
-	GraphicEngine::i().getGui().injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
 
 	return false;
 }
@@ -334,6 +338,8 @@ void Game::update(Time elapsedTime)
 
 	PhysicsEngine::i().notifyCollisions();
 	MessageHandler::i().update();
+
+	
 }
 
 void Game::render(float interpolation, Time elapsedTime)
@@ -342,6 +348,11 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 	GraphicEngine::i().updateCamera();
+
+	//GUI
+	GraphicEngine::i().getGui().injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+
+	GraphicEngine::i().getGui().update();
 
 	GraphicEngine::i().renderAll();
 

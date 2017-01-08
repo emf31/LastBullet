@@ -274,6 +274,12 @@ void GraphicEngine::inicializar()
 		gui.setMouseCursor("AlfiskoSkin/MouseArrow");
 
 		gui.showMouseCursor(false);
+
+		CEGUI::PushButton *DebugShapesButton = static_cast<CEGUI::PushButton*>(gui.getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));
+		DebugShapesButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GraphicEngine::onDebugShapesClicked, this));
+
+		CEGUI::PushButton* closePushButton = static_cast<CEGUI::PushButton*>(gui.getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(99)->getChild(100));
+		closePushButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GraphicEngine::onCloseMenuButtonClicked, this));
 }
 
 bool GraphicEngine::isRuning()
@@ -341,4 +347,18 @@ void GraphicEngine::cargarTexturas() {
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	irrScene->addToDeletionQueue(nodo->getNodo());
+}
+
+bool GraphicEngine::onDebugShapesClicked(const CEGUI::EventArgs& e) {
+	toggleDebug();
+	return true;
+}
+
+bool GraphicEngine::onCloseMenuButtonClicked(const CEGUI::EventArgs& e) {
+	gui.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(0.0f);
+
+	gui.debugInput = !GraphicEngine::i().getGui().debugInput;
+	gui.showMouseCursor(GraphicEngine::i().getGui().debugInput);
+	getActiveCamera()->setInputReceiver(!gui.debugInput);
+	return true;
 }

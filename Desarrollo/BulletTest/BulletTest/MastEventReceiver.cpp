@@ -56,6 +56,13 @@ bool MastEventReceiver::leftMousePressed()
 		return false;
 }
 
+bool MastEventReceiver::leftMouseUp() {
+	if (mouseButtonState[0] == PRESSED || mouseButtonState[0] == DOWN)
+		return false;
+	else
+		return true;
+}
+
 bool MastEventReceiver::leftMouseDown()
 {
 	if (mouseButtonState[0] == PRESSED || mouseButtonState[0] == DOWN)
@@ -268,6 +275,7 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			//Left Mouse Button Pressed
 			if (event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN)
 			{
+				//GraphicEngine::i().getGui().injectMouseButton(EMIE_LMOUSE_PRESSED_DOWN);
 				//
 				if (mouseButtonState[0] == UP || mouseButtonState[0] == RELEASED)
 					mouseButtonState[0] = PRESSED;
@@ -308,6 +316,7 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			//Right Mouse Button Pressed
 			if (event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN)
 			{
+				//GraphicEngine::i().getGui().injectMouseButton(EMIE_RMOUSE_PRESSED_DOWN);
 				//
 				if (mouseButtonState[2] == UP || mouseButtonState[2] == RELEASED)
 					mouseButtonState[2] = PRESSED;

@@ -393,6 +393,9 @@
     <ClInclude Include="GUI\GUI.h">
       <Filter>Headers\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="MastEventReceiver.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
