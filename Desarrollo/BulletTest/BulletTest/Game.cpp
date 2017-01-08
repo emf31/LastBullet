@@ -245,6 +245,7 @@ void Game::inicializar()
 
 
 	//GRAFO
+	/*
 	//True, grafo dirigido
 	SparseGraph grafo(true);
 
@@ -289,7 +290,7 @@ void Game::inicializar()
 
 	grafo.printGrafo();
 
-	AStarSearch astar(grafo, 0 , 2);
+	AStarSearch astar(grafo, 0 , 2);*/
 
 }
 

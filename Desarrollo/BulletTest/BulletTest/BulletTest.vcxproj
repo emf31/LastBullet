@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -204,6 +204,7 @@
     <ClInclude Include="Graph\Heuristic.h" />
     <ClInclude Include="Graph\NavGraphNode.h" />
     <ClInclude Include="Graph\SparseGraph.h" />
+    <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="Graph\GraphEdge.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />
     <ClCompile Include="Graph\SparseGraph.cpp" />
+    <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
