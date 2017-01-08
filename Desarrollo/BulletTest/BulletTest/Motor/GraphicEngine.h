@@ -13,6 +13,8 @@
 
 #include "DebugDraw.h"
 
+#include <GUI.h>
+
 
 using namespace irr;
 using namespace core;
@@ -55,6 +57,7 @@ public:
 	void setCameraEntity(Entity* entity);
 	void updateCamera();
 	Camera* getActiveCamera();
+	
 
 	void mostrarInterfaz(/*Player* player*/);
 	void actualizarInterfaz(/*Player* player*/);
@@ -85,6 +88,8 @@ public:
 		debug_camera = !debug_camera;
 	}
 
+	Motor::GUI& getGui() { return gui; }
+	//void setCursorVisible(bool t) { gui.showMouseCursor(t); }
 private:
 	IrrlichtDevice *irrDevice;
 	IVideoDriver *irrDriver;
@@ -108,5 +113,7 @@ private:
 
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();
+
+	Motor::GUI gui;
 };
 

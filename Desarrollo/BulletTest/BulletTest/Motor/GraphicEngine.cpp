@@ -11,6 +11,7 @@
 
 GraphicEngine::GraphicEngine() : debug_camera(true)
 {
+	
 }
 
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
@@ -90,6 +91,7 @@ void GraphicEngine::updateCamera()
 {
 	if(debug_camera && active_camera != NULL)
 		active_camera->update();
+	
 }
 
 
@@ -191,6 +193,7 @@ void GraphicEngine::renderAll()
 	irrScene->drawAll();
 	irrGUI->drawAll();
 
+
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	if (debug_draw_bullet)
 	{
@@ -202,6 +205,8 @@ void GraphicEngine::renderAll()
 		PhysicsEngine::i().m_world->debugDrawWorld();
 
 	}
+
+	gui.draw();
 
 	irrDriver->endScene();
 	int fps = irrDriver->getFPS();
@@ -258,8 +263,17 @@ void GraphicEngine::inicializar()
 
 		debug_draw_bullet = true;
 	//}
-	
 
+
+		gui.init("GUI", irrDevice);
+
+		gui.loadScheme("AlfiskoSkin.scheme");
+
+		gui.loadLayout("SimpleDebug.layout");
+	
+		gui.setMouseCursor("AlfiskoSkin/MouseArrow");
+
+		gui.showMouseCursor(false);
 }
 
 bool GraphicEngine::isRuning()
