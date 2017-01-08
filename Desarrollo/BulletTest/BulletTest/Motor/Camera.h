@@ -22,10 +22,13 @@ public:
 	void asignarEntity(Entity* ent);
 	void update();
 
+	void setInputReceiver(bool input) { m_camera->setInputReceiverEnabled(input);  }
+
 	Vec3<float> getRotation();
 
 private:
 	ICameraSceneNode* m_camera;
+	
 	Entity* m_entity;
 };
 

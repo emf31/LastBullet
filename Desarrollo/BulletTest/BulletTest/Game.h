@@ -14,6 +14,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
 
+#include <GUI.h>
 
 class Game
 {
@@ -33,5 +34,4 @@ public:
 private:
 	
 	float interpolation;
-	
 };

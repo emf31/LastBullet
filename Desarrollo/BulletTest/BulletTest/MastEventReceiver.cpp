@@ -224,6 +224,7 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			// if key is Pressed Down
 			if (event.KeyInput.PressedDown == true)
 			{
+				//GraphicEngine::i().getGui().injectKeyDown(event.KeyInput.Key);
 				// If key was not down before
 				if (keyState[event.KeyInput.Key] != DOWN)
 					keyState[event.KeyInput.Key] = PRESSED; // Set to Pressed
@@ -256,6 +257,8 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			{
 				mouse.Y = event.MouseInput.Y;
 				mouse.X = event.MouseInput.X;
+
+				//GraphicEngine::i().getGui().injectMousePosition(mouseX(), mouseY());
 			}
 
 			//Wheel moved.

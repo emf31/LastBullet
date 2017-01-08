@@ -103,7 +103,7 @@ void Game::run()
 			}
 		if (GraphicEngine::i().isWindowActive()) {
 
-			interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
+			interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 			render(interpolation, timePerFrame);
 
@@ -296,7 +296,11 @@ void Game::inicializar()
 
 bool Game::processEvents()
 {
-	EntityManager::i().handleInput();
+
+	if (!GraphicEngine::i().getGui().debugInput) {
+		EntityManager::i().handleInput();
+	}
+	
 
 	//Teclas debug
 	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
@@ -307,7 +311,13 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_TAB)) {
 		EntityManager::i().muestraTabla();
+	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
+		GraphicEngine::i().getGui().debugInput = !GraphicEngine::i().getGui().debugInput;
+		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
+		GraphicEngine::i().getGui().showMouseCursor(GraphicEngine::i().getGui().debugInput);
+		GraphicEngine::i().getActiveCamera()->setInputReceiver(!GraphicEngine::i().getGui().debugInput);
 	}
+	GraphicEngine::i().getGui().injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
 
 	return false;
 }

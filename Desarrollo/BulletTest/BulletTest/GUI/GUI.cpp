@@ -1,11 +1,11 @@
 #include "GUI.h"
 
 
-void Motor::GUI::init(const std::string& resourcesPath){
+void Motor::GUI::init(const std::string& resourcesPath, irr::IrrlichtDevice *device){
 	//Solo inicializamos una vez m_renderer
 	
-	if (m_renderer == nullptr) {
-		m_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
+	if (m_rendererIrrlicht == nullptr) {
+		m_rendererIrrlicht = &CEGUI::IrrlichtRenderer::bootstrapSystem(*device);
 
 		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 
@@ -26,7 +26,7 @@ void Motor::GUI::init(const std::string& resourcesPath){
 
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 
-	m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
+	m_context = &CEGUI::System::getSingleton().createGUIContext(m_rendererIrrlicht->getDefaultRenderTarget());
 	m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 	m_context->setRootWindow(m_root);
 }
@@ -38,9 +38,9 @@ void Motor::GUI::destroy() {
 
 void Motor::GUI::draw() {
 	
-	m_renderer->beginRendering();
+	m_rendererIrrlicht->beginRendering();
 	m_context->draw();
-	m_renderer->endRendering();
+	m_rendererIrrlicht->endRendering();
 	//glDisable(GL_SCISSOR_TEST);
 }
 
