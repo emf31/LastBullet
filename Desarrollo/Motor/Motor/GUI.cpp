@@ -3,6 +3,7 @@
 
 void Motor::GUI::init(const std::string& resourcesPath){
 	//Solo inicializamos una vez m_renderer
+	
 	if (m_renderer == nullptr) {
 		m_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 
@@ -23,6 +24,8 @@ void Motor::GUI::init(const std::string& resourcesPath){
 		CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 	}
 
+	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+
 	m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
 	m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 	m_context->setRootWindow(m_root);
@@ -34,10 +37,11 @@ void Motor::GUI::destroy() {
 }
 
 void Motor::GUI::draw() {
+	
 	m_renderer->beginRendering();
 	m_context->draw();
 	m_renderer->endRendering();
-	glDisable(GL_SCISSOR_TEST);
+	//glDisable(GL_SCISSOR_TEST);
 }
 
 void Motor::GUI::loadScheme(const std::string& schemeFile){
@@ -53,6 +57,12 @@ CEGUI::Window* Motor::GUI::createWidget(const std::string& type, const vec4f& de
 	CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().createWindow(type, name);
 	m_root->addChild(newWindow);
 	setWidgetDestRect(newWindow, destRectPerc, destRectPix);
+	return newWindow;
+}
+
+CEGUI::Window * Motor::GUI::loadLayout(const std::string & layout) {
+	CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile(layout);
+	m_root->addChild(newWindow);
 	return newWindow;
 }
 

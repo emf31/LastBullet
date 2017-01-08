@@ -40,4 +40,5 @@ void Input::Do_Movement(GLfloat deltaTime) {
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (keys[GLFW_KEY_D])
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+
 }

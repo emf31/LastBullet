@@ -19,6 +19,8 @@ namespace Motor{
 
 		CEGUI::Window* createWidget(const std::string& type, const vec4f& destRectPerc, const vec4f& destRectPix, const std::string& name="");
 
+		CEGUI::Window* loadLayout(const std::string& layout);
+
 		static void setWidgetDestRect(CEGUI::Window* widget, const vec4f& destRectPerc, const vec4f& destRectPix);
 		//Getters
 		CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }

@@ -5,6 +5,8 @@
 #include "Shader.h"
 #include "Camera.h"
 
+#include "GUI.h"
+
 #include <GLEW/glew.h>
 //GLFW
 #include <GLFW/glfw3.h>
@@ -27,4 +29,6 @@ public:
 private:
 	ResourceManager *rm;
 	TNode scene;
+	Motor::GUI gui;
+
 };

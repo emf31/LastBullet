@@ -17,25 +17,7 @@ int main() {
 		return -1;
 	}
 	SceneManager *sm = engine.getSceneManager();
-
-	Motor::GUI gui;
-	gui.init("GUI");
-	gui.loadScheme("TaharezLook.scheme");
-	gui.setFont("DejaVuSans-10");
-	vec4f perc;
-	perc.x = 0.5f;
-	perc.y = 0.5f;
-	perc.z = 0.1f;
-	perc.w = 0.05f;
-
-	vec4f perx;
-
-	perx.x = 0.0f;
-	perx.y = 0.0f;
-	perx.z = 0.0f;
-	perx.w = 0.0f;
-
-	gui.createWidget("TaharezLook/Button",perc, perx, "Test");
+	
 
 	TNode* n = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
