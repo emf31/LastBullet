@@ -8,10 +8,7 @@
  *
  */
 
-#if   defined (WINDOWS_STORE_RT)
-#include <windows.h>
-#include <winsock.h>
-#elif defined (_WIN32)
+
 #include <WinSock2.h>
 #include <windows.h>
 #include <Ws2tcpip.h>
@@ -26,4 +23,3 @@
 // winsock2.h(212) : error C2011: 'netent' : 'struct' type redefinition
 // winsock2.h(219) : error C2011: 'servent' : 'struct' type redefinition 
 
-#endif

@@ -3,11 +3,9 @@
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <CEGUI/RendererModules/Irrlicht/Renderer.h>
-#include <irrlitch/IEventReceiver.h>
 
 #include "../MastEventReceiver.hpp"
 
-#include <time.hpp>
 
 struct vec4f{
 	float x, y, z, w;
@@ -20,7 +18,7 @@ namespace Motor{
 		void destroy();
 		void draw();
 
-		void update();
+		virtual void update()=0;
 
 		void loadScheme(const std::string& schemeFile);
 		void setFont(const std::string& fontFile);
@@ -58,14 +56,14 @@ namespace Motor{
 		static void setWidgetDestRect(CEGUI::Window* widget, const vec4f& destRectPerc, const vec4f& destRectPix);
 		//Getters
 		CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
-		CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_rendererIrrlicht; }
+		//CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_rendererIrrlicht; }
 		const CEGUI::GUIContext* getContext() { return m_context; }
 
 		bool debugInput = false;
 
 	private:
 		CEGUI::OpenGL3Renderer* m_renderer;
-		CEGUI::IrrlichtRenderer* m_rendererIrrlicht;
+		//CEGUI::IrrlichtRenderer* m_rendererIrrlicht;
 		CEGUI::GUIContext* m_context = nullptr;
 
 		CEGUI::Window* m_root = nullptr;

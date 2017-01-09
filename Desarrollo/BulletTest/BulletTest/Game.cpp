@@ -24,11 +24,15 @@
 #include <Cliente.h>
 #include <TriggerSystem.h>
 #include <MessageHandler.h>
-#include <Windows.h>
+
 
 #include <SparseGraph.h>
 #include <GraphEdge.h>
 #include <AStarSearch.h>
+
+
+#include <GUIManager.h>
+
 
 const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
@@ -242,7 +246,8 @@ void Game::inicializar()
 
 	}
 
-
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
 
 	//GRAFO
 	/*
@@ -297,7 +302,7 @@ void Game::inicializar()
 bool Game::processEvents()
 {
 
-	if (!GraphicEngine::i().getGui().debugInput) {
+	if (!debugMenu.debugInput) {
 		EntityManager::i().handleInput();
 	}
 	
@@ -312,15 +317,15 @@ bool Game::processEvents()
 	else if (MastEventReceiver::i().keyPressed(KEY_TAB)) {
 		EntityManager::i().muestraTabla();
 	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
-		GraphicEngine::i().getGui().debugInput = !GraphicEngine::i().getGui().debugInput;
+		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
-		GraphicEngine::i().getGui().showMouseCursor(GraphicEngine::i().getGui().debugInput);
-		GraphicEngine::i().getActiveCamera()->setInputReceiver(!GraphicEngine::i().getGui().debugInput);
-		GraphicEngine::i().getGui().getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+		debugMenu.showMouseCursor(debugMenu.debugInput);
+		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
 	} else if (MastEventReceiver::i().leftMouseDown()) {
-		GraphicEngine::i().getGui().injectLeftMouseButton();
+		debugMenu.injectLeftMouseButton();
 	} else if (MastEventReceiver::i().leftMouseUp()) {
-		GraphicEngine::i().getGui().injectLeftMouseButtonUp();
+		debugMenu.injectLeftMouseButtonUp();
 	}
 
 	return false;
@@ -339,6 +344,8 @@ void Game::update(Time elapsedTime)
 	PhysicsEngine::i().notifyCollisions();
 	MessageHandler::i().update();
 
+	GUIManager::i().updateAllGuis();
+
 	
 }
 
@@ -350,9 +357,10 @@ void Game::render(float interpolation, Time elapsedTime)
 	GraphicEngine::i().updateCamera();
 
 	//GUI
-	GraphicEngine::i().getGui().injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+	debugMenu.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+	
 
-	GraphicEngine::i().getGui().update();
+	//GraphicEngine::i().getGui().update();
 
 	GraphicEngine::i().renderAll();
 

@@ -14,8 +14,6 @@
 #include "DebugDraw.h"
 
 #include <GUI.h>
-
-
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -88,12 +86,9 @@ public:
 		debug_camera = !debug_camera;
 	}
 
-	bool onDebugShapesClicked(const CEGUI::EventArgs& e);
-
-	bool onCloseMenuButtonClicked(const CEGUI::EventArgs & e);
-
-	Motor::GUI& getGui() { return gui; }
 	//void setCursorVisible(bool t) { gui.showMouseCursor(t); }
+
+	IrrlichtDevice* getDevice() { return irrDevice; }
 private:
 	IrrlichtDevice *irrDevice;
 	IVideoDriver *irrDriver;
@@ -118,6 +113,5 @@ private:
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();
 
-	Motor::GUI gui;
 };
 

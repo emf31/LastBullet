@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="AlfiskoSkin/Label" name="Label" >
+            <Property name="Area" value="{{0.0390625,0},{0.736111,-1},{0.0390625,128},{0.736111,31}}" />
+            <Property name="Text" value="Vida: " />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FFFF3030" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label2" >
+            <Property name="Area" value="{{0.0390625,0},{0.854167,0},{0.0390625,128},{0.854167,32}}" />
+            <Property name="Text" value="Municion:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label3" >
+            <Property name="Area" value="{{0.0390625,0},{0.791667,-1},{0.0390625,128},{0.791667,31}}" />
+            <Property name="Text" value="Arma:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label4" >
+            <Property name="Area" value="{{0.0390625,0},{0.916667,-1},{0.0390625,128},{0.916667,31}}" />
+            <Property name="Text" value="Municion total:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label5" >
+            <Property name="ID" value="1" />
+            <Property name="Area" value="{{0.0859375,75},{0.736111,0},{0.0859375,203},{0.736111,32}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FFFF3030" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label6" >
+            <Property name="ID" value="2" />
+            <Property name="Area" value="{{0.0859375,75},{0.791667,-1},{0.0859375,203},{0.791667,31}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label7" >
+            <Property name="ID" value="3" />
+            <Property name="Area" value="{{0.0859375,75},{0.854167,-1},{0.0859375,203},{0.854167,31}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label8" >
+            <Property name="ID" value="4" />
+            <Property name="Area" value="{{0.0859375,75},{0.916667,-1},{0.0859375,203},{0.916667,31}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+    </Window>
+</GUILayout>

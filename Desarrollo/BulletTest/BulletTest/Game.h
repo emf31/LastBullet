@@ -14,7 +14,8 @@
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
 
-#include <GUI.h>
+#include <InGameHUD.h>
+#include <DebugMenuGUI.h>
 
 class Game
 {
@@ -32,6 +33,7 @@ public:
 	static const Time timePerFrame;
 
 private:
-	
+	InGameHUD ingameGUI;
+	DebugMenuGUI debugMenu;
 	float interpolation;
 };

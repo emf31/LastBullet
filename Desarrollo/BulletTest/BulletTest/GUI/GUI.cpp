@@ -1,34 +1,14 @@
 #include "GUI.h"
-
+#include <GUIManager.h>
 
 void Motor::GUI::init(const std::string& resourcesPath, irr::IrrlichtDevice *device){
-	//Solo inicializamos una vez m_renderer
-	
-	if (m_rendererIrrlicht == nullptr) {
-		m_rendererIrrlicht = &CEGUI::IrrlichtRenderer::bootstrapSystem(*device);
-
-		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
-
-		resourceProvider->setResourceGroupDirectory("imagesets", resourcesPath + "/imagesets/");
-		resourceProvider->setResourceGroupDirectory("schemes", resourcesPath + "/schemes/");
-		resourceProvider->setResourceGroupDirectory("fonts", resourcesPath + "/fonts/");
-		resourceProvider->setResourceGroupDirectory("layouts", resourcesPath + "/layouts/");
-		resourceProvider->setResourceGroupDirectory("looknfeels", resourcesPath + "/looknfeel/");
-		resourceProvider->setResourceGroupDirectory("lua_scripts", resourcesPath + "/lua_scripts/");
-
-		CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-		CEGUI::Scheme::setDefaultResourceGroup("schemes");
-		CEGUI::Font::setDefaultResourceGroup("fonts");
-		CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-		CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-		CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
-	}
-
+	GUIManager::i().init(resourcesPath, device);
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-
-	m_context = &CEGUI::System::getSingleton().createGUIContext(m_rendererIrrlicht->getDefaultRenderTarget());
+	m_context = &CEGUI::System::getSingleton().createGUIContext(GUIManager::i().getIrrlichtRenderer()->getDefaultRenderTarget());
 	m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 	m_context->setRootWindow(m_root);
+
+	GUIManager::i().addGui(this);
 }
 
 
@@ -38,13 +18,13 @@ void Motor::GUI::destroy() {
 
 void Motor::GUI::draw() {
 	
-	m_rendererIrrlicht->beginRendering();
+	GUIManager::i().getIrrlichtRenderer()->beginRendering();
 	m_context->draw();
-	m_rendererIrrlicht->endRendering();
+	GUIManager::i().getIrrlichtRenderer()->endRendering();
 	//glDisable(GL_SCISSOR_TEST);
 }
 
-void Motor::GUI::update() {
+/*void Motor::GUI::update() {
 	unsigned int elapsed;
 	Time time;
 	if (m_lastTime == 0) {
@@ -56,7 +36,7 @@ void Motor::GUI::update() {
 		m_lastTime = nextTime;
 	}
 	m_context->injectTimePulse(elapsed);
-}
+}*/
 
 void Motor::GUI::loadScheme(const std::string& schemeFile){
 	CEGUI::SchemeManager::getSingleton().createFromFile(schemeFile);
