@@ -246,7 +246,7 @@ void Game::inicializar()
 
 	//GRAFO
 	//True, grafo dirigido
-	SparseGraph grafo(true);
+	/*SparseGraph grafo(true);
 
 	NavGraphNode nodo1(grafo.getNextFreeNodeIndex(), Vec2f(0,30));
 	grafo.addNode(nodo1);
@@ -290,7 +290,7 @@ void Game::inicializar()
 	grafo.printGrafo();
 
 	AStarSearch astar(grafo, 0 , 2);
-
+	std::list<int> camino = astar.GetPathToTarget();*/
 }
 
 bool Game::processEvents()

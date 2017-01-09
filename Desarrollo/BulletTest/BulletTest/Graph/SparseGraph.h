@@ -9,11 +9,12 @@
 class SparseGraph {
 private:
 	std::vector<NavGraphNode> m_nodes;
-	std::vector<std::list<GraphEdge>> m_Edges;
+	
 	bool m_digraph;
 	int m_nextNodeIndex;
 
 public:
+	std::vector<std::list<GraphEdge>> m_Edges;
 
 	SparseGraph(bool digraph) : m_digraph(digraph), m_nextNodeIndex(0) {};
 	//const NavGraphNode& GetNode(int idx) { return m_nodes.at(idx); };
@@ -155,10 +156,21 @@ public:
 		}
 
 		//return true if we are at the end of the edge list
-		bool end()
+		const GraphEdge* end()
 		{
-			return (curEdge == G.m_Edges[NodeIndex].end());
+			return &(*G.m_Edges[NodeIndex].end());
 		}
+
+		bool operator == (const GraphEdge& rhs) const
+		{
+			return *curEdge == rhs;
+		}
+
+		bool operator != (const GraphEdge& rhs) const
+		{
+			return *curEdge != rhs;
+		}
+
 	};
 
 	friend class ConstEdgeIterator;

@@ -25,26 +25,16 @@ public:
 	void setCost(double cost) { m_cost = cost; };
 
 	//these two operators are required
-	bool operator==(const GraphEdge& rhs)
+	bool operator==(const GraphEdge& rhs) const
 	{
 		return rhs.m_from == this->m_from &&
 			rhs.m_to == this->m_to   &&
 			rhs.m_cost == this->m_cost;
 	}
 
-	bool operator!=(const GraphEdge& rhs)
+	bool operator!=(const GraphEdge& rhs) const
 	{
 		return !(*this == rhs);
-	}
-	bool operator==(GraphEdge& rhs)
-	{
-		return rhs.m_from == this->m_from &&
-			rhs.m_to == this->m_to   &&
-			rhs.m_cost == this->m_cost;
 	}
 
-	bool operator!=(GraphEdge& rhs)
-	{
-		return !(*this == rhs);
-	}
 };

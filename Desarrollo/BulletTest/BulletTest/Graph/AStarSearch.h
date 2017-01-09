@@ -19,8 +19,8 @@ private:
 	//iPQ indexes into.
 	std::vector<double>             m_FCosts;
 
-	 std::vector<const GraphEdge*>       m_ShortestPathTree;
-	 std::vector<const GraphEdge*>       m_SearchFrontier;
+	 std::vector<GraphEdge*>       m_ShortestPathTree;
+	 std::vector<GraphEdge*>       m_SearchFrontier;
 
 	int                            m_iSource;
 	int                            m_iTarget;
@@ -44,7 +44,7 @@ public:
 	}
 
 	//returns the vector of edges that the algorithm has examined
-	std::vector<const GraphEdge*> GetSPT()const { return m_ShortestPathTree; }
+	std::vector<GraphEdge*> GetSPT() { return m_ShortestPathTree; }
 
 	//returns a vector of node indexes that comprise the shortest path
 	//from the source to the target
@@ -77,41 +77,42 @@ void AStarSearch::Search()
 		if (NextClosestNode == m_iTarget) return;
 
 		//now to test all the edges attached to this node
-		SparseGraph::ConstEdgeIterator ConstEdgeItr(m_Graph, NextClosestNode);
+		//SparseGraph::ConstEdgeIterator ConstEdgeItr(m_Graph, NextClosestNode);
 
-		for (const GraphEdge* pE = ConstEdgeItr.begin(); !ConstEdgeItr.end(); pE = ConstEdgeItr.next())
-		{
-			//calculate the heuristic cost from this node to the target (H)                       
-			double HCost = Heuristic_Euclid::Calculate(m_Graph, m_iTarget, pE->To());
-
-			//calculate the 'real' cost to this node from the source (G)
-			double GCost = m_GCosts[NextClosestNode] + pE->Cost();
-
-			//if the node has not been added to the frontier, add it and update
-			//the G and F costs
-			if (m_SearchFrontier[pE->To()] == NULL)
+			for (std::list<GraphEdge>::iterator curEdge = m_Graph.m_Edges[NextClosestNode].begin(); curEdge != m_Graph.m_Edges[NextClosestNode].end(); ++curEdge)
 			{
-				m_FCosts[pE->To()] = GCost + HCost;
-				m_GCosts[pE->To()] = GCost;
+				//calculate the heuristic cost from this node to the target (H)                       
+				double HCost = Heuristic_Euclid::Calculate(m_Graph, m_iTarget, curEdge->To());
 
-				pq.insert(pE->To());
+				//calculate the 'real' cost to this node from the source (G)
+				double GCost = m_GCosts[NextClosestNode] + curEdge->Cost();
 
-				m_SearchFrontier[pE->To()] = pE;
+				//if the node has not been added to the frontier, add it and update
+				//the G and F costs
+				if (m_SearchFrontier[curEdge->To()] == NULL)
+				{
+					m_FCosts[curEdge->To()] = GCost + HCost;
+					m_GCosts[curEdge->To()] = GCost;
+
+					pq.insert(curEdge->To());
+
+					m_SearchFrontier[curEdge->To()] = &(*curEdge);
+				}
+
+				//if this node is already on the frontier but the cost to get here
+				//is cheaper than has been found previously, update the node
+				//costs and frontier accordingly.
+				else if ((GCost < m_GCosts[curEdge->To()]) && (m_ShortestPathTree[curEdge->To()] == NULL))
+				{
+					m_FCosts[curEdge->To()] = GCost + HCost;
+					m_GCosts[curEdge->To()] = GCost;
+
+					pq.ChangePriority(curEdge->To());
+
+					m_SearchFrontier[curEdge->To()] = &(*curEdge);
+				}
 			}
 
-			//if this node is already on the frontier but the cost to get here
-			//is cheaper than has been found previously, update the node
-			//costs and frontier accordingly.
-			else if ((GCost < m_GCosts[pE->To()]) && (m_ShortestPathTree[pE->To()] == NULL))
-			{
-				m_FCosts[pE->To()] = GCost + HCost;
-				m_GCosts[pE->To()] = GCost;
-
-				pq.ChangePriority(pE->To());
-
-				m_SearchFrontier[pE->To()] = pE;
-			}
-		}
 	}
 }
 
