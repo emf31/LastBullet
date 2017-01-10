@@ -57,9 +57,6 @@ public:
 	Camera* getActiveCamera();
 	
 
-	void mostrarInterfaz(/*Player* player*/);
-	void actualizarInterfaz(/*Player* player*/);
-	const wchar_t *GetWC(const char *c);
 	IGUIStaticText* vida;
 	IGUIStaticText* ammo;
 	IGUIStaticText* ammototal;

@@ -142,9 +142,7 @@ void Player::inicializar()
 	pistola->setEquipada(true);
 	tienePistola = true;
 
-	
 
-	GraphicEngine::i().mostrarInterfaz();
 }
 
 
@@ -157,7 +155,6 @@ void Player::update(Time elapsedTime)
 	if (p_controller->onGround()) {
 		p_controller->jumpedOnAir = false;
 	}
-
 	speedFinal = Vec3<float>(0, 0, 0);
 
 	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
@@ -173,8 +170,6 @@ void Player::update(Time elapsedTime)
 			btVector3(0.f, 0.f, 0.f));
 	}
 
-
-	GraphicEngine::i().actualizarInterfaz();
 
 
 	
