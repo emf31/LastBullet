@@ -139,19 +139,42 @@ void EntityManager::cleanDeleteQueue()
 
 void EntityManager::muestraTabla()
 {
-	
+	//queremos hacer una copia asi que no hacemos puntero aqui
+	std::unordered_map <unsigned long, TFilaTabla> aux;
+	std::vector<TFilaTabla> ordenado;
+	int max=-1;
+	RakNet::RakNetGUID guid;
+	TFilaTabla fila;
+	//fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	aux = m_tabla;
+	while (aux.size() > 0) {
+		for (auto i = aux.begin(); i != aux.end(); ++i) {
+			if (i->second.kills > max) {
+				max = i->second.kills;
+				guid = i->second.guid;
+			}
+
+		}
+		ordenado.push_back(aux.find(RakNet::RakNetGUID::ToUint32(guid))->second);
+		aux.erase(RakNet::RakNetGUID::ToUint32(guid));
+		max = -1;
+	}
+
 	std::cout << "*****************************************************************" << std::endl;
-	for (auto i = m_tabla.begin(); i != m_tabla.end(); ++i) {
+	for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
+
+
 
 		std::cout << "//////////" << std::endl;
-		std::cout << "Nombre del player: " << i->second.name << std::endl;
-		std::cout << "Kills: " << i->second.kills << std::endl;
-		std::cout << "Death: " << i->second.deaths << std::endl;
-		std::cout << "Puntuacion: " << i->second.puntuacion << std::endl;
+		std::cout << "Nombre del player: " << i->name << std::endl;
+		std::cout << "Kills: " << i->kills << std::endl;
+		std::cout << "Death: " << i->deaths << std::endl;
+		std::cout << "Puntuacion: " << i->puntuacion << std::endl;
 		std::cout << "//////////" << std::endl;
-		
+
 
 	}
+
 	std::cout << "*****************************************************************" << std::endl;
 }
 

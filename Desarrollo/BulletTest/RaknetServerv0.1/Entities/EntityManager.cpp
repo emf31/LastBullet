@@ -444,6 +444,17 @@ void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterf
 
 
 	}
+	if (fila->kills >= MaxScore) {
+		for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+			//se envia a TODOS para que todos actualicen la tabla de puntuacion
+			bsOut.Write((RakNet::MessageID)FIN_PARTIDA);
+			bsOut.Write(guid);
+			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			bsOut.Reset();
+
+		}
+	}
 }
 
 void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)

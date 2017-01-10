@@ -401,6 +401,40 @@ void Cliente::update() {
 
 			}
 			break;
+			case FIN_PARTIDA:
+			{
+
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				bsIn.Read(guidTabla);
+
+				//std::cout << "el player " << p.name << " ha muerto" << std::endl;
+
+				if (EntityManager::i().getRaknetEntity(guidTabla)->getID() == PLAYER) {
+					//es el player
+					Player* player = (Player*)EntityManager::i().getRaknetEntity(guidTabla);
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+					std::cout << "FIN DE LA PARTIDA:" << std::endl;
+					std::cout << "HAS GANADO" << std::endl;
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+				}
+				else {
+					//es un enemigo
+					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(guidTabla);
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+					std::cout << "FIN DE LA PARTIDA:" << std::endl;
+					std::cout << "El player " << enemigo->getName() << " ha ganado" << std::endl;
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+				}
+				std::cout << "PUNTUACION FINAL:" << std::endl;
+				EntityManager::i().muestraTabla();
+				std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+				
+
+
+			}
+			break;
 
 			case ID_UNCONNECTED_PONG:
 			{

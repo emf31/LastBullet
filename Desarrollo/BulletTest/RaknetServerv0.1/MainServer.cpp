@@ -51,6 +51,7 @@ int main() {
 	
 	
 	
+	
 	//std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
@@ -395,11 +396,12 @@ int main() {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				//recibo el guid del cliente que ha sido disparado
 				bsIn.Read(kill);
+				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
 				if (kill.guidDeath != kill.guidKill) {
 					//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado
 					EntityManager::i().aumentaKill(kill.guidKill, peer);	
 				}
-				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+				
 				
 
 			}

@@ -61,6 +61,7 @@ public:
 	void removeEntity(Entity* entity);
 	Entity * getRaknetEntity(RakNet::RakNetGUID guid);
 	Entity * getEntityID(int id);
+	int MaxScore = 5;
 
 private:
 	EntityManager(EntityManager const&);
