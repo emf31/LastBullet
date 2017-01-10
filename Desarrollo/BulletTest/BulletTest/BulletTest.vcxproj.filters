@@ -150,6 +150,18 @@
     <ClCompile Include="Otros\PriorityQueue.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\GUI.cpp">
+      <Filter>Source Code\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\InGameHUD.cpp">
+      <Filter>Source Code\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\GUIManager.cpp">
+      <Filter>Source Code\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\DebugMenuGUI.cpp">
+      <Filter>Source Code\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -387,6 +399,21 @@
     <ClInclude Include="Graph\Heuristic.h">
       <Filter>Headers\Graph</Filter>
     </ClInclude>
+    <ClInclude Include="GUI\GUI.h">
+      <Filter>Headers\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MastEventReceiver.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\InGameHUD.h">
+      <Filter>Headers\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\GUIManager.h">
+      <Filter>Headers\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\DebugMenuGUI.h">
+      <Filter>Headers\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -484,6 +511,12 @@
     </Filter>
     <Filter Include="Source Code\Graph">
       <UniqueIdentifier>{95a495db-6776-44d6-a5eb-5307bd595c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\GUI">
+      <UniqueIdentifier>{bf92a5ce-b109-4864-9144-c1c12caa25ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\GUI">
+      <UniqueIdentifier>{c504afe8-4421-43cd-b8c1-fb0e67287c32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -24,11 +24,15 @@
 #include <Cliente.h>
 #include <TriggerSystem.h>
 #include <MessageHandler.h>
-#include <Windows.h>
+
 
 #include <SparseGraph.h>
 #include <GraphEdge.h>
 #include <AStarSearch.h>
+
+
+#include <GUIManager.h>
+
 
 const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
@@ -103,7 +107,7 @@ void Game::run()
 			}
 		if (GraphicEngine::i().isWindowActive()) {
 
-			interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
+			interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 			render(interpolation, timePerFrame);
 
@@ -242,9 +246,11 @@ void Game::inicializar()
 
 	}
 
-
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
 
 	//GRAFO
+	/*
 	//True, grafo dirigido
 	/*SparseGraph grafo(true);
 
@@ -291,11 +297,16 @@ void Game::inicializar()
 
 	AStarSearch astar(grafo, 0 , 2);
 	std::list<int> camino = astar.GetPathToTarget();*/
+
 }
 
 bool Game::processEvents()
 {
-	EntityManager::i().handleInput();
+
+	if (!debugMenu.debugInput) {
+		EntityManager::i().handleInput();
+	}
+	
 
 	//Teclas debug
 	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
@@ -306,6 +317,16 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_TAB)) {
 		EntityManager::i().muestraTabla();
+	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
+		debugMenu.debugInput = !debugMenu.debugInput;
+		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
+		debugMenu.showMouseCursor(debugMenu.debugInput);
+		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+	} else if (MastEventReceiver::i().leftMouseDown()) {
+		debugMenu.injectLeftMouseButton();
+	} else if (MastEventReceiver::i().leftMouseUp()) {
+		debugMenu.injectLeftMouseButtonUp();
 	}
 
 	return false;
@@ -323,6 +344,10 @@ void Game::update(Time elapsedTime)
 
 	PhysicsEngine::i().notifyCollisions();
 	MessageHandler::i().update();
+
+	GUIManager::i().updateAllGuis();
+
+	
 }
 
 void Game::render(float interpolation, Time elapsedTime)
@@ -331,6 +356,12 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 	GraphicEngine::i().updateCamera();
+
+	//GUI
+	debugMenu.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+	
+
+	//GraphicEngine::i().getGui().update();
 
 	GraphicEngine::i().renderAll();
 

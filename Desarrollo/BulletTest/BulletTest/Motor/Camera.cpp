@@ -20,6 +20,7 @@ void Camera::setTarget(Vec3<float> target)
 void Camera::setPosition(Vec3<float> position)
 {
 	m_camera->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
+	
 }
 
 Vec3<float> Camera::getPosition()

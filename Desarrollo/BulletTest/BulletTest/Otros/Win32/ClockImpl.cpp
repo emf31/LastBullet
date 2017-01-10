@@ -26,6 +26,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "ClockImpl.hpp"
+#include <WinSock2.h>
 #include <windows.h>
 
 

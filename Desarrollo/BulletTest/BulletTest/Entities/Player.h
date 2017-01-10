@@ -63,7 +63,7 @@ public:
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
-	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal(); }
+	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual(); }
 
 
 	btPairCachingGhostObject* getGhostObject() {

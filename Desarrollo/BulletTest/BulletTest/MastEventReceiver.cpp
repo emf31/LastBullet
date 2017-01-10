@@ -56,6 +56,13 @@ bool MastEventReceiver::leftMousePressed()
 		return false;
 }
 
+bool MastEventReceiver::leftMouseUp() {
+	if (mouseButtonState[0] == PRESSED || mouseButtonState[0] == DOWN)
+		return false;
+	else
+		return true;
+}
+
 bool MastEventReceiver::leftMouseDown()
 {
 	if (mouseButtonState[0] == PRESSED || mouseButtonState[0] == DOWN)
@@ -224,6 +231,7 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			// if key is Pressed Down
 			if (event.KeyInput.PressedDown == true)
 			{
+				//GraphicEngine::i().getGui().injectKeyDown(event.KeyInput.Key);
 				// If key was not down before
 				if (keyState[event.KeyInput.Key] != DOWN)
 					keyState[event.KeyInput.Key] = PRESSED; // Set to Pressed
@@ -256,6 +264,8 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			{
 				mouse.Y = event.MouseInput.Y;
 				mouse.X = event.MouseInput.X;
+
+				//GraphicEngine::i().getGui().injectMousePosition(mouseX(), mouseY());
 			}
 
 			//Wheel moved.
@@ -265,6 +275,7 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			//Left Mouse Button Pressed
 			if (event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN)
 			{
+				//GraphicEngine::i().getGui().injectMouseButton(EMIE_LMOUSE_PRESSED_DOWN);
 				//
 				if (mouseButtonState[0] == UP || mouseButtonState[0] == RELEASED)
 					mouseButtonState[0] = PRESSED;
@@ -305,6 +316,7 @@ bool MastEventReceiver::OnEvent(SEvent const& event)
 			//Right Mouse Button Pressed
 			if (event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN)
 			{
+				//GraphicEngine::i().getGui().injectMouseButton(EMIE_RMOUSE_PRESSED_DOWN);
 				//
 				if (mouseButtonState[2] == UP || mouseButtonState[2] == RELEASED)
 					mouseButtonState[2] = PRESSED;

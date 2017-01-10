@@ -8,9 +8,11 @@
 #include <sstream>
 #include <exception>
 
+#include <GUIManager.h>
 
 GraphicEngine::GraphicEngine() : debug_camera(true)
 {
+	
 }
 
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
@@ -90,6 +92,7 @@ void GraphicEngine::updateCamera()
 {
 	if(debug_camera && active_camera != NULL)
 		active_camera->update();
+	
 }
 
 
@@ -98,85 +101,6 @@ Camera * GraphicEngine::getActiveCamera()
 	return active_camera;
 }
 
-void GraphicEngine::mostrarInterfaz()
-{
-	
-	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
-	irrGUI->getSkin()->setFont(fnt);
-
-	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-	float v = p->getLifeComponent()->getVida();
-	int a = p->getAmmoActual();
-	int b = p->getCargadorActual();
-	int c = p->getAmmoTotal()*b;
-
-	std::ostringstream oss;
-	oss << "Vida: " << v;
-	std::string vstring = oss.str();
-
-
-	std::ostringstream oss2;
-	oss2 << "AMMO: " << a << " / " << b;
-	std::string vstring2 = oss2.str();
-
-	std::ostringstream oss3;
-	oss3 << "AMMO TOTAL: " << c;
-	std::string vstring3 = oss3.str();
-
-
-	vida = irrGUI->addStaticText(GetWC(vstring.c_str()), rect<int>(0, 0, 100, 100));
-	ammo = irrGUI->addStaticText(GetWC(vstring2.c_str()), rect<int>(0, 60, 100, 100));
-	ammototal = irrGUI->addStaticText(GetWC(vstring3.c_str()), rect<int>(0, 90, 160, 160));
-	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
-
-
-}	
-const wchar_t * GraphicEngine::GetWC(const char *c)
-{
-	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = new wchar_t[cSize];
-	mbstowcs(wc, c, cSize);
-
-	return wc;
-}
-void GraphicEngine::actualizarInterfaz()
-{
-	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-	float v = p->getLifeComponent()->getVida();
-	int a = p->getAmmoActual();
-	int b = p->getCargadorActual();
-	int c = p->getAmmoTotal()*b;
-
-	std::ostringstream oss;
-	oss << "Vida: " << v;
-	std::string vstring = oss.str();
-
-	std::ostringstream oss2;
-	oss2 << "AMMO: " << a << " / " << b;
-	std::string vstring2 = oss2.str();
-
-	std::ostringstream oss3;
-	oss3 << "AMMO TOTAL: " << c;
-	std::string vstring3 = oss3.str();
-
-	const wchar_t* aux1 = GetWC(vstring.c_str());
-	vida->setText(aux1);
-	delete[] aux1;
-
-	aux1 = GetWC(vstring2.c_str());
-	ammo->setText(aux1);
-	delete[] aux1;
-
-	aux1 = GetWC(vstring3.c_str());
-	ammototal->setText(aux1);
-	delete[] aux1;
-
-	aux1 = GetWC(p->getCurrentWeapon().c_str());
-	arma_actual->setText(aux1);
-	delete[] aux1;
-	
-
-}
 
 void GraphicEngine::setActiveCamera(int ID)
 {
@@ -191,6 +115,7 @@ void GraphicEngine::renderAll()
 	irrScene->drawAll();
 	irrGUI->drawAll();
 
+
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	if (debug_draw_bullet)
 	{
@@ -202,6 +127,9 @@ void GraphicEngine::renderAll()
 		PhysicsEngine::i().m_world->debugDrawWorld();
 
 	}
+
+	//gui.draw();
+	GUIManager::i().drawAllGuis();
 
 	irrDriver->endScene();
 	int fps = irrDriver->getFPS();
@@ -258,7 +186,7 @@ void GraphicEngine::inicializar()
 
 		debug_draw_bullet = true;
 	//}
-	
+
 
 }
 
@@ -328,3 +256,4 @@ void GraphicEngine::cargarTexturas() {
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	irrScene->addToDeletionQueue(nodo->getNodo());
 }
+

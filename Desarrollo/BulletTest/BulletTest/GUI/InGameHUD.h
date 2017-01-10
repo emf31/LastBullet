@@ -1,0 +1,44 @@
+#pragma once
+
+#include <Player.h>
+#include <GUI.h>
+//#include <Player.h>
+
+struct fila_tabla {
+	CEGUI::DefaultWindow* label;
+	CEGUI::DefaultWindow* muertes;
+	CEGUI::DefaultWindow* bajas;
+	CEGUI::DefaultWindow* puntos;
+};
+class InGameHUD: public Motor::GUI {
+public:
+
+	InGameHUD();
+
+	void inicializar();
+
+	virtual void update() override;
+
+	void updateLabelVida();
+
+	void updateLabelArma();
+
+	void updateLabelMunicion();
+
+	void updateLabelMunicionTotal();
+
+
+private:
+	CEGUI::DefaultWindow* LabelVida;
+	CEGUI::DefaultWindow* LabelArma;
+	CEGUI::DefaultWindow* LabelMunicion;
+	CEGUI::DefaultWindow* LabelMunicionTotal;
+
+	fila_tabla player1;
+	fila_tabla player2;
+	fila_tabla player3;
+	fila_tabla player4;
+
+	Player *p;
+
+};
