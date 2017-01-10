@@ -52,8 +52,10 @@ void PistolaDrop::handleMessage(const Message & message)
 
 				static_cast<Player*>(message.data)->setWeapon(PISTOLA);
 				m_nodo->setVisible(false);
-				if (Cliente::i().isConected())
-					Cliente::i().armaCogida(m_id);
+//				if (Cliente::i().isConected()) {
+
+				//}
+					//Cliente::i().armaCogida(m_id);
 
 			}
 		}

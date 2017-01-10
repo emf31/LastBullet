@@ -11,10 +11,12 @@
 #include "../Otros/Lista.h"
 #include "../Otros/LifeComponent.h"
 
+class Cliente;
+
 class Player : public Entity
 {
 public:
-	Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, Cliente* cliente, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
 	void setPosition(Vec3<float> &pos);
@@ -104,7 +106,7 @@ private:
 	bool isReloading;
 
 	
-
+	Cliente* m_cliente;
 	
 	//Player controller
 	btCollisionShape* m_pCollisionShape;

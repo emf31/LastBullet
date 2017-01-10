@@ -9,9 +9,9 @@
   LifeObject.cpp
   PhysicsEntity.cpp
   Player.cpp
-Entities\Player.cpp(128): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-Entities\Player.cpp(132): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-Entities\Player.cpp(136): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(127): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(131): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+Entities\Player.cpp(135): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
   RocketBullet.cpp
   RocketBulletEnemy.cpp
   AsaltoDrop.cpp
@@ -24,6 +24,10 @@ Entities\Weapons\Pistola.cpp(62): warning C4244: 'argumento': conversión de 'do
   RocketLauncher.cpp
   Compilando...
   Weapon.cpp
+  GraphEdge.cpp
+  GraphNode.cpp
+  SparseGraph.cpp
+Graph\SparseGraph.cpp(204): warning C4018: '>=': no coinciden signed/unsigned
   InputHandler.cpp
   MessageHandler.cpp
   MachineState.cpp
@@ -31,11 +35,6 @@ Entities\Weapons\Pistola.cpp(62): warning C4244: 'argumento': conversión de 'do
   MastEventReceiver.cpp
   Game.cpp
   main.cpp
-  Cliente.cpp
-Motor de Red\Cliente.cpp(411): warning C4477: 'printf' : la cadena de formato '%i' requiere un argumento de tipo 'int', pero el argumento variádico 2 tiene el tipo 'RakNet::Time'
-  Motor de Red\Cliente.cpp(411): note: considere el uso de ' %lli' en la cadena de formato
-  Motor de Red\Cliente.cpp(411): note: considere el uso de ' %I64i' en la cadena de formato
-Motor de Red\Cliente.cpp(740): warning C4101: 'time': variable local sin referencia
   AnimatedSceneNode.cpp
   Animation.cpp
   Camera.cpp
@@ -49,17 +48,25 @@ Motor\MapLoader.cpp(158): warning C4316: 'RocketLauncherDrop': puede que el obje
   RenderState.cpp
   BasicSceneNode.cpp
   SceneNode.cpp
+  Compilando...
+  Cliente.cpp
+Network\Cliente.cpp(445): warning C4477: 'printf' : la cadena de formato '%i' requiere un argumento de tipo 'int', pero el argumento variádico 2 tiene el tipo 'RakNet::Time'
+  Network\Cliente.cpp(445): note: considere el uso de ' %lli' en la cadena de formato
+  Network\Cliente.cpp(445): note: considere el uso de ' %I64i' en la cadena de formato
+Network\Cliente.cpp(778): warning C4101: 'time': variable local sin referencia
+  Lobby.cpp
   Clock.cpp
   LifeComponent.cpp
-  Compilando...
   Lista.cpp
+  PriorityQueue.cpp
   Time.cpp
   Util.cpp
 Otros\Util.cpp(38): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Vec2f.cpp
   ClockImpl.cpp
   TriggerSystem.cpp
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
-  TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+D:\Archivos de programa (x86)\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
+  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
           with
           [
               _Kty=unsigned short,
@@ -67,7 +74,7 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): war
               _Other1=unsigned long &,
               _Other2=TriggerRecordStruct *&
           ]
-  TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
           with
           [
               _Kty=unsigned short,
@@ -77,7 +84,9 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): war
           ]
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  All 18563 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  6633 of 18581 functions (35.7%) were compiled, the rest were copied from previous compilation.
+    127 functions were new in current compilation
+    1509 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)

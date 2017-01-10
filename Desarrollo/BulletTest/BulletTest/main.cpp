@@ -1,13 +1,7 @@
 #include "Game.h"
-#include <Windows.h>
 
-
-int main(int, char const**)
+int main()
 {
-	AllocConsole();
-	freopen("conin$", "r", stdin);
-	freopen("conout$", "w", stdout);
-	freopen("conout$", "w", stderr);
 
 	
 
@@ -16,6 +10,10 @@ int main(int, char const**)
 		game->run();
 	//}
 	delete game;
+
+	
+
+	std::exit(0);
 
 	return 0;
 

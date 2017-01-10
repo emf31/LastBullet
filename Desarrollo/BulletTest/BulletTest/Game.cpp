@@ -29,6 +29,7 @@
 #include <SparseGraph.h>
 #include <GraphEdge.h>
 #include <AStarSearch.h>
+#include <chrono>
 
 const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
@@ -96,8 +97,8 @@ void Game::run()
 				//Realizamos actualizaciones
 				update(timePerFrame);
 
-				if (Cliente::i().isConected()) {
-					Cliente::i().update();
+				if (cliente.isConected()) {
+					cliente.update();
 				}
 
 			}
@@ -124,8 +125,8 @@ void Game::run()
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
 
-	if (Cliente::i().isConected()) {
-		Cliente::i().apagar();
+	if (cliente.isConected()) {
+		cliente.apagar();
 	}
 	
 	MessageHandler::i().borrarContenido();
@@ -205,9 +206,9 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("NombreA", map.getSpawnPoints());
+		/*Player* player = new Player("NombreA", map.getSpawnPoints());
 		player->inicializar();
-		player->cargarContenido();
+		player->cargarContenido();*/
 
 	}
 	else {
@@ -216,27 +217,27 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//raknet
-		Cliente::i().inicializar();
+		cliente.inicializar();
 
 		
 		//Bucle infinito hasta que se conecte
-		while (Cliente::i().isConected() == false) {
-			Cliente::i().update();
+		while (cliente.isConected() == false) {
+			cliente.update();
 		}
 
-		Cliente::i().createPlayer(map.getSpawnPoints());
+		cliente.createPlayer(map.getSpawnPoints());
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
 		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
-			Cliente::i().nuevaVida((*it)->getID());
+			//Cliente::i().nuevaVida((*it)->getID());
 		}
 			
 		//enviamos los paquetes de armas al servidor para que los cree
 
 		std::list<Entity*>weapon = EntityManager::i().getWeapons();
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
-			Cliente::i().nuevaArma((*it)->getID());
+			//Cliente::i().nuevaArma((*it)->getID());
 		}
 
 

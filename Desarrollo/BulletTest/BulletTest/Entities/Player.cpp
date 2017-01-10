@@ -24,14 +24,14 @@
 #include <TriggerSystem.h>
 
 
-Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
+Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, Cliente* cliente, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
 	m_spawns(spawnPoints),
 	life_component(this)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
 	TriggerSystem::i().RegisterEntity(this);
-	
+	m_cliente = cliente;
 
 }
 
@@ -192,7 +192,7 @@ void Player::update(Time elapsedTime)
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
-		Cliente::i().enviarMovimiento(this);
+//		Cliente::i().enviarMovimiento(this);
 	}
 
 	if (m_renderState.getPosition().getY() < -200) {
@@ -265,7 +265,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}else if (message.mensaje == "COLISION_ROCKET") {
-		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+//		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
 		delete message.data;
 	}
 
@@ -414,8 +414,8 @@ void Player::UpWeapon()
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
-	if (Cliente::i().isConected()) {
-		Cliente::i().cambioArma(1,m_guid);
+	if (m_cliente->isConected()) {
+//		Cliente::i().cambioArma(1,m_guid);
 	}
 }
 
@@ -429,8 +429,8 @@ void Player::DownWeapon()
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
-	if (Cliente::i().isConected()) {
-		Cliente::i().cambioArma(2, m_guid);
+	if (m_cliente->isConected()) {
+//		Cliente::i().cambioArma(2, m_guid);
 	}
 }
 

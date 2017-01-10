@@ -14,7 +14,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <cstdlib>
 
-
+#include <Cliente.h>
 class Game
 {
 public:
@@ -31,6 +31,8 @@ public:
 	static const Time timePerFrame;
 
 private:
+
+	Cliente cliente;
 	
 	float interpolation;
 	

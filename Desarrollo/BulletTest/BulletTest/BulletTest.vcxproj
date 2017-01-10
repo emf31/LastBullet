@@ -86,7 +86,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
@@ -124,7 +124,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_IRR_STATIC_LIB_;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Motor de Red;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>

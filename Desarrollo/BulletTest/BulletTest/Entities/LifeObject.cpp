@@ -66,8 +66,10 @@ void LifeObject::handleMessage(const Message & message)
 				estado = USADO;
 				clockRecargaLife.restart();
 
-				if (Cliente::i().isConected())
-					Cliente::i().vidaCogida(m_id);
+				/*if (Cliente::i().isConected()) {
+
+				}*/
+					//Cliente::i().vidaCogida(m_id);
 
 				
 				m_nodo->setVisible(false);
