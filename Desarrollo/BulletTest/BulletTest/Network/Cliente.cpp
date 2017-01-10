@@ -428,7 +428,7 @@ void Cliente::update() {
 					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				}
 				std::cout << "PUNTUACION FINAL:" << std::endl;
-				EntityManager::i().muestraTabla();
+				//EntityManager::i().muestraTabla();
 				std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				
 

@@ -1,4 +1,6 @@
 #pragma once
+
+//#include <InGameHUD.h>
 #include <unordered_map>
 #include <Time.hpp>
 #include "Entity.h"
@@ -10,6 +12,8 @@
 
 
 static const int PLAYER = 1000;
+
+class InGameHUD;
 
 class EntityManager
 {
@@ -59,7 +63,7 @@ public:
 		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
 		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 	}
-	void muestraTabla();
+	void muestraTabla(InGameHUD *ingame);
 	void aumentaKill(RakNet::RakNetGUID &guid) {
 		TFilaTabla *fila;
 		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;

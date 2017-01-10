@@ -314,9 +314,11 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 		GraphicEngine::i().toggleCamera();
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_TAB)) {
-		EntityManager::i().muestraTabla();
+	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+		ingameGUI.setTablaVisible(false);
+	}else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
+		ingameGUI.setTablaVisible(true);
+		EntityManager::i().muestraTabla(&ingameGUI);
 	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);

@@ -15,6 +15,8 @@ void InGameHUD::inicializar() {
 	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 	LabelMunicionTotal = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(4));
 
+	windowTabla = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10));
+
 	player1.label = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(1));
 	player1.bajas = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(11));
 	player1.muertes = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(12));
@@ -70,4 +72,101 @@ void InGameHUD::updateLabelVida() {
 	CEGUI::String str;
 	oss << p->getAmmoTotal();
 	LabelMunicionTotal->setText(oss.str());
+ }
+
+ void InGameHUD::setTablaVisible(bool visible) {
+	windowTabla->setVisible(visible);
+ }
+
+ void InGameHUD::setPlayerKills(int player, int kills) {
+	 std::ostringstream oss;
+	 oss << kills;
+	 switch (player) {
+	 case 1:
+		 player1.bajas->setText(oss.str());
+		 
+		 break;
+
+	 case 2:
+		 player2.bajas->setText(oss.str());
+		 break;
+
+	 case 3:
+		 player3.bajas->setText(oss.str());
+		 break;
+
+	 case 4:
+		 player4.bajas->setText(oss.str());
+		 break;
+	 }
+ }
+
+ void InGameHUD::setPlayerDeaths(int player, int deaths) {
+	 std::ostringstream oss;
+	 oss << deaths;
+	 switch (player) {
+	 case 1:
+		 /*std::ostringstream oss;
+		 oss << nombre;*/
+		 player1.muertes->setText(oss.str());
+		 break;
+
+	 case 2:
+		 player2.muertes->setText(oss.str());
+		 break;
+
+	 case 3:
+		 player3.muertes->setText(oss.str());
+		 break;
+
+	 case 4:
+		 player4.muertes->setText(oss.str());
+		 break;
+	 }
+ }
+
+ void InGameHUD::setPlayerPoints(int player, int points) {
+	 std::ostringstream oss;
+	 oss << points;
+	 switch (player) {
+	 case 1:
+		 /*std::ostringstream oss;
+		 oss << nombre;*/
+		 player1.puntos->setText(oss.str());
+		 break;
+
+	 case 2:
+		 player2.puntos->setText(oss.str());
+		 break;
+
+	 case 3:
+		 player3.puntos->setText(oss.str());
+		 break;
+
+	 case 4:
+		 player4.puntos->setText(oss.str());
+		 break;
+	 }
+ }
+
+ void InGameHUD::setPlayerName(int player, const std::string & nombre) {
+	 switch (player) {
+	 case 1:
+		 /*std::ostringstream oss;
+		 oss << nombre;*/
+		 player1.label->setText(nombre.c_str());
+		 break;
+
+	 case 2:
+		 player2.label->setText(nombre.c_str());
+		 break;
+
+	 case 3:
+		 player3.label->setText(nombre.c_str());
+		 break;
+
+	 case 4:
+		 player4.label->setText(nombre.c_str());
+		 break;
+	 }
  }

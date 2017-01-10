@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Player.h>
+
 #include <GUI.h>
 //#include <Player.h>
 
@@ -27,17 +28,31 @@ public:
 
 	void updateLabelMunicionTotal();
 
+	void setTablaVisible(bool visible);
 
+	void setPlayerName(int player, const std::string& nombre);
+
+	void setPlayerKills(int player, int kills);
+
+	void setPlayerDeaths(int player, int deaths);
+
+	void setPlayerPoints(int player, int points);
+
+
+
+	fila_tabla player1;
+	fila_tabla player2;
+	fila_tabla player3;
+	fila_tabla player4;
 private:
 	CEGUI::DefaultWindow* LabelVida;
 	CEGUI::DefaultWindow* LabelArma;
 	CEGUI::DefaultWindow* LabelMunicion;
 	CEGUI::DefaultWindow* LabelMunicionTotal;
 
-	fila_tabla player1;
-	fila_tabla player2;
-	fila_tabla player3;
-	fila_tabla player4;
+	CEGUI::DefaultWindow* windowTabla;
+
+	
 
 	Player *p;
 

@@ -64,6 +64,7 @@
             <Property name="ID" value="10" />
             <Property name="Area" value="{{0.192969,0},{0.147222,0},{0.83125,0},{0.695833,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="Generic/Image" name="Image" >
                 <Property name="Area" value="{{0.291816,-173},{0.280556,-44},{0.291816,505},{0.280556,213}}" />
                 <Property name="Alpha" value="0.98" />
