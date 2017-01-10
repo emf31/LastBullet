@@ -61,7 +61,8 @@ void Asalto::cargarContenido()
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
-	m_nodo->setTexture("../media/ice0.jpg", 0);
+	//m_nodo->setTexture("../media/ice0.jpg", 0);
+	//m_nodo->setTexture("../media/ice0.jpg", 1);
 }
 
 void Asalto::borrarContenido()
