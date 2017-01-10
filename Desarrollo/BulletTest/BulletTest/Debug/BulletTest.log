@@ -3,5 +3,43 @@
   Macro definition of min detected - undefining
 d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Generando código...
+  Compilando...
+  main.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Game.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\ua\cuarto\abp\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\ua\cuarto\abp\tba\desarrollo\bullettest\bullettest\game.cpp(360): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  Lista.cpp
+  LifeComponent.cpp
+  Lobby.cpp
+  Cliente.cpp
+  MapLoader.cpp
+  GraphicEngine.cpp
+  InputHandler.cpp
+  Weapon.cpp
+  RocketLauncher.cpp
+  Pistola.cpp
+  Asalto.cpp
+  WeaponDrop.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
+  AsaltoDrop.cpp
+  RocketBulletEnemy.cpp
+  RocketBullet.cpp
+  Player.cpp
+  LifeObject.cpp
+  GunBullet.cpp
+  Granada.cpp
+  Entity.cpp
+  Enemy.cpp
   BulletTest.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

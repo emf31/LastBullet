@@ -43,7 +43,7 @@
     <Image height="14" name="ButtonPushedL" width="3" xPos="398" yPos="319" />
     <Image height="14" name="ButtonPushedR" width="3" xPos="461" yPos="319" />
     <Image height="3" name="ButtonPushedT" width="58" xPos="402" yPos="315" />
-    <Image height="13" name="CheckboxHover" width="13" xPos="398" yPos="359" />
+    <Image height="13" name="CheckboxHover" width="13" xPos="401" yPos="361" />
     <Image height="6" name="ProgressFullB" width="284" xPos="6" yPos="269" />
     <Image height="6" name="ProgressFullL" width="6" xPos="0" yPos="263" />
     <Image height="6" name="ProgressFullR" width="8" xPos="290" yPos="263" />
@@ -57,7 +57,7 @@
     <Image height="4" name="ButtonPushedBR" width="4" xPos="460" yPos="333" />
     <Image height="4" name="ButtonPushedTL" width="4" xPos="398" yPos="315" />
     <Image height="4" name="ButtonPushedTR" width="4" xPos="460" yPos="315" />
-    <Image height="13" name="CheckboxNormal" width="13" xPos="398" yPos="376" />
+    <Image height="13" name="CheckboxNormal" width="13" xPos="401" yPos="378" />
     <Image height="2" name="HorzScrollbarB" width="8" xPos="98" yPos="503" />
     <Image height="2" name="HorzScrollbarT" width="8" xPos="98" yPos="490" />
     <Image height="6" name="ProgressEmptyB" width="283" xPos="7" yPos="289" />
@@ -74,7 +74,7 @@
     <Image height="3" name="TitlebarDummy1" width="30" xPos="0" yPos="161" />
     <Image height="8" name="VertScrollbarL" width="2" xPos="28" yPos="505" />
     <Image height="8" name="VertScrollbarR" width="2" xPos="41" yPos="505" />
-    <Image height="13" name="CheckboxChecked" width="13" xPos="398" yPos="343" />
+    <Image height="13" name="CheckboxChecked" width="13" xPos="401" yPos="345" />
     <Image height="7" name="HorzThumbHoverB" width="26" xPos="138" yPos="515" />
     <Image height="6" name="HorzThumbHoverT" width="26" xPos="138" yPos="509" />
     <Image height="6" name="ProgressEmptyBL" width="6" xPos="1" yPos="289" />
@@ -104,7 +104,7 @@
     <Image height="13" name="HorzThumbShadowL" width="12" xPos="119" yPos="509" />
     <Image height="13" name="HorzThumbShadowR" width="14" xPos="171" yPos="509" />
     <Image height="6" name="ProgressFullFill" width="284" xPos="6" yPos="263" />
-    <Image height="13" name="RadioButtonHover" width="13" xPos="416" yPos="359" />
+    <Image height="13" name="RadioButtonHover" width="13" xPos="419" yPos="361" />
     <Image height="14" name="ScrollDownNormal" width="15" xPos="64" yPos="615" />
     <Image height="14" name="ScrollDownPushed" width="15" xPos="28" yPos="615" />
     <Image height="15" name="ScrollLeftNormal" width="14" xPos="83" yPos="490" />
@@ -143,7 +143,7 @@
     <Image height="6" name="HorzThumbPushedTL" width="7" xPos="131" yPos="527" />
     <Image height="6" name="HorzThumbPushedTR" width="7" xPos="164" yPos="527" />
     <Image height="6" name="ProgressEmptyFill" width="283" xPos="7" yPos="283" />
-    <Image height="13" name="RadioButtonNormal" width="13" xPos="416" yPos="376" />
+    <Image height="13" name="RadioButtonNormal" width="13" xPos="419" yPos="378" />
     <Image height="15" name="ScrollRightNormal" width="14" xPos="209" yPos="490" />
     <Image height="15" name="ScrollRightPushed" width="14" xPos="209" yPos="526" />
     <Image height="4" name="TitlebarInactiveB" width="666" xPos="8" yPos="103" />
@@ -162,7 +162,7 @@
     <Image height="8" name="VertThumbPushedTR" width="7" xPos="35" yPos="541" />
     <Image height="5" name="HorzScrollbarFill1" width="8" xPos="98" yPos="492" />
     <Image height="6" name="HorzScrollbarFill2" width="8" xPos="98" yPos="497" />
-    <Image height="14" name="RadioButtonChecked" width="13" xPos="416" yPos="342" />
+    <Image height="14" name="RadioButtonChecked" width="13" xPos="419" yPos="344" />
     <Image height="8" name="TitlebarInactiveBL" width="7" xPos="1" yPos="99" />
     <Image height="7" name="TitlebarInactiveBR" width="9" xPos="674" yPos="100" />
     <Image height="8" name="TitlebarInactiveTL" width="7" xPos="1" yPos="74" />
@@ -181,5 +181,5 @@
     <Image height="12" name="TitlebarInactiveFill2" width="673" xPos="5" yPos="91" />
     <Image height="7" name="VertSliderThumbNormal" width="25" xPos="0" yPos="533" />
     <Image height="7" name="VertSliderThumbPushed" width="25" xPos="0" yPos="360" />
-    <Image autoScaled="vertical" height="104" name="Tabla" width="142" xPos="355" yPos="461" />
+    <Image height="110" name="TablaFondo" width="368" xPos="377" yPos="398" />
 </Imageset>
