@@ -193,6 +193,7 @@ void Player::update(Time elapsedTime)
 	if (m_renderState.getPosition().getY() < -200) {
 		getLifeComponent()->restaVida(100, m_guid);
 	}
+	updateRelojes();
 
 }
 
@@ -509,3 +510,18 @@ void Player::resetAll() {
 
 }
 
+void Player::updateRelojes() {
+	if (relojHit.getElapsedTime().asSeconds()<=0.5) {
+		hit = true;
+	}
+	else {
+		hit = false;
+	}
+
+	if (relojSangre.getElapsedTime().asSeconds() <= 0.5) {
+		sangre = true;
+	}
+	else {
+		sangre = false;
+	}
+}

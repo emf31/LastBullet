@@ -182,4 +182,7 @@
     <Image height="7" name="VertSliderThumbNormal" width="25" xPos="0" yPos="533" />
     <Image height="7" name="VertSliderThumbPushed" width="25" xPos="0" yPos="360" />
     <Image height="110" name="TablaFondo" width="368" xPos="377" yPos="398" />
+    <Image height="24" name="hitmarker" width="24" xPos="182" yPos="584" />
+    <Image height="32" name="mirilla" width="32" xPos="137" yPos="579" />
+    <Image height="118" name="SangreBorde" width="150" xPos="575" yPos="510" />
 </Imageset>

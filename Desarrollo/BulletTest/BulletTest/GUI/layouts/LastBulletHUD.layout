@@ -67,7 +67,7 @@
             <Property name="Visible" value="false" />
             <Window type="Generic/Image" name="Image" >
                 <Property name="Area" value="{{0.291816,-173},{0.280556,-44},{0.291816,505},{0.280556,213}}" />
-                <Property name="Alpha" value="0.98" />
+                <Property name="Alpha" value="0.85" />
                 <Property name="Image" value="AlfiskoSkin/TablaFondo" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Window type="AlfiskoSkin/Label" name="Label" >
@@ -175,6 +175,29 @@
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 </Window>
             </Window>
+        </Window>
+        <Window type="Generic/Image" name="Mirilla" >
+            <Property name="ID" value="50" />
+            <Property name="Area" value="{{0,0},{0,0},{0,32},{0,32}}" />
+            <Property name="Image" value="AlfiskoSkin/mirilla" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Generic/Image" name="Hitmarker" >
+            <Property name="ID" value="51" />
+            <Property name="Area" value="{{0,0},{0,0},{0,32},{0,32}}" />
+            <Property name="Image" value="AlfiskoSkin/hitmarker" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Generic/Image" name="Sangre" >
+            <Property name="ID" value="52" />
+            <Property name="Area" value="{{0,-1},{0,0},{1,127},{1,128}}" />
+            <Property name="Image" value="AlfiskoSkin/SangreBorde" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
     </Window>
 </GUILayout>

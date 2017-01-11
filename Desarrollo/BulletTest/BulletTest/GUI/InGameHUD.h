@@ -38,7 +38,7 @@ public:
 
 	void setPlayerPoints(int player, int points);
 
-
+	void updateRelojes();
 
 	fila_tabla player1;
 	fila_tabla player2;
@@ -49,6 +49,9 @@ private:
 	CEGUI::DefaultWindow* LabelArma;
 	CEGUI::DefaultWindow* LabelMunicion;
 	CEGUI::DefaultWindow* LabelMunicionTotal;
+
+	CEGUI::DefaultWindow* hitMarker;
+	CEGUI::DefaultWindow* sangre;
 
 	CEGUI::DefaultWindow* windowTabla;
 

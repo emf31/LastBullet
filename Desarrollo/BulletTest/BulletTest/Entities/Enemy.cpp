@@ -128,6 +128,7 @@ void Enemy::handleMessage(const Message & message)
 		std::cout << m_isDying << std::endl;
 		if (!m_isDying) {
 			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
+			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		}
 		
 	}
@@ -141,6 +142,7 @@ void Enemy::handleMessage(const Message & message)
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
 		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		delete message.data;
 	}
 }

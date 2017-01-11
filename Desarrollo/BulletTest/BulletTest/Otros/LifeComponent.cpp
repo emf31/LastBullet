@@ -25,6 +25,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		}
 
 	}
+	
 }
 
 bool LifeComponent::update()

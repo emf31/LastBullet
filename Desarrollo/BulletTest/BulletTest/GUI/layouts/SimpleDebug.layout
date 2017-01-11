@@ -9,6 +9,7 @@
             <Property name="ID" value="10" />
             <Property name="Area" value="{{0.0539063,891},{0.00277778,118},{0.28125,891},{0.780556,118}}" />
             <Property name="Text" value="Debug Menu" />
+            <Property name="Alpha" value="0" />
             <Property name="SizingEnabled" value="false" />
             <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
             <AutoWindow namePath="__auto_titlebar__" >

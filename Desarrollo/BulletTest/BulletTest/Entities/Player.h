@@ -23,6 +23,7 @@ public:
 	// Heredado vía Entity
 	virtual void inicializar() override;
 	virtual void update(Time elapsedTime) override;
+
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
@@ -72,6 +73,12 @@ public:
 
 	void resetAll();
 	KinematicCharacterController* p_controller;
+	void updateRelojes();
+
+	bool hit;
+	bool sangre;
+
+	Clock relojSangre, relojHit;
 
 private:
 
@@ -103,6 +110,9 @@ private:
 	bool isRunning;
 	bool isReloading;
 
+
+	
+	
 	
 
 	

@@ -17,6 +17,9 @@ void InGameHUD::inicializar() {
 
 	windowTabla = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10));
 
+	hitMarker = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(51));
+	sangre = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(52));
+
 	player1.label = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(1));
 	player1.bajas = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(11));
 	player1.muertes = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(12));
@@ -45,6 +48,13 @@ void InGameHUD::update() {
 	updateLabelArma();
 	updateLabelMunicion();
 	updateLabelMunicionTotal();
+
+	updateRelojes();
+}
+
+void InGameHUD::updateRelojes() {
+	hitMarker->setVisible(p->hit);
+	sangre->setVisible(p->sangre);
 }
 void InGameHUD::updateLabelVida() {
 	std::ostringstream oss;
