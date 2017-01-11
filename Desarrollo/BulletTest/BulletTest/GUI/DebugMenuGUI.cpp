@@ -4,7 +4,7 @@ void DebugMenuGUI::update() {
 }
 
 void DebugMenuGUI::inicializar() {
-	init("GUI", GraphicEngine::i().getDevice());
+	init("../GUI", GraphicEngine::i().getDevice());
 
 	loadScheme("AlfiskoSkin.scheme");
 	loadLayout("SimpleDebug.layout");
