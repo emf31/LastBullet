@@ -302,9 +302,11 @@ void Game::inicializar()
 
 bool Game::processEvents()
 {
-
-	if (!debugMenu.debugInput) {
-		EntityManager::i().handleInput();
+	if ( !static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->endGame) {
+		
+		if (!debugMenu.debugInput) {
+			EntityManager::i().handleInput();
+		}
 	}
 	
 

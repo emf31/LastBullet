@@ -78,6 +78,8 @@ public:
 	bool hit;
 	bool sangre;
 
+	bool endGame = false;
+
 	Clock relojSangre, relojHit;
 
 private:

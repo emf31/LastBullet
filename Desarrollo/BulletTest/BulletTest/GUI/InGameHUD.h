@@ -50,6 +50,8 @@ private:
 	CEGUI::DefaultWindow* LabelMunicion;
 	CEGUI::DefaultWindow* LabelMunicionTotal;
 
+	CEGUI::DefaultWindow* LabelEndGame;
+
 	CEGUI::DefaultWindow* hitMarker;
 	CEGUI::DefaultWindow* sangre;
 

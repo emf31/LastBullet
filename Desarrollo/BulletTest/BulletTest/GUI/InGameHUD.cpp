@@ -15,6 +15,8 @@ void InGameHUD::inicializar() {
 	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 	LabelMunicionTotal = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(4));
 
+	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(54));
+
 	windowTabla = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10));
 
 	hitMarker = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(51));
@@ -50,6 +52,12 @@ void InGameHUD::update() {
 	updateLabelMunicionTotal();
 
 	updateRelojes();
+
+	if (p->endGame) {
+		EntityManager::i().muestraTabla(this);
+		LabelEndGame->setVisible(true);
+		setTablaVisible(true);
+	}
 }
 
 void InGameHUD::updateRelojes() {

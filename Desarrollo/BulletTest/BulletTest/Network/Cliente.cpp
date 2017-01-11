@@ -429,6 +429,7 @@ void Cliente::update() {
 					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				}
 				std::cout << "PUNTUACION FINAL:" << std::endl;
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->endGame = true;
 				//EntityManager::i().muestraTabla();
 				std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				
