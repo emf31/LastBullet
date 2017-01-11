@@ -151,14 +151,14 @@ void GraphicEngine::inicializar()
 {
 	//if(!irrDevice){
 		// Initialize irrlicht
-		irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(1280, 720), 32, false, false, false, &MastEventReceiver::i());
+		irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(1280, 720), 32, true, false, false, &MastEventReceiver::i());
 		irrDevice->setWindowCaption(L"Test");
 
 		irrGUI = irrDevice->getGUIEnvironment();
 		irrScene = irrDevice->getSceneManager();
 		irrDriver = irrDevice->getVideoDriver();
 
-		irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(1280 / 2 - 220 / 2, 720 / 2 - 165 / 2));
+		//irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(1280 / 2 - 220 / 2, 720 / 2 - 165 / 2));
 
 
 		irrDevice->getCursorControl()->setVisible(0);
