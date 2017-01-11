@@ -28,6 +28,21 @@ void muestraPlayer(Player *p) {
 	std::cout << "ID: " << p->getID() << std::endl;
 }
 
+unsigned char getPacketIdentifier(RakNet::Packet * pPacket)
+{
+	if (pPacket == 0)
+		return 255;
+
+	if ((unsigned char)pPacket->data[0] == ID_TIMESTAMP)
+	{
+		RakAssert(pPacket->length > sizeof(RakNet::MessageID) + sizeof(RakNet::Time));
+		return (unsigned char)pPacket->data[sizeof(RakNet::MessageID) + sizeof(RakNet::Time)];
+	}
+	else
+		return (unsigned char)pPacket->data[0];
+}
+
+
 
 int main() {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
@@ -85,22 +100,24 @@ int main() {
 
 				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//RakNet::BitStream bsIn(packet->data, packet->length, false);
+				//bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				
-				bsIn.Read(p_struct);
+				//bsIn.Read(p_struct);
 				
 				//RakNet::BitStream bsOut;
-				
-				EntityManager::i().sendPlayer(p_struct, peer);
 
-				Player *p = new Player(p_struct.name, p_struct.guid);
-				p->getRenderState()->setPosition(p_struct.position);
+				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
+				
+				EntityManager::i().sendPlayer(t_player, peer);
+
+				Player *p = new Player(t_player.name, t_player.guid);
+				p->getRenderState()->setPosition(t_player.position);
 				EntityManager::i().mostrarClientes();
 
 				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
-				filaTabla.guid = p_struct.guid;
-				filaTabla.name = p_struct.name;
+				filaTabla.guid = t_player.guid;
+				filaTabla.name = t_player.name;
 				filaTabla.kills = 0;
 				filaTabla.deaths = 0;
 				filaTabla.puntuacion = 0;

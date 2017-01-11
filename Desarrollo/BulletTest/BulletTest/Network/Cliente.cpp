@@ -30,7 +30,11 @@ void Cliente::update() {
 
 	
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-			switch (packet->data[0]) {
+
+			// Recibimos un paquete, tenemos que obtener el tipo de mensaje
+			mPacketIdentifier = getPacketIdentifier(packet);
+
+			switch (mPacketIdentifier) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
 				printf("Otro cliente se ha desconectado.\n");
 				break;
@@ -63,20 +67,21 @@ void Cliente::update() {
 			{
 				//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//RakNet::BitStream bsIn(packet->data, packet->length, false);
+				//bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+
+				TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
 				//recibo el player
-				bsIn.Read(nuevoplayer);
+				//bsIn.Read(nuevoplayer);
 
 
-				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				Enemy *e = new Enemy(p.name, p.guid);
 				e->inicializar();
 				e->cargarContenido();
-				e->setPosition(nuevoplayer.position);
+				e->setPosition(p.position);
 				EntityManager::i().mostrarClientes();
 
-				peer->DeallocatePacket(packet);
 
 			}
 			break;
@@ -85,16 +90,13 @@ void Cliente::update() {
 			{
 				//eres un player nuevo, te envian todos los clientes que habian en el server para que tu tambien los tengas
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-				//recibo el player
-				bsIn.Read(nuevoplayer);
 
-				Enemy *e = new Enemy(nuevoplayer.name, nuevoplayer.guid);
+				Enemy *e = new Enemy(p.name, p.guid);
 				e->inicializar();
 				e->cargarContenido();
-				e->setPosition(nuevoplayer.position);
+				e->setPosition(p.position);
 				EntityManager::i().mostrarClientes();
 
 			}
@@ -500,19 +502,20 @@ void Cliente::inicializar() {
 
 void Cliente::conectar(std::string address, int port) {
 	peer = RakNet::RakPeerInterface::GetInstance();
+	peer->AllowConnectionResponseIPMigration(false);
 	peer->Startup(1, &sd, 1);
 	peer->Connect(address.c_str(), SERVER_PORT, 0, 0);
+	peer->SetOccasionalPing(true);
 
 }
 
 void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
-	RakNet::BitStream bsOut;
-	std::string str;
+
 	TPlayer nuevoplayer;
 
 
 	//Al conectarnos le enviamos nuestro objeto Player tal cual
-	bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
+	//bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
 
 	printf("Introduce un nombre \n");
 	std::cin >> str;
@@ -522,15 +525,16 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 	player->inicializar();
 	player->cargarContenido();
 
-
+	nuevoplayer.mID = NUEVO_PLAYER;
 	nuevoplayer.guid = player->getGuid();
 	nuevoplayer.name = player->getName();
 
 
+	peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
-	bsOut.Write(nuevoplayer);
-	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-	bsOut.Reset();
+	//bsOut.Write(nuevoplayer);
+	//peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
+	//bsOut.Reset();
 
 }
 
@@ -794,8 +798,23 @@ void Cliente::apagar() {
 	
 	conectado = false;
 
-	peer->DeallocatePacket(packet);
-	peer->Shutdown(10);
+	//shut down the client
+	peer->Shutdown(300);
+	//and end the connection
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 	
+}
+
+unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
+{
+	if (pPacket == 0)
+		return 255;
+
+	if ((unsigned char)pPacket->data[0] == ID_TIMESTAMP)
+	{
+		RakAssert(pPacket->length > sizeof(RakNet::MessageID) + sizeof(RakNet::Time));
+		return (unsigned char)pPacket->data[sizeof(RakNet::MessageID) + sizeof(RakNet::Time)];
+	}
+	else
+		return (unsigned char)pPacket->data[0];
 }

@@ -85,5 +85,9 @@ private:
 
 	//Lobby de la partida
 	//LobbyClient lobby;
+
+
+	unsigned char mPacketIdentifier;
+	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 };
 

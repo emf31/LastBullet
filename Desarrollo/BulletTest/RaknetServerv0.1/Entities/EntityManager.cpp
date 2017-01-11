@@ -6,23 +6,31 @@
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	TPlayer nuevocli;
-	RakNet::BitStream bsOut;
+	//RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		nuevocli.mID = NUEVO_PLAYER;
+		peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
+
+
 		//enviamos el nuevo player a todos los clientes que habian en el servidor
-		bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
-		bsOut.Write(p);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-		bsOut.Reset();
+		//bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
+		//bsOut.Write(p);
+		//peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		//bsOut.Reset();
 
 		//enviamos todos los clientes que habian en el servidor al nuevo player
 
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
 		nuevocli.position = i->second->getRenderState()->getPosition();
-		bsOut.Write((RakNet::MessageID)NUEVO_CLIENTE);
-		bsOut.Write(nuevocli);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p.guid, false);
-		bsOut.Reset();
+		nuevocli.mID = NUEVO_CLIENTE;
+
+		//bsOut.Write((RakNet::MessageID)NUEVO_CLIENTE);
+		//bsOut.Write(nuevocli);
+		peer->Send((const char*)&nuevocli, sizeof(nuevocli), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p.guid, false);
+		//peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p.guid, false);
+		//bsOut.Reset();
 	}
 }
 

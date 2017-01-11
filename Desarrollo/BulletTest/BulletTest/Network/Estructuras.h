@@ -5,11 +5,14 @@
 #include <MessageIdentifiers.h>
 #include <Clock.hpp>
 
-typedef struct {
+#pragma pack(push, 1)
+struct TPlayer {
+	unsigned char mID;
 	Vec3<float> position;
 	RakNet::RakNetGUID guid;
 	std::string name;
-}TPlayer;
+};
+#pragma pack(pop)
 
 typedef struct {
 	bool isDying;
