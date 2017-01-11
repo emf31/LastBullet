@@ -2,11 +2,11 @@
 
 
 SceneManager::SceneManager() {
-	gui.init("GUI");
+	//gui.init("GUI");
 	//gui.loadScheme("VanillaSkin.scheme");
-	gui.loadScheme("AlfiskoSkin.scheme");
+	//gui.loadScheme("AlfiskoSkin.scheme");
 
-	gui.loadLayout("SimpleDebug.layout");
+	//gui.loadLayout("SimpleDebug.layout");
 	//gui.setFont("DejaVuSans-10");
 	vec4f perc;
 	perc.x = 0.5f;
@@ -53,7 +53,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	view = camera_ptr->GetViewMatrix();
 	//Desencadena el dibujado de la escena
 	scene.beginDraw(projection, view);
-	gui.draw();
+	//gui.draw();
 	glfwSwapBuffers(window);
 	
 }
