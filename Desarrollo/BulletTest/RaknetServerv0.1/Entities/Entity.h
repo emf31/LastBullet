@@ -1,19 +1,19 @@
 #pragma once
 
-#include "../Otros/vec3.hpp"
-#include  "../Otros/Time.hpp"
-#include  "../Otros/Clock.hpp"
-#include  "../RenderState.h"
+#include  <Clock.hpp>
+#include <Vec3f.h>
 
 #include <RakPeerInterface.h>
 
 class Entity
 {
 public:
-	Entity(const std::string& name, RakNet::RakNetGUID guid, int id=-1);
+	Entity(const std::string& name, RakNet::RakNetGUID guid, int id = -1);
 	virtual ~Entity();
 
-	RenderState* getRenderState() { return &m_renderState; }
+
+	Vec3f getPosition() const { return m_position; }
+	void setPosition(Vec3f& pos) { m_position = pos; }
 
 	RakNet::RakNetGUID getGuid() {
 		return m_guid;
@@ -40,9 +40,6 @@ public:
 	}
 
 	virtual void inicializar() = 0;
-	virtual void update(Time elapsedTime) = 0;
-	virtual void handleInput() = 0;
-	virtual void cargarContenido() = 0;
 	virtual void borrarContenido() = 0;
 	
 
@@ -50,7 +47,7 @@ protected:
 	RakNet::RakNetGUID m_guid;
 	int m_id;
 	std::string m_name;
-	RenderState m_renderState;
+	Vec3f m_position;
 
 private:
 

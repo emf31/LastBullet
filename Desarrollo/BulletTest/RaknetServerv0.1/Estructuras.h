@@ -1,5 +1,5 @@
 #pragma once
-#include "../../BulletTest/Otros/vec3.hpp"
+#include <Vec3f.h>
 #include <RakPeerInterface.h>
 #include <iostream>
 #include <MessageIdentifiers.h>
@@ -7,24 +7,31 @@
 #pragma pack(push, 1)
 struct TPlayer {
 	unsigned char mID;
-	Vec3<float> position;
+	Vec3f position;
 	RakNet::RakNetGUID guid;
 	std::string name;
 };
 #pragma pack(pop)
 
+#pragma pack(push, 1)
+struct RakID {
+	unsigned char mID;
+	RakNet::RakNetGUID guid;
+};
+#pragma pack(pop)
+
 typedef struct {
 	bool isDying;
-	Vec3<float> position;
-	Vec3<float> rotation;
+	Vec3f position;
+	Vec3f rotation;
 	RakNet::RakNetGUID guid;
 }TMovimiento;
 
 typedef struct {
-	Vec3<float> position;
-	Vec3<float> direction;
-	Vec3<float> finalposition;
-	Vec3<float> rotation;
+	Vec3f position;
+	Vec3f direction;
+	Vec3f finalposition;
+	Vec3f rotation;
 	RakNet::RakNetGUID guid;
 }TBala;
 
@@ -34,8 +41,8 @@ typedef struct {
 }TImpactoBala;
 
 typedef struct {
-	Vec3<float> origen;
-	Vec3<float> direction;
+	Vec3f origen;
+	Vec3f direction;
 	RakNet::RakNetGUID guid;
 }TGranada;
 
@@ -52,7 +59,7 @@ typedef struct {
 }TImpactoRocket;
 
 typedef struct {
-	Vec3<float> fuerza;
+	Vec3f fuerza;
 	RakNet::RakNetGUID guid;
 }TImpulso;
 

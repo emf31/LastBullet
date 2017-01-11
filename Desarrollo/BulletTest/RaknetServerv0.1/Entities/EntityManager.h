@@ -42,15 +42,7 @@ public:
 
 	//Inicializa todas las entities
 	void inicializar();
-	//Updatea todas las entities
-	void update(Time elapsedTime);
-	//Updatea la posicion de render de todas las entities
-	void updateRender(float interpolation);
 
-	void handleInput();
-	//Carga el contenido de todas las entities
-	void cargarContenido();
-	//Borra el contenido de todas las entities
 	void borrarContenido();
 	//Borra el entity manager(borramos el mapa y los punteros a entities)
 	void apagar();

@@ -6,31 +6,19 @@
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	TPlayer nuevocli;
-	//RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
-		nuevocli.mID = NUEVO_PLAYER;
+		
 		peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
-
-
-		//enviamos el nuevo player a todos los clientes que habian en el servidor
-		//bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
-		//bsOut.Write(p);
-		//peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-		//bsOut.Reset();
 
 		//enviamos todos los clientes que habian en el servidor al nuevo player
 
+		nuevocli.mID = NUEVO_CLIENTE;
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
-		nuevocli.position = i->second->getRenderState()->getPosition();
-		nuevocli.mID = NUEVO_CLIENTE;
-
-		//bsOut.Write((RakNet::MessageID)NUEVO_CLIENTE);
-		//bsOut.Write(nuevocli);
+		nuevocli.position = i->second->getPosition();
+		
 		peer->Send((const char*)&nuevocli, sizeof(nuevocli), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p.guid, false);
-		//peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, p.guid, false);
-		//bsOut.Reset();
 	}
 }
 
@@ -79,19 +67,15 @@ void EntityManager::lanzarGranda(TGranada & g, RakNet::RakPeerInterface * peer)
 
 void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
 {
+	RakID rakID;
 
-
-	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != guid) {
-
-			//enviamos el guid del cliente que tiene que borrar
-			bsOut.Write((RakNet::MessageID)DESCONECTADO);
-			bsOut.Write(guid);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-			bsOut.Reset();
+			rakID.mID = DESCONECTADO;
+			rakID.guid = guid;
+			peer->Send((const char*)&rakID, sizeof(rakID), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
 		}
 
 	}
@@ -276,36 +260,6 @@ void EntityManager::inicializar()
 
 }
 
-void EntityManager::update(Time elapsedTime)
-{
-	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-		i->second->update(elapsedTime);
-	}
-}
-
-void EntityManager::updateRender(float interpolation)
-{
-	/*for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-		i->second->updateRender(interpolation);
-	}*/
-}
-
-void EntityManager::handleInput()
-{
-	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-		i->second->handleInput();
-	}
-}
-
-
-
-void EntityManager::cargarContenido()
-{
-	std::unordered_map<unsigned long, Entity*>::iterator i = m_jugadores.begin();
-	for (; i != m_jugadores.end(); ++i) {
-		i->second->cargarContenido();
-	}
-}
 
 void EntityManager::borrarContenido()
 {
@@ -390,7 +344,7 @@ void EntityManager::mostrarClientes() {
 
 		i->second->getGuid();
 		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
-		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+		std::cout << "Posicion: " << i->second->getPosition().x << ", " << i->second->getPosition().z << std::endl;
 		std::cout << "GUID de la Entity: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
 		std::cout << "GUID de la Clave: " << i->first << std::endl;
 		std::cout << "ID: " << i->second->getID() << std::endl;

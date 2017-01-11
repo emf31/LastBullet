@@ -23,7 +23,7 @@ void muestraPlayer(Player *p) {
 
 	//std::cout << "Vida: " << p->vida << std::endl;
 	//std::cout << "Municion: " << p->municion << std::endl;
-	std::cout << "Posicion: " << p->getRenderState()->getPosition().getX() << ", " << p->getRenderState()->getPosition().getY() << std::endl;
+	std::cout << "Posicion: " << p->getPosition().x << ", " << p->getPosition().y << std::endl;
 	std::cout << "GUID: " << RakNet::RakNetGUID::ToUint32(p->getGuid()) << std::endl;
 	std::cout << "ID: " << p->getID() << std::endl;
 }
@@ -64,35 +64,34 @@ int main() {
 	int idVida=0;
 	float danyo = 0;
 	
-	
-	
-	
-	//std::vector<Player*> clientArray;
 
 	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
-	;
 	std::cout << "Escuchando conexiones en el puerto: " << SERVER_PORT <<"\nTu IP es: "<< peer->GetLocalIP(0) << std::endl;
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
+
+	//Identificador de paquete recibido
+	unsigned char mPacketIdentifier;
 
 	while (1) {
 		//el for recibe un primer paquete, una vez que ya se lo ha guardado tiene que desasignarlo para poder recibir el siguiente por eso el deallocate, luego recibe el siguiente
 		//Si no se recibe nada packet = 0 y no se entra al bucle
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-			switch (packet->data[0])
+			// Recibimos un paquete, tenemos que obtener el tipo de mensaje
+			mPacketIdentifier = getPacketIdentifier(packet);
+
+			switch (mPacketIdentifier)
 			{
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				printf("vfdvdvdAnother client has disconnected.\n");
+				printf("Another client has disconnected.\n");
 				break;
 			case ID_REMOTE_CONNECTION_LOST:
-				printf("vfdvdvdOtro cliente ha perdido la conexion.\n");
+				printf("Otro cliente ha perdido la conexion.\n");
 				break;
 			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				printf("vdfvdvOtro cliente se ha conectado.\n");
+				printf("Otro cliente se ha conectado.\n");
 				break;
 			case ID_CONNECTION_REQUEST_ACCEPTED: {
-				printf("vfdvdvdNuestra conexion se ha aceptado.\n");
-
-
+				printf("Nuestra conexion se ha aceptado.\n");
 			}
 			break;
 
@@ -100,39 +99,33 @@ int main() {
 
 				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
 
-				//RakNet::BitStream bsIn(packet->data, packet->length, false);
-				//bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				
-				//bsIn.Read(p_struct);
-				
-				//RakNet::BitStream bsOut;
-
 				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
 				
+				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
 				EntityManager::i().sendPlayer(t_player, peer);
 
 				Player *p = new Player(t_player.name, t_player.guid);
-				p->getRenderState()->setPosition(t_player.position);
+				p->setPosition(t_player.position);
+
 				EntityManager::i().mostrarClientes();
 
 				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
-				filaTabla.guid = t_player.guid;
+				/*filaTabla.guid = t_player.guid;
 				filaTabla.name = t_player.name;
 				filaTabla.kills = 0;
 				filaTabla.deaths = 0;
 				filaTabla.puntuacion = 0;
-				EntityManager::i().enviaFila(peer, filaTabla);
+				EntityManager::i().enviaFila(peer, filaTabla);*/
 
 				
 			}
-							   break;
+			break;
 			case ID_NEW_INCOMING_CONNECTION: {
 				printf("Conexion entrante...\n");
 
-
 			}
 
-											 break;
+			break;
 			case ID_DISCONNECTION_NOTIFICATION:
 				printf("Un cliente se ha desconectado.\n");
 				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
@@ -148,42 +141,6 @@ int main() {
 
 			}
 			break;
-			case ID_GAME_MESSAGE_1:
-			{
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				RakNet::RakString stringEntrante;
-				bsIn.Read(stringEntrante);
-
-				std::cout << stringEntrante.C_String() << std::endl;
-			}
-			break;
-			case MENSAJE_POSICION:
-			{
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				float x, y, z;
-				bsIn.ReadFloat16(x, 0, 9);
-				bsIn.ReadFloat16(y, 0, 9);
-				bsIn.ReadFloat16(z, 0, 9);
-				std::cout << x << ", " << y << ", " << z << std::endl;
-			}
-
-			break;
-			case DESCONECTADO:
-			{
-
-				/*RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				std::cout << "HOLAAAAAAAAA ME VOY" << std::endl;
-				printf("Un cliente se ha desconectado.\n");
-				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
-				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
-				EntityManager::i().enviaDesconexion(packet->guid, peer);
-				//lo borramos de los clientes actuales del servidor
-				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));*/
-			}
-			break;
 			case MOVIMIENTO: {
 
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
@@ -193,7 +150,7 @@ int main() {
 				bsIn.Read(movimiento);
 
 				EntityManager::i().enviaNuevaPos(movimiento, peer);
-				EntityManager::i().getRaknetEntity(movimiento.guid)->getRenderState()->setPosition(movimiento.position);
+				EntityManager::i().getRaknetEntity(movimiento.guid)->setPosition(movimiento.position);
 
 				
 
