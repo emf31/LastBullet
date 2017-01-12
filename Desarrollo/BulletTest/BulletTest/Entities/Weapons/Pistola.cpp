@@ -135,10 +135,10 @@ void Pistola::shoot() {
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
-//			if (Cliente::i().isConected()) {
+			if (Cliente::i().isConected()) {
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-//				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
-			//}
+				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			}
 
 			relojCadencia.restart();
 		}

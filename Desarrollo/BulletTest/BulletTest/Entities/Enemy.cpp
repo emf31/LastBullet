@@ -151,7 +151,7 @@ bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 //pila posiciones
-void Enemy::encolaMovimiento(TMovimiento mov)
+void Enemy::encolaMovimiento(TMovimiento& mov)
 {
 	// Añadir a la cola
 	m_positions.push(mov);

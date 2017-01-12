@@ -23,7 +23,7 @@ void muestraPlayer(Player *p) {
 
 	//std::cout << "Vida: " << p->vida << std::endl;
 	//std::cout << "Municion: " << p->municion << std::endl;
-	std::cout << "Posicion: " << p->getPosition().x << ", " << p->getPosition().y << std::endl;
+	std::cout << "Posicion: " << p->getPosition().getX() << ", " << p->getPosition().getY() << std::endl;
 	std::cout << "GUID: " << RakNet::RakNetGUID::ToUint32(p->getGuid()) << std::endl;
 	std::cout << "ID: " << p->getID() << std::endl;
 }
@@ -143,14 +143,10 @@ int main() {
 			break;
 			case MOVIMIENTO: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				
-				
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(movimiento);
+				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
 
-				EntityManager::i().enviaNuevaPos(movimiento, peer);
-				EntityManager::i().getRaknetEntity(movimiento.guid)->setPosition(movimiento.position);
+				EntityManager::i().enviaNuevaPos(mov, peer);
+				EntityManager::i().getRaknetEntity(mov.guid)->setPosition(mov.position);
 
 				
 
@@ -220,14 +216,10 @@ int main() {
 
 			case DISPARAR_BALA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TBala bala = *reinterpret_cast<TBala*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(p_bala);
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviarDisparoCliente(p_bala, peer);
+				EntityManager::i().enviarDisparoCliente(bala, peer);
 
 			}
 			break;

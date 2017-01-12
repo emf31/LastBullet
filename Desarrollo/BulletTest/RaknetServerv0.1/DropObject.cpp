@@ -25,20 +25,6 @@ void DropObject::inicializar()
 {
 }
 
-void DropObject::update(Time elapsedTime)
-{
-
-
-}
-
-void DropObject::handleInput()
-{
-}
-
-void DropObject::cargarContenido()
-{
-}
-
 void DropObject::borrarContenido()
 {
 }

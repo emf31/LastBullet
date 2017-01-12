@@ -20,7 +20,7 @@ public:
 	//Envia un nuevo player a todos los clientes
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
 	//este metodo ahora envia la posicion y la rotacion del jugador
-	void enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer);
+	void enviaNuevaPos(TMovimiento p, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);

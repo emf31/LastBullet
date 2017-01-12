@@ -1,7 +1,7 @@
 #pragma once
 
 #include  <Clock.hpp>
-#include <Vec3f.h>
+#include <vec3.hpp>
 
 #include <RakPeerInterface.h>
 
@@ -12,8 +12,8 @@ public:
 	virtual ~Entity();
 
 
-	Vec3f getPosition() const { return m_position; }
-	void setPosition(Vec3f& pos) { m_position = pos; }
+	Vec3<float> getPosition() const { return m_position; }
+	void setPosition(Vec3<float>& pos) { m_position = pos; }
 
 	RakNet::RakNetGUID getGuid() {
 		return m_guid;
@@ -47,7 +47,7 @@ protected:
 	RakNet::RakNetGUID m_guid;
 	int m_id;
 	std::string m_name;
-	Vec3f m_position;
+	Vec3<float> m_position;
 
 private:
 

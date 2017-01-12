@@ -22,23 +22,15 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
-void EntityManager::enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer)
+void EntityManager::enviaNuevaPos(TMovimiento p, RakNet::RakPeerInterface *peer)
 {
 
-	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != p.guid) {
-			//std::cout << "///////ENVIAMOS POS INICIO////////" << std::endl;
-			//std::cout << "El player: " << p.name << "se mueve desde: "<< getRaknetEntity(p.guid)->getRenderState()->getPosition().getX()<<","<< getRaknetEntity(p.guid)->getRenderState()->getPosition().getZ() <<" a la nueva pos: " << p.position.getX() << "," << p.position.getZ() << std::endl;
-			//std::cout << "Enviamos esta nueva pos a: " << i->second->getName() <<"con guid: "<<RakNet::RakNetGUID::ToUint32(i->second->getGuid())<< std::endl;
 			//enviamos la posicion actualizada del player a todos los clientes
-			bsOut.Write((RakNet::MessageID)MOVIMIENTO);
-			bsOut.Write(p);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-			bsOut.Reset();
-			//std::cout << "///////ENVIAMOS POS FINAL////////" << std::endl;
+			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 		}
 
 	}
@@ -180,19 +172,10 @@ void EntityManager::enviaTiempoActualArma(DropObject * o, RakNet::RakNetGUID &gu
 
 void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *peer)
 {
-
-
-	RakNet::BitStream bsOut;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != b.guid) {
-
-			//enviamos el guid del cliente que tiene que borrar
-			bsOut.Write((RakNet::MessageID)DISPARAR_BALA);
-			bsOut.Write(b);
-			peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-			bsOut.Reset();
+			peer->Send((const char*)&b, sizeof(b), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 		}
 
 	}
@@ -344,7 +327,7 @@ void EntityManager::mostrarClientes() {
 
 		i->second->getGuid();
 		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
-		std::cout << "Posicion: " << i->second->getPosition().x << ", " << i->second->getPosition().z << std::endl;
+		std::cout << "Posicion: " << i->second->getPosition().getX() << ", " << i->second->getPosition().getZ() << std::endl;
 		std::cout << "GUID de la Entity: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
 		std::cout << "GUID de la Clave: " << i->first << std::endl;
 		std::cout << "ID: " << i->second->getID() << std::endl;

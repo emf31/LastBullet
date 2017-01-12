@@ -1,2 +1,4 @@
-﻿  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+﻿  Pistola.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

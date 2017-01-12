@@ -192,7 +192,7 @@ void Player::update(Time elapsedTime)
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 		//ahora posicion y rotacion se envian en el mismo
-//		Cliente::i().enviarMovimiento(this);
+		Cliente::i().enviarMovimiento(this);
 	}
 
 	if (m_renderState.getPosition().getY() < -200) {

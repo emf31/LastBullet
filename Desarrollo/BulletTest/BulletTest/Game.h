@@ -31,8 +31,6 @@ public:
 	static const Time timePerFrame;
 
 private:
-
-	Cliente cliente;
 	
 	float interpolation;
 	

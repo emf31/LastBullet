@@ -9,7 +9,7 @@ Entity::Entity(const std::string& name, RakNet::RakNetGUID guid, int id) :
 	m_id(id)
 {
 	//De momento se generan en el 0,0
-	setPosition(Vec3f(0, 0, 0));
+	setPosition(Vec3<float>(0, 0, 0));
 
 	//cada entity que se crea llama a entity manager para registrarse
 	EntityManager::i().registerEntity(this);

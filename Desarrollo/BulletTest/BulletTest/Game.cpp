@@ -97,8 +97,8 @@ void Game::run()
 				//Realizamos actualizaciones
 				update(timePerFrame);
 
-				if (cliente.isConected()) {
-					cliente.update();
+				if (Cliente::i().isConected()) {
+					Cliente::i().update();
 				}
 
 			}
@@ -125,8 +125,8 @@ void Game::run()
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
 
-	if (cliente.isConected()) {
-		cliente.apagar();
+	if (Cliente::i().isConected()) {
+		Cliente::i().apagar();
 	}
 	
 	MessageHandler::i().borrarContenido();
@@ -217,15 +217,15 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//raknet
-		cliente.inicializar();
+		Cliente::i().inicializar();
 
 		
 		//Bucle infinito hasta que se conecte
-		while (cliente.isConected() == false) {
-			cliente.update();
+		while (Cliente::i().isConected() == false) {
+			Cliente::i().update();
 		}
 
-		cliente.createPlayer(map.getSpawnPoints());
+		Cliente::i().createPlayer(map.getSpawnPoints());
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();

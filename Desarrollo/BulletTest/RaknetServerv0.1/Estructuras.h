@@ -1,5 +1,6 @@
 #pragma once
 #include <Vec3f.h>
+#include <vec3.hpp>
 #include <RakPeerInterface.h>
 #include <iostream>
 #include <MessageIdentifiers.h>
@@ -7,7 +8,7 @@
 #pragma pack(push, 1)
 struct TPlayer {
 	unsigned char mID;
-	Vec3f position;
+	Vec3<float> position;
 	RakNet::RakNetGUID guid;
 	std::string name;
 };
@@ -20,20 +21,29 @@ struct RakID {
 };
 #pragma pack(pop)
 
-typedef struct {
+#pragma pack(push, 1)
+struct TMovimiento {
+	unsigned char mID;
 	bool isDying;
-	Vec3f position;
-	Vec3f rotation;
+	Vec3<float> position;
+	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
-}TMovimiento;
+};
+#pragma pack(pop)
 
-typedef struct {
-	Vec3f position;
-	Vec3f direction;
-	Vec3f finalposition;
-	Vec3f rotation;
+#pragma pack(push, 1)
+struct TBala {
+	unsigned char mID;
+	Vec3<float> position;
+	Vec3<float> direction;
+	Vec3<float> finalposition;
+	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
-}TBala;
+};
+#pragma pack(pop)
+
+
+
 
 typedef struct {
 	float damage;

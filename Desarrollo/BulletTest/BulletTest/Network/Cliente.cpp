@@ -67,14 +67,7 @@ void Cliente::update() {
 			{
 				//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
 
-				//RakNet::BitStream bsIn(packet->data, packet->length, false);
-				//bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
 				TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
-
-				//recibo el player
-				//bsIn.Read(nuevoplayer);
-
 
 				Enemy *e = new Enemy(p.name, p.guid);
 				e->inicializar();
@@ -99,6 +92,19 @@ void Cliente::update() {
 				e->setPosition(p.position);
 				EntityManager::i().mostrarClientes();
 
+			}
+			break;
+			case MOVIMIENTO:
+			{
+				TMovimiento m = *reinterpret_cast<TMovimiento*>(packet->data);
+
+				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
+				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
+
+				if (e != NULL) {
+					e->encolaMovimiento(m);
+				}
+			
 			}
 			break;
 
@@ -174,59 +180,26 @@ void Cliente::update() {
 			//}
 			//break;
 
-			//case MOVIMIENTO:
-			//{
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	//recibo el player
-			//	bsIn.Read(movimiento);
-			//	//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
-			//	Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(movimiento.guid));
+			case DESCONECTADO:
+			{
+				RakID rakID = *reinterpret_cast<RakID*>(packet->data);
 
-			//	if (e != NULL) {
-			//		e->encolaMovimiento(movimiento);
-			//	}
-			//	
-			//	e = nullptr;
+				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
+				
 
-			//}
-			//break;
+			}
+			break;
 
+			case DISPARAR_BALA:
+			{
+				TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 
-			//case DESCONECTADO:
-			//{
+				GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+				bala->cargarContenido();
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	
-			//	bsIn.Read(desconectado);
-			//	//Entity* e = EntityManager::i().getRaknetEntity(desconectado);
-			//	//EntityManager::i().getRaknetEntity(desconectado)->borrarContenido();
-			//	//EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
-			//	EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(desconectado));
-
-			//	//TODO IMPORTANTE: esto a veces da un error pork borra el entity justo cuando en el otro hilo esta haciendo el update del entity que aqui se elimina
-			//	//habria que enviarle un mensaje borrate igual que la bala para que lo borre despues del update.
-			//	
-
-			//}
-			//break;
-
-			//case DISPARAR_BALA:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-			//	bsIn.Read(balaDisparada);
-
-
-			//	GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
-			//	bala->cargarContenido();
-
-			//}
-			//break;
+			}
+			break;
 
 			//case DISPARAR_ROCKET:
 			//{
@@ -513,10 +486,6 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 
 	TPlayer nuevoplayer;
 
-
-	//Al conectarnos le enviamos nuestro objeto Player tal cual
-	//bsOut.Write((RakNet::MessageID)NUEVO_PLAYER);
-
 	printf("Introduce un nombre \n");
 	std::cin >> str;
 
@@ -532,29 +501,46 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 
 	peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
-	//bsOut.Write(nuevoplayer);
-	//peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-	//bsOut.Reset();
+}
+//Envia la posición del player al servidor para que este lo comunique a todos
+void Cliente::enviarMovimiento(Player* p) {
+
+	TMovimiento mov;
+
+	mov.mID = MOVIMIENTO;
+	mov.position = p->getRenderState()->getPosition();
+	mov.rotation = p->getRenderState()->getRotation();
+	mov.guid = p->getGuid();
+	mov.isDying = p->getLifeComponent()->isDying();
+
+	peer->Send((const char*)&mov, sizeof(mov), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+
+//Envia un mensaje al servidor de disparar bala pasando una estructura TBala
+void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) {
+	TBala bala;
+	bala.mID = DISPARAR_BALA;
+	bala.direction = direction;
+	bala.position = position;
+	bala.finalposition = finalposition;
+	bala.rotation = rotation;
+	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+
+	peer->Send((const char*)&bala, sizeof(bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
 }
 
-//void Cliente::enviarMovimiento(Player* p) {
-//
-//	RakNet::BitStream bsOut;
-//	TMovimiento paquetemov;
-//
-//	bsOut.Write((RakNet::MessageID)MOVIMIENTO);
-//
-//	//TODO asumimios que tanto el servidor como el cliente crean el player en el (0,0) en un futuro el servidor deberia enviar la posicion inicial al cliente.
-//	paquetemov.position = p->getRenderState()->getPosition();
-//	paquetemov.rotation = p->getRenderState()->getRotation();
-//	paquetemov.guid = p->getGuid();
-//	paquetemov.isDying = p->getLifeComponent()->isDying();
-//
-//	bsOut.Write(paquetemov);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
+void Cliente::enviarDesconexion() {
+	RakID rakID;
+	rakID.mID = DESCONECTADO;
+	rakID.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+
+
+	peer->Send((const char*)&rakID, sizeof(rakID), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+
+}
+
+
 //
 //void Cliente::vidaCogida(int id)
 //{
@@ -646,33 +632,8 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 //}
 //
 //
-//void Cliente::enviarDesconexion() {
-//
-//	RakNet::BitStream bsOut;
-//
-//	bsOut.Write((RakNet::MessageID)DESCONECTADO);
-//	bsOut.Write(1);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//
-//}
-//
-//void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) {
-//
-//	RakNet::BitStream bsOut;
-//
-//	bsOut.Write((RakNet::MessageID)DISPARAR_BALA);
-//	TBala bala;
-//	bala.direction = direction;
-//	bala.position = position;
-//	bala.finalposition = finalposition;
-//	bala.rotation = rotation;
-//	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-//	bsOut.Write(bala);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//
-//}
+
+
 //
 //void Cliente::dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
 //{

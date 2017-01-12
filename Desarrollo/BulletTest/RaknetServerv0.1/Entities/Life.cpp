@@ -27,20 +27,6 @@ void Life::inicializar()
 {
 }
 
-void Life::update(Time elapsedTime)
-{
-	
-
-}
-
-void Life::handleInput()
-{
-}
-
-void Life::cargarContenido()
-{
-}
-
 void Life::borrarContenido()
 {
 }

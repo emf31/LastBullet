@@ -12,26 +12,26 @@ class Cliente
 {
 public:
 
-	Cliente();
-	/*static Cliente& i() {
+	
+	static Cliente& i() {
 		static Cliente singleton;
 		return singleton;
-	}*/
+	}
 
 	void update();
 
 	void createPlayer(std::vector<Vec3<float>> &spawnPoints);
 	void inicializar();
 	void conectar(std::string address, int port);
-	//void enviarMovimiento(Player* p); 
+	void enviarMovimiento(Player* p); 
+	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
+	void enviarDesconexion();
 	//void vidaCogida(int id);
 	//void nuevaVida(int id);
 	//void armaCogida(int id);
 	//void nuevaArma(int id);
 	//void lanzarGranada(TGranada g);
 	//void enviarDisparo(RakNet::RakNetGUID guid, float* damage);
-	//void enviarDesconexion();
-	//void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
 	//void dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	//void playerMuerto();
 	//void impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket* impact);
@@ -56,8 +56,8 @@ private:
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
 	
-
-	
+	//private constructor
+	Cliente();
 
 	bool conectado;
 
@@ -65,7 +65,7 @@ private:
 	RakNet::BitStream bsOut;
 	std::string str;
 	//TMovimiento movimiento;
-	TPlayer nuevoplayer;
+	//TPlayer nuevoplayer;
 	//TBala balaDisparada;
 	//TGranada granada;
 	//TCambioArma t_cambioArma;
