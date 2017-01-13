@@ -200,6 +200,20 @@ void Cliente::update() {
 
 			}
 			break;
+			case IMPACTO_BALA:
+			{
+
+				TImpactoBala bala = *reinterpret_cast<TImpactoBala*>(packet->data);
+
+				//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
+
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(bala.damage, bala.guid);
+
+				//TODO ahora le quitamos siempre 20 de vida en un futuro podriamos pensar en quitar vida dependiendo de donde impacte la bala
+
+			}
+			break;
 
 			//case DISPARAR_ROCKET:
 			//{
@@ -251,22 +265,7 @@ void Cliente::update() {
 			//}
 			//break;
 
-			//case IMPACTO_BALA:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
-			//	bsIn.Read(imp_bala);
-
-
-			//	//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-			//	static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(imp_bala.damage, imp_bala.guid);
-
-			//	//TODO ahora le quitamos siempre 20 de vida en un futuro podriamos pensar en quitar vida dependiendo de donde impacte la bala
-
-			//}
-			//break;
+			
 
 			//case IMPACTO_ROCKET:
 			//{
@@ -539,6 +538,27 @@ void Cliente::enviarDesconexion() {
 	peer->Send((const char*)&rakID, sizeof(rakID), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
 }
+void Cliente::enviarDisparo(RakNet::RakNetGUID guid, float* damage) {
+
+
+	//////////////////////////////////////////////////////
+	//TODO asumimios que el disparo ha sido certero del jugador que dispara con un enemigo, luego simplemente habria que cambiar la logica de ahora (que es pulsar la R, esta en player)
+	//por la de que si la bala colisiona de verdad, si la bala colisiona de verdad desencadenaria toda la logica que se produce al pulsar la R ahora.
+	/////////////////////////////////////////////////////
+	//bsOut.Write(aqui pasariamos el guid del enemigo al que le hemos dado cuando sepamos con quien ha colisionado la bala)
+	//se pueden enviar 2 mensajes seguidos, luego habria que hacer 2 read en el servidor, el primero te dice el guid de quien ha recibido el disparo y el segundo el guid de quien ha disparado
+
+	//ANTES ESTABA ASI
+	//bsOut.Write(guid);
+	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
+	TImpactoBala imp_bala;
+	imp_bala.mID = IMPACTO_BALA;
+	imp_bala.damage = *damage;
+	imp_bala.guid = guid;
+
+	peer->Send((const char*)&imp_bala, sizeof(imp_bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+
 
 
 //
@@ -605,32 +625,7 @@ void Cliente::enviarDesconexion() {
 //	bsOut.Reset();
 //}
 //
-//void Cliente::enviarDisparo(RakNet::RakNetGUID guid, float* damage) {
-//
-//	RakNet::BitStream bsOut;
-//
-//	bsOut.Write((RakNet::MessageID)IMPACTO_BALA);
-//
-//	//////////////////////////////////////////////////////
-//	//TODO asumimios que el disparo ha sido certero del jugador que dispara con un enemigo, luego simplemente habria que cambiar la logica de ahora (que es pulsar la R, esta en player)
-//	//por la de que si la bala colisiona de verdad, si la bala colisiona de verdad desencadenaria toda la logica que se produce al pulsar la R ahora.
-//	/////////////////////////////////////////////////////
-//	//bsOut.Write(aqui pasariamos el guid del enemigo al que le hemos dado cuando sepamos con quien ha colisionado la bala)
-//	//se pueden enviar 2 mensajes seguidos, luego habria que hacer 2 read en el servidor, el primero te dice el guid de quien ha recibido el disparo y el segundo el guid de quien ha disparado
-//
-//	//ANTES ESTABA ASI
-//	//bsOut.Write(guid);
-//	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
-//	TImpactoBala imp_bala;
-//	imp_bala.damage = *damage;
-//	imp_bala.guid = guid;
-//
-//	bsOut.Write(imp_bala);
-//	//printf("envio mensaje del disparo\n");
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
+
 //
 
 

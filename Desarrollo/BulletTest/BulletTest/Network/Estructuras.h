@@ -45,12 +45,13 @@ struct TBala {
 #pragma pack(pop)
 
 
-
-typedef struct {
+#pragma pack(push, 1)
+struct TImpactoBala {
+	unsigned char mID;
 	float damage;
 	RakNet::RakNetGUID guid;
-}TImpactoBala;
-
+};
+#pragma pack(pop)
 
 
 typedef struct {

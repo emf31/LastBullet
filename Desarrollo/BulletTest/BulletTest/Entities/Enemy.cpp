@@ -127,7 +127,7 @@ void Enemy::handleMessage(const Message & message)
 	if (message.mensaje == "COLISION_BALA") {
 		std::cout << m_isDying << std::endl;
 		if (!m_isDying) {
-//			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
+			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
 		}
 		
 	}
