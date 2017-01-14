@@ -162,6 +162,12 @@
     <ClCompile Include="GUI\DebugMenuGUI.cpp">
       <Filter>Source Code\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Mapa\PathPlanner.cpp">
+      <Filter>Source Code\Mapa</Filter>
+    </ClCompile>
+    <ClCompile Include="Mapa\Map.cpp">
+      <Filter>Source Code\Mapa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -414,6 +420,12 @@
     <ClInclude Include="GUI\DebugMenuGUI.h">
       <Filter>Headers\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Mapa\PathPlanner.h">
+      <Filter>Headers\Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapa\Map.h">
+      <Filter>Headers\Mapa</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -517,6 +529,12 @@
     </Filter>
     <Filter Include="Source Code\GUI">
       <UniqueIdentifier>{c504afe8-4421-43cd-b8c1-fb0e67287c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Mapa">
+      <UniqueIdentifier>{02e8a2dd-215b-4ce8-b36e-127e3ff7bd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Mapa">
+      <UniqueIdentifier>{fe557c46-1c73-462b-85de-eb93c9fa13ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 #include <btBulletCollisionCommon.h>
 
 #include "vec3.hpp"
+#include <Vec2f.h>
 
 
 const float pif = static_cast<float>(M_PI);
@@ -32,3 +33,5 @@ int Randi(int min, int max);
 btVector3 bt(const Vec3<float> &vec);
 
 Vec3<float> cons(const btVector3 &bt);
+
+Vec2f vec3ToVec2(const Vec3<float> &vec);
