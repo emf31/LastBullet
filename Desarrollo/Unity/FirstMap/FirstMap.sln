@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstMap", "FirstMap.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstMap.Editor.Plugins", "FirstMap.Editor.Plugins.csproj", "{EFBF85C3-E70F-467B-6BB0-152EB2EF14B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstMap.Editor", "FirstMap.Editor.csproj", "{D3F826B4-171A-E936-532A-345E62F46663}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{EFBF85C3-E70F-467B-6BB0-152EB2EF14B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFBF85C3-E70F-467B-6BB0-152EB2EF14B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFBF85C3-E70F-467B-6BB0-152EB2EF14B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3F826B4-171A-E936-532A-345E62F46663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F826B4-171A-E936-532A-345E62F46663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3F826B4-171A-E936-532A-345E62F46663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3F826B4-171A-E936-532A-345E62F46663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
