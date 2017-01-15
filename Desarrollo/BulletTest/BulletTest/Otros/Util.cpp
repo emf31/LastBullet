@@ -53,3 +53,8 @@ Vec3<float> cons(const btVector3 & bt)
 {
 	return Vec3<float>(bt.getX(), bt.getY(), bt.getZ());
 }
+
+Vec2f vec3ToVec2(const Vec3<float>& vec)
+{
+	return Vec2f(vec.getX(),vec.getZ());
+}

@@ -53,6 +53,9 @@ public:
 	bool isDying() { return m_isDying; }
 	void setIsDying(bool die) { m_isDying = die; }
 
+	float getRadio(){
+		return radius;
+	}
 private:
 
 	//MachineState* m_pStateMachine;
