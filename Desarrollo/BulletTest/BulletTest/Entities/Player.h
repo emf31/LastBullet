@@ -11,6 +11,8 @@
 #include "../Otros/Lista.h"
 #include "../Otros/LifeComponent.h"
 
+class Cliente;
+
 class Player : public Entity
 {
 public:
@@ -111,12 +113,6 @@ private:
 	bool isMoving;
 	bool isRunning;
 	bool isReloading;
-
-
-	
-	
-	
-
 	
 	//Player controller
 	btCollisionShape* m_pCollisionShape;

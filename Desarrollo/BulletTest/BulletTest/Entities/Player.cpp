@@ -261,7 +261,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}else if (message.mensaje == "COLISION_ROCKET") {
-		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		Cliente::i().impactoRocket(m_guid, *(TImpactoRocket*)message.data);
 		delete message.data;
 	}
 
@@ -411,7 +411,7 @@ void Player::UpWeapon()
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
 	if (Cliente::i().isConected()) {
-		Cliente::i().cambioArma(1,m_guid);
+//		Cliente::i().cambioArma(1,m_guid);
 	}
 }
 
@@ -426,7 +426,7 @@ void Player::DownWeapon()
 
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
 	if (Cliente::i().isConected()) {
-		Cliente::i().cambioArma(2, m_guid);
+//		Cliente::i().cambioArma(2, m_guid);
 	}
 }
 
@@ -507,6 +507,8 @@ void Player::resetAll() {
 
 	pistola->setEquipada(true);
 	tienePistola = true;
+
+	life_component.resetVida();
 
 }
 

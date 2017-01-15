@@ -141,8 +141,8 @@ void Enemy::handleMessage(const Message & message)
 
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
-		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
 		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+		Cliente::i().impactoRocket(m_guid, *(TImpactoRocket*)message.data);
 		delete message.data;
 	}
 }
@@ -153,7 +153,7 @@ bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 //pila posiciones
-void Enemy::encolaMovimiento(TMovimiento mov)
+void Enemy::encolaMovimiento(TMovimiento& mov)
 {
 	// Añadir a la cola
 	m_positions.push(mov);

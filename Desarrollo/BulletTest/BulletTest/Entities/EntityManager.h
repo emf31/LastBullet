@@ -59,7 +59,7 @@ public:
 	//Borra la cola de borrado de entities, se llama en cada iteracion
 	void cleanDeleteQueue();
 
-	void cambiaTabla(TFilaTabla fila) {
+	void cambiaTabla(TFilaTabla& fila) {
 		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
 		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 	}

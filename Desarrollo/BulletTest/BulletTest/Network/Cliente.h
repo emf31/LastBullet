@@ -12,7 +12,7 @@ class Cliente
 {
 public:
 
-
+	
 	static Cliente& i() {
 		static Cliente singleton;
 		return singleton;
@@ -24,20 +24,21 @@ public:
 	void inicializar();
 	void conectar(std::string address, int port);
 	void enviarMovimiento(Player* p); 
-	void vidaCogida(int id);
-	void nuevaVida(int id);
-	void armaCogida(int id);
-	void nuevaArma(int id);
-	void lanzarGranada(TGranada g);
-	void enviarDisparo(RakNet::RakNetGUID guid, float* damage);
-	void enviarDesconexion();
 	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
+	void enviarDesconexion();
+	void enviarDisparo(RakNet::RakNetGUID guid, float* damage);
 	void dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
-	void playerMuerto();
-	void impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket* impact);
+	void impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket& impact);
+	void lanzarGranada(TGranada& g);
 	void aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid);
-	void cambioArma(int cambio, RakNet::RakNetGUID guid);
+	void playerMuerto();
 	void actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath);
+	void vidaCogida(int id);
+	void armaCogida(int id);
+	void nuevaVida(int id);
+	void nuevaArma(int id);
+	void cambioArma(int cambio, RakNet::RakNetGUID guid);
+
 
 	void searchServersOnLAN();
 
@@ -56,7 +57,7 @@ private:
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
 	
-
+	//private constructor
 	Cliente();
 
 	bool conectado;
@@ -64,26 +65,15 @@ private:
 
 	RakNet::BitStream bsOut;
 	std::string str;
-	TMovimiento movimiento;
-	TPlayer nuevoplayer;
-	TBala balaDisparada;
-	TGranada granada;
-	TCambioArma t_cambioArma;
-	TVidaServer vidaServer;
-	TImpactoRocket impacto;
-	TImpactoBala imp_bala;
-	RakNet::RakNetGUID desconectado;
-	RakNet::RakNetGUID guidDispara;
-	RakNet::RakNetGUID guidTabla;
-	TFilaTabla nuevaFila;
-	int idVida;
-	float danyo = 0.0f;
-	Vec3<float> fuerza;
 
 	//Lista de servidores disponibles
 	std::vector<std::string> m_servers;
 
 	//Lobby de la partida
-	LobbyClient lobby;
+	//LobbyClient lobby;
+
+
+	unsigned char mPacketIdentifier;
+	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 };
 

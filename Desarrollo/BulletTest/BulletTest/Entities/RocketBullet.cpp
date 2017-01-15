@@ -83,14 +83,14 @@ void RocketBullet::handleMessage(const Message & message)
 
 				Entity* myentity = *it;
 
-				damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
+				damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion) / 3.f;
 
 				if (Cliente::i().isConected()) {
 					if (damage > 0) {
 
 						if (myentity->getID() == PLAYER) {
 							TImpactoRocket* impact = new TImpactoRocket();
-							impact->damage = damage / 3;
+							impact->damage = damage;
 							impact->guidImpactado = myentity->getGuid();
 							impact->guidDisparado = myentity->getGuid();
 							
@@ -100,7 +100,7 @@ void RocketBullet::handleMessage(const Message & message)
 						}
 						else {
 							TImpactoRocket* impact = new TImpactoRocket();
-							impact->damage = damage / 3;
+							impact->damage = damage;
 							impact->guidImpactado = myentity->getGuid();
 							impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
 

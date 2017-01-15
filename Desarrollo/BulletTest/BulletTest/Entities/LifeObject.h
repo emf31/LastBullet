@@ -23,6 +23,7 @@ public:
 
 	void asignaTiempo(Clock tiempo);
 	void VidaCogida();
+
 	// Heredado vía Entity
 	virtual void inicializar() override;
 

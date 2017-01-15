@@ -26,10 +26,8 @@
 #include <MessageHandler.h>
 
 #include <Map.h>
-
-
-
 #include <GUIManager.h>
+
 
 
 const int Game::server_port = 65535;
