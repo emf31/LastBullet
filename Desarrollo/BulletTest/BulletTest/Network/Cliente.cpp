@@ -108,78 +108,6 @@ void Cliente::update() {
 			}
 			break;
 
-			//case NUEVA_VIDA:
-			//{
-			//	
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	bsIn.Read(vidaServer);
-			//	//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-			//	//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-			//	LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
-			//	v->asignaTiempo(vidaServer.tiempo);
-			//	//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
-
-			//}
-			//break;
-
-			//case NUEVA_ARMA:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	bsIn.Read(vidaServer);
-			//	//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-			//	//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-			//	
-			//	//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
-
-			//}
-			//break;
-
-			//case ARMA_COGIDA:
-			//{
-
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	bsIn.Read(idVida);
-			//	//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-			//	//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-			//	WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idVida));
-			//	w->ArmaCogida();
-			//	//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
-
-
-			//	
-
-
-
-			//	Message msg(w, "cogida", NULL);
-			//	MessageHandler::i().sendMessage(msg);
-
-
-			//}
-			//break;
-
-			//case VIDA_COGIDA:
-			//{
-
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-			//	bsIn.Read(idVida);
-			//	//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-			//	//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-			//	//TODO esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
-			//	LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida));
-			//	v->VidaCogida();
-			//	//NOTA: si esto no va igual tenemos que enviar un mensaje con el mensaje handler
-
-			//}
-			//break;
-
 
 			case DESCONECTADO:
 			{
@@ -215,202 +143,193 @@ void Cliente::update() {
 			}
 			break;
 
-			//case DISPARAR_ROCKET:
-			//{
+			case DISPARAR_ROCKET:
+			{
+				TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-			//	bsIn.Read(balaDisparada);
-
-			//	RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
+				RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
 
-			//}
-			//break;
+			}
+			break;
 
-			//case LANZAR_GRANADA:
-			//{
+			case IMPACTO_ROCKET:
+			{
+				TImpactoRocket impacto = *reinterpret_cast<TImpactoRocket*>(packet->data);
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(impacto.damage, impacto.guidDisparado);
 
-			//	bsIn.Read(granada);
-			//	
-			//	Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
-			//	ent->lanzarGranada(granada);
+			}
+			break;
 
-
-			//}
-			//break;
-
-			//case CAMBIO_ARMA:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-			//	bsIn.Read(t_cambioArma);
-
-			//	if (t_cambioArma.cambio == 1) {
-			//		Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
-			//		MessageHandler::i().sendMessage(msg1);
-			//	}else {
-			//		Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
-			//		MessageHandler::i().sendMessage(msg1);
-			//	}
+			case LANZAR_GRANADA:
+			{
+				TGranada granada = *reinterpret_cast<TGranada*>(packet->data);
+				
+				Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
+				ent->lanzarGranada(granada);
 
 
+			}
+			break;
 
-			//}
-			//break;
+			case APLICAR_IMPULSO:
+			{
 
-			
+				TImpulso imp = *reinterpret_cast<TImpulso*>(packet->data);
 
-			//case IMPACTO_ROCKET:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-			//	std::cout << "ME HAN DADO CON EL ROCKET" << std::endl;
-
-			//	
-			//	bsIn.Read(impacto);
-
-			//	//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-			//	//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
-			//	static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(impacto.damage, impacto.guidDisparado);
-
-			//}
-			//break;
-
-			//case APLICAR_IMPULSO:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-			//	bsIn.Read(fuerza);
-
-			//	//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-			//	Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
-			//	player->impulsar(fuerza);
-			//	player = nullptr;
-
-			//}
-			//break;
+				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+				Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
+				player->impulsar(imp.fuerza);
 
 
-			//case ACTUALIZA_TABLA:
-			//{
+			}
+			break;
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+			case NUEVA_VIDA:
+			{
+				TDropServer vidaServer = *reinterpret_cast<TDropServer*>(packet->data);
 
-			//	bsIn.Read(nuevaFila);
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
+				v->asignaTiempo(vidaServer.tiempo);
 
-			//	
-			//	EntityManager::i().cambiaTabla(nuevaFila);
+			}
+			break;
 
-			//}
-			//break;
+			case NUEVA_ARMA:
+			{
+				TDropServer armaServer = *reinterpret_cast<TDropServer*>(packet->data);
 
-			//case AUMENTA_KILL:
-			//{
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				WeaponDrop *v = static_cast<WeaponDrop*>(EntityManager::i().getEntity(armaServer.id));
+				v->asignaTiempo(armaServer.tiempo);
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+			}
+			break;
 
-			//	bsIn.Read(guidTabla);
+			case ARMA_COGIDA:
+			{
+				TId idArma = *reinterpret_cast<TId*>(packet->data);
 
-			//	
-			//	EntityManager::i().aumentaKill(guidTabla);
-
-			//}
-			//break;
-
-			//case AUMENTA_MUERTE:
-			//{
-
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-
-			//	bsIn.Read(guidTabla);
-
-			//	EntityManager::i().aumentaMuerte(guidTabla);
-
-			//}
-			//break;
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idArma.id));
+				w->ArmaCogida();
 
 
-			//case MUERTE:
-			//{
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+			}
+			break;
 
-			//	bsIn.Read(nuevoplayer);
-			//	
-			//	//std::cout << "el player " << p.name << " ha muerto" << std::endl;
-
-			//	if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
-			//		//es el player
-			//		Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-			//		//player->setPosition(nuevoplayer.position);		
-			//		player->resetAll();
-			//		player = nullptr;
-
-			//		//TODO esto en verdad no iria aqui, esto deberia de estar en algun metodo que resetee, la vida y la municion despues de que pase un cierto tiempo para reaparecer
-			//		//ademas que desactivara el draw de esta entetity para que no puedeas moverte ni nada mientras estas muerto.
-			//		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->resetVida();
-			//	}
-			//	else {
-			//		//es un enemigo
-			//		Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-			//		//enemigo->setIsDying(true);
-			//		
-			//		enemigo = nullptr;
-			//	}
-			//	
+			case VIDA_COGIDA:
+			{
 
 
-			//}
-			//break;
-			//case FIN_PARTIDA:
-			//{
+				TId idVida = *reinterpret_cast<TId*>(packet->data);
+				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+				//TODO esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
+				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida.id));
+				v->VidaCogida();
 
-			//	RakNet::BitStream bsIn(packet->data, packet->length, false);
-			//	bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+			}
+			break;
 
-			//	bsIn.Read(guidTabla);
+			case MUERTE:
+			{
+				TPlayer nuevoplayer = *reinterpret_cast<TPlayer*>(packet->data);
 
-			//	//std::cout << "el player " << p.name << " ha muerto" << std::endl;
+				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
+					//es el player
+					Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);		
+					player->resetAll();
 
-			//	if (EntityManager::i().getRaknetEntity(guidTabla)->getID() == PLAYER) {
-			//		//es el player
-			//		Player* player = (Player*)EntityManager::i().getRaknetEntity(guidTabla);
-			//		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-			//		std::cout << "FIN DE LA PARTIDA:" << std::endl;
-			//		std::cout << "HAS GANADO" << std::endl;
-			//		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-			//	}
-			//	else {
-			//		//es un enemigo
-			//		Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(guidTabla);
-			//		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-			//		std::cout << "FIN DE LA PARTIDA:" << std::endl;
-			//		std::cout << "El player " << enemigo->getName() << " ha ganado" << std::endl;
-			//		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-			//	}
-			//	std::cout << "PUNTUACION FINAL:" << std::endl;
-			//	EntityManager::i().muestraTabla();
-			//	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-			//	
+				}
+				else {
+					//es un enemigo
+					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+
+				}
+			}
+			break;
+			case ACTUALIZA_TABLA:
+			{
+				TFilaTabla nuevaFila = *reinterpret_cast<TFilaTabla*>(packet->data);
+
+				EntityManager::i().cambiaTabla(nuevaFila);
+
+			}
+			break;
+			case AUMENTA_KILL:
+			{
+				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+				
+				EntityManager::i().aumentaKill(guidTabla.guid);
+
+			}
+			break;
+
+			case AUMENTA_MUERTE:
+			{
+
+				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+
+				EntityManager::i().aumentaMuerte(guidTabla.guid);
+
+			}
+			break;
+				
+
+			case CAMBIO_ARMA:
+			{
+				TCambioArma t_cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
+
+				if (t_cambioArma.cambio == 1) {
+					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
+					MessageHandler::i().sendMessage(msg1);
+				}else {
+					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
+					MessageHandler::i().sendMessage(msg1);
+				}
+
+			}
+			break;
 
 
-			//}
-			//break;
+			case FIN_PARTIDA:
+			{
+
+				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+
+				if (EntityManager::i().getRaknetEntity(guidTabla.guid)->getID() == PLAYER) {
+					//es el player
+					Player* player = (Player*)EntityManager::i().getRaknetEntity(guidTabla.guid);
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+					std::cout << "FIN DE LA PARTIDA:" << std::endl;
+					std::cout << "HAS GANADO" << std::endl;
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+				}
+				else {
+					//es un enemigo
+					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(guidTabla.guid);
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+					std::cout << "FIN DE LA PARTIDA:" << std::endl;
+					std::cout << "El player " << enemigo->getName() << " ha ganado" << std::endl;
+					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+				}
+				std::cout << "PUNTUACION FINAL:" << std::endl;
+				EntityManager::i().muestraTabla();
+				std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+				
+
+
+			}
+			break;
 
 			case ID_UNCONNECTED_PONG:
 			{
@@ -489,7 +408,7 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 	std::cin >> str;
 
 
-	Player *player = new Player(str, spawnPoints, this, peer->GetMyGUID());
+	Player *player = new Player(str, spawnPoints, peer->GetMyGUID());
 	player->inicializar();
 	player->cargarContenido();
 
@@ -558,160 +477,115 @@ void Cliente::enviarDisparo(RakNet::RakNetGUID guid, float* damage) {
 
 	peer->Send((const char*)&imp_bala, sizeof(imp_bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 }
-
-
-
-//
-//void Cliente::vidaCogida(int id)
-//{
-//	RakNet::BitStream bsOut;
-//	TPlayer paquetemov;
-//
-//	bsOut.Write((RakNet::MessageID)VIDA_COGIDA);
-//	//enviamos un mensaje al server con la vida que ha sido cogida
-//	bsOut.Write(id);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//
-//}
-//
-//void Cliente::nuevaVida(int id)
-//{
-//
-//	RakNet::BitStream bsOut;
-//	
-//
-//	bsOut.Write((RakNet::MessageID)NUEVA_VIDA);
-//
-//	bsOut.Write(id);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
-//void Cliente::nuevaArma(int id)
-//{
-//
-//	RakNet::BitStream bsOut;
-//
-//
-//	bsOut.Write((RakNet::MessageID)NUEVA_ARMA);
-//
-//	bsOut.Write(id);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
-//void Cliente::armaCogida(int id)
-//{
-//	RakNet::BitStream bsOut;
-//
-//	bsOut.Write((RakNet::MessageID)ARMA_COGIDA);
-//	//enviamos un mensaje al server con la vida que ha sido cogida
-//	bsOut.Write(id);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//
-//}
-//
-//void Cliente::lanzarGranada(TGranada g) {
-//
-//	RakNet::BitStream bsOut;
-//	
-//
-//	bsOut.Write((RakNet::MessageID)LANZAR_GRANADA);
-//
-//	bsOut.Write(g);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
-
-//
-
-
-//
-//void Cliente::dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
-//{
-//	RakNet::BitStream bsOut;
-//
-//	bsOut.Write((RakNet::MessageID)DISPARAR_ROCKET);
-//	TBala bala;
-//	bala.direction = direction;
-//	bala.position = position;
-//	bala.rotation = rotation;
-//	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-//	bsOut.Write(bala);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
-//
-//void Cliente::playerMuerto()
-//{
-//	//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
-//
-//	RakNet::BitStream bsOut;
-//	TPlayer nuevoplayer;
-//	bsOut.Write((RakNet::MessageID)MUERTE);
-//
-//	nuevoplayer.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-//	nuevoplayer.name = EntityManager::i().getEntity(PLAYER)->getName();
-//	nuevoplayer.position = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-//
-//
-//	bsOut.Write(nuevoplayer);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
-//void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket* impact)
-//{
-//	RakNet::BitStream bsOut;
-//
-//	bsOut.Write((RakNet::MessageID)IMPACTO_ROCKET);
-//
-//	bsOut.Write(*impact);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-//
-//void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
-//{
-//	RakNet::BitStream bsOut;
-//	TImpulso impulso;
-//	impulso.fuerza = force;
-//	impulso.guid = guid;
-//	bsOut.Write((RakNet::MessageID)APLICAR_IMPULSO);
-//	bsOut.Write(impulso);
-//	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-//	bsOut.Reset();
-//}
-
-/*void Cliente::cambioArma(int cambio, RakNet::RakNetGUID guid)
+void Cliente::dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
 {
-	RakNet::BitStream bsOut;
-	TCambioArma swap;
-	swap.cambio = cambio;
-	swap.guid = guid;
-	bsOut.Write((RakNet::MessageID)CAMBIO_ARMA);
-	bsOut.Write(swap);
-	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-	bsOut.Reset();
+
+	TBala bala;
+	bala.mID = DISPARAR_ROCKET;
+	bala.direction = direction;
+	bala.position = position;
+	bala.rotation = rotation;
+	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+
+	peer->Send((const char*)&bala, sizeof(bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+
 }
 
+void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket& impact)
+{
+	impact.mID = IMPACTO_ROCKET;
+	peer->Send((const char*)&impact, sizeof(impact), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+	
+}
+
+void Cliente::lanzarGranada(TGranada& g) {
+
+	g.mID = LANZAR_GRANADA;
+	peer->Send((const char*)&g, sizeof(g), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
+{
+	TImpulso impulso;
+	impulso.mID = APLICAR_IMPULSO;
+	impulso.fuerza = force;
+	impulso.guid = guid;
+
+	peer->Send((const char*)&impulso, sizeof(impulso), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+
+void Cliente::playerMuerto()
+{
+	//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
+
+	TPlayer nuevoplayer;
+	nuevoplayer.mID = MUERTE;
+	nuevoplayer.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+	nuevoplayer.name = EntityManager::i().getEntity(PLAYER)->getName();
+	nuevoplayer.position = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+
+	peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
 void Cliente::actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath)
 {
 	TKill kill;
+	kill.mID = ACTUALIZA_TABLA;
 	kill.guidKill = guidKill;
 	kill.guidDeath = guidDeath;
 
-	RakNet::BitStream bsOut;
-	bsOut.Write((RakNet::MessageID)ACTUALIZA_TABLA);
-	bsOut.Write(kill);
-	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, servidor, false);
-	bsOut.Reset();
+	peer->Send((const char*)&kill, sizeof(kill), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
-}*/
+}
+
+void Cliente::armaCogida(int id)
+{
+	TId s_id;
+	s_id.mID = ARMA_COGIDA;
+	s_id.id = id;
+
+	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+void Cliente::vidaCogida(int id)
+{
+
+	TId s_id;
+	s_id.mID = VIDA_COGIDA;
+	s_id.id = id;
+
+	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+
+
+}
+void Cliente::nuevaVida(int id)
+{
+	TId s_id;
+	s_id.mID = NUEVA_VIDA;
+	s_id.id = id;
+
+	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+
+
+void Cliente::nuevaArma(int id)
+{
+	TId s_id;
+	s_id.mID = NUEVA_ARMA;
+	s_id.id = id;
+
+	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+
+
+void Cliente::cambioArma(int cambio, RakNet::RakNetGUID guid)
+{
+
+	TCambioArma swap;
+	swap.mID = CAMBIO_ARMA;
+	swap.cambio = cambio;
+	swap.guid = guid;
+
+	peer->Send((const char*)&swap, sizeof(swap), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+}
+
 
 void Cliente::searchServersOnLAN() {
 	//Creo un RakPeer para lanzar un paquete de búsqueda
@@ -766,11 +640,5 @@ unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 	if (pPacket == 0)
 		return 255;
 
-	if ((unsigned char)pPacket->data[0] == ID_TIMESTAMP)
-	{
-		RakAssert(pPacket->length > sizeof(RakNet::MessageID) + sizeof(RakNet::Time));
-		return (unsigned char)pPacket->data[sizeof(RakNet::MessageID) + sizeof(RakNet::Time)];
-	}
-	else
-		return (unsigned char)pPacket->data[0];
+	return (unsigned char)pPacket->data[0];
 }

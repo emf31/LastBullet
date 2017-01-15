@@ -53,48 +53,76 @@ struct TImpactoBala {
 };
 #pragma pack(pop)
 
-
-typedef struct {
-	Vec3<float> origen;
-	Vec3<float> direction;
-	RakNet::RakNetGUID guid;
-}TGranada;
-
-typedef struct {
-	int id;
-	Clock tiempo;
-}TVidaServer;
-
-typedef struct {
+#pragma pack(push, 1)
+struct TImpactoRocket {
+	unsigned char mID;
 	float damage;
 	RakNet::RakNetGUID guidImpactado;
 	RakNet::RakNetGUID guidDisparado;
-}TImpactoRocket;
+};
+#pragma pack(pop)
 
-typedef struct {
+#pragma pack(push, 1)
+struct TGranada {
+	unsigned char mID;
+	Vec3<float> origen;
+	Vec3<float> direction;
+	RakNet::RakNetGUID guid;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+struct TImpulso {
+	unsigned char mID;
 	Vec3<float> fuerza;
 	RakNet::RakNetGUID guid;
-}TImpulso;
+};
+#pragma pack(pop)
 
-typedef struct {
-	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
-	int cambio;
-	RakNet::RakNetGUID guid;
-}TCambioArma;
+#pragma pack(push, 1)
+struct TKill{
+	unsigned char mID;
+	RakNet::RakNetGUID guidKill;
+	RakNet::RakNetGUID guidDeath;
+};
+#pragma pack(pop)
 
-typedef struct {
+#pragma pack(push, 1)
+struct TFilaTabla {
+	unsigned char mID;
 	std::string name;
 	RakNet::RakNetGUID guid;
 	int kills;
 	int deaths;
 	int puntuacion;
-}TFilaTabla;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+struct TDropServer {
+	unsigned char mID;
+	int id;
+	Clock tiempo;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+struct TId {
+	unsigned char mID;
+	int id;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+struct TCambioArma {
+	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
+	unsigned char mID;
+	int cambio;
+	RakNet::RakNetGUID guid;
+};
+#pragma pack(pop)
 
 
-typedef struct {
-	RakNet::RakNetGUID guidKill;
-	RakNet::RakNetGUID guidDeath;
-}TKill;
 
 
 enum GameMessages

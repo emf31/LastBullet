@@ -51,19 +51,20 @@ void PistolaDrop::handleMessage(const Message & message)
 				clockRespawnWeapon.restart();
 
 				static_cast<Player*>(message.data)->setWeapon(PISTOLA);
-				m_nodo->setVisible(false);
-//				if (Cliente::i().isConected()) {
 
-				//}
-					//Cliente::i().armaCogida(m_id);
+				m_nodo->setVisible(false);
+				if (Cliente::i().isConected()) {
+					Cliente::i().armaCogida(m_id);
+				}
+				
 
 			}
 		}
-		}
+	}
 }
 
 bool PistolaDrop::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	ArmaCogida();
+	//ArmaCogida();
 	return true;
 }

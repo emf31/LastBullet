@@ -49,20 +49,7 @@ int main() {
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	sd.socketFamily = AF_INET;
 	RakNet::Packet *packet;
-	RakNet::RakNetGUID guid_Pdisparado;
-	TPlayer p_struct;
-	TMovimiento movimiento;
-	TBala p_bala;
-	TImpactoRocket impact;
-	TGranada p_granada;
-	TImpulso impulso;
-	TImpactoBala imp_bala;
-	TCambioArma cambioArma;
-	TFilaTabla filaTabla;
-	Clock tiempoRestartVida;
-	TKill kill;
-	int idVida=0;
-	float danyo = 0;
+
 	
 
 	peer->Startup(MAX_CLIENTS, &sd, 1)==RakNet::RAKNET_STARTED;
@@ -95,31 +82,6 @@ int main() {
 			}
 			break;
 
-			case NUEVO_PLAYER: {
-
-				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
-
-				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
-				
-				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
-				EntityManager::i().sendPlayer(t_player, peer);
-
-				Player *p = new Player(t_player.name, t_player.guid);
-				p->setPosition(t_player.position);
-
-				EntityManager::i().mostrarClientes();
-
-				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
-				/*filaTabla.guid = t_player.guid;
-				filaTabla.name = t_player.name;
-				filaTabla.kills = 0;
-				filaTabla.deaths = 0;
-				filaTabla.puntuacion = 0;
-				EntityManager::i().enviaFila(peer, filaTabla);*/
-
-				
-			}
-			break;
 			case ID_NEW_INCOMING_CONNECTION: {
 				printf("Conexion entrante...\n");
 
@@ -141,6 +103,34 @@ int main() {
 
 			}
 			break;
+			case NUEVO_PLAYER: {
+
+				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
+
+				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
+
+				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
+				EntityManager::i().sendPlayer(t_player, peer);
+
+				Player *p = new Player(t_player.name, t_player.guid);
+				p->setPosition(t_player.position);
+
+				EntityManager::i().mostrarClientes();
+
+				TFilaTabla filaTabla;
+				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
+				filaTabla.mID = ACTUALIZA_TABLA;
+				filaTabla.guid = t_player.guid;
+				filaTabla.name = t_player.name;
+				filaTabla.kills = 0;
+				filaTabla.deaths = 0;
+				filaTabla.puntuacion = 0;
+				EntityManager::i().enviaFila(peer, filaTabla);
+
+
+			}
+			break;
+
 			case MOVIMIENTO: {
 
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
@@ -155,28 +145,18 @@ int main() {
 
 			case LANZAR_GRANADA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TGranada p_granada = *reinterpret_cast<TGranada*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(p_granada);
 
 				EntityManager::i().lanzarGranda(p_granada, peer);
-				
-
-
 
 			}
 			break;
 
 			case IMPACTO_BALA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TImpactoBala imp_bala = *reinterpret_cast<TImpactoBala*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(imp_bala);
 				//notifico a ese cliente que ha sido disparado
 				EntityManager::i().enviaDisparado(imp_bala, packet->guid, peer);
 
@@ -185,13 +165,8 @@ int main() {
 
 			case APLICAR_IMPULSO: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TImpulso impulso = *reinterpret_cast<TImpulso*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(impulso);
-				//notifico a ese cliente que ha sido disparado
 				EntityManager::i().enviaImpulso(impulso, peer);
 
 			}
@@ -199,14 +174,9 @@ int main() {
 
 			case IMPACTO_ROCKET: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
 
+				TImpactoRocket impact = *reinterpret_cast<TImpactoRocket*>(packet->data);
 
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				
-				bsIn.Read(impact);
-				
 				//notifico a ese cliente que ha sido disparado
 				EntityManager::i().enviaDisparadoRocket(impact, peer);
 
@@ -227,14 +197,18 @@ int main() {
 
 			case DISPARAR_ROCKET: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TBala p_bala = *reinterpret_cast<TBala*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(p_bala);
 				//notifico a ese cliente que ha sido disparado
 				EntityManager::i().enviarDisparoClienteRocket(p_bala, peer);
+
+			}
+			break;
+			case MUERTE: {
+
+				TPlayer p_struct = *reinterpret_cast<TPlayer*>(packet->data);
+
+				EntityManager::i().notificarMuerte(p_struct, peer);
 
 			}
 			break;
@@ -242,13 +216,9 @@ int main() {
 
 			case NUEVA_VIDA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TId idVida = *reinterpret_cast<TId*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(idVida);
-				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida));
+				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida.id));
 				if (vida != NULL) {
 					//existe esa vida ya (un cliente que se conecto antes ya la creo)
 					
@@ -263,19 +233,16 @@ int main() {
 				}
 				else {
 					//no existe la vida aun (este es el primer cliente que se conecta)
-					Life *l = new Life(idVida);
+					Life *l = new Life(idVida.id);
 				}
 			}
 			break;
 			case NUEVA_ARMA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TId idArma = *reinterpret_cast<TId*>(packet->data);
 
 
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(idVida);
-				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idVida));
+				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idArma.id));
 				if (arma != NULL) {
 					//existe esa vida ya (un cliente que se conecto antes ya la creo)
 
@@ -290,7 +257,7 @@ int main() {
 				}
 				else {
 					//no existe la vida aun (este es el primer cliente que se conecta)
-					DropObject *d = new DropObject(idVida);
+					DropObject *d = new DropObject(idArma.id);
 				}
 
 
@@ -300,13 +267,9 @@ int main() {
 
 			case VIDA_COGIDA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TId idVida = *reinterpret_cast<TId*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(idVida);
-				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida));
+				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida.id));
 				vida->resetTiempoRecargar();
 
 				EntityManager::i().VidaCogida(idVida, peer);
@@ -316,53 +279,35 @@ int main() {
 
 			}
 			break;
+
 			case ARMA_COGIDA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TId idArma = *reinterpret_cast<TId*>(packet->data);
 
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(idVida);
-				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idVida));
-				EntityManager::i().ArmaCogida(idVida, peer);
+				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idArma.id));
+				arma->resetTiempoRecargar();
+
+				EntityManager::i().ArmaCogida(idArma, peer);
 			}
 			break;
+
 			case CAMBIO_ARMA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TCambioArma cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(cambioArma);
 				//notifico a ese cliente que ha sido disparado
 				EntityManager::i().enviaCambioArma(cambioArma, peer);
 
 			}
 			break;
-			case MUERTE: {
-
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo la estructura del cliente que ha muerto
-				bsIn.Read(p_struct);
-				//notifico a todos que ese cliente a muerto
-				EntityManager::i().notificarMuerte(p_struct, peer);
-
-			}
-			break;
+			
 
 			case ACTUALIZA_TABLA: {
 
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				TKill kill = *reinterpret_cast<TKill*>(packet->data);
 
-
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				//recibo el guid del cliente que ha sido disparado
-				bsIn.Read(kill);
 				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+
 				if (kill.guidDeath != kill.guidKill) {
 					//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado
 					EntityManager::i().aumentaKill(kill.guidKill, peer);	

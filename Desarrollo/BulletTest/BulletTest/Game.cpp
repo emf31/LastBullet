@@ -206,9 +206,9 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		/*Player* player = new Player("NombreA", map.getSpawnPoints());
+		Player* player = new Player("NombreA", map.getSpawnPoints());
 		player->inicializar();
-		player->cargarContenido();*/
+		player->cargarContenido();
 
 	}
 	else {
@@ -230,14 +230,14 @@ void Game::inicializar()
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
 		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
-			//Cliente::i().nuevaVida((*it)->getID());
+			Cliente::i().nuevaVida((*it)->getID());
 		}
 			
 		//enviamos los paquetes de armas al servidor para que los cree
 
 		std::list<Entity*>weapon = EntityManager::i().getWeapons();
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
-			//Cliente::i().nuevaArma((*it)->getID());
+			Cliente::i().nuevaArma((*it)->getID());
 		}
 
 

@@ -19,10 +19,10 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		m_isDying = true;
 		relojMuerte.restart();
 
-		/*if (Cliente::i().isConected()) {
-			//Cliente::i().playerMuerto();
-			//Cliente::i().actualizaTabla(guid, m_player->getGuid());
-		}*/
+		if (Cliente::i().isConected()) {
+			Cliente::i().playerMuerto();
+			Cliente::i().actualizaTabla(guid, m_player->getGuid());
+		}
 
 	}
 }

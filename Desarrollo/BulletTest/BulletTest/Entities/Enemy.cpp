@@ -140,7 +140,7 @@ void Enemy::handleMessage(const Message & message)
 
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
-//		Cliente::i().impactoRocket(m_guid, (TImpactoRocket*)message.data);
+		Cliente::i().impactoRocket(m_guid, *(TImpactoRocket*)message.data);
 		delete message.data;
 	}
 }

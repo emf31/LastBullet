@@ -30,8 +30,8 @@ public:
 	void enviaTiempoActualArma(DropObject *d, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
 	void enviarDisparoClienteRocket(TBala &b, RakNet::RakPeerInterface *peer);
-	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
-	void ArmaCogida(int idArma, RakNet::RakPeerInterface *peer);
+	void VidaCogida(TId &idVida, RakNet::RakPeerInterface *peer);
+	void ArmaCogida(TId &idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
 	void enviaCambioArma(TCambioArma &cambio, RakNet::RakPeerInterface *peer);
