@@ -23,7 +23,7 @@ public class Exporter : MonoBehaviour
         foreach (object o in obj)
         {
             GameObject g = (GameObject)o;
-            if (!g.name.Equals("Script") && !g.name.Equals("Main Camera") && !g.name.Equals("Directional Light") && !g.name.Equals("Waypoint Editor") && !g.name.Equals("Waypoint Cluster"))
+            if (!g.name.Equals("Script") && !g.name.Equals("Main Camera") && !g.name.Equals("Directional Light") && !g.name.Equals("Waypoint Editor"))
             {
                 GameObject parent = g.transform.parent.gameObject;
                 if (parent != null)
@@ -51,14 +51,18 @@ public class Exporter : MonoBehaviour
 
                         if (g.tag == "Grafo")
                         {
-                            
-                            WayPoint w = g.GetComponent<WayPoint>();
-                            objeto.conexionesGrafo = new int[w.outs.Count];
-                            foreach (WayPointPercent p in w.outs){
-                                Debug.Log("entro");
-                                objeto.conexionesGrafo[objeto.indice]=Int32.Parse(p.waypoint.name);
-                                objeto.indice++;
+                            WayPoint[] w = g.GetComponentsInChildren<WayPoint>();
+                           // WayPoint w = g.GetComponent<WayPoint>();
+                           foreach(WayPoint waypoint in w) {
+                                objeto.conexionesGrafo = new int[waypoint.outs.Count];
+                                foreach (WayPointPercent p in waypoint.outs) {
+                                    //Debug.Log("entro");
+                                    objeto.conexionesGrafo[objeto.indice] = Int32.Parse(p.waypoint.name);
+                                    objeto.indice++;
+                                }
+                                objeto.indice = 0;
                             }
+                           
                         }
 
                         if (mt != null)
