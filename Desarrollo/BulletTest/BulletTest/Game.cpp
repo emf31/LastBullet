@@ -141,11 +141,12 @@ void Game::inicializar()
 	//inicializamos bullet
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
+
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
-	MapLoader map;
-	map.readMap("..\rust_export.txt");
+	//mapa
+	Map::i().inicializar();
 
 	GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
 	ge->addEntityList(EntityManager::i().getLifeObjects());
@@ -205,9 +206,11 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("NombreA", map.getSpawnPoints());
+		Player* player = new Player("NombreA");
 		player->inicializar();
 		player->cargarContenido();
+		//Añadimos observer partida al player
+		player->addObserver(&partida);
 
 	}
 	else {
@@ -224,7 +227,12 @@ void Game::inicializar()
 			Cliente::i().update();
 		}
 
-		Cliente::i().createPlayer(map.getSpawnPoints());
+		Player* player = Cliente::i().createPlayer();
+		//Añadimos observer al player
+		player->addObserver(&partida);
+
+		//Añadimos observer al cliente
+		Cliente::i().addObserver(&partida);
 
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
@@ -245,8 +253,9 @@ void Game::inicializar()
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
 
-	//mapa
-	Map::i().inicializar();
+	
+
+	
 
 }
 
@@ -262,25 +271,39 @@ bool Game::processEvents()
 
 	//Teclas debug
 	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
+
 		GraphicEngine::i().toggleDebug();
+
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
+
 		GraphicEngine::i().toggleCamera();
+
 	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+
 		ingameGUI.setTablaVisible(false);
+
 	}else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
+
 		ingameGUI.setTablaVisible(true);
-		EntityManager::i().muestraTabla(&ingameGUI);
+		partida.muestraTabla(&ingameGUI);
+
 	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
+
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+
 	} else if (MastEventReceiver::i().leftMouseDown()) {
+
 		debugMenu.injectLeftMouseButton();
+
 	} else if (MastEventReceiver::i().leftMouseUp()) {
+
 		debugMenu.injectLeftMouseButtonUp();
+
 	}
 
 	return false;

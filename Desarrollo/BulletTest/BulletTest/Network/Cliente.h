@@ -7,8 +7,9 @@
 #include <Time.hpp>
 #include <Player.h>
 #include <Lobby.h>
+#include <Subject.h>
 
-class Cliente
+class Cliente : public Subject	//Para comunicarse con la partida
 {
 public:
 
@@ -18,9 +19,10 @@ public:
 		return singleton;
 	}
 
+
 	void update();
 
-	void createPlayer(std::vector<Vec3<float>> &spawnPoints);
+	Player* createPlayer();
 	void inicializar();
 	void conectar(std::string address, int port);
 	void enviarMovimiento(Player* p); 
@@ -38,6 +40,7 @@ public:
 	void nuevaVida(int id);
 	void nuevaArma(int id);
 	void cambioArma(int cambio, RakNet::RakNetGUID guid);
+
 
 
 	void searchServersOnLAN();
@@ -62,8 +65,6 @@ private:
 
 	bool conectado;
 
-
-	RakNet::BitStream bsOut;
 	std::string str;
 
 	//Lista de servidores disponibles
@@ -75,5 +76,6 @@ private:
 
 	unsigned char mPacketIdentifier;
 	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
+
 };
 

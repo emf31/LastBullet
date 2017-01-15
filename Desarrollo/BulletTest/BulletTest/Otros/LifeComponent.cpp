@@ -1,6 +1,7 @@
 #include "LifeComponent.h"
 #include <Player.h>
 #include <Cliente.h>
+#include <Map.h>
 
 LifeComponent::LifeComponent(Player * player)
 {
@@ -35,8 +36,8 @@ bool LifeComponent::update()
 		m_isDying = false;
 		m_vida = 100;
 
-		m_player->searchSpawnPoint();
-		m_player->resetAll();
+		m_player->p_controller->reset(PhysicsEngine::i().m_world);
+		m_player->setPosition(Map::i().searchSpawnPoint());
 	}
 
 	return m_isDying;

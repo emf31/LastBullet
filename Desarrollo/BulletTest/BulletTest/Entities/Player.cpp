@@ -16,16 +16,16 @@
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
 #include <memory>
-#include "Enemy.h"
-#include "../Command/ShootAsalto.h"
-#include "../Command/ShootRocket.h"
-#include "../Command/ShootPistola.h"
+#include <Enemy.h>
+#include <ShootAsalto.h>
+#include <ShootRocket.h>
+#include <ShootPistola.h>
 
 #include <TriggerSystem.h>
+#include <Map.h>
 
 
-Player::Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
-	m_spawns(spawnPoints),
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
 	life_component(this)
 {
 	//Registramos la entity en el trigger system
@@ -45,66 +45,8 @@ void Player::setPosition(Vec3<float> &pos)
 {
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-	//m_nodo->setPosition(pos);
-	m_nodo.get()->setPosition(pos);
+	m_nodo->setPosition(pos);
 }
-
-//Busca en la lista de puntos de spawn alguno que no intersecte con ningún enemigo de radio x,
-//luego con la lista que queda se coge un punto aleatorio
-void Player::searchSpawnPoint()
-{
-	float radio = 100;
-	float fDistance = 0;
-	int spawn = 0;
-
-	if (m_spawns.size() == 1) {
-		setPosition(m_spawns.at(0));
-		return;
-	}
-
-	std::list<Entity*> enemies = EntityManager::i().getEnemies();
-
-	std::vector<Vec3<float>> auxSpawns;
-
-	std::list<Entity*>::iterator it;
-	std::vector<Vec3<float>>::iterator it2;
-
-	for (it2 = m_spawns.begin(); it2 != m_spawns.end(); ++it2) {
-		bool valid = true;
-		for (it = enemies.begin(); it != enemies.end(); ++it) {
-			Vec3<float> vector = (*it)->getRenderState()->getPosition() - (*it2);
-			fDistance = vector.Magnitude();
-
-			if (fDistance < 100) {
-				valid = false;
-				break;
-			}
-
-		}
-		if (valid) {
-			auxSpawns.push_back(*it2);
-		}	
-
-	}
-
-	//Si hay mas de 1 elegimos uno aleatorio
-	if (auxSpawns.size() > 1) {
-		spawn = Randi(0, auxSpawns.size() - 1);
-	}
-	
-	//Si no esta vacio es que hemos encontrado uno
-	if (!auxSpawns.empty()) {
-		p_controller->reset(PhysicsEngine::i().m_world);
-		setPosition(auxSpawns.at(spawn));
-	}
-	else {
-		p_controller->reset(PhysicsEngine::i().m_world);
-		setPosition(m_spawns.at(Randi(0, m_spawns.size() - 1)));
-	}
-	
-}
-
-
 
 
 void Player::inicializar()
@@ -245,7 +187,10 @@ void Player::cargarContenido()
 	GraphicEngine::i().setCameraEntity(this);
 
 	life_component.resetVida();
-	searchSpawnPoint();
+
+	p_controller->reset(PhysicsEngine::i().m_world);
+
+	setPosition(Map::i().searchSpawnPoint());
 
 }
 
@@ -274,7 +219,8 @@ bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 		Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
 		if (ent->getID() == 65534) {
 			//Respawns
-			searchSpawnPoint();
+			p_controller->reset(PhysicsEngine::i().m_world);
+			setPosition(Map::i().searchSpawnPoint());
 		} else if (ent->getID() == 65535) {
 			//LifeObjects
 			Entity *ge = EntityManager::i().getEntity(9000);

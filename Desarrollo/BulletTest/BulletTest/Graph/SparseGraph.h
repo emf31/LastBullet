@@ -17,6 +17,8 @@ public:
 	std::vector<std::list<GraphEdge>> m_Edges;
 
 	SparseGraph(bool digraph) : m_digraph(digraph), m_nextNodeIndex(0) {};
+	~SparseGraph() {};
+
 	//const NavGraphNode& GetNode(int idx) { return m_nodes.at(idx); };
 	NavGraphNode& getNode(int idx);;
 	GraphEdge& getEdge(int from, int to);

@@ -19,7 +19,7 @@ MapLoader::~MapLoader(){
 
 void MapLoader::readMap(const std::string & name)
 {	
-	std::ifstream i("../media/map1.json");
+	std::ifstream i(name);
 	if(i){
 		json j = json::parse(i);
 		int cont = 0;

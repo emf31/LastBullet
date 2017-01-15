@@ -139,77 +139,7 @@ void EntityManager::cleanDeleteQueue()
 
 void EntityManager::muestraTabla(InGameHUD* ingame)
 {
-	//queremos hacer una copia asi que no hacemos puntero aqui
-	std::unordered_map <unsigned long, TFilaTabla> aux;
-	std::vector<TFilaTabla> ordenado;
-	int max=-1;
-	RakNet::RakNetGUID guid;
-	TFilaTabla fila;
-	//fila = m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-	aux = m_tabla;
-	while (aux.size() > 0) {
-		for (auto i = aux.begin(); i != aux.end(); ++i) {
-			if (i->second.kills > max) {
-				max = i->second.kills;
-				guid = i->second.guid;
-			}
-
-		}
-		ordenado.push_back(aux.find(RakNet::RakNetGUID::ToUint32(guid))->second);
-		aux.erase(RakNet::RakNetGUID::ToUint32(guid));
-		max = -1;
-	}
-
-	//std::cout << "*****************************************************************" << std::endl;
-	int a = 1;
-	for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
-
-		
-
-		/*std::cout << "//////////" << std::endl;
-		std::cout << "Nombre del player: " << i->name << std::endl;
-		std::cout << "Kills: " << i->kills << std::endl;
-		std::cout << "Death: " << i->deaths << std::endl;
-		std::cout << "Puntuacion: " << i->puntuacion << std::endl;
-		std::cout << "//////////" << std::endl;*/
-		
-
-		switch (a) {
-		case 1:
-			ingame->setPlayerName(1, i->name);
-			ingame->setPlayerKills(1, i->kills);
-			ingame->setPlayerDeaths(1, i->deaths);
-			ingame->setPlayerPoints(1, i->puntuacion);
-			break;
-
-		case 2:
-			ingame->setPlayerName(2, i->name);
-
-			ingame->setPlayerKills(2, i->kills);
-			ingame->setPlayerDeaths(2, i->deaths);
-			ingame->setPlayerPoints(2, i->puntuacion);
-			break;
-
-		case 3:
-			ingame->setPlayerName(3, i->name);
-
-			ingame->setPlayerKills(3, i->kills);
-			ingame->setPlayerDeaths(3, i->deaths);
-			ingame->setPlayerPoints(3, i->puntuacion);
-			break;
-
-		case 4:
-			ingame->setPlayerName(4, i->name);
-
-			ingame->setPlayerKills(4, i->kills);
-			ingame->setPlayerDeaths(4, i->deaths);
-			ingame->setPlayerPoints(4, i->puntuacion);
-			break;
-		}
-		a++;
-	}
-
-	//std::cout << "*********************************FIN********************************" << std::endl;
+	
 }
 
 Entity * EntityManager::getEntity(int id)
