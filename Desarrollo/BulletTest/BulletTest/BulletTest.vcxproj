@@ -306,10 +306,6 @@
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Network\Cliente.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
-    <ClCompile Include="Observer\events\Event.cpp" />
-    <ClCompile Include="Observer\events\KillEvent.cpp" />
-    <ClCompile Include="Observer\events\MuerteEvent.cpp" />
-    <ClCompile Include="Observer\events\PlayerEvent.cpp" />
     <ClCompile Include="Observer\Observer.cpp" />
     <ClCompile Include="Observer\Subject.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />

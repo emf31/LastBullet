@@ -127,7 +127,13 @@ void Enemy::handleMessage(const Message & message)
 	if (message.mensaje == "COLISION_BALA") {
 		std::cout << m_isDying << std::endl;
 		if (!m_isDying) {
-			Cliente::i().enviarDisparo(m_guid, static_cast<float*>(message.data));
+			//Este float * es una referencia a una variable de clase asi que no hay problema
+			TImpactoBala impacto;
+			impacto.damage = *static_cast<float*>(message.data);
+			impacto.guid = m_guid;
+
+			Cliente::i().dispatchMessage(impacto, IMPACTO_BALA);
+
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		}
 		
@@ -141,8 +147,8 @@ void Enemy::handleMessage(const Message & message)
 
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
+		Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
-		Cliente::i().impactoRocket(m_guid, *(TImpactoRocket*)message.data);
 		delete message.data;
 	}
 }

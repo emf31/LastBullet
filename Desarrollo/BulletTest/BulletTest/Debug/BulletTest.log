@@ -1,140 +1,28 @@
-﻿  main.cpp
+﻿  Cliente.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  ClockImpl.cpp
-  LifeComponent.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Lobby.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\lobby.cpp(60): warning C4018: '<': no coinciden signed/unsigned
-  Cliente.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(446): warning C4477: 'printf' : la cadena de formato '%i' requiere un argumento de tipo 'int', pero el argumento variádico 2 tiene el tipo 'RakNet::Time'
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(446): note: considere el uso de ' %lli' en la cadena de formato
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(446): note: considere el uso de ' %I64i' en la cadena de formato
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(779): warning C4101: 'time': variable local sin referencia
-  GraphicEngine.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Camera.cpp
-  MastEventReceiver.cpp
-  Game.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(363): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
-  InGameHUD.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  GUIManager.cpp
-  GUI.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): note: vea la definición anterior de 'snprintf'
-  DebugMenuGUI.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  RocketLauncher.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Pistola.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  Asalto.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  RocketLauncherDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  PistolaDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  AsaltoDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  RocketBullet.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Generando código...
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\gui\gui.cpp(144): warning C4715: 'Motor::GUI::irrlichtToCeguiKey': no todas las rutas de acceso de control devuelven un valor
-  Compilando...
-  Player.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(127): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(131): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(135): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-  LifeObject.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Granada.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  EntityManager.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Enemy.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(340): warning C4477: 'printf' : la cadena de formato '%i' requiere un argumento de tipo 'int', pero el argumento variádico 2 tiene el tipo 'RakNet::Time'
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(340): note: considere el uso de ' %lli' en la cadena de formato
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(340): note: considere el uso de ' %I64i' en la cadena de formato
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.cpp(456): warning C4101: 'time': variable local sin referencia
   Generando código...
   Omitiendo... (no se detectaron cambios relevantes)
-  TriggerSystem.cpp
-  Lista.cpp
-  PhysicsEngine.cpp
-  MapLoader.cpp
-  Patrullar.cpp
-  MachineState.cpp
-  MessageHandler.cpp
-  InputHandler.cpp
-  Weapon.cpp
-  WeaponDrop.cpp
-  RocketBulletEnemy.cpp
-  PhysicsEntity.cpp
-  GunBullet.cpp
-  GroupEntity.cpp
+  LifeComponent.cpp
+  Lobby.cpp
+  Game.cpp
+  RocketLauncher.cpp
+  Pistola.cpp
+  Asalto.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
+  AsaltoDrop.cpp
+  RocketBullet.cpp
+  Player.cpp
+  LifeObject.cpp
+  Granada.cpp
   Entity.cpp
-  Button.cpp
+  Enemy.cpp
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

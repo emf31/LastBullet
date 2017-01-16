@@ -128,8 +128,16 @@ void Player::update(Time elapsedTime)
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
-		//ahora posicion y rotacion se envian en el mismo
-		Cliente::i().enviarMovimiento(this);
+
+		TMovimiento mov;
+		mov.isDying = getLifeComponent()->isDying();
+		mov.position = getRenderState()->getPosition();
+		mov.rotation = getRenderState()->getRotation();
+		mov.guid = getGuid();
+
+		Cliente::i().dispatchMessage(mov, MOVIMIENTO);
+		
+		//Cliente::i().enviarMovimiento(this);
 	}
 
 	if (m_renderState.getPosition().getY() < -200) {
@@ -206,7 +214,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}else if (message.mensaje == "COLISION_ROCKET") {
-		Cliente::i().impactoRocket(m_guid, *(TImpactoRocket*)message.data);
+		Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		delete message.data;
 	}
 

@@ -36,6 +36,7 @@ const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 Game::Game()
+	: partida(&ingameGUI)
 {
 	
 }
@@ -206,11 +207,10 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("NombreA");
+		player = new Player("NombreA");
 		player->inicializar();
 		player->cargarContenido();
-		//Añadimos observer partida al player
-		player->addObserver(&partida);
+		
 
 	}
 	else {
@@ -227,24 +227,23 @@ void Game::inicializar()
 			Cliente::i().update();
 		}
 
-		Player* player = Cliente::i().createPlayer();
-		//Añadimos observer al player
-		player->addObserver(&partida);
-
-		//Añadimos observer al cliente
-		Cliente::i().addObserver(&partida);
-
+		player = Cliente::i().createPlayer();
+		
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
 		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
-			Cliente::i().nuevaVida((*it)->getID());
+			TId tID;
+			tID.id = (*it)->getID();
+			Cliente::i().dispatchMessage(tID, NUEVA_VIDA);
 		}
 			
 		//enviamos los paquetes de armas al servidor para que los cree
 
 		std::list<Entity*>weapon = EntityManager::i().getWeapons();
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
-			Cliente::i().nuevaArma((*it)->getID());
+			TId tID2;
+			tID2.id = (*it)->getID();
+			Cliente::i().dispatchMessage(tID2, NUEVA_VIDA);
 		}
 
 
@@ -253,21 +252,18 @@ void Game::inicializar()
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
 
-	
-
-	
-
+	//Añadimos observer al cliente y ingameHUD
+	Cliente::i().addObserver(&partida);
+	//Añadimos observer al player
+	player->addObserver(&partida);
 }
 
 bool Game::processEvents()
 {
-	if ( !static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->endGame) {
 		
-		if (!debugMenu.debugInput) {
-			EntityManager::i().handleInput();
-		}
+	if (!debugMenu.debugInput) {
+		EntityManager::i().handleInput();
 	}
-	
 
 	//Teclas debug
 	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
@@ -286,7 +282,7 @@ bool Game::processEvents()
 	}else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(true);
-		partida.muestraTabla(&ingameGUI);
+		partida.muestraTabla();
 
 	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
 

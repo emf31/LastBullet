@@ -5,21 +5,21 @@
 
 #include <RakPeerInterface.h>
 #include <MessageIdentifiers.h>
-#include <BitStream.h>
 #include <RakNetTypes.h>  // MessageID
 #include <Observer.h>
+
 #include <InGameHUD.h>
 
 class Partida : public Observer {
 public:
 
-	Partida() { }
+	Partida(InGameHUD* hud) : ingame(hud) {  }
 	~Partida(){ }
 
 	virtual void onNotify(Event& event) override;
 
 
-	void muestraTabla(InGameHUD *ingame);
+	void muestraTabla();
 
 private:
 
@@ -31,5 +31,5 @@ private:
 
 	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 
-
+	InGameHUD* ingame;
 };

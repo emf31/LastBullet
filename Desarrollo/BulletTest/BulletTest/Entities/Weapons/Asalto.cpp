@@ -132,8 +132,16 @@ void Asalto::shoot()
 			bala->cargarContenido();
 
 			if (Cliente::i().isConected()) {
+				TBala bala;
+				bala.position = cons(start);
+				bala.direction = cons(direccion);
+				bala.finalposition = cons(posicionImpacto);
+				bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
+				bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+				Cliente::i().dispatchMessage(bala, DISPARAR_BALA);
+				//Cliente::i().dispararBala();
 			}
 
 			relojCadencia.restart();

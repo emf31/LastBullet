@@ -39,4 +39,5 @@ private:
 	float interpolation;
 
 	Partida partida;
+	Player* player;
 };

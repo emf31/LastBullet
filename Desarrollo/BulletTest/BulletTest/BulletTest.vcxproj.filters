@@ -181,18 +181,6 @@
     <ClCompile Include="Observer\Subject.cpp">
       <Filter>Source Code\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="Observer\events\Event.cpp">
-      <Filter>Source Code\Observer\events</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer\events\KillEvent.cpp">
-      <Filter>Source Code\Observer\events</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer\events\MuerteEvent.cpp">
-      <Filter>Source Code\Observer\events</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer\events\PlayerEvent.cpp">
-      <Filter>Source Code\Observer\events</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
