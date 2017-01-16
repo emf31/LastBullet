@@ -24,6 +24,8 @@ public:
 
 	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 
 
+private:
+
 	std::vector<Vec3<float>> spawnPoints;
 
 };

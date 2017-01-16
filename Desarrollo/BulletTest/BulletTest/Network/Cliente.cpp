@@ -18,6 +18,9 @@
 #include "../Entities/WeaponDrops/WeaponDrop.h"
 #include "../Entities/WeaponDrops/AsaltoDrop.h"
 #include "../Entities/RocketBulletEnemy.h"
+#include <events/PlayerEvent.h>
+#include <events/KillEvent.h>
+#include <events/MuerteEvent.h>
 
 Cliente::Cliente() /*: lobby(peer)*/
 {
@@ -261,15 +264,23 @@ void Cliente::update() {
 			{
 				TFilaTabla nuevaFila = *reinterpret_cast<TFilaTabla*>(packet->data);
 
-				EntityManager::i().cambiaTabla(nuevaFila);
+				PlayerEvent evento(nuevaFila);
+
+				notify(evento);
+
+				//EntityManager::i().cambiaTabla(nuevaFila);
 
 			}
 			break;
 			case AUMENTA_KILL:
 			{
 				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+
+				KillEvent evento(guidTabla.guid);
+
+				notify(evento);
 				
-				EntityManager::i().aumentaKill(guidTabla.guid);
+				//EntityManager::i().aumentaKill(guidTabla.guid);
 
 			}
 			break;
@@ -279,7 +290,11 @@ void Cliente::update() {
 
 				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
 
-				EntityManager::i().aumentaMuerte(guidTabla.guid);
+				MuerteEvent evento(guidTabla.guid);
+
+				notify(evento);
+
+				//EntityManager::i().aumentaMuerte(guidTabla.guid);
 
 			}
 			break;
@@ -401,7 +416,7 @@ void Cliente::conectar(std::string address, int port) {
 
 }
 
-void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
+Player* Cliente::createPlayer() {
 
 	TPlayer nuevoplayer;
 
@@ -409,7 +424,7 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 	std::cin >> str;
 
 
-	Player *player = new Player(str, spawnPoints, peer->GetMyGUID());
+	Player *player = new Player(str, peer->GetMyGUID());
 	player->inicializar();
 	player->cargarContenido();
 
@@ -419,6 +434,8 @@ void Cliente::createPlayer(std::vector<Vec3<float>> &spawnPoints) {
 
 
 	peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+
+	return player;
 
 }
 //Envia la posición del player al servidor para que este lo comunique a todos

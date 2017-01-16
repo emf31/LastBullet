@@ -142,8 +142,6 @@
     <ClCompile Include="Graph\SparseGraph.cpp">
       <Filter>Source Code\Graph</Filter>
     </ClCompile>
-    <ClCompile Include="Graph\GraphEdge.cpp" />
-    <ClCompile Include="Graph\GraphNode.cpp" />
     <ClCompile Include="Otros\Vec2f.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
@@ -167,6 +165,33 @@
     </ClCompile>
     <ClCompile Include="Mapa\Map.cpp">
       <Filter>Source Code\Mapa</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph\GraphEdge.cpp">
+      <Filter>Source Code\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph\GraphNode.cpp">
+      <Filter>Source Code\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\Partida.cpp">
+      <Filter>Source Code\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\Observer.cpp">
+      <Filter>Source Code\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\Subject.cpp">
+      <Filter>Source Code\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\events\Event.cpp">
+      <Filter>Source Code\Observer\events</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\events\KillEvent.cpp">
+      <Filter>Source Code\Observer\events</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\events\MuerteEvent.cpp">
+      <Filter>Source Code\Observer\events</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\events\PlayerEvent.cpp">
+      <Filter>Source Code\Observer\events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,7 +387,6 @@
     <ClInclude Include="Entities\Button.h">
       <Filter>Headers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Otros\EnumParser.h" />
     <ClInclude Include="TriggerSystem\TriggerRecordStruct.h">
       <Filter>Headers\Triggers</Filter>
     </ClInclude>
@@ -425,6 +449,30 @@
     </ClInclude>
     <ClInclude Include="Mapa\Map.h">
       <Filter>Headers\Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\Partida.h">
+      <Filter>Headers\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\EnumParser.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\Observer.h">
+      <Filter>Headers\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\Subject.h">
+      <Filter>Headers\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\events\Event.h">
+      <Filter>Headers\Observer\events</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\events\KillEvent.h">
+      <Filter>Headers\Observer\events</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\events\MuerteEvent.h">
+      <Filter>Headers\Observer\events</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\events\PlayerEvent.h">
+      <Filter>Headers\Observer\events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -535,6 +583,18 @@
     </Filter>
     <Filter Include="Source Code\Mapa">
       <UniqueIdentifier>{fe557c46-1c73-462b-85de-eb93c9fa13ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Observer">
+      <UniqueIdentifier>{424c6910-1e27-4742-b145-49d63ac25547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Observer\events">
+      <UniqueIdentifier>{377e0166-746f-4c52-a1f5-bca89a35025c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Observer">
+      <UniqueIdentifier>{68f4a4f2-c246-41e6-90d6-a0e0b66c9063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Observer\events">
+      <UniqueIdentifier>{f722ba71-7b40-4e12-b11b-0fe327c22c05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
