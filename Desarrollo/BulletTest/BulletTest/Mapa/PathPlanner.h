@@ -29,6 +29,11 @@ private:
 	//seran los nodos mas cercanos, y de estos nodos mas cercanos hay que calcular su distancia con la posicion del bot y quedarte con el que menos distancia tenga.
 	int getNodoMasCercanoABot(Vec2f pos) const;
 	int getNodoMasCercanoAObjetivo(Vec2f pos) const;
+
+	//este metodo lo que hara es intentar suavizar el camino, para ello mirara entre los siguientes nodos del camino
+	//y si puede saltarse alguno porque no hay ningun obstaculo se lo saltara, es decir si el camino es 1-2-3,
+	//pero del 1 al 3 se puede ir con una linea recta porque no hay obstaculos entonces elimina al 2 del camino.
+	void SuavizarCamino(std::list<Vec2f>& listaCamino);
 	
 	
 

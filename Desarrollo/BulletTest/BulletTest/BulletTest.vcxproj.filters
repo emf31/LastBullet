@@ -168,6 +168,9 @@
     <ClCompile Include="Mapa\Map.cpp">
       <Filter>Source Code\Mapa</Filter>
     </ClCompile>
+    <ClCompile Include="Mapa\Celda.cpp">
+      <Filter>Source Code\Mapa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -424,6 +427,12 @@
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
     <ClInclude Include="Mapa\Map.h">
+      <Filter>Headers\Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapa\BoundingBox.h">
+      <Filter>Headers\Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapa\Celda.h">
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
   </ItemGroup>

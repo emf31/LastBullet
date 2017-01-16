@@ -151,7 +151,7 @@ void GraphicEngine::inicializar()
 {
 	//if(!irrDevice){
 		// Initialize irrlicht
-		irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(1280, 720), 32, true, false, false, &MastEventReceiver::i());
+		irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(1280, 720), 32, false, false, false, &MastEventReceiver::i());
 		irrDevice->setWindowCaption(L"Test");
 
 		irrGUI = irrDevice->getGUIEnvironment();
