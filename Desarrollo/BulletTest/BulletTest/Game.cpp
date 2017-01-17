@@ -28,6 +28,8 @@
 #include <Map.h>
 #include <GUIManager.h>
 
+#include <PathPlanner.h>
+
 
 
 const int Game::server_port = 65535;
@@ -166,16 +168,25 @@ void Game::inicializar()
 	TriggerSystem::i().RegisterEntity(grupoRockets);*/
 
 
-	/*Enemy *e = new Enemy("Rambo");
+	Enemy *e = new Enemy("Rambo");
 	e->inicializar();
 	e->cargarContenido();
-	e->setPosition(Vec3<float>(-4,-55, 400));
+	e->setPosition(Vec3<float>(181,20, 81));
 
 	Enemy *e1 = new Enemy("Chuck Norris");
 	e1->inicializar();
 	e1->cargarContenido();
-	e1->setPosition(Vec3<float>(216, -2.6, 156.3));
+	e1->setPosition(Vec3<float>(11.8, 20, 23));
 
+	std::list<Vec2f> camino1;
+	std::list<Vec2f> camino2;
+	PathPlanner path1(e);
+	PathPlanner path2(e1);
+	path1.CreatePathToPosition(Vec2f(95,116),camino1);
+	path2.CreatePathToPosition(Vec2f(95, 116), camino2);
+
+
+	/*
 	Enemy *e2 = new Enemy("Messi");
 	e2->inicializar();
 	e2->cargarContenido();

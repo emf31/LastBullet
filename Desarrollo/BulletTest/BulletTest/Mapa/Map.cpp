@@ -128,10 +128,10 @@ void Map::borrarContenido() {
 bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 {
 	//TODO hacer este metodo
-	return false;
+	return true;
 }
 
-void Map::ConvertirNodosAPosiciones(std::list<int> CaminoDeNodos, std::list<Vec2f> camino)
+void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec2f>& camino)
 {
 	//Iteramos la lista de node index y obtenemos el nodo del grafo para meter la pos en el camino
 	for (std::list<int>::const_iterator it = CaminoDeNodos.begin(); it != CaminoDeNodos.end(); ++it) {
@@ -201,6 +201,7 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode>& nodosCercan
 	
 	std::vector<int> celdasVecinas;
 	int indCelda = cellSpace->PositionToIndex(pos);
+	std::cout << "ESTOY EN LA CELDA NUMERO: " << indCelda << std::endl;
 	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos);
 	
 	if (nodosCercanos.size() == 0) {
