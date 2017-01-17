@@ -10,15 +10,17 @@
 #include <vector>
 #include "../Otros/Lista.h"
 #include "../Otros/LifeComponent.h"
+#include <Subject.h>
+#include <Observer.h>
 
-class Player : public Entity
+class Player : public Entity, public Subject
 {
 public:
-	Player(const std::string& name, std::vector<Vec3<float>> spawnPoints, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
 	void setPosition(Vec3<float> &pos);
-	void searchSpawnPoint();
+	
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -82,6 +84,7 @@ public:
 
 	Clock relojSangre, relojHit;
 
+
 private:
 
 	Animation* animation;
@@ -111,12 +114,6 @@ private:
 	bool isMoving;
 	bool isRunning;
 	bool isReloading;
-
-
-	
-	
-	
-
 	
 	//Player controller
 	btCollisionShape* m_pCollisionShape;
@@ -128,6 +125,6 @@ private:
 
 	Vec3<float> speedFinal;
 
-	std::vector<Vec3<float>> m_spawns;
+	
 };
 

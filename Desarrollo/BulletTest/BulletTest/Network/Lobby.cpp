@@ -3,7 +3,7 @@
 
 //TODO habria que cambiar el cliente para que los enemigos no se creen hasta haber empezado la partida,
 //pero si alguien se conecta a mitad de partida habria que ver como hacerlo
-
+/*
 using namespace std;
 
 LobbyClient::LobbyClient(RakNet::RakPeerInterface *peer) :
@@ -65,5 +65,5 @@ bool LobbyClient::addPlayer(const TPlayer & p) {
 		return false;
 	}
 	
-}
+}*/
 

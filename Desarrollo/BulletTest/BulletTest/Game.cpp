@@ -26,10 +26,8 @@
 #include <MessageHandler.h>
 
 #include <Map.h>
-
-
-
 #include <GUIManager.h>
+
 
 
 const int Game::server_port = 65535;
@@ -38,6 +36,7 @@ const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 Game::Game()
+	: partida(&ingameGUI)
 {
 	
 }
@@ -143,11 +142,12 @@ void Game::inicializar()
 	//inicializamos bullet
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
+
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
-	MapLoader map;
-	map.readMap("..\rust_export.txt");
+	//mapa
+	Map::i().inicializar();
 
 	GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
 	ge->addEntityList(EntityManager::i().getLifeObjects());
@@ -207,9 +207,10 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("NombreA", map.getSpawnPoints());
+		player = new Player("NombreA");
 		player->inicializar();
 		player->cargarContenido();
+		
 
 	}
 	else {
@@ -226,19 +227,23 @@ void Game::inicializar()
 			Cliente::i().update();
 		}
 
-		Cliente::i().createPlayer(map.getSpawnPoints());
-
+		player = Cliente::i().createPlayer();
+		
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
 		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
-			Cliente::i().nuevaVida((*it)->getID());
+			TId tID;
+			tID.id = (*it)->getID();
+			Cliente::i().dispatchMessage(tID, NUEVA_VIDA);
 		}
 			
 		//enviamos los paquetes de armas al servidor para que los cree
 
 		std::list<Entity*>weapon = EntityManager::i().getWeapons();
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
-			Cliente::i().nuevaArma((*it)->getID());
+			TId tID2;
+			tID2.id = (*it)->getID();
+			Cliente::i().dispatchMessage(tID2, NUEVA_VIDA);
 		}
 
 
@@ -247,42 +252,54 @@ void Game::inicializar()
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
 
-	//mapa
-	Map::i().inicializar();
-
+	//Añadimos observer al cliente y ingameHUD
+	Cliente::i().addObserver(&partida);
+	//Añadimos observer al player
+	player->addObserver(&partida);
 }
 
 bool Game::processEvents()
 {
-	if ( !static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->endGame) {
 		
-		if (!debugMenu.debugInput) {
-			EntityManager::i().handleInput();
-		}
+	if (!debugMenu.debugInput) {
+		EntityManager::i().handleInput();
 	}
-	
 
 	//Teclas debug
 	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
+
 		GraphicEngine::i().toggleDebug();
+
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
+
 		GraphicEngine::i().toggleCamera();
+
 	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+
 		ingameGUI.setTablaVisible(false);
+
 	}else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
+
 		ingameGUI.setTablaVisible(true);
-		EntityManager::i().muestraTabla(&ingameGUI);
+		partida.muestraTabla();
+
 	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
+
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+
 	} else if (MastEventReceiver::i().leftMouseDown()) {
+
 		debugMenu.injectLeftMouseButton();
+
 	} else if (MastEventReceiver::i().leftMouseUp()) {
+
 		debugMenu.injectLeftMouseButtonUp();
+
 	}
 
 	return false;

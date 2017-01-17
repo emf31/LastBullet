@@ -83,27 +83,26 @@ void RocketBullet::handleMessage(const Message & message)
 
 				Entity* myentity = *it;
 
-				damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion);
+				damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion) / 3.f;
 
 				if (Cliente::i().isConected()) {
 					if (damage > 0) {
 
 						if (myentity->getID() == PLAYER) {
-							TImpactoRocket* impact = new TImpactoRocket();
-							impact->damage = damage / 3;
-							impact->guidImpactado = myentity->getGuid();
-							impact->guidDisparado = myentity->getGuid();
+							TImpactoRocket* selfImpact = new TImpactoRocket();
+							selfImpact->damage = damage;
+							selfImpact->guidDisparado = myentity->getGuid();
+							selfImpact->guidImpactado = myentity->getGuid();
 							
-							Message msg(myentity, "COLISION_ROCKET", impact);
+							Message msg(myentity, "COLISION_ROCKET", selfImpact);
 							MessageHandler::i().sendMessage(msg);
 
 						}
 						else {
 							TImpactoRocket* impact = new TImpactoRocket();
-							impact->damage = damage / 3;
-							impact->guidImpactado = myentity->getGuid();
-							impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
-
+							impact->damage = damage;
+							impact->guidDisparado = myentity->getGuid();
+							impact->guidImpactado = EntityManager::i().getEntity(PLAYER)->getGuid();
 							Message msg(myentity, "COLISION_ROCKET", impact);
 							MessageHandler::i().sendMessage(msg);
 
@@ -174,7 +173,11 @@ float RocketBullet::explosion(Entity* player, Vec3<float> posExplosion, Vec3<flo
 		}
 		//Si no es un enemigo y hay que notificar al server de ese impulso
 		else if (Cliente::i().isConected()) {
-			Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
+			TImpulso impulso;
+			impulso.fuerza = cons(force);
+			impulso.guid = player->getGuid();
+			Cliente::i().dispatchMessage(impulso, APLICAR_IMPULSO);
+			//Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
 		}
 
 	}

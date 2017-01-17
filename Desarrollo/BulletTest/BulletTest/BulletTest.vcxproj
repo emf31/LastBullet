@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Observer;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -124,7 +124,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_IRR_STATIC_LIB_;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Motor de Red;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -212,6 +212,7 @@
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
+    <ClInclude Include="Handlers\Partida.h" />
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />
@@ -233,6 +234,12 @@
     <ClInclude Include="Network\Cliente.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
+    <ClInclude Include="Observer\events\Event.h" />
+    <ClInclude Include="Observer\events\KillEvent.h" />
+    <ClInclude Include="Observer\events\MuerteEvent.h" />
+    <ClInclude Include="Observer\events\PlayerEvent.h" />
+    <ClInclude Include="Observer\Observer.h" />
+    <ClInclude Include="Observer\Subject.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\EnumParser.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
@@ -282,6 +289,7 @@
     <ClCompile Include="GUI\InGameHUD.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
+    <ClCompile Include="Handlers\Partida.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />
     <ClCompile Include="Mapa\Celda.cpp" />
@@ -301,6 +309,8 @@
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Network\Cliente.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
+    <ClCompile Include="Observer\Observer.cpp" />
+    <ClCompile Include="Observer\Subject.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />

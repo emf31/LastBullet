@@ -20,9 +20,6 @@ private:
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
-	virtual void update(Time elapsedTime) override;
-	virtual void handleInput() override;
-	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 };
 

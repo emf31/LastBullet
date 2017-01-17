@@ -1,6 +1,7 @@
 #include "LifeComponent.h"
 #include <Player.h>
 #include <Cliente.h>
+#include <Map.h>
 
 LifeComponent::LifeComponent(Player * player)
 {
@@ -20,8 +21,22 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		relojMuerte.restart();
 
 		if (Cliente::i().isConected()) {
-			Cliente::i().playerMuerto();
-			Cliente::i().actualizaTabla(guid, m_player->getGuid());
+
+			TPlayer nuevoplayer;
+			nuevoplayer.position = m_player->getRenderState()->getPosition();
+			nuevoplayer.guid = m_player->getGuid();
+			nuevoplayer.name = m_player->getName();
+
+
+			Cliente::i().dispatchMessage(nuevoplayer, MUERTE);
+
+
+			TKill kill;
+			kill.guidKill = guid;
+			kill.guidDeath = m_player->getGuid();
+
+			Cliente::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+	
 		}
 
 	}
@@ -35,8 +50,8 @@ bool LifeComponent::update()
 		m_isDying = false;
 		m_vida = 100;
 
-		m_player->searchSpawnPoint();
-		m_player->resetAll();
+		m_player->p_controller->reset(PhysicsEngine::i().m_world);
+		m_player->setPosition(Map::i().searchSpawnPoint());
 	}
 
 	return m_isDying;

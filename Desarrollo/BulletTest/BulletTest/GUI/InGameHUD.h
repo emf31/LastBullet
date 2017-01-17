@@ -11,7 +11,7 @@ struct fila_tabla {
 	CEGUI::DefaultWindow* bajas;
 	CEGUI::DefaultWindow* puntos;
 };
-class InGameHUD: public Motor::GUI {
+class InGameHUD : public Motor::GUI {
 public:
 
 	InGameHUD();
@@ -39,6 +39,8 @@ public:
 	void setPlayerPoints(int player, int points);
 
 	void updateRelojes();
+
+	void muestraFinPartida();
 
 	fila_tabla player1;
 	fila_tabla player2;

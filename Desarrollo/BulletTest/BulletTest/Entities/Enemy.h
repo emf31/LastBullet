@@ -44,7 +44,7 @@ public:
 
 
 
-	void encolaMovimiento(TMovimiento mov);
+	void encolaMovimiento(TMovimiento& mov);
 	void desencolaMovimiento();
 
 //	MachineState* GetFSM()const { return m_pStateMachine; }

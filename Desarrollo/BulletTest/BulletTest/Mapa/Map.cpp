@@ -1,17 +1,10 @@
 #include "Map.h"
 #include <GraphEdge.h>
+#include <EntityManager.h>
+#include <Util.h>
 
 
-bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
-{
-	//TODO hacer este metodo
-	return false;
-}
 
-void Map::ConvertirNodosAPosiciones(std::list<int> CaminoDeNodos, std::list<Vec2f> camino)
-{
-	//TODO
-}
 
 void Map::addNodosToCells()
 {
@@ -31,9 +24,14 @@ Map::Map() : grafo(NULL), cellSpace(NULL)
 void Map::inicializar()
 {
 
+
 	//dimensiones del mapa 647x475
 	//se crea la division del espacio en celdas
 	cellSpace = new CellSpacePartition(647.f, 475.f, 10, 5);
+
+	//Lee el mapa
+	map.readMap("../media/map1.json");
+
 
 	//GRAFO
 	
@@ -98,6 +96,7 @@ void Map::inicializar()
 
 	//grafo->printGrafo();
 
+
 	
 
 	//se meten los nodos a las celdas correspondientes
@@ -113,6 +112,7 @@ void Map::inicializar()
 
 
 
+
 	//AStarSearch astar(grafo, 0 , 2);
 	//std::list<int> camino = astar.GetPathToTarget();
 
@@ -124,4 +124,70 @@ void Map::inicializar()
 void Map::borrarContenido() {
 	delete grafo;
 	delete cellSpace;
+}
+bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
+{
+	//TODO hacer este metodo
+	return false;
+}
+
+void Map::ConvertirNodosAPosiciones(std::list<int> CaminoDeNodos, std::list<Vec2f> camino)
+{
+	//TODO
+}
+
+//Busca un punto de respawn seguro en el mapa
+Vec3<float> Map::searchSpawnPoint()
+{
+	float radio = 100;
+	float fDistance = 0;
+	int spawn = 0;
+
+	std::vector<Vec3<float>> m_spawns = map.getSpawnPoints();
+
+	if (m_spawns.size() == 1) {
+		return m_spawns.at(0);
+	}
+
+	std::list<Entity*> enemies = EntityManager::i().getEnemies();
+
+	std::vector<Vec3<float>> auxSpawns;
+
+	std::list<Entity*>::iterator it;
+	std::vector<Vec3<float>>::iterator it2;
+
+	for (it2 = m_spawns.begin(); it2 != m_spawns.end(); ++it2) {
+		bool valid = true;
+		for (it = enemies.begin(); it != enemies.end(); ++it) {
+			Vec3<float> vector = (*it)->getRenderState()->getPosition() - (*it2);
+			fDistance = vector.Magnitude();
+
+			if (fDistance < 100) {
+				valid = false;
+				break;
+			}
+
+		}
+		if (valid) {
+			auxSpawns.push_back(*it2);
+		}
+
+	}
+
+	//Si hay mas de 1 elegimos uno aleatorio
+	if (auxSpawns.size() > 1) {
+		spawn = Randi(0, auxSpawns.size() - 1);
+	}
+
+	//Si no esta vacio es que hemos encontrado uno
+	if (!auxSpawns.empty()) {
+		//p_controller->reset(PhysicsEngine::i().m_world);
+		//setPosition(auxSpawns.at(spawn));
+		return auxSpawns.at(spawn);
+	}
+	else {
+		//p_controller->reset(PhysicsEngine::i().m_world);
+		//setPosition(m_spawns.at(Randi(0, m_spawns.size() - 1)));
+		return m_spawns.at(Randi(0, m_spawns.size() - 1));
+	}
 }

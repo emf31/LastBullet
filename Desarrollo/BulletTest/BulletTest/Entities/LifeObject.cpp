@@ -66,8 +66,13 @@ void LifeObject::handleMessage(const Message & message)
 				estado = USADO;
 				clockRecargaLife.restart();
 
-				if (Cliente::i().isConected())
-					Cliente::i().vidaCogida(m_id);
+				if (Cliente::i().isConected()) {
+					TId s_id;
+					s_id.id = m_id;
+
+					Cliente::i().dispatchMessage(s_id, VIDA_COGIDA);
+				}
+				
 
 				
 				m_nodo->setVisible(false);
@@ -93,7 +98,7 @@ bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
 	
 	//m_nodo->setVisible(false);
 
-	VidaCogida();
+	//VidaCogida();
 
 	return true;
 }
@@ -104,7 +109,7 @@ void LifeObject::asignaTiempo(Clock tiempo) {
 	
 	estado = USADO;
 	m_nodo->setVisible(false);
-	PhysicsEngine::i().m_world->removeCollisionObject(m_ghostObject);
+	PhysicsEngine::i().removeGhostObject(m_ghostObject);
 }
 
 void LifeObject::VidaCogida()

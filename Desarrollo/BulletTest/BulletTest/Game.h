@@ -16,6 +16,7 @@
 
 #include <InGameHUD.h>
 #include <DebugMenuGUI.h>
+#include <Partida.h>
 
 class Game
 {
@@ -36,4 +37,7 @@ private:
 	InGameHUD ingameGUI;
 	DebugMenuGUI debugMenu;
 	float interpolation;
+
+	Partida partida;
+	Player* player;
 };

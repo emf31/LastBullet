@@ -13,7 +13,7 @@
 
 static const int PLAYER = 1000;
 
-class InGameHUD;
+
 
 class EntityManager
 {
@@ -59,7 +59,7 @@ public:
 	//Borra la cola de borrado de entities, se llama en cada iteracion
 	void cleanDeleteQueue();
 
-	void cambiaTabla(TFilaTabla fila) {
+	/*void cambiaTabla(TFilaTabla& fila) {
 		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
 		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 	}
@@ -73,7 +73,7 @@ public:
 		TFilaTabla *fila;
 		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
 		fila->deaths++;
-	}
+	}*/
 
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
@@ -97,7 +97,7 @@ private:
 	
 	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
-	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
+	//std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 	
 	std::unordered_set<Entity*> delete_set;
 
