@@ -67,7 +67,10 @@ void LifeObject::handleMessage(const Message & message)
 				clockRecargaLife.restart();
 
 				if (Cliente::i().isConected()) {
-					Cliente::i().vidaCogida(m_id);
+					TId s_id;
+					s_id.id = m_id;
+
+					Cliente::i().dispatchMessage(s_id, VIDA_COGIDA);
 				}
 				
 

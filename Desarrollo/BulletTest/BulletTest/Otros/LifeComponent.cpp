@@ -21,8 +21,22 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		relojMuerte.restart();
 
 		if (Cliente::i().isConected()) {
-			Cliente::i().playerMuerto();
-			Cliente::i().actualizaTabla(guid, m_player->getGuid());
+
+			TPlayer nuevoplayer;
+			nuevoplayer.position = m_player->getRenderState()->getPosition();
+			nuevoplayer.guid = m_player->getGuid();
+			nuevoplayer.name = m_player->getName();
+
+
+			Cliente::i().dispatchMessage(nuevoplayer, MUERTE);
+
+
+			TKill kill;
+			kill.guidKill = guid;
+			kill.guidDeath = m_player->getGuid();
+
+			Cliente::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+	
 		}
 
 	}

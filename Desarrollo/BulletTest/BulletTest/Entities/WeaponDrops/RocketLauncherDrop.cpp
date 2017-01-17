@@ -53,7 +53,9 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
 				m_nodo->setVisible(false);
 				if (Cliente::i().isConected()) {
-					Cliente::i().armaCogida(m_id);
+					TId tID;
+					tID.id = m_id;
+					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
 				}
 				
 

@@ -50,7 +50,10 @@ void AsaltoDrop::handleMessage(const Message & message)
 				estado = USADO;
 				clockRespawnWeapon.restart();
 				if (Cliente::i().isConected()) {
-					Cliente::i().armaCogida(m_id);
+					TId tID;
+					tID.id = m_id;
+
+					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
 				}
 				static_cast<Player*>(message.data)->setWeapon(ASALTO);
 				m_nodo->setVisible(false);

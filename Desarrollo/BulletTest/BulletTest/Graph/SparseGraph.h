@@ -8,14 +8,14 @@
 
 class SparseGraph {
 private:
-	std::vector<NavGraphNode> m_nodes;
+	
 	
 	bool m_digraph;
 	int m_nextNodeIndex;
 
 public:
 	std::vector<std::list<GraphEdge>> m_Edges;
-
+	std::vector<NavGraphNode> m_nodes;
 	SparseGraph(bool digraph) : m_digraph(digraph), m_nextNodeIndex(0) {};
 	~SparseGraph() {};
 

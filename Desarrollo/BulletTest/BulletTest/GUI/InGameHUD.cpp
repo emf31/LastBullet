@@ -53,16 +53,17 @@ void InGameHUD::update() {
 
 	updateRelojes();
 
-	if (p->endGame) {
-		EntityManager::i().muestraTabla(this);
-		LabelEndGame->setVisible(true);
-		setTablaVisible(true);
-	}
 }
+
 
 void InGameHUD::updateRelojes() {
 	hitMarker->setVisible(p->hit);
 	sangre->setVisible(p->sangre);
+}
+void InGameHUD::muestraFinPartida() {
+	LabelEndGame->setVisible(true);
+	setTablaVisible(true);
+
 }
 void InGameHUD::updateLabelVida() {
 	std::ostringstream oss;

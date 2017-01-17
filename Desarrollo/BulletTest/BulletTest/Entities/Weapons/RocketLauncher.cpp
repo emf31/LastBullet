@@ -97,8 +97,15 @@ void RocketLauncher::shoot() {
 			bala->cargarContenido();
 
 			if (Cliente::i().isConected()) {
+
+				TBala tBala;
+				tBala.position = cons(start);
+				tBala.direction = cons(direccion);
+				tBala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
+				tBala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispararRocket(cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());
+				Cliente::i().dispatchMessage(tBala, DISPARAR_ROCKET);
 			}
 
 			relojCadencia.restart();

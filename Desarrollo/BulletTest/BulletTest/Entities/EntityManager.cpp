@@ -4,7 +4,6 @@
 #include "EntityManager.h"
 #include "Enemy.h"
 #include <list>
-#include <InGameHUD.h>
 
 
 
@@ -137,10 +136,10 @@ void EntityManager::cleanDeleteQueue()
 	delete_set.clear();
 }
 
-void EntityManager::muestraTabla(InGameHUD* ingame)
+/*void EntityManager::muestraTabla(InGameHUD* ingame)
 {
 	
-}
+}*/
 
 Entity * EntityManager::getEntity(int id)
 {

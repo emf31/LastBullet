@@ -19,29 +19,17 @@ public:
 		return singleton;
 	}
 
-
 	void update();
 
 	Player* createPlayer();
 	void inicializar();
 	void conectar(std::string address, int port);
-	void enviarMovimiento(Player* p); 
-	void dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);
-	void enviarDesconexion();
-	void enviarDisparo(RakNet::RakNetGUID guid, float* damage);
-	void dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
-	void impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket& impact);
-	void lanzarGranada(TGranada& g);
-	void aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid);
-	void playerMuerto();
-	void actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath);
-	void vidaCogida(int id);
-	void armaCogida(int id);
-	void nuevaVida(int id);
-	void nuevaArma(int id);
-	void cambioArma(int cambio, RakNet::RakNetGUID guid);
 
-
+	template<typename T>
+	void dispatchMessage(T& estructura, GameMessages messageType) {
+		estructura.mID = messageType;
+		peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+	}
 
 	void searchServersOnLAN();
 
@@ -78,4 +66,3 @@ private:
 	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 
 };
-

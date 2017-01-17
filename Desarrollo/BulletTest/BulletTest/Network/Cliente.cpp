@@ -321,27 +321,11 @@ void Cliente::update() {
 
 				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
 
-				if (EntityManager::i().getRaknetEntity(guidTabla.guid)->getID() == PLAYER) {
-					//es el player
-					Player* player = (Player*)EntityManager::i().getRaknetEntity(guidTabla.guid);
-					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-					std::cout << "FIN DE LA PARTIDA:" << std::endl;
-					std::cout << "HAS GANADO" << std::endl;
-					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-				}
-				else {
-					//es un enemigo
-					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(guidTabla.guid);
-					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-					std::cout << "FIN DE LA PARTIDA:" << std::endl;
-					std::cout << "El player " << enemigo->getName() << " ha ganado" << std::endl;
-					std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-				}
-				std::cout << "PUNTUACION FINAL:" << std::endl;
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->endGame = true;
-				//EntityManager::i().muestraTabla();
-				std::cout << "+++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-				
+				Event ev;
+				ev.event_type = E_FIN_PARTIDA;
+
+				//Notificamos al HUD que es el fin de la partida
+				notify(ev);
 
 
 			}
@@ -418,7 +402,7 @@ void Cliente::conectar(std::string address, int port) {
 
 Player* Cliente::createPlayer() {
 
-	TPlayer nuevoplayer;
+	
 
 	printf("Introduce un nombre \n");
 	std::cin >> str;
@@ -428,181 +412,17 @@ Player* Cliente::createPlayer() {
 	player->inicializar();
 	player->cargarContenido();
 
-	nuevoplayer.mID = NUEVO_PLAYER;
+	TPlayer nuevoplayer;
 	nuevoplayer.guid = player->getGuid();
 	nuevoplayer.name = player->getName();
 
-
-	peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
+	dispatchMessage(nuevoplayer, NUEVO_PLAYER);
+	//peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
 	return player;
 
 }
-//Envia la posición del player al servidor para que este lo comunique a todos
-void Cliente::enviarMovimiento(Player* p) {
 
-	TMovimiento mov;
-
-	mov.mID = MOVIMIENTO;
-	mov.position = p->getRenderState()->getPosition();
-	mov.rotation = p->getRenderState()->getRotation();
-	mov.guid = p->getGuid();
-	mov.isDying = p->getLifeComponent()->isDying();
-
-	peer->Send((const char*)&mov, sizeof(mov), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-
-//Envia un mensaje al servidor de disparar bala pasando una estructura TBala
-void Cliente::dispararBala(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) {
-	TBala bala;
-	bala.mID = DISPARAR_BALA;
-	bala.direction = direction;
-	bala.position = position;
-	bala.finalposition = finalposition;
-	bala.rotation = rotation;
-	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-
-	peer->Send((const char*)&bala, sizeof(bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-
-}
-
-void Cliente::enviarDesconexion() {
-	RakID rakID;
-	rakID.mID = DESCONECTADO;
-	rakID.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-
-
-	peer->Send((const char*)&rakID, sizeof(rakID), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-
-}
-void Cliente::enviarDisparo(RakNet::RakNetGUID guid, float* damage) {
-
-
-	//////////////////////////////////////////////////////
-	//TODO asumimios que el disparo ha sido certero del jugador que dispara con un enemigo, luego simplemente habria que cambiar la logica de ahora (que es pulsar la R, esta en player)
-	//por la de que si la bala colisiona de verdad, si la bala colisiona de verdad desencadenaria toda la logica que se produce al pulsar la R ahora.
-	/////////////////////////////////////////////////////
-	//bsOut.Write(aqui pasariamos el guid del enemigo al que le hemos dado cuando sepamos con quien ha colisionado la bala)
-	//se pueden enviar 2 mensajes seguidos, luego habria que hacer 2 read en el servidor, el primero te dice el guid de quien ha recibido el disparo y el segundo el guid de quien ha disparado
-
-	//ANTES ESTABA ASI
-	//bsOut.Write(guid);
-	//esto no tiene sentido le estas pasando el guid del que dispara, hay que saber el guid de a quien le da la bala, ahora cogemos uno cual sea de los enteties
-	TImpactoBala imp_bala;
-	imp_bala.mID = IMPACTO_BALA;
-	imp_bala.damage = *damage;
-	imp_bala.guid = guid;
-
-	peer->Send((const char*)&imp_bala, sizeof(imp_bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-void Cliente::dispararRocket(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation)
-{
-
-	TBala bala;
-	bala.mID = DISPARAR_ROCKET;
-	bala.direction = direction;
-	bala.position = position;
-	bala.rotation = rotation;
-	bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-
-	peer->Send((const char*)&bala, sizeof(bala), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-
-}
-
-void Cliente::impactoRocket(RakNet::RakNetGUID palayerDanyado, TImpactoRocket& impact)
-{
-	impact.mID = IMPACTO_ROCKET;
-	peer->Send((const char*)&impact, sizeof(impact), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-	
-}
-
-void Cliente::lanzarGranada(TGranada& g) {
-
-	g.mID = LANZAR_GRANADA;
-	peer->Send((const char*)&g, sizeof(g), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-void Cliente::aplicarImpulso(Vec3<float> force, RakNet::RakNetGUID guid)
-{
-	TImpulso impulso;
-	impulso.mID = APLICAR_IMPULSO;
-	impulso.fuerza = force;
-	impulso.guid = guid;
-
-	peer->Send((const char*)&impulso, sizeof(impulso), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-
-void Cliente::playerMuerto()
-{
-	//si entras aqui es porque te has quedado sin vida, se lo comunicas el servidor para que se lo comunique a todos y te vuelva a asignar una posicion.
-
-	TPlayer nuevoplayer;
-	nuevoplayer.mID = MUERTE;
-	nuevoplayer.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-	nuevoplayer.name = EntityManager::i().getEntity(PLAYER)->getName();
-	nuevoplayer.position = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-
-	peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-void Cliente::actualizaTabla(RakNet::RakNetGUID guidKill, RakNet::RakNetGUID guidDeath)
-{
-	TKill kill;
-	kill.mID = ACTUALIZA_TABLA;
-	kill.guidKill = guidKill;
-	kill.guidDeath = guidDeath;
-
-	peer->Send((const char*)&kill, sizeof(kill), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-
-}
-
-void Cliente::armaCogida(int id)
-{
-	TId s_id;
-	s_id.mID = ARMA_COGIDA;
-	s_id.id = id;
-
-	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-void Cliente::vidaCogida(int id)
-{
-
-	TId s_id;
-	s_id.mID = VIDA_COGIDA;
-	s_id.id = id;
-
-	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-
-
-}
-void Cliente::nuevaVida(int id)
-{
-	TId s_id;
-	s_id.mID = NUEVA_VIDA;
-	s_id.id = id;
-
-	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-
-
-void Cliente::nuevaArma(int id)
-{
-	TId s_id;
-	s_id.mID = NUEVA_ARMA;
-	s_id.id = id;
-
-	peer->Send((const char*)&s_id, sizeof(s_id), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
-
-
-void Cliente::cambioArma(int cambio, RakNet::RakNetGUID guid)
-{
-
-	TCambioArma swap;
-	swap.mID = CAMBIO_ARMA;
-	swap.cambio = cambio;
-	swap.guid = guid;
-
-	peer->Send((const char*)&swap, sizeof(swap), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
-}
 
 
 void Cliente::searchServersOnLAN() {

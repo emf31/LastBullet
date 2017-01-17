@@ -1,6 +1,6 @@
 #pragma once
-#include <Vec3f.h>
 #include <RakPeerInterface.h>
+#include <RakNetTypes.h>
 #include <iostream>
 #include <MessageIdentifiers.h>
 #include <Clock.hpp>
@@ -13,6 +13,8 @@ struct TPlayer {
 	Vec3<float> position;
 	RakNet::RakNetGUID guid;
 	std::string name;
+
+	
 };
 #pragma pack(pop)
 
@@ -20,6 +22,8 @@ struct TPlayer {
 struct RakID {
 	unsigned char mID;
 	RakNet::RakNetGUID guid;
+
+	
 };
 #pragma pack(pop)
 
@@ -30,6 +34,8 @@ struct TMovimiento {
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
+
+	
 };
 #pragma pack(pop)
 
@@ -41,6 +47,9 @@ struct TBala {
 	Vec3<float> finalposition;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
+
+	
+
 };
 #pragma pack(pop)
 
@@ -50,6 +59,8 @@ struct TImpactoBala {
 	unsigned char mID;
 	float damage;
 	RakNet::RakNetGUID guid;
+
+	
 };
 #pragma pack(pop)
 
@@ -59,6 +70,8 @@ struct TImpactoRocket {
 	float damage;
 	RakNet::RakNetGUID guidImpactado;
 	RakNet::RakNetGUID guidDisparado;
+
+	
 };
 #pragma pack(pop)
 
@@ -68,6 +81,8 @@ struct TGranada {
 	Vec3<float> origen;
 	Vec3<float> direction;
 	RakNet::RakNetGUID guid;
+
+	
 };
 #pragma pack(pop)
 
@@ -76,6 +91,9 @@ struct TImpulso {
 	unsigned char mID;
 	Vec3<float> fuerza;
 	RakNet::RakNetGUID guid;
+
+	
+
 };
 #pragma pack(pop)
 
@@ -84,6 +102,8 @@ struct TKill{
 	unsigned char mID;
 	RakNet::RakNetGUID guidKill;
 	RakNet::RakNetGUID guidDeath;
+
+
 };
 #pragma pack(pop)
 
@@ -95,6 +115,8 @@ struct TFilaTabla {
 	int kills;
 	int deaths;
 	int puntuacion;
+
+
 };
 #pragma pack(pop)
 
@@ -103,6 +125,8 @@ struct TDropServer {
 	unsigned char mID;
 	int id;
 	Clock tiempo;
+
+
 };
 #pragma pack(pop)
 
@@ -110,6 +134,7 @@ struct TDropServer {
 struct TId {
 	unsigned char mID;
 	int id;
+
 };
 #pragma pack(pop)
 
@@ -119,6 +144,7 @@ struct TCambioArma {
 	unsigned char mID;
 	int cambio;
 	RakNet::RakNetGUID guid;
+
 };
 #pragma pack(pop)
 

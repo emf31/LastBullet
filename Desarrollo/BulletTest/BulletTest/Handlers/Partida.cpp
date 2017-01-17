@@ -2,6 +2,7 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
+ 
 
 void Partida::onNotify(Event& event)
 {
@@ -23,12 +24,17 @@ void Partida::onNotify(Event& event)
 			aumentaMuerte(m_ev->m_guid);
 		}
 		break;
+		case E_FIN_PARTIDA: {
+			muestraTabla();
+			ingame->muestraFinPartida();
+		}
+		break;
 
 	}
 
 }
 
-void Partida::muestraTabla(InGameHUD * ingame)
+void Partida::muestraTabla()
 {
 	//queremos hacer una copia asi que no hacemos puntero aqui
 	std::unordered_map <unsigned long, TFilaTabla> aux;
