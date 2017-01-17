@@ -54,15 +54,20 @@ public class Exporter : MonoBehaviour
                             WayPoint[] w = g.GetComponentsInChildren<WayPoint>();
                            // WayPoint w = g.GetComponent<WayPoint>();
                            foreach(WayPoint waypoint in w) {
-                                objeto.conexionesGrafo = new int[waypoint.outs.Count];
+                                Nodo nodo = new Nodo(waypoint.name);
+                                nodo.posX = waypoint.transform.position.x;
+                                nodo.posY = waypoint.transform.position.y;
+                                nodo.posZ = waypoint.transform.position.z;
                                 foreach (WayPointPercent p in waypoint.outs) {
-                                    //Debug.Log("entro");
-                                    objeto.conexionesGrafo[objeto.indice] = Int32.Parse(p.waypoint.name);
-                                    objeto.indice++;
+                                    objeto.hasChild = true;
+
+                                    nodo.conexiones.Add(Int32.Parse(p.waypoint.name));
+
                                 }
-                                objeto.indice = 0;
+                                //if(nodo.conexiones.Count>0)
+                                    objeto.children.Add(nodo);
+
                             }
-                           
                         }
 
                         if (mt != null)
@@ -98,7 +103,7 @@ public class Exporter : MonoBehaviour
 
                         if (g.name.Equals("terminal"))
                             Debug.Log(AssetDatabase.GetAssetPath(g.gameObject));
-
+                        //objeto.processChildren();
                         raiz.addChild(objeto);
                     }
                 }
@@ -122,7 +127,7 @@ public class Exporter : MonoBehaviour
     }
 }
 
-
+[System.Serializable]
 public class Objeto
 {
     public string nombre;
@@ -133,18 +138,30 @@ public class Objeto
 
     public float colliderX, colliderY, colliderZ;
     public float colliderSizeX, colliderSizeY, colliderSizeZ;
-
-    public int[] conexionesGrafo;
-    public int indice;
-
     public string tag;
     public string extraTags;
     public bool hasChild;
 
+    [SerializeField]
+    public List<Nodo> children;
+
     public Objeto()
     {
-        
-        indice = 0;
+        children = new List<Nodo>();
+    }
+}
+
+
+[System.Serializable]
+public class Nodo {
+    public String name;
+    public double posX, posY, posZ;
+    [SerializeField]
+    public List<Int32> conexiones;
+
+    public  Nodo(String nombre) {
+        name = nombre;
+        conexiones = new List<Int32>();
     }
 }
 

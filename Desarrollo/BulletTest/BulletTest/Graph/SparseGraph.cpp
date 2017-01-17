@@ -1,6 +1,8 @@
 #include "SparseGraph.h"
 #include "GraphEnumeration.h"
+#include <fstream>
 
+#include "../json/json.hpp"
 
 //const NavGraphNode& GetNode(int idx) { return m_nodes.at(idx); };
 
@@ -158,6 +160,47 @@ void SparseGraph::removeEdge(int from, int to)
 		++curEdge)
 	{
 		if (curEdge->To() == to) { curEdge = m_Edges[from].erase(curEdge); break; }
+	}
+}
+
+void SparseGraph::readGraph(const std::string & path) {
+	using namespace nlohmann;
+	std::ifstream stream(path);
+	if (stream) {
+		json j = json::parse(stream);
+		for (json::iterator it = j.begin(); it != j.end(); ++it) {
+			json obj = *it;
+			if (obj["tag"] == "Grafo") {
+				json jsonArray = obj["children"];
+				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
+					json nodoJson = *arrayIt;
+
+					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]));
+					addNode(nodo);
+				}
+				for (json::iterator arrayIterador1 = jsonArray.begin(); arrayIterador1 != jsonArray.end(); ++arrayIterador1) {
+					json nodoJson = *arrayIterador1;
+					json arrayConexiones = nodoJson["conexiones"];
+
+					for (json::iterator arrayIterador2 = arrayConexiones.begin(); arrayIterador2 != arrayConexiones.end(); ++arrayIterador2) {
+						int conexion = *arrayIterador2;
+						std::string str = nodoJson["name"];
+						int idx = std::stoi(str);
+
+						NavGraphNode nodoConex = getNode(conexion);
+						NavGraphNode nodoActual = getNode(idx);
+
+						Vec2f componentes(nodoConex.getPosition() - nodoActual.getPosition());
+						float coste = componentes.Magnitude();
+
+						GraphEdge edge(idx, conexion, coste);
+						addEdge(edge);
+					}
+				}
+				break;
+				//No necesitamos nada mas del fichero
+			}
+		}
 	}
 }
 

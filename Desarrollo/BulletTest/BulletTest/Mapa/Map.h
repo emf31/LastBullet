@@ -35,7 +35,12 @@ public:
 	Vec3<float> searchSpawnPoint();
 
 	std::vector<Vec3<float>> getSpawnPoints() { return map.getSpawnPoints(); };
+
 	void CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode>& nodosCercanos);
+
+
+	
+
 private:
 	//True, grafo dirigido
 	SparseGraph* grafo;
@@ -45,6 +50,7 @@ private:
 	//Cargador del mapa
 	MapLoader map;
 	
+
 
 	Map();
 	
