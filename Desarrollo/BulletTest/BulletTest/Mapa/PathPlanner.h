@@ -27,8 +27,7 @@ private:
 
 	//estos metodos lo que tienen que hacer es buscar cuales son los nodos que estan en una celda de espacio que se define al rededor del bot, los que esten dentro de esta celda
 	//seran los nodos mas cercanos, y de estos nodos mas cercanos hay que calcular su distancia con la posicion del bot y quedarte con el que menos distancia tenga.
-	int getNodoMasCercanoABot(Vec2f pos) const;
-	int getNodoMasCercanoAObjetivo(Vec2f pos) const;
+	int getNodoMasCercanoAPos(Vec2f pos) const;
 
 	//este metodo lo que hara es intentar suavizar el camino, para ello mirara entre los siguientes nodos del camino
 	//y si puede saltarse alguno porque no hay ningun obstaculo se lo saltara, es decir si el camino es 1-2-3,

@@ -22,14 +22,14 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 		return true;
 	}
 
-	int NodoMasCercanoAlBot = getNodoMasCercanoABot(vec3ToVec2(m_Bot->getRenderPosition()));
+	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderPosition()));
 
 	if (NodoMasCercanoAlBot == -1) {
 		return false;
 	}
 
 
-	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAObjetivo(posObjetivo);
+	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAPos(posObjetivo);
 
 	if (NodoMasCercanoAlObjetivo == -1) {
 		return false;
@@ -57,17 +57,31 @@ bool PathPlanner::CreatePathToItem()
 	return false;
 }
 
-int PathPlanner::getNodoMasCercanoABot(Vec2f pos) const
-{
-	//TODO
-	return -1;
-}
 
-int PathPlanner::getNodoMasCercanoAObjetivo(Vec2f pos) const
+int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 {
-
-	//TODO 
-	return -1;
+	std::list<NavGraphNode> nodosCercanos;
+	Map::i().CalcularNodosCercanos(pos, nodosCercanos);
+	float menorDist;
+	float distAux;
+	Vec2f vecLong;
+	bool primero = true;
+	int NodoMasCercano=-1;
+	for (std::list<NavGraphNode>::iterator it= nodosCercanos.begin(); it != nodosCercanos.end(); ++it) {
+		if (primero == false) {
+			vecLong = (pos - it->getPosition());
+			menorDist= vecLong.Magnitude();
+			NodoMasCercano = it->Index();
+		}
+		vecLong = (pos - it->getPosition());
+		distAux= vecLong.Magnitude();
+		if (menorDist > distAux) {
+			menorDist = distAux;
+			NodoMasCercano = it->Index();
+		}
+	}
+	
+	return NodoMasCercano;
 }
 
 void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)

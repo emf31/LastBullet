@@ -119,7 +119,7 @@ void Map::inicializar()
 
 }
 
-//TODO hacer un borrar contenido
+
 
 void Map::borrarContenido() {
 	delete grafo;
@@ -133,7 +133,11 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 
 void Map::ConvertirNodosAPosiciones(std::list<int> CaminoDeNodos, std::list<Vec2f> camino)
 {
-	//TODO
+	//Iteramos la lista de node index y obtenemos el nodo del grafo para meter la pos en el camino
+	for (std::list<int>::const_iterator it = CaminoDeNodos.begin(); it != CaminoDeNodos.end(); ++it) {
+		camino.push_back(grafo->getNode(*it).getPosition());
+		
+	}
 }
 
 //Busca un punto de respawn seguro en el mapa
@@ -190,4 +194,30 @@ Vec3<float> Map::searchSpawnPoint()
 		//setPosition(m_spawns.at(Randi(0, m_spawns.size() - 1)));
 		return m_spawns.at(Randi(0, m_spawns.size() - 1));
 	}
+}
+
+void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode>& nodosCercanos)
+{
+	
+	std::vector<int> celdasVecinas;
+	int indCelda = cellSpace->PositionToIndex(pos);
+	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos);
+	
+	if (nodosCercanos.size() == 0) {
+		cellSpace->CalculaNodosEnCeldasVecinas(indCelda, nodosCercanos, celdasVecinas);
+	}
+	if(nodosCercanos.size() == 0) {
+		//nos guardamos en celdasVecinas las celdas visitadas para luego calcular las celdas vecina de cada una de las visitadas, es decir,
+		//la primera vez visitamos las 8 vecinas de indCelda, pero si no encontramos ningun nodo, la segunda vez tendriamos que visitar las
+		//8 vecinas de cada una de las celdas que visitamos antes, para ello recorremos la lista
+		for (int i = 0; i < celdasVecinas.size(); i++) {
+			
+		
+			cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[i], nodosCercanos, celdasVecinas);
+			
+		}
+		
+	}
+
+	
 }

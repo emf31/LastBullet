@@ -60,3 +60,78 @@ void CellSpacePartition::mostrarContenido()
 		std::cout << "****** FIN CELDA " << i << " **********" << std::endl;
 	}
 }
+
+void CellSpacePartition::CalculaNodoEnCelda(int ind, std::list<NavGraphNode>& nodosCercanos)
+{
+	for (std::list<NavGraphNode*>::iterator it = m_Celdas[ind].Nodos.begin(); it != m_Celdas[ind].Nodos.end(); ++it)
+	{
+		std::cout <<"Añado nodo: "<< (*it)->Index() << "a la lista "<< std::endl;
+		nodosCercanos.push_back((**it));
+	}
+}
+
+void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode>& nodosCercanos, std::vector<int>& celdasVecinas)
+{
+
+	bool esBordeDerecho = false;
+	bool esBordeIzquierdo = false;
+	bool esBordeArriba = false;
+	bool esBordeAbajo = false;
+
+	//con esto lo que conseguimos es saber si la celda esta en un borde izquierdo o un borde derecho
+	//ya que nuestro vector es unidimensional pero estamos representando una matriz bidimensional
+	if (ind%m_numCeldasX == 0) {
+		//la fila de izquierda es multiplo del numCeldasdeX
+		esBordeIzquierdo = true;
+	}else if(ind+1%m_numCeldasX){
+		//la fila de la derecha sumandole 1 seria multiplo del numCeldasX
+		esBordeDerecho = true;
+	}
+
+	if (ind - m_numCeldasX < 0) {
+		esBordeArriba = true;
+	}
+	else if (ind + m_numCeldasX > ((m_numCeldasX*m_numCeldasY)-1)) {
+		esBordeAbajo = true;
+	}
+
+	int arrIzq = ind - m_numCeldasX - 1;
+	int arrDer = ind - m_numCeldasX + 1;
+	int arriba = ind - m_numCeldasX;
+	int izq = ind - 1;
+	int der = ind + 1;
+	int abajo = ind + m_numCeldasX;
+	int abaIzq = ind + m_numCeldasX - 1;
+	int abaDer = ind + m_numCeldasX + 1;
+	if (esBordeIzquierdo == false) {
+		//arriba-izquierda
+		CalculaNodoEnCelda(arrIzq, nodosCercanos);
+		celdasVecinas.push_back(arrIzq);
+		//izquierda
+		CalculaNodoEnCelda(izq, nodosCercanos);
+		celdasVecinas.push_back(izq);
+		//abajo izquierda
+		CalculaNodoEnCelda(abaIzq, nodosCercanos);
+		celdasVecinas.push_back(abaIzq);
+	}
+	if (esBordeDerecho == false) {
+		//arriba-derecha
+		CalculaNodoEnCelda(arrDer, nodosCercanos);
+		celdasVecinas.push_back(arrDer);
+		//derecha
+		CalculaNodoEnCelda(der, nodosCercanos);
+		celdasVecinas.push_back(der);
+		//abajo derecha
+		CalculaNodoEnCelda(abaDer, nodosCercanos);
+		celdasVecinas.push_back(abaDer);
+	}
+	if (esBordeArriba == false) {
+		CalculaNodoEnCelda(arriba, nodosCercanos);
+		celdasVecinas.push_back(arriba);
+	}
+	if (esBordeAbajo == false) {
+		CalculaNodoEnCelda(abajo, nodosCercanos);
+		celdasVecinas.push_back(abajo);
+	}
+
+}

@@ -43,4 +43,8 @@ public:
 
 	void mostrarContenido();
 
+	void CalculaNodoEnCelda(int ind, std::list<NavGraphNode>& nodosCercanos);
+
+	void CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode>& nodosCercanos, std::vector<int>& celdasVecinas);
+
 };
