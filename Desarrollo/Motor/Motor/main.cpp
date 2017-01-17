@@ -23,7 +23,7 @@ int main() {
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 
-	TNode* m = sm->addMesh(sm->getMesh("assets/cartel.obj"));
+	TNode* m = sm->addMesh(sm->getMesh("assets/cartel.fbx"));
 	m->setPosition(Vec3<float>(5.f, -1.75f, 0.0f));
 	m->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 

@@ -3,5 +3,112 @@ d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLo
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
 c:\program files (x86)\windows kits\8.1\include\shared\minwindef.h(130): warning C4005: 'APIENTRY': redefinición de macro
   d:\ua\cuarto\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
+  Texture.cpp
+  TTransform.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TSpotLight.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TNode.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\tnode.cpp(50): warning C4018: '<': no coinciden signed/unsigned
+  TModel.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TMeshNode.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TMesh.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TLightNode.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TEntity.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TCameraNode.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  TCamera.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  SceneManager.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  ResourceManager.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+  Input.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(15): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(16): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(20): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(23): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(24): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\input.cpp(30): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  GUI.cpp
+  EngineDevice.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(56): warning C4101: 'success': variable local sin referencia
+c:\program files (x86)\windows kits\8.1\include\shared\minwindef.h(130): warning C4005: 'APIENTRY': redefinición de macro
+  d:\ua\cuarto\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(31): warning C4305: 'return': truncamiento de 'int' a 'bool'
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(38): warning C4305: 'return': truncamiento de 'int' a 'bool'
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(49): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(50): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(77): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(86): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(106): warning C4800: 'int': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
+  Generando código...
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\resourcemanager.cpp(75): warning C4715: 'ResourceManager::getTexture': no todas las rutas de acceso de control devuelven un valor
+  LINK : no se encontró D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewAttachShader definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewCompileShader definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewCreateProgram definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewCreateShader definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewDeleteShader definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewGetProgramInfoLog definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewGetProgramiv definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewGetShaderInfoLog definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewGetShaderiv definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewLinkProgram definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewShaderSource definido localmente
+ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewGenerateMipmap definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewBufferData definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewGenBuffers definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewEnableVertexAttribArray definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewGetUniformLocation definido localmente
+TModel.obj : warning LNK4049: se importó el símbolo ___glewGetUniformLocation definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewUniform1f definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewUniform1i definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewVertexAttribPointer definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewBindVertexArray definido localmente
+TMesh.obj : warning LNK4049: se importó el símbolo ___glewGenVertexArrays definido localmente
+TModel.obj : warning LNK4049: se importó el símbolo ___glewUniformMatrix4fv definido localmente
+TModel.obj : warning LNK4049: se importó el símbolo ___glewUseProgram definido localmente
+glew32d.lib(glew.obj) : warning LNK4099: no se encontró PDB 'glew_s.pdb' con 'glew32d.lib(glew.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glew_s.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(vulkan.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(vulkan.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(window.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_init.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_joystick.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_monitor.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_time.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_time.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_tls.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_tls.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(wgl_context.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(egl_context.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.pdb (Full PDB)
