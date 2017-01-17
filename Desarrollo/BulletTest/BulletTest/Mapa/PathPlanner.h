@@ -1,14 +1,15 @@
-#include <Enemy.h>
+#include <Enemy_Bot.h>
 #include <SparseGraph.h>
 #include <vector>
 #include <Vec2f.h>
+
 
 
 #pragma once
 class PathPlanner
 {
 public:
-	PathPlanner(Enemy* bot);
+	PathPlanner(Enemy_Bot* bot);
 	~PathPlanner();
 
 	//encuentra el camino menos costoso hasta la posicion destino (haria una llamada
@@ -18,7 +19,7 @@ public:
 	//al metodo de buscar camino de Astar)
 	bool CreatePathToItem();
 private:
-	Enemy* m_Bot;
+	Enemy_Bot* m_Bot;
 	SparseGraph& m_grafo;
 	Vec2f m_posDestino;
 

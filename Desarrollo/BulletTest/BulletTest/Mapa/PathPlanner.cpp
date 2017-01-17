@@ -4,7 +4,7 @@
 #include <AStarSearch.h>
 
 
-PathPlanner::PathPlanner(Enemy* bot) : m_grafo(Map::i().getGrafo())
+PathPlanner::PathPlanner(Enemy_Bot* bot) : m_grafo(Map::i().getGrafo())
 {
 	m_Bot = bot;
 }

@@ -182,6 +182,12 @@
     <ClCompile Include="Graph\GraphEdge.cpp">
       <Filter>Source Code\Graph</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Enemy_Bot.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\PathFollow.cpp">
+      <Filter>Source Code\IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -466,6 +472,12 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Enemy_Bot.h">
+      <Filter>Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\PathFollow.h">
+      <Filter>Headers\IA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
