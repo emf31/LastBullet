@@ -149,7 +149,7 @@ void Game::inicializar()
 	//mapa
 	Map::i().inicializar();
 
-	GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
+	/*GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
 	ge->addEntityList(EntityManager::i().getLifeObjects());
 	TriggerSystem::i().RegisterEntity(ge);
 
@@ -163,7 +163,7 @@ void Game::inicializar()
 
 	GroupEntity *grupoRockets = new GroupEntity("grupoRockets", 9003);
 	grupoRockets->addEntityList(EntityManager::i().getRockets());
-	TriggerSystem::i().RegisterEntity(grupoRockets);
+	TriggerSystem::i().RegisterEntity(grupoRockets);*/
 
 
 	/*Enemy *e = new Enemy("Rambo");

@@ -30,14 +30,14 @@ void Map::inicializar()
 	cellSpace = new CellSpacePartition(647.f, 475.f, 10, 5);
 
 	//Lee el mapa
-	map.readMap("../media/map1.json");
+	map.readMap("../media/laberinto.json");
 
 
 	//GRAFO
 	
 	//True, grafo dirigido
 	grafo = new SparseGraph(true);
-	grafo->readGraph("../media/map1.json");
+	grafo->readGraph("../media/laberinto.json");
 
 	/*
 	grafo->addNode(nodo1);
