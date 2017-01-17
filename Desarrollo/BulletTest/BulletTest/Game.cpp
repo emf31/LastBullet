@@ -178,12 +178,7 @@ void Game::inicializar()
 	e1->cargarContenido();
 	e1->setPosition(Vec3<float>(11.8, 20, 23));
 
-	std::list<Vec2f> camino1;
-	std::list<Vec2f> camino2;
-	PathPlanner path1(e);
-	PathPlanner path2(e1);
-	path1.CreatePathToPosition(Vec2f(95,116),camino1);
-	path2.CreatePathToPosition(Vec2f(95, 116), camino2);
+
 
 
 	/*
@@ -202,7 +197,7 @@ void Game::inicializar()
 	e->cargarContenido();
 	e->setPosition();*/
 
-	int a;
+	int a=1;
 	do {
 		std::cout << "Elige un modo:" << std::endl;
 		std::cout << "[1] - Un jugador" << std::endl;
@@ -267,6 +262,15 @@ void Game::inicializar()
 	Cliente::i().addObserver(&partida);
 	//Añadimos observer al player
 	player->addObserver(&partida);
+
+
+	std::list<Vec2f> camino1;
+	std::list<Vec2f> camino2;
+	PathPlanner path1(e);
+	PathPlanner path2(e1);
+	path1.CreatePathToPosition(Vec2f(95, 116), camino1);
+	path2.CreatePathToPosition(Vec2f(95, 116), camino2);
+
 }
 
 bool Game::processEvents()

@@ -17,7 +17,7 @@ PathPlanner::~PathPlanner()
 bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& camino)
 {
 	m_posDestino = posObjetivo;
-	if (!Map::i().isPathObstructed(vec3ToVec2(m_Bot->getRenderPosition()), posObjetivo, m_Bot->getRadio())) {
+	if (!Map::i().isPathObstructed(vec3ToVec2(m_Bot->getRenderState()->getPosition()), posObjetivo, m_Bot->getRadio())) {
 		camino.push_back(posObjetivo);
 		return true;
 	}
@@ -81,7 +81,7 @@ int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 	bool primero = true;
 	int NodoMasCercano=-1;
 	for (std::list<NavGraphNode>::iterator it= nodosCercanos.begin(); it != nodosCercanos.end(); ++it) {
-		if (primero == true) {
+		if (primero == true && !Map::i().isPathObstructed(pos, it->getPosition(), m_Bot->getRadio())) {
 			vecLong = (pos - it->getPosition());
 			menorDist= vecLong.Magnitude();
 			NodoMasCercano = it->Index();
@@ -89,7 +89,7 @@ int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 		}
 		vecLong = (pos - it->getPosition());
 		distAux= vecLong.Magnitude();
-		if (menorDist > distAux) {
+		if (menorDist > distAux && !Map::i().isPathObstructed(pos, it->getPosition(), m_Bot->getRadio())) {
 			menorDist = distAux;
 			NodoMasCercano = it->Index();
 		}
