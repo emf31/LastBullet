@@ -27,7 +27,7 @@ void Map::inicializar()
 
 	//dimensiones del mapa 647x475
 	//se crea la division del espacio en celdas
-	cellSpace = new CellSpacePartition(647.f, 475.f, 10, 5);
+	cellSpace = new CellSpacePartition(200, 200, 10, 5);
 
 	//Lee el mapa
 	map.readMap("../media/laberinto.json");

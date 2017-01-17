@@ -1,8 +1,4 @@
-﻿  Game.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(334): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
+﻿  Map.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(213): warning C4018: '<': no coinciden signed/unsigned
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
