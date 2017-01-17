@@ -28,6 +28,8 @@ public:
 	void addEdge(GraphEdge edge);
 	void removeEdge(int from, int to);
 
+	void readGraph(const std::string& path);
+
 	void printGrafo() {
 		for (std::vector<std::list<GraphEdge>>::iterator curEdgeList = m_Edges.begin(); curEdgeList != m_Edges.end(); ++curEdgeList)
 		{

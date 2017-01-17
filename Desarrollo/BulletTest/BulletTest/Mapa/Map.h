@@ -31,6 +31,8 @@ public:
 
 	std::vector<Vec3<float>> getSpawnPoints() { return map.getSpawnPoints(); };
 
+	void setGraph(SparseGraph graph);
+
 private:
 	//True, grafo dirigido
 	SparseGraph* grafo;
@@ -38,6 +40,7 @@ private:
 	//Cargador del mapa
 	MapLoader map;
 	
+
 
 	Map();
 	

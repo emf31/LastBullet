@@ -21,9 +21,9 @@ void Map::inicializar()
 	
 	//True, grafo dirigido
 	grafo = new SparseGraph(true);
-	
+	grafo->readGraph("../media/map1.json");
 
-	NavGraphNode nodo1(grafo->getNextFreeNodeIndex(), Vec2f(0,30));
+	/*NavGraphNode nodo1(grafo->getNextFreeNodeIndex(), Vec2f(0,30));
 	grafo->addNode(nodo1);
 
 	NavGraphNode nodo2(grafo->getNextFreeNodeIndex(), Vec2f(30, 0));
@@ -60,7 +60,7 @@ void Map::inicializar()
 	grafo->addEdge(edge5);
 	grafo->addEdge(edge6);
 	grafo->addEdge(edge7);
-	grafo->addEdge(edge8);
+	grafo->addEdge(edge8);*/
 
 	//grafo->printGrafo();
 

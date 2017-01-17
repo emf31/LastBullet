@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3ca4701e882514eb6c56c9a3c3533b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\mediamap1.json
+  fileName: D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\media\map1.json
 --- !u!1001 &67537753
 Prefab:
   m_ObjectHideFlags: 0
@@ -883,7 +883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1842810852}
-  outs: []
+  outs:
+  - probability: 100
+    waypoint: {fileID: 555155251}
   ins:
   - {fileID: 1709913769}
 --- !u!135 &139303156
@@ -1812,8 +1814,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1842810852}
-  outs: []
-  ins: []
+  outs:
+  - probability: 100
+    waypoint: {fileID: 1367837087}
+  ins:
+  - {fileID: 1091783254}
+  - {fileID: 670135729}
 --- !u!135 &412849230
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2350,8 +2356,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1842810852}
-  outs: []
-  ins: []
+  outs:
+  - probability: 100
+    waypoint: {fileID: 2077326101}
+  ins:
+  - {fileID: 139303155}
 --- !u!135 &555155252
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2669,6 +2678,69 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 473f2af6792e64041b968c602b4ab73b, type: 3}
   m_PrefabInternal: {fileID: 654694860}
+--- !u!1 &670135727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 670135728}
+  - component: {fileID: 670135730}
+  - component: {fileID: 670135729}
+  m_Layer: 8
+  m_Name: 8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &670135728
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 670135727}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.967703, y: 6.011877, z: 10.476511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1138625936}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670135729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 670135727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1be734766a5784b95f148eb1bc91c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 1842810852}
+  outs:
+  - probability: 34
+    waypoint: {fileID: 412849229}
+  - probability: 33
+    waypoint: {fileID: 1709913769}
+  - probability: 33
+    waypoint: {fileID: 1367837087}
+  ins:
+  - {fileID: 2077326101}
+--- !u!135 &670135730
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 670135727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &678245362
 Prefab:
   m_ObjectHideFlags: 0
@@ -4454,6 +4526,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1091783253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1091783256}
+  - component: {fileID: 1091783255}
+  - component: {fileID: 1091783254}
+  m_Layer: 8
+  m_Name: 7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1091783254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1091783253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1be734766a5784b95f148eb1bc91c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 1842810852}
+  outs:
+  - probability: 100
+    waypoint: {fileID: 412849229}
+  ins: []
+--- !u!135 &1091783255
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1091783253}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1091783256
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1091783253}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.6906571, y: 6.011877, z: 1.9606495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1138625936}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1121111131
 Prefab:
   m_ObjectHideFlags: 0
@@ -4622,7 +4752,8 @@ Transform:
   - {fileID: 2004913653}
   - {fileID: 1367837089}
   - {fileID: 412849231}
-  - {fileID: 1881463949}
+  - {fileID: 1091783256}
+  - {fileID: 670135728}
   m_Father: {fileID: 42652186}
   m_RootOrder: 98
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5658,8 +5789,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1842810852}
-  outs: []
-  ins: []
+  outs:
+  - probability: 100
+    waypoint: {fileID: 1709913769}
+  ins:
+  - {fileID: 670135729}
+  - {fileID: 412849229}
 --- !u!135 &1367837088
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7588,12 +7723,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1842810852}
   outs:
-  - probability: 50
+  - probability: 34
     waypoint: {fileID: 2077326101}
-  - probability: 50
+  - probability: 33
     waypoint: {fileID: 139303155}
+  - probability: 33
+    waypoint: {fileID: 2004913651}
   ins:
   - {fileID: 2004913651}
+  - {fileID: 670135729}
+  - {fileID: 1367837087}
 --- !u!135 &1709913770
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8081,7 +8220,8 @@ MonoBehaviour:
   - {fileID: 2004913651}
   - {fileID: 1367837087}
   - {fileID: 412849229}
-  - {fileID: 1881463950}
+  - {fileID: 1091783254}
+  - {fileID: 670135729}
   cluster: {fileID: 1138625935}
 --- !u!65 &1842810853
 BoxCollider:
@@ -8210,62 +8350,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 473f2af6792e64041b968c602b4ab73b, type: 3}
   m_PrefabInternal: {fileID: 1847696647}
---- !u!1 &1881463948
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1881463949}
-  - component: {fileID: 1881463951}
-  - component: {fileID: 1881463950}
-  m_Layer: 8
-  m_Name: 7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1881463949
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1881463948}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.35732, y: 3.0460382, z: 22.814365}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1138625936}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1881463950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1881463948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1be734766a5784b95f148eb1bc91c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1842810852}
-  outs: []
-  ins: []
---- !u!135 &1881463951
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1881463948}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1888341408
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,7 +8938,8 @@ MonoBehaviour:
   outs:
   - probability: 100
     waypoint: {fileID: 1709913769}
-  ins: []
+  ins:
+  - {fileID: 1709913769}
 --- !u!135 &2004913652
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9127,9 +9212,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1842810852}
-  outs: []
+  outs:
+  - probability: 100
+    waypoint: {fileID: 670135729}
   ins:
   - {fileID: 1709913769}
+  - {fileID: 555155251}
 --- !u!135 &2077326102
 SphereCollider:
   m_ObjectHideFlags: 0
