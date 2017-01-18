@@ -2,6 +2,7 @@
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
 #include <PathPlanner.h>
+#include <PathFollow.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
@@ -13,12 +14,37 @@ Enemy_Bot::~Enemy_Bot()
 
 void Enemy_Bot::inicializar()
 {
+	m_PathPlanner = new PathPlanner(this);
+	m_PathFollow = new PathFollow(this);
 }
 
 void Enemy_Bot::update(Time elapsedTime)
 {
 
 	updateAnimation();
+
+	
+
+	if (isAtPosition(m_Target))
+	{
+		//Marcamos como objetivo actual el siguiente nodo del camino
+		m_Target = m_camino.front();
+		
+		//Como es nuestro objetivo lo eliminamos ya de la lista
+		m_camino.pop_front();
+
+		//Lo marcamos como objetivo
+		m_PathFollow->SetTarget(m_Target);
+
+		//Es el ultimo nodo
+		if (m_camino.size() == 0) {
+			m_PathFollow->ArriveOn();
+		}
+		else {
+			m_PathFollow->SeekOn();
+		}
+		
+	}
 
 }
 
