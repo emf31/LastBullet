@@ -257,22 +257,28 @@ void Game::inicializar()
 
 
 
-	Enemy_Bot *e = new Enemy_Bot("Rambo");
+	e = new Enemy_Bot("Rambo");
 	e->inicializar();
 	e->cargarContenido();
 	e->setPosition(Vec3<float>(181, 20, 81));
 
-	Enemy_Bot *e1 = new Enemy_Bot("Chuck Norris");
+	/*Enemy_Bot *e1 = new Enemy_Bot("Chuck Norris");
 	e1->inicializar();
 	e1->cargarContenido();
-	e1->setPosition(Vec3<float>(11.8, 20, 23));
+	e1->setPosition(Vec3<float>(11.8, 20, 23));*/
 
-	std::list<Vec2f> camino1;
-	std::list<Vec2f> camino2;
+	/*std::list<Vec2f> camino1;
 	PathPlanner path1(e);
-	PathPlanner path2(e1);
-	path1.CreatePathToPosition(Vec2f(95, 116), camino1);
-	path2.CreatePathToPosition(Vec2f(95, 116), camino2);
+	path1.CreatePathToPosition(Vec2f(95, 116), camino1);*/
+
+	
+
+
+	//std::list<Vec2f> camino2;
+	
+	//PathPlanner path2(e1);
+	
+	//path2.CreatePathToPosition(Vec2f(95, 116), camino2);
 
 	
 
@@ -295,6 +301,11 @@ bool Game::processEvents()
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 
 		GraphicEngine::i().toggleCamera();
+
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_KEY_5)) {
+
+		e->createPathToPosition(Vec2f(188, 108));
 
 	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
 

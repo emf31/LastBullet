@@ -23,9 +23,9 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	updateAnimation();
 
-	
+	updateMovement();
 
-	if (isAtPosition(m_Target))
+	if (isAtPosition(m_Target) && !m_camino.empty())
 	{
 		//Marcamos como objetivo actual el siguiente nodo del camino
 		m_Target = m_camino.front();
@@ -46,6 +46,20 @@ void Enemy_Bot::update(Time elapsedTime)
 		
 	}
 
+	//m_rigidBody->setLinearVelocity(btVector3(1, 0, 1) * 2.f);
+
+
+	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
+	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+
+	// Set rotation
+	vector3df Euler;
+	const btQuaternion& TQuat = m_rigidBody->getOrientation();
+	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
+	q.toEuler(Euler);
+	Euler *= RADTODEG;
+
+	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 }
 
 void Enemy_Bot::handleInput()
@@ -74,14 +88,14 @@ void Enemy_Bot::cargarContenido()
 
 	radius = 1.2f;
 	height = 7.3f;
-	mass = 1000.f;
+	mass = 70.f;
 
 
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, height, radius, mass, DISABLE_SIMULATION);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(5.f, 5.f, 5.f), mass, false, Vec3<float>(0,0,0), DISABLE_DEACTIVATION);
 
-	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	/*btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
-	proxy->m_collisionFilterMask = col::enemyCollidesWith;
+	proxy->m_collisionFilterMask = col::enemyCollidesWith;*/
 }
 
 void Enemy_Bot::borrarContenido()
@@ -109,6 +123,31 @@ void Enemy_Bot::setPosition(Vec3<float> pos)
 	m_nodo.get()->setPosition(pos);
 }
 
+
+void Enemy_Bot::updateMovement()
+{
+	if (siguiendo) {
+		Vec2f direccion = m_PathFollow->Calculate();
+		btVector3 vel = btVector3(direccion.x, 0, direccion.y);
+		vel = vel * 20.f;
+
+		m_rigidBody->setLinearVelocity(vel);
+	}
+	
+}
+
+void Enemy_Bot::createPathToPosition(Vec2f vec) {
+	siguiendo = true;
+
+	//Limpiamos el camino actual
+	m_camino.clear();
+
+	m_PathPlanner->CreatePathToPosition(vec, m_camino);
+
+	m_PathFollow->SeekOn();
+
+	m_Target = m_camino.front();
+}
 
 void Enemy_Bot::updateAnimation()
 {

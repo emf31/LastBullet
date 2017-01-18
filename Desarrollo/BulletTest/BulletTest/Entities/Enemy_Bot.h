@@ -4,6 +4,7 @@
 #include <Util.h>
 #include <Vec2f.h>
 
+
 class PathPlanner;
 class PathFollow;
 
@@ -37,13 +38,20 @@ public:
 	//Devuelve true si el bot esta en esa posicion
 	bool isAtPosition(Vec2f pos)
 	{
-		const static double tolerance = 10.0;
+		const static double tolerance = 3.0;
 		Vec2f curr_pos = vec3ToVec2(m_renderState.getPosition());
 
 		return Vec2f(curr_pos - pos).Magnitude() < tolerance * tolerance;
 	}
 
+	void updateMovement();
+
+	void createPathToPosition(Vec2f vec);
+
 private:
+
+	bool siguiendo = false;
+
 	float radius;
 	float height;
 	float mass;

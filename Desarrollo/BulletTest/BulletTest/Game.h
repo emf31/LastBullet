@@ -18,6 +18,8 @@
 #include <DebugMenuGUI.h>
 #include <Partida.h>
 
+#include <Enemy_Bot.h>
+
 class Game
 {
 public:
@@ -40,4 +42,6 @@ private:
 
 	Partida partida;
 	Player* player;
+
+	Enemy_Bot *e;
 };

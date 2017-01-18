@@ -6,25 +6,42 @@ PathFollow::PathFollow(Enemy_Bot * bot)
 	m_owner = bot;
 }
 
-void PathFollow::update()
+Vec2f PathFollow::Calculate()
 {
 
+	Vec2f direction;
+
 	if (m_cBehaviour == seek) {
-		Seek(m_vTarget);
+		direction = Seek(m_vTarget);
 	}
 	else if (m_cBehaviour == arrive) {
-		Arrive(m_vTarget);
+		direction = Arrive(m_vTarget);
 	}
 
-
+	return direction;
 }
 
 Vec2f PathFollow::Seek(const Vec2f & target)
 {
-	return Vec2f();
+	Vec2f dir(target - vec3ToVec2(m_owner->getRenderState()->getPosition()));
+	dir = dir.Normalize();
+
+	return dir;
 }
 
 Vec2f PathFollow::Arrive(const Vec2f & target)
 {
-	return Vec2f();
+
+	Vec2f ToTarget = target - vec3ToVec2(m_owner->getRenderState()->getPosition());
+
+	//calculate the distance to the target
+	double dist = ToTarget.Magnitude();
+
+
+	if (dist > 1)
+	{
+		return ToTarget.Normalize();
+	}
+
+	return Vec2f(0, 0);
 }
