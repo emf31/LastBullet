@@ -25,7 +25,7 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	updateMovement();
 
-	if (isAtPosition(m_Target) && !m_camino.empty())
+	/*if (isAtPosition(m_Target) && !m_camino.empty())
 	{
 		//Marcamos como objetivo actual el siguiente nodo del camino
 		m_Target = m_camino.front();
@@ -44,7 +44,7 @@ void Enemy_Bot::update(Time elapsedTime)
 			m_PathFollow->SeekOn();
 		}
 		
-	}
+	}*/
 
 	//m_rigidBody->setLinearVelocity(btVector3(1, 0, 1) * 2.f);
 
@@ -137,6 +137,7 @@ void Enemy_Bot::updateMovement()
 }
 
 void Enemy_Bot::createPathToPosition(Vec2f vec) {
+
 	siguiendo = true;
 
 	//Limpiamos el camino actual
@@ -144,9 +145,8 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 	m_PathPlanner->CreatePathToPosition(vec, m_camino);
 
-	m_PathFollow->SeekOn();
+	m_PathFollow->SetPath(m_camino);
 
-	m_Target = m_camino.front();
 }
 
 void Enemy_Bot::updateAnimation()

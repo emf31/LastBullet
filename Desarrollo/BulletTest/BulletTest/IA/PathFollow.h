@@ -1,11 +1,13 @@
 
 #include <Vec2f.h>
-
+#include <list>
 
 enum behaviour_type {
 	seek = 0,
 	arrive = 1
 };
+
+//static const int no_target = -1;
 
 class Enemy_Bot;
 
@@ -17,6 +19,8 @@ public:
 
 	void      SetTarget(Vec2f& t) { m_vTarget = t; }
 	Vec2f  Target()const { return m_vTarget; }
+
+	void SetPath(std::list<Vec2f>& path) { SeekOn(); m_currentPath = &path; m_vTarget = m_currentPath->front(); }
 
 	void SeekOn() { m_cBehaviour = seek; }
 	void ArriveOn() { m_cBehaviour = arrive; }
@@ -37,5 +41,8 @@ private:
 
 	//current behaviour
 	behaviour_type m_cBehaviour;
+
+	//curren path
+	std::list<Vec2f>* m_currentPath;
 	
 };

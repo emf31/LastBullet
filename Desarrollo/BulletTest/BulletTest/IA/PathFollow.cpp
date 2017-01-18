@@ -9,6 +9,22 @@ PathFollow::PathFollow(Enemy_Bot * bot)
 Vec2f PathFollow::Calculate()
 {
 
+	//Si se cumple hemos llegado al objetivo
+	if (m_owner->isAtPosition(m_vTarget) && !m_currentPath->empty()) {
+
+		//Marcamos como objetivo actual el siguiente nodo del camino
+		m_vTarget = m_currentPath->front();
+
+		//Como es nuestro objetivo lo eliminamos ya de la lista
+		m_currentPath->pop_front();
+
+		//Es el ultimo nodo
+		if (m_currentPath->size() == 0) {
+			ArriveOn();
+		}
+	}
+
+
 	Vec2f direction;
 
 	if (m_cBehaviour == seek) {
@@ -18,15 +34,15 @@ Vec2f PathFollow::Calculate()
 		direction = Arrive(m_vTarget);
 	}
 
+
 	return direction;
 }
 
 Vec2f PathFollow::Seek(const Vec2f & target)
 {
 	Vec2f dir(target - vec3ToVec2(m_owner->getRenderState()->getPosition()));
-	dir = dir.Normalize();
 
-	return dir;
+	return dir.Normalize();
 }
 
 Vec2f PathFollow::Arrive(const Vec2f & target)
@@ -38,7 +54,7 @@ Vec2f PathFollow::Arrive(const Vec2f & target)
 	double dist = ToTarget.Magnitude();
 
 
-	if (dist > 1)
+	if (dist > 3)
 	{
 		return ToTarget.Normalize();
 	}
