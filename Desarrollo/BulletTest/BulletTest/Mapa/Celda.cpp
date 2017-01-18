@@ -88,7 +88,7 @@ void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraph
 	if (ind%m_numCeldasX == 0) {
 		//la fila de izquierda es multiplo del numCeldasdeX
 		esBordeIzquierdo = true;
-	}else if(ind==9 || ind==19 || ind==29 || ind==39 || ind==49){
+	}else if(ind + 1 >= m_numCeldasX && (ind + 1) % m_numCeldasX==0){
 		//ind+1>= m_numCeldasX && ind+1%m_numCeldasX==0
 		//la fila de la derecha sumandole 1 seria multiplo del numCeldasX
 		esBordeDerecho = true;
