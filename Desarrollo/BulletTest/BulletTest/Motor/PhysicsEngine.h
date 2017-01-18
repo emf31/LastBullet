@@ -13,17 +13,18 @@
 namespace col {
 	enum Collisions {
 		COL_NOTHING = 0,
-		Static = BIT(0),
+		RAY_CAST = BIT(0),
 		Granada = BIT(1),
 		Character = BIT(2),
 		Rocket = BIT(3),
 		Caja = BIT(4),
 		Enemy = BIT(5),
 		Sensor = BIT(6),
-		RocketEnemy = BIT(7)
+		RocketEnemy = BIT(7),
+		Static = BIT(8)
 	};
 
-	const int staticCollidesWith = Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
+	const int staticCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
 	const int characterCollidesWith = Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;

@@ -2,6 +2,7 @@
 #include <GraphEdge.h>
 #include <EntityManager.h>
 #include <Util.h>
+#include <PhysicsEngine.h>
 
 
 
@@ -127,8 +128,123 @@ void Map::borrarContenido() {
 }
 bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 {
-	//TODO hacer este metodo
-	return true;
+	std::cout << "entro a metodo is path obstructed" << std::endl;
+	int altura = 0;
+	Vec2f aumento = posFinal - posIni;
+	//****************************RayCast central***************************************
+	btVector3 start = btVector3(posIni.x, altura, posIni.y);
+	btVector3 target = btVector3(posFinal.x, altura, posFinal.y);
+	//btVector3 distancia = target - start;
+	//distancia.length();	
+	/*btVector3 direccion = target - start;
+	direccion.normalize();
+
+	//antes estaba esto pero como quiero que solo sea hasta el nodo le quito el size of world no se si funcionara
+	//btVector3 end = start + (direccion*SIZE_OF_WORLD);
+	btVector3 SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
+	btVector3 end = start + (direccion*SIZE_OF_WORLD);*/
+
+	btCollisionWorld::ClosestRayResultCallback ray(start, target);
+
+	PhysicsEngine::i().m_world->rayTest(start, target, ray);
+
+	if (ray.hasHit())//si ray ha golpeado algo entro
+	{
+		//Veo la entity que colisiona
+		Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+		if (ent != EntityManager::i().getEntity(PLAYER))
+		{
+			//ha colisionado con una entity que no es el player
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
+			return true;
+		}
+	}
+	//**********************************************************************************
+
+
+
+	//****************************RayCast Izquierda***************************************
+	Vec2f rayCastIzquierdaIni = posIni;
+	rayCastIzquierdaIni.x -= aumento.x;
+	rayCastIzquierdaIni.y += aumento.y;
+	Vec2f rayCastIzquierdaFin = posFinal;
+	rayCastIzquierdaFin.x -= aumento.x;
+	rayCastIzquierdaFin.y += aumento.y;
+
+
+	btVector3 start1 = btVector3(rayCastIzquierdaIni.x, altura, rayCastIzquierdaIni.y);
+	btVector3 target1 = btVector3(rayCastIzquierdaFin.x, altura, rayCastIzquierdaFin.y);
+	btVector3 direccion1 = target1 - start1;
+	direccion1.normalize();
+
+	//antes estaba esto pero como quiero que solo sea hasta el nodo le quito el size of world no se si funcionara
+	//btVector3 end = start + (direccion*SIZE_OF_WORLD);
+//	btVector3 end1 = start1 + (direccion1*SIZE_OF_WORLD);
+
+	btCollisionWorld::ClosestRayResultCallback ray1(start1, target);
+
+	PhysicsEngine::i().m_world->rayTest(start1, target, ray1);
+
+	if (ray1.hasHit())//si ray ha golpeado algo entro
+	{
+		//Veo la entity que colisiona
+		Entity* ent = static_cast<Entity*>(ray1.m_collisionObject->getUserPointer());
+		if (ent != EntityManager::i().getEntity(PLAYER))
+		{
+			//ha colisionado con una entity que no es el player
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST IZQUIERDA HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST IZQUIERDA HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST IZQUIERDA HA COLISIONADO CON UNA PARED" << std::endl;
+			return true;
+		}
+	}
+
+	//**********************************************************************************
+
+
+	//****************************RayCast Derecha***************************************
+	Vec2f rayCastDerechaIni = posIni;
+	rayCastDerechaIni.x += aumento.x;
+	rayCastDerechaIni.y -= aumento.y;
+	Vec2f rayCastDerechaFin = posFinal;
+	rayCastDerechaFin.x += aumento.x;
+	rayCastDerechaFin.y -= aumento.y;
+
+
+	btVector3 start2 = btVector3(rayCastDerechaIni.x, altura, rayCastDerechaIni.y);
+	btVector3 target2 = btVector3(rayCastDerechaFin.x, altura, rayCastDerechaFin.y);
+	btVector3 direccion2 = target2 - start2;
+	direccion2.normalize();
+
+	//antes estaba esto pero como quiero que solo sea hasta el nodo le quito el size of world no se si funcionara
+	//btVector3 end = start + (direccion*SIZE_OF_WORLD);
+	//btVector3 end2 = start2 + (direccion2*SIZE_OF_WORLD);
+
+	btCollisionWorld::ClosestRayResultCallback ray2(start2, target);
+
+	PhysicsEngine::i().m_world->rayTest(start2, target, ray2);
+
+	if (ray2.hasHit())//si ray ha golpeado algo entro
+	{
+		//Veo la entity que colisiona
+		Entity* ent = static_cast<Entity*>(ray2.m_collisionObject->getUserPointer());
+		if (ent != EntityManager::i().getEntity(PLAYER))
+		{
+			//ha colisionado con una entity que no es el player
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST DERECHA HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST DERECHA HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST DERECHA HA COLISIONADO CON UNA PARED" << std::endl;
+			return true;
+		}
+	}
+
+	//**********************************************************************************
+
+	return false;
+
+	
 }
 
 void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec2f>& camino)

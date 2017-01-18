@@ -1,3 +1,10 @@
-﻿  PathFollow.cpp
+﻿  Map.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(135): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(136): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(177): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(178): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(216): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(217): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(330): warning C4018: '<': no coinciden signed/unsigned
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

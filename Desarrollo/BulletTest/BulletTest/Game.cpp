@@ -187,7 +187,7 @@ void Game::inicializar()
 	e->cargarContenido();
 	e->setPosition();*/
 
-	int a;
+	int a=1;
 	do {
 		std::cout << "Elige un modo:" << std::endl;
 		std::cout << "[1] - Un jugador" << std::endl;
@@ -254,10 +254,12 @@ void Game::inicializar()
 	player->addObserver(&partida);
 
 
+
+
 	Enemy_Bot *e = new Enemy_Bot("Rambo");
 	e->inicializar();
 	e->cargarContenido();
-	e->setPosition(Vec3<float>(181,20, 81));
+	e->setPosition(Vec3<float>(181, 20, 81));
 
 	Enemy_Bot *e1 = new Enemy_Bot("Chuck Norris");
 	e1->inicializar();
@@ -270,6 +272,9 @@ void Game::inicializar()
 	PathPlanner path2(e1);
 	path1.CreatePathToPosition(Vec2f(95, 116), camino1);
 	path2.CreatePathToPosition(Vec2f(95, 116), camino2);
+
+	
+
 }
 
 bool Game::processEvents()
@@ -284,6 +289,7 @@ bool Game::processEvents()
 
 		GraphicEngine::i().toggleDebug();
 
+		
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 
