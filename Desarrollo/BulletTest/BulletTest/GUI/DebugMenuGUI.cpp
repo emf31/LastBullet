@@ -37,7 +37,6 @@ void DebugMenuGUI::inicializar() {
 	botRucri->cargarContenido();
 	botRucri->setPosition(Map::i().searchSpawnPoint());
 
-
 }
 
 bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {

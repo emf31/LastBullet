@@ -3,7 +3,7 @@
 #include <Animation.h>
 #include <Util.h>
 #include <Vec2f.h>
-
+#include <KinematicCharacterController.h>
 
 class PathPlanner;
 class PathFollow;
@@ -56,8 +56,6 @@ private:
 	float height;
 	float mass;
 
-	btRigidBody* m_rigidBody;
-
 	Animation animation;
 
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
@@ -88,7 +86,7 @@ private:
 	Vec2f m_Target;
 
 
-
+	KinematicCharacterController* p_controller;
 
 	friend class PathPlanner;
 };

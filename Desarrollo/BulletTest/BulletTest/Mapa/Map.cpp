@@ -28,7 +28,7 @@ void Map::inicializar()
 
 	//dimensiones del mapa 647x475
 	//se crea la division del espacio en celdas
-	cellSpace = new CellSpacePartition(200, 200, 10, 5);
+	cellSpace = new CellSpacePartition(200, 200, 5, 5);
 
 	//Lee el mapa
 	map.readMap("../media/laberinto.json");
@@ -39,66 +39,6 @@ void Map::inicializar()
 	//True, grafo dirigido
 	grafo = new SparseGraph(true);
 	grafo->readGraph("../media/laberinto.json");
-
-	/*
-	grafo->addNode(nodo1);
-
-	NavGraphNode nodo2(grafo->getNextFreeNodeIndex(), Vec2f(0, 10));
-	grafo->addNode(nodo2);
-
-	NavGraphNode nodo3(grafo->getNextFreeNodeIndex(), Vec2f(20, 60));
-	grafo->addNode(nodo3);
-
-	NavGraphNode nodo4(grafo->getNextFreeNodeIndex(), Vec2f(30, 60));
-	grafo->addNode(nodo4);
-
-	NavGraphNode nodo5(grafo->getNextFreeNodeIndex(), Vec2f(150, 200));
-	grafo->addNode(nodo5);
-
-	NavGraphNode nodo6(grafo->getNextFreeNodeIndex(), Vec2f(100, 100));
-	grafo->addNode(nodo6);
-
-	
-	NavGraphNode nodo7(grafo->getNextFreeNodeIndex(), Vec2f(10, 100));
-	grafo->addNode(nodo7);
-	
-	NavGraphNode nodo8(grafo->getNextFreeNodeIndex(), Vec2f(20, 90));
-	grafo->addNode(nodo8);
-	NavGraphNode nodo9(grafo->getNextFreeNodeIndex(), Vec2f(250, 300));
-	grafo->addNode(nodo9);
-	NavGraphNode nodo10(grafo->getNextFreeNodeIndex(), Vec2f(253, 290));
-	grafo->addNode(nodo10);
-	NavGraphNode nodo11(grafo->getNextFreeNodeIndex(), Vec2f(250, 305));
-	grafo->addNode(nodo11);
-	NavGraphNode nodo12(grafo->getNextFreeNodeIndex(), Vec2f(250, 295));
-	grafo->addNode(nodo12);
-	
-
-	GraphEdge edge1(nodo1.Index(), nodo5.Index(), 2.9);
-	GraphEdge edge2(nodo1.Index(), nodo6.Index(), 1.f);
-
-	GraphEdge edge3(nodo5.Index(), nodo6.Index(), 3.f);
-	GraphEdge edge4(nodo5.Index(), nodo2.Index(), 1.9);
-
-	GraphEdge edge5(nodo6.Index(), nodo4.Index(), 1.1);
-	GraphEdge edge6(nodo2.Index(), nodo3.Index(), 3.1);
-	GraphEdge edge7(nodo4.Index(), nodo3.Index(), 3.7);
-
-	GraphEdge edge8(nodo3.Index(), nodo5.Index(), 0.8);
-
-	grafo->addEdge(edge1);
-	grafo->addEdge(edge2);
-	grafo->addEdge(edge3);
-	grafo->addEdge(edge4);
-	grafo->addEdge(edge5);
-	grafo->addEdge(edge6);
-	grafo->addEdge(edge7);
-	grafo->addEdge(edge8);*/
-
-	//grafo->printGrafo();
-
-
-	
 
 	//se meten los nodos a las celdas correspondientes
 	

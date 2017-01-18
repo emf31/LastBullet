@@ -75,7 +75,9 @@ public:
 	}
 
 	void resetAll();
+
 	KinematicCharacterController* p_controller;
+
 	void updateRelojes();
 
 	bool hit;
@@ -115,10 +117,6 @@ private:
 	bool isMoving;
 	bool isRunning;
 	bool isReloading;
-	
-	//Player controller
-	btCollisionShape* m_pCollisionShape;
-	btPairCachingGhostObject* m_pGhostObject;
 
 	float radius;
 	float height;

@@ -4,8 +4,9 @@
 #include <btBulletDynamicscommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 
-#include "../Entities/Entity.h"
+#include <Entity.h>
 #include <Time.hpp>
+#include <KinematicCharacterController.h>
 
 #include <unordered_set>
 
@@ -25,15 +26,13 @@ namespace col {
 	};
 
 	const int staticCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
-	const int characterCollidesWith = Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
+	const int characterCollidesWith = Collisions::Character | Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
 	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
 	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja;
 }
-
-typedef std::shared_ptr<btRigidBody> RigidPtr;
 
 class PhysicsEngine
 {
@@ -53,10 +52,10 @@ public:
 	//Updatea las fisicas
 	void update(Time elapsedTime);
 
-
-	void createBoxDynamicCharacter(btRigidBody* rigid);
-
 	void notifyCollisions();
+
+	//Crea un kinematic character controller
+	KinematicCharacterController* createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass);
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
 	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa,bool haveMesh , Vec3<float> centerCol = Vec3<float>(0, 0, 0),int body_state = ACTIVE_TAG);
@@ -74,6 +73,7 @@ public:
 	//borra un rigidbody de la simulacion
 	bool removeRigidBody(btRigidBody* body);
 	bool removeGhostObject(btGhostObject * body);
+	bool removeKinematic(KinematicCharacterController* kinematic);
 
 	void cleanDeleteObjects();
 
@@ -88,7 +88,6 @@ private:
 	btGhostPairCallback* m_pGhostPairCallBack;
 
 	std::list<btRigidBody*> m_rigidBodies;
-	//std::list<btCollisionShape*> m_collisionShapes;
 
 	std::unordered_set<btCollisionObject*> collisions_set;
 

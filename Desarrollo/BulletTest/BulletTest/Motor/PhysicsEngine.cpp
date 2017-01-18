@@ -107,12 +107,27 @@ void PhysicsEngine::notifyCollisions() {
 	contacts.clear();
 }
 
-void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
-{
-	m_world->addRigidBody(rigid);
-	//and add to the list of rigidBodies
-	m_rigidBodies.push_back(rigid);
 
+KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass) {
+
+	btCapsuleShape* m_pCollisionShape = new btCapsuleShape(radius, height);
+
+	btVector3 intertia;
+	m_pCollisionShape->calculateLocalInertia(mass, intertia);
+
+
+	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
+	actorGhost->setUserPointer(ent);
+
+	actorGhost->setCollisionShape(m_pCollisionShape);
+	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+
+	KinematicCharacterController* p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
+	p_controller->setUp(btVector3(0, 1, 0));
+
+	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character, col::characterCollidesWith);
+
+	return p_controller;
 }
 
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, Vec3<float>centerCol , int body_state)
@@ -276,6 +291,7 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 	return ghostObj;
 }
 
+
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 {
 	m_rigidBodies.remove(body);
@@ -290,7 +306,6 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 
 bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 {
-
 	m_world->removeCollisionObject(body);
 
 	//Insertamos el cuerpo en el set de borrado
@@ -298,6 +313,19 @@ bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 
 	return true;
 }
+
+bool PhysicsEngine::removeKinematic(KinematicCharacterController * kinematic)
+{
+	m_world->removeCollisionObject(kinematic->getGhostObject());
+
+	//Insertamos el cuerpo en el set de borrado
+	collisions_set.insert(kinematic->getGhostObject());
+
+	delete kinematic;
+
+	return false;
+}
+
 
 void PhysicsEngine::cleanDeleteObjects()
 {

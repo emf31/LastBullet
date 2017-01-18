@@ -25,41 +25,19 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	updateMovement();
 
-	/*if (isAtPosition(m_Target) && !m_camino.empty())
-	{
-		//Marcamos como objetivo actual el siguiente nodo del camino
-		m_Target = m_camino.front();
-		
-		//Como es nuestro objetivo lo eliminamos ya de la lista
-		m_camino.pop_front();
 
-		//Lo marcamos como objetivo
-		m_PathFollow->SetTarget(m_Target);
-
-		//Es el ultimo nodo
-		if (m_camino.size() == 0) {
-			m_PathFollow->ArriveOn();
-		}
-		else {
-			m_PathFollow->SeekOn();
-		}
-		
-	}*/
-
-	//m_rigidBody->setLinearVelocity(btVector3(1, 0, 1) * 2.f);
+	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 
-	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	m_renderState.updatePositions(Vec3<float>(
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
-	// Set rotation
-	vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;
 
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
+
+	
 }
 
 void Enemy_Bot::handleInput()
@@ -91,16 +69,22 @@ void Enemy_Bot::cargarContenido()
 	mass = 70.f;
 
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(5.f, 5.f, 5.f), mass, false, Vec3<float>(0,0,0), DISABLE_DEACTIVATION);
+	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(5.f, 5.f, 5.f), mass, false, Vec3<float>(0,0,0), DISABLE_DEACTIVATION);
 
 	/*btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
 	proxy->m_collisionFilterMask = col::enemyCollidesWith;*/
+
+	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
+
+	p_controller->m_acceleration_walk = 6.3f;
+	p_controller->m_deceleration_walk = 8.5f;
+	p_controller->m_maxSpeed_walk = 6.f;
 }
 
 void Enemy_Bot::borrarContenido()
 {
-	PhysicsEngine::i().removeRigidBody(m_rigidBody);
+	PhysicsEngine::i().removeKinematic(p_controller);
 
 	GraphicEngine::i().removeNode(m_nodo);
 }
@@ -117,10 +101,8 @@ bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 void Enemy_Bot::setPosition(Vec3<float> pos)
 {
 	m_renderState.setPosition(pos);
-	btTransform transform = m_rigidBody->getCenterOfMassTransform();
-	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo.get()->setPosition(pos);
+	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	m_nodo->setPosition(pos);
 }
 
 
@@ -129,9 +111,8 @@ void Enemy_Bot::updateMovement()
 	if (siguiendo) {
 		Vec2f direccion = m_PathFollow->Calculate();
 		btVector3 vel = btVector3(direccion.x, 0, direccion.y);
-		vel = vel * 20.f;
 
-		m_rigidBody->setLinearVelocity(vel);
+		p_controller->setWalkDirection(vel);
 	}
 	
 }

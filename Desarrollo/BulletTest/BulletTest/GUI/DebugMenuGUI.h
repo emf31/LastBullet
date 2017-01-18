@@ -19,6 +19,5 @@ private:
 	Enemy_Bot* botTonire;
 	Enemy_Bot* botRucri;
 
-
 	
 };

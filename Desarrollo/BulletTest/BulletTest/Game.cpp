@@ -93,9 +93,7 @@ void Game::run()
 				time_gameclock += timePerFrame;
 
 				MastEventReceiver::i().endEventProcess();
-				if (processEvents()) {
-					wantToExit = true;
-				}
+				processEvents();
 				MastEventReceiver::i().startEventProcess();
 
 				//Realizamos actualizaciones
@@ -107,17 +105,9 @@ void Game::run()
 
 			}
 		if (GraphicEngine::i().isWindowActive()) {
-
 			interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 			render(interpolation, timePerFrame);
-
-
-
-
-			if (wantToExit) {
-				break;
-			}
 		}
 
 		
@@ -242,8 +232,6 @@ void Game::inicializar()
 			tID2.id = (*it)->getID();
 			Cliente::i().dispatchMessage(tID2, NUEVA_VIDA);
 		}
-
-
 	}
 
 	ingameGUI.inicializar();
@@ -251,36 +239,9 @@ void Game::inicializar()
 
 	//Añadimos observer al cliente y ingameHUD
 	Cliente::i().addObserver(&partida);
+
 	//Añadimos observer al player
-	player->addObserver(&partida);
-
-
-
-
-	e = new Enemy_Bot("Rambo");
-	e->inicializar();
-	e->cargarContenido();
-	e->setPosition(Vec3<float>(181, 20, 81));
-
-	/*Enemy_Bot *e1 = new Enemy_Bot("Chuck Norris");
-	e1->inicializar();
-	e1->cargarContenido();
-	e1->setPosition(Vec3<float>(11.8, 20, 23));*/
-
-	/*std::list<Vec2f> camino1;
-	PathPlanner path1(e);
-	path1.CreatePathToPosition(Vec2f(95, 116), camino1);*/
-
-	
-
-
-	//std::list<Vec2f> camino2;
-	
-	//PathPlanner path2(e1);
-	
-	//path2.CreatePathToPosition(Vec2f(95, 116), camino2);
-
-	
+	player->addObserver(&partida);	
 
 }
 
@@ -288,7 +249,7 @@ bool Game::processEvents()
 {
 		
 	if (!debugMenu.debugInput) {
-		EntityManager::i().handleInput();
+		EntityManager::i().getEntity(PLAYER)->handleInput();
 	}
 
 	//Teclas debug
@@ -302,11 +263,6 @@ bool Game::processEvents()
 
 		GraphicEngine::i().toggleCamera();
 
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_5)) {
-
-		e->createPathToPosition(Vec2f(21, 173));
-
 	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
@@ -316,13 +272,14 @@ bool Game::processEvents()
 		ingameGUI.setTablaVisible(true);
 		partida.muestraTabla();
 
-	} else if (MastEventReceiver::i().keyPressed(KEY_F10)) {
+	} else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+
 		debugMenu.mapa->setVisible(debugMenu.debugInput);
 
 	} else if (MastEventReceiver::i().leftMouseDown()) {
@@ -349,6 +306,7 @@ void Game::update(Time elapsedTime)
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
+
 	MessageHandler::i().update();
 
 	GUIManager::i().updateAllGuis();

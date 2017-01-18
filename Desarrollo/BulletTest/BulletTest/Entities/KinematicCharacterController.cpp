@@ -179,6 +179,7 @@ void KinematicCharacterController::setSpeed(float speed) {
 
 KinematicCharacterController::~KinematicCharacterController()
 {
+
 }
 
 btPairCachingGhostObject* KinematicCharacterController::getGhostObject()

@@ -168,23 +168,7 @@ void Player::cargarContenido()
 	height = 7.3f;
 	mass = 70.f;
 
-	m_pCollisionShape = new btCapsuleShape(radius, height);
-
-	btVector3 intertia;
-	m_pCollisionShape->calculateLocalInertia(mass, intertia);
-
-
-	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
-	actorGhost->setUserPointer(this);
-
-	actorGhost->setCollisionShape(m_pCollisionShape);
-	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
-
-	p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
-	p_controller->setUp(btVector3(0, 1, 0));
-
-	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character,
-		col::characterCollidesWith);
+	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
 	p_controller->m_acceleration_walk = 6.3f;
 	p_controller->m_deceleration_walk = 8.5f;
@@ -204,9 +188,9 @@ void Player::cargarContenido()
 
 void Player::borrarContenido()
 {
-	//Estas cosas se borran aqui y no en el physics engine porque el player es especial(ghost object)
-	delete m_pCollisionShape;
-	delete p_controller;
+	GraphicEngine::i().removeNode(m_nodo);
+
+	PhysicsEngine::i().removeKinematic(p_controller);
 }
 
 void Player::handleMessage(const Message & message)
