@@ -36,7 +36,7 @@ private:
 	void SuavizarCamino(std::list<Vec2f>& listaCamino);
 	
 	
-
+	
 	
 
 

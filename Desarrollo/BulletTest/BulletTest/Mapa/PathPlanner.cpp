@@ -57,6 +57,11 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 		
 		//antes de salir del metodo suavizamos el camino para que sea mas natural el movimiento
 		SuavizarCamino(camino);
+
+
+		//Asignamos este camino al bot
+		m_Bot->m_camino = camino;
+
 		return true;
 	}
 	else {
