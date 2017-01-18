@@ -42,6 +42,7 @@ private:
 	CommandPtr run_command;
 	CommandPtr list_up;
 	CommandPtr list_down;
+	CommandPtr reload;
 
 	std::map <EKEY_CODE, CommandPtr> commands;
 

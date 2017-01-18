@@ -51,6 +51,7 @@ public:
 	void bindWeapon();
 	void UpWeapon();
 	void DownWeapon();
+	void reload();
 
 	void impulsar(Vec3<float> force);
 
@@ -66,7 +67,7 @@ public:
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
-	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual(); }
+	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes(); }
 
 
 	btPairCachingGhostObject* getGhostObject() {

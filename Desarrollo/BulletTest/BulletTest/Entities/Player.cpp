@@ -384,6 +384,11 @@ void Player::DownWeapon()
 	}
 }
 
+void Player::reload() {
+	printf("RECARGANDO\n");
+	listaWeapons->valorActual()->recargar();
+}
+
 void Player::impulsar(Vec3<float> force)
 {
 	btVector3 fuerza(force.getX(), force.getY(), force.getZ());

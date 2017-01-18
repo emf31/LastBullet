@@ -479,6 +479,9 @@
     <ClInclude Include="IA\PathFollow.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
+    <ClInclude Include="Command\Reload.h">
+      <Filter>Headers\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
