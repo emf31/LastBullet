@@ -1,5 +1,7 @@
 #include "Celda.h"
 #include <SparseGraph.h>
+#include <Map.h>
+#include <Util.h>
 
 
 
@@ -61,16 +63,19 @@ void CellSpacePartition::mostrarContenido()
 	}
 }
 
-void CellSpacePartition::CalculaNodoEnCelda(int ind, std::list<NavGraphNode>& nodosCercanos)
+void CellSpacePartition::CalculaNodoEnCelda(int ind, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot)
 {
 	for (std::list<NavGraphNode*>::iterator it = m_Celdas[ind].Nodos.begin(); it != m_Celdas[ind].Nodos.end(); ++it)
 	{
-		std::cout <<"Añado nodo: "<< (*it)->Index() << "a la lista "<< std::endl;
-		nodosCercanos.push_back((**it));
+		if (!Map::i().isPathObstructed(posBot, (*it)->getPosition(), 1.2f)) {
+			//std::cout << "Añado nodo: " << (*it)->Index() << "a la lista " << std::endl;
+			nodosCercanos.push_back((*it));
+		}
+
 	}
 }
 
-void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode>& nodosCercanos, std::vector<int>& celdasVecinas)
+void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec2f& posBot)
 {
 
 	bool esBordeDerecho = false;
@@ -83,7 +88,8 @@ void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraph
 	if (ind%m_numCeldasX == 0) {
 		//la fila de izquierda es multiplo del numCeldasdeX
 		esBordeIzquierdo = true;
-	}else if(ind+1%m_numCeldasX){
+	}else if(ind + 1 >= m_numCeldasX && (ind + 1) % m_numCeldasX==0){
+		//ind+1>= m_numCeldasX && ind+1%m_numCeldasX==0
 		//la fila de la derecha sumandole 1 seria multiplo del numCeldasX
 		esBordeDerecho = true;
 	}
@@ -104,33 +110,45 @@ void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraph
 	int abaIzq = ind + m_numCeldasX - 1;
 	int abaDer = ind + m_numCeldasX + 1;
 	if (esBordeIzquierdo == false) {
-		//arriba-izquierda
-		CalculaNodoEnCelda(arrIzq, nodosCercanos);
-		celdasVecinas.push_back(arrIzq);
+		if (esBordeArriba == false) {
+			//arriba-izquierda
+			CalculaNodoEnCelda(arrIzq, nodosCercanos, posBot);
+			celdasVecinas.push_back(arrIzq);
+		}
+
 		//izquierda
-		CalculaNodoEnCelda(izq, nodosCercanos);
+		CalculaNodoEnCelda(izq, nodosCercanos,  posBot);
 		celdasVecinas.push_back(izq);
-		//abajo izquierda
-		CalculaNodoEnCelda(abaIzq, nodosCercanos);
-		celdasVecinas.push_back(abaIzq);
+		if (esBordeAbajo == false) {
+			//abajo izquierda
+			CalculaNodoEnCelda(abaIzq, nodosCercanos, posBot);
+			celdasVecinas.push_back(abaIzq);
+		}
+
 	}
 	if (esBordeDerecho == false) {
-		//arriba-derecha
-		CalculaNodoEnCelda(arrDer, nodosCercanos);
-		celdasVecinas.push_back(arrDer);
+		if (esBordeArriba == false) {
+			//arriba-derecha
+			CalculaNodoEnCelda(arrDer, nodosCercanos, posBot);
+			celdasVecinas.push_back(arrDer);
+		}
+
 		//derecha
-		CalculaNodoEnCelda(der, nodosCercanos);
+		CalculaNodoEnCelda(der, nodosCercanos, posBot);
 		celdasVecinas.push_back(der);
-		//abajo derecha
-		CalculaNodoEnCelda(abaDer, nodosCercanos);
-		celdasVecinas.push_back(abaDer);
+		if (esBordeAbajo == false) {
+			//abajo derecha
+			CalculaNodoEnCelda(abaDer, nodosCercanos, posBot);
+			celdasVecinas.push_back(abaDer);
+		}
+
 	}
 	if (esBordeArriba == false) {
-		CalculaNodoEnCelda(arriba, nodosCercanos);
+		CalculaNodoEnCelda(arriba, nodosCercanos, posBot);
 		celdasVecinas.push_back(arriba);
 	}
 	if (esBordeAbajo == false) {
-		CalculaNodoEnCelda(abajo, nodosCercanos);
+		CalculaNodoEnCelda(abajo, nodosCercanos, posBot);
 		celdasVecinas.push_back(abajo);
 	}
 
