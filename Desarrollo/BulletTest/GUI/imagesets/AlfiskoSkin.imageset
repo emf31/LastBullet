@@ -185,4 +185,5 @@
     <Image height="24" name="hitmarker" width="24" xPos="182" yPos="584" />
     <Image height="32" name="mirilla" width="32" xPos="137" yPos="579" />
     <Image height="118" name="SangreBorde" width="150" xPos="575" yPos="510" />
+    <Image height="195" name="Mapa" width="195" xPos="552" yPos="640" />
 </Imageset>

@@ -305,7 +305,7 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_5)) {
 
-		e->createPathToPosition(Vec2f(188, 108));
+		e->createPathToPosition(Vec2f(21, 173));
 
 	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
 
@@ -323,6 +323,7 @@ bool Game::processEvents()
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+		debugMenu.mapa->setVisible(debugMenu.debugInput);
 
 	} else if (MastEventReceiver::i().leftMouseDown()) {
 

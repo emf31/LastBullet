@@ -122,23 +122,25 @@ int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
 {
 	std::list<Vec2f>::iterator e1(listaCamino.begin()), e2(listaCamino.begin());
-	//pasamos 2 nodos siguientes para ver si podemos saltarnos el del medio
+	/*
 	++e2;
-	++e2;
-
-	/*if (Map::i().isPathObstructed(vec3ToVec2(m_Bot->getRenderState()->getPosition()), *(e2), m_Bot->getRadio())) {
+	
+	if (Map::i().isPathObstructed(vec3ToVec2(m_Bot->getRenderState()->getPosition()), *(e2), m_Bot->getRadio())) {
+		//el camino esta obstruido necesitamos los 2 nodos
+		++e1;
 		++e2;
 	}
 	else {
-		e1 = listaCamino.erase(e1);
-		if (e2 != listaCamino.end()) {
-			++e2;
-		}
-		if (e2 != listaCamino.end()) {
-			++e2;
-		}
-	}*/
+		std::cout << "PARA suavizar el camino elimino el nodo con posicion: " << (*e1) << std::endl;
+		e1=listaCamino.erase(e1);
+	}
+	e1 = listaCamino.begin();
+	e2 = listaCamino.begin();
+	*/
 
+	//pasamos 2 nodos siguientes para ver si podemos saltarnos el del medio
+	++e2;
+	++e2;
 	while (e2 != listaCamino.end()) {
 		if (Map::i().isPathObstructed(*(e1), *(e2), m_Bot->getRadio())) {
 			//el camino esta obstruido necesitamos los 2 nodos
@@ -153,6 +155,7 @@ void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
 			//para volver a repetir el proceso y ver si se puede eliminar el nodo que hay nuevamente
 			//entre e1 y e2
 			++e1;
+			std::cout << "Para suavizar el camino elimino el nodo con posicion: " << (*e1) << std::endl;
 			e1 = listaCamino.erase(e1);
 			if (e2 != listaCamino.end()) {
 				++e2;
