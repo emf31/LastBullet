@@ -23,6 +23,7 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 	}
 
 	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+	
 
 	if (NodoMasCercanoAlBot == -1) {
 		return false;
@@ -30,12 +31,13 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 
 
 	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAPos(posObjetivo);
+	
 
 	if (NodoMasCercanoAlObjetivo == -1) {
 		return false;
 	}
-	std::cout << "-----------------NODO DE PARTIDA:  "<< NodoMasCercanoAlBot << std::endl;
-	std::cout << "-----------------NODO DE DESTINO:  " << NodoMasCercanoAlObjetivo << std::endl;
+
+
 	
 	AStarSearch AStar(m_grafo, NodoMasCercanoAlBot, NodoMasCercanoAlObjetivo);
 
@@ -43,6 +45,11 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 	if (!CaminoDeNodos.empty()) {
 		Map::i().ConvertirNodosAPosiciones(CaminoDeNodos, camino);
 		camino.push_back(posObjetivo);
+#ifdef NAV_INFO
+		std::cout << "EL NODO MAS CERCANO AL BOT en pos: " << vec3ToVec2(m_Bot->getRenderState()->getPosition()) << " es: " << m_grafo.getNode(NodoMasCercanoAlBot).Index() << "y su posion es" << m_grafo.getNode(NodoMasCercanoAlBot).getPosition() << std::endl;
+		std::cout << "EL NODO MAS CERCANO AL OBJETIVO en pos: " << posObjetivo << " es: " << m_grafo.getNode(NodoMasCercanoAlObjetivo).Index() << "y su posion es" << m_grafo.getNode(NodoMasCercanoAlObjetivo).getPosition() << std::endl;
+		std::cout << "-----------------NODO DE PARTIDA:  " << NodoMasCercanoAlBot << std::endl;
+		std::cout << "-----------------NODO DE DESTINO:  " << NodoMasCercanoAlObjetivo << std::endl;
 		std::cout << "***********************************************" << std::endl;
 		std::cout << "LA LISTA DE NODOS A SEGUIR ES: " << std::endl;
 		for (std::list<int>::iterator it1 = CaminoDeNodos.begin(); it1 != CaminoDeNodos.end(); ++it1) {
@@ -54,14 +61,21 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 			std::cout << (*it2) << std::endl;
 		}
 		std::cout << "********************++++++++++++++++++++++++++++++++++++++++++***************************" << std::endl;
+#endif // NAV_INFO
+
+
 		
 		//antes de salir del metodo suavizamos el camino para que sea mas natural el movimiento
 		SuavizarCamino(camino);
+#ifdef NAV_INFO
 		std::cout << "LA LISTA DE POSICIONES A SEGUIR DESPUES DE SUAVIZAR ES: " << std::endl;
 		for (std::list<Vec2f>::iterator it2 = camino.begin(); it2 != camino.end(); ++it2) {
 			std::cout << (*it2) << std::endl;
 		}
 		std::cout << "********************++++++++++++++++++++++++++++++++++++++++++***************************" << std::endl;
+#endif // NAV_INFO
+
+
 		return true;
 	}
 	else {
@@ -99,7 +113,7 @@ int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 			NodoMasCercano = (*it)->Index();
 		}
 	}
-	std::cout << "EL NODO MAS CERCANO a la posicion: " << pos << " es: " << m_grafo.getNode(NodoMasCercano).Index() << "y su posion es" << m_grafo.getNode(NodoMasCercano).getPosition() << std::endl;
+	
 	return NodoMasCercano;
 }
 

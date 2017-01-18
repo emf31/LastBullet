@@ -68,7 +68,7 @@ void CellSpacePartition::CalculaNodoEnCelda(int ind, std::list<NavGraphNode*>& n
 	for (std::list<NavGraphNode*>::iterator it = m_Celdas[ind].Nodos.begin(); it != m_Celdas[ind].Nodos.end(); ++it)
 	{
 		if (!Map::i().isPathObstructed(posBot, (*it)->getPosition(), 1.2f)) {
-			std::cout << "Añado nodo: " << (*it)->Index() << "a la lista " << std::endl;
+			//std::cout << "Añado nodo: " << (*it)->Index() << "a la lista " << std::endl;
 			nodosCercanos.push_back((*it));
 		}
 

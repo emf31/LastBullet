@@ -101,15 +101,14 @@ void Map::inicializar()
 	
 
 	//se meten los nodos a las celdas correspondientes
-	std::cout<<""<<std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "" << std::endl;
+	
 	std::cout << "AÑADIMOS LOS NODOS A LAS CELDAS" << std::endl;
 	addNodosToCells();
-	std::cout << "" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "" << std::endl;
+#ifdef NAV_INFO
 	cellSpace->mostrarContenido();
+#endif // NAV_INFO
+
+	
 
 
 
@@ -155,7 +154,7 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 		if (ent != EntityManager::i().getEntity(PLAYER))
 		{
 			//ha colisionado con una entity que no es el player
-			std::cout << " EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
+			//std::cout << " EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
 			return true;
 		}
 	}
@@ -193,8 +192,6 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 		{
 			//ha colisionado con una entity que no es el player
 			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST IZQUIERDA HA COLISIONADO CON UNA PARED" << std::endl;
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST IZQUIERDA HA COLISIONADO CON UNA PARED" << std::endl;
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST IZQUIERDA HA COLISIONADO CON UNA PARED" << std::endl;
 			return true;
 		}
 	}
@@ -231,8 +228,6 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 		if (ent != EntityManager::i().getEntity(PLAYER))
 		{
 			//ha colisionado con una entity que no es el player
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST DERECHA HA COLISIONADO CON UNA PARED" << std::endl;
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST DERECHA HA COLISIONADO CON UNA PARED" << std::endl;
 			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST DERECHA HA COLISIONADO CON UNA PARED" << std::endl;
 			return true;
 		}
@@ -315,7 +310,7 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCerca
 	
 	std::vector<int> celdasVecinas;
 	int indCelda = cellSpace->PositionToIndex(pos);
-	std::cout << "ESTOY EN LA CELDA NUMERO: " << indCelda << std::endl;
+	//std::cout << "ESTOY EN LA CELDA NUMERO: " << indCelda << std::endl;
 	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos, pos);
 	
 	if (nodosCercanos.size() == 0) {
@@ -337,6 +332,8 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCerca
 			int inicio = tam;
 			for (inicio; inicio < tam2; inicio++) {
 
+				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
+				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
 				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
 				cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[inicio], nodosCercanos, celdasVecinas, pos);
 
