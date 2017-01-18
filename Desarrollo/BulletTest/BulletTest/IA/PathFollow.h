@@ -13,9 +13,9 @@ class PathFollow {
 public:
 	PathFollow(Enemy_Bot* bot);
 
-	void update();
+	Vec2f Calculate();
 
-	void      SetTarget(Vec2f t) { m_vTarget = t; }
+	void      SetTarget(Vec2f& t) { m_vTarget = t; }
 	Vec2f  Target()const { return m_vTarget; }
 
 	void SeekOn() { m_cBehaviour = seek; }

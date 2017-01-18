@@ -63,13 +63,11 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 		std::cout << "********************++++++++++++++++++++++++++++++++++++++++++***************************" << std::endl;
 #endif // NAV_INFO
 
-
 		
 		//antes de salir del metodo suavizamos el camino para que sea mas natural el movimiento
 		SuavizarCamino(camino);
 
-		//Asignamos este camino al bot
-		m_Bot->m_camino = camino;
+
 
 #ifdef NAV_INFO
 		std::cout << "LA LISTA DE POSICIONES A SEGUIR DESPUES DE SUAVIZAR ES: " << std::endl;
@@ -127,6 +125,19 @@ void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
 	//pasamos 2 nodos siguientes para ver si podemos saltarnos el del medio
 	++e2;
 	++e2;
+
+	/*if (Map::i().isPathObstructed(vec3ToVec2(m_Bot->getRenderState()->getPosition()), *(e2), m_Bot->getRadio())) {
+		++e2;
+	}
+	else {
+		e1 = listaCamino.erase(e1);
+		if (e2 != listaCamino.end()) {
+			++e2;
+		}
+		if (e2 != listaCamino.end()) {
+			++e2;
+		}
+	}*/
 
 	while (e2 != listaCamino.end()) {
 		if (Map::i().isPathObstructed(*(e1), *(e2), m_Bot->getRadio())) {
