@@ -11,6 +11,7 @@
 #include "../Command/ShootPistola.h"
 #include "../Command/ShootCommandGranada.h"
 #include "../Command/RunCommand.h"
+#include "../Command/Reload.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
 
@@ -39,12 +40,14 @@ InputHandler::InputHandler()
 	shoot_pistola = CommandPtr(new ShootPistola());
 	shoot_commandGranada = CommandPtr(new ShootCommandGranada());
 	run_command = CommandPtr(new RunCommand());
-	
+	reload = CommandPtr(new Reload());
+
 	// Player
 	commands[KEY_KEY_W] = move_up;
 	commands[KEY_KEY_A] = move_left;
 	commands[KEY_KEY_S] = move_down;
 	commands[KEY_KEY_D] = move_right;
+	commands[KEY_KEY_R] = reload;
 	commands[KEY_KEY_3] = list_up;
 	commands[KEY_KEY_4] = list_down;
 	commands[KEY_SPACE] = jump;

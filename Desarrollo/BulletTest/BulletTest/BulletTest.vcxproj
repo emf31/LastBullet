@@ -170,6 +170,7 @@
     <ClInclude Include="Command\MoveLeft.h" />
     <ClInclude Include="Command\MoveRight.h" />
     <ClInclude Include="Command\MoveUp.h" />
+    <ClInclude Include="Command\Reload.h" />
     <ClInclude Include="Command\RunCommand.h" />
     <ClInclude Include="Command\ShootAsalto.h" />
     <ClInclude Include="Command\ShootCommandGranada.h" />
