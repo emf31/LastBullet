@@ -1,6 +1,6 @@
 #include "PathFollow.h"
 #include <Enemy_Bot.h>
-
+#include <Map.h>
 PathFollow::PathFollow(Enemy_Bot * bot)
 {
 	m_owner = bot;

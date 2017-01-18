@@ -21,10 +21,22 @@ void DebugMenuGUI::inicializar() {
 
 	mapa = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(20));
 	mapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMapClicked, this));
-	bot = new Enemy_Bot("ELEXPLORADOR");
-	bot->inicializar();
-	bot->cargarContenido();
-	bot->setPosition(Map::i().searchSpawnPoint());
+
+	botJuliyo = new Enemy_Bot("BOTJULIYO");
+	botJuliyo->inicializar();
+	botJuliyo->cargarContenido();
+	botJuliyo->setPosition(Map::i().searchSpawnPoint());
+
+	botTonire = new Enemy_Bot("BOTTONIRE");
+	botTonire->inicializar();
+	botTonire->cargarContenido();
+	botTonire->setPosition(Map::i().searchSpawnPoint());
+
+	botRucri = new Enemy_Bot("BOTRUCRI");
+	botRucri->inicializar();
+	botRucri->cargarContenido();
+	botRucri->setPosition(Map::i().searchSpawnPoint());
+
 
 }
 
@@ -46,9 +58,13 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 	float x = getContext()->getMouseCursor().getPosition().d_x;
 	float y = getContext()->getMouseCursor().getPosition().d_y;
 	std::cout << "Se pincha en la posicion: x= " << x << " y= " << y << std::endl;
-	float nodoX=x/3+2;
-	float nodoY=y/3+6;
+	float nodoX=y/3+6;
+	float nodoY=x/3+2;
 	std::cout << "El bot ira a la posicion: x= " << nodoX << " y= " << nodoY << std::endl;
-	bot->createPathToPosition(Vec2f(nodoX, nodoY));
+	botJuliyo->createPathToPosition(Vec2f(nodoX, nodoY));
+	botTonire->createPathToPosition(Vec2f(nodoX, nodoY));
+	botRucri->createPathToPosition(Vec2f(nodoX, nodoY));
+
+
 	return true;
 }
