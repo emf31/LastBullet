@@ -128,8 +128,8 @@ void Map::borrarContenido() {
 }
 bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 {
-	std::cout << "entro a metodo is path obstructed" << std::endl;
-	int altura = 0;
+
+	int altura = 1;
 	Vec2f aumento = posFinal - posIni;
 	//****************************RayCast central***************************************
 	btVector3 start = btVector3(posIni.x, altura, posIni.y);
@@ -155,16 +155,14 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 		if (ent != EntityManager::i().getEntity(PLAYER))
 		{
 			//ha colisionado con una entity que no es el player
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
-			std::cout << "OOOOOOOOOOOOJOOOOOOOOOOOOOOOOOOOOOOOOO EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
+			std::cout << " EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
 			return true;
 		}
 	}
 	//**********************************************************************************
 
 
-
+	/*
 	//****************************RayCast Izquierda***************************************
 	Vec2f rayCastIzquierdaIni = posIni;
 	rayCastIzquierdaIni.x -= aumento.x;
@@ -241,7 +239,7 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 	}
 
 	//**********************************************************************************
-
+	*/
 	return false;
 
 	
@@ -312,27 +310,40 @@ Vec3<float> Map::searchSpawnPoint()
 	}
 }
 
-void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode>& nodosCercanos)
+void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot)
 {
 	
 	std::vector<int> celdasVecinas;
 	int indCelda = cellSpace->PositionToIndex(pos);
 	std::cout << "ESTOY EN LA CELDA NUMERO: " << indCelda << std::endl;
-	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos);
+	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos, pos);
 	
 	if (nodosCercanos.size() == 0) {
-		cellSpace->CalculaNodosEnCeldasVecinas(indCelda, nodosCercanos, celdasVecinas);
+		cellSpace->CalculaNodosEnCeldasVecinas(indCelda, nodosCercanos, celdasVecinas, pos);
 	}
 	if(nodosCercanos.size() == 0) {
 		//nos guardamos en celdasVecinas las celdas visitadas para luego calcular las celdas vecina de cada una de las visitadas, es decir,
 		//la primera vez visitamos las 8 vecinas de indCelda, pero si no encontramos ningun nodo, la segunda vez tendriamos que visitar las
 		//8 vecinas de cada una de las celdas que visitamos antes, para ello recorremos la lista
-		for (int i = 0; i < celdasVecinas.size(); i++) {
+		int tam = celdasVecinas.size();
+		for (int i = 0; i < tam; i++) {
 			
-		
-			cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[i], nodosCercanos, celdasVecinas);
+			
+			cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[i], nodosCercanos, celdasVecinas,pos);
 			
 		}
+		if (nodosCercanos.size() == 0) {
+			int tam2 = celdasVecinas.size();
+			int inicio = tam;
+			for (inicio; inicio < tam2; inicio++) {
+
+				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
+				cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[inicio], nodosCercanos, celdasVecinas, pos);
+
+			}
+		}
+
+		
 		
 	}
 

@@ -36,7 +36,7 @@ public:
 
 	std::vector<Vec3<float>> getSpawnPoints() { return map.getSpawnPoints(); };
 
-	void CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode>& nodosCercanos);
+	void CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot);
 
 
 	
