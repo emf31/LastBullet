@@ -80,9 +80,9 @@ void Player::inicializar()
 	
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(pistola);
-	pistola->setEquipada(true);
-	tienePistola = true;
+	listaWeapons->insertar(rocket);
+	rocket->setEquipada(true);
+	tieneRocketLauncher = true;
 
 
 }

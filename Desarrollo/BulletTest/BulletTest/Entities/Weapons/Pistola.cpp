@@ -48,8 +48,6 @@ void Pistola::update(Time elapsedTime)
 					disparos = capacidadAmmo - disparosRestantes;
 					disparosRestantes = 0;
 				}
-
-
 			}
 
 		}

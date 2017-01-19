@@ -13,6 +13,9 @@
 RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(125), m_rotation(rotation), radioExplosion(30)
 {
+
+	m_lifetime = seconds(5);
+
 }
 
 
@@ -42,6 +45,13 @@ void RocketBullet::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+
+	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
+
+		//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
+		Message msg1(this, "BORRATE", NULL);
+		MessageHandler::i().sendMessage(msg1);
+	}
 }
 
 void RocketBullet::handleInput()
@@ -73,9 +83,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 	float damage = 0;
 
-	if (message.mensaje == "COLLISION") {
-
-		if (estado == DISPONIBLE) {
+	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
 			std::list<Entity*>characters = EntityManager::i().getCharacters();
 			///Explosion
@@ -125,10 +133,9 @@ void RocketBullet::handleMessage(const Message & message)
 			GraphicEngine::i().removeNode(m_nodo);
 
 			EntityManager::i().removeEntity(this);
-		}
-
-
 	}
+
+
 
 }
 
