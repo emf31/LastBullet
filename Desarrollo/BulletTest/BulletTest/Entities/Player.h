@@ -67,7 +67,16 @@ public:
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
-	int getAmmoTotal() { return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes(); }
+	int getAmmoTotal() { 
+
+		if (listaWeapons->valorActual()->getEstadoWeapon() == CARGADA) {
+			return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes();
+		}
+		else {
+			return -1;
+		}
+	}
+
 
 
 	btPairCachingGhostObject* getGhostObject() {

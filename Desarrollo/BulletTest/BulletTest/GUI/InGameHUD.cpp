@@ -89,8 +89,15 @@ void InGameHUD::updateLabelVida() {
  void InGameHUD::updateLabelMunicionTotal() {
 	std::ostringstream oss;
 	CEGUI::String str;
-	oss << p->getAmmoTotal();
-	LabelMunicionTotal->setText(oss.str());
+	int ammoTotal = p->getAmmoTotal();
+	if (ammoTotal == -1) {
+		LabelMunicionTotal->setText("RECARGANDO");
+	}
+	else {
+		oss << p->getAmmoTotal();
+		LabelMunicionTotal->setText(oss.str());
+	}
+
  }
 
  void InGameHUD::setTablaVisible(bool visible) {

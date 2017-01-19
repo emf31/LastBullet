@@ -31,24 +31,18 @@ void RocketLauncher::update(Time elapsedTime)
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
-				if (relojrecarga.getElapsedTime() < recarga) {
-					printf("recargando\n");
-				}
-				else {
+				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
 					disparos = 0;
 					numCargadores--;
 				}
+
 			}
 			else if (disparosRestantes>0) {
-				if (relojrecarga.getElapsedTime() < recarga) {
-					printf("recargando\n");
-				}
-				else {
+				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
 					disparos = capacidadAmmo - disparosRestantes;
 					disparosRestantes = 0;
-
 				}
 
 			}

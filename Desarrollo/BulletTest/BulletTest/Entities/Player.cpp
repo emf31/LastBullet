@@ -369,7 +369,6 @@ void Player::DownWeapon()
 }
 
 void Player::reload() {
-	printf("RECARGANDO\n");
 	listaWeapons->valorActual()->recargar();
 }
 
