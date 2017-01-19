@@ -7,7 +7,9 @@ using namespace std;
 #include "Camera.h"
 #include "TModel.h"
 
-#include "GUI.h"
+#include <GUI.h>
+
+#include "Billboard.h"
 
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
@@ -18,6 +20,9 @@ int main() {
 	}
 	SceneManager *sm = engine.getSceneManager();
 	
+	Shader billboardShader("assets/billboard_shader.vs", "assets/model_loading.frag");
+	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
+	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));
 
 	TNode* n = sm->addMesh(sm->getMesh("assets/contenedor.obj"));
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
@@ -30,6 +35,10 @@ int main() {
 	TNode* w = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 	w->setPosition(Vec3<float>(10.f, -1.75f, 0.0f));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+
+	
+	
+	//Billboard billboard(billNode);
 
 	/*TNode* bike = sm->addMesh(sm->getMesh("assets/bike.FBX"));
 	bike->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));

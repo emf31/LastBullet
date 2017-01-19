@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{-0.0609375,78},{-2.32831e-010,0},{0.939062,78},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+        <Window type="AlfiskoSkin/FrameWindow" name="FrameWindow" >
+            <Property name="ID" value="10" />
+            <Property name="Area" value="{{0.0539063,891},{0.00277778,118},{0.28125,891},{0.780556,118}}" />
+            <Property name="Text" value="Debug Menu" />
+            <Property name="Alpha" value="0" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="ID" value="99" />
+                <Window type="AlfiskoSkin/Button" name="Button" >
+                    <Property name="ID" value="100" />
+                    <Property name="Area" value="{{0,-1},{0,-2},{0,19},{0,19}}" />
+                    <Property name="Alpha" value="0" />
+                    <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                </Window>
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0.0142146,0},{0.0352247,0},{0.0142146,239},{0.0352247,33}}" />
+                <Property name="Text" value="Network Debug Info" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button2" >
+                <Property name="ID" value="12" />
+                <Property name="Area" value="{{0.0135039,0},{0.133283,0},{0.0135039,239},{0.133283,33}}" />
+                <Property name="Text" value="Debug Shapes" />
+                <Property name="TooltipText" value="Activa las debug shapes" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button3" >
+                <Property name="ID" value="13" />
+                <Property name="Area" value="{{0.0888415,0},{0.228484,0},{0.0888415,239},{0.228484,32}}" />
+                <Property name="Text" value="Log" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label" >
+            <Property name="Area" value="{{0.00234375,1067},{0.0430556,29},{0.14375,1067},{0.0902778,29}}" />
+            <Property name="Text" value="F2 - Debug menu" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label2" >
+            <Property name="Area" value="{{0.835938,0},{0.0277778,0},{0.876562,128},{0.0277778,32}}" />
+            <Property name="Text" value="F1 - Console Log" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="LogWindow" >
+            <Property name="ID" value="1" />
+            <Property name="Area" value="{{0.0429688,0},{0.541667,0},{0.449219,0},{0.9375,0}}" />
+            <Property name="Text" value="Log" />
+            <Property name="Visible" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <Window type="AlfiskoSkin/MultiLineEditbox" name="MultiLineEditbox" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,0},{0,-5.31226e-007},{0.999604,0},{0.822752,-5.31226e-007}}" />
+                <Property name="Text" >
+</Property>
+                <Property name="ReadOnly" value="true" />
+                <Property name="ForceVertScrollbar" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/Editbox" name="Editbox" >
+                <Property name="Area" value="{{0,0},{0.842476,0},{0.497649,256},{0.851476,32}}" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Fpsmeter" >
+            <Property name="Area" value="{{0,42},{0,50},{0,90},{0,82}}" />
+            <Property name="Text" value="FPS: " />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label3" >
+            <Property name="Area" value="{{0,105},{0,50},{0,186},{0,82}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label4" >
+            <Property name="Area" value="{{0,41},{0,139},{0,91},{0,171}}" />
+            <Property name="Text" value="Faces: " />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label5" >
+            <Property name="Area" value="{{0,43},{0,92},{0,90},{0,124}}" />
+            <Property name="Text" value="Verts: " />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label6" >
+            <Property name="Area" value="{{0,105},{0,92},{0,186},{0,124}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label7" >
+            <Property name="Area" value="{{0,106},{0,139},{0,186},{0,171}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+        </Window>
+    </Window>
+</GUILayout>

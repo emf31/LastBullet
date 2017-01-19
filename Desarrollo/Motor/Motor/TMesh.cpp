@@ -1,7 +1,5 @@
 #include "TMesh.h"
 
-
-
 TMesh::TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures, Shader *shader) {
 	this->vertices = vertices;
 	this->indices = indices;

@@ -93,6 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,8 +156,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Billboard.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
-    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="GUI\DebugMenuGUI.cpp" />
+    <ClCompile Include="GUI\GUI.cpp" />
+    <ClCompile Include="GUI\GUIManager.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -174,9 +178,12 @@
     <ClCompile Include="TTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Billboard.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EngineDevice.h" />
-    <ClInclude Include="GUI.h" />
+    <ClInclude Include="GUI\DebugMenuGUI.h" />
+    <ClInclude Include="GUI\GUI.h" />
+    <ClInclude Include="GUI\GUIManager.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />

@@ -41,6 +41,9 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	glViewport(0, 0, screenWidth, screenHeight);
 
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_CULL_FACE);
 	
 	glfwSwapInterval(-1); //vSync adaptativa!
 

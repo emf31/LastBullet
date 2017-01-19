@@ -1,7 +1,10 @@
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\vc140.pdb
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\vc140.idb
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\billboard.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\enginedevice.obj
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\debugmenugui.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\gui.obj
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\guimanager.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\input.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\main.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\resourcemanager.obj
@@ -17,14 +20,12 @@ d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\tmodel.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\tnode.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\tspotlight.obj
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\ttransform.obj
+d:\ua\cuarto\abp\tba\desarrollo\motor\debug\motor.ilk
+d:\ua\cuarto\abp\tba\desarrollo\motor\debug\motor.exe
 d:\ua\cuarto\abp\tba\desarrollo\motor\debug\motor.pdb
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\cl.command.1.tlog
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\cl.read.1.tlog
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\cl.write.1.tlog
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link-cvtres.read.1.tlog
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link-cvtres.write.1.tlog
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link-rc.read.1.tlog
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link-rc.write.1.tlog
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link.command.1.tlog
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link.read.1.tlog
 d:\ua\cuarto\abp\tba\desarrollo\motor\motor\debug\motor.tlog\link.write.1.tlog

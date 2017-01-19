@@ -40,9 +40,14 @@ TNode * TNode::getParentNode() {
 void TNode::beginDraw(glm::mat4 projection, glm::mat4 view) {
 	if (m_model != nullptr) {
 		glm::mat4 model;
-		model = glm::translate(model, position);
-		model = glm::scale(model, scale);
 
+		/*glm::vec3 cameraRight(view[0][0], view[1][0], view[2][0]);
+		glm::vec3 cameraUp(view[0][1], view[1][1], view[2][1]);*/
+
+		model = glm::translate(model, position);
+		//model = glm::rotate(model,rotation.x, glm::vec3(1,0,0));
+		model = glm::scale(model, scale);
+		
 		m_model->beginDraw(projection, view, model);
 		m_model->endDraw();
 	} //ELSE el modelo es null ¿cargar un modelo de "ERROR"?
@@ -64,7 +69,7 @@ void TNode::setPosition(Vec3<float> position) {
 	this->position = glm::vec3(position.getX(), position.getY(), position.getZ());
 }
 
-void TNode::rotate(Vec3<float> rotation) {
-
-}
+/*void TNode::rotate(Vec3<float> rotation) {
+	//this->rotation = glm::rotate();
+}*/
 

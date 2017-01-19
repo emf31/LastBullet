@@ -42,6 +42,7 @@ public:
 	void beginDraw();
 	void endDraw();
 
+
 private:
 	/*  Render data  */
 	Shader *shader;

@@ -4,6 +4,7 @@ void Input::key_callbackImpl(GLFWwindow * window, int key, int scancode, int act
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
+
 	if (action == GLFW_PRESS)
 		keys[key] = true;
 	else if (action == GLFW_RELEASE)

@@ -8,7 +8,7 @@ SceneManager::SceneManager() {
 
 	//gui.loadLayout("SimpleDebug.layout");
 	//gui.setFont("DejaVuSans-10");
-	vec4f perc;
+	/*vec4f perc;
 	perc.x = 0.5f;
 	perc.y = 0.5f;
 	perc.z = 0.1f;
@@ -19,7 +19,7 @@ SceneManager::SceneManager() {
 	perx.x = 0.0f;
 	perx.y = 0.0f;
 	perx.z = 0.0f;
-	perx.w = 0.0f;
+	perx.w = 0.0f;*/
 
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
 }

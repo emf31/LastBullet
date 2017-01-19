@@ -24,8 +24,11 @@ public:
 
 	void setScale(Vec3<float> scale);
 	void setPosition(Vec3<float> position);
-	void rotate(Vec3<float> rotation);
+	void setRotation(Vec3<float> rotation);
 	
+	Vec3<float> getPosition() { 
+		return Vec3<float>(position.x, position.y, position.z);
+	}
 	//SceneManager *sceneManager_ptr;
 private:
 	TModel *m_model;
@@ -34,6 +37,7 @@ private:
 	
 	glm::vec3 scale;
 	glm::vec3 position;
+	glm::vec3 rotation;
 	
 };
 

@@ -29,6 +29,6 @@ public:
 private:
 	ResourceManager *rm;
 	TNode scene;
-	Motor::GUI gui;
+	//Motor::GUI gui;
 
 };
