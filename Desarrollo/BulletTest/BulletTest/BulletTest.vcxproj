@@ -216,6 +216,7 @@
     <ClInclude Include="Handlers\MessageHandler.h" />
     <ClInclude Include="Handlers\Partida.h" />
     <ClInclude Include="IA\MachineState.h" />
+    <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />

@@ -10,6 +10,7 @@ Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity
 
 Enemy_Bot::~Enemy_Bot()
 {
+
 }
 
 void Enemy_Bot::inicializar()
@@ -31,11 +32,14 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	m_renderState.updatePositions(Vec3<float>(
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - p_controller->getStepHeight() / 2,
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
 
-	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
+	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+
+
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 
 	
 }
@@ -62,7 +66,7 @@ void Enemy_Bot::cargarContenido()
 	animation.addAnimation("Idle", 220, 472);
 	animation.addAnimation("AimRunning", 473, 524);
 
-	m_animState = quieto;
+	m_animState = andando;
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -77,13 +81,16 @@ void Enemy_Bot::cargarContenido()
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
-	p_controller->m_acceleration_walk = 6.3f;
-	p_controller->m_deceleration_walk = 8.5f;
-	p_controller->m_maxSpeed_walk = 6.f;
+	p_controller->m_acceleration_walk = 4.3f;
+	p_controller->m_deceleration_walk = 6.5f;
+	p_controller->m_maxSpeed_walk = 2.f;
 }
 
 void Enemy_Bot::borrarContenido()
 {
+	delete m_PathFollow;
+	delete m_PathPlanner;
+
 	PhysicsEngine::i().removeKinematic(p_controller);
 
 	GraphicEngine::i().removeNode(m_nodo);
@@ -108,12 +115,16 @@ void Enemy_Bot::setPosition(Vec3<float> pos)
 
 void Enemy_Bot::updateMovement()
 {
-	if (siguiendo) {
-		Vec2f direccion = m_PathFollow->Calculate();
-		btVector3 vel = btVector3(direccion.x, 0, direccion.y);
+	Vec2f direccion = m_PathFollow->Calculate();
 
-		p_controller->setWalkDirection(vel);
+	if (!direccion.Zero()) {
+		m_vHeading = direccion;
 	}
+	
+
+	btVector3 vel = btVector3(direccion.x, 0, direccion.y);
+
+	p_controller->setWalkDirection(vel);
 	
 }
 
@@ -121,12 +132,14 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 	siguiendo = true;
 
-	//Limpiamos el camino actual
-	m_camino.clear();
+	//Camino actual a seguir
+	std::list<Vec2f> m_camino;
 
 	m_PathPlanner->CreatePathToPosition(vec, m_camino);
 
 	m_PathFollow->SetPath(m_camino);
+
+	m_PathFollow->FollowOn();
 
 }
 

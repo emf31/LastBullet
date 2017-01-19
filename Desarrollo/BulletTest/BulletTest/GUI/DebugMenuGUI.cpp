@@ -27,7 +27,7 @@ void DebugMenuGUI::inicializar() {
 	botJuliyo->cargarContenido();
 	botJuliyo->setPosition(Map::i().searchSpawnPoint());
 
-	botTonire = new Enemy_Bot("BOTTONIRE");
+	/*botTonire = new Enemy_Bot("BOTTONIRE");
 	botTonire->inicializar();
 	botTonire->cargarContenido();
 	botTonire->setPosition(Map::i().searchSpawnPoint());
@@ -35,7 +35,7 @@ void DebugMenuGUI::inicializar() {
 	botRucri = new Enemy_Bot("BOTRUCRI");
 	botRucri->inicializar();
 	botRucri->cargarContenido();
-	botRucri->setPosition(Map::i().searchSpawnPoint());
+	botRucri->setPosition(Map::i().searchSpawnPoint());*/
 
 }
 
@@ -61,8 +61,8 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 	float nodoY=x/3+2;
 	std::cout << "El bot ira a la posicion: x= " << nodoX << " y= " << nodoY << std::endl;
 	botJuliyo->createPathToPosition(Vec2f(nodoX, nodoY));
-	botTonire->createPathToPosition(Vec2f(nodoX, nodoY));
-	botRucri->createPathToPosition(Vec2f(nodoX, nodoY));
+	/*botTonire->createPathToPosition(Vec2f(nodoX, nodoY));
+	botRucri->createPathToPosition(Vec2f(nodoX, nodoY));*/
 
 
 	return true;

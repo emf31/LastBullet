@@ -16,8 +16,8 @@ private:
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
 	Enemy_Bot* botJuliyo;
-	Enemy_Bot* botTonire;
-	Enemy_Bot* botRucri;
+	//Enemy_Bot* botTonire;
+	//Enemy_Bot* botRucri;
 
 	
 };

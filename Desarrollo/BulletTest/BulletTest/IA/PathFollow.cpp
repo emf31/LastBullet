@@ -1,39 +1,29 @@
 #include "PathFollow.h"
 #include <Enemy_Bot.h>
 #include <Map.h>
-PathFollow::PathFollow(Enemy_Bot * bot)
+#include <Util.h>
+
+PathFollow::PathFollow(Enemy_Bot * bot) : m_dWaypointSeekDistSq(WaypointSeekDist*WaypointSeekDist)
 {
 	m_owner = bot;
+
+	//creamos un Path
+	m_pPath = new Path();
+}
+
+PathFollow::~PathFollow()
+{
+	delete m_pPath;
 }
 
 Vec2f PathFollow::Calculate()
 {
 
-	//Si se cumple hemos llegado al objetivo
-	if (m_owner->isAtPosition(m_vTarget) && !m_currentPath->empty()) {
-
-		//Marcamos como objetivo actual el siguiente nodo del camino
-		m_vTarget = m_currentPath->front();
-
-		//Como es nuestro objetivo lo eliminamos ya de la lista
-		m_currentPath->pop_front();
-
-		//Es el ultimo nodo
-		if (m_currentPath->size() == 0) {
-			ArriveOn();
-		}
-	}
-
-
 	Vec2f direction;
 
-	if (m_cBehaviour == seek) {
-		direction = Seek(m_vTarget);
+	if (m_cBehaviour == follow_path) {
+		direction = FollowPath();
 	}
-	else if (m_cBehaviour == arrive) {
-		direction = Arrive(m_vTarget);
-	}
-
 
 	return direction;
 }
@@ -54,10 +44,31 @@ Vec2f PathFollow::Arrive(const Vec2f & target)
 	double dist = ToTarget.Magnitude();
 
 
-	if (dist > 3)
+	if (dist > 5)
 	{
 		return ToTarget.Normalize();
 	}
 
 	return Vec2f(0, 0);
+}
+
+Vec2f PathFollow::FollowPath()
+{
+	//move to next target if close enough to current target (working in
+	//distance squared space)
+	if (m_owner->isAtPosition(m_pPath->CurrentWaypoint()))
+	{
+		m_pPath->SetNextWaypoint();
+	}
+
+	if (!m_pPath->Finished())
+	{
+		return Seek(m_pPath->CurrentWaypoint());
+	}
+
+	else
+	{
+		return Arrive(m_pPath->CurrentWaypoint());
+	}
+
 }

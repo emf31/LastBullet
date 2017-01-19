@@ -78,10 +78,6 @@ private:
 	//a normalized vector pointing in the direction the entity is heading. 
 	Vec2f    m_vHeading;
 
-
-	//Camino actual a seguir
-	std::list<Vec2f> m_camino;
-
 	//Current target
 	Vec2f m_Target;
 
