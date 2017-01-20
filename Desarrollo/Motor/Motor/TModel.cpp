@@ -10,11 +10,14 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 	} else {
 		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	}*/
+
+	// Si no se especifica un shader se carga uno por defecto
 	if (shaderPath == NULL) {
 		this->shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	} else {
 		this->shader = shaderPath;
 	}
+	// Carmamos el modelo
 	this->loadModel(path);
 }
 
@@ -22,93 +25,92 @@ TModel::~TModel() {
 }
 
 void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model) {
+	// Activamos el shader que tenemos guardado
 	shader->Use();
 
+	// Le pasamos las matrices
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
+	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)
 		this->meshes[i].beginDraw();
 }
 
-void TModel::loadModel(string path) {
-	// Read file via ASSIMP
+void TModel::loadModel(const string& path) {
+	// Leemos con ASSIMP
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
-	// Check for errors
+	// Miramos si hay algún error
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // Si no es 0
 	{
 		cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
 		return;
 	}
-	// Retrieve the directory path of the filepath
+	// Cogemos el directorio del recurso
 	this->directory = path.substr(0, path.find_last_of('/'));
 
-	// Process ASSIMP's root node recursively
+	// Recorremos el nodo padre de ASSIMP recursivamente
 	this->processNode(scene->mRootNode, scene);
 }
 
 void TModel::processNode(aiNode * node, const aiScene * scene) {
-	// Process each mesh located at the current node
+	// Procesamos cada malla
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
-		// The node object only contains indices to index the actual objects in the scene. 
-		// The scene contains all the data, node is just to keep stuff organized (like relations between nodes).
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		//Guardamos la malla en nuestro array de mallas
 		this->meshes.push_back(this->processMesh(mesh, scene));
 	}
-	// After we've processed all of the meshes (if any) we then recursively process each of the children nodes
+
+	// Procesamos los hijos de este nodo (recursivamente)
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
 		this->processNode(node->mChildren[i], scene);
 	}
 }
 
 TMesh TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
-	// Data to fill
+	// Datos básicos de las mallas (vértices, índices y texturas)
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
 	vector<Texture> textures;
 
-	// Walk through each of the mesh's vertices
+	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
 		Vertex vertex;
-		glm::vec3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
-						  // Positions
+		glm::vec3 vector;
+		// Posiciones
 		vector.x = mesh->mVertices[i].x;
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
 		vertex.Position = vector;
-		// Normals
+		// Normales
 		vector.x = mesh->mNormals[i].x;
 		vector.y = mesh->mNormals[i].y;
 		vector.z = mesh->mNormals[i].z;
 		vertex.Normal = vector;
-		// Texture Coordinates
-		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
+		// Coordenadas de textura
+		if (mesh->mTextureCoords[0]) // Tiene coordenadas de texturas?
 		{
 			glm::vec2 vec;
-			// A vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't 
-			// use models where a vertex can have multiple texture coordinates so we always take the first set (0).
 			vec.x = mesh->mTextureCoords[0][i].x;
 			vec.y = mesh->mTextureCoords[0][i].y;
 			vertex.TexCoords = vec;
 		} else
-			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+			vertex.TexCoords = glm::vec2(0.0f, 0.0f); //Si no las tiene le ponemos unas por defecto
 		vertices.push_back(vertex);
 	}
-	// Now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
+	// Recorremos todas las caras de la malla (triángulos) y nos guardamos sus vertex index
 	for (GLuint i = 0; i < mesh->mNumFaces; i++) {
 		aiFace face = mesh->mFaces[i];
-		// Retrieve all indices of the face and store them in the indices vector
+		// Nos guardamos todos los índices
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 			indices.push_back(face.mIndices[j]);
 	}
-	// Process materials
+	// Materiales!
 	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		// We assume a convention for sampler names in the shaders. Each diffuse texture should be named
-		// as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER. 
-		// Same applies to other texture as the following list summarizes:
+
 		// Diffuse: texture_diffuseN
 		// Specular: texture_specularN
 		// Normal: texture_normalN
@@ -124,7 +126,7 @@ TMesh TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 	}
 
-	// Return a mesh object created from the extracted mesh data
+	// Return del mesh preparado
 	return TMesh(vertices, indices, textures, shader);
 }
 
@@ -133,7 +135,8 @@ vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType typ
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
 		aiString str;
 		mat->GetTexture(type, i, &str);
-		// Check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
+		// Miramos si se ha cargado la textura con anterioridad en el ResourceManager
+		// Si no se ha cargado, el RM la carga. Si ya se había cargado, el RM nos da un puntero a ella :)
 		ResourceManager rm = ResourceManager::i();
 		Texture text = rm.getTexture(str.C_Str(), typeName, this->directory);
 		textures.push_back(text);

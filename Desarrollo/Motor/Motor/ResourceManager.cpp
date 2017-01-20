@@ -7,15 +7,6 @@ ResourceManager::ResourceManager() {
 
 
 ResourceManager::~ResourceManager() {
-	/*for (auto i = models.begin(); i != models.end(); ++i) { 
-		delete i->second;
-		models.erase(i->first);
-	}
-
-	for (auto i = shaders.begin(); i != shaders.end(); ++i) {
-		delete i->second;
-		shaders.erase(i->first);
-	}*/
 }
 
 TModel* ResourceManager::getMesh(const std::string& path,Shader* shader) {
@@ -40,8 +31,8 @@ TModel* ResourceManager::getMesh(const std::string& path,Shader* shader) {
 
 
 
-/*Si se pasan los dos paths, primero se busca por el vertexShader y lo devuelve si está en el mapa. Si no está, se crea
-Si solo se pasa el vertex simplemente se busca en el mapa y se devuelve si está*/
+/* Si se pasan los dos paths, primero se busca por el vertexShader y lo devuelve si está en el mapa. Si no está, se crea
+Si solo se pasa el vertex simplemente se busca en el mapa y se devuelve si está */
 Shader* ResourceManager::getShader(const std::string& vertexShader, std::string fragmentShader) {
 	if (vertexShader != "" && fragmentShader != "") {
 		if (shaders.find(vertexShader) != shaders.end()) {
@@ -60,11 +51,14 @@ Shader* ResourceManager::getShader(const std::string& vertexShader, std::string 
 	return NULL;
 }
 
+// Carga una textura de un fichero
 Texture ResourceManager::getTexture(const std::string& path, const std::string& type, const std::string& directory) {
 	if (path != "") {
 		if (textures.find(path) != textures.end()) {
+			// Si la textura ya está en nuestro mapa la devolvemos.
 			return textures[path];
 		} else {
+			// Si no lop está, primero la cargamos :))
 			Texture texture;
 			texture.id = TModel::TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
 			texture.type = type;

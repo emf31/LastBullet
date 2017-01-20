@@ -35,18 +35,13 @@ int main() {
 	TNode* w = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 	w->setPosition(Vec3<float>(10.f, -1.75f, 0.0f));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-
-	
 	
 	//Billboard billboard(billNode);
 
-	/*TNode* bike = sm->addMesh(sm->getMesh("assets/bike.FBX"));
-	bike->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
-	bike->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));*/
-
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
-		//FPS
+
+		// FPS
 		int fps = engine.getFPS();
 		std::ostringstream title;
 		title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;

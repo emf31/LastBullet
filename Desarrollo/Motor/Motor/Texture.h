@@ -13,6 +13,6 @@ public:
 	string type;
 	aiString path;
 
-	static GLint TextureFromFile();
+	//static GLint TextureFromFile();
 };
 

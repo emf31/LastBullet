@@ -44,14 +44,15 @@ TNode* SceneManager::addMesh(TModel * model) {
 }
 
 void SceneManager::draw(GLFWwindow* window) {
-	//Clear
+	// Clear
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//Update matrices
-	projection = glm::perspective(camera_ptr->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f);
+	// Update matrices
+	projection = glm::perspective(camera_ptr->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
 	view = camera_ptr->GetViewMatrix();
-	//Desencadena el dibujado de la escena
+
+	// Desencadena el dibujado de la escena
 	scene.beginDraw(projection, view);
 	//gui.draw();
 	glfwSwapBuffers(window);

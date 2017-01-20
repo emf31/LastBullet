@@ -69,7 +69,7 @@ void TNode::setPosition(Vec3<float> position) {
 	this->position = glm::vec3(position.getX(), position.getY(), position.getZ());
 }
 
-/*void TNode::rotate(Vec3<float> rotation) {
-	//this->rotation = glm::rotate();
-}*/
+void TNode::setRotation(Vec3<float> rotation) {
+	this->rotation = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
+}
 

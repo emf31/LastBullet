@@ -5,7 +5,7 @@ TMesh::TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> te
 	this->indices = indices;
 	this->textures = textures;
 	this->shader = shader;
-	// Now that we have all the required data, set the vertex buffers and its attribute pointers.
+
 	this->setupMesh();
 }
 
@@ -15,35 +15,35 @@ TMesh::~TMesh() {
 
 
 void TMesh::beginDraw() {
-	// Bind appropriate textures
+
 	GLuint diffuseNr = 1;
 	GLuint specularNr = 1;
 	for (GLuint i = 0; i < this->textures.size(); i++) {
-		glActiveTexture(GL_TEXTURE0 + i); // Active proper texture unit before binding
-										  // Retrieve texture number (the N in diffuse_textureN)
+		glActiveTexture(GL_TEXTURE0 + i); // Activamos la textura que toca primero
+										  // + i para la que toca ahora diffuseI (siendo I el número de la textura difusa)
 		stringstream ss;
 		string number;
 		string name = this->textures[i].type;
 		if (name == "texture_diffuse")
-			ss << diffuseNr++; // Transfer GLuint to stream
+			ss << diffuseNr++; // GLuit << stream
 		else if (name == "texture_specular")
-			ss << specularNr++; // Transfer GLuint to stream
+			ss << specularNr++; // GLuit << stream
 		number = ss.str();
-		// Now set the sampler to the correct texture unit
+		// Ponemos en el sampler la textura que toca
 		glUniform1i(glGetUniformLocation(shader->Program, (name + number).c_str()), i);
-		// And finally bind the texture
+		// Bindeamos la textura
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 	}
 
-	// Also set each mesh's shininess property to a default value (if you want you could extend this to another mesh property and possibly change this value)
+	// Ponemos el brillo a su valor por defecto (se podría cambiar el valor??)
 	glUniform1f(glGetUniformLocation(shader->Program, "material.shininess"), 16.0f);
 
-	// Draw mesh
+	// Dibujamos!
 	glBindVertexArray(this->VAO);
 	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
-	// Always good practice to set everything back to defaults once configured.
+	// Dejamos todo como estaba y activamos la primera textura
 	for (GLuint i = 0; i < this->textures.size(); i++) {
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -56,30 +56,27 @@ void TMesh::endDraw() {
 }
 
 void TMesh::setupMesh() {
-	// Create buffers/arrays
-	glGenVertexArrays(1, &this->VAO);
-	glGenBuffers(1, &this->VBO);
-	glGenBuffers(1, &this->EBO);
+	// Creamos los buffers y arrays
+	glGenVertexArrays(1, &this->VAO); // Un VAO
+	glGenBuffers(1, &this->VBO); // Un VBO
+	glGenBuffers(1, &this->EBO); // Un EBO
 
 	glBindVertexArray(this->VAO);
-	// Load data into vertex buffers
+	// Cargamos datos en el VAO
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	// A great thing about structs is that their memory layout is sequential for all its items.
-	// The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which
-	// again translates to 3/2 floats which translates to a byte array.
+
 	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
 
-	// Set the vertex attribute pointers
-	// Vertex Positions
+	// Vértices (0)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
-	// Vertex Normals
+	// Normales (1)
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Normal));
-	// Vertex Texture Coords
+	// Coordenadas de texturas (2)
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoords));
 
