@@ -44,4 +44,5 @@ private:
 	Player* player;
 
 	Enemy_Bot *e;
+	Enemy_Bot *e2;
 };

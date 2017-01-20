@@ -130,7 +130,6 @@ void Enemy_Bot::updateMovement()
 
 void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
-	siguiendo = true;
 
 	//Camino actual a seguir
 	std::list<Vec2f> m_camino;
@@ -141,6 +140,19 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 	m_PathFollow->FollowOn();
 
+}
+
+void Enemy_Bot::createPathToItem(ExtraInfo tipo)
+{
+
+	//Camino actual a seguir
+	std::list<Vec2f> m_camino;
+
+	m_PathPlanner->CreatePathToItem(tipo, m_camino);
+
+	m_PathFollow->SetPath(m_camino);
+
+	m_PathFollow->FollowOn();
 }
 
 void Enemy_Bot::updateAnimation()

@@ -188,6 +188,9 @@
     <ClCompile Include="IA\PathFollow.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
+    <ClCompile Include="Mapa\Dijkstra.cpp">
+      <Filter>Source Code\Mapa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -484,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="IA\Path.h">
       <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapa\Dijkstra.h">
+      <Filter>Headers\Mapa</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

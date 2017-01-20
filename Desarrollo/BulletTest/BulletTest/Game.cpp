@@ -34,6 +34,7 @@
 
 
 
+
 const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -162,21 +163,22 @@ void Game::inicializar()
 
 
 
-	/*
-	Enemy *e2 = new Enemy("Messi");
+	
+	e2 = new Enemy_Bot("HansTopo");
 	e2->inicializar();
 	e2->cargarContenido();
-	e2->setPosition(Vec3<float>(74.06, 17.6, -66.41));*/
-
-	/*Enemy *e = new Enemy("Son Goku");
+	e2->setPosition(Map::i().searchSpawnPoint());
+	/*
+	Enemy *e = new Enemy("Son Goku");
 	e->inicializar();
 	e->cargarContenido();
-	e->setPosition();
+	e->setPosition(Map::i().searchSpawnPoint());
 
-	Enemy *e = new Enemy("Bruce Lee");
-	e->inicializar();
-	e->cargarContenido();
-	e->setPosition();*/
+	Enemy *e1 = new Enemy("Bruce Lee");
+	e1->inicializar();
+	e1->cargarContenido();
+	e1->setPosition(Map::i().searchSpawnPoint());
+	*/
 
 	int a=1;
 	do {
@@ -263,7 +265,27 @@ bool Game::processEvents()
 
 		GraphicEngine::i().toggleCamera();
 
-	} else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+	}else if (MastEventReceiver::i().keyPressed(KEY_KEY_5)) {
+
+		e2->createPathToItem(T_VIDA);
+
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_KEY_6)) {
+
+		e2->createPathToItem(T_PISTOLA);
+
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_KEY_7)) {
+
+		e2->createPathToItem(T_ROCKET);
+
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_KEY_8)) {
+
+		e2->createPathToItem(T_ASALTO);
+
+	}
+	else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
 

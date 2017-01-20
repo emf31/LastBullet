@@ -222,6 +222,7 @@
     <ClInclude Include="IA\StatesIA\StateIA.h" />
     <ClInclude Include="Mapa\BoundingBox.h" />
     <ClInclude Include="Mapa\Celda.h" />
+    <ClInclude Include="Mapa\Dijkstra.h" />
     <ClInclude Include="Mapa\Map.h" />
     <ClInclude Include="Mapa\PathPlanner.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
@@ -299,6 +300,7 @@
     <ClCompile Include="IA\PathFollow.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />
     <ClCompile Include="Mapa\Celda.cpp" />
+    <ClCompile Include="Mapa\Dijkstra.cpp" />
     <ClCompile Include="Mapa\Map.cpp" />
     <ClCompile Include="Mapa\PathPlanner.cpp" />
     <ClCompile Include="MastEventReceiver.cpp" />

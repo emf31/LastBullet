@@ -2,6 +2,7 @@
 #include <Map.h>
 #include <Util.h>
 #include <AStarSearch.h>
+#include <Dijkstra.h>
 
 
 PathPlanner::PathPlanner(Enemy_Bot* bot) : m_grafo(Map::i().getGrafo())
@@ -85,10 +86,23 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 	}
 }
 
-bool PathPlanner::CreatePathToItem()
+bool PathPlanner::CreatePathToItem(ExtraInfo tipo, std::list<Vec2f>& camino)
 {
-	//TODO
-	return false;
+	std::list<int> listaNodos;
+	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+
+
+	if (NodoMasCercanoAlBot == -1) {
+		return false;
+	}
+
+	Dijkstra dij(m_grafo, NodoMasCercanoAlBot, tipo);
+	listaNodos = dij.getPathToTarget();
+	listaNodos.push_front(NodoMasCercanoAlBot);
+
+	Map::i().ConvertirNodosAPosiciones(listaNodos, camino);
+	SuavizarCamino(camino);
+	return true;
 }
 
 

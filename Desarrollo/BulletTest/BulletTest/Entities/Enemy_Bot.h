@@ -4,6 +4,7 @@
 #include <Util.h>
 #include <Vec2f.h>
 #include <KinematicCharacterController.h>
+#include <NavGraphNode.h>
 
 class PathPlanner;
 class PathFollow;
@@ -47,6 +48,7 @@ public:
 	void updateMovement();
 
 	void createPathToPosition(Vec2f vec);
+	void createPathToItem(ExtraInfo tipo);
 
 private:
 

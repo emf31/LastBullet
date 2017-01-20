@@ -1,661 +1,661 @@
-19/01/2017 19:29:03 (Std) 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-19/01/2017 19:29:03 (Std) 	+                     Crazy Eddie's GUI System - Event log                    +
-19/01/2017 19:29:03 (Std) 	+                          (http://www.cegui.org.uk/)                         +
-19/01/2017 19:29:03 (Std) 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+20/01/2017 21:08:02 (Std) 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+20/01/2017 21:08:02 (Std) 	+                     Crazy Eddie's GUI System - Event log                    +
+20/01/2017 21:08:02 (Std) 	+                          (http://www.cegui.org.uk/)                         +
+20/01/2017 21:08:02 (Std) 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-19/01/2017 19:29:03 (Std) 	CEGUI::Logger singleton created. (063C4280)
-19/01/2017 19:29:03 (Std) 	
-19/01/2017 19:29:03 (Std) 	********************************************************************************
-19/01/2017 19:29:03 (Std) 	* Important:                                                                   *
-19/01/2017 19:29:03 (Std) 	*     To get support at the CEGUI forums, you must post _at least_ the section *
-19/01/2017 19:29:03 (Std) 	*     of this log file indicated below.  Failure to do this will result in no  *
-19/01/2017 19:29:03 (Std) 	*     support being given; please do not waste our time.                       *
-19/01/2017 19:29:03 (Std) 	********************************************************************************
-19/01/2017 19:29:03 (Std) 	********************************************************************************
-19/01/2017 19:29:03 (Std) 	* -------- START OF ESSENTIAL SECTION TO BE POSTED ON THE FORUM       -------- *
-19/01/2017 19:29:03 (Std) 	********************************************************************************
-19/01/2017 19:29:03 (Std) 	---- Version: 0.8.6 (Build: Dec  6 2016 Debug Microsoft Windows MSVC++ 14.0 (2015) 32 bit) ----
-19/01/2017 19:29:03 (Std) 	---- Renderer module is: CEGUI::IrrlichtRenderer - Official Irrlicht based 2nd generation renderer module.  RenderTarget support is enabled. ----
-19/01/2017 19:29:03 (Std) 	---- XML Parser module is: CEGUI::ExpatParser - Official expat based parser module for CEGUI ----
-19/01/2017 19:29:03 (Std) 	---- Image Codec module is: IrrlichtImageCodec - Integrated ImageCodec using the Irrlicht engine. ----
-19/01/2017 19:29:03 (Std) 	---- Scripting module is: None ----
-19/01/2017 19:29:03 (Std) 	********************************************************************************
-19/01/2017 19:29:03 (Std) 	* -------- END OF ESSENTIAL SECTION TO BE POSTED ON THE FORUM         -------- *
-19/01/2017 19:29:03 (Std) 	********************************************************************************
-19/01/2017 19:29:03 (Std) 	
-19/01/2017 19:29:03 (Std) 	---- Begining CEGUI System initialisation ----
-19/01/2017 19:29:03 (Std) 	[CEGUI::ImageManager] Singleton created (062C6E98)
-19/01/2017 19:29:03 (Std) 	[CEGUI::ImageManager] Registered Image type: BasicImage
-19/01/2017 19:29:03 (Std) 	CEGUI::FontManager singleton created. (063A5540)
-19/01/2017 19:29:03 (Std) 	CEGUI::WindowFactoryManager singleton created
-19/01/2017 19:29:03 (Std) 	CEGUI::WindowManager singleton created (0CB28C48)
-19/01/2017 19:29:03 (Std) 	CEGUI::SchemeManager singleton created. (063A57F8)
-19/01/2017 19:29:03 (Std) 	CEGUI::GlobalEventSet singleton created. (062F7760)
-19/01/2017 19:29:03 (Std) 	CEGUI::AnimationManager singleton created (00CC2D50)
-19/01/2017 19:29:03 (Std) 	CEGUI::WidgetLookManager singleton created. (063DD2F8)
-19/01/2017 19:29:03 (Std) 	CEGUI::WindowRendererManager singleton created (063DD338)
-19/01/2017 19:29:03 (Std) 	CEGUI::RenderEffectManager singleton created (062F7880)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'DefaultWindow' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'DefaultWindow' windows added. (063C4838)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'DragContainer' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'DragContainer' windows added. (063C49C8)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'ScrolledContainer' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'ScrolledContainer' windows added. (063C4B58)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'ClippedContainer' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'ClippedContainer' windows added. (063CAD60)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/PushButton' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/PushButton' windows added. (063CAE28)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/RadioButton' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/RadioButton' windows added. (063CB3A0)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Combobox' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Combobox' windows added. (063CB2D8)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ComboDropList' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ComboDropList' windows added. (063CA720)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Editbox' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Editbox' windows added. (063CB148)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/FrameWindow' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/FrameWindow' windows added. (063CAC98)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ItemEntry' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ItemEntry' windows added. (063CAEF0)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Listbox' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Listbox' windows added. (063CABD0)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ListHeader' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ListHeader' windows added. (063CA7E8)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ListHeaderSegment' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ListHeaderSegment' windows added. (063CA658)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Menubar' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Menubar' windows added. (063CAFB8)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/PopupMenu' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/PopupMenu' windows added. (063CA8B0)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/MenuItem' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/MenuItem' windows added. (063CA978)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/MultiColumnList' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/MultiColumnList' windows added. (063CB080)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/MultiLineEditbox' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/MultiLineEditbox' windows added. (063CA590)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ProgressBar' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ProgressBar' windows added. (063CAA40)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ScrollablePane' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ScrollablePane' windows added. (063CAB08)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Scrollbar' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Scrollbar' windows added. (063CB210)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Slider' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Slider' windows added. (063CB468)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Spinner' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Spinner' windows added. (063CCE38)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/TabButton' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/TabButton' windows added. (063CD158)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/TabControl' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/TabControl' windows added. (063CCF00)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Thumb' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Thumb' windows added. (063CD3B0)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Titlebar' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Titlebar' windows added. (063CCFC8)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ToggleButton' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ToggleButton' windows added. (063CC988)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Tooltip' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Tooltip' windows added. (063CD090)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/ItemListbox' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/ItemListbox' windows added. (063CD2E8)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/GroupBox' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/GroupBox' windows added. (063CCA50)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'CEGUI/Tree' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'CEGUI/Tree' windows added. (063CCD70)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'LayoutCell' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'LayoutCell' windows added. (063CD220)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'HorizontalLayoutContainer' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'HorizontalLayoutContainer' windows added. (063CCB18)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'VerticalLayoutContainer' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'VerticalLayoutContainer' windows added. (063CC668)
-19/01/2017 19:29:03 (Std) 	Created WindowFactory for 'GridLayoutContainer' windows.
-19/01/2017 19:29:03 (Std) 	WindowFactory for 'GridLayoutContainer' windows added. (063CD478)
-19/01/2017 19:29:03 (Std) 	CEGUI::System singleton created. (0CB2B8C8)
-19/01/2017 19:29:03 (Std) 	---- CEGUI System initialisation completed ----
-19/01/2017 19:29:03 (Std) 	
-19/01/2017 19:29:03 (Info) 	Window 'root' of type 'DefaultWindow' has been created. (063CF590)
-19/01/2017 19:29:03 (Std) 	Started creation of Scheme from XML specification:
-19/01/2017 19:29:03 (Std) 	---- CEGUI GUIScheme name: AlfiskoSkin
-19/01/2017 19:29:03 (Info) 	Finished creation of GUIScheme 'AlfiskoSkin' via XML file. (0CB47F40)
-19/01/2017 19:29:03 (Info) 	---- Begining resource loading for GUI scheme 'AlfiskoSkin' ----
-19/01/2017 19:29:03 (Std) 	[ImageManager] Started creation of Imageset from XML specification:
-19/01/2017 19:29:03 (Std) 	[ImageManager] ---- CEGUI Imageset name: AlfiskoSkin
-19/01/2017 19:29:03 (Std) 	[ImageManager] ---- Source texture file: AlfiskoSkin.png
-19/01/2017 19:29:03 (Std) 	[ImageManager] ---- Source texture resource group: (Default)
-19/01/2017 19:29:03 (Std) 	[IrrlichtRenderer] Created texture: AlfiskoSkin
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowB' (063C61A8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowL' (063D8840) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowR' (063E5BD8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowT' (063F1220) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxB' (063F1410) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxL' (063EBDB0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxR' (063EBEC8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxT' (063EB090) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowBL' (063EB838) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowBR' (063EB2C0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowTL' (063EB1A8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowTR' (063EB3D8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxBL' (063EB4F0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxBR' (063EB608) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxTL' (063EB950) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxTR' (063EBC98) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseMove' (063EB720) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseNeSw' (063EBA68) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/NewImage1' (063EBB80) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseArrow' (0CB5BB18) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowFill' (0CB5CB80) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxFill' (0CB5BF78) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipB' (0CB5B8E8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipL' (0CB5B258) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipR' (0CB5C608) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipT' (0CB5BD48) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverB' (0CB5CC98) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverL' (0CB5CA68) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverR' (0CB5CDB0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverT' (0CB5C2C0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/GenericBrush' (0CB5C720) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseTextBar' (0CB5C3D8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverBL' (0CB5C838) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverBR' (0CB5B140) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverTL' (0CB5C4F0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverTR' (0CB5CEC8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalB' (0CB5C950) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalL' (0CB5B370) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalR' (0CB5B028) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalT' (0CB5BC30) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedB' (0CB5B6B8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedL' (0CB5B488) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedR' (0CB5B5A0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedT' (0CB5B7D0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CheckboxHover' (0CB5BA00) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullB' (0CB5BE60) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullL' (0CB5C090) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullR' (0CB5C1A8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullT' (0CB60A78) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollUpHover' (0CB60B90) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalBL' (0CB5FC40) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalBR' (0CB5FE70) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalTL' (0CB5FD58) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalTR' (0CB5F038) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedBL' (0CB5FB28) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedBR' (0CB60CA8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedTL' (0CB60960) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedTR' (0CB5FF88) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CheckboxNormal' (0CB602D0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarB' (0CB5F7E0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarT' (0CB600A0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyB' (0CB5F8F8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyL' (0CB5FA10) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyR' (0CB5F5B0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyT' (0CB60ED8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullBL' (0CB5F6C8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullBR' (0CB601B8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullTL' (0CB60848) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullTR' (0CB603E8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressShadow' (0CB60500) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollUpNormal' (0CB60DC0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollUpPushed' (0CB5F150) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarDummy1' (0CB60618) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarL' (0CB60730) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarR' (0CB5F268) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CheckboxChecked' (0CB5F380) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverB' (0CB5F498) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverT' (0CB642E0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyBL' (0CB64628) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyBR' (0CB63C50) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyTL' (0CB64970) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyTR' (0CB64740) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollDownHover' (0CB63B38) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollLeftHover' (0CB63A20) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveB' (0CB636D8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveL' (0CB63278) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveR' (0CB64858) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveT' (0CB643F8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverL' (0CB64CB8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverR' (0CB64DD0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverFill1' (0CB63160) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverFill2' (0CB641C8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderTrackL' (0CB63D68) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderTrackR' (0CB64510) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverBL' (0CB634A8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverBR' (0CB63E80) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverTL' (0CB64EE8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverTR' (0CB63F98) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalB' (0CB63048) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalT' (0CB63390) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedB' (0CB640B0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedT' (0CB637F0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbShadowL' (0CB63908) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbShadowR' (0CB64A88) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullFill' (0CB635C0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/RadioButtonHover' (0CB64BA0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollDownNormal' (0CB67288) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollDownPushed' (0CB67058) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollLeftNormal' (0CB68CC8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollLeftPushed' (0CB673A0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollRightHover' (0CB682F0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveBL' (0CB68980) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveBR' (0CB68520) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveTL' (0CB67C60) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveTR' (0CB67170) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderTrackB' (0CB68868) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderTrackT' (0CB674B8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverBL' (0CB68BB0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverBR' (0CB68750) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverTL' (0CB68A98) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverTR' (0CB68EF8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalL' (0CB67800) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalR' (0CB68DE0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedL' (0CB681D8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedR' (0CB675D0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbShadowB' (0CB67A30) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbShadowT' (0CB676E8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalFill1' (0CB67918) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalFill2' (0CB67B48) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedFill1' (0CB67D78) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedFill2' (0CB67E90) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CloseButtonNormal' (0CB67FA8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CloseButtonPushed' (0CB68408) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderShadowL' (0CB680C0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderShadowR' (0CB68638) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalBL' (0CB6AAA0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalBR' (0CB6A988) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalTL' (0CB69E98) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalTR' (0CB69808) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedBL' (0CB6ABB8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedBR' (0CB6A410) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedTL' (0CB6A528) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedTR' (0CB6ACD0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyFill' (0CB6ADE8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/RadioButtonNormal' (0CB69FB0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollRightNormal' (0CB6A0C8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollRightPushed' (0CB6A1E0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveB' (0CB69920) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveL' (0CB693A8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveR' (0CB69B50) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveT' (0CB6AF00) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderShadowB' (0CB6A870) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderShadowT' (0CB6A2F8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalBL' (0CB6A640) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalBR' (0CB69A38) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalTL' (0CB6A758) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalTR' (0CB69060) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedBL' (0CB69178) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedBR' (0CB69290) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedTL' (0CB694C0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedTR' (0CB69C68) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarFill1' (0CB695D8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarFill2' (0CB696F0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/RadioButtonChecked' (0CB69D80) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveBL' (0CB6E538) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveBR' (0CB6D4D0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveTL' (0CB6EF10) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveTR' (0CB6D188) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarFill1' (0CB6D5E8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarFill2' (0CB6DEA8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderTrackFill' (0CB6D070) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveFill1' (0CB6D2A0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveFill2' (0CB6DA48) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderTrackFill' (0CB6E880) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderThumbHover' (0CB6D3B8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderThumbHover' (0CB6E650) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderThumbNormal' (0CB6E0D8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderThumbPushed' (0CB6E768) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveFill1' (0CB6D700) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveFill2' (0CB6DFC0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderThumbNormal' (0CB6DB60) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderThumbPushed' (0CB6E998) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TablaFondo' (0CB6DC78) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/hitmarker' (0CB6D818) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/mirilla' (0CB6EDF8) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/SangreBorde' (0CB6E1F0) of type: BasicImage
-19/01/2017 19:29:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/Mapa' (0CB6EBC8) of type: BasicImage
-19/01/2017 19:29:03 (Info) 	Successfully loaded 5633 glyphs
-19/01/2017 19:29:03 (Info) 	Finished creation of Font 'DejaVuSans-12' via XML file. (063E2018)
-19/01/2017 19:29:03 (Std) 	===== Falagard 'root' element: look and feel parsing begins =====
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Label'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Label'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Button'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Button'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/ImageButton'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/ImageButton'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/RadioButton'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/RadioButton'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Checkbox'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Checkbox'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Titlebar'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Titlebar'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/FrameWindow'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/FrameWindow'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Editbox'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Editbox'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalScrollbarThumb'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalScrollbarThumb'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalScrollbar'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalScrollbar'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalScrollbarThumb'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalScrollbarThumb'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalScrollbar'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalScrollbar'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/MultiLineEditbox'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/MultiLineEditbox'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/ProgressBar'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/ProgressBar'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalSliderThumb'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalSliderThumb'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalSlider'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalSlider'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalSliderThumb'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalSliderThumb'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalSlider'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalSlider'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/MenuItem'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/MenuItem'.
-19/01/2017 19:29:03 (Std) 	===== Look and feel parsing completed =====
-19/01/2017 19:29:03 (Std) 	No window renderer factories specified for module 'CEGUICoreWindowRendererSet' - adding all available factories...
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Button' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Button' added. (0CBC32B8)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Default' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Default' added. (0CBC1F30)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Editbox' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Editbox' added. (0CBC2C78)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/FrameWindow' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/FrameWindow' added. (0CBC2F98)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ItemEntry' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ItemEntry' added. (0CBC2638)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ListHeader' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ListHeader' added. (0CBC2E08)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ListHeaderSegment' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ListHeaderSegment' added. (0CBC3380)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Listbox' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Listbox' added. (0CBC2700)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Menubar' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Menubar' added. (0CBC27C8)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/MenuItem' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/MenuItem' added. (0CBC2890)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/MultiColumnList' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/MultiColumnList' added. (0CBC2A20)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/MultiLineEditbox' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/MultiLineEditbox' added. (0CBC2ED0)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/PopupMenu' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/PopupMenu' added. (0CBC2BB0)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ProgressBar' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ProgressBar' added. (0CBC3448)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ScrollablePane' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ScrollablePane' added. (0CBC3510)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Scrollbar' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Scrollbar' added. (0CBC5A90)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Slider' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Slider' added. (0CBC5B58)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Static' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Static' added. (0CBC5C20)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/StaticImage' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/StaticImage' added. (0CBC56A8)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/StaticText' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/StaticText' added. (0CBC5770)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/TabButton' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/TabButton' added. (0CBC5838)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/TabControl' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/TabControl' added. (0CBC5900)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Titlebar' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Titlebar' added. (0CBC4BB8)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ToggleButton' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ToggleButton' added. (0CBC4AF0)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Tooltip' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Tooltip' added. (0CBC4ED8)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/ItemListbox' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/ItemListbox' added. (0CBC51F8)
-19/01/2017 19:29:03 (Std) 	Created WindowRendererFactory for 'Core/Tree' WindowRenderers.
-19/01/2017 19:29:03 (Std) 	WindowRendererFactory 'Core/Tree' added. (0CBC4708)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Label' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'AlfiskoSkin/Label' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Button' using base type 'CEGUI/PushButton', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/Button' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/ImageButton' using base type 'CEGUI/PushButton', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/ImageButton' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/RadioButton' using base type 'CEGUI/RadioButton', window renderer 'Core/ToggleButton' Look'N'Feel 'AlfiskoSkin/RadioButton' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Checkbox' using base type 'CEGUI/ToggleButton', window renderer 'Core/ToggleButton' Look'N'Feel 'AlfiskoSkin/Checkbox' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Titlebar' using base type 'CEGUI/Titlebar', window renderer 'Core/Titlebar' Look'N'Feel 'AlfiskoSkin/Titlebar' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/FrameWindow' using base type 'CEGUI/FrameWindow', window renderer 'Core/FrameWindow' Look'N'Feel 'AlfiskoSkin/FrameWindow' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Editbox' using base type 'CEGUI/Editbox', window renderer 'Core/Editbox' Look'N'Feel 'AlfiskoSkin/Editbox' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalScrollbarThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/VerticalScrollbarThumb' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalScrollbar' using base type 'CEGUI/Scrollbar', window renderer 'Core/Scrollbar' Look'N'Feel 'AlfiskoSkin/VerticalScrollbar' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalScrollbarThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/HorizontalScrollbarThumb' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalScrollbar' using base type 'CEGUI/Scrollbar', window renderer 'Core/Scrollbar' Look'N'Feel 'AlfiskoSkin/HorizontalScrollbar' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/MultiLineEditbox' using base type 'CEGUI/MultiLineEditbox', window renderer 'Core/MultiLineEditbox' Look'N'Feel 'AlfiskoSkin/MultiLineEditbox' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/ProgressBar' using base type 'CEGUI/ProgressBar', window renderer 'Core/ProgressBar' Look'N'Feel 'AlfiskoSkin/ProgressBar' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalSliderThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/HorizontalSliderThumb' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalSlider' using base type 'CEGUI/Slider', window renderer 'Core/Slider' Look'N'Feel 'AlfiskoSkin/HorizontalSlider' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalSliderThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/VerticalSliderThumb' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalSlider' using base type 'CEGUI/Slider', window renderer 'Core/Slider' Look'N'Feel 'AlfiskoSkin/VerticalSlider' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/MenuItem' using base type 'CEGUI/MenuItem', window renderer 'Core/MenuItem' Look'N'Feel 'AlfiskoSkin/MenuItem' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Info) 	---- Resource loading for GUI scheme 'AlfiskoSkin' completed ----
-19/01/2017 19:29:03 (Std) 	Started creation of Scheme from XML specification:
-19/01/2017 19:29:03 (Std) 	---- CEGUI GUIScheme name: Generic
-19/01/2017 19:29:03 (Info) 	Finished creation of GUIScheme 'Generic' via XML file. (0CCB2340)
-19/01/2017 19:29:03 (Info) 	---- Begining resource loading for GUI scheme 'Generic' ----
-19/01/2017 19:29:03 (Std) 	===== Falagard 'root' element: look and feel parsing begins =====
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'Generic/Label'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'Generic/Label'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'Generic/LabelWithOutline'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'Generic/LabelWithOutline'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'Generic/Image'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'Generic/Image'.
-19/01/2017 19:29:03 (Info) 	---> Start of definition for widget look 'Generic/ImageButton'.
-19/01/2017 19:29:03 (Info) 	---< End of definition for widget look 'Generic/ImageButton'.
-19/01/2017 19:29:03 (Std) 	===== Look and feel parsing completed =====
-19/01/2017 19:29:03 (Std) 	No window renderer factories specified for module 'CEGUICoreWindowRendererSet' - adding all available factories...
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Button' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Default' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Editbox' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/FrameWindow' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ItemEntry' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ListHeader' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ListHeaderSegment' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Listbox' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Menubar' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/MenuItem' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/MultiColumnList' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/MultiLineEditbox' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/PopupMenu' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ProgressBar' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ScrollablePane' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Scrollbar' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Slider' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Static' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/StaticImage' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/StaticText' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/TabButton' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/TabControl' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Titlebar' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ToggleButton' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Tooltip' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/ItemListbox' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Info) 	Factory for 'Core/Tree' appears to be  already registered, skipping.
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'Generic/Label' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'Generic/Label' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'Generic/LabelWithOutline' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'Generic/LabelWithOutline' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'Generic/Image' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'Generic/Image' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Std) 	Creating falagard mapping for type 'Generic/ImageButton' using base type 'CEGUI/PushButton', window renderer 'Core/Button' Look'N'Feel 'Generic/ImageButton' and RenderEffect ''. (0095D440)
-19/01/2017 19:29:03 (Info) 	---- Resource loading for GUI scheme 'Generic' completed ----
-19/01/2017 19:29:03 (Info) 	---- Beginning loading of GUI layout from 'LastBulletHUD.layout' ----
-19/01/2017 19:29:03 (Info) 	Window 'DefaultWindow' of type 'DefaultWindow' has been created. (0CBDD0E0)
-19/01/2017 19:29:03 (Info) 	Window 'Label' of type 'AlfiskoSkin/Label' has been created. (0CBD7D88)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label'.
-19/01/2017 19:29:03 (Info) 	Window 'Label2' of type 'AlfiskoSkin/Label' has been created. (0CBDA380)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label2'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label2'.
-19/01/2017 19:29:03 (Info) 	Window 'Label3' of type 'AlfiskoSkin/Label' has been created. (0CBDA970)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label3'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label3'.
-19/01/2017 19:29:03 (Info) 	Window 'Label4' of type 'AlfiskoSkin/Label' has been created. (0CBFA960)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label4'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label4'.
-19/01/2017 19:29:03 (Info) 	Window 'Label5' of type 'AlfiskoSkin/Label' has been created. (0CBFEF58)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label5'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label5'.
-19/01/2017 19:29:03 (Info) 	Window 'Label6' of type 'AlfiskoSkin/Label' has been created. (0CCDDED0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label6'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label6'.
-19/01/2017 19:29:03 (Info) 	Window 'Label7' of type 'AlfiskoSkin/Label' has been created. (0CBDAF60)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label7'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label7'.
-19/01/2017 19:29:03 (Info) 	Window 'Label8' of type 'AlfiskoSkin/Label' has been created. (0CCE4908)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label8'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label8'.
-19/01/2017 19:29:03 (Info) 	Window 'DefaultWindow' of type 'DefaultWindow' has been created. (0CCEDA10)
-19/01/2017 19:29:03 (Info) 	Window 'Image' of type 'Generic/Image' has been created. (0CCE41B0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Image'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Image'.
-19/01/2017 19:29:03 (Info) 	Window 'Label' of type 'AlfiskoSkin/Label' has been created. (0CCECF00)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label'.
-19/01/2017 19:29:03 (Info) 	Window 'Label2' of type 'AlfiskoSkin/Label' has been created. (0CCE3598)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label2'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label2'.
-19/01/2017 19:29:03 (Info) 	Window 'Label3' of type 'AlfiskoSkin/Label' has been created. (0CCE3B88)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label3'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label3'.
-19/01/2017 19:29:03 (Info) 	Window 'Label4' of type 'AlfiskoSkin/Label' has been created. (0CCDE4C0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label4'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label4'.
-19/01/2017 19:29:03 (Info) 	Window 'Label5' of type 'AlfiskoSkin/Label' has been created. (0CCDEAB0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label5'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label5'.
-19/01/2017 19:29:03 (Info) 	Window 'Label6' of type 'AlfiskoSkin/Label' has been created. (0639FC08)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label6'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label6'.
-19/01/2017 19:29:03 (Info) 	Window 'Label62' of type 'AlfiskoSkin/Label' has been created. (0639C5C0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label62'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label62'.
-19/01/2017 19:29:03 (Info) 	Window 'Label7' of type 'AlfiskoSkin/Label' has been created. (063A0818)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label7'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label7'.
-19/01/2017 19:29:03 (Info) 	Window 'Label8' of type 'AlfiskoSkin/Label' has been created. (063A2C48)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label8'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label8'.
-19/01/2017 19:29:03 (Info) 	Window 'Label9' of type 'AlfiskoSkin/Label' has been created. (0639BFB8)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label9'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label9'.
-19/01/2017 19:29:03 (Info) 	Window 'Label10' of type 'AlfiskoSkin/Label' has been created. (063A3250)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label10'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label10'.
-19/01/2017 19:29:03 (Info) 	Window 'Label11' of type 'AlfiskoSkin/Label' has been created. (0639CBC8)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label11'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label11'.
-19/01/2017 19:29:03 (Info) 	Window 'Label102' of type 'AlfiskoSkin/Label' has been created. (063A0E20)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label102'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label102'.
-19/01/2017 19:29:03 (Info) 	Window 'Label112' of type 'AlfiskoSkin/Label' has been created. (063A3858)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label112'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label112'.
-19/01/2017 19:29:03 (Info) 	Window 'Label92' of type 'AlfiskoSkin/Label' has been created. (0639D1D0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label92'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label92'.
-19/01/2017 19:29:03 (Info) 	Window 'Label82' of type 'AlfiskoSkin/Label' has been created. (0639D7D8)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label82'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label82'.
-19/01/2017 19:29:03 (Info) 	Window 'Label922' of type 'AlfiskoSkin/Label' has been created. (063A1428)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label922'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label922'.
-19/01/2017 19:29:03 (Info) 	Window 'Label1022' of type 'AlfiskoSkin/Label' has been created. (063A1A30)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label1022'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label1022'.
-19/01/2017 19:29:03 (Info) 	Window 'Label822' of type 'AlfiskoSkin/Label' has been created. (0CD46188)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label822'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label822'.
-19/01/2017 19:29:03 (Info) 	Window 'Label1122' of type 'AlfiskoSkin/Label' has been created. (0CD4C208)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label1122'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label1122'.
-19/01/2017 19:29:03 (Info) 	Window 'Mirilla' of type 'Generic/Image' has been created. (0CD4A3E0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Mirilla'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Mirilla'.
-19/01/2017 19:29:03 (Info) 	Window 'Hitmarker' of type 'Generic/Image' has been created. (0CD497D0)
-19/01/2017 19:29:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Hitmarker'
-19/01/2017 19:29:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Hitmarker'.
-19/01/2017 19:29:04 (Info) 	Window 'Sangre' of type 'Generic/Image' has been created. (0CD4C810)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Sangre'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Sangre'.
-19/01/2017 19:29:04 (Info) 	Window 'Label9' of type 'AlfiskoSkin/Label' has been created. (0CD4CE18)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label9'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label9'.
-19/01/2017 19:29:04 (Std) 	---- Successfully completed loading of GUI layout from 'LastBulletHUD.layout' ----
-19/01/2017 19:29:04 (Info) 	Window 'root' of type 'DefaultWindow' has been created. (0CD49DD8)
-19/01/2017 19:29:04 (Std) 	Started creation of Scheme from XML specification:
-19/01/2017 19:29:04 (Std) 	---- CEGUI GUIScheme name: AlfiskoSkin
-19/01/2017 19:29:04 (Info) 	Finished creation of GUIScheme 'AlfiskoSkin' via XML file. (0CCB1B90)
-19/01/2017 19:29:04 (Std) 	---- Returning existing instance of Scheme named 'AlfiskoSkin'.
-19/01/2017 19:29:04 (Info) 	---- Begining resource cleanup for GUI scheme 'AlfiskoSkin' ----
-19/01/2017 19:29:04 (Info) 	---- Resource cleanup for GUI scheme 'AlfiskoSkin' completed ----
-19/01/2017 19:29:04 (Info) 	GUI scheme 'AlfiskoSkin' has been unloaded (object destructor). (0CCB1B90)
-19/01/2017 19:29:04 (Info) 	---- Beginning loading of GUI layout from 'SimpleDebug.layout' ----
-19/01/2017 19:29:04 (Info) 	Window 'DefaultWindow' of type 'DefaultWindow' has been created. (0CD4A9E8)
-19/01/2017 19:29:04 (Info) 	Window 'FrameWindow' of type 'AlfiskoSkin/FrameWindow' has been created. (0CD45160)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/FrameWindow' to the window 'FrameWindow'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/FrameWindow' to window 'FrameWindow'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_titlebar__' of type 'AlfiskoSkin/Titlebar' has been created. (0CBD69C0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Titlebar' to the window '__auto_titlebar__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Titlebar' to window '__auto_titlebar__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_closebutton__' of type 'AlfiskoSkin/ImageButton' has been created. (0CBD71D0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_closebutton__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_closebutton__'.
-19/01/2017 19:29:04 (Std) 	[IrrlichtRenderer] Created texture: _irr_tt_tex_0
-19/01/2017 19:29:04 (Info) 	Window 'Button' of type 'AlfiskoSkin/Button' has been created. (0CD53378)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button'.
-19/01/2017 19:29:04 (Info) 	Window 'Button' of type 'AlfiskoSkin/Button' has been created. (0CD55978)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button'.
-19/01/2017 19:29:04 (Info) 	Window 'Button2' of type 'AlfiskoSkin/Button' has been created. (0CBF0E90)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button2'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button2'.
-19/01/2017 19:29:04 (Info) 	Window 'Button3' of type 'AlfiskoSkin/Button' has been created. (0CBF1D70)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button3'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button3'.
-19/01/2017 19:29:04 (Info) 	Window 'Label' of type 'AlfiskoSkin/Label' has been created. (0CD479A8)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label'.
-19/01/2017 19:29:04 (Info) 	Window 'Label2' of type 'AlfiskoSkin/Label' has been created. (0CD46790)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label2'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label2'.
-19/01/2017 19:29:04 (Info) 	Window 'LogWindow' of type 'AlfiskoSkin/FrameWindow' has been created. (0CBF1488)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/FrameWindow' to the window 'LogWindow'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/FrameWindow' to window 'LogWindow'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_titlebar__' of type 'AlfiskoSkin/Titlebar' has been created. (0CD9E0F0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Titlebar' to the window '__auto_titlebar__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Titlebar' to window '__auto_titlebar__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_closebutton__' of type 'AlfiskoSkin/ImageButton' has been created. (0CD9E700)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_closebutton__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_closebutton__'.
-19/01/2017 19:29:04 (Std) 	[IrrlichtRenderer] Created texture: _irr_tt_tex_1
-19/01/2017 19:29:04 (Info) 	Window 'MultiLineEditbox' of type 'AlfiskoSkin/MultiLineEditbox' has been created. (0CB54600)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/MultiLineEditbox' to the window 'MultiLineEditbox'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/MultiLineEditbox' to window 'MultiLineEditbox'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_hscrollbar__' of type 'AlfiskoSkin/HorizontalScrollbar' has been created. (0CD4B5F8)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Scrollbar' to the window '__auto_hscrollbar__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/HorizontalScrollbar' to window '__auto_hscrollbar__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_incbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0CD9DAB0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_incbtn__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_incbtn__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_decbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0CDABCC0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_decbtn__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_decbtn__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_thumb__' of type 'AlfiskoSkin/HorizontalScrollbarThumb' has been created. (0CDCE2C8)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_thumb__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/HorizontalScrollbarThumb' to window '__auto_thumb__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_vscrollbar__' of type 'AlfiskoSkin/VerticalScrollbar' has been created. (0CD4BC00)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Scrollbar' to the window '__auto_vscrollbar__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/VerticalScrollbar' to window '__auto_vscrollbar__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_incbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0CDCEEC8)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_incbtn__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_incbtn__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_decbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0CDCF4C0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_decbtn__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_decbtn__'.
-19/01/2017 19:29:04 (Info) 	Window '__auto_thumb__' of type 'AlfiskoSkin/VerticalScrollbarThumb' has been created. (0CDD1AC0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_thumb__'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/VerticalScrollbarThumb' to window '__auto_thumb__'.
-19/01/2017 19:29:04 (Std) 	[IrrlichtRenderer] Created texture: DejaVuSans-12_auto_glyph_images_32
-19/01/2017 19:29:04 (Info) 	Window 'Editbox' of type 'AlfiskoSkin/Editbox' has been created. (0CDA6C00)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Editbox' to the window 'Editbox'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Editbox' to window 'Editbox'.
-19/01/2017 19:29:04 (Info) 	Window 'ImageButton' of type 'Generic/ImageButton' has been created. (0CE3E7C0)
-19/01/2017 19:29:04 (Info) 	Assigning the window renderer 'Core/Button' to the window 'ImageButton'
-19/01/2017 19:29:04 (Info) 	Assigning LookNFeel 'Generic/ImageButton' to window 'ImageButton'.
-19/01/2017 19:29:04 (Std) 	---- Successfully completed loading of GUI layout from 'SimpleDebug.layout' ----
+20/01/2017 21:08:02 (Std) 	CEGUI::Logger singleton created. (081325D0)
+20/01/2017 21:08:02 (Std) 	
+20/01/2017 21:08:02 (Std) 	********************************************************************************
+20/01/2017 21:08:02 (Std) 	* Important:                                                                   *
+20/01/2017 21:08:02 (Std) 	*     To get support at the CEGUI forums, you must post _at least_ the section *
+20/01/2017 21:08:02 (Std) 	*     of this log file indicated below.  Failure to do this will result in no  *
+20/01/2017 21:08:02 (Std) 	*     support being given; please do not waste our time.                       *
+20/01/2017 21:08:02 (Std) 	********************************************************************************
+20/01/2017 21:08:02 (Std) 	********************************************************************************
+20/01/2017 21:08:02 (Std) 	* -------- START OF ESSENTIAL SECTION TO BE POSTED ON THE FORUM       -------- *
+20/01/2017 21:08:02 (Std) 	********************************************************************************
+20/01/2017 21:08:02 (Std) 	---- Version: 0.8.6 (Build: Dec  6 2016 Debug Microsoft Windows MSVC++ 14.0 (2015) 32 bit) ----
+20/01/2017 21:08:02 (Std) 	---- Renderer module is: CEGUI::IrrlichtRenderer - Official Irrlicht based 2nd generation renderer module.  RenderTarget support is enabled. ----
+20/01/2017 21:08:02 (Std) 	---- XML Parser module is: CEGUI::ExpatParser - Official expat based parser module for CEGUI ----
+20/01/2017 21:08:02 (Std) 	---- Image Codec module is: IrrlichtImageCodec - Integrated ImageCodec using the Irrlicht engine. ----
+20/01/2017 21:08:02 (Std) 	---- Scripting module is: None ----
+20/01/2017 21:08:02 (Std) 	********************************************************************************
+20/01/2017 21:08:02 (Std) 	* -------- END OF ESSENTIAL SECTION TO BE POSTED ON THE FORUM         -------- *
+20/01/2017 21:08:02 (Std) 	********************************************************************************
+20/01/2017 21:08:02 (Std) 	
+20/01/2017 21:08:02 (Std) 	---- Begining CEGUI System initialisation ----
+20/01/2017 21:08:02 (Std) 	[CEGUI::ImageManager] Singleton created (0818E378)
+20/01/2017 21:08:02 (Std) 	[CEGUI::ImageManager] Registered Image type: BasicImage
+20/01/2017 21:08:02 (Std) 	CEGUI::FontManager singleton created. (08161850)
+20/01/2017 21:08:02 (Std) 	CEGUI::WindowFactoryManager singleton created
+20/01/2017 21:08:02 (Std) 	CEGUI::WindowManager singleton created (0815D4D0)
+20/01/2017 21:08:02 (Std) 	CEGUI::SchemeManager singleton created. (08159820)
+20/01/2017 21:08:02 (Std) 	CEGUI::GlobalEventSet singleton created. (0FB71F08)
+20/01/2017 21:08:02 (Std) 	CEGUI::AnimationManager singleton created (00EB6C48)
+20/01/2017 21:08:02 (Std) 	CEGUI::WidgetLookManager singleton created. (0817C828)
+20/01/2017 21:08:02 (Std) 	CEGUI::WindowRendererManager singleton created (0817C8A8)
+20/01/2017 21:08:02 (Std) 	CEGUI::RenderEffectManager singleton created (0FB718D8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'DefaultWindow' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'DefaultWindow' windows added. (0FB54DB0)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'DragContainer' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'DragContainer' windows added. (0FB549C8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'ScrolledContainer' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'ScrolledContainer' windows added. (0FB55648)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'ClippedContainer' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'ClippedContainer' windows added. (0FB54770)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/PushButton' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/PushButton' windows added. (0FB54A90)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/RadioButton' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/RadioButton' windows added. (0FB54CE8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Combobox' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Combobox' windows added. (0FB5CF00)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ComboDropList' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ComboDropList' windows added. (0FB5C348)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Editbox' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Editbox' windows added. (0FB5C410)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/FrameWindow' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/FrameWindow' windows added. (0FB5C730)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ItemEntry' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ItemEntry' windows added. (0FB5C8C0)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Listbox' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Listbox' windows added. (0FB5BC40)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ListHeader' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ListHeader' windows added. (0FB5C4D8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ListHeaderSegment' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ListHeaderSegment' windows added. (0FB5C5A0)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Menubar' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Menubar' windows added. (0FB5C7F8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/PopupMenu' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/PopupMenu' windows added. (0FB5CCA8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/MenuItem' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/MenuItem' windows added. (0FB5CE38)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/MultiColumnList' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/MultiColumnList' windows added. (0FB5BD08)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/MultiLineEditbox' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/MultiLineEditbox' windows added. (0FB5BE98)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ProgressBar' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ProgressBar' windows added. (0FB5C988)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ScrollablePane' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ScrollablePane' windows added. (0FB5C1B8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Scrollbar' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Scrollbar' windows added. (0FB5CA50)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Slider' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Slider' windows added. (0FB5CB18)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Spinner' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Spinner' windows added. (0FB5BB78)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/TabButton' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/TabButton' windows added. (0FB5BDD0)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/TabControl' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/TabControl' windows added. (0FB5CBE0)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Thumb' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Thumb' windows added. (0FB5CFC8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Titlebar' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Titlebar' windows added. (0FB5B790)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ToggleButton' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ToggleButton' windows added. (0FB5CD70)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Tooltip' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Tooltip' windows added. (0FB5BF60)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/ItemListbox' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/ItemListbox' windows added. (0FB5C668)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/GroupBox' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/GroupBox' windows added. (0FB5B858)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'CEGUI/Tree' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'CEGUI/Tree' windows added. (0FB5C028)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'LayoutCell' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'LayoutCell' windows added. (0FB5B920)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'HorizontalLayoutContainer' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'HorizontalLayoutContainer' windows added. (0FB5B9E8)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'VerticalLayoutContainer' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'VerticalLayoutContainer' windows added. (0FB5BAB0)
+20/01/2017 21:08:02 (Std) 	Created WindowFactory for 'GridLayoutContainer' windows.
+20/01/2017 21:08:02 (Std) 	WindowFactory for 'GridLayoutContainer' windows added. (0FB5C0F0)
+20/01/2017 21:08:02 (Std) 	CEGUI::System singleton created. (0FB509D0)
+20/01/2017 21:08:02 (Std) 	---- CEGUI System initialisation completed ----
+20/01/2017 21:08:02 (Std) 	
+20/01/2017 21:08:03 (Info) 	Window 'root' of type 'DefaultWindow' has been created. (08150348)
+20/01/2017 21:08:03 (Std) 	Started creation of Scheme from XML specification:
+20/01/2017 21:08:03 (Std) 	---- CEGUI GUIScheme name: AlfiskoSkin
+20/01/2017 21:08:03 (Info) 	Finished creation of GUIScheme 'AlfiskoSkin' via XML file. (00E97800)
+20/01/2017 21:08:03 (Info) 	---- Begining resource loading for GUI scheme 'AlfiskoSkin' ----
+20/01/2017 21:08:03 (Std) 	[ImageManager] Started creation of Imageset from XML specification:
+20/01/2017 21:08:03 (Std) 	[ImageManager] ---- CEGUI Imageset name: AlfiskoSkin
+20/01/2017 21:08:03 (Std) 	[ImageManager] ---- Source texture file: AlfiskoSkin.png
+20/01/2017 21:08:03 (Std) 	[ImageManager] ---- Source texture resource group: (Default)
+20/01/2017 21:08:03 (Std) 	[IrrlichtRenderer] Created texture: AlfiskoSkin
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowB' (0FB60058) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowL' (0FB60B48) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowR' (0FB60288) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowT' (0FB611D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxB' (0FB60800) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxL' (0FB61638) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxR' (0FB5FBF8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxT' (0FB60D78) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowBL' (0FB603A0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowBR' (0FB60E90) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowTL' (0FB606E8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowTR' (0FB60FA8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxBL' (0FB604B8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxBR' (0FB5FD10) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxTL' (0FB5F9C8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxTR' (0FB612F0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseMove' (0FB5FE28) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseNeSw' (0FB610C0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/NewImage1' (0FB605D0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseArrow' (0FB60A30) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowFill' (0FB60918) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/EditboxFill' (0FB5F8B0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipB' (0FB60C60) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipL' (0FB61408) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipR' (0FB61520) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/WindowClipT' (0FB5F798) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverB' (0FB5FF40) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverL' (0FB5FAE0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverR' (0816E308) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverT' (0816E420) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/GenericBrush' (0816DEA8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/MouseTextBar' (0816CE40) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverBL' (0816D2A0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverBR' (0816D700) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverTL' (0816C580) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverTR' (0816D188) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalB' (0816D4D0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalL' (0816DA48) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalR' (0816DB60) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalT' (0816CF58) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedB' (0816DC78) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedL' (0816E1F0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedR' (0816D070) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedT' (0816C9E0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CheckboxHover' (0816DD90) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullB' (0816E0D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullL' (0816C698) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullR' (0816DFC0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullT' (0816D3B8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollUpHover' (0816D930) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalBL' (0816C7B0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalBR' (0816C8C8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalTL' (0816D5E8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalTR' (0816D818) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedBL' (0816CAF8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedBR' (0816CC10) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedTL' (0816CD28) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedTR' (081707C0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CheckboxNormal' (081709F0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarB' (08171B70) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarT' (08170B08) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyB' (08170C20) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyL' (08171A58) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyR' (08171080) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyT' (081708D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullBL' (08170D38) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullBR' (08171C88) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullTL' (08170E50) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullTR' (08170F68) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressShadow' (08172200) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollUpNormal' (08171198) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollUpPushed' (081720E8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarDummy1' (08171DA0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarL' (08171EB8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarR' (081715F8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CheckboxChecked' (081712B0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverB' (08171710) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverT' (081713C8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyBL' (08171FD0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyBR' (08172318) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyTL' (08172430) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyTR' (081714E0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollDownHover' (08171940) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollLeftHover' (08171828) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveB' (08170590) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveL' (081706A8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveR' (08174C30) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveT' (08174F78) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverL' (081748E8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverR' (081747D0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverFill1' (08175090) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonHoverFill2' (08175720) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderTrackL' (08174A00) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderTrackR' (08176210) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverBL' (081751A8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverBR' (08175C98) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverTL' (081745A0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbHoverTR' (081752C0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalB' (08176328) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalT' (08174E60) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedB' (081746B8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedT' (08174B18) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbShadowL' (08175950) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbShadowR' (08174D48) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressFullFill' (081753D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/RadioButtonHover' (08175A68) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollDownNormal' (081754F0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollDownPushed' (08175608) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollLeftNormal' (08175FE0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollLeftPushed' (08175838) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollRightHover' (08175B80) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveBL' (08175DB0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveBR' (08175EC8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveTL' (081760F8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveTR' (08176440) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderTrackB' (08176B20) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderTrackT' (08178218) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverBL' (08176C38) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverBR' (081767D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverTL' (08177958) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbHoverTR' (08177DB8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalL' (08176E68) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalR' (081771B0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedL' (08176F80) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedR' (08178330) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbShadowB' (081765A8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbShadowT' (08177CA0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalFill1' (081772C8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonNormalFill2' (08178448) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedFill1' (08177ED0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ButtonPushedFill2' (08176D50) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CloseButtonNormal' (08178100) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/CloseButtonPushed' (081766C0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderShadowL' (081773E0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderShadowR' (08177098) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalBL' (081768F0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalBR' (08176A08) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalTL' (08177FE8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbNormalTR' (081774F8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedBL' (08177610) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedBR' (08177728) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedTL' (08177840) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzThumbPushedTR' (08177B88) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ProgressEmptyFill' (08177A70) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/RadioButtonNormal' (0FB78200) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollRightNormal' (0FB78660) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/ScrollRightPushed' (0FB78318) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveB' (0FB78548) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveL' (0FB77710) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveR' (0FB769F0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveT' (0FB77FD0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderShadowB' (0FB78430) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderShadowT' (0FB767C0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalBL' (0FB77EB8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalBR' (0FB775F8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalTL' (0FB773C8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbNormalTR' (0FB77828) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedBL' (0FB780E8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedBR' (0FB768D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedTL' (0FB774E0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertThumbPushedTR' (0FB76B08) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarFill1' (0FB77080) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzScrollbarFill2' (0FB76C20) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/RadioButtonChecked' (0FB76D38) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveBL' (0FB77940) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveBR' (0FB772B0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveTL' (0FB76E50) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveTR' (0FB76F68) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarFill1' (0FB77A58) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertScrollbarFill2' (0FB77198) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderTrackFill' (0FB77B70) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveFill1' (0FB77C88) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarActiveFill2' (0FB77DA0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderTrackFill' (0FB7AE60) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderThumbHover' (0FB7AC30) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderThumbHover' (0FB7BC98) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderThumbNormal' (0FB7B3D8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/HorzSliderThumbPushed' (0FB7AD48) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveFill1' (0FB7C328) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TitlebarInactiveFill2' (0FB7C210) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderThumbNormal' (0FB7AF78) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/VertSliderThumbPushed' (0FB7B838) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/TablaFondo' (0FB7A7D0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/hitmarker' (0FB7BDB0) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/mirilla' (0FB7AA00) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/SangreBorde' (0FB7A8E8) of type: BasicImage
+20/01/2017 21:08:03 (Std) 	[ImageManager] Created image: 'AlfiskoSkin/Mapa' (0FB7B090) of type: BasicImage
+20/01/2017 21:08:03 (Info) 	Successfully loaded 5633 glyphs
+20/01/2017 21:08:03 (Info) 	Finished creation of Font 'DejaVuSans-12' via XML file. (08186680)
+20/01/2017 21:08:03 (Std) 	===== Falagard 'root' element: look and feel parsing begins =====
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Label'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Label'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Button'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Button'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/ImageButton'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/ImageButton'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/RadioButton'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/RadioButton'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Checkbox'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Checkbox'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Titlebar'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Titlebar'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/FrameWindow'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/FrameWindow'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/Editbox'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/Editbox'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalScrollbarThumb'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalScrollbarThumb'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalScrollbar'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalScrollbar'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalScrollbarThumb'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalScrollbarThumb'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalScrollbar'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalScrollbar'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/MultiLineEditbox'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/MultiLineEditbox'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/ProgressBar'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/ProgressBar'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalSliderThumb'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalSliderThumb'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/HorizontalSlider'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/HorizontalSlider'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalSliderThumb'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalSliderThumb'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/VerticalSlider'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/VerticalSlider'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'AlfiskoSkin/MenuItem'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'AlfiskoSkin/MenuItem'.
+20/01/2017 21:08:03 (Std) 	===== Look and feel parsing completed =====
+20/01/2017 21:08:03 (Std) 	No window renderer factories specified for module 'CEGUICoreWindowRendererSet' - adding all available factories...
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Button' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Button' added. (0FBE19F8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Default' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Default' added. (0FBE2420)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Editbox' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Editbox' added. (0FBE2CB8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/FrameWindow' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/FrameWindow' added. (0FBE1610)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ItemEntry' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ItemEntry' added. (0FBE25B0)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ListHeader' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ListHeader' added. (0FBE2678)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ListHeaderSegment' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ListHeaderSegment' added. (0FBE2740)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Listbox' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Listbox' added. (0FBE2808)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Menubar' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Menubar' added. (0FBE28D0)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/MenuItem' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/MenuItem' added. (0FBE2A60)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/MultiColumnList' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/MultiColumnList' added. (0FBE33C0)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/MultiLineEditbox' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/MultiLineEditbox' added. (0FBE30A0)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/PopupMenu' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/PopupMenu' added. (0FBE3168)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ProgressBar' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ProgressBar' added. (0FBE2E48)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ScrollablePane' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ScrollablePane' added. (0FBE3230)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Scrollbar' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Scrollbar' added. (0FBE32F8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Slider' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Slider' added. (0FBE2FD8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Static' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Static' added. (0FBE2F10)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/StaticImage' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/StaticImage' added. (08169C78)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/StaticText' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/StaticText' added. (08169958)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/TabButton' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/TabButton' added. (0816A2B8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/TabControl' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/TabControl' added. (081697C8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Titlebar' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Titlebar' added. (08169570)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ToggleButton' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ToggleButton' added. (08169AE8)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Tooltip' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Tooltip' added. (08169E08)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/ItemListbox' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/ItemListbox' added. (08169890)
+20/01/2017 21:08:03 (Std) 	Created WindowRendererFactory for 'Core/Tree' WindowRenderers.
+20/01/2017 21:08:03 (Std) 	WindowRendererFactory 'Core/Tree' added. (08169BB0)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Label' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'AlfiskoSkin/Label' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Button' using base type 'CEGUI/PushButton', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/Button' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/ImageButton' using base type 'CEGUI/PushButton', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/ImageButton' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/RadioButton' using base type 'CEGUI/RadioButton', window renderer 'Core/ToggleButton' Look'N'Feel 'AlfiskoSkin/RadioButton' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Checkbox' using base type 'CEGUI/ToggleButton', window renderer 'Core/ToggleButton' Look'N'Feel 'AlfiskoSkin/Checkbox' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Titlebar' using base type 'CEGUI/Titlebar', window renderer 'Core/Titlebar' Look'N'Feel 'AlfiskoSkin/Titlebar' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/FrameWindow' using base type 'CEGUI/FrameWindow', window renderer 'Core/FrameWindow' Look'N'Feel 'AlfiskoSkin/FrameWindow' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/Editbox' using base type 'CEGUI/Editbox', window renderer 'Core/Editbox' Look'N'Feel 'AlfiskoSkin/Editbox' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalScrollbarThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/VerticalScrollbarThumb' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalScrollbar' using base type 'CEGUI/Scrollbar', window renderer 'Core/Scrollbar' Look'N'Feel 'AlfiskoSkin/VerticalScrollbar' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalScrollbarThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/HorizontalScrollbarThumb' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalScrollbar' using base type 'CEGUI/Scrollbar', window renderer 'Core/Scrollbar' Look'N'Feel 'AlfiskoSkin/HorizontalScrollbar' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/MultiLineEditbox' using base type 'CEGUI/MultiLineEditbox', window renderer 'Core/MultiLineEditbox' Look'N'Feel 'AlfiskoSkin/MultiLineEditbox' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/ProgressBar' using base type 'CEGUI/ProgressBar', window renderer 'Core/ProgressBar' Look'N'Feel 'AlfiskoSkin/ProgressBar' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalSliderThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/HorizontalSliderThumb' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/HorizontalSlider' using base type 'CEGUI/Slider', window renderer 'Core/Slider' Look'N'Feel 'AlfiskoSkin/HorizontalSlider' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalSliderThumb' using base type 'CEGUI/Thumb', window renderer 'Core/Button' Look'N'Feel 'AlfiskoSkin/VerticalSliderThumb' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/VerticalSlider' using base type 'CEGUI/Slider', window renderer 'Core/Slider' Look'N'Feel 'AlfiskoSkin/VerticalSlider' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'AlfiskoSkin/MenuItem' using base type 'CEGUI/MenuItem', window renderer 'Core/MenuItem' Look'N'Feel 'AlfiskoSkin/MenuItem' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Info) 	---- Resource loading for GUI scheme 'AlfiskoSkin' completed ----
+20/01/2017 21:08:03 (Std) 	Started creation of Scheme from XML specification:
+20/01/2017 21:08:03 (Std) 	---- CEGUI GUIScheme name: Generic
+20/01/2017 21:08:03 (Info) 	Finished creation of GUIScheme 'Generic' via XML file. (0FCC6790)
+20/01/2017 21:08:03 (Info) 	---- Begining resource loading for GUI scheme 'Generic' ----
+20/01/2017 21:08:03 (Std) 	===== Falagard 'root' element: look and feel parsing begins =====
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'Generic/Label'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'Generic/Label'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'Generic/LabelWithOutline'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'Generic/LabelWithOutline'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'Generic/Image'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'Generic/Image'.
+20/01/2017 21:08:03 (Info) 	---> Start of definition for widget look 'Generic/ImageButton'.
+20/01/2017 21:08:03 (Info) 	---< End of definition for widget look 'Generic/ImageButton'.
+20/01/2017 21:08:03 (Std) 	===== Look and feel parsing completed =====
+20/01/2017 21:08:03 (Std) 	No window renderer factories specified for module 'CEGUICoreWindowRendererSet' - adding all available factories...
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Button' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Default' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Editbox' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/FrameWindow' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ItemEntry' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ListHeader' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ListHeaderSegment' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Listbox' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Menubar' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/MenuItem' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/MultiColumnList' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/MultiLineEditbox' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/PopupMenu' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ProgressBar' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ScrollablePane' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Scrollbar' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Slider' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Static' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/StaticImage' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/StaticText' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/TabButton' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/TabControl' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Titlebar' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ToggleButton' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Tooltip' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/ItemListbox' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Info) 	Factory for 'Core/Tree' appears to be  already registered, skipping.
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'Generic/Label' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'Generic/Label' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'Generic/LabelWithOutline' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'Generic/LabelWithOutline' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'Generic/Image' using base type 'DefaultWindow', window renderer 'Core/Default' Look'N'Feel 'Generic/Image' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Std) 	Creating falagard mapping for type 'Generic/ImageButton' using base type 'CEGUI/PushButton', window renderer 'Core/Button' Look'N'Feel 'Generic/ImageButton' and RenderEffect ''. (0080CF6C)
+20/01/2017 21:08:03 (Info) 	---- Resource loading for GUI scheme 'Generic' completed ----
+20/01/2017 21:08:03 (Info) 	---- Beginning loading of GUI layout from 'LastBulletHUD.layout' ----
+20/01/2017 21:08:03 (Info) 	Window 'DefaultWindow' of type 'DefaultWindow' has been created. (0FBF3DB0)
+20/01/2017 21:08:03 (Info) 	Window 'Label' of type 'AlfiskoSkin/Label' has been created. (0FBF5360)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label'.
+20/01/2017 21:08:03 (Info) 	Window 'Label2' of type 'AlfiskoSkin/Label' has been created. (0FBF5950)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label2'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label2'.
+20/01/2017 21:08:03 (Info) 	Window 'Label3' of type 'AlfiskoSkin/Label' has been created. (0FBF6288)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label3'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label3'.
+20/01/2017 21:08:03 (Info) 	Window 'Label4' of type 'AlfiskoSkin/Label' has been created. (0FC1DB38)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label4'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label4'.
+20/01/2017 21:08:03 (Info) 	Window 'Label5' of type 'AlfiskoSkin/Label' has been created. (0FC1D228)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label5'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label5'.
+20/01/2017 21:08:03 (Info) 	Window 'Label6' of type 'AlfiskoSkin/Label' has been created. (0FC1E128)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label6'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label6'.
+20/01/2017 21:08:03 (Info) 	Window 'Label7' of type 'AlfiskoSkin/Label' has been created. (0FC1E718)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label7'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label7'.
+20/01/2017 21:08:03 (Info) 	Window 'Label8' of type 'AlfiskoSkin/Label' has been created. (0FCFF000)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label8'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label8'.
+20/01/2017 21:08:03 (Info) 	Window 'DefaultWindow' of type 'DefaultWindow' has been created. (0FD09328)
+20/01/2017 21:08:03 (Info) 	Window 'Image' of type 'Generic/Image' has been created. (0FD08818)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Image'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Image'.
+20/01/2017 21:08:03 (Info) 	Window 'Label' of type 'AlfiskoSkin/Label' has been created. (0FD16350)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label'.
+20/01/2017 21:08:03 (Info) 	Window 'Label2' of type 'AlfiskoSkin/Label' has been created. (0FD1E948)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label2'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label2'.
+20/01/2017 21:08:03 (Info) 	Window 'Label3' of type 'AlfiskoSkin/Label' has been created. (0FD23FB0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label3'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label3'.
+20/01/2017 21:08:03 (Info) 	Window 'Label4' of type 'AlfiskoSkin/Label' has been created. (0FD22F40)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label4'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label4'.
+20/01/2017 21:08:03 (Info) 	Window 'Label5' of type 'AlfiskoSkin/Label' has been created. (0FD2F928)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label5'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label5'.
+20/01/2017 21:08:03 (Info) 	Window 'Label6' of type 'AlfiskoSkin/Label' has been created. (00ECB1D0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label6'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label6'.
+20/01/2017 21:08:03 (Info) 	Window 'Label62' of type 'AlfiskoSkin/Label' has been created. (00ECB7D8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label62'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label62'.
+20/01/2017 21:08:03 (Info) 	Window 'Label7' of type 'AlfiskoSkin/Label' has been created. (0FD3DC80)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label7'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label7'.
+20/01/2017 21:08:03 (Info) 	Window 'Label8' of type 'AlfiskoSkin/Label' has been created. (0FD412C8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label8'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label8'.
+20/01/2017 21:08:03 (Info) 	Window 'Label9' of type 'AlfiskoSkin/Label' has been created. (0FD40CC0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label9'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label9'.
+20/01/2017 21:08:03 (Info) 	Window 'Label10' of type 'AlfiskoSkin/Label' has been created. (0FD400B0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label10'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label10'.
+20/01/2017 21:08:03 (Info) 	Window 'Label11' of type 'AlfiskoSkin/Label' has been created. (0FD3F4A0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label11'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label11'.
+20/01/2017 21:08:03 (Info) 	Window 'Label102' of type 'AlfiskoSkin/Label' has been created. (0FD3E288)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label102'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label102'.
+20/01/2017 21:08:03 (Info) 	Window 'Label112' of type 'AlfiskoSkin/Label' has been created. (0FD418D0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label112'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label112'.
+20/01/2017 21:08:03 (Info) 	Window 'Label92' of type 'AlfiskoSkin/Label' has been created. (0FD3E890)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label92'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label92'.
+20/01/2017 21:08:03 (Info) 	Window 'Label82' of type 'AlfiskoSkin/Label' has been created. (0FD3CA68)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label82'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label82'.
+20/01/2017 21:08:03 (Info) 	Window 'Label922' of type 'AlfiskoSkin/Label' has been created. (0FD3EE98)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label922'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label922'.
+20/01/2017 21:08:03 (Info) 	Window 'Label1022' of type 'AlfiskoSkin/Label' has been created. (0FD3FAA8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label1022'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label1022'.
+20/01/2017 21:08:03 (Info) 	Window 'Label822' of type 'AlfiskoSkin/Label' has been created. (0FD41ED8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label822'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label822'.
+20/01/2017 21:08:03 (Info) 	Window 'Label1122' of type 'AlfiskoSkin/Label' has been created. (0FD424E0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label1122'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label1122'.
+20/01/2017 21:08:03 (Info) 	Window 'Mirilla' of type 'Generic/Image' has been created. (0FD406B8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Mirilla'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Mirilla'.
+20/01/2017 21:08:03 (Info) 	Window 'Hitmarker' of type 'Generic/Image' has been created. (0FD3B850)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Hitmarker'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Hitmarker'.
+20/01/2017 21:08:03 (Info) 	Window 'Sangre' of type 'Generic/Image' has been created. (0FD42AE8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Sangre'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'Generic/Image' to window 'Sangre'.
+20/01/2017 21:08:03 (Info) 	Window 'Label9' of type 'AlfiskoSkin/Label' has been created. (0FD430F0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label9'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label9'.
+20/01/2017 21:08:03 (Std) 	---- Successfully completed loading of GUI layout from 'LastBulletHUD.layout' ----
+20/01/2017 21:08:03 (Info) 	Window 'root' of type 'DefaultWindow' has been created. (0FD3BE58)
+20/01/2017 21:08:03 (Std) 	Started creation of Scheme from XML specification:
+20/01/2017 21:08:03 (Std) 	---- CEGUI GUIScheme name: AlfiskoSkin
+20/01/2017 21:08:03 (Info) 	Finished creation of GUIScheme 'AlfiskoSkin' via XML file. (0FC08A70)
+20/01/2017 21:08:03 (Std) 	---- Returning existing instance of Scheme named 'AlfiskoSkin'.
+20/01/2017 21:08:03 (Info) 	---- Begining resource cleanup for GUI scheme 'AlfiskoSkin' ----
+20/01/2017 21:08:03 (Info) 	---- Resource cleanup for GUI scheme 'AlfiskoSkin' completed ----
+20/01/2017 21:08:03 (Info) 	GUI scheme 'AlfiskoSkin' has been unloaded (object destructor). (0FC08A70)
+20/01/2017 21:08:03 (Info) 	---- Beginning loading of GUI layout from 'SimpleDebug.layout' ----
+20/01/2017 21:08:03 (Info) 	Window 'DefaultWindow' of type 'DefaultWindow' has been created. (0FD3C460)
+20/01/2017 21:08:03 (Info) 	Window 'FrameWindow' of type 'AlfiskoSkin/FrameWindow' has been created. (0FD15BA0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/FrameWindow' to the window 'FrameWindow'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/FrameWindow' to window 'FrameWindow'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_titlebar__' of type 'AlfiskoSkin/Titlebar' has been created. (0FD43830)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Titlebar' to the window '__auto_titlebar__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Titlebar' to window '__auto_titlebar__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_closebutton__' of type 'AlfiskoSkin/ImageButton' has been created. (0FD43E40)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_closebutton__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_closebutton__'.
+20/01/2017 21:08:03 (Std) 	[IrrlichtRenderer] Created texture: _irr_tt_tex_0
+20/01/2017 21:08:03 (Info) 	Window 'Button' of type 'AlfiskoSkin/Button' has been created. (0FBF32D8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button'.
+20/01/2017 21:08:03 (Info) 	Window 'Button' of type 'AlfiskoSkin/Button' has been created. (0FBEF2E8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button'.
+20/01/2017 21:08:03 (Info) 	Window 'Button2' of type 'AlfiskoSkin/Button' has been created. (0FBEF8E0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button2'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button2'.
+20/01/2017 21:08:03 (Info) 	Window 'Button3' of type 'AlfiskoSkin/Button' has been created. (0FBEFED8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window 'Button3'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Button' to window 'Button3'.
+20/01/2017 21:08:03 (Info) 	Window 'Label' of type 'AlfiskoSkin/Label' has been created. (0FDAD1C0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label'.
+20/01/2017 21:08:03 (Info) 	Window 'Label2' of type 'AlfiskoSkin/Label' has been created. (0FDB1418)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Default' to the window 'Label2'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Label' to window 'Label2'.
+20/01/2017 21:08:03 (Info) 	Window 'LogWindow' of type 'AlfiskoSkin/FrameWindow' has been created. (0FDA9268)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/FrameWindow' to the window 'LogWindow'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/FrameWindow' to window 'LogWindow'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_titlebar__' of type 'AlfiskoSkin/Titlebar' has been created. (0FBF04D0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Titlebar' to the window '__auto_titlebar__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Titlebar' to window '__auto_titlebar__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_closebutton__' of type 'AlfiskoSkin/ImageButton' has been created. (0FDABB58)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_closebutton__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_closebutton__'.
+20/01/2017 21:08:03 (Std) 	[IrrlichtRenderer] Created texture: _irr_tt_tex_1
+20/01/2017 21:08:03 (Info) 	Window 'MultiLineEditbox' of type 'AlfiskoSkin/MultiLineEditbox' has been created. (0FDB7328)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/MultiLineEditbox' to the window 'MultiLineEditbox'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/MultiLineEditbox' to window 'MultiLineEditbox'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_hscrollbar__' of type 'AlfiskoSkin/HorizontalScrollbar' has been created. (0FDB0808)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Scrollbar' to the window '__auto_hscrollbar__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/HorizontalScrollbar' to window '__auto_hscrollbar__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_incbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0FDE3188)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_incbtn__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_incbtn__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_decbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0FDE5788)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_decbtn__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_decbtn__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_thumb__' of type 'AlfiskoSkin/HorizontalScrollbarThumb' has been created. (0FDE8590)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_thumb__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/HorizontalScrollbarThumb' to window '__auto_thumb__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_vscrollbar__' of type 'AlfiskoSkin/VerticalScrollbar' has been created. (0FDB2028)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Scrollbar' to the window '__auto_vscrollbar__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/VerticalScrollbar' to window '__auto_vscrollbar__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_incbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0FDEABB0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_incbtn__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_incbtn__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_decbtn__' of type 'AlfiskoSkin/ImageButton' has been created. (0FDEB1A8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_decbtn__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/ImageButton' to window '__auto_decbtn__'.
+20/01/2017 21:08:03 (Info) 	Window '__auto_thumb__' of type 'AlfiskoSkin/VerticalScrollbarThumb' has been created. (0FE0B7A8)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window '__auto_thumb__'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/VerticalScrollbarThumb' to window '__auto_thumb__'.
+20/01/2017 21:08:03 (Std) 	[IrrlichtRenderer] Created texture: DejaVuSans-12_auto_glyph_images_32
+20/01/2017 21:08:03 (Info) 	Window 'Editbox' of type 'AlfiskoSkin/Editbox' has been created. (0FDDCEA0)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Editbox' to the window 'Editbox'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'AlfiskoSkin/Editbox' to window 'Editbox'.
+20/01/2017 21:08:03 (Info) 	Window 'ImageButton' of type 'Generic/ImageButton' has been created. (0FE6F358)
+20/01/2017 21:08:03 (Info) 	Assigning the window renderer 'Core/Button' to the window 'ImageButton'
+20/01/2017 21:08:03 (Info) 	Assigning LookNFeel 'Generic/ImageButton' to window 'ImageButton'.
+20/01/2017 21:08:03 (Std) 	---- Successfully completed loading of GUI layout from 'SimpleDebug.layout' ----

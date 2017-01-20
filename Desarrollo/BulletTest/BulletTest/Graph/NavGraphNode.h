@@ -2,22 +2,30 @@
 #include "GraphNode.h"
 #include "../Otros/Vec2f.h"
 
+enum ExtraInfo {
+	T_NORMAL = 0,
+	T_ROCKET = 1,
+	T_PISTOLA = 2,
+	T_ASALTO = 3,
+	T_VIDA = 4
+};
+
 class NavGraphNode : public GraphNode {
 protected:
 	Vec2f m_position;//guardamos la posicion en el espacio del nodo en 2D
 
-	void* m_extraInfo;//Aqui se puede añadir mas informacion en caso de que sea necesario
+	ExtraInfo m_extraInfo;//Aqui se puede añadir mas informacion en caso de que sea necesario
 public:
 	//NavGraphNode() :m_extraInfo(extraInfo()) {};
 
-	NavGraphNode(int      idx,
-		Vec2f pos) :GraphNode(idx),
+	NavGraphNode(int idx, Vec2f pos, ExtraInfo info = T_NORMAL) :
+		GraphNode(idx),
 		m_position(pos),
-		m_extraInfo(extraInfo())
+		m_extraInfo(info)
 	{}
-	void* extraInfo()const { return m_extraInfo; };
+	ExtraInfo extraInfo()const { return m_extraInfo; };
 
-	void setExtraInfo(void* extra_inf) { m_extraInfo = extra_inf; }
+	void setExtraInfo(ExtraInfo extra_inf) { m_extraInfo = extra_inf; }
 
 	Vec2f getPosition() const { return m_position; }
 };
