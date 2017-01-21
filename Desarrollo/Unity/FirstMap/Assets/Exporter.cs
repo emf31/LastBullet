@@ -54,7 +54,7 @@ public class Exporter : MonoBehaviour
                             WayPoint[] w = g.GetComponentsInChildren<WayPoint>();
                            // WayPoint w = g.GetComponent<WayPoint>();
                            foreach(WayPoint waypoint in w) {
-                                Nodo nodo = new Nodo(waypoint.name);
+                                Nodo nodo = new Nodo(waypoint.name,waypoint.tag);
                                 nodo.posX = waypoint.transform.position.x;
                                 nodo.posY = waypoint.transform.position.y;
                                 nodo.posZ = waypoint.transform.position.z;
@@ -156,11 +156,13 @@ public class Objeto
 public class Nodo {
     public String name;
     public double posX, posY, posZ;
+    public string extraInfo;
     [SerializeField]
     public List<Int32> conexiones;
 
-    public  Nodo(String nombre) {
+    public  Nodo(String nombre,string tag) {
         name = nombre;
+        extraInfo = tag;
         conexiones = new List<Int32>();
     }
 }
