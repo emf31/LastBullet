@@ -175,7 +175,28 @@ void SparseGraph::readGraph(const std::string & path) {
 				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
 					json nodoJson = *arrayIt;
 
-					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]));
+					std::string extra = nodoJson["extraInfo"];
+					ExtraInfo g_extraInfo;
+					if (extra == "LifeObject") {
+						std::cout << "Leemos nodo vida \n";
+						g_extraInfo = T_VIDA;
+					}
+					else if (extra == "AsaltoDrop") {
+						std::cout << "Leemos nodo asaltoDrop \n";
+						g_extraInfo = T_ASALTO;
+					}
+					else if (extra == "PistolaDrop") {
+						std::cout << "Leemos nodo pistolaDrop \n";
+						g_extraInfo = T_PISTOLA;
+					}
+					else if (extra == "RocketLauncherDrop") {
+						std::cout << "Leemos nodo RocketLauncherDrop \n";
+						g_extraInfo = T_ROCKET;
+					}
+					else {
+						g_extraInfo = T_NORMAL;
+					}
+					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]),g_extraInfo);
 					addNode(nodo);
 				}
 				for (json::iterator arrayIterador1 = jsonArray.begin(); arrayIterador1 != jsonArray.end(); ++arrayIterador1) {
