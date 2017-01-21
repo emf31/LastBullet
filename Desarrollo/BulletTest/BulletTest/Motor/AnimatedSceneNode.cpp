@@ -23,8 +23,9 @@ void AnimatedSceneNode::setTexture(const io::path & texture, int material)
 void AnimatedSceneNode::setPosition(Vec3<float> position)
 {
 	m_node->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
-
 }
+
+
 
 Vec3<float> AnimatedSceneNode::getPosition()
 {
@@ -35,6 +36,7 @@ Vec3<float> AnimatedSceneNode::getPosition()
 void AnimatedSceneNode::setRotation(Vec3<float> rotation)
 {
 	m_node->setRotation(vector3df(rotation.getX(), rotation.getY(), rotation.getZ()));
+
 
 }
 

@@ -31,6 +31,10 @@ public:
 	virtual ISceneNode* getNodo() override;
 	virtual void setAnimation(int start, int end) override {};
 
+	virtual void updateAbsolutePosition() override {
+		m_node->updateAbsolutePosition();
+	}
+
 private:
 	ISceneNode* m_node;
 

@@ -31,7 +31,7 @@ public:
 
 	virtual ISceneNode* getNodo() = 0;
 	virtual void setAnimation(int start, int end)=0;
-
+	virtual void updateAbsolutePosition() = 0;
 
 protected:
 	IVideoDriver* m_irrDriver;

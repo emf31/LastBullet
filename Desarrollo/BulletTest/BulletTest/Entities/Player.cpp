@@ -58,6 +58,10 @@ void Player::inicializar()
 	tieneRocketLauncher = false;
 	tienePistola = false;
 
+	//Creamos la camara FPS
+	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	GraphicEngine::i().setCameraEntity(this);
+
 	granada = new Granada();
 	granada->inicializar();
 	granada->cargarContenido();
@@ -80,10 +84,10 @@ void Player::inicializar()
 	
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(rocket);
-	rocket->setEquipada(true);
-	tieneRocketLauncher = true;
-
+	listaWeapons->insertar(asalto);
+	asalto->setEquipada(true);
+	tieneAsalto = true;
+	bindWeapon();
 
 }
 
@@ -174,9 +178,7 @@ void Player::cargarContenido()
 	p_controller->m_deceleration_walk = 8.5f;
 	p_controller->m_maxSpeed_walk = 6.f;
 
-	//Creamos la camara FPS
-	GraphicEngine::i().createCamera(Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
-	GraphicEngine::i().setCameraEntity(this);
+
 
 	life_component.resetVida();
 

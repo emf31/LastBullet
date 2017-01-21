@@ -26,6 +26,14 @@ public:
 
 	Vec3<float> getRotation();
 
+	void addChild(std::shared_ptr<SceneNode> nodo) { 
+		m_camera->addChild(nodo->getNodo()); 
+
+	}
+	void updateAbsolutePosition() {
+		m_camera->updateAbsolutePosition();
+	}
+
 private:
 	ICameraSceneNode* m_camera;
 	

@@ -33,6 +33,10 @@ public:
 	virtual void setVisible(bool visible) override;
 	virtual void setAnimation(int start,int end) override;
 
+	virtual void updateAbsolutePosition() override {
+		m_node->updateAbsolutePosition();
+	}
+
 private:
 	IAnimatedMeshSceneNode* m_node;
 

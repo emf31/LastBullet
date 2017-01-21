@@ -30,10 +30,10 @@ void Asalto::inicializar()
 void Asalto::update(Time elapsedTime)
 {
 	if (equipada) {
-		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
 		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);
+		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -66,10 +66,15 @@ void Asalto::handleInput()
 void Asalto::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj");
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.5f, 0.5f, 0.5f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
 	//m_nodo->setTexture("../media/ice0.jpg", 0);
 	//m_nodo->setTexture("../media/ice0.jpg", 1);
+
+	
+
+	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
+
 }
 
 void Asalto::borrarContenido()

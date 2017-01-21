@@ -17,7 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(135.f, 135.f, 135.f);
+	fuerza = Vec3<float>(80.f,300.f, 80.f);
 }
 
 void Granada::update(Time elapsedTime)
@@ -60,15 +60,15 @@ void Granada::cargarContenido()
 
 	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
 	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/Granada/granada.obj");
-
+	m_nodo->setVisible(false);
 
 	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
 
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+	/*m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
 
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-	proxy->m_collisionFilterMask = col::rocketCollidesWith;
+	proxy->m_collisionFilterMask = col::rocketCollidesWith;*/
 
 	radioExplosion=30.f;
 
@@ -140,10 +140,11 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
+		m_nodo->setVisible(true);
 
-		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
+		//Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
 
-		setPosition(posicion);
+		setPosition(GraphicEngine::i().getActiveCamera()->getPosition());
 
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
@@ -157,13 +158,15 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 		btVector3 force = direccion2 * FUERZA;
 
+		//force.setY(force.getY());
+
 		m_rigidBody->applyCentralImpulse(force);
 		
 
 		if (Cliente::i().isConected()) {
 			TGranada granada;
 			granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-			granada.origen = posicion;
+			granada.origen = m_renderState.getPosition();
 			granada.direction = direccion;
 			Cliente::i().dispatchMessage(granada, LANZAR_GRANADA);
 		}
