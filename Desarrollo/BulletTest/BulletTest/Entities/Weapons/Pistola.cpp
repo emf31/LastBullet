@@ -19,7 +19,7 @@ void Pistola::inicializar()
 	capacidadAmmo = 6;
 	disparos = 0;
 	recarga = milliseconds(1000);
-	cadencia = milliseconds(350);
+	cadencia = milliseconds(250);
 	numCargadores = numCargadoresPistola;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 	FUERZA = btVector3(10, 10, 10);
@@ -28,10 +28,10 @@ void Pistola::inicializar()
 void Pistola::update(Time elapsedTime)
 {
 	if (equipada) {
-		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
 		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);
+		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -62,11 +62,12 @@ void Pistola::handleInput()
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.2f, 0.2f, 0.2f), "", "../media/arma/pistola.obj");
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/arma/pistola.obj");
 	m_nodo->setVisible(false);
 	//m_nodo->setTexture("../media/ice0.jpg", 0);
 	//m_nodo->setTexture("../media/ice0.jpg", 1);
 	//m_nodo->setTexture("../media/ice0.jpg", 2);
+	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
 
 }
 

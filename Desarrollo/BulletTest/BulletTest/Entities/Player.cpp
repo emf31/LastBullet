@@ -84,11 +84,14 @@ void Player::inicializar()
 	
 	listaWeapons = new Lista();
 
+
 	listaWeapons->insertar(asalto);
 	asalto->setEquipada(true);
 	tieneAsalto = true;
 	bindWeapon();
 
+	listaWeapons->insertar(pistola);
+	listaWeapons->insertar(rocket);
 }
 
 
@@ -174,10 +177,9 @@ void Player::cargarContenido()
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
-	p_controller->m_acceleration_walk = 6.3f;
+	p_controller->m_acceleration_walk = 5.3f;
 	p_controller->m_deceleration_walk = 8.5f;
-	p_controller->m_maxSpeed_walk = 6.f;
-
+	p_controller->m_maxSpeed_walk = 4.f;
 
 
 	life_component.resetVida();

@@ -17,10 +17,10 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-	damage = 15;
+	damage = 30;
 	capacidadAmmo = 30;
 	disparos = 0;
-	cadencia = milliseconds(50);
+	cadencia = milliseconds(80);
 	recarga = milliseconds(1000);
 	numCargadores = numCargadoresAsalto;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);

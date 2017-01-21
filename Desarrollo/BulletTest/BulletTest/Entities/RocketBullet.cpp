@@ -11,7 +11,7 @@
 
 
 RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(125), m_rotation(rotation), radioExplosion(30)
+m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation), radioExplosion(45)
 {
 
 	m_lifetime = seconds(5);
@@ -38,13 +38,13 @@ void RocketBullet::update(Time elapsedTime)
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
 	// Set rotation
-	vector3df Euler;
+	/*vector3df Euler;
 	const btQuaternion& TQuat = m_rigidBody->getOrientation();
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
 	Euler *= RADTODEG;
 
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));*/
 
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
 
@@ -60,10 +60,10 @@ void RocketBullet::handleInput()
 
 void RocketBullet::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", "");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
-
+	m_renderState.setRenderRot(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();

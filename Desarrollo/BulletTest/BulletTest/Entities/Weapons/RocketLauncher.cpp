@@ -24,10 +24,10 @@ void RocketLauncher::inicializar()
 void RocketLauncher::update(Time elapsedTime)
 {
 	if (equipada) {
-		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
 		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 7.3f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);
+		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -59,9 +59,10 @@ void RocketLauncher::handleInput()
 void RocketLauncher::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(2.2f, 2.2f, 2.2f), "", "../media/arma/rocket.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(1.f, 1.f, 1.f), "", "../media/arma/rocket.obj");
 	m_nodo->setVisible(false);
-	m_nodo->setTexture("../media/ice0.jpg", 0);
+
+	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
 
 }
 
@@ -90,7 +91,7 @@ void RocketLauncher::shoot() {
 
 			// posicion de la camara
 			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition());
-			start.setY(start.getY() + 3.f);
+			//start.setY(start.getY() + 3.f);
 
 			//añadimos un poco de desvio en el arma
 			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
