@@ -17,7 +17,7 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(80.f,300.f, 80.f);
+	fuerza = Vec3<float>(60.f,100.f, 60.f);
 }
 
 void Granada::update(Time elapsedTime)

@@ -48,7 +48,7 @@ public:
 
 	Clock clockRecargaGranada;
 
-	float timeRecargaGranada = 3;
+	float timeRecargaGranada = 2;
 
 private:
 	int estado=GRANADACARGADA;
