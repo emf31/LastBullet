@@ -89,6 +89,7 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 bool PathPlanner::CreatePathToItem(ExtraInfo tipo, std::list<Vec2f>& camino)
 {
 	std::list<int> listaNodos;
+	std::cout << vec3ToVec2(m_Bot->getRenderState()->getPosition()) << std::endl;
 	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
 
 

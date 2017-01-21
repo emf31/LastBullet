@@ -164,10 +164,7 @@ void Game::inicializar()
 
 
 	
-	e2 = new Enemy_Bot("HansTopo");
-	e2->inicializar();
-	e2->cargarContenido();
-	e2->setPosition(Map::i().searchSpawnPoint());
+
 	/*
 	Enemy *e = new Enemy("Son Goku");
 	e->inicializar();
@@ -244,6 +241,11 @@ void Game::inicializar()
 
 	//Añadimos observer al player
 	player->addObserver(&partida);	
+
+	e2 = new Enemy_Bot("HansTopo");
+	e2->inicializar();
+	e2->cargarContenido();
+	e2->setPosition(Map::i().searchSpawnPoint());
 
 }
 
