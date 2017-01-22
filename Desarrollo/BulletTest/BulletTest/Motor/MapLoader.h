@@ -6,7 +6,8 @@
 #include <vector>
 #include <TriggerRecordStruct.h>
 #include <memory>
-#include "../Motor/BasicSceneNode.h"
+#include <BasicSceneNode.h>
+#include <Entity.h>
 
 class MapLoader
 {
@@ -16,10 +17,10 @@ public:
 	~MapLoader();
 	void readMap(const std::string& name);
 	std::shared_ptr<BasicSceneNode> createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const io::path & mesh, std::string &name, float mass);
-	void createLifeObject(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
-	void createAsaltoDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
-	void createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
-	void createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const io::path & mesh, std::string &name);
+	static Entity* createLifeObject(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh );
+	static Entity* createAsaltoDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
+	static Entity* createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
+	static Entity* createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
 	void createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type);
 
 	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 

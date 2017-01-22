@@ -142,7 +142,7 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 }
 
-void Enemy_Bot::createPathToItem(ExtraInfo tipo)
+void Enemy_Bot::createPathToItem(const std::string& tipo)
 {
 
 	//Camino actual a seguir

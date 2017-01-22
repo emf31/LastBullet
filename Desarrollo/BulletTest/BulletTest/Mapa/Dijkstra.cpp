@@ -33,7 +33,7 @@ bool Dijkstra::isSatisfied(int NextClosestNode)
 	bool satisfied = false;
 	NavGraphNode& nodo = m_grafo.getNode(NextClosestNode);
 
-	if (nodo.extraInfo() == m_tipo) {
+	if (nodo.extraInfo() != NULL && nodo.extraInfo()->getClassName() == m_tipo) {
 		satisfied = true;
 		m_Target = nodo.Index();
 	}

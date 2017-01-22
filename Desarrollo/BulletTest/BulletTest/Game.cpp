@@ -269,22 +269,22 @@ bool Game::processEvents()
 
 	}else if (MastEventReceiver::i().keyPressed(KEY_KEY_5)) {
 
-		e2->createPathToItem(T_VIDA);
+		e2->createPathToItem("LifeObject");
 
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_6)) {
 
-		e2->createPathToItem(T_PISTOLA);
+		e2->createPathToItem("PistolaDrop");
 
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_7)) {
 
-		e2->createPathToItem(T_ROCKET);
+		e2->createPathToItem("RocketDrop");
 
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_8)) {
 
-		e2->createPathToItem(T_ASALTO);
+		e2->createPathToItem("AsaltoDrop");
 
 	}
 	else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {

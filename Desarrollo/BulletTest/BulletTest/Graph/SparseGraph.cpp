@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "../json/json.hpp"
+#include <MapLoader.h>
 
 //const NavGraphNode& GetNode(int idx) { return m_nodes.at(idx); };
 
@@ -174,29 +175,28 @@ void SparseGraph::readGraph(const std::string & path) {
 				json jsonArray = obj["children"];
 				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
 					json nodoJson = *arrayIt;
-
+					Entity* ent = NULL;
 					std::string extra = nodoJson["extraInfo"];
-					ExtraInfo g_extraInfo;
 					if (extra == "LifeObject") {
-						std::cout << "Leemos nodo vida \n";
-						g_extraInfo = T_VIDA;
+						ent = MapLoader::createLifeObject(Vec3<float>(nodoJson["posX"], nodoJson["posY"],nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "LifeObject", "");
+						//std::cout << "Leemos nodo vida \n";
 					}
 					else if (extra == "AsaltoDrop") {
-						std::cout << "Leemos nodo asaltoDrop \n";
-						g_extraInfo = T_ASALTO;
+						//std::cout << "Leemos nodo asaltoDrop \n";
+						ent = MapLoader::createAsaltoDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "AsaltoDrop", "");
 					}
 					else if (extra == "PistolaDrop") {
-						std::cout << "Leemos nodo pistolaDrop \n";
-						g_extraInfo = T_PISTOLA;
+						//std::cout << "Leemos nodo pistolaDrop \n";
+						ent = MapLoader::createPistolaDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "PistolaDrop", "");
 					}
 					else if (extra == "RocketLauncherDrop") {
-						std::cout << "Leemos nodo RocketLauncherDrop \n";
-						g_extraInfo = T_ROCKET;
+						//std::cout << "Leemos nodo RocketLauncherDrop \n";
+						ent = MapLoader::createRocektLauncherDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "RocketDrop", "");
 					}
-					else {
-						g_extraInfo = T_NORMAL;
-					}
-					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]),g_extraInfo);
+
+
+					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]));
+					nodo.setExtraInfo(ent);
 					addNode(nodo);
 				}
 				for (json::iterator arrayIterador1 = jsonArray.begin(); arrayIterador1 != jsonArray.end(); ++arrayIterador1) {

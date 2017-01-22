@@ -48,7 +48,7 @@ public:
 	void updateMovement();
 
 	void createPathToPosition(Vec2f vec);
-	void createPathToItem(ExtraInfo tipo);
+	void createPathToItem(const std::string& tipo);
 
 private:
 
