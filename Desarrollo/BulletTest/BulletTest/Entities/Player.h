@@ -34,7 +34,6 @@ public:
 	virtual void setPosition(const Vec3<float> &pos) override;
 
 
-	void run();
 	void setWeapon(int weapon);
 
 	void jump();

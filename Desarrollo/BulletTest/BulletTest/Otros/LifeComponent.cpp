@@ -4,7 +4,7 @@
 #include <Map.h>
 
 LifeComponent::LifeComponent(Entity * player) 
-	: m_player(player), m_isDying(false)
+	: m_player(player), m_isDying(false), m_vida(100)
 {
 }
 

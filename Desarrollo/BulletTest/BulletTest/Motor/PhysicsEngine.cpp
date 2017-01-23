@@ -5,6 +5,7 @@
 #include <set>
 #include <BulletCollision\CollisionDispatch\btCollisionObject.h>
 
+
 #include <MessageHandler.h>
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
@@ -117,10 +118,6 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(ent);
-
-	actorGhost->setCcdMotionThreshold(1e-7);
-	actorGhost->setCcdSweptSphereRadius(0.5f);
-	//body->setCcdMotionThreshold(...); and body->setCcdSweptSphereRadius(0.2f);
 
 	actorGhost->setCollisionShape(m_pCollisionShape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);

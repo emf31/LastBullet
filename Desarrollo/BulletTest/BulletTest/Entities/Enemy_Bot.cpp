@@ -3,8 +3,10 @@
 #include <PhysicsEngine.h>
 #include <PathPlanner.h>
 #include <PathFollow.h>
+#include <Player.h>
 
-Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
+Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
+	life_component(this)
 {
 }
 
@@ -26,6 +28,7 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	updateMovement();
 
+	life_component.update();
 
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
@@ -37,7 +40,6 @@ void Enemy_Bot::update(Time elapsedTime)
 
 
 	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
-
 
 	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 
@@ -83,6 +85,13 @@ void Enemy_Bot::cargarContenido()
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
+	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
+	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
+	proxy->m_collisionFilterMask = col::enemyCollidesWith;
+
+	
+
+
 	p_controller->m_acceleration_walk = 4.3f;
 	p_controller->m_deceleration_walk = 6.5f;
 	p_controller->m_maxSpeed_walk = 2.f;
@@ -100,6 +109,23 @@ void Enemy_Bot::borrarContenido()
 
 void Enemy_Bot::handleMessage(const Message & message)
 {
+	if (message.mensaje == "COLISION_BALA") {
+		if (life_component.isDying() == false) {
+			//TODO si la IA esta en el server habra que cambiar esta funcion
+			//Este float * es una referencia a una variable de clase asi que no hay problema
+			/*TImpactoBala impacto;
+			impacto.damage = *static_cast<float*>(message.data);
+			impacto.guid = m_guid;
+
+			Cliente::i().dispatchMessage(impacto, IMPACTO_BALA);*/
+
+			life_component.restaVida(*static_cast<float*>(message.data));
+
+
+			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+		}
+	}
+	
 }
 
 bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
@@ -109,9 +135,9 @@ bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 
 void Enemy_Bot::setPosition(const Vec3<float>& pos)
 {
+	p_controller->reset(PhysicsEngine::i().m_world);
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-	p_controller->reset(PhysicsEngine::i().m_world);
 	m_nodo->setPosition(pos);
 }
 
@@ -129,16 +155,22 @@ bool Enemy_Bot::isAtPosition(Vec2f pos)
 
 void Enemy_Bot::updateMovement()
 {
-	Vec2f direccion = m_PathFollow->Calculate();
+	if (life_component.isDying() == false) {
+		Vec2f direccion = m_PathFollow->Calculate();
 
-	if (!direccion.Zero()) {
-		m_vHeading = direccion;
+		if (!direccion.Zero()) {
+			m_vHeading = direccion;
+		}
+
+
+		btVector3 vel = btVector3(direccion.x, 0, direccion.y);
+
+		p_controller->setWalkDirection(vel);
+	}
+	else {
+		p_controller->reset(PhysicsEngine::i().m_world);
 	}
 	
-
-	btVector3 vel = btVector3(direccion.x, 0, direccion.y);
-
-	p_controller->setWalkDirection(vel);
 	
 }
 

@@ -46,21 +46,18 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
 
 			if (estado == DISPONIBLE) {
-				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRespawnWeapon.restart();
-
-				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
-				m_nodo->setVisible(false);
 				if (Cliente::i().isConected()) {
 					TId tID;
 					tID.id = m_id;
+
 					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
 				}
-				
+				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
+				m_nodo->setVisible(false);
 
 			}
-
 		}
 	}
 }

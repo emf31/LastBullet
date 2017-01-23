@@ -5,6 +5,7 @@
 #include <Vec2f.h>
 #include <KinematicCharacterController.h>
 #include <NavGraphNode.h>
+#include <LifeComponent.h>
 
 class PathPlanner;
 class PathFollow;
@@ -33,6 +34,8 @@ public:
 
 	//Devolvemos el path planning
 	PathPlanner* getPathPlanning() const { return m_PathPlanner; }
+
+	LifeComponent& getLifeComponent() { return life_component; }
 
 	//Devuelve true si el bot esta en esa posicion
 	bool isAtPosition(Vec2f pos);
@@ -76,6 +79,8 @@ private:
 
 
 	KinematicCharacterController* p_controller;
+
+	LifeComponent life_component;
 
 	friend class PathPlanner;
 };

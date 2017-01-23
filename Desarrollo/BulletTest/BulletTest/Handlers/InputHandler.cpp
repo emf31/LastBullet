@@ -10,7 +10,6 @@
 #include "../Command/ShootRocket.h"
 #include "../Command/ShootPistola.h"
 #include "../Command/ShootCommandGranada.h"
-#include "../Command/RunCommand.h"
 #include "../Command/Reload.h"
 #include "../MastEventReceiver.hpp"
 #include <irrlicht.h>
@@ -39,7 +38,6 @@ InputHandler::InputHandler()
 	shoot_rocket = CommandPtr(new ShootRocket());
 	shoot_pistola = CommandPtr(new ShootPistola());
 	shoot_commandGranada = CommandPtr(new ShootCommandGranada());
-	run_command = CommandPtr(new RunCommand());
 	reload = CommandPtr(new Reload());
 
 	// Player
@@ -53,7 +51,6 @@ InputHandler::InputHandler()
 	commands[KEY_SPACE] = jump;
 	commands[KEY_LBUTTON] = shoot_pistola;
 	commands[KEY_RBUTTON] = shoot_commandGranada;
-	commands[KEY_LSHIFT] = run_command;
 	
 	
 }

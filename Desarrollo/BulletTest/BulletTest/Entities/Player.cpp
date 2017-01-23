@@ -238,12 +238,6 @@ void Player::setPosition(const Vec3<float>& pos)
 	m_nodo->setPosition(pos);
 }
 
-void Player::run()
-{
-	if(p_controller->onGround())
-		p_controller->setSpeed(3.0);
-}
-
 void Player::jump() {
 
 

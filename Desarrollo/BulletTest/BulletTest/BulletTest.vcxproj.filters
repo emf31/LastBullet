@@ -319,9 +319,6 @@
     <ClInclude Include="Entities\WeaponDrops\RocketLauncherDrop.h">
       <Filter>Headers\Entities\WeaponDrops</Filter>
     </ClInclude>
-    <ClInclude Include="Command\RunCommand.h">
-      <Filter>Headers\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Otros\SafeQueue.h">
       <Filter>Headers\Otros</Filter>
     </ClInclude>

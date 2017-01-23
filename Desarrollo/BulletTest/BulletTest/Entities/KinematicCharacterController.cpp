@@ -22,8 +22,7 @@ subject to the following restrictions:
 #include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
 #include "LinearMath/btDefaultMotionState.h"
-#include <iostream>
-#include "KinematicCharacterController.h"
+#include <KinematicCharacterController.h>
 
 
 // static helper method
@@ -169,17 +168,8 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	jumpedOnAir = false;
 }
 
-float KinematicCharacterController::getSpeedFactor() const {
-	return m_speed;
-}
-
-void KinematicCharacterController::setSpeed(float speed) {
-	m_speed = btScalar(speed);
-}
-
 KinematicCharacterController::~KinematicCharacterController()
 {
-
 }
 
 btPairCachingGhostObject* KinematicCharacterController::getGhostObject()
@@ -577,7 +567,7 @@ void KinematicCharacterController::stepDown(btCollisionWorld* collisionWorld, bt
 		break;
 	}
 
-	if (m_ghostObject->hasContactResponse() && (callback.hasHit() && needsCollision(m_ghostObject, callback.m_hitCollisionObject)) || runonce == true)
+	if ((m_ghostObject->hasContactResponse() && (callback.hasHit() && needsCollision(m_ghostObject, callback.m_hitCollisionObject))) || runonce == true)
 	{
 		// we dropped a fraction of the height -> hit floor
 		btScalar fraction = (m_currentPosition.getY() - callback.m_hitPointWorld.getY()) / 2;
@@ -630,11 +620,8 @@ void KinematicCharacterController::setWalkDirection
 	const btVector3& walkDirection
 )
 {
-	
-
 	m_useWalkDirection = true;
 	m_walkDirection = walkDirection;
-	
 	m_normalizedDirection = getNormalizedVector(m_walkDirection);
 }
 
@@ -773,7 +760,7 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 	m_wasOnGround = onGround();
 
 	//btVector3 lvel = m_walkDirection;
-	btScalar c = 0.0f;
+	//btScalar c = 0.0f;
 
 	if (m_walkDirection.length2() > 0)
 	{
@@ -821,12 +808,11 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 	//}
 
 	if (m_useWalkDirection) {
-
 		m_walkDirection += prev_walkDirection;
 
 		m_walkDirection += m_walkDirection * m_acceleration_walk * dt;
 
-		
+
 
 
 		float speedXZ = m_walkDirection.length();
@@ -834,7 +820,6 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 		if (speedXZ > m_maxSpeed_walk) {
 			m_walkDirection = m_walkDirection / speedXZ * m_maxSpeed_walk;
 		}
-			
 
 		stepForwardAndStrafe(collisionWorld, m_walkDirection);
 	}
@@ -847,11 +832,6 @@ void KinematicCharacterController::playerStep(btCollisionWorld* collisionWorld, 
 
 		// how far will we move while we are moving?
 		btVector3 move = m_walkDirection * dtMoving;
-		// Prevent from going over maximum speed
-		/*float speedXZ = move.length();
-
-		if (speedXZ > 360.f)
-			move = move / speedXZ * 360.f;*/
 
 		//printf("  dtMoving: %f", dtMoving);
 
@@ -926,34 +906,11 @@ bool KinematicCharacterController::canJump()
 	}
 
 	return false;
-
 }
 
-void KinematicCharacterController::jump(const btVector3& v)//Este jump es el jump del salto
+void KinematicCharacterController::jump(const btVector3& v)
 {
-	if(canJump()){
-	m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
-	m_verticalVelocity = m_jumpSpeed;
-	m_wasJumping = true;
-
-	m_jumpAxis = v.length2() == 0 ? m_up : v.normalized();
-
-	m_jumpPosition = m_ghostObject->getWorldTransform().getOrigin();
-
-#if 0
-	currently no jumping.
-		btTransform xform;
-	m_rigidBody->getMotionState()->getWorldTransform(xform);
-	btVector3 up = xform.getBasis()[1];
-	up.normalize();
-	btScalar magnitude = (btScalar(1.0) / m_rigidBody->getInvMass()) * btScalar(8.0);
-	m_rigidBody->applyCentralImpulse(up * magnitude);
-#endif
-	}
-}
-
-void KinematicCharacterController::Rocketjump(const btVector3& v)//Este jump es el jump del rocketJump
-{
+	if (canJump()) {
 		m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
 		m_verticalVelocity = m_jumpSpeed;
 		m_wasJumping = true;
@@ -971,7 +928,30 @@ void KinematicCharacterController::Rocketjump(const btVector3& v)//Este jump es 
 		btScalar magnitude = (btScalar(1.0) / m_rigidBody->getInvMass()) * btScalar(8.0);
 		m_rigidBody->applyCentralImpulse(up * magnitude);
 #endif
+	}
 	
+}
+
+void KinematicCharacterController::Rocketjump(const btVector3& v)//Este jump es el jump del rocketJump
+{
+	m_jumpSpeed = v.length2() == 0 ? m_SetjumpSpeed : v.length();
+	m_verticalVelocity = m_jumpSpeed;
+	m_wasJumping = true;
+
+	m_jumpAxis = v.length2() == 0 ? m_up : v.normalized();
+
+	m_jumpPosition = m_ghostObject->getWorldTransform().getOrigin();
+
+#if 0
+	currently no jumping.
+		btTransform xform;
+	m_rigidBody->getMotionState()->getWorldTransform(xform);
+	btVector3 up = xform.getBasis()[1];
+	up.normalize();
+	btScalar magnitude = (btScalar(1.0) / m_rigidBody->getInvMass()) * btScalar(8.0);
+	m_rigidBody->applyCentralImpulse(up * magnitude);
+#endif
+
 }
 
 void KinematicCharacterController::setGravity(const btVector3& gravity)
@@ -1077,5 +1057,3 @@ btQuaternion KinematicCharacterController::getRotation(btVector3& v0, btVector3&
 
 	return shortestArcQuatNormalize2(v0, v1);
 }
-
-

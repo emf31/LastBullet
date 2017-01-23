@@ -14,13 +14,11 @@ subject to the following restrictions:
 */
 
 
-#ifndef KINEMATIC_CHARACTER_CONTROLLER_H
-#define KINEMATIC_CHARACTER_CONTROLLER_H
+#pragma once
 
-#include "LinearMath/btVector3.h"
-#include "BulletDynamics\Character\btCharacterControllerInterface.h"
+#include <LinearMath/btVector3.h>
 
-#include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
+#include <BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h>
 
 
 class btCollisionShape;
@@ -35,8 +33,7 @@ class btPairCachingGhostObject;
 ///Interaction between btKinematicCharacterController and dynamic rigid bodies needs to be explicity implemented by the user.
 ATTRIBUTE_ALIGNED16(class) KinematicCharacterController
 {
-protected:
-
+private:
 
 	btScalar m_halfHeight;
 
@@ -54,8 +51,6 @@ protected:
 	btScalar m_maxSlopeCosine;  // Cosine equivalent of m_maxSlopeRadians (calculated once when set, for optimization)
 	btScalar m_gravity;
 
-	
-
 	btScalar m_turnAngle;
 
 	btScalar m_stepHeight;
@@ -65,8 +60,6 @@ protected:
 							  ///this is the desired walk direction, set by the user
 	btVector3	m_walkDirection;
 	btVector3	prev_walkDirection;
-
-	
 
 	btVector3	m_normalizedDirection;
 	btVector3	m_AngVel;
@@ -113,7 +106,7 @@ protected:
 	void stepForwardAndStrafe(btCollisionWorld* collisionWorld, const btVector3& walkMove);
 	void stepDown(btCollisionWorld* collisionWorld, btScalar dt);
 
-	bool needsCollision(const btCollisionObject* body0, const btCollisionObject* body1);
+	virtual bool needsCollision(const btCollisionObject* body0, const btCollisionObject* body1);
 
 	void setUpVector(const btVector3& up);
 
@@ -131,9 +124,11 @@ public:
 	float m_acceleration_walk;
 	float m_deceleration_walk;
 	float m_maxSpeed_walk;
+	bool jumpedOnAir;
+
 
 	///btActionInterface interface
-	void updateAction(btCollisionWorld* collisionWorld,btScalar deltaTime)
+	virtual void updateAction(btCollisionWorld* collisionWorld,btScalar deltaTime)
 	{
 		preStep(collisionWorld);
 		playerStep(collisionWorld, deltaTime);
@@ -151,22 +146,21 @@ public:
 	///	increment the position each simulation iteration, regardless
 	///	of dt.
 	/// This call will reset any velocity set by setVelocityForTimeInterval().
-	 void	setWalkDirection(const btVector3& walkDirection);
+	virtual void	setWalkDirection(const btVector3& walkDirection);
 
 	/// Caller provides a velocity with which the character should move for
 	///	the given time period.  After the time period, velocity is reset
 	///	to zero.
 	/// This call will reset any walk direction set by setWalkDirection().
 	/// Negative time intervals will result in no motion.
-	 void setVelocityForTimeInterval(const btVector3& velocity,
+	virtual void setVelocityForTimeInterval(const btVector3& velocity,
 		btScalar timeInterval);
 
-	 void setAngularVelocity(const btVector3& velocity);
-	 const btVector3& getAngularVelocity() const;
+	virtual void setAngularVelocity(const btVector3& velocity);
+	virtual const btVector3& getAngularVelocity() const;
 
-	 void setLinearVelocity(const btVector3& velocity);
-	 btVector3 getLinearVelocity() const;
-	 float getSpeedFactor() const;
+	virtual void setLinearVelocity(const btVector3& velocity);
+	virtual btVector3 getLinearVelocity() const;
 
 	void setLinearDamping(btScalar d) { m_linearDamping = btClamped(d, (btScalar)btScalar(0.0), (btScalar)btScalar(1.0)); }
 	btScalar getLinearDamping() const { return  m_linearDamping; }
@@ -188,10 +182,11 @@ public:
 	void setMaxJumpHeight(btScalar maxJumpHeight);
 	bool canJump();
 
-	void jump(const btVector3& v = btVector3());
 	void Rocketjump(const btVector3& v = btVector3());
 
-	void applyImpulse(const btVector3& v) { Rocketjump(v); }
+	void jump(const btVector3& v = btVector3());
+
+	void applyImpulse(const btVector3& v) { jump(v); }
 
 	void setGravity(const btVector3& gravity);
 	btVector3 getGravity() const;
@@ -213,9 +208,5 @@ public:
 	bool onGround() const;
 	void setUpInterpolate(bool value);
 
-	bool jumpedOnAir;
-	void setSpeed(float speed);
 
 };
-
-#endif // BT_KINEMATIC_CHARACTER_CONTROLLER_H

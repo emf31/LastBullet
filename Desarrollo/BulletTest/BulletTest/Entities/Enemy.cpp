@@ -123,7 +123,6 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		std::cout << m_isDying << std::endl;
 		if (!m_isDying) {
 			//Este float * es una referencia a una variable de clase asi que no hay problema
 			TImpactoBala impacto;

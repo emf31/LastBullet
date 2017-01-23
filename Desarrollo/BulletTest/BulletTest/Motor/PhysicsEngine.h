@@ -30,8 +30,7 @@ namespace col {
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
-	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
-	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja;
+	const int cajaCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
 }
 
 class PhysicsEngine

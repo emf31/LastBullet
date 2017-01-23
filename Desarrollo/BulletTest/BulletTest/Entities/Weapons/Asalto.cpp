@@ -126,7 +126,7 @@ void Asalto::shoot()
 				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
 				if (ent != EntityManager::i().getEntity(PLAYER))
 				{
-					if (ent->getClassName() == "Enemy") {
+					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
 						Message msg(ent, "COLISION_BALA", &damage);
 						MessageHandler::i().sendMessage(msg);
 					}
