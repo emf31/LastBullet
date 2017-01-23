@@ -19,25 +19,19 @@ public:
 
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
 
-	void setPosition(const Vec3<float>& pos);
-	int getEstado() { return estado;}
+	int getEstado() const{ return estado;}
 	void setEstado(int newEstado) { estado = newEstado; }
+
 	// Heredado vía Entity
 	virtual void inicializar() override;
-
 	virtual void update(Time elapsedTime) override;
-
 	virtual void handleInput() override;
-
 	virtual void cargarContenido() override;
-
 	virtual void borrarContenido() override;
-
 	virtual void handleMessage(const Message& message) override;
-
 	virtual std::string getClassName() { return "Granada"; }
-
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+	virtual void setPosition(const Vec3<float> &pos) override;
 
 	void shoot(const btVector3& posicionPlayer);
 	void serverShoot(TGranada& g);
@@ -51,8 +45,8 @@ public:
 	float timeRecargaGranada = 2;
 
 private:
-	int estado=GRANADACARGADA;
-	RakNet::RakNetGUID guidLanzador=RakNet::UNASSIGNED_RAKNET_GUID;
+	int estado= GRANADACARGADA;
+	RakNet::RakNetGUID guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
 	Vec3<float> fuerza;
 	float radioExplosion;
 	btGhostObject* m_explosion;

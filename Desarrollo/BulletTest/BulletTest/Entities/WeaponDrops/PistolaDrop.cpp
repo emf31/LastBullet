@@ -70,3 +70,4 @@ bool PistolaDrop::handleTrigger(TriggerRecordStruct * Trigger)
 	//ArmaCogida();
 	return true;
 }
+

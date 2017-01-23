@@ -28,6 +28,8 @@ public:
 	virtual std::string getClassName() override;
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
+	virtual void setPosition(const Vec3<float> &pos) override;
 	
 private:
 	Vec3<float> m_direction;

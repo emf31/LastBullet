@@ -23,7 +23,7 @@ public:
 		return singleton;
 	}
 
-	int numClientes() {
+	int numClientes() const {
 		return m_jugadores.size();
 	}
 	
@@ -59,22 +59,6 @@ public:
 	//Borra la cola de borrado de entities, se llama en cada iteracion
 	void cleanDeleteQueue();
 
-	/*void cambiaTabla(TFilaTabla& fila) {
-		std::cout << "Recibo como fila a:  " << fila.name << std::endl;
-		m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
-	}
-	void muestraTabla(InGameHUD *ingame);
-	void aumentaKill(RakNet::RakNetGUID &guid) {
-		TFilaTabla *fila;
-		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-		fila->kills++;
-	}
-	void aumentaMuerte(RakNet::RakNetGUID &guid) {
-		TFilaTabla *fila;
-		fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
-		fila->deaths++;
-	}*/
-
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	std::list<Entity*> getCharacters();
@@ -84,7 +68,6 @@ public:
 	std::list<Entity*> getRockets();
 	std::list<Entity*> getPistolas();
 	std::list<Entity*> getAsalto();
-	std::list<Entity*> getAllEntitiesTriggerables();
 
 	
 
@@ -97,7 +80,6 @@ private:
 	
 	std::unordered_map<int, Entity*> m_entities;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
-	//std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 	
 	std::unordered_set<Entity*> delete_set;
 

@@ -139,7 +139,7 @@ void Cliente::update() {
 				//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(bala.damage, bala.guid);
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
 				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
 
@@ -162,7 +162,7 @@ void Cliente::update() {
 
 				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
 				//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent()->restaVida(impacto.damage, impacto.guidDisparado);
+				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
 			}

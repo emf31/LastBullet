@@ -31,8 +31,8 @@ public:
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
+	virtual void setPosition(const Vec3<float> &pos) override;
 
-	void setPosition(Vec3<float> pos);
 	void updateEnemigo(Vec3<float> pos);
 
 	void updateAnimation();

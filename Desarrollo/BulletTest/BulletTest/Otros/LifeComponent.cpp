@@ -3,10 +3,9 @@
 #include <Cliente.h>
 #include <Map.h>
 
-LifeComponent::LifeComponent(Player * player)
+LifeComponent::LifeComponent(Entity * player) 
+	: m_player(player), m_isDying(false)
 {
-	m_player = player;
-	m_isDying = false;
 }
 
 LifeComponent::~LifeComponent()
@@ -43,18 +42,16 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 	
 }
 
-bool LifeComponent::update()
+void LifeComponent::update()
 {
 	//Una vez termine la animacion de muerte, volvemos a movernos
 	if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
 		m_isDying = false;
 		m_vida = 100;
 
-		m_player->p_controller->reset(PhysicsEngine::i().m_world);
 		m_player->setPosition(Map::i().searchSpawnPoint());
 	}
 
-	return m_isDying;
 }
 
 void LifeComponent::resetVida()

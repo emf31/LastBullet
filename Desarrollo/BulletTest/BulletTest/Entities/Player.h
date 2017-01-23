@@ -19,20 +19,19 @@ public:
 	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
-	void setPosition(Vec3<float> &pos);
+	
 	
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
 	virtual void update(Time elapsedTime) override;
-
 	virtual void handleInput() override;
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message& message) override;
 	virtual std::string getClassName() { return "Player"; }
-
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+	virtual void setPosition(const Vec3<float> &pos) override;
 
 
 	void run();
@@ -59,7 +58,7 @@ public:
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
 
-	LifeComponent* getLifeComponent() { return &life_component; }
+	LifeComponent& getLifeComponent() { return life_component; }
 
 	std::string getCurrentWeapon() {
 		return listaWeapons->valorActual()->getClassName();
@@ -131,6 +130,7 @@ private:
 	float height;
 	float mass;
 
+	//Current facing player vector
 	Vec3<float> speedFinal;
 
 	

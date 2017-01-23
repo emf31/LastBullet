@@ -66,7 +66,6 @@ void PhysicsEngine::inicializar()
 	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;
 
 
-	m_rigidBodies = std::list<btRigidBody*>();
 
 
 	
@@ -119,11 +118,16 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(ent);
 
+	actorGhost->setCcdMotionThreshold(1e-7);
+	actorGhost->setCcdSweptSphereRadius(0.5f);
+	//body->setCcdMotionThreshold(...); and body->setCcdSweptSphereRadius(0.2f);
+
 	actorGhost->setCollisionShape(m_pCollisionShape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
 	KinematicCharacterController* p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
 	p_controller->setUp(btVector3(0, 1, 0));
+
 
 	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character, col::characterCollidesWith);
 

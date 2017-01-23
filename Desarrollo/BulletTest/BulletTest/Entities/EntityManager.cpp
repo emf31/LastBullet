@@ -31,9 +31,7 @@ void EntityManager::update(Time elapsedTime)
 void EntityManager::updateRender(float interpolation)
 {
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-	//	std::cout << "Entity ANTES: " << i->second->getName() << std::endl;
 		i->second->updateRender(interpolation);
-	//	std::cout << "Entity DESPUES: " << i->second->getName() << std::endl;
 	}
 }
 
@@ -136,11 +134,6 @@ void EntityManager::cleanDeleteQueue()
 	delete_set.clear();
 }
 
-/*void EntityManager::muestraTabla(InGameHUD* ingame)
-{
-	
-}*/
-
 Entity * EntityManager::getEntity(int id)
 {
 	auto found = m_entities.find(id);
@@ -166,7 +159,7 @@ std::list<Entity*> EntityManager::getEnemies()
 {
 	std::list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-		if (i->second->getClassName() == "Enemy")
+		if (i->second->getClassName() == "Enemy" || i->second->getClassName() == "Enemy_Bot")
 			characters.push_back(i->second);
 	}
 	return characters;
@@ -219,14 +212,6 @@ std::list<Entity*> EntityManager::getAsalto() {
 	return weapons;
 }
 
-std::list<Entity*> EntityManager::getAllEntitiesTriggerables()
-{
-	std::list<Entity*>characters;
-	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-			characters.push_back(i->second);
-	}
-	return characters;
-}
 
 Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
 {

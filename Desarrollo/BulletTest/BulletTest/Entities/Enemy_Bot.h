@@ -25,25 +25,17 @@ public:
 	virtual void borrarContenido() override;
 	virtual void handleMessage(const Message & message) override;
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
-	virtual std::string getClassName() { return "Enemy"; }
+	virtual std::string getClassName() { return "Enemy_Bot"; }
+	virtual void setPosition(const Vec3<float> &pos) override;
 
-	void setPosition(Vec3<float> pos);
 
-	float getRadio() const {
-		return radius;
-	}
+	float getRadio() const { return radius; }
 
 	//Devolvemos el path planning
 	PathPlanner* getPathPlanning() const { return m_PathPlanner; }
 
 	//Devuelve true si el bot esta en esa posicion
-	bool isAtPosition(Vec2f pos)
-	{
-		const static double tolerance = 3.0;
-		Vec2f curr_pos = vec3ToVec2(m_renderState.getPosition());
-
-		return Vec2f(curr_pos - pos).Magnitude() < tolerance * tolerance;
-	}
+	bool isAtPosition(Vec2f pos);
 
 	void updateMovement();
 
@@ -69,7 +61,6 @@ private:
 
 	//Calcula el vector movimiento del bot
 	PathFollow*	m_PathFollow;
-
 
 	
 	//the direction the bot is facing (and therefore the direction of aim). 

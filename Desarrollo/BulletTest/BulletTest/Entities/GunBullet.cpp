@@ -66,3 +66,7 @@ bool GunBullet::handleTrigger(TriggerRecordStruct * Trigger)
 {
 	return false;
 }
+
+void GunBullet::setPosition(const Vec3<float>& pos)
+{
+}

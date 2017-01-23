@@ -77,7 +77,7 @@ void LifeObject::handleMessage(const Message & message)
 				
 				m_nodo->setVisible(false);
 
-				static_cast<Player*>(message.data)->getLifeComponent()->sumarVida();
+				static_cast<Player*>(message.data)->getLifeComponent().sumarVida();
 
 			}
 
@@ -101,6 +101,28 @@ bool LifeObject::handleTrigger(TriggerRecordStruct* Trigger) {
 	//VidaCogida();
 
 	return true;
+}
+
+void LifeObject::setPosition(const Vec3<float>& pos)
+{
+	m_renderState.setPosition(pos);
+
+	btTransform transform = m_ghostObject->getWorldTransform();
+	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	m_ghostObject->setWorldTransform(transform);
+
+	m_nodo->setPosition(pos);
+}
+
+void LifeObject::setCollisionGroup(int group) {
+	btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
+	proxy->m_collisionFilterGroup = group;
+}
+
+void LifeObject::setCollisionMask(int mask) {
+	btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
+	proxy->m_collisionFilterMask = mask;
+
 }
 
 void LifeObject::asignaTiempo(Clock tiempo) {

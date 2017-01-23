@@ -9,10 +9,6 @@ Button::Button(std::shared_ptr<BasicSceneNode> nodo, const std::string & name, E
 Button::~Button() {
 }
 
-void Button::setPosition(Vec3<float>& pos) {
-	m_renderState.setPosition(pos);
-}
-
 void Button::inicializar() {
 	TriggerSystem::i().RegisterTrigger(m_triggerType, 10, m_id, m_renderState.getPosition(), 5, Time::Zero, false);
 	m_ghostTrigger = PhysicsEngine::i().createSphereShape(this, 5);
@@ -41,4 +37,9 @@ bool Button::handleTrigger(TriggerRecordStruct * Trigger) {
 
 std::string Button::getClassName() {
 	return std::string();
+}
+
+void Button::setPosition(const Vec3<float>& pos)
+{
+	m_renderState.setPosition(pos);
 }

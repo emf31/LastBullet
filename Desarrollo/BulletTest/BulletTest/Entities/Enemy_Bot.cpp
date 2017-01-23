@@ -57,6 +57,8 @@ void Enemy_Bot::cargarContenido()
 	m_nodo.get()->setTexture("../media/head01.png", 0);
 	m_nodo.get()->setTexture("../media/m4tex.png", 2);
 
+	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0));
+
 	animation.addAnimation("Default", 0, 0);
 	animation.addAnimation("Run_Forwards", 1, 69);
 	animation.addAnimation("Run_backwards", 70, 138);
@@ -105,13 +107,25 @@ bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-void Enemy_Bot::setPosition(Vec3<float> pos)
+void Enemy_Bot::setPosition(const Vec3<float>& pos)
 {
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	p_controller->reset(PhysicsEngine::i().m_world);
 	m_nodo->setPosition(pos);
 }
 
+
+
+//Devuelve true si el bot esta en esa posicion
+
+bool Enemy_Bot::isAtPosition(Vec2f pos)
+{
+	const static double tolerance = 3.0;
+	Vec2f curr_pos = vec3ToVec2(m_renderState.getPosition());
+
+	return Vec2f(curr_pos - pos).Magnitude() < tolerance * tolerance;
+}
 
 void Enemy_Bot::updateMovement()
 {
@@ -157,7 +171,7 @@ void Enemy_Bot::createPathToItem(const std::string& tipo)
 
 void Enemy_Bot::updateAnimation()
 {
-	switch (m_animState)
+	/*switch (m_animState)
 	{
 	case quieto:
 		if (animation.getActualAnimation() != "Idle") {
@@ -182,5 +196,5 @@ void Enemy_Bot::updateAnimation()
 		}
 		break;
 
-	}
+	}*/
 }

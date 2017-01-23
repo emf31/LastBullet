@@ -9,7 +9,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-//#include <Player.h>
+#include <Vec2f.h>
 
 #include "DebugDraw.h"
 
@@ -49,6 +49,11 @@ public:
 
 	std::shared_ptr<BasicSceneNode> createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
 	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
+
+	std::shared_ptr<SceneNode> createBillboard(std::shared_ptr<SceneNode>, Vec2f vector2d, Vec3<float> relPosition);
+	std::shared_ptr<SceneNode> createBillboardText(std::shared_ptr<SceneNode>, const std::string& text, Vec2f vector2d, Vec3<float> relPosition);
+
+	const wchar_t * GetWC(const char *c);
 	
 	//Metodos de la camara
 	void createCamera(Vec3<float> position, Vec3<float> target);

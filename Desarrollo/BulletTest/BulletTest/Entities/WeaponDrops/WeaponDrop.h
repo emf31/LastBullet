@@ -34,23 +34,14 @@ public:
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
 
-	void setPosition(Vec3<float> pos) {
+	virtual void setPosition(const Vec3<float> &pos) override;
 
-		m_renderState.setPosition(pos);
-		//m_currentPosition = m_ghostObject->getWorldTransform().getOrigin();
-
-		btTransform transform = m_ghostObject->getWorldTransform();
-		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-		m_ghostObject->setWorldTransform(transform);
-
-		m_nodo->setPosition(pos);
-	}
 	void asignaTiempo(Clock tiempo);
 	void ArmaCogida();
 
 protected:
 	Clock clockRespawnWeapon;
-	float timeRespawnWeapon =3;
+	float timeRespawnWeapon;
 	
 
 	int estado = DISPONIBLE;

@@ -101,16 +101,14 @@ void Enemy::borrarContenido()
 	
 	GraphicEngine::i().removeNode(m_nodo);
 }
-
 //Teletransporta un enemigo a la posicion que le pasas
-void Enemy::setPosition(Vec3<float> pos) {
-
+void Enemy::setPosition(const Vec3<float>& pos)
+{
 	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
 	m_nodo.get()->setPosition(pos);
-
 }
 
 

@@ -25,5 +25,6 @@ public:
 	virtual std::string getClassName() { return "AsaltoDrop"; }
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
+
 };
 

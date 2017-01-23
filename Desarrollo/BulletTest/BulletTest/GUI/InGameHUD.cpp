@@ -67,7 +67,7 @@ void InGameHUD::muestraFinPartida() {
 }
 void InGameHUD::updateLabelVida() {
 	std::ostringstream oss;
-	oss << p->getLifeComponent()->getVida();
+	oss << p->getLifeComponent().getVida();
 	CEGUI::String str(oss.str());
 	LabelVida->setText(str);
 }

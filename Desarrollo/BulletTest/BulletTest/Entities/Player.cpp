@@ -7,7 +7,7 @@
 #include <Estructuras.h>
 #include <InputHandler.h>
 #include "math.h"
-#include "../Otros/Vec3f.h"
+#include <vec3.hpp>
 #include <Util.h>
 #include "GunBullet.h"
 #include "RocketBullet.h"
@@ -41,12 +41,6 @@ Player::~Player()
 	
 }
 
-void Player::setPosition(Vec3<float> &pos)
-{
-	m_renderState.setPosition(pos);
-	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-	m_nodo->setPosition(pos);
-}
 
 
 void Player::inicializar()
@@ -107,20 +101,15 @@ void Player::update(Time elapsedTime)
 	speedFinal = Vec3<float>(0, 0, 0);
 
 	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
-	if (life_component.update() == false) {
-
+	if (life_component.isDying() == false) {
 		// Ejecuta todos los comandos
 		InputHandler::i().excuteCommands(this);
-		speedFinal.normalise();
-		p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
-
-	} else {
-		p_controller->setWalkDirection(
-			btVector3(0.f, 0.f, 0.f));
 	}
 
+	speedFinal.normalise();
+	p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
 
-
+	life_component.update();
 	
 	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
@@ -137,19 +126,19 @@ void Player::update(Time elapsedTime)
 	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
 
 		TMovimiento mov;
-		mov.isDying = getLifeComponent()->isDying();
+		mov.isDying = getLifeComponent().isDying();
 		mov.position = getRenderState()->getPosition();
 		mov.rotation = getRenderState()->getRotation();
 		mov.guid = getGuid();
 
 		Cliente::i().dispatchMessage(mov, MOVIMIENTO);
 		
-		//Cliente::i().enviarMovimiento(this);
 	}
 
 	if (m_renderState.getPosition().getY() < -200) {
-		getLifeComponent()->restaVida(100, m_guid);
+		getLifeComponent().restaVida(100, m_guid);
 	}
+
 	updateRelojes();
 
 }
@@ -167,9 +156,9 @@ void Player::cargarContenido()
 	//Creas el nodo(grafico)
 
 	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
+	m_nodo->setVisible(false);
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
-
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -239,6 +228,14 @@ bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 		}
 	}
 	return true;
+}
+
+void Player::setPosition(const Vec3<float>& pos)
+{
+	m_renderState.setPosition(pos);
+	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	p_controller->reset(PhysicsEngine::i().m_world);
+	m_nodo->setPosition(pos);
 }
 
 void Player::run()

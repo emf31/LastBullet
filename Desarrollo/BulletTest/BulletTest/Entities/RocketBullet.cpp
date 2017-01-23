@@ -121,7 +121,7 @@ void RocketBullet::handleMessage(const Message & message)
 				else {
 
 					//TODO cuando haya IA habra que hacer una comprobacion extra
-					static_cast<Player*>(myentity)->getLifeComponent()->restaVida(damage);
+					static_cast<Player*>(myentity)->getLifeComponent().restaVida(damage);
 
 					//TODO si estas jugando en un solo player aqui tendras que quitarle vida a la IA
 				}
@@ -147,6 +147,10 @@ bool RocketBullet::handleTrigger(TriggerRecordStruct * Trigger)
 std::string RocketBullet::getClassName()
 {
 	return "RocketBullet";
+}
+
+void RocketBullet::setPosition(const Vec3<float>& pos)
+{
 }
 
 float RocketBullet::explosion(Entity* player, Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)

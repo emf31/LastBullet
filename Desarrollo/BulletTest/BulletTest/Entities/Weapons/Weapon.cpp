@@ -24,3 +24,7 @@ void Weapon::recargar() {
 	}
 
 }
+
+void Weapon::setPosition(const Vec3<float>& pos)
+{
+}

@@ -106,7 +106,7 @@ void Granada::handleMessage(const Message & message)
 
 		//solo se comprueba si te han quitado vida a ti mismo ya que la granada esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
 		Player* myentity = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-		myentity->getLifeComponent()->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
+		myentity->getLifeComponent().restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
 
 		//volvemos a resetear el guidLanzador
 		guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;

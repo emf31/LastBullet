@@ -91,6 +91,10 @@ std::string RocketBulletEnemy::getClassName()
 	return "RocketBulletEnemy";
 }
 
+void RocketBulletEnemy::setPosition(const Vec3<float>& pos)
+{
+}
+
 float RocketBulletEnemy::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
 {
 

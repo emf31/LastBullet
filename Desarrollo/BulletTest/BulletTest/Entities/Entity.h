@@ -38,37 +38,17 @@ public:
 
 	RenderState* getRenderState() { return &m_renderState; }
 
-	RakNet::RakNetGUID getGuid() {
-		return m_guid;
-	}
+	const RakNet::RakNetGUID& getGuid() { return m_guid; }
+	void setGUID(const RakNet::RakNetGUID& guid) { m_guid = guid; }
 
-	void setGUID(RakNet::RakNetGUID guid) {
-		m_guid = guid;
-	}
-	void setName(std::string& name) {
-		m_name = name;
-	 }
-	std::string getName() {
-		return m_name;
-	}
+	void setName(const std::string& name) { m_name = name; }
+	const std::string& getName() const { return m_name; }
 
-
-	int getID() {
-		return m_id;
-	}
-	void setID(int id) {
-		m_id = id;
-	}
+	int getID() const { return m_id; }
+	void setID(int id) { m_id = id; }
 	
 
-	
-		
-	
-	
-
-	byte getTriggerFlags() {
-		return dwTriggerFlags;
-	}
+	byte getTriggerFlags() const { return dwTriggerFlags; }
 
 	
 	std::shared_ptr<SceneNode> getNode();
@@ -80,22 +60,24 @@ public:
 	virtual void borrarContenido() = 0;
 	virtual void handleMessage(const Message& message) = 0;
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
-
 	virtual std::string getClassName() = 0;
-
+	virtual void setPosition(const Vec3<float>& vec) = 0;
 
 protected:
+	//Unique id de la entity
 	int m_id;
+	//Unique id de red de la entity
 	RakNet::RakNetGUID m_guid;
+	//Nombre de la entity
 	std::string m_name;
+	//Nodo respresentativo de la entity
 	std::shared_ptr<SceneNode> m_nodo;
+	//Para interpolar el nodo
 	RenderState m_renderState;
 	
+	//Flag para trigger system
+	byte dwTriggerFlags;
 
-	byte dwTriggerFlags = kTrig_None;
-
-	//Sirve para identificar que una entity sea un grupo de entities, siempre se crea a false
-	bool isGroup;
 private:
 
 	

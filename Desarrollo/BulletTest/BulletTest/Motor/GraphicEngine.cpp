@@ -51,6 +51,8 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 	//Asi no le afectan las luces
 	Node->setMaterialFlag(EMF_LIGHTING, false);
 
+	
+
 	m_camera = 0;
 
 	//Si es diferente de "" asignamos una textura al nodo
@@ -64,6 +66,37 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDriver));
 }
 
+std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, Vec2f vector2d, Vec3<float> relPosition) {
+
+	IBillboardSceneNode *billboard = irrScene->addBillboardSceneNode(nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
+
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
+}
+std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, Vec2f vector2d, Vec3<float> relPosition) {
+
+	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
+
+	const wchar_t* aux1 = GetWC(text.c_str());
+
+	IBillboardSceneNode *billboard = irrScene->addBillboardTextSceneNode(0, aux1, nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
+
+	billboard->setSize(core::dimension2df(6, 1));
+	billboard->setPosition(core::vector3df(0, 200, 0));
+	billboard->setColor(video::SColor(255, 255, 128, 128), video::SColor(255, 255, 128, 128));
+
+	delete[] aux1;
+
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
+}
+
+const wchar_t * GraphicEngine::GetWC(const char *c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
+}
 
 void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {

@@ -11,15 +11,13 @@ Entity::Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name,
 	m_name(name),
 	m_renderState(),
 	m_guid(guid),
-	isGroup(false)
+	dwTriggerFlags(kTrig_None)
 {
 
 	if (m_nodo) {
 		m_renderState.setPosition(m_nodo.get()->getPosition());
-		//std::cout << "soy el pringao de " << m_nodo.get()->getPosition().getX() << '\n';
 	}
 	else {
-		//std::cout << "soy el pringao de " << name << '\n';
 		m_renderState.setPosition(Vec3<float>(0,0,0));
 	}
 

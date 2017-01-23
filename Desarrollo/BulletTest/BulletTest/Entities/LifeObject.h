@@ -12,9 +12,6 @@ public:
 	LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name);
 	~LifeObject();
 
-	//void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
-	//btRigidBody* getRigidBody() { return m_rigidBody; }
-
 	void setGhostObject(btGhostObject* ghostObject) { m_ghostObject = ghostObject; }
 	btGhostObject* getGhostObject() { return m_ghostObject; }
 
@@ -26,50 +23,25 @@ public:
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
-
 	virtual void update(Time elapsedTime) override;
-
 	virtual void handleInput() override;
-
 	virtual void cargarContenido() override;
-
 	virtual void borrarContenido() override;
-
 	virtual void handleMessage(const Message& message) override;
-
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
-
-
 	virtual std::string getClassName() { return "LifeObject"; }
+	virtual void setPosition(const Vec3<float> &pos) override;
 
-	void setCollisionGroup(const int &group) {
-		btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
-		proxy->m_collisionFilterGroup = group;
-	}
-	void setCollisionMask(const int &mask) {
-		btBroadphaseProxy* proxy = m_ghostObject->getBroadphaseHandle();
-		proxy->m_collisionFilterMask = mask;
+	void setCollisionGroup(int group);
+	void setCollisionMask(int mask);
 
-	}
-
-	void setPosition(Vec3<float> pos) {
-
-		m_renderState.setPosition(pos);
-		//m_currentPosition = m_ghostObject->getWorldTransform().getOrigin();
-
-		btTransform transform = m_ghostObject->getWorldTransform();
-		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-		m_ghostObject->setWorldTransform(transform);
-
-		m_nodo->setPosition(pos);
-	}
 	Clock clockRecargaLife;
 	float timeRecargaLife = 3;
 
 	int estado = DISPONIBLE;
+
 private:
-	//btGhostPairCallback* m_ghostPairCallback = NULL;				// Needed once to enable ghost objects inside Bullet
-	btGhostObject* m_ghostObject;							// simple aabb ghost object (keeps track of the objects whose aabbs intersect its own collision shape aabb: this is called "broadphase stage collision detection")
-	//btPairCachingGhostObject* m_ghostObject;		// full shape ghost object (keeps track of the objects whose collision shape intersect its own collision shape: this is called "narrowphase stage collision detection")
+	btGhostObject* m_ghostObject;
+	
 	btVector3 m_currentPosition;
 };

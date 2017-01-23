@@ -36,6 +36,8 @@ public:
 
 	virtual std::string getClassName() { return "Weapon"; }
 
+	virtual void setPosition(const Vec3<float> &pos) override;
+
 	virtual void shoot() = 0;
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }
