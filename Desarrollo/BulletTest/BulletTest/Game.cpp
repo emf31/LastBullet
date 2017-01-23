@@ -279,7 +279,7 @@ bool Game::processEvents()
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_7)) {
 
-		e2->createPathToItem("RocketDrop");
+		e2->createPathToItem("RocketLauncherDrop");
 
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_8)) {
