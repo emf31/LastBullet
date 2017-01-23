@@ -31,6 +31,7 @@ namespace col {
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
 	const int cajaCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
+	const int enemyCollidesWith = Collisions::RAY_CAST | Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja | Collisions::Enemy;
 }
 
 class PhysicsEngine
