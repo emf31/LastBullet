@@ -1,7 +1,7 @@
-﻿  RocketLauncherDrop.cpp
+﻿  Camera.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

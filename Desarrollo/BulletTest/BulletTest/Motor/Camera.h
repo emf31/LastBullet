@@ -3,8 +3,10 @@
 #include <vec3.hpp>
 #include "../Entities/Entity.h"
 
+class CameraShake;
 using namespace irr;
 using namespace scene;
+
 
 class Camera
 {
@@ -30,13 +32,13 @@ public:
 		m_camera->addChild(nodo->getNodo()); 
 
 	}
-	void updateAbsolutePosition() {
-		m_camera->updateAbsolutePosition();
-	}
+	void cameraShake();
+
 
 private:
 	ICameraSceneNode* m_camera;
 	
 	Entity* m_entity;
+	CameraShake* m_cameraShake;
 };
 

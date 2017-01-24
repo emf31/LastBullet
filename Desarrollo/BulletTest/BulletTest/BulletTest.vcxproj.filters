@@ -191,6 +191,9 @@
     <ClCompile Include="Mapa\Dijkstra.cpp">
       <Filter>Source Code\Mapa</Filter>
     </ClCompile>
+    <ClCompile Include="Motor\CameraShake.cpp">
+      <Filter>Source Code\Motor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -487,6 +490,9 @@
     </ClInclude>
     <ClInclude Include="Mapa\Dijkstra.h">
       <Filter>Headers\Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\CameraShake.h">
+      <Filter>Headers\Motor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

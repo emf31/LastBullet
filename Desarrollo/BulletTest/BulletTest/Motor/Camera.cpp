@@ -1,15 +1,18 @@
 
 #include "Camera.h"
+#include <CameraShake.h>
 
 
 Camera::Camera(ICameraSceneNode* camera) : m_camera(camera), m_entity(NULL)
 {
+	m_cameraShake = new CameraShake(*this);
 }
 
 
 Camera::~Camera()
 {
 	delete m_camera;
+	delete m_cameraShake;
 }
 
 void Camera::setTarget(Vec3<float> target)
@@ -51,8 +54,15 @@ void Camera::update()
 			m_entity->getRenderPosition().getZ())
 		);
 	}
+	m_cameraShake->update();
+
 }
 
 Vec3<float> Camera::getRotation() {
 	return Vec3<float> (m_camera->getRotation().X, m_camera->getRotation().Y, m_camera->getRotation().Z);
+}
+
+void Camera::cameraShake()
+{
+	m_cameraShake->shakeOn();
 }

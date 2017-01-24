@@ -228,6 +228,7 @@
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\Camera.h" />
+    <ClInclude Include="Motor\CameraShake.h" />
     <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\MapLoader.h" />
@@ -308,6 +309,7 @@
     <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
     <ClCompile Include="Motor\Animation.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
+    <ClCompile Include="Motor\CameraShake.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\MapLoader.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />

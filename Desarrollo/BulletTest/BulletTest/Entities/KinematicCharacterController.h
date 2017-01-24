@@ -125,6 +125,7 @@ public:
 	float m_deceleration_walk;
 	float m_maxSpeed_walk;
 	bool jumpedOnAir;
+	float fallDownSpeed;
 
 
 	///btActionInterface interface

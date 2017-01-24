@@ -94,10 +94,19 @@ void Player::update(Time elapsedTime)
 {
 	isMoving = false;
 	
-
-	if (p_controller->onGround()) {
+	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
+	if (p_controller->onGround() && p_controller->jumpedOnAir) {
 		p_controller->jumpedOnAir = false;
 	}
+
+	//Detectamos si chocamos al suelo con una velocidad previa muy rapida
+	 if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
+		 printf("He caido de alto\n");
+		 GraphicEngine::i().getActiveCamera()->cameraShake();
+	 }
+	 p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
+
+	 //Deteccion de movimiento
 	speedFinal = Vec3<float>(0, 0, 0);
 
 	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
