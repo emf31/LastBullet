@@ -14,20 +14,18 @@ void main()
 
 	mat4 modelView = view * model;
 
-	// First colunm.
   	modelView[0][0] = 1.0; 
  	  modelView[0][1] = 0.0; 
   	modelView[0][2] = 0.0; 
 
-    // Second colunm.
+
     modelView[1][0] = 0.0; 
     modelView[1][1] = 1.0; 
     modelView[1][2] = 0.0; 
 
-	// Thrid colunm.
-	modelView[2][0] = 0.0; 
-	modelView[2][1] = 0.0; 
-	modelView[2][2] = 1.0; 
+  	modelView[2][0] = 0.0; 
+  	modelView[2][1] = 0.0; 
+  	modelView[2][2] = 1.0; 
 
 	vec4 P = modelView *  vec4(position, 1.0f);
     gl_Position = projection * P;
