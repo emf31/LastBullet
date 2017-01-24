@@ -1,8 +1,8 @@
-﻿  CameraShake.cpp
+﻿  Game.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(7): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\game.cpp(332): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
+  BulletTest.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
