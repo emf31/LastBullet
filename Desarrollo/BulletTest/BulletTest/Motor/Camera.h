@@ -35,6 +35,7 @@ public:
 	void cameraShake();
 
 
+
 private:
 	ICameraSceneNode* m_camera;
 	

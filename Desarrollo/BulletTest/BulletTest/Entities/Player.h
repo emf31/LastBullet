@@ -94,7 +94,7 @@ public:
 
 	Clock relojSangre, relojHit;
 
-
+	Asalto* asalto;
 private:
 
 	Animation* animation;
@@ -104,7 +104,7 @@ private:
 
 	//LISTA DE ARMAS
 	Lista* listaWeapons;
-	Asalto* asalto;
+
 	Pistola* pistola;
 	RocketLauncher* rocket;
 
