@@ -74,7 +74,7 @@ void InGameHUD::updateLabelVida() {
 
  void InGameHUD::updateLabelArma() {
 	CEGUI::String str;
-	std::string string = p->getCurrentWeapon();
+	std::string string = p->getCurrentWeaponName();
 	str = string.c_str();
 	LabelArma->setText(str);
 }
