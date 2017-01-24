@@ -9,6 +9,8 @@ void DebugMenuGUI::inicializar() {
 	init("../GUI", GraphicEngine::i().getDevice());
 
 	loadScheme("AlfiskoSkin.scheme");
+	loadScheme("VanillaSkin.scheme");
+	loadScheme("VanillaCommonDialogs.scheme");
 	loadLayout("SimpleDebug.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(false);
@@ -21,6 +23,16 @@ void DebugMenuGUI::inicializar() {
 
 	mapa = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(20));
 	mapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMapClicked, this));
+
+	DebugNetwork= static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(11));
+	DebugNetwork->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugNetworkClicked, this));
+
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(14));
+	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAClicked, this));
+
+	
+	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
+	
 
 	botJuliyo = new Enemy_Bot("BOTJULIYO");
 	botJuliyo->inicializar();
@@ -41,6 +53,14 @@ void DebugMenuGUI::inicializar() {
 
 bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 	GraphicEngine::i().toggleDebug();
+	return true;
+}
+bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
+	NetworkWindow->setVisible(!NetworkWindow->isVisible());
+	return true;
+}
+bool DebugMenuGUI::onDebugIAClicked(const CEGUI::EventArgs & e) {
+	mapa->setVisible(!mapa->isVisible());
 	return true;
 }
 

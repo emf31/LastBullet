@@ -304,7 +304,8 @@ bool Game::processEvents()
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
 
-		debugMenu.mapa->setVisible(debugMenu.debugInput);
+		//TODO llevarlo al otro sitio
+		//debugMenu.mapa->setVisible(debugMenu.debugInput);
 
 	} else if (MastEventReceiver::i().leftMouseDown()) {
 
