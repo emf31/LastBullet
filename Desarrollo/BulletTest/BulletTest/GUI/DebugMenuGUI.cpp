@@ -9,18 +9,54 @@ void DebugMenuGUI::inicializar() {
 	init("../GUI", GraphicEngine::i().getDevice());
 
 	loadScheme("AlfiskoSkin.scheme");
+	loadScheme("VanillaSkin.scheme");
+	loadScheme("VanillaCommonDialogs.scheme");
 	loadLayout("SimpleDebug.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(false);
 
+	//MENU PRINCIPAL
 	DebugShapesButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));
 	DebugShapesButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugShapesClicked, this));
 
 	closePushButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(99)->getChild(100));
 	closePushButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonClicked, this));
 
+	DebugNetwork = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(11));
+	DebugNetwork->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugNetworkClicked, this));
+
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(14));
+	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAClicked, this));
+
+	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));
+
+	//MENU NETWORK
+	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
+
+
+	//MENU IA
 	mapa = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(20));
 	mapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMapClicked, this));
+
+	BotonMapa = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(5));
+	BotonMapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAMapaClicked, this));
+
+	BuscarVida = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(1));
+	BuscarVida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAVIDAClicked, this));
+
+	BuscarRocket = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(2));
+	BuscarRocket->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAROCKETClicked, this));
+
+	BuscarAsalto = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(3));
+	BuscarAsalto->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAASALTOClicked, this));
+
+	BuscarPistola = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(4));
+	BuscarPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAPISTOLAClicked, this));
+
+	closePushButtonIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(99)->getChild(100));
+	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));
+
+	
 
 	botJuliyo = new Enemy_Bot("BOTJULIYO");
 	botJuliyo->inicializar();
@@ -43,15 +79,50 @@ bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 	GraphicEngine::i().toggleDebug();
 	return true;
 }
+bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
+	NetworkWindow->setVisible(!NetworkWindow->isVisible());
+	return true;
+}
+bool DebugMenuGUI::onDebugIAClicked(const CEGUI::EventArgs & e) {
+	IAWindow->setVisible(!IAWindow->isVisible());
+	return true;
+}
+bool DebugMenuGUI::onDebugIAMapaClicked(const CEGUI::EventArgs & e) {
+	mapa->setVisible(!mapa->isVisible());
+	return true;
+}
+bool DebugMenuGUI::onDebugIAVIDAClicked(const CEGUI::EventArgs & e) {
+	botJuliyo->createPathToItem("LifeObject");
+	return true;
+}
+bool DebugMenuGUI::onDebugIAROCKETClicked(const CEGUI::EventArgs & e) {
+	botJuliyo->createPathToItem("RocketLauncherDrop");
+	return true;
+}
+bool DebugMenuGUI::onDebugIAASALTOClicked(const CEGUI::EventArgs & e) {
+	botJuliyo->createPathToItem("AsaltoDrop");
+	return true;
+}
+bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
+	botJuliyo->createPathToItem("PistolaDrop");
+	return true;
+}
 
 bool DebugMenuGUI::onCloseMenuButtonClicked(const CEGUI::EventArgs & e) {
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(0.0f);
 	debugInput = !debugInput;
 	showMouseCursor(debugInput);
 	GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugInput);
-	mapa->setVisible(debugInput);
+	onCloseMenuButtonIAClicked(e);
 	return true;
 }
+
+bool DebugMenuGUI::onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e) {
+	getContext()->getRootWindow()->getChild(0)->getChild(30)->setVisible(false);
+	mapa->setVisible(false);
+	return true;
+}
+
 
 bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 	float x = getContext()->getMouseCursor().getPosition().d_x;
