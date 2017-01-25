@@ -98,7 +98,7 @@ bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
 
 void Asalto::shoot()
 {
-
+	GraphicEngine::i().getActiveCamera()->cameraRecoil();
 	if (disparos < capacidadAmmo) {
 
 

@@ -4,6 +4,7 @@
 #include "../Entities/Entity.h"
 
 class CameraShake;
+class GunRecoil;
 using namespace irr;
 using namespace scene;
 
@@ -33,6 +34,7 @@ public:
 
 	}
 	void cameraShake();
+	void cameraRecoil();
 
 
 
@@ -41,5 +43,6 @@ private:
 	
 	Entity* m_entity;
 	CameraShake* m_cameraShake;
+	GunRecoil* m_GunRecoil;
 };
 

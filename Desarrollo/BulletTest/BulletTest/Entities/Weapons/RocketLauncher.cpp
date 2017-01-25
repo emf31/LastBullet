@@ -82,6 +82,7 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 
 void RocketLauncher::shoot() {
 
+	GraphicEngine::i().getActiveCamera()->cameraRecoil();
 	if (disparos < capacidadAmmo) {
 
 

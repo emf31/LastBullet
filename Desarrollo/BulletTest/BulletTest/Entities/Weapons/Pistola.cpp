@@ -87,6 +87,7 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 
 void Pistola::shoot() {
 
+	GraphicEngine::i().getActiveCamera()->cameraRecoil();
 	if (disparos < capacidadAmmo) {
 
 

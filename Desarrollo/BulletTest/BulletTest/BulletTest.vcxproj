@@ -231,6 +231,7 @@
     <ClInclude Include="Motor\CameraShake.h" />
     <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
+    <ClInclude Include="Motor\GunRecoil.h" />
     <ClInclude Include="Motor\MapLoader.h" />
     <ClInclude Include="Motor\PhysicsEngine.h" />
     <ClInclude Include="Motor\RenderState.h" />
@@ -311,6 +312,7 @@
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\CameraShake.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
+    <ClCompile Include="Motor\GunRecoil.cpp" />
     <ClCompile Include="Motor\MapLoader.cpp" />
     <ClCompile Include="Motor\PhysicsEngine.cpp" />
     <ClCompile Include="Motor\RenderState.cpp" />

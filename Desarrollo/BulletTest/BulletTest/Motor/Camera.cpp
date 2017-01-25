@@ -1,11 +1,13 @@
 
 #include "Camera.h"
 #include <CameraShake.h>
+#include <GunRecoil.h>
 
 
 Camera::Camera(ICameraSceneNode* camera) : m_camera(camera), m_entity(NULL)
 {
 	m_cameraShake = new CameraShake(*this);
+	m_GunRecoil = new GunRecoil(*this);
 }
 
 
@@ -13,6 +15,7 @@ Camera::~Camera()
 {
 	delete m_camera;
 	delete m_cameraShake;
+	delete m_GunRecoil;
 }
 
 void Camera::setTarget(Vec3<float> target)
@@ -55,6 +58,7 @@ void Camera::update()
 		);
 	}
 	m_cameraShake->update();
+	m_GunRecoil->update();
 
 }
 
@@ -65,4 +69,8 @@ Vec3<float> Camera::getRotation() {
 void Camera::cameraShake()
 {
 	m_cameraShake->shakeOn();
+}
+void Camera::cameraRecoil()
+{
+	m_GunRecoil->RecoilOn();
 }

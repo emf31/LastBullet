@@ -194,6 +194,9 @@
     <ClCompile Include="Motor\CameraShake.cpp">
       <Filter>Source Code\Motor</Filter>
     </ClCompile>
+    <ClCompile Include="Motor\GunRecoil.cpp">
+      <Filter>Source Code\Motor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -492,7 +495,10 @@
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
     <ClInclude Include="Motor\CameraShake.h">
-      <Filter>Source Code\Motor</Filter>
+      <Filter>Headers\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\GunRecoil.h">
+      <Filter>Headers\Motor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
