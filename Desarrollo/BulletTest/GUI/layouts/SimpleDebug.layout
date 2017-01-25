@@ -183,5 +183,56 @@
                 <Property name="HorzFormatting" value="LeftAligned" />
             </Window>
         </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="VentanaIA" >
+            <Property name="ID" value="30" />
+            <Property name="Area" value="{{0.0539063,599},{0.00277778,114},{0.28125,599},{0.780556,-164}}" />
+            <Property name="Text" value="Debug Menu" />
+            <Property name="Visible" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="ID" value="99" />
+                <Window type="AlfiskoSkin/Button" name="Button" >
+                    <Property name="ID" value="100" />
+                    <Property name="Area" value="{{0,-1},{0,-2},{0,19},{0,19}}" />
+                    <Property name="Alpha" value="0" />
+                    <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                </Window>
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarVida" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0.0142146,-6},{0.0352247,55},{0.0142146,233},{0.0352247,88}}" />
+                <Property name="Text" value="Buscar Vida" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarRocket" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0.0135039,-5},{0.133283,74},{0.0135039,234},{0.133283,107}}" />
+                <Property name="Text" value="Buscar Rocket" />
+                <Property name="TooltipText" value="Activa las debug shapes" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarPistola" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0.0888415,-5},{0.228484,146},{0.0888415,234},{0.228484,178}}" />
+                <Property name="Text" value="Buscar Pistola" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonMapa" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0.0142146,-5},{0.0352247,5},{0.0142146,234},{0.0352247,38}}" />
+                <Property name="Text" value="Mostrar/Ocultar Mapa" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarAsalto" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0.0888415,-5},{0.228484,95},{0.0888415,234},{0.228484,127}}" />
+                <Property name="Text" value="Buscar Asalto" />
+            </Window>
+        </Window>
     </Window>
 </GUILayout>

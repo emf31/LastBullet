@@ -241,11 +241,13 @@ void Game::inicializar()
 
 	//Añadimos observer al player
 	player->addObserver(&partida);	
-
+	/*
 	e2 = new Enemy_Bot("HansTopo");
 	e2->inicializar();
 	e2->cargarContenido();
 	e2->setPosition(Map::i().searchSpawnPoint());
+	*/
+
 
 }
 
@@ -266,27 +268,7 @@ bool Game::processEvents()
 
 		GraphicEngine::i().toggleCamera();
 
-	}else if (MastEventReceiver::i().keyPressed(KEY_KEY_5)) {
-
-		e2->createPathToItem("LifeObject");
-
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_6)) {
-
-		e2->createPathToItem("PistolaDrop");
-
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_7)) {
-
-		e2->createPathToItem("RocketLauncherDrop");
-
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_8)) {
-
-		e2->createPathToItem("AsaltoDrop");
-
-	}
-	else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+	}else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
 

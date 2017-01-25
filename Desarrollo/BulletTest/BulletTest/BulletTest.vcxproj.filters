@@ -492,7 +492,7 @@
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
     <ClInclude Include="Motor\CameraShake.h">
-      <Filter>Headers\Motor</Filter>
+      <Filter>Source Code\Motor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

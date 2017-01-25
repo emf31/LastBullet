@@ -59,8 +59,12 @@ public:
 
 	LifeComponent& getLifeComponent() { return life_component; }
 
-	std::string getCurrentWeapon() {
+	std::string getCurrentWeaponName() {
 		return listaWeapons->valorActual()->getClassName();
+	};
+
+	Weapon* getCurrentWeapon() {
+		return listaWeapons->valorActual();
 	};
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
@@ -94,8 +98,10 @@ public:
 
 	Clock relojSangre, relojHit;
 
-	Asalto* asalto;
+	
 private:
+
+	Asalto* asalto;
 
 	Animation* animation;
 

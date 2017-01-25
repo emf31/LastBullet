@@ -1,8 +1,7 @@
-﻿  CameraShake.cpp
+﻿  Asalto.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(7): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

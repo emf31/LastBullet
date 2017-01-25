@@ -8,7 +8,7 @@ class CameraShake {
 public:
 	CameraShake(Camera& camera);
 	~CameraShake(){};
-	void shakeOn() { m_shakeActive = true; m_shakeTime.restart(); };
+	void shakeOn();
 	bool isShakeActive() { return m_shakeActive; }
 	void update();
 
