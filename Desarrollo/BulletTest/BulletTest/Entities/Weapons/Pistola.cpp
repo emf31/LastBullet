@@ -106,7 +106,7 @@ void Pistola::shoot() {
 
 			btVector3 end = start + (direccion*SIZE_OF_WORLD);
 
-			btCollisionWorld::ClosestRayResultCallback ray(start, end);
+			btKinematicClosestShapeResultCallback ray(start, end);
 
 			PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
@@ -115,25 +115,24 @@ void Pistola::shoot() {
 
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
-			
-				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+					if (ray.parte != bodyPart::Body::EXTERNA) {
+						Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+						if (ent != EntityManager::i().getEntity(PLAYER))
+						{
+							if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
+								Message msg(ent, "COLISION_BALA", &damage);
+								MessageHandler::i().sendMessage(msg);
+							}
+							//Para mover objetos del mapa
+							posicionImpacto = ray.m_hitPointWorld;
 
-				if (ent != EntityManager::i().getEntity(PLAYER))
-				{
-					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-						Message msg(ent, "COLISION_BALA", &damage);
-						MessageHandler::i().sendMessage(msg);
+							if (ent->getClassName() == "PhysicsEntity") {
+								btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+								btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+							}
+						}
 					}
-					//Para mover objetos del mapa
-					posicionImpacto = ray.m_hitPointWorld;
 
-					if (ent->getClassName() == "PhysicsEntity") {
-						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-					}
-				}
-
-				
 			}
 
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());

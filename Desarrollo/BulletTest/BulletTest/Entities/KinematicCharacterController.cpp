@@ -159,7 +159,7 @@ KinematicCharacterController::KinematicCharacterController(btPairCachingGhostObj
 	m_interpolateUp = true;
 	setMaxSlope(btRadians(45.0));
 	m_currentStepOffset = 0.0;
-	m_maxPenetrationDepth = btScalar(0.2);
+	m_maxPenetrationDepth = btScalar(0.05);
 	full_drop = false;
 	bounce_fix = false;
 	m_linearDamping = btScalar(0.0);

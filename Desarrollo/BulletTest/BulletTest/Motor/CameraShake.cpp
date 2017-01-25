@@ -15,7 +15,7 @@ void CameraShake::update()
 		//t=1.5T
 		if (m_shakeTime.getElapsedTime().asSeconds() < (0.5*(2*PI / m_frecuencia))) {
 			posicion = -m_amplitud*sin(m_frecuencia*m_shakeTime.getElapsedTime().asSeconds());
-			m_camera.setTarget(Vec3<float>(m_camera.getTarget().getX(), m_camera.getTarget().getY() - posicion, m_camera.getTarget().getZ()));
+			//m_camera.setTarget(Vec3<float>(m_camera.getTarget().getX(), m_camera.getTarget().getY() - posicion, m_camera.getTarget().getZ()));
 
 			ISceneNode* juliyoNode=static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->asalto->getNode()->getNodo();
 

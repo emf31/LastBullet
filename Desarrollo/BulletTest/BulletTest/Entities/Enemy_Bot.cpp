@@ -85,12 +85,12 @@ void Enemy_Bot::cargarContenido()
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
+
 	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
 	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
 	proxy->m_collisionFilterMask = col::enemyCollidesWith;
 
 	
-
 
 	p_controller->m_acceleration_walk = 4.3f;
 	p_controller->m_deceleration_walk = 6.5f;

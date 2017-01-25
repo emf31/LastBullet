@@ -34,6 +34,52 @@ namespace col {
 	const int enemyCollidesWith = Collisions::RAY_CAST | Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja | Collisions::Enemy;
 }
 
+namespace bodyPart {
+	enum Body {
+		CUERPO = 0,
+		CABEZA = 1,
+		EXTERNA = 2
+	};
+}
+
+
+
+
+
+class btKinematicClosestShapeResultCallback : public btCollisionWorld::ClosestRayResultCallback
+{
+public:
+	btKinematicClosestShapeResultCallback(const btVector3& start, const btVector3& end) : btCollisionWorld::ClosestRayResultCallback(start, end)
+	{
+		parte = bodyPart::Body::CUERPO;
+	}
+
+	virtual btScalar addSingleResult(btCollisionWorld::LocalRayResult& rayResult, bool normalInWorldSpace)
+	{
+		if (rayResult.m_localShapeInfo) {
+			m_shapeIndex = rayResult.m_localShapeInfo->m_triangleIndex;
+		}
+
+		if (rayResult.m_collisionObject->getCollisionShape()->getShapeType() == COMPOUND_SHAPE_PROXYTYPE) {
+			btCompoundShape* compound = (btCompoundShape*)rayResult.m_collisionObject->getCollisionShape();
+			parte = static_cast<bodyPart::Body>(compound->getChildShape(m_shapeIndex)->getUserIndex());
+
+			if (parte == bodyPart::Body::EXTERNA) {
+				return btScalar(1.0);
+			}
+		}
+
+
+
+
+		return ClosestRayResultCallback::addSingleResult(rayResult, normalInWorldSpace);
+	}
+public:
+	bodyPart::Body parte;
+	int m_shapeIndex;
+};
+
+
 class PhysicsEngine
 {
 public:

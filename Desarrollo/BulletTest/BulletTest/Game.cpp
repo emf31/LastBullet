@@ -261,7 +261,6 @@ bool Game::processEvents()
 
 		GraphicEngine::i().toggleDebug();
 
-		e2->setPosition(Map::i().searchSpawnPoint());
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
 

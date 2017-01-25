@@ -109,17 +109,34 @@ void PhysicsEngine::notifyCollisions() {
 
 
 KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass) {
+	btCompoundShape* shape = new btCompoundShape();
 
 	btCapsuleShape* m_pCollisionShape = new btCapsuleShape(radius, height);
+	m_pCollisionShape->setUserIndex(bodyPart::Body::CUERPO);
+
+	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(3.f,3.f,3.f));
+	m_CollisionBox->setUserIndex(bodyPart::Body::EXTERNA);
+
+	btTransform t;
+	t.setIdentity();
+	t.setOrigin(btVector3(0, 0, 0)); 
+
+	shape->addChildShape(t, m_pCollisionShape);
+	shape->addChildShape(t, m_CollisionBox);
+
+	btVector3 inertia(0, 0, 0);
+
+	btScalar masses[2] = { mass, mass};
 
 	btVector3 intertia;
-	m_pCollisionShape->calculateLocalInertia(mass, intertia);
+	shape->calculatePrincipalAxisTransform(masses, t, inertia);
 
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(ent);
 
-	actorGhost->setCollisionShape(m_pCollisionShape);
+
+	actorGhost->setCollisionShape(shape);
 	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
 	KinematicCharacterController* p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);

@@ -37,14 +37,6 @@ void RocketBullet::update(Time elapsedTime)
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
-	// Set rotation
-	/*vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;
-
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));*/
 
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
 
@@ -109,8 +101,8 @@ void RocketBullet::handleMessage(const Message & message)
 						else {
 							TImpactoRocket* impact = new TImpactoRocket();
 							impact->damage = damage;
-							impact->guidDisparado = myentity->getGuid();
-							impact->guidImpactado = EntityManager::i().getEntity(PLAYER)->getGuid();
+							impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
+							impact->guidImpactado = myentity->getGuid();;
 							Message msg(myentity, "COLISION_ROCKET", impact);
 							MessageHandler::i().sendMessage(msg);
 
