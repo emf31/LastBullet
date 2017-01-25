@@ -99,7 +99,7 @@ bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
 void Asalto::shoot()
 {
 	GraphicEngine::i().getActiveCamera()->cameraRecoil();
-	if (disparos < capacidadAmmo) {
+	if (disparos < capacidadAmmo && estadoWeapon==CARGADA) {
 
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
