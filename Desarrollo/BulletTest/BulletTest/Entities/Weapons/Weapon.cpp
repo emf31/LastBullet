@@ -14,15 +14,16 @@ Weapon::~Weapon()
 
 void Weapon::recargar() {
 
-	relojrecarga.restart();
-	estadoWeapon = DESCARGADA;
+	if (estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
 
-	disparosRestantes += capacidadAmmo - disparos;
-	if (disparosRestantes >= capacidadAmmo) {
-		numCargadores++;
-		disparosRestantes -= capacidadAmmo;
+		disparosRestantes += capacidadAmmo - disparos;
+		if (disparosRestantes >= capacidadAmmo) {
+			numCargadores++;
+			disparosRestantes -= capacidadAmmo;
+		}
 	}
-
 }
 
 void Weapon::setPosition(const Vec3<float>& pos)

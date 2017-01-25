@@ -88,7 +88,7 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 void Pistola::shoot() {
 
 	GraphicEngine::i().getActiveCamera()->cameraRecoil();
-	if (disparos < capacidadAmmo) {
+	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {

@@ -83,7 +83,7 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 void RocketLauncher::shoot() {
 
 	GraphicEngine::i().getActiveCamera()->cameraRecoil();
-	if (disparos < capacidadAmmo) {
+	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
