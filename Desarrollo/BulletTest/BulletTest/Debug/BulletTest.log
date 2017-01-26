@@ -1,7 +1,8 @@
-﻿  Weapon.cpp
+﻿  GunRecoil.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\gunrecoil.cpp(31): warning C4244: 'argumento': conversión de '__int64' a 'unsigned int'; posible pérdida de datos
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
