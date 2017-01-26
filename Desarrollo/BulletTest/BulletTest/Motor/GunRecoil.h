@@ -18,4 +18,10 @@ private:
 	Clock m_recoilTime;
 	bool m_recoilActive;
 	std::stack<Vec3<float>> randomStack;
+	Vec3<float> randomAcumulativo;
+
+	Vec3<float> velocidad ;
+	Vec3<float> xfin;
+	Vec3<float> xini;
+
 };
