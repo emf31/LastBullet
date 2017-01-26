@@ -21,6 +21,8 @@ public:
 
 	void update();
 
+	void pingServer();
+
 	Player* createPlayer();
 	void inicializar();
 	void conectar(std::string address, int port);
@@ -47,6 +49,7 @@ private:
 
 	RakNet::SocketDescriptor sd;
 	RakNet::RakNetGUID servidor;
+	RakNet::SystemAddress servidorAdr;
 	
 	//private constructor
 	Cliente();
