@@ -20,12 +20,32 @@ private:
 	bool onDebugIAASALTOClicked(const CEGUI::EventArgs & e);
 	bool onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e);
 	bool onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e);
+	bool onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e);
+	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
+
+	
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
-	CEGUI::PushButton *DebugIA;
+	//Network
 	CEGUI::PushButton *DebugNetwork;
 	CEGUI::DefaultWindow *NetworkWindow;
+	CEGUI::DefaultWindow *NetworSyncWindow;
+	CEGUI::ProgressBar *movimientoPB;
+	CEGUI::ProgressBar *disparosPB;
+	CEGUI::ProgressBar *impactoPB;
+	CEGUI::ProgressBar *dropArmaPB;
+	CEGUI::ProgressBar *dropVidaPB;
+	CEGUI::ProgressBar *muertePB;
+	CEGUI::ProgressBar *granadaPB;
+	CEGUI::ProgressBar *aumentaKillPB;
+	CEGUI::ProgressBar *aumentaMuertePB;
+	CEGUI::PushButton *closePushButtonNetSync;
+	CEGUI::PushButton *closePushButtonNetDebug;
+	bool networkOpen = false;
+
+	//IA
+	CEGUI::PushButton *DebugIA;
 	CEGUI::DefaultWindow *mapa;
 	CEGUI::DefaultWindow *IAWindow;
 	CEGUI::PushButton *BuscarVida;
@@ -34,6 +54,8 @@ private:
 	CEGUI::PushButton *BuscarAsalto;
 	CEGUI::PushButton *BotonMapa;
 	CEGUI::PushButton *closePushButtonIA;
+
+
 	Enemy_Bot* botJuliyo;
 	//Enemy_Bot* botTonire;
 	//Enemy_Bot* botRucri;

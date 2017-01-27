@@ -32,6 +32,20 @@ void DebugMenuGUI::inicializar() {
 
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
+	NetworSyncWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(80));
+	movimientoPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(1));
+	disparosPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(2));
+	impactoPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(3));
+	dropArmaPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(4));
+	dropVidaPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(5));
+	muertePB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(6));
+	granadaPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(7));
+	aumentaKillPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(8));
+	aumentaMuertePB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(9));
+	closePushButtonNetSync = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(99)->getChild(100));
+	closePushButtonNetSync->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetSyncClicked, this));
+	closePushButtonNetDebug = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(60)->getChild(99)->getChild(100));
+	closePushButtonNetDebug->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetDebugClicked, this));
 
 
 	//MENU IA
@@ -55,6 +69,8 @@ void DebugMenuGUI::inicializar() {
 
 	closePushButtonIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(99)->getChild(100));
 	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));
+
+
 
 	
 
@@ -80,7 +96,9 @@ bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
-	NetworkWindow->setVisible(!NetworkWindow->isVisible());
+	networkOpen = !networkOpen;
+	NetworkWindow->setVisible(networkOpen);
+	NetworSyncWindow->setVisible(networkOpen);
 	return true;
 }
 bool DebugMenuGUI::onDebugIAClicked(const CEGUI::EventArgs & e) {
@@ -120,6 +138,16 @@ bool DebugMenuGUI::onCloseMenuButtonClicked(const CEGUI::EventArgs & e) {
 bool DebugMenuGUI::onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e) {
 	getContext()->getRootWindow()->getChild(0)->getChild(30)->setVisible(false);
 	mapa->setVisible(false);
+	return true;
+}
+bool DebugMenuGUI::onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e) {
+	NetworSyncWindow->setVisible(false);
+	return true;
+}
+
+bool DebugMenuGUI::onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e)
+{
+	NetworkWindow->setVisible(false);
 	return true;
 }
 
