@@ -12,49 +12,56 @@ void GunRecoil::RecoilOn()
 {
 	m_recoilActive = true;
 	m_recoilTime.restart();
-	/*if (static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getCurrentWeaponName() == "Asalto") {
-		m_amplitud = 0.4;
-	}
-	if (static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getCurrentWeaponName() == "Pistola") {
-		m_amplitud = 0.1;
-	}
-	if (static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getCurrentWeaponName() == "RocketLauncher") {
-		m_amplitud = 0.6;
-	}*/
 }
 
 void GunRecoil::update()
 {
+
+
 	if (m_recoilActive) {
 		if (m_recoilTime.getElapsedTime().asSeconds() < 0.1f) {
 
-			srand(m_recoilTime.getElapsedTime().asMicroseconds());
+			//generamos los numeros randomizados
+			srand(m_recoilTime.getElapsedTime().asMilliseconds());
 			int randomX = rand() % 100 +1;
 			int randomY = rand() % 100 +1;
 			int randomZ = rand() % 100 +1;
 
-			//std::cout << randomX << " " << randomY << " " << randomZ<<std::endl;
-
-			int signoX = (rand() % 3)-1;//devuelve 0 o 1
-			//if (signoX == 0)
-			//	signoX--;
+			int signoX = (rand() % 3)-1;//devuelve -1 o 0 o 1
 
 			int signoY = rand() % 2;//devuelve 0 o 1
-			//if (signoY == 0)
-				//signoY--;
 
-			int signoZ = (rand() % 3) -1;//devuelve 0 o 1
+			int signoZ = (rand() % 3) -1;//devuelve -1 o 0 o 1
 
+			//comprobamos si la mira no se ha ido muy para arriba
 
-			Vec3<float> randomf = Vec3<float>(signoX*(float(randomX)/700),signoY*(float(randomY)/600),signoZ*(float(randomZ)/700));
+			if (randomAcumulativo.getY() > 6) {
+				randomY = 0;
+			}	
+
+			//seteamos la camara en la posicion adecuada
+
+			Vec3<float>  randomf = Vec3<float>(signoX*(float(randomX)/700),signoY*(float(randomY)/1000),signoZ*(float(randomZ)/700));
 
 			m_camera.setTarget(Vec3<float>(m_camera.getTarget().getX()+ randomf.getX(), m_camera.getTarget().getY() + randomf.getY(), m_camera.getTarget().getZ()+randomf.getZ()));
 
+			randomAcumulativo += randomf;
 
+			//Actualizamos los valores de xini xfin y velocidad para despues hacer un mru y devolver la camara a la posicion inicial
+
+			xfin = Vec3<float>(m_camera.getTarget().getX() - randomAcumulativo.getX(), m_camera.getTarget().getY() - randomAcumulativo.getY(), m_camera.getTarget().getZ() - randomAcumulativo.getZ());
+			xini = Vec3<float>(m_camera.getTarget().getX(), m_camera.getTarget().getY(), m_camera.getTarget().getZ());
+			velocidad = (xfin - xini) / 0.1f;
+
+		}
+		else if (m_recoilTime.getElapsedTime().asSeconds() < 0.2f) {
+			
+			m_camera.setTarget(xini+(velocidad*(m_recoilTime.getElapsedTime().asSeconds()-0.1f)));
+			
 		}
 		else {
 			m_recoilActive = false;
+			randomAcumulativo = Vec3<float>(0, 0, 0);
 		}
-
 	}
 }

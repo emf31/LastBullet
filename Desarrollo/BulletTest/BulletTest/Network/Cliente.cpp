@@ -21,6 +21,7 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
+#include <GetTime.h>
 
 Cliente::Cliente() /*: lobby(peer)*/
 {
@@ -30,13 +31,13 @@ Cliente::Cliente() /*: lobby(peer)*/
 
 void Cliente::update() {
 		
-
 	
+	pingServer();
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
 			// Recibimos un paquete, tenemos que obtener el tipo de mensaje
 			mPacketIdentifier = getPacketIdentifier(packet);
-
+			
 			switch (mPacketIdentifier) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
 				printf("Otro cliente se ha desconectado.\n");
@@ -57,6 +58,7 @@ void Cliente::update() {
 
 				printf("Nuestra conexion se ha aceptado.\n");
 				servidor = packet->guid;
+				servidorAdr = packet->systemAddress;
 
 
 				//Esta variable indica que el servidor a aceptado la conexion
@@ -425,8 +427,9 @@ void Cliente::update() {
 				break;
 
 			}
+			
 		}
-
+		RakNet::GetTimeMS();
 
 }
 
@@ -532,7 +535,10 @@ void Cliente::searchServersOnLAN() {
 		if (packet->data[0] == ID_UNCONNECTED_PONG) {
 			RakNet::TimeMS time;
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
+			
 			bsIn.IgnoreBytes(1);
+			bsIn.Read(time);
+			printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS()-time));
 			m_servers.push_back(packet->systemAddress.ToString());
 		}
 
@@ -562,6 +568,7 @@ unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 	return (unsigned char)pPacket->data[0];
 }
 
+<<<<<<< HEAD
 void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type) {
 	TSyncMessage sync;
 	sync.destino = guidDestino;
@@ -571,4 +578,9 @@ void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type
 	std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
 
 	dispatchMessage(sync,SYNC);
+=======
+void Cliente::pingServer() {
+	
+		peer->Ping(servidorAdr.ToString() , 65535, false);	
+>>>>>>> 343dffc327cce1a704bf4a72205e0007841d9780
 }
