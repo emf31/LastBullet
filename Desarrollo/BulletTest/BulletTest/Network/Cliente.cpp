@@ -107,7 +107,8 @@ void Cliente::update() {
 				if (e != NULL) {
 					e->encolaMovimiento(m);
 				}
-			
+				
+				sendSyncPackage(m.guid, mPacketIdentifier);
 			}
 			break;
 
@@ -129,6 +130,7 @@ void Cliente::update() {
 				GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 				bala->cargarContenido();
 
+				sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
 			}
 			break;
 			case IMPACTO_BALA:
@@ -142,6 +144,7 @@ void Cliente::update() {
 				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
 				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
+				sendSyncPackage(bala.guid, mPacketIdentifier);
 
 			}
 			break;
@@ -152,6 +155,7 @@ void Cliente::update() {
 
 				RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
+				sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
 
 			}
 			break;
@@ -165,6 +169,7 @@ void Cliente::update() {
 				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
+				sendSyncPackage(impacto.guidDisparado, mPacketIdentifier);
 			}
 			break;
 
@@ -175,7 +180,7 @@ void Cliente::update() {
 				Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
 				ent->lanzarGranada(granada);
 
-
+				sendSyncPackage(granada.guid, mPacketIdentifier);
 			}
 			break;
 
@@ -188,7 +193,7 @@ void Cliente::update() {
 				Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
 				player->impulsar(imp.fuerza);
 
-
+				sendSyncPackage(imp.guid, mPacketIdentifier);
 			}
 			break;
 
@@ -200,6 +205,7 @@ void Cliente::update() {
 				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 				LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
 				v->asignaTiempo(vidaServer.tiempo);
+
 
 			}
 			break;
@@ -225,13 +231,12 @@ void Cliente::update() {
 				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idArma.id));
 				w->ArmaCogida();
 
-
+				sendSyncPackage(idArma.guid, mPacketIdentifier);
 			}
 			break;
 
 			case VIDA_COGIDA:
 			{
-
 
 				TId idVida = *reinterpret_cast<TId*>(packet->data);
 				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
@@ -240,6 +245,7 @@ void Cliente::update() {
 				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida.id));
 				v->VidaCogida();
 
+				sendSyncPackage(idVida.guid, mPacketIdentifier);
 			}
 			break;
 
@@ -258,6 +264,7 @@ void Cliente::update() {
 					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 
 				}
+				sendSyncPackage(nuevoplayer.guid, mPacketIdentifier);
 			}
 			break;
 			case ACTUALIZA_TABLA:
@@ -279,6 +286,8 @@ void Cliente::update() {
 				KillEvent evento(guidTabla.guid);
 
 				notify(evento);
+
+				sendSyncPackage(guidTabla.guid, mPacketIdentifier);
 				
 				//EntityManager::i().aumentaKill(guidTabla.guid);
 
@@ -294,6 +303,7 @@ void Cliente::update() {
 
 				notify(evento);
 
+				sendSyncPackage(guidTabla.guid, mPacketIdentifier);
 				//EntityManager::i().aumentaMuerte(guidTabla.guid);
 
 			}
@@ -338,6 +348,77 @@ void Cliente::update() {
 				bsIn.IgnoreBytes(1);
 				bsIn.Read(time);
 				printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::Time() - time);
+				break;
+			}
+
+			case SYNC:
+			{
+				//Sync
+				TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
+				/*std::cout << "Sync packet from: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl;
+				std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
+				switch (sync.packageType) {
+					case MOVIMIENTO:
+					{
+						countMovimiento++;
+						break;
+					}
+					case DISPARAR_BALA:
+					{
+						countDisparo++;
+						break;
+					}
+					case DISPARAR_ROCKET:
+					{
+						countDisparo++;
+						break;
+					}
+					case IMPACTO_BALA:
+					{
+						countImpacto++;
+						break;
+					}
+					case IMPACTO_ROCKET:
+					{
+						countImpacto++;
+						break;
+					}
+					case VIDA_COGIDA:
+					{
+						countDropVida++;
+						break;
+					}
+					case ARMA_COGIDA:
+					{
+						countDropArma++;
+						break;
+					}
+					case MUERTE:
+					{
+						countMuerte++;
+						break;
+					}
+					case LANZAR_GRANADA:
+					{
+						countGranada++;
+						break;
+					}
+					case AUMENTA_KILL:
+					{
+						countAumentaKill++;
+						break;
+					}
+					case AUMENTA_MUERTE:
+					{
+						countAumentaMuerte++;
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+				break;
 			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
@@ -479,4 +560,15 @@ unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 		return 255;
 
 	return (unsigned char)pPacket->data[0];
+}
+
+void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type) {
+	TSyncMessage sync;
+	sync.destino = guidDestino;
+	sync.origen = EntityManager::i().getEntity(PLAYER)->getGuid();
+	sync.packageType = type;
+	std::cout << "Enviando paquete de sincronizacion..." << std::endl;
+	std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
+
+	dispatchMessage(sync,SYNC);
 }

@@ -135,7 +135,6 @@ int main() {
 			case MOVIMIENTO: {
 
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
-
 				EntityManager::i().enviaNuevaPos(mov, peer);
 				EntityManager::i().getRaknetEntity(mov.guid)->setPosition(mov.position);
 
@@ -270,6 +269,8 @@ int main() {
 
 				TId idVida = *reinterpret_cast<TId*>(packet->data);
 
+				idVida.guid = packet->guid;
+
 				Life *vida = static_cast<Life*>(EntityManager::i().getEntityID(idVida.id));
 				vida->resetTiempoRecargar();
 
@@ -284,6 +285,8 @@ int main() {
 			case ARMA_COGIDA: {
 
 				TId idArma = *reinterpret_cast<TId*>(packet->data);
+
+				idArma.guid = packet->guid;
 
 				DropObject *arma = static_cast<DropObject*>(EntityManager::i().getEntityID(idArma.id));
 				arma->resetTiempoRecargar();
@@ -327,6 +330,15 @@ int main() {
 				printf("Ping...Pong\n");
 				break;
 			}
+
+			case SYNC:
+			{
+				TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
+				//std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
+				EntityManager::i().enviaSync(peer, sync);
+				break;
+			}
+
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
