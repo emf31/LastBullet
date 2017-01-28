@@ -115,7 +115,7 @@ void Cliente::update() {
 					e->encolaMovimiento(m);
 				}
 				
-				sendSyncPackage(m.guid, mPacketIdentifier);
+				//sendSyncPackage(m.guid, mPacketIdentifier);
 			}
 			break;
 
@@ -372,17 +372,20 @@ void Cliente::update() {
 					}
 					case DISPARAR_BALA:
 					{
+						std::cout << "AUMENTO DISPARO" << std::endl;
 						countDisparo++;
 						break;
 					}
 					case DISPARAR_ROCKET:
 					{
+						std::cout << "AUMENTO DISPARO" << std::endl;
 						countDisparo++;
 						break;
 					}
 					case IMPACTO_BALA:
 					{
 						countImpacto++;
+						
 						break;
 					}
 					case IMPACTO_ROCKET:
@@ -593,9 +596,8 @@ void Cliente::pingServer() {
 void Cliente::resetBar() {
 
 	
+
 	countDisparo = 0;
-	countDisparo = 0;
-	countImpacto = 0;
 	countImpacto = 0;
 	countDropVida = 0;
 	countDropArma = 0;
@@ -604,4 +606,70 @@ void Cliente::resetBar() {
 	countAumentaKill = 0;
 	countAumentaMuerte = 0;
 
+}
+
+
+void Cliente::resetBar(unsigned char tipo) {
+	
+	switch (tipo) {
+	case MOVIMIENTO: {
+		
+		break;
+	}
+	case DISPARAR_BALA:
+	{
+		countDisparo = 0;
+		break;
+	}
+	case DISPARAR_ROCKET:
+	{
+		countDisparo = 0;
+		break;
+	}
+	case IMPACTO_BALA:
+	{
+		countImpacto = 0;
+		
+		break;
+	}
+	case IMPACTO_ROCKET:
+	{
+		countImpacto = 0;
+		break;
+	}
+	case VIDA_COGIDA:
+	{
+		countDropVida = 0;
+		break;
+	}
+	case ARMA_COGIDA:
+	{
+		countDropArma = 0;
+		break;
+	}
+	case MUERTE:
+	{
+		countMuerte = 0;
+		break;
+	}
+	case LANZAR_GRANADA:
+	{
+		countGranada = 0;
+		break;
+	}
+	case AUMENTA_KILL:
+	{
+		countAumentaKill = 0;
+		break;
+	}
+	case AUMENTA_MUERTE:
+	{
+		countAumentaMuerte = 0;
+		break;
+	}
+	default:
+	{
+		break;
+	}
+	}
 }

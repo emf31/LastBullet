@@ -30,6 +30,10 @@ public:
 	template<typename T>
 	void dispatchMessage(T& estructura, GameMessages messageType) {
 		estructura.mID = messageType;
+		if (messageType != SYNC) {
+			resetBar(messageType);
+		}
+		
 		peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 	}
 
@@ -74,4 +78,5 @@ private:
 
 
 	void resetBar();
+	void resetBar(unsigned char tipo);
 };
