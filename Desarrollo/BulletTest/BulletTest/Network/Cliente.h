@@ -68,7 +68,7 @@ private:
 	//Lobby de la partida
 	//LobbyClient lobby;
 
-
+	Clock resetBarTime;
 	unsigned char mPacketIdentifier;
 	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 

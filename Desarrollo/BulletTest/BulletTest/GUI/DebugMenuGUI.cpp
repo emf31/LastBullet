@@ -173,8 +173,15 @@ void DebugMenuGUI::updateProgressBars() {
 	float progreso = 1 / (float)numClientes;
 	Cliente cliente = Cliente::i();
 	
+	if (cliente.countGranada != 0)
+		cliente.countGranada++;
+	if (cliente.countDisparo != 0)
+		cliente.countDisparo++;
+	if (cliente.countMovimiento != 0)
+		cliente.countMovimiento++;
 
-	movimientoPB->setProgress((cliente.countMovimiento+1)*progreso);
+
+	movimientoPB->setProgress(cliente.countMovimiento*progreso);
 	disparosPB->setProgress(cliente.countDisparo*progreso);
 	impactoPB->setProgress(cliente.countImpacto*progreso);
 	dropArmaPB->setProgress(cliente.countDropArma*progreso);

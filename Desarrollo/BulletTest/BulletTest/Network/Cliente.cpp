@@ -33,7 +33,11 @@ void Cliente::update() {
 		
 	
 	//pingServer();
-	resetBar();
+	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
+		resetBar();
+		resetBarTime.restart();
+	}
+	countMovimiento = 0;
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
 			// Recibimos un paquete, tenemos que obtener el tipo de mensaje
@@ -439,6 +443,7 @@ void Cliente::inicializar() {
 	char eleccion;
 	int elec;
 	std::string str;
+	resetBarTime.restart();
 
 	do {
 		searchServersOnLAN();
@@ -587,7 +592,7 @@ void Cliente::pingServer() {
 
 void Cliente::resetBar() {
 
-	countMovimiento = 0;
+	
 	countDisparo = 0;
 	countDisparo = 0;
 	countImpacto = 0;
