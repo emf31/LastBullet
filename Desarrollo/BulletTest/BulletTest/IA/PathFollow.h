@@ -10,8 +10,6 @@ enum behaviour_type {
 	follow_path = 2
 };
 
-//used in path following
-const float WaypointSeekDist = 2;
 
 class Enemy_Bot;
 
@@ -27,15 +25,11 @@ public:
 
 	void  SetPath(std::list<Vec2f>& new_path) { m_pPath->Set(new_path); }
 
-	//void SeekOn() { m_cBehaviour = seek; }
-	//void ArriveOn() { m_cBehaviour = arrive; }
 	void FollowOn() { m_cBehaviour = follow_path; }
 
-	//this behavior moves the agent towards a target position
+
 	Vec2f Seek(const Vec2f &target);
 
-	//this behavior is similar to seek but it attempts to arrive 
-	//at the target with a zero velocity
 	Vec2f Arrive(const Vec2f    &target);
 
 	Vec2f FollowPath();
@@ -53,8 +47,6 @@ private:
 	//curren path
 	Path* m_pPath;
 
-	//Distancia a la que alcanzas un waypoint
-	float m_dWaypointSeekDistSq;
 	
 
 };

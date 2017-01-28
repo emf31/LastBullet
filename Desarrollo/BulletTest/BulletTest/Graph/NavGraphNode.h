@@ -17,7 +17,6 @@ protected:
 
 	Entity* m_extraInfo;//Aqui se puede añadir mas informacion en caso de que sea necesario
 public:
-	//NavGraphNode() :m_extraInfo(extraInfo()) {};
 
 	NavGraphNode(int idx, Vec2f pos) :
 		GraphNode(idx),

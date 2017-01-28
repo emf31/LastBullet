@@ -21,7 +21,9 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
-#include <GetTime.h>
+
+//Clase para administrar los paquetes que van llegando, se hace una llamada al metodo update desde el bucle
+//principal. Tambien tiene funciones para establecer la conexión con el servidor y enviar paquetes.
 
 Cliente::Cliente() /*: lobby(peer)*/
 {
@@ -30,325 +32,331 @@ Cliente::Cliente() /*: lobby(peer)*/
 
 
 void Cliente::update() {
-		
-	
-	pingServer();
-		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-
-			// Recibimos un paquete, tenemos que obtener el tipo de mensaje
-			mPacketIdentifier = getPacketIdentifier(packet);
-			
-			switch (mPacketIdentifier) {
-			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				printf("Otro cliente se ha desconectado.\n");
-				break;
-			case 22:
-				printf("EL SERVIDOR SE HA CAIDO.\n");
-				break;
-			case ID_REMOTE_CONNECTION_LOST:
-				printf("Otro cliente ha perdido la conexion.\n");
-
-				break;
-			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				printf("Otro cliente se ha conectado.\n");
-
-				break;
-
-			case ID_CONNECTION_REQUEST_ACCEPTED: {
-
-				printf("Nuestra conexion se ha aceptado.\n");
-				servidor = packet->guid;
-				servidorAdr = packet->systemAddress;
 
 
-				//Esta variable indica que el servidor a aceptado la conexion
-				conectado = true;
 
+	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
-			}
-				break;
+		// Recibimos un paquete, tenemos que obtener el tipo de mensaje
+		mPacketIdentifier = getPacketIdentifier(packet);
 
-			case NUEVO_PLAYER:
-			{
-				//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
+		switch (mPacketIdentifier) {
+		case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+			printf("Otro cliente se ha desconectado.\n");
+			break;
+		case 22:
+			printf("EL SERVIDOR SE HA CAIDO.\n");
+			break;
+		case ID_REMOTE_CONNECTION_LOST:
+			printf("Otro cliente ha perdido la conexion.\n");
 
-				TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
+			break;
+		case ID_REMOTE_NEW_INCOMING_CONNECTION:
+			printf("Otro cliente se ha conectado.\n");
 
-				Enemy *e = new Enemy(p.name, p.guid);
-				e->inicializar();
-				e->cargarContenido();
-				e->setPosition(p.position);
-				EntityManager::i().mostrarClientes();
-
-
-			}
 			break;
 
-			case NUEVO_CLIENTE:
-			{
-				//eres un player nuevo, te envian todos los clientes que habian en el server para que tu tambien los tengas
+		case ID_CONNECTION_REQUEST_ACCEPTED: {
 
-				TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
+			printf("Nuestra conexion se ha aceptado.\n");
+			servidor = packet->guid;
 
 
-				Enemy *e = new Enemy(p.name, p.guid);
-				e->inicializar();
-				e->cargarContenido();
-				e->setPosition(p.position);
-				EntityManager::i().mostrarClientes();
+			//Esta variable indica que el servidor ha aceptado la conexion
+			conectado = true;
 
-			}
-			break;
-			case MOVIMIENTO:
-			{
-				TMovimiento m = *reinterpret_cast<TMovimiento*>(packet->data);
 
-				//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
-				Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
-
-				if (e != NULL) {
-					e->encolaMovimiento(m);
-				}
-			
-			}
-			break;
-
-
-			case DESCONECTADO:
-			{
-				RakID rakID = *reinterpret_cast<RakID*>(packet->data);
-
-				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
-				
-
-			}
-			break;
-
-			case DISPARAR_BALA:
-			{
-				TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
-
-				GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
-				bala->cargarContenido();
-
-			}
-			break;
-			case IMPACTO_BALA:
-			{
-
-				TImpactoBala bala = *reinterpret_cast<TImpactoBala*>(packet->data);
-
-				//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
-
-				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
-
-
-			}
-			break;
-
-			case DISPARAR_ROCKET:
-			{
-				TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
-
-				RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
-
-
-			}
-			break;
-
-			case IMPACTO_ROCKET:
-			{
-				TImpactoRocket impacto = *reinterpret_cast<TImpactoRocket*>(packet->data);
-
-				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
-				static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
-
-			}
-			break;
-
-			case LANZAR_GRANADA:
-			{
-				TGranada granada = *reinterpret_cast<TGranada*>(packet->data);
-				
-				Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
-				ent->lanzarGranada(granada);
-
-
-			}
-			break;
-
-			case APLICAR_IMPULSO:
-			{
-
-				TImpulso imp = *reinterpret_cast<TImpulso*>(packet->data);
-
-				//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-				Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
-				player->impulsar(imp.fuerza);
-
-
-			}
-			break;
-
-			case NUEVA_VIDA:
-			{
-				TDropServer vidaServer = *reinterpret_cast<TDropServer*>(packet->data);
-
-				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-				LifeObject *v= static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
-				v->asignaTiempo(vidaServer.tiempo);
-
-			}
-			break;
-
-			case NUEVA_ARMA:
-			{
-				TDropServer armaServer = *reinterpret_cast<TDropServer*>(packet->data);
-
-				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-				WeaponDrop *v = static_cast<WeaponDrop*>(EntityManager::i().getEntity(armaServer.id));
-				v->asignaTiempo(armaServer.tiempo);
-
-			}
-			break;
-
-			case ARMA_COGIDA:
-			{
-				TId idArma = *reinterpret_cast<TId*>(packet->data);
-
-				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-				WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idArma.id));
-				w->ArmaCogida();
-
-
-			}
-			break;
-
-			case VIDA_COGIDA:
-			{
-
-
-				TId idVida = *reinterpret_cast<TId*>(packet->data);
-				//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
-				//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
-				//TODO esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
-				LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida.id));
-				v->VidaCogida();
-
-			}
-			break;
-
-			case MUERTE:
-			{
-				TPlayer nuevoplayer = *reinterpret_cast<TPlayer*>(packet->data);
-
-				if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
-					//es el player
-					Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);		
-					player->resetAll();
-
-				}
-				else {
-					//es un enemigo
-					Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-
-				}
-			}
-			break;
-			case ACTUALIZA_TABLA:
-			{
-				TFilaTabla nuevaFila = *reinterpret_cast<TFilaTabla*>(packet->data);
-
-				PlayerEvent evento(nuevaFila);
-
-				notify(evento);
-
-				//EntityManager::i().cambiaTabla(nuevaFila);
-
-			}
-			break;
-			case AUMENTA_KILL:
-			{
-				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
-
-				KillEvent evento(guidTabla.guid);
-
-				notify(evento);
-				
-				//EntityManager::i().aumentaKill(guidTabla.guid);
-
-			}
-			break;
-
-			case AUMENTA_MUERTE:
-			{
-
-				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
-
-				MuerteEvent evento(guidTabla.guid);
-
-				notify(evento);
-
-				//EntityManager::i().aumentaMuerte(guidTabla.guid);
-
-			}
-			break;
-				
-
-			case CAMBIO_ARMA:
-			{
-				TCambioArma t_cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
-
-				if (t_cambioArma.cambio == 1) {
-					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
-					MessageHandler::i().sendMessage(msg1);
-				}else {
-					Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
-					MessageHandler::i().sendMessage(msg1);
-				}
-
-			}
-			break;
-
-
-			case FIN_PARTIDA:
-			{
-
-				RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
-
-				Event ev;
-				ev.event_type = E_FIN_PARTIDA;
-
-				//Notificamos al HUD que es el fin de la partida
-				notify(ev);
-
-
-			}
-			break;
-
-			case ID_UNCONNECTED_PONG:
-			{
-				RakNet::TimeMS time;
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(1);
-				bsIn.Read(time);
-				printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::GetTimeMS() - time);
-			}
-			default:
-				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
-				break;
-
-			}
-			
 		}
-		RakNet::GetTimeMS();
+											 break;
+
+		case NUEVO_PLAYER:
+		{
+			//un player nuevo se ha conectado, y recibo sus datos, tengo que ponerlo en la lista de jugadores
+
+			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
+
+			Enemy *e = new Enemy(p.name, p.guid);
+			e->inicializar();
+			e->cargarContenido();
+			e->setPosition(p.position);
+			EntityManager::i().mostrarClientes();
+
+
+		}
+		break;
+
+		case NUEVO_CLIENTE:
+		{
+			//eres un player nuevo, te envian todos los clientes que habian en el server para que tu tambien los tengas
+
+			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
+
+
+			Enemy *e = new Enemy(p.name, p.guid);
+			e->inicializar();
+			e->cargarContenido();
+			e->setPosition(p.position);
+			EntityManager::i().mostrarClientes();
+
+		}
+		break;
+		case MOVIMIENTO:
+		{
+			TMovimiento m = *reinterpret_cast<TMovimiento*>(packet->data);
+
+			//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
+			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
+
+			if (e != NULL) {
+				e->encolaMovimiento(m);
+			}
+
+		}
+		break;
+
+
+		case DESCONECTADO:
+		{
+			//Un cliente de la partida se ha desconectado, borramos la entity que lo representa.
+
+			RakID rakID = *reinterpret_cast<RakID*>(packet->data);
+
+			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
+
+
+		}
+		break;
+
+		case DISPARAR_BALA:
+		{
+			//Una bala ha sido disparada desde otro cliente, tenemos que dibujarla en local
+
+			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
+
+			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+			bala->cargarContenido();
+
+		}
+		break;
+		case IMPACTO_BALA:
+		{
+
+			//Algun cliente nos ha dado con una bala(Asalto o Pistola) y nos lo notifica para restarnos vida
+
+			TImpactoBala bala = *reinterpret_cast<TImpactoBala*>(packet->data);
+
+			//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
+
+			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
+			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
+
+
+		}
+		break;
+
+		case DISPARAR_ROCKET:
+		{
+
+			//Algun cliente ha disparado un rocket y tenemos que dibujarlo
+
+			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
+
+			RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
+
+
+		}
+		break;
+
+		case IMPACTO_ROCKET:
+		{
+			//Nos han dado con un rocket, tenemos que restarnos vida
+
+			TImpactoRocket impacto = *reinterpret_cast<TImpactoRocket*>(packet->data);
+
+			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+			//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
+			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
+			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
+
+		}
+		break;
+
+		case LANZAR_GRANADA:
+		{
+			//Un enemigo a lanzado una granada
+
+			TGranada granada = *reinterpret_cast<TGranada*>(packet->data);
+
+			Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
+			ent->lanzarGranada(granada);
+
+
+		}
+		break;
+
+		case APLICAR_IMPULSO:
+		{
+
+			TImpulso imp = *reinterpret_cast<TImpulso*>(packet->data);
+
+			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+			Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
+			player->impulsar(imp.fuerza);
+
+
+		}
+		break;
+
+		case NUEVA_VIDA:
+		{
+			TDropServer vidaServer = *reinterpret_cast<TDropServer*>(packet->data);
+
+			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+			LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
+			v->asignaTiempo(vidaServer.tiempo);
+
+		}
+		break;
+
+		case NUEVA_ARMA:
+		{
+			TDropServer armaServer = *reinterpret_cast<TDropServer*>(packet->data);
+
+			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+			WeaponDrop *v = static_cast<WeaponDrop*>(EntityManager::i().getEntity(armaServer.id));
+			v->asignaTiempo(armaServer.tiempo);
+
+		}
+		break;
+
+		case ARMA_COGIDA:
+		{
+			TId idArma = *reinterpret_cast<TId*>(packet->data);
+
+			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+			WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idArma.id));
+			w->ArmaCogida();
+
+
+		}
+		break;
+
+		case VIDA_COGIDA:
+		{
+
+
+			TId idVida = *reinterpret_cast<TId*>(packet->data);
+			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
+			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
+			//TODO esto peta por todos lados, enviar un mensaje a la entity y que haga ella el reesto
+			LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida.id));
+			v->VidaCogida();
+
+		}
+		break;
+
+		case MUERTE:
+		{
+			TPlayer nuevoplayer = *reinterpret_cast<TPlayer*>(packet->data);
+
+			if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
+				//es el player
+				Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+				player->resetAll();
+
+			}
+			else {
+				//es un enemigo
+				Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+
+			}
+		}
+		break;
+		case ACTUALIZA_TABLA:
+		{
+			TFilaTabla nuevaFila = *reinterpret_cast<TFilaTabla*>(packet->data);
+
+			PlayerEvent evento(nuevaFila);
+
+			notify(evento);
+
+
+		}
+		break;
+		case AUMENTA_KILL:
+		{
+			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+
+			KillEvent evento(guidTabla.guid);
+
+			notify(evento);
+
+		}
+		break;
+
+		case AUMENTA_MUERTE:
+		{
+
+			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+
+			MuerteEvent evento(guidTabla.guid);
+
+			notify(evento);
+
+		}
+		break;
+
+
+		case CAMBIO_ARMA:
+		{
+			TCambioArma t_cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
+
+			if (t_cambioArma.cambio == 1) {
+				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
+				MessageHandler::i().sendMessage(msg1);
+			}
+			else {
+				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
+				MessageHandler::i().sendMessage(msg1);
+			}
+
+		}
+		break;
+
+
+		case FIN_PARTIDA:
+		{
+
+			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+
+			Event ev;
+			ev.event_type = E_FIN_PARTIDA;
+
+			//Notificamos al HUD que es el fin de la partida
+			notify(ev);
+
+
+		}
+		break;
+
+		case ID_UNCONNECTED_PONG:
+		{
+			RakNet::TimeMS time;
+			RakNet::BitStream bsIn(packet->data, packet->length, false);
+			bsIn.IgnoreBytes(1);
+			bsIn.Read(time);
+			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::Time() - time);
+		}
+		default:
+			printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
+			break;
+
+		}
+	}
+
 
 }
 
@@ -375,23 +383,25 @@ void Cliente::inicializar() {
 			std::string ipConPuerto = m_servers.at((elec));
 			std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
 			str = ip;
-		} else if (eleccion == 'm') {
+		}
+		else if (eleccion == 'm') {
 			printf("Introduce la IP \n");
 			std::cin >> str;
 			if (str != "a") {
 				break;
-			} else {
+			}
+			else {
 				eleccion = 'a';
 			}
 		}
-	}while (eleccion == 'a');
+	} while (eleccion == 'a');
 
-	
+
 	//Nos conectamos a la lobby del servidor
 	//lobby.join(str, SERVER_PORT);
 
 	conectar(str, SERVER_PORT);
-	
+
 }
 
 void Cliente::conectar(std::string address, int port) {
@@ -405,7 +415,7 @@ void Cliente::conectar(std::string address, int port) {
 
 Player* Cliente::createPlayer() {
 
-	
+
 
 	printf("Introduce un nombre \n");
 	std::cin >> str;
@@ -420,7 +430,6 @@ Player* Cliente::createPlayer() {
 	nuevoplayer.name = player->getName();
 
 	dispatchMessage(nuevoplayer, NUEVO_PLAYER);
-	//peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
 	return player;
 
@@ -454,10 +463,7 @@ void Cliente::searchServersOnLAN() {
 		if (packet->data[0] == ID_UNCONNECTED_PONG) {
 			RakNet::TimeMS time;
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
-			
 			bsIn.IgnoreBytes(1);
-			bsIn.Read(time);
-			printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS()-time));
 			m_servers.push_back(packet->systemAddress.ToString());
 		}
 
@@ -469,25 +475,21 @@ void Cliente::searchServersOnLAN() {
 
 
 void Cliente::apagar() {
-	
+
 	conectado = false;
 
 	//shut down the client
 	peer->Shutdown(300);
 	//and end the connection
 	RakNet::RakPeerInterface::DestroyInstance(peer);
-	
+
 }
 
+//obtenemos el id del paquete recibido
 unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 {
 	if (pPacket == 0)
 		return 255;
 
 	return (unsigned char)pPacket->data[0];
-}
-
-void Cliente::pingServer() {
-	
-		peer->Ping(servidorAdr.ToString() , 65535, false);	
 }

@@ -3,7 +3,7 @@
 #include <Map.h>
 #include <Util.h>
 
-PathFollow::PathFollow(Enemy_Bot * bot) : m_dWaypointSeekDistSq(WaypointSeekDist*WaypointSeekDist)
+PathFollow::PathFollow(Enemy_Bot * bot)
 {
 	m_owner = bot;
 
@@ -40,7 +40,6 @@ Vec2f PathFollow::Arrive(const Vec2f & target)
 
 	Vec2f ToTarget = target - vec3ToVec2(m_owner->getRenderState()->getPosition());
 
-	//calculate the distance to the target
 	double dist = ToTarget.Magnitude();
 
 
@@ -54,8 +53,6 @@ Vec2f PathFollow::Arrive(const Vec2f & target)
 
 Vec2f PathFollow::FollowPath()
 {
-	//move to next target if close enough to current target (working in
-	//distance squared space)
 	if (m_owner->isAtPosition(m_pPath->CurrentWaypoint()))
 	{
 		m_pPath->SetNextWaypoint();

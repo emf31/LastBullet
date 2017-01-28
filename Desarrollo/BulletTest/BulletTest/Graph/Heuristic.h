@@ -7,9 +7,9 @@ public:
 
 	Heuristic_Euclid() {}
 
-	//calculate the straight line distance from node nd1 to node nd2
-	static float Calculate(SparseGraph& G, int nd1, int nd2)
+	//linea recta de nd1 a nd2
+	static float Calculate(SparseGraph& G, int nodo1, int nodo2)
 	{
-		return Vec2f(G.getNode(nd1).getPosition() - G.getNode(nd2).getPosition()).Magnitude();
+		return Vec2f(G.getNode(nodo1).getPosition() - G.getNode(nodo2).getPosition()).Magnitude();
 	}
 };

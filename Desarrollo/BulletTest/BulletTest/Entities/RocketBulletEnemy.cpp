@@ -8,13 +8,14 @@
 
 #include <list>
 
-
+//Esta clase representa un rocket bullet disparado desde un enemigo. La diferencia con el rocket bullet
+//normal es que este cuando colisiona no hace daño ya que esta comprobacion ya se hace desde el cliente enemigo
+//que dispara dicho rocket.
 
 RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(65), m_rotation(rotation), radioExplosion(40)
 {
 
-	//NOTA: llevar cuidado con esto puede que pete aqui
 	cargarContenido();
 }
 
@@ -56,7 +57,7 @@ void RocketBulletEnemy::cargarContenido()
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1,false);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::RocketEnemy;
 	proxy->m_collisionFilterMask = col::rocketenemyCollidesWith;
@@ -66,15 +67,15 @@ void RocketBulletEnemy::cargarContenido()
 
 void RocketBulletEnemy::borrarContenido()
 {
-	
-	
+
+
 }
 
 void RocketBulletEnemy::handleMessage(const Message & message)
 {
 
 	if (message.mensaje == "COLLISION") {
-		
+
 		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		EntityManager::i().removeEntity(this);
 		GraphicEngine::i().removeNode(m_nodo);

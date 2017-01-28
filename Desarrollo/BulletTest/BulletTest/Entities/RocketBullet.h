@@ -38,6 +38,6 @@ private:
 
 	
 
-	float explosion(Entity* player,Vec3<float>posExplosion,Vec3<float>posCharacter,float radio);
+	float explosion(Entity* player, const Vec3<float>& posExplosion, float radio);
 
 };

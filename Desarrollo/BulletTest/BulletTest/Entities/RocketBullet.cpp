@@ -8,7 +8,9 @@
 
 #include <list>
 
-
+//Clase que representa un misil disparado por un rocketLauncher. Cuando colisiona con algun otro objeto,
+//comprueba mediante un radio de explosion si ha impactado con algun jugador. Esta clase es responsable
+//de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation), radioExplosion(45)
@@ -70,61 +72,63 @@ void RocketBullet::borrarContenido()
 {
 }
 
+
 void RocketBullet::handleMessage(const Message & message)
 {
 
 	float damage = 0;
 
+	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
-			std::list<Entity*>characters = EntityManager::i().getCharacters();
-			///Explosion
-			for (std::list<Entity*>::iterator it = characters.begin(); it != characters.end(); it++) {
+		std::list<Entity*>characters = EntityManager::i().getCharacters();
+		///Explosion
+		for (std::list<Entity*>::iterator it = characters.begin(); it != characters.end(); it++) {
 
-				Entity* myentity = *it;
+			Entity* myentity = *it;
 
-				damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), myentity->getRenderPosition(), radioExplosion) / 3.f;
+			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 3.f;
 
-				if (Cliente::i().isConected()) {
-					if (damage > 0) {
+			if (Cliente::i().isConected()) {
+				if (damage > 0) {
 
-						if (myentity->getID() == PLAYER) {
-							TImpactoRocket* selfImpact = new TImpactoRocket();
-							selfImpact->damage = damage;
-							selfImpact->guidDisparado = myentity->getGuid();
-							selfImpact->guidImpactado = myentity->getGuid();
-							
-							Message msg(myentity, "COLISION_ROCKET", selfImpact);
-							MessageHandler::i().sendMessage(msg);
+					if (myentity->getID() == PLAYER) {
+						TImpactoRocket* selfImpact = new TImpactoRocket();
+						selfImpact->damage = damage;
+						selfImpact->guidDisparado = myentity->getGuid();
+						selfImpact->guidImpactado = myentity->getGuid();
 
-						}
-						else {
-							TImpactoRocket* impact = new TImpactoRocket();
-							impact->damage = damage;
-							impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
-							impact->guidImpactado = myentity->getGuid();;
-							Message msg(myentity, "COLISION_ROCKET", impact);
-							MessageHandler::i().sendMessage(msg);
-
-						}
+						Message msg(myentity, "COLISION_ROCKET", selfImpact);
+						MessageHandler::i().sendMessage(msg);
 
 					}
+					else {
+						TImpactoRocket* impact = new TImpactoRocket();
+						impact->damage = damage;
+						impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
+						impact->guidImpactado = myentity->getGuid();;
+						Message msg(myentity, "COLISION_ROCKET", impact);
+						MessageHandler::i().sendMessage(msg);
+
+					}
+
 				}
-				else {
+			}
+			else {
 
-					//TODO cuando haya IA habra que hacer una comprobacion extra
-					static_cast<Player*>(myentity)->getLifeComponent().restaVida(damage);
+				//TODO cuando haya IA habra que hacer una comprobacion extra
+				static_cast<Player*>(myentity)->getLifeComponent().restaVida(damage);
 
-					//TODO si estas jugando en un solo player aqui tendras que quitarle vida a la IA
-				}
-
+				//TODO si estas jugando en un solo player aqui tendras que quitarle vida a la IA
 			}
 
-			PhysicsEngine::i().removeRigidBody(m_rigidBody);
+		}
 
-			GraphicEngine::i().removeNode(m_nodo);
+		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-			EntityManager::i().removeEntity(this);
+		GraphicEngine::i().removeNode(m_nodo);
+
+		EntityManager::i().removeEntity(this);
 	}
 
 
@@ -145,11 +149,14 @@ void RocketBullet::setPosition(const Vec3<float>& pos)
 {
 }
 
-float RocketBullet::explosion(Entity* player, Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
+//Calcula la el daño que hace la explosion de un rocket en funcion del punto
+//de impacto, la posicion del player impactado y un radio de alcance. Además aplica un impulso
+//y en caso de ser un enemigo lo comunica al servidor.
+float RocketBullet::explosion(Entity* player, const Vec3<float>& posExplosion, float radio)
 {
 	float vidaRestada = 0;
 
-	Vec3<float> vector = posExplosion - posCharacter;
+	Vec3<float> vector = posExplosion - player->getRenderPosition();
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
 		if (distancia < radio / 3) {

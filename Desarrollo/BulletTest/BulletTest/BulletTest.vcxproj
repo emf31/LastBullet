@@ -287,6 +287,7 @@
     <ClCompile Include="Entities\Weapons\Pistola.cpp" />
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
+    <ClCompile Include="Graph\AStarSearch.cpp" />
     <ClCompile Include="Graph\GraphEdge.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />
     <ClCompile Include="Graph\SparseGraph.cpp" />

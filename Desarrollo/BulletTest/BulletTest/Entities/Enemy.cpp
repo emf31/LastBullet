@@ -7,7 +7,9 @@
 #include <EntityManager.h>
 #include <iostream>
 
-#include "../IA/StatesIA/Patrullar.h"
+//Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
+//Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
+//de bala o de rocket.
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
 {
@@ -46,7 +48,7 @@ void Enemy::update(Time elapsedTime)
 	//m_pStateMachine->Update();
 
 	/*if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
-		m_isDying = false;
+	m_isDying = false;
 	}*/
 
 }
@@ -98,7 +100,7 @@ void Enemy::borrarContenido()
 	delete animation;
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
-	
+
 	GraphicEngine::i().removeNode(m_nodo);
 }
 //Teletransporta un enemigo a la posicion que le pasas
@@ -133,7 +135,7 @@ void Enemy::handleMessage(const Message & message)
 
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		}
-		
+
 	}
 	else if (message.mensaje == "ARMAUP") {
 		//TODO poner el codigo de cambiar el modelo del arma hacia arriba
@@ -163,8 +165,8 @@ void Enemy::encolaMovimiento(TMovimiento& mov)
 }
 
 void Enemy::desencolaMovimiento()
-{	
-	
+{
+
 	if (m_positions.size() > 3) {
 		TMovimiento mov;
 		while (!m_positions.empty()) {
@@ -187,9 +189,10 @@ void Enemy::desencolaMovimiento()
 		updateEnemigo(mov.position);
 		m_renderState.updateRotations(mov.rotation);
 		m_isDying = mov.isDying;
-	}else {
+	}
+	else {
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
-		
+
 	}
 
 }

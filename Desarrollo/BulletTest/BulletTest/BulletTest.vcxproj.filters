@@ -197,6 +197,9 @@
     <ClCompile Include="Motor\GunRecoil.cpp">
       <Filter>Source Code\Motor</Filter>
     </ClCompile>
+    <ClCompile Include="Graph\AStarSearch.cpp">
+      <Filter>Source Code\Graph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -412,9 +415,6 @@
     <ClInclude Include="Graph\SparseGraph.h">
       <Filter>Headers\Graph</Filter>
     </ClInclude>
-    <ClInclude Include="Graph\GraphEnumeration.h">
-      <Filter>Headers\Graph</Filter>
-    </ClInclude>
     <ClInclude Include="Otros\Vec2f.h">
       <Filter>Headers\Otros</Filter>
     </ClInclude>
@@ -499,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="Motor\GunRecoil.h">
       <Filter>Headers\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph\GraphEnumeration.h">
+      <Filter>Headers\Graph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
