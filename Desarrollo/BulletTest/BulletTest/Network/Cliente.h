@@ -30,6 +30,10 @@ public:
 	template<typename T>
 	void dispatchMessage(T& estructura, GameMessages messageType) {
 		estructura.mID = messageType;
+		if (messageType != SYNC) {
+			resetBar(messageType);
+		}
+		
 		peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 	}
 
@@ -43,6 +47,10 @@ public:
 		return conectado;
 	}
 
+
+	void sendSyncPackage(RakNet::RakNetGUID guid, unsigned char mPacketIdentifier);
+
+	int countMovimiento=0, countDisparo=0, countImpacto=0, countDropArma=0, countDropVida=0, countMuerte=0, countGranada=0, countAumentaKill=0, countAumentaMuerte=0;
 private:
 	RakNet::Packet *packet;
 	RakNet::RakPeerInterface *peer;
@@ -64,8 +72,11 @@ private:
 	//Lobby de la partida
 	//LobbyClient lobby;
 
-
+	Clock resetBarTime;
 	unsigned char mPacketIdentifier;
 	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 
+
+	void resetBar();
+	void resetBar(unsigned char tipo);
 };

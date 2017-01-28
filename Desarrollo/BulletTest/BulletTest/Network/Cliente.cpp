@@ -21,6 +21,7 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
+#include <GetTime.h>
 
 //Clase para administrar los paquetes que van llegando, se hace una llamada al metodo update desde el bucle
 //principal. Tambien tiene funciones para establecer la conexión con el servidor y enviar paquetes.
@@ -32,6 +33,13 @@ Cliente::Cliente() /*: lobby(peer)*/
 
 
 void Cliente::update() {
+	
+	//pingServer();
+	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
+		resetBar();
+		resetBarTime.restart();
+	}
+	countMovimiento = 0;
 
 
 
@@ -91,7 +99,6 @@ void Cliente::update() {
 
 			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-
 			Enemy *e = new Enemy(p.name, p.guid);
 			e->inicializar();
 			e->cargarContenido();
@@ -119,6 +126,7 @@ void Cliente::update() {
 		{
 			//Un cliente de la partida se ha desconectado, borramos la entity que lo representa.
 
+
 			RakID rakID = *reinterpret_cast<RakID*>(packet->data);
 
 			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
@@ -136,6 +144,8 @@ void Cliente::update() {
 			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 			bala->cargarContenido();
 
+			sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
+
 		}
 		break;
 		case IMPACTO_BALA:
@@ -150,6 +160,7 @@ void Cliente::update() {
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
+			sendSyncPackage(bala.guid, mPacketIdentifier);
 
 		}
 		break;
@@ -163,7 +174,7 @@ void Cliente::update() {
 
 			RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
-
+			sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
 		}
 		break;
 
@@ -178,6 +189,8 @@ void Cliente::update() {
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
+			sendSyncPackage(impacto.guidDisparado, mPacketIdentifier);
+
 		}
 		break;
 
@@ -190,6 +203,7 @@ void Cliente::update() {
 			Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
 			ent->lanzarGranada(granada);
 
+			sendSyncPackage(granada.guid, mPacketIdentifier);
 
 		}
 		break;
@@ -203,9 +217,11 @@ void Cliente::update() {
 			Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
 			player->impulsar(imp.fuerza);
 
+			sendSyncPackage(imp.guid, mPacketIdentifier);
+
 
 		}
-		break;
+
 
 		case NUEVA_VIDA:
 		{
@@ -215,6 +231,7 @@ void Cliente::update() {
 			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 			LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
 			v->asignaTiempo(vidaServer.tiempo);
+
 
 		}
 		break;
@@ -240,13 +257,12 @@ void Cliente::update() {
 			WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idArma.id));
 			w->ArmaCogida();
 
-
+			sendSyncPackage(idArma.guid, mPacketIdentifier);
 		}
 		break;
 
 		case VIDA_COGIDA:
 		{
-
 
 			TId idVida = *reinterpret_cast<TId*>(packet->data);
 			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
@@ -255,6 +271,7 @@ void Cliente::update() {
 			LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida.id));
 			v->VidaCogida();
 
+			sendSyncPackage(idVida.guid, mPacketIdentifier);
 		}
 		break;
 
@@ -273,6 +290,7 @@ void Cliente::update() {
 				Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 
 			}
+			sendSyncPackage(nuevoplayer.guid, mPacketIdentifier);
 		}
 		break;
 		case ACTUALIZA_TABLA:
@@ -283,6 +301,7 @@ void Cliente::update() {
 
 			notify(evento);
 
+			//EntityManager::i().cambiaTabla(nuevaFila);
 
 		}
 		break;
@@ -293,6 +312,10 @@ void Cliente::update() {
 			KillEvent evento(guidTabla.guid);
 
 			notify(evento);
+
+			sendSyncPackage(guidTabla.guid, mPacketIdentifier);
+
+			//EntityManager::i().aumentaKill(guidTabla.guid);
 
 		}
 		break;
@@ -305,6 +328,9 @@ void Cliente::update() {
 			MuerteEvent evento(guidTabla.guid);
 
 			notify(evento);
+
+			sendSyncPackage(guidTabla.guid, mPacketIdentifier);
+			//EntityManager::i().aumentaMuerte(guidTabla.guid);
 
 		}
 		break;
@@ -349,14 +375,88 @@ void Cliente::update() {
 			bsIn.IgnoreBytes(1);
 			bsIn.Read(time);
 			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::Time() - time);
-		}
-		default:
-			printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 			break;
+		}
+
+			case SYNC:
+			{
+				//Sync
+				TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
+				/*std::cout << "Sync packet from: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl;
+				std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
+				switch (sync.packageType) {
+					case MOVIMIENTO:
+					{
+						countMovimiento++;
+						break;
+					}
+					case DISPARAR_BALA:
+					{
+						std::cout << "AUMENTO DISPARO" << std::endl;
+						countDisparo++;
+						break;
+					}
+					case DISPARAR_ROCKET:
+					{
+						std::cout << "AUMENTO DISPARO" << std::endl;
+						countDisparo++;
+						break;
+					}
+					case IMPACTO_BALA:
+					{
+						countImpacto++;
+						
+						break;
+					}
+					case IMPACTO_ROCKET:
+					{
+						countImpacto++;
+						break;
+					}
+					case VIDA_COGIDA:
+					{
+						countDropVida++;
+						break;
+					}
+					case ARMA_COGIDA:
+					{
+						countDropArma++;
+						break;
+					}
+					case MUERTE:
+					{
+						countMuerte++;
+						break;
+					}
+					case LANZAR_GRANADA:
+					{
+						countGranada++;
+						break;
+					}
+					case AUMENTA_KILL:
+					{
+						countAumentaKill++;
+						break;
+					}
+					case AUMENTA_MUERTE:
+					{
+						countAumentaMuerte++;
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+				break;
+			}
+			default:
+				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
+				break;
 
 		}
 	}
-
+	RakNet::GetTimeMS();
 
 }
 
@@ -365,6 +465,7 @@ void Cliente::inicializar() {
 	char eleccion;
 	int elec;
 	std::string str;
+	resetBarTime.restart();
 
 	do {
 		searchServersOnLAN();
@@ -430,6 +531,7 @@ Player* Cliente::createPlayer() {
 	nuevoplayer.name = player->getName();
 
 	dispatchMessage(nuevoplayer, NUEVO_PLAYER);
+	//peer->Send((const char*)&nuevoplayer, sizeof(nuevoplayer), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 
 	return player;
 
@@ -463,7 +565,10 @@ void Cliente::searchServersOnLAN() {
 		if (packet->data[0] == ID_UNCONNECTED_PONG) {
 			RakNet::TimeMS time;
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
+
 			bsIn.IgnoreBytes(1);
+			bsIn.Read(time);
+			printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
 			m_servers.push_back(packet->systemAddress.ToString());
 		}
 
@@ -485,11 +590,107 @@ void Cliente::apagar() {
 
 }
 
-//obtenemos el id del paquete recibido
 unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 {
 	if (pPacket == 0)
 		return 255;
 
 	return (unsigned char)pPacket->data[0];
+}
+
+void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type) {
+	TSyncMessage sync;
+	sync.destino = guidDestino;
+	sync.origen = EntityManager::i().getEntity(PLAYER)->getGuid();
+	sync.packageType = type;
+	/*std::cout << "Enviando paquete de sincronizacion..." << std::endl;
+	std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
+	*/
+
+	dispatchMessage(sync, SYNC);
+}
+void Cliente::pingServer() {
+
+	peer->Ping(servidorAdr.ToString(), 65535, false);
+}
+
+void Cliente::resetBar() {
+
+
+
+	countDisparo = 0;
+	countImpacto = 0;
+	countDropVida = 0;
+	countDropArma = 0;
+	countMuerte = 0;
+	countGranada = 0;
+	countAumentaKill = 0;
+	countAumentaMuerte = 0;
+
+}
+
+
+void Cliente::resetBar(unsigned char tipo) {
+
+	switch (tipo) {
+	case MOVIMIENTO: {
+
+		break;
+	}
+	case DISPARAR_BALA:
+	{
+		countDisparo = 0;
+		break;
+	}
+	case DISPARAR_ROCKET:
+	{
+		countDisparo = 0;
+		break;
+	}
+	case IMPACTO_BALA:
+	{
+		countImpacto = 0;
+
+		break;
+	}
+	case IMPACTO_ROCKET:
+	{
+		countImpacto = 0;
+		break;
+	}
+	case VIDA_COGIDA:
+	{
+		countDropVida = 0;
+		break;
+	}
+	case ARMA_COGIDA:
+	{
+		countDropArma = 0;
+		break;
+	}
+	case MUERTE:
+	{
+		countMuerte = 0;
+		break;
+	}
+	case LANZAR_GRANADA:
+	{
+		countGranada = 0;
+		break;
+	}
+	case AUMENTA_KILL:
+	{
+		countAumentaKill = 0;
+		break;
+	}
+	case AUMENTA_MUERTE:
+	{
+		countAumentaMuerte = 0;
+		break;
+	}
+	default:
+	{
+		break;
+	}
+	}
 }

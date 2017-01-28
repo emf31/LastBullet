@@ -30,7 +30,10 @@ void EntityManager::enviaNuevaPos(TMovimiento p, RakNet::RakPeerInterface *peer)
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != p.guid) {
 			//enviamos la posicion actualizada del player a todos los clientes
+			//std::cout << "Dentro: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(p.guid) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
+
 			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+
 		}
 
 	}
@@ -153,7 +156,7 @@ void EntityManager::enviarDisparoClienteRocket(TBala & b, RakNet::RakPeerInterfa
 
 void EntityManager::VidaCogida(TId &idVida, RakNet::RakPeerInterface * peer)
 {
-
+	
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a TODOS para que todos sepan que la vida con idVida ha sido cogida
@@ -375,4 +378,10 @@ void EntityManager::enviaFila(RakNet::RakPeerInterface * peer, TFilaTabla fila)
 		}
 	}
 
+}
+
+
+void EntityManager::enviaSync(RakNet::RakPeerInterface *peer, TSyncMessage sync) {
+	//std::cout << "Tipoo: " <<(unsigned int) sync.mID << std::endl;
+	peer->Send((const char*)&sync, sizeof(sync), HIGH_PRIORITY, RELIABLE_ORDERED,0, sync.destino, false);
 }

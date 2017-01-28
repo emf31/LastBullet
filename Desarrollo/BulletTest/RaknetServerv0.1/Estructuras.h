@@ -110,6 +110,7 @@ struct TDropServer {
 struct TId {
 	unsigned char mID;
 	int id;
+	RakNet::RakNetGUID guid;
 };
 #pragma pack(pop)
 
@@ -121,12 +122,18 @@ struct TCambioArma {
 	RakNet::RakNetGUID guid;
 };
 #pragma pack(pop)
+#pragma pack(push, 1)
+struct TSyncMessage {
+	unsigned char mID;
+
+	unsigned char packageType;
+	RakNet::RakNetGUID origen;
+	RakNet::RakNetGUID destino;
+};
+#pragma pack(pop)
 
 
-
-
-enum GameMessages
-{
+enum GameMessages {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
 	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
 	MENSAJE_NOMBRE = ID_USER_PACKET_ENUM + 3,
@@ -155,7 +162,8 @@ enum GameMessages
 	MOSTRAR_TABLA = ID_USER_PACKET_ENUM + 26,
 	AUMENTA_KILL = ID_USER_PACKET_ENUM + 27,
 	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28,
-	FIN_PARTIDA = ID_USER_PACKET_ENUM + 29
+	FIN_PARTIDA = ID_USER_PACKET_ENUM + 29,
+	SYNC = ID_USER_PACKET_ENUM + 30
 
 
 };
