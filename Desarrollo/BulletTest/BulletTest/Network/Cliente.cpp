@@ -568,8 +568,7 @@ unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 	return (unsigned char)pPacket->data[0];
 }
 
-<<<<<<< HEAD
-void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type) {
+	void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type) {
 	TSyncMessage sync;
 	sync.destino = guidDestino;
 	sync.origen = EntityManager::i().getEntity(PLAYER)->getGuid();
@@ -577,10 +576,9 @@ void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type
 	std::cout << "Enviando paquete de sincronizacion..." << std::endl;
 	std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
 
-	dispatchMessage(sync,SYNC);
-=======
+	dispatchMessage(sync, SYNC);
+}
 void Cliente::pingServer() {
 	
 		peer->Ping(servidorAdr.ToString() , 65535, false);	
->>>>>>> 343dffc327cce1a704bf4a72205e0007841d9780
 }
