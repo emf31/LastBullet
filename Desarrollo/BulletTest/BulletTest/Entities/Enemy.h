@@ -56,6 +56,8 @@ public:
 	float getRadio(){
 		return radius;
 	}
+
+	void setVisibilidadBilboardSync(bool visible);
 private:
 
 	//MachineState* m_pStateMachine;
@@ -72,12 +74,12 @@ private:
 	bool m_isDying;
 
 	Clock relojMuerte;
+	Clock billboardTime;
 	
 
 
 	btRigidBody* m_rigidBody;
 	std::queue<TMovimiento> m_positions;
-	
 	
 
 	virtual std::string getClassName() { return "Enemy"; }
