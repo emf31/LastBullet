@@ -69,7 +69,9 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, Vec2f vector2d, Vec3<float> relPosition) {
 
 	IBillboardSceneNode *billboard = irrScene->addBillboardSceneNode(nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
-
+	billboard->setSize(core::dimension2df(9, 3));
+	billboard->setPosition(core::vector3df(0, 250, 0));
+	billboard->setColor(video::SColor(255, 0, 255, 0));
 	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
 }
 std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, Vec2f vector2d, Vec3<float> relPosition) {
@@ -86,6 +88,8 @@ std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<Sc
 
 	delete[] aux1;
 
+	
+	
 	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
 }
 

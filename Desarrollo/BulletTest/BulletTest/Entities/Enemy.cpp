@@ -27,6 +27,7 @@ void Enemy::inicializar()
 	animation = new Animation();
 	granada = new Granada();
 	m_isDying = false;
+	
 }
 
 void Enemy::update(Time elapsedTime)
@@ -35,7 +36,11 @@ void Enemy::update(Time elapsedTime)
 
 	updateState();
 	updateAnimation();
-
+	if (billboardTime.getElapsedTime().asSeconds() >= 2) {
+		setVisibilidadBilboardSync(false);
+		m_nodo.get()->setTexture("../media/body01.png", 1);
+		billboardTime.restart();
+	}
 	isMoving = true;
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
@@ -62,9 +67,10 @@ void Enemy::cargarContenido()
 	m_nodo.get()->setTexture("../media/body01.png", 1);
 	m_nodo.get()->setTexture("../media/head01.png", 0);
 	m_nodo.get()->setTexture("../media/m4tex.png", 2);
+	
 
 	//m_renderState.setPosition(Vec3<float>(0, 100, 0));
-
+	billboardTime.restart();
 	animation->addAnimation("Default", 0, 0);
 	animation->addAnimation("Run_Forwards", 1, 69);
 	animation->addAnimation("Run_backwards", 70, 138);
@@ -197,6 +203,11 @@ void Enemy::desencolaMovimiento()
 void Enemy::lanzarGranada(TGranada g)
 {
 	granada->serverShoot(g);
+}
+
+void Enemy::setVisibilidadBilboardSync(bool visible)
+{
+	m_nodo.get()->setTexture("../media/body01green.png", 1);
 }
 
 
