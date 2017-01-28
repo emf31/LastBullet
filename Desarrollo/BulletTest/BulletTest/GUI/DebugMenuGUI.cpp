@@ -3,6 +3,7 @@
 
 
 void DebugMenuGUI::update() {
+	updateProgressBars();
 }
 
 void DebugMenuGUI::inicializar() {
@@ -165,4 +166,22 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 
 
 	return true;
+}
+
+void DebugMenuGUI::updateProgressBars() {
+	int numClientes = EntityManager::i().numClientes();
+	float progreso = 1 / (float)numClientes;
+	Cliente cliente = Cliente::i();
+
+	movimientoPB->setProgress(cliente.countMovimiento*progreso);
+	disparosPB->setProgress(cliente.countDisparo*progreso);
+	impactoPB->setProgress(cliente.countImpacto*progreso);
+	dropArmaPB->setProgress(cliente.countDropArma*progreso);
+	dropVidaPB->setProgress(cliente.countDropVida*progreso);
+	muertePB->setProgress(cliente.countMuerte*progreso);
+	granadaPB->setProgress(cliente.countGranada*progreso);
+	aumentaKillPB->setProgress(cliente.countAumentaKill*progreso);
+	aumentaMuertePB->setProgress(cliente.countAumentaMuerte*progreso);
+
+
 }

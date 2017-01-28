@@ -3,6 +3,8 @@
 #include <GraphicEngine.h>
 #include <GUI.h>
 #include <Enemy_Bot.h>
+#include <EntityManager.h>
+#include <Cliente.h>
 class DebugMenuGUI : public Motor::GUI {
 public:
 	virtual void update() override;
@@ -23,7 +25,7 @@ private:
 	bool onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e);
 	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
 
-	
+	void updateProgressBars();
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
