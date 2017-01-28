@@ -6,8 +6,6 @@
 #include <NavGraphNode.h>
 #include <GraphEnumeration.h>
 
-
-
 class SparseGraph {
 private:
 
@@ -21,13 +19,13 @@ public:
 	SparseGraph(bool digraph) : m_digraph(digraph), m_nextNodeIndex(0) {};
 	~SparseGraph() {};
 
+
 	NavGraphNode& getNode(int idx);;
 	GraphEdge& getEdge(int from, int to);
 	int getNextFreeNodeIndex() const { return m_nextNodeIndex; };
 	int addNode(NavGraphNode node);
 	void removeNode(int node);
 	void addEdge(GraphEdge edge);
-	void removeEdge(int from, int to);
 
 	void readGraph(const std::string& path);
 
@@ -47,27 +45,25 @@ public:
 
 	}
 
+	//Comprueba que la arista no exista ya en el grafo
+	bool  UniqueEdge(int from, int to)const;
 
-	//numero de nodos
 	int numNodes() const { return m_nodes.size(); };
 
-	//numero de nodos activos
-	int numActiveNodes() const;;
 
-	// numero total de aristas
 	int numEdges();
 
 	bool isDigraph()const { return m_digraph; };
 	bool isEmpty()const { return m_nodes.empty(); };
 
-	//devuelve true si el nodo esta presente en el grafo
+
 	bool isNodePresent(int node)const;
 
-	//devuelve true si la arista presente en el grafo
 	bool isEdgePresent(int from, int to);
 
 	void clear();
 
 
-
 };
+
+

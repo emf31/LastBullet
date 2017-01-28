@@ -40,6 +40,7 @@ void Map::inicializar()
 	grafo = new SparseGraph(true);
 	grafo->readGraph("../media/laberinto.json");
 
+
 	//se meten los nodos a las celdas correspondientes
 	
 	std::cout << "AÑADIMOS LOS NODOS A LAS CELDAS" << std::endl;

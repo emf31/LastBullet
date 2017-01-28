@@ -6,8 +6,7 @@
 #include <MapLoader.h>
 
 
-NavGraphNode & SparseGraph::getNode(int idx) { 
-
+NavGraphNode & SparseGraph::getNode(int idx) {
 
 	return m_nodes.at(idx);
 }
@@ -21,7 +20,6 @@ GraphEdge& SparseGraph::getEdge(int from, int to)
 		if (i->To() == to)
 			return *i;
 	}
-	
 
 }
 
@@ -46,6 +44,7 @@ int SparseGraph::addNode(NavGraphNode node)
 void SparseGraph::removeNode(int node)
 {
 
+
 	m_nodes[node].setIndex(invalid_node_index);//pones el nodo a index invalido
 
 
@@ -53,7 +52,7 @@ void SparseGraph::removeNode(int node)
 	{
 		for (std::list<GraphEdge>::iterator curEdge = m_Edges[node].begin(); curEdge != m_Edges[node].end(); ++curEdge) //recorre todos los nodos en el vector de edges
 		{
-			for (std::list<GraphEdge>::iterator curE = m_Edges[curEdge->To()].begin();curE != m_Edges[curEdge->To()].end(); ++curE) //vas sacando los nodos de las listas de edges
+			for (std::list<GraphEdge>::iterator curE = m_Edges[curEdge->To()].begin(); curE != m_Edges[curEdge->To()].end(); ++curE) //vas sacando los nodos de las listas de edges
 			{
 				if (curE->To() == node)
 				{
@@ -63,7 +62,6 @@ void SparseGraph::removeNode(int node)
 				}
 			}
 		}
-
 		m_Edges[node].clear();//por ultimo eliminas la posicion del vector del nodo de edge
 	}
 	else {
@@ -82,47 +80,34 @@ void SparseGraph::removeNode(int node)
 	}
 }
 
-//Anade una arista al grafo, si el grafo es no dirigido hay que anadir una arista en el sentido opuesto.
+//Anade una arista al grafo, asegurandose de que no sea una arista duplicada,
+//ademas si el grafo es no dirigido hay que anadir una arista en el sentido opuesto.
 void SparseGraph::addEdge(GraphEdge edge)
 {
-
 
 	if ((m_nodes[edge.To()].Index() != invalid_node_index) &&
 		(m_nodes[edge.From()].Index() != invalid_node_index))
 	{
 
+		if (UniqueEdge(edge.From(), edge.To()))
+		{
+			m_Edges[edge.From()].push_back(edge);
+		}
+
+
 		if (!m_digraph)
 		{
-			GraphEdge NewEdge = edge;
 
-			NewEdge.setTo(edge.From());
-			NewEdge.setFrom(edge.To());
+			if (UniqueEdge(edge.To(), edge.From()))
+			{
+				GraphEdge NewEdge = edge;
 
-			m_Edges[edge.To()].push_back(NewEdge);
+				NewEdge.setTo(edge.From());
+				NewEdge.setFrom(edge.To());
+
+				m_Edges[edge.To()].push_back(NewEdge);
+			}
 		}
-	}
-}
-
-void SparseGraph::removeEdge(int from, int to)
-{
-
-	std::list<GraphEdge>::iterator curEdge;
-
-	if (!m_digraph)
-	{
-		for (curEdge = m_Edges[to].begin();
-			curEdge != m_Edges[to].end();
-			++curEdge)
-		{
-			if (curEdge->To() == from) { curEdge = m_Edges[to].erase(curEdge); break; }
-		}
-	}
-
-	for (curEdge = m_Edges[from].begin();
-		curEdge != m_Edges[from].end();
-		++curEdge)
-	{
-		if (curEdge->To() == to) { curEdge = m_Edges[from].erase(curEdge); break; }
 	}
 }
 
@@ -140,7 +125,7 @@ void SparseGraph::readGraph(const std::string & path) {
 					Entity* ent = NULL;
 					std::string extra = nodoJson["extraInfo"];
 					if (extra == "LifeObject") {
-						ent = MapLoader::createLifeObject(Vec3<float>(nodoJson["posX"], nodoJson["posY"],nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "LifeObject", "");
+						ent = MapLoader::createLifeObject(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "LifeObject", "");
 						//std::cout << "Leemos nodo vida \n";
 					}
 					else if (extra == "AsaltoDrop") {
@@ -187,16 +172,23 @@ void SparseGraph::readGraph(const std::string & path) {
 	}
 }
 
-int SparseGraph::numActiveNodes() const 
+bool SparseGraph::UniqueEdge(int from, int to) const
 {
-	int count = 0;
+	for (std::list<GraphEdge>::const_iterator curEdge = m_Edges[from].begin();
+		curEdge != m_Edges[from].end();
+		++curEdge)
+	{
+		if (curEdge->To() == to)
+		{
+			return false;
+		}
+	}
 
-	for (unsigned int n = 0; n < m_nodes.size(); ++n) if (m_nodes[n].Index() != invalid_node_index) ++count;
-
-	return count;
+	return true;
 }
 
-int SparseGraph::numEdges() 
+
+int SparseGraph::numEdges()
 {
 	int tot = 0;
 
@@ -237,9 +229,6 @@ bool SparseGraph::isEdgePresent(int from, int to)
 
 void SparseGraph::clear()
 {
-	m_nextNodeIndex = 0; 
-	m_nodes.clear(); 
-	m_Edges.clear();
+	m_nextNodeIndex = 0; m_nodes.clear(); m_Edges.clear();
 }
-
 
