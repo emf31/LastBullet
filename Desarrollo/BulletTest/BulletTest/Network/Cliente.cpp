@@ -33,6 +33,7 @@ void Cliente::update() {
 		
 	
 	//pingServer();
+	resetBar();
 		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
 			// Recibimos un paquete, tenemos que obtener el tipo de mensaje
@@ -576,7 +577,7 @@ unsigned char Cliente::getPacketIdentifier(RakNet::Packet * pPacket)
 	/*std::cout << "Enviando paquete de sincronizacion..." << std::endl;
 	std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
 	*/
-	resetBar(type);
+	
 	dispatchMessage(sync, SYNC);
 }
 void Cliente::pingServer() {
@@ -584,67 +585,18 @@ void Cliente::pingServer() {
 		peer->Ping(servidorAdr.ToString() , 65535, false);	
 }
 
-void Cliente::resetBar(unsigned char tipo) {
+void Cliente::resetBar() {
 
-	switch (tipo) {
-	case MOVIMIENTO:
-	{
-		countMovimiento = 0;
-		break;
-	}
-	case DISPARAR_BALA:
-	{
-		countDisparo = 0;
-		break;
-	}
-	case DISPARAR_ROCKET:
-	{
-		countDisparo = 0;
-		break;
-	}
-	case IMPACTO_BALA:
-	{
-		countImpacto = 0;
-		break;
-	}
-	case IMPACTO_ROCKET:
-	{
-		countImpacto = 0;
-		break;
-	}
-	case VIDA_COGIDA:
-	{
-		countDropVida = 0;
-		break;
-	}
-	case ARMA_COGIDA:
-	{
-		countDropArma = 0;
-		break;
-	}
-	case MUERTE:
-	{
-		countMuerte = 0;
-		break;
-	}
-	case LANZAR_GRANADA:
-	{
-		countGranada = 0;
-		break;
-	}
-	case AUMENTA_KILL:
-	{
-		countAumentaKill = 0;
-		break;
-	}
-	case AUMENTA_MUERTE:
-	{
-		countAumentaMuerte = 0;
-		break;
-	}
-	default:
-	{
-		break;
-	}
-	}
+	countMovimiento = 0;
+	countDisparo = 0;
+	countDisparo = 0;
+	countImpacto = 0;
+	countImpacto = 0;
+	countDropVida = 0;
+	countDropArma = 0;
+	countMuerte = 0;
+	countGranada = 0;
+	countAumentaKill = 0;
+	countAumentaMuerte = 0;
+
 }

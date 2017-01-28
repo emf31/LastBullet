@@ -172,8 +172,9 @@ void DebugMenuGUI::updateProgressBars() {
 	int numClientes = EntityManager::i().numClientes();
 	float progreso = 1 / (float)numClientes;
 	Cliente cliente = Cliente::i();
+	
 
-	movimientoPB->setProgress(cliente.countMovimiento*progreso);
+	movimientoPB->setProgress((cliente.countMovimiento+1)*progreso);
 	disparosPB->setProgress(cliente.countDisparo*progreso);
 	impactoPB->setProgress(cliente.countImpacto*progreso);
 	dropArmaPB->setProgress(cliente.countDropArma*progreso);

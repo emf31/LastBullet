@@ -73,5 +73,5 @@ private:
 	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 
 
-	void resetBar(unsigned char tipo);
+	void resetBar();
 };
