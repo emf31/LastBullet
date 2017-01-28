@@ -115,7 +115,8 @@ void Cliente::update() {
 					e->encolaMovimiento(m);
 				}
 				
-				//sendSyncPackage(m.guid, mPacketIdentifier);
+
+				sendSyncPackage(m.guid, mPacketIdentifier);
 			}
 			break;
 
