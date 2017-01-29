@@ -38,8 +38,7 @@ void Enemy::update(Time elapsedTime)
 
 	updateState();
 	updateAnimation();
-	if (billboardTime.getElapsedTime().asSeconds() >= 2) {
-		setVisibilidadBilboardSync(false);
+	if (billboardTime.getElapsedTime().asSeconds() >= 2 ) {
 		m_nodo.get()->setTexture("../media/body01.png", 1);
 		billboardTime.restart();
 	}
@@ -210,7 +209,7 @@ void Enemy::lanzarGranada(TGranada g)
 	granada->serverShoot(g);
 }
 
-void Enemy::setVisibilidadBilboardSync(bool visible)
+void Enemy::setVisibilidadBilboardSync()
 {
 	m_nodo.get()->setTexture("../media/body01green.png", 1);
 }

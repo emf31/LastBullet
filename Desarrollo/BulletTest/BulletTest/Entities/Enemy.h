@@ -57,7 +57,7 @@ public:
 		return radius;
 	}
 
-	void setVisibilidadBilboardSync(bool visible);
+	void setVisibilidadBilboardSync();
 private:
 
 	//MachineState* m_pStateMachine;

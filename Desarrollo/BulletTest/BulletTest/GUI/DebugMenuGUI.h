@@ -45,6 +45,7 @@ private:
 	CEGUI::PushButton *closePushButtonNetSync;
 	CEGUI::PushButton *closePushButtonNetDebug;
 	bool networkOpen = false;
+	
 
 	//IA
 	CEGUI::PushButton *DebugIA;

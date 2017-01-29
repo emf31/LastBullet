@@ -51,6 +51,7 @@ public:
 	void sendSyncPackage(RakNet::RakNetGUID guid, unsigned char mPacketIdentifier);
 
 	int countMovimiento=0, countDisparo=0, countImpacto=0, countDropArma=0, countDropVida=0, countMuerte=0, countGranada=0, countAumentaKill=0, countAumentaMuerte=0;
+	bool windowsPacketOpen = false;
 private:
 	RakNet::Packet *packet;
 	RakNet::RakPeerInterface *peer;
