@@ -33,6 +33,11 @@ public:
 		if (messageType != SYNC) {
 			resetBar(messageType);
 		}
+		if (messageType == MOVIMIENTO) {
+			countMovementPacketsOut++;
+		} else if(messageType != SYNC)
+			countPacketsOut++;
+		
 		
 		peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, servidor, false);
 	}
@@ -47,10 +52,16 @@ public:
 		return conectado;
 	}
 
+	std::string getServerIp() {
+		return servidorAdr.ToString();
+	}
 
 	void sendSyncPackage(RakNet::RakNetGUID guid, unsigned char mPacketIdentifier);
 
 	int countMovimiento=0, countDisparo=0, countImpacto=0, countDropArma=0, countDropVida=0, countMuerte=0, countGranada=0, countAumentaKill=0, countAumentaMuerte=0;
+
+	int countPacketsIn = 0, countPacketsOut = 0, countPacketsTotal=0;
+	int countMovementPacketsIn = 0, countMovementPacketsOut = 0, countMovementPacketsTotal = 0;
 private:
 	RakNet::Packet *packet;
 	RakNet::RakPeerInterface *peer;

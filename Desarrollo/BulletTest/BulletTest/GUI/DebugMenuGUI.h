@@ -26,6 +26,7 @@ private:
 	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
 
 	void updateProgressBars();
+	void updateNetworkWindowInfo();
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
@@ -44,6 +45,17 @@ private:
 	CEGUI::ProgressBar *aumentaMuertePB;
 	CEGUI::PushButton *closePushButtonNetSync;
 	CEGUI::PushButton *closePushButtonNetDebug;
+
+	CEGUI::ToggleButton *toggleCountMovement;
+
+	CEGUI::DefaultWindow *labelStatus;
+	CEGUI::DefaultWindow *labelPing;
+	CEGUI::DefaultWindow *labelTotalPackets;
+	CEGUI::DefaultWindow *labelPacketsIn;
+	CEGUI::DefaultWindow *labelPacketsOut;
+	CEGUI::DefaultWindow *labelServerIp;
+	CEGUI::DefaultWindow *labelNumPlayers;
+
 	bool networkOpen = false;
 
 	//IA

@@ -81,7 +81,6 @@ void InGameHUD::updateLabelVida() {
 
  void InGameHUD::updateLabelMunicion() {
 	std::ostringstream oss;
-	CEGUI::String str;
 	oss << p->getAmmoActual() << "/" << p->getCargadorActual();
 	LabelMunicion->setText(oss.str());
  }

@@ -39,9 +39,11 @@ void Cliente::update() {
 	}
 	countMovimiento = 0;
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-
+		
+		
 		// Recibimos un paquete, tenemos que obtener el tipo de mensaje
 		mPacketIdentifier = getPacketIdentifier(packet);
+
 
 		switch (mPacketIdentifier) {
 		case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -114,8 +116,8 @@ void Cliente::update() {
 			if (e != NULL) {
 				e->encolaMovimiento(m);
 			}
-
-			//sendSyncPackage(m.guid, mPacketIdentifier);
+			countMovementPacketsIn++;
+			sendSyncPackage(m.guid, mPacketIdentifier);
 		}
 		break;
 
@@ -440,8 +442,14 @@ void Cliente::update() {
 			break;
 
 		}
+		if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC)
+			countPacketsIn++;
 
 	}
+	
+
+	countPacketsTotal = countPacketsIn + countPacketsOut;
+	countMovementPacketsTotal = countMovementPacketsIn + countMovementPacketsOut;
 	RakNet::GetTimeMS();
 
 }

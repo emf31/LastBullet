@@ -92,9 +92,9 @@
             <Property name="NormalImage" value="AlfiskoSkin/Mapa" />
             <Property name="PushedImage" value="AlfiskoSkin/Mapa" />
         </Window>
-        <Window type="Vanilla/FrameWindow" name="FrameWindow2" >
+        <Window type="Vanilla/FrameWindow" name="NetworkInfo" >
             <Property name="ID" value="60" />
-            <Property name="Area" value="{{0,279},{0,62},{0.3,443},{0.3,140}}" />
+            <Property name="Area" value="{{0,371},{0,57},{0.3,535},{0.3,130}}" />
             <Property name="Text" value="Network Debug Info" />
             <Property name="Alpha" value="0.9" />
             <Property name="Visible" value="false" />
@@ -139,13 +139,13 @@
                 <Property name="HorzFormatting" value="RightAligned" />
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label6" >
-                <Property name="Area" value="{{0.462547,52},{0.100386,-2},{0.462547,146},{0.100386,30}}" />
+                <Property name="Area" value="{{0.462547,30},{0.100386,1},{0.462547,124},{0.100386,33}}" />
                 <Property name="Text" value="Server: " />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="HorzFormatting" value="RightAligned" />
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label7" >
-                <Property name="Area" value="{{0,302},{0,74},{0,393},{0,106}}" />
+                <Property name="Area" value="{{0,280},{0,76},{0,371},{0,108}}" />
                 <Property name="Text" value="Players: " />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="HorzFormatting" value="RightAligned" />
@@ -182,15 +182,20 @@
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label86" >
                 <Property name="ID" value="6" />
-                <Property name="Area" value="{{0,411},{0,25},{0,539},{0,57}}" />
+                <Property name="Area" value="{{0,388},{0,26},{0,516},{0,58}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="HorzFormatting" value="LeftAligned" />
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label87" >
                 <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,411},{0,74},{0,539},{0,106}}" />
+                <Property name="Area" value="{{0,388},{0,75},{0,516},{0,107}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="Vanilla/Checkbox" name="Checkbox" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0,301},{0,125},{0,540},{0,157}}" />
+                <Property name="Text" value="Count movement packets" />
             </Window>
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="VentanaIA" >

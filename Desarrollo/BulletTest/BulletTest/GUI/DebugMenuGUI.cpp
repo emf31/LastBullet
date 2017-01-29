@@ -4,6 +4,7 @@
 
 void DebugMenuGUI::update() {
 	updateProgressBars();
+	updateNetworkWindowInfo();
 }
 
 void DebugMenuGUI::inicializar() {
@@ -33,7 +34,19 @@ void DebugMenuGUI::inicializar() {
 
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
+
+	labelStatus = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(1));
+	labelPing = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(2));
+	labelTotalPackets = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(3));
+	labelPacketsIn = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(4));
+	labelPacketsOut = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(5));
+	labelServerIp = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(6));
+	labelNumPlayers = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(7));
+
+	toggleCountMovement = static_cast<CEGUI::ToggleButton*>(NetworkWindow->getChild(8));
+
 	NetworSyncWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(80));
+
 	movimientoPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(1));
 	disparosPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(2));
 	impactoPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(3));
@@ -43,6 +56,7 @@ void DebugMenuGUI::inicializar() {
 	granadaPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(7));
 	aumentaKillPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(8));
 	aumentaMuertePB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(9));
+
 	closePushButtonNetSync = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(99)->getChild(100));
 	closePushButtonNetSync->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetSyncClicked, this));
 	closePushButtonNetDebug = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(60)->getChild(99)->getChild(100));
@@ -191,5 +205,48 @@ void DebugMenuGUI::updateProgressBars() {
 	aumentaKillPB->setProgress(cliente.countAumentaKill*progreso);
 	aumentaMuertePB->setProgress(cliente.countAumentaMuerte*progreso);
 
+
+}
+
+void DebugMenuGUI::updateNetworkWindowInfo(){
+	Cliente cliente = Cliente::i();
+
+	if (toggleCountMovement->isSelected()) {
+		cliente.countPacketsTotal = cliente.countPacketsTotal + cliente.countMovementPacketsTotal;
+		cliente.countPacketsIn = cliente.countPacketsIn + cliente.countMovementPacketsIn;
+		cliente.countPacketsOut = cliente.countPacketsOut + cliente.countMovementPacketsOut;
+	}
+
+	std::ostringstream ossStatus;
+	if (cliente.isConected()) {
+		ossStatus << "Connected";
+	} else {
+		ossStatus << "Not Connected";
+	}
+	labelStatus->setText(ossStatus.str());
+
+	std::ostringstream ossServerIp;
+	std::string serverIp = cliente.getServerIp();
+	size_t pos = serverIp.find("|");
+	ossServerIp << serverIp.substr(0, pos);
+	labelServerIp->setText(ossServerIp.str());
+
+	std::ostringstream ossNumPlayers;
+	ossNumPlayers << EntityManager::i().numClientes();
+	labelNumPlayers->setText(ossNumPlayers.str());
+
+	std::ostringstream ossTotal;
+	ossTotal << cliente.countPacketsTotal;
+	labelTotalPackets->setText(ossTotal.str());
+
+	std::ostringstream ossIn;
+	ossIn << cliente.countPacketsIn;
+	labelPacketsIn->setText(ossIn.str());
+
+	std::ostringstream ossOut;
+	ossOut << cliente.countPacketsOut;
+	labelPacketsOut->setText(ossOut.str());
+
+	
 
 }
