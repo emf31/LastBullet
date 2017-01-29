@@ -1,4 +1,4 @@
-
+ï»¿
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -23,9 +23,6 @@
 #include <events/MuerteEvent.h>
 #include <GetTime.h>
 
-//Clase para administrar los paquetes que van llegando, se hace una llamada al metodo update desde el bucle
-//principal. Tambien tiene funciones para establecer la conexión con el servidor y enviar paquetes.
-
 Cliente::Cliente() /*: lobby(peer)*/
 {
 }
@@ -33,16 +30,14 @@ Cliente::Cliente() /*: lobby(peer)*/
 
 
 void Cliente::update() {
-	
+
+
 	//pingServer();
 	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
 		resetBar();
 		resetBarTime.restart();
 	}
 	countMovimiento = 0;
-
-
-
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
 		// Recibimos un paquete, tenemos que obtener el tipo de mensaje
@@ -68,9 +63,10 @@ void Cliente::update() {
 
 			printf("Nuestra conexion se ha aceptado.\n");
 			servidor = packet->guid;
+			servidorAdr = packet->systemAddress;
 
 
-			//Esta variable indica que el servidor ha aceptado la conexion
+			//Esta variable indica que el servidor a aceptado la conexion
 			conectado = true;
 
 
@@ -119,18 +115,13 @@ void Cliente::update() {
 				e->encolaMovimiento(m);
 			}
 
-
-			sendSyncPackage(m.guid, mPacketIdentifier);
-
+			//sendSyncPackage(m.guid, mPacketIdentifier);
 		}
 		break;
 
 
 		case DESCONECTADO:
 		{
-			//Un cliente de la partida se ha desconectado, borramos la entity que lo representa.
-
-
 			RakID rakID = *reinterpret_cast<RakID*>(packet->data);
 
 			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
@@ -141,26 +132,22 @@ void Cliente::update() {
 
 		case DISPARAR_BALA:
 		{
-			//Una bala ha sido disparada desde otro cliente, tenemos que dibujarla en local
-
 			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 
 			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 			bala->cargarContenido();
 
 			sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
-
 		}
 		break;
 		case IMPACTO_BALA:
 		{
 
-			//Algun cliente nos ha dado con una bala(Asalto o Pistola) y nos lo notifica para restarnos vida
-
 			TImpactoBala bala = *reinterpret_cast<TImpactoBala*>(packet->data);
 
 			//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
 
+			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
@@ -171,21 +158,17 @@ void Cliente::update() {
 
 		case DISPARAR_ROCKET:
 		{
-
-			//Algun cliente ha disparado un rocket y tenemos que dibujarlo
-
 			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 
 			RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
 			sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
+
 		}
 		break;
 
 		case IMPACTO_ROCKET:
 		{
-			//Nos han dado con un rocket, tenemos que restarnos vida
-
 			TImpactoRocket impacto = *reinterpret_cast<TImpactoRocket*>(packet->data);
 
 			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
@@ -194,21 +177,17 @@ void Cliente::update() {
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
 
 			sendSyncPackage(impacto.guidDisparado, mPacketIdentifier);
-
 		}
 		break;
 
 		case LANZAR_GRANADA:
 		{
-			//Un enemigo a lanzado una granada
-
 			TGranada granada = *reinterpret_cast<TGranada*>(packet->data);
 
 			Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
 			ent->lanzarGranada(granada);
 
 			sendSyncPackage(granada.guid, mPacketIdentifier);
-
 		}
 		break;
 
@@ -222,10 +201,8 @@ void Cliente::update() {
 			player->impulsar(imp.fuerza);
 
 			sendSyncPackage(imp.guid, mPacketIdentifier);
-
-
 		}
-
+		break;
 
 		case NUEVA_VIDA:
 		{
@@ -382,87 +359,88 @@ void Cliente::update() {
 			break;
 		}
 
-			case SYNC:
+		case SYNC:
+		{
+			//Sync
+			TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
+			/*std::cout << "Sync packet from: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl;
+			std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
+			if (sync.packageType != MOVIMIENTO) {
+				Enemy *e = static_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
+				e->setVisibilidadBilboardSync(true);
+			}
+			switch (sync.packageType) {
+			case MOVIMIENTO:
 			{
-				//Sync
-				TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
-				/*std::cout << "Sync packet from: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl;
-				std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
-				if (sync.packageType != MOVIMIENTO) {
-					Enemy *e = static_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
-					e->setVisibilidadBilboardSync(true);
-				}
-				switch (sync.packageType) {
-					case MOVIMIENTO:
-					{
-						countMovimiento++;
-						break;
-					}
-					case DISPARAR_BALA:
-					{
-						std::cout << "AUMENTO DISPARO" << std::endl;
-						countDisparo++;
-						break;
-					}
-					case DISPARAR_ROCKET:
-					{
-						std::cout << "AUMENTO DISPARO" << std::endl;
-						countDisparo++;
-						break;
-					}
-					case IMPACTO_BALA:
-					{
-						countImpacto++;
-						
-						break;
-					}
-					case IMPACTO_ROCKET:
-					{
-						countImpacto++;
-						break;
-					}
-					case VIDA_COGIDA:
-					{
-						countDropVida++;
-						break;
-					}
-					case ARMA_COGIDA:
-					{
-						countDropArma++;
-						break;
-					}
-					case MUERTE:
-					{
-						countMuerte++;
-						break;
-					}
-					case LANZAR_GRANADA:
-					{
-						countGranada++;
-						break;
-					}
-					case AUMENTA_KILL:
-					{
-						countAumentaKill++;
-						break;
-					}
-					case AUMENTA_MUERTE:
-					{
-						countAumentaMuerte++;
-						break;
-					}
-					default:
-					{
-						break;
-					}
-				}
+				countMovimiento++;
+				break;
+			}
+			case DISPARAR_BALA:
+			{
+				std::cout << "AUMENTO DISPARO" << std::endl;
+				countDisparo++;
+				break;
+			}
+			case DISPARAR_ROCKET:
+			{
+				std::cout << "AUMENTO DISPARO" << std::endl;
+				countDisparo++;
+				break;
+			}
+			case IMPACTO_BALA:
+			{
+				countImpacto++;
+
+				break;
+			}
+			case IMPACTO_ROCKET:
+			{
+				countImpacto++;
+				break;
+			}
+			case VIDA_COGIDA:
+			{
+				countDropVida++;
+				break;
+			}
+			case ARMA_COGIDA:
+			{
+				countDropArma++;
+				break;
+			}
+			case MUERTE:
+			{
+				countMuerte++;
+				break;
+			}
+			case LANZAR_GRANADA:
+			{
+				countGranada++;
+				break;
+			}
+			case AUMENTA_KILL:
+			{
+				countAumentaKill++;
+				break;
+			}
+			case AUMENTA_MUERTE:
+			{
+				countAumentaMuerte++;
 				break;
 			}
 			default:
-				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
+			{
 				break;
+			}
+			}
+			break;
+		}
+		default:
+			printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
+			break;
 
 		}
+
 	}
 	RakNet::GetTimeMS();
 
@@ -548,7 +526,7 @@ Player* Cliente::createPlayer() {
 
 
 void Cliente::searchServersOnLAN() {
-	//Creo un RakPeer para lanzar un paquete de búsqueda
+	//Creo un RakPeer para lanzar un paquete de bï¿½squeda
 	RakNet::RakPeerInterface *client;
 	client = RakNet::RakPeerInterface::GetInstance();
 
@@ -557,7 +535,7 @@ void Cliente::searchServersOnLAN() {
 
 	client->Startup(1, &socketDescriptor, 1);
 
-	//Hacemos ping a bradcast en el puerto en el que sabemos que está escuchando el server
+	//Hacemos ping a bradcast en el puerto en el que sabemos que estï¿½ escuchando el server
 	client->Ping("255.255.255.255", 65535, false);
 	std::cout << "Buscando servidores en la red local..." << std::endl;
 	RakSleep(1000);
