@@ -69,6 +69,8 @@ void Enemy::cargarContenido()
 	m_nodo.get()->setTexture("../media/body01.png", 1);
 	m_nodo.get()->setTexture("../media/head01.png", 0);
 	m_nodo.get()->setTexture("../media/m4tex.png", 2);
+
+	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0));
 	
 
 	//m_renderState.setPosition(Vec3<float>(0, 100, 0));

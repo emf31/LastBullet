@@ -14,7 +14,6 @@ public:
 	~RocketBulletEnemy();
 
 private:
-	float radioExplosion;
 	Vec3<float> m_direction;
 	Vec3<float> m_position;
 	Vec3<float> m_rotation;
