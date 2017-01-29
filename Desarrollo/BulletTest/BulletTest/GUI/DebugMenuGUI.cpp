@@ -112,8 +112,10 @@ bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 }
 bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
 	networkOpen = !networkOpen;
+	Cliente::i().windowsPacketOpen = !Cliente::i().windowsPacketOpen;
 	NetworkWindow->setVisible(networkOpen);
-	NetworSyncWindow->setVisible(networkOpen);
+	NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);
+	
 	return true;
 }
 bool DebugMenuGUI::onDebugIAClicked(const CEGUI::EventArgs & e) {
@@ -157,6 +159,7 @@ bool DebugMenuGUI::onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e) {
 }
 bool DebugMenuGUI::onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e) {
 	NetworSyncWindow->setVisible(false);
+	Cliente::i().windowsPacketOpen = false;
 	return true;
 }
 

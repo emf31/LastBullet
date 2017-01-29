@@ -13,9 +13,9 @@
 //que dispara dicho rocket.
 
 RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(65), m_rotation(rotation), radioExplosion(40)
+m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation)
 {
-
+	m_lifetime = seconds(5);
 	cargarContenido();
 }
 
@@ -36,14 +36,12 @@ void RocketBulletEnemy::update(Time elapsedTime)
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
 
-	// Set rotation
-	vector3df Euler;
-	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
-	Euler *= RADTODEG;
+	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
 
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+		//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
+		Message msg1(this, "BORRATE", NULL);
+		MessageHandler::i().sendMessage(msg1);
+	}
 }
 
 void RocketBulletEnemy::handleInput()
@@ -52,7 +50,7 @@ void RocketBulletEnemy::handleInput()
 
 void RocketBulletEnemy::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "../media/redTexture.jpg", "");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
@@ -62,7 +60,6 @@ void RocketBulletEnemy::cargarContenido()
 	proxy->m_collisionFilterGroup = col::Collisions::RocketEnemy;
 	proxy->m_collisionFilterMask = col::rocketenemyCollidesWith;
 	m_rigidBody->setCollisionFlags(4);
-	radioExplosion = 40.f;
 }
 
 void RocketBulletEnemy::borrarContenido()
@@ -74,7 +71,7 @@ void RocketBulletEnemy::borrarContenido()
 void RocketBulletEnemy::handleMessage(const Message & message)
 {
 
-	if (message.mensaje == "COLLISION") {
+	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
 		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		EntityManager::i().removeEntity(this);

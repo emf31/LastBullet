@@ -62,6 +62,9 @@ public:
 
 	int countPacketsIn = 0, countPacketsOut = 0, countPacketsTotal=0;
 	int countMovementPacketsIn = 0, countMovementPacketsOut = 0, countMovementPacketsTotal = 0;
+
+	bool windowsPacketOpen = false;
+
 private:
 	RakNet::Packet *packet;
 	RakNet::RakPeerInterface *peer;

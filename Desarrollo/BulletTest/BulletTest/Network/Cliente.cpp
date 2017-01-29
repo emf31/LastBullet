@@ -367,9 +367,10 @@ void Cliente::update() {
 			TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
 			/*std::cout << "Sync packet from: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl;
 			std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
-			if (sync.packageType != MOVIMIENTO) {
+			std::cout << windowsPacketOpen << std::endl;
+			if (sync.packageType != MOVIMIENTO && windowsPacketOpen) {
 				Enemy *e = static_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
-				e->setVisibilidadBilboardSync(true);
+				e->setVisibilidadBilboardSync();
 			}
 			switch (sync.packageType) {
 			case MOVIMIENTO:

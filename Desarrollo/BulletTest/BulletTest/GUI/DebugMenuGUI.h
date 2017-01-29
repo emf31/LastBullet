@@ -57,6 +57,7 @@ private:
 	CEGUI::DefaultWindow *labelNumPlayers;
 
 	bool networkOpen = false;
+	
 
 	//IA
 	CEGUI::PushButton *DebugIA;
