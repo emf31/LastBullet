@@ -1,6 +1,8 @@
 #pragma once
 #include <RakPeerInterface.h>
 #include <RakNetTypes.h>
+#include <RakNetTime.h>
+#include <GetTime.h>
 #include <iostream>
 #include <MessageIdentifiers.h>
 #include <Clock.hpp>
@@ -34,8 +36,13 @@ struct TMovimiento {
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
+};
+#pragma pack(pop)
 
-	
+#pragma pack(push, 1)
+struct TPing {
+	unsigned char mID;
+	RakNet::Time ping;
 };
 #pragma pack(pop)
 
@@ -188,5 +195,6 @@ enum GameMessages {
 	AUMENTA_KILL = ID_USER_PACKET_ENUM + 27,
 	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28,
 	FIN_PARTIDA = ID_USER_PACKET_ENUM + 29,
-	SYNC = ID_USER_PACKET_ENUM + 30
+	SYNC = ID_USER_PACKET_ENUM + 30,
+	PING = ID_USER_PACKET_ENUM + 31
 };

@@ -32,6 +32,13 @@ struct TMovimiento {
 #pragma pack(pop)
 
 #pragma pack(push, 1)
+struct TPing {
+	unsigned char mID;
+	RakNet::Time ping;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
 struct TBala {
 	unsigned char mID;
 	Vec3<float> position;
@@ -163,7 +170,8 @@ enum GameMessages {
 	AUMENTA_KILL = ID_USER_PACKET_ENUM + 27,
 	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28,
 	FIN_PARTIDA = ID_USER_PACKET_ENUM + 29,
-	SYNC = ID_USER_PACKET_ENUM + 30
+	SYNC = ID_USER_PACKET_ENUM + 30,
+	PING = ID_USER_PACKET_ENUM + 31
 
 
 };
