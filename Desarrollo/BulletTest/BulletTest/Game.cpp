@@ -58,7 +58,7 @@ void Game::run()
 	inicializar();
 
 	/// The physics clock is just used to run the physics and runs asynchronously with the gameclock
-	Time time_physics_prev, time_physics_curr;
+	Time time_physics_prev, time_physics_curr, time_client_prev, time_client_curr;
 
 	/// There's an inner loop in here where things happen once every TickMs. These variables are for that.
 	Time time_gameclock;
@@ -100,9 +100,12 @@ void Game::run()
 				//Realizamos actualizaciones
 				update(timePerFrame);
 
+				time_client_curr = clock.getElapsedTime();
+
 				if (Cliente::i().isConected()) {
-					Cliente::i().update();
+					Cliente::i().update(time_client_curr - time_client_prev);
 				}
+				time_client_prev = time_client_curr;
 
 			}
 		if (GraphicEngine::i().isWindowActive()) {
@@ -209,8 +212,9 @@ void Game::inicializar()
 
 		
 		//Bucle infinito hasta que se conecte
+		Time time;
 		while (Cliente::i().isConected() == false) {
-			Cliente::i().update();
+			Cliente::i().update(time);
 		}
 
 		player = Cliente::i().createPlayer();

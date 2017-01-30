@@ -222,17 +222,20 @@ void DebugMenuGUI::updateNetworkWindowInfo(){
 
 	std::ostringstream ossStatus;
 	if (cliente.isConected()) {
+		//labelStatus->setProperty("NormalTextColour", "tl:FF00FF00 tr:FF00FF00 bl:FF00FF00 br:FF00FF00");
 		ossStatus << "Connected";
 	} else {
 		ossStatus << "Not Connected";
 	}
 	labelStatus->setText(ossStatus.str());
 
-	std::ostringstream ossServerIp;
-	std::string serverIp = cliente.getServerIp();
-	size_t pos = serverIp.find("|");
-	ossServerIp << serverIp.substr(0, pos);
-	labelServerIp->setText(ossServerIp.str());
+	if (cliente.isConected()) {
+		std::ostringstream ossServerIp;
+		std::string serverIp = cliente.getServerIp();
+		size_t pos = serverIp.find("|");
+		ossServerIp << serverIp.substr(0, pos);
+		labelServerIp->setText(ossServerIp.str());
+	}
 
 	std::ostringstream ossNumPlayers;
 	ossNumPlayers << EntityManager::i().numClientes();
@@ -249,6 +252,10 @@ void DebugMenuGUI::updateNetworkWindowInfo(){
 	std::ostringstream ossOut;
 	ossOut << cliente.countPacketsOut;
 	labelPacketsOut->setText(ossOut.str());
+
+	std::ostringstream ossPing;
+	ossPing << cliente.GetPing();
+	labelPing->setText(ossPing.str());
 
 	
 

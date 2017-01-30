@@ -20,7 +20,7 @@ public:
 		return singleton;
 	}
 
-	void update();
+	void update(Time elapsedTime);
 
 	void pingServer();
 
@@ -66,6 +66,9 @@ public:
 
 	bool windowsPacketOpen = false;
 
+
+	float GetPing() const { return pingMS; }
+
 private:
 	RakNet::Packet *packet;
 	RakNet::RakPeerInterface *peer;
@@ -94,5 +97,10 @@ private:
 
 	void resetBar();
 	void resetBar(unsigned char tipo);
+
+	RakNet::Time pingMS;
+	Clock timeFor;
+	RakNet::TimeMS duracionFor;
+	
 
 };

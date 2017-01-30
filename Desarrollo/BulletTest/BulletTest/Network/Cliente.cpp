@@ -29,13 +29,23 @@ Cliente::Cliente() /*: lobby(peer)*/
 
 
 
-void Cliente::update() {
+void Cliente::update(Time elapsedTime) {
 
+	
+	TPing ping;
+	//cogemos el tiempo cuando enviamos para restar el tiempo de cuando recibimos-enviamos y a esto le restamos el tiempo del update y tendriamos el ping
+	duracionFor = timeFor.getElapsedTime().asMilliseconds();
+	timeFor.restart();
+	ping.ping = RakNet::GetTimeMS();
+	//Enviamos ping cada update
+	dispatchMessage(ping, PING);
 
 	//pingServer();
+
 	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
 		resetBar();
 		resetBarTime.restart();
+		//pingServer();
 	}
 	countMovimiento = 0;
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
@@ -361,7 +371,7 @@ void Cliente::update() {
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
 			bsIn.IgnoreBytes(1);
 			bsIn.Read(time);
-			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::Time() - time);
+			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::GetTimeMS() - time);
 			break;
 		}
 
@@ -442,6 +452,16 @@ void Cliente::update() {
 			}
 			break;
 		}
+		case PING:
+		{
+			//Ping
+			
+			TPing pingStruct = *reinterpret_cast<TPing*>(packet->data);
+			//+1 milisegundo que tarda en hacer el for
+			pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor+1;
+
+			break;
+		}
 		default:
 			printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 			break;
@@ -452,10 +472,14 @@ void Cliente::update() {
 
 	}
 	
-
+	
 	countPacketsTotal = countPacketsIn + countPacketsOut;
 	countMovementPacketsTotal = countMovementPacketsIn + countMovementPacketsOut;
 	RakNet::GetTimeMS();
+	duracionFor = timeFor.getElapsedTime().asMilliseconds();
+	//pingMS = pingMS - (elapsedTime.asMilliseconds() - duracionFor);
+	//pingMS = duracionFor;
+	timeFor.restart();
 
 }
 
@@ -610,7 +634,7 @@ void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type
 }
 void Cliente::pingServer() {
 
-	peer->Ping(servidorAdr.ToString(), 65535, false);
+	peer->Ping(servidorAdr.ToString(false), 65535, false);
 }
 
 void Cliente::resetBar() {

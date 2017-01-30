@@ -338,6 +338,13 @@ int main() {
 				EntityManager::i().enviaSync(peer, sync);
 				break;
 			}
+			case PING:
+			{
+				TPing ping = *reinterpret_cast<TPing*>(packet->data);
+				peer->Send((const char*)&ping, sizeof(ping), HIGH_PRIORITY, RELIABLE_ORDERED, 0, packet->guid, false);
+
+				break;
+			}
 
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
