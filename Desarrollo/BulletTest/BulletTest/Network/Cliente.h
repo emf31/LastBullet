@@ -9,6 +9,7 @@
 #include <Lobby.h>
 #include <Subject.h>
 
+
 class Cliente : public Subject	//Para comunicarse con la partida
 {
 public:
@@ -93,4 +94,5 @@ private:
 
 	void resetBar();
 	void resetBar(unsigned char tipo);
+
 };

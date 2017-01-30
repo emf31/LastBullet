@@ -38,7 +38,12 @@ void Enemy::update(Time elapsedTime)
 
 	updateState();
 	updateAnimation();
-	if (billboardTime.getElapsedTime().asSeconds() >= 2 ) {
+	//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
+	if (lastSyncPacket.getElapsedTime().asSeconds() >= 5) {
+		m_nodo.get()->setTexture("../media/body01red.png", 1);
+	}
+	//si el verde supera los 2 segundos se reestablece la skin original
+	if (billboardTime.getElapsedTime().asSeconds() >= 2 && lastSyncPacket.getElapsedTime().asSeconds() < 5) {
 		m_nodo.get()->setTexture("../media/body01.png", 1);
 		billboardTime.restart();
 	}

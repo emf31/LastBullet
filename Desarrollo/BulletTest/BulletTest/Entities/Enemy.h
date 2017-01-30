@@ -58,6 +58,7 @@ public:
 	}
 
 	void setVisibilidadBilboardSync();
+	Clock lastSyncPacket;
 private:
 
 	//MachineState* m_pStateMachine;

@@ -104,6 +104,10 @@ void Cliente::update() {
 			e->setPosition(p.position);
 			EntityManager::i().mostrarClientes();
 
+			
+			
+			
+
 		}
 		break;
 		case MOVIMIENTO:
@@ -367,9 +371,11 @@ void Cliente::update() {
 			TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
 			/*std::cout << "Sync packet from: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl;
 			std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
-			std::cout << windowsPacketOpen << std::endl;
+			//std::cout << windowsPacketOpen << std::endl;
+
+			Enemy *e = static_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
+			e->lastSyncPacket.restart();
 			if (sync.packageType != MOVIMIENTO && windowsPacketOpen) {
-				Enemy *e = static_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
 				e->setVisibilidadBilboardSync();
 			}
 			switch (sync.packageType) {
@@ -380,13 +386,11 @@ void Cliente::update() {
 			}
 			case DISPARAR_BALA:
 			{
-				std::cout << "AUMENTO DISPARO" << std::endl;
 				countDisparo++;
 				break;
 			}
 			case DISPARAR_ROCKET:
 			{
-				std::cout << "AUMENTO DISPARO" << std::endl;
 				countDisparo++;
 				break;
 			}
