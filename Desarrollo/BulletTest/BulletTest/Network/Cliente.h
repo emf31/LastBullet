@@ -36,7 +36,7 @@ public:
 		}
 		if (messageType == MOVIMIENTO) {
 			countMovementPacketsOut++;
-		} else if(messageType != SYNC)
+		} else if(messageType != SYNC && messageType != PING)
 			countPacketsOut++;
 		
 		

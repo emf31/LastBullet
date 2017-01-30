@@ -470,15 +470,16 @@ void Cliente::update(Time elapsedTime) {
 			break;
 
 		}
-		if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC)
+		if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC && mPacketIdentifier != PING)
 			countPacketsIn++;
+
+		//std::cout << (unsigned int)mPacketIdentifier << std::endl;
 
 	}
 	
 	
 	countPacketsTotal = countPacketsIn + countPacketsOut;
 	countMovementPacketsTotal = countMovementPacketsIn + countMovementPacketsOut;
-	RakNet::GetTimeMS();
 	duracionFor = timeFor.getElapsedTime().asMilliseconds();
 	//pingMS = pingMS - (elapsedTime.asMilliseconds() - duracionFor);
 	//pingMS = duracionFor;
