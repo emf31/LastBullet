@@ -1,0 +1,8 @@
+En la carpeta raíz se encuentra el informe del desarrollo del cartel.
+
+En la subcarpeta /Galaxia se encuentra el .psd y el png de la imagen de la galaxia que ha sido realizada para el fondo del cartel.
+
+En la subcarpeta /Logo Last Bullet está el .psd del logo del juego junto con su png, ademas, en /Logo Last Bullet/Logo 3D descartado se encuentra la versión del logo 3D que se realizó pero posteriormente se descarto.
+
+En la subcarpeta /Cartel final está el .psd del cartel final y su correspondiente png, en /Cartel final/Carteles descartados hay diferentes imagenes de carteles descartados junto algunos de .psd de los carteles, en 
+/Cartel final/PSD assets están los .psd de la ciudad que se ha usado en el cartel y el .psd del soldado que finalmente no se ha utilizado.

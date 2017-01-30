@@ -253,6 +253,10 @@ void DebugMenuGUI::updateNetworkWindowInfo(){
 	ossOut << cliente.countPacketsOut;
 	labelPacketsOut->setText(ossOut.str());
 
+	std::ostringstream ossPing;
+	ossPing << cliente.GetPing();
+	labelPing->setText(ossPing.str());
+
 	
 
 }

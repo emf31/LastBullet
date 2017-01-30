@@ -32,11 +32,17 @@ Cliente::Cliente() /*: lobby(peer)*/
 void Cliente::update() {
 
 
-	
+	TPing ping;
+	ping.ping = RakNet::GetTime();
+	//Enviamos ping cada update
+	dispatchMessage(ping, PING);
+
+	//pingServer();
+
 	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
 		resetBar();
 		resetBarTime.restart();
-		pingServer();
+		//pingServer();
 	}
 	countMovimiento = 0;
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
@@ -437,6 +443,14 @@ void Cliente::update() {
 				break;
 			}
 			}
+			break;
+		}
+		case PING:
+		{
+			//Ping
+			TPing pingStruct = *reinterpret_cast<TPing*>(packet->data);
+			pingMS = RakNet::GetTime() - pingStruct.ping;
+
 			break;
 		}
 		default:
