@@ -383,11 +383,14 @@ void Cliente::update(Time elapsedTime) {
 			std::cout << "Message type: " << (unsigned int)sync.packageType << std::endl;*/
 			//std::cout << windowsPacketOpen << std::endl;
 
-			Enemy *e = static_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
-			e->lastSyncPacket.restart();
-			if (sync.packageType != MOVIMIENTO && windowsPacketOpen) {
-				e->setVisibilidadBilboardSync();
+			Enemy *e = dynamic_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
+			if (e != NULL){
+				e->lastSyncPacket.restart();
+				if (sync.packageType != MOVIMIENTO && windowsPacketOpen) {
+					e->setVisibilidadBilboardSync();
+				}
 			}
+			
 			switch (sync.packageType) {
 			case MOVIMIENTO:
 			{
