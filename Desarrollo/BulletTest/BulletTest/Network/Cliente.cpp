@@ -371,7 +371,7 @@ void Cliente::update(Time elapsedTime) {
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
 			bsIn.IgnoreBytes(1);
 			bsIn.Read(time);
-			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::GetTimeMS() - time);
+			//printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::GetTimeMS() - time);
 			break;
 		}
 
@@ -595,7 +595,7 @@ void Cliente::searchServersOnLAN() {
 
 			bsIn.IgnoreBytes(1);
 			bsIn.Read(time);
-			printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
+			//printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
 			m_servers.push_back(packet->systemAddress.ToString());
 		}
 

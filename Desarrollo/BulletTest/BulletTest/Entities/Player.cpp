@@ -101,7 +101,7 @@ void Player::update(Time elapsedTime)
 
 	//Detectamos si chocamos al suelo con una velocidad previa muy rapida
 	 if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
-		 printf("He caido de alto\n");
+		 //printf("He caido de alto\n");
 		 GraphicEngine::i().getActiveCamera()->cameraShake();
 	 }
 	 p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();

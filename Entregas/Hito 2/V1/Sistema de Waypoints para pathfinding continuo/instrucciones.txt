@@ -1,0 +1,44 @@
+///////////////////////////////////
+/////////PARADOX STUDIOS///////////
+///////////////////////////////////
+
+Controles específicos para el entregable
+
+Para controlar la cámara y obtener una vista superior lo que hay que hacer es utilizar
+la tecla "2", que lo que hace es separar o juntar la cámara del jugador. Una vez esté
+separada del jugador habrá que utilizar las flechas del teclado para mover la cámara y
+ponerla en una posición donde se pueda ver todo el mapa.
+
+Para utilizar el menu de debug hay que utilizar la tecla "F2". Una vez abierto, con el ratón,
+podrás seleccionar la opción de IA.
+
+Los controles del juego son los siguientes:
+
+•	WASD: movimiento del jugador
+•	Botón izquierdo del ratón: disparar
+•	Botón derecho del ratón: lanzar granada
+•	3: retroceder arma
+•	4: avanzar arma
+•	Barra espaciadora: saltar
+•	1: debug de las físicas
+•	2: separar cámara del player
+•	F2: Menu de debug
+•	Tabulador: ver la puntación de la partida en caso de estar en red
+
+Algunas cosas que se puede hacer en el prototipo:
+
+•	Disparar.
+•	Lanzar granadas.
+•	Coger vida y más armas.
+•	RocketJump: puedes saltar más que con un salto si te lanzas un misil del rocket contra el suelo.
+•	Doble salto: una vez saltes, en el aire puedes darle una vez más al espacio y saltar otra vez.
+•	Utilizar el menú de debug para quitar o poner el debug de las físicas
+•	Utilizar el menú de debug para ver el debug del motor de red.
+•	Utilizar el menú de debug para realizar pruebas del pathfinding (pinchando sobre el mapa o seleccionando alguna opción de buscar vida o algún arma).
+•	Ver la puntuación de la partida en red.
+
+
+Instrucciones para ejecutar:
+
+•	Si quieres ejecutar el juego en una máquina que no tiene visual studio instalado tienes que instalar el archivo de la ruta Entregables/vc_redist.x86.exe
+•	Una ver realizado el paso anterior, si era necesario, hay que ir a la ruta Entregables/Debug/nombredelentregable.exe
