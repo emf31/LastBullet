@@ -1,14 +1,9 @@
-﻿  RocketLauncher.cpp
+﻿  Game.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-  Pistola.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(65): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(341): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

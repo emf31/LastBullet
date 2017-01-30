@@ -147,6 +147,8 @@ void Game::inicializar()
 	//mapa
 	Map::i().inicializar();
 
+	
+
 	/*GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
 	ge->addEntityList(EntityManager::i().getLifeObjects());
 	TriggerSystem::i().RegisterEntity(ge);
@@ -252,7 +254,11 @@ void Game::inicializar()
 	e2->setPosition(Map::i().searchSpawnPoint());
 	*/
 
+	GraphicEngine::i().toggleCamera();
 
+	GraphicEngine::i().getActiveCamera()->setPosition(Vec3<float>(100, 150, 100));
+
+	GraphicEngine::i().getActiveCamera()->setTarget(Vec3<float>(100, 0, 100));
 }
 
 bool Game::processEvents()

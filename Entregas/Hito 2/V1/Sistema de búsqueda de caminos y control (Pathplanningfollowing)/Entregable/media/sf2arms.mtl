@@ -1,0 +1,18 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 11.11.2016 01:20:39
+
+newmtl lense2_tga
+	Ns 90.1961
+	Ni 1.5000
+	d 0.7500
+	Tr 0.2500
+	Tf 0.7500 0.7500 0.7500 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 0.0121 0.0121 0.0121
+	Ks 0.2668 0.2668 0.2668
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\julio\Desktop\viewmodel_ak12\lense.tga
+	map_Kd C:\Users\julio\Desktop\viewmodel_ak12\lense.tga
+	map_bump C:\Users\julio\Desktop\viewmodel_ak12\lens_ref.tga
+	bump C:\Users\julio\Desktop\viewmodel_ak12\lens_ref.tga

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{-0.0609375,78},{-2.32831e-010,0},{0.939062,78},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+        <Window type="AlfiskoSkin/FrameWindow" name="FrameWindow" >
+            <Property name="ID" value="10" />
+            <Property name="Area" value="{{0.0539063,891},{0.00277778,118},{0.28125,891},{0.780556,118}}" />
+            <Property name="Text" value="Debug Menu" />
+            <Property name="Alpha" value="0" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="ID" value="99" />
+                <Window type="AlfiskoSkin/Button" name="Button" >
+                    <Property name="ID" value="100" />
+                    <Property name="Area" value="{{0,-1},{0,-2},{0,19},{0,19}}" />
+                    <Property name="Alpha" value="0" />
+                    <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                </Window>
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0.0142146,0},{0.0352247,0},{0.0142146,239},{0.0352247,33}}" />
+                <Property name="Text" value="Network Debug Info" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button2" >
+                <Property name="ID" value="12" />
+                <Property name="Area" value="{{0.0135039,0},{0.133283,0},{0.0135039,239},{0.133283,33}}" />
+                <Property name="Text" value="Debug Shapes" />
+                <Property name="TooltipText" value="Activa las debug shapes" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button3" >
+                <Property name="ID" value="13" />
+                <Property name="Area" value="{{0.0888415,0},{0.228484,0},{0.0888415,239},{0.228484,32}}" />
+                <Property name="Text" value="Log" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonMapa" >
+                <Property name="ID" value="14" />
+                <Property name="Area" value="{{0.0142146,1},{0.0352247,152},{0.0142146,240},{0.0352247,185}}" />
+                <Property name="Text" value="IA" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label" >
+            <Property name="Area" value="{{0.00234375,1067},{0.0430556,29},{0.14375,1067},{0.0902778,29}}" />
+            <Property name="Text" value="F2 - Debug menu" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label2" >
+            <Property name="Area" value="{{0.835938,0},{0.0277778,0},{0.876562,128},{0.0277778,32}}" />
+            <Property name="Text" value="F1 - Console Log" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="LogWindow" >
+            <Property name="ID" value="1" />
+            <Property name="Area" value="{{0.0429688,0},{0.541667,0},{0.449219,0},{0.9375,0}}" />
+            <Property name="Text" value="Log" />
+            <Property name="Visible" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <Window type="AlfiskoSkin/MultiLineEditbox" name="MultiLineEditbox" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,0},{0,-5.31226e-007},{0.999604,0},{0.822752,-5.31226e-007}}" />
+                <Property name="Text" >
+</Property>
+                <Property name="ReadOnly" value="true" />
+                <Property name="ForceVertScrollbar" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/Editbox" name="Editbox" >
+                <Property name="Area" value="{{0,0},{0.842476,0},{0.497649,256},{0.851476,32}}" />
+            </Window>
+        </Window>
+        <Window type="Generic/ImageButton" name="ImageButton" >
+            <Property name="ID" value="20" />
+            <Property name="Area" value="{{0,0},{4.65662e-010,1},{0,600},{4.65662e-010,601}}" />
+            <Property name="Alpha" value="0.96" />
+            <Property name="Visible" value="false" />
+            <Property name="HoverImage" value="AlfiskoSkin/Mapa" />
+            <Property name="NormalImage" value="AlfiskoSkin/Mapa" />
+            <Property name="PushedImage" value="AlfiskoSkin/Mapa" />
+        </Window>
+        <Window type="Vanilla/FrameWindow" name="NetworkInfo" >
+            <Property name="ID" value="60" />
+            <Property name="Area" value="{{0,371},{0,57},{0.3,535},{0.3,130}}" />
+            <Property name="Text" value="Network Debug Info" />
+            <Property name="Alpha" value="0.9" />
+            <Property name="Visible" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="ID" value="99" />
+                <Window type="AlfiskoSkin/Button" name="Button" >
+                    <Property name="ID" value="100" />
+                    <Property name="Area" value="{{0,-6},{0,-5},{0,14},{0,16}}" />
+                    <Property name="Alpha" value="0" />
+                    <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                </Window>
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0.0346596,6},{0.0807654,8},{0.296955,-49},{0.181394,12}}" />
+                <Property name="Text" value="Status: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0.0337079,7},{0.262548,8},{0.0337079,90},{0.262548,40}}" />
+                <Property name="Text" value="Ping: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0.0318352,9},{0.436293,7},{0.0318352,89},{0.436293,39}}" />
+                <Property name="Text" value="Packets: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label4" >
+                <Property name="Area" value="{{0.0749064,-7},{0.586873,8},{0.0749064,66},{0.586873,40}}" />
+                <Property name="Text" value="In: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label5" >
+                <Property name="Area" value="{{0.076779,-10},{0.745174,12},{0.076779,66},{0.745174,44}}" />
+                <Property name="Text" value="Out: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label6" >
+                <Property name="Area" value="{{0.462547,30},{0.100386,1},{0.462547,124},{0.100386,33}}" />
+                <Property name="Text" value="Server: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label7" >
+                <Property name="Area" value="{{0,280},{0,76},{0,371},{0,108}}" />
+                <Property name="Text" value="Players: " />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label8" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,132},{0,28},{0,260},{0,60}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label82" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,132},{0,76},{0,260},{0,108}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label83" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,132},{0,120},{0,260},{0,152}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label84" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,132},{0,159},{0,260},{0,191}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label85" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,132},{0,205},{0,260},{0,237}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label86" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0,388},{0,26},{0,516},{0,58}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label87" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,388},{0,75},{0,516},{0,107}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="Vanilla/Checkbox" name="Checkbox" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0,301},{0,125},{0,540},{0,157}}" />
+                <Property name="Text" value="Count movement packets" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="VentanaIA" >
+            <Property name="ID" value="30" />
+            <Property name="Area" value="{{0.0539063,599},{0.00277778,114},{0.28125,599},{0.780556,-164}}" />
+            <Property name="Text" value="Debug Menu" />
+            <Property name="Visible" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="ID" value="99" />
+                <Window type="AlfiskoSkin/Button" name="Button" >
+                    <Property name="ID" value="100" />
+                    <Property name="Area" value="{{0,-1},{0,-2},{0,19},{0,19}}" />
+                    <Property name="Alpha" value="0" />
+                    <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                </Window>
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarVida" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0.0142146,-6},{0.0352247,55},{0.0142146,233},{0.0352247,88}}" />
+                <Property name="Text" value="Buscar Vida" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarRocket" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0.0135039,-5},{0.133283,74},{0.0135039,234},{0.133283,107}}" />
+                <Property name="Text" value="Buscar Rocket" />
+                <Property name="TooltipText" value="Activa las debug shapes" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarPistola" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0.0888415,-5},{0.228484,146},{0.0888415,234},{0.228484,178}}" />
+                <Property name="Text" value="Buscar Pistola" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonMapa" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0.0142146,-5},{0.0352247,5},{0.0142146,234},{0.0352247,38}}" />
+                <Property name="Text" value="Mostrar/Ocultar Mapa" />
+                <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="BotonBuscarAsalto" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0.0888415,-5},{0.228484,95},{0.0888415,234},{0.228484,127}}" />
+                <Property name="Text" value="Buscar Asalto" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="NetworkSync" >
+            <Property name="ID" value="80" />
+            <Property name="Area" value="{{0,34},{0,45},{0.3,-51},{0.3,219}}" />
+            <Property name="Text" value="Packet Sync Level" />
+            <Property name="Visible" value="false" />
+            <Property name="RollUpEnabled" value="false" />
+            <Property name="SizingEnabled" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="ID" value="99" />
+                <Window type="AlfiskoSkin/Button" name="Button" >
+                    <Property name="ID" value="100" />
+                    <Property name="Area" value="{{0,-1},{0,-2},{0,19},{0,19}}" />
+                    <Property name="Alpha" value="0" />
+                    <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+                </Window>
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0.172414,-50},{0.0196519,-3},{0.514294,-13},{0.100966,-3}}" />
+                <Property name="Text" value="Movimiento" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{-0.0359195,10},{-0.0280741,50},{-0.0359195,146},{-0.0280741,82}}" />
+                <Property name="Text" value="Disparos" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,90},{-0.0400641,146},{-0.0280741,122}}" />
+                <Property name="Text" value="Impacto" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label4" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,130},{-0.0400641,146},{-0.0280741,162}}" />
+                <Property name="Text" value="Drop Arma" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label5" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,170},{-0.0400641,146},{-0.0280741,202}}" />
+                <Property name="Text" value="Drop Vida" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label6" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,210},{-0.0400641,146},{-0.0280741,242}}" />
+                <Property name="Text" value="Muerte" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label7" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,250},{-0.0400641,146},{-0.0280741,282}}" />
+                <Property name="Text" value="Granada" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label8" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,290},{-0.0400641,146},{-0.0280741,322}}" />
+                <Property name="Text" value="AumentaKill" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label9" >
+                <Property name="Area" value="{{-0.0400641,10},{-0.0280741,330},{-0.0400641,146},{-0.0280741,362}}" />
+                <Property name="Text" value="AumentaMuerte" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="RightAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar3" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0.362787,35},{0.252667,0},{0.066313,256},{0.210556,32}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar4" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0.362787,35},{0.364964,0},{0.0663133,256},{0.322852,32}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar5" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0.362787,36},{0.47726,1},{0.0663133,257},{0.435149,33}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar6" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0.362787,36},{0.589556,2},{0.066313,257},{0.547445,34}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar7" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0.362787,36},{0.701853,2},{0.0663133,257},{0.659742,34}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0.362787,35},{0.0421112,-5},{0.066313,256},{0,27}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar2" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0.362787,35},{0.140371,0},{0.0663133,256},{0.0982594,32}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar8" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0.362787,36},{0.814149,2},{0.066313,257},{0.772038,34}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar9" >
+                <Property name="ID" value="9" />
+                <Property name="Area" value="{{0.362787,36},{0.926446,1},{0.066313,257},{0.884335,33}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
