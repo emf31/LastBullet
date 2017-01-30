@@ -1,8 +1,14 @@
-﻿SOIL.lib(SOIL.obj) : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:ICF'
-LINK : warning LNK4098: la biblioteca predeterminada'MSVCRTD' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+﻿  main.cpp
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\Shader.h(57): warning C4101: 'infoLog': variable local sin referencia
+d:\ua\cuarto\abp\tba\desarrollo\motor\motor\Shader.h(56): warning C4101: 'success': variable local sin referencia
+C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY': redefinición de macro
+  D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\includes\GLFW/glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
+     Creando biblioteca D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\Motor.lib y objeto D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\Motor.exp
+LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\resourcemanager.cpp(75): warning C4715: 'ResourceManager::getTexture': no todas las rutas de acceso de control devuelven un valor
-  All 1717 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  98 of 1828 functions ( 5.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    32 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
 ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewLinkProgram definido localmente
 ResourceManager.obj : warning LNK4049: se importó el símbolo ___glewDeleteShader definido localmente
@@ -29,24 +35,5 @@ TMesh.obj : warning LNK4049: se importó el símbolo ___glewBindVertexArray defi
 TMesh.obj : warning LNK4049: se importó el símbolo ___glewEnableVertexAttribArray definido localmente
 TModel.obj : warning LNK4049: se importó el símbolo ___glewUniformMatrix4fv definido localmente
 TModel.obj : warning LNK4049: se importó el símbolo ___glewUseProgram definido localmente
-glew32d.lib(glew.obj) : warning LNK4099: no se encontró PDB 'glew_s.pdb' con 'glew32d.lib(glew.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glew_s.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(vulkan.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(vulkan.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(window.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_init.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_joystick.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_monitor.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_time.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_time.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_tls.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_tls.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(wgl_context.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(egl_context.obj)' o en 'D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\Motor.exe
   Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Release\Motor.pdb (Full PDB)

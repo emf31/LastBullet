@@ -20,9 +20,9 @@ int main() {
 	}
 	SceneManager *sm = engine.getSceneManager();
 	
-	Shader billboardShader("assets/billboard_shader.vs", "assets/model_loading.frag");
+	/*Shader billboardShader("assets/billboard_shader.vs", "assets/model_loading.frag");
 	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
-	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));
+	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
 
 	TNode* n = sm->addMesh(sm->getMesh("assets/contenedor.obj"));
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
