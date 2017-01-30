@@ -32,10 +32,11 @@ Cliente::Cliente() /*: lobby(peer)*/
 void Cliente::update() {
 
 
-	//pingServer();
+	
 	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
 		resetBar();
 		resetBarTime.restart();
+		pingServer();
 	}
 	countMovimiento = 0;
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
@@ -357,7 +358,7 @@ void Cliente::update() {
 			RakNet::BitStream bsIn(packet->data, packet->length, false);
 			bsIn.IgnoreBytes(1);
 			bsIn.Read(time);
-			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::Time() - time);
+			printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::GetTimeMS() - time);
 			break;
 		}
 
@@ -606,7 +607,7 @@ void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type
 }
 void Cliente::pingServer() {
 
-	peer->Ping(servidorAdr.ToString(), 65535, false);
+	peer->Ping(servidorAdr.ToString(false), 65535, false);
 }
 
 void Cliente::resetBar() {
