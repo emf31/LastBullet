@@ -175,6 +175,7 @@
     <ClInclude Include="Command\ShootCommandGranada.h" />
     <ClInclude Include="Command\ShootPistola.h" />
     <ClInclude Include="Command\ShootRocket.h" />
+    <ClInclude Include="Command\ShootSniper.h" />
     <ClInclude Include="Entities\Button.h" />
     <ClInclude Include="Entities\Enemy_Bot.h" />
     <ClInclude Include="Entities\Granada.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Entities\Weapons\Asalto.h" />
     <ClInclude Include="Entities\Weapons\Pistola.h" />
     <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
+    <ClInclude Include="Entities\Weapons\Sniper.h" />
     <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph\AStarSearch.h" />
@@ -286,6 +288,7 @@
     <ClCompile Include="Entities\Weapons\Asalto.cpp" />
     <ClCompile Include="Entities\Weapons\Pistola.cpp" />
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
+    <ClCompile Include="Entities\Weapons\Sniper.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
     <ClCompile Include="Graph\AStarSearch.cpp" />
     <ClCompile Include="Graph\GraphEdge.cpp" />

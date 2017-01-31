@@ -12,14 +12,12 @@
 #include "GunBullet.h"
 #include "RocketBullet.h"
 #include "RocketBulletEnemy.h"
-#include "Weapons/Asalto.h"
-#include "Weapons/Pistola.h"
-#include "Weapons/RocketLauncher.h"
 #include <memory>
 #include <Enemy.h>
 #include <ShootAsalto.h>
 #include <ShootRocket.h>
 #include <ShootPistola.h>
+#include <ShootSniper.h>
 
 #include <TriggerSystem.h>
 #include <Map.h>
@@ -49,6 +47,7 @@ void Player::inicializar()
 	isReloading = false;
 	isShooting = false;
 	tieneAsalto = false;
+	tieneSniper = false;
 	tieneRocketLauncher = false;
 	tienePistola = false;
 
@@ -76,12 +75,16 @@ void Player::inicializar()
 	pistola->inicializar();
 	pistola->cargarContenido();
 	
+	sniper = new Sniper();
+	sniper->inicializar();
+	sniper->cargarContenido();
+
 	listaWeapons = new Lista();
 
 
-	listaWeapons->insertar(asalto);
-	asalto->setEquipada(true);
-	tieneAsalto = true;
+	listaWeapons->insertar(sniper);
+	sniper->setEquipada(true);
+	tieneSniper = true;
 	bindWeapon();
 
 	listaWeapons->insertar(pistola);
@@ -340,6 +343,9 @@ void Player::bindWeapon() {
 	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
 		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
 	}
+	else if (listaWeapons->valorActual()->getClassName() == "Sniper") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootSniper()));
+	}
 }
 
 
@@ -415,6 +421,16 @@ void Player::setWeapon(int newWeapon) {
 				pistola->resetAmmoTotal();
 			}
 		break;
+		/*case SNIPER:
+			if (!tieneSniper) {
+				printf("TE HAS EQUIPADO UN FRANCOTIRADOR\n");
+				listaWeapons->insertar(sniper);
+				tieneSniper = true;
+			}
+			else {
+				sniper->resetAmmoTotal();
+			}
+			break;*/
 	}
 
 

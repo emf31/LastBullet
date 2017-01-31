@@ -12,6 +12,10 @@
 #include "../Otros/LifeComponent.h"
 #include <Subject.h>
 #include <Observer.h>
+#include "Weapons/Asalto.h"
+#include "Weapons/Pistola.h"
+#include "Weapons/RocketLauncher.h"
+#include "Weapons/Sniper.h"
 
 class Player : public Entity, public Subject
 {
@@ -113,6 +117,7 @@ private:
 
 	Pistola* pistola;
 	RocketLauncher* rocket;
+	Sniper* sniper;
 
 	LifeComponent life_component;
 
@@ -123,6 +128,7 @@ private:
 	bool tieneAsalto;
 	bool tieneRocketLauncher;
 	bool tienePistola;
+	bool tieneSniper;
 
 	bool isShooting;
 

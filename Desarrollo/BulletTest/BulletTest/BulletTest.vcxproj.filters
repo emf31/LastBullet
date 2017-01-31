@@ -169,7 +169,6 @@
     <ClCompile Include="Mapa\Celda.cpp">
       <Filter>Source Code\Mapa</Filter>
     </ClCompile>
-    <ClCompile Include="Handlers\Partida.cpp" />
     <ClCompile Include="Observer\Subject.cpp">
       <Filter>Source Code\Observer</Filter>
     </ClCompile>
@@ -199,6 +198,12 @@
     </ClCompile>
     <ClCompile Include="Graph\AStarSearch.cpp">
       <Filter>Source Code\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\Partida.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\Sniper.cpp">
+      <Filter>Source Code\Entities\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,6 +507,12 @@
     </ClInclude>
     <ClInclude Include="Graph\GraphEnumeration.h">
       <Filter>Headers\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Weapons\Sniper.h">
+      <Filter>Headers\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ShootSniper.h">
+      <Filter>Headers\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
