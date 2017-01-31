@@ -159,4 +159,7 @@
       <Filter>Archivos de encabezado\GUI</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram2.cd" />
+  </ItemGroup>
 </Project>

@@ -44,9 +44,10 @@ void TNode::beginDraw(glm::mat4 projection, glm::mat4 view) {
 		/*glm::vec3 cameraRight(view[0][0], view[1][0], view[2][0]);
 		glm::vec3 cameraUp(view[0][1], view[1][1], view[2][1]);*/
 
-		model = glm::translate(model, position);
-		//model = glm::rotate(model,rotation.x, glm::vec3(1,0,0));
+		
 		model = glm::scale(model, scale);
+		//model = glm::rotate(model,rotation.x, glm::vec3(1,0,0));
+		model = glm::translate(model, position);
 		
 		m_model->beginDraw(projection, view, model);
 		m_model->endDraw();

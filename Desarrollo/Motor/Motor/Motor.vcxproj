@@ -202,6 +202,9 @@
     <ClInclude Include="TTransform.h" />
     <ClInclude Include="vec3.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram2.cd" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
