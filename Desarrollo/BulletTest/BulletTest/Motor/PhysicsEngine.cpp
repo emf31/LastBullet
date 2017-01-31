@@ -210,7 +210,7 @@ btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float heigh
 	btRigidBody* rigidBody = new btRigidBody(masa, m_pMotionState, m_pCollisionShape, intertia);
 	rigidBody->setActivationState(body_state);
 
-	rigidBody->setRestitution(0.7f);
+	
 
 	//add a pointer to rigidBody pointing to associated Entity
 	rigidBody->setUserPointer(entity);
@@ -239,7 +239,7 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	//now create the rigidBody
 	btRigidBody* rigidBody = new btRigidBody(mass, m_pMotionState, m_pCollisionShape, intertia);
 	rigidBody->setActivationState(body_state);
-	rigidBody->setRestitution(3500.f);
+	//rigidBody->setRestitution(3500.f);
 	//rigidBody->setHitFraction(2000.f);
 	//rigidBody->setSpinningFriction(100.f);
 	//add a pointer to rigidBody pointing to associated Entity

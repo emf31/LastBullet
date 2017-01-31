@@ -42,13 +42,20 @@ public:
 
 	Clock clockRecargaGranada;
 
-	float timeRecargaGranada = 2;
+
 
 private:
-	int estado= GRANADACARGADA;
-	RakNet::RakNetGUID guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
+	int estado;
+	RakNet::RakNetGUID guidLanzador;
+
 	Vec3<float> fuerza;
 	float radioExplosion;
+	float mass;
+	float height;
+	float radius;
+	float timeRecargaGranada;
+	float restitution;
+
 	btGhostObject* m_explosion;
 };
 
