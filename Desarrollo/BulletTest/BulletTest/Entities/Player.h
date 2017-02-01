@@ -54,6 +54,8 @@ public:
 	void UpWeapon();
 	void DownWeapon();
 	void reload();
+	void apuntar();
+	void restablecerMira();
 
 	void impulsar(Vec3<float> force);
 

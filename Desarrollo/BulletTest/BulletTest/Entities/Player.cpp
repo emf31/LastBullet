@@ -382,6 +382,16 @@ void Player::reload() {
 	listaWeapons->valorActual()->recargar();
 }
 
+void Player::apuntar()
+{
+	GraphicEngine::i().getActiveCamera()->apuntar();
+}
+
+void Player::restablecerMira()
+{
+	GraphicEngine::i().getActiveCamera()->restablecerMira();
+}
+
 void Player::impulsar(Vec3<float> force)
 {
 	btVector3 fuerza(force.getX(), force.getY(), force.getZ());

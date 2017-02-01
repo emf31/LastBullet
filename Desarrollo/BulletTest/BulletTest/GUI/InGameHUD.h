@@ -46,6 +46,7 @@ public:
 	fila_tabla player2;
 	fila_tabla player3;
 	fila_tabla player4;
+	CEGUI::DefaultWindow* scope;
 private:
 	CEGUI::DefaultWindow* LabelVida;
 	CEGUI::DefaultWindow* LabelArma;
@@ -56,6 +57,7 @@ private:
 
 	CEGUI::DefaultWindow* hitMarker;
 	CEGUI::DefaultWindow* sangre;
+	
 
 	CEGUI::DefaultWindow* windowTabla;
 

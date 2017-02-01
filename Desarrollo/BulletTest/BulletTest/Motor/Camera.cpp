@@ -8,6 +8,9 @@ Camera::Camera(ICameraSceneNode* camera) : m_camera(camera), m_entity(NULL)
 {
 	m_cameraShake = new CameraShake(*this);
 	m_GunRecoil = new GunRecoil(*this);
+	defaultFOV = m_camera->getFOV(); // this is in radians 
+	defaultAspect = m_camera->getAspectRatio();
+	zoomFOV = 0.25f;
 }
 
 
@@ -73,4 +76,14 @@ void Camera::cameraShake()
 void Camera::cameraRecoil()
 {
 	m_GunRecoil->RecoilOn();
+}
+
+void Camera::apuntar()
+{
+	m_camera->setFOV(zoomFOV);
+}
+
+void Camera::restablecerMira()
+{
+	m_camera->setFOV(defaultFOV);
 }

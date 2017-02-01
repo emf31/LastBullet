@@ -287,7 +287,17 @@ bool Game::processEvents()
 		ingameGUI.setTablaVisible(true);
 		partida.muestraTabla();
 
-	} else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
+	}
+	else if (MastEventReceiver::i().keyDown(KEY_KEY_M)) {
+		Player* p = static_cast<Player*> (EntityManager::i().getEntity(PLAYER));
+		p->apuntar();
+		ingameGUI.scope->setVisible(true);
+	}else if (MastEventReceiver::i().keyDown(KEY_KEY_N)) {
+		Player* p = static_cast<Player*> (EntityManager::i().getEntity(PLAYER));
+		p->restablecerMira();
+		ingameGUI.scope->setVisible(false);
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
