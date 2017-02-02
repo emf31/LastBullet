@@ -236,7 +236,7 @@ void Game::inicializar()
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
 			TId tID2;
 			tID2.id = (*it)->getID();
-			Cliente::i().dispatchMessage(tID2, NUEVA_VIDA);
+			Cliente::i().dispatchMessage(tID2, NUEVA_ARMA);
 		}
 	}
 

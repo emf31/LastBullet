@@ -55,7 +55,7 @@ void SniperDrop::handleMessage(const Message & message)
 
 					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
 				}
-				static_cast<Player*>(message.data)->setWeapon(ASALTO);
+				static_cast<Player*>(message.data)->setWeapon(SNIPER);
 				m_nodo->setVisible(false);
 
 			}
