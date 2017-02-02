@@ -514,6 +514,9 @@
     <ClInclude Include="Command\ShootSniper.h">
       <Filter>Headers\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Command\Apuntar.h">
+      <Filter>Headers\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

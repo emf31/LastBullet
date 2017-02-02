@@ -85,10 +85,12 @@ public:
 		}
 	}
 
-
-
 	btPairCachingGhostObject* getGhostObject() {
 		return p_controller->getGhostObject();
+	}
+
+	bool getApuntando() {
+		return apuntando;
 	}
 
 	void resetAll();
@@ -131,6 +133,8 @@ private:
 	bool tieneRocketLauncher;
 	bool tienePistola;
 	bool tieneSniper;
+
+	bool apuntando=false;
 
 	bool isShooting;
 

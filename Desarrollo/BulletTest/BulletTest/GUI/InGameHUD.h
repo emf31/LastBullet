@@ -40,6 +40,8 @@ public:
 
 	void updateRelojes();
 
+	void updateApuntando();
+
 	void muestraFinPartida();
 
 	fila_tabla player1;

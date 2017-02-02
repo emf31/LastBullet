@@ -54,12 +54,17 @@ void InGameHUD::update() {
 
 	updateRelojes();
 
+	updateApuntando();
+
 }
 
 
 void InGameHUD::updateRelojes() {
 	hitMarker->setVisible(p->hit);
 	sangre->setVisible(p->sangre);
+}
+void InGameHUD::updateApuntando() {
+	scope->setVisible(p->getApuntando());
 }
 void InGameHUD::muestraFinPartida() {
 	LabelEndGame->setVisible(true);

@@ -284,8 +284,14 @@ void Player::move_up()
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
 
-	speedFinal.addX(speed.getX());
-	speedFinal.addZ(speed.getZ());
+	if (!apuntando) {
+		speedFinal.addX(speed.getX());
+		speedFinal.addZ(speed.getZ());
+	}
+	else {
+		speedFinal.addX(speed.getX()/3);
+		speedFinal.addZ(speed.getZ()/3);
+	}
 
 	isMoving = true;
 
@@ -298,10 +304,14 @@ void Player::move_down()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-
-	speedFinal.addX(-speed.getX());
-	speedFinal.addZ(-speed.getZ());
-
+	if (!apuntando) {
+		speedFinal.addX(-speed.getX());
+		speedFinal.addZ(-speed.getZ());
+	}
+	else {
+		speedFinal.addX(-speed.getX()/3);
+		speedFinal.addZ(-speed.getZ()/3);
+	}
 	isMoving = true;
 }
 
@@ -311,10 +321,14 @@ void Player::move_right()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-
-	speedFinal.addX(speed.getZ());
-	speedFinal.addZ(-speed.getX());
-
+	if (!apuntando) {
+		speedFinal.addX(speed.getZ());
+		speedFinal.addZ(-speed.getX());
+	}
+	else {
+		speedFinal.addX(speed.getZ()/3);
+		speedFinal.addZ(-speed.getX()/3);
+	}
 	isMoving = true;
 }
 
@@ -324,11 +338,14 @@ void Player::move_left()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-
-	speedFinal.addX(-speed.getZ());
-	speedFinal.addZ(speed.getX());
-
-
+	if (!apuntando) {
+		speedFinal.addX(-speed.getZ());
+		speedFinal.addZ(speed.getX());
+	}
+	else {
+		speedFinal.addX(-speed.getZ()/3);
+		speedFinal.addZ(speed.getX()/3);
+	}
 
 	isMoving = true;
 }
@@ -346,6 +363,7 @@ void Player::bindWeapon() {
 	else if (listaWeapons->valorActual()->getClassName() == "Sniper") {
 		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootSniper()));
 	}
+
 }
 
 
@@ -353,7 +371,10 @@ void Player::UpWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Siguiente();
-
+	if (apuntando) {
+		GraphicEngine::i().getActiveCamera()->restablecerMira();
+		apuntando = false;
+	}
 	bindWeapon();
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
@@ -367,6 +388,10 @@ void Player::DownWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Anterior();
+	if (apuntando) {
+		GraphicEngine::i().getActiveCamera()->restablecerMira();
+		apuntando = false;
+	}
 
 	bindWeapon();
 	
@@ -384,7 +409,18 @@ void Player::reload() {
 
 void Player::apuntar()
 {
-	GraphicEngine::i().getActiveCamera()->apuntar();
+
+	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
+		if (!apuntando) {
+			GraphicEngine::i().getActiveCamera()->apuntar();
+			apuntando = true;
+		}
+		else {
+			GraphicEngine::i().getActiveCamera()->restablecerMira();
+			apuntando = false;
+		}
+	}
+
 }
 
 void Player::restablecerMira()

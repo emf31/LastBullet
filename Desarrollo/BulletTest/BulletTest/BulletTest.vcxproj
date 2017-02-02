@@ -162,6 +162,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command\Apuntar.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
     <ClInclude Include="Command\ListWeaponDown.h" />
