@@ -101,10 +101,10 @@ void Sniper::shoot()
 
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
-		GraphicEngine::i().getActiveCamera()->cameraRecoil();
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 
+			GraphicEngine::i().getActiveCamera()->cameraRecoil();
 
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;

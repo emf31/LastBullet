@@ -205,6 +205,9 @@
     <ClCompile Include="Entities\Weapons\Sniper.cpp">
       <Filter>Source Code\Entities\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\SniperDrop.cpp">
+      <Filter>Source Code\Entities\WeaponDrops</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -516,6 +519,9 @@
     </ClInclude>
     <ClInclude Include="Command\Apuntar.h">
       <Filter>Headers\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\WeaponDrops\SniperDrop.h">
+      <Filter>Headers\Entities\WeaponDrops</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

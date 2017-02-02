@@ -10,6 +10,7 @@
 #include <WeaponDrops/RocketLauncherDrop.h>
 #include <WeaponDrops/PistolaDrop.h>
 #include <WeaponDrops/AsaltoDrop.h>
+#include <WeaponDrops/SniperDrop.h>
 #include <GroupEntity.h>
 #include <GraphicEngine.h>
 #include <SceneNode.h>

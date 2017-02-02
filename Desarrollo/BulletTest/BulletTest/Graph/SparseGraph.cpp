@@ -140,7 +140,10 @@ void SparseGraph::readGraph(const std::string & path) {
 						//std::cout << "Leemos nodo RocketLauncherDrop \n";
 						ent = MapLoader::createRocektLauncherDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "RocketDrop", "");
 					}
-
+					else if (extra == "SniperDrop") {
+						//std::cout << "Leemos nodo RocketLauncherDrop \n";
+						ent = MapLoader::createSniperDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "SniperDrop", "");
+					}
 
 					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]));
 					nodo.setExtraInfo(ent);

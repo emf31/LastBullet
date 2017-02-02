@@ -21,6 +21,7 @@ public:
 	static Entity* createAsaltoDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
 	static Entity* createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
 	static Entity* createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
+	static Entity* createSniperDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const io::path & mesh);
 	void createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type);
 
 	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 

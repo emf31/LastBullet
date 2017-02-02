@@ -81,6 +81,7 @@ void Camera::cameraRecoil()
 void Camera::apuntar()
 {
 	m_camera->setFOV(zoomFOV);
+
 }
 
 void Camera::restablecerMira()
