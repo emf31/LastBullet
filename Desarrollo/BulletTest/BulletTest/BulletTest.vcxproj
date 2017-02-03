@@ -217,6 +217,19 @@
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
     <ClInclude Include="Handlers\Partida.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzyRule.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzySet.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetLeftShoulder.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetRightShoulder.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetSingleton.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetTriangle.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzyTerm.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzyVariable.h" />
+    <ClInclude Include="IA\FuzzyLogic\FzAND.h" />
+    <ClInclude Include="IA\FuzzyLogic\FzFairly.h" />
+    <ClInclude Include="IA\FuzzyLogic\FzOR.h" />
+    <ClInclude Include="IA\FuzzyLogic\FzSet.h" />
+    <ClInclude Include="IA\FuzzyLogic\FzVery.h" />
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
@@ -302,6 +315,7 @@
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="Handlers\Partida.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzyVariable.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\PathFollow.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />

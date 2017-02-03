@@ -205,6 +205,9 @@
     <ClCompile Include="Entities\Weapons\Sniper.cpp">
       <Filter>Source Code\Entities\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzyVariable.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -517,6 +520,45 @@
     <ClInclude Include="Command\Apuntar.h">
       <Filter>Headers\Command</Filter>
     </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyTerm.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzSet.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySet.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetLeftShoulder.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetRightShoulder.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetSingleton.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetTriangle.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzAND.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzOR.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzVery.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzFairly.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyRule.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyVariable.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -635,6 +677,9 @@
     </Filter>
     <Filter Include="Headers\Observer\events">
       <UniqueIdentifier>{f2e09faa-e587-423a-b8b2-29f536ed3723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\FuzzyLogic">
+      <UniqueIdentifier>{9cb861a4-4106-46ca-b950-5bb62b3a02f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
