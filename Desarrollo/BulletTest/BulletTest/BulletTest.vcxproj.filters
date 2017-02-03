@@ -208,6 +208,42 @@
     <ClCompile Include="IA\FuzzyLogic\FuzzyVariable.cpp">
       <Filter>Headers\IA\FuzzyLogic</Filter>
     </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetLeftShoulder.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzyModule.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzyRule.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySet.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetRightShoulder.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetTriangle.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetSingleton.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzAND.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzFairly.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzOR.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzVery.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzSet.cpp">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -535,9 +571,6 @@
     <ClInclude Include="IA\FuzzyLogic\FuzzySetRightShoulder.h">
       <Filter>Headers\IA\FuzzyLogic</Filter>
     </ClInclude>
-    <ClInclude Include="IA\FuzzyLogic\FuzzySetSingleton.h">
-      <Filter>Headers\IA\FuzzyLogic</Filter>
-    </ClInclude>
     <ClInclude Include="IA\FuzzyLogic\FuzzySetTriangle.h">
       <Filter>Headers\IA\FuzzyLogic</Filter>
     </ClInclude>
@@ -557,6 +590,12 @@
       <Filter>Headers\IA\FuzzyLogic</Filter>
     </ClInclude>
     <ClInclude Include="IA\FuzzyLogic\FuzzyVariable.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyModule.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetSingleton.h">
       <Filter>Headers\IA\FuzzyLogic</Filter>
     </ClInclude>
   </ItemGroup>

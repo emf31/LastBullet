@@ -1,5 +1,4 @@
-#ifndef FUZZY_VARIABLE_H
-#define FUZZY_VARIABLE_H
+#pragma once
 #pragma warning (disable:4786)
 
 #include <map>
@@ -21,7 +20,7 @@ private:
 
 	//disallow copies
 	FuzzyVariable(const FuzzyVariable&);
-	FuzzyVariable& operator=(const FuzzyVariable&);
+	//FuzzyVariable& operator=(const FuzzyVariable&);
 
 private:
 
@@ -48,7 +47,7 @@ private:
 
 public:
 
-	FuzzyVariable() :m_dMinRange(0.0), m_dMaxRange(0.0) {}
+	FuzzyVariable();
 
 	//the following methods create instances of the sets named in the method
 	//name and add them to the member set map. Each time a set of any type is
@@ -59,15 +58,9 @@ public:
 
 	FzSet  AddRightShoulderSet(std::string name, double minBound, double peak, double maxBound);
 
-	FzSet  AddTriangularSet(std::string name,
-		double       minBound,
-		double       peak,
-		double       maxBound);
+	FzSet  AddTriangularSet(std::string name, double minBound, double peak, double maxBound);
 
-	FzSet  AddSingletonSet(std::string name,
-		double       minBound,
-		double       peak,
-		double       maxBound);
+	FzSet  AddSingletonSet(std::string name, double minBound, double peak, double maxBound);
 
 
 	//fuzzify a value by calculating its DOM in each of this variable's subsets
@@ -87,5 +80,3 @@ public:
 
 
 
-
-#endif

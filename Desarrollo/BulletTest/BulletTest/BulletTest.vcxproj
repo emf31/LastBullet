@@ -217,6 +217,7 @@
     <ClInclude Include="Handlers\Message.h" />
     <ClInclude Include="Handlers\MessageHandler.h" />
     <ClInclude Include="Handlers\Partida.h" />
+    <ClInclude Include="IA\FuzzyLogic\FuzzyModule.h" />
     <ClInclude Include="IA\FuzzyLogic\FuzzyRule.h" />
     <ClInclude Include="IA\FuzzyLogic\FuzzySet.h" />
     <ClInclude Include="IA\FuzzyLogic\FuzzySetLeftShoulder.h" />
@@ -315,7 +316,19 @@
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="Handlers\Partida.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzyModule.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzyRule.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzySet.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetLeftShoulder.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetRightShoulder.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetSingleton.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetTriangle.cpp" />
     <ClCompile Include="IA\FuzzyLogic\FuzzyVariable.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FzAND.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FzFairly.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FzOR.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FzSet.cpp" />
+    <ClCompile Include="IA\FuzzyLogic\FzVery.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\PathFollow.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />

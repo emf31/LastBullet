@@ -1,5 +1,4 @@
-#ifndef FUZZYTERM_H
-#define FUZZYTERM_H
+#pragma once
 
 //Clase padre de los terminos fuzzy
 class FuzzyTerm
@@ -23,6 +22,3 @@ public:
 
 };
 
-
-
-#endif

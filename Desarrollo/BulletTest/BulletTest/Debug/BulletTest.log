@@ -1,160 +1,55 @@
-﻿  FuzzyVariable.cpp
-c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\assert.h(14): error C2059: error de sintaxis: 'cadena'
-c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\assert.h(14): error C2334: símbolos (token) inesperados delante de '{'; se pasará por alto el cuerpo de función aparente
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\random(30): error C2059: error de sintaxis: 'namespace'
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\random(30): error C2334: símbolos (token) inesperados delante de '{'; se pasará por alto el cuerpo de función aparente
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(293): error C2864: 'FzOR::btNanMask': un %[DATA_MEMBER VARIABLE_TEMPLATE] estático con un inicializador de clase debe tener el tipo integral const no volátil
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(293): note: el tipo es 'int'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(298): error C2864: 'FzOR::btInfinityMask': un %[DATA_MEMBER VARIABLE_TEMPLATE] estático con un inicializador de clase debe tener el tipo integral const no volátil
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(298): note: el tipo es 'int'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(309): error C2804: 'operator +' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(309): error C2333: 'FzOR::operator +': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(314): error C2804: 'operator -' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(314): error C2333: 'FzOR::operator -': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(319): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btscalar.h(319): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(764): error C2804: 'operator +' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(764): error C2333: 'FzOR::operator +': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(780): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(780): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(796): error C2804: 'operator -' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(796): error C2333: 'FzOR::operator -': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(830): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(830): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(846): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(846): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(853): error C2804: 'operator /' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(853): error C2333: 'FzOR::operator /': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(870): error C2804: 'operator /' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(870): error C2333: 'FzOR::operator /': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(953): error C3254: 'FzOR': la clase contiene la invalidación explícita 'distance2', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(953): error C2838: 'distance2': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(958): error C3254: 'FzOR': la clase contiene la invalidación explícita 'distance', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(958): error C2838: 'distance': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(963): error C3254: 'FzOR': la clase contiene la invalidación explícita 'normalized', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(963): error C2838: 'normalized': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(970): error C3254: 'FzOR': la clase contiene la invalidación explícita 'rotate', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(970): error C2838: 'rotate': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1012): error C3254: 'FzOR': la clase contiene la invalidación explícita 'maxDot', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1012): error C2838: 'maxDot': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1047): error C3254: 'FzOR': la clase contiene la invalidación explícita 'minDot', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1047): error C2838: 'minDot': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1323): error C3254: 'FzOR': la clase contiene la invalidación explícita 'serializeFloat', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1323): error C2838: 'serializeFloat': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1330): error C3254: 'FzOR': la clase contiene la invalidación explícita 'deSerializeFloat', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1330): error C2838: 'deSerializeFloat': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1337): error C3254: 'FzOR': la clase contiene la invalidación explícita 'serializeDouble', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1337): error C2838: 'serializeDouble': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1344): error C3254: 'FzOR': la clase contiene la invalidación explícita 'deSerializeDouble', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1344): error C2838: 'deSerializeDouble': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1351): error C3254: 'FzOR': la clase contiene la invalidación explícita 'serialize', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1351): error C2838: 'serialize': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1358): error C3254: 'FzOR': la clase contiene la invalidación explícita 'deSerialize', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btvector3.h(1358): error C2838: 'deSerialize': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(594): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(594): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(682): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(682): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(765): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(765): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(942): error C3254: 'FzOR': la clase contiene la invalidación explícita 'serializeFloat', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(942): error C2838: 'serializeFloat': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(949): error C3254: 'FzOR': la clase contiene la invalidación explícita 'deSerializeFloat', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(949): error C2838: 'deSerializeFloat': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(956): error C3254: 'FzOR': la clase contiene la invalidación explícita 'serializeDouble', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(956): error C2838: 'serializeDouble': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(963): error C3254: 'FzOR': la clase contiene la invalidación explícita 'deSerializeDouble', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(963): error C2838: 'deSerializeDouble': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(970): error C3254: 'FzOR': la clase contiene la invalidación explícita 'serialize', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(970): error C2838: 'serialize': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(977): error C3254: 'FzOR': la clase contiene la invalidación explícita 'deSerialize', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btquaternion.h(977): error C2838: 'deSerialize': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(768): error C3254: 'FzOR': la clase contiene la invalidación explícita '*=', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(768): error C2838: '*=': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(858): error C3254: 'FzOR': la clase contiene la invalidación explícita '+=', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(858): error C2838: '+=': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(880): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(880): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(902): error C2804: 'operator +' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(902): error C2333: 'FzOR::operator +': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(926): error C2804: 'operator -' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(926): error C2333: 'FzOR::operator -': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(951): error C3254: 'FzOR': la clase contiene la invalidación explícita '-=', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(951): error C2838: '-=': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(974): error C3254: 'FzOR': la clase contiene la invalidación explícita 'determinant', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(974): error C2838: 'determinant': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(981): error C3254: 'FzOR': la clase contiene la invalidación explícita 'absolute', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(981): error C2838: 'absolute': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1002): error C3254: 'FzOR': la clase contiene la invalidación explícita 'transpose', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1002): error C2838: 'transpose': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1039): error C3254: 'FzOR': la clase contiene la invalidación explícita 'adjoint', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1039): error C2838: 'adjoint': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1047): error C3254: 'FzOR': la clase contiene la invalidación explícita 'inverse', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1047): error C2838: 'inverse': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1060): error C3254: 'FzOR': la clase contiene la invalidación explícita 'transposeTimes', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1060): error C2838: 'transposeTimes': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1116): error C3254: 'FzOR': la clase contiene la invalidación explícita 'timesTranspose', pero no deriva de una interfaz que contiene la declaración de función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1116): error C2838: 'timesTranspose': nombre completo no válido en la declaración de miembro
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1169): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1169): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1180): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1180): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1220): error C2804: 'operator *' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1220): error C2333: 'FzOR::operator *': error en la declaración de función; se pasará por alto el cuerpo de la función
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1321): error C2804: 'operator ==' binario tiene demasiados parámetros
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\bullet\linearmath\btmatrix3x3.h(1321): fatal error C1003: el recuento de errores supera 100; se detiene la compilación
-  Sniper.cpp
+﻿  Util.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.cpp(38): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  main.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
-  Generando código...
-  Compilando...
-  Util.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.cpp(38): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   Lista.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   LifeComponent.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   Lobby.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   Cliente.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   MapLoader.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(134): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(144): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(154): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
@@ -164,112 +59,139 @@ c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\map
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   GraphicEngine.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   CameraShake.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(7): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(15): warning C4305: '=': truncamiento de 'double' a 'float'
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(21): warning C4305: '=': truncamiento de 'double' a 'float'
-  main.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
-  Game.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(342): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
   PathPlanner.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   Map.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(75): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\mapa\map.cpp(76): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
   Celda.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\mapa\celda.cpp(40): warning C4018: '>': no coinciden signed/unsigned
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\mapa\celda.cpp(55): warning C4018: '<': no coinciden signed/unsigned
   PathFollow.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FzOR.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FzAND.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FuzzyVariable.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FuzzySetTriangle.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FuzzySetSingleton.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FuzzySetRightShoulder.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FuzzySetLeftShoulder.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  FuzzyRule.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  FuzzyModule.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   Partida.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   InputHandler.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Game.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(342): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
   InGameHUD.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   DebugMenuGUI.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   Weapon.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Generando código...
-  Compilando...
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Sniper.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   RocketLauncher.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   Pistola.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(65): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
   Asalto.cpp
@@ -277,62 +199,62 @@ c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   WeaponDrop.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   RocketLauncherDrop.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   PistolaDrop.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   AsaltoDrop.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   RocketBulletEnemy.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   RocketBullet.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   Player.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(66): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(70): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
@@ -343,40 +265,105 @@ c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  Granada.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   Entity.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Enemy_Bot.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
   Enemy.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
-  Granada.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
-  Enemy_Bot.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(60): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
   Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  EntityManager.cpp
+BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btDbvt.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvt.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btDbvtBroadphase.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDbvtBroadphase.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btDispatcher.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDispatcher.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btOverlappingPairCache.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btOverlappingPairCache.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btQuantizedBvh.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btQuantizedBvh.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btActivatingCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btActivatingCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btBoxBoxCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btBoxBoxCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btBoxBoxDetector.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btBoxBoxDetector.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCollisionDispatcher.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionDispatcher.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCollisionObject.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionObject.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCollisionWorld.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionWorld.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCompoundCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCompoundCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCompoundCompoundCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCompoundCompoundCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexConcaveCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexConcaveCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexConvexAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexConvexAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexPlaneCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexPlaneCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btDefaultCollisionConfiguration.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btDefaultCollisionConfiguration.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btEmptyCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btEmptyCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btGhostObject.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btGhostObject.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btHashedSimplePairCache.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btHashedSimplePairCache.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btManifoldResult.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btManifoldResult.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btSimulationIslandManager.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btSimulationIslandManager.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btSphereSphereCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btSphereSphereCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btSphereTriangleCollisionAlgorithm.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btSphereTriangleCollisionAlgorithm.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btUnionFind.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btUnionFind.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(SphereTriangleDetector.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(SphereTriangleDetector.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btBoxShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btBoxShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btBvhTriangleMeshShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btBvhTriangleMeshShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCapsuleShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCapsuleShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCollisionShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCollisionShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btCompoundShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btCompoundShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConcaveShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConcaveShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexInternalShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexInternalShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexPolyhedron.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexPolyhedron.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btOptimizedBvh.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btOptimizedBvh.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btPolyhedralConvexShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btPolyhedralConvexShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btSphereShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btSphereShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btTriangleCallback.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btTriangleCallback.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btTriangleMeshShape.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btTriangleMeshShape.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btContinuousConvexCollision.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btContinuousConvexCollision.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btConvexCast.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btConvexCast.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btGjkConvexCast.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btGjkConvexCast.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btGjkEpa2.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btGjkEpa2.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btGjkEpaPenetrationDepthSolver.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btGjkEpaPenetrationDepthSolver.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btGjkPairDetector.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btGjkPairDetector.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btMinkowskiPenetrationDepthSolver.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btMinkowskiPenetrationDepthSolver.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btPersistentManifold.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btPersistentManifold.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btRaycastCallback.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btRaycastCallback.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btSubSimplexConvexCast.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btSubSimplexConvexCast.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btVoronoiSimplexSolver.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btVoronoiSimplexSolver.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_Debug.lib(btPolyhedralContactClipping.obj) : warning LNK4099: no se encontró PDB 'BulletCollision.pdb' con 'BulletCollision_Debug.lib(btPolyhedralContactClipping.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletCollision.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_Debug.lib(btConeTwistConstraint.obj) : warning LNK4099: no se encontró PDB 'BulletDynamics.pdb' con 'BulletDynamics_Debug.lib(btConeTwistConstraint.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletDynamics.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_Debug.lib(btGeneric6DofConstraint.obj) : warning LNK4099: no se encontró PDB 'BulletDynamics.pdb' con 'BulletDynamics_Debug.lib(btGeneric6DofConstraint.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletDynamics.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_Debug.lib(btSequentialImpulseConstraintSolver.obj) : warning LNK4099: no se encontró PDB 'BulletDynamics.pdb' con 'BulletDynamics_Debug.lib(btSequentialImpulseConstraintSolver.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletDynamics.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_Debug.lib(btTypedConstraint.obj) : warning LNK4099: no se encontró PDB 'BulletDynamics.pdb' con 'BulletDynamics_Debug.lib(btTypedConstraint.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletDynamics.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_Debug.lib(btDiscreteDynamicsWorld.obj) : warning LNK4099: no se encontró PDB 'BulletDynamics.pdb' con 'BulletDynamics_Debug.lib(btDiscreteDynamicsWorld.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletDynamics.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_Debug.lib(btRigidBody.obj) : warning LNK4099: no se encontró PDB 'BulletDynamics.pdb' con 'BulletDynamics_Debug.lib(btRigidBody.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletDynamics.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_Debug.lib(btAlignedAllocator.obj) : warning LNK4099: no se encontró PDB 'LinearMath.pdb' con 'LinearMath_Debug.lib(btAlignedAllocator.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\LinearMath.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_Debug.lib(btConvexHullComputer.obj) : warning LNK4099: no se encontró PDB 'LinearMath.pdb' con 'LinearMath_Debug.lib(btConvexHullComputer.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\LinearMath.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_Debug.lib(btGeometryUtil.obj) : warning LNK4099: no se encontró PDB 'LinearMath.pdb' con 'LinearMath_Debug.lib(btGeometryUtil.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\LinearMath.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_Debug.lib(btVector3.obj) : warning LNK4099: no se encontró PDB 'LinearMath.pdb' con 'LinearMath_Debug.lib(btVector3.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\LinearMath.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

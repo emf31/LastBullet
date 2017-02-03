@@ -1,5 +1,4 @@
-#ifndef FUZZY_VERY_H
-#define FUZZY_VERY_H
+#pragma once
 
 #include "FuzzySet.h"
 #include "FuzzyTerm.h"
@@ -19,18 +18,13 @@ private:
 
 public:
 
-	FzVery(FzSet& ft) :m_Set(ft.m_Set) {}
+	FzVery(FzSet& ft);
 
-	double GetDOM()const
-	{
-		return m_Set.GetDOM() * m_Set.GetDOM();
-	}
+	double GetDOM()const;
 
-	FuzzyTerm* Clone()const { return new FzVery(*this); }
+	FuzzyTerm* Clone()const;
 
-	void ClearDOM() { m_Set.ClearDOM(); }
-	void ORwithDOM(double val) { m_Set.ORwithDOM(val * val); }
+	void ClearDOM();
+	void ORwithDOM(double val);
 };
-
-#endif
 

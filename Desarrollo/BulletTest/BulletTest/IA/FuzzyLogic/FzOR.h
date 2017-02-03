@@ -1,9 +1,9 @@
-#ifndef FUZZY_OR_H
-#define FUZZY_OR_H
+#pragma once
 
 #include <vector>
 #include <cassert>
 #include "FuzzyTerm.h"
+#include <Util.h>
 
 class FzOR : public FuzzyTerm
 {
@@ -17,66 +17,22 @@ private:
 
 public:
 
-	~FzOR()
-	{
-		std::vector<FuzzyTerm*>::iterator curTerm;
-		for (curTerm = m_Terms.begin(); curTerm != m_Terms.end(); ++curTerm)
-		{
-			delete *curTerm;
-		}
-	}
+	~FzOR();
 
 	//copy ctor
-	FzOR(const FzOR& fa)
-	{
-		std::vector<FuzzyTerm*>::const_iterator curTerm;
-		for (curTerm = fa.m_Terms.begin(); curTerm != fa.m_Terms.end(); ++curTerm)
-		{
-			m_Terms.push_back((*curTerm)->Clone());
-		}
-
+	FzOR(const FzOR& fa);
 	//ctors accepting fuzzy terms.
-	FzOR(FuzzyTerm& op1, FuzzyTerm& op2)
-	{
-		m_Terms.push_back(op1.Clone());
-		m_Terms.push_back(op2.Clone());
-	}
+	FzOR(FuzzyTerm& op1, FuzzyTerm& op2);
 
-	FzOR(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3)
-	{
-		m_Terms.push_back(op1.Clone());
-		m_Terms.push_back(op2.Clone());
-		m_Terms.push_back(op3.Clone());
-	}
-	FzOR(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3, FuzzyTerm& op4)
-	{
-		m_Terms.push_back(op1.Clone());
-		m_Terms.push_back(op2.Clone());
-		m_Terms.push_back(op3.Clone());
-		m_Terms.push_back(op4.Clone());
-	}
+	FzOR(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3);
+	FzOR(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3, FuzzyTerm& op4);
 
 	//virtual ctor
-	FuzzyTerm* Clone()const { return new FzOR(*this); }
+	FuzzyTerm* Clone()const;
 
-	double GetDOM()const
-	{
-		double largest = MinDouble;
-
-		std::vector<FuzzyTerm*>::const_iterator curTerm;
-		for (curTerm = m_Terms.begin(); curTerm != m_Terms.end(); ++curTerm)
-		{
-			if ((*curTerm)->GetDOM() > largest)
-			{
-				largest = (*curTerm)->GetDOM();
-			}
-		}
-
-		return largest;
-	}
+	double GetDOM()const;
 
 	//unused
-	void ClearDOM() { assert(0 && "<FzOR::ClearDOM>: invalid context"); }
-	void ORwithDOM(double val) { assert(0 && "<FzOR::ORwithDOM>: invalid context"); }
+	void ClearDOM();
+	void ORwithDOM(double val);
 };
-#endif

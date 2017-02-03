@@ -1,5 +1,5 @@
-#ifndef FUZZY_RULE_H
-#define FUZZY_RULE_H
+#pragma once
+
 
 #include <vector>
 #include "FuzzySet.h"
@@ -25,21 +25,14 @@ private:
 
 public:
 
-	FuzzyRule(const FuzzyTerm& ant,
-		const FuzzyTerm& con) :m_pAntecedent(ant.Clone()),
-		m_pConsequence(con.Clone())
-	{}
+	FuzzyRule(const FuzzyTerm& ant, const FuzzyTerm& con);
 
-	~FuzzyRule() { delete m_pAntecedent; delete m_pConsequence; }
+	~FuzzyRule();
 
-	void SetConfidenceOfConsequentToZero() { m_pConsequence->ClearDOM(); }
+	void SetConfidenceOfConsequentToZero();
 
 	//this method updates the DOM (the confidence) of the consequent term with
 	//the DOM of the antecedent term. 
-	void Calculate()
-	{
-		m_pConsequence->ORwithDOM(m_pAntecedent->GetDOM());
-	}
+	void Calculate();
 };
 
-#endif

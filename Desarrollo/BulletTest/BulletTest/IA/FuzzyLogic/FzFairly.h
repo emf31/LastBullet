@@ -1,10 +1,12 @@
-#ifndef FUZZY_FAIRLY_H
-#define FUZZY_FAIRLY_H
+#pragma once
 
 #include "FuzzySet.h"
 #include "FuzzyTerm.h"
 #include "FzSet.h"
 #include <math.h>
+
+
+
 
 class FzFairly : public FuzzyTerm
 {
@@ -18,19 +20,14 @@ private:
 
 public:
 
-	FzFairly(FzSet& ft) :m_Set(ft.m_Set) {}
+	FzFairly(FzSet& ft);
 
-	double GetDOM()const
-	{
-		return sqrt(m_Set.GetDOM());
-	}
+	double GetDOM()const;
+	FuzzyTerm* Clone()const;
 
-	FuzzyTerm* Clone()const { return new FzFairly(*this); }
+	void ClearDOM();
+	void ORwithDOM(double val);
 
-	void ClearDOM() { m_Set.ClearDOM(); }
-	void ORwithDOM(double val) { m_Set.ORwithDOM(sqrt(val)); }
+
 };
 
-
-
-#endif

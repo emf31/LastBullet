@@ -58,3 +58,5 @@ Vec2f vec3ToVec2(const Vec3<float>& vec)
 {
 	return Vec2f(vec.getX(),vec.getZ());
 }
+
+

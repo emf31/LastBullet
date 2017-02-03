@@ -6,14 +6,16 @@
 #include "FuzzySetRightShoulder.h"
 #include "FuzzySetSingleton.h"
 #include "FzSet.h"
-//#include <Util.h>
-//#include "misc/utils.h"
+#include <Util.h>
 #include <cassert>
 #include <iostream>
 #include <algorithm>
 
 //------------------------------ dtor -----------------------------------------
 //-----------------------------------------------------------------------------
+
+FuzzyVariable::FuzzyVariable() :m_dMinRange(0.0), m_dMaxRange(0.0) {}
+
 FuzzyVariable::~FuzzyVariable()
 {
 	MemberSets::iterator it;
@@ -123,7 +125,7 @@ FzSet FuzzyVariable::AddTriangularSet(std::string name,
 	double       peak,
 	double       maxBound)
 {
-	m_MemberSets[name] = new FuzzySet_Triangle(peak,
+	m_MemberSets[name] = new FuzzySetTriangle(peak,
 		peak - minBound,
 		maxBound - peak);
 	//adjust range if necessary
@@ -141,7 +143,7 @@ FzSet FuzzyVariable::AddLeftShoulderSet(std::string name,
 	double       peak,
 	double       maxBound)
 {
-	m_MemberSets[name] = new FuzzySet_LeftShoulder(peak, peak - minBound, maxBound - peak);
+	m_MemberSets[name] = new FuzzySetLeftShoulder(peak, peak - minBound, maxBound - peak);
 
 	//adjust range if necessary
 	AdjustRangeToFit(minBound, maxBound);
@@ -159,7 +161,7 @@ FzSet FuzzyVariable::AddRightShoulderSet(std::string name,
 	double       peak,
 	double       maxBound)
 {
-	m_MemberSets[name] = new FuzzySet_RightShoulder(peak, peak - minBound, maxBound - peak);
+	m_MemberSets[name] = new FuzzySetRightShoulder(peak, peak - minBound, maxBound - peak);
 
 	//adjust range if necessary
 	AdjustRangeToFit(minBound, maxBound);
@@ -177,7 +179,7 @@ FzSet FuzzyVariable::AddSingletonSet(std::string name,
 	double       peak,
 	double       maxBound)
 {
-	m_MemberSets[name] = new FuzzySet_Singleton(peak,
+	m_MemberSets[name] = new FuzzySetSingleton(peak,
 		peak - minBound,
 		maxBound - peak);
 

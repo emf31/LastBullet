@@ -1,5 +1,4 @@
-#ifndef FUZZY_AND_H
-#define FUZZY_AND_H
+#pragma once
 
 #include <vector>
 #include <cassert>
@@ -18,81 +17,21 @@ private:
 
 public:
 
-	~FzAND()
-	{
-		std::vector<FuzzyTerm*>::iterator curTerm;
-		for (curTerm = m_Terms.begin(); curTerm != m_Terms.end(); ++curTerm)
-		{
-			delete *curTerm;
-		}
-	}
-
+	~FzAND();
 	//copy ctor
-	FzAND(const FzAND& fa)
-	{
-		std::vector<FuzzyTerm*>::const_iterator curTerm;
-		for (curTerm = fa.m_Terms.begin(); curTerm != fa.m_Terms.end(); ++curTerm)
-		{
-			m_Terms.push_back((*curTerm)->Clone());
-		}
-	}
+	FzAND(const FzAND& fa);
 
 	//ctors accepting fuzzy terms.
-	FzAND(FuzzyTerm& op1, FuzzyTerm& op2)
-	{
-		m_Terms.push_back(op1.Clone());
-		m_Terms.push_back(op2.Clone());
-	}
-	FzAND(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3)
-	{
-		m_Terms.push_back(op1.Clone());
-		m_Terms.push_back(op2.Clone());
-		m_Terms.push_back(op3.Clone());
-	}
-	FzAND(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3, FuzzyTerm& op4)
-	{
-		m_Terms.push_back(op1.Clone());
-		m_Terms.push_back(op2.Clone());
-		m_Terms.push_back(op3.Clone());
-		m_Terms.push_back(op4.Clone());
-	}
+	FzAND(FuzzyTerm& op1, FuzzyTerm& op2);
+	FzAND(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3);
+	FzAND(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3, FuzzyTerm& op4);
 
 	//virtual ctor
-	FuzzyTerm* Clone()const { return new FzAND(*this); }
+	FuzzyTerm* Clone()const;
 
-	double GetDOM()const
-	{
-		double smallest = MaxDouble;
+	double GetDOM()const;
 
-		std::vector<FuzzyTerm*>::const_iterator curTerm;
-		for (curTerm = m_Terms.begin(); curTerm != m_Terms.end(); ++curTerm)
-		{
-			if ((*curTerm)->GetDOM() < smallest)
-			{
-				smallest = (*curTerm)->GetDOM();
-			}
-		}
+	void  ClearDOM();
 
-		return smallest;
-	}
-
-	void  ClearDOM()
-	{
-		std::vector<FuzzyTerm*>::iterator curTerm;
-		for (curTerm = m_Terms.begin(); curTerm != m_Terms.end(); ++curTerm)
-		{
-			(*curTerm)->ClearDOM();
-		}
-	}
-
-	void  ORwithDOM(double val)
-	{
-		std::vector<FuzzyTerm*>::iterator curTerm;
-		for (curTerm = m_Terms.begin(); curTerm != m_Terms.end(); ++curTerm)
-		{
-			(*curTerm)->ORwithDOM(val);
-		}
-	}
+	void  ORwithDOM(double val);
 };
-
-#endif

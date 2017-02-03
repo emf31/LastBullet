@@ -1,5 +1,4 @@
-#ifndef PROXY_FUZZY_SET
-#define PROXY_FUZZY_SET
+#pragma once
 
 #include "FuzzyTerm.h"
 #include "FuzzySet.h"
@@ -21,13 +20,12 @@ private:
 
 public:
 
-	FzSet(FuzzySet& fs) :m_Set(fs) {}
+	FzSet(FuzzySet& fs);
 
-	FuzzyTerm* Clone()const { return new FzSet(*this); }
-	double     GetDOM()const { return m_Set.GetDOM(); }
-	void       ClearDOM() { m_Set.ClearDOM(); }
-	void       ORwithDOM(double val) { m_Set.ORwithDOM(val); }
+	FuzzyTerm* Clone()const;
+	double     GetDOM()const;
+	void       ClearDOM();
+	void       ORwithDOM(double val);
 };
 
 
-#endif
