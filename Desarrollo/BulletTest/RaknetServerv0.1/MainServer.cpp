@@ -90,11 +90,7 @@ int main() {
 
 			break;
 			case ID_DISCONNECTION_NOTIFICATION:
-				printf("Un cliente se ha desconectado.\n");
-				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
-				break;
-			case ID_CONNECTION_LOST: {
-
+			{
 				printf("Un cliente se ha desconectado.\n");
 				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
 				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
@@ -102,8 +98,9 @@ int main() {
 				//lo borramos de los clientes actuales del servidor
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
+				break;
 			}
-			break;
+
 			case NUEVO_PLAYER: {
 
 				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
@@ -334,7 +331,7 @@ int main() {
 			case SYNC:
 			{
 				TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
-				//std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
+				
 				EntityManager::i().enviaSync(peer, sync);
 				break;
 			}

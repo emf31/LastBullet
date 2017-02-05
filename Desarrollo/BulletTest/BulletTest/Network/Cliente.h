@@ -13,7 +13,6 @@
 class Cliente : public Subject	//Para comunicarse con la partida
 {
 public:
-
 	
 	static Cliente& i() {
 		static Cliente singleton;

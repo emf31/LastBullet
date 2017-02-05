@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include "Game.h"
 #include "MastEventReceiver.hpp"
 #include <Clock.hpp>
@@ -10,7 +9,6 @@
 #include <WeaponDrops/RocketLauncherDrop.h>
 #include <WeaponDrops/PistolaDrop.h>
 #include <WeaponDrops/AsaltoDrop.h>
-#include <GroupEntity.h>
 #include <GraphicEngine.h>
 #include <SceneNode.h>
 #include <MessageHandler.h>
@@ -20,7 +18,6 @@
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h>
-#include <thread> 
 #include <Cliente.h>
 #include <TriggerSystem.h>
 #include <MessageHandler.h>
@@ -149,38 +146,6 @@ void Game::inicializar()
 
 	
 
-	/*GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
-	ge->addEntityList(EntityManager::i().getLifeObjects());
-	TriggerSystem::i().RegisterEntity(ge);
-
-	GroupEntity *grupoAsaltos = new GroupEntity("grupoAsalto", 9001);
-	grupoAsaltos->addEntityList(EntityManager::i().getAsalto());
-	TriggerSystem::i().RegisterEntity(grupoAsaltos);
-
-	GroupEntity *grupoPistolas = new GroupEntity("grupoPistolas", 9002);
-	grupoPistolas->addEntityList(EntityManager::i().getPistolas());
-	TriggerSystem::i().RegisterEntity(grupoPistolas);
-
-	GroupEntity *grupoRockets = new GroupEntity("grupoRockets", 9003);
-	grupoRockets->addEntityList(EntityManager::i().getRockets());
-	TriggerSystem::i().RegisterEntity(grupoRockets);*/
-
-
-
-
-	
-
-	/*
-	Enemy *e = new Enemy("Son Goku");
-	e->inicializar();
-	e->cargarContenido();
-	e->setPosition(Map::i().searchSpawnPoint());
-
-	Enemy *e1 = new Enemy("Bruce Lee");
-	e1->inicializar();
-	e1->cargarContenido();
-	e1->setPosition(Map::i().searchSpawnPoint());
-	*/
 
 	int a=1;
 	do {
@@ -214,9 +179,8 @@ void Game::inicializar()
 
 		
 		//Bucle infinito hasta que se conecte
-		Time time;
 		while (Cliente::i().isConected() == false) {
-			Cliente::i().update(time);
+			Cliente::i().update(Time::Zero);
 		}
 
 		player = Cliente::i().createPlayer();
@@ -247,18 +211,7 @@ void Game::inicializar()
 
 	//Añadimos observer al player
 	player->addObserver(&partida);	
-	/*
-	e2 = new Enemy_Bot("HansTopo");
-	e2->inicializar();
-	e2->cargarContenido();
-	e2->setPosition(Map::i().searchSpawnPoint());
-	*/
 
-	/*GraphicEngine::i().toggleCamera();
-
-	GraphicEngine::i().getActiveCamera()->setPosition(Vec3<float>(100, 150, 100));
-
-	GraphicEngine::i().getActiveCamera()->setTarget(Vec3<float>(100, 0, 100));*/
 }
 
 bool Game::processEvents()

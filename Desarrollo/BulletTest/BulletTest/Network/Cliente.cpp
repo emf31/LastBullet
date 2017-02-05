@@ -31,23 +31,13 @@ Cliente::Cliente() /*: lobby(peer)*/
 
 void Cliente::update(Time elapsedTime) {
 
-	
-	TPing ping;
-	//cogemos el tiempo cuando enviamos para restar el tiempo de cuando recibimos-enviamos y a esto le restamos el tiempo del update y tendriamos el ping
-	duracionFor = timeFor.getElapsedTime().asMilliseconds();
-	timeFor.restart();
-	ping.ping = RakNet::GetTimeMS();
-	//Enviamos ping cada update
-	dispatchMessage(ping, PING);
-
-	//pingServer();
 
 	if (resetBarTime.getElapsedTime().asSeconds() >= 5) {
 		resetBar();
 		resetBarTime.restart();
-		//pingServer();
 	}
 	countMovimiento = 0;
+
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 		
 		
@@ -298,7 +288,6 @@ void Cliente::update(Time elapsedTime) {
 
 			notify(evento);
 
-			//EntityManager::i().cambiaTabla(nuevaFila);
 
 		}
 		break;
@@ -312,7 +301,7 @@ void Cliente::update(Time elapsedTime) {
 
 			sendSyncPackage(guidTabla.guid, mPacketIdentifier);
 
-			//EntityManager::i().aumentaKill(guidTabla.guid);
+			
 
 		}
 		break;
@@ -327,7 +316,7 @@ void Cliente::update(Time elapsedTime) {
 			notify(evento);
 
 			sendSyncPackage(guidTabla.guid, mPacketIdentifier);
-			//EntityManager::i().aumentaMuerte(guidTabla.guid);
+			
 
 		}
 		break;
@@ -461,7 +450,7 @@ void Cliente::update(Time elapsedTime) {
 			
 			TPing pingStruct = *reinterpret_cast<TPing*>(packet->data);
 			//+1 milisegundo que tarda en hacer el for
-			pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor+1;
+			pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor + 1;
 
 			break;
 		}
@@ -576,6 +565,8 @@ void Cliente::searchServersOnLAN() {
 
 	client->Startup(1, &socketDescriptor, 1);
 
+	RakNet::RakNetGUID rakID = client->GetMyGUID();
+
 	//Hacemos ping a bradcast en el puerto en el que sabemos que est� escuchando el server
 	client->Ping("255.255.255.255", 65535, false);
 	std::cout << "Buscando servidores en la red local..." << std::endl;
@@ -638,7 +629,13 @@ void Cliente::sendSyncPackage(RakNet::RakNetGUID guidDestino, unsigned char type
 }
 void Cliente::pingServer() {
 
-	peer->Ping(servidorAdr.ToString(false), 65535, false);
+	TPing ping;
+	//cogemos el tiempo cuando enviamos para restar el tiempo de cuando recibimos-enviamos y a esto le restamos el tiempo del update y tendriamos el ping
+	duracionFor = timeFor.getElapsedTime().asMilliseconds();
+	timeFor.restart();
+	ping.ping = RakNet::GetTimeMS();
+	//Enviamos ping cada update
+	dispatchMessage(ping, PING);
 }
 
 void Cliente::resetBar() {
