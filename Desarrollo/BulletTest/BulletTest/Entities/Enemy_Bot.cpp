@@ -19,6 +19,28 @@ void Enemy_Bot::inicializar()
 {
 	m_PathPlanner = new PathPlanner(this);
 	m_PathFollow = new PathFollow(this);
+
+	asalto = new Asalto();
+	asalto->inicializar();
+	asalto->cargarContenido();
+
+	rocket = new RocketLauncher();
+	rocket->inicializar();
+	rocket->cargarContenido();
+
+	pistola = new Pistola();
+	pistola->inicializar();
+	pistola->cargarContenido();
+
+	sniper = new Sniper();
+	sniper->inicializar();
+	sniper->cargarContenido();
+
+	listaWeapons = new Lista();
+
+	listaWeapons->insertar(asalto);
+
+
 }
 
 void Enemy_Bot::update(Time elapsedTime)

@@ -44,6 +44,20 @@ void Lista::Mostrar() {
 	printf("\n");
 }
 
+bool Lista::Buscar(std::string arma) {
+	pnodo nodo = actual;
+
+	do {
+		if (arma == nodo->valor->getClassName()) {
+			return true;
+		}
+		nodo = nodo->siguiente;
+	} while (nodo != actual);
+
+	return false;
+
+}
+
 void Lista::Siguiente() {
 	if (actual) {
 		actual->valor->setEquipada(false);

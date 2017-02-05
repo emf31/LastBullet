@@ -14,6 +14,7 @@ public:
 	void insertar(Weapon* v);
 	bool ListaVacia() { return actual == NULL; }
 	void Mostrar();
+	bool Buscar(std::string arma);
 	void Siguiente();
 	void Anterior();
 	bool Actual() { return actual != NULL; }

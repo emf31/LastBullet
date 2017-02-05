@@ -6,6 +6,11 @@
 #include <KinematicCharacterController.h>
 #include <NavGraphNode.h>
 #include <LifeComponent.h>
+#include "../Otros/Lista.h"
+#include "Weapons/Asalto.h"
+#include "Weapons/Pistola.h"
+#include "Weapons/RocketLauncher.h"
+#include "Weapons/Sniper.h"
 
 class PathPlanner;
 class PathFollow;
@@ -65,7 +70,15 @@ private:
 	//Calcula el vector movimiento del bot
 	PathFollow*	m_PathFollow;
 
-	
+
+	//LISTA DE ARMAS
+	Lista* listaWeapons;
+
+	Asalto* asalto;
+	Pistola* pistola;
+	RocketLauncher* rocket;
+	Sniper* sniper;
+
 	//the direction the bot is facing (and therefore the direction of aim). 
 	//Note that this may not be the same as the bot's heading, which always
 	//points in the direction of the bot's movement
@@ -76,7 +89,6 @@ private:
 
 	//Current target
 	Vec2f m_Target;
-
 
 	KinematicCharacterController* p_controller;
 
