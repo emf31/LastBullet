@@ -11,6 +11,7 @@
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
 #include "Weapons/Sniper.h"
+#include "FuzzyLogic\FuzzyModule.h"
 
 class PathPlanner;
 class PathFollow;
@@ -57,6 +58,8 @@ private:
 	float radius;
 	float height;
 	float mass;
+
+	double calcularDesirability(FuzzyModule& fm, double dist, double ammo);
 
 	Animation animation;
 
