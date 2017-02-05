@@ -15,6 +15,9 @@ public:
 	virtual ~NetObject();
 
 	virtual void inicializar();
+
+	virtual void conectar(const std::string& ip, int port);
+
 	virtual void handlePackets(Time elapsedTime) = 0;
 
 	bool isConnected() const { return connected; }
@@ -26,12 +29,16 @@ protected:
 	RakNet::Packet *packet;
 	RakNet::RakPeerInterface *peer;
 
-private:
-
-	bool connected;
-
-	RakNet::SocketDescriptor sd;
+	unsigned char mPacketIdentifier;
+	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);
 
 	RakNet::RakNetGUID servidor;
 	RakNet::SystemAddress servidorAdr;
+
+	bool connected;
+
+private:
+
+	RakNet::SocketDescriptor sd;
+	
 };

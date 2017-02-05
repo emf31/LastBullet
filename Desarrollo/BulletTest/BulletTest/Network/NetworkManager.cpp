@@ -6,17 +6,34 @@ void NetworkManager::inicializar(const std::string& address)
 	serverIP = address;
 }
 
-void NetworkManager::createNetObject(NetObject * netobj)
+bool NetworkManager::removeNetObject(NetPtr netobj)
 {
-	if (netobj != NULL) {
-		m_netobjs.push_back(netobj);
-	}
+	m_netObjs.remove(netobj);
+
+	//should check here if it's removed
+
+	return true;
+}
+
+void NetworkManager::apagar()
+{
+	m_netObjs.clear();
+}
+
+std::shared_ptr<NetObject> NetworkManager::createNetPlayer(Player* player)
+{
+	NetPlayer* netp = new NetPlayer(player);
+	NetPlayerPtr ptr(netp);
+
+	m_netObjs.push_back(ptr);
+
+	return ptr;
 }
 
 void NetworkManager::updateNetwork(Time elapsedTime)
 {
-	std::list<NetObject*>::iterator it;
-	for (it = m_netobjs.begin(); it != m_netobjs.end(); ++it) {
+	std::list<NetPtr>::iterator it;
+	for (it = m_netObjs.begin(); it != m_netObjs.end(); ++it) {
 		(*it)->handlePackets(elapsedTime);
 	}
 }

@@ -241,6 +241,7 @@
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
     <ClInclude Include="Network\NetObject.h" />
+    <ClInclude Include="Network\NetPlayer.h" />
     <ClInclude Include="Network\NetworkManager.h" />
     <ClInclude Include="Observer\events\Event.h" />
     <ClInclude Include="Observer\events\KillEvent.h" />
@@ -324,6 +325,7 @@
     <ClCompile Include="Network\Cliente.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Network\NetObject.cpp" />
+    <ClCompile Include="Network\NetPlayer.cpp" />
     <ClCompile Include="Network\NetworkManager.cpp" />
     <ClCompile Include="Observer\Observer.cpp" />
     <ClCompile Include="Observer\Subject.cpp" />
