@@ -57,7 +57,11 @@ void MapLoader::readMap(const std::string & name)
 						node->setTexture("../media/lanzacohetes.jpg", 0);
 					} else if (extraTags == "asalto") {
 						node->setTexture("../media/asalto.jpg", 0);
+					} else if (extraTags == "asalto") {
+						node->setTexture("../media/sniper.png", 0);
 					}
+
+
 				}
 					
 				if (obj["tag"] == "LifeObject")
@@ -173,7 +177,7 @@ Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> es
 
 Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
 {
-	std::shared_ptr<BasicSceneNode> sniper = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/sniper.jpg", "");
+	std::shared_ptr<BasicSceneNode> sniper = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/sniper.png", "");
 	SniperDrop *SniperDropEnt = new SniperDrop(sniper, name);
 	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, escala*2.f));
 	SniperDropEnt->setPosition(posicion);

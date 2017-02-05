@@ -2955,7 +2955,7 @@ GameObject:
   - component: {fileID: 1359895451}
   m_Layer: 8
   m_Name: 31
-  m_TagString: RocketLauncherDrop
+  m_TagString: SniperDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4163,7 +4163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3ca4701e882514eb6c56c9a3c3533b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: "D:\\4\xBAcurso\\Repositorios\\TBA\\Desarrollo\\BulletTest\\media\\laberinto.json"
+  fileName: C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\media\laberinto.json
 --- !u!4 &1874369740
 Transform:
   m_ObjectHideFlags: 0
