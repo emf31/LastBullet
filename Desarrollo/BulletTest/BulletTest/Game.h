@@ -20,6 +20,8 @@
 
 #include <Enemy_Bot.h>
 
+#include <World.h>
+
 class Game
 {
 public:
@@ -40,9 +42,11 @@ private:
 	DebugMenuGUI debugMenu;
 	float interpolation;
 
-	Partida partida;
+	//Partida partida;
 	Player* player;
 
 	Enemy_Bot *e;
 	Enemy_Bot *e2;
+
+	World world;
 };

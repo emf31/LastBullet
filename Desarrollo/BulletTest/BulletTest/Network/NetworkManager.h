@@ -8,15 +8,16 @@
 
 static const int server_port = 65535;
 
-//Easy access to pointers
-typedef std::shared_ptr<NetPlayer> NetPlayerPtr;
-//typedef std::shared_ptr<NetBot> NetBotPtr;
-typedef std::shared_ptr<NetObject> NetPtr;
+
 
 class NetworkManager {
 
-
 public:
+	//Easy access to pointers
+	/*typedef std::shared_ptr<NetPlayer> NetPlayerPtr;
+	//typedef std::shared_ptr<NetBot> NetBotPtr;
+	typedef std::shared_ptr<NetObject> NetPtr;*/
+
 
 	static NetworkManager& i() {
 		static NetworkManager singleton;
@@ -24,17 +25,31 @@ public:
 	}
 
 	void inicializar(const std::string& address);
-	bool removeNetObject(NetPtr netobj);
+	//bool removeNetBotObject(std::shared_ptr<NetPlayer> netobj);
 	void apagar();
 	
 	//Creates a pointer of NetPlayer
-	NetPlayerPtr createNetPlayer(Player* player);
+	std::shared_ptr<NetPlayer> createNetPlayer(Player* player);
 
 	//Call handle packets for every netobject
 	void updateNetwork(Time elapsedTime);
 
+
+	//Send packet to server using netplayer peer (used for global messages like kills, deaths, life objects)
+	template<typename T>
+	void dispatchMessage(T& estructura, GameMessages messageType) {
+		estructura.mID = messageType;
+			
+		m_netPlayer->peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, m_netPlayer->getServerGUID(), false);
+	}
+
+
+
 private:
-	std::list<NetPtr> m_netObjs;
+
+	std::shared_ptr<NetPlayer> m_netPlayer;
+
+	//std::list<NetObject> m_netObjs;
 
 	std::string serverIP;
 

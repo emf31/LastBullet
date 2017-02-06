@@ -209,6 +209,9 @@
     <ClCompile Include="Network\NetPlayer.cpp">
       <Filter>Source Code\Network</Filter>
     </ClCompile>
+    <ClCompile Include="World\World.cpp">
+      <Filter>Headers\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -521,6 +524,9 @@
     <ClInclude Include="Network\NetPlayer.h">
       <Filter>Headers\Network</Filter>
     </ClInclude>
+    <ClInclude Include="World\World.h">
+      <Filter>Headers\World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -639,6 +645,9 @@
     </Filter>
     <Filter Include="Headers\Observer\events">
       <UniqueIdentifier>{f2e09faa-e587-423a-b8b2-29f536ed3723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\World">
+      <UniqueIdentifier>{022800d7-819b-4b2e-966e-475edb5fa585}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

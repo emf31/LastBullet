@@ -201,27 +201,9 @@ void GraphicEngine::inicializar()
 		irrDevice->getCursorControl()->setVisible(0);
 		cargarTexturas();
 
+		setDebugDraw();
 
-
-		//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
-		//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
-		//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
-
-		debugDraw = new DebugDraw(irrDevice);
-		debugDraw->setDebugMode(
-			btIDebugDraw::DBG_DrawWireframe |
-			btIDebugDraw::DBG_DrawAabb |
-			btIDebugDraw::DBG_DrawContactPoints |
-			//btIDebugDraw::DBG_DrawText |
-			//btIDebugDraw::DBG_DrawConstraintLimits |
-			btIDebugDraw::DBG_DrawConstraints //|
-		);
-		PhysicsEngine::i().m_world->setDebugDrawer(debugDraw);
-
-
-		debugMat.Lighting = false;
-
-		debug_draw_bullet = true;
+		
 	//}
 
 
@@ -292,5 +274,27 @@ void GraphicEngine::cargarTexturas() {
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	irrScene->addToDeletionQueue(nodo->getNodo());
+}
+
+void GraphicEngine::setDebugDraw()
+{
+	debugDraw = new DebugDraw(irrDevice);
+	//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
+	//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
+	//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
+	debugDraw->setDebugMode(
+		btIDebugDraw::DBG_DrawWireframe |
+		btIDebugDraw::DBG_DrawAabb |
+		btIDebugDraw::DBG_DrawContactPoints |
+		//btIDebugDraw::DBG_DrawText |
+		//btIDebugDraw::DBG_DrawConstraintLimits |
+		btIDebugDraw::DBG_DrawConstraints //|
+	);
+	PhysicsEngine::i().m_world->setDebugDrawer(debugDraw);
+
+
+	debugMat.Lighting = false;
+
+	debug_draw_bullet = true;
 }
 

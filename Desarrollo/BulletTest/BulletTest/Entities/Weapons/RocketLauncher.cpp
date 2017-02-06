@@ -105,7 +105,7 @@ void RocketLauncher::shoot() {
 			RocketBullet* bala = new RocketBullet(cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
-			if (Cliente::i().isConected()) {
+			/*if (Cliente::i().isConected()) {
 
 				TBala tBala;
 				tBala.position = cons(start);
@@ -115,7 +115,7 @@ void RocketLauncher::shoot() {
 
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 				Cliente::i().dispatchMessage(tBala, DISPARAR_ROCKET);
-			}
+			}*/
 
 			relojCadencia.restart();
 		}

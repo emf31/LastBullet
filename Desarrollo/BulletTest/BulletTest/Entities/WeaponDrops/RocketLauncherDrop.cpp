@@ -48,12 +48,12 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 			if (estado == DISPONIBLE) {
 				estado = USADO;
 				clockRespawnWeapon.restart();
-				if (Cliente::i().isConected()) {
+				/*if (Cliente::i().isConected()) {
 					TId tID;
 					tID.id = m_id;
 
 					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
-				}
+				}*/
 				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
 				m_nodo->setVisible(false);
 

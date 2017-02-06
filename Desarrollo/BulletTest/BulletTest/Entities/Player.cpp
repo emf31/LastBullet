@@ -23,6 +23,7 @@
 
 #include <TriggerSystem.h>
 #include <Map.h>
+
 #include <NetworkManager.h>
 
 
@@ -33,6 +34,17 @@ Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, 
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
 	TriggerSystem::i().RegisterEntity(this);
 	
+
+	//Creates object to send and receive packets
+	m_network.reset();
+	m_network = NetworkManager::i().createNetPlayer(this);
+	m_network->inicializar();
+
+	TPlayer nuevoplayer;
+	nuevoplayer.guid = getGuid();
+	nuevoplayer.name = getName();
+
+	m_network->dispatchMessage(nuevoplayer, NUEVO_PLAYER);
 
 }
 
@@ -92,8 +104,7 @@ void Player::inicializar()
 	/////////////////////////////////////////
 	////////////////////////////////////////
 
-	//Creates object to send and receive packets
-	m_network = NetworkManager::i().createNetPlayer(this);
+	
 }
 
 
@@ -140,7 +151,7 @@ void Player::update(Time elapsedTime)
 
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
-	if (m_guid != RakNet::UNASSIGNED_RAKNET_GUID) {
+	if (m_network->isConnected()) {
 
 		TMovimiento mov;
 		mov.isDying = getLifeComponent().isDying();
@@ -148,7 +159,7 @@ void Player::update(Time elapsedTime)
 		mov.rotation = getRenderState()->getRotation();
 		mov.guid = getGuid();
 
-		Cliente::i().dispatchMessage(mov, MOVIMIENTO);
+		m_network->dispatchMessage(mov, MOVIMIENTO);
 		
 	}
 
@@ -208,7 +219,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}else if (message.mensaje == "COLISION_ROCKET") {
-		Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+		//Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		delete message.data;
 	}
 

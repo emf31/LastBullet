@@ -84,11 +84,9 @@ public:
 		debug_draw_bullet = !debug_draw_bullet;
 	}
 
-	void toggleCamera() {
-		debug_camera = !debug_camera;
-	}
+	void toggleCamera() { debug_camera = !debug_camera; }
 
-	//void setCursorVisible(bool t) { gui.showMouseCursor(t); }
+	void setDebugDraw();
 
 	IrrlichtDevice* getDevice() { return irrDevice; }
 private:
@@ -110,9 +108,8 @@ private:
 
 	irr::video::SMaterial debugMat;
 
-	DebugDraw *debugDraw;
+	DebugDraw* debugDraw;
 
-	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();
 
 };

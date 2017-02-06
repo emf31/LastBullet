@@ -12,7 +12,9 @@
 #include "../Otros/LifeComponent.h"
 #include <Subject.h>
 #include <Observer.h>
-#include <NetPlayer.h>
+
+
+class NetPlayer;
 
 class Player : public Entity, public Subject
 {
@@ -74,7 +76,8 @@ public:
 
 	void updateRelojes();
 
-	
+	//shared ptr, we can pass by value
+	std::shared_ptr<NetPlayer> m_network;
 
 public:
 	KinematicCharacterController* p_controller;
@@ -82,10 +85,11 @@ public:
 	bool hit;
 	bool sangre;
 	Clock relojSangre, relojHit;
+
+	
 	
 private:
-	//shared ptr we can copy this
-	NetPlayerPtr m_network;
+	
 
 	Animation* animation;
 

@@ -112,9 +112,9 @@ bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 }
 bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
 	networkOpen = !networkOpen;
-	Cliente::i().windowsPacketOpen = !Cliente::i().windowsPacketOpen;
+	/*Cliente::i().windowsPacketOpen = !Cliente::i().windowsPacketOpen;
 	NetworkWindow->setVisible(networkOpen);
-	NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);
+	NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);*/
 	
 	return true;
 }
@@ -159,7 +159,7 @@ bool DebugMenuGUI::onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e) {
 }
 bool DebugMenuGUI::onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e) {
 	NetworSyncWindow->setVisible(false);
-	Cliente::i().windowsPacketOpen = false;
+	//Cliente::i().windowsPacketOpen = false;
 	return true;
 }
 
@@ -188,9 +188,9 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 void DebugMenuGUI::updateProgressBars() {
 	int numClientes = EntityManager::i().numClientes();
 	float progreso = 1 / (float)numClientes;
-	Cliente cliente = Cliente::i();
+	//Cliente cliente = Cliente::i();
 	
-	if (cliente.countGranada != 0)
+	/*if (cliente.countGranada != 0)
 		cliente.countGranada++;
 	if (cliente.countDisparo != 0)
 		cliente.countDisparo++;
@@ -206,13 +206,13 @@ void DebugMenuGUI::updateProgressBars() {
 	muertePB->setProgress(cliente.countMuerte*progreso);
 	granadaPB->setProgress(cliente.countGranada*progreso);
 	aumentaKillPB->setProgress(cliente.countAumentaKill*progreso);
-	aumentaMuertePB->setProgress(cliente.countAumentaMuerte*progreso);
+	aumentaMuertePB->setProgress(cliente.countAumentaMuerte*progreso);*/
 
 
 }
 
 void DebugMenuGUI::updateNetworkWindowInfo(){
-	Cliente cliente = Cliente::i();
+	/*Cliente cliente = Cliente::i();
 
 	if (toggleCountMovement->isSelected()) {
 		cliente.countPacketsTotal = cliente.countPacketsTotal + cliente.countMovementPacketsTotal;
@@ -255,7 +255,7 @@ void DebugMenuGUI::updateNetworkWindowInfo(){
 
 	std::ostringstream ossPing;
 	ossPing << cliente.GetPing();
-	labelPing->setText(ossPing.str());
+	labelPing->setText(ossPing.str());*/
 
 	
 

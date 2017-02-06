@@ -66,12 +66,12 @@ void LifeObject::handleMessage(const Message & message)
 				estado = USADO;
 				clockRecargaLife.restart();
 
-				if (Cliente::i().isConected()) {
+				/*if (Cliente::i().isConected()) {
 					TId s_id;
 					s_id.id = m_id;
 
 					Cliente::i().dispatchMessage(s_id, VIDA_COGIDA);
-				}
+				}*/
 				
 
 				

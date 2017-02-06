@@ -17,11 +17,10 @@ NetObject::~NetObject()
 
 void NetObject::inicializar()
 {
-	/*conectado = false;
 	char eleccion;
 	int elec;
 	std::string str;
-	resetBarTime.restart();
+	//resetBarTime.restart();
 
 	do {
 		searchServersOnLAN();
@@ -57,7 +56,7 @@ void NetObject::inicializar()
 	//Nos conectamos a la lobby del servidor
 	//lobby.join(str, SERVER_PORT);
 
-	conectar(str, SERVER_PORT);*/
+	conectar(str, server_port);
 }
 
 void NetObject::conectar(const std::string & ip, int port)
@@ -67,6 +66,17 @@ void NetObject::conectar(const std::string & ip, int port)
 	peer->Startup(1, &sd, 1);
 	peer->Connect(ip.c_str(), port, 0, 0);
 	peer->SetOccasionalPing(true);
+
+}
+
+void NetObject::apagar()
+{
+	connected = false;
+
+	//shut down the client
+	peer->Shutdown(300);
+	//and end the connection
+	RakNet::RakPeerInterface::DestroyInstance(peer);
 
 }
 

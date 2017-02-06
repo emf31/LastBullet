@@ -89,7 +89,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 3.f;
 
-			if (Cliente::i().isConected()) {
+			/*if (Cliente::i().isConected()) {
 				if (damage > 0) {
 
 					if (myentity->getID() == PLAYER) {
@@ -120,7 +120,7 @@ void RocketBullet::handleMessage(const Message & message)
 				static_cast<Player*>(myentity)->getLifeComponent().restaVida(damage);
 
 				//TODO si estas jugando en un solo player aqui tendras que quitarle vida a la IA
-			}
+			}*/
 
 		}
 
@@ -178,7 +178,7 @@ float RocketBullet::explosion(Entity* player, const Vec3<float>& posExplosion, f
 		btVector3 force = bt(direccion) * FUERZA;
 
 		//Si es el player aplicamos el impulso al player
-		if (player->getClassName() == "Player") {
+		/*if (player->getClassName() == "Player") {
 			static_cast<Player*>(player)->p_controller->applyImpulse(force);
 		}
 		//Si no es un enemigo y hay que notificar al server de ese impulso
@@ -186,9 +186,9 @@ float RocketBullet::explosion(Entity* player, const Vec3<float>& posExplosion, f
 			TImpulso impulso;
 			impulso.fuerza = cons(force);
 			impulso.guid = player->getGuid();
-			Cliente::i().dispatchMessage(impulso, APLICAR_IMPULSO);
+			//Cliente::i().dispatchMessage(impulso, APLICAR_IMPULSO);
 			//Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
-		}
+		}*/
 
 	}
 

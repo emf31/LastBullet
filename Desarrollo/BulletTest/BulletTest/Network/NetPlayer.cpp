@@ -7,7 +7,7 @@
 #include <RocketBulletEnemy.h>
 #include <Player.h>
 
-NetPlayer::NetPlayer(Player* player) : m_player(player)
+NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
 }
 
@@ -448,4 +448,15 @@ void NetPlayer::handlePackets(Time elapsedTime)
 	//pingMS = pingMS - (elapsedTime.asMilliseconds() - duracionFor);
 	//pingMS = duracionFor;
 	timeFor.restart();*/
+}
+
+void NetPlayer::apagar()
+{
+	if (isConnected()) {
+		//First call shutdown from base class
+		NetObject::apagar();
+
+		//Do what you need here
+	}
+	
 }

@@ -28,6 +28,7 @@
 #include <PathPlanner.h>
 #include <Enemy_Bot.h>
 
+#include <NetworkManager.h>
 
 
 
@@ -38,9 +39,9 @@ const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 Game::Game()
-	: partida(&ingameGUI)
+: world()
 {
-	
+
 }
 
 
@@ -65,7 +66,7 @@ void Game::run()
 	time_gameclock = clock.getElapsedTime();
 
 	bool wantToExit = false;
-	
+
 
 	while (GraphicEngine::i().isRuning()) {
 
@@ -73,81 +74,98 @@ void Game::run()
 
 		time_physics_curr = clock.getElapsedTime();
 
-		if (GraphicEngine::i().isWindowActive()) {
-			PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
-		}
+		//if (GraphicEngine::i().isWindowActive()) {
+		PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
+		//}
 
 		time_physics_prev = time_physics_curr;
 
-		
-			// Game Clock part of the loop
-			/*  This ticks once every TickMs milliseconds on average */
-			Time dt = clock.getElapsedTime() - time_gameclock;
 
-			//Llevamos control en las actualizaciones por frame
-			while (dt >= timePerFrame) // 15 veces/segundo
-			{
-				dt -= timePerFrame;
-				time_gameclock += timePerFrame;
+		// Game Clock part of the loop
+		/*  This ticks once every TickMs milliseconds on average */
+		Time dt = clock.getElapsedTime() - time_gameclock;
 
-				MastEventReceiver::i().endEventProcess();
-				processEvents();
-				MastEventReceiver::i().startEventProcess();
+		//Llevamos control en las actualizaciones por frame
+		while (dt >= timePerFrame) // 15 veces/segundo
+		{
+			dt -= timePerFrame;
+			time_gameclock += timePerFrame;
 
-				//Realizamos actualizaciones
-				update(timePerFrame);
+			MastEventReceiver::i().endEventProcess();
+			processEvents();
+			MastEventReceiver::i().startEventProcess();
 
-				time_client_curr = clock.getElapsedTime();
+			//Realizamos actualizaciones
+			update(timePerFrame);
 
-				if (Cliente::i().isConected()) {
-					Cliente::i().update(time_client_curr - time_client_prev);
-				}
-				time_client_prev = time_client_curr;
+			time_client_curr = clock.getElapsedTime();
 
-			}
+			/*if (Cliente::i().isConected()) {
+				Cliente::i().update(time_client_curr - time_client_prev);
+			}*/
+			NetworkManager::i().updateNetwork(time_client_curr - time_client_prev);
+
+			time_client_prev = time_client_curr;
+
+		}
+
 		if (GraphicEngine::i().isWindowActive()) {
 			interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 			render(interpolation, timePerFrame);
 		}
 
-		
+
 	}
 
-	
+
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
 
-	if (Cliente::i().isConected()) {
+	/*if (Cliente::i().isConected()) {
 		Cliente::i().apagar();
-	}
-	
+	}*/
+
+	NetworkManager::i().apagar();
+
+
 	MessageHandler::i().borrarContenido();
-	
+
 }
 
 
-//Tenemos que hacer patron fachada
+
 void Game::inicializar()
 {
+
+
 	
 
-	//inicializamos bullet
+
+
+	std::string str;
+
+	printf("Introduce un nombre \n");
+	std::cin >> str;
+
+	Player *player = new Player(str);
+
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 
-	//Esto resetea valores
-	EntityManager::i().inicializarEntityManager();
-
-	//mapa
-	Map::i().inicializar();
-
 	
 
+	while (player->m_network->isConnected() == false) {
+		NetworkManager::i().updateNetwork(Time::Zero);
+	}
+	
 
-	int a=1;
+	world.inicializar();
+
+
+	/*int a = 1;
 	do {
 		std::cout << "Elige un modo:" << std::endl;
 		std::cout << "[1] - Un jugador" << std::endl;
@@ -155,18 +173,10 @@ void Game::inicializar()
 
 		std::cin >> a;
 	} while (a != 1 && a != 2);
-	
+
 	if (a == 1) {
-		//LLama al inicializar de todas las entities
-		EntityManager::i().inicializar();
-
-		EntityManager::i().cargarContenido();
-
-		//Creamos el player
-		player = new Player("NombreA");
-		player->inicializar();
-		player->cargarContenido();
 		
+
 
 	}
 	else {
@@ -177,46 +187,33 @@ void Game::inicializar()
 		//raknet
 		Cliente::i().inicializar();
 
-		
+
 		//Bucle infinito hasta que se conecte
 		while (Cliente::i().isConected() == false) {
 			Cliente::i().update(Time::Zero);
 		}
 
-		player = Cliente::i().createPlayer();
 		
-		//enviamos los paquetes del vida al servidor para que los cree
-		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
-		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
-			TId tID;
-			tID.id = (*it)->getID();
-			Cliente::i().dispatchMessage(tID, NUEVA_VIDA);
-		}
-			
-		//enviamos los paquetes de armas al servidor para que los cree
 
-		std::list<Entity*>weapon = EntityManager::i().getWeapons();
-		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
-			TId tID2;
-			tID2.id = (*it)->getID();
-			Cliente::i().dispatchMessage(tID2, NUEVA_VIDA);
-		}
-	}
+		
+
+
+	}*/
 
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
 
 	//Añadimos observer al cliente y ingameHUD
-	Cliente::i().addObserver(&partida);
+	//Cliente::i().addObserver(&partida);
 
 	//Añadimos observer al player
-	player->addObserver(&partida);	
+	//player->addObserver(&partida);	
 
 }
 
 bool Game::processEvents()
 {
-		
+
 	if (!debugMenu.debugInput) {
 		EntityManager::i().getEntity(PLAYER)->handleInput();
 	}
@@ -231,16 +228,19 @@ bool Game::processEvents()
 
 		GraphicEngine::i().toggleCamera();
 
-	}else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+	}
+	else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
 
-	}else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
+	}
+	else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(true);
-		partida.muestraTabla();
+		//partida.muestraTabla();
 
-	} else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
@@ -251,11 +251,13 @@ bool Game::processEvents()
 		//TODO llevarlo al otro sitio
 		//debugMenu.mapa->setVisible(debugMenu.debugInput);
 
-	} else if (MastEventReceiver::i().leftMouseDown()) {
+	}
+	else if (MastEventReceiver::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();
 
-	} else if (MastEventReceiver::i().leftMouseUp()) {
+	}
+	else if (MastEventReceiver::i().leftMouseUp()) {
 
 		debugMenu.injectLeftMouseButtonUp();
 
@@ -271,7 +273,7 @@ void Game::update(Time elapsedTime)
 	EntityManager::i().cleanDeleteQueue();
 
 	EntityManager::i().update(elapsedTime);
-	
+
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
@@ -280,7 +282,7 @@ void Game::update(Time elapsedTime)
 
 	GUIManager::i().updateAllGuis();
 
-	
+
 }
 
 void Game::render(float interpolation, Time elapsedTime)
@@ -292,7 +294,7 @@ void Game::render(float interpolation, Time elapsedTime)
 
 	//GUI
 	debugMenu.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
-	
+
 
 	//GraphicEngine::i().getGui().update();
 

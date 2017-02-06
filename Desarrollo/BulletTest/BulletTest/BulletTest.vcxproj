@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Observer;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;Observer;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -266,6 +266,7 @@
     <ClInclude Include="States\StateStack.hpp" />
     <ClInclude Include="TriggerSystem\TriggerRecordStruct.h" />
     <ClInclude Include="TriggerSystem\TriggerSystem.h" />
+    <ClInclude Include="World\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Button.cpp" />
@@ -338,6 +339,7 @@
     <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
+    <ClCompile Include="World\World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

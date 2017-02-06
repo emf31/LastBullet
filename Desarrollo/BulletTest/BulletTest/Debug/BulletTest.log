@@ -1,7 +1,218 @@
-﻿  NetworkManager.cpp
+﻿  World.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  GraphicEngine.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Game.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\game.cpp(296): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  main.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Lista.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  LifeComponent.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  NetworkManager.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  NetPlayer.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  NetObject.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Lobby.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Cliente.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  MapLoader.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(134): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(144): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(154): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(164): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+  GunRecoil.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  CameraShake.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(7): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(15): warning C4305: '=': truncamiento de 'double' a 'float'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\camerashake.cpp(21): warning C4305: '=': truncamiento de 'double' a 'float'
+  Camera.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Partida.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  InputHandler.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  InGameHUD.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  DebugMenuGUI.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Weapon.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  RocketLauncher.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Pistola.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\weapons\pistola.cpp(65): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  Asalto.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  WeaponDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  RocketLauncherDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  PistolaDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  AsaltoDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  RocketBulletEnemy.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  RocketBullet.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Player.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(81): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(85): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(89): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+  LifeObject.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  GunBullet.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Granada.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Entity.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Enemy_Bot.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Enemy.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\network\cliente.h(69): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Generando código...
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
