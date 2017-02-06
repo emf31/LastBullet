@@ -5,6 +5,7 @@
 #include <LifeObject.h>
 #include <WeaponDrops/WeaponDrop.h>
 #include <RocketBulletEnemy.h>
+#include <Player.h>
 
 NetPlayer::NetPlayer(Player* player) : m_player(player)
 {

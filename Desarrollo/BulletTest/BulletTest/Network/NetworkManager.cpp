@@ -20,7 +20,7 @@ void NetworkManager::apagar()
 	m_netObjs.clear();
 }
 
-std::shared_ptr<NetObject> NetworkManager::createNetPlayer(Player* player)
+NetPlayerPtr NetworkManager::createNetPlayer(Player* player)
 {
 	NetPlayer* netp = new NetPlayer(player);
 	NetPlayerPtr ptr(netp);

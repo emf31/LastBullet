@@ -23,6 +23,7 @@
 
 #include <TriggerSystem.h>
 #include <Map.h>
+#include <NetworkManager.h>
 
 
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
@@ -62,8 +63,9 @@ void Player::inicializar()
 
 	animation = new Animation;
 
-	/*****************************/
+	/*******************************/
 	/*******INICIALIZAR ARMAS******/
+	/*****************************/
 	asalto = new Asalto();
 	asalto->inicializar();
 	asalto->cargarContenido();
@@ -86,6 +88,12 @@ void Player::inicializar()
 
 	listaWeapons->insertar(pistola);
 	listaWeapons->insertar(rocket);
+
+	/////////////////////////////////////////
+	////////////////////////////////////////
+
+	//Creates object to send and receive packets
+	m_network = NetworkManager::i().createNetPlayer(this);
 }
 
 
@@ -352,9 +360,9 @@ void Player::UpWeapon()
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
-	if (Cliente::i().isConected()) {
-//		Cliente::i().cambioArma(1,m_guid);
-	}
+	/*if (Cliente::i().isConected()) {
+		Cliente::i().cambioArma(1,m_guid);
+	}*/
 }
 
 void Player::DownWeapon()
@@ -367,9 +375,9 @@ void Player::DownWeapon()
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	//TODO aqui controlar que cambia de arma, es decir que no tines solo 1 arma
-	if (Cliente::i().isConected()) {
-//		Cliente::i().cambioArma(2, m_guid);
-	}
+	/*if (Cliente::i().isConected()) {
+		Cliente::i().cambioArma(2, m_guid);
+	}*/
 }
 
 void Player::reload() {
@@ -418,6 +426,16 @@ void Player::setWeapon(int newWeapon) {
 	}
 
 
+}
+
+int Player::getAmmoTotal() {
+
+	if (listaWeapons->valorActual()->getEstadoWeapon() == CARGADA) {
+		return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes();
+	}
+	else {
+		return -1;
+	}
 }
 
 void Player::resetAll() {

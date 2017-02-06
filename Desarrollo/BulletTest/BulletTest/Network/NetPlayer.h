@@ -1,6 +1,8 @@
 #pragma once
 #include <NetObject.h>
-#include <Player.h>
+
+//Forward declaration - prevents circular reference
+class Player;
 
 class NetPlayer : public NetObject{
 public:

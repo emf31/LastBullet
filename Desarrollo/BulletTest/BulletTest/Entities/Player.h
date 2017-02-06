@@ -12,6 +12,7 @@
 #include "../Otros/LifeComponent.h"
 #include <Subject.h>
 #include <Observer.h>
+#include <NetPlayer.h>
 
 class Player : public Entity, public Subject
 {
@@ -19,8 +20,6 @@ public:
 	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
-	
-	
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -59,49 +58,34 @@ public:
 
 	LifeComponent& getLifeComponent() { return life_component; }
 
-	std::string getCurrentWeaponName() {
-		return listaWeapons->valorActual()->getClassName();
-	};
+	std::string getCurrentWeaponName() { return listaWeapons->valorActual()->getClassName(); };
 
-	Weapon* getCurrentWeapon() {
-		return listaWeapons->valorActual();
-	};
+	Weapon* getCurrentWeapon() { return listaWeapons->valorActual(); };
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
-	int getAmmoTotal() { 
-
-		if (listaWeapons->valorActual()->getEstadoWeapon() == CARGADA) {
-			return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes();
-		}
-		else {
-			return -1;
-		}
-	}
+	int getAmmoTotal();
 
 
 
-	btPairCachingGhostObject* getGhostObject() {
-		return p_controller->getGhostObject();
-	}
+	btPairCachingGhostObject* getGhostObject() const{ return p_controller->getGhostObject(); }
 
 	void resetAll();
 
-	KinematicCharacterController* p_controller;
-
 	void updateRelojes();
+
+	
+
+public:
+	KinematicCharacterController* p_controller;
 
 	bool hit;
 	bool sangre;
-
-	bool endGame = false;
-
 	Clock relojSangre, relojHit;
-
 	
 private:
-
-	Asalto* asalto;
+	//shared ptr we can copy this
+	NetPlayerPtr m_network;
 
 	Animation* animation;
 
@@ -111,6 +95,7 @@ private:
 	//LISTA DE ARMAS
 	Lista* listaWeapons;
 
+	Asalto* asalto;
 	Pistola* pistola;
 	RocketLauncher* rocket;
 

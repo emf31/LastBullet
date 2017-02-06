@@ -6,15 +6,15 @@
 #include <Player.h>
 #include <NetPlayer.h>
 
-static const int SERVER_PORT = 65535;
+static const int server_port = 65535;
+
+//Easy access to pointers
+typedef std::shared_ptr<NetPlayer> NetPlayerPtr;
+//typedef std::shared_ptr<NetBot> NetBotPtr;
+typedef std::shared_ptr<NetObject> NetPtr;
 
 class NetworkManager {
-public:
 
-	//Easy access to pointers
-	typedef std::shared_ptr<NetPlayer> NetPlayerPtr;
-	//typedef std::shared_ptr<NetBot> NetBotPtr;
-	typedef std::shared_ptr<NetObject> NetPtr;
 
 public:
 
@@ -28,7 +28,7 @@ public:
 	void apagar();
 	
 	//Creates a pointer of NetPlayer
-	std::shared_ptr<NetObject> createNetPlayer(Player* player);
+	NetPlayerPtr createNetPlayer(Player* player);
 
 	//Call handle packets for every netobject
 	void updateNetwork(Time elapsedTime);
