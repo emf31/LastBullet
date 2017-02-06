@@ -51,6 +51,8 @@ public:
 	void createPathToPosition(Vec2f vec);
 	void createPathToItem(const std::string& tipo);
 
+	void elegirWeapon();
+
 private:
 
 	bool siguiendo = false;

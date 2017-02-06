@@ -28,6 +28,7 @@ public:
 
 	virtual void shoot();
 
+	virtual double getDesirability(double distToTarget);
 
 	virtual void resetAmmoTotal() {
 		numCargadores = numCargadoresSniper;

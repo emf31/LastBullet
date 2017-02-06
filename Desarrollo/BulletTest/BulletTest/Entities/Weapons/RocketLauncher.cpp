@@ -128,3 +128,9 @@ void RocketLauncher::shoot() {
 		estadoWeapon = DESCARGADA;
 	}
 }
+
+double RocketLauncher::getDesirability(double dist) {
+
+	return 5;
+
+}

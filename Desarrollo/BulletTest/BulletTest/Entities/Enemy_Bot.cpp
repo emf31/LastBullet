@@ -39,7 +39,10 @@ void Enemy_Bot::inicializar()
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(asalto);
+	listaWeapons->insertar(sniper);
+	sniper->setEquipada(true);
 
+	/*
 	FuzzyModule fm;
 
 	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
@@ -72,6 +75,15 @@ void Enemy_Bot::inicializar()
 
 	std::cout << "Desirability: "<< calcularDesirability(fm, 25, 0); 
 	std::cout << "\n";
+
+	*/
+	std::cout << "El arma actual es: " << listaWeapons->valorActual()->getClassName();
+	std::cout << "\n";
+	elegirWeapon();
+	std::cout << "He elegido arma \n";
+	std::cout << "El arma actual es: " << listaWeapons->valorActual()->getClassName();
+	std::cout << "\n";
+
 }
 
 double Enemy_Bot::calcularDesirability(FuzzyModule& fm, double dist, double ammmo) {
@@ -80,6 +92,15 @@ double Enemy_Bot::calcularDesirability(FuzzyModule& fm, double dist, double ammm
 	fm.Fuzzify("AmmoStatus", ammmo);
 
 	return fm.DeFuzzify("Desirability", FuzzyModule::max_av);
+
+}
+
+void Enemy_Bot::elegirWeapon() {
+
+	double DistToTarget = 400;  //TODO: Hay que hacer un metodo que calcule la distancia entre el Bot y el Player
+
+	listaWeapons->armaMasDeseada(DistToTarget);
+
 
 }
 

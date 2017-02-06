@@ -44,11 +44,14 @@ void Lista::Mostrar() {
 	printf("\n");
 }
 
-bool Lista::Buscar(std::string arma) {
+bool Lista::Equipar(std::string arma) {
 	pnodo nodo = actual;
 
 	do {
 		if (arma == nodo->valor->getClassName()) {
+			actual->valor->setEquipada(false);
+			actual = nodo;
+			actual->valor->setEquipada(true);
 			return true;
 		}
 		nodo = nodo->siguiente;
@@ -96,3 +99,24 @@ void Lista::Vaciar() {
 
 }
 
+void Lista::armaMasDeseada(double dist) {
+
+	double mejorDeseabilidad = 0;
+	double deseabilidadActual;
+
+	pnodo nodo = actual;
+	std::string nombreMejorArma="";
+
+	do {
+		deseabilidadActual = nodo->valor->getDesirability(dist);
+		if (deseabilidadActual > mejorDeseabilidad) {
+			nombreMejorArma = nodo->valor->getClassName();
+			mejorDeseabilidad = deseabilidadActual;
+		}
+		nodo = nodo->siguiente;
+	} while (nodo != actual);
+
+
+	Equipar(nombreMejorArma);
+
+}

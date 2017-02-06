@@ -164,3 +164,9 @@ void Pistola::shoot() {
 	}
 
 }
+
+double Pistola::getDesirability(double dist) {
+
+	return 1;
+
+}

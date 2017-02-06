@@ -10,6 +10,9 @@
 #include <Util.h>
 #include <Message.h>
 
+#include "FuzzyLogic\FuzzyModule.h"
+
+
 #define CARGADA 0
 #define DESCARGADA 1
 
@@ -53,6 +56,8 @@ public:
 	virtual void resetRecarga() { relojrecarga.restart(); }
 
 	virtual void recargar();
+
+	virtual double getDesirability(double distToTarget)=0;
 
 protected:
 	Time cadencia;
