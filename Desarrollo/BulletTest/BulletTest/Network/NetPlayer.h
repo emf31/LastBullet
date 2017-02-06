@@ -4,7 +4,7 @@
 //Forward declaration - prevents circular reference
 class Player;
 
-class NetPlayer : public NetObject{
+class NetPlayer : public NetObject {
 public:
 	NetPlayer(Player* player);
 	~NetPlayer();

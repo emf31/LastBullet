@@ -159,7 +159,7 @@ void Player::update(Time elapsedTime)
 		mov.rotation = getRenderState()->getRotation();
 		mov.guid = getGuid();
 
-		m_network->dispatchMessage(mov, MOVIMIENTO);
+		//m_network->dispatchMessage(mov, MOVIMIENTO);
 		
 	}
 
