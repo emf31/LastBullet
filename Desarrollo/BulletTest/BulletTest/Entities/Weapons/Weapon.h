@@ -59,8 +59,6 @@ public:
 
 	virtual double getDesirability(double distToTarget)=0;
 
-	virtual void createRules() = 0;
-
 protected:
 	Time cadencia;
 	Clock relojCadencia;

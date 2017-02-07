@@ -23,7 +23,6 @@ void Enemy_Bot::inicializar()
 	asalto = new Asalto();
 	asalto->inicializar();
 	asalto->cargarContenido();
-	asalto->createRules();
 
 	rocket = new RocketLauncher();
 	rocket->inicializar();
@@ -36,7 +35,6 @@ void Enemy_Bot::inicializar()
 	sniper = new Sniper();
 	sniper->inicializar();
 	sniper->cargarContenido();
-	sniper->createRules();
 
 	listaWeapons = new Lista();
 
