@@ -2,36 +2,46 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
+#include <EventSystem.h>
  
 
-void Partida::onNotify(Event& event)
+Partida::Partida(InGameHUD * hud) : ingame(hud), EventListener()
 {
-	switch (event.event_type)
+}
+
+Partida::~Partida()
+{
+}
+
+void Partida::handleEvent(Event* e)
+{
+	switch (e->event_type)
 	{
 		case E_NUEVO_PLAYER: {
-			PlayerEvent* p_ev = static_cast<PlayerEvent*>(&event);
+			PlayerEvent* p_ev = static_cast<PlayerEvent*>(e);
 			nuevoPlayer(p_ev->m_fila);
-		
+			break;
 		}
-		break;
+
 		case E_AUMENTA_KILL: {
-			KillEvent* k_ev = static_cast<KillEvent*>(&event);
+			KillEvent* k_ev = static_cast<KillEvent*>(e);
 			aumentaKill(k_ev->m_guid);
+			break;
 		}
-		break;
+
 		case E_AUMENTA_MUERTE: {
-			MuerteEvent* m_ev = static_cast<MuerteEvent*>(&event);
+			MuerteEvent* m_ev = static_cast<MuerteEvent*>(e);
 			aumentaMuerte(m_ev->m_guid);
+			break;
 		}
-		break;
+
 		case E_FIN_PARTIDA: {
 			muestraTabla();
 			ingame->muestraFinPartida();
+			break;
 		}
-		break;
 
 	}
-
 }
 
 void Partida::muestraTabla()

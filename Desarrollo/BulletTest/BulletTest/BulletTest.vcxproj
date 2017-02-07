@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;Observer;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -197,6 +197,12 @@
     <ClInclude Include="Entities\Weapons\Pistola.h" />
     <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
     <ClInclude Include="Entities\Weapons\Weapon.h" />
+    <ClInclude Include="EventSystem\EventListener.h" />
+    <ClInclude Include="EventSystem\EventSystem.h" />
+    <ClInclude Include="EventSystem\events\Event.h" />
+    <ClInclude Include="EventSystem\events\KillEvent.h" />
+    <ClInclude Include="EventSystem\events\MuerteEvent.h" />
+    <ClInclude Include="EventSystem\events\PlayerEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph\AStarSearch.h" />
     <ClInclude Include="Graph\GraphEdge.h" />
@@ -243,14 +249,7 @@
     <ClInclude Include="Network\NetObject.h" />
     <ClInclude Include="Network\NetPlayer.h" />
     <ClInclude Include="Network\NetworkManager.h" />
-    <ClInclude Include="Observer\events\Event.h" />
-    <ClInclude Include="Observer\events\KillEvent.h" />
-    <ClInclude Include="Observer\events\MuerteEvent.h" />
-    <ClInclude Include="Observer\events\PlayerEvent.h" />
-    <ClInclude Include="Observer\Observer.h" />
-    <ClInclude Include="Observer\Subject.h" />
     <ClInclude Include="Otros\Clock.hpp" />
-    <ClInclude Include="Otros\EnumParser.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
@@ -291,6 +290,8 @@
     <ClCompile Include="Entities\Weapons\Pistola.cpp" />
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
+    <ClCompile Include="EventSystem\EventListener.cpp" />
+    <ClCompile Include="EventSystem\EventSystem.cpp" />
     <ClCompile Include="Graph\AStarSearch.cpp" />
     <ClCompile Include="Graph\GraphEdge.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />

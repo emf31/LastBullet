@@ -7,12 +7,7 @@ NetObject::NetObject()
 
 NetObject::~NetObject()
 {
-	connected = false;
 
-	//shut down the client
-	peer->Shutdown(300);
-	//and end the connection
-	RakNet::RakPeerInterface::DestroyInstance(peer);
 }
 
 void NetObject::inicializar()
@@ -59,7 +54,7 @@ void NetObject::inicializar()
 	conectar(str, server_port);
 }
 
-void NetObject::conectar(const std::string & ip, int port)
+void NetObject::conectar(const std::string& ip, int port)
 {
 	peer = RakNet::RakPeerInterface::GetInstance();
 	peer->AllowConnectionResponseIPMigration(false);
@@ -73,8 +68,13 @@ void NetObject::apagar()
 {
 	connected = false;
 
+	
+	m_servers.clear();
+
+
 	//shut down the client
 	peer->Shutdown(300);
+
 	//and end the connection
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 

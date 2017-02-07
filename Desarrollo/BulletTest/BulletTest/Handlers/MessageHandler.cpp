@@ -4,12 +4,9 @@
 #include <EntityManager.h>
 void MessageHandler::update()
 {
-	//std::cout << m_messages.size() << std::endl;
 	//Vamos enviando todos los mensajes
-	//m.lock();
 	while (!m_messages.empty()) {
-		/*btCollisionObjectArray arr = PhysicsEngine::i().m_world->getCollisionObjectArray();
-		std::unordered_map<int, Entity*> map = EntityManager::i().m_entities;*/
+
 		Message message;
 		message = m_messages.dequeue();
 
@@ -21,7 +18,6 @@ void MessageHandler::update()
 		
 		
 	}
-	//m.unlock();
 }
 
 void MessageHandler::sendMessage(const Message & message)

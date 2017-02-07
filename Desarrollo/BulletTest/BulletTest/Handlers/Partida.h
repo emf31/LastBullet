@@ -6,17 +6,18 @@
 #include <RakPeerInterface.h>
 #include <MessageIdentifiers.h>
 #include <RakNetTypes.h>  // MessageID
-#include <Observer.h>
 
 #include <InGameHUD.h>
 
-class Partida : public Observer {
+#include <EventListener.h>
+
+class Partida : public EventListener {
 public:
 
-	Partida(InGameHUD* hud) : ingame(hud) {  }
-	~Partida(){ }
+	Partida(InGameHUD* hud);
+	~Partida();
 
-	virtual void onNotify(Event& event) override;
+	virtual void handleEvent(Event* e) override;
 
 
 	void muestraTabla();

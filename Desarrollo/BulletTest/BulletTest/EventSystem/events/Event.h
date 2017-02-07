@@ -1,5 +1,7 @@
 #pragma once
 
+#include <EventListener.h>
+
 enum EventType {
 	E_NUEVO_PLAYER = 0,
 	E_AUMENTA_MUERTE = 1,
@@ -13,6 +15,8 @@ class Event
 public:
 	Event() { }
 	virtual ~Event() { }
+
 	EventType event_type;
 
+	EventListener* sentBy;
 };

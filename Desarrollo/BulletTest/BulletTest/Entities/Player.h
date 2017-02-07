@@ -10,13 +10,11 @@
 #include <vector>
 #include "../Otros/Lista.h"
 #include "../Otros/LifeComponent.h"
-#include <Subject.h>
-#include <Observer.h>
 
 
 class NetPlayer;
 
-class Player : public Entity, public Subject
+class Player : public Entity
 {
 public:
 	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);

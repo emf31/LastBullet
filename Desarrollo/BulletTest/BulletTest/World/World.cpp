@@ -12,7 +12,7 @@ World::~World()
 {
 }
 
-//Call this when the game starts
+
 void World::inicializar()
 {
 	

@@ -3,7 +3,7 @@
 
 void NetworkManager::inicializar(const std::string& address)
 {
-	serverIP = address;
+	//serverIP = address;
 }
 
 /*bool NetworkManager::removeNetBotObject(NetPtr netobj)

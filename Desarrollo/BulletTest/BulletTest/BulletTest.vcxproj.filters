@@ -212,6 +212,12 @@
     <ClCompile Include="World\World.cpp">
       <Filter>Headers\World</Filter>
     </ClCompile>
+    <ClCompile Include="EventSystem\EventListener.cpp">
+      <Filter>Headers\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem\EventSystem.cpp">
+      <Filter>Headers\EventSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -464,27 +470,6 @@
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
     <ClInclude Include="Handlers\Partida.h" />
-    <ClInclude Include="Observer\Subject.h">
-      <Filter>Headers\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer\Observer.h">
-      <Filter>Headers\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer\events\PlayerEvent.h">
-      <Filter>Headers\Observer\events</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer\events\MuerteEvent.h">
-      <Filter>Headers\Observer\events</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer\events\KillEvent.h">
-      <Filter>Headers\Observer\events</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer\events\Event.h">
-      <Filter>Headers\Observer\events</Filter>
-    </ClInclude>
-    <ClInclude Include="Otros\EnumParser.h">
-      <Filter>Headers\Observer\events</Filter>
-    </ClInclude>
     <ClInclude Include="MastEventReceiver.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -526,6 +511,24 @@
     </ClInclude>
     <ClInclude Include="World\World.h">
       <Filter>Headers\World</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\EventListener.h">
+      <Filter>Headers\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\EventSystem.h">
+      <Filter>Headers\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\events\Event.h">
+      <Filter>Headers\EventSystem\events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\events\KillEvent.h">
+      <Filter>Headers\EventSystem\events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\events\MuerteEvent.h">
+      <Filter>Headers\EventSystem\events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\events\PlayerEvent.h">
+      <Filter>Headers\EventSystem\events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -640,14 +643,14 @@
     <Filter Include="Source Code\Observer">
       <UniqueIdentifier>{f0708a04-c0ff-449b-9f44-a0f353a2a187}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Observer">
-      <UniqueIdentifier>{c9ad2c0c-bed5-4c40-b3fe-0db829235990}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Observer\events">
-      <UniqueIdentifier>{f2e09faa-e587-423a-b8b2-29f536ed3723}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\World">
       <UniqueIdentifier>{022800d7-819b-4b2e-966e-475edb5fa585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\EventSystem">
+      <UniqueIdentifier>{c9ad2c0c-bed5-4c40-b3fe-0db829235990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\EventSystem\events">
+      <UniqueIdentifier>{f2e09faa-e587-423a-b8b2-29f536ed3723}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

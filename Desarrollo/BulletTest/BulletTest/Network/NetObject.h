@@ -5,8 +5,8 @@
 #include <RakNetTypes.h>
 #include <Time.hpp>
 #include <Player.h>
-#include <Subject.h>
 #include <RakSleep.h>
+#include <EventListener.h>
 
 
 class NetObject {
@@ -21,11 +21,14 @@ public:
 
 	virtual void handlePackets(Time elapsedTime) = 0;
 
+
 	virtual void apagar();
+
 
 	bool isConnected() const { return connected; }
 	const std::string& getServerIp() { return servidorAdr.ToString(); }
 	const RakNet::RakNetGUID& getServerGUID() const { return servidor; }
+	const RakNet::RakNetGUID& getMyGUID() const { return peer->GetMyGUID(); }
 
 
 protected:

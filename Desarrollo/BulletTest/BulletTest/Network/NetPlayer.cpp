@@ -6,6 +6,7 @@
 #include <WeaponDrops/WeaponDrop.h>
 #include <RocketBulletEnemy.h>
 #include <Player.h>
+#include <EventSystem.h>
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
@@ -13,6 +14,7 @@ NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 
 NetPlayer::~NetPlayer()
 {
+
 }
 
 void NetPlayer::handlePackets(Time elapsedTime)
@@ -48,6 +50,14 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			//Esta variable indica que el servidor a aceptado la conexion
 			connected = true;
+
+			TPlayer nuevoplayer;
+			nuevoplayer.guid = peer->GetMyGUID();
+			nuevoplayer.name = m_player->getName();
+
+			m_player->setGUID(peer->GetMyGUID());
+
+			dispatchMessage(nuevoplayer, NUEVO_PLAYER);
 
 			break;
 		}
@@ -320,31 +330,21 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		case FIN_PARTIDA:
 		{
 
-			/*RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
 
-			Event ev;
-			ev.event_type = E_FIN_PARTIDA;
+			Event* ev = new Event();
+			ev->event_type = E_FIN_PARTIDA;
 
 			//Notificamos al HUD que es el fin de la partida
-			notify(ev);*/
+			EventSystem::i().dispatchNow(ev);
 
 
 		}
 		break;
 
-		case ID_UNCONNECTED_PONG:
+		/*case SYNC:
 		{
-			RakNet::TimeMS time;
-			RakNet::BitStream bsIn(packet->data, packet->length, false);
-			bsIn.IgnoreBytes(1);
-			bsIn.Read(time);
-			//printf("Got pong from %s with time %i\n", packet->systemAddress.ToString(), RakNet::GetTimeMS() - time);
-			break;
-		}
-
-		case SYNC:
-		{
-			/*
+			
 			//Sync
 			TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
 			//std::cout << windowsPacketOpen << std::endl;
@@ -418,10 +418,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			{
 			break;
 			}
-			}*/
+			}
 			break;
-		}
-		case PING:
+		}*/
+		/*case PING:
 		{
 			//Ping
 
@@ -430,7 +430,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor + 1;
 
 			break;
-		}
+		}*/
 		default:
 			printf("Un mensaje con identificador %i ha llegado.\n", mPacketIdentifier);
 			break;
@@ -454,7 +454,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 	timeFor.restart();*/
 }
 
-void NetPlayer::apagar()
+/*void NetPlayer::apagar()
 {
 	if (isConnected()) {
 		//First call shutdown from base class
@@ -464,3 +464,4 @@ void NetPlayer::apagar()
 	}
 	
 }
+*/

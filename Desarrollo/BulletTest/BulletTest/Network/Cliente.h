@@ -7,10 +7,10 @@
 #include <Time.hpp>
 #include <Player.h>
 #include <Lobby.h>
-#include <Subject.h>
 
 
-class Cliente : public Subject	//Para comunicarse con la partida
+
+class Cliente
 {
 public:
 	

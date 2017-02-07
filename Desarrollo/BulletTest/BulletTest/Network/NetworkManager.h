@@ -51,7 +51,7 @@ private:
 
 	//std::list<NetObject> m_netObjs;
 
-	std::string serverIP;
+	//std::string serverIP;
 
 	NetworkManager() { }
 };

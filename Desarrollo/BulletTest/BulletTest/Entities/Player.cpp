@@ -27,8 +27,7 @@
 #include <NetworkManager.h>
 
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) ,
-	life_component(this)
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) , life_component(this)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
@@ -39,12 +38,6 @@ Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, 
 	m_network.reset();
 	m_network = NetworkManager::i().createNetPlayer(this);
 	m_network->inicializar();
-
-	TPlayer nuevoplayer;
-	nuevoplayer.guid = getGuid();
-	nuevoplayer.name = getName();
-
-	m_network->dispatchMessage(nuevoplayer, NUEVO_PLAYER);
 
 }
 
@@ -158,8 +151,8 @@ void Player::update(Time elapsedTime)
 		mov.position = getRenderState()->getPosition();
 		mov.rotation = getRenderState()->getRotation();
 		mov.guid = getGuid();
-
-		//m_network->dispatchMessage(mov, MOVIMIENTO);
+	
+		m_network->dispatchMessage(mov, MOVIMIENTO);
 		
 	}
 

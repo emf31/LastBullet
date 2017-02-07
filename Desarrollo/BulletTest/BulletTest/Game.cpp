@@ -143,6 +143,8 @@ void Game::inicializar()
 
 	
 
+	PhysicsEngine::i().inicializar();
+	GraphicEngine::i().inicializar();
 
 
 	std::string str;
@@ -152,8 +154,6 @@ void Game::inicializar()
 
 	Player *player = new Player(str);
 
-	PhysicsEngine::i().inicializar();
-	GraphicEngine::i().inicializar();
 
 	
 
@@ -203,11 +203,7 @@ void Game::inicializar()
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
 
-	//Añadimos observer al cliente y ingameHUD
-	//Cliente::i().addObserver(&partida);
 
-	//Añadimos observer al player
-	//player->addObserver(&partida);	
 
 }
 

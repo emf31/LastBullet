@@ -91,8 +91,13 @@ int main() {
 			break;
 			case ID_DISCONNECTION_NOTIFICATION:
 			{
+
+				Entity* ent = EntityManager::i().getRaknetEntity(packet->guid);
+
 				printf("Un cliente se ha desconectado.\n");
-				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
+
+				std::cout << "su nombre es:" << ent->getName() << std::endl;
+
 				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
 				EntityManager::i().enviaDesconexion(packet->guid, peer);
 				//lo borramos de los clientes actuales del servidor
@@ -133,8 +138,11 @@ int main() {
 
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
 				EntityManager::i().enviaNuevaPos(mov, peer);
-				EntityManager::i().getRaknetEntity(mov.guid)->setPosition(mov.position);
+				Entity* ent = EntityManager::i().getRaknetEntity(mov.guid);
 
+				if (ent != NULL) {
+					ent->setPosition(mov.position);
+				}
 				
 
 			}
