@@ -351,6 +351,7 @@ void Player::move_left()
 }
 
 void Player::bindWeapon() {
+
 	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
 		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootAsalto()));
 	}

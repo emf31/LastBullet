@@ -23,23 +23,29 @@ void Enemy_Bot::inicializar()
 	asalto = new Asalto();
 	asalto->inicializar();
 	asalto->cargarContenido();
+	asalto->CalcularRules();
 
 	rocket = new RocketLauncher();
 	rocket->inicializar();
 	rocket->cargarContenido();
+	rocket->CalcularRules();
 
 	pistola = new Pistola();
 	pistola->inicializar();
 	pistola->cargarContenido();
+	pistola->CalcularRules();
 
 	sniper = new Sniper();
 	sniper->inicializar();
 	sniper->cargarContenido();
+	sniper->CalcularRules();
 
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(asalto);
 	listaWeapons->insertar(sniper);
+	listaWeapons->insertar(pistola);
+	listaWeapons->insertar(rocket);
 	sniper->setEquipada(true);
 
 	/*
@@ -97,7 +103,7 @@ double Enemy_Bot::calcularDesirability(FuzzyModule& fm, double dist, double ammm
 
 void Enemy_Bot::elegirWeapon() {
 
-	double DistToTarget = 400;  //TODO: Hay que hacer un metodo que calcule la distancia entre el Bot y el Player
+	double DistToTarget = 100;  //TODO: Hay que hacer un metodo que calcule la distancia entre el Bot y el Player
 
 	listaWeapons->armaMasDeseada(DistToTarget);
 
