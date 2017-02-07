@@ -170,3 +170,7 @@ double Pistola::getDesirability(double dist) {
 	return 1;
 
 }
+
+void Pistola::createRules() {
+
+}

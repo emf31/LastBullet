@@ -134,3 +134,7 @@ double RocketLauncher::getDesirability(double dist) {
 	return 5;
 
 }
+
+void RocketLauncher::createRules() {
+
+}

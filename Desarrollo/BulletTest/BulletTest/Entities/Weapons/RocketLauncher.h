@@ -29,7 +29,9 @@ public:
 
 	virtual void shoot();
 
-	virtual double getDesirability(double distToTarget);
+	virtual double getDesirability(double dist);
+
+	virtual void createRules();
 
 
 	virtual void resetAmmoTotal() {
