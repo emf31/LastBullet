@@ -18,7 +18,6 @@
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h>
-#include <Cliente.h>
 #include <TriggerSystem.h>
 #include <MessageHandler.h>
 
@@ -100,9 +99,6 @@ void Game::run()
 
 			time_client_curr = clock.getElapsedTime();
 
-			/*if (Cliente::i().isConected()) {
-				Cliente::i().update(time_client_curr - time_client_prev);
-			}*/
 			NetworkManager::i().updateNetwork(time_client_curr - time_client_prev);
 
 			time_client_prev = time_client_curr;
@@ -123,10 +119,6 @@ void Game::run()
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
-
-	/*if (Cliente::i().isConected()) {
-		Cliente::i().apagar();
-	}*/
 
 	NetworkManager::i().apagar();
 

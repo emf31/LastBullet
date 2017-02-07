@@ -1,6 +1,5 @@
 #include "RocketLauncherDrop.h"
-#include <Cliente.h>
-
+#include <NetworkManager.h>
 
 RocketLauncherDrop::RocketLauncherDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
@@ -48,12 +47,12 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 			if (estado == DISPONIBLE) {
 				estado = USADO;
 				clockRespawnWeapon.restart();
-				/*if (Cliente::i().isConected()) {
-					TId tID;
-					tID.id = m_id;
 
-					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
-				}*/
+				TId tID;
+				tID.id = m_id;
+
+				NetworkManager::i().dispatchMessage(tID, ARMA_COGIDA);
+
 				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
 				m_nodo->setVisible(false);
 

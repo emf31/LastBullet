@@ -4,7 +4,7 @@
 #include <GUI.h>
 #include <Enemy_Bot.h>
 #include <EntityManager.h>
-#include <Cliente.h>
+
 class DebugMenuGUI : public Motor::GUI {
 public:
 	virtual void update() override;

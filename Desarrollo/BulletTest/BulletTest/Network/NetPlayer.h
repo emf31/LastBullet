@@ -11,7 +11,7 @@ public:
 
 	virtual void handlePackets(Time elapsedTime) override;
 
-	//virtual void apagar();
+	virtual void apagar();
 
 	//Send packet to server using netplayer peer 
 	template<typename T>

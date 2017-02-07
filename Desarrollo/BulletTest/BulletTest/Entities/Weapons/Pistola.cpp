@@ -1,7 +1,7 @@
 #include "Pistola.h"
-#include <Cliente.h>
 #include <Estructuras.h>
 #include "../EntityManager.h"
+#include <NetworkManager.h>
 
 Pistola::Pistola() : Weapon()
 {
@@ -140,18 +140,16 @@ void Pistola::shoot() {
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
-			/*if (Cliente::i().isConected()) {
-				TBala bala;
-				bala.position = cons(start);
-				bala.direction = cons(direccion);
-				bala.finalposition = cons(posicionImpacto);
-				bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
-				bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			TBala p_bala;
+			p_bala.position = cons(start);
+			p_bala.direction = cons(direccion);
+			p_bala.finalposition = cons(posicionImpacto);
+			p_bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
+			p_bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
 
-				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispatchMessage(bala, DISPARAR_BALA);
-				//Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
-			}*/
+			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+			NetworkManager::i().dispatchMessage(p_bala, DISPARAR_BALA);
+			
 
 			relojCadencia.restart();
 		}

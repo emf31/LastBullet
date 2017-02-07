@@ -4,6 +4,7 @@
 #include <PathPlanner.h>
 #include <PathFollow.h>
 #include <Player.h>
+#include <NetworkManager.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
 	life_component(this)
@@ -113,11 +114,11 @@ void Enemy_Bot::handleMessage(const Message & message)
 		if (life_component.isDying() == false) {
 			//TODO si la IA esta en el server habra que cambiar esta funcion
 			//Este float * es una referencia a una variable de clase asi que no hay problema
-			/*TImpactoBala impacto;
+			TImpactoBala impacto;
 			impacto.damage = *static_cast<float*>(message.data);
 			impacto.guid = m_guid;
 
-			Cliente::i().dispatchMessage(impacto, IMPACTO_BALA);*/
+			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);
 
 			life_component.restaVida(*static_cast<float*>(message.data));
 

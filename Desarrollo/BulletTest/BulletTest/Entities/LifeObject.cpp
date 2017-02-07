@@ -1,7 +1,7 @@
 #include "LifeObject.h"
 #include <PhysicsEngine.h>
-#include <Cliente.h>
 #include <TriggerSystem.h>
+#include <NetworkManager.h>
 
 LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
@@ -66,12 +66,10 @@ void LifeObject::handleMessage(const Message & message)
 				estado = USADO;
 				clockRecargaLife.restart();
 
-				/*if (Cliente::i().isConected()) {
-					TId s_id;
-					s_id.id = m_id;
+				TId s_id;
+				s_id.id = m_id;
 
-					Cliente::i().dispatchMessage(s_id, VIDA_COGIDA);
-				}*/
+				NetworkManager::i().dispatchMessage(s_id, VIDA_COGIDA);
 				
 
 				

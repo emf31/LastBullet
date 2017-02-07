@@ -1,7 +1,8 @@
 #include "Granada.h"
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
-#include <Cliente.h>
+#include <EntityManager.h>
+#include <NetworkManager.h>
 
 
 Granada::Granada() : Entity(-1, NULL)
@@ -147,13 +148,11 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		m_rigidBody->applyCentralImpulse(force);
 		
 
-		/*if (Cliente::i().isConected()) {
-			TGranada granada;
-			granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-			granada.origen = m_renderState.getPosition();
-			granada.direction = direccion;
-			Cliente::i().dispatchMessage(granada, LANZAR_GRANADA);
-		}*/
+		TGranada granada;
+		granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+		granada.origen = m_renderState.getPosition();
+		granada.direction = direccion;
+		NetworkManager::i().dispatchMessage(granada, LANZAR_GRANADA);
 		
 		//logica granada servidor: 
 		//un player dispara la granada, se envia un mensaje al server con un TGranada desde ese player, entonces se le pasa la posicion de origen y el vector direccion

@@ -133,9 +133,6 @@
     <ClCompile Include="TriggerSystem\TriggerSystem.cpp">
       <Filter>Source Code\Triggers</Filter>
     </ClCompile>
-    <ClCompile Include="Network\Cliente.cpp">
-      <Filter>Source Code\Network</Filter>
-    </ClCompile>
     <ClCompile Include="Network\Lobby.cpp">
       <Filter>Source Code\Network</Filter>
     </ClCompile>
@@ -170,12 +167,6 @@
       <Filter>Source Code\Mapa</Filter>
     </ClCompile>
     <ClCompile Include="Handlers\Partida.cpp" />
-    <ClCompile Include="Observer\Subject.cpp">
-      <Filter>Source Code\Observer</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer\Observer.cpp">
-      <Filter>Source Code\Observer</Filter>
-    </ClCompile>
     <ClCompile Include="Graph\GraphNode.cpp">
       <Filter>Source Code\Graph</Filter>
     </ClCompile>
@@ -412,9 +403,6 @@
     <ClInclude Include="TriggerSystem\TriggerSystem.h">
       <Filter>Headers\Triggers</Filter>
     </ClInclude>
-    <ClInclude Include="Network\Cliente.h">
-      <Filter>Headers\Network</Filter>
-    </ClInclude>
     <ClInclude Include="Network\Estructuras.h">
       <Filter>Headers\Network</Filter>
     </ClInclude>
@@ -639,9 +627,6 @@
     </Filter>
     <Filter Include="Source Code\Mapa">
       <UniqueIdentifier>{fe557c46-1c73-462b-85de-eb93c9fa13ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Code\Observer">
-      <UniqueIdentifier>{f0708a04-c0ff-449b-9f44-a0f353a2a187}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\World">
       <UniqueIdentifier>{022800d7-819b-4b2e-966e-475edb5fa585}</UniqueIdentifier>

@@ -1,6 +1,6 @@
 #include <Weapons/RocketLauncher.h>
-#include <Cliente.h>
 #include <Estructuras.h>
+#include <NetworkManager.h>
 
 RocketLauncher::RocketLauncher() : Weapon()
 {
@@ -105,17 +105,15 @@ void RocketLauncher::shoot() {
 			RocketBullet* bala = new RocketBullet(cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
-			/*if (Cliente::i().isConected()) {
+		
+			TBala tBala;
+			tBala.position = cons(start);
+			tBala.direction = cons(direccion);
+			tBala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
+			tBala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
 
-				TBala tBala;
-				tBala.position = cons(start);
-				tBala.direction = cons(direccion);
-				tBala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
-				tBala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-
-				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispatchMessage(tBala, DISPARAR_ROCKET);
-			}*/
+			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+			NetworkManager::i().dispatchMessage(tBala, DISPARAR_ROCKET);
 
 			relojCadencia.restart();
 		}

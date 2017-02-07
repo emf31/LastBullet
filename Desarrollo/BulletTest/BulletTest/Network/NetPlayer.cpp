@@ -7,6 +7,10 @@
 #include <RocketBulletEnemy.h>
 #include <Player.h>
 #include <EventSystem.h>
+#include <events/PlayerEvent.h>
+#include <events/MuerteEvent.h>
+#include <events/KillEvent.h>
+
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
@@ -270,24 +274,23 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		break;
 		case ACTUALIZA_TABLA:
 		{
-			/*TFilaTabla nuevaFila = *reinterpret_cast<TFilaTabla*>(packet->data);
+			TFilaTabla nuevaFila = *reinterpret_cast<TFilaTabla*>(packet->data);
 
-			PlayerEvent evento(nuevaFila);
+			PlayerEvent* evento = new PlayerEvent(nuevaFila);
 
-			notify(evento);*/
-
+			EventSystem::i().dispatchNow(evento);
 
 		}
 		break;
 		case AUMENTA_KILL:
 		{
-			/*RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
 
-			KillEvent evento(guidTabla.guid);
+			KillEvent* killEvent = new KillEvent(guidTabla.guid);
 
-			notify(evento);
+			EventSystem::i().dispatchNow(killEvent);
 
-			sendSyncPackage(guidTabla.guid, mPacketIdentifier);*/
+			//sendSyncPackage(guidTabla.guid, mPacketIdentifier);
 
 
 
@@ -297,31 +300,14 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		case AUMENTA_MUERTE:
 		{
 
-			/*RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
 
-			MuerteEvent evento(guidTabla.guid);
+			MuerteEvent* deathEvent = new MuerteEvent(guidTabla.guid);
 
-			notify(evento);
+			EventSystem::i().dispatchNow(deathEvent);
 
-			sendSyncPackage(guidTabla.guid, mPacketIdentifier);*/
+			//sendSyncPackage(guidTabla.guid, mPacketIdentifier);
 
-
-		}
-		break;
-
-
-		case CAMBIO_ARMA:
-		{
-			TCambioArma t_cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
-
-			if (t_cambioArma.cambio == 1) {
-				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
-				MessageHandler::i().sendMessage(msg1);
-			}
-			else {
-				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
-				MessageHandler::i().sendMessage(msg1);
-			}
 
 		}
 		break;
@@ -338,6 +324,22 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//Notificamos al HUD que es el fin de la partida
 			EventSystem::i().dispatchNow(ev);
 
+
+		}
+		break;
+
+		case CAMBIO_ARMA:
+		{
+			TCambioArma t_cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
+
+			if (t_cambioArma.cambio == 1) {
+				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
+				MessageHandler::i().sendMessage(msg1);
+			}
+			else {
+				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
+				MessageHandler::i().sendMessage(msg1);
+			}
 
 		}
 		break;
@@ -454,7 +456,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 	timeFor.restart();*/
 }
 
-/*void NetPlayer::apagar()
+void NetPlayer::apagar()
 {
 	if (isConnected()) {
 		//First call shutdown from base class
@@ -464,4 +466,3 @@ void NetPlayer::handlePackets(Time elapsedTime)
 	}
 	
 }
-*/

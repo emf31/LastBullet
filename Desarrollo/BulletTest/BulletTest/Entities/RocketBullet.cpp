@@ -3,7 +3,7 @@
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
 #include <Util.h>
-#include <Cliente.h>
+#include <NetworkManager.h>
 
 
 #include <list>
@@ -89,51 +89,45 @@ void RocketBullet::handleMessage(const Message & message)
 
 			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 3.f;
 
-			/*if (Cliente::i().isConected()) {
-				if (damage > 0) {
 
-					if (myentity->getID() == PLAYER) {
-						TImpactoRocket* selfImpact = new TImpactoRocket();
-						selfImpact->damage = damage;
-						selfImpact->guidDisparado = myentity->getGuid();
-						selfImpact->guidImpactado = myentity->getGuid();
+			if (damage > 0) {
 
-						Message msg(myentity, "COLISION_ROCKET", selfImpact);
-						MessageHandler::i().sendMessage(msg);
+				if (myentity->getID() == PLAYER) {
+					TImpactoRocket* selfImpact = new TImpactoRocket();
+					selfImpact->damage = damage;
+					selfImpact->guidDisparado = myentity->getGuid();
+					selfImpact->guidImpactado = myentity->getGuid();
 
-					}
-					else {
-						TImpactoRocket* impact = new TImpactoRocket();
-						impact->damage = damage;
-						impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
-						impact->guidImpactado = myentity->getGuid();;
-						Message msg(myentity, "COLISION_ROCKET", impact);
-						MessageHandler::i().sendMessage(msg);
-
-					}
+					Message msg(myentity, "COLISION_ROCKET", selfImpact);
+					MessageHandler::i().sendMessage(msg);
 
 				}
+				else {
+					TImpactoRocket* impact = new TImpactoRocket();
+					impact->damage = damage;
+					impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
+					impact->guidImpactado = myentity->getGuid();;
+					Message msg(myentity, "COLISION_ROCKET", impact);
+					MessageHandler::i().sendMessage(msg);
+
+				}
+
 			}
-			else {
-
-				//TODO cuando haya IA habra que hacer una comprobacion extra
-				static_cast<Player*>(myentity)->getLifeComponent().restaVida(damage);
-
-				//TODO si estas jugando en un solo player aqui tendras que quitarle vida a la IA
-			}*/
-
 		}
 
-		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-		GraphicEngine::i().removeNode(m_nodo);
-
-		EntityManager::i().removeEntity(this);
 	}
 
+	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
+	GraphicEngine::i().removeNode(m_nodo);
 
+	EntityManager::i().removeEntity(this);
 }
+
+
+
+
 
 bool RocketBullet::handleTrigger(TriggerRecordStruct * Trigger)
 {
@@ -178,17 +172,16 @@ float RocketBullet::explosion(Entity* player, const Vec3<float>& posExplosion, f
 		btVector3 force = bt(direccion) * FUERZA;
 
 		//Si es el player aplicamos el impulso al player
-		/*if (player->getClassName() == "Player") {
+		if (player->getClassName() == "Player") {
 			static_cast<Player*>(player)->p_controller->applyImpulse(force);
 		}
-		//Si no es un enemigo y hay que notificar al server de ese impulso
-		else if (Cliente::i().isConected()) {
+		//Si es un enemigo y hay que notificar al server de ese impulso
+		else {
 			TImpulso impulso;
 			impulso.fuerza = cons(force);
 			impulso.guid = player->getGuid();
-			//Cliente::i().dispatchMessage(impulso, APLICAR_IMPULSO);
-			//Cliente::i().aplicarImpulso(Vec3<float>(force.x(), force.y(), force.z()), player->getGuid());
-		}*/
+			NetworkManager::i().dispatchMessage(impulso, APLICAR_IMPULSO);
+		}
 
 	}
 

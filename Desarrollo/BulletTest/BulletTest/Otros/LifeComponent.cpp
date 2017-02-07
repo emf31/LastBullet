@@ -2,6 +2,7 @@
 #include <Player.h>
 #include <Cliente.h>
 #include <Map.h>
+#include <NetworkManager.h>
 
 LifeComponent::LifeComponent(Entity * player) 
 	: m_player(player), m_isDying(false), m_vida(100)
@@ -19,24 +20,22 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		m_isDying = true;
 		relojMuerte.restart();
 
-		/*if (Cliente::i().isConected()) {
 
-			TPlayer nuevoplayer;
-			nuevoplayer.position = m_player->getRenderState()->getPosition();
-			nuevoplayer.guid = m_player->getGuid();
-			nuevoplayer.name = m_player->getName();
-
-
-			Cliente::i().dispatchMessage(nuevoplayer, MUERTE);
+		TPlayer nuevoplayer;
+		nuevoplayer.position = m_player->getRenderState()->getPosition();
+		nuevoplayer.guid = m_player->getGuid();
+		nuevoplayer.name = m_player->getName();
 
 
-			TKill kill;
-			kill.guidKill = guid;
-			kill.guidDeath = m_player->getGuid();
+		NetworkManager::i().dispatchMessage(nuevoplayer, MUERTE);
 
-			Cliente::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+
+		TKill kill;
+		kill.guidKill = guid;
+		kill.guidDeath = m_player->getGuid();
+
+		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
 	
-		}*/
 
 	}
 	

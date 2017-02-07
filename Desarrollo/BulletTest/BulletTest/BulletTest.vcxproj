@@ -243,7 +243,6 @@
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
-    <ClInclude Include="Network\Cliente.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
     <ClInclude Include="Network\NetObject.h" />
@@ -324,13 +323,10 @@
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
-    <ClCompile Include="Network\Cliente.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Network\NetObject.cpp" />
     <ClCompile Include="Network\NetPlayer.cpp" />
     <ClCompile Include="Network\NetworkManager.cpp" />
-    <ClCompile Include="Observer\Observer.cpp" />
-    <ClCompile Include="Observer\Subject.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />

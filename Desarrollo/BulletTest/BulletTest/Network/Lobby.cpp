@@ -1,5 +1,4 @@
 #include "Lobby.h"
-#include "Cliente.h"
 
 //TODO habria que cambiar el cliente para que los enemigos no se creen hasta haber empezado la partida,
 //pero si alguien se conecta a mitad de partida habria que ver como hacerlo

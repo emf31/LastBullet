@@ -1,5 +1,6 @@
 #include "PistolaDrop.h"
-#include <Cliente.h>
+
+#include <NetworkManager.h>
 
 
 PistolaDrop::PistolaDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
@@ -53,12 +54,11 @@ void PistolaDrop::handleMessage(const Message & message)
 				static_cast<Player*>(message.data)->setWeapon(PISTOLA);
 
 				m_nodo->setVisible(false);
-				/*if (Cliente::i().isConected()) {
-					TId tID;
-					tID.id = m_id;
-					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
-				}*/
-				
+
+				TId tID;
+				tID.id = m_id;
+				NetworkManager::i().dispatchMessage(tID, ARMA_COGIDA);
+
 
 			}
 		}

@@ -3,9 +3,9 @@
 #include <PhysicsEngine.h>
 #include <GraphicEngine.h>
 #include <Estructuras.h>
-#include <Cliente.h>
 #include <EntityManager.h>
 #include <iostream>
+#include <NetworkManager.h>
 
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
@@ -139,11 +139,11 @@ void Enemy::handleMessage(const Message & message)
 	if (message.mensaje == "COLISION_BALA") {
 		if (!m_isDying) {
 			//Este float * es una referencia a una variable de clase asi que no hay problema
-			/*TImpactoBala impacto;
+			TImpactoBala impacto;
 			impacto.damage = *static_cast<float*>(message.data);
 			impacto.guid = m_guid;
 
-			Cliente::i().dispatchMessage(impacto, IMPACTO_BALA);*/
+			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);
 
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		}
@@ -158,9 +158,13 @@ void Enemy::handleMessage(const Message & message)
 
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
-		/*Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
-		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();*/
+
+		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+
+		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+
 		delete message.data;
+
 	}
 }
 

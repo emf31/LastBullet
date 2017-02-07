@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <Cliente.h>
 #include <PhysicsEngine.h>
 #include <GraphicEngine.h>
 #include "../MastEventReceiver.hpp"
@@ -212,7 +211,7 @@ void Player::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION") {
 		
 	}else if (message.mensaje == "COLISION_ROCKET") {
-		//Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		delete message.data;
 	}
 

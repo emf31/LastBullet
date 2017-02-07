@@ -1,7 +1,7 @@
 #include "Asalto.h"
-#include <Cliente.h>
 #include <Estructuras.h>
 #include <Util.h>
+#include <NetworkManager.h>
 
 
 Asalto::Asalto() : Weapon()
@@ -155,18 +155,16 @@ void Asalto::shoot()
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
-			/*if (Cliente::i().isConected()) {
-				TBala bala;
-				bala.position = cons(start);
-				bala.direction = cons(direccion);
-				bala.finalposition = cons(posicionImpacto);
-				bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
-				bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			TBala t_bala;
+			t_bala.position = cons(start);
+			t_bala.direction = cons(direccion);
+			t_bala.finalposition = cons(posicionImpacto);
+			t_bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
+			t_bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
 
-				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispatchMessage(bala, DISPARAR_BALA);
-				//Cliente::i().dispararBala();
-			}*/
+			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+			NetworkManager::i().dispatchMessage(t_bala, DISPARAR_BALA);
+
 
 			relojCadencia.restart();
 
