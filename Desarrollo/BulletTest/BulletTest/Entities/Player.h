@@ -74,11 +74,11 @@ public:
 	};
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
-	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
+	int getCargadorActual() { return listaWeapons->valorActual()->getCapacidadCargador(); }
 	int getAmmoTotal() { 
 
 		if (listaWeapons->valorActual()->getEstadoWeapon() == CARGADA) {
-			return listaWeapons->valorActual()->getAmmoTotal()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes();
+			return listaWeapons->valorActual()->getNumCargadores()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes();
 		}
 		else {
 			return -1;

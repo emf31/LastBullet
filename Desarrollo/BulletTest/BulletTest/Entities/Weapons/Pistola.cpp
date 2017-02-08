@@ -164,7 +164,7 @@ void Pistola::shoot() {
 	}
 
 }
-
+/*
 double Pistola::getDesirability(double dist) {
 
 	fm.Fuzzify("DistToTarget", dist);
@@ -190,4 +190,4 @@ void Pistola::CalcularRules() {
 	fm.AddRule(FzAND(Target_Far, Ammo_Okay), Undesirable);
 	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Undesirable);
 
-}
+}*/

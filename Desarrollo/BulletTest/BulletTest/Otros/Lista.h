@@ -18,10 +18,11 @@ public:
 	void Siguiente();
 	void Anterior();
 	bool Actual() { return actual != NULL; }
+	bool Buscar(std::string str);
 	Weapon* valorActual() { return actual->valor; }
 	void Vaciar();
 
-	void armaMasDeseada(double dist);
+	//void armaMasDeseada(double dist);
 
 private:
 	pnodo actual;

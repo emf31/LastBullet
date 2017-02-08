@@ -10,8 +10,6 @@
 #include <Util.h>
 #include <Message.h>
 
-#include "FuzzyLogic\FuzzyModule.h"
-
 
 #define CARGADA 0
 #define DESCARGADA 1
@@ -46,9 +44,12 @@ public:
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 
 	virtual int getAmmo() { return capacidadAmmo - disparos; }
-	virtual int getCargadorWeapon() { return capacidadAmmo; }
-	virtual int getAmmoTotal() { return numCargadores; }
+	virtual int getCapacidadCargador() { return capacidadAmmo; }
+	virtual int getNumCargadores() { return numCargadores; }
 	virtual int getBalasRestantes() { return disparosRestantes; }
+
+	virtual int getMunicionTotal() { return capacidadAmmo*numCargadores + disparosRestantes; }
+
 
 	virtual void resetAmmoTotal() = 0;
 
@@ -57,9 +58,6 @@ public:
 
 	virtual void recargar();
 
-	virtual double getDesirability(double distToTarget)=0;
-
-	virtual void CalcularRules()=0;
 
 protected:
 	Time cadencia;

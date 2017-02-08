@@ -29,9 +29,7 @@ public:
 
 	virtual void shoot();
 
-	virtual double getDesirability(double distToTarget);
 
-	virtual void CalcularRules();
 
 	virtual void resetAmmoTotal() {
 		numCargadores = numCargadoresRocket;
@@ -39,6 +37,7 @@ public:
 private:
 	btVector3 SIZE_OF_WORLD;
 
+	/*
 	FuzzyModule fm;
 
 	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
@@ -55,6 +54,6 @@ private:
 
 	FzSet Ammo_Low = AmmoStatus.AddLeftShoulderSet("Ammo_Low", 0, 0, 10);
 	FzSet Ammo_Okay = AmmoStatus.AddTriangularSet("Ammo_Okay", 0, 10, 30);
-	FzSet Ammo_Loads = AmmoStatus.AddRightShoulderSet("Ammo_Loads", 10, 30, 300);
+	FzSet Ammo_Loads = AmmoStatus.AddRightShoulderSet("Ammo_Loads", 10, 30, 300);*/
 };
 

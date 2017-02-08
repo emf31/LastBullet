@@ -178,7 +178,7 @@ void Asalto::shoot()
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
-}
+}/*
 
 double Asalto::getDesirability(double dist) {
 
@@ -207,3 +207,4 @@ void Asalto::CalcularRules() {
 	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Desirable);
 
 }
+*/

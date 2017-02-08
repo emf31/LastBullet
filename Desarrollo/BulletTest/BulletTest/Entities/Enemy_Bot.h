@@ -53,6 +53,8 @@ public:
 
 	void elegirWeapon();
 
+	void crearFuzzyRules();
+
 private:
 
 	bool siguiendo = false;
@@ -60,8 +62,6 @@ private:
 	float radius;
 	float height;
 	float mass;
-
-	double calcularDesirability(FuzzyModule& fm, double dist, double ammo);
 
 	Animation animation;
 
@@ -100,4 +100,49 @@ private:
 	LifeComponent life_component;
 
 	friend class PathPlanner;
+
+
+
+
+	//FuzzyLogic
+
+
+	FuzzyModule fm;
+
+	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
+
+	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);
+	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25, 150, 300);
+	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 150, 300, 500);
+
+
+
+	//DesirabilityAsalto
+
+	FuzzyVariable& DesirabilityAsalto = fm.CreateFLV("DesirabilityAsalto");
+	FuzzyVariable& AmmoStatusAsalto = fm.CreateFLV("AmmoStatusAsalto");
+
+
+	FzSet UndesirableAsalto = DesirabilityAsalto.AddLeftShoulderSet("UndesirableAsalto", 0, 25, 50);
+	FzSet DesirableAsalto = DesirabilityAsalto.AddTriangularSet("DesirableAsalto", 25, 50, 75);
+	FzSet VeryDesirableAsalto = DesirabilityAsalto.AddRightShoulderSet("VeryDesirableAsalto", 50, 75, 100);
+
+	FzSet Ammo_LowAsalto = AmmoStatusAsalto.AddLeftShoulderSet("Ammo_LowAsalto", 0, 0, 10);
+	FzSet Ammo_OkayAsalto = AmmoStatusAsalto.AddTriangularSet("Ammo_OkayAsalto", 0, 30, 60);
+	FzSet Ammo_LoadsAsalto = AmmoStatusAsalto.AddRightShoulderSet("Ammo_LoadsAsalto", 30, 60, 200);
+
+	//DesirabilitySniper
+
+	FuzzyVariable& DesirabilitySniper = fm.CreateFLV("DesirabilitySniper");
+	FuzzyVariable& AmmoStatusSniper = fm.CreateFLV("AmmoStatusSniper");
+
+	FzSet UndesirableSniper = DesirabilitySniper.AddLeftShoulderSet("UndesirableSniper", 0, 25, 50);
+	FzSet DesirableSniper = DesirabilitySniper.AddTriangularSet("DesirableSniper", 25, 50, 75);
+	FzSet VeryDesirableSniper = DesirabilitySniper.AddRightShoulderSet("VeryDesirableSniper", 50, 75, 100);
+
+	FzSet Ammo_LowSniper = AmmoStatusSniper.AddLeftShoulderSet("Ammo_LowSniper", 0, 0, 5);
+	FzSet Ammo_OkaySniper = AmmoStatusSniper.AddTriangularSet("Ammo_OkaySniper", 0, 5, 10);
+	FzSet Ammo_LoadsSniper = AmmoStatusSniper.AddRightShoulderSet("Ammo_LoadsSniper", 5, 10, 15);
+
+
 };

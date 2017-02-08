@@ -99,6 +99,22 @@ void Lista::Vaciar() {
 
 }
 
+bool Lista::Buscar(std::string str) {
+
+	pnodo nodo = actual;
+
+	do {
+		if (nodo->valor->getClassName() == str)
+			return true;
+		nodo = nodo->siguiente;
+	} while (nodo != actual);
+
+	return false;
+
+
+}
+
+/*
 void Lista::armaMasDeseada(double dist) {
 
 	double mejorDeseabilidad = 0;
@@ -119,4 +135,4 @@ void Lista::armaMasDeseada(double dist) {
 
 	Equipar(nombreMejorArma);
 
-}
+}*/

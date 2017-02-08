@@ -129,7 +129,7 @@ void RocketLauncher::shoot() {
 		estadoWeapon = DESCARGADA;
 	}
 }
-
+/*
 double RocketLauncher::getDesirability(double dist) {
 
 	fm.Fuzzify("DistToTarget", dist);
@@ -158,4 +158,4 @@ void RocketLauncher::CalcularRules() {
 	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Undesirable);
 
 
-}
+}*/

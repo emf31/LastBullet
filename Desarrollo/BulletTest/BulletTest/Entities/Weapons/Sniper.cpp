@@ -179,7 +179,7 @@ void Sniper::shoot()
 		estadoWeapon = DESCARGADA;
 	}
 }
-
+/*
 double Sniper::getDesirability(double dist) {
 
 	fm.Fuzzify("DistToTarget", dist);
@@ -205,4 +205,4 @@ void Sniper::CalcularRules() {
 	fm.AddRule(FzAND(Target_Far, Ammo_Low), VeryDesirable);
 	fm.AddRule(FzAND(Target_Far, Ammo_Okay), VeryDesirable);
 	fm.AddRule(FzAND(Target_Far, Ammo_Loads), VeryDesirable);
-}
+}*/

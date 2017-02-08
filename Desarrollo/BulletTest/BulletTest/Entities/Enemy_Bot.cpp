@@ -23,92 +23,38 @@ void Enemy_Bot::inicializar()
 	asalto = new Asalto();
 	asalto->inicializar();
 	asalto->cargarContenido();
-	asalto->CalcularRules();
 
 	rocket = new RocketLauncher();
 	rocket->inicializar();
 	rocket->cargarContenido();
-	rocket->CalcularRules();
 
 	pistola = new Pistola();
 	pistola->inicializar();
 	pistola->cargarContenido();
-	pistola->CalcularRules();
 
 	sniper = new Sniper();
 	sniper->inicializar();
 	sniper->cargarContenido();
-	sniper->CalcularRules();
 
 	listaWeapons = new Lista();
 
 	listaWeapons->insertar(asalto);
 	listaWeapons->insertar(sniper);
-	listaWeapons->insertar(pistola);
-	listaWeapons->insertar(rocket);
 	sniper->setEquipada(true);
 
-	/*
-	FuzzyModule fm;
+	crearFuzzyRules();
+	elegirWeapon();
 
-	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
-	FuzzyVariable& Desirability = fm.CreateFLV("Desirability");
-	FuzzyVariable& AmmoStatus = fm.CreateFLV("AmmoStatus");
-
-	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);
-	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25, 150, 300);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 150, 300, 500);
-
-	FzSet Undesirable = Desirability.AddLeftShoulderSet("Underisable", 0, 25, 50);
-	FzSet Desirable = Desirability.AddTriangularSet("Desirable", 25, 50, 75);
-	FzSet VeryDesirable = Desirability.AddRightShoulderSet("Target_Far", 50, 75, 100);
-
-	FzSet Ammo_Low = AmmoStatus.AddLeftShoulderSet("Ammo_Low", 0, 0, 10);
-	FzSet Ammo_Okay = AmmoStatus.AddTriangularSet("Ammo_Okay", 0, 10, 30);
-	FzSet Ammo_Loads = AmmoStatus.AddRightShoulderSet("Ammo_Loads", 10, 30, 40);
-
-	fm.AddRule(FzAND(Target_Close, Ammo_Low), Undesirable);
-	fm.AddRule(FzAND(Target_Close, Ammo_Okay), Undesirable);
-	fm.AddRule(FzAND(Target_Close, Ammo_Loads), Undesirable);
-
-	fm.AddRule(FzAND(Target_Medium, Ammo_Low), Desirable);
-	fm.AddRule(FzAND(Target_Medium, Ammo_Okay), VeryDesirable);
-	fm.AddRule(FzAND(Target_Medium, Ammo_Loads), VeryDesirable);
-
-	fm.AddRule(FzAND(Target_Far, Ammo_Low), Undesirable);
-	fm.AddRule(FzAND(Target_Far, Ammo_Okay), Desirable);
-	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Desirable);
-
-	std::cout << "Desirability: "<< calcularDesirability(fm, 25, 0); 
-	std::cout << "\n";
-
-	*/
+/*
 	std::cout << "El arma actual es: " << listaWeapons->valorActual()->getClassName();
 	std::cout << "\n";
 	elegirWeapon();
 	std::cout << "He elegido arma \n";
 	std::cout << "El arma actual es: " << listaWeapons->valorActual()->getClassName();
-	std::cout << "\n";
+	std::cout << "\n";*/
 
 }
 
-double Enemy_Bot::calcularDesirability(FuzzyModule& fm, double dist, double ammmo) {
-	
-	fm.Fuzzify("DistToTarget", dist);
-	fm.Fuzzify("AmmoStatus", ammmo);
-
-	return fm.DeFuzzify("Desirability", FuzzyModule::max_av);
-
-}
-
-void Enemy_Bot::elegirWeapon() {
-
-	double DistToTarget = 100;  //TODO: Hay que hacer un metodo que calcule la distancia entre el Bot y el Player
-
-	listaWeapons->armaMasDeseada(DistToTarget);
-
-
-}
 
 void Enemy_Bot::update(Time elapsedTime)
 {
@@ -318,4 +264,77 @@ void Enemy_Bot::updateAnimation()
 		break;
 
 	}*/
+}
+
+void Enemy_Bot::crearFuzzyRules() {
+
+	//Asalto
+
+	fm.AddRule(FzAND(Target_Close, Ammo_LowAsalto), DesirableAsalto);
+	fm.AddRule(FzAND(Target_Close, Ammo_OkayAsalto), VeryDesirableAsalto);
+	fm.AddRule(FzAND(Target_Close, Ammo_LoadsAsalto), VeryDesirableAsalto);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_LowAsalto), UndesirableAsalto);
+	fm.AddRule(FzAND(Target_Medium, Ammo_OkayAsalto), DesirableAsalto);
+	fm.AddRule(FzAND(Target_Medium, Ammo_LoadsAsalto), DesirableAsalto);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_LowAsalto), UndesirableAsalto);
+	fm.AddRule(FzAND(Target_Far, Ammo_OkayAsalto), UndesirableAsalto);
+	fm.AddRule(FzAND(Target_Far, Ammo_LoadsAsalto), DesirableAsalto);
+
+	//Sniper
+
+	fm.AddRule(FzAND(Target_Close, Ammo_LowSniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Close, Ammo_OkaySniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Close, Ammo_LoadsSniper), UndesirableSniper);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_LowSniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Medium, Ammo_OkaySniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Medium, Ammo_LoadsSniper), DesirableSniper);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_LowSniper), VeryDesirableSniper);
+	fm.AddRule(FzAND(Target_Far, Ammo_OkaySniper), VeryDesirableSniper);
+	fm.AddRule(FzAND(Target_Far, Ammo_LoadsSniper), VeryDesirableSniper);
+
+
+}
+
+void Enemy_Bot::elegirWeapon() {
+
+	double mejorScore = 0;
+	std::string bestWeapon = "";
+
+	double DistToTarget = 100;
+
+	fm.Fuzzify("DistToTarget", DistToTarget);
+	fm.Fuzzify("AmmoStatusAsalto", asalto->getMunicionTotal());
+	fm.Fuzzify("AmmoStatusSniper", sniper->getMunicionTotal());
+
+	if (listaWeapons->Buscar("Asalto")) {
+
+		double DesAsalto = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
+
+		std::cout << "Deseabilidad del asalto: " << DesAsalto << "\n";
+
+		if (DesAsalto > mejorScore) {
+			mejorScore > DesAsalto;
+			bestWeapon = "Asalto";
+		}
+
+	}
+
+	if (listaWeapons->Buscar("Sniper")) {
+
+		double DesSniper = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
+
+		std::cout << "Deseabilidad del sniper: " << DesSniper << "\n";
+
+		if (DesSniper > mejorScore) {
+			mejorScore > DesSniper;
+			bestWeapon = "Sniper";
+		}
+
+
+	}
+
 }
