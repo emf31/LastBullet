@@ -24,10 +24,12 @@ int main() {
 	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
 	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
 
-	TNode* n = sm->addMesh(sm->getMesh("assets/contenedor.obj"));
+
+	/*
+	TNode* m = sm->addMesh(sm->getMesh("assets/contenedor.obj"));
 	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
-	
+
 
 	TNode* m = sm->addMesh(sm->getMesh("assets/cartel.obj"));
 	m->setPosition(Vec3<float>(5.f, -1.75f, 0.0f));
@@ -36,6 +38,13 @@ int main() {
 	TNode* w = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
 	w->setPosition(Vec3<float>(10.f, -1.75f, 0.0f));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	*/
+
+	TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
+	TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
+	TModel* w = sm->crearNodoMalla(sm->getMesh("assets/nanosuit.obj"));
+	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+
 	
 
 	while (!engine.shouldCloseWindw()){

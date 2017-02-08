@@ -24,18 +24,19 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 TModel::~TModel() {
 }
 
-void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model) {
+void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
+
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 
 	// Le pasamos las matrices
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(matrizActual));
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i].beginDraw();
+		this->meshes[i].beginDraw(projection, view, matrizActual);
 }
 
 void TModel::loadModel(const string& path) {
@@ -145,7 +146,7 @@ vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType typ
 }
 
 
-void TModel::endDraw() {
+void TModel::endDraw(glm::mat4& matrizActual) {
 	//std::cout << u8"Adiós" << std::endl;
 	//TEntity::endDraw();
 }

@@ -158,6 +158,9 @@
     <ClInclude Include="Billboard.h">
       <Filter>Archivos de encabezado\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="enum.h">
+      <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram2.cd" />

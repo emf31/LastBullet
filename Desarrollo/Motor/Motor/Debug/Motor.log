@@ -1,51 +1,44 @@
 ﻿  main.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
 c:\program files (x86)\windows kits\8.1\include\shared\minwindef.h(130): warning C4005: 'APIENTRY': redefinición de macro
-  d:\ua\cuarto\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
   TNode.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\tnode.cpp(56): warning C4018: '<': no coinciden signed/unsigned
-  Generando código...
-  Compilando...
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tnode.cpp(61): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tnode.cpp(70): warning C4018: '<': no coinciden signed/unsigned
   TModel.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
   TMeshNode.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
   TLightNode.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
   TCameraNode.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
   SceneManager.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
   ResourceManager.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
   EngineDevice.cpp
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(59): warning C4101: 'infoLog': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\shader.h(58): warning C4101: 'success': variable local sin referencia
 c:\program files (x86)\windows kits\8.1\include\shared\minwindef.h(130): warning C4005: 'APIENTRY': redefinición de macro
-  d:\ua\cuarto\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(31): warning C4305: 'return': truncamiento de 'int' a 'bool'
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(38): warning C4305: 'return': truncamiento de 'int' a 'bool'
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(52): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(53): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(80): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(89): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\enginedevice.cpp(109): warning C4800: 'int': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\includes\glfw\glfw3.h(98): note: vea la definición anterior de 'APIENTRY'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(31): warning C4305: 'return': truncamiento de 'int' a 'bool'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(38): warning C4305: 'return': truncamiento de 'int' a 'bool'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(52): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(53): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(80): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(89): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\enginedevice.cpp(109): warning C4800: 'int': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
   Generando código...
-d:\ua\cuarto\abp\tba\desarrollo\motor\motor\resourcemanager.cpp(69): warning C4715: 'ResourceManager::getTexture': no todas las rutas de acceso de control devuelven un valor
-  Omitiendo... (no se detectaron cambios relevantes)
-  TTransform.cpp
-  TSpotLight.cpp
-  TMesh.cpp
-  TEntity.cpp
-  TCamera.cpp
-  Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe
-  Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Debug\Motor.pdb (Full PDB)
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\resourcemanager.cpp(69): warning C4715: 'ResourceManager::getTexture': no todas las rutas de acceso de control devuelven un valor
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\Debug\Motor.exe
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\Debug\Motor.pdb (Full PDB)

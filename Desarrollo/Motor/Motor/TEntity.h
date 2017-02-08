@@ -4,12 +4,10 @@
 class TEntity {
 public:
 	TEntity();
-	~TEntity();
+	virtual ~TEntity();
 
-	virtual void beginDraw()=0;
-	virtual void endDraw()=0;
+	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual)=0;
+	virtual void endDraw(glm::mat4& matrizActual)=0;
 
-	glm::vec3 position;
-	glm::vec3 scale;
 };
 

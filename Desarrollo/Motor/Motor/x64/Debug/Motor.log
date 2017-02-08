@@ -1,0 +1,38 @@
+﻿  main.cpp
+main.obj : error LNK2019: símbolo externo glewInit sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwInit sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwTerminate sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwWindowHint sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwCreateWindow sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwWindowShouldClose sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwSetWindowShouldClose sin resolver al que se hace referencia en la función "void __cdecl key_callback(struct GLFWwindow *,int,int,int,int)" (?key_callback@@YAXPEAUGLFWwindow@@HHHH@Z)
+main.obj : error LNK2019: símbolo externo glfwGetFramebufferSize sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwPollEvents sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwSetKeyCallback sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwMakeContextCurrent sin resolver al que se hace referencia en la función main
+main.obj : error LNK2019: símbolo externo glfwSwapBuffers sin resolver al que se hace referencia en la función main
+main.obj : error LNK2001: símbolo externo __glewBindBuffer sin resolver
+main.obj : error LNK2001: símbolo externo __glewBufferData sin resolver
+main.obj : error LNK2001: símbolo externo __glewDeleteBuffers sin resolver
+main.obj : error LNK2001: símbolo externo __glewGenBuffers sin resolver
+main.obj : error LNK2001: símbolo externo __glewAttachShader sin resolver
+main.obj : error LNK2001: símbolo externo __glewCompileShader sin resolver
+main.obj : error LNK2001: símbolo externo __glewCreateProgram sin resolver
+main.obj : error LNK2001: símbolo externo __glewCreateShader sin resolver
+main.obj : error LNK2001: símbolo externo __glewDeleteShader sin resolver
+main.obj : error LNK2001: símbolo externo __glewEnableVertexAttribArray sin resolver
+main.obj : error LNK2001: símbolo externo __glewGetProgramInfoLog sin resolver
+main.obj : error LNK2001: símbolo externo __glewGetProgramiv sin resolver
+main.obj : error LNK2001: símbolo externo __glewGetShaderInfoLog sin resolver
+main.obj : error LNK2001: símbolo externo __glewGetShaderiv sin resolver
+main.obj : error LNK2001: símbolo externo __glewLinkProgram sin resolver
+main.obj : error LNK2001: símbolo externo __glewShaderSource sin resolver
+main.obj : error LNK2001: símbolo externo __glewUseProgram sin resolver
+main.obj : error LNK2001: símbolo externo __glewVertexAttribPointer sin resolver
+main.obj : error LNK2001: símbolo externo __glewBindVertexArray sin resolver
+main.obj : error LNK2001: símbolo externo __glewDeleteVertexArrays sin resolver
+main.obj : error LNK2001: símbolo externo __glewGenVertexArrays sin resolver
+main.obj : error LNK2001: símbolo externo glewExperimental sin resolver
+../lib\glew32d.lib : warning LNK4272: el tipo de máquina de biblioteca 'X86' está en conflicto con el tipo de máquina de destino 'x64'
+../lib\glfw3.lib : warning LNK4272: el tipo de máquina de biblioteca 'X86' está en conflicto con el tipo de máquina de destino 'x64'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\x64\Debug\Motor.exe : fatal error LNK1120: 34 externos sin resolver

@@ -22,8 +22,8 @@ void TSpotLight::setColor(int r, int g, int b) {
 	m_b = b;
 }
 
-void TSpotLight::beginDraw() {
+void TSpotLight::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
 }
 
-void TSpotLight::endDraw() {
+void TSpotLight::endDraw(glm::mat4& matrizActual) {
 }

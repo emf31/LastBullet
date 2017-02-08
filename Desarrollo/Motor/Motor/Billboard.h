@@ -10,7 +10,7 @@ public:
 	}
 	Billboard(TNode* nodo) {
 		m_node = nodo;
-		Vec3<float> pos = m_node->getPosition();
+		//Vec3<float> pos = m_node->getPosition();
 	}
 
 	void updateFacingPosition() {

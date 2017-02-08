@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include "TTransform.h"
 
 
 SceneManager::SceneManager() {
@@ -22,6 +23,8 @@ SceneManager::SceneManager() {
 	perx.w = 0.0f;*/
 
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
+	scene = new TNode();
+	scene->setType(T_RAIZ);
 }
 
 
@@ -35,14 +38,6 @@ TModel* SceneManager::getMesh(std::string path,Shader* shader) {
 	return NULL;
 }
 
-TNode* SceneManager::addMesh(TModel * model) {
-	TNode *node = new TNode();
-	//node->sceneManager_ptr = this;
-	node->setModel(model);
-	scene.addChild(node);
-	return node;
-}
-
 void SceneManager::draw(GLFWwindow* window) {
 	// Clear
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -53,8 +48,95 @@ void SceneManager::draw(GLFWwindow* window) {
 	view = camera_ptr->GetViewMatrix();
 
 	// Desencadena el dibujado de la escena
-	scene.beginDraw(projection, view);
+	scene->draw(projection, view, m_matrizActual);
 	//gui.draw();
 	glfwSwapBuffers(window);
 	
 }
+
+TModel * SceneManager::crearNodoMalla(TModel * model)
+{
+	TNode * nuevoNodoMalla;
+	TNode * nuevoNodoRotacion;
+	TNode * nuevoNodoEscalado;
+	TNode * nuevoNodoTraslacion;
+
+	//creamos los nodos malla y los nodos transformaciones necesaria para esta
+	nuevoNodoRotacion = crearNodoRotacion(scene);
+	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado);
+	nuevoNodoMalla = new TNode(nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
+	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
+
+	//asignamos matrices de transformacion
+	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
+	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+
+	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
+	nuevoNodoMalla->setEntity(model);
+	nuevoNodoMalla->setType(T_MALLA);
+	//nuevoNodoMalla->setModel(model);
+	//nuevoNodoMalla->getEntity()->setModel();
+
+	return model;
+}
+
+TNode * SceneManager::crearNodoTransformacion()
+{
+	//DUDA aqui tendriamos que tener tambien algun identificador en el nodo no? porque yo estoy creando 3 nodos de transformacion pero no se cual es cual.
+	TNode* transNode = new TNode(scene);
+	TTransform* trans = new TTransform();
+	transNode->setType(T_TRANSFORM);
+	transNode->setEntity(trans);
+
+	return transNode;
+}
+
+TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre)
+{
+	TNode* transNode = new TNode(nodoPadre);
+	transNode->setType(T_TRASLACION);
+	TTransform* trans = new TTransform();
+	trans->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
+	transNode->setEntity(trans);
+	return transNode;
+}
+
+TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre)
+{
+	TNode* transNode = new TNode(nodoPadre);
+	transNode->setType(T_ROTACION);
+	TTransform* trans = new TTransform();
+	transNode->setEntity(trans);
+	return transNode;
+}
+
+TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre)
+{
+	TNode* transNode = new TNode(nodoPadre);
+	transNode->setType(T_ESCALADO);
+	TTransform* trans = new TTransform();
+	trans->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	transNode->setEntity(trans);
+	
+	return transNode;
+}
+
+TNode * SceneManager::crearNodoLuz()
+{
+	TNode* luzNode = new TNode(scene);
+	luzNode->setType(T_LUZ);
+	return luzNode;
+}
+
+TNode * SceneManager::crearNodoCamara()
+{
+	return nullptr;
+}
+

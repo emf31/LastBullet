@@ -5,6 +5,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "vec3.hpp"
+#include "TTransform.h"
 using namespace std;
 
 // GL Includes
@@ -18,7 +20,9 @@ using namespace std;
 
 #include "TMesh.h"
 
-class TModel {
+//class TNode;
+
+class TModel : public TEntity {
 public:
 	/*  Funciones   */
 	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
@@ -50,9 +54,29 @@ public:
 		return textureID;
 	}
 
-	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model);
+	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual);
 
-	virtual void endDraw();
+	virtual void endDraw(glm::mat4& matrizActual);
+
+	void setPosition(Vec3<float> pos) {
+		transTraslacion->setPosition(pos);
+	}
+	void setRotation(Vec3<float> rot) {
+		transRotacion->setRotation(rot);
+	}
+	void setScale(Vec3<float> esc) {
+		transEscalado->setScale(esc);
+	}
+
+	void setTransformacionRotacion(TTransform* rot) {
+		transRotacion = rot;
+	}
+	void setTransformacionEscalado(TTransform* esc) {
+		transEscalado = esc;
+	}
+	void setTransformacionTraslacion(TTransform* tras) {
+		transTraslacion = tras;
+	}
 	
 
 private:
@@ -70,6 +94,14 @@ private:
 	TMesh processMesh(aiMesh* mesh, const aiScene* scene);
 
 	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
+
+	//TNode* transRotacion;
+	//TNode* transEscalado;
+	//TNode* transTraslacion;
+	TTransform* transRotacion;
+	TTransform* transEscalado;
+	TTransform* transTraslacion;
+	
 
 };
 

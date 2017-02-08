@@ -9,8 +9,8 @@ TCamera::TCamera() {
 TCamera::~TCamera() {
 }
 
-void TCamera::beginDraw() {
+void TCamera::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
 }
 
-void TCamera::endDraw() {
+void TCamera::endDraw(glm::mat4& matrizActual) {
 }

@@ -182,6 +182,7 @@
     <ClInclude Include="Billboard.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EngineDevice.h" />
+    <ClInclude Include="enum.h" />
     <ClInclude Include="GUI\DebugMenuGUI.h" />
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="GUI\GUIManager.h" />

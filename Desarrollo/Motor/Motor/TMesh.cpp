@@ -14,7 +14,7 @@ TMesh::~TMesh() {
 }
 
 
-void TMesh::beginDraw() {
+void TMesh::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
 
 	GLuint diffuseNr = 1;
 	GLuint specularNr = 1;
@@ -49,9 +49,10 @@ void TMesh::beginDraw() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	glActiveTexture(GL_TEXTURE0);
+	//std::cout << "SE SUPONE QUE DIBUJO " << std::endl;
 }
 
-void TMesh::endDraw() {
+void TMesh::endDraw(glm::mat4& matrizActual) {
 
 }
 
