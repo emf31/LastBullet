@@ -5,34 +5,35 @@
 #include "FuzzySet.h"
 #include "FzOR.h"
 #include "FzAND.h"
-//#include "misc/utils.h"
 
 
 class FuzzyRule
 {
 private:
 
-	//antecedent (usually a composite of several fuzzy sets and operators)
+	//Termino antecendente
 	const FuzzyTerm*  m_pAntecedent;
 
-	//consequence (usually a single fuzzy set, but can be several ANDed together)
+	//Termino consecuencia
 	FuzzyTerm*        m_pConsequence;
 
-	//it doesn't make sense to allow clients to copy rules
+	//Constructor de copia privado para que no pueda ser usado por clientes
 	FuzzyRule(const FuzzyRule&);
 	FuzzyRule& operator=(const FuzzyRule&);
 
 
 public:
 
+	//constructor
 	FuzzyRule(const FuzzyTerm& ant, const FuzzyTerm& con);
 
+	//destructor
 	~FuzzyRule();
 
+	//clean
 	void SetConfidenceOfConsequentToZero();
 
-	//this method updates the DOM (the confidence) of the consequent term with
-	//the DOM of the antecedent term. 
+	//calcula las respuestas
 	void Calculate();
 };
 

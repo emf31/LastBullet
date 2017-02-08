@@ -5,7 +5,8 @@
 
 #include "FuzzyModule.h"
 
-//------------------------------ dtor -----------------------------------------
+
+//------------------------------ Destructor -----------------------------------------
 FuzzyModule::~FuzzyModule()
 {
 	VarMap::iterator curVar = m_Variables.begin();
@@ -21,17 +22,15 @@ FuzzyModule::~FuzzyModule()
 	}
 }
 
-//----------------------------- AddRule ---------------------------------------
+//----------------------------- Añadir regla(crea una nueva regla con los 2 term que les pasa) ---------------------------------------
 void FuzzyModule::AddRule(FuzzyTerm& antecedent, FuzzyTerm& consequence)
 {
 	m_Rules.push_back(new FuzzyRule(antecedent, consequence));
 }
 
 
-//-------------------------- CreateFLV ---------------------------
-//
-//  creates a new fuzzy variable and returns a reference to it
-//-----------------------------------------------------------------------------
+
+//-------------------------------Añade una nueva variable en el mapa----------------------------------------------
 FuzzyVariable& FuzzyModule::CreateFLV(const std::string& VarName)
 {
 	m_Variables[VarName] = new FuzzyVariable();;
@@ -40,7 +39,7 @@ FuzzyVariable& FuzzyModule::CreateFLV(const std::string& VarName)
 }
 
 
-//---------------------------- WriteAllDOMs -----------------------------------
+//---------------------------- Metodo para escribir todos los DOM -----------------------------------
 std::ostream& FuzzyModule::WriteAllDOMs(std::ostream& os)
 {
 	os << "\n\n";

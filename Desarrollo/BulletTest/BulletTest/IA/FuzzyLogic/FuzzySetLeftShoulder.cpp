@@ -1,11 +1,8 @@
 #include "FuzzySetLeftShoulder.h"
 #include <cassert>
 
-
-FuzzySetLeftShoulder::FuzzySetLeftShoulder(double peak,
-	double LeftOffset,
-	double RightOffset) :
-
+//Constructor
+FuzzySetLeftShoulder::FuzzySetLeftShoulder(double peak,double LeftOffset,double RightOffset) :
 	FuzzySet(((peak - LeftOffset) + peak) / 2),
 	m_dPeakPoint(peak),
 	m_dLeftOffset(LeftOffset),

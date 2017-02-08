@@ -1,5 +1,6 @@
 #include "FuzzySetTriangle.h"
 
+//Constructor
 FuzzySetTriangle::FuzzySetTriangle(double mid,
 	double lft,
 	double rgt) :FuzzySet(mid),

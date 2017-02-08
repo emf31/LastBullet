@@ -14,46 +14,38 @@ class FuzzyVariable
 {
 private:
 
+	//TypeDef para los FuzzySets que se guardan y despues acceder a ellos de manera mas sencilla
 	typedef std::map<std::string, FuzzySet*>  MemberSets;
 
-private:
-
-	//disallow copies
+	//Constructor de copia en privado
 	FuzzyVariable(const FuzzyVariable&);
-	//FuzzyVariable& operator=(const FuzzyVariable&);
 
-private:
+	//Declaracioón del mapa de fuzzysets del typedef
+	MemberSets m_MemberSets;
 
-	//a map of the fuzzy sets that comprise this variable
-	MemberSets   m_MemberSets;
+	//Variables del rango inferior y superior
+	double m_dMinRange;
+	double m_dMaxRange;
 
-	//the minimum and maximum value of the range of this variable
-	double        m_dMinRange;
-	double        m_dMaxRange;
-
-
-	//this method is called with the upper and lower bound of a set each time a
-	//new set is added to adjust the upper and lower range values accordingly
+	//Metodo que sirve para setear el rango superior e inferior y los posteriores fuzzySets se adecuaran a este rango
 	void AdjustRangeToFit(double min, double max);
 
-	//a client retrieves a reference to a fuzzy variable when an instance is
-	//created via FuzzyModule::CreateFLV(). To prevent the client from deleting
-	//the instance the FuzzyVariable destructor is made private and the 
-	//FuzzyModule class made a friend.
+	//Destrucctor de FuzzyVariable
 	~FuzzyVariable();
 
+	//Clase amiga FuzzyMOdule para poder acceder a sus valores
 	friend class FuzzyModule;
 
 
 public:
 
+	//Construcctor de FuzzyVariable
 	FuzzyVariable();
 
-	//the following methods create instances of the sets named in the method
-	//name and add them to the member set map. Each time a set of any type is
-	//added the m_dMinRange and m_dMaxRange are adjusted accordingly. All of the
-	//methods return a proxy class representing the newly created instance. This
-	//proxy set can be used as an operand when creating the rule base.
+	//Metodos que crean Instancias de un fuzzySet propio de un fuzzyset concreto
+	//Estos metodos devuelve un objeto tipo fzset que es una clase proxy representativa de fuzzyset
+	//y tiene referencia al fuzzyset original
+
 	FzSet  AddLeftShoulderSet(std::string name, double minBound, double peak, double maxBound);
 
 	FzSet  AddRightShoulderSet(std::string name, double minBound, double peak, double maxBound);
@@ -63,17 +55,17 @@ public:
 	FzSet  AddSingletonSet(std::string name, double minBound, double peak, double maxBound);
 
 
-	//fuzzify a value by calculating its DOM in each of this variable's subsets
-	void        Fuzzify(double val);
+	//Fuzzifica un calor calculado los DOM de las variables que tiene
+	void Fuzzify(double val);
 
-	//defuzzify the variable using the max average method
-	double       DeFuzzifyMaxAv()const;
+	//Defuzzifica por Max averabe
+	double DeFuzzifyMaxAv()const;
 
-	//defuzzify the variable using the centroid method
-	double       DeFuzzifyCentroid(int NumSamples)const;
+	//Deffucifica por centroid, necesita un parametro qu esta en module para hacerlo
+	double DeFuzzifyCentroid(int NumSamples)const;
 
 
-
+	//Escribe los DOM
 	std::ostream& WriteDOMs(std::ostream& os);
 };
 

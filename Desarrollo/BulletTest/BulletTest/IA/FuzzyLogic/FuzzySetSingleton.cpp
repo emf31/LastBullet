@@ -1,6 +1,6 @@
 #include "FuzzySetSingleton.h"
 
-
+//Constructor
 FuzzySetSingleton::FuzzySetSingleton(double       mid,
 	double       lft,
 	double       rgt) :FuzzySet(mid),

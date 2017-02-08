@@ -1,15 +1,6 @@
 #pragma once
 #pragma warning (disable:4786)
-//-----------------------------------------------------------------------------
-//
-//  Name:   FuzzyModule.h
-//
-//  Author: Mat Buckland (www.ai-junkie.com)
-//
-//  Desc:   this class describes a fuzzy module: a collection of fuzzy variables
-//          and the rules that operate on them.
-//
-//-----------------------------------------------------------------------------
+
 #include <vector>
 #include <string>
 #include <map>
@@ -28,53 +19,48 @@
 
 class FuzzyModule
 {
+
 private:
 
 	typedef std::map<std::string, FuzzyVariable*> VarMap;
 
-public:
-
-	//you must pass one of these values to the defuzzify method. This module
-	//only supports the MaxAv and centroid methods.
-	enum DefuzzifyMethod { max_av, centroid };
-
-	//when calculating the centroid of the fuzzy manifold this value is used
-	//to determine how many cross-sections should be sampled
-	enum { NumSamples = 15 };
-
-private:
-
-	//a map of all the fuzzy variables this module uses
-	VarMap                   m_Variables;
+	//mapa de vairables que se define con un typedef
+	VarMap m_Variables;
 
 	//a vector containing all the fuzzy rules
 	std::vector<FuzzyRule*>   m_Rules;
 
 
-	//zeros the DOMs of the consequents of each rule. Used by Defuzzify()
+	//Metodo que se usa en deffuzify, sirve para limpiar DOM
 	inline void SetConfidencesOfConsequentsToZero();
 
 
 public:
 
+	//Metodos que se pueden realizar para defuzzificar, por ahora solo hay maxaverage y centroid
+	enum DefuzzifyMethod { max_av, centroid };
+
+	//enumeracion para calcular el centroid
+	enum { NumSamples = 15 };
+
+	//destrucctor
 	~FuzzyModule();
 
-	//creates a new 'empty' fuzzy variable and returns a reference to it.
+	//Crea las variables y las mete en el mapa
 	FuzzyVariable&  CreateFLV(const std::string& VarName);
 
-	//adds a rule to the module
-	void            AddRule(FuzzyTerm& antecedent, FuzzyTerm& consequence);
+	//añade reglas al vector de reglas
+	void AddRule(FuzzyTerm& antecedent, FuzzyTerm& consequence);
 
-	//this method calls the Fuzzify method of the named FLV 
+	//Fuzzifica las variable que tenga el mismo nombre que la key
 	inline void     Fuzzify(const std::string& NameOfFLV, double val);
 
-	//given a fuzzy variable and a deffuzification method this returns a 
-	//crisp value
+	//Dada la key deffuzzifica (de normal lo hace con max_average)
 	inline double    DeFuzzify(const std::string& key,
 		DefuzzifyMethod    method = max_av);
 
 
-	//writes the DOMs of all the variables in the module to an output stream
+	//Escribe todos los dom
 	std::ostream&   WriteAllDOMs(std::ostream& os);
 
 };
@@ -82,10 +68,9 @@ public:
 ///////////////////////////////////////////////////////////////////////////////
 
 //----------------------------- Fuzzify ---------------------------------------
-//
-//  this method calls the Fuzzify method of the variable with the same name
-//  as the key
-//-----------------------------------------------------------------------------
+
+//  Llama al metod de fuzzify del que le pasan la key
+
 inline void FuzzyModule::Fuzzify(const std::string& NameOfFLV, double val)
 {
 	//first make sure the key exists
@@ -96,28 +81,23 @@ inline void FuzzyModule::Fuzzify(const std::string& NameOfFLV, double val)
 }
 
 //---------------------------- DeFuzzify --------------------------------------
-//
-//  given a fuzzy variable and a deffuzification method this returns a 
-//  crisp value
-//-----------------------------------------------------------------------------
+
+//  Defuzzifica segun la key que le pasan y el metodo
+
 inline double
 FuzzyModule::DeFuzzify(const std::string& NameOfFLV, DefuzzifyMethod method)
 {
-	//first make sure the key exists
 	assert((m_Variables.find(NameOfFLV) != m_Variables.end()) &&
 		"<FuzzyModule::DeFuzzifyMaxAv>:key not found");
 
-	//clear the DOMs of all the consequents of all the rules
 	SetConfidencesOfConsequentsToZero();
 
-	//process the rules
 	std::vector<FuzzyRule*>::iterator curRule = m_Rules.begin();
 	for (curRule; curRule != m_Rules.end(); ++curRule)
 	{
 		(*curRule)->Calculate();
 	}
 
-	//now defuzzify the resultant conclusion using the specified method
 	switch (method)
 	{
 	case centroid:
@@ -138,9 +118,9 @@ FuzzyModule::DeFuzzify(const std::string& NameOfFLV, DefuzzifyMethod method)
 
 
 
-//-------------------------- ClearConsequents ---------------------------------
+//-------------------------- SetConfidenceOfConsequentToZero ---------------------------------
 //
-//  zeros the DOMs of the consequents of each rule
+//  Va llamando SetConfidenceOfConsequentToZero de cada regla
 //-----------------------------------------------------------------------------
 inline void FuzzyModule::SetConfidencesOfConsequentsToZero()
 {

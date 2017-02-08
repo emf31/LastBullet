@@ -9,16 +9,17 @@ class FuzzySetSingleton : public FuzzySet
 {
 private:
 
-	//the values that define the shape of this FLV
+	//Valores necesarios para este FuzzySet
 	double   m_dMidPoint;
 	double   m_dLeftOffset;
 	double   m_dRightOffset;
 
 public:
 
+	//Constructor propio del FuzzySet
 	FuzzySetSingleton(double mid,double lft, double rgt);
 
-	//this method calculates the degree of membership for a particular value
+	//Calcula el valor concreto segun el tipo de FuzzySet que es
 	double     CalculateDOM(double val)const;
 };
 

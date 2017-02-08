@@ -1,6 +1,7 @@
 #include "FuzzySetRightShoulder.h"
 #include <Util.h>
 
+//Constructor
 FuzzySetRightShoulder::FuzzySetRightShoulder(double peak,
 	double LeftOffset,
 	double RightOffset) :

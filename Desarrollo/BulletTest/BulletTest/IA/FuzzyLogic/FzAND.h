@@ -9,29 +9,33 @@ class FzAND : public FuzzyTerm
 {
 private:
 
-	//an instance of this class may AND together up to 4 terms
+	//vector de terminos de AND
 	std::vector<FuzzyTerm*> m_Terms;
 
-	//disallow assignment
+	//No necesitas el operador igual asi que lo declaras privado
 	FzAND& operator=(const FzAND&);
 
 public:
-
+	//Destructor
 	~FzAND();
-	//copy ctor
+
+	//Constructor de copia
 	FzAND(const FzAND& fa);
 
-	//ctors accepting fuzzy terms.
+	//Constructores de con los terminos
 	FzAND(FuzzyTerm& op1, FuzzyTerm& op2);
 	FzAND(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3);
 	FzAND(FuzzyTerm& op1, FuzzyTerm& op2, FuzzyTerm& op3, FuzzyTerm& op4);
 
-	//virtual ctor
+	//Construtor Virtual
 	FuzzyTerm* Clone()const;
 
+	//Devuelve el DOM
 	double GetDOM()const;
 
+	//Limpia el DOM
 	void  ClearDOM();
 
+	//LLamas a la funcion con el mismo nombre de todas los terminos
 	void  ORwithDOM(double val);
 };
