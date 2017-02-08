@@ -19,6 +19,7 @@ RocketLauncher::~RocketLauncher()
 
 void RocketLauncher::inicializar()
 {
+
 }
 
 void RocketLauncher::update(Time elapsedTime)
@@ -131,6 +132,30 @@ void RocketLauncher::shoot() {
 
 double RocketLauncher::getDesirability(double dist) {
 
-	return 5;
+	fm.Fuzzify("DistToTarget", dist);
+	fm.Fuzzify("AmmoStatus", capacidadAmmo*numCargadores + disparosRestantes);
+
+	double desirability = fm.DeFuzzify("Desirability", FuzzyModule::max_av);
+
+	std::cout << "Deseabilidad del lanzacohetes: " << desirability << "\n";
+
+	return desirability;
+
+}
+
+void RocketLauncher::CalcularRules() {
+
+	fm.AddRule(FzAND(Target_Close, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Close, Ammo_Okay), Undesirable);
+	fm.AddRule(FzAND(Target_Close, Ammo_Loads), Desirable);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_Low), Desirable);
+	fm.AddRule(FzAND(Target_Medium, Ammo_Okay), VeryDesirable);
+	fm.AddRule(FzAND(Target_Medium, Ammo_Loads), VeryDesirable);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Far, Ammo_Okay), Undesirable);
+	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Undesirable);
+
 
 }

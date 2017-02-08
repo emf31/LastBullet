@@ -167,6 +167,27 @@ void Pistola::shoot() {
 
 double Pistola::getDesirability(double dist) {
 
-	return 1;
+	fm.Fuzzify("DistToTarget", dist);
+	fm.Fuzzify("AmmoStatus", capacidadAmmo*numCargadores + disparosRestantes);
+
+	double desirability = fm.DeFuzzify("Desirability", FuzzyModule::max_av);
+
+	std::cout << "Deseabilidad de la pistola: " << desirability << "\n";
+
+	return desirability;
+}
+
+void Pistola::CalcularRules() {
+	fm.AddRule(FzAND(Target_Close, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Close, Ammo_Okay), Undesirable);
+	fm.AddRule(FzAND(Target_Close, Ammo_Loads), Undesirable);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Medium, Ammo_Okay), Undesirable);
+	fm.AddRule(FzAND(Target_Medium, Ammo_Loads), Undesirable);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Far, Ammo_Okay), Undesirable);
+	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Undesirable);
 
 }
