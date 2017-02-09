@@ -247,6 +247,9 @@
     <ClCompile Include="IA\WeaponSystem.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
+    <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp">
+      <Filter>Source Code\IA\SensorySystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -604,6 +607,12 @@
     <ClInclude Include="IA\WeaponSystem.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
+    <ClInclude Include="IA\SensorySystem\Memory.h">
+      <Filter>Headers\IA\SensorySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\SensorySystem\SensoryMemory.h">
+      <Filter>Headers\IA\SensorySystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -746,6 +755,12 @@
     </Filter>
     <Filter Include="Source Code\IA\FuzzyLogic\FuzzyEdges">
       <UniqueIdentifier>{dc76c85f-e97e-49b2-98df-8b36c21dee0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\SensorySystem">
+      <UniqueIdentifier>{59c05c02-0eb4-45b8-9d1c-f16bf56193aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\SensorySystem">
+      <UniqueIdentifier>{f83946d5-0af1-4814-aab5-58823bc0db7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

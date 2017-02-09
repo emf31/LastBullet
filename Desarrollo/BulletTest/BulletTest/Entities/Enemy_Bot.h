@@ -8,6 +8,7 @@
 #include <LifeComponent.h>
 
 #include "FuzzyLogic\FuzzyModule.h"
+#include <SensorySystem\SensoryMemory.h>
 
 #include "WeaponSystem.h"
 
@@ -53,13 +54,16 @@ public:
 
 	void crearFuzzyRules();
 
-private:
+	Vec2f getFacing();
 
-	bool siguiendo = false;
+	float getFOV();
+private:
+	
 
 	float radius;
 	float height;
 	float mass;
+	float FOV;
 
 	Animation animation;
 
@@ -92,6 +96,8 @@ private:
 	KinematicCharacterController* p_controller;
 
 	LifeComponent life_component;
+
+	SensoryMemory* sense;
 
 	friend class PathPlanner;
 

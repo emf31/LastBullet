@@ -234,6 +234,8 @@
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
+    <ClInclude Include="IA\SensorySystem\Memory.h" />
+    <ClInclude Include="IA\SensorySystem\SensoryMemory.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />
     <ClInclude Include="IA\WeaponSystem.h" />
@@ -332,6 +334,7 @@
     <ClCompile Include="IA\FuzzyLogic\FzVery.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\PathFollow.cpp" />
+    <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />
     <ClCompile Include="IA\WeaponSystem.cpp" />
     <ClCompile Include="Mapa\Celda.cpp" />
