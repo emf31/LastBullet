@@ -1,16 +1,20 @@
-﻿  Enemy_Bot.cpp
+﻿  WeaponSystem.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(22): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+  Enemy_Bot.cpp
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(23): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(27): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(31): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(35): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(320): warning C4552: '>': el operador no tiene efecto; se esperaba un operador con efecto secundario
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(333): warning C4552: '>': el operador no tiene efecto; se esperaba un operador con efecto secundario
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(303): warning C4552: '>': el operador no tiene efecto; se esperaba un operador con efecto secundario
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(318): warning C4552: '>': el operador no tiene efecto; se esperaba un operador con efecto secundario
   Generando código...
   Omitiendo... (no se detectaron cambios relevantes)
   main.cpp

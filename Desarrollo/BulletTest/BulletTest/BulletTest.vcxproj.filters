@@ -244,6 +244,9 @@
     <ClCompile Include="IA\FuzzyLogic\FzSet.cpp">
       <Filter>Source Code\IA\FuzzyLogic\FuzzySets</Filter>
     </ClCompile>
+    <ClCompile Include="IA\WeaponSystem.cpp">
+      <Filter>Source Code\IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -597,6 +600,9 @@
     </ClInclude>
     <ClInclude Include="IA\FuzzyLogic\FzVery.h">
       <Filter>Headers\IA\FuzzyLogic\FuzzyHedges</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\WeaponSystem.h">
+      <Filter>Headers\IA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

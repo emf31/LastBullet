@@ -20,27 +20,10 @@ void Enemy_Bot::inicializar()
 	m_PathPlanner = new PathPlanner(this);
 	m_PathFollow = new PathFollow(this);
 
-	asalto = new Asalto();
-	asalto->inicializar();
-	asalto->cargarContenido();
+	weaponSystem = new WeaponSystem(this, 1, 1, 1);
+	weaponSystem->Inicializar();
 
-	rocket = new RocketLauncher();
-	rocket->inicializar();
-	rocket->cargarContenido();
 
-	pistola = new Pistola();
-	pistola->inicializar();
-	pistola->cargarContenido();
-
-	sniper = new Sniper();
-	sniper->inicializar();
-	sniper->cargarContenido();
-
-	listaWeapons = new Lista();
-
-	listaWeapons->insertar(asalto);
-	listaWeapons->insertar(sniper);
-	sniper->setEquipada(true);
 
 	crearFuzzyRules();
 	elegirWeapon();
@@ -302,15 +285,15 @@ void Enemy_Bot::crearFuzzyRules() {
 void Enemy_Bot::elegirWeapon() {
 
 	double mejorScore = 0;
-	std::string bestWeapon = "";
+	std::string bestWeapon = "Pistola";
 
 	double DistToTarget = 100;
 
 	fm.Fuzzify("DistToTarget", DistToTarget);
-	fm.Fuzzify("AmmoStatusAsalto", asalto->getMunicionTotal());
-	fm.Fuzzify("AmmoStatusSniper", sniper->getMunicionTotal());
 
-	if (listaWeapons->Buscar("Asalto")) {
+	if (weaponSystem->buscar("Asalto")) {
+
+		fm.Fuzzify("AmmoStatusAsalto", weaponSystem->getAmmoAsalto());
 
 		double DesAsalto = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
 
@@ -323,7 +306,9 @@ void Enemy_Bot::elegirWeapon() {
 
 	}
 
-	if (listaWeapons->Buscar("Sniper")) {
+	if (weaponSystem->buscar("Sniper")) {
+
+		fm.Fuzzify("AmmoStatusSniper", weaponSystem->getAmmoSniper());
 
 		double DesSniper = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
 
@@ -336,5 +321,7 @@ void Enemy_Bot::elegirWeapon() {
 
 
 	}
+
+	weaponSystem->Equipar(bestWeapon);
 
 }
