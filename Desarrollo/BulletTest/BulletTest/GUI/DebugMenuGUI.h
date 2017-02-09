@@ -4,10 +4,17 @@
 #include <GUI.h>
 #include <Enemy_Bot.h>
 #include <EntityManager.h>
+#include <events\Event.h>
+#include <NetworkDebugger.h>
 
 class DebugMenuGUI : public Motor::GUI {
 public:
+	DebugMenuGUI();
+	~DebugMenuGUI();
+
 	virtual void update() override;
+	virtual void handleEvent(Event * ev) override;
+
 	void inicializar();
 	
 private:
@@ -25,11 +32,12 @@ private:
 	bool onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e);
 	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
 
-	void updateProgressBars();
-	void updateNetworkWindowInfo();
+	void updateProgressBars(NetworkDebugger* deb);
+	void updateNetworkWindowInfo(NetworkDebugger* deb);
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
+
 	//Network
 	CEGUI::PushButton *DebugNetwork;
 	CEGUI::DefaultWindow *NetworkWindow;

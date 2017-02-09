@@ -2,7 +2,7 @@
 #include "BasicSceneNode.h"
 
 
-BasicSceneNode::BasicSceneNode(ISceneNode* node, IVideoDriver* irrDriver) : SceneNode(irrDriver),
+BasicSceneNode::BasicSceneNode(IMeshSceneNode* node, IrrlichtDevice * irrDevice) : SceneNode(irrDevice),
 	m_node(node)
 {
 }
@@ -16,7 +16,7 @@ BasicSceneNode::~BasicSceneNode()
 
 void BasicSceneNode::setTexture(const io::path & texture, int material)
 {
-	m_node->getMaterial(material).setTexture(0, m_irrDriver->getTexture(texture));
+	m_node->getMaterial(material).setTexture(0, m_irrDevice->getVideoDriver()->getTexture(texture));
 }
 
 
@@ -55,6 +55,12 @@ void BasicSceneNode::removeChild(std::shared_ptr<SceneNode> child)
 
 ISceneNode* BasicSceneNode::getNodo() {
 	return m_node;
+}
+
+void BasicSceneNode::setColor(const Color4f & color)
+{
+	IMesh* mesh = m_node->getMesh();
+	m_irrDevice->getSceneManager()->getMeshManipulator()->setVertexColors(mesh, video::SColor(color.a, color.r, color.g, color.b));
 }
 
 void BasicSceneNode::setVisible(bool visible)

@@ -33,7 +33,7 @@ void World::inicializar()
 
 
 	//enviamos los paquetes del vida al servidor para que los cree
-	/*std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
+	std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
 	for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
 		TId tID;
 		tID.id = (*it)->getID();
@@ -47,7 +47,7 @@ void World::inicializar()
 		TId tID2;
 		tID2.id = (*it)->getID();
 		NetworkManager::i().dispatchMessage(tID2, NUEVA_ARMA);
-	}*/
+	}
 }
 
 void World::apagar()

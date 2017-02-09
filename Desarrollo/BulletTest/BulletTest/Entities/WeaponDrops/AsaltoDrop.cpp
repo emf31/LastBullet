@@ -64,6 +64,5 @@ void AsaltoDrop::handleMessage(const Message & message)
 
 bool AsaltoDrop::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	ArmaCogida();
 	return true;
 }

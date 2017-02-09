@@ -63,7 +63,6 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 
 bool RocketLauncherDrop::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	ArmaCogida();
 	return true;
 }
 

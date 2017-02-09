@@ -29,7 +29,7 @@
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) , life_component(this)
 {
 	//Registramos la entity en el trigger system
-	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
+	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola | Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
 	TriggerSystem::i().RegisterEntity(this);
 	
 
@@ -37,6 +37,8 @@ Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, 
 	m_network.reset();
 	m_network = NetworkManager::i().createNetPlayer(this);
 	m_network->inicializar();
+
+	EntityManager::i().registerRaknetEntity(this);
 
 }
 

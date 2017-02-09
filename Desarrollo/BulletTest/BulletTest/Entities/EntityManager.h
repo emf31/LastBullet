@@ -52,6 +52,8 @@ public:
 
 	//Registra una entity en el mapa
 	void registerEntity(Entity* entity);
+	//Registra una entity con representacion en la red
+	void registerRaknetEntity(Entity* entity);
 
 	//Borra una entity del mapa
 	void removeEntity(Entity* entity);

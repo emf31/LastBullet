@@ -5,6 +5,7 @@
 #include <vec3.hpp>
 #include "SceneNode.h"
 #include <memory>
+#include <Color4f.h>
 
 
 using namespace irr;
@@ -17,7 +18,7 @@ using namespace gui;
 class SceneNode
 {
 public:
-	SceneNode(IVideoDriver* irrDriver);
+	SceneNode(IrrlichtDevice * irrDevice);
 	~SceneNode();
 
 	virtual void setVisible(bool visible) = 0;
@@ -31,11 +32,11 @@ public:
 
 	virtual ISceneNode* getNodo() = 0;
 	virtual void setAnimation(int start, int end)=0;
-	virtual void updateAbsolutePosition() = 0;
+	virtual void setColor(const Color4f& color) = 0;
 
 protected:
-	IVideoDriver* m_irrDriver;
-	ISceneManager *m_irrScene;
+	IrrlichtDevice* m_irrDevice;
+
 	
 };
 

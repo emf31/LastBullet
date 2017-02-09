@@ -1,8 +1,8 @@
 #pragma once
-#include "../Entities/Entity.h"
-#include <string>
 #include "Message.h"
-#include "../Otros/SafeQueue.h"
+#include <Entity.h>
+#include <string>
+#include <queue>
 
 class MessageHandler
 {
@@ -11,11 +11,13 @@ public:
 		static MessageHandler singleton;
 		return singleton;
 	}
+
 	void update();
 	void sendMessage(const Message& message);
+	void sendMessageNow(const Message& message);
 	void borrarContenido();
 
 private:
-	SafeQueue<Message> m_messages;
+	std::queue<Message> m_messages;
 	MessageHandler() {}
 };

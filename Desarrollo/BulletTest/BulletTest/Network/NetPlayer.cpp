@@ -14,6 +14,11 @@
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
+
+#ifdef NETWORK_DEBUG
+	debugger.reset(new NetworkDebugger());
+#endif
+
 }
 
 NetPlayer::~NetPlayer()
@@ -63,6 +68,8 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			dispatchMessage(nuevoplayer, NUEVO_PLAYER);
 
+
+
 			break;
 		}
 
@@ -79,6 +86,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			e->setPosition(p.position);
 			EntityManager::i().mostrarClientes();
 
+#ifdef NETWORK_DEBUG
+			debugger->addDebugMark(e->getID());
+#endif
 
 		}
 		break;
@@ -97,7 +107,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			EntityManager::i().mostrarClientes();
 
 
-
+#ifdef NETWORK_DEBUG
+			debugger->addDebugMark(e->getID());
+#endif
 
 
 		}
@@ -112,8 +124,11 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			if (e != NULL) {
 				e->encolaMovimiento(m);
 			}
-			/*countMovementPacketsIn++;
-			sendSyncPackage(m.guid, mPacketIdentifier);*/
+			/*countMovementPacketsIn++;*/
+
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(m.guid, mPacketIdentifier);
+#endif
 		}
 		break;
 
@@ -135,7 +150,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 			bala->cargarContenido();
 
-			//sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
+#endif
 		}
 		break;
 		case IMPACTO_BALA:
@@ -145,11 +162,13 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
 
-			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(bala.damage, bala.guid);
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
+			//si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+			m_player->getLifeComponent().restaVida(bala.damage, bala.guid);
+			m_player->relojSangre.restart();
 
-			//sendSyncPackage(bala.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(bala.guid, mPacketIdentifier);
+#endif
 
 		}
 		break;
@@ -160,7 +179,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
 
-			//sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
+#endif
 
 		}
 		break;
@@ -169,12 +190,15 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		{
 			TImpactoRocket impacto = *reinterpret_cast<TImpactoRocket*>(packet->data);
 
-			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+			//si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
 			//le pasamos el damage causado por el rocket y el guid del jugador que lo disparo, para que si lo mata pueda apuntarse un punto
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojSangre.restart();
+			m_player->getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
+			m_player->relojSangre.restart();
 
-			//sendSyncPackage(impacto.guidDisparado, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(impacto.guidDisparado, mPacketIdentifier);
+#endif
+
 		}
 		break;
 
@@ -185,7 +209,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
 			ent->lanzarGranada(granada);
 
-			//sendSyncPackage(granada.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(granada.guid, mPacketIdentifier);
+#endif
 		}
 		break;
 
@@ -194,11 +220,12 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TImpulso imp = *reinterpret_cast<TImpulso*>(packet->data);
 
-			//el player siempre tendra ID=1000 asi que si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-			Player* player = (Player*)EntityManager::i().getEntity(PLAYER);
-			player->impulsar(imp.fuerza);
+			//si recibimos este mensaje es pork nos han dado a nosotros
+			m_player->impulsar(imp.fuerza);
 
-			//sendSyncPackage(imp.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(imp.guid, mPacketIdentifier);
+#endif
 		}
 		break;
 
@@ -236,7 +263,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			WeaponDrop *w = static_cast<WeaponDrop*>(EntityManager::i().getEntity(idArma.id));
 			w->ArmaCogida();
 
-			//sendSyncPackage(idArma.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(idArma.guid, mPacketIdentifier);
+#endif
+
 		}
 		break;
 
@@ -250,7 +280,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(idVida.id));
 			v->VidaCogida();
 
-			//sendSyncPackage(idVida.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(idVida.guid, mPacketIdentifier);
+#endif
 		}
 		break;
 
@@ -258,18 +290,20 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		{
 			TPlayer nuevoplayer = *reinterpret_cast<TPlayer*>(packet->data);
 
-			if (EntityManager::i().getRaknetEntity(nuevoplayer.guid)->getID() == PLAYER) {
+			Entity* ent = EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+
+			//Si ha muerto el player
+			if (ent == m_player) {
 				//es el player
 				Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 				player->resetAll();
 
 			}
-			else {
-				//es un enemigo
-				Enemy* enemigo = (Enemy*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 
-			}
-			//sendSyncPackage(nuevoplayer.guid, mPacketIdentifier);
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(nuevoplayer.guid, mPacketIdentifier);
+#endif
+
 		}
 		break;
 		case ACTUALIZA_TABLA:
@@ -290,10 +324,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			EventSystem::i().dispatchNow(killEvent);
 
-			//sendSyncPackage(guidTabla.guid, mPacketIdentifier);
 
-
-
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(guidTabla.guid, mPacketIdentifier);
+#endif
 		}
 		break;
 
@@ -306,8 +340,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			EventSystem::i().dispatchNow(deathEvent);
 
-			//sendSyncPackage(guidTabla.guid, mPacketIdentifier);
-
+#ifdef NETWORK_DEBUG
+			debugger->sendSyncPackage(guidTabla.guid, mPacketIdentifier);
+#endif
 
 		}
 		break;
@@ -344,85 +379,17 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		}
 		break;
 
-		/*case SYNC:
+		case SYNC:
 		{
-			
-			//Sync
+
+#ifdef NETWORK_DEBUG
 			TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
-			//std::cout << windowsPacketOpen << std::endl;
 
-			Enemy *e = dynamic_cast<Enemy*> (EntityManager::i().getRaknetEntity(sync.origen));
-			if (e != NULL) {
-			e->lastSyncPacket.restart();
-			if (sync.packageType != MOVIMIENTO && windowsPacketOpen) {
-			e->setVisibilidadBilboardSync();
-			}
-			}
+			debugger->receivedSyncPacket(sync);
+#endif
+			break;
+		}
 
-			switch (sync.packageType) {
-			case MOVIMIENTO:
-			{
-			countMovimiento++;
-			break;
-			}
-			case DISPARAR_BALA:
-			{
-			countDisparo++;
-			break;
-			}
-			case DISPARAR_ROCKET:
-			{
-			countDisparo++;
-			break;
-			}
-			case IMPACTO_BALA:
-			{
-			countImpacto++;
-
-			break;
-			}
-			case IMPACTO_ROCKET:
-			{
-			countImpacto++;
-			break;
-			}
-			case VIDA_COGIDA:
-			{
-			countDropVida++;
-			break;
-			}
-			case ARMA_COGIDA:
-			{
-			countDropArma++;
-			break;
-			}
-			case MUERTE:
-			{
-			countMuerte++;
-			break;
-			}
-			case LANZAR_GRANADA:
-			{
-			countGranada++;
-			break;
-			}
-			case AUMENTA_KILL:
-			{
-			countAumentaKill++;
-			break;
-			}
-			case AUMENTA_MUERTE:
-			{
-			countAumentaMuerte++;
-			break;
-			}
-			default:
-			{
-			break;
-			}
-			}
-			break;
-		}*/
 		/*case PING:
 		{
 			//Ping
@@ -438,6 +405,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			break;
 
 		}
+
+
+
 	}
 
 	/*if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC && mPacketIdentifier != PING)

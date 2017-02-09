@@ -5,6 +5,7 @@
 #include <PathFollow.h>
 #include <Player.h>
 #include <NetworkManager.h>
+#include <Color4f.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
 	life_component(this)
@@ -56,11 +57,12 @@ void Enemy_Bot::cargarContenido()
 
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
-	m_nodo.get()->setTexture("../media/body01.png", 1);
-	m_nodo.get()->setTexture("../media/head01.png", 0);
-	m_nodo.get()->setTexture("../media/m4tex.png", 2);
+	m_nodo->setTexture("../media/body01.png", 1);
+	m_nodo->setTexture("../media/head01.png", 0);
+	m_nodo->setTexture("../media/m4tex.png", 2);
 
-	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0));
+	//nodo, size, relposition, color
+	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(9, 3), Vec3<float>(0, 250, 0), Color4f(255, 0, 255, 0));
 
 	animation.addAnimation("Default", 0, 0);
 	animation.addAnimation("Run_Forwards", 1, 69);
@@ -113,7 +115,7 @@ void Enemy_Bot::handleMessage(const Message & message)
 	if (message.mensaje == "COLISION_BALA") {
 		if (life_component.isDying() == false) {
 			//TODO si la IA esta en el server habra que cambiar esta funcion
-			//Este float * es una referencia a una variable de clase asi que no hay problema
+			//Este float * es una referencia a una variable estatica asi que no hay problema
 			TImpactoBala impacto;
 			impacto.damage = *static_cast<float*>(message.data);
 			impacto.guid = m_guid;

@@ -38,9 +38,8 @@ public:
 	//Send packet to server using netplayer peer (used for global messages like kills, deaths, life objects)
 	template<typename T>
 	void dispatchMessage(T& estructura, GameMessages messageType) {
-		estructura.mID = messageType;
-			
-		m_netPlayer->peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, m_netPlayer->getServerGUID(), false);
+
+		m_netPlayer->dispatchMessage(estructura, messageType);
 	}
 
 

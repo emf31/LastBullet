@@ -1,7 +1,9 @@
 #pragma once
 #include <vec3.hpp>
+#include <Color4f.h>
 #include "BasicSceneNode.h"
 #include "AnimatedSceneNode.h"
+#include <BillboardSceneNode.h>
 #include "Camera.h"
 
 #include "irrlicht.h"
@@ -50,8 +52,8 @@ public:
 	std::shared_ptr<BasicSceneNode> createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
 	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
 
-	std::shared_ptr<SceneNode> createBillboard(std::shared_ptr<SceneNode>, Vec2f vector2d, Vec3<float> relPosition);
-	std::shared_ptr<SceneNode> createBillboardText(std::shared_ptr<SceneNode>, const std::string& text, Vec2f vector2d, Vec3<float> relPosition);
+	std::shared_ptr<SceneNode> createBillboard(std::shared_ptr<SceneNode>, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color);
+	std::shared_ptr<SceneNode> createBillboardText(std::shared_ptr<SceneNode>, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color);
 
 	const wchar_t * GetWC(const char *c);
 	

@@ -9,14 +9,9 @@
 #include <Animation.h>
 
 #include <queue>
-#include <mutex>
 
 #include <BasicSceneNode.h>
 #include <Granada.h>
-
-#include <SafeQueue.h>
-
-#include <MachineState.h>
 
 class Enemy : public Entity
 {
@@ -32,6 +27,7 @@ public:
 	virtual void cargarContenido() override;
 	virtual void borrarContenido() override;
 	virtual void setPosition(const Vec3<float> &pos) override;
+	virtual std::string getClassName() { return "Enemy"; }
 
 	void updateEnemigo(Vec3<float> pos);
 
@@ -47,7 +43,6 @@ public:
 	void encolaMovimiento(TMovimiento& mov);
 	void desencolaMovimiento();
 
-//	MachineState* GetFSM()const { return m_pStateMachine; }
 	void lanzarGranada(TGranada g);
 
 	bool isDying() { return m_isDying; }
@@ -58,10 +53,10 @@ public:
 	}
 
 	void setVisibilidadBilboardSync();
-	Clock lastSyncPacket;
+	
+
 private:
 
-	//MachineState* m_pStateMachine;
 
 	float radius;
 	float height;
@@ -75,7 +70,7 @@ private:
 	bool m_isDying;
 
 	Clock relojMuerte;
-	Clock billboardTime;
+	
 	
 
 
@@ -83,7 +78,7 @@ private:
 	std::queue<TMovimiento> m_positions;
 	
 
-	virtual std::string getClassName() { return "Enemy"; }
+	
 	
 };
 

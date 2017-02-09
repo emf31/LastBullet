@@ -20,6 +20,8 @@ public:
 
 	virtual void update() override;
 
+	virtual void handleEvent(Event * ev) override;
+
 	void updateLabelVida();
 
 	void updateLabelArma();

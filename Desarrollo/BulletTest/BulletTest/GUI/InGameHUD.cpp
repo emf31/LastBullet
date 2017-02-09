@@ -55,6 +55,10 @@ void InGameHUD::update() {
 
 }
 
+void InGameHUD::handleEvent(Event * ev)
+{
+}
+
 
 void InGameHUD::updateRelojes() {
 	hitMarker->setVisible(p->hit);

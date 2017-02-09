@@ -13,11 +13,11 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
-class BasicSceneNode : public SceneNode
+class BillboardSceneNode : public SceneNode
 {
 public:
-	BasicSceneNode(IMeshSceneNode* node, IrrlichtDevice * irrDevice);
-	~BasicSceneNode();
+	BillboardSceneNode(IBillboardSceneNode* node, IrrlichtDevice * irrDevice);
+	~BillboardSceneNode();
 
 	virtual void addChild(std::shared_ptr<SceneNode> child) override;
 	virtual void removeChild(std::shared_ptr<SceneNode> child) override;
@@ -32,10 +32,10 @@ public:
 	virtual void setAnimation(int start, int end) override {};
 	virtual void setColor(const Color4f& color) override;
 
-private:
-	IMeshSceneNode* m_node;
 
-	// Heredado vía SceneNode
-	
+private:
+	IBillboardSceneNode* m_node;
+
+
 };
 

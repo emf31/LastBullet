@@ -1,10 +1,33 @@
 #include "DebugMenuGUI.h"
 #include <Map.h>
+#include <events\DebugNetEvent.h>
 
+
+DebugMenuGUI::DebugMenuGUI() : GUI()
+{
+
+}
+
+DebugMenuGUI::~DebugMenuGUI()
+{
+}
 
 void DebugMenuGUI::update() {
-	updateProgressBars();
-	updateNetworkWindowInfo();
+	/*updateProgressBars();
+	updateNetworkWindowInfo();*/
+}
+
+void DebugMenuGUI::handleEvent(Event * ev)
+{
+	switch (ev->event_type) {
+		case E_NETWORK_DEBUGGER:
+		{
+			DebugNetEvent* deb = static_cast<DebugNetEvent*>(ev);
+			updateProgressBars(deb->m_debugger);
+			updateNetworkWindowInfo(deb->m_debugger);
+			break;
+		}
+	}
 }
 
 void DebugMenuGUI::inicializar() {
@@ -89,10 +112,10 @@ void DebugMenuGUI::inicializar() {
 
 	
 
-	botJuliyo = new Enemy_Bot("BOTJULIYO");
+	/*botJuliyo = new Enemy_Bot("BOTJULIYO");
 	botJuliyo->inicializar();
 	botJuliyo->cargarContenido();
-	botJuliyo->setPosition(Map::i().searchSpawnPoint());
+	botJuliyo->setPosition(Map::i().searchSpawnPoint());*/
 
 	/*botTonire = new Enemy_Bot("BOTTONIRE");
 	botTonire->inicializar();
@@ -112,9 +135,9 @@ bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 }
 bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
 	networkOpen = !networkOpen;
-	/*Cliente::i().windowsPacketOpen = !Cliente::i().windowsPacketOpen;
+	//Cliente::i().windowsPacketOpen = !Cliente::i().windowsPacketOpen;
 	NetworkWindow->setVisible(networkOpen);
-	NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);*/
+	//NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);
 	
 	return true;
 }
@@ -185,7 +208,7 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 
-void DebugMenuGUI::updateProgressBars() {
+void DebugMenuGUI::updateProgressBars(NetworkDebugger* deb) {
 	int numClientes = EntityManager::i().numClientes();
 	float progreso = 1 / (float)numClientes;
 	//Cliente cliente = Cliente::i();
@@ -211,7 +234,7 @@ void DebugMenuGUI::updateProgressBars() {
 
 }
 
-void DebugMenuGUI::updateNetworkWindowInfo(){
+void DebugMenuGUI::updateNetworkWindowInfo(NetworkDebugger* deb){
 	/*Cliente cliente = Cliente::i();
 
 	if (toggleCountMovement->isSelected()) {

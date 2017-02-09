@@ -16,6 +16,8 @@ Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL
 	/*m_pStateMachine = new MachineState(this);
 	m_pStateMachine->SetCurrentState(&Patrullar::i());
 	m_pStateMachine->SetGlobalState(&Patrullar::i());*/
+
+	EntityManager::i().registerRaknetEntity(this);
 }
 
 
@@ -38,16 +40,19 @@ void Enemy::update(Time elapsedTime)
 
 	updateState();
 	updateAnimation();
-	//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
+
+	/*//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
 	if (lastSyncPacket.getElapsedTime().asSeconds() >= 5) {
 		m_nodo->setTexture("../media/body01red.png", 1);
 	}
 	//si el verde supera los 2 segundos se reestablece la skin original
-	if (billboardTime.getElapsedTime().asSeconds() >= 2 && lastSyncPacket.getElapsedTime().asSeconds() < 5) {
+	if (billboardTime.getElapsedTime().asSeconds() >= 2) {
 		m_nodo->setTexture("../media/body01.png", 1);
 		billboardTime.restart();
-	}
+	}*/
+
 	isMoving = true;
+
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
@@ -70,15 +75,13 @@ void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
-	m_nodo.get()->setTexture("../media/body01.png", 1);
-	m_nodo.get()->setTexture("../media/head01.png", 0);
-	m_nodo.get()->setTexture("../media/m4tex.png", 2);
+	m_nodo->setTexture("../media/body01.png", 1);
+	m_nodo->setTexture("../media/head01.png", 0);
+	m_nodo->setTexture("../media/m4tex.png", 2);
 
-	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0));
+	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
 	
 
-	//m_renderState.setPosition(Vec3<float>(0, 100, 0));
-	billboardTime.restart();
 	animation->addAnimation("Default", 0, 0);
 	animation->addAnimation("Run_Forwards", 1, 69);
 	animation->addAnimation("Run_backwards", 70, 138);
@@ -220,7 +223,7 @@ void Enemy::lanzarGranada(TGranada g)
 
 void Enemy::setVisibilidadBilboardSync()
 {
-	m_nodo.get()->setTexture("../media/body01green.png", 1);
+	m_nodo->setTexture("../media/body01green.png", 1);
 }
 
 

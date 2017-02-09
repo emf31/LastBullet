@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Motor\AnimatedSceneNode.cpp">
-      <Filter>Source Code\Motor</Filter>
-    </ClCompile>
     <ClCompile Include="Motor\Animation.cpp">
       <Filter>Source Code\Motor</Filter>
     </ClCompile>
@@ -12,9 +9,6 @@
     </ClCompile>
     <ClCompile Include="Entities\WeaponDrops\AsaltoDrop.cpp">
       <Filter>Source Code\Entities\WeaponDrops</Filter>
-    </ClCompile>
-    <ClCompile Include="Motor\BasicSceneNode.cpp">
-      <Filter>Source Code\Motor</Filter>
     </ClCompile>
     <ClCompile Include="Motor\Camera.cpp">
       <Filter>Source Code\Motor</Filter>
@@ -99,9 +93,6 @@
     </ClCompile>
     <ClCompile Include="Entities\WeaponDrops\RocketLauncherDrop.cpp">
       <Filter>Source Code\Entities\WeaponDrops</Filter>
-    </ClCompile>
-    <ClCompile Include="Motor\SceneNode.cpp">
-      <Filter>Source Code\Motor</Filter>
     </ClCompile>
     <ClCompile Include="Otros\Time.cpp">
       <Filter>Source Code\Otros</Filter>
@@ -209,6 +200,30 @@
     <ClCompile Include="EventSystem\EventSystem.cpp">
       <Filter>Headers\EventSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Otros\DebugMarks.cpp">
+      <Filter>Headers\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\Color4f.cpp">
+      <Filter>Source Code\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetworkDebugger.cpp">
+      <Filter>Headers\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\AnimatedSceneNode.cpp">
+      <Filter>Source Code\Motor\SceneNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\BasicSceneNode.cpp">
+      <Filter>Source Code\Motor\SceneNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\SceneNode.cpp">
+      <Filter>Source Code\Motor\SceneNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\BillboardSceneNode.cpp">
+      <Filter>Source Code\Motor\SceneNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\Settings.cpp">
+      <Filter>Headers\Otros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -289,13 +304,7 @@
     <ClInclude Include="Handlers\MessageHandler.h">
       <Filter>Headers\Handlers</Filter>
     </ClInclude>
-    <ClInclude Include="Motor\AnimatedSceneNode.h">
-      <Filter>Headers\Motor</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\Animation.h">
-      <Filter>Headers\Motor</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor\BasicSceneNode.h">
       <Filter>Headers\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Motor\Camera.h">
@@ -351,9 +360,6 @@
     </ClInclude>
     <ClInclude Include="Command\ShootRocket.h">
       <Filter>Headers\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor\SceneNode.h">
-      <Filter>Headers\Motor</Filter>
     </ClInclude>
     <ClInclude Include="States\State.hpp">
       <Filter>Headers\States</Filter>
@@ -518,6 +524,33 @@
     <ClInclude Include="EventSystem\events\PlayerEvent.h">
       <Filter>Headers\EventSystem\events</Filter>
     </ClInclude>
+    <ClInclude Include="Otros\DebugMarks.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\Color4f.h">
+      <Filter>Headers\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetworkDebugger.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\events\DebugNetEvent.h">
+      <Filter>Headers\EventSystem\events</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\AnimatedSceneNode.h">
+      <Filter>Headers\Motor\SceneNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\BasicSceneNode.h">
+      <Filter>Headers\Motor\SceneNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\SceneNode.h">
+      <Filter>Headers\Motor\SceneNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\BillboardSceneNode.h">
+      <Filter>Headers\Motor\SceneNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Settings.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -636,6 +669,12 @@
     </Filter>
     <Filter Include="Headers\EventSystem\events">
       <UniqueIdentifier>{f2e09faa-e587-423a-b8b2-29f536ed3723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Motor\SceneNodes">
+      <UniqueIdentifier>{41e3170b-fac8-4d80-8ca8-84df611b95bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Motor\SceneNodes">
+      <UniqueIdentifier>{415a8231-2487-467d-8dc9-9cfbab0bd2ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

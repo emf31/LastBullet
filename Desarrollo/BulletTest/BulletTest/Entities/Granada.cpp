@@ -152,6 +152,7 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 		granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
 		granada.origen = m_renderState.getPosition();
 		granada.direction = direccion;
+
 		NetworkManager::i().dispatchMessage(granada, LANZAR_GRANADA);
 		
 		//logica granada servidor: 
@@ -176,6 +177,8 @@ void Granada::serverShoot(TGranada& g) {
 		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 		proxy->m_collisionFilterMask = col::rocketCollidesWith;
+
+		m_nodo->setVisible(true);
 
 		//nos guardamos el guid de la persona que lanza por si luego lo mata poder actualizar la tabla
 		guidLanzador = g.guid;

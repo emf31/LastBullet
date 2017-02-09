@@ -5,6 +5,7 @@
 #include <CEGUI/RendererModules/Irrlicht/Renderer.h>
 
 #include "../MastEventReceiver.hpp"
+#include <EventListener.h>
 
 
 struct vec4f{
@@ -12,13 +13,20 @@ struct vec4f{
 };
 
 namespace Motor{
-	class GUI {
+	class GUI : public EventListener {
+
 	public:
+		GUI();
+		~GUI();
+
 		void init(const std::string& resourcesPath, irr::IrrlichtDevice *device);
 		void destroy();
 		void draw();
 
-		virtual void update()=0;
+		virtual void update() = 0;
+
+		// Heredado vía EventListener
+		virtual void handleEvent(Event * ev) = 0;
 
 		void loadScheme(const std::string& schemeFile);
 		void setFont(const std::string& fontFile);
@@ -54,22 +62,25 @@ namespace Motor{
 
 
 		static void setWidgetDestRect(CEGUI::Window* widget, const vec4f& destRectPerc, const vec4f& destRectPix);
+
 		//Getters
 		CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
-		//CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_rendererIrrlicht; }
 		const CEGUI::GUIContext* getContext() { return m_context; }
 
 		bool debugInput = false;
 
 	private:
 		CEGUI::OpenGL3Renderer* m_renderer;
-		//CEGUI::IrrlichtRenderer* m_rendererIrrlicht;
+
 		CEGUI::GUIContext* m_context = nullptr;
 
 		CEGUI::Window* m_root = nullptr;
 
 		unsigned int m_lastTime = 0;
 		
+
+		
+
 	};
 }
 

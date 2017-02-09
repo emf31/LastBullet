@@ -215,6 +215,7 @@ int main() {
 
 				EntityManager::i().notificarMuerte(p_struct, peer);
 
+
 			}
 			break;
 

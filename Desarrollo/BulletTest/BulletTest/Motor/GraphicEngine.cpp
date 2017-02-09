@@ -17,12 +17,13 @@ GraphicEngine::GraphicEngine() : debug_camera(true)
 
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
-	ISceneNode *Node;
+	IMeshSceneNode *Node;
 	if(mesh!="")
 		Node = irrScene->addMeshSceneNode(irrScene->getMesh(mesh));
 	else
 		Node = irrScene->addCubeSceneNode(2.0f);
 
+	
 	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
 	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
 	//Asi no le afectan las luces
@@ -37,7 +38,7 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(Node, irrDriver));
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(Node, irrDevice));
 }
 
 std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
@@ -63,18 +64,19 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 	
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDriver));
+	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDevice));
 }
 
-std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, Vec2f vector2d, Vec3<float> relPosition) {
+std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
 
 	IBillboardSceneNode *billboard = irrScene->addBillboardSceneNode(nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
-	billboard->setSize(core::dimension2df(9, 3));
-	billboard->setPosition(core::vector3df(0, 250, 0));
-	billboard->setColor(video::SColor(255, 0, 255, 0));
-	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
+	billboard->setSize(core::dimension2df(vector2d.x, vector2d.y));
+	billboard->setPosition(core::vector3df(relPosition.getX(), relPosition.getY(), relPosition.getZ()));
+	billboard->setColor(video::SColor(color.a, color.r, color.g, color.b));
+
+	return std::shared_ptr<BillboardSceneNode>(new BillboardSceneNode(billboard, irrDevice));
 }
-std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, Vec2f vector2d, Vec3<float> relPosition) {
+std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
 
 	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
 
@@ -90,7 +92,7 @@ std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<Sc
 
 	
 	
-	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
+	return std::shared_ptr<BillboardSceneNode>(new BillboardSceneNode(billboard, irrDevice));
 }
 
 const wchar_t * GraphicEngine::GetWC(const char *c)

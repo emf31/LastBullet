@@ -2,7 +2,7 @@
 #include "AnimatedSceneNode.h"
 
 
-AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver* irrDriver) : SceneNode(irrDriver),
+AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IrrlichtDevice * irrDevice) : SceneNode(irrDevice),
 	m_node(node)
 {
 }
@@ -10,13 +10,12 @@ AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver*
 
 AnimatedSceneNode::~AnimatedSceneNode()
 {
-	m_node = nullptr;
-	m_irrDriver = nullptr;
+
 }
 
 void AnimatedSceneNode::setTexture(const io::path & texture, int material)
 {
-	m_node->getMaterial(material).setTexture(0, m_irrDriver->getTexture(texture));
+	m_node->getMaterial(material).setTexture(0, m_irrDevice->getVideoDriver()->getTexture(texture));
 }
 
 

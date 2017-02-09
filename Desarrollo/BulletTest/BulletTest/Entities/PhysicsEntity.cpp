@@ -25,14 +25,12 @@ void PhysicsEntity::setCollisionMask(int mask) {
 
 void PhysicsEntity::rotate(Vec3<float> rot)
 {
-	btTransform tr;
-	tr.setIdentity();
+
 	btQuaternion quat;
 	quat.setEulerZYX(rot.getX(), rot.getY(), rot.getZ()); //or quat.setEulerZYX depending on the ordering you want
-	tr.setRotation(quat);
 
 	m_rigidBody->getWorldTransform().setRotation(quat);
-	//m_rigidBody->setCenterOfMassTransform(tr);
+
 }
 
 void PhysicsEntity::inicializar()

@@ -87,7 +87,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;NETWORK_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -199,6 +199,7 @@
     <ClInclude Include="Entities\Weapons\Weapon.h" />
     <ClInclude Include="EventSystem\EventListener.h" />
     <ClInclude Include="EventSystem\EventSystem.h" />
+    <ClInclude Include="EventSystem\events\DebugNetEvent.h" />
     <ClInclude Include="EventSystem\events\Event.h" />
     <ClInclude Include="EventSystem\events\KillEvent.h" />
     <ClInclude Include="EventSystem\events\MuerteEvent.h" />
@@ -233,8 +234,10 @@
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
+    <ClInclude Include="Motor\BillboardSceneNode.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\CameraShake.h" />
+    <ClInclude Include="Motor\Color4f.h" />
     <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\GunRecoil.h" />
@@ -247,13 +250,16 @@
     <ClInclude Include="Network\Lobby.h" />
     <ClInclude Include="Network\NetObject.h" />
     <ClInclude Include="Network\NetPlayer.h" />
+    <ClInclude Include="Network\NetworkDebugger.h" />
     <ClInclude Include="Network\NetworkManager.h" />
     <ClInclude Include="Otros\Clock.hpp" />
+    <ClInclude Include="Otros\DebugMarks.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
     <ClInclude Include="Otros\PriorityQueue.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
+    <ClInclude Include="Otros\Settings.h" />
     <ClInclude Include="Otros\Time.hpp" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\Vec2f.h" />
@@ -314,8 +320,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
     <ClCompile Include="Motor\Animation.cpp" />
+    <ClCompile Include="Motor\BillboardSceneNode.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\CameraShake.cpp" />
+    <ClCompile Include="Motor\Color4f.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\GunRecoil.cpp" />
     <ClCompile Include="Motor\MapLoader.cpp" />
@@ -326,11 +334,14 @@
     <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Network\NetObject.cpp" />
     <ClCompile Include="Network\NetPlayer.cpp" />
+    <ClCompile Include="Network\NetworkDebugger.cpp" />
     <ClCompile Include="Network\NetworkManager.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
+    <ClCompile Include="Otros\DebugMarks.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
     <ClCompile Include="Otros\PriorityQueue.cpp" />
+    <ClCompile Include="Otros\Settings.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Vec2f.cpp" />

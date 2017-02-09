@@ -1,6 +1,5 @@
 #include "LifeComponent.h"
 #include <Player.h>
-#include <Cliente.h>
 #include <Map.h>
 #include <NetworkManager.h>
 

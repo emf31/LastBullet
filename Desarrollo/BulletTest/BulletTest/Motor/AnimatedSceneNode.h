@@ -17,7 +17,7 @@ using namespace gui;
 class AnimatedSceneNode : public SceneNode
 {
 public:
-	AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver* irrDriver);
+	AnimatedSceneNode(IAnimatedMeshSceneNode* node, IrrlichtDevice * irrDevice);
 	~AnimatedSceneNode();
 
 	virtual void addChild(std::shared_ptr<SceneNode> child) override;
@@ -32,10 +32,8 @@ public:
 	virtual ISceneNode* getNodo() override;
 	virtual void setVisible(bool visible) override;
 	virtual void setAnimation(int start,int end) override;
-
-	virtual void updateAbsolutePosition() override {
-		m_node->updateAbsolutePosition();
-	}
+	virtual void setColor(const Color4f& color) override { }
+	
 
 private:
 	IAnimatedMeshSceneNode* m_node;

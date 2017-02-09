@@ -1,5 +1,7 @@
 #pragma once
 #include <NetObject.h>
+#include <NetworkDebugger.h>
+#include <memory>
 
 //Forward declaration - prevents circular reference
 class Player;
@@ -23,5 +25,9 @@ public:
 
 private:
 	Player* m_player;
+
+#ifdef NETWORK_DEBUG
+	std::shared_ptr<NetworkDebugger> debugger;
+#endif
 
 };

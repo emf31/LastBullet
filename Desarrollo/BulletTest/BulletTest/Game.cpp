@@ -12,6 +12,7 @@
 #include <GraphicEngine.h>
 #include <SceneNode.h>
 #include <MessageHandler.h>
+#include <EventSystem.h>
 #include <StateStack.hpp>
 #include <MapLoader.h>
 #include <RakPeerInterface.h>
@@ -144,7 +145,7 @@ void Game::inicializar()
 	printf("Introduce un nombre \n");
 	std::cin >> str;
 
-	Player *player = new Player(str);
+	Player *player = new Player(str, RakNet::UNASSIGNED_RAKNET_GUID);
 
 
 	
@@ -260,6 +261,7 @@ void Game::update(Time elapsedTime)
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
 
+
 	EntityManager::i().update(elapsedTime);
 
 	TriggerSystem::i().Update();
@@ -267,6 +269,8 @@ void Game::update(Time elapsedTime)
 	PhysicsEngine::i().notifyCollisions();
 
 	MessageHandler::i().update();
+
+	EventSystem::i().update();
 
 	GUIManager::i().updateAllGuis();
 

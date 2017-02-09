@@ -95,11 +95,14 @@ void EntityManager::registerEntity(Entity * entity)
 	//si todo ha ido bien le asignamos el entity al map
 	m_entities[entity->getID()] = entity;
 
+}
+
+void EntityManager::registerRaknetEntity(Entity * entity) 
+{
 	//Si la entity tiene GUID la añadimos a la lista de jugadores
 	if (entity->getGuid() != RakNet::UNASSIGNED_RAKNET_GUID) {
 		m_jugadores[RakNet::RakNetGUID::ToUint32(entity->getGuid())] = entity;
 	}
-
 }
 
 void EntityManager::removeEntity(Entity * entity)
