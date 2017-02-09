@@ -35,11 +35,10 @@ void SensoryMemory::updateVision()
 				else {
 					mymemory.m_inFOV = false;
 				}
-				mymemory.m_inFOV = false;
-				mymemory.m_isShootable = false;
 			}
 			else {
-
+				mymemory.m_inFOV = false;
+				mymemory.m_isShootable = false;
 			}
 
 
@@ -102,7 +101,12 @@ std::list<Entity*> SensoryMemory::GetListOfRecentlySensedEnemies() const
 {
 	//TODO
 	std::list<Entity*>myEnemies;
-	double currentTime;
+	double currentTime = sensoryClock.getElapsedTime().asSeconds();
+	for (auto it = m_botMemory.begin(); it != m_botMemory.end(); ++it) {
+		if (currentTime - (*it).second.m_lastTimeSensed <= m_memorySpan){
+			myEnemies.push_back((*it).first);
+		}
+	}
 	return myEnemies;
 }
 

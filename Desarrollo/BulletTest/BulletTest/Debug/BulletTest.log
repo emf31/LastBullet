@@ -5,19 +5,7 @@ c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\uti
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\ia\sensorysystem\sensorymemory.cpp(89): warning C4101: 'currentTime': variable local sin referencia
-  Enemy_Bot.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(23): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(28): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(33): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(38): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(54): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\ia\sensorysystem\sensorymemory.cpp(105): warning C4101: 'currentTime': variable local sin referencia
   Generando código...
   Compilando...
   main.cpp
@@ -59,6 +47,18 @@ c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\proper
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
+  Enemy_Bot.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(23): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(28): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(33): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(38): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(54): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
   Generando código...
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
