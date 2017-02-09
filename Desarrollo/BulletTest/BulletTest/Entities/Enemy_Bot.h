@@ -54,15 +54,16 @@ public:
 
 	void elegirWeapon();
 
-	Vec3<float> getFacing();
+	Vec2f getFacing();
+
+	float getFOV();
 
 private:
-
-	bool siguiendo = false;
 
 	float radius;
 	float height;
 	float mass;
+	float FOV;
 
 	double calcularDesirability(FuzzyModule& fm, double dist, double ammo);
 

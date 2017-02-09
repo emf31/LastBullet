@@ -20,10 +20,25 @@ void SensoryMemory::updateVision()
 
 			if (!isRaycastObstructed(*it)) {
 				std::cout << "Raycast OK" << std::endl;
-				
+				mymemory.m_isShootable = true;
 				if (isInFOV(*it)) {
+					//mymemory.m_inFOV = true;
+					mymemory.m_lastTimeSensed = sensoryClock.getElapsedTime().asSeconds();
+					mymemory.m_lastTimeVisible = sensoryClock.getElapsedTime().asSeconds();
+					mymemory.m_lastPosition = (*it)->getRenderState()->getPosition();
+					if(!mymemory.m_inFOV){
+						mymemory.m_inFOV = true;
+						mymemory.m_TimeBecameVisible = mymemory.m_lastTimeSensed;
+					}
 					std::cout << "Te veo" << std::endl;
 				}
+				else {
+					mymemory.m_inFOV = false;
+				}
+				mymemory.m_inFOV = false;
+				mymemory.m_isShootable = false;
+			}
+			else {
 
 			}
 
@@ -53,8 +68,8 @@ bool SensoryMemory::isEnemyInFOV(Entity * ent) const
 bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 {
 	//****************************RayCast central***************************************
-	btVector3 start = btVector3(m_bot->getRenderPosition().getX(), m_bot->getRenderPosition().getY(), m_bot->getRenderPosition().getZ());
-	btVector3 target = btVector3(ent->getRenderPosition().getX(), ent->getRenderPosition().getY(), ent->getRenderPosition().getZ());
+	btVector3 start = btVector3(m_bot->getRenderState()->getPosition().getX(), m_bot->getRenderState()->getPosition().getY(), m_bot->getRenderState()->getPosition().getZ());
+	btVector3 target = btVector3(ent->getRenderState()->getPosition().getX(), ent->getRenderState()->getPosition().getY(), ent->getRenderState()->getPosition().getZ());
 
 	btCollisionWorld::ClosestRayResultCallback ray(start, target);
 
@@ -74,18 +89,18 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 
 bool SensoryMemory::isInFOV(Entity * ent) const
 {
-	Vec3<float>aux = m_bot->getFacing();
-	Vec2f facing = Vec2f(aux.getX(), aux.getY());
+	Vec2f facing = m_bot->getFacing();
 	Vec2f pos1 = Vec2f(m_bot->getRenderPosition().getX(), m_bot->getRenderPosition().getZ());
 	Vec2f pos2 = Vec2f(ent->getRenderPosition().getX(), ent->getRenderPosition().getZ());
 
 	Vec2f vector = Vec2f(pos2 - pos1).Normalize();
 
-	return facing.Dot(vector) >= cos(DegToRad(90) / 2.0);
+	return facing.Dot(vector) >= m_bot->getFOV();
 }
 
 std::list<Entity*> SensoryMemory::GetListOfRecentlySensedEnemies() const
 {
+	//TODO
 	std::list<Entity*>myEnemies;
 	double currentTime;
 	return myEnemies;

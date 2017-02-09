@@ -4,6 +4,7 @@
 #include <EntityManager.h>
 #include <vec3.hpp>
 #include <map>
+#include <Clock.hpp>
 
 class Enemy_Bot;
 
@@ -17,6 +18,8 @@ private:
 	std::map<Entity*, Memory> m_botMemory;
 
 	double m_memorySpan;
+
+	Clock sensoryClock;
 
 	void updateNewEnemies(Entity* ent);
 

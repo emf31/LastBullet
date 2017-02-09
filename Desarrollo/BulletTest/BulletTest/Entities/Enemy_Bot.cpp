@@ -50,6 +50,9 @@ void Enemy_Bot::inicializar()
 
 	sense = new SensoryMemory(this,20);
 
+	//angulo de vision
+	FOV = cos(cos(DegToRad(45)) / 2.0); ;
+
 	/*
 	FuzzyModule fm;
 
@@ -112,9 +115,14 @@ void Enemy_Bot::elegirWeapon() {
 
 }
 
-Vec3<float> Enemy_Bot::getFacing()
+Vec2f Enemy_Bot::getFacing()
 {
-	return m_renderState.getRotation();
+	return m_vHeading;
+}
+
+float Enemy_Bot::getFOV()
+{
+	return FOV;
 }
 
 void Enemy_Bot::update(Time elapsedTime)
