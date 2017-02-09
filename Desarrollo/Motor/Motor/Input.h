@@ -7,7 +7,8 @@
 #include "Camera.h"
 class Input {
 public:
-
+	bool rotarDerecha;
+	bool rotarIzquierda;
 	// Camara
 	Camera camera;
 

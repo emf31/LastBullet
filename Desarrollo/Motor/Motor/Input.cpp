@@ -41,5 +41,18 @@ void Input::Do_Movement(GLfloat deltaTime) {
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (keys[GLFW_KEY_D])
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+	if (keys[GLFW_KEY_R]) {
+		rotarDerecha = true;
+	}
+	else {
+		rotarDerecha = false;
+	}
+		
+	if (keys[GLFW_KEY_T]) {
+		rotarIzquierda = true;
+	}
+	else {
+		rotarIzquierda = false;
+	}
 
 }

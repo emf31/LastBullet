@@ -99,6 +99,8 @@ int EngineDevice::getFPS() {
 void EngineDevice::doMovement() {
 	glfwPollEvents();
 	input.Do_Movement(deltaTime);
+	m_rotarDerecha = &Input::rotarDerecha;
+	m_rotarIzquierda = &Input::rotarIzquierda;
 }
 
 void EngineDevice::end() {

@@ -58,25 +58,16 @@ public:
 
 	virtual void endDraw(glm::mat4& matrizActual);
 
-	void setPosition(Vec3<float> pos) {
-		transTraslacion->setPosition(pos);
-	}
-	void setRotation(Vec3<float> rot) {
-		transRotacion->setRotation(rot);
-	}
-	void setScale(Vec3<float> esc) {
-		transEscalado->setScale(esc);
-	}
-
-	void setTransformacionRotacion(TTransform* rot) {
-		transRotacion = rot;
-	}
-	void setTransformacionEscalado(TTransform* esc) {
-		transEscalado = esc;
-	}
-	void setTransformacionTraslacion(TTransform* tras) {
-		transTraslacion = tras;
-	}
+	void setPosition(Vec3<float> pos);
+	void setRotation(Vec3<float> rot);
+	void setScale(Vec3<float> esc);
+	Vec3<float> getRotation();
+	Vec3<float> getPosition();
+	Vec3<float> getScale();
+	void setTransformacionRotacion(TTransform* rot);
+	void setTransformacionEscalado(TTransform* esc);
+	void setTransformacionTraslacion(TTransform* tras);
+	
 	
 
 private:

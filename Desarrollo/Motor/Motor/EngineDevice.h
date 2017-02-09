@@ -25,6 +25,9 @@ class EngineDevice {
 public:
 	EngineDevice();
 	~EngineDevice();
+
+	bool m_rotarDerecha;
+	bool m_rotarIzquierda;
 	
 	bool createEngineDevice(int screenWidth, int screenHeight, std::string titleWindow);
 	

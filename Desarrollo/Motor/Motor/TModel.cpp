@@ -150,3 +150,41 @@ void TModel::endDraw(glm::mat4& matrizActual) {
 	//std::cout << u8"Adiós" << std::endl;
 	//TEntity::endDraw();
 }
+
+void TModel::setPosition(Vec3<float> pos) {
+	transTraslacion->setPosition(pos);
+}
+
+void TModel::setRotation(Vec3<float> rot) {
+	transRotacion->setRotation(rot);
+}
+
+void TModel::setScale(Vec3<float> esc) {
+	transEscalado->setScale(esc);
+}
+
+void TModel::setTransformacionRotacion(TTransform * rot) {
+	transRotacion = rot;
+}
+
+void TModel::setTransformacionEscalado(TTransform * esc) {
+	transEscalado = esc;
+}
+
+void TModel::setTransformacionTraslacion(TTransform * tras) {
+	transTraslacion = tras;
+}
+
+Vec3<float> TModel::getRotation() {
+	return transRotacion->getRotation();
+}
+
+Vec3<float> TModel::getPosition()
+{
+	return transTraslacion->getPosition();
+}
+
+Vec3<float> TModel::getScale()
+{
+	return transEscalado->getScale();
+}

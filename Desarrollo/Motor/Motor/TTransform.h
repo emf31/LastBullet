@@ -20,25 +20,15 @@ public:
 	void scale(float s1, float s2, float s3);
 	*/
 
-	void setPosition(Vec3<float> position) {
-		m_position = glm::vec3(position.getX(), position.getY(), position.getZ());
-	}
-	void setScale(Vec3<float> scale) {
-		m_scale = glm::vec3(scale.getX(), scale.getY(), scale.getZ());
-	}
-	void setRotation(Vec3<float> rotation) {
-
-		const glm::vec3 a = m_rotation;
-		const glm::vec3 b = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
-		m_rotation = glm::cross(b, a);
-		angulo = acos(glm::dot(b, a) / (glm::length(b) * glm::length(a)));
-
-		
-	}
+	void setPosition(Vec3<float> position);
+	void setScale(Vec3<float> scale);
+	void setRotation(Vec3<float> rotation);
+	Vec3<float> getRotation();
+	Vec3<float> getPosition();
+	Vec3<float> getScale();
 
 	void multiply(glm::mat4 mat);
 	void multiply(glm::vec4 vec);
-
 	void loadMatrix(glm::mat4 mat);
 
 	
@@ -49,6 +39,7 @@ public:
 private: 
 	glm::vec3 m_scale;
 	glm::vec3 m_position;
+	glm::vec3 m_origen;
 	glm::vec3 m_rotation;
 	glm::mat4 m_matrix;
 	float angulo;

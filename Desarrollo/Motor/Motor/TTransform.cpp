@@ -4,7 +4,8 @@
 TTransform::TTransform() {
 
 	m_scale = glm::vec3(1.f);
-	m_position = glm::vec3(1.f);
+	m_position = glm::vec3(0.f);
+	m_origen = glm::vec3(0.f);
 	m_rotation = glm::vec3(1.f);
 	m_matrix = glm::mat4();
 	angulo = 0.0f;
@@ -21,6 +22,20 @@ void TTransform::transpose() {
 
 void TTransform::invert() {
 	m_matrix = glm::inverse(m_matrix);
+}
+void TTransform::setPosition(Vec3<float> position) {
+	m_position = glm::vec3(position.getX(), position.getY(), position.getZ());
+}
+void TTransform::setScale(Vec3<float> scale) {
+	m_scale = glm::vec3(scale.getX(), scale.getY(), scale.getZ());
+}
+void TTransform::setRotation(Vec3<float> rotation) {
+	
+	glm::vec3 a = m_rotation;
+	glm::vec3 b = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
+	m_rotation = glm::cross(b, a);
+	angulo = acos(glm::dot(b, a) / (glm::length(b) * glm::length(a)));
+
 }
 /*
 Esto ya no lo tenemos asi porque cuando llamas a trasladar y rotar lo que hace es cambiar los vectores correspondientes
@@ -41,6 +56,15 @@ void TTransform::scale(float s1, float s2, float s3) {
 	m_matrix = glm::scale(m_matrix, glm::vec3(s1,s2,s3));
 }
 */
+Vec3<float> TTransform::getRotation() {
+	return Vec3<float>(m_rotation.x, m_rotation.y, m_rotation.z);
+}
+Vec3<float> TTransform::getPosition() {
+	return Vec3<float>(m_position.x, m_position.y, m_position.z);
+}
+Vec3<float> TTransform::getScale() {
+	return Vec3<float>(m_scale.x, m_scale.y, m_scale.z);
+}
 void TTransform::multiply(glm::mat4 mat) {
 	m_matrix = m_matrix * mat;
 }
@@ -59,9 +83,13 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 {
 	m_matrix = matrizActual;
 
+	//matrizActual = glm::translate(matrizActual, m_origen);
+	//matrizActual = glm::rotate(matrizActual, 90.f, m_rotation);
 	matrizActual = glm::rotate(matrizActual, angulo, m_rotation);
 	matrizActual = glm::scale(matrizActual, m_scale);
 	matrizActual = glm::translate(matrizActual, m_position);
+	
+	
 }
 
 void TTransform::endDraw(glm::mat4& matrizActual)
