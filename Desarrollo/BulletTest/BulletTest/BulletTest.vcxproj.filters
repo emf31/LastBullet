@@ -244,6 +244,9 @@
     <ClCompile Include="IA\FuzzyLogic\FzSet.cpp">
       <Filter>Source Code\IA\FuzzyLogic\FuzzySets</Filter>
     </ClCompile>
+    <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp">
+      <Filter>Headers\IA\SensorySystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -598,6 +601,12 @@
     <ClInclude Include="IA\FuzzyLogic\FzVery.h">
       <Filter>Headers\IA\FuzzyLogic\FuzzyHedges</Filter>
     </ClInclude>
+    <ClInclude Include="IA\SensorySystem\Memory.h">
+      <Filter>Headers\IA\SensorySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\SensorySystem\SensoryMemory.h">
+      <Filter>Headers\IA\SensorySystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -740,6 +749,9 @@
     </Filter>
     <Filter Include="Source Code\IA\FuzzyLogic\FuzzyEdges">
       <UniqueIdentifier>{dc76c85f-e97e-49b2-98df-8b36c21dee0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\SensorySystem">
+      <UniqueIdentifier>{3a2b4a81-f816-4e76-b172-c7bbe15fd172}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

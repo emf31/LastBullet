@@ -12,7 +12,7 @@ Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity
 
 Enemy_Bot::~Enemy_Bot()
 {
-
+	delete sense;
 }
 
 void Enemy_Bot::inicializar()
@@ -47,6 +47,8 @@ void Enemy_Bot::inicializar()
 	listaWeapons->insertar(pistola);
 	listaWeapons->insertar(rocket);
 	sniper->setEquipada(true);
+
+	sense = new SensoryMemory(this,20);
 
 	/*
 	FuzzyModule fm;
@@ -110,6 +112,11 @@ void Enemy_Bot::elegirWeapon() {
 
 }
 
+Vec3<float> Enemy_Bot::getFacing()
+{
+	return m_renderState.getRotation();
+}
+
 void Enemy_Bot::update(Time elapsedTime)
 {
 
@@ -131,6 +138,8 @@ void Enemy_Bot::update(Time elapsedTime)
 	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
 
 	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+
+	sense->updateVision();
 
 	
 }

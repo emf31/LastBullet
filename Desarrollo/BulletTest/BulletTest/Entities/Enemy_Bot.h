@@ -12,6 +12,7 @@
 #include "Weapons/RocketLauncher.h"
 #include "Weapons/Sniper.h"
 #include "FuzzyLogic\FuzzyModule.h"
+#include <SensorySystem\SensoryMemory.h>
 
 class PathPlanner;
 class PathFollow;
@@ -52,6 +53,8 @@ public:
 	void createPathToItem(const std::string& tipo);
 
 	void elegirWeapon();
+
+	Vec3<float> getFacing();
 
 private:
 
@@ -98,6 +101,8 @@ private:
 	KinematicCharacterController* p_controller;
 
 	LifeComponent life_component;
+
+	SensoryMemory* sense;
 
 	friend class PathPlanner;
 };
