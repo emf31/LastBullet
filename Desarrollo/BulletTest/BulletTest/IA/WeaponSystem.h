@@ -5,6 +5,7 @@
 #include "Weapons/Sniper.h"
 #include "../Otros/Lista.h"
 #include <Vec2f.h>
+#include <Transformations.h>
 
 
 class Enemy_Bot;
@@ -35,6 +36,7 @@ public:
 
 	Vec2f PredictFuturePositionOfTarget()const;
 	void AddNoiseToAim(Vec2f& AimingPos) const;
+
 
 private:
 

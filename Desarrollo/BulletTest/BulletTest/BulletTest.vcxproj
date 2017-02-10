@@ -266,6 +266,7 @@
     <ClInclude Include="Observer\events\PlayerEvent.h" />
     <ClInclude Include="Observer\Observer.h" />
     <ClInclude Include="Observer\Subject.h" />
+    <ClInclude Include="Otros\C2DMatrix.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\EnumParser.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
@@ -274,6 +275,7 @@
     <ClInclude Include="Otros\PriorityQueue.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Time.hpp" />
+    <ClInclude Include="Otros\Transformations.h" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />

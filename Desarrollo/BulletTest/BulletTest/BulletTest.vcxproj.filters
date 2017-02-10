@@ -613,6 +613,12 @@
     <ClInclude Include="IA\SensorySystem\SensoryMemory.h">
       <Filter>Headers\IA\SensorySystem</Filter>
     </ClInclude>
+    <ClInclude Include="Otros\C2DMatrix.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\Transformations.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

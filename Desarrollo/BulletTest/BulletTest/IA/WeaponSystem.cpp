@@ -34,3 +34,14 @@ void WeaponSystem::TakeAimAndShoot()const
 void WeaponSystem::Equipar(std::string weapon) {
 	listaWeapons->Equipar(weapon);
 }
+
+void WeaponSystem::AddNoiseToAim(Vec2f& AimingPos)const {
+
+//	Vec2f toPos = AimingPos - m_pOwner->Pos();
+
+//	Vec2DRotateAroundOrigin(toPos, Randf(-m_dAimAccuracy, m_dAimAccuracy));
+
+//	AimingPos = toPos + m_pOwner->Pos();
+
+}
+
