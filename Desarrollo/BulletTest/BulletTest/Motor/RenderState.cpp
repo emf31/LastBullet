@@ -103,7 +103,7 @@ Vec3<float> RenderState::getVelocity() {
 }
 Vec3<float> RenderState::getRenderPos()
 {
-	return m_renderPos;;
+	return m_renderPos;
 }
 Vec3<float> RenderState::getRenderRotation()
 {

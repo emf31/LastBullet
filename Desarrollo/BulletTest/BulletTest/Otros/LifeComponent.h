@@ -5,7 +5,7 @@
 
 class LifeComponent {
 public:
-	LifeComponent(Entity* player);
+	LifeComponent(Entity* owner);
 	~LifeComponent();
 
 	void restaVida(float cantidad, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
@@ -23,5 +23,5 @@ private:
 	bool m_isDying;
 	Clock relojMuerte;
 
-	Entity* m_player;
+	Entity* m_pOwner;
 };

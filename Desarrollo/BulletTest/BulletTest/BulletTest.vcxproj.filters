@@ -250,6 +250,9 @@
     <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp">
       <Filter>Source Code\IA\SensorySystem</Filter>
     </ClCompile>
+    <ClCompile Include="IA\TargetingSystem.cpp">
+      <Filter>Source Code\IA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -618,6 +621,9 @@
     </ClInclude>
     <ClInclude Include="Otros\Transformations.h">
       <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\TargetingSystem.h">
+      <Filter>Headers\IA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

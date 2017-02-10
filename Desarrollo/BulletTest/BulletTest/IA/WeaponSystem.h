@@ -8,6 +8,8 @@
 #include <Transformations.h>
 
 
+
+
 class Enemy_Bot;
 
 class WeaponSystem
@@ -35,7 +37,7 @@ public:
 
 
 	Vec2f PredictFuturePositionOfTarget()const;
-	void AddNoiseToAim(Vec2f& AimingPos) const;
+	void AddNoiseToAim(Vec3<float>& AimingPos) const;
 
 
 private:

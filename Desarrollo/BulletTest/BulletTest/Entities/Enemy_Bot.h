@@ -7,6 +7,8 @@
 #include <NavGraphNode.h>
 #include <LifeComponent.h>
 
+#include "../Otros/LifeComponent.h"
+
 #include "FuzzyLogic\FuzzyModule.h"
 #include <SensorySystem\SensoryMemory.h>
 
@@ -35,12 +37,15 @@ public:
 	virtual void setPosition(const Vec3<float> &pos) override;
 
 
+
 	float getRadio() const { return radius; }
 
 	//Devolvemos el path planning
 	PathPlanner* getPathPlanning() const { return m_PathPlanner; }
 
 	LifeComponent& getLifeComponent() { return life_component; }
+
+	SensoryMemory* const GetSensoryMemory()const { return sense; }
 
 	//Devuelve true si el bot esta en esa posicion
 	bool isAtPosition(Vec2f pos);
@@ -57,8 +62,11 @@ public:
 	Vec2f getFacing();
 
 	float getFOV();
+
+
 private:
 	
+
 
 	float radius;
 	float height;
