@@ -122,19 +122,7 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
 
 
-						std::cout << "Posicion del target:" << std::endl;
-						std::cout << posTarget.getX() << std::endl;
-						std::cout << posTarget.getY() << std::endl;
-						std::cout << posTarget.getZ() << std::endl;
 
-
-						std::cout << "Posicion de la colision:" << std::endl;
-						std::cout << ent->getRenderPosition().getX() << std::endl;
-						std::cout << ent->getRenderPosition().getY() << std::endl;
-						std::cout << ent->getRenderPosition().getZ() << std::endl;
-
-						std::cout<<std::endl;
-						
 						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
 							std::cout << "ZIfdsffsdZU" << std::endl;
 
@@ -143,6 +131,22 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 						}
 						//Para mover objetos del mapa
 						posicionImpacto = ray.m_hitPointWorld;
+
+						std::cout << "Posicion del target:" << std::endl;
+						std::cout << posTarget.getX() << std::endl;
+						std::cout << posTarget.getY() << std::endl;
+						std::cout << posTarget.getZ() << std::endl;
+
+
+						std::cout << "Posicion de la colision:" << std::endl;
+						std::cout << posicionImpacto.getX() << std::endl;
+						std::cout << posicionImpacto.y() << std::endl;
+						std::cout << posicionImpacto.z() << std::endl;
+
+						std::cout << std::endl;
+
+						std::cout << "Tipo de entidad del RayCast: ";
+						std::cout << ent->getClassName()<< std::endl;
 
 						if (ent->getClassName() == "PhysicsEntity") {
 							btRigidBody::upcast(ray.m_collisionObject)->activate(true);
