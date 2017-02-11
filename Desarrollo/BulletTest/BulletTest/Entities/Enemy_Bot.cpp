@@ -21,8 +21,11 @@ void Enemy_Bot::inicializar()
 	m_PathFollow = new PathFollow(this);
 
 
+	targetingSystem = new TargetingSystem(this);
+
 	weaponSystem = new WeaponSystem(this, 1, 1, 1);
 	weaponSystem->Inicializar();
+
 
 	sense = new SensoryMemory(this,20);
 
@@ -173,6 +176,7 @@ void Enemy_Bot::borrarContenido()
 	delete m_PathPlanner;
 	delete sense;
 	delete weaponSystem;
+	delete targetingSystem;
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 

@@ -51,6 +51,7 @@ inline float Vec2DDistanceSq(const Vec2f &v1, const Vec2f &v2)
 	return ySeparation*ySeparation + xSeparation*xSeparation;
 }
 
+
 Vec2f operator*(float scale, const Vec2f &v);
 std::ostream &operator<<(std::ostream &output, const Vec2f &v);
 

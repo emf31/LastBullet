@@ -10,11 +10,6 @@ public:
 	TargetingSystem(Enemy_Bot* owner);
 	~TargetingSystem();
 
-private:
-	
-	Enemy_Bot* m_pOwner;
-	Entity* m_pCurrentTarget;
-
 	void       Update();
 
 	bool       isTargetPresent()const { return m_pCurrentTarget != 0; }
@@ -32,6 +27,10 @@ private:
 	Entity* GetTarget()const { return m_pCurrentTarget; }
 
 	void       ClearTarget() { m_pCurrentTarget = 0; }
+private:
+	
+	Enemy_Bot* m_pOwner;
+	Entity* m_pCurrentTarget;
 
 };
 

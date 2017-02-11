@@ -7,12 +7,10 @@
 #include <NavGraphNode.h>
 #include <LifeComponent.h>
 
-#include "../Otros/LifeComponent.h"
-
 #include "FuzzyLogic\FuzzyModule.h"
 #include <SensorySystem\SensoryMemory.h>
-
 #include "WeaponSystem.h"
+#include "TargetingSystem.h"
 
 class PathPlanner;
 class PathFollow;
@@ -46,6 +44,13 @@ public:
 	LifeComponent& getLifeComponent() { return life_component; }
 
 	SensoryMemory* const GetSensoryMemory()const { return sense; }
+
+	WeaponSystem* const getWeaponSys()const { return weaponSystem; }
+
+	TargetingSystem* const getTargetSys() { return targetingSystem; }
+	Entity* const getTargetBot()const { return targetingSystem->GetTarget(); }
+
+
 
 	//Devuelve true si el bot esta en esa posicion
 	bool isAtPosition(Vec2f pos);
@@ -87,7 +92,7 @@ private:
 
 	WeaponSystem* weaponSystem;
 
-
+	TargetingSystem* targetingSystem;
 
 
 	//the direction the bot is facing (and therefore the direction of aim). 

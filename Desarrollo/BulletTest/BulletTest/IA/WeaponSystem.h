@@ -36,7 +36,7 @@ public:
 	bool buscar(std::string weapon) { return listaWeapons->Buscar(weapon); }
 
 
-	Vec2f PredictFuturePositionOfTarget()const;
+	Vec3<float> PredictFuturePositionOfTarget()const;
 	void AddNoiseToAim(Vec3<float>& AimingPos) const;
 
 

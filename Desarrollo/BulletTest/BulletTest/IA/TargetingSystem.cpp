@@ -25,14 +25,18 @@ void TargetingSystem::Update()
 		//make sure the bot is alive and that it is not the owner
 		if (*curBot != m_pOwner)//TODO Hay que comprobar que el target tenga vida mayor que 0: (*curBot)->getLifeComponent().getVida()>0) && 
 		{
+			//if ((*curBot)->getClassName == "Enemy_Bot" || (*curBot)->getClassName == "Player") {
 
-			/*double dist = Vec2DDistanceSq((*curBot)->getRenderPosition(), m_pOwner->getRenderPosition());//TODO Pasar a 3dimensiones
+				float distancia = Vec3<float>::getDistance((*curBot)->getRenderPosition(), m_pOwner->getRenderPosition());
 
-			if (dist < ClosestDistSoFar)
-			{
-				ClosestDistSoFar = dist;
-				m_pCurrentTarget = *curBot;
-			}*/
+				if (distancia < ClosestDistSoFar)
+				{
+					ClosestDistSoFar = distancia;
+					m_pCurrentTarget = *curBot;
+				}
+
+			//}
+
 		}
 	}
 }
