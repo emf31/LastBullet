@@ -46,6 +46,12 @@ private:
 	glm::mat4 m_matrix;
 	glm::mat4 m_orientation;
 	float angulo;
-	
+	/*
+	glm::mat4 myMatrix;
+	glm::mat4 myScalingMatrix;
+	glm::mat4 tempModel;
+	glm::mat4 myRotationMatrix;
+	*/
+
 };
 

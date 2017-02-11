@@ -152,15 +152,15 @@ void TModel::endDraw(glm::mat4& matrizActual) {
 }
 
 void TModel::setPosition(Vec3<float> pos) {
-	transTraslacion->setPosition(pos);
+	transformacion->setPosition(pos);
 }
 
 void TModel::setRotation(Vec3<float> rot) {
-	transRotacion->setRotation(rot);
+	transformacion->setRotation(rot);
 }
 
 void TModel::setScale(Vec3<float> esc) {
-	transEscalado->setScale(esc);
+	transformacion->setScale(esc);
 }
 
 void TModel::setTransformacionRotacion(TTransform * rot) {
@@ -176,15 +176,15 @@ void TModel::setTransformacionTraslacion(TTransform * tras) {
 }
 
 Vec3<float> TModel::getRotation() {
-	return transRotacion->getRotation();
+	return transformacion->getRotation();
 }
 
 Vec3<float> TModel::getPosition()
 {
-	return transTraslacion->getPosition();
+	return transformacion->getPosition();
 }
 
 Vec3<float> TModel::getScale()
 {
-	return transEscalado->getScale();
+	return transformacion->getScale();
 }

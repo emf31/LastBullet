@@ -4,12 +4,15 @@
 TTransform::TTransform() {
 
 	m_scale = glm::vec3(1.f);
-	m_position = glm::vec3(0.f);
+	m_position = glm::vec3(0.f,-1.75f,0.0f);
 	m_origen = glm::vec3(0.f);
 	m_rotation = glm::vec3(1.f);
 	m_matrix = glm::mat4();
 	m_orientation = glm::mat4();
 	angulo = 0.0f;
+
+	glm::mat4 myMatrix = glm::mat4(1.f);
+	glm::mat4 myScalingMatrix = glm::mat4(1.f);
 }
 
 
@@ -111,13 +114,13 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 	matrizActual = glm::rotate(matrizActual, angulo, glm::vec3(0.0, 1.0, 0.0));
 	matrizActual = glm::scale(matrizActual, m_scale);
 	matrizActual = glm::translate(matrizActual, m_position);
+	
 	/*
 	glm::mat4 trans;
 	trans = glm::rotate(trans, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	trans = glm::translate(trans, m_position);
 	matrizActual = trans;
 	*/
-
 
 	/*
 		for (int i = 0; i < matrizActual.length(); i++) {
@@ -128,7 +131,18 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 	}
 	*/
 
+	/*
+		glm::mat4 myMatrix = glm::translate(myMatrix,glm::vec3( m_position.x, m_position.y, m_position.z));
+	glm::mat4 myScalingMatrix = glm::scale(myScalingMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
+	glm::vec3 myRotationAxis(0, 1, 0);
+	glm::mat4 tempModel = glm::mat4(1.f);
+	glm::mat4 myRotationMatrix = glm::rotate(tempModel, angulo, myRotationAxis);
+
+	glm::mat4 Model = myMatrix* myRotationMatrix *myScalingMatrix;
 	
+	matrizActual *= Model;
+	*/
+
 	
 }
 

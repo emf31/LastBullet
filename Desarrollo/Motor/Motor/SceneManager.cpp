@@ -57,13 +57,21 @@ void SceneManager::draw(GLFWwindow* window) {
 TModel * SceneManager::crearNodoMalla(TModel * model)
 {
 	TNode * nuevoNodoMalla;
+	TNode * nuevoNodoTransformacion;
+
+	nuevoNodoTransformacion = crearNodoTransformacion();
+	nuevoNodoMalla = new TNode(nuevoNodoTransformacion);
+
+	scene->addChild(nuevoNodoTransformacion);
+	nuevoNodoTransformacion->addChild(nuevoNodoMalla);
+	model->setTransformacion(static_cast<TTransform*> (nuevoNodoTransformacion->getEntity()));
+	//creamos los nodos malla y los nodos transformaciones necesaria para esta
+
+	/*
+	TNode * nuevoNodoMalla;
 	TNode * nuevoNodoRotacion;
 	TNode * nuevoNodoEscalado;
 	TNode * nuevoNodoTraslacion;
-
-	//creamos los nodos malla y los nodos transformaciones necesaria para esta
-
-	
 	//rotacion antes de traslacion
 	nuevoNodoRotacion = crearNodoRotacion(scene);
 	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion);
@@ -85,7 +93,7 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
 	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
 	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
-
+	*/
 	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoMalla->setEntity(model);
 	nuevoNodoMalla->setType(T_MALLA);
@@ -101,6 +109,8 @@ TNode * SceneManager::crearNodoTransformacion()
 	TNode* transNode = new TNode(scene);
 	TTransform* trans = new TTransform();
 	transNode->setType(T_TRANSFORM);
+	trans->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
+	//trans->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	transNode->setEntity(trans);
 
 	return transNode;
