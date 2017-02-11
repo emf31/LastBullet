@@ -114,8 +114,9 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 
+	targetingSystem->Update();
 	sense->updateVision();
-
+	weaponSystem->TakeAimAndShoot();
 	
 }
 

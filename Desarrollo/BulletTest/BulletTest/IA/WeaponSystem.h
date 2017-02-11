@@ -24,7 +24,7 @@ public:
 	void TakeAimAndShoot()const;
 	void Equipar(std::string weapon);
 
-	Weapon* GetCurrentWeapon()const { return m_pCurrentWeapon; }
+	Weapon* GetCurrentWeapon()const { return listaWeapons->valorActual(); }
 	Weapon* GetWeaponFromInventory(std::string weapon);
 	double getReactionTime()const { return m_dReactionTime; }
 
@@ -45,8 +45,6 @@ private:
 	Enemy_Bot* m_pOwner;
 
 	Lista* listaWeapons;
-
-	Weapon* m_pCurrentWeapon;
 
 	double m_dReactionTime;
 	double m_dAimAccuracy;

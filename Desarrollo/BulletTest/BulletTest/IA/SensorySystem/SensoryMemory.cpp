@@ -19,7 +19,7 @@ void SensoryMemory::updateVision()
 			Memory& mymemory = m_botMemory[*it];
 
 			if (!isRaycastObstructed(*it)) {
-				std::cout << "Raycast OK" << std::endl;
+				//std::cout << "Raycast OK" << std::endl;
 				mymemory.m_isShootable = true;
 				if (isInFOV(*it)) {
 					//mymemory.m_inFOV = true;

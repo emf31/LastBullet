@@ -85,6 +85,92 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
+
+void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
+
+
+
+	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
+
+		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+
+			disparos++;
+
+
+
+			btVector3 start = bt(posOwner);
+
+			btVector3 target = bt(posTarget);
+
+			btVector3 direccion = target - start;
+			direccion.normalize();
+
+			btVector3 end = start + (direccion*SIZE_OF_WORLD);
+
+
+			btKinematicClosestShapeResultCallback ray(start, end);
+
+			PhysicsEngine::i().m_world->rayTest(start, end, ray);
+
+			btVector3 posicionImpacto;
+
+
+			if (ray.hasHit())//si ray ha golpeado algo entro
+			{
+
+				if (ray.parte != bodyPart::Body::EXTERNA) {
+					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+
+
+						std::cout << "Posicion del target:" << std::endl;
+						std::cout << posTarget.getX() << std::endl;
+						std::cout << posTarget.getY() << std::endl;
+						std::cout << posTarget.getZ() << std::endl;
+
+
+						std::cout << "Posicion de la colision:" << std::endl;
+						std::cout << ent->getRenderPosition().getX() << std::endl;
+						std::cout << ent->getRenderPosition().getY() << std::endl;
+						std::cout << ent->getRenderPosition().getZ() << std::endl;
+
+						std::cout<<std::endl;
+						
+						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
+							std::cout << "ZIfdsffsdZU" << std::endl;
+
+							Message msg(ent, "COLISION_BALA", &damage);
+							MessageHandler::i().sendMessage(msg);
+						}
+						//Para mover objetos del mapa
+						posicionImpacto = ray.m_hitPointWorld;
+
+						if (ent->getClassName() == "PhysicsEntity") {
+							btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+							btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+						}
+					
+				}
+
+			}
+
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			bala->cargarContenido();
+
+			relojCadencia.restart();
+
+		}
+
+	}
+
+
+	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
+	}
+
+}
+
+
 void Pistola::shoot() {
 
 	

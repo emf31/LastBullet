@@ -20,6 +20,7 @@ WeaponSystem::~WeaponSystem()
 void WeaponSystem::Inicializar() {
 
 	pistola = new Pistola();
+	pistola->inicializar();
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
@@ -64,12 +65,17 @@ void WeaponSystem::TakeAimAndShoot()const
 	//very recently gone out of view (this latter condition is to ensure the 
 	//weapon is aimed at the target even if it temporarily dodges behind a wall
 	//or other cover)
-	/*if (m_pOwner->getTargetSys()->isTargetShootable() ||
+
+	//IF ORIGINAL
+	/*	if (m_pOwner->getTargetSys()->isTargetShootable() ||
 		(m_pOwner->getTargetSys()->GetTimeTargetHasBeenOutOfView() <
 			m_dAimPersistance))
+	{*/
+	if (m_pOwner->getTargetSys()->isTargetShootable())
 	{
+
 		//the position the weapon will be aimed at
-		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderPosition();
+		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
 
 		//if the current weapon is not an instant hit type gun the target position
 		//must be adjusted to take into account the predicted movement of the 
@@ -77,20 +83,27 @@ void WeaponSystem::TakeAimAndShoot()const
 
 		if (GetCurrentWeapon()->getClassName() == "RocketLauncher")
 		{
-			AimingPos = PredictFuturePositionOfTarget();
+		//	AimingPos = PredictFuturePositionOfTarget();
 
 			//if the weapon is aimed correctly, there is line of sight between the
 			//bot and the aiming position and it has been in view for a period longer
 			//than the bot's reaction time, shoot the weapon
-			if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
+
+			//IF ORIGINAL
+			/*if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
 				(m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >
 					m_dReactionTime) &&
 				m_pOwner->hasLOSto(AimingPos))
-			{
-				AddNoiseToAim(AimingPos);
+			{*/
 
-				GetCurrentWeapon()->ShootAt(AimingPos);
-			}
+			//if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
+			//{
+			
+			
+			//AddNoiseToAim(AimingPos);
+
+				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
+			//}
 		}
 
 		//no need to predict movement, aim directly at target
@@ -98,14 +111,22 @@ void WeaponSystem::TakeAimAndShoot()const
 		{
 			//if the weapon is aimed correctly and it has been in view for a period
 			//longer than the bot's reaction time, shoot the weapon
-			if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
+
+
+			//IF ORIGINAL
+			/*			if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
 				(m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >
 					m_dReactionTime))
-			{
-				AddNoiseToAim(AimingPos);
+			{*/
 
-				GetCurrentWeapon()->ShootAt(AimingPos);
-			}
+			//if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
+			//{
+				
+			
+			//AddNoiseToAim(AimingPos);
+
+				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
+			//}
 		}
 
 	}
@@ -114,6 +135,6 @@ void WeaponSystem::TakeAimAndShoot()const
 	//heading direction
 	else
 	{
-		m_pOwner->RotateFacingTowardPosition(m_pOwner->getRenderPosition() + m_pOwner->Heading());
-	}*/
+		//m_pOwner->RotateFacingTowardPosition(m_pOwner->getRenderPosition() + m_pOwner->Heading());
+	}
 }

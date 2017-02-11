@@ -41,6 +41,9 @@ public:
 
 	virtual void shoot() = 0;
 
+	virtual void shootBot(Vec3<float> posOwner, Vec3<float> posTarget)=0;
+
+
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 
 	virtual int getAmmo() { return capacidadAmmo - disparos; }
@@ -57,6 +60,7 @@ public:
 	virtual void resetRecarga() { relojrecarga.restart(); }
 
 	virtual void recargar();
+
 
 
 protected:

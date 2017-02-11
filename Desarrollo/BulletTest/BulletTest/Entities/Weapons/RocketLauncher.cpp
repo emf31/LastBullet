@@ -81,6 +81,10 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
+void RocketLauncher::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
+
+}
+
 void RocketLauncher::shoot() {
 
 	

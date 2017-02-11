@@ -96,6 +96,10 @@ bool Sniper::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
+void Sniper::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
+
+}
+
 void Sniper::shoot()
 {
 

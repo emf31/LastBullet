@@ -28,6 +28,7 @@ public:
 
 	virtual void shoot();
 
+	virtual void shootBot(Vec3<float> posOwner, Vec3<float> posTarget);
 
 
 
