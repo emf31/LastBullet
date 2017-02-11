@@ -60,6 +60,9 @@ public:
 
 	void setPosition(Vec3<float> pos);
 	void setRotation(Vec3<float> rot);
+	void setRotation2(float angu, Vec3<float> rotation) {
+		transRotacion->setRotation2(angu,rotation);
+	}
 	void setScale(Vec3<float> esc);
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();

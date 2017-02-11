@@ -8,6 +8,7 @@ TTransform::TTransform() {
 	m_origen = glm::vec3(0.f);
 	m_rotation = glm::vec3(1.f);
 	m_matrix = glm::mat4();
+	m_orientation = glm::mat4();
 	angulo = 0.0f;
 }
 
@@ -36,6 +37,17 @@ void TTransform::setRotation(Vec3<float> rotation) {
 	m_rotation = glm::cross(b, a);
 	angulo = acos(glm::dot(b, a) / (glm::length(b) * glm::length(a)));
 
+	m_orientation = glm::rotate(m_orientation, rotation.getX(), glm::vec3(1.0, 0.0, 0.0));
+	m_orientation = glm::rotate(m_orientation, rotation.getY(), glm::vec3(0.0, 1.0, 0.0));
+	m_orientation = glm::rotate(m_orientation, rotation.getZ(), glm::vec3(0.0, 0.0, 1.0));
+
+	m_rotation2 = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
+	std::cout << "El angulo es: " << angulo << "y el vector: " << m_rotation.x << "," << m_rotation.y << "," << m_rotation.z << std::endl;
+}
+void TTransform::setRotation2(float angu, Vec3<float> rotation)
+{
+	m_rotation = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
+	angulo = angu;
 }
 /*
 Esto ya no lo tenemos asi porque cuando llamas a trasladar y rotar lo que hace es cambiar los vectores correspondientes
@@ -82,12 +94,40 @@ void TTransform::loadMatrix(glm::mat4 mat) {
 void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual)
 {
 	m_matrix = matrizActual;
-
-	//matrizActual = glm::translate(matrizActual, m_origen);
+	/*
+		//matrizActual = glm::translate(matrizActual, m_origen);
 	//matrizActual = glm::rotate(matrizActual, 90.f, m_rotation);
 	matrizActual = glm::rotate(matrizActual, angulo, m_rotation);
+	//matrizActual *= m_orientation;
+	matrizActual = glm::scale(matrizActual, m_scale);
+	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::mat4 trans;
+	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+	vec = trans * vec;
+	std::cout << vec.x << vec.y << vec.z << std::endl;
+	matrizActual = glm::translate(matrizActual, m_position);
+	
+	*/
+	matrizActual = glm::rotate(matrizActual, angulo, glm::vec3(0.0, 1.0, 0.0));
 	matrizActual = glm::scale(matrizActual, m_scale);
 	matrizActual = glm::translate(matrizActual, m_position);
+	/*
+	glm::mat4 trans;
+	trans = glm::rotate(trans, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	trans = glm::translate(trans, m_position);
+	matrizActual = trans;
+	*/
+
+
+	/*
+		for (int i = 0; i < matrizActual.length(); i++) {
+		for (int j = 0; j < matrizActual[0].length(); j++) {
+			std::cout << matrizActual[i][j] << " ";
+		}
+		std::cout<<std::endl;
+	}
+	*/
+
 	
 	
 }

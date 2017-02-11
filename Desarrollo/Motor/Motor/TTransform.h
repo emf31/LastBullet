@@ -23,6 +23,7 @@ public:
 	void setPosition(Vec3<float> position);
 	void setScale(Vec3<float> scale);
 	void setRotation(Vec3<float> rotation);
+	void setRotation2(float angu, Vec3<float> rotation);
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
@@ -41,7 +42,9 @@ private:
 	glm::vec3 m_position;
 	glm::vec3 m_origen;
 	glm::vec3 m_rotation;
+	glm::vec3 m_rotation2;
 	glm::mat4 m_matrix;
+	glm::mat4 m_orientation;
 	float angulo;
 	
 };

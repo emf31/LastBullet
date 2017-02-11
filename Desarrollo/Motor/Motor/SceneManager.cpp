@@ -62,16 +62,24 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	TNode * nuevoNodoTraslacion;
 
 	//creamos los nodos malla y los nodos transformaciones necesaria para esta
+
+	
+	//rotacion antes de traslacion
 	nuevoNodoRotacion = crearNodoRotacion(scene);
 	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion);
 	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado);
 	nuevoNodoMalla = new TNode(nuevoNodoTraslacion);
-
+	
 	//asignamos los hijos
+	
+	//rotacion antes de traslacion
 	scene->addChild(nuevoNodoRotacion);
 	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
 	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
 	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
+	
+	
+
 
 	//asignamos matrices de transformacion
 	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));

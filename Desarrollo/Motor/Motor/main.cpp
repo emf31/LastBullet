@@ -40,27 +40,28 @@ int main() {
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	*/
 
-	TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
-	TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
+	//TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
+	//TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
 	TModel* w = sm->crearNodoMalla(sm->getMesh("assets/nanosuit.obj"));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-
+	/*
 	Vec3<float> rotacion = n->getRotation();
 	std::cout << "La rotacion Antes es: " << rotacion.getX()<<","<< rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
 	rotacion.setY(rotacion.getY() + 10);
 	std::cout << "La rotacion despues es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
 	n->setRotation(rotacion);
-
+	*/
 	Vec3<float> posicion = w->getPosition();
 	Vec3<float> rotacion2 = w->getRotation();
-	std::cout << "La posicion Antes es: " << posicion.getX() << "," << posicion.getY() << "," << posicion.getZ() << "," << std::endl;
 	posicion = posicion + Vec3<float>(3.5f, 3.5f, 3.5f);
-	std::cout << "La posicion despues es: " << posicion.getX() << "," << posicion.getY() << "," << posicion.getZ() << "," << std::endl;
-	std::cout << "La rotacion Antes es: " << rotacion2.getX() << "," << rotacion2.getY() << "," << rotacion2.getZ() << "," << std::endl;
-	rotacion2.setY(rotacion2.getY() + 5);
-	std::cout << "La rotacion despues es: " << rotacion2.getX() << "," << rotacion2.getY() << "," << rotacion2.getZ() << "," << std::endl;
+	//rotacion2.setY(rotacion2.getY() + 45);
+	std::cout << "La rotacion antes es: " << rotacion2.getX() << "," << rotacion2.getY() << "," << rotacion2.getZ() << "," << std::endl;
 	w->setPosition(posicion);
-	w->setRotation(rotacion2);
+	//w->setRotation(rotacion2);
+	w->setRotation2(90, Vec3<float>(0.0f, 1.0f, 0.0f));
+
+	Vec3<float> aux = w->getRotation();
+	std::cout << "La rotacion despues es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
 	
 	long int cont = 0;
 	while (!engine.shouldCloseWindw()){
@@ -81,7 +82,8 @@ int main() {
 			cont = 0;
 			posicion = w->getPosition();
 			std::cout << "La posicion es: " << posicion.getX() << "," << posicion.getY() << "," << posicion.getZ() << "," << std::endl;
-			posicion.setX(posicion.getX() + 0.5);
+			posicion.setX(posicion.getX() + 1.5);
+			//posicion.setY(posicion.getY() + 1.5);
 			w->setPosition(posicion);
 			
 		}
