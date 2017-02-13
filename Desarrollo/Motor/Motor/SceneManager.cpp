@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 #include "TTransform.h"
-
+#include "TSpotLight.h"
 
 SceneManager::SceneManager() {
 	//gui.init("GUI");
@@ -140,6 +140,9 @@ TNode * SceneManager::crearNodoLuz()
 {
 	TNode* luzNode = new TNode(scene);
 	luzNode->setType(T_LUZ);
+	scene->addChild(luzNode);
+	TSpotLight* luz = new TSpotLight();
+	luzNode->setEntity(luz);
 	return luzNode;
 }
 

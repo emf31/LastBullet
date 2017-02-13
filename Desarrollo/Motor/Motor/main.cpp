@@ -40,10 +40,12 @@ int main() {
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	*/
 
-	//TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
-	//TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
+	TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
+	TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
 	TModel* w = sm->crearNodoMalla(sm->getMesh("assets/nanosuit.obj"));
+	TNode* luz = sm->crearNodoLuz();
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	
 	/*
 	Vec3<float> rotacion = n->getRotation();
 	std::cout << "La rotacion Antes es: " << rotacion.getX()<<","<< rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
@@ -51,7 +53,12 @@ int main() {
 	std::cout << "La rotacion despues es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
 	n->setRotation(rotacion);
 	*/
-	Vec3<float> posicion = w->getPosition();
+
+	Vec3<float> posicion = m->getPosition();
+	posicion.setY(posicion.getY() + 40);
+	m->setPosition(posicion);
+
+	posicion = w->getPosition();
 	Vec3<float> rotacion2 = w->getRotation();
 	posicion = posicion + Vec3<float>(3.5f, 3.5f, 3.5f);
 	//rotacion2.setY(rotacion2.getY() + 45);
@@ -62,6 +69,14 @@ int main() {
 
 	Vec3<float> aux = w->getRotation();
 	std::cout << "La rotacion despues es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+	
+
+	
+	
+	//set colors
+	n->setModelColor(0.33f, 0.42f, 0.18f);
+	m->setModelColor(1.0f, 0.5f, 0.31f);
+	w->setModelColor(0.8f, 0.0f, 0.61f);
 	
 	long int cont = 0;
 	while (!engine.shouldCloseWindw()){

@@ -19,6 +19,9 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 	}
 	// Carmamos el modelo
 	this->loadModel(path);
+	m_r = 1.f;
+	m_g = 1.f;
+	m_b = 1.f;
 }
 
 TModel::~TModel() {
@@ -33,6 +36,14 @@ void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizAc
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(matrizActual));
+
+	//colores
+	GLint objectColorLoc = glGetUniformLocation(shader->Program, "objectColor");
+	GLint lightColorLoc = glGetUniformLocation(shader->Program, "lightColor");
+	//TODOOO aqui el color del objeto no se tiene que poner a mano se tendria que coger de TModel
+	//y el color de la luz lo mismo tendria ser cada TLightSpot quien tenga su color
+	glUniform3f(objectColorLoc, m_r, m_g, m_b);
+	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)

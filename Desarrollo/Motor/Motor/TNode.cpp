@@ -56,6 +56,12 @@ void TNode::draw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) 
 		//el segundo nodo es el de escala multiplica la matriz actual que ya estaba rotada y la escala
 		//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
 		//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
+		if (type ==T_MALLA) {
+			std::cout << "DIBUJO MODELO" << std::endl;
+		}
+		if (type == T_LUZ) {
+			std::cout << "LUUUUUUUUUZ" << std::endl;
+		}
 		if (type == T_ROTACION) {
 			//std::cout << "ROTOOOOOOOO" << std::endl;
 		}

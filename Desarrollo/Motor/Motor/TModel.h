@@ -70,6 +70,12 @@ public:
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionEscalado(TTransform* esc);
 	void setTransformacionTraslacion(TTransform* tras);
+
+	void setModelColor(float r, float g, float b) {
+		m_r = r;
+		m_g = g;
+		m_b = b;
+	}
 	
 	
 
@@ -95,6 +101,9 @@ private:
 	TTransform* transRotacion;
 	TTransform* transEscalado;
 	TTransform* transTraslacion;
+	float m_r;
+	float m_g;
+	float m_b;
 	
 
 };
