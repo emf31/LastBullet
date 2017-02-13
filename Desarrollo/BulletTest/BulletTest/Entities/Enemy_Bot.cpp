@@ -17,14 +17,17 @@ Enemy_Bot::~Enemy_Bot()
 
 void Enemy_Bot::inicializar()
 {
+	crearFuzzyRules();
+
 	m_PathPlanner = new PathPlanner(this);
 	m_PathFollow = new PathFollow(this);
 
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 20,500, 20);
+	weaponSystem = new WeaponSystem(this, 20,3, 20);
 	weaponSystem->Inicializar();
+
 
 
 	sense = new SensoryMemory(this,20);
@@ -116,6 +119,8 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	targetingSystem->Update();
 	sense->updateVision();
+
+
 	weaponSystem->TakeAimAndShoot();
 	
 }
@@ -341,12 +346,12 @@ void Enemy_Bot::crearFuzzyRules() {
 
 }
 
-void Enemy_Bot::elegirWeapon() {
+void Enemy_Bot::elegirWeapon(float Dist) {
 
 	double mejorScore = 0;
 	std::string bestWeapon = "Pistola";
 
-	double DistToTarget = 100;
+	double DistToTarget = Dist;
 
 	fm.Fuzzify("DistToTarget", DistToTarget);
 
@@ -356,10 +361,9 @@ void Enemy_Bot::elegirWeapon() {
 
 		double DesAsalto = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
 
-		std::cout << "Deseabilidad del asalto: " << DesAsalto << "\n";
 
 		if (DesAsalto > mejorScore) {
-			mejorScore > DesAsalto;
+			mejorScore = DesAsalto;
 			bestWeapon = "Asalto";
 		}
 
@@ -371,16 +375,16 @@ void Enemy_Bot::elegirWeapon() {
 
 		double DesSniper = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
 
-		std::cout << "Deseabilidad del sniper: " << DesSniper << "\n";
 
+1
 		if (DesSniper > mejorScore) {
-			mejorScore > DesSniper;
+			mejorScore = DesSniper;
 			bestWeapon = "Sniper";
 		}
 
 
 	}
 
-	weaponSystem->Equipar(bestWeapon);
 
+	weaponSystem->Equipar(bestWeapon);
 }

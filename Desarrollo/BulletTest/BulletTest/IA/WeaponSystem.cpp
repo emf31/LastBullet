@@ -22,31 +22,32 @@ void WeaponSystem::Inicializar() {
 	pistola = new Pistola();
 	pistola->inicializar();
 
+	asalto = new Asalto();
+	asalto->inicializar();
+
+	sniper = new Sniper();
+	sniper->inicializar();
+
+
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
+	listaWeapons->insertar(asalto);
+	listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
 
 }
 
 
 void WeaponSystem::Equipar(std::string weapon) {
+	GetCurrentWeapon()->setEquipada(false);
 	listaWeapons->Equipar(weapon);
+	GetCurrentWeapon()->setEquipada(true);
+
 }
 
 void WeaponSystem::AddNoiseToAim(Vec3<float>& AimingPos)const {
 
 
-	//Chino enamorao
-
-	/*Vec3<float> toPos = AimingPos - m_pOwner->getRenderPosition();
-
-	Vec2DRotateAroundOrigin(toPos, Randf(-m_dAimAccuracy, m_dAimAccuracy));
-
-	AimingPos = toPos + m_pOwner->getRenderPosition();
-	*/
-
-
-	//Myself
 
 	Vec3<float> toPos;
 
@@ -54,9 +55,9 @@ void WeaponSystem::AddNoiseToAim(Vec3<float>& AimingPos)const {
 	toPos.setY(AimingPos.getY() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
 	toPos.setZ(AimingPos.getZ() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
 
-
-
 	AimingPos = toPos;
+
+
 
 }
 
@@ -78,6 +79,11 @@ void WeaponSystem::TakeAimAndShoot()const
 		//the position the weapon will be aimed at
 		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
 
+		float DistToTarget=Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
+
+		m_pOwner->elegirWeapon(DistToTarget);
+
+
 		//if the current weapon is not an instant hit type gun the target position
 		//must be adjusted to take into account the predicted movement of the 
 		//target
@@ -98,13 +104,13 @@ void WeaponSystem::TakeAimAndShoot()const
 			{*/
 
 			//if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
-			//{
+		//	{
 			
 			
 			AddNoiseToAim(AimingPos);
 
 				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
-			//}
+		//	}
 		}
 
 		//no need to predict movement, aim directly at target
@@ -124,7 +130,7 @@ void WeaponSystem::TakeAimAndShoot()const
 			//{
 				
 			
-			//AddNoiseToAim(AimingPos);
+			AddNoiseToAim(AimingPos);
 
 				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
 			//}

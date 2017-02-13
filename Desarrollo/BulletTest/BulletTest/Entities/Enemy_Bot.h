@@ -60,7 +60,7 @@ public:
 	void createPathToPosition(Vec2f vec);
 	void createPathToItem(const std::string& tipo);
 
-	void elegirWeapon();
+	void elegirWeapon(float DistToTarget);
 
 	void crearFuzzyRules();
 
@@ -124,9 +124,9 @@ private:
 
 	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
 
-	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);
-	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25, 150, 300);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 150, 300, 500);
+	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 50, 250);
+	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 50, 250, 500);
+	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 300, 500, 800);
 
 
 
@@ -142,7 +142,7 @@ private:
 
 	FzSet Ammo_LowAsalto = AmmoStatusAsalto.AddLeftShoulderSet("Ammo_LowAsalto", 0, 0, 10);
 	FzSet Ammo_OkayAsalto = AmmoStatusAsalto.AddTriangularSet("Ammo_OkayAsalto", 0, 30, 60);
-	FzSet Ammo_LoadsAsalto = AmmoStatusAsalto.AddRightShoulderSet("Ammo_LoadsAsalto", 30, 60, 200);
+	FzSet Ammo_LoadsAsalto = AmmoStatusAsalto.AddRightShoulderSet("Ammo_LoadsAsalto", 30, 60, 150);
 
 	//DesirabilitySniper
 

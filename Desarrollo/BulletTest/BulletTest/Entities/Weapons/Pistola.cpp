@@ -36,7 +36,6 @@ void Pistola::update(Time elapsedTime)
 		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
-
 			if (numCargadores > 0) {
 				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
@@ -100,7 +99,6 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 			disparos++;
 
 
-
 			btVector3 start = bt(posOwner);
 
 			btVector3 target = bt(posTarget);
@@ -158,7 +156,6 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
-		printf("F");
 	}
 
 }

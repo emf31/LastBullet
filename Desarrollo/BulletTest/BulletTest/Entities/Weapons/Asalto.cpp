@@ -98,11 +98,14 @@ bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
 
 void Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
+
+
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 
 			disparos++;
+
 
 			btVector3 start = bt(posOwner);
 
@@ -126,30 +129,32 @@ void Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
 				if (ray.parte != bodyPart::Body::EXTERNA) {
 					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-					if (ent != EntityManager::i().getEntity(PLAYER))
-					{
-						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-							Message msg(ent, "COLISION_BALA", &damage);
-							MessageHandler::i().sendMessage(msg);
-						}
-						//Para mover objetos del mapa
-						posicionImpacto = ray.m_hitPointWorld;
 
-						if (ent->getClassName() == "PhysicsEntity") {
-							btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-							btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-						}
+
+
+					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot" || ent->getClassName() == "Player") {
+
+						Message msg(ent, "COLISION_BALA", &damage);
+						MessageHandler::i().sendMessage(msg);
 					}
+					//Para mover objetos del mapa
+					posicionImpacto = ray.m_hitPointWorld;
+
+					if (ent->getClassName() == "PhysicsEntity") {
+						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+					}
+
 				}
 
 			}
+
+
 
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
 			relojCadencia.restart();
-
-
 
 		}
 

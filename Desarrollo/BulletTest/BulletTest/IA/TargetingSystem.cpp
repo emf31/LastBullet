@@ -65,4 +65,5 @@ double TargetingSystem::GetTimeTargetHasBeenVisible()const
 double TargetingSystem::GetTimeTargetHasBeenOutOfView()const
 {
 	return m_pOwner->GetSensoryMemory()->GetTimeOpponentHasBeenOutOfView(m_pCurrentTarget);
-}*/
+}
+*/
