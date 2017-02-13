@@ -206,6 +206,17 @@ void Player::handleMessage(const Message & message)
 		Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		delete message.data;
 	}
+	else if (message.mensaje == "COLISION_BALA") {
+			//Este float * es una referencia a una variable de clase asi que no hay problema
+			TImpactoBala impacto;
+			impacto.damage = *static_cast<float*>(message.data);
+			impacto.guid = m_guid;
+
+			getLifeComponent().restaVida(impacto.damage, impacto.guid);
+			relojSangre.restart();
+			//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+		
+	}
 
 }
 

@@ -26,7 +26,7 @@ namespace col {
 	};
 
 	const int staticCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
-	const int characterCollidesWith = Collisions::Character | Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
+	const int characterCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;

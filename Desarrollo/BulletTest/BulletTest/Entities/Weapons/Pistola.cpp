@@ -27,6 +27,8 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
+
+
 	if (equipada) {
 		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
@@ -34,6 +36,7 @@ void Pistola::update(Time elapsedTime)
 		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
+
 			if (numCargadores > 0) {
 				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
@@ -123,30 +126,13 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
 
 
-						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-							std::cout << "ZIfdsffsdZU" << std::endl;
+						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot" || ent->getClassName() == "Player") {
 
 							Message msg(ent, "COLISION_BALA", &damage);
 							MessageHandler::i().sendMessage(msg);
 						}
 						//Para mover objetos del mapa
 						posicionImpacto = ray.m_hitPointWorld;
-
-						std::cout << "Posicion del target:" << std::endl;
-						std::cout << posTarget.getX() << std::endl;
-						std::cout << posTarget.getY() << std::endl;
-						std::cout << posTarget.getZ() << std::endl;
-
-
-						std::cout << "Posicion de la colision:" << std::endl;
-						std::cout << posicionImpacto.getX() << std::endl;
-						std::cout << posicionImpacto.y() << std::endl;
-						std::cout << posicionImpacto.z() << std::endl;
-
-						std::cout << std::endl;
-
-						std::cout << "Tipo de entidad del RayCast: ";
-						std::cout << ent->getClassName()<< std::endl;
 
 						if (ent->getClassName() == "PhysicsEntity") {
 							btRigidBody::upcast(ray.m_collisionObject)->activate(true);
@@ -156,6 +142,8 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 				}
 
 			}
+
+
 
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
@@ -170,6 +158,7 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
+		printf("F");
 	}
 
 }

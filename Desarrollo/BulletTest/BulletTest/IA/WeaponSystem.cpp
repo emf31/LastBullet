@@ -24,6 +24,7 @@ void WeaponSystem::Inicializar() {
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
+	pistola->setEquipada(true);
 
 }
 
@@ -100,7 +101,7 @@ void WeaponSystem::TakeAimAndShoot()const
 			//{
 			
 			
-			//AddNoiseToAim(AimingPos);
+			AddNoiseToAim(AimingPos);
 
 				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
 			//}
