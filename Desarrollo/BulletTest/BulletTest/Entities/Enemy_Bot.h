@@ -6,6 +6,8 @@
 #include <KinematicCharacterController.h>
 #include <NavGraphNode.h>
 #include <LifeComponent.h>
+#include <NetBot.h>
+#include <memory>
 
 class PathPlanner;
 class PathFollow;
@@ -46,24 +48,15 @@ public:
 	void createPathToItem(const std::string& tipo);
 
 private:
-
-	bool siguiendo = false;
+	
 
 	float radius;
 	float height;
 	float mass;
 
-	Animation animation;
-
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 
 	void updateAnimation();
-
-	//el bot lo usa para seguir un camino
-	PathPlanner* m_PathPlanner;
-
-	//Calcula el vector movimiento del bot
-	PathFollow*	m_PathFollow;
 
 	
 	//the direction the bot is facing (and therefore the direction of aim). 
@@ -81,6 +74,16 @@ private:
 	KinematicCharacterController* p_controller;
 
 	LifeComponent life_component;
+
+	std::shared_ptr<NetBot> m_network;
+
+	//el bot lo usa para seguir un camino
+	PathPlanner* m_PathPlanner;
+
+	//Calcula el vector movimiento del bot
+	PathFollow*	m_PathFollow;
+
+	Animation animation;
 
 	friend class PathPlanner;
 };

@@ -4,12 +4,12 @@
 #include <memory>
 
 //Forward declaration - prevents circular reference
-class Player;
+class Enemy_Bot;
 
-class NetPlayer : public NetObject {
+class NetBot : public NetObject {
 public:
-	NetPlayer(Player* player);
-	~NetPlayer();
+	NetBot(Enemy_Bot* bot);
+	~NetBot();
 
 	virtual void inicializar() override;
 
@@ -26,15 +26,6 @@ public:
 	}
 
 private:
-	Player* m_player;
-
-	void searchServersOnLAN();
-
-	//Lista de servidores disponibles
-	std::vector<std::string> m_servers;
-
-#ifdef NETWORK_DEBUG
-	std::shared_ptr<NetworkDebugger> debugger;
-#endif
+	Enemy_Bot* m_bot;
 
 };

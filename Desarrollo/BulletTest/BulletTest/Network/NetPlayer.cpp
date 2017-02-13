@@ -1,4 +1,4 @@
-#include <NetPlayer.h>
+﻿#include <NetPlayer.h>
 #include <Estructuras.h>
 #include <EntityManager.h>
 #include <Enemy.h>
@@ -10,6 +10,8 @@
 #include <events/PlayerEvent.h>
 #include <events/MuerteEvent.h>
 #include <events/KillEvent.h>
+#include <NetworkManager.h>
+
 
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
@@ -24,6 +26,50 @@ NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 NetPlayer::~NetPlayer()
 {
 
+}
+
+void NetPlayer::inicializar()
+{
+	char eleccion;
+	int elec;
+	std::string str;
+	//resetBarTime.restart();
+
+	do {
+		searchServersOnLAN();
+
+		//Lista de servidores en la red
+		std::cout << m_servers.size() << " servidor(es) encontrado(s): " << std::endl;
+		for (std::size_t i = 0; i < m_servers.size(); ++i) {
+			std::cout << "\t[" << i << "] - " << m_servers.at(i) << std::endl;
+		}
+		std::cout << "\t[a] - Actualizar" << std::endl;
+		std::cout << "\t[m] - Introducir IP manualmente" << std::endl;
+		std::cout << "Elige una opcion: ";
+		std::cin >> eleccion;
+		if (eleccion != 'a' && eleccion != 'm') {
+			elec = eleccion - '0';
+			std::string ipConPuerto = m_servers.at((elec));
+			std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
+			str = ip;
+		}
+		else if (eleccion == 'm') {
+			printf("Introduce la IP \n");
+			std::cin >> str;
+			if (str != "a") {
+				break;
+			}
+			else {
+				eleccion = 'a';
+			}
+		}
+	} while (eleccion == 'a');
+
+
+	//Nos conectamos a la lobby del servidor
+	//lobby.join(str, SERVER_PORT);
+
+	conectar(str, server_port);
 }
 
 void NetPlayer::handlePackets(Time elapsedTime)
@@ -45,8 +91,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			printf("Otro cliente ha perdido la conexion.\n");
 
 			break;
-		case ID_REMOTE_NEW_INCOMING_CONNECTION:
-			printf("Otro cliente se ha conectado.\n");
+		case ID_CONNECTION_ATTEMPT_FAILED:
+			printf("Fallo en la conexion.\n");
+
+			//Aqui enviariamos un evento de conexion fallida a la interfaz.
 
 			break;
 
@@ -57,7 +105,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			servidorAdr = packet->systemAddress;
 
 
-			//Esta variable indica que el servidor a aceptado la conexion
+			//Esta variable indica que el servidor ha aceptado la conexion
 			connected = true;
 
 			TPlayer nuevoplayer;
@@ -65,6 +113,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			nuevoplayer.name = m_player->getName();
 
 			m_player->setGUID(peer->GetMyGUID());
+
+			EntityManager::i().registerRaknetEntity(m_player);
+
 
 			dispatchMessage(nuevoplayer, NUEVO_PLAYER);
 
@@ -433,6 +484,47 @@ void NetPlayer::apagar()
 		NetObject::apagar();
 
 		//Do what you need here
+		m_servers.clear();
 	}
 	
+}
+void NetPlayer::searchServersOnLAN() {
+	//Creo un RakPeer para lanzar un paquete de b�squeda
+	RakNet::RakPeerInterface *client;
+	client = RakNet::RakPeerInterface::GetInstance();
+
+	RakNet::SocketDescriptor socketDescriptor(65534, 0);
+	socketDescriptor.socketFamily = AF_INET;
+
+	client->Startup(1, &socketDescriptor, 1);
+
+	RakNet::RakNetGUID rakID = client->GetMyGUID();
+
+	//Hacemos ping a bradcast en el puerto en el que sabemos que est� escuchando el server
+	client->Ping("255.255.255.255", 65535, false);
+	std::cout << "Buscando servidores en la red local..." << std::endl;
+	RakSleep(1000);
+	RakNet::Packet *packet;
+	//Limpiamos la lista de servidores primero.
+	m_servers.clear();
+
+	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
+		if (packet == 0) {
+			RakSleep(1000);
+			continue;
+		}
+		if (packet->data[0] == ID_UNCONNECTED_PONG) {
+			RakNet::TimeMS time;
+			RakNet::BitStream bsIn(packet->data, packet->length, false);
+
+			bsIn.IgnoreBytes(1);
+			bsIn.Read(time);
+			//printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
+			m_servers.push_back(packet->systemAddress.ToString());
+		}
+
+		RakSleep(1000);
+	}
+	//Destruyo el RakPeer. Ya no hace falta
+	RakNet::RakPeerInterface::DestroyInstance(client);
 }

@@ -3,21 +3,21 @@
 
 void NetworkManager::inicializar(const std::string& address)
 {
-	//serverIP = address;
+	serverIP = address;
 }
 
-/*bool NetworkManager::removeNetBotObject(NetPtr netobj)
+bool NetworkManager::removeNetBotObject(std::shared_ptr<NetBot> netobj)
 {
-	//m_netObjs.remove(netobj);
+	m_netBots.remove(netobj);
 
 	//should check here if it's removed
 
 	return true;
-}*/
+}
 
 void NetworkManager::apagar()
 {
-	//m_netObjs.clear();
+	m_netBots.clear();
 
 	//m_netPlayer.reset();
 
@@ -38,12 +38,23 @@ std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer(Player* player)
 	
 }
 
+std::shared_ptr<NetBot> NetworkManager::createNetBot(Enemy_Bot * bot)
+{
+	NetBot* netp = new NetBot(bot);
+
+	std::shared_ptr<NetBot> ptr(netp);
+
+	m_netBots.push_back(ptr);
+
+	return ptr;
+}
+
 void NetworkManager::updateNetwork(Time elapsedTime)
 {
-	/*std::list<NetPtr>::iterator it;
-	for (it = m_netObjs.begin(); it != m_netObjs.end(); ++it) {
+	std::list<std::shared_ptr<NetBot>>::iterator it;
+	for (it = m_netBots.begin(); it != m_netBots.end(); ++it) {
 		(*it)->handlePackets(elapsedTime);
-	}*/
+	}
 
 	//We call handle packets of netplayer too
 	m_netPlayer->handlePackets(elapsedTime);

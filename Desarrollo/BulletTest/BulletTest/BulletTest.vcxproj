@@ -248,6 +248,7 @@
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
+    <ClInclude Include="Network\NetBot.h" />
     <ClInclude Include="Network\NetObject.h" />
     <ClInclude Include="Network\NetPlayer.h" />
     <ClInclude Include="Network\NetworkDebugger.h" />
@@ -332,6 +333,7 @@
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
+    <ClCompile Include="Network\NetBot.cpp" />
     <ClCompile Include="Network\NetObject.cpp" />
     <ClCompile Include="Network\NetPlayer.cpp" />
     <ClCompile Include="Network\NetworkDebugger.cpp" />

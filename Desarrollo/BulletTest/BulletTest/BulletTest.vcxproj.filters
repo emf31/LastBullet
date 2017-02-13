@@ -157,7 +157,6 @@
     <ClCompile Include="Mapa\Celda.cpp">
       <Filter>Source Code\Mapa</Filter>
     </ClCompile>
-    <ClCompile Include="Handlers\Partida.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp">
       <Filter>Source Code\Graph</Filter>
     </ClCompile>
@@ -191,23 +190,11 @@
     <ClCompile Include="Network\NetPlayer.cpp">
       <Filter>Source Code\Network</Filter>
     </ClCompile>
-    <ClCompile Include="World\World.cpp">
-      <Filter>Headers\World</Filter>
-    </ClCompile>
-    <ClCompile Include="EventSystem\EventListener.cpp">
-      <Filter>Headers\EventSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="EventSystem\EventSystem.cpp">
-      <Filter>Headers\EventSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Otros\DebugMarks.cpp">
       <Filter>Headers\Otros</Filter>
     </ClCompile>
     <ClCompile Include="Motor\Color4f.cpp">
       <Filter>Source Code\Motor</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\NetworkDebugger.cpp">
-      <Filter>Headers\Network</Filter>
     </ClCompile>
     <ClCompile Include="Motor\AnimatedSceneNode.cpp">
       <Filter>Source Code\Motor\SceneNodes</Filter>
@@ -223,6 +210,24 @@
     </ClCompile>
     <ClCompile Include="Otros\Settings.cpp">
       <Filter>Headers\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetBot.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Handlers\Partida.cpp">
+      <Filter>Source Code\World</Filter>
+    </ClCompile>
+    <ClCompile Include="World\World.cpp">
+      <Filter>Source Code\World</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem\EventListener.cpp">
+      <Filter>Source Code\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem\EventSystem.cpp">
+      <Filter>Source Code\EventSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetworkDebugger.cpp">
+      <Filter>Source Code\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -463,7 +468,6 @@
     <ClInclude Include="Mapa\Celda.h">
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
-    <ClInclude Include="Handlers\Partida.h" />
     <ClInclude Include="MastEventReceiver.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -550,6 +554,12 @@
     </ClInclude>
     <ClInclude Include="Otros\Settings.h">
       <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\Partida.h">
+      <Filter>Headers\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetBot.h">
+      <Filter>Headers\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -675,6 +685,15 @@
     </Filter>
     <Filter Include="Source Code\Motor\SceneNodes">
       <UniqueIdentifier>{415a8231-2487-467d-8dc9-9cfbab0bd2ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\EventSystem">
+      <UniqueIdentifier>{a0d6284c-9d18-4e66-852e-f510ba1d33af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\World">
+      <UniqueIdentifier>{816031e2-2a39-4cad-a249-62f2081bab55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\EventSystem\events">
+      <UniqueIdentifier>{e47cc754-e8a3-4db0-970d-067cecb33108}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

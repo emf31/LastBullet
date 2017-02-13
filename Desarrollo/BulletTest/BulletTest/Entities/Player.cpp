@@ -33,12 +33,7 @@ Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, 
 	TriggerSystem::i().RegisterEntity(this);
 	
 
-	//Creates object to send and receive packets
-	m_network.reset();
-	m_network = NetworkManager::i().createNetPlayer(this);
-	m_network->inicializar();
-
-	EntityManager::i().registerRaknetEntity(this);
+	
 
 }
 
@@ -92,13 +87,17 @@ void Player::inicializar()
 	tieneAsalto = true;
 	bindWeapon();
 
-	listaWeapons->insertar(pistola);
-	listaWeapons->insertar(rocket);
+	
 
 	/////////////////////////////////////////
 	////////////////////////////////////////
+	//NETWORK
+	//Creates object to send and receive packets
+	m_network.reset();
+	m_network = NetworkManager::i().createNetPlayer(this);
+	/*m_network->inicializar();
 
-	
+	EntityManager::i().registerRaknetEntity(this);*/
 }
 
 

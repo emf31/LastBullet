@@ -4,7 +4,9 @@
 #include <list>
 #include <memory>
 #include <Player.h>
+#include <Enemy_Bot.h>
 #include <NetPlayer.h>
+#include <NetBot.h>
 
 static const int server_port = 65535;
 
@@ -13,10 +15,6 @@ static const int server_port = 65535;
 class NetworkManager {
 
 public:
-	//Easy access to pointers
-	/*typedef std::shared_ptr<NetPlayer> NetPlayerPtr;
-	//typedef std::shared_ptr<NetBot> NetBotPtr;
-	typedef std::shared_ptr<NetObject> NetPtr;*/
 
 
 	static NetworkManager& i() {
@@ -25,11 +23,12 @@ public:
 	}
 
 	void inicializar(const std::string& address);
-	//bool removeNetBotObject(std::shared_ptr<NetPlayer> netobj);
+	bool removeNetBotObject(std::shared_ptr<NetBot> netobj);
 	void apagar();
 	
 	//Creates a pointer of NetPlayer
 	std::shared_ptr<NetPlayer> createNetPlayer(Player* player);
+	std::shared_ptr<NetBot> createNetBot(Enemy_Bot* bot);
 
 	//Call handle packets for every netobject
 	void updateNetwork(Time elapsedTime);
@@ -48,9 +47,9 @@ private:
 
 	std::shared_ptr<NetPlayer> m_netPlayer;
 
-	//std::list<NetObject> m_netObjs;
+	std::list<std::shared_ptr<NetBot>> m_netBots;
 
-	//std::string serverIP;
+	std::string serverIP;
 
 	NetworkManager() { }
 };
