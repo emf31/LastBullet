@@ -34,6 +34,13 @@ public:
 	bool isEnemyInFOV(Entity* ent)const;
 	bool isRaycastObstructed(Entity* ent)const;
 	bool isInFOV(Entity* ent)const;
+
+	Vec3<float> GetLastRecordedPositionOfOpponent(Entity* ent)const;
+	double GetTimeOpponentHasBeenVisible(Entity* ent)const;
+	double GetTimeSinceLastSensed(Entity* ent)const;
+	double GetTimeOpponentHasBeenOutOfView(Entity* ent)const;
+
+
 	std::list<Entity*> GetListOfRecentlySensedEnemies()const;
 
 

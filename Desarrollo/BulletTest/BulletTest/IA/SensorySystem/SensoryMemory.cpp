@@ -97,6 +97,46 @@ bool SensoryMemory::isInFOV(Entity * ent) const
 	return facing.Dot(vector) >= m_bot->getFOV();
 }
 
+Vec3<float> SensoryMemory::GetLastRecordedPositionOfOpponent(Entity *ent) const
+{
+	auto it=m_botMemory.find(ent);
+	if (it != m_botMemory.end()) {
+		return (*it).second.m_lastPosition;
+	}
+
+	throw std::runtime_error("SENSORYMEMORY::GetLastRecordedPositionOfOpponent>: Intentando conseguir posicion de un bot que no has guardado");
+}
+
+double SensoryMemory::GetTimeOpponentHasBeenVisible(Entity * ent) const
+{
+	auto it = m_botMemory.find(ent);
+	if (it != m_botMemory.end() && (*it).second.m_inFOV == true) {
+		return sensoryClock.getElapsedTime().asSeconds() - (*it).second.m_TimeBecameVisible;
+	}
+
+	return 0.0;
+}
+
+double SensoryMemory::GetTimeSinceLastSensed(Entity * ent) const
+{
+	auto it = m_botMemory.find(ent);
+	if (it != m_botMemory.end() && (*it).second.m_inFOV == true) {
+		return sensoryClock.getElapsedTime().asSeconds() - (*it).second.m_lastTimeSensed;
+	}
+
+	return 0.0;
+}
+
+double SensoryMemory::GetTimeOpponentHasBeenOutOfView(Entity * ent) const
+{
+	auto it = m_botMemory.find(ent);
+	if (it != m_botMemory.end()) {
+		return sensoryClock.getElapsedTime().asSeconds() - (*it).second.m_TimeBecameVisible;
+	}
+
+	return 0.0;
+}
+
 std::list<Entity*> SensoryMemory::GetListOfRecentlySensedEnemies() const
 {
 	//TODO
