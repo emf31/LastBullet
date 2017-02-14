@@ -18,7 +18,7 @@ public:
 
 	bool       isTargetShootable()const;
 
-	//Vector2D   GetLastRecordedPosition()const;
+	Vec3<float>   GetLastRecordedPosition()const;
 
 	double      GetTimeTargetHasBeenVisible()const;
 

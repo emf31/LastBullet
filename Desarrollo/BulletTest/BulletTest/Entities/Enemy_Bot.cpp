@@ -376,7 +376,6 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 		double DesSniper = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
 
 
-1
 		if (DesSniper > mejorScore) {
 			mejorScore = DesSniper;
 			bestWeapon = "Sniper";

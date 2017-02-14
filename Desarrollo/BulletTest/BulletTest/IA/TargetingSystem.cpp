@@ -51,8 +51,8 @@ bool TargetingSystem::isTargetShootable()const
 {
 	return m_pOwner->GetSensoryMemory()->isEnemyShootable(m_pCurrentTarget);
 }
-/*
-Vector2D TargetingSystem::GetLastRecordedPosition()const
+
+Vec3<float> TargetingSystem::GetLastRecordedPosition()const
 {
 	return m_pOwner->GetSensoryMemory()->GetLastRecordedPositionOfOpponent(m_pCurrentTarget);
 }
@@ -66,4 +66,3 @@ double TargetingSystem::GetTimeTargetHasBeenOutOfView()const
 {
 	return m_pOwner->GetSensoryMemory()->GetTimeOpponentHasBeenOutOfView(m_pCurrentTarget);
 }
-*/
