@@ -47,6 +47,8 @@ public:
 	void createPathToPosition(Vec2f vec);
 	void createPathToItem(const std::string& tipo);
 
+	std::shared_ptr<NetBot> m_network;
+
 private:
 	
 
@@ -75,7 +77,7 @@ private:
 
 	LifeComponent life_component;
 
-	std::shared_ptr<NetBot> m_network;
+	
 
 	//el bot lo usa para seguir un camino
 	PathPlanner* m_PathPlanner;

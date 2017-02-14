@@ -2,6 +2,7 @@
 #include <NetObject.h>
 #include <NetworkDebugger.h>
 #include <memory>
+#include <Windows.h>
 
 //Forward declaration - prevents circular reference
 class Player;
@@ -17,6 +18,11 @@ public:
 
 	virtual void apagar();
 
+
+	void crearPartida();
+
+	void unirsePartida();
+
 	//Send packet to server using netplayer peer 
 	template<typename T>
 	void dispatchMessage(T& estructura, GameMessages messageType) {
@@ -26,6 +32,9 @@ public:
 	}
 
 private:
+
+	void startup(LPCTSTR lpApplicationName);
+
 	Player* m_player;
 
 	void searchServersOnLAN();

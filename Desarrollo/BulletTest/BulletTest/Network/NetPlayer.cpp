@@ -12,8 +12,6 @@
 #include <events/KillEvent.h>
 #include <NetworkManager.h>
 
-
-
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
 
@@ -32,8 +30,80 @@ void NetPlayer::inicializar()
 {
 	char eleccion;
 	int elec;
+
 	std::string str;
-	//resetBarTime.restart();
+	
+	//do {
+
+		std::cout << "\t[a] - Crear partida" << std::endl;
+		std::cout << "\t[b] - Unirse a partida" << std::endl;
+		std::cout << "Elige una opcion: ";
+
+		std::cin >> eleccion;
+
+		if (eleccion == 'a') {
+			crearPartida();
+
+			unirsePartida();
+		}
+		else if (eleccion == 'b') {
+
+			unirsePartida();
+			
+		}
+
+	//} while (eleccion != 'a' || eleccion != 'b');
+
+		
+		
+	//Nos conectamos a la lobby del servidor
+	//lobby.join(str, SERVER_PORT);
+
+	
+}
+void NetPlayer::startup(LPCTSTR lpApplicationName)
+{
+	// additional information
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+
+	// set the size of the structures
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+
+	// start the program up
+	CreateProcess(lpApplicationName,   // the path
+		NULL,			// Command line
+		NULL,           // Process handle not inheritable
+		NULL,           // Thread handle not inheritable
+		FALSE,          // Set handle inheritance to FALSE
+		0,              // No creation flags
+		NULL,           // Use parent's environment block
+		NULL,           // Use parent's starting directory 
+		&si,            // Pointer to STARTUPINFO structure
+		&pi             // Pointer to PROCESS_INFORMATION structure (removed extra parentheses)
+	);
+
+
+	// Close process and thread handles. 
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+}
+
+
+void NetPlayer::crearPartida()
+{
+	startup(L"RaknetServerv0.1.exe");
+}
+
+void NetPlayer::unirsePartida()
+{
+
+	char eleccion;
+	int elec;
+
+	std::string str;
 
 	do {
 		searchServersOnLAN();
@@ -63,13 +133,10 @@ void NetPlayer::inicializar()
 				eleccion = 'a';
 			}
 		}
+
+		conectar(str, server_port);
+
 	} while (eleccion == 'a');
-
-
-	//Nos conectamos a la lobby del servidor
-	//lobby.join(str, SERVER_PORT);
-
-	conectar(str, server_port);
 }
 
 void NetPlayer::handlePackets(Time elapsedTime)
@@ -103,6 +170,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			printf("Nuestra conexion se ha aceptado.\n");
 			servidor = packet->guid;
 			servidorAdr = packet->systemAddress;
+
 
 
 			//Esta variable indica que el servidor ha aceptado la conexion
@@ -488,6 +556,8 @@ void NetPlayer::apagar()
 	}
 	
 }
+
+
 void NetPlayer::searchServersOnLAN() {
 	//Creo un RakPeer para lanzar un paquete de b�squeda
 	RakNet::RakPeerInterface *client;

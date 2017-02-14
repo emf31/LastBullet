@@ -30,7 +30,7 @@
 
 #include <NetworkManager.h>
 
-
+#include <Settings.h>
 
 
 const int Game::server_port = 65535;
@@ -135,7 +135,7 @@ void Game::inicializar()
 
 
 	
-
+	Settings::i().LoadSettings();
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 
@@ -146,7 +146,10 @@ void Game::inicializar()
 	std::cin >> str;
 
 	Player *player = new Player(str, RakNet::UNASSIGNED_RAKNET_GUID);
+	player->m_network->inicializar();
 
+	/*Enemy_Bot* bot = new Enemy_Bot("JULIYO BOT", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();*/
 
 	
 

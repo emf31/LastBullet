@@ -13,9 +13,10 @@ Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity
 	//Creates object to send and receive packets
 	m_network.reset();
 	m_network = NetworkManager::i().createNetBot(this);
-	m_network->inicializar();
 
-	EntityManager::i().registerRaknetEntity(this);
+
+	
+
 }
 
 Enemy_Bot::~Enemy_Bot()
@@ -85,12 +86,6 @@ void Enemy_Bot::cargarContenido()
 	height = 7.3f;
 	mass = 70.f;
 
-
-	//m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(5.f, 5.f, 5.f), mass, false, Vec3<float>(0,0,0), DISABLE_DEACTIVATION);
-
-	/*btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
-	proxy->m_collisionFilterMask = col::enemyCollidesWith;*/
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
