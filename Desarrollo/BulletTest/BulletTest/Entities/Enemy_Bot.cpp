@@ -37,7 +37,7 @@ void Enemy_Bot::inicializar()
 	sense = new SensoryMemory(this,20);
 
 	//angulo de vision
-	FOV = cos(cos(DegToRad(45)) / 2.0); ;
+	FOV = DegToRad(45) ;
 
 	/*
 	FuzzyModule fm;
