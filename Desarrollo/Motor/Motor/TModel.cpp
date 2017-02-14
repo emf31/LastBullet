@@ -174,15 +174,15 @@ void TModel::setScale(Vec3<float> esc) {
 	transEscalado->setScale(esc);
 }
 
-void TModel::setTransformacionRotacion(TTransform * rot) {
+void TModel::setTransformacionRotacion(TRotacion * rot) {
 	transRotacion = rot;
 }
 
-void TModel::setTransformacionEscalado(TTransform * esc) {
+void TModel::setTransformacionEscalado(TEscalado * esc) {
 	transEscalado = esc;
 }
 
-void TModel::setTransformacionTraslacion(TTransform * tras) {
+void TModel::setTransformacionTraslacion(TTraslacion * tras) {
 	transTraslacion = tras;
 }
 

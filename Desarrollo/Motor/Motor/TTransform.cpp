@@ -128,6 +128,11 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 	}
 	*/
 
+
+	//NOTA: lo que nos ha dicho en clase es que hagamos un unico nodo de transformacion que tenga rotacion, escalado y trasladado como hicimos antes, pero que el nodo rotacion solo rote y asi
+	//la cosa es que cuando llamo a rotacion lo que tiene que hacer es actualizar la matriz de este nodo aplicandole el glm rotate (cada nodo transformacion tiene una matriz) y asi se irian acumulando
+	//las rotaciones, luego en el begin draw lo que hacemos es apilar esta matriz ya rotada y en el end draw lo que hacemos es desapilar.
+	//y luego donde se multiplican todas las matrices es en el begin draw del model que coge las 3 matrices una de cada nodo y las multiplica y esto es la matrices del modelo.
 	
 	
 }

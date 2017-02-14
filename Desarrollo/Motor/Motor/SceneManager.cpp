@@ -1,6 +1,9 @@
 #include "SceneManager.h"
 #include "TTransform.h"
 #include "TSpotLight.h"
+#include "TRotacion.h"
+#include "TTraslacion.h"
+#include "TEscalado.h"
 
 SceneManager::SceneManager() {
 	//gui.init("GUI");
@@ -82,9 +85,9 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 
 
 	//asignamos matrices de transformacion
-	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
-	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
-	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	model->setTransformacionRotacion(static_cast<TRotacion*> (nuevoNodoRotacion->getEntity()));
+	model->setTransformacionEscalado(static_cast<TEscalado*> (nuevoNodoEscalado->getEntity()));
+	model->setTransformacionTraslacion(static_cast<TTraslacion*> (nuevoNodoTraslacion->getEntity()));
 
 	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoMalla->setEntity(model);
@@ -110,7 +113,7 @@ TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre)
 {
 	TNode* transNode = new TNode(nodoPadre);
 	transNode->setType(T_TRASLACION);
-	TTransform* trans = new TTransform();
+	TTraslacion* trans = new TTraslacion();
 	trans->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
 	transNode->setEntity(trans);
 	return transNode;
@@ -120,7 +123,7 @@ TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre)
 {
 	TNode* transNode = new TNode(nodoPadre);
 	transNode->setType(T_ROTACION);
-	TTransform* trans = new TTransform();
+	TRotacion* trans = new TRotacion();
 	transNode->setEntity(trans);
 	return transNode;
 }
@@ -129,7 +132,7 @@ TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre)
 {
 	TNode* transNode = new TNode(nodoPadre);
 	transNode->setType(T_ESCALADO);
-	TTransform* trans = new TTransform();
+	TEscalado* trans = new TEscalado();
 	trans->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	transNode->setEntity(trans);
 	

@@ -61,10 +61,10 @@ int main() {
 	posicion = w->getPosition();
 	Vec3<float> rotacion2 = w->getRotation();
 	posicion = posicion + Vec3<float>(3.5f, 3.5f, 3.5f);
-	//rotacion2.setY(rotacion2.getY() + 45);
+	rotacion2.setY(rotacion2.getY() + 90);
 	std::cout << "La rotacion antes es: " << rotacion2.getX() << "," << rotacion2.getY() << "," << rotacion2.getZ() << "," << std::endl;
 	w->setPosition(posicion);
-	//w->setRotation(rotacion2);
+	w->setRotation(rotacion2);
 	w->setRotation2(90, Vec3<float>(0.0f, 1.0f, 0.0f));
 
 	Vec3<float> aux = w->getRotation();
@@ -136,6 +136,7 @@ int main() {
 		*/
 		
 		sm->draw(engine.getWindow());
+		
 		
 	}
 	engine.end();

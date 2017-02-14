@@ -1,6 +1,7 @@
 #pragma once
 #include "TEntity.h"
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/gtc/type_ptr.hpp>
 class TSpotLight : public TEntity {
 public:
 	TSpotLight();
@@ -22,5 +23,10 @@ public:
 private:
 	glm::vec3 lightPos;
 	glm::mat4 m_matrix;
+	Shader* shaderLuz;
+	GLuint lightVAO;
+	GLuint lightVBO;
+	
+	
 };
 

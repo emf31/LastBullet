@@ -7,6 +7,9 @@
 #include <vector>
 #include "vec3.hpp"
 #include "TTransform.h"
+#include "TRotacion.h"
+#include "TTraslacion.h"
+#include "TEscalado.h"
 using namespace std;
 
 // GL Includes
@@ -67,9 +70,9 @@ public:
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionEscalado(TTransform* esc);
-	void setTransformacionTraslacion(TTransform* tras);
+	void setTransformacionRotacion(TRotacion* rot);
+	void setTransformacionEscalado(TEscalado* esc);
+	void setTransformacionTraslacion(TTraslacion* tras);
 
 	void setModelColor(float r, float g, float b) {
 		m_r = r;
@@ -98,9 +101,9 @@ private:
 	//TNode* transRotacion;
 	//TNode* transEscalado;
 	//TNode* transTraslacion;
-	TTransform* transRotacion;
-	TTransform* transEscalado;
-	TTransform* transTraslacion;
+	TRotacion* transRotacion;
+	TEscalado* transEscalado;
+	TTraslacion* transTraslacion;
 	float m_r;
 	float m_g;
 	float m_b;
