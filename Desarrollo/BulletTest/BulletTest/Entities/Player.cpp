@@ -479,7 +479,7 @@ void Player::setWeapon(int newWeapon) {
 				pistola->resetAmmoTotal();
 			}
 		break;
-		/*case SNIPER:
+		case SNIPER:
 			if (!tieneSniper) {
 				printf("TE HAS EQUIPADO UN FRANCOTIRADOR\n");
 				listaWeapons->insertar(sniper);
@@ -488,7 +488,7 @@ void Player::setWeapon(int newWeapon) {
 			else {
 				sniper->resetAmmoTotal();
 			}
-			break;*/
+			break;
 	}
 
 
@@ -504,6 +504,7 @@ void Player::resetAll() {
 	tieneRocketLauncher = false;
 	tienePistola = false;
 	tieneAsalto = false;
+	tieneSniper = false;
 
 
 	asalto->borrarContenido();
@@ -518,12 +519,17 @@ void Player::resetAll() {
 	pistola->inicializar();
 	pistola->cargarContenido();
 
+	sniper->borrarContenido();
+	sniper->inicializar();
+	sniper->cargarContenido();
+
 
 	listaWeapons->insertar(pistola);
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	rocket->setEquipada(false);
 	asalto->setEquipada(false);
+	sniper->setEquipada(false);
 
 	pistola->setEquipada(true);
 	tienePistola = true;
