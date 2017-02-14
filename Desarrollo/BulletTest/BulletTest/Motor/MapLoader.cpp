@@ -5,6 +5,7 @@
 #include "../Entities\WeaponDrops/AsaltoDrop.h"
 #include "../Entities\WeaponDrops/PistolaDrop.h"
 #include "../Entities/WeaponDrops/RocketLauncherDrop.h"
+#include "../Entities/WeaponDrops/SniperDrop.h"
 #include "GraphicEngine.h"
 #include "../Entities/Button.h"
 #include "../Otros/EnumParser.h"
@@ -19,7 +20,7 @@ MapLoader::~MapLoader(){
 
 void MapLoader::readMap(const std::string & name)
 {	
-	std::ifstream i("../media/map1.json");
+	std::ifstream i(name);
 	if(i){
 		json j = json::parse(i);
 		int cont = 0;
@@ -47,7 +48,7 @@ void MapLoader::readMap(const std::string & name)
 				std::string extraTags = obj["extraTags"];
 				//std::cout << "ExtraTags: " << extraTags << std::endl;
 				if (obj["tag"] == "PhysicEntity") {
-					std::shared_ptr<BasicSceneNode> node =createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
+					std::shared_ptr<BasicSceneNode> node = createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
 					if (extraTags == "life") {
 						node->setTexture("../media/life.png",0);
 					} else if (extraTags == "pistola") {
@@ -56,17 +57,23 @@ void MapLoader::readMap(const std::string & name)
 						node->setTexture("../media/lanzacohetes.jpg", 0);
 					} else if (extraTags == "asalto") {
 						node->setTexture("../media/asalto.jpg", 0);
+					} else if (extraTags == "asalto") {
+						node->setTexture("../media/sniper.png", 0);
 					}
+
+
 				}
 					
 				if (obj["tag"] == "LifeObject")
-					createLifeObject(pos, es, mesh, nombre);
+					createLifeObject(pos, es, nombre, mesh);
 				if (obj["tag"] == "PistolaDrop")
-					createPistolaDrop(pos, es, mesh, nombre);
+					createPistolaDrop(pos, es, nombre, mesh);
 				if (obj["tag"] == "AsaltoDrop")
-					createAsaltoDrop(pos, es, mesh, nombre);
+					createAsaltoDrop(pos, es, nombre, mesh);
 				if (obj["tag"] == "RocketLauncherDrop")
-					createRocektLauncherDrop(pos, es, mesh, nombre);
+					createRocektLauncherDrop(pos, es, nombre, mesh);
+				if (obj["tag"] == "SniperDrop")
+					createSniperDrop(pos, es, nombre, mesh);
 				if (obj["tag"] == "Grafo")
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 				if (obj["tag"] == "Spawn") {
@@ -128,36 +135,54 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 	return sceneNode;
 }
 
-void MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+Entity* MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
 {
 	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/life.png", "");
 	LifeObject *vidaEnt = new LifeObject(vida, name);
-	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt,escala));
+	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, escala*2.f));
 	vidaEnt->setPosition(posicion);
+
+	return vidaEnt;
 }
 
-void MapLoader::createAsaltoDrop(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+Entity* MapLoader::createAsaltoDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
 {
 	std::shared_ptr<BasicSceneNode> asaltodrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/Asalto.jpg", "");
 	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(asaltodrop, name);
-	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, escala));
+	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, escala*2.f));
 	AsaltoDropEnt->setPosition(posicion);
+
+	return AsaltoDropEnt;
 }
 
-void MapLoader::createPistolaDrop(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+Entity* MapLoader::createPistolaDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
 {
 	std::shared_ptr<BasicSceneNode> pistoladrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/pistola.jpg", "");
 	PistolaDrop *pistolaEnt = new PistolaDrop(pistoladrop, name);
-	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, escala));
+	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, escala*2.f));
 	pistolaEnt->setPosition(posicion);
+
+	return pistolaEnt;
 }
 
-void MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escala, const io::path & mesh, std::string & name)
+Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
 {
 	std::shared_ptr<BasicSceneNode> lanzacohete = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/lanzacohetes.jpg", "");
 	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(lanzacohete,name);
-	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, escala));
+	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, escala*2.f));
 	RocketLauncherDropEnt->setPosition(posicion);
+
+	return RocketLauncherDropEnt;
+}
+
+Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
+{
+	std::shared_ptr<BasicSceneNode> sniper = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/sniper.png", "");
+	SniperDrop *SniperDropEnt = new SniperDrop(sniper, name);
+	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, escala*2.f));
+	SniperDropEnt->setPosition(posicion);
+
+	return SniperDropEnt;
 }
 
 void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type) {

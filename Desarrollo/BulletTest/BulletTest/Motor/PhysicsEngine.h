@@ -4,8 +4,9 @@
 #include <btBulletDynamicscommon.h>
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 
-#include "../Entities/Entity.h"
-#include "../Otros/Time.hpp"
+#include <Entity.h>
+#include <Time.hpp>
+#include <KinematicCharacterController.h>
 
 #include <unordered_set>
 
@@ -13,26 +14,71 @@
 namespace col {
 	enum Collisions {
 		COL_NOTHING = 0,
-		Static = BIT(0),
+		RAY_CAST = BIT(0),
 		Granada = BIT(1),
 		Character = BIT(2),
 		Rocket = BIT(3),
 		Caja = BIT(4),
 		Enemy = BIT(5),
 		Sensor = BIT(6),
-		RocketEnemy = BIT(7)
+		RocketEnemy = BIT(7),
+		Static = BIT(8)
 	};
 
-	const int staticCollidesWith = Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
-	const int characterCollidesWith = Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
+	const int staticCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
+	const int characterCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
 	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
 	const int sensorCollidesWith = Collisions::Character;
-	const int cajaCollidesWith = Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
-	const int enemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja;
+	const int cajaCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
+	const int enemyCollidesWith = Collisions::RAY_CAST | Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja | Collisions::Enemy;
 }
 
-typedef std::shared_ptr<btRigidBody> RigidPtr;
+namespace bodyPart {
+	enum Body {
+		CUERPO = 0,
+		CABEZA = 1,
+		EXTERNA = 2
+	};
+}
+
+
+
+
+
+class btKinematicClosestShapeResultCallback : public btCollisionWorld::ClosestRayResultCallback
+{
+public:
+	btKinematicClosestShapeResultCallback(const btVector3& start, const btVector3& end) : btCollisionWorld::ClosestRayResultCallback(start, end)
+	{
+		parte = bodyPart::Body::CUERPO;
+	}
+
+	virtual btScalar addSingleResult(btCollisionWorld::LocalRayResult& rayResult, bool normalInWorldSpace)
+	{
+		if (rayResult.m_localShapeInfo) {
+			m_shapeIndex = rayResult.m_localShapeInfo->m_triangleIndex;
+		}
+
+		if (rayResult.m_collisionObject->getCollisionShape()->getShapeType() == COMPOUND_SHAPE_PROXYTYPE) {
+			btCompoundShape* compound = (btCompoundShape*)rayResult.m_collisionObject->getCollisionShape();
+			parte = static_cast<bodyPart::Body>(compound->getChildShape(m_shapeIndex)->getUserIndex());
+
+			if (parte == bodyPart::Body::EXTERNA) {
+				return btScalar(1.0);
+			}
+		}
+
+
+
+
+		return ClosestRayResultCallback::addSingleResult(rayResult, normalInWorldSpace);
+	}
+public:
+	bodyPart::Body parte;
+	int m_shapeIndex;
+};
+
 
 class PhysicsEngine
 {
@@ -52,10 +98,10 @@ public:
 	//Updatea las fisicas
 	void update(Time elapsedTime);
 
-
-	void createBoxDynamicCharacter(btRigidBody* rigid);
-
 	void notifyCollisions();
+
+	//Crea un kinematic character controller
+	KinematicCharacterController* createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass);
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
 	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa,bool haveMesh , Vec3<float> centerCol = Vec3<float>(0, 0, 0),int body_state = ACTIVE_TAG);
@@ -73,6 +119,7 @@ public:
 	//borra un rigidbody de la simulacion
 	bool removeRigidBody(btRigidBody* body);
 	bool removeGhostObject(btGhostObject * body);
+	bool removeKinematic(KinematicCharacterController* kinematic);
 
 	void cleanDeleteObjects();
 
@@ -87,7 +134,6 @@ private:
 	btGhostPairCallback* m_pGhostPairCallBack;
 
 	std::list<btRigidBody*> m_rigidBodies;
-	//std::list<btCollisionShape*> m_collisionShapes;
 
 	std::unordered_set<btCollisionObject*> collisions_set;
 

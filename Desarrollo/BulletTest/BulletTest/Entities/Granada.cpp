@@ -1,7 +1,7 @@
 #include "Granada.h"
-#include "../Motor/GraphicEngine.h"
-#include "../Motor/PhysicsEngine.h"
-#include "../Motor de Red/Cliente.h"
+#include <GraphicEngine.h>
+#include <PhysicsEngine.h>
+#include <Cliente.h>
 
 
 Granada::Granada() : Entity(-1, NULL)
@@ -17,7 +17,15 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(135.f, 135.f, 135.f);
+	fuerza = Vec3<float>(60.f ,100.f, 60.f);
+	radioExplosion = 30.f;
+	height = 1.2f;
+	radius = 0.5;
+	mass = 1.f;
+	timeRecargaGranada = 2.f;
+	restitution = 1.f;
+	estado = GRANADACARGADA;
+	guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
 }
 
 void Granada::update(Time elapsedTime)
@@ -35,7 +43,7 @@ void Granada::update(Time elapsedTime)
 		m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
 
 
-		if (clockRecargaGranada.getElapsedTime().asSeconds()>timeRecargaGranada) {
+		if (clockRecargaGranada.getElapsedTime().asSeconds() > timeRecargaGranada) {
 			setEstado(GRANADACARGADA);
 
 
@@ -57,25 +65,10 @@ void Granada::handleInput()
 
 void Granada::cargarContenido()
 {
-
-	//m_nodo = GraphicEngine::i().createNode(Vec3<float>(2, 100, 0), Vec3<float>(0.01, 0.01, 0.01), "", "../media/granada.obj");
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/WPN_MK2Grenade.obj");
-
-
-	//m_renderState.setPosition(Vec3<float>(2, 100, 0));
-
-	m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
-
-	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
-	proxy->m_collisionFilterMask = col::rocketCollidesWith;
-
-	radioExplosion=30.f;
-
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/Granada/granada.obj");
+	m_nodo->setVisible(false);
 
 }
-
-
 
 void Granada::borrarContenido()
 {
@@ -84,34 +77,23 @@ void Granada::borrarContenido()
 void Granada::handleMessage(const Message & message)
 {
 
-	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() != "Player" && estado==GRANADADISPARADA) {
-			//std::cout << "EL MISIL HA CHOCADO CONTRA LA PARED" << std::endl;
-			//PhysicsEngine::i().removeRigidBody(m_rigidBody);
-
-		}
-		
-	}
-
 	if (message.mensaje == "BORRATE") {
 
 		if (m_explosion != NULL) {
 			PhysicsEngine::i().removeGhostObject(m_explosion);
 		}
-			
-
 
 		m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
 
 		//solo se comprueba si te han quitado vida a ti mismo ya que la granada esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
 		Player* myentity = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-		myentity->getLifeComponent()->restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
+		myentity->getLifeComponent().restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
 
 		//volvemos a resetear el guidLanzador
 		guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
 
-//		GraphicEngine::i().removeNode(m_nodo);
+		m_nodo->setVisible(false);
 
 	}
 }
@@ -135,15 +117,19 @@ bool Granada::handleTrigger(TriggerRecordStruct * Trigger)
 void Granada::shoot(const btVector3& posicionPlayer) {
 
 	if (estado== GRANADACARGADA) {
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, height, radius, mass);
+		m_rigidBody->setRestitution(restitution);
+
+
 		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 		proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
+		m_nodo->setVisible(true);
 
-		Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
+		//Vec3<float> posicion(posicionPlayer.x() + 3, posicionPlayer.y() + 5, posicionPlayer.z());
 
-		setPosition(posicion);
+		setPosition(GraphicEngine::i().getActiveCamera()->getPosition());
 
 		btVector3 FUERZA(fuerza.getX(), fuerza.getY(), fuerza.getZ());
 
@@ -157,16 +143,16 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 
 		btVector3 force = direccion2 * FUERZA;
 
+
 		m_rigidBody->applyCentralImpulse(force);
 		
 
 		if (Cliente::i().isConected()) {
-			guidLanzador = EntityManager::i().getEntity(PLAYER)->getGuid();
 			TGranada granada;
-			granada.guid = guidLanzador;
-			granada.origen = posicion;
+			granada.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			granada.origen = m_renderState.getPosition();
 			granada.direction = direccion;
-			Cliente::i().lanzarGranada(granada);
+			Cliente::i().dispatchMessage(granada, LANZAR_GRANADA);
 		}
 		
 		//logica granada servidor: 
@@ -185,7 +171,9 @@ void Granada::shoot(const btVector3& posicionPlayer) {
 void Granada::serverShoot(TGranada& g) {
 
 	if (estado == GRANADACARGADA) {
-		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, 1.25f, 0.5f, 1.f);
+		m_rigidBody = PhysicsEngine::i().createCapsuleRigidBody(this, height, radius, mass);
+		m_rigidBody->setRestitution(restitution);
+
 		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 		proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 		proxy->m_collisionFilterMask = col::rocketCollidesWith;

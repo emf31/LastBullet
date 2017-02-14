@@ -24,7 +24,9 @@ public:
 
 	virtual std::string getClassName() override;
 
-	const std::unordered_set<Entity*>* getListaEntities() { return &lista_entities; }
+	virtual void setPosition(const Vec3<float> &pos) override;
+
+	const std::unordered_set<Entity*>& getListaEntities() { return lista_entities; }
 
 	void addEntity(Entity* ent);
 

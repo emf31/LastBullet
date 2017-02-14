@@ -1,11 +1,12 @@
 
 #include "PhysicsEngine.h"
-#include "Serialize/BulletWorldImporter\btBulletWorldImporter.h"
+#include <Serialize/BulletWorldImporter\btBulletWorldImporter.h>
 #include <unordered_map>
 #include <set>
-#include "BulletCollision\CollisionDispatch\btCollisionObject.h"
+#include <BulletCollision\CollisionDispatch\btCollisionObject.h>
 
-#include "../Handlers/MessageHandler.h"
+
+#include <MessageHandler.h>
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
@@ -66,7 +67,6 @@ void PhysicsEngine::inicializar()
 	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;
 
 
-	m_rigidBodies = std::list<btRigidBody*>();
 
 
 	
@@ -107,12 +107,45 @@ void PhysicsEngine::notifyCollisions() {
 	contacts.clear();
 }
 
-void PhysicsEngine::createBoxDynamicCharacter(btRigidBody* rigid)
-{
-	m_world->addRigidBody(rigid);
-	//and add to the list of rigidBodies
-	m_rigidBodies.push_back(rigid);
 
+KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass) {
+	btCompoundShape* shape = new btCompoundShape();
+
+	btCapsuleShape* m_pCollisionShape = new btCapsuleShape(radius, height);
+	m_pCollisionShape->setUserIndex(bodyPart::Body::CUERPO);
+
+	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(3.f,3.f,3.f));
+	m_CollisionBox->setUserIndex(bodyPart::Body::EXTERNA);
+
+	btTransform t;
+	t.setIdentity();
+	t.setOrigin(btVector3(0, 0, 0)); 
+
+	shape->addChildShape(t, m_pCollisionShape);
+	shape->addChildShape(t, m_CollisionBox);
+
+	btVector3 inertia(0, 0, 0);
+
+	btScalar masses[2] = { mass, mass};
+
+	btVector3 intertia;
+	shape->calculatePrincipalAxisTransform(masses, t, inertia);
+
+
+	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
+	actorGhost->setUserPointer(ent);
+
+
+	actorGhost->setCollisionShape(shape);
+	actorGhost->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+
+	KinematicCharacterController* p_controller = new KinematicCharacterController(actorGhost, static_cast<btConvexShape*>(m_pCollisionShape), 2.f);
+	p_controller->setUp(btVector3(0, 1, 0));
+
+
+	PhysicsEngine::i().m_world->addCollisionObject(p_controller->getGhostObject(), col::Collisions::Character, col::characterCollidesWith);
+
+	return p_controller;
 }
 
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, Vec3<float>centerCol , int body_state)
@@ -177,7 +210,7 @@ btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float heigh
 	btRigidBody* rigidBody = new btRigidBody(masa, m_pMotionState, m_pCollisionShape, intertia);
 	rigidBody->setActivationState(body_state);
 
-	rigidBody->setRestitution(0.7f);
+	
 
 	//add a pointer to rigidBody pointing to associated Entity
 	rigidBody->setUserPointer(entity);
@@ -206,7 +239,7 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	//now create the rigidBody
 	btRigidBody* rigidBody = new btRigidBody(mass, m_pMotionState, m_pCollisionShape, intertia);
 	rigidBody->setActivationState(body_state);
-	rigidBody->setRestitution(3500.f);
+	//rigidBody->setRestitution(3500.f);
 	//rigidBody->setHitFraction(2000.f);
 	//rigidBody->setSpinningFriction(100.f);
 	//add a pointer to rigidBody pointing to associated Entity
@@ -276,6 +309,7 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 	return ghostObj;
 }
 
+
 bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 {
 	m_rigidBodies.remove(body);
@@ -290,7 +324,6 @@ bool PhysicsEngine::removeRigidBody(btRigidBody * body)
 
 bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 {
-
 	m_world->removeCollisionObject(body);
 
 	//Insertamos el cuerpo en el set de borrado
@@ -298,6 +331,19 @@ bool PhysicsEngine::removeGhostObject(btGhostObject * body)
 
 	return true;
 }
+
+bool PhysicsEngine::removeKinematic(KinematicCharacterController * kinematic)
+{
+	m_world->removeCollisionObject(kinematic->getGhostObject());
+
+	//Insertamos el cuerpo en el set de borrado
+	collisions_set.insert(kinematic->getGhostObject());
+
+	delete kinematic;
+
+	return false;
+}
+
 
 void PhysicsEngine::cleanDeleteObjects()
 {

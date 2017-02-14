@@ -1,17 +1,15 @@
 #pragma once
 #include <RakPeerInterface.h>
 #include "Clock.hpp"
-
-//Fordward declaration para evitar referencia circular
-class Player;
+#include <Entity.h>
 
 class LifeComponent {
 public:
-	LifeComponent(Player* player);
+	LifeComponent(Entity* owner);
 	~LifeComponent();
 
 	void restaVida(float cantidad, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
-	bool update();
+	void update();
 
 	void resetVida();
 	float getVida();
@@ -25,5 +23,5 @@ private:
 	bool m_isDying;
 	Clock relojMuerte;
 
-	Player* m_player;
+	Entity* m_pOwner;
 };

@@ -1,16 +1,12 @@
 #include "Button.h"
-#include "../TriggerSystem.h"
-#include "../Motor/PhysicsEngine.h"
+#include <TriggerSystem.h>
+#include <PhysicsEngine.h>
 
 Button::Button(std::shared_ptr<BasicSceneNode> nodo, const std::string & name, EnumTriggerType type, int id):Entity(id, nodo, name) {
 	m_triggerType = type;
 }
 
 Button::~Button() {
-}
-
-void Button::setPosition(Vec3<float>& pos) {
-	m_renderState.setPosition(pos);
 }
 
 void Button::inicializar() {
@@ -41,4 +37,9 @@ bool Button::handleTrigger(TriggerRecordStruct * Trigger) {
 
 std::string Button::getClassName() {
 	return std::string();
+}
+
+void Button::setPosition(const Vec3<float>& pos)
+{
+	m_renderState.setPosition(pos);
 }

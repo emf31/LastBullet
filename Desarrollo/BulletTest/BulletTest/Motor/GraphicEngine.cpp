@@ -1,16 +1,18 @@
 
 #include "GraphicEngine.h"
 #include "../MastEventReceiver.hpp"
-#include "../Entities/EntityManager.h"
-#include "../Entities/Player.h"
+#include <EntityManager.h>
+#include <Player.h>
 #include "PhysicsEngine.h"
 #include <string>
 #include <sstream>
 #include <exception>
 
+#include <GUIManager.h>
 
 GraphicEngine::GraphicEngine() : debug_camera(true)
 {
+	
 }
 
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
@@ -49,6 +51,8 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 	//Asi no le afectan las luces
 	Node->setMaterialFlag(EMF_LIGHTING, false);
 
+	
+
 	m_camera = 0;
 
 	//Si es diferente de "" asignamos una textura al nodo
@@ -62,6 +66,41 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDriver));
 }
 
+std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, Vec2f vector2d, Vec3<float> relPosition) {
+
+	IBillboardSceneNode *billboard = irrScene->addBillboardSceneNode(nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
+	billboard->setSize(core::dimension2df(9, 3));
+	billboard->setPosition(core::vector3df(0, 250, 0));
+	billboard->setColor(video::SColor(255, 0, 255, 0));
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
+}
+std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, Vec2f vector2d, Vec3<float> relPosition) {
+
+	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
+
+	const wchar_t* aux1 = GetWC(text.c_str());
+
+	IBillboardSceneNode *billboard = irrScene->addBillboardTextSceneNode(0, aux1, nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
+
+	billboard->setSize(core::dimension2df(6, 1));
+	billboard->setPosition(core::vector3df(0, 200, 0));
+	billboard->setColor(video::SColor(255, 255, 128, 128), video::SColor(255, 255, 128, 128));
+
+	delete[] aux1;
+
+	
+	
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(billboard, irrDriver));
+}
+
+const wchar_t * GraphicEngine::GetWC(const char *c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
+}
 
 void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 {
@@ -90,6 +129,7 @@ void GraphicEngine::updateCamera()
 {
 	if(debug_camera && active_camera != NULL)
 		active_camera->update();
+	
 }
 
 
@@ -98,85 +138,6 @@ Camera * GraphicEngine::getActiveCamera()
 	return active_camera;
 }
 
-void GraphicEngine::mostrarInterfaz()
-{
-	
-	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
-	irrGUI->getSkin()->setFont(fnt);
-
-	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-	float v = p->getLifeComponent()->getVida();
-	int a = p->getAmmoActual();
-	int b = p->getCargadorActual();
-	int c = p->getAmmoTotal()*b;
-
-	std::ostringstream oss;
-	oss << "Vida: " << v;
-	std::string vstring = oss.str();
-
-
-	std::ostringstream oss2;
-	oss2 << "AMMO: " << a << " / " << b;
-	std::string vstring2 = oss2.str();
-
-	std::ostringstream oss3;
-	oss3 << "AMMO TOTAL: " << c;
-	std::string vstring3 = oss3.str();
-
-
-	vida = irrGUI->addStaticText(GetWC(vstring.c_str()), rect<int>(0, 0, 100, 100));
-	ammo = irrGUI->addStaticText(GetWC(vstring2.c_str()), rect<int>(0, 60, 100, 100));
-	ammototal = irrGUI->addStaticText(GetWC(vstring3.c_str()), rect<int>(0, 90, 160, 160));
-	arma_actual = irrGUI->addStaticText(L"", rect<int>(0, 30, 100, 50));
-
-
-}	
-const wchar_t * GraphicEngine::GetWC(const char *c)
-{
-	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = new wchar_t[cSize];
-	mbstowcs(wc, c, cSize);
-
-	return wc;
-}
-void GraphicEngine::actualizarInterfaz()
-{
-	Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-	float v = p->getLifeComponent()->getVida();
-	int a = p->getAmmoActual();
-	int b = p->getCargadorActual();
-	int c = p->getAmmoTotal()*b;
-
-	std::ostringstream oss;
-	oss << "Vida: " << v;
-	std::string vstring = oss.str();
-
-	std::ostringstream oss2;
-	oss2 << "AMMO: " << a << " / " << b;
-	std::string vstring2 = oss2.str();
-
-	std::ostringstream oss3;
-	oss3 << "AMMO TOTAL: " << c;
-	std::string vstring3 = oss3.str();
-
-	const wchar_t* aux1 = GetWC(vstring.c_str());
-	vida->setText(aux1);
-	delete[] aux1;
-
-	aux1 = GetWC(vstring2.c_str());
-	ammo->setText(aux1);
-	delete[] aux1;
-
-	aux1 = GetWC(vstring3.c_str());
-	ammototal->setText(aux1);
-	delete[] aux1;
-
-	aux1 = GetWC(p->getCurrentWeapon().c_str());
-	arma_actual->setText(aux1);
-	delete[] aux1;
-	
-
-}
 
 void GraphicEngine::setActiveCamera(int ID)
 {
@@ -191,6 +152,7 @@ void GraphicEngine::renderAll()
 	irrScene->drawAll();
 	irrGUI->drawAll();
 
+
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	if (debug_draw_bullet)
 	{
@@ -202,6 +164,9 @@ void GraphicEngine::renderAll()
 		PhysicsEngine::i().m_world->debugDrawWorld();
 
 	}
+
+	//gui.draw();
+	GUIManager::i().drawAllGuis();
 
 	irrDriver->endScene();
 	int fps = irrDriver->getFPS();
@@ -230,7 +195,7 @@ void GraphicEngine::inicializar()
 		irrScene = irrDevice->getSceneManager();
 		irrDriver = irrDevice->getVideoDriver();
 
-		irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(1280 / 2 - 220 / 2, 720 / 2 - 165 / 2));
+		//irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(1280 / 2 - 220 / 2, 720 / 2 - 165 / 2));
 
 
 		irrDevice->getCursorControl()->setVisible(0);
@@ -258,7 +223,7 @@ void GraphicEngine::inicializar()
 
 		debug_draw_bullet = true;
 	//}
-	
+
 
 }
 
@@ -328,3 +293,14 @@ void GraphicEngine::cargarTexturas() {
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	irrScene->addToDeletionQueue(nodo->getNodo());
 }
+
+void GraphicEngine::apuntar()
+{
+	active_camera->apuntar();
+}
+
+void GraphicEngine::restablecerMirilla()
+{
+	active_camera->restablecerMira();
+}
+

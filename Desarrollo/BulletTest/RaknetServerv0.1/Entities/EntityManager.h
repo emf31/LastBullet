@@ -20,7 +20,7 @@ public:
 	//Envia un nuevo player a todos los clientes
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
 	//este metodo ahora envia la posicion y la rotacion del jugador
-	void enviaNuevaPos(TMovimiento &p, RakNet::RakPeerInterface *peer);
+	void enviaNuevaPos(TMovimiento p, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
@@ -30,27 +30,20 @@ public:
 	void enviaTiempoActualArma(DropObject *d, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
 	void enviarDisparoClienteRocket(TBala &b, RakNet::RakPeerInterface *peer);
-	void VidaCogida(int idVida, RakNet::RakPeerInterface *peer);
-	void ArmaCogida(int idArma, RakNet::RakPeerInterface *peer);
+	void VidaCogida(TId &idVida, RakNet::RakPeerInterface *peer);
+	void ArmaCogida(TId &idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
 	void enviaCambioArma(TCambioArma &cambio, RakNet::RakPeerInterface *peer);
 	void aumentaKill(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
+	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);
 
 
 	//Inicializa todas las entities
 	void inicializar();
-	//Updatea todas las entities
-	void update(Time elapsedTime);
-	//Updatea la posicion de render de todas las entities
-	void updateRender(float interpolation);
 
-	void handleInput();
-	//Carga el contenido de todas las entities
-	void cargarContenido();
-	//Borra el contenido de todas las entities
 	void borrarContenido();
 	//Borra el entity manager(borramos el mapa y los punteros a entities)
 	void apagar();
@@ -61,6 +54,7 @@ public:
 	void removeEntity(Entity* entity);
 	Entity * getRaknetEntity(RakNet::RakNetGUID guid);
 	Entity * getEntityID(int id);
+	int MaxScore = 5;
 
 private:
 	EntityManager(EntityManager const&);

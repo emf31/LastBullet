@@ -1,6 +1,6 @@
 ﻿  RenderState.cpp
+  Vec3f.cpp
   MainServer.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\raknetserverv0.1\mainserver.cpp(56): warning C4553: '==': el operador no tiene efecto; ¿ha pensado en '='?
   Player.cpp
   Life.cpp
   EntityManager.cpp
@@ -10,5 +10,5 @@ d:\4ºcurso\repositorios\tba\desarrollo\bullettest\raknetserverv0.1\mainserver.c
   Time.cpp
   Clock.cpp
   Generando código...
-  RaknetServerv0.1.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.exe
-  RaknetServerv0.1.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.pdb (Full PDB)
+  RaknetServerv0.1.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.exe
+  RaknetServerv0.1.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.pdb (Full PDB)

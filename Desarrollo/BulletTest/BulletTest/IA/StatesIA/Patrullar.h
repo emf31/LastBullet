@@ -9,17 +9,9 @@ public:
 		static Patrullar singleton;
 		return singleton;
 	}
-	virtual void Enter(Entity* pEnemy) {
-		std::cout << "ZIZU" << std::endl;
-	}
-	virtual void Execute(Entity* pEnemy) {
-		std::cout << "ZIZU" << std::endl;
-
-	}
-	virtual void Exit(Entity* pEnemy) {
-		std::cout << "ZIZU" << std::endl;
-
-	}
+	virtual void Enter(Enemy_Bot* pEnemy);
+	virtual void Execute(Enemy_Bot* pEnemy);
+	virtual void Exit(Enemy_Bot* pEnemy);
 
 private:
 	Patrullar() {};

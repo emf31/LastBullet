@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "input_constants.h"
-#include "../Entities/Player.h"
+#include <Player.h>
 #include "../Command/Command.h"
 
 typedef std::shared_ptr<Command> CommandPtr;
@@ -42,6 +42,8 @@ private:
 	CommandPtr run_command;
 	CommandPtr list_up;
 	CommandPtr list_down;
+	CommandPtr reload;
+	CommandPtr apuntar;
 
 	std::map <EKEY_CODE, CommandPtr> commands;
 

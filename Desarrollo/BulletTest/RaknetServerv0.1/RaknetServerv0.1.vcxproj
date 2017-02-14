@@ -90,7 +90,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\BulletTest\include\Raknet;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\BulletTest\include\Raknet;Otros;Entities</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,6 +160,7 @@
     <ClCompile Include="Entities\Life.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="MainServer.cpp" />
+    <ClCompile Include="Otros\Vec3f.cpp" />
     <ClCompile Include="RenderState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,7 @@
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Estructuras.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
+    <ClInclude Include="Otros\Vec3f.h" />
     <ClInclude Include="RenderState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

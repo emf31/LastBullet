@@ -1,7 +1,8 @@
 #include "Asalto.h"
-#include "../../Motor de Red/Cliente.h"
-#include "../../Motor de Red/Estructuras.h"
-#include "../../Otros/Util.h"
+#include <Cliente.h>
+#include <Estructuras.h>
+#include <Util.h>
+
 
 Asalto::Asalto() : Weapon()
 {
@@ -17,10 +18,10 @@ Asalto::~Asalto()
 
 void Asalto::inicializar()
 {
-	damage = 15;
+	damage = 30;
 	capacidadAmmo = 30;
 	disparos = 0;
-	cadencia = milliseconds(50);
+	cadencia = milliseconds(80);
 	recarga = milliseconds(1000);
 	numCargadores = numCargadoresAsalto;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
@@ -30,10 +31,12 @@ void Asalto::inicializar()
 void Asalto::update(Time elapsedTime)
 {
 	if (equipada) {
-		Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+
+		
+		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
 		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);
+		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -42,10 +45,17 @@ void Asalto::update(Time elapsedTime)
 					disparos = 0;
 					numCargadores--;
 				}
+
 			}
-			else {
-				relojrecarga.restart();
+			else if (disparosRestantes>0) {
+				if (relojrecarga.getElapsedTime() >= recarga) {
+					estadoWeapon = CARGADA;
+					disparos = capacidadAmmo - disparosRestantes;
+					disparosRestantes = 0;
+				}
+
 			}
+
 		}
 	
 	}
@@ -58,10 +68,18 @@ void Asalto::handleInput()
 
 void Asalto::cargarContenido()
 {
+
+
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.003f, 0.003f, 0.003f), "", "../media/arma/asalto.obj");
+	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.5f, 0.5f, 0.5f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
-	m_nodo->setTexture("../media/ice0.jpg", 0);
+	//m_nodo->setTexture("../media/ice0.jpg", 0);
+	//m_nodo->setTexture("../media/ice0.jpg", 1);
+
+	
+
+	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
+
 }
 
 void Asalto::borrarContenido()
@@ -78,13 +96,88 @@ bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-void Asalto::shoot()
-{
+void Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
-	if (disparos < capacidadAmmo) {
 
+
+	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+
+			disparos++;
+
+
+			btVector3 start = bt(posOwner);
+
+			btVector3 target = bt(posTarget);
+
+			btVector3 direccion = target - start;
+			direccion.normalize();
+
+			btVector3 end = start + (direccion*SIZE_OF_WORLD);
+
+
+			btKinematicClosestShapeResultCallback ray(start, end);
+
+			PhysicsEngine::i().m_world->rayTest(start, end, ray);
+
+			btVector3 posicionImpacto;
+
+
+			if (ray.hasHit())//si ray ha golpeado algo entro
+			{
+
+				if (ray.parte != bodyPart::Body::EXTERNA) {
+					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+
+
+
+					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot" || ent->getClassName() == "Player") {
+
+						Message msg(ent, "COLISION_BALA", &damage);
+						MessageHandler::i().sendMessage(msg);
+					}
+					//Para mover objetos del mapa
+					posicionImpacto = ray.m_hitPointWorld;
+
+					if (ent->getClassName() == "PhysicsEntity") {
+						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+					}
+
+				}
+
+			}
+
+
+
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			bala->cargarContenido();
+
+			relojCadencia.restart();
+
+		}
+
+	}
+
+
+	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
+		relojrecarga.restart();
+		estadoWeapon = DESCARGADA;
+	}
+
+}
+
+void Asalto::shoot()
+{
+	
+	if (disparos < capacidadAmmo && estadoWeapon==CARGADA) {
+
+		GraphicEngine::i().getActiveCamera()->cameraRecoil();
+
+		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+			
+
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
 
@@ -100,39 +193,51 @@ void Asalto::shoot()
 
 			btVector3 end = start + (direccion*SIZE_OF_WORLD);
 
-			btCollisionWorld::ClosestRayResultCallback ray(start, end);
+			btKinematicClosestShapeResultCallback ray(start, end);
 
 			PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
 			btVector3 posicionImpacto;
 
+			
 
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
-				//Veo la entity que colisiona
-				Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-				if (ent != EntityManager::i().getEntity(PLAYER))
-				{
-					if (ent->getClassName() == "Enemy") {
-						Message msg(ent, "COLISION_BALA", &damage);
-						MessageHandler::i().sendMessage(msg);
-					}
-					//Para mover objetos del mapa
-					posicionImpacto = ray.m_hitPointWorld;
+	
+					if (ray.parte != bodyPart::Body::EXTERNA) {
+						Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+						if (ent != EntityManager::i().getEntity(PLAYER))
+						{
+							if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
+								Message msg(ent, "COLISION_BALA", &damage);
+								MessageHandler::i().sendMessage(msg);
+							}
+							//Para mover objetos del mapa
+							posicionImpacto = ray.m_hitPointWorld;
 
-					if (ent->getClassName() == "PhysicsEntity") {
-						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+							if (ent->getClassName() == "PhysicsEntity") {
+								btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+								btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
+							}
+						}
 					}
-				}
+
 			}
 
 			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
 			bala->cargarContenido();
 
 			if (Cliente::i().isConected()) {
+				TBala bala;
+				bala.position = cons(start);
+				bala.direction = cons(direccion);
+				bala.finalposition = cons(posicionImpacto);
+				bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
+				bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+
 				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispararBala(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+				Cliente::i().dispatchMessage(bala, DISPARAR_BALA);
+				//Cliente::i().dispararBala();
 			}
 
 			relojCadencia.restart();
@@ -142,9 +247,37 @@ void Asalto::shoot()
 
 	}
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-		if (numCargadores > 0) {
-			relojrecarga.restart();
-		}
+		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+}/*
+
+double Asalto::getDesirability(double dist) {
+
+	fm.Fuzzify("DistToTarget", dist);
+	fm.Fuzzify("AmmoStatus", capacidadAmmo*numCargadores + disparosRestantes);
+
+	double desirability = fm.DeFuzzify("Desirability", FuzzyModule::max_av);
+
+	std::cout << "Deseabilidad del lanzacohetes: " << desirability << "\n";
+
+	return desirability;
 }
+
+void Asalto::CalcularRules() {
+
+	fm.AddRule(FzAND(Target_Close, Ammo_Low), Desirable);
+	fm.AddRule(FzAND(Target_Close, Ammo_Okay), VeryDesirable);
+	fm.AddRule(FzAND(Target_Close, Ammo_Loads), VeryDesirable);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Medium, Ammo_Okay), Desirable);
+	fm.AddRule(FzAND(Target_Medium, Ammo_Loads), Desirable);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_Low), Undesirable);
+	fm.AddRule(FzAND(Target_Far, Ammo_Okay), Undesirable);
+	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Desirable);
+
+}
+*/
+

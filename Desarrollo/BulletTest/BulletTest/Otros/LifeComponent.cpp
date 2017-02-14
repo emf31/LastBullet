@@ -1,11 +1,11 @@
 #include "LifeComponent.h"
-#include "../Entities/Player.h"
-#include "../Motor de Red/Cliente.h"
+#include <Player.h>
+#include <Cliente.h>
+#include <Map.h>
 
-LifeComponent::LifeComponent(Player * player)
+LifeComponent::LifeComponent(Entity * owner) 
+	: m_pOwner(owner), m_isDying(false), m_vida(100)
 {
-	m_player = player;
-	m_isDying = false;
 }
 
 LifeComponent::~LifeComponent()
@@ -20,25 +20,38 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		relojMuerte.restart();
 
 		if (Cliente::i().isConected()) {
-			Cliente::i().playerMuerto();
-			Cliente::i().actualizaTabla(guid, m_player->getGuid());
+
+			TPlayer nuevoplayer;
+			nuevoplayer.position = m_pOwner->getRenderState()->getPosition();
+			nuevoplayer.guid = m_pOwner->getGuid();
+			nuevoplayer.name = m_pOwner->getName();
+
+
+			Cliente::i().dispatchMessage(nuevoplayer, MUERTE);
+
+
+			TKill kill;
+			kill.guidKill = guid;
+			kill.guidDeath = m_pOwner->getGuid();
+
+			Cliente::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+	
 		}
 
 	}
+	
 }
 
-bool LifeComponent::update()
+void LifeComponent::update()
 {
 	//Una vez termine la animacion de muerte, volvemos a movernos
 	if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
 		m_isDying = false;
 		m_vida = 100;
 
-		m_player->searchSpawnPoint();
-		m_player->resetAll();
+		m_pOwner->setPosition(Map::i().searchSpawnPoint());
 	}
 
-	return m_isDying;
 }
 
 void LifeComponent::resetVida()

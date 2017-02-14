@@ -2,41 +2,47 @@
 #include <algorithm>
 #include "Game.h"
 #include "MastEventReceiver.hpp"
-#include "Otros\Clock.hpp"
-#include "Motor\PhysicsEngine.h"
-#include "Entities\EntityManager.h"
-#include "Entities\PhysicsEntity.h"
-#include "Entities\LifeObject.h"
-#include "Entities\WeaponDrops\RocketLauncherDrop.h"
-#include "Entities\WeaponDrops\PistolaDrop.h"
-#include "Entities\WeaponDrops\AsaltoDrop.h"
-#include "Entities/GroupEntity.h"
-#include "Motor\GraphicEngine.h"
-#include "Motor\SceneNode.h"
-#include "Handlers\MessageHandler.h"
-#include "States\StateStack.hpp"
-#include "Motor\MapLoader.h"
-
-
+#include <Clock.hpp>
+#include <PhysicsEngine.h>
+#include <EntityManager.h>
+#include <PhysicsEntity.h>
+#include <LifeObject.h>
+#include <WeaponDrops/RocketLauncherDrop.h>
+#include <WeaponDrops/PistolaDrop.h>
+#include <WeaponDrops/AsaltoDrop.h>
+#include <WeaponDrops/SniperDrop.h>
+#include <GroupEntity.h>
+#include <GraphicEngine.h>
+#include <SceneNode.h>
+#include <MessageHandler.h>
+#include <StateStack.hpp>
+#include <MapLoader.h>
 #include <RakPeerInterface.h>
 #include <MessageIdentifiers.h>
 #include <BitStream.h>
 #include <RakNetTypes.h>
 #include <thread> 
-#include "Motor de Red\Cliente.h"
-#include "TriggerSystem.h"
+#include <Cliente.h>
+#include <TriggerSystem.h>
+#include <MessageHandler.h>
 
-#define SERVER_PORT 65535
+#include <Map.h>
+#include <GUIManager.h>
 
-#include "Handlers\MessageHandler.h"
-#include <Windows.h>
+#include <PathPlanner.h>
+#include <Enemy_Bot.h>
 
 
+
+
+
+const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 
 Game::Game()
+	: partida(&ingameGUI)
 {
 	
 }
@@ -53,7 +59,7 @@ void Game::run()
 	inicializar();
 
 	/// The physics clock is just used to run the physics and runs asynchronously with the gameclock
-	Time time_physics_prev, time_physics_curr;
+	Time time_physics_prev, time_physics_curr, time_client_prev, time_client_curr;
 
 	/// There's an inner loop in here where things happen once every TickMs. These variables are for that.
 	Time time_gameclock;
@@ -66,8 +72,6 @@ void Game::run()
 	
 
 	while (GraphicEngine::i().isRuning()) {
-		//if (GraphicEngine::i().isWindowActive()) {
-		//if (Cliente::i().isConected() ) {
 
 		///Las fisicas se ejecutan 60 veces por segundo
 
@@ -91,35 +95,26 @@ void Game::run()
 				time_gameclock += timePerFrame;
 
 				MastEventReceiver::i().endEventProcess();
-				if (processEvents()) {
-					wantToExit = true;
-				}
+				processEvents();
 				MastEventReceiver::i().startEventProcess();
 
 				//Realizamos actualizaciones
 				update(timePerFrame);
 
+				time_client_curr = clock.getElapsedTime();
+
 				if (Cliente::i().isConected()) {
-					Cliente::i().update();
+					Cliente::i().update(time_client_curr - time_client_prev);
 				}
+				time_client_prev = time_client_curr;
 
 			}
 		if (GraphicEngine::i().isWindowActive()) {
-
-			interpolation = (float)min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
+			interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
 
 			render(interpolation, timePerFrame);
-
-
-
-
-			if (wantToExit) {
-				break;
-			}
 		}
 
-		
-		//}
 		
 	}
 
@@ -146,13 +141,16 @@ void Game::inicializar()
 	//inicializamos bullet
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
+
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
-	MapLoader map;
-	map.readMap("..\rust_export.txt");
+	//mapa
+	Map::i().inicializar();
 
-	GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
+	
+
+	/*GroupEntity *ge = new GroupEntity("GrupoLifeObjects",9000);
 	ge->addEntityList(EntityManager::i().getLifeObjects());
 	TriggerSystem::i().RegisterEntity(ge);
 
@@ -166,35 +164,26 @@ void Game::inicializar()
 
 	GroupEntity *grupoRockets = new GroupEntity("grupoRockets", 9003);
 	grupoRockets->addEntityList(EntityManager::i().getRockets());
-	TriggerSystem::i().RegisterEntity(grupoRockets);
+	TriggerSystem::i().RegisterEntity(grupoRockets);*/
 
 
-	/*Enemy *e = new Enemy("Rambo");
+
+
+	
+
+	/*
+	Enemy *e = new Enemy("Son Goku");
 	e->inicializar();
 	e->cargarContenido();
-	e->setPosition(Vec3<float>(-4,-55, 400));
+	e->setPosition(Map::i().searchSpawnPoint());
 
-	Enemy *e1 = new Enemy("Chuck Norris");
+	Enemy *e1 = new Enemy("Bruce Lee");
 	e1->inicializar();
 	e1->cargarContenido();
-	e1->setPosition(Vec3<float>(216, -2.6, 156.3));
+	e1->setPosition(Map::i().searchSpawnPoint());
+	*/
 
-	Enemy *e2 = new Enemy("Messi");
-	e2->inicializar();
-	e2->cargarContenido();
-	e2->setPosition(Vec3<float>(74.06, 17.6, -66.41));*/
-
-	/*Enemy *e = new Enemy("Son Goku");
-	e->inicializar();
-	e->cargarContenido();
-	e->setPosition();
-
-	Enemy *e = new Enemy("Bruce Lee");
-	e->inicializar();
-	e->cargarContenido();
-	e->setPosition();*/
-
-	int a;
+	int a=1;
 	do {
 		std::cout << "Elige un modo:" << std::endl;
 		std::cout << "[1] - Un jugador" << std::endl;
@@ -210,9 +199,10 @@ void Game::inicializar()
 		EntityManager::i().cargarContenido();
 
 		//Creamos el player
-		Player* player = new Player("NombreA", map.getSpawnPoints());
+		player = new Player("NombreA");
 		player->inicializar();
 		player->cargarContenido();
+		
 
 	}
 	else {
@@ -225,46 +215,99 @@ void Game::inicializar()
 
 		
 		//Bucle infinito hasta que se conecte
+		Time time;
 		while (Cliente::i().isConected() == false) {
-			Cliente::i().update();
+			Cliente::i().update(time);
 		}
 
-		Cliente::i().createPlayer(map.getSpawnPoints());
-
+		player = Cliente::i().createPlayer();
+		
 		//enviamos los paquetes del vida al servidor para que los cree
 		std::list<Entity*>lifeObj = EntityManager::i().getLifeObjects();
 		for (std::list<Entity*>::const_iterator it = lifeObj.begin(); it != lifeObj.end(); ++it) {
-			Cliente::i().nuevaVida((*it)->getID());
+			TId tID;
+			tID.id = (*it)->getID();
+			Cliente::i().dispatchMessage(tID, NUEVA_VIDA);
 		}
 			
 		//enviamos los paquetes de armas al servidor para que los cree
 
 		std::list<Entity*>weapon = EntityManager::i().getWeapons();
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
-			Cliente::i().nuevaArma((*it)->getID());
+			TId tID2;
+			tID2.id = (*it)->getID();
+			Cliente::i().dispatchMessage(tID2, NUEVA_ARMA);
 		}
-
-
 	}
 
-	
-	
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
 
+	//Añadimos observer al cliente y ingameHUD
+	Cliente::i().addObserver(&partida);
+
+	//Añadimos observer al player
+	player->addObserver(&partida);	
+	/*
+	e2 = new Enemy_Bot("HansTopo");
+	e2->inicializar();
+	e2->cargarContenido();
+	e2->setPosition(Map::i().searchSpawnPoint());
+	*/
+
+	/*GraphicEngine::i().toggleCamera();
+
+	GraphicEngine::i().getActiveCamera()->setPosition(Vec3<float>(100, 150, 100));
+
+	GraphicEngine::i().getActiveCamera()->setTarget(Vec3<float>(100, 0, 100));*/
 }
 
 bool Game::processEvents()
 {
-	EntityManager::i().handleInput();
+		
+	if (!debugMenu.debugInput) {
+		EntityManager::i().getEntity(PLAYER)->handleInput();
+	}
 
 	//Teclas debug
 	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
+
 		GraphicEngine::i().toggleDebug();
+
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
+
 		GraphicEngine::i().toggleCamera();
+
+	}else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+
+		ingameGUI.setTablaVisible(false);
+
+	}else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
+
+		ingameGUI.setTablaVisible(true);
+		partida.muestraTabla();
+
 	}
-	else if (MastEventReceiver::i().keyPressed(KEY_TAB)) {
-		EntityManager::i().muestraTabla();
+	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
+
+		debugMenu.debugInput = !debugMenu.debugInput;
+		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
+		debugMenu.showMouseCursor(debugMenu.debugInput);
+		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+
+		//TODO llevarlo al otro sitio
+		//debugMenu.mapa->setVisible(debugMenu.debugInput);
+
+	} else if (MastEventReceiver::i().leftMouseDown()) {
+
+		debugMenu.injectLeftMouseButton();
+
+	} else if (MastEventReceiver::i().leftMouseUp()) {
+
+		debugMenu.injectLeftMouseButtonUp();
+
 	}
 
 	return false;
@@ -281,7 +324,12 @@ void Game::update(Time elapsedTime)
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
+
 	MessageHandler::i().update();
+
+	GUIManager::i().updateAllGuis();
+
+	
 }
 
 void Game::render(float interpolation, Time elapsedTime)
@@ -290,6 +338,12 @@ void Game::render(float interpolation, Time elapsedTime)
 	EntityManager::i().updateRender(interpolation);
 
 	GraphicEngine::i().updateCamera();
+
+	//GUI
+	debugMenu.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+	
+
+	//GraphicEngine::i().getGui().update();
 
 	GraphicEngine::i().renderAll();
 

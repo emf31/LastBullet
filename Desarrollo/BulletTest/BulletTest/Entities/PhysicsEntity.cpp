@@ -12,6 +12,17 @@ PhysicsEntity::~PhysicsEntity()
 {
 }
 
+void PhysicsEntity::setCollisionGroup(int group) {
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterGroup = group;
+}
+
+void PhysicsEntity::setCollisionMask(int mask) {
+	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
+	proxy->m_collisionFilterMask = mask;
+
+}
+
 void PhysicsEntity::rotate(Vec3<float> rot)
 {
 	btTransform tr;
@@ -75,4 +86,13 @@ void PhysicsEntity::handleMessage(const Message & message)
 bool PhysicsEntity::handleTrigger(TriggerRecordStruct * Trigger)
 {
 	return false;
+}
+
+void PhysicsEntity::setPosition(const Vec3<float>& pos)
+{
+	m_renderState.setPosition(pos);
+	btTransform transform = m_rigidBody->getCenterOfMassTransform();
+	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	m_rigidBody->setCenterOfMassTransform(transform);
+	m_nodo->setPosition(pos);
 }

@@ -1,15 +1,15 @@
 #pragma once
-#include "../../Motor/GraphicEngine.h"
-#include "../../Motor/PhysicsEngine.h"
-#include "../Entity.h"
-#include "../../Handlers/MessageHandler.h"
+#include <GraphicEngine.h>
+#include <PhysicsEngine.h>
+#include <Entity.h>
+#include <MessageHandler.h>
 #include "../GunBullet.h"
 #include "../RocketBullet.h"
 #include "math.h"
 #include "../../Otros/Vec3f.h"
-#include "../../Otros/Util.h"
-#include "../../Handlers/MessageHandler.h"
-#include "../../Handlers/Message.h"
+#include <Util.h>
+#include <Message.h>
+
 
 #define CARGADA 0
 #define DESCARGADA 1
@@ -37,18 +37,31 @@ public:
 
 	virtual std::string getClassName() { return "Weapon"; }
 
+	virtual void setPosition(const Vec3<float> &pos) override;
+
 	virtual void shoot() = 0;
+
+	virtual void shootBot(Vec3<float> posOwner, Vec3<float> posTarget)=0;
+
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 
 	virtual int getAmmo() { return capacidadAmmo - disparos; }
-	virtual int getCargadorWeapon() { return capacidadAmmo; }
-	virtual int getAmmoTotal() { return numCargadores; }
+	virtual int getCapacidadCargador() { return capacidadAmmo; }
+	virtual int getNumCargadores() { return numCargadores; }
+	virtual int getBalasRestantes() { return disparosRestantes; }
+
+	virtual int getMunicionTotal() { return capacidadAmmo*numCargadores + disparosRestantes; }
+
 
 	virtual void resetAmmoTotal() = 0;
 
 	virtual void setEquipada(bool nuevoEquipada) { equipada = nuevoEquipada; }
 	virtual void resetRecarga() { relojrecarga.restart(); }
+
+	virtual void recargar();
+
+
 
 protected:
 	Time cadencia;
@@ -66,5 +79,8 @@ protected:
 	int estadoWeapon;
 
 	bool equipada=false;
+
+	int disparosRestantes=0;
+
 };
 

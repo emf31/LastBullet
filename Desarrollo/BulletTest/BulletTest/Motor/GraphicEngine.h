@@ -1,5 +1,5 @@
 #pragma once
-#include "../Otros/vec3.hpp"
+#include <vec3.hpp>
 #include "BasicSceneNode.h"
 #include "AnimatedSceneNode.h"
 #include "Camera.h"
@@ -9,11 +9,11 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-//#include "../Entities/Player.h"
+#include <Vec2f.h>
 
 #include "DebugDraw.h"
 
-
+#include <GUI.h>
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -49,16 +49,19 @@ public:
 
 	std::shared_ptr<BasicSceneNode> createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& texture = "", const io::path& mesh = "");
 	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
+
+	std::shared_ptr<SceneNode> createBillboard(std::shared_ptr<SceneNode>, Vec2f vector2d, Vec3<float> relPosition);
+	std::shared_ptr<SceneNode> createBillboardText(std::shared_ptr<SceneNode>, const std::string& text, Vec2f vector2d, Vec3<float> relPosition);
+
+	const wchar_t * GetWC(const char *c);
 	
 	//Metodos de la camara
 	void createCamera(Vec3<float> position, Vec3<float> target);
 	void setCameraEntity(Entity* entity);
 	void updateCamera();
 	Camera* getActiveCamera();
+	
 
-	void mostrarInterfaz(/*Player* player*/);
-	void actualizarInterfaz(/*Player* player*/);
-	const wchar_t *GetWC(const char *c);
 	IGUIStaticText* vida;
 	IGUIStaticText* ammo;
 	IGUIStaticText* ammototal;
@@ -84,7 +87,11 @@ public:
 	void toggleCamera() {
 		debug_camera = !debug_camera;
 	}
+	void apuntar();
+	void restablecerMirilla();
+	//void setCursorVisible(bool t) { gui.showMouseCursor(t); }
 
+	IrrlichtDevice* getDevice() { return irrDevice; }
 private:
 	IrrlichtDevice *irrDevice;
 	IVideoDriver *irrDriver;
@@ -108,5 +115,6 @@ private:
 
 	//std::unordered_map<int, SceneNode*> m_sceneNodes;
 	GraphicEngine();
+
 };
 

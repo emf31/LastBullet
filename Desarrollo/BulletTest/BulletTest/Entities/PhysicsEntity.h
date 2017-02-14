@@ -3,7 +3,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/BasicSceneNode.h"
-#include "../Motor/PhysicsEngine.h"
+#include <PhysicsEngine.h>
 class PhysicsEntity : public Entity
 {
 public:
@@ -13,47 +13,25 @@ public:
 	void setRigidBody(btRigidBody* rigidBody) { 
 		m_rigidBody = rigidBody;
 	}
-	void setCollisionGroup(const int &group) {
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterGroup = group;
-	}
-	void setCollisionMask(const int &mask) {
-		btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
-		proxy->m_collisionFilterMask = mask;
+	void setCollisionGroup(int group);
+	void setCollisionMask(int mask);
 
-	}
-	btRigidBody* getRigidBody() { return m_rigidBody; }
+	btRigidBody* getRigidBody() const{ return m_rigidBody; }
 
 	void rotate(Vec3<float> rot);
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
-
 	virtual void update(Time elapsedTime) override;
-
 	virtual void handleInput() override;
-
 	virtual void cargarContenido() override;
-
 	virtual void borrarContenido() override;
-
 	virtual void handleMessage(const Message & message) override;
-
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
-
 	virtual std::string getClassName() { return "PhysicsEntity"; }
+	virtual void setPosition(const Vec3<float> &pos) override;
 
 
-
-	void setPosition(Vec3<float> pos) {
-
-		m_renderState.setPosition(pos);
-		btTransform transform = m_rigidBody->getCenterOfMassTransform();
-		transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
-		m_rigidBody->setCenterOfMassTransform(transform);
-		m_nodo->setPosition(pos);
-
-	}
 	Vec3<float> centerCollision;
 private:
 	btRigidBody* m_rigidBody;

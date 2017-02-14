@@ -2,7 +2,6 @@
 
 GroupEntity::GroupEntity(const std::string &name, int id) : Entity(id, NULL, name) 
 {
-	isGroup = true;
 }
 
 GroupEntity::~GroupEntity()
@@ -62,6 +61,10 @@ bool GroupEntity::handleTrigger(TriggerRecordStruct* Trigger)
 std::string GroupEntity::getClassName()
 {
 	return "GroupEntity";
+}
+
+void GroupEntity::setPosition(const Vec3<float>& pos)
+{
 }
 
 //Añade una entity, si esta duplicada no la añade

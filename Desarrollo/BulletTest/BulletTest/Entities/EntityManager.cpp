@@ -7,7 +7,6 @@
 
 
 
-
 void EntityManager::inicializar()
 {
 	
@@ -32,9 +31,7 @@ void EntityManager::update(Time elapsedTime)
 void EntityManager::updateRender(float interpolation)
 {
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-	//	std::cout << "Entity ANTES: " << i->second->getName() << std::endl;
 		i->second->updateRender(interpolation);
-	//	std::cout << "Entity DESPUES: " << i->second->getName() << std::endl;
 	}
 }
 
@@ -137,24 +134,6 @@ void EntityManager::cleanDeleteQueue()
 	delete_set.clear();
 }
 
-void EntityManager::muestraTabla()
-{
-	
-	std::cout << "*****************************************************************" << std::endl;
-	for (auto i = m_tabla.begin(); i != m_tabla.end(); ++i) {
-
-		std::cout << "//////////" << std::endl;
-		std::cout << "Nombre del player: " << i->second.name << std::endl;
-		std::cout << "Kills: " << i->second.kills << std::endl;
-		std::cout << "Death: " << i->second.deaths << std::endl;
-		std::cout << "Puntuacion: " << i->second.puntuacion << std::endl;
-		std::cout << "//////////" << std::endl;
-		
-
-	}
-	std::cout << "*****************************************************************" << std::endl;
-}
-
 Entity * EntityManager::getEntity(int id)
 {
 	auto found = m_entities.find(id);
@@ -180,7 +159,7 @@ std::list<Entity*> EntityManager::getEnemies()
 {
 	std::list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-		if (i->second->getClassName() == "Enemy")
+		if (i->second->getClassName() == "Enemy" || i->second->getClassName() == "Enemy_Bot")
 			characters.push_back(i->second);
 	}
 	return characters;
@@ -200,7 +179,7 @@ std::list<Entity*> EntityManager::getWeapons()
 {
 	std::list<Entity*>weapons;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-		if (i->second->getClassName() == "RocketLauncherDrop" || i->second->getClassName() == "PistolaDrop" || i->second->getClassName() == "AsaltoDrop")
+		if (i->second->getClassName() == "RocketLauncherDrop" || i->second->getClassName() == "PistolaDrop" || i->second->getClassName() == "AsaltoDrop" || i->second->getClassName() == "SniperDrop")
 			weapons.push_back(i->second);
 	}
 	return weapons;
@@ -233,14 +212,15 @@ std::list<Entity*> EntityManager::getAsalto() {
 	return weapons;
 }
 
-std::list<Entity*> EntityManager::getAllEntitiesTriggerables()
-{
-	std::list<Entity*>characters;
+std::list<Entity*> EntityManager::getSniper() {
+	std::list<Entity*>weapons;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-			characters.push_back(i->second);
+		if (i->second->getClassName() == "SniperDrop")
+			weapons.push_back(i->second);
 	}
-	return characters;
+	return weapons;
 }
+
 
 Entity * EntityManager::getRaknetEntity(RakNet::RakNetGUID guid)
 {
