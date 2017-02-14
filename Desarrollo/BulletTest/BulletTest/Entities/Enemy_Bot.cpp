@@ -25,7 +25,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 20,3, 20);
+	weaponSystem = new WeaponSystem(this, 20,30, 20);
 	weaponSystem->Inicializar();
 
 
@@ -33,7 +33,7 @@ void Enemy_Bot::inicializar()
 	sense = new SensoryMemory(this,20);
 
 	//angulo de vision
-	FOV = cos(cos(DegToRad(45)) / 2.0); ;
+	FOV = DegToRad(45) ;
 
 	/*
 	FuzzyModule fm;

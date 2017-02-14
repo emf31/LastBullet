@@ -88,13 +88,16 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 
 bool SensoryMemory::isInFOV(Entity * ent) const
 {
-	Vec2f facing = m_bot->getFacing();
+	Vec2f facing = m_bot->getFacing().Normalize();
 	Vec2f pos1 = Vec2f(m_bot->getRenderPosition().getX(), m_bot->getRenderPosition().getZ());
 	Vec2f pos2 = Vec2f(ent->getRenderPosition().getX(), ent->getRenderPosition().getZ());
 
 	Vec2f vector = Vec2f(pos2 - pos1).Normalize();
 
-	return facing.Dot(vector) >= m_bot->getFOV();
+	double angle = acos(facing.Dot(vector));
+	std::cout << "Angulo= " << (angle) << std::endl;
+
+	return angle <= m_bot->getFOV();
 }
 
 Vec3<float> SensoryMemory::GetLastRecordedPositionOfOpponent(Entity *ent) const

@@ -73,7 +73,7 @@ void WeaponSystem::TakeAimAndShoot()const
 		(m_pOwner->getTargetSys()->GetTimeTargetHasBeenOutOfView() <
 			m_dAimPersistance))
 	{*/
-	if (m_pOwner->getTargetSys()->isTargetShootable())
+	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
 	{
 
 		//the position the weapon will be aimed at

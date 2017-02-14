@@ -1,4 +1,4 @@
-﻿  TargetingSystem.cpp
+﻿  Enemy_Bot.cpp
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   Macro definition of max detected - undefining
@@ -10,15 +10,5 @@ c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2d
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2dmatrix.h(139): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2dmatrix.h(141): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\transformations.h(233): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  main.cpp
-  PathPlanner.cpp
-  WeaponSystem.cpp
-  SensoryMemory.cpp
-  PathFollow.cpp
-  Game.cpp
-  DebugMenuGUI.cpp
-  Enemy_Bot.cpp
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
