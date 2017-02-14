@@ -4,6 +4,8 @@
 #include <PathPlanner.h>
 #include <PathFollow.h>
 #include <Player.h>
+#include <MachineState.h>
+#include "../IA/StatesIA/Patrullar.h"
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
 	life_component(this)
@@ -25,10 +27,12 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 20,3, 20);
+	weaponSystem = new WeaponSystem(this, 1,30, 20);
 	weaponSystem->Inicializar();
 
-
+	m_pStateMachine = new MachineState(this);
+	m_pStateMachine->SetCurrentState(&Patrullar::i());
+	m_pStateMachine->SetGlobalState(&Patrullar::i());
 
 	sense = new SensoryMemory(this,20);
 
@@ -122,6 +126,8 @@ void Enemy_Bot::update(Time elapsedTime)
 
 
 	weaponSystem->TakeAimAndShoot();
+
+	m_pStateMachine->Update();
 	
 }
 
@@ -327,7 +333,7 @@ void Enemy_Bot::crearFuzzyRules() {
 
 	fm.AddRule(FzAND(Target_Far, Ammo_LowAsalto), UndesirableAsalto);
 	fm.AddRule(FzAND(Target_Far, Ammo_OkayAsalto), UndesirableAsalto);
-	fm.AddRule(FzAND(Target_Far, Ammo_LoadsAsalto), DesirableAsalto);
+	fm.AddRule(FzAND(Target_Far, Ammo_LoadsAsalto), UndesirableAsalto);
 
 	//Sniper
 

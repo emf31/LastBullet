@@ -1,12 +1,12 @@
 #pragma once
 #include "StateIA.h"
-class Patrullar :
+class Perseguir :
 	public StateIA
 {
 public:
 
-	static Patrullar& i() {
-		static Patrullar singleton;
+	static Perseguir& i() {
+		static Perseguir singleton;
 		return singleton;
 	}
 	virtual void Enter(Enemy_Bot* pEnemy);
@@ -14,7 +14,7 @@ public:
 	virtual void Exit(Enemy_Bot* pEnemy);
 
 private:
-	Patrullar() {};
+	Perseguir() {};
 
 };
 

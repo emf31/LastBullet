@@ -11,6 +11,9 @@
 #include <SensorySystem\SensoryMemory.h>
 #include "WeaponSystem.h"
 #include "TargetingSystem.h"
+#include "MachineState.h"
+
+
 
 class PathPlanner;
 class PathFollow;
@@ -48,6 +51,9 @@ public:
 	WeaponSystem* const getWeaponSys()const { return weaponSystem; }
 
 	TargetingSystem* const getTargetSys() { return targetingSystem; }
+
+	MachineState* const getMachineState()const { return m_pStateMachine; }
+
 	Entity* const getTargetBot()const { return targetingSystem->GetTarget(); }
 
 
@@ -93,6 +99,9 @@ private:
 	WeaponSystem* weaponSystem;
 
 	TargetingSystem* targetingSystem;
+
+	MachineState* m_pStateMachine;
+
 
 
 	//the direction the bot is facing (and therefore the direction of aim). 

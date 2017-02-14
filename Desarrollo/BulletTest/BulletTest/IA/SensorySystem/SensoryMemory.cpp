@@ -2,6 +2,9 @@
 #include <Enemy_Bot.h>
 #include <Vec2f.h>
 
+#include "../IA/StatesIA/Perseguir.h"
+
+
 SensoryMemory::SensoryMemory(Enemy_Bot* myBot, double span):m_bot(myBot),m_memorySpan(span)
 {
 }
@@ -30,9 +33,14 @@ void SensoryMemory::updateVision()
 						mymemory.m_inFOV = true;
 						mymemory.m_TimeBecameVisible = mymemory.m_lastTimeSensed;
 					}
-					std::cout << "Te veo" << std::endl;
+					m_bot->getMachineState()->SetCurrentState(&Perseguir::i());
+
 				}
 				else {
+
+					if (mymemory.m_inFOV) {
+
+					}
 					mymemory.m_inFOV = false;
 				}
 			}
