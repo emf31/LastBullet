@@ -1,11 +1,12 @@
-#include "Enemy_Bot.h"
+#include <Enemy_Bot.h>
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
 #include <PathPlanner.h>
 #include <PathFollow.h>
 #include <Player.h>
 #include <MachineState.h>
-#include "../IA/StatesIA/Patrullar.h"
+#include <StatesIA\Patrullar.h>
+#include <Map.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
 	life_component(this)
@@ -19,6 +20,7 @@ Enemy_Bot::~Enemy_Bot()
 
 void Enemy_Bot::inicializar()
 {
+
 	crearFuzzyRules();
 
 	m_PathPlanner = new PathPlanner(this);
@@ -27,7 +29,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1,30, 20);
+	weaponSystem = new WeaponSystem(this, 1,5, 20);
 	weaponSystem->Inicializar();
 
 	m_pStateMachine = new MachineState(this);
@@ -39,55 +41,19 @@ void Enemy_Bot::inicializar()
 	//angulo de vision
 	FOV = DegToRad(45) ;
 
-	/*
-	FuzzyModule fm;
-
-	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
-	FuzzyVariable& Desirability = fm.CreateFLV("Desirability");
-	FuzzyVariable& AmmoStatus = fm.CreateFLV("AmmoStatus");
-
-	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);
-	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25, 150, 300);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 150, 300, 500);
-
-	FzSet Undesirable = Desirability.AddLeftShoulderSet("Underisable", 0, 25, 50);
-	FzSet Desirable = Desirability.AddTriangularSet("Desirable", 25, 50, 75);
-	FzSet VeryDesirable = Desirability.AddRightShoulderSet("Target_Far", 50, 75, 100);
-
-	FzSet Ammo_Low = AmmoStatus.AddLeftShoulderSet("Ammo_Low", 0, 0, 10);
-	FzSet Ammo_Okay = AmmoStatus.AddTriangularSet("Ammo_Okay", 0, 10, 30);
-	FzSet Ammo_Loads = AmmoStatus.AddRightShoulderSet("Ammo_Loads", 10, 30, 40);
-
-	fm.AddRule(FzAND(Target_Close, Ammo_Low), Undesirable);
-	fm.AddRule(FzAND(Target_Close, Ammo_Okay), Undesirable);
-	fm.AddRule(FzAND(Target_Close, Ammo_Loads), Undesirable);
-
-	fm.AddRule(FzAND(Target_Medium, Ammo_Low), Desirable);
-	fm.AddRule(FzAND(Target_Medium, Ammo_Okay), VeryDesirable);
-	fm.AddRule(FzAND(Target_Medium, Ammo_Loads), VeryDesirable);
-
-	fm.AddRule(FzAND(Target_Far, Ammo_Low), Undesirable);
-	fm.AddRule(FzAND(Target_Far, Ammo_Okay), Desirable);
-	fm.AddRule(FzAND(Target_Far, Ammo_Loads), Desirable);
-
-	std::cout << "Desirability: "<< calcularDesirability(fm, 25, 0); 
-	std::cout << "\n";
->>>>>>> refs/remotes/origin/SistemaSensorial
-
-
-	crearFuzzyRules();
-	elegirWeapon();
-
-/*
-	std::cout << "El arma actual es: " << listaWeapons->valorActual()->getClassName();
-	std::cout << "\n";
-	elegirWeapon();
-	std::cout << "He elegido arma \n";
-	std::cout << "El arma actual es: " << listaWeapons->valorActual()->getClassName();
-	std::cout << "\n";*/
 
 }
 
+
+void Enemy_Bot::lookAt(Vec2f at) {
+
+	m_vHeading = at - vec3ToVec2(m_renderState.getPosition());
+
+	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+
+}
 
 Vec2f Enemy_Bot::getFacing()
 {
@@ -180,6 +146,10 @@ void Enemy_Bot::cargarContenido()
 	p_controller->m_acceleration_walk = 4.3f;
 	p_controller->m_deceleration_walk = 6.5f;
 	p_controller->m_maxSpeed_walk = 2.f;
+
+	setPosition(Map::i().searchSpawnPoint());
+	lookAt(Vec2f(0, 0));
+
 }
 
 void Enemy_Bot::borrarContenido()
@@ -247,6 +217,7 @@ void Enemy_Bot::updateMovement()
 		Vec2f direccion = m_PathFollow->Calculate();
 
 		if (!direccion.Zero()) {
+			std::cout << "Obama: " << m_vHeading <<std::endl;
 			m_vHeading = direccion;
 		}
 

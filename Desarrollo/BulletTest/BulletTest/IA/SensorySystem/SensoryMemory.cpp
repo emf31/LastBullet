@@ -3,6 +3,7 @@
 #include <Vec2f.h>
 
 #include "../IA/StatesIA/Perseguir.h"
+#include "../IA/StatesIA/Disparar.h"
 
 
 SensoryMemory::SensoryMemory(Enemy_Bot* myBot, double span):m_bot(myBot),m_memorySpan(span)
@@ -24,6 +25,7 @@ void SensoryMemory::updateVision()
 			if (!isRaycastObstructed(*it)) {
 				//std::cout << "Raycast OK" << std::endl;
 				mymemory.m_isShootable = true;
+
 				if (isInFOV(*it)) {
 					//mymemory.m_inFOV = true;
 					mymemory.m_lastTimeSensed = sensoryClock.getElapsedTime().asSeconds();
@@ -32,19 +34,20 @@ void SensoryMemory::updateVision()
 					if(!mymemory.m_inFOV){
 						mymemory.m_inFOV = true;
 						mymemory.m_TimeBecameVisible = mymemory.m_lastTimeSensed;
+						m_bot->getMachineState()->SetCurrentState(&Disparar::i());
+
 					}
-					m_bot->getMachineState()->SetCurrentState(&Perseguir::i());
 
 				}
 				else {
-
-					if (mymemory.m_inFOV) {
-
-					}
 					mymemory.m_inFOV = false;
 				}
 			}
 			else {
+				if (mymemory.m_inFOV) {
+					std::cout << "Entra" << std::endl;
+					m_bot->getMachineState()->SetCurrentState(&Perseguir::i());
+				}
 				mymemory.m_inFOV = false;
 				mymemory.m_isShootable = false;
 			}
@@ -96,14 +99,25 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 
 bool SensoryMemory::isInFOV(Entity * ent) const
 {
+
+	//std::cout << "facing= " << m_bot->getFacing() << std::endl;
+
+	Vec3<float> positionBot = m_bot->getRenderState()->getPosition();
+	Vec3<float> positionEnt = ent->getRenderState()->getPosition();
+
 	Vec2f facing = m_bot->getFacing().Normalize();
-	Vec2f pos1 = Vec2f(m_bot->getRenderPosition().getX(), m_bot->getRenderPosition().getZ());
-	Vec2f pos2 = Vec2f(ent->getRenderPosition().getX(), ent->getRenderPosition().getZ());
+	Vec2f pos1 = Vec2f(positionBot.getX(), positionBot.getZ());
+	Vec2f pos2 = Vec2f(positionEnt.getX(), positionEnt.getZ());
 
 	Vec2f vector = Vec2f(pos2 - pos1).Normalize();
 
+
+
 	double angle = acos(facing.Dot(vector));
-	std::cout << "Angulo= " << (angle) << std::endl;
+
+//	std::cout << "vector= " << (vector) << std::endl;
+//	std::cout << "Angulo= " << (angle) << std::endl;
+
 
 	return angle <= m_bot->getFOV();
 }

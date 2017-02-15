@@ -73,8 +73,14 @@ void WeaponSystem::TakeAimAndShoot()const
 		(m_pOwner->getTargetSys()->GetTimeTargetHasBeenOutOfView() <
 			m_dAimPersistance))
 	{*/
+
+	
+
 	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
 	{
+
+		m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
+
 
 		//the position the weapon will be aimed at
 		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();

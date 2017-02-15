@@ -118,9 +118,6 @@
     <ClCompile Include="IA\MachineState.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
-    <ClCompile Include="IA\StatesIA\Patrullar.cpp">
-      <Filter>Source Code\IA</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\GroupEntity.cpp">
       <Filter>Source Code\Entities</Filter>
     </ClCompile>
@@ -253,7 +250,16 @@
     <ClCompile Include="IA\TargetingSystem.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
-    <ClCompile Include="IA\StatesIA\Perseguir.cpp" />
+    <ClCompile Include="Entities\WeaponDrops\SniperDrop.cpp" />
+    <ClCompile Include="IA\StatesIA\Patrullar.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\Perseguir.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\Disparar.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -428,9 +434,6 @@
       <Filter>Headers\IA\StatesIA</Filter>
     </ClInclude>
     <ClInclude Include="IA\MachineState.h">
-      <Filter>Headers\IA</Filter>
-    </ClInclude>
-    <ClInclude Include="IA\StatesIA\Patrullar.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
     <ClInclude Include="Entities\GroupEntity.h">
@@ -626,7 +629,16 @@
     <ClInclude Include="IA\TargetingSystem.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
-    <ClInclude Include="IA\StatesIA\Perseguir.h" />
+    <ClInclude Include="Entities\WeaponDrops\SniperDrop.h" />
+    <ClInclude Include="IA\StatesIA\Perseguir.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Patrullar.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Disparar.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -775,6 +787,9 @@
     </Filter>
     <Filter Include="Source Code\IA\SensorySystem">
       <UniqueIdentifier>{f83946d5-0af1-4814-aab5-58823bc0db7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\StatesIA">
+      <UniqueIdentifier>{58b71de3-7ef0-4d69-b191-2f690bc70a03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

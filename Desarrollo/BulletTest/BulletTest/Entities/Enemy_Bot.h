@@ -44,6 +44,8 @@ public:
 	//Devolvemos el path planning
 	PathPlanner* getPathPlanning() const { return m_PathPlanner; }
 
+	PathFollow* getPathFollow() const { return m_PathFollow; }
+
 	LifeComponent& getLifeComponent() { return life_component; }
 
 	SensoryMemory* const GetSensoryMemory()const { return sense; }
@@ -57,11 +59,13 @@ public:
 	Entity* const getTargetBot()const { return targetingSystem->GetTarget(); }
 
 
+	void lookAt(Vec2f at);
 
 	//Devuelve true si el bot esta en esa posicion
 	bool isAtPosition(Vec2f pos);
 
 	void updateMovement();
+
 
 	void createPathToPosition(Vec2f vec);
 	void createPathToItem(const std::string& tipo);

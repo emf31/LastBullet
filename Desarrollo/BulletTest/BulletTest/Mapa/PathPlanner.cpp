@@ -171,7 +171,7 @@ void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
 			//para volver a repetir el proceso y ver si se puede eliminar el nodo que hay nuevamente
 			//entre e1 y e2
 			++e1;
-			std::cout << "Para suavizar el camino elimino el nodo con posicion: " << (*e1) << std::endl;
+			//std::cout << "Para suavizar el camino elimino el nodo con posicion: " << (*e1) << std::endl;
 			e1 = listaCamino.erase(e1);
 			if (e2 != listaCamino.end()) {
 				++e2;

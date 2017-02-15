@@ -237,6 +237,7 @@
     <ClInclude Include="IA\PathFollow.h" />
     <ClInclude Include="IA\SensorySystem\Memory.h" />
     <ClInclude Include="IA\SensorySystem\SensoryMemory.h" />
+    <ClInclude Include="IA\StatesIA\Disparar.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\Perseguir.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />
@@ -341,6 +342,7 @@
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\PathFollow.cpp" />
     <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp" />
+    <ClCompile Include="IA\StatesIA\Disparar.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />
     <ClCompile Include="IA\StatesIA\Perseguir.cpp" />
     <ClCompile Include="IA\TargetingSystem.cpp" />
