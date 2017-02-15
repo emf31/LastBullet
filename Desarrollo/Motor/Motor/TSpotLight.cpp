@@ -91,15 +91,20 @@ void TSpotLight::setLight()
 }
 
 void TSpotLight::beginDraw() {
-	m_matrix = SceneManager::i().m_matrizActual;
+	/*
+		m_matrix = SceneManager::i().m_matrizActual;
 	SceneManager::i().m_matrizActual = glm::scale(SceneManager::i().m_matrizActual, glm::vec3(1.2f));
 	SceneManager::i().m_matrizActual = glm::translate(SceneManager::i().m_matrizActual, lightPos);
+	*/
+	m_matrix = glm::mat4();
+	m_matrix = glm::scale(m_matrix, glm::vec3(1.2f));
+	m_matrix = glm::translate(m_matrix, lightPos);
 	
 	shaderLuz->Use();
 	// Le pasamos las matrices
 	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "projection"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().projection));
 	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "view"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().view));
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "model"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().m_matrizActual));
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "model"), 1, GL_FALSE, glm::value_ptr(m_matrix));
 
 
 	glBindVertexArray(lightVAO);
@@ -110,5 +115,5 @@ void TSpotLight::beginDraw() {
 }
 
 void TSpotLight::endDraw() {
-	SceneManager::i().m_matrizActual = m_matrix;
+	//SceneManager::i().m_matrizActual = m_matrix;
 }

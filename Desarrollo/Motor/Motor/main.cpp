@@ -18,8 +18,7 @@ int main() {
 	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
 		return -1;
 	}
-	SceneManager *sm = engine.getSceneManager();
-	
+	SceneManager &sm = SceneManager::i();
 	/*Shader billboardShader("assets/billboard_shader.vs", "assets/model_loading.frag");
 	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
 	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
@@ -42,8 +41,8 @@ int main() {
 
 	//TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
 	//TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
-	TModel* w = sm->crearNodoMalla(sm->getMesh("assets/nanosuit.obj"));
-	TNode* luz = sm->crearNodoLuz();
+	TModel* w = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	TNode* luz = sm.crearNodoLuz();
 	//n->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	//m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
@@ -133,7 +132,7 @@ int main() {
 		}
 		*/
 		
-		sm->draw(engine.getWindow());
+		sm.draw(engine.getWindow());
 		std::cout << "siguiente iteracion" << std::endl;
 		
 		

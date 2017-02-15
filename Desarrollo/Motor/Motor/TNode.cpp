@@ -83,7 +83,7 @@ void TNode::draw() {
 		//si es el nodo raiz se dibuja sus hijos directamente
 		for (int i = 0; i < m_childNodes.size(); i++) {
 			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
-			SceneManager::i().m_matrizActual = glm::mat4();
+			//SceneManager::i().m_matrizActual = glm::mat4();
 			m_childNodes.at(i)->draw();
 		}
 	}

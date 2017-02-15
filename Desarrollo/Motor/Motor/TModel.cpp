@@ -49,7 +49,7 @@ void TModel::beginDraw() {
 	glm::mat4 rotation = SceneManager::i().pilaMatrices.back();
 	SceneManager::i().pilaMatrices.pop_back();
 	
-	glm::mat4 model = SceneManager::i().m_matrizActual * traslade * scale* rotation;
+	glm::mat4 model = traslade * scale* rotation;
 	
 	std::cout << "MATRIZ ROTACION: " << std::endl;
 	for (int i = 0; i < rotation.length(); i++) {
@@ -79,13 +79,14 @@ void TModel::beginDraw() {
 		}
 		std::cout << std::endl;
 	}
-	
+	glm::mat4 view = SceneManager::i().view;
+		glm::mat4 projection = SceneManager::i().projection;
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().projection));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().view));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
 	//colores

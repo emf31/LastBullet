@@ -35,7 +35,7 @@ public:
 
 	glm::mat4 projection;
 	glm::mat4 view;
-	glm::mat4 m_matrizActual;
+	//glm::mat4 m_matrizActual;
 	Camera *camera_ptr;
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;

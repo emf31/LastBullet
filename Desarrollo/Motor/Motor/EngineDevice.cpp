@@ -8,7 +8,6 @@ EngineDevice::EngineDevice() {
 
 EngineDevice::~EngineDevice() {
 	glfwDestroyWindow(window);
-	delete sm;
 }
 
 
@@ -55,23 +54,15 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	//KeyCallbacks
 	setKeyCallbacks();
 
+	
+	sm.camera_ptr = &input.camera;
+	sm.screenWidth = &this->screenWidth;
+	sm.screenHeight = &this->screenHeight;
+	sm.inicializar();
+
 	return 1;
 }
 
-
-
-SceneManager* EngineDevice::getSceneManager() {
-	if (sm != nullptr) {
-		return sm;
-	} else {
-		sm = new SceneManager();
-		sm->camera_ptr = &input.camera;
-		sm->screenWidth = &screenWidth;
-		sm->screenHeight = &screenHeight;
-		sm->inicializar();
-		return sm;
-	}
-}
 
 GLFWwindow* EngineDevice::getWindow() {
 	return window;

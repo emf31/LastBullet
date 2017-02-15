@@ -31,7 +31,6 @@ public:
 	
 	bool createEngineDevice(int screenWidth, int screenHeight, std::string titleWindow);
 	
-	SceneManager* getSceneManager();
 	GLFWwindow * getWindow();
 	
 	void setWindowTitle(std::string title);
@@ -48,7 +47,7 @@ public:
 	GLfloat lastFrame = 0.0f;
 
 private:
-	SceneManager *sm;
+	SceneManager& sm = SceneManager::i();
 	GLFWwindow *window;
 	GLfloat lastTime;
 
