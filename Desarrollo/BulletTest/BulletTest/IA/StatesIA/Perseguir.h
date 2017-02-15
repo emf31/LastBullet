@@ -13,6 +13,10 @@ public:
 	virtual void Execute(Enemy_Bot* pEnemy);
 	virtual void Exit(Enemy_Bot* pEnemy);
 
+	virtual std::string getStateName() { return "Perseguir"; }
+
+
+
 private:
 	Perseguir() {};
 

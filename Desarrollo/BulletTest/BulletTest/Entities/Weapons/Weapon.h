@@ -41,7 +41,7 @@ public:
 
 	virtual void shoot() = 0;
 
-	virtual void shootBot(Vec3<float> posOwner, Vec3<float> posTarget)=0;
+	virtual float shootBot(Vec3<float> posOwner, Vec3<float> posTarget)=0;
 
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }

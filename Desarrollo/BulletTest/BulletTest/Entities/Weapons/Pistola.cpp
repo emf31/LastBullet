@@ -88,9 +88,9 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 
-void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
+float Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
-
+	float danyo=0;
 
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
@@ -128,6 +128,7 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
 							Message msg(ent, "COLISION_BALA", &damage);
 							MessageHandler::i().sendMessage(msg);
+							danyo = damage;
 						}
 						//Para mover objetos del mapa
 						posicionImpacto = ray.m_hitPointWorld;
@@ -157,6 +158,8 @@ void Pistola::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
+	return danyo;
 
 }
 

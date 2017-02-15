@@ -96,9 +96,10 @@ bool Sniper::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-void Sniper::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
+float Sniper::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
-
+	float danyo = 0;
+	
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
@@ -135,6 +136,7 @@ void Sniper::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
 						Message msg(ent, "COLISION_BALA", &damage);
 						MessageHandler::i().sendMessage(msg);
+						danyo = damage;
 					}
 					//Para mover objetos del mapa
 					posicionImpacto = ray.m_hitPointWorld;
@@ -164,6 +166,9 @@ void Sniper::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
+	return danyo;
+
 }
 
 void Sniper::shoot()

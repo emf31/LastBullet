@@ -96,9 +96,9 @@ bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-void Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
+float Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
-
+	float danyo = 0;
 
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
@@ -136,6 +136,8 @@ void Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
 						Message msg(ent, "COLISION_BALA", &damage);
 						MessageHandler::i().sendMessage(msg);
+						danyo = damage;
+
 					}
 					//Para mover objetos del mapa
 					posicionImpacto = ray.m_hitPointWorld;
@@ -165,6 +167,8 @@ void Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
+	return danyo;
 
 }
 

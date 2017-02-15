@@ -38,6 +38,7 @@ public:
 
 	Vec3<float> PredictFuturePositionOfTarget()const;
 	void AddNoiseToAim(Vec3<float>& AimingPos) const;
+	float damageTarget;
 
 
 private:
@@ -54,6 +55,7 @@ private:
 	Pistola* pistola;
 	Sniper* sniper;
 	RocketLauncher* rocket;
+
 
 };
 

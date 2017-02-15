@@ -3,7 +3,6 @@
 #include <Vec2f.h>
 
 #include "../IA/StatesIA/Perseguir.h"
-#include "../IA/StatesIA/Disparar.h"
 
 
 SensoryMemory::SensoryMemory(Enemy_Bot* myBot, double span):m_bot(myBot),m_memorySpan(span)
@@ -34,8 +33,6 @@ void SensoryMemory::updateVision()
 					if(!mymemory.m_inFOV){
 						mymemory.m_inFOV = true;
 						mymemory.m_TimeBecameVisible = mymemory.m_lastTimeSensed;
-						m_bot->getMachineState()->SetCurrentState(&Disparar::i());
-
 					}
 
 				}

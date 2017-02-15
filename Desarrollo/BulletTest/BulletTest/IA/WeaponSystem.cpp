@@ -136,10 +136,9 @@ void WeaponSystem::TakeAimAndShoot()const
 			if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
 			{
 				
-			
-			AddNoiseToAim(AimingPos);
+				AddNoiseToAim(AimingPos);
+				m_pOwner->SetDamageTarget(GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos));
 
-				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
 			}
 		}
 

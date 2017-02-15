@@ -49,7 +49,12 @@ public:
 	StateIA* PreviousState()  { return m_pPreviousState; }
 	//returns true if the current state’s type is equal to the type of the
 	//class passed as a parameter.
-	bool isInState(const StateIA& st)const;
+	bool isInState(std::string estado) {
+		if (m_pCurrentState->getStateName() == estado) {
+			return true;
+		}
+		return false;
+	}
 
 private:
 

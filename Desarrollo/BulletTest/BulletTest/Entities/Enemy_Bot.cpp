@@ -6,6 +6,7 @@
 #include <Player.h>
 #include <MachineState.h>
 #include <StatesIA\Patrullar.h>
+#include <StatesIA\BuscarVida.h>
 #include <Map.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
@@ -29,7 +30,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1,5, 20);
+	weaponSystem = new WeaponSystem(this, 1,400, 20);
 	weaponSystem->Inicializar();
 
 	m_pStateMachine = new MachineState(this);
@@ -92,6 +93,9 @@ void Enemy_Bot::update(Time elapsedTime)
 
 
 	weaponSystem->TakeAimAndShoot();
+
+	if (!this->getMachineState()->isInState("BuscarVida"))
+	FuzzyLifeObject();
 
 	m_pStateMachine->Update();
 	
@@ -217,7 +221,6 @@ void Enemy_Bot::updateMovement()
 		Vec2f direccion = m_PathFollow->Calculate();
 
 		if (!direccion.Zero()) {
-			std::cout << "Obama: " << m_vHeading <<std::endl;
 			m_vHeading = direccion;
 		}
 
@@ -292,6 +295,22 @@ void Enemy_Bot::updateAnimation()
 
 void Enemy_Bot::crearFuzzyRules() {
 
+
+	//LifeDrop
+
+
+	fm.AddRule(FzAND(Life_Low, Life_LowTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Low, Life_OkayTarget), DesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Low, Life_LoadsTarget), VeryDesirableLifeDrop);
+
+	fm.AddRule(FzAND(Life_Okay, Life_LowTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Okay, Life_OkayTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Okay, Life_LoadsTarget), DesirableLifeDrop);
+
+	fm.AddRule(FzAND(Life_Loads, Life_LowTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Loads, Life_OkayTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Loads, Life_LoadsTarget), UndesirableLifeDrop);
+
 	//Asalto
 
 	fm.AddRule(FzAND(Target_Close, Ammo_LowAsalto), DesirableAsalto);
@@ -363,4 +382,21 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 
 	weaponSystem->Equipar(bestWeapon);
+}
+
+void Enemy_Bot::FuzzyLifeObject() {
+
+
+
+	fm.Fuzzify("Life", life_component.getVida());
+	fm.Fuzzify("LifeTarget", damageTarget);
+
+	double k = fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av);
+	std::cout << "Valor FuzzyLifeObject: " << k << std::endl;
+
+	if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>40) {
+		m_pStateMachine->SetCurrentState(&BuscarVida::i());
+	}
+
+
 }

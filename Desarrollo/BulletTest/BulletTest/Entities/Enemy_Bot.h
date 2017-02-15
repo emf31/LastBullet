@@ -72,16 +72,22 @@ public:
 
 	void elegirWeapon(float DistToTarget);
 
+	void FuzzyLifeObject();
+
 	void crearFuzzyRules();
 
 	Vec2f getFacing();
 
 	float getFOV();
 
+	void SetDamageTarget(float damage) {
+		damageTarget += damage;
+	}
+
 
 private:
 	
-
+	float damageTarget = 0;
 
 	float radius;
 	float height;
@@ -141,7 +147,26 @@ private:
 	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 50, 250, 500);
 	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 300, 500, 800);
 
+	//LifeDrop
 
+	FuzzyVariable& Life = fm.CreateFLV("Life");
+	FuzzyVariable& LifeTarget = fm.CreateFLV("LifeTarget");
+
+	FzSet Life_Low = Life.AddLeftShoulderSet("Life_Low", 0, 10, 30);
+	FzSet Life_Okay = Life.AddTriangularSet("Life_Okay", 10, 30, 60);
+	FzSet Life_Loads = Life.AddRightShoulderSet("Life_Loads", 60, 70, 100);
+	
+	FzSet Life_LoadsTarget = LifeTarget.AddLeftShoulderSet("Life_LowTarget", 0, 10, 30);
+	FzSet Life_OkayTarget = LifeTarget.AddTriangularSet("Life_OkayTarget", 10, 30, 60);
+	FzSet Life_LowTarget = LifeTarget.AddRightShoulderSet("Life_LoadsTarget", 60, 70, 100);
+
+	//DesirabilityLifeDrop
+
+	FuzzyVariable& DesirabilityLifeDrop = fm.CreateFLV("DesirabilityLifeDrop");
+
+	FzSet UndesirableLifeDrop = DesirabilityLifeDrop.AddLeftShoulderSet("UndesirableLifeDrop", 0, 25, 50);
+	FzSet DesirableLifeDrop = DesirabilityLifeDrop.AddTriangularSet("DesirableLifeDrop", 25, 50, 75);
+	FzSet VeryDesirableLifeDrop = DesirabilityLifeDrop.AddRightShoulderSet("VeryDesirableLifeDrop", 50, 75, 100);
 
 	//DesirabilityAsalto
 
