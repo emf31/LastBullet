@@ -8,10 +8,13 @@
 #include <StatesIA\Patrullar.h>
 #include <StatesIA\BuscarVida.h>
 #include <Map.h>
+#include <TriggerSystem.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
 	life_component(this)
 {
+	dwTriggerFlags = kTrig_EnemyShootSound;
+	TriggerSystem::i().RegisterEntity(this);
 }
 
 Enemy_Bot::~Enemy_Bot()
@@ -192,7 +195,12 @@ void Enemy_Bot::handleMessage(const Message & message)
 
 bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	return false;
+	Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
+	if (ent->getID() != m_id && Trigger->eTriggerType == kTrig_EnemyShootSound) {
+		printf("Trigger tipo sonido de arma enemigo\n");
+		sense->updateSound(ent);
+	}
+	return true;
 }
 
 void Enemy_Bot::setPosition(const Vec3<float>& pos)

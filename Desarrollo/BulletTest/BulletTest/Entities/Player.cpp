@@ -27,7 +27,7 @@ Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, 
 	life_component(this)
 {
 	//Registramos la entity en el trigger system
-	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
+	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
 	TriggerSystem::i().RegisterEntity(this);
 	
 
@@ -274,8 +274,12 @@ void Player::jump() {
 void Player::shoot() {
 
 
-	TriggerSystem::i().RegisterTrigger(kTrig_Explosion, 1000, this->getID(), this->getRenderPosition(), 50, milliseconds(500), false);
-
+	//TriggerSystem::i().RegisterTrigger(kTrig_Explosion, 1000, this->getID(), this->getRenderPosition(), 50, milliseconds(500), false);
+	TriggerSystem::i().RegisterTrigger(kTrig_EnemyShootSound, 1002, m_id, m_renderState.getPosition(), 50, milliseconds(50), false);
+	
+	//Activar shape del alcance del trigger
+	
+//PhysicsEngine::i().createSphereShape(this, 25);
 	listaWeapons->valorActual()->shoot();
 
 }
