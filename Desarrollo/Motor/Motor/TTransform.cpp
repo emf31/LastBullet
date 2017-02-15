@@ -93,7 +93,6 @@ void TTransform::multiply(glm::mat4 mat) {
 void TTransform::multiply(glm::vec4 vec) {
 	//m_matrix = vec * m_matrix ;
 	//TODO
-	
 }
 
 void TTransform::loadMatrix(glm::mat4 mat) {
@@ -103,77 +102,11 @@ void TTransform::loadMatrix(glm::mat4 mat) {
 void TTransform::beginDraw()
 {
 	SceneManager::i().pilaMatrices.push_back(m_matrix);
-	/*
-	std::cout << "APILO MATRIZ: " << std::endl;
-	for (int i = 0; i < m_matrix.length(); i++) {
-		for (int j = 0; j < m_matrix[0].length(); j++) {
-			std::cout << m_matrix[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-	*/
-
-
-
-	/*
-	Pruebas Antiguas
-		m_matrix = matrizActual;
-	/*
-		//matrizActual = glm::translate(matrizActual, m_origen);
-	//matrizActual = glm::rotate(matrizActual, 90.f, m_rotation);
-	matrizActual = glm::rotate(matrizActual, angulo, m_rotation);
-	//matrizActual *= m_orientation;
-	matrizActual = glm::scale(matrizActual, m_scale);
-	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
-	glm::mat4 trans;
-	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
-	vec = trans * vec;
-	std::cout << vec.x << vec.y << vec.z << std::endl;
-	matrizActual = glm::translate(matrizActual, m_position);
-	
-	matrizActual = glm::rotate(matrizActual, angulo, glm::vec3(0.0, 1.0, 0.0));
-	matrizActual = glm::scale(matrizActual, m_scale);
-	matrizActual = glm::translate(matrizActual, m_position);
-	/*
-	glm::mat4 trans;
-	trans = glm::rotate(trans, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	trans = glm::translate(trans, m_position);
-	matrizActual = trans;
-	
-	/*
-	for (int i = 0; i < matrizActual.length(); i++) {
-	for (int j = 0; j < matrizActual[0].length(); j++) {
-	std::cout << matrizActual[i][j] << " ";
-	}
-	std::cout<<std::endl;
-	}
-	
-
-
-	//NOTA: lo que nos ha dicho en clase es que hagamos un unico nodo de transformacion que tenga rotacion, escalado y trasladado como hicimos antes, pero que el nodo rotacion solo rote y asi
-	//la cosa es que cuando llamo a rotacion lo que tiene que hacer es actualizar la matriz de este nodo aplicandole el glm rotate (cada nodo transformacion tiene una matriz) y asi se irian acumulando
-	//las rotaciones, luego en el begin draw lo que hacemos es apilar esta matriz ya rotada y en el end draw lo que hacemos es desapilar.
-	//y luego donde se multiplican todas las matrices es en el begin draw del model que coge las 3 matrices una de cada nodo y las multiplica y esto es la matrices del modelo.
-	
-	*/
-
-	
-	
 }
 
 void TTransform::endDraw()
 {
 	//PREGUNTA , COMO TENEMOS QUE DESAPILAR EN EL END DRAW? PORQUE YA ESTAMOS DESAPILANDO LAS MATRICES PARA PODER OBTENERLAS Y MULTIPLICARLAS A LA HORA DE DIBUJAR
 	//SceneManager::i().pilaMatrices.pop();
-	/*
-	
-	std::cout << "DESAPILO MATRIZ: " << std::endl;
-	for (int i = 0; i < m_matrix.length(); i++) {
-		for (int j = 0; j < m_matrix[0].length(); j++) {
-			std::cout << m_matrix[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-	*/
 }
 

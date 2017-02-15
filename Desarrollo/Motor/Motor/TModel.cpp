@@ -33,57 +33,46 @@ void TModel::beginDraw() {
 	glm::mat4 view = SceneManager::i().view;
 	glm::mat4 projection = SceneManager::i().projection;
 	glm::mat4 actual = SceneManager::i().m_matrizActual;
-	/*
 	glm::mat4 model=glm::mat4();
-
-	for (int i = 0; i < SceneManager::i().pilaMatrices.size(); i++) {
-		model = model * SceneManager::i().pilaMatrices.front();
+	int tam = SceneManager::i().pilaMatrices.size();
+	for (int i = 0; i < tam; i++) {
+		model = SceneManager::i().pilaMatrices.front()*model;
 		SceneManager::i().pilaMatrices.pop_front();
 	}
-	model = model*SceneManager::i().m_matrizActual;
+	//por si dependemos de la transformacion del padre, tenemos que multiplicar nuestra modelo por la de los padres que es la actual.
+	model = actual * model;
 	//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
 	SceneManager::i().m_matrizActual = model;
-	*/
-	
+
+
+
+
+	/*
+	DE ESTA FORMA SI VA (antiguo, el nuevo ahora tambien va , pero me guardo esto por si peta en un futuro)
 	glm::mat4 traslade = SceneManager::i().pilaMatrices.back();
 	SceneManager::i().pilaMatrices.pop_back();
 	glm::mat4 scale = SceneManager::i().pilaMatrices.back();
 	SceneManager::i().pilaMatrices.pop_back();
 	glm::mat4 rotation = SceneManager::i().pilaMatrices.back();
 	SceneManager::i().pilaMatrices.pop_back();
-	
+
 	glm::mat4 model = actual* traslade * scale* rotation;
-	SceneManager::i().m_matrizActual = model;
-	/*
-	std::cout << "MATRIZ ROTACION: " << std::endl;
-	for (int i = 0; i < rotation.length(); i++) {
-		for (int j = 0; j < rotation[0].length(); j++) {
-			std::cout << rotation[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << "MATRIZ ESCALADO: " << std::endl;
-	for (int i = 0; i < scale.length(); i++) {
-		for (int j = 0; j < scale[0].length(); j++) {
-			std::cout << scale[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << "MATRIZ TRASLACION: " << std::endl;
-	for (int i = 0; i < traslade.length(); i++) {
-		for (int j = 0; j < traslade[0].length(); j++) {
-			std::cout << traslade[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
+	//SceneManager::i().m_matrizActual = model;
+
+	SceneManager::i().pilaMatrices.push_back(rotation);
+	SceneManager::i().pilaMatrices.push_back(scale);
+	SceneManager::i().pilaMatrices.push_back(traslade);
 	std::cout << "MATRIZ MODELO: " << std::endl;
 	for (int i = 0; i < model.length(); i++) {
-		for (int j = 0; j < model[0].length(); j++) {
-			std::cout << model[i][j] << " ";
-		}
-		std::cout << std::endl;
+	for (int j = 0; j < model[0].length(); j++) {
+	std::cout << model[i][j] << " ";
+	}
+	std::cout << std::endl;
 	}
 	*/
+
+
+
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 

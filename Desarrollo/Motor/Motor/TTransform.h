@@ -14,12 +14,6 @@ public:
 	void transpose();
 	void invert();
 
-	/*
-	void translate(float x, float y, float z);
-	void rotate(float f1, float f2, float f3, float angle);
-	void scale(float s1, float s2, float s3);
-	*/
-
 	void setPosition(Vec3<float> position);
 	void setScale(Vec3<float> scale);
 	void setRotation(Vec3<float> rotation);

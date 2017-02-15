@@ -27,6 +27,7 @@ void SceneManager::inicializar() {
 	scene = new TNode();
 	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
+	std::cout << "matriz actual reseteada" << std::endl;
 }
 
 

@@ -23,59 +23,29 @@ int main() {
 	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
 	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
 
-
-	/*
-	TNode* m = sm->addMesh(sm->getMesh("assets/contenedor.obj"));
-	n->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
+	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	n->setModelColor(0.33f, 0.42f, 0.18f);
 
 
-	TNode* m = sm->addMesh(sm->getMesh("assets/cartel.obj"));
-	m->setPosition(Vec3<float>(5.f, -1.75f, 0.0f));
-	m->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 
-	TNode* w = sm->addMesh(sm->getMesh("assets/nanosuit.obj"));
-	w->setPosition(Vec3<float>(10.f, -1.75f, 0.0f));
-	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	*/
+	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
+	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
+	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
+	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
+	m->setModelColor(1.0f, 0.5f, 0.31f);
 
-	//TModel* n = sm->crearNodoMalla(sm->getMesh("assets/contenedor.obj"));
-	//TModel* m = sm->crearNodoMalla(sm->getMesh("assets/cartel.obj"));
+
+
 	TModel* w = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	TNode* luz = sm.crearNodoLuz();
-	//n->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
-	//m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	
-	/*
-	Vec3<float> rotacion = n->getRotation();
-	std::cout << "La rotacion Antes es: " << rotacion.getX()<<","<< rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
-	rotacion.setY(rotacion.getY() + 10);
-	std::cout << "La rotacion despues es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
-	n->setRotation(rotacion);
-	*/
-
-	//Vec3<float> posicion = m->getPosition();
-	//posicion.setY(posicion.getY() + 40);
-	//m->setPosition(Vec3<float>(0.f,15.0,0.0));
-
-	
-	Vec3<float> rotacion2 = w->getRotation();
-	rotacion2.setY(rotacion2.getY() + 90);
-	std::cout << "La rotacion antes es: " << rotacion2.getX() << "," << rotacion2.getY() << "," << rotacion2.getZ() << "," << std::endl;
 	w->setPosition(Vec3<float>(3.5f, 3.5f, 3.5f));
 	w->setRotationY(90.f);
-
-	Vec3<float> aux = w->getRotation();
-	std::cout << "La rotacion despues es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-	
-
-	
-	
-	//set colors
-	//n->setModelColor(0.33f, 0.42f, 0.18f);
-	//m->setModelColor(1.0f, 0.5f, 0.31f);
 	w->setModelColor(0.8f, 0.0f, 0.61f);
+	Vec3<float> aux = w->getRotation();
+
+	TNode* luz = sm.crearNodoLuz();
+	
 	
 	long int cont = 0;
 	while (!engine.shouldCloseWindw()){
@@ -89,9 +59,6 @@ int main() {
 		
 		engine.doMovement();
 
-		if (cont == 50) {
-			//w->setRotation(Vec3<float>(0.0f,1.0f,0.0f));
-		}
 		if (cont == 100) {
 			cont = 0;
 			aux = w->getPosition();

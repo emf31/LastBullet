@@ -105,7 +105,6 @@ private:
 	float m_r;
 	float m_g;
 	float m_b;
-	std::vector<glm::mat4> matrixVec;
 	
 
 };
