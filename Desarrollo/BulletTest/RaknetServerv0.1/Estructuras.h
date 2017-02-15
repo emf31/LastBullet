@@ -139,6 +139,16 @@ struct TSyncMessage {
 };
 #pragma pack(pop)
 
+#pragma pack(push, 1)
+struct TGameInfo {
+	unsigned char mID;
+
+	RakNet::RakNetGUID creador;
+	int gameMode;
+	int numBots;
+	std::string map;
+};
+#pragma pack(pop)
 
 enum GameMessages {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
@@ -171,7 +181,10 @@ enum GameMessages {
 	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28,
 	FIN_PARTIDA = ID_USER_PACKET_ENUM + 29,
 	SYNC = ID_USER_PACKET_ENUM + 30,
-	PING = ID_USER_PACKET_ENUM + 31
+	PING = ID_USER_PACKET_ENUM + 31,
+	CREAR_PARTIDA = ID_USER_PACKET_ENUM + 32,
+	CREAR_LOBBY = ID_USER_PACKET_ENUM + 33,
+	UNIRSE_LOBBY = ID_USER_PACKET_ENUM + 34,
 
 
 };

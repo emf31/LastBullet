@@ -11,6 +11,7 @@
 #include <events/MuerteEvent.h>
 #include <events/KillEvent.h>
 #include <NetworkManager.h>
+#include <Settings.h>
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
@@ -42,13 +43,28 @@ void NetPlayer::inicializar()
 		std::cin >> eleccion;
 
 		if (eleccion == 'a') {
-			crearPartida();
+			//TGameInfo gameinfo;
+			//gameinfo.creador = m_player->getGuid();
+			//gameinfo.gameMode = std::stoi(Settings::i().GetValue("mode"));
+			//gameinfo.map = Settings::i().GetValue("mapa");
+			//gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+			//crearPartida();
 
-			unirsePartida();
+
+
+			//unirseLobby();
+
+			TGameInfo gameinfo;
+			gameinfo.creador = m_player->getGuid();
+			gameinfo.gameMode = std::stoi(Settings::i().GetValue("mode"));
+			gameinfo.map = Settings::i().GetValue("mapa");
+			gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+
+			crearPartida(gameinfo);
 		}
 		else if (eleccion == 'b') {
 
-			unirsePartida();
+			//unirsePartida();
 			
 		}
 
@@ -91,13 +107,24 @@ void NetPlayer::startup(LPCTSTR lpApplicationName)
 	CloseHandle(pi.hThread);
 }
 
-
-void NetPlayer::crearPartida()
+void NetPlayer::crearPartida(const TGameInfo & gameinfo)
 {
-	startup(L"RaknetServerv0.1.exe");
+	dispatchMessage(gameinfo, CREAR_PARTIDA);
 }
 
-void NetPlayer::unirsePartida()
+
+void NetPlayer::crearLobby()
+{
+	RakID rakID;
+
+	rakID.guid = m_player->getGuid();
+
+	//startup(L"RaknetServerv0.1.exe");
+	dispatchMessage(rakID, CREAR_LOBBY);
+	
+}
+
+void NetPlayer::unirseLobby()
 {
 
 	char eleccion;
@@ -556,6 +583,7 @@ void NetPlayer::apagar()
 	}
 	
 }
+
 
 
 void NetPlayer::searchServersOnLAN() {

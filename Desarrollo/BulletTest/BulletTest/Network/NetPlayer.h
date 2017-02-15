@@ -18,10 +18,12 @@ public:
 
 	virtual void apagar();
 
+	void crearPartida(const TGameInfo& gameinfo);
 
-	void crearPartida();
 
-	void unirsePartida();
+	void crearLobby();
+
+	void unirseLobby();
 
 	//Send packet to server using netplayer peer 
 	template<typename T>

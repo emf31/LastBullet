@@ -1,7 +1,6 @@
 resolucionx:1280
 resoluciony:720
 fullscreen:0
-server:127.0.0.1
 name:Juliyo
-mode:server
+mode:
 

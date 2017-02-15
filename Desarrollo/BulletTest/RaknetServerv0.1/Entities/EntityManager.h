@@ -38,7 +38,7 @@ public:
 	void aumentaKill(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
-	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);
+	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);;
 
 
 	//Inicializa todas las entities

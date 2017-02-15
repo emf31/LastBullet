@@ -16,6 +16,8 @@
 #define SERVER_PORT 65535
 
 
+TGameInfo gameinfo;
+
 
 void muestraPlayer(Player *p) {
 
@@ -351,6 +353,16 @@ int main() {
 
 				break;
 			}
+			case CREAR_PARTIDA:
+			{
+				TGameInfo rak = *reinterpret_cast<TGameInfo*>(packet->data);
+
+				gameinfo = rak;
+
+
+				break;
+			}
+			
 
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
