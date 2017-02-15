@@ -57,6 +57,20 @@ void SensoryMemory::updateVision()
 	}
 }
 
+void SensoryMemory::updateSound(Entity * ent)
+{
+	updateNewEnemies(ent);
+	Memory& mymemory = m_botMemory[ent];
+	if (!isRaycastObstructed(ent)) {
+		mymemory.m_isShootable = true;
+		mymemory.m_lastPosition = ent->getRenderState()->getPosition();
+	}
+	else {
+		mymemory.m_isShootable = false;
+	}
+	mymemory.m_lastTimeSensed = sensoryClock.getElapsedTime().asSeconds();
+}
+
 bool SensoryMemory::isEnemyShootable(Entity * ent) const
 {
 	if (m_botMemory.find(ent) != m_botMemory.end()) {

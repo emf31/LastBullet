@@ -13,7 +13,8 @@ enum EnumTriggerType {
 	Button_Trig_Ent = (1 << 3),
 	Button_Trig_Ent_Pistola = (1 << 4),
 	Button_Trig_Ent_Rocket = (1 << 5),
-	Button_Trig_Ent_Asalto = (1 << 6)
+	Button_Trig_Ent_Asalto = (1 << 6),
+	kTrig_EnemyShootSound = (1 << 7)
 };
 
 EnumParser<EnumTriggerType>::EnumParser() {
@@ -25,6 +26,7 @@ EnumParser<EnumTriggerType>::EnumParser() {
 	enumMap["Button_Trig_Ent_Pistola"] = Button_Trig_Ent_Pistola;
 	enumMap["Button_Trig_Ent_Rocket"] = Button_Trig_Ent_Rocket;
 	enumMap["Button_Trig_Ent_Asalto"] = Button_Trig_Ent_Asalto;
+	enumMap["kTrig_EnemyShootSound"] = kTrig_EnemyShootSound;
 }
 
 
@@ -50,7 +52,6 @@ struct TriggerRecordStruct {
 		fradius(fradius),
 		nExpirationTime(nExpirationTime),
 		bDynamicSourcePos(bDynamicSourcePos){
-
 		tiempoDeVida.restart();
 	}
 };

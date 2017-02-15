@@ -30,7 +30,7 @@ public:
 	~SensoryMemory();
 
 	void updateVision();
-	void updateSound();
+	void updateSound(Entity* ent);
 	bool isEnemyShootable(Entity* ent)const;
 	bool isEnemyInFOV(Entity* ent)const;
 	bool isRaycastObstructed(Entity* ent)const;
