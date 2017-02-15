@@ -1,11 +1,9 @@
 #include "SceneManager.h"
 #include "TTransform.h"
 #include "TSpotLight.h"
-#include "TRotacion.h"
-#include "TTraslacion.h"
-#include "TEscalado.h"
 
-SceneManager::SceneManager() {
+
+void SceneManager::inicializar() {
 	//gui.init("GUI");
 	//gui.loadScheme("VanillaSkin.scheme");
 	//gui.loadScheme("AlfiskoSkin.scheme");
@@ -28,11 +26,11 @@ SceneManager::SceneManager() {
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
 	scene = new TNode();
 	scene->setType(T_RAIZ);
+	m_matrizActual = glm::mat4();
 }
 
 
-SceneManager::~SceneManager() {
-}
+
 
 TModel* SceneManager::getMesh(std::string path,Shader* shader) {
 	if (path != "") {
@@ -51,7 +49,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	view = camera_ptr->GetViewMatrix();
 
 	// Desencadena el dibujado de la escena
-	scene->draw(projection, view, m_matrizActual);
+	scene->draw();
 	//gui.draw();
 	glfwSwapBuffers(window);
 	
@@ -85,9 +83,9 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 
 
 	//asignamos matrices de transformacion
-	model->setTransformacionRotacion(static_cast<TRotacion*> (nuevoNodoRotacion->getEntity()));
-	model->setTransformacionEscalado(static_cast<TEscalado*> (nuevoNodoEscalado->getEntity()));
-	model->setTransformacionTraslacion(static_cast<TTraslacion*> (nuevoNodoTraslacion->getEntity()));
+	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
+	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
 
 	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoMalla->setEntity(model);
@@ -113,8 +111,8 @@ TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre)
 {
 	TNode* transNode = new TNode(nodoPadre);
 	transNode->setType(T_TRASLACION);
-	TTraslacion* trans = new TTraslacion();
-	trans->setPosition(Vec3<float>(0.0f, -1.75f, 0.0f));
+	TTransform* trans = new TTransform();
+	trans->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	transNode->setEntity(trans);
 	return transNode;
 }
@@ -123,7 +121,7 @@ TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre)
 {
 	TNode* transNode = new TNode(nodoPadre);
 	transNode->setType(T_ROTACION);
-	TRotacion* trans = new TRotacion();
+	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
 	return transNode;
 }
@@ -132,8 +130,7 @@ TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre)
 {
 	TNode* transNode = new TNode(nodoPadre);
 	transNode->setType(T_ESCALADO);
-	TEscalado* trans = new TEscalado();
-	trans->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
 	
 	return transNode;

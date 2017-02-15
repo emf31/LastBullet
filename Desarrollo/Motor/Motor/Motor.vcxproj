@@ -169,17 +169,14 @@
     <ClCompile Include="TCamera.cpp" />
     <ClCompile Include="TCameraNode.cpp" />
     <ClCompile Include="TEntity.cpp" />
-    <ClCompile Include="TEscalado.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TLightNode.cpp" />
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshNode.cpp" />
     <ClCompile Include="TModel.cpp" />
     <ClCompile Include="TNode.cpp" />
-    <ClCompile Include="TRotacion.cpp" />
     <ClCompile Include="TSpotLight.cpp" />
     <ClCompile Include="TTransform.cpp" />
-    <ClCompile Include="TTraslacion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Billboard.h" />
@@ -196,17 +193,14 @@
     <ClInclude Include="TCamera.h" />
     <ClInclude Include="TCameraNode.h" />
     <ClInclude Include="TEntity.h" />
-    <ClInclude Include="TEscalado.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TLightNode.h" />
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshNode.h" />
     <ClInclude Include="TModel.h" />
     <ClInclude Include="TNode.h" />
-    <ClInclude Include="TRotacion.h" />
     <ClInclude Include="TSpotLight.h" />
     <ClInclude Include="TTransform.h" />
-    <ClInclude Include="TTraslacion.h" />
     <ClInclude Include="vec3.hpp" />
   </ItemGroup>
   <ItemGroup>

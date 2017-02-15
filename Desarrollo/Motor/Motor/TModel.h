@@ -7,9 +7,7 @@
 #include <vector>
 #include "vec3.hpp"
 #include "TTransform.h"
-#include "TRotacion.h"
-#include "TTraslacion.h"
-#include "TEscalado.h"
+
 using namespace std;
 
 // GL Includes
@@ -57,22 +55,22 @@ public:
 		return textureID;
 	}
 
-	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual);
+	virtual void beginDraw();
 
-	virtual void endDraw(glm::mat4& matrizActual);
+	virtual void endDraw();
 
 	void setPosition(Vec3<float> pos);
 	void setRotation(Vec3<float> rot);
-	void setRotation2(float angu, Vec3<float> rotation) {
-		transRotacion->setRotation2(angu,rotation);
-	}
+	void setRotationX(float angu);
+	void setRotationY(float angu);
+	void setRotationZ(float angu);
 	void setScale(Vec3<float> esc);
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
-	void setTransformacionRotacion(TRotacion* rot);
-	void setTransformacionEscalado(TEscalado* esc);
-	void setTransformacionTraslacion(TTraslacion* tras);
+	void setTransformacionRotacion(TTransform* rot);
+	void setTransformacionEscalado(TTransform* esc);
+	void setTransformacionTraslacion(TTransform* tras);
 
 	void setModelColor(float r, float g, float b) {
 		m_r = r;
@@ -101,12 +99,13 @@ private:
 	//TNode* transRotacion;
 	//TNode* transEscalado;
 	//TNode* transTraslacion;
-	TRotacion* transRotacion;
-	TEscalado* transEscalado;
-	TTraslacion* transTraslacion;
+	TTransform* transRotacion;
+	TTransform* transEscalado;
+	TTransform* transTraslacion;
 	float m_r;
 	float m_g;
 	float m_b;
+	std::vector<glm::mat4> matrixVec;
 	
 
 };

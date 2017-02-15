@@ -90,16 +90,16 @@ void TSpotLight::setLight()
 
 }
 
-void TSpotLight::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
-	m_matrix = matrizActual;
-	matrizActual = glm::scale(matrizActual, glm::vec3(1.2f));
-	matrizActual = glm::translate(matrizActual, lightPos);
+void TSpotLight::beginDraw() {
+	m_matrix = SceneManager::i().m_matrizActual;
+	SceneManager::i().m_matrizActual = glm::scale(SceneManager::i().m_matrizActual, glm::vec3(1.2f));
+	SceneManager::i().m_matrizActual = glm::translate(SceneManager::i().m_matrizActual, lightPos);
 	
 	shaderLuz->Use();
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "model"), 1, GL_FALSE, glm::value_ptr(matrizActual));
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "projection"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().projection));
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "view"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().view));
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "model"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().m_matrizActual));
 
 
 	glBindVertexArray(lightVAO);
@@ -109,6 +109,6 @@ void TSpotLight::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 
 }
 
-void TSpotLight::endDraw(glm::mat4& matrizActual) {
-	 matrizActual= m_matrix;
+void TSpotLight::endDraw() {
+	SceneManager::i().m_matrizActual = m_matrix;
 }

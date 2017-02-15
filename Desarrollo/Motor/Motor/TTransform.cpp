@@ -1,15 +1,14 @@
 #include "TTransform.h"
+#include "SceneManager.h"
 
 
 TTransform::TTransform() {
 
-	m_scale = glm::vec3(1.f);
-	m_position = glm::vec3(0.f);
-	m_origen = glm::vec3(0.f);
-	m_rotation = glm::vec3(1.f);
 	m_matrix = glm::mat4();
-	m_orientation = glm::mat4();
 	angulo = 0.0f;
+	m_rotation = Vec3<float>(0.0f, 0.0f, 0.0f);
+	m_scale = Vec3<float>(1.0f, 1.0f, 1.0f);
+	m_position = Vec3<float>(0.0f, 0.0f, 0.0f);
 }
 
 
@@ -25,12 +24,33 @@ void TTransform::invert() {
 	m_matrix = glm::inverse(m_matrix);
 }
 void TTransform::setPosition(Vec3<float> position) {
-	m_position = glm::vec3(position.getX(), position.getY(), position.getZ());
+	m_position += position;
+	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));
 }
 void TTransform::setScale(Vec3<float> scale) {
-	m_scale = glm::vec3(scale.getX(), scale.getY(), scale.getZ());
+	m_scale = m_scale * scale;
+	m_matrix = glm::scale(m_matrix, glm::vec3(scale.getX(), scale.getY(), scale.getZ()));
+}
+void TTransform::setRotationX(float angu)
+{	
+	m_rotation.setX(m_rotation.getX() + angu);
+	m_matrix = glm::rotate(m_matrix, angulo, glm::vec3(1.0, 0.0, 0.0));
+}
+void TTransform::setRotationY(float angu)
+{
+
+	m_rotation.setY(m_rotation.getY() + angu);
+	m_matrix = glm::rotate(m_matrix, angu, glm::vec3(0.0, 1.0, 0.0));
+
+}
+void TTransform::setRotationZ(float angu)
+{
+	m_rotation.setZ(m_rotation.getZ() + angu);
+	m_matrix = glm::rotate(m_matrix, angulo, glm::vec3(0.0, 0.0, 1.0));
 }
 void TTransform::setRotation(Vec3<float> rotation) {
+	/*
+	
 	
 	glm::vec3 a = m_rotation;
 	glm::vec3 b = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
@@ -43,39 +63,28 @@ void TTransform::setRotation(Vec3<float> rotation) {
 
 	m_rotation2 = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
 	std::cout << "El angulo es: " << angulo << "y el vector: " << m_rotation.x << "," << m_rotation.y << "," << m_rotation.z << std::endl;
+	*/
 }
-void TTransform::setRotation2(float angu, Vec3<float> rotation)
+Vec3<float> TTransform::getRotation()
 {
-	m_rotation = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
-	angulo = angu;
+	return m_rotation;
 }
-/*
-Esto ya no lo tenemos asi porque cuando llamas a trasladar y rotar lo que hace es cambiar los vectores correspondientes
-y estos vectores ya se multiplicaran por la matrizactual que acumula las transformaciones de los padres cuando le toque en el begin draw
-porque si multiplicamos por la matriz propia de cada TTransform no estariamos teniendo en cuenta las transformaciones de los padres.
-
-Entonces cuando nosotros movemos una malla lo que hacemos es cambiarle el vector posicion y este ya se multiplicara por la matriz cuando se llame a su begindraw
-
-void TTransform::translate(float x, float y, float z) {
-	m_matrix = glm::translate(m_matrix,glm::vec3(x,y,z));
+Vec3<float> TTransform::getPosition()
+{
+	return m_position;
 }
-
-void TTransform::rotate(float f1, float f2, float f3, float angle) {
-	m_matrix = glm::rotate(m_matrix,angle,glm::vec3(f1,f2,f3));
+Vec3<float> TTransform::getScale()
+{
+	return m_scale;
 }
-
-void TTransform::scale(float s1, float s2, float s3) {
-	m_matrix = glm::scale(m_matrix, glm::vec3(s1,s2,s3));
+glm::mat4 TTransform::getRotation2() {
+	return m_matrix;
 }
-*/
-Vec3<float> TTransform::getRotation() {
-	return Vec3<float>(m_rotation.x, m_rotation.y, m_rotation.z);
+glm::mat4 TTransform::getPosition2() {
+	return m_matrix;
 }
-Vec3<float> TTransform::getPosition() {
-	return Vec3<float>(m_position.x, m_position.y, m_position.z);
-}
-Vec3<float> TTransform::getScale() {
-	return Vec3<float>(m_scale.x, m_scale.y, m_scale.z);
+glm::mat4 TTransform::getScale2() {
+	return m_matrix;
 }
 void TTransform::multiply(glm::mat4 mat) {
 	m_matrix = m_matrix * mat;
@@ -91,9 +100,24 @@ void TTransform::loadMatrix(glm::mat4 mat) {
 	m_matrix = mat;
 }
 
-void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual)
+void TTransform::beginDraw()
 {
-	m_matrix = matrizActual;
+	SceneManager::i().pilaMatrices.push_back(m_matrix);
+	/*
+	std::cout << "APILO MATRIZ: " << std::endl;
+	for (int i = 0; i < m_matrix.length(); i++) {
+		for (int j = 0; j < m_matrix[0].length(); j++) {
+			std::cout << m_matrix[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	*/
+
+
+
+	/*
+	Pruebas Antiguas
+		m_matrix = matrizActual;
 	/*
 		//matrizActual = glm::translate(matrizActual, m_origen);
 	//matrizActual = glm::rotate(matrizActual, 90.f, m_rotation);
@@ -107,7 +131,6 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 	std::cout << vec.x << vec.y << vec.z << std::endl;
 	matrizActual = glm::translate(matrizActual, m_position);
 	
-	*/
 	matrizActual = glm::rotate(matrizActual, angulo, glm::vec3(0.0, 1.0, 0.0));
 	matrizActual = glm::scale(matrizActual, m_scale);
 	matrizActual = glm::translate(matrizActual, m_position);
@@ -116,17 +139,15 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 	trans = glm::rotate(trans, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	trans = glm::translate(trans, m_position);
 	matrizActual = trans;
-	*/
-
-
+	
 	/*
-		for (int i = 0; i < matrizActual.length(); i++) {
-		for (int j = 0; j < matrizActual[0].length(); j++) {
-			std::cout << matrizActual[i][j] << " ";
-		}
-		std::cout<<std::endl;
+	for (int i = 0; i < matrizActual.length(); i++) {
+	for (int j = 0; j < matrizActual[0].length(); j++) {
+	std::cout << matrizActual[i][j] << " ";
 	}
-	*/
+	std::cout<<std::endl;
+	}
+	
 
 
 	//NOTA: lo que nos ha dicho en clase es que hagamos un unico nodo de transformacion que tenga rotacion, escalado y trasladado como hicimos antes, pero que el nodo rotacion solo rote y asi
@@ -134,11 +155,25 @@ void TTransform::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matr
 	//las rotaciones, luego en el begin draw lo que hacemos es apilar esta matriz ya rotada y en el end draw lo que hacemos es desapilar.
 	//y luego donde se multiplican todas las matrices es en el begin draw del model que coge las 3 matrices una de cada nodo y las multiplica y esto es la matrices del modelo.
 	
+	*/
+
+	
 	
 }
 
-void TTransform::endDraw(glm::mat4& matrizActual)
+void TTransform::endDraw()
 {
-	matrizActual = m_matrix;
+	//PREGUNTA , COMO TENEMOS QUE DESAPILAR EN EL END DRAW? PORQUE YA ESTAMOS DESAPILANDO LAS MATRICES PARA PODER OBTENERLAS Y MULTIPLICARLAS A LA HORA DE DIBUJAR
+	//SceneManager::i().pilaMatrices.pop();
+	/*
+	
+	std::cout << "DESAPILO MATRIZ: " << std::endl;
+	for (int i = 0; i < m_matrix.length(); i++) {
+		for (int j = 0; j < m_matrix[0].length(); j++) {
+			std::cout << m_matrix[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	*/
 }
 

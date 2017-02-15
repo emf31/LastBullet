@@ -16,8 +16,8 @@ public:
 
 	}
 
-	void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual);
-	void endDraw(glm::mat4& matrizActual);
+	void beginDraw();
+	void endDraw();
 	int m_r, m_g, m_b, m_a;
 
 private:

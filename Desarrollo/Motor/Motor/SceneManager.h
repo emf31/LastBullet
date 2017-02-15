@@ -7,6 +7,7 @@
 #include "enum.h"
 
 #include "GUI.h"
+#include <deque>
 
 #include <GLEW/glew.h>
 //GLFW
@@ -14,8 +15,12 @@
 
 class SceneManager {
 public:
-	SceneManager();
-	~SceneManager();
+
+	static SceneManager& i() {
+		static SceneManager singleton;
+		return singleton;
+	}
+	void inicializar();
 
 	//void getTexture(std::string path);
 	TModel* getMesh(std::string path, Shader* shader=nullptr);
@@ -33,9 +38,10 @@ public:
 	glm::mat4 m_matrizActual;
 	Camera *camera_ptr;
 	float *screenWidth, *screenHeight;
+	std::deque<glm::mat4> pilaMatrices;
 private:
 	ResourceManager *rm;
 	TNode* scene;
 	//Motor::GUI gui;
-
+	
 };

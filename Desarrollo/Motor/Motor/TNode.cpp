@@ -1,5 +1,5 @@
 #include "TNode.h"
-
+#include "SceneManager.h"
 TNode::TNode(TNode* nodoPadre)
 {
 	m_parentNode = nodoPadre;
@@ -32,7 +32,7 @@ TNode * TNode::getParentNode() {
 	return m_parentNode;
 }
 
-void TNode::draw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
+void TNode::draw() {
 	if (type != T_RAIZ) {
 		
 
@@ -57,10 +57,10 @@ void TNode::draw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) 
 		//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
 		//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
 		if (type ==T_MALLA) {
-			std::cout << "DIBUJO MODELO" << std::endl;
+			//std::cout << "DIBUJO MODELO" << std::endl;
 		}
 		if (type == T_LUZ) {
-			std::cout << "LUUUUUUUUUZ" << std::endl;
+			//std::cout << "LUUUUUUUUUZ" << std::endl;
 		}
 		if (type == T_ROTACION) {
 			//std::cout << "ROTOOOOOOOO" << std::endl;
@@ -71,18 +71,20 @@ void TNode::draw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) 
 		else if (type == T_TRASLACION) {
 			//std::cout << "TRASLADOOOOO" << std::endl;
 		}
-		getEntity()->beginDraw(projection, view, matrizActual);//apilo la transformacion de la entidad a la matriz correspondiente
+		getEntity()->beginDraw();//apilo la transformacion de la entidad a la matriz correspondiente
 		for (int i = 0; i < m_childNodes.size(); i++) {
-			m_childNodes.at(i)->draw(projection, view, matrizActual);
+			m_childNodes.at(i)->draw();
 		}
-		getEntity()->endDraw(matrizActual);//desapilo la transformacion que hice antes
+		getEntity()->endDraw();//desapilo la transformacion que hice antes
 	}
 	else {
 		//ELSE el modelo es null ¿cargar un modelo de "ERROR"?
 
 		//si es el nodo raiz se dibuja sus hijos directamente
 		for (int i = 0; i < m_childNodes.size(); i++) {
-			m_childNodes.at(i)->draw(projection, view, matrizActual);
+			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
+			SceneManager::i().m_matrizActual = glm::mat4();
+			m_childNodes.at(i)->draw();
 		}
 	}
 

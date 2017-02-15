@@ -23,10 +23,15 @@ public:
 	void setPosition(Vec3<float> position);
 	void setScale(Vec3<float> scale);
 	void setRotation(Vec3<float> rotation);
-	void setRotation2(float angu, Vec3<float> rotation);
+	void setRotationX(float angu);
+	void setRotationY(float angu);
+	void setRotationZ(float angu);
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
+	glm::mat4 getRotation2();
+	glm::mat4 getPosition2();
+	glm::mat4 getScale2();
 
 	void multiply(glm::mat4 mat);
 	void multiply(glm::vec4 vec);
@@ -34,17 +39,14 @@ public:
 
 	
 
-	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual);
-	virtual void endDraw(glm::mat4& matrizActual);
+	virtual void beginDraw();
+	virtual void endDraw();
 
 private: 
-	glm::vec3 m_scale;
-	glm::vec3 m_position;
-	glm::vec3 m_origen;
-	glm::vec3 m_rotation;
-	glm::vec3 m_rotation2;
 	glm::mat4 m_matrix;
-	glm::mat4 m_orientation;
+	Vec3<float> m_rotation;
+	Vec3<float> m_position;
+	Vec3<float> m_scale;
 	float angulo;
 	
 };

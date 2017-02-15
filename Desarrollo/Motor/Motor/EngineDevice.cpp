@@ -68,6 +68,7 @@ SceneManager* EngineDevice::getSceneManager() {
 		sm->camera_ptr = &input.camera;
 		sm->screenWidth = &screenWidth;
 		sm->screenHeight = &screenHeight;
+		sm->inicializar();
 		return sm;
 	}
 }

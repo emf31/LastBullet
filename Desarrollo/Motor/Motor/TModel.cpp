@@ -1,6 +1,7 @@
 #include "TModel.h"
 #include "ResourceManager.h"
 #include <glm/gtc/type_ptr.hpp>
+#include "SceneManager.h"
 
 
 TModel::TModel(GLchar * path, Shader* shaderPath) {
@@ -27,15 +28,65 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 TModel::~TModel() {
 }
 
-void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
+void TModel::beginDraw() {
 
+	/*
+	glm::mat4 model=glm::mat4();
+
+	for (int i = 0; i < SceneManager::i().pilaMatrices.size(); i++) {
+		model = model * SceneManager::i().pilaMatrices.front();
+		SceneManager::i().pilaMatrices.pop_front();
+	}
+	model = model*SceneManager::i().m_matrizActual;
+	//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
+	SceneManager::i().m_matrizActual = model;
+	*/
+	
+	glm::mat4 traslade = SceneManager::i().pilaMatrices.back();
+	SceneManager::i().pilaMatrices.pop_back();
+	glm::mat4 scale = SceneManager::i().pilaMatrices.back();
+	SceneManager::i().pilaMatrices.pop_back();
+	glm::mat4 rotation = SceneManager::i().pilaMatrices.back();
+	SceneManager::i().pilaMatrices.pop_back();
+	
+	glm::mat4 model = SceneManager::i().m_matrizActual * traslade * scale* rotation;
+	
+	std::cout << "MATRIZ ROTACION: " << std::endl;
+	for (int i = 0; i < rotation.length(); i++) {
+		for (int j = 0; j < rotation[0].length(); j++) {
+			std::cout << rotation[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "MATRIZ ESCALADO: " << std::endl;
+	for (int i = 0; i < scale.length(); i++) {
+		for (int j = 0; j < scale[0].length(); j++) {
+			std::cout << scale[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "MATRIZ TRASLACION: " << std::endl;
+	for (int i = 0; i < traslade.length(); i++) {
+		for (int j = 0; j < traslade[0].length(); j++) {
+			std::cout << traslade[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "MATRIZ MODELO: " << std::endl;
+	for (int i = 0; i < model.length(); i++) {
+		for (int j = 0; j < model[0].length(); j++) {
+			std::cout << model[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(matrizActual));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().projection));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().view));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
 	//colores
 	GLint objectColorLoc = glGetUniformLocation(shader->Program, "objectColor");
@@ -47,7 +98,7 @@ void TModel::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizAc
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i].beginDraw(projection, view, matrizActual);
+		this->meshes[i].beginDraw();
 }
 
 void TModel::loadModel(const string& path) {
@@ -157,7 +208,7 @@ vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType typ
 }
 
 
-void TModel::endDraw(glm::mat4& matrizActual) {
+void TModel::endDraw() {
 	//std::cout << u8"Adiós" << std::endl;
 	//TEntity::endDraw();
 }
@@ -170,19 +221,31 @@ void TModel::setRotation(Vec3<float> rot) {
 	transRotacion->setRotation(rot);
 }
 
+void TModel::setRotationX(float angu) {
+	transRotacion->setRotationX(angu);
+}
+
+void TModel::setRotationY(float angu) {
+	transRotacion->setRotationY(angu);
+}
+
+void TModel::setRotationZ(float angu) {
+	transRotacion->setRotationZ(angu);
+}
+
 void TModel::setScale(Vec3<float> esc) {
 	transEscalado->setScale(esc);
 }
 
-void TModel::setTransformacionRotacion(TRotacion * rot) {
+void TModel::setTransformacionRotacion(TTransform * rot) {
 	transRotacion = rot;
 }
 
-void TModel::setTransformacionEscalado(TEscalado * esc) {
+void TModel::setTransformacionEscalado(TTransform * esc) {
 	transEscalado = esc;
 }
 
-void TModel::setTransformacionTraslacion(TTraslacion * tras) {
+void TModel::setTransformacionTraslacion(TTransform * tras) {
 	transTraslacion = tras;
 }
 

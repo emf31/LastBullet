@@ -9,6 +9,6 @@ TEntity::TEntity() {
 TEntity::~TEntity() {
 }
 
-void TEntity::endDraw(glm::mat4& matrizActual) {
+void TEntity::endDraw() {
 	std::cout << "Hola" << std::endl;
 }

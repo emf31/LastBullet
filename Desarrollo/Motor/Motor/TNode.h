@@ -29,7 +29,7 @@ public:
 	/*virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model);
 	virtual void endDraw();
 	*/
-	void draw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual);
+	void draw();
 	TEntity* getEntity() {
 		return m_entity;
 	}

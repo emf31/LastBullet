@@ -37,8 +37,8 @@ public:
 	TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures, Shader *shader);
 	~TMesh();
 
-	void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual);
-	void endDraw(glm::mat4& matrizActual);
+	void beginDraw();
+	void endDraw();
 
 
 private:

@@ -6,8 +6,8 @@ public:
 	TEntity();
 	virtual ~TEntity();
 
-	virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual)=0;
-	virtual void endDraw(glm::mat4& matrizActual)=0;
+	virtual void beginDraw()=0;
+	virtual void endDraw()=0;
 
 };
 
