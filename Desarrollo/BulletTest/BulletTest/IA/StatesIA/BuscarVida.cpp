@@ -10,7 +10,10 @@ void BuscarVida::Enter(Enemy_Bot* pEnemy) {
 void BuscarVida::Execute(Enemy_Bot* pEnemy) {
 
 	std::cout << "BUSCANDO VIDA" << std::endl;
-	pEnemy->createPathToItem("LifeObject");
+	if (k == 0) {
+		pEnemy->createPathToItem("LifeObject");
+		k++;
+	}
 
 }
 
