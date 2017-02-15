@@ -28,6 +28,6 @@ private:
 
 public:
 	
-	Memory():m_inFOV(false),m_isShootable(false) {}
+	Memory():m_inFOV(false),m_isShootable(false), m_lastTimeSensed(-1000), m_TimeBecameVisible(-1000), m_lastTimeVisible(0) {}
 
 };
