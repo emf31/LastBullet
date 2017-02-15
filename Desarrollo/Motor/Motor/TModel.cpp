@@ -30,6 +30,9 @@ TModel::~TModel() {
 
 void TModel::beginDraw() {
 
+	glm::mat4 view = SceneManager::i().view;
+	glm::mat4 projection = SceneManager::i().projection;
+	glm::mat4 actual = SceneManager::i().m_matrizActual;
 	/*
 	glm::mat4 model=glm::mat4();
 
@@ -49,8 +52,9 @@ void TModel::beginDraw() {
 	glm::mat4 rotation = SceneManager::i().pilaMatrices.back();
 	SceneManager::i().pilaMatrices.pop_back();
 	
-	glm::mat4 model = traslade * scale* rotation;
-	
+	glm::mat4 model = actual* traslade * scale* rotation;
+	SceneManager::i().m_matrizActual = model;
+	/*
 	std::cout << "MATRIZ ROTACION: " << std::endl;
 	for (int i = 0; i < rotation.length(); i++) {
 		for (int j = 0; j < rotation[0].length(); j++) {
@@ -79,8 +83,7 @@ void TModel::beginDraw() {
 		}
 		std::cout << std::endl;
 	}
-	glm::mat4 view = SceneManager::i().view;
-		glm::mat4 projection = SceneManager::i().projection;
+	*/
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 

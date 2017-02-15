@@ -91,19 +91,20 @@ void TSpotLight::setLight()
 }
 
 void TSpotLight::beginDraw() {
-	/*
-		m_matrix = SceneManager::i().m_matrizActual;
-	SceneManager::i().m_matrizActual = glm::scale(SceneManager::i().m_matrizActual, glm::vec3(1.2f));
-	SceneManager::i().m_matrizActual = glm::translate(SceneManager::i().m_matrizActual, lightPos);
-	*/
-	m_matrix = glm::mat4();
+	
+	m_matrix = SceneManager::i().m_matrizActual;
 	m_matrix = glm::scale(m_matrix, glm::vec3(1.2f));
 	m_matrix = glm::translate(m_matrix, lightPos);
+	glm::mat4 view = SceneManager::i().view;
+	glm::mat4 projection = SceneManager::i().projection;
 	
+	//por si algo dependiera de la transformacion de la luz tenemos que cambiar la matriz actual a la nueva matriz de luz, si no depende nada de esto cuando lleguemos al nodo raiz se resetearia a la identidad
+	SceneManager::i().m_matrizActual = m_matrix;
+
 	shaderLuz->Use();
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "projection"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().projection));
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "view"), 1, GL_FALSE, glm::value_ptr(SceneManager::i().view));
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "model"), 1, GL_FALSE, glm::value_ptr(m_matrix));
 
 

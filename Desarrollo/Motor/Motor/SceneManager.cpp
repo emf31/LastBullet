@@ -26,7 +26,7 @@ void SceneManager::inicializar() {
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
 	scene = new TNode();
 	scene->setType(T_RAIZ);
-	//m_matrizActual = glm::mat4();
+	m_matrizActual = glm::mat4();
 }
 
 
