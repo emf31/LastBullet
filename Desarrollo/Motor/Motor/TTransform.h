@@ -36,12 +36,14 @@ public:
 	virtual void beginDraw();
 	virtual void endDraw();
 
+
 private: 
 	glm::mat4 m_matrix;
 	Vec3<float> m_rotation;
 	Vec3<float> m_position;
 	Vec3<float> m_scale;
 	float angulo;
+	
 	
 };
 

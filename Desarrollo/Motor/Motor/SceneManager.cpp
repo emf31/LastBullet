@@ -1,6 +1,5 @@
 #include "SceneManager.h"
 #include "TTransform.h"
-#include "TSpotLight.h"
 
 
 void SceneManager::inicializar() {
@@ -24,7 +23,7 @@ void SceneManager::inicializar() {
 	perx.w = 0.0f;*/
 
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
-	scene = new TNode();
+	scene = new TNode(-1);
 	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
 	std::cout << "matriz actual reseteada" << std::endl;
@@ -64,21 +63,19 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	TNode * nuevoNodoTraslacion;
 
 	//creamos los nodos malla y los nodos transformaciones necesaria para esta
-
+	int id = model->getID();
 	
 	//rotacion antes de traslacion
-	nuevoNodoRotacion = crearNodoRotacion(scene);
-	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion);
-	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado);
-	nuevoNodoMalla = new TNode(nuevoNodoTraslacion);
+	nuevoNodoRotacion = crearNodoRotacion(scene, id);
+	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado, id);
+	nuevoNodoMalla = new TNode(id, nuevoNodoTraslacion);
 	
 	//asignamos los hijos
-	
-	//rotacion antes de traslacion
-	scene->addChild(nuevoNodoRotacion);
-	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
-	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
-	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
+	scene->setChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->setChild(nuevoNodoEscalado);
+	nuevoNodoEscalado->setChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->setChild(nuevoNodoMalla);
 	
 	
 
@@ -97,10 +94,10 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	return model;
 }
 
-TNode * SceneManager::crearNodoTransformacion()
+TNode * SceneManager::crearNodoTransformacion(int entityID)
 {
 	//DUDA aqui tendriamos que tener tambien algun identificador en el nodo no? porque yo estoy creando 3 nodos de transformacion pero no se cual es cual.
-	TNode* transNode = new TNode(scene);
+	TNode* transNode = new TNode(entityID, scene);
 	TTransform* trans = new TTransform();
 	transNode->setType(T_TRANSFORM);
 	transNode->setEntity(trans);
@@ -108,9 +105,9 @@ TNode * SceneManager::crearNodoTransformacion()
 	return transNode;
 }
 
-TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre)
+TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre, int entityID)
 {
-	TNode* transNode = new TNode(nodoPadre);
+	TNode* transNode = new TNode(entityID, nodoPadre);
 	transNode->setType(T_TRASLACION);
 	TTransform* trans = new TTransform();
 	trans->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
@@ -118,18 +115,18 @@ TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre)
 	return transNode;
 }
 
-TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre)
+TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre, int entityID)
 {
-	TNode* transNode = new TNode(nodoPadre);
+	TNode* transNode = new TNode(entityID, nodoPadre);
 	transNode->setType(T_ROTACION);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
 	return transNode;
 }
 
-TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre)
+TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre, int entityID)
 {
-	TNode* transNode = new TNode(nodoPadre);
+	TNode* transNode = new TNode(entityID, nodoPadre);
 	transNode->setType(T_ESCALADO);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
@@ -137,15 +134,48 @@ TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre)
 	return transNode;
 }
 
-TNode * SceneManager::crearNodoLuz()
+TSpotLight * SceneManager::crearNodoLuz()
 {
-	TNode* luzNode = new TNode(scene);
-	luzNode->setType(T_LUZ);
-	scene->addChild(luzNode);
+
+	TNode* luzNode;
+	TNode * nuevoNodoRotacion;
+	TNode * nuevoNodoEscalado;
+	TNode * nuevoNodoTraslacion;
+
+	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
 	TSpotLight* luz = new TSpotLight();
+	int id = luz->getID();
+
+	//rotacion antes de traslacion
+	nuevoNodoRotacion = crearNodoRotacion(scene, id);
+	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado, id);
+	luzNode = new TNode(id, nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	scene->setChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->setChild(nuevoNodoEscalado);
+	nuevoNodoEscalado->setChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->setChild(luzNode);
+
+
+
+
+	//asignamos matrices de transformacion
+	luz->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	luz->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
+	luz->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+
+	//seteamos la entity
 	luzNode->setEntity(luz);
-	return luzNode;
+	luzNode->setType(T_LUZ);
+
+
+	return luz;
+
 }
+
+
 
 TNode * SceneManager::crearNodoCamara()
 {

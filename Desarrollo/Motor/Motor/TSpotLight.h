@@ -2,6 +2,7 @@
 #include "TEntity.h"
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp>
+#include "TTransform.h"
 class TSpotLight : public TEntity {
 public:
 	TSpotLight();
@@ -9,9 +10,6 @@ public:
 	void setColor(int r, int g, int b, int a);
 	void setColor(int r, int g, int b);
 	void setLight();
-	void setLightPosition(glm::vec3 pos) {
-		lightPos=pos;
-	}
 	void pruebaColores() {
 
 	}
@@ -20,12 +18,29 @@ public:
 	void endDraw();
 	int m_r, m_g, m_b, m_a;
 
+	int getID() {
+		return entityID;
+	}
+	void setTransformacionRotacion(TTransform* rot);
+	void setTransformacionEscalado(TTransform* esc);
+	void setTransformacionTraslacion(TTransform* tras);
+	void setPosition(Vec3<float> pos);
+	void setRotationX(float angu);
+	void setRotationY(float angu);
+	void setRotationZ(float angu);
+	void setScale(Vec3<float> esc);
+	Vec3<float> getRotation();
+	Vec3<float> getPosition();
+	Vec3<float> getScale();
+
 private:
-	glm::vec3 lightPos;
-	glm::mat4 m_matrix;
 	Shader* shaderLuz;
 	GLuint lightVAO;
 	GLuint lightVBO;
+	int entityID = -1;
+	TTransform* transRotacion;
+	TTransform* transEscalado;
+	TTransform* transTraslacion;
 	
 	
 };

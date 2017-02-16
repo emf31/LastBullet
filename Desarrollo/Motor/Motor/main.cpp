@@ -6,6 +6,7 @@ using namespace std;
 #include "Shader.h"
 #include "Camera.h"
 #include "TModel.h"
+#include "TSpotLight.h"
 
 #include <GUI.h>
 
@@ -44,7 +45,8 @@ int main() {
 	w->setModelColor(0.8f, 0.0f, 0.61f);
 	Vec3<float> aux = w->getRotation();
 
-	TNode* luz = sm.crearNodoLuz();
+	TSpotLight* luz = sm.crearNodoLuz();
+	luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
 	
 	
 	long int cont = 0;

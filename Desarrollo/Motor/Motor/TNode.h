@@ -10,7 +10,7 @@
 class TNode
 {
 public:
-	TNode(TNode* nodoPadre=nullptr);
+	TNode(int entityID, TNode* nodoPadre=nullptr);
 	~TNode();
 	
 	void setModel(TModel* model);
@@ -24,7 +24,10 @@ public:
 	}
 
 	bool removeChild(TNode *child);
-	void addChild(TNode* child);
+	//void addChild(TNode* child);
+	void setChild(TNode* child);
+
+
 	//TODOOO antes estaba asi, pero creo que los nodos no tienen begin draw y end draw, solo tienen un draw, que ya llama al begin y end draw de las entities asociadas
 	/*virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model);
 	virtual void endDraw();
@@ -48,13 +51,16 @@ public:
 	}
 
 	//SceneManager *sceneManager_ptr;
-	
+	int getMyNodeEntityID() {
+		return myNodeEntityID;
+	}
 
 private:
 	//TModel *m_model;
 	TEntity *m_entity;
 	TNode *m_parentNode;
 	std::vector<TNode*> m_childNodes;
+	int myNodeEntityID;
 	
 	
 	

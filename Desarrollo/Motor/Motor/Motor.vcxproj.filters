@@ -63,15 +63,6 @@
     <ClCompile Include="TNode.cpp">
       <Filter>Archivos de código fuente\Nodes</Filter>
     </ClCompile>
-    <ClCompile Include="TMeshNode.cpp">
-      <Filter>Archivos de código fuente\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="TCameraNode.cpp">
-      <Filter>Archivos de código fuente\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="TLightNode.cpp">
-      <Filter>Archivos de código fuente\Nodes</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -126,15 +117,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="TNode.h">
-      <Filter>Archivos de encabezado\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="TMeshNode.h">
-      <Filter>Archivos de encabezado\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="TCameraNode.h">
-      <Filter>Archivos de encabezado\Nodes</Filter>
-    </ClInclude>
-    <ClInclude Include="TLightNode.h">
       <Filter>Archivos de encabezado\Nodes</Filter>
     </ClInclude>
     <ClInclude Include="vec3.hpp">

@@ -9,6 +9,7 @@ TTransform::TTransform() {
 	m_rotation = Vec3<float>(0.0f, 0.0f, 0.0f);
 	m_scale = Vec3<float>(1.0f, 1.0f, 1.0f);
 	m_position = Vec3<float>(0.0f, 0.0f, 0.0f);
+	
 }
 
 

@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "enum.h"
+#include "TSpotLight.h"
 
 #include "GUI.h"
 #include <deque>
@@ -26,11 +27,13 @@ public:
 	TModel* getMesh(std::string path, Shader* shader=nullptr);
 	void draw(GLFWwindow* window);
 	TModel* crearNodoMalla(TModel * model);
-	TNode* crearNodoTransformacion();
-	TNode* crearNodoTraslacion(TNode* nodoPadre);
-	TNode* crearNodoRotacion(TNode* nodoPadre);
-	TNode* crearNodoEscalado(TNode* nodoPadre);
-	TNode* crearNodoLuz();
+	TNode* crearNodoTransformacion(int entityID);
+	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
+	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);
+	//NOTA : en mi cabeza tiene sentido que lo que devolvamos sea un TModel o un TSpotLight ya que luego desde el juego lo que manejariamos serian estas entities
+	//lo cual a parte de ser mas claro para quien lo use asi no tendriamos acceso a los nodos del arbol desde fuera del motor grafico para que no se pueda corromper este.
+	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
+	TSpotLight* crearNodoLuz();
 	TNode* crearNodoCamara();
 
 	glm::mat4 projection;
@@ -39,9 +42,16 @@ public:
 	Camera *camera_ptr;
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;
+	int getEntityCount() {
+		return nodeEntityCount;
+	}
+	void aumentaEntityCount() {
+		nodeEntityCount++;
+	}
 private:
 	ResourceManager *rm;
 	TNode* scene;
+	int nodeEntityCount = 0;
 	//Motor::GUI gui;
 	
 };

@@ -77,7 +77,9 @@ public:
 		m_g = g;
 		m_b = b;
 	}
-	
+	int getID() {
+		return entityID;
+	}
 	
 
 private:
@@ -105,6 +107,7 @@ private:
 	float m_r;
 	float m_g;
 	float m_b;
+	int entityID = -1;
 	
 
 };

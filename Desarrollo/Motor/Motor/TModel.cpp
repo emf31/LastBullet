@@ -23,6 +23,8 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 	m_r = 1.f;
 	m_g = 1.f;
 	m_b = 1.f;
+	entityID = SceneManager::i().getEntityCount();
+	SceneManager::i().aumentaEntityCount();
 }
 
 TModel::~TModel() {
