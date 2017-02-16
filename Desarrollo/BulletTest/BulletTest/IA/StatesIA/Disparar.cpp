@@ -14,7 +14,7 @@ void Disparar::Execute(Enemy_Bot* pEnemy) {
 
 	pEnemy->getPathFollow()->FollowOff();
 
-	std::cout << "Disparar" << std::endl;
+	//std::cout << "Disparar" << std::endl;
 
 
 

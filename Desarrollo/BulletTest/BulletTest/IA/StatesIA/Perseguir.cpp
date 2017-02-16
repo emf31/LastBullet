@@ -9,7 +9,7 @@ void Perseguir::Enter(Enemy_Bot* pEnemy) {
 
 void Perseguir::Execute(Enemy_Bot* pEnemy) {
 
-	std::cout << "Perseguir" << std::endl;
+	//std::cout << "Perseguir" << std::endl;
 
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
