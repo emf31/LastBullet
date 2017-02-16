@@ -3,6 +3,7 @@
 #include <PathFollow.h>
 
 
+
 void BuscarVida::Enter(Enemy_Bot* pEnemy) {
 	pEnemy->createPathToItem("LifeObject");
 
@@ -10,7 +11,7 @@ void BuscarVida::Enter(Enemy_Bot* pEnemy) {
 
 void BuscarVida::Execute(Enemy_Bot* pEnemy) {
 
-	std::cout << "BUSCANDO VIDA" << std::endl;
+	//std::cout << "BUSCANDO VIDA" << std::endl;
 
 }
 

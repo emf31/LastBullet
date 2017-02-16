@@ -263,6 +263,9 @@
     <ClCompile Include="IA\StatesIA\BuscarVida.cpp">
       <Filter>Source Code\IA\StatesIA</Filter>
     </ClCompile>
+    <ClCompile Include="IA\StatesIA\BuscarWeapon.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -642,7 +645,7 @@
     <ClInclude Include="IA\StatesIA\Disparar.h">
       <Filter>Headers\IA\StatesIA</Filter>
     </ClInclude>
-    <ClInclude Include="IA\StatesIA\BuscarVida.h">
+    <ClInclude Include="IA\StatesIA\BuscarWeapon.h">
       <Filter>Headers\IA\StatesIA</Filter>
     </ClInclude>
   </ItemGroup>

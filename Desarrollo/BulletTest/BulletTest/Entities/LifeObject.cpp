@@ -59,7 +59,10 @@ void LifeObject::borrarContenido()
 void LifeObject::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+
+		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
+
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
@@ -77,7 +80,11 @@ void LifeObject::handleMessage(const Message & message)
 				
 				m_nodo->setVisible(false);
 
-				static_cast<Player*>(message.data)->getLifeComponent().sumarVida();
+				if (ClassName == "Player")
+					static_cast<Player*>(message.data)->getLifeComponent().sumarVida();
+				if (ClassName == "Enemy_Bot") {
+					static_cast<Enemy_Bot*>(message.data)->getLifeComponent().sumarVida();
+				}
 
 			}
 

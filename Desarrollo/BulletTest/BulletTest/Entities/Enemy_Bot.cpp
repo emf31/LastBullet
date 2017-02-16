@@ -7,6 +7,7 @@
 #include <MachineState.h>
 #include <StatesIA\Patrullar.h>
 #include <StatesIA\BuscarVida.h>
+#include <StatesIA\BuscarWeapon.h>
 #include <Map.h>
 #include <TriggerSystem.h>
 
@@ -36,15 +37,16 @@ void Enemy_Bot::inicializar()
 	weaponSystem = new WeaponSystem(this, 1,400, 20);
 	weaponSystem->Inicializar();
 
-	m_pStateMachine = new MachineState(this);
-	m_pStateMachine->SetCurrentState(&Patrullar::i());
-	//m_pStateMachine->SetGlobalState(&Patrullar::i());
 
 	sense = new SensoryMemory(this,20);
 
 	//angulo de vision
 	FOV = DegToRad(45) ;
 
+
+	m_pStateMachine = new MachineState(this);
+	m_pStateMachine->SetCurrentState(&Patrullar::i());
+	//m_pStateMachine->SetGlobalState(&Patrullar::i());
 
 }
 
@@ -100,6 +102,10 @@ void Enemy_Bot::update(Time elapsedTime)
 	if (!this->getMachineState()->isInState("BuscarVida"))
 	FuzzyLifeObject();
 
+	if (this->getMachineState()->isInState("Patrullar"))
+		m_pStateMachine->ChangeState(&BuscarWeapon::i());
+
+
 	m_pStateMachine->Update();
 	
 }
@@ -145,8 +151,8 @@ void Enemy_Bot::cargarContenido()
 
 
 	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
-	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
-	proxy->m_collisionFilterMask = col::enemyCollidesWith;
+	proxy->m_collisionFilterGroup = col::Collisions::Character;
+	proxy->m_collisionFilterMask = col::characterCollidesWith;
 
 	
 
