@@ -22,7 +22,7 @@ Map::Map() : grafo(NULL), cellSpace(NULL)
 
 
 
-void Map::inicializar()
+void Map::inicializar(const std::string& mapa)
 {
 
 
@@ -31,7 +31,7 @@ void Map::inicializar()
 	cellSpace = new CellSpacePartition(200, 200, 5, 5);
 
 	//Lee el mapa
-	map.readMap("../media/laberinto.json");
+	map.readMap(mapa);
 
 
 	//GRAFO

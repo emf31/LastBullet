@@ -18,7 +18,7 @@ public:
 
 	virtual void apagar();
 
-	void crearPartida(const TGameInfo& gameinfo);
+	void crearPartida();
 
 
 	void crearLobby();

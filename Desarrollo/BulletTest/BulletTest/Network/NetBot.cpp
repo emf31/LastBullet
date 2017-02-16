@@ -2,6 +2,7 @@
 #include <Estructuras.h>
 #include <EntityManager.h>
 #include <Enemy_Bot.h>
+#include <NetworkManager.h>
 
 
 NetBot::NetBot(Enemy_Bot* bot) : NetObject(), m_bot(bot)
@@ -17,6 +18,7 @@ NetBot::~NetBot()
 
 void NetBot::inicializar()
 {
+	conectar("127.0.0.1", server_port);
 }
 
 void NetBot::handlePackets(Time elapsedTime)
@@ -62,8 +64,7 @@ void NetBot::handlePackets(Time elapsedTime)
 
 			EntityManager::i().registerRaknetEntity(m_bot);
 
-
-			dispatchMessage(nuevoplayer, NUEVO_PLAYER);
+			dispatchMessage(nuevoplayer, NUEVO_BOT);
 
 
 

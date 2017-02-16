@@ -33,13 +33,13 @@
 #include <Settings.h>
 
 
+
 const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 
 Game::Game()
-: world()
 {
 
 }
@@ -65,55 +65,60 @@ void Game::run()
 	time_physics_prev = time_physics_curr = clock.getElapsedTime();
 	time_gameclock = clock.getElapsedTime();
 
-	bool wantToExit = false;
-
-
+	
 	while (GraphicEngine::i().isRuning()) {
+		if (World::i().gamestarted) {
+			///Las fisicas se ejecutan 60 veces por segundo
 
-		///Las fisicas se ejecutan 60 veces por segundo
+			time_physics_curr = clock.getElapsedTime();
 
-		time_physics_curr = clock.getElapsedTime();
+			//if (GraphicEngine::i().isWindowActive()) {
+			PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
+			//}
 
-		//if (GraphicEngine::i().isWindowActive()) {
-		PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
-		//}
-
-		time_physics_prev = time_physics_curr;
+			time_physics_prev = time_physics_curr;
 
 
-		// Game Clock part of the loop
-		/*  This ticks once every TickMs milliseconds on average */
-		Time dt = clock.getElapsedTime() - time_gameclock;
+			// Game Clock part of the loop
+			/*  This ticks once every TickMs milliseconds on average */
+			Time dt = clock.getElapsedTime() - time_gameclock;
 
-		//Llevamos control en las actualizaciones por frame
-		while (dt >= timePerFrame) // 15 veces/segundo
-		{
-			dt -= timePerFrame;
-			time_gameclock += timePerFrame;
+			//Llevamos control en las actualizaciones por frame
+			while (dt >= timePerFrame) // 15 veces/segundo
+			{
+				dt -= timePerFrame;
+				time_gameclock += timePerFrame;
 
-			MastEventReceiver::i().endEventProcess();
-			processEvents();
-			MastEventReceiver::i().startEventProcess();
+				MastEventReceiver::i().endEventProcess();
+				processEvents();
+				MastEventReceiver::i().startEventProcess();
 
-			//Realizamos actualizaciones
-			update(timePerFrame);
+				//Realizamos actualizaciones
+				update(timePerFrame);
 
-			time_client_curr = clock.getElapsedTime();
+				time_client_curr = clock.getElapsedTime();
 
-			NetworkManager::i().updateNetwork(time_client_curr - time_client_prev);
+				NetworkManager::i().updateNetwork(time_client_curr - time_client_prev);
 
-			time_client_prev = time_client_curr;
+				time_client_prev = time_client_curr;
 
+			}
+
+			if (GraphicEngine::i().isWindowActive()) {
+				interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
+
+				render(interpolation, timePerFrame);
+			}
 		}
-
-		if (GraphicEngine::i().isWindowActive()) {
-			interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
-
-			render(interpolation, timePerFrame);
-		}
+		
 
 
 	}
+
+
+
+
+	
 
 
 	EntityManager::i().apagar();
@@ -153,12 +158,12 @@ void Game::inicializar()
 
 	
 
-	while (player->m_network->isConnected() == false) {
+	/*while (player->m_network->isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}
+	}*/
 	
 
-	world.inicializar();
+	//world.inicializar();
 
 
 	/*int a = 1;

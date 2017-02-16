@@ -29,11 +29,11 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		NetworkManager::i().dispatchMessage(nuevoplayer, MUERTE);
 
 
-		TKill kill;
+		/*TKill kill;
 		kill.guidKill = guid;
 		kill.guidDeath = m_player->getGuid();
 
-		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);*/
 	
 
 	}

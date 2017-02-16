@@ -1,5 +1,7 @@
 #pragma once
 #include "Weapon.h"
+#include <Character.h>
+
 
 #define numCargadoresAsalto 5
 
@@ -7,7 +9,7 @@
 class Asalto : public Weapon
 {
 public:
-	Asalto();
+	Asalto(Character* ent);
 	~Asalto();
 
 	virtual void inicializar() override;
@@ -26,7 +28,7 @@ public:
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
-	virtual void shoot();
+	virtual void shoot(const Vec3<float>& target);
 
 
 	virtual void resetAmmoTotal() {
@@ -36,6 +38,8 @@ public:
 private:
 	btVector3 SIZE_OF_WORLD;
 	btVector3 FUERZA;
+
+	Character* m_ent;
 
 };
 

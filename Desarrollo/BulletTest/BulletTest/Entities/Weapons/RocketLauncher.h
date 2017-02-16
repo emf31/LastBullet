@@ -1,14 +1,17 @@
 #pragma once
 #include "Weapon.h"
+#include <Character.h>
+
+
+class Player;
 
 #define numCargadoresRocket 3
 
 
-class RocketLauncher :
-	public Weapon
+class RocketLauncher : public Weapon
 {
 public:
-	RocketLauncher();
+	RocketLauncher(Character* ent);
 	~RocketLauncher();
 
 	virtual void inicializar() override;
@@ -27,13 +30,14 @@ public:
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
-	virtual void shoot();
+	virtual void shoot(const Vec3<float>& target);
 
 
-	virtual void resetAmmoTotal() {
-		numCargadores = numCargadoresRocket;
-	}
+	virtual void resetAmmoTotal() { numCargadores = numCargadoresRocket; }
+
 private:
 	btVector3 SIZE_OF_WORLD;
+
+	Character* m_ent;
 };
 

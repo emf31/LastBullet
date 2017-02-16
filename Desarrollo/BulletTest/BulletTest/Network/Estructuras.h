@@ -9,6 +9,7 @@
 #include <vec3.hpp>
 
 
+
 #pragma pack(push, 1)
 struct TPlayer {
 	unsigned char mID;
@@ -170,6 +171,7 @@ struct TGameInfo {
 	unsigned char mID;
 
 	RakNet::RakNetGUID creador;
+	std::string name;
 	int gameMode;
 	int numBots;
 	std::string map;
@@ -212,4 +214,7 @@ enum GameMessages {
 	CREAR_PARTIDA = ID_USER_PACKET_ENUM + 32,
 	CREAR_LOBBY = ID_USER_PACKET_ENUM + 33,
 	UNIRSE_LOBBY = ID_USER_PACKET_ENUM + 34,
+	EMPEZAR_PARTIDA = ID_USER_PACKET_ENUM + 35,
+	NUEVO_BOT = ID_USER_PACKET_ENUM + 36,
+	UNIRSE_PARTIDA = ID_USER_PACKET_ENUM + 37,
 };

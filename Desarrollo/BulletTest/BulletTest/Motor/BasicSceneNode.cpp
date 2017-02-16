@@ -31,6 +31,12 @@ Vec3<float> BasicSceneNode::getPosition()
 	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }
 
+Vec3<float> BasicSceneNode::getRotation()
+{
+	vector3df aux = m_node->getRotation();
+	return Vec3<float>(aux.X, aux.Y, aux.Z);
+}
+
 void BasicSceneNode::setRotation(Vec3<float> rotation)
 {
 	m_node->setRotation(vector3df(rotation.getX(), rotation.getY(), rotation.getZ()));

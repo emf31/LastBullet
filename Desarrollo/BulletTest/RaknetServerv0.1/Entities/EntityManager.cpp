@@ -22,29 +22,54 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 	}
 }
 
-void EntityManager::enviaNuevaPos(TMovimiento p, RakNet::RakPeerInterface *peer)
+void EntityManager::sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::RakPeerInterface *peer)
 {
+	//Enviamos todos el bot a todos los clientes menos al host de la partida, que es el que los ha creado
+	p.mID = NUEVO_PLAYER;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		if (i->second->getGuid() != host) {
+			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
+		}
+	}
+}
+
+void EntityManager::enviaNuevaPos(TMovimiento p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
+{
+	Entity* ent = EntityManager::i().getRaknetEntity(p.guid);
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != p.guid) {
-			//enviamos la posicion actualizada del player a todos los clientes
-			//std::cout << "Dentro: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(p.guid) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
 
+			//No se envia al propietario de la partida, si el que se mueve es un bot
+			if (ent->getClassName() == "Bot" && i->second->getGuid() == owner) {
+				continue;
+			}
+			
 			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+
+			
 
 		}
 
 	}
 }
 
-void EntityManager::lanzarGranda(TGranada & g, RakNet::RakPeerInterface * peer)
+void EntityManager::lanzarGranda(TGranada & g, RakNet::RakNetGUID owner, RakNet::RakPeerInterface * peer)
 {
+	Entity* ent = EntityManager::i().getRaknetEntity(g.guid);
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != g.guid) {
+
+			//No se envia al propietario de la partida, si el que se mueve es un bot
+			if (ent->getClassName() == "Bot" && i->second->getGuid() == owner) {
+				continue;
+			}
+
 			peer->Send((const char*)&g, sizeof(g), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 		}
 
@@ -127,11 +152,20 @@ void EntityManager::enviaTiempoActualArma(DropObject * o, RakNet::RakNetGUID &gu
 
 }
 
-void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *peer)
+void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
 {
+
+	Entity* ent = EntityManager::i().getRaknetEntity(b.guid);
+
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != b.guid) {
+
+			//No se envia al propietario de la partida, si el que se mueve es un bot
+			if (ent->getClassName() == "Bot" && i->second->getGuid() == owner) {
+				continue;
+			}
+
 			peer->Send((const char*)&b, sizeof(b), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 		}
 
@@ -139,13 +173,20 @@ void EntityManager::enviarDisparoCliente(TBala & b, RakNet::RakPeerInterface *pe
 }
 
 
-void EntityManager::enviarDisparoClienteRocket(TBala & b, RakNet::RakPeerInterface *peer)
+void EntityManager::enviarDisparoClienteRocket(TBala & b, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
 {
+
+	Entity* ent = EntityManager::i().getRaknetEntity(b.guid);
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a todos menos a nosotros mismos
 		if (i->second->getGuid() != b.guid) {
+
+			//No se envia al propietario de la partida, si el que se mueve es un bot
+			if (ent->getClassName() == "Bot" && i->second->getGuid() == owner) {
+				continue;
+			}
 
 			peer->Send((const char*)&b, sizeof(b), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 
@@ -384,4 +425,16 @@ void EntityManager::enviaFila(RakNet::RakPeerInterface * peer, TFilaTabla fila)
 void EntityManager::enviaSync(RakNet::RakPeerInterface *peer, TSyncMessage sync) {
 	//std::cout << "Tipoo: " <<(unsigned int) sync.mID << std::endl;
 	peer->Send((const char*)&sync, sizeof(sync), HIGH_PRIORITY, RELIABLE_ORDERED,0, sync.destino, false);
+}
+
+void EntityManager::empezarPartida(RakNet::RakPeerInterface * peer, TGameInfo & info)
+{
+	info.mID = EMPEZAR_PARTIDA;
+
+	//Enviamos mensaje de empezar partida a todos con los datos de la partida
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+
+	}
 }

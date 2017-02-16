@@ -229,6 +229,9 @@
     <ClCompile Include="Network\NetworkDebugger.cpp">
       <Filter>Source Code\Network</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Character.cpp">
+      <Filter>Headers\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -560,6 +563,9 @@
     </ClInclude>
     <ClInclude Include="Network\NetBot.h">
       <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Character.h">
+      <Filter>Headers\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

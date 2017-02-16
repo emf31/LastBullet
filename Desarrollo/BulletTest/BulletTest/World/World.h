@@ -4,15 +4,22 @@
 
 class World {
 public:
-	World();
+	
 	~World();
 
-	void inicializar();
+	static World& i() {
+		static World singleton;
+		return singleton;
+	}
+
+	void inicializar(const std::string& mapa);
 	void apagar();
+
+	bool gamestarted = false;
 
 private:
 
 	//Partida* partida;
 
-
+	World() { }
 };

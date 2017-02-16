@@ -155,6 +155,7 @@
     <ClCompile Include="..\BulletTest\Otros\Time.cpp" />
     <ClCompile Include="..\BulletTest\Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="DropObject.cpp" />
+    <ClCompile Include="Entities\Bot.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\EntityManager.cpp" />
     <ClCompile Include="Entities\Life.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="..\BulletTest\Otros\vec3.hpp" />
     <ClInclude Include="..\BulletTest\Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="DropObject.h" />
+    <ClInclude Include="Entities\Bot.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="Entities\Life.h" />

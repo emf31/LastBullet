@@ -4,17 +4,19 @@
 #include <btBulletDynamicscommon.h>
 #include "KinematicCharacterController.h"
 #include "Granada.h"
-#include "Weapons/Weapon.h"
-#include "../Motor/AnimatedSceneNode.h"
-#include "../Motor/Animation.h"
+#include <Weapons\Weapon.h>
+#include <AnimatedSceneNode.h>
+#include <Animation.h>
 #include <vector>
-#include "../Otros/Lista.h"
-#include "../Otros/LifeComponent.h"
+#include <Lista.h>
+#include <LifeComponent.h>
+
+#include <Character.h>
 
 
 class NetPlayer;
 
-class Player : public Entity
+class Player : public Character
 {
 public:
 	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);

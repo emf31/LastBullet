@@ -2,8 +2,9 @@
 #include <Estructuras.h>
 #include "../EntityManager.h"
 #include <NetworkManager.h>
+#include <Player.h>
 
-Pistola::Pistola() : Weapon()
+Pistola::Pistola(Character* ent) : Weapon(), m_ent(ent)
 {
 	
 }
@@ -25,13 +26,10 @@ void Pistola::inicializar()
 	FUERZA = btVector3(10, 10, 10);
 }
 
+
 void Pistola::update(Time elapsedTime)
 {
 	if (equipada) {
-		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-		Vec3<float> player_rot = EntityManager::i().getEntity(PLAYER)->getRenderState()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 6.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -55,25 +53,27 @@ void Pistola::update(Time elapsedTime)
 
 }
 
+
 void Pistola::handleInput()
 {
 }
+
 
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY()+6.5, player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/arma/pistola.obj");
 	m_nodo->setVisible(false);
-	//m_nodo->setTexture("../media/ice0.jpg", 0);
-	//m_nodo->setTexture("../media/ice0.jpg", 1);
-	//m_nodo->setTexture("../media/ice0.jpg", 2);
-	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
+
+	
 
 }
+
 
 void Pistola::borrarContenido()
 {
 }
+
 
 void Pistola::handleMessage(const Message & message)
 {
@@ -85,25 +85,27 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-void Pistola::shoot() {
+
+void Pistola::shoot(const Vec3<float>& target) {
 
 	
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
-		GraphicEngine::i().getActiveCamera()->cameraRecoil();
+		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
 
 			// posicion de la camara
-			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			btVector3 start = bt(m_ent->getRenderState()->getPosition());
+			start += btVector3(0.f, 8.f, 0.f);
 
 			//añadimos un poco de desvio en el arma
 			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-			btVector3 target = bt(GraphicEngine::i().getActiveCamera()->getTarget());
-			btVector3 direccion = target - bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			btVector3 tg = bt(target);
+			btVector3 direccion = tg - start;
 			direccion.normalize();
 
 			btVector3 end = start + (direccion*SIZE_OF_WORLD);
@@ -119,9 +121,9 @@ void Pistola::shoot() {
 			{
 					if (ray.parte != bodyPart::Body::EXTERNA) {
 						Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-						if (ent != EntityManager::i().getEntity(PLAYER))
+						if (ent != m_ent)
 						{
-							if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
+							if (ent->getClassName() == "Player" || ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
 								Message msg(ent, "COLISION_BALA", &damage);
 								MessageHandler::i().sendMessage(msg);
 							}
@@ -137,15 +139,15 @@ void Pistola::shoot() {
 
 			}
 
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), m_nodo->getRotation());
 			bala->cargarContenido();
 
 			TBala p_bala;
 			p_bala.position = cons(start);
 			p_bala.direction = cons(direccion);
 			p_bala.finalposition = cons(posicionImpacto);
-			p_bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
-			p_bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			p_bala.rotation = m_nodo->getRotation();
+			p_bala.guid = m_ent->getGuid();
 
 			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 			NetworkManager::i().dispatchMessage(p_bala, DISPARAR_BALA);

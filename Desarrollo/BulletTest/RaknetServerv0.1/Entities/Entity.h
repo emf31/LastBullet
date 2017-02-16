@@ -41,7 +41,7 @@ public:
 
 	virtual void inicializar() = 0;
 	virtual void borrarContenido() = 0;
-	
+	virtual std::string getClassName() = 0;
 
 protected:
 	RakNet::RakNetGUID m_guid;

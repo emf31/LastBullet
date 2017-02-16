@@ -31,6 +31,12 @@ Vec3<float> BillboardSceneNode::getPosition()
 	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }
 
+Vec3<float> BillboardSceneNode::getRotation()
+{
+	vector3df aux = m_node->getRotation();
+	return Vec3<float>(aux.X, aux.Y, aux.Z);
+}
+
 void BillboardSceneNode::setRotation(Vec3<float> rotation)
 {
 	m_node->setRotation(vector3df(rotation.getX(), rotation.getY(), rotation.getZ()));

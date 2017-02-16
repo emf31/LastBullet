@@ -6,8 +6,9 @@
 #include <Player.h>
 #include <NetworkManager.h>
 #include <Color4f.h>
+#include <Map.h>
 
-Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid) ,
+Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
 	life_component(this)
 {
 	//Creates object to send and receive packets
@@ -51,6 +52,18 @@ void Enemy_Bot::update(Time elapsedTime)
 	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
 
 	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+
+	if (m_network->isConnected()) {
+
+		TMovimiento mov;
+		mov.isDying = getLifeComponent().isDying();
+		mov.position = getRenderState()->getPosition();
+		mov.rotation = getRenderState()->getRotation();
+		mov.guid = getGuid();
+
+		m_network->dispatchMessage(mov, MOVIMIENTO);
+
+	}
 
 	
 }
@@ -99,6 +112,8 @@ void Enemy_Bot::cargarContenido()
 	p_controller->m_acceleration_walk = 4.3f;
 	p_controller->m_deceleration_walk = 6.5f;
 	p_controller->m_maxSpeed_walk = 2.f;
+
+	setPosition(Map::i().searchSpawnPoint());
 }
 
 void Enemy_Bot::borrarContenido()
@@ -115,18 +130,13 @@ void Enemy_Bot::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
 		if (life_component.isDying() == false) {
-			//TODO si la IA esta en el server habra que cambiar esta funcion
-			//Este float * es una referencia a una variable estatica asi que no hay problema
-			TImpactoBala impacto;
-			impacto.damage = *static_cast<float*>(message.data);
-			impacto.guid = m_guid;
 
-			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);
+			//Este float * es una referencia a una variable estatica asi que no hay problema
 
 			life_component.restaVida(*static_cast<float*>(message.data));
 
-
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+
 		}
 	}
 	

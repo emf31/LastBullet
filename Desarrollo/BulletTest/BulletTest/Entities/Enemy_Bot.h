@@ -1,5 +1,5 @@
 #pragma once
-#include <Entity.h>
+#include <Character.h>
 #include <Animation.h>
 #include <Util.h>
 #include <Vec2f.h>
@@ -12,7 +12,8 @@
 class PathPlanner;
 class PathFollow;
 
-class Enemy_Bot : public Entity {
+
+class Enemy_Bot : public Character {
 
 public:
 

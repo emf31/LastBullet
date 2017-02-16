@@ -45,8 +45,6 @@ private:
 	//Partida partida;
 	Player* player;
 
-	Enemy_Bot *e;
-	Enemy_Bot *e2;
+	
 
-	World world;
 };

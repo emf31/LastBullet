@@ -131,6 +131,15 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	btVector3 intertia;
 	shape->calculatePrincipalAxisTransform(masses, t, inertia);
 
+	btTransform transform;
+	transform.setIdentity();
+	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition() + centerCol);
+	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
+	transform.setOrigin((pos));
+
+	//create the motionState of the object
+	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
+
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
 	actorGhost->setUserPointer(ent);

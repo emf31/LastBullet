@@ -11,6 +11,7 @@
 #include "Entities/Life.h"
 #include "Estructuras.h"
 #include "Entities/EntityManager.h"
+#include <Bot.h>
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -136,10 +137,24 @@ int main() {
 			}
 			break;
 
+			case NUEVO_BOT: {
+
+				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
+
+				//Enviamos el nuevo bot a todos los players menos al host y le enviamos a ese nuevo player todos los anteriores
+				//EntityManager::i().sendPlayer(t_player, peer);
+				EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
+
+				Bot *bot = new Bot(t_player.name, t_player.guid);
+				bot->setPosition(t_player.position);
+
+				break;
+			}
+
 			case MOVIMIENTO: {
 
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
-				EntityManager::i().enviaNuevaPos(mov, peer);
+				EntityManager::i().enviaNuevaPos(mov, gameinfo.creador, peer);
 				Entity* ent = EntityManager::i().getRaknetEntity(mov.guid);
 
 				if (ent != NULL) {
@@ -155,7 +170,7 @@ int main() {
 				TGranada p_granada = *reinterpret_cast<TGranada*>(packet->data);
 
 
-				EntityManager::i().lanzarGranda(p_granada, peer);
+				EntityManager::i().lanzarGranda(p_granada, gameinfo.creador, peer);
 
 			}
 			break;
@@ -196,7 +211,7 @@ int main() {
 				TBala bala = *reinterpret_cast<TBala*>(packet->data);
 
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviarDisparoCliente(bala, peer);
+				EntityManager::i().enviarDisparoCliente(bala, gameinfo.creador, peer);
 
 			}
 			break;
@@ -207,7 +222,7 @@ int main() {
 				TBala p_bala = *reinterpret_cast<TBala*>(packet->data);
 
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviarDisparoClienteRocket(p_bala, peer);
+				EntityManager::i().enviarDisparoClienteRocket(p_bala, gameinfo.creador, peer);
 
 			}
 			break;
@@ -359,6 +374,34 @@ int main() {
 
 				gameinfo = rak;
 
+
+				Player *p = new Player(rak.name, rak.creador);
+
+
+				EntityManager::i().empezarPartida(peer, rak);
+
+				break;
+			}
+
+			case UNIRSE_PARTIDA:
+			{
+				TPlayer rak = *reinterpret_cast<TPlayer*>(packet->data);
+
+				Player *p = new Player(rak.name, rak.guid);
+
+				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
+				EntityManager::i().sendPlayer(rak, peer);
+
+				TGameInfo info;
+				info.mID = EMPEZAR_PARTIDA;
+				info.creador = gameinfo.creador;
+				info.map = gameinfo.map;
+				info.gameMode = gameinfo.gameMode;
+				info.numBots = gameinfo.numBots;
+			
+
+				//Esto es temporal
+				peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
 
 				break;
 			}

@@ -26,7 +26,8 @@
 #include <NetworkManager.h>
 
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Entity(1000, NULL, name, guid) , life_component(this)
+
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid) , life_component(this)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola | Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto;
@@ -72,20 +73,23 @@ void Player::inicializar()
 	/*******************************/
 	/*******INICIALIZAR ARMAS******/
 	/*****************************/
-	asalto = new Asalto();
+	asalto = new Asalto(this);
 	asalto->inicializar();
 	asalto->cargarContenido();
 
-	rocket = new RocketLauncher();
+	rocket = new RocketLauncher(this);
 	rocket->inicializar();
 	rocket->cargarContenido();
 
-	pistola = new Pistola();
+	pistola = new Pistola(this);
 	pistola->inicializar();
 	pistola->cargarContenido();
-	
-	listaWeapons = new Lista();
 
+	GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
+	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
+	GraphicEngine::i().getActiveCamera()->addChild(pistola->getNode());
+
+	listaWeapons = new Lista();
 
 	listaWeapons->insertar(asalto);
 	asalto->setEquipada(true);
@@ -93,11 +97,6 @@ void Player::inicializar()
 	bindWeapon();
 
 	
-
-	
-	/*m_network->inicializar();
-
-	EntityManager::i().registerRaknetEntity(this);*/
 }
 
 
@@ -274,7 +273,7 @@ void Player::shoot() {
 
 	TriggerSystem::i().RegisterTrigger(kTrig_Explosion, 1000, this->getID(), this->getRenderPosition(), 50, milliseconds(500), false);
 
-	listaWeapons->valorActual()->shoot();
+	listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
 
 }
 

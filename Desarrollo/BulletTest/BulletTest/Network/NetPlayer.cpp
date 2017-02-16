@@ -12,6 +12,7 @@
 #include <events/KillEvent.h>
 #include <NetworkManager.h>
 #include <Settings.h>
+#include <World.h>
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
@@ -54,17 +55,13 @@ void NetPlayer::inicializar()
 
 			//unirseLobby();
 
-			TGameInfo gameinfo;
-			gameinfo.creador = m_player->getGuid();
-			gameinfo.gameMode = std::stoi(Settings::i().GetValue("mode"));
-			gameinfo.map = Settings::i().GetValue("mapa");
-			gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+			
 
-			crearPartida(gameinfo);
+			crearPartida();
 		}
 		else if (eleccion == 'b') {
 
-			//unirsePartida();
+			unirseLobby();
 			
 		}
 
@@ -107,9 +104,36 @@ void NetPlayer::startup(LPCTSTR lpApplicationName)
 	CloseHandle(pi.hThread);
 }
 
-void NetPlayer::crearPartida(const TGameInfo & gameinfo)
+void NetPlayer::crearPartida()
 {
+	conectar("127.0.0.1", server_port);
+
+	while (isConnected() == false) {
+		NetworkManager::i().updateNetwork(Time::Zero);
+	}
+
+	TGameInfo gameinfo;
+	gameinfo.creador = m_player->getGuid();
+	gameinfo.name = Settings::i().GetValue("name");
+	gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
+	gameinfo.map = Settings::i().GetValue("mapa");
+	gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
+	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
+
+	Enemy_Bot *bot = new Enemy_Bot("Jose Luis", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();
+
+	Enemy_Bot *bot2 = new Enemy_Bot("Enrique Molto", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot2->m_network->inicializar();
+
+	Enemy_Bot *bot3 = new Enemy_Bot("Antonio Rebollo", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot3->m_network->inicializar();
+
+	while (World::i().gamestarted == false) {
+		NetworkManager::i().updateNetwork(Time::Zero);
+	}
 }
 
 
@@ -120,7 +144,7 @@ void NetPlayer::crearLobby()
 	rakID.guid = m_player->getGuid();
 
 	//startup(L"RaknetServerv0.1.exe");
-	dispatchMessage(rakID, CREAR_LOBBY);
+	//dispatchMessage(rakID, CREAR_LOBBY);
 	
 }
 
@@ -164,6 +188,23 @@ void NetPlayer::unirseLobby()
 		conectar(str, server_port);
 
 	} while (eleccion == 'a');
+
+
+
+	while (isConnected() == false) {
+		NetworkManager::i().updateNetwork(Time::Zero);
+	}
+
+	TPlayer p;
+	p.guid = m_player->getGuid();
+	p.name = m_player->getName();
+
+	dispatchMessage(p, UNIRSE_PARTIDA);
+
+	while (World::i().gamestarted == false) {
+		NetworkManager::i().updateNetwork(Time::Zero);
+	}
+
 }
 
 void NetPlayer::handlePackets(Time elapsedTime)
@@ -203,18 +244,24 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//Esta variable indica que el servidor ha aceptado la conexion
 			connected = true;
 
-			TPlayer nuevoplayer;
-			nuevoplayer.guid = peer->GetMyGUID();
-			nuevoplayer.name = m_player->getName();
+			
 
 			m_player->setGUID(peer->GetMyGUID());
 
 			EntityManager::i().registerRaknetEntity(m_player);
 
 
-			dispatchMessage(nuevoplayer, NUEVO_PLAYER);
 
+			break;
+		}
 
+		case EMPEZAR_PARTIDA: {
+
+			TGameInfo info = *reinterpret_cast<TGameInfo*>(packet->data);
+
+			World::i().inicializar(info.map);
+
+			World::i().gamestarted = true;
 
 			break;
 		}

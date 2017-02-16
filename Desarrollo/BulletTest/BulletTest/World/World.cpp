@@ -4,16 +4,12 @@
 #include <PhysicsEngine.h>
 
 
-World::World()
-{
-}
-
 World::~World()
 {
 }
 
 
-void World::inicializar()
+void World::inicializar(const std::string& mapa)
 {
 	
 
@@ -21,7 +17,9 @@ void World::inicializar()
 	EntityManager::i().inicializarEntityManager();
 
 	//mapa
-	Map::i().inicializar();
+	std::string str = "../media/";
+	str.append(mapa);
+	Map::i().inicializar(str);
 
 
 	//LLama al inicializar de todas las entities

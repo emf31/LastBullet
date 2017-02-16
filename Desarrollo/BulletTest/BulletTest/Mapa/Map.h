@@ -15,7 +15,7 @@ public:
 	}
 
 
-	void inicializar();
+	void inicializar(const std::string& mapa);
 
 	
 	void borrarContenido();

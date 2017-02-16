@@ -2,9 +2,10 @@
 #include <Estructuras.h>
 #include <Util.h>
 #include <NetworkManager.h>
+#include <Player.h>
 
 
-Asalto::Asalto() : Weapon()
+Asalto::Asalto(Character* ent) : Weapon(), m_ent(ent)
 {
 	
 
@@ -28,15 +29,11 @@ void Asalto::inicializar()
 	FUERZA = btVector3(60.f, 60.f, 60.f);
 }
 
-void Asalto::update(Time elapsedTime)
+
+ void Asalto::update(Time elapsedTime)
 {
 	if (equipada) {
 
-		
-		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -62,46 +59,45 @@ void Asalto::update(Time elapsedTime)
 
 }
 
+
 void Asalto::handleInput()
 {
 }
 
-void Asalto::cargarContenido()
+
+ void Asalto::cargarContenido()
 {
 
-
-	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.5f, 0.5f, 0.5f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
-	//m_nodo->setTexture("../media/ice0.jpg", 0);
-	//m_nodo->setTexture("../media/ice0.jpg", 1);
-
-	
-
-	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
 
 }
 
-void Asalto::borrarContenido()
+
+ void Asalto::borrarContenido()
 {
 }
 
-void Asalto::handleMessage(const Message & message)
+
+ void Asalto::handleMessage(const Message & message)
 {
 
 }
 
-bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
+
+ bool Asalto::handleTrigger(TriggerRecordStruct * Trigger)
 {
 	return false;
 }
 
-void Asalto::shoot()
+
+void Asalto::shoot(const Vec3<float>& target)
 {
 	
 	if (disparos < capacidadAmmo && estadoWeapon==CARGADA) {
 
-		GraphicEngine::i().getActiveCamera()->cameraRecoil();
+		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
 
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 			
@@ -110,13 +106,14 @@ void Asalto::shoot()
 			disparos++;
 
 			// posicion de la camara
-			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition()); 
+			btVector3 start = bt(m_ent->getRenderState()->getPosition()); 
+			start += btVector3(0.f, 8.f, 0.f);
 
 			//añadimos un poco de desvio en el arma
 			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-			btVector3 target = bt(GraphicEngine::i().getActiveCamera()->getTarget());
-			btVector3 direccion = target - bt(GraphicEngine::i().getActiveCamera()->getPosition());
+			btVector3 tg = bt(target);
+			btVector3 direccion = tg - start;
 			direccion.normalize();
 
 			btVector3 end = start + (direccion*SIZE_OF_WORLD);
@@ -132,35 +129,36 @@ void Asalto::shoot()
 			if (ray.hasHit())//si ray ha golpeado algo entro
 			{
 	
-					if (ray.parte != bodyPart::Body::EXTERNA) {
-						Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-						if (ent != EntityManager::i().getEntity(PLAYER))
-						{
-							if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-								Message msg(ent, "COLISION_BALA", &damage);
-								MessageHandler::i().sendMessage(msg);
-							}
-							//Para mover objetos del mapa
-							posicionImpacto = ray.m_hitPointWorld;
+				if (ray.parte != bodyPart::Body::EXTERNA) {
+					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
 
-							if (ent->getClassName() == "PhysicsEntity") {
-								btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-								btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-							}
+					if (ent != m_ent)
+					{
+						if (ent->getClassName() == "Player" || ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
+							Message msg(ent, "COLISION_BALA", &damage);
+							MessageHandler::i().sendMessage(msg);
+						}
+						//Para mover objetos del mapa
+						posicionImpacto = ray.m_hitPointWorld;
+
+						if (ent->getClassName() == "PhysicsEntity") {
+							btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+							btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
 						}
 					}
+				}
 
 			}
 
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), m_nodo->getRotation());
 			bala->cargarContenido();
 
 			TBala t_bala;
 			t_bala.position = cons(start);
 			t_bala.direction = cons(direccion);
 			t_bala.finalposition = cons(posicionImpacto);
-			t_bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
-			t_bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
+			t_bala.rotation = m_nodo->getRotation();
+			t_bala.guid = m_ent->getGuid();
 
 			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 			NetworkManager::i().dispatchMessage(t_bala, DISPARAR_BALA);

@@ -3,16 +3,17 @@
 #include <Time.hpp>
 #include <Entity.h>
 
-class Player : public Entity
+class Bot : public Entity
 {
 public:
-	Player(const std::string& name, RakNet::RakNetGUID guid);
-	~Player();
+	Bot(const std::string& name, RakNet::RakNetGUID guid);
+	~Bot();
 
 private:
+
 	// Heredado vía Entity
 	virtual void inicializar() override;
 	virtual void borrarContenido() override;
-	virtual std::string getClassName() { return "Player"; };
+	virtual std::string getClassName() { return "Bot"; };
 };
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <Entity.h>
+#include <Character.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
 
@@ -13,7 +13,7 @@
 #include <BasicSceneNode.h>
 #include <Granada.h>
 
-class Enemy : public Entity
+class Enemy : public Character
 {
 public:
 	Enemy(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);

@@ -27,6 +27,7 @@ public:
 	virtual void setRotation(Vec3<float> rotation) override;
 
 	virtual Vec3<float> getPosition() override;
+	virtual Vec3<float> getRotation() override;
 	virtual Vec3<float> getScale() override;
 
 	virtual ISceneNode* getNodo() override;

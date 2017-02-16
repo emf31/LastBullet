@@ -1,13 +1,14 @@
 #pragma once
 #include "Weapon.h"
+#include <Character.h>
 
 #define numCargadoresPistola 6
 
-class Pistola :
-	public Weapon
+
+class Pistola : public Weapon
 {
 public:
-	Pistola();
+	Pistola(Character* ent);
 	~Pistola();
 
 	virtual void inicializar() override;
@@ -26,14 +27,14 @@ public:
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
-	virtual void shoot();
+	virtual void shoot(const Vec3<float>& target);
 
-	virtual void resetAmmoTotal() {
-		numCargadores= numCargadoresPistola;
-	}
+	virtual void resetAmmoTotal() { numCargadores= numCargadoresPistola; }
 
 private:
 	btVector3 SIZE_OF_WORLD;
 	btVector3 FUERZA;
+
+	Character* m_ent;
 };
 

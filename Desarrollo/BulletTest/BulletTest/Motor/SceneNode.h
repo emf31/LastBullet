@@ -28,6 +28,7 @@ public:
 	virtual void setPosition(Vec3<float> position) = 0;
 	virtual void setRotation(Vec3<float> rotation) = 0;
 	virtual Vec3<float> getPosition() = 0;
+	virtual Vec3<float> getRotation() = 0;
 	virtual Vec3<float> getScale() = 0;
 
 	virtual ISceneNode* getNodo() = 0;
