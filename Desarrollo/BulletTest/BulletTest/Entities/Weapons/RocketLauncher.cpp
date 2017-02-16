@@ -109,7 +109,7 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 			btVector3 direccion = tg - start;
 			direccion.normalize();
 
-			RocketBullet* bala = new RocketBullet(cons(start), cons(direccion), m_ent->getNode()->getRotation());
+			RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
 			bala->cargarContenido();
 
 		

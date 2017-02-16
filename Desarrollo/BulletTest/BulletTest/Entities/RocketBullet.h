@@ -6,11 +6,12 @@
 #include <Time.hpp>
 #include <Clock.hpp>
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
+#include <Character.h>
 
 class RocketBullet : public Entity
 {
 public:
-	RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
+	RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
 	~RocketBullet();
 
 	// Heredado vía Entity
@@ -36,7 +37,8 @@ private:
 	btRigidBody* m_rigidBody;
 	int estado=DISPONIBLE;
 
-	
+	//Entity que dispara la bala
+	Character* m_owner;
 
 	float explosion(Entity* player, const Vec3<float>& posExplosion, float radio);
 

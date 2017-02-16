@@ -21,6 +21,15 @@ void World::inicializar(const std::string& mapa)
 	str.append(mapa);
 	Map::i().inicializar(str);
 
+	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();
+
+	Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot2->m_network->inicializar();
+
+	Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot3->m_network->inicializar();
+
 
 	//LLama al inicializar de todas las entities
 	EntityManager::i().inicializar();

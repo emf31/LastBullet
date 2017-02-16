@@ -59,7 +59,8 @@ void LifeObject::borrarContenido()
 void LifeObject::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+		std::string tipo = static_cast<Entity*>(message.data)->getClassName();
+		if (tipo == "Player" || tipo == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				//PhysicsEngine::i().removeGhostObject(m_ghostObject);

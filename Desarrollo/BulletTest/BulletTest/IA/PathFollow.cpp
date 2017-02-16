@@ -7,6 +7,7 @@ PathFollow::PathFollow(Enemy_Bot * bot)
 {
 	m_owner = bot;
 
+	m_cBehaviour = stop;
 	//creamos un Path
 	m_pPath = new Path();
 }
@@ -19,10 +20,15 @@ PathFollow::~PathFollow()
 Vec2f PathFollow::Calculate()
 {
 
-	Vec2f direction;
+	Vec2f direction(0,0);
 
 	if (m_cBehaviour == follow_path) {
 		direction = FollowPath();
+	}
+
+	if (m_cBehaviour == stop) {
+		direction.x = 0;
+		direction.y = 0;
 	}
 
 	return direction;

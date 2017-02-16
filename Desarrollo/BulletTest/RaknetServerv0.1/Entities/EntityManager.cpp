@@ -6,6 +6,8 @@
 void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	TPlayer nuevocli;
+
+
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		

@@ -378,7 +378,12 @@ int main() {
 				Player *p = new Player(rak.name, rak.creador);
 
 
-				EntityManager::i().empezarPartida(peer, rak);
+				//EntityManager::i().empezarPartida(peer, rak);
+
+				rak.mID = EMPEZAR_PARTIDA;
+
+				//Esto es temporal
+				peer->Send((const char*)&rak, sizeof(rak), HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
 
 				break;
 			}
@@ -388,6 +393,8 @@ int main() {
 				TPlayer rak = *reinterpret_cast<TPlayer*>(packet->data);
 
 				Player *p = new Player(rak.name, rak.guid);
+
+				rak.mID = NUEVO_PLAYER;
 
 				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
 				EntityManager::i().sendPlayer(rak, peer);

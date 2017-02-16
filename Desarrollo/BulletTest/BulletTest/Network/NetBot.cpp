@@ -103,7 +103,7 @@ void NetBot::handlePackets(Time elapsedTime)
 			TImpulso imp = *reinterpret_cast<TImpulso*>(packet->data);
 
 			//si recibimos este mensaje es pork nos han dado a nosotros
-			//m_bot->impulsar(imp.fuerza);
+			m_bot->impulsar(imp.fuerza);
 
 			break;
 		}

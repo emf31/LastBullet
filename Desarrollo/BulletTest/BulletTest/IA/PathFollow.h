@@ -5,10 +5,11 @@
 
 
 enum behaviour_type {
-	seek = 0,
-	arrive = 1,
-	follow_path = 2
+
+	follow_path = 0,
+	stop = 1
 };
+
 
 
 class Enemy_Bot;
@@ -27,6 +28,7 @@ public:
 
 	void FollowOn() { m_cBehaviour = follow_path; }
 
+	void FollowOff() { m_cBehaviour = stop; }
 
 	Vec2f Seek(const Vec2f &target);
 
@@ -37,7 +39,7 @@ public:
 
 private:
 	Enemy_Bot* m_owner;
-	
+
 	//Current Target
 	Vec2f m_vTarget;
 
@@ -47,6 +49,6 @@ private:
 	//curren path
 	Path* m_pPath;
 
-	
+
 
 };

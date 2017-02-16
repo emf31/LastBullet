@@ -139,6 +139,10 @@ void Enemy_Bot::handleMessage(const Message & message)
 
 		}
 	}
+	else if (message.mensaje == "COLISION_ROCKET") {
+		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+		delete message.data;
+	}
 	
 }
 
@@ -153,6 +157,12 @@ void Enemy_Bot::setPosition(const Vec3<float>& pos)
 	m_renderState.setPosition(pos);
 	p_controller->warp(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_nodo->setPosition(pos);
+}
+
+void Enemy_Bot::impulsar(Vec3<float> force)
+{
+	btVector3 fuerza(force.getX(), force.getY(), force.getZ());
+	p_controller->applyImpulse(fuerza);
 }
 
 

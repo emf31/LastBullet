@@ -12,8 +12,8 @@
 //comprueba mediante un radio de explosion si ha impactado con algun jugador. Esta clase es responsable
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
-RocketBullet::RocketBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation), radioExplosion(45)
+RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
+m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation), radioExplosion(45), m_owner()
 {
 
 	m_lifetime = seconds(5);
@@ -92,7 +92,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 			if (damage > 0) {
 
-				if (myentity->getID() == PLAYER) {
+				if (myentity->getID() == m_owner->getID()) {
 					TImpactoRocket* selfImpact = new TImpactoRocket();
 					selfImpact->damage = damage;
 					selfImpact->guidDisparado = myentity->getGuid();
@@ -105,7 +105,7 @@ void RocketBullet::handleMessage(const Message & message)
 				else {
 					TImpactoRocket* impact = new TImpactoRocket();
 					impact->damage = damage;
-					impact->guidDisparado = EntityManager::i().getEntity(PLAYER)->getGuid();
+					impact->guidDisparado = m_owner->getGuid();
 					impact->guidImpactado = myentity->getGuid();;
 					Message msg(myentity, "COLISION_ROCKET", impact);
 					MessageHandler::i().sendMessage(msg);

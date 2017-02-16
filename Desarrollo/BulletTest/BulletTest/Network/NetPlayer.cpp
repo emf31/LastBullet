@@ -44,18 +44,6 @@ void NetPlayer::inicializar()
 		std::cin >> eleccion;
 
 		if (eleccion == 'a') {
-			//TGameInfo gameinfo;
-			//gameinfo.creador = m_player->getGuid();
-			//gameinfo.gameMode = std::stoi(Settings::i().GetValue("mode"));
-			//gameinfo.map = Settings::i().GetValue("mapa");
-			//gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
-			//crearPartida();
-
-
-
-			//unirseLobby();
-
-			
 
 			crearPartida();
 		}
@@ -122,14 +110,7 @@ void NetPlayer::crearPartida()
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
-	Enemy_Bot *bot = new Enemy_Bot("Jose Luis", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();
-
-	Enemy_Bot *bot2 = new Enemy_Bot("Enrique Molto", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot2->m_network->inicializar();
-
-	Enemy_Bot *bot3 = new Enemy_Bot("Antonio Rebollo", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot3->m_network->inicializar();
+	
 
 	while (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -294,10 +275,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 
 			Enemy *e = new Enemy(p.name, p.guid);
-			e->inicializar();
+			/*e->inicializar();
 			e->cargarContenido();
 			e->setPosition(p.position);
-			EntityManager::i().mostrarClientes();
+			EntityManager::i().mostrarClientes();*/
 
 
 #ifdef NETWORK_DEBUG
