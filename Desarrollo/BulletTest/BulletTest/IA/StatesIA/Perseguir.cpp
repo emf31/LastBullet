@@ -14,7 +14,7 @@ void Perseguir::Execute(Enemy_Bot* pEnemy) {
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
 
-			pEnemy->getMachineState()->SetCurrentState(&Disparar::i());
+			pEnemy->getMachineState()->ChangeState(&Disparar::i());
 	}
 
 	try {
@@ -26,7 +26,7 @@ void Perseguir::Execute(Enemy_Bot* pEnemy) {
 		pEnemy->createPathToPosition(vec);
 	}
 	catch (std::runtime_error e) {
-		pEnemy->getMachineState()->SetCurrentState(&Patrullar::i());
+		pEnemy->getMachineState()->ChangeState(&Patrullar::i());
 	}
 
 

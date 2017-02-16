@@ -4,16 +4,13 @@
 
 
 void BuscarVida::Enter(Enemy_Bot* pEnemy) {
+	pEnemy->createPathToItem("LifeObject");
 
 }
 
 void BuscarVida::Execute(Enemy_Bot* pEnemy) {
 
 	std::cout << "BUSCANDO VIDA" << std::endl;
-	if (k == 0) {
-		pEnemy->createPathToItem("LifeObject");
-		k++;
-	}
 
 }
 

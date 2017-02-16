@@ -17,7 +17,5 @@ public:
 
 private:
 	BuscarVida() {};
-	int k = 0;
-
 };
 

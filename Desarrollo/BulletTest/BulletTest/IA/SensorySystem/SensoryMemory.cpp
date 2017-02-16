@@ -41,10 +41,7 @@ void SensoryMemory::updateVision()
 				}
 			}
 			else {
-				if (mymemory.m_inFOV) {
-					std::cout << "Entra" << std::endl;
-					m_bot->getMachineState()->SetCurrentState(&Perseguir::i());
-				}
+
 				mymemory.m_inFOV = false;
 				mymemory.m_isShootable = false;
 			}

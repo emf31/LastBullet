@@ -21,7 +21,7 @@ void Disparar::Execute(Enemy_Bot* pEnemy) {
 	if (!pEnemy->getTargetSys()->isTargetWithinFOV()) {
 
 		if(!pEnemy->getMachineState()->isInState("BuscarVida"))
-		pEnemy->getMachineState()->SetCurrentState(&Perseguir::i());
+		pEnemy->getMachineState()->ChangeState(&Perseguir::i());
 
 	}
 

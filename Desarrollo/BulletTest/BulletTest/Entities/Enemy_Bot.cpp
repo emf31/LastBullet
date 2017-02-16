@@ -38,7 +38,7 @@ void Enemy_Bot::inicializar()
 
 	m_pStateMachine = new MachineState(this);
 	m_pStateMachine->SetCurrentState(&Patrullar::i());
-	m_pStateMachine->SetGlobalState(&Patrullar::i());
+	//m_pStateMachine->SetGlobalState(&Patrullar::i());
 
 	sense = new SensoryMemory(this,20);
 
@@ -403,7 +403,7 @@ void Enemy_Bot::FuzzyLifeObject() {
 	std::cout << "Valor FuzzyLifeObject: " << k << std::endl;
 
 	if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>40) {
-		m_pStateMachine->SetCurrentState(&BuscarVida::i());
+		m_pStateMachine->ChangeState(&BuscarVida::i());
 	}
 
 
