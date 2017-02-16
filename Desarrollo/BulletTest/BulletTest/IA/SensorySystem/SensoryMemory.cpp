@@ -40,10 +40,11 @@ void SensoryMemory::updateVision()
 					}
 					else {
 						mymemory.m_inFOV = false;
-						std::cout << "Entro en fov false" << std::endl;
+						//std::cout << "Entro en fov false" << std::endl;
 					}
 				}
 				else {
+					//std::cout << "Entro en raycast false" << std::endl;
 					mymemory.m_inFOV = false;
 					mymemory.m_isShootable = false;
 				}
@@ -94,8 +95,13 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 	//****************************RayCast central***************************************
 	btVector3 start = btVector3(m_bot->getRenderState()->getPosition().getX(), m_bot->getRenderState()->getPosition().getY(), m_bot->getRenderState()->getPosition().getZ());
 	btVector3 target = btVector3(ent->getRenderState()->getPosition().getX(), ent->getRenderState()->getPosition().getY(), ent->getRenderState()->getPosition().getZ());
+	btVector3 vector = target - start;
+	vector.normalize();
+
+	start = start + (vector * 5);
 
 	btCollisionWorld::ClosestRayResultCallback ray(start, target);
+	
 
 	PhysicsEngine::i().m_world->rayTest(start, target, ray);
 
@@ -103,7 +109,7 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 	{
 		//Veo la entity que colisiona
 		Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-		if (ent != EntityManager::i().getEntity(PLAYER))
+		if (ent->getClassName()!="Player")
 		{
 			return true;
 		}
@@ -131,11 +137,13 @@ bool SensoryMemory::isInFOV(Entity * ent) const
 
 	//std::cout << "facing= " << facing << std::endl;
 	//std::cout << "vector= " << (vector) << std::endl;
-	//std::cout << "Angulo= " << (angle) << std::endl;
+	
 
 	if (std::isnan(angle)) {
 		throw std::runtime_error("SENSORYMEMORY::isInFOV: Da un numero NAN");
 	}
+
+	//std::cout << "Angulo= " << (angle) << std::endl;
 	//if(angle!= -1#IND)
 	return angle <= m_bot->getFOV();
 }
