@@ -15,39 +15,45 @@ SensoryMemory::~SensoryMemory()
 
 void SensoryMemory::updateVision()
 {
-	std::list<Entity*>lista = EntityManager::i().getCharacters();
-	for (std::list<Entity*>::iterator it = lista.begin(); it != lista.end(); ++it) {
-		if (m_bot != (*it)) {
-			updateNewEnemies(*it);
-			Memory& mymemory = m_botMemory[*it];
+	try {
 
-			if (!isRaycastObstructed(*it)) {
-				//std::cout << "Raycast OK" << std::endl;
-				mymemory.m_isShootable = true;
+		std::list<Entity*>lista = EntityManager::i().getCharacters();
+		for (std::list<Entity*>::iterator it = lista.begin(); it != lista.end(); ++it) {
+			if (m_bot != (*it)) {
+				updateNewEnemies(*it);
+				Memory& mymemory = m_botMemory[*it];
 
-				if (isInFOV(*it)) {
-					//mymemory.m_inFOV = true;
-					mymemory.m_lastTimeSensed = sensoryClock.getElapsedTime().asSeconds();
-					mymemory.m_lastTimeVisible = sensoryClock.getElapsedTime().asSeconds();
-					mymemory.m_lastPosition = (*it)->getRenderState()->getPosition();
-					if(!mymemory.m_inFOV){
-						mymemory.m_inFOV = true;
-						mymemory.m_TimeBecameVisible = mymemory.m_lastTimeSensed;
+				if (!isRaycastObstructed(*it)) {
+					//std::cout << "Raycast OK" << std::endl;
+					mymemory.m_isShootable = true;
+
+					if (isInFOV(*it)) {
+						//mymemory.m_inFOV = true;
+						mymemory.m_lastTimeSensed = sensoryClock.getElapsedTime().asSeconds();
+						mymemory.m_lastTimeVisible = sensoryClock.getElapsedTime().asSeconds();
+						mymemory.m_lastPosition = (*it)->getRenderState()->getPosition();
+						if (!mymemory.m_inFOV) {
+							mymemory.m_inFOV = true;
+							mymemory.m_TimeBecameVisible = mymemory.m_lastTimeSensed;
+						}
+
 					}
-
+					else {
+						mymemory.m_inFOV = false;
+						std::cout << "Entro en fov false" << std::endl;
+					}
 				}
 				else {
 					mymemory.m_inFOV = false;
+					mymemory.m_isShootable = false;
 				}
+
+
 			}
-			else {
-
-				mymemory.m_inFOV = false;
-				mymemory.m_isShootable = false;
-			}
-
-
 		}
+	}
+	catch (std::runtime_error e) {
+		//Se sale de la ejecucion en caso de que de un error matematico en el angulo porque da NAN
 	}
 }
 
@@ -123,10 +129,14 @@ bool SensoryMemory::isInFOV(Entity * ent) const
 
 	double angle = acos(facing.Dot(vector));
 
-//	std::cout << "vector= " << (vector) << std::endl;
-//	std::cout << "Angulo= " << (angle) << std::endl;
+	//std::cout << "facing= " << facing << std::endl;
+	//std::cout << "vector= " << (vector) << std::endl;
+	//std::cout << "Angulo= " << (angle) << std::endl;
 
-
+	if (std::isnan(angle)) {
+		throw std::runtime_error("SENSORYMEMORY::isInFOV: Da un numero NAN");
+	}
+	//if(angle!= -1#IND)
 	return angle <= m_bot->getFOV();
 }
 

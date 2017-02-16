@@ -9,7 +9,7 @@ void Patrullar::Enter(Enemy_Bot* pEnemy) {
 
 void Patrullar::Execute(Enemy_Bot* pEnemy) {
 	//std::cout << "Zizu" << std::endl;
-	std::cout << "Patrullar" << std::endl;
+	//std::cout << "Patrullar" << std::endl;
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
 

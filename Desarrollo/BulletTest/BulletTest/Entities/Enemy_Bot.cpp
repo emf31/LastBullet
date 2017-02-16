@@ -400,7 +400,7 @@ void Enemy_Bot::FuzzyLifeObject() {
 	fm.Fuzzify("LifeTarget", damageTarget);
 
 	double k = fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av);
-	std::cout << "Valor FuzzyLifeObject: " << k << std::endl;
+	//std::cout << "Valor FuzzyLifeObject: " << k << std::endl;
 
 	if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>40) {
 		m_pStateMachine->ChangeState(&BuscarVida::i());
