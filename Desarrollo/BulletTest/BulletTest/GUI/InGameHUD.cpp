@@ -21,6 +21,7 @@ void InGameHUD::inicializar() {
 
 	hitMarker = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(51));
 	sangre = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(52));
+	scope = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(77));
 
 	player1.label = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(1));
 	player1.bajas = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(11));
@@ -53,12 +54,17 @@ void InGameHUD::update() {
 
 	updateRelojes();
 
+	updateApuntando();
+
 }
 
 
 void InGameHUD::updateRelojes() {
 	hitMarker->setVisible(p->hit);
 	sangre->setVisible(p->sangre);
+}
+void InGameHUD::updateApuntando() {
+	scope->setVisible(p->getApuntando());
 }
 void InGameHUD::muestraFinPartida() {
 	LabelEndGame->setVisible(true);

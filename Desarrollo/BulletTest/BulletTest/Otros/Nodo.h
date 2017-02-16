@@ -8,6 +8,7 @@
 #define LANZACOHETES 10
 #define ASALTO 11
 #define PISTOLA 12
+#define SNIPER 13
 
 class Nodo
 {

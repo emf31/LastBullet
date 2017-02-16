@@ -143,6 +143,7 @@ bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 
+
 bool DebugMenuGUI::onCloseMenuButtonClicked(const CEGUI::EventArgs & e) {
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(0.0f);
 	debugInput = !debugInput;

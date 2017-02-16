@@ -12,6 +12,10 @@
 #include "../Otros/LifeComponent.h"
 #include <Subject.h>
 #include <Observer.h>
+#include "Weapons/Asalto.h"
+#include "Weapons/Pistola.h"
+#include "Weapons/RocketLauncher.h"
+#include "Weapons/Sniper.h"
 
 class Player : public Entity, public Subject
 {
@@ -50,6 +54,8 @@ public:
 	void UpWeapon();
 	void DownWeapon();
 	void reload();
+	void apuntar();
+	void restablecerMira();
 
 	void impulsar(Vec3<float> force);
 
@@ -79,10 +85,12 @@ public:
 		}
 	}
 
-
-
 	btPairCachingGhostObject* getGhostObject() {
 		return p_controller->getGhostObject();
+	}
+
+	bool getApuntando() {
+		return apuntando;
 	}
 
 	void resetAll();
@@ -113,6 +121,7 @@ private:
 
 	Pistola* pistola;
 	RocketLauncher* rocket;
+	Sniper* sniper;
 
 	LifeComponent life_component;
 
@@ -123,6 +132,9 @@ private:
 	bool tieneAsalto;
 	bool tieneRocketLauncher;
 	bool tienePistola;
+	bool tieneSniper;
+
+	bool apuntando=false;
 
 	bool isShooting;
 

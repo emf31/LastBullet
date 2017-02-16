@@ -10,6 +10,7 @@
 #include <WeaponDrops/RocketLauncherDrop.h>
 #include <WeaponDrops/PistolaDrop.h>
 #include <WeaponDrops/AsaltoDrop.h>
+#include <WeaponDrops/SniperDrop.h>
 #include <GroupEntity.h>
 #include <GraphicEngine.h>
 #include <SceneNode.h>
@@ -235,7 +236,7 @@ void Game::inicializar()
 		for (std::list<Entity*>::const_iterator it = weapon.begin(); it != weapon.end(); ++it) {
 			TId tID2;
 			tID2.id = (*it)->getID();
-			Cliente::i().dispatchMessage(tID2, NUEVA_VIDA);
+			Cliente::i().dispatchMessage(tID2, NUEVA_ARMA);
 		}
 	}
 
@@ -287,7 +288,8 @@ bool Game::processEvents()
 		ingameGUI.setTablaVisible(true);
 		partida.muestraTabla();
 
-	} else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
+	}
+	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);

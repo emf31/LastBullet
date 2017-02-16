@@ -87,7 +87,8 @@ public:
 	void toggleCamera() {
 		debug_camera = !debug_camera;
 	}
-
+	void apuntar();
+	void restablecerMirilla();
 	//void setCursorVisible(bool t) { gui.showMouseCursor(t); }
 
 	IrrlichtDevice* getDevice() { return irrDevice; }

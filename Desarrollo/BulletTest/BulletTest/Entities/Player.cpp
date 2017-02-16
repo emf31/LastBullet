@@ -12,14 +12,12 @@
 #include "GunBullet.h"
 #include "RocketBullet.h"
 #include "RocketBulletEnemy.h"
-#include "Weapons/Asalto.h"
-#include "Weapons/Pistola.h"
-#include "Weapons/RocketLauncher.h"
 #include <memory>
 #include <Enemy.h>
 #include <ShootAsalto.h>
 #include <ShootRocket.h>
 #include <ShootPistola.h>
+#include <ShootSniper.h>
 
 #include <TriggerSystem.h>
 #include <Map.h>
@@ -49,6 +47,7 @@ void Player::inicializar()
 	isReloading = false;
 	isShooting = false;
 	tieneAsalto = false;
+	tieneSniper = false;
 	tieneRocketLauncher = false;
 	tienePistola = false;
 
@@ -76,12 +75,16 @@ void Player::inicializar()
 	pistola->inicializar();
 	pistola->cargarContenido();
 	
+	sniper = new Sniper();
+	sniper->inicializar();
+	sniper->cargarContenido();
+
 	listaWeapons = new Lista();
 
 
-	listaWeapons->insertar(asalto);
-	asalto->setEquipada(true);
-	tieneAsalto = true;
+	listaWeapons->insertar(sniper);
+	sniper->setEquipada(true);
+	tieneSniper = true;
 	bindWeapon();
 
 	listaWeapons->insertar(pistola);
@@ -281,8 +284,14 @@ void Player::move_up()
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
 
-	speedFinal.addX(speed.getX());
-	speedFinal.addZ(speed.getZ());
+	if (!apuntando) {
+		speedFinal.addX(speed.getX());
+		speedFinal.addZ(speed.getZ());
+	}
+	else {
+		speedFinal.addX(speed.getX()/3);
+		speedFinal.addZ(speed.getZ()/3);
+	}
 
 	isMoving = true;
 
@@ -295,10 +304,14 @@ void Player::move_down()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-
-	speedFinal.addX(-speed.getX());
-	speedFinal.addZ(-speed.getZ());
-
+	if (!apuntando) {
+		speedFinal.addX(-speed.getX());
+		speedFinal.addZ(-speed.getZ());
+	}
+	else {
+		speedFinal.addX(-speed.getX()/3);
+		speedFinal.addZ(-speed.getZ()/3);
+	}
 	isMoving = true;
 }
 
@@ -308,10 +321,14 @@ void Player::move_right()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-
-	speedFinal.addX(speed.getZ());
-	speedFinal.addZ(-speed.getX());
-
+	if (!apuntando) {
+		speedFinal.addX(speed.getZ());
+		speedFinal.addZ(-speed.getX());
+	}
+	else {
+		speedFinal.addX(speed.getZ()/3);
+		speedFinal.addZ(-speed.getX()/3);
+	}
 	isMoving = true;
 }
 
@@ -321,11 +338,14 @@ void Player::move_left()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-
-	speedFinal.addX(-speed.getZ());
-	speedFinal.addZ(speed.getX());
-
-
+	if (!apuntando) {
+		speedFinal.addX(-speed.getZ());
+		speedFinal.addZ(speed.getX());
+	}
+	else {
+		speedFinal.addX(-speed.getZ()/3);
+		speedFinal.addZ(speed.getX()/3);
+	}
 
 	isMoving = true;
 }
@@ -340,6 +360,10 @@ void Player::bindWeapon() {
 	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
 		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
 	}
+	else if (listaWeapons->valorActual()->getClassName() == "Sniper") {
+		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootSniper()));
+	}
+
 }
 
 
@@ -347,7 +371,10 @@ void Player::UpWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Siguiente();
-
+	if (apuntando) {
+		GraphicEngine::i().getActiveCamera()->restablecerMira();
+		apuntando = false;
+	}
 	bindWeapon();
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
@@ -361,6 +388,10 @@ void Player::DownWeapon()
 {
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Anterior();
+	if (apuntando) {
+		GraphicEngine::i().getActiveCamera()->restablecerMira();
+		apuntando = false;
+	}
 
 	bindWeapon();
 	
@@ -374,6 +405,27 @@ void Player::DownWeapon()
 
 void Player::reload() {
 	listaWeapons->valorActual()->recargar();
+}
+
+void Player::apuntar()
+{
+
+	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
+		if (!apuntando) {
+			GraphicEngine::i().getActiveCamera()->apuntar();
+			apuntando = true;
+		}
+		else {
+			GraphicEngine::i().getActiveCamera()->restablecerMira();
+			apuntando = false;
+		}
+	}
+
+}
+
+void Player::restablecerMira()
+{
+	GraphicEngine::i().getActiveCamera()->restablecerMira();
 }
 
 void Player::impulsar(Vec3<float> force)
@@ -415,6 +467,16 @@ void Player::setWeapon(int newWeapon) {
 				pistola->resetAmmoTotal();
 			}
 		break;
+		case SNIPER:
+			if (!tieneSniper) {
+				printf("TE HAS EQUIPADO UN FRANCOTIRADOR\n");
+				listaWeapons->insertar(sniper);
+				tieneSniper = true;
+			}
+			else {
+				sniper->resetAmmoTotal();
+			}
+			break;
 	}
 
 
@@ -430,6 +492,7 @@ void Player::resetAll() {
 	tieneRocketLauncher = false;
 	tienePistola = false;
 	tieneAsalto = false;
+	tieneSniper = false;
 
 
 	asalto->borrarContenido();
@@ -444,12 +507,17 @@ void Player::resetAll() {
 	pistola->inicializar();
 	pistola->cargarContenido();
 
+	sniper->borrarContenido();
+	sniper->inicializar();
+	sniper->cargarContenido();
+
 
 	listaWeapons->insertar(pistola);
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
 	rocket->setEquipada(false);
 	asalto->setEquipada(false);
+	sniper->setEquipada(false);
 
 	pistola->setEquipada(true);
 	tienePistola = true;

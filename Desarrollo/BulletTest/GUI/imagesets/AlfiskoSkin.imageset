@@ -3,24 +3,24 @@
     <Image height="22" name="WindowL" width="8" xPos="0" yPos="225" />
     <Image height="20" name="WindowR" width="8" xPos="674" yPos="226" />
     <Image height="8" name="WindowT" width="663" xPos="9" yPos="216" />
-    <Image height="3" name="EditboxB" width="130" xPos="546" yPos="276" />
-    <Image height="10" name="EditboxL" width="3" xPos="540" yPos="263" />
-    <Image height="10" name="EditboxR" width="3" xPos="679" yPos="263" />
-    <Image height="3" name="EditboxT" width="130" xPos="546" yPos="257" />
+    <Image height="3" name="EditboxB" width="130" xPos="233" yPos="602" />
+    <Image height="10" name="EditboxL" width="3" xPos="227" yPos="589" />
+    <Image height="10" name="EditboxR" width="3" xPos="366" yPos="589" />
+    <Image height="3" name="EditboxT" width="130" xPos="233" yPos="583" />
     <Image height="8" name="WindowBL" width="8" xPos="0" yPos="248" />
-    <Image height="8" name="WindowBR" width="8" xPos="674" yPos="248" />
+    <Image height="334" name="WindowBR" width="8" xPos="769" yPos="248" />
     <Image height="8" name="WindowTL" width="8" xPos="0" yPos="216" />
     <Image height="8" name="WindowTR" width="8" xPos="674" yPos="216" />
-    <Image height="5" name="EditboxBL" width="5" xPos="540" yPos="274" />
-    <Image height="5" name="EditboxBR" width="5" xPos="677" yPos="274" />
-    <Image height="5" name="EditboxTL" width="5" xPos="540" yPos="257" />
-    <Image height="5" name="EditboxTR" width="5" xPos="677" yPos="257" />
+    <Image height="5" name="EditboxBL" width="5" xPos="227" yPos="600" />
+    <Image height="5" name="EditboxBR" width="5" xPos="364" yPos="600" />
+    <Image height="5" name="EditboxTL" width="5" xPos="227" yPos="583" />
+    <Image height="5" name="EditboxTR" width="5" xPos="364" yPos="583" />
     <Image height="26" name="MouseMove" width="24" xPos="108" yPos="546" />
     <Image height="22" name="MouseNeSw" width="22" xPos="137" yPos="549" />
     <Image height="6" name="NewImage1" width="6" xPos="218" yPos="426" />
     <Image height="23" name="MouseArrow" width="14" xPos="85" yPos="548" />
     <Image height="24" name="WindowFill" width="663" xPos="9" yPos="224" />
-    <Image height="12" name="EditboxFill" width="132" xPos="545" yPos="262" />
+    <Image height="12" name="EditboxFill" width="132" xPos="232" yPos="588" />
     <Image height="4" name="WindowClipB" width="663" xPos="9" yPos="252" />
     <Image height="22" name="WindowClipL" width="4" xPos="0" yPos="225" />
     <Image height="20" name="WindowClipR" width="4" xPos="678" yPos="226" />
@@ -186,4 +186,5 @@
     <Image height="32" name="mirilla" width="32" xPos="137" yPos="579" />
     <Image height="118" name="SangreBorde" width="150" xPos="575" yPos="510" />
     <Image height="195" name="Mapa" width="195" xPos="552" yPos="640" />
+    <Image height="130" name="scope" width="165" xPos="565" yPos="264" />
 </Imageset>
