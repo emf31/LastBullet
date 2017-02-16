@@ -37,7 +37,7 @@ public:
 	virtual std::string getClassName() { return "Enemy_Bot"; }
 	virtual void setPosition(const Vec3<float> &pos) override;
 
-
+	void setWeapon(int weapon) { weaponSystem->setWeapon(weapon); }
 
 	float getRadio() const { return radius; }
 

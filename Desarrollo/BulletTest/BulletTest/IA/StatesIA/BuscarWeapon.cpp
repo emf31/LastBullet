@@ -5,18 +5,17 @@
 
 
 void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
-	pEnemy->createPathToItem("LifeObject");
+	pEnemy->createPathToItem("AsaltoDrop");
 
 }
 
 void BuscarWeapon::Execute(Enemy_Bot* pEnemy) {
 
 		if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
+
 		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
-
-		pEnemy->getMachineState()->ChangeState(&Disparar::i());
+			pEnemy->getMachineState()->ChangeState(&Disparar::i());
 	}
-
 
 }
 

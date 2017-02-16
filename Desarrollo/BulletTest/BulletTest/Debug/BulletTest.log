@@ -1,14 +1,15 @@
-﻿  Patrullar.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+﻿  AsaltoDrop.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2dmatrix.h(124): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2dmatrix.h(126): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2dmatrix.h(139): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\c2dmatrix.h(141): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\transformations.h(233): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\network\cliente.h(70): warning C4244: 'return': conversión de 'const RakNet::Time' a 'float'; posible pérdida de datos
   BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

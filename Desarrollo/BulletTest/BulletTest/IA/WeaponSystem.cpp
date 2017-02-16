@@ -31,8 +31,8 @@ void WeaponSystem::Inicializar() {
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
-	listaWeapons->insertar(asalto);
-	listaWeapons->insertar(sniper);
+	//listaWeapons->insertar(asalto);
+	//listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
 
 }
@@ -58,6 +58,45 @@ void WeaponSystem::AddNoiseToAim(Vec3<float>& AimingPos)const {
 	AimingPos = toPos;
 
 
+
+}
+
+void WeaponSystem::setWeapon(int newWeapon){
+
+	switch (newWeapon) {
+	case LANZACOHETES:
+		if (!buscar("RocketLauncher")) {
+			listaWeapons->insertar(rocket);
+		}
+		else {
+			rocket->resetAmmoTotal();
+		}
+		break;
+	case ASALTO:
+		if (!buscar("Asalto")) {
+			listaWeapons->insertar(asalto);
+		}
+		else {
+			asalto->resetAmmoTotal();
+		}
+		break;
+	case PISTOLA:
+		if (!buscar("Pistola")) {
+			listaWeapons->insertar(pistola);
+		}
+		else {
+			pistola->resetAmmoTotal();
+		}
+		break;
+	case SNIPER:
+		if (!buscar("Sniper")) {
+			listaWeapons->insertar(sniper);
+		}
+		else {
+			sniper->resetAmmoTotal();
+		}
+		break;
+	}
 
 }
 

@@ -455,7 +455,6 @@ void Player::setWeapon(int newWeapon) {
 	switch (newWeapon) {
 		case LANZACOHETES:
 			if (!tieneRocketLauncher) {
-				printf("TE HAS EQUIPADO UN LANZACOHETES\n");
 				listaWeapons->insertar(rocket);
 				tieneRocketLauncher = true;
 			}
@@ -465,7 +464,6 @@ void Player::setWeapon(int newWeapon) {
 		break;
 		case ASALTO:
 			if (!tieneAsalto) {
-				printf("TE HAS EQUIPADO UN ASALTO\n");
 				listaWeapons->insertar(asalto);
 				tieneAsalto = true;
 			}
@@ -475,7 +473,6 @@ void Player::setWeapon(int newWeapon) {
 		break;
 		case PISTOLA:
 			if (!tienePistola) {
-				printf("TE HAS EQUIPADO UNA PISTOLA\n");
 				listaWeapons->insertar(pistola);
 				tienePistola = true;
 			}
@@ -485,7 +482,6 @@ void Player::setWeapon(int newWeapon) {
 		break;
 		case SNIPER:
 			if (!tieneSniper) {
-				printf("TE HAS EQUIPADO UN FRANCOTIRADOR\n");
 				listaWeapons->insertar(sniper);
 				tieneSniper = true;
 			}

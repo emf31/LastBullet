@@ -33,6 +33,8 @@ public:
 	int getAmmoPistola() { return pistola->getMunicionTotal(); }
 	int getAmmoRocketLauncher() { return rocket->getMunicionTotal(); }
 
+	void setWeapon(int weapon);
+
 	bool buscar(std::string weapon) { return listaWeapons->Buscar(weapon); }
 
 

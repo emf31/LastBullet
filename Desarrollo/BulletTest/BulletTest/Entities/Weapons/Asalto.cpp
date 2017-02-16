@@ -107,6 +107,8 @@ float Asalto::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 			disparos++;
 
 
+			std::cout << "Disparo asalto" << std::endl;
+
 			btVector3 start = bt(posOwner);
 
 			btVector3 target = bt(posTarget);
