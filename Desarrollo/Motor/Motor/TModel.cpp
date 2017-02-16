@@ -23,7 +23,7 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 	m_r = 1.f;
 	m_g = 1.f;
 	m_b = 1.f;
-	entityID = SceneManager::i().getEntityCount();
+	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 }
 
@@ -243,6 +243,8 @@ void TModel::setTransformacionEscalado(TTransform * esc) {
 void TModel::setTransformacionTraslacion(TTransform * tras) {
 	transTraslacion = tras;
 }
+
+
 
 Vec3<float> TModel::getRotation() {
 	return transRotacion->getRotation();

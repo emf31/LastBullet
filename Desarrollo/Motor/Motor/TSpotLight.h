@@ -4,6 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "TTransform.h"
 class TSpotLight : public TEntity {
+	friend class SceneManager;
 public:
 	TSpotLight();
 	~TSpotLight();
@@ -18,12 +19,8 @@ public:
 	void endDraw();
 	int m_r, m_g, m_b, m_a;
 
-	int getID() {
-		return entityID;
-	}
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionEscalado(TTransform* esc);
-	void setTransformacionTraslacion(TTransform* tras);
+
+
 	void setPosition(Vec3<float> pos);
 	void setRotationX(float angu);
 	void setRotationY(float angu);
@@ -34,10 +31,23 @@ public:
 	Vec3<float> getScale();
 
 private:
+
+
+	void setTransformacionRotacion(TTransform* rot);
+	void setTransformacionEscalado(TTransform* esc);
+	void setTransformacionTraslacion(TTransform* tras);
+
+
+
+
+
+
+
+
 	Shader* shaderLuz;
 	GLuint lightVAO;
 	GLuint lightVBO;
-	int entityID = -1;
+	
 	TTransform* transRotacion;
 	TTransform* transEscalado;
 	TTransform* transTraslacion;

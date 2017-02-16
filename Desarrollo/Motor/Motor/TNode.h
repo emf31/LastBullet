@@ -1,31 +1,26 @@
 #pragma once
-#include "TModel.h"
 #include "vec3.hpp"
 #include <algorithm>
 #include <vector>
 #include <iterator>
 #include "enum.h"
+#include "TEntity.h"
 
 
 class TNode
 {
+	friend class SceneManager;
 public:
 	TNode(int entityID, TNode* nodoPadre=nullptr);
 	~TNode();
 	
-	void setModel(TModel* model);
-
-	TModel* getModel();
 
 	TNode* getParentNode();
 
-	void setParentNode(TNode* nodoPadre) {
-		m_parentNode = nodoPadre;
-	}
-
+	void setParentNode(TNode* nodoPadre);
 	bool removeChild(TNode *child);
-	//void addChild(TNode* child);
-	void setChild(TNode* child);
+	void addChild(TNode* child);
+	
 
 
 	//TODOOO antes estaba asi, pero creo que los nodos no tienen begin draw y end draw, solo tienen un draw, que ya llama al begin y end draw de las entities asociadas
@@ -33,30 +28,14 @@ public:
 	virtual void endDraw();
 	*/
 	void draw();
-	TEntity* getEntity() {
-		return m_entity;
-	}
-	void setEntity(TEntity* entidad) {
-		m_entity = entidad;
-	}
-	
-	T_Nodos getNodeType() {
-		return type;
-	}
-	T_Nodos getType() {
-		return type;
-	}
-	void setType(T_Nodos tipo) {
-		type = tipo;
-	}
-
-	//SceneManager *sceneManager_ptr;
-	int getMyNodeEntityID() {
-		return myNodeEntityID;
-	}
+	TEntity* getEntity();
+	void setEntity(TEntity* entidad);
+	T_Nodos getNodeType();
+	T_Nodos getType();
+	void setType(T_Nodos tipo);
+	int getMyNodeEntityID();
 
 private:
-	//TModel *m_model;
 	TEntity *m_entity;
 	TNode *m_parentNode;
 	std::vector<TNode*> m_childNodes;

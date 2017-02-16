@@ -28,8 +28,6 @@ int main() {
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	n->setModelColor(0.33f, 0.42f, 0.18f);
 
-
-
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
@@ -44,10 +42,14 @@ int main() {
 	w->setRotationY(90.f);
 	w->setModelColor(0.8f, 0.0f, 0.61f);
 	Vec3<float> aux = w->getRotation();
+	
+
+
 
 	TSpotLight* luz = sm.crearNodoLuz();
 	luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
 	
+	w->addChild(luz);
 	
 	long int cont = 0;
 	while (!engine.shouldCloseWindw()){
@@ -60,7 +62,6 @@ int main() {
 		engine.setWindowTitle(title.str());
 		
 		engine.doMovement();
-
 		if (cont == 100) {
 			cont = 0;
 			aux = w->getPosition();

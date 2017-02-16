@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 
 
+
 TTransform::TTransform() {
 
 	m_matrix = glm::mat4();
@@ -24,6 +25,7 @@ void TTransform::transpose() {
 void TTransform::invert() {
 	m_matrix = glm::inverse(m_matrix);
 }
+//TODO necesitamos el setPosition que te ponga la posicion donde le pasamos sin que vaya acumulando como ahora, ahora seria un update position
 void TTransform::setPosition(Vec3<float> position) {
 	m_position += position;
 	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));

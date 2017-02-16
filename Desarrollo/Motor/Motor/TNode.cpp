@@ -12,14 +12,11 @@ TNode::~TNode()
 {
 	delete m_entity;
 }
-
-
-
-void TNode::setChild(TNode * child)
-{
+void TNode::addChild(TNode* child) {
+	//child va a ser un nodo hoja es decir, un nodo malla, nodo luz o nodo camara
 	m_childNodes.push_back(child);
-}
 
+}
 bool TNode::removeChild(TNode * child) {
 	auto result = std::find(m_childNodes.begin(), m_childNodes.end(), child);
 
@@ -34,6 +31,10 @@ bool TNode::removeChild(TNode * child) {
 
 TNode * TNode::getParentNode() {
 	return m_parentNode;
+}
+
+void TNode::setParentNode(TNode * nodoPadre) {
+	m_parentNode = nodoPadre;
 }
 
 void TNode::draw() {
@@ -60,6 +61,30 @@ void TNode::draw() {
 		}
 	}
 
+}
+
+TEntity * TNode::getEntity() {
+	return m_entity;
+}
+
+void TNode::setEntity(TEntity * entidad) {
+	m_entity = entidad;
+}
+
+T_Nodos TNode::getNodeType() {
+	return type;
+}
+
+T_Nodos TNode::getType() {
+	return type;
+}
+
+void TNode::setType(T_Nodos tipo) {
+	type = tipo;
+}
+
+int TNode::getMyNodeEntityID() {
+	return myNodeEntityID;
 }
 
 

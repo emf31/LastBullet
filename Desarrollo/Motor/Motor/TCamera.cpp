@@ -1,16 +1,19 @@
 #include "TCamera.h"
+#include "SceneManager.h"
 
 
 
 TCamera::TCamera() {
+	setID(SceneManager::i().getEntityCount());
+	SceneManager::i().aumentaEntityCount();
 }
 
 
 TCamera::~TCamera() {
 }
 
-void TCamera::beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4& matrizActual) {
+void TCamera::beginDraw() {
 }
 
-void TCamera::endDraw(glm::mat4& matrizActual) {
+void TCamera::endDraw() {
 }

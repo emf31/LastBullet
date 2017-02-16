@@ -9,7 +9,7 @@ TSpotLight::TSpotLight() {
 	setColor(0.30f, 1.0f, 0.50f);
 	this->shaderLuz = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	setLight();
-	entityID = SceneManager::i().getEntityCount();
+	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 }
 
@@ -181,3 +181,4 @@ Vec3<float> TSpotLight::getScale()
 {
 	return transEscalado->getScale();
 }
+

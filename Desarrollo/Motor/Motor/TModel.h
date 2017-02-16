@@ -24,6 +24,7 @@ using namespace std;
 //class TNode;
 
 class TModel : public TEntity {
+	friend class SceneManager;
 public:
 	/*  Funciones   */
 	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
@@ -68,21 +69,29 @@ public:
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionEscalado(TTransform* esc);
-	void setTransformacionTraslacion(TTransform* tras);
+
 
 	void setModelColor(float r, float g, float b) {
 		m_r = r;
 		m_g = g;
 		m_b = b;
 	}
-	int getID() {
-		return entityID;
-	}
+
 	
 
 private:
+
+
+
+
+	void setTransformacionRotacion(TTransform* rot);
+	void setTransformacionEscalado(TTransform* esc);
+	void setTransformacionTraslacion(TTransform* tras);
+	
+
+
+
+
 	/*  Model Data  */
 	vector<TMesh> meshes;
 	string directory;
@@ -104,10 +113,10 @@ private:
 	TTransform* transRotacion;
 	TTransform* transEscalado;
 	TTransform* transTraslacion;
+	
 	float m_r;
 	float m_g;
 	float m_b;
-	int entityID = -1;
 	
 
 };

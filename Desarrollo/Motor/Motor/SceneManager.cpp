@@ -2,6 +2,7 @@
 #include "TTransform.h"
 
 
+
 void SceneManager::inicializar() {
 	//gui.init("GUI");
 	//gui.loadScheme("VanillaSkin.scheme");
@@ -72,10 +73,10 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	nuevoNodoMalla = new TNode(id, nuevoNodoTraslacion);
 	
 	//asignamos los hijos
-	scene->setChild(nuevoNodoRotacion);
-	nuevoNodoRotacion->setChild(nuevoNodoEscalado);
-	nuevoNodoEscalado->setChild(nuevoNodoTraslacion);
-	nuevoNodoTraslacion->setChild(nuevoNodoMalla);
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
+	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
 	
 	
 
@@ -84,6 +85,7 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
 	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
 	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	model->setMiNodo(nuevoNodoMalla);
 
 	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoMalla->setEntity(model);
@@ -153,10 +155,10 @@ TSpotLight * SceneManager::crearNodoLuz()
 	luzNode = new TNode(id, nuevoNodoTraslacion);
 
 	//asignamos los hijos
-	scene->setChild(nuevoNodoRotacion);
-	nuevoNodoRotacion->setChild(nuevoNodoEscalado);
-	nuevoNodoEscalado->setChild(nuevoNodoTraslacion);
-	nuevoNodoTraslacion->setChild(luzNode);
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
+	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(luzNode);
 
 
 
@@ -165,6 +167,7 @@ TSpotLight * SceneManager::crearNodoLuz()
 	luz->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
 	luz->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
 	luz->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	luz->setMiNodo(luzNode);
 
 	//seteamos la entity
 	luzNode->setEntity(luz);
