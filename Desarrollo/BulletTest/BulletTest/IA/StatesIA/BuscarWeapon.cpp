@@ -9,25 +9,41 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 
 	std::list<Vec2f> m_camino;
 
-	
+	float best = 100000;
+	float actual;
+	std::string bestString = "Ninguno";
 
-	float best = pEnemy->getPathPlanning()->CreatePathToItem("AsaltoDrop", m_camino);
-	std::string bestString = "AsaltoDrop";
-
-	m_camino.clear();
-
-	/*if(!pEnemy->getWeaponSys()->buscar("RocketLauncher"))
-	if (pEnemy->getPathPlanning()->CreatePathToItem("RocketLauncherDrop", m_camino) < best) {
-		bestString = "RocketLauncherDrop";
-	}*/
-
-	if (!pEnemy->getWeaponSys()->buscar("Sniper"))
-	if (pEnemy->getPathPlanning()->CreatePathToItem("SniperDrop", m_camino) < best) {
-		bestString = "SniperDrop";
+	if (!pEnemy->getWeaponSys()->buscar("Asalto")) {
+		actual = pEnemy->getPathPlanning()->CreatePathToItem("AsaltoDrop", m_camino);
+		if (actual < best) {
+			best = actual;
+			bestString = "AsaltoDrop";
+			m_camino.clear();
+		}
 	}
+
+
+	if (!pEnemy->getWeaponSys()->buscar("Sniper")) {
+		actual = pEnemy->getPathPlanning()->CreatePathToItem("SniperDrop", m_camino);
+		if (actual < best) {
+			best = actual;
+			bestString = "SniperDrop";
+			m_camino.clear();
+		}
+	}
+
+/*	if (!pEnemy->getWeaponSys()->buscar("RocketLauncher")) {
+		actual = pEnemy->getPathPlanning()->CreatePathToItem("RocketLauncherDrop", m_camino);
+		if (actual < best) {
+			best = actual;
+			bestString = "RocketLauncherDrop";
+			m_camino.clear();
+		}
+	}*/
 	
 	std::cout << "El mejor es: " << bestString << std::endl;
 
+	if(bestString!="Ninguno")
 	pEnemy->createPathToItem(bestString);
 
 
