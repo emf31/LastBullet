@@ -59,7 +59,9 @@ public:
 	glm::mat4 GetViewMatrix() {
 		return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 	}
-
+	glm::vec3 getPosition() {
+		return this->Position;
+	}
 	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
 	void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
 		GLfloat velocity = this->MovementSpeed * deltaTime;
@@ -102,6 +104,7 @@ public:
 		if (this->Zoom >= 45.0f)
 			this->Zoom = 45.0f;
 	}
+
 
 private:
 	// Calculates the front vector from the Camera's (updated) Eular Angles

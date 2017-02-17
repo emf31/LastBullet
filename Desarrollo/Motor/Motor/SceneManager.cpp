@@ -48,6 +48,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	// Update matrices
 	projection = glm::perspective(camera_ptr->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
 	view = camera_ptr->GetViewMatrix();
+	activeCameraPos = Vec3<float>(camera_ptr->getPosition().x, camera_ptr->getPosition().y, camera_ptr->getPosition().z) ;
 
 	// Desencadena el dibujado de la escena
 	scene->draw();

@@ -40,6 +40,7 @@ public:
 	glm::mat4 view;
 	glm::mat4 m_matrizActual;
 	Camera *camera_ptr;
+	Vec3<float> activeCameraPos;
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;
 	int getEntityCount() {
@@ -52,6 +53,7 @@ private:
 	ResourceManager *rm;
 	TNode* scene;
 	int nodeEntityCount = 0;
+
 	//Motor::GUI gui;
 	
 };
