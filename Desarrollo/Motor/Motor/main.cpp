@@ -26,13 +26,13 @@ int main() {
 
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
-	n->setModelColor(0.33f, 0.42f, 0.18f);
+	//n->setModelColor(0.33f, 0.42f, 0.18f);
 
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
-	m->setModelColor(1.0f, 0.5f, 0.31f);
+	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
 
@@ -40,7 +40,7 @@ int main() {
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	w->setPosition(Vec3<float>(3.5f, 3.5f, 3.5f));
 	w->setRotationY(90.f);
-	w->setModelColor(0.8f, 0.0f, 0.61f);
+	//w->setModelColor(0.8f, 0.0f, 0.61f);
 	Vec3<float> aux = w->getRotation();
 	
 
@@ -49,7 +49,7 @@ int main() {
 	TSpotLight* luz = sm.crearNodoLuz();
 	luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
 	
-	w->addChild(luz);
+	//w->addChild(luz);
 	
 	long int cont = 0;
 	while (!engine.shouldCloseWindw()){

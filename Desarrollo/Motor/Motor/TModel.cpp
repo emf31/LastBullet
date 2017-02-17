@@ -86,10 +86,14 @@ void TModel::beginDraw() {
 	//colores
 	GLint objectColorLoc = glGetUniformLocation(shader->Program, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(shader->Program, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(shader->Program, "lightPos");
+	
 	//TODOOO aqui el color del objeto no se tiene que poner a mano se tendria que coger de TModel
 	//y el color de la luz lo mismo tendria ser cada TLightSpot quien tenga su color
+	//los colores los tendriamos que coger de el array de luces que tendriamos que tener en el scene manager
 	glUniform3f(objectColorLoc, m_r, m_g, m_b);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(lightPosLoc, 3.0f, 5.0f, 2.0f);
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)
