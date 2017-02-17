@@ -32,6 +32,7 @@ TModel::~TModel() {
 
 void TModel::beginDraw() {
 
+	
 	glm::mat4 view = SceneManager::i().view;
 	glm::mat4 projection = SceneManager::i().projection;
 	glm::mat4 actual = SceneManager::i().m_matrizActual;
@@ -85,18 +86,25 @@ void TModel::beginDraw() {
 
 	//colores
 	GLint objectColorLoc = glGetUniformLocation(shader->Program, "objectColor");
-	GLint lightColorLoc = glGetUniformLocation(shader->Program, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(shader->Program, "lightPos");
-	GLint viewPosLoc = glGetUniformLocation(shader->Program, "viewPos");
-	
-	
-	//TODOOO aqui el color del objeto no se tiene que poner a mano se tendria que coger de TModel
-	//y el color de la luz lo mismo tendria ser cada TLightSpot quien tenga su color
-	//los colores los tendriamos que coger de el array de luces que tendriamos que tener en el scene manager
 	glUniform3f(objectColorLoc, m_r, m_g, m_b);
-	glUniform3f(lightColorLoc, 0.50f, 1.0f, 0.30f);
-	glUniform3f(lightPosLoc, 3.0f, 5.0f, 2.0f);
-	glUniform3f(viewPosLoc, SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
+	
+	//camaras
+	//TODO en un futuro esto sera un vector de camaras que tendremos en SceneManager
+	GLint viewPosLoc = glGetUniformLocation(shader->Program, "viewPos");
+	glUniform3f(viewPosLoc, SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());	
+	
+	//le pasamos las distintas luces al shader
+	Vec3<float> lightPos;
+	Vec3<float> lightColor;
+	for (int i = 0; i < SceneManager::i().vectorLuces.size(); i++) {
+		lightPos = SceneManager::i().vectorLuces[i]->getPosition();
+		lightColor = SceneManager::i().vectorLuces[i]->getColor();
+		GLint lightColorLoc = glGetUniformLocation(shader->Program, "lightColor");
+		GLint lightPosLoc = glGetUniformLocation(shader->Program, "lightPos");
+		glUniform3f(lightColorLoc, lightColor.getX(), lightColor.getY(), lightColor.getZ());
+		glUniform3f(lightPosLoc, lightPos.getX(), lightPos.getY(), lightPos.getZ());
+	}
+
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)

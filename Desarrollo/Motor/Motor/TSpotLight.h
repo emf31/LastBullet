@@ -11,9 +11,6 @@ public:
 	void setColor(int r, int g, int b, int a);
 	void setColor(int r, int g, int b);
 	void setLight();
-	void pruebaColores() {
-
-	}
 
 	void beginDraw();
 	void endDraw();
@@ -29,6 +26,7 @@ public:
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
+	Vec3<float> getColor();
 
 private:
 

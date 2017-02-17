@@ -174,6 +174,9 @@ TSpotLight * SceneManager::crearNodoLuz()
 	luzNode->setEntity(luz);
 	luzNode->setType(T_LUZ);
 
+	//la añadimos al vector de luces
+	vectorLuces.push_back(luz);
+
 
 	return luz;
 

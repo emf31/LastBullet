@@ -35,6 +35,12 @@ public:
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
 	TSpotLight* crearNodoLuz();
 	TNode* crearNodoCamara();
+	int getEntityCount() {
+		return nodeEntityCount;
+	}
+	void aumentaEntityCount() {
+		nodeEntityCount++;
+	}
 
 	glm::mat4 projection;
 	glm::mat4 view;
@@ -43,12 +49,7 @@ public:
 	Vec3<float> activeCameraPos;
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;
-	int getEntityCount() {
-		return nodeEntityCount;
-	}
-	void aumentaEntityCount() {
-		nodeEntityCount++;
-	}
+	std::vector<TSpotLight*> vectorLuces;
 private:
 	ResourceManager *rm;
 	TNode* scene;

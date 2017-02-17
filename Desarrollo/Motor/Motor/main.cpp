@@ -48,6 +48,7 @@ int main() {
 
 	TSpotLight* luz = sm.crearNodoLuz();
 	luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
+	//luz->setColor(1.0f, 0.9f, 0.9f);
 	
 	//w->addChild(luz);
 	
