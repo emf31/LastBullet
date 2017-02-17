@@ -79,7 +79,7 @@ private:
 	CEGUI::PushButton *closePushButtonIA;
 
 
-	Enemy_Bot* botJuliyo;
+	//Enemy_Bot* botJuliyo;
 	//Enemy_Bot* botTonire;
 	//Enemy_Bot* botRucri;
 

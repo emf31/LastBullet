@@ -14,7 +14,7 @@
 class Partida : public EventListener {
 public:
 
-	Partida(InGameHUD* hud);
+	Partida();
 	~Partida();
 
 	virtual void handleEvent(Event* e) override;

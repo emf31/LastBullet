@@ -13,6 +13,7 @@
 #include <NetworkManager.h>
 #include <Settings.h>
 #include <World.h>
+#include <Map.h>
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
 {
@@ -110,7 +111,19 @@ void NetPlayer::crearPartida()
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
-	
+	//TODO cuando halla estados estoy hay que arreglarlo
+	std::string str = "../media/";
+	str.append(gameinfo.map);
+	Map::i().inicializar(str);
+
+	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();
+
+	Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot2->m_network->inicializar();
+
+	Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot3->m_network->inicializar();
 
 	while (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -166,11 +179,9 @@ void NetPlayer::unirseLobby()
 			}
 		}
 
-		conectar(str, server_port);
-
 	} while (eleccion == 'a');
 
-
+	conectar(str, server_port);
 
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -181,6 +192,11 @@ void NetPlayer::unirseLobby()
 	p.name = m_player->getName();
 
 	dispatchMessage(p, UNIRSE_PARTIDA);
+
+	//TODO cuando halla estados estoy hay que arreglarlo
+	std::string str2 = "../media/";
+	str2.append("laberinto.json");
+	Map::i().inicializar(str2);
 
 	while (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -254,14 +270,14 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-			Enemy *e = new Enemy(p.name, p.guid);
+			/*Enemy *e = new Enemy(p.name, p.guid);
 			e->inicializar();
 			e->cargarContenido();
 			e->setPosition(p.position);
-			EntityManager::i().mostrarClientes();
+			EntityManager::i().mostrarClientes();*/
 
 #ifdef NETWORK_DEBUG
-			debugger->addDebugMark(e->getID());
+			//debugger->addDebugMark(e->getID());
 #endif
 
 		}
@@ -282,7 +298,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 
 #ifdef NETWORK_DEBUG
-			debugger->addDebugMark(e->getID());
+			//debugger->addDebugMark(e->getID());
 #endif
 
 
@@ -410,8 +426,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
 			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 			LifeObject *v = static_cast<LifeObject*>(EntityManager::i().getEntity(vidaServer.id));
-			v->asignaTiempo(vidaServer.tiempo);
-
+			if (v != NULL) {
+				v->asignaTiempo(vidaServer.tiempo);
+			}
 
 		}
 		break;
@@ -423,7 +440,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//recibimos mensaje en el cliente de que cuando nos conectamos una vida estaba cogida, entonces obtenemos esa vida que nos dice el servidor cual es mediante el id
 			//y le cambiamos el tiempo de recargar que tenia por el que el servidor te pasa
 			WeaponDrop *v = static_cast<WeaponDrop*>(EntityManager::i().getEntity(armaServer.id));
-			v->asignaTiempo(armaServer.tiempo);
+			if (v != NULL) {
+				v->asignaTiempo(armaServer.tiempo);
+			}
+			
 
 		}
 		break;

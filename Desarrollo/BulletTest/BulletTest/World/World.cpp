@@ -16,19 +16,7 @@ void World::inicializar(const std::string& mapa)
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
-	//mapa
-	std::string str = "../media/";
-	str.append(mapa);
-	Map::i().inicializar(str);
-
-	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();
-
-	Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot2->m_network->inicializar();
-
-	Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot3->m_network->inicializar();
+	partida = new Partida();
 
 
 	//LLama al inicializar de todas las entities
@@ -59,4 +47,6 @@ void World::inicializar(const std::string& mapa)
 
 void World::apagar()
 {
+	delete partida;
+	partida = nullptr;
 }

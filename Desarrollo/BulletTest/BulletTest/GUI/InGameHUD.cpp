@@ -1,11 +1,11 @@
 #include "InGameHUD.h"
 
 
-InGameHUD::InGameHUD() {	
+InGameHUD::InGameHUD() : GUI() {	
 }
 
 void InGameHUD::inicializar() {
-	init("../GUI", GraphicEngine::i().getDevice());
+	init("../GUI", GraphicEngine::i().getDevice(), "InGameHUD");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
 	loadLayout("LastBulletHUD.layout");

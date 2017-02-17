@@ -10,6 +10,7 @@ public:
 		static GUIManager singleton;
 		return singleton;
 	}
+
 	void init(const std::string& resourcesPath, irr::IrrlichtDevice *device) {
 		if (m_IrrlichtRenderer == nullptr) {
 			m_IrrlichtRenderer = &CEGUI::IrrlichtRenderer::bootstrapSystem(*device);
@@ -31,22 +32,30 @@ public:
 			CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 		}
 	}
-	void addGui(Motor::GUI *gui) {
-		m_guis.push_back(gui);
+	void addGui(const std::string& name, Motor::GUI *gui) {
+		m_guis[name] = gui;
 	}
 
 	void updateAllGuis() {
-		std::list<Motor::GUI*>::iterator it;
+		std::map<std::string, Motor::GUI*>::iterator it;
 		for (it = m_guis.begin(); it != m_guis.end(); ++it) {
-			(*it)->update();
+			it->second->update();
 		}
 	}
 
 	void drawAllGuis() {
-		std::list<Motor::GUI*>::iterator it;
+		std::map<std::string, Motor::GUI*>::iterator it;
 		for (it = m_guis.begin(); it != m_guis.end(); ++it) {
-			(*it)->draw();
+			it->second->draw();
 		}
+	}
+
+	Motor::GUI* getGUIbyName(const std::string& name) {
+		auto found = m_guis.find(name);
+		if (found != m_guis.end())
+			return found->second;
+		//no existe devolvemos 0
+		return NULL;
 	}
 
 	CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_IrrlichtRenderer; }
@@ -55,5 +64,6 @@ private:
 
 	}
 	CEGUI::IrrlichtRenderer *m_IrrlichtRenderer; //TODO: CAMBIAR A OPENGL3RENDERER CUANDO CAMBIEMOS A NUESTRO MOTOR
-	std::list<Motor::GUI*> m_guis;
+
+	std::map<std::string , Motor::GUI*> m_guis;
 };

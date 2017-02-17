@@ -2,23 +2,23 @@
 #include <GUIManager.h>
 #include <EventSystem.h>
 
-Motor::GUI::GUI()
+Motor::GUI::GUI() : EventListener()
 {
-	EventSystem::i().registerListener(this);
+	
 }
 
 Motor::GUI::~GUI()
 {
 }
 
-void Motor::GUI::init(const std::string& resourcesPath, irr::IrrlichtDevice *device){
+void Motor::GUI::init(const std::string& resourcesPath, irr::IrrlichtDevice *device, const std::string& name){
 	GUIManager::i().init(resourcesPath, device);
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 	m_context = &CEGUI::System::getSingleton().createGUIContext(GUIManager::i().getIrrlichtRenderer()->getDefaultRenderTarget());
 	m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 	m_context->setRootWindow(m_root);
 
-	GUIManager::i().addGui(this);
+	GUIManager::i().addGui(name, this);
 }
 
 

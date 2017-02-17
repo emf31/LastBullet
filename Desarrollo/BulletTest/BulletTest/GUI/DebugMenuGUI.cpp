@@ -31,7 +31,7 @@ void DebugMenuGUI::handleEvent(Event * ev)
 }
 
 void DebugMenuGUI::inicializar() {
-	init("../GUI", GraphicEngine::i().getDevice());
+	init("../GUI", GraphicEngine::i().getDevice(), "DebugMenuGUI");
 
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("VanillaSkin.scheme");
@@ -150,19 +150,19 @@ bool DebugMenuGUI::onDebugIAMapaClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 bool DebugMenuGUI::onDebugIAVIDAClicked(const CEGUI::EventArgs & e) {
-	botJuliyo->createPathToItem("LifeObject");
+	//botJuliyo->createPathToItem("LifeObject");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAROCKETClicked(const CEGUI::EventArgs & e) {
-	botJuliyo->createPathToItem("RocketLauncherDrop");
+	//botJuliyo->createPathToItem("RocketLauncherDrop");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAASALTOClicked(const CEGUI::EventArgs & e) {
-	botJuliyo->createPathToItem("AsaltoDrop");
+	//botJuliyo->createPathToItem("AsaltoDrop");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
-	botJuliyo->createPathToItem("PistolaDrop");
+	//botJuliyo->createPathToItem("PistolaDrop");
 	return true;
 }
 
@@ -200,7 +200,7 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 	float nodoX=y/3+6;
 	float nodoY=x/3+2;
 	std::cout << "El bot ira a la posicion: x= " << nodoX << " y= " << nodoY << std::endl;
-	botJuliyo->createPathToPosition(Vec2f(nodoX, nodoY));
+	//botJuliyo->createPathToPosition(Vec2f(nodoX, nodoY));
 	/*botTonire->createPathToPosition(Vec2f(nodoX, nodoY));
 	botRucri->createPathToPosition(Vec2f(nodoX, nodoY));*/
 

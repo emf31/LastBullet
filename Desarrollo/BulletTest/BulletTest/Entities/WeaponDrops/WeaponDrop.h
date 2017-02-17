@@ -30,7 +30,7 @@ public:
 
 	virtual void handleMessage(const Message& message) =0;
 
-	virtual std::string getClassName() { return "WeaponDrop"; }
+	virtual std::string getClassName() = 0;
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
 

@@ -3,10 +3,12 @@
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
 #include <EventSystem.h>
+#include <GUIManager.h>
  
 
-Partida::Partida(InGameHUD * hud) : ingame(hud), EventListener()
+Partida::Partida() : EventListener()
 {
+	ingame = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
 }
 
 Partida::~Partida()

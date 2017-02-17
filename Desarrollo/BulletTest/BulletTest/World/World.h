@@ -17,9 +17,12 @@ public:
 
 	bool gamestarted = false;
 
+	Partida* getPartida() const { return partida; }
+
 private:
 
-	//Partida* partida;
+
+	Partida* partida;
 
 	World() { }
 };

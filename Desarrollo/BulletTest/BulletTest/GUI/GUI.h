@@ -19,7 +19,7 @@ namespace Motor{
 		GUI();
 		~GUI();
 
-		void init(const std::string& resourcesPath, irr::IrrlichtDevice *device);
+		void init(const std::string& resourcesPath, irr::IrrlichtDevice *device, const std::string& name);
 		void destroy();
 		void draw();
 

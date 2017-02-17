@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation), radioExplosion(45), m_owner()
+m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation), radioExplosion(45), m_owner(owner)
 {
 
 	m_lifetime = seconds(5);
@@ -107,6 +107,7 @@ void RocketBullet::handleMessage(const Message & message)
 					impact->damage = damage;
 					impact->guidDisparado = m_owner->getGuid();
 					impact->guidImpactado = myentity->getGuid();;
+
 					Message msg(myentity, "COLISION_ROCKET", impact);
 					MessageHandler::i().sendMessage(msg);
 

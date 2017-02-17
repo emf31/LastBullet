@@ -32,14 +32,14 @@
 
 #include <Settings.h>
 
-
+#include <World.h>
 
 const int Game::server_port = 65535;
 const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 
-Game::Game()
+Game::Game() : ingameGUI(), debugMenu()
 {
 
 }
@@ -144,6 +144,7 @@ void Game::inicializar()
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 
+	
 
 	std::string str;
 
@@ -151,6 +152,11 @@ void Game::inicializar()
 	std::cin >> str;
 
 	Player *player = new Player(str, RakNet::UNASSIGNED_RAKNET_GUID);
+
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
+
+
 	player->m_network->inicializar();
 
 	/*Enemy_Bot* bot = new Enemy_Bot("JULIYO BOT", RakNet::UNASSIGNED_RAKNET_GUID);
@@ -201,8 +207,7 @@ void Game::inicializar()
 
 	}*/
 
-	ingameGUI.inicializar();
-	debugMenu.inicializar();
+	
 
 
 
@@ -234,7 +239,7 @@ bool Game::processEvents()
 	else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(true);
-		//partida.muestraTabla();
+		World::i().getPartida()->muestraTabla();
 
 	}
 	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {

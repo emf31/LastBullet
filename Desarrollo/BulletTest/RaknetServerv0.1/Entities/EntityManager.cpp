@@ -7,6 +7,8 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 {
 	TPlayer nuevocli;
 
+	p.mID = NUEVO_PLAYER;
+
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
@@ -28,6 +30,7 @@ void EntityManager::sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::
 {
 	//Enviamos todos el bot a todos los clientes menos al host de la partida, que es el que los ha creado
 	p.mID = NUEVO_PLAYER;
+
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		if (i->second->getGuid() != host) {

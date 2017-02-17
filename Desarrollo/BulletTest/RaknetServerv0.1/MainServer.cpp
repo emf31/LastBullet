@@ -18,6 +18,7 @@
 
 
 TGameInfo gameinfo;
+RakNet::RakPeerInterface *peer;
 
 
 void muestraPlayer(Player *p) {
@@ -45,10 +46,11 @@ unsigned char getPacketIdentifier(RakNet::Packet * pPacket)
 		return (unsigned char)pPacket->data[0];
 }
 
+void enviarFilaTabla(RakNet::RakNetGUID& rakID, const std::string& name);
 
 
 int main() {
-	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
+	peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	sd.socketFamily = AF_INET;
 	RakNet::Packet *packet;
@@ -141,9 +143,11 @@ int main() {
 
 				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
 
-				//Enviamos el nuevo bot a todos los players menos al host y le enviamos a ese nuevo player todos los anteriores
+				enviarFilaTabla(t_player.guid, t_player.name);
+
+				//Enviamos el nuevo bot a todos los players menos al host 
 				//EntityManager::i().sendPlayer(t_player, peer);
-				EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
+				//EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
 
 				Bot *bot = new Bot(t_player.name, t_player.guid);
 				bot->setPosition(t_player.position);
@@ -154,7 +158,9 @@ int main() {
 			case MOVIMIENTO: {
 
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
+
 				EntityManager::i().enviaNuevaPos(mov, gameinfo.creador, peer);
+
 				Entity* ent = EntityManager::i().getRaknetEntity(mov.guid);
 
 				if (ent != NULL) {
@@ -378,6 +384,9 @@ int main() {
 				Player *p = new Player(rak.name, rak.creador);
 
 
+				enviarFilaTabla(rak.creador, rak.name);
+
+
 				//EntityManager::i().empezarPartida(peer, rak);
 
 				rak.mID = EMPEZAR_PARTIDA;
@@ -394,7 +403,7 @@ int main() {
 
 				Player *p = new Player(rak.name, rak.guid);
 
-				rak.mID = NUEVO_PLAYER;
+				enviarFilaTabla(rak.guid, rak.name);
 
 				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
 				EntityManager::i().sendPlayer(rak, peer);
@@ -424,4 +433,18 @@ int main() {
 
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 	return 0;
+}
+
+
+void enviarFilaTabla(RakNet::RakNetGUID& rakID, const std::string& name) {
+	TFilaTabla filaTabla;
+	//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
+	filaTabla.mID = ACTUALIZA_TABLA;
+	filaTabla.guid = rakID;
+	filaTabla.name = name;
+	filaTabla.kills = 0;
+	filaTabla.deaths = 0;
+	filaTabla.puntuacion = 0;
+
+	EntityManager::i().enviaFila(peer, filaTabla);
 }

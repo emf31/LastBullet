@@ -11,6 +11,7 @@ struct fila_tabla {
 	CEGUI::DefaultWindow* bajas;
 	CEGUI::DefaultWindow* puntos;
 };
+
 class InGameHUD : public Motor::GUI {
 public:
 
@@ -48,6 +49,7 @@ public:
 	fila_tabla player2;
 	fila_tabla player3;
 	fila_tabla player4;
+
 private:
 	CEGUI::DefaultWindow* LabelVida;
 	CEGUI::DefaultWindow* LabelArma;

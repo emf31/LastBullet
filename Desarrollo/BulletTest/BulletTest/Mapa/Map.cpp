@@ -199,6 +199,10 @@ Vec3<float> Map::searchSpawnPoint()
 
 	std::vector<Vec3<float>> m_spawns = map.getSpawnPoints();
 
+	if (m_spawns.empty()) {
+		return Vec3<float>(0,0,0);
+	}
+
 	if (m_spawns.size() == 1) {
 		return m_spawns.at(0);
 	}

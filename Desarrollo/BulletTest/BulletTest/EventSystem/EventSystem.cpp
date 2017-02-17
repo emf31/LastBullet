@@ -3,6 +3,12 @@
 void EventSystem::dispatch(Event * e)
 {
 	//add the event to evenlist, we'll dispatch it later
+	m_EventList.push(e);
+}
+
+void EventSystem::dispatchNow(Event * e)
+{
+	//dispatch the event now
 
 	for (auto i = m_EventListeners.begin(); i != m_EventListeners.end(); i++)
 	{
@@ -22,16 +28,10 @@ void EventSystem::dispatch(Event * e)
 	releaseEvent(e);
 }
 
-void EventSystem::dispatchNow(Event * e)
-{
-	//dispatch the event now
-
-	m_EventList.push(e);
-}
-
 void EventSystem::update(void)
 {
-
+	int a;
+	a = 5;
 }
 
 void EventSystem::borrarContenido()
