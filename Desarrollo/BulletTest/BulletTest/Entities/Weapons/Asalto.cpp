@@ -92,9 +92,12 @@ void Asalto::handleInput()
 }
 
 
+
+
+
 void Asalto::shoot(const Vec3<float>& target)
 {
-	
+
 	if (disparos < capacidadAmmo && estadoWeapon==CARGADA) {
 
 		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
@@ -174,4 +177,6 @@ void Asalto::shoot(const Vec3<float>& target)
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
 }
+

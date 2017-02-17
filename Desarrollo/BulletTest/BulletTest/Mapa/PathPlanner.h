@@ -17,7 +17,7 @@ public:
 	bool CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& camino);
 	//encuentra el camino menos costoso hasta un item (haria una llamada
 	//al metodo de buscar camino de Astar)
-	bool CreatePathToItem(const std::string& tipo, std::list<Vec2f>& camino);
+	float CreatePathToItem(const std::string& tipo, std::list<Vec2f>& camino);
 private:
 	Enemy_Bot* m_Bot;
 	SparseGraph& m_grafo;

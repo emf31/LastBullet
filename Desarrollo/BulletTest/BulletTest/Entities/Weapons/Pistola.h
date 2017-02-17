@@ -29,12 +29,15 @@ public:
 
 	virtual void shoot(const Vec3<float>& target);
 
-	virtual void resetAmmoTotal() { numCargadores= numCargadoresPistola; }
+
+	virtual void resetAmmoTotal() { numCargadores = numCargadoresPistola; }
 
 private:
 	btVector3 SIZE_OF_WORLD;
 	btVector3 FUERZA;
 
+
 	Character* m_ent;
+
 };
 

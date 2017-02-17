@@ -86,7 +86,7 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 	}
 }
 
-bool PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& camino)
+float PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& camino)
 {
 	std::list<int> listaNodos;
 	
@@ -94,7 +94,7 @@ bool PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& ca
 
 
 	if (NodoMasCercanoAlBot == -1) {
-		return false;
+		throw std::runtime_error("Excepcion del PathPlanner");
 	}
 
 	Dijkstra dij(m_grafo, NodoMasCercanoAlBot, tipo);
@@ -104,7 +104,7 @@ bool PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& ca
 	Map::i().ConvertirNodosAPosiciones(listaNodos, camino);
 	SuavizarCamino(camino);
 
-	return true;
+	return dij.getCostToTarget();
 }
 
 
@@ -171,7 +171,7 @@ void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
 			//para volver a repetir el proceso y ver si se puede eliminar el nodo que hay nuevamente
 			//entre e1 y e2
 			++e1;
-			std::cout << "Para suavizar el camino elimino el nodo con posicion: " << (*e1) << std::endl;
+			//std::cout << "Para suavizar el camino elimino el nodo con posicion: " << (*e1) << std::endl;
 			e1 = listaCamino.erase(e1);
 			if (e2 != listaCamino.end()) {
 				++e2;

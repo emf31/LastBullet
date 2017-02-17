@@ -6,15 +6,12 @@ class MachineState
 {
 public:
 
-	MachineState(Entity* owner) :m_pOwner(owner),
-		m_pCurrentState(NULL),
-		m_pPreviousState(NULL),
-		m_pGlobalState(NULL)
+	MachineState(Enemy_Bot* owner) :m_pOwner(owner)
 	{}
 	~MachineState();
 
 	//use these methods to initialize the FSM
-	void SetCurrentState(StateIA* s) { m_pCurrentState = s; }
+	void SetCurrentState(StateIA* s) {m_pCurrentState = s; }
 	void SetGlobalState(StateIA* s) { m_pGlobalState = s; }
 	void SetPreviousState(StateIA* s) { m_pPreviousState = s; }
 
@@ -52,12 +49,18 @@ public:
 	StateIA* PreviousState()  { return m_pPreviousState; }
 	//returns true if the current state’s type is equal to the type of the
 	//class passed as a parameter.
-	bool isInState(const StateIA& st)const;
+	bool isInState(std::string estado) {
+		if (m_pCurrentState->getStateName() == estado) {
+			return true;
+		}
+		return false;
+	}
 
 private:
 
 	//a pointer to the agent that owns this instance
-	Entity* m_pOwner;
+	Enemy_Bot* m_pOwner;
+
 	StateIA* m_pCurrentState;
 	//a record of the last state the agent was in
 	StateIA* m_pPreviousState;

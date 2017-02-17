@@ -90,6 +90,10 @@ public:
 
 	void setDebugDraw();
 
+	void apuntar();
+	void restablecerMirilla();
+
+
 	IrrlichtDevice* getDevice() { return irrDevice; }
 private:
 	IrrlichtDevice *irrDevice;

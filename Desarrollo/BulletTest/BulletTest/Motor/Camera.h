@@ -35,7 +35,8 @@ public:
 	}
 	void cameraShake();
 	void cameraRecoil();
-
+	void apuntar();
+	void restablecerMira();
 
 
 private:
@@ -44,5 +45,8 @@ private:
 	Entity* m_entity;
 	CameraShake* m_cameraShake;
 	GunRecoil* m_GunRecoil;
+	f32 defaultFOV;
+	f32 defaultAspect;
+	f32 zoomFOV;
 };
 

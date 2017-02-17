@@ -1,12 +1,19 @@
-#include "Enemy_Bot.h"
+#include <Enemy_Bot.h>
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
 #include <PathPlanner.h>
 #include <PathFollow.h>
 #include <Player.h>
+
 #include <NetworkManager.h>
 #include <Color4f.h>
+
+#include <MachineState.h>
+#include <StatesIA\Patrullar.h>
+#include <StatesIA\BuscarVida.h>
+#include <StatesIA\BuscarWeapon.h>
 #include <Map.h>
+#include <TriggerSystem.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
 	life_component(this)
@@ -15,20 +22,61 @@ Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Charac
 	m_network.reset();
 	m_network = NetworkManager::i().createNetBot(this);
 
-
-	
-
+	dwTriggerFlags = kTrig_EnemyShootSound;
+	TriggerSystem::i().RegisterEntity(this);
 }
 
 Enemy_Bot::~Enemy_Bot()
 {
-
+	
 }
 
 void Enemy_Bot::inicializar()
 {
+
+	crearFuzzyRules();
+
 	m_PathPlanner = new PathPlanner(this);
 	m_PathFollow = new PathFollow(this);
+
+
+	targetingSystem = new TargetingSystem(this);
+
+	weaponSystem = new WeaponSystem(this, 0,0, 20);
+	weaponSystem->Inicializar();
+
+
+	sense = new SensoryMemory(this,20);
+
+	//angulo de vision
+	FOV = DegToRad(45) ;
+
+
+	m_pStateMachine = new MachineState(this);
+	m_pStateMachine->SetCurrentState(&Patrullar::i());
+	//m_pStateMachine->SetGlobalState(&Patrullar::i());
+
+}
+
+
+void Enemy_Bot::lookAt(Vec2f at) {
+
+	m_vHeading = at - vec3ToVec2(m_renderState.getPosition());
+
+	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+
+}
+
+Vec2f Enemy_Bot::getFacing()
+{
+	return m_vHeading;
+}
+
+float Enemy_Bot::getFOV()
+{
+	return FOV;
 }
 
 void Enemy_Bot::update(Time elapsedTime)
@@ -65,6 +113,20 @@ void Enemy_Bot::update(Time elapsedTime)
 
 	}
 
+	targetingSystem->Update();
+	sense->updateVision();
+
+
+	weaponSystem->TakeAimAndShoot();
+
+	if (!this->getMachineState()->isInState("BuscarVida"))
+	FuzzyLifeObject();
+
+	if (this->getMachineState()->isInState("Patrullar"))
+		m_pStateMachine->ChangeState(&BuscarWeapon::i());
+
+
+	m_pStateMachine->Update();
 	
 }
 
@@ -104,8 +166,8 @@ void Enemy_Bot::cargarContenido()
 
 
 	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
-	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
-	proxy->m_collisionFilterMask = col::enemyCollidesWith;
+	proxy->m_collisionFilterGroup = col::Collisions::Character;
+	proxy->m_collisionFilterMask = col::characterCollidesWith;
 
 	
 
@@ -114,12 +176,18 @@ void Enemy_Bot::cargarContenido()
 	p_controller->m_maxSpeed_walk = 2.f;
 
 	setPosition(Map::i().searchSpawnPoint());
+
+	lookAt(Vec2f(0, 0));
+
 }
 
 void Enemy_Bot::borrarContenido()
 {
 	delete m_PathFollow;
 	delete m_PathPlanner;
+	delete sense;
+	delete weaponSystem;
+	delete targetingSystem;
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 
@@ -148,7 +216,12 @@ void Enemy_Bot::handleMessage(const Message & message)
 
 bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	return false;
+	Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
+	if (ent->getID() != m_id && Trigger->eTriggerType == kTrig_EnemyShootSound) {
+		printf("Trigger tipo sonido de arma enemigo\n");
+		sense->updateSound(ent);
+	}
+	return true;
 }
 
 void Enemy_Bot::setPosition(const Vec3<float>& pos)
@@ -212,17 +285,19 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 }
 
-void Enemy_Bot::createPathToItem(const std::string& tipo)
+float Enemy_Bot::createPathToItem(const std::string& tipo)
 {
 
 	//Camino actual a seguir
 	std::list<Vec2f> m_camino;
 
-	m_PathPlanner->CreatePathToItem(tipo, m_camino);
+	float result=m_PathPlanner->CreatePathToItem(tipo, m_camino);
 
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
+
+	return result;
 }
 
 void Enemy_Bot::updateAnimation()
@@ -253,4 +328,112 @@ void Enemy_Bot::updateAnimation()
 		break;
 
 	}*/
+}
+
+void Enemy_Bot::crearFuzzyRules() {
+
+
+	//LifeDrop
+
+
+	fm.AddRule(FzAND(Life_Low, Life_LowTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Low, Life_OkayTarget), DesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Low, Life_LoadsTarget), VeryDesirableLifeDrop);
+
+	fm.AddRule(FzAND(Life_Okay, Life_LowTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Okay, Life_OkayTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Okay, Life_LoadsTarget), DesirableLifeDrop);
+
+	fm.AddRule(FzAND(Life_Loads, Life_LowTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Loads, Life_OkayTarget), UndesirableLifeDrop);
+	fm.AddRule(FzAND(Life_Loads, Life_LoadsTarget), UndesirableLifeDrop);
+
+	//Asalto
+
+	fm.AddRule(FzAND(Target_Close, Ammo_LowAsalto), DesirableAsalto);
+	fm.AddRule(FzAND(Target_Close, Ammo_OkayAsalto), VeryDesirableAsalto);
+	fm.AddRule(FzAND(Target_Close, Ammo_LoadsAsalto), VeryDesirableAsalto);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_LowAsalto), UndesirableAsalto);
+	fm.AddRule(FzAND(Target_Medium, Ammo_OkayAsalto), DesirableAsalto);
+	fm.AddRule(FzAND(Target_Medium, Ammo_LoadsAsalto), DesirableAsalto);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_LowAsalto), UndesirableAsalto);
+	fm.AddRule(FzAND(Target_Far, Ammo_OkayAsalto), UndesirableAsalto);
+	fm.AddRule(FzAND(Target_Far, Ammo_LoadsAsalto), UndesirableAsalto);
+
+	//Sniper
+
+	fm.AddRule(FzAND(Target_Close, Ammo_LowSniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Close, Ammo_OkaySniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Close, Ammo_LoadsSniper), UndesirableSniper);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_LowSniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Medium, Ammo_OkaySniper), UndesirableSniper);
+	fm.AddRule(FzAND(Target_Medium, Ammo_LoadsSniper), DesirableSniper);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_LowSniper), VeryDesirableSniper);
+	fm.AddRule(FzAND(Target_Far, Ammo_OkaySniper), VeryDesirableSniper);
+	fm.AddRule(FzAND(Target_Far, Ammo_LoadsSniper), VeryDesirableSniper);
+
+
+}
+
+void Enemy_Bot::elegirWeapon(float Dist) {
+
+	double mejorScore = 0;
+	std::string bestWeapon = "Pistola";
+
+	double DistToTarget = Dist;
+
+	fm.Fuzzify("DistToTarget", DistToTarget);
+
+	if (weaponSystem->buscar("Asalto")) {
+
+		fm.Fuzzify("AmmoStatusAsalto", weaponSystem->getAmmoAsalto());
+
+		double DesAsalto = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
+
+
+		if (DesAsalto > mejorScore) {
+			mejorScore = DesAsalto;
+			bestWeapon = "Asalto";
+		}
+
+	}
+
+	if (weaponSystem->buscar("Sniper")) {
+
+		fm.Fuzzify("AmmoStatusSniper", weaponSystem->getAmmoSniper());
+
+		double DesSniper = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
+
+
+		if (DesSniper > mejorScore) {
+			mejorScore = DesSniper;
+			bestWeapon = "Sniper";
+		}
+
+
+	}
+
+
+	weaponSystem->Equipar(bestWeapon);
+}
+
+void Enemy_Bot::FuzzyLifeObject() {
+
+
+
+	fm.Fuzzify("Life", life_component.getVida());
+	fm.Fuzzify("LifeTarget", damageTarget);
+
+	double k = fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av);
+	//std::cout << "Valor FuzzyLifeObject: " << k << std::endl;
+
+	if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>40) {
+		m_pStateMachine->ChangeState(&BuscarVida::i());
+	}
+
+
 }

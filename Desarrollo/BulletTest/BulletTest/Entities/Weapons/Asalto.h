@@ -2,7 +2,6 @@
 #include "Weapon.h"
 #include <Character.h>
 
-
 #define numCargadoresAsalto 5
 
 
@@ -31,13 +30,12 @@ public:
 	virtual void shoot(const Vec3<float>& target);
 
 
-	virtual void resetAmmoTotal() {
-		numCargadores= numCargadoresAsalto;
-	}
+	virtual void resetAmmoTotal() { numCargadores = numCargadoresAsalto; }
 
 private:
 	btVector3 SIZE_OF_WORLD;
 	btVector3 FUERZA;
+
 
 	Character* m_ent;
 

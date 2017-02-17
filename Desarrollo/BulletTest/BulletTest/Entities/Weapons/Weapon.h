@@ -10,6 +10,7 @@
 #include <Util.h>
 #include <Message.h>
 
+
 #define CARGADA 0
 #define DESCARGADA 1
 
@@ -39,12 +40,16 @@ public:
 
 	virtual void shoot(const Vec3<float>& target) = 0;
 
+
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 
 	virtual int getAmmo() { return capacidadAmmo - disparos; }
-	virtual int getCargadorWeapon() { return capacidadAmmo; }
-	virtual int getAmmoTotal() { return numCargadores; }
+	virtual int getCapacidadCargador() { return capacidadAmmo; }
+	virtual int getNumCargadores() { return numCargadores; }
 	virtual int getBalasRestantes() { return disparosRestantes; }
+
+	virtual int getMunicionTotal() { return capacidadAmmo*numCargadores + disparosRestantes; }
+
 
 	virtual void resetAmmoTotal() = 0;
 
@@ -52,6 +57,8 @@ public:
 	virtual void resetRecarga() { relojrecarga.restart(); }
 
 	virtual void recargar();
+
+
 
 protected:
 	Time cadencia;

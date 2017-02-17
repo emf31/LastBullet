@@ -8,8 +8,15 @@
 #include <AnimatedSceneNode.h>
 #include <Animation.h>
 #include <vector>
+
 #include <Lista.h>
 #include <LifeComponent.h>
+
+#include "Weapons/Asalto.h"
+#include "Weapons/Pistola.h"
+#include "Weapons/RocketLauncher.h"
+#include "Weapons/Sniper.h"
+
 
 #include <Character.h>
 
@@ -51,6 +58,8 @@ public:
 	void UpWeapon();
 	void DownWeapon();
 	void reload();
+	void apuntar();
+	void restablecerMira();
 
 	void impulsar(Vec3<float> force);
 
@@ -65,12 +74,18 @@ public:
 	Weapon* getCurrentWeapon() { return listaWeapons->valorActual(); };
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
-	int getCargadorActual() { return listaWeapons->valorActual()->getCargadorWeapon(); }
+
+	int getCargadorActual() { return listaWeapons->valorActual()->getCapacidadCargador(); }
 	int getAmmoTotal();
 
 
 
 	btPairCachingGhostObject* getGhostObject() const{ return p_controller->getGhostObject(); }
+
+
+	bool getApuntando() {
+		return apuntando;
+	}
 
 	void resetAll();
 
@@ -102,6 +117,7 @@ private:
 	Asalto* asalto;
 	Pistola* pistola;
 	RocketLauncher* rocket;
+	Sniper* sniper;
 
 	LifeComponent life_component;
 
@@ -112,6 +128,9 @@ private:
 	bool tieneAsalto;
 	bool tieneRocketLauncher;
 	bool tienePistola;
+	bool tieneSniper;
+
+	bool apuntando=false;
 
 	bool isShooting;
 

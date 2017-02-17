@@ -43,6 +43,8 @@ public:
 
 	void updateRelojes();
 
+	void updateApuntando();
+
 	void muestraFinPartida();
 
 	fila_tabla player1;
@@ -50,7 +52,11 @@ public:
 	fila_tabla player3;
 	fila_tabla player4;
 
+	
+
 private:
+	CEGUI::DefaultWindow* scope;
+
 	CEGUI::DefaultWindow* LabelVida;
 	CEGUI::DefaultWindow* LabelArma;
 	CEGUI::DefaultWindow* LabelMunicion;
@@ -60,6 +66,7 @@ private:
 
 	CEGUI::DefaultWindow* hitMarker;
 	CEGUI::DefaultWindow* sangre;
+	
 
 	CEGUI::DefaultWindow* windowTabla;
 

@@ -29,6 +29,8 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
+
+
 	if (equipada) {
 
 		if (estadoWeapon == DESCARGADA) {
@@ -86,8 +88,10 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 
+
 void Pistola::shoot(const Vec3<float>& target) {
 
+	float danyo = 0;
 	
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
@@ -126,6 +130,7 @@ void Pistola::shoot(const Vec3<float>& target) {
 							if (ent->getClassName() == "Player" || ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
 								Message msg(ent, "COLISION_BALA", &damage);
 								MessageHandler::i().sendMessage(msg);
+								danyo = damage;
 							}
 							//Para mover objetos del mapa
 							posicionImpacto = ray.m_hitPointWorld;
@@ -162,5 +167,6 @@ void Pistola::shoot(const Vec3<float>& target) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
 
 }

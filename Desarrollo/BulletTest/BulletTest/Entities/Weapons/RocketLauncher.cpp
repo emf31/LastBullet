@@ -87,7 +87,9 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 
+
 void RocketLauncher::shoot(const Vec3<float>& target) {
+
 
 	
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
@@ -132,4 +134,6 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 		
 		estadoWeapon = DESCARGADA;
 	}
+
+	
 }

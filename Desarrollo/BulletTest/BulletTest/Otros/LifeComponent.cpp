@@ -3,8 +3,8 @@
 #include <Map.h>
 #include <NetworkManager.h>
 
-LifeComponent::LifeComponent(Entity * player) 
-	: m_player(player), m_isDying(false), m_vida(100)
+LifeComponent::LifeComponent(Entity * owner) 
+	: m_pOwner(owner), m_isDying(false), m_vida(100)
 {
 }
 
@@ -20,10 +20,12 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		relojMuerte.restart();
 
 
+
 		TPlayer nuevoplayer;
-		nuevoplayer.position = m_player->getRenderState()->getPosition();
-		nuevoplayer.guid = m_player->getGuid();
-		nuevoplayer.name = m_player->getName();
+		nuevoplayer.position = m_pOwner->getRenderState()->getPosition();
+		nuevoplayer.guid = m_pOwner->getGuid();
+		nuevoplayer.name = m_pOwner->getName();
+
 
 
 		NetworkManager::i().dispatchMessage(nuevoplayer, MUERTE);
@@ -31,7 +33,8 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 
 		/*TKill kill;
 		kill.guidKill = guid;
-		kill.guidDeath = m_player->getGuid();
+		kill.guidDeath = m_pOwner->getGuid();
+
 
 		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);*/
 	
@@ -47,7 +50,7 @@ void LifeComponent::update()
 		m_isDying = false;
 		m_vida = 100;
 
-		m_player->setPosition(Map::i().searchSpawnPoint());
+		m_pOwner->setPosition(Map::i().searchSpawnPoint());
 	}
 
 }

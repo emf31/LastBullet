@@ -5,6 +5,7 @@
 #include "../Entities\WeaponDrops/AsaltoDrop.h"
 #include "../Entities\WeaponDrops/PistolaDrop.h"
 #include "../Entities/WeaponDrops/RocketLauncherDrop.h"
+#include "../Entities/WeaponDrops/SniperDrop.h"
 #include "GraphicEngine.h"
 #include "../Entities/Button.h"
 #include "../Otros/EnumParser.h"
@@ -56,7 +57,11 @@ void MapLoader::readMap(const std::string & name)
 						node->setTexture("../media/lanzacohetes.jpg", 0);
 					} else if (extraTags == "asalto") {
 						node->setTexture("../media/asalto.jpg", 0);
+					} else if (extraTags == "asalto") {
+						node->setTexture("../media/sniper.png", 0);
 					}
+
+
 				}
 					
 				if (obj["tag"] == "LifeObject")
@@ -67,6 +72,8 @@ void MapLoader::readMap(const std::string & name)
 					createAsaltoDrop(pos, es, nombre, mesh);
 				if (obj["tag"] == "RocketLauncherDrop")
 					createRocektLauncherDrop(pos, es, nombre, mesh);
+				if (obj["tag"] == "SniperDrop")
+					createSniperDrop(pos, es, nombre, mesh);
 				if (obj["tag"] == "Grafo")
 					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 				if (obj["tag"] == "Spawn") {
@@ -166,6 +173,16 @@ Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> es
 	RocketLauncherDropEnt->setPosition(posicion);
 
 	return RocketLauncherDropEnt;
+}
+
+Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
+{
+	std::shared_ptr<BasicSceneNode> sniper = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/sniper.png", "");
+	SniperDrop *SniperDropEnt = new SniperDrop(sniper, name);
+	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, escala*2.f));
+	SniperDropEnt->setPosition(posicion);
+
+	return SniperDropEnt;
 }
 
 void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type) {

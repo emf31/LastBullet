@@ -9,6 +9,7 @@
 #include <WeaponDrops/RocketLauncherDrop.h>
 #include <WeaponDrops/PistolaDrop.h>
 #include <WeaponDrops/AsaltoDrop.h>
+#include <WeaponDrops/SniperDrop.h>
 #include <GraphicEngine.h>
 #include <SceneNode.h>
 #include <MessageHandler.h>
@@ -116,11 +117,6 @@ void Game::run()
 	}
 
 
-
-
-	
-
-
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
@@ -159,53 +155,7 @@ void Game::inicializar()
 
 	player->m_network->inicializar();
 
-	/*Enemy_Bot* bot = new Enemy_Bot("JULIYO BOT", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();*/
 
-	
-
-	/*while (player->m_network->isConnected() == false) {
-		NetworkManager::i().updateNetwork(Time::Zero);
-	}*/
-	
-
-	//world.inicializar();
-
-
-	/*int a = 1;
-	do {
-		std::cout << "Elige un modo:" << std::endl;
-		std::cout << "[1] - Un jugador" << std::endl;
-		std::cout << "[2] - Multijugador" << std::endl;
-
-		std::cin >> a;
-	} while (a != 1 && a != 2);
-
-	if (a == 1) {
-		
-
-
-	}
-	else {
-		EntityManager::i().inicializar();
-
-		EntityManager::i().cargarContenido();
-
-		//raknet
-		Cliente::i().inicializar();
-
-
-		//Bucle infinito hasta que se conecte
-		while (Cliente::i().isConected() == false) {
-			Cliente::i().update(Time::Zero);
-		}
-
-		
-
-		
-
-
-	}*/
 
 	
 

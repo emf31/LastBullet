@@ -112,20 +112,6 @@ void DebugMenuGUI::inicializar() {
 
 	
 
-	/*botJuliyo = new Enemy_Bot("BOTJULIYO");
-	botJuliyo->inicializar();
-	botJuliyo->cargarContenido();
-	botJuliyo->setPosition(Map::i().searchSpawnPoint());*/
-
-	/*botTonire = new Enemy_Bot("BOTTONIRE");
-	botTonire->inicializar();
-	botTonire->cargarContenido();
-	botTonire->setPosition(Map::i().searchSpawnPoint());
-
-	botRucri = new Enemy_Bot("BOTRUCRI");
-	botRucri->inicializar();
-	botRucri->cargarContenido();
-	botRucri->setPosition(Map::i().searchSpawnPoint());*/
 
 }
 
@@ -149,22 +135,25 @@ bool DebugMenuGUI::onDebugIAMapaClicked(const CEGUI::EventArgs & e) {
 	mapa->setVisible(!mapa->isVisible());
 	return true;
 }
-bool DebugMenuGUI::onDebugIAVIDAClicked(const CEGUI::EventArgs & e) {
-	//botJuliyo->createPathToItem("LifeObject");
+
+bool DebugMenuGUI::onDebugIAVIDAClicked(const CEGUI::EventArgs & e)
+{
+	return true;
+}
+
+bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
+	//Obama->createPathToItem("LifeObject");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAROCKETClicked(const CEGUI::EventArgs & e) {
-	//botJuliyo->createPathToItem("RocketLauncherDrop");
+	//Obama->createPathToItem("RocketLauncherDrop");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAASALTOClicked(const CEGUI::EventArgs & e) {
-	//botJuliyo->createPathToItem("AsaltoDrop");
+	//Obama->createPathToItem("AsaltoDrop");
 	return true;
 }
-bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
-	//botJuliyo->createPathToItem("PistolaDrop");
-	return true;
-}
+
 
 bool DebugMenuGUI::onCloseMenuButtonClicked(const CEGUI::EventArgs & e) {
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(0.0f);
@@ -200,7 +189,9 @@ bool DebugMenuGUI::onMapClicked(const CEGUI::EventArgs & e) {
 	float nodoX=y/3+6;
 	float nodoY=x/3+2;
 	std::cout << "El bot ira a la posicion: x= " << nodoX << " y= " << nodoY << std::endl;
+
 	//botJuliyo->createPathToPosition(Vec2f(nodoX, nodoY));
+
 	/*botTonire->createPathToPosition(Vec2f(nodoX, nodoY));
 	botRucri->createPathToPosition(Vec2f(nodoX, nodoY));*/
 

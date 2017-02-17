@@ -109,9 +109,6 @@
     <ClCompile Include="IA\MachineState.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
-    <ClCompile Include="IA\StatesIA\Patrullar.cpp">
-      <Filter>Source Code\IA</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\GroupEntity.cpp">
       <Filter>Source Code\Entities</Filter>
     </ClCompile>
@@ -231,6 +228,75 @@
     </ClCompile>
     <ClCompile Include="Entities\Character.cpp">
       <Filter>Headers\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Weapons\Sniper.cpp">
+      <Filter>Source Code\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\SniperDrop.cpp">
+      <Filter>Source Code\Entities\WeaponDrops</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzyModule.cpp">
+      <Filter>Source Code\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzyRule.cpp">
+      <Filter>Source Code\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzyVariable.cpp">
+      <Filter>Source Code\IA\FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySet.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetLeftShoulder.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetRightShoulder.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetSingleton.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FuzzySetTriangle.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzAND.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzyOperators</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzOR.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzyOperators</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzVery.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzyEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzFairly.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzyEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\FuzzyLogic\FzSet.cpp">
+      <Filter>Source Code\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp">
+      <Filter>Source Code\IA\SensoryMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\BuscarVida.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\BuscarWeapon.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\Disparar.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\Perseguir.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\StatesIA\Patrullar.cpp">
+      <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\TargetingSystem.cpp">
+      <Filter>Source Code\IA</Filter>
+    </ClCompile>
+    <ClCompile Include="IA\WeaponSystem.cpp">
+      <Filter>Source Code\IA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,12 +461,6 @@
     </ClInclude>
     <ClInclude Include="IA\StatesIA\StateIA.h">
       <Filter>Headers\IA\StatesIA</Filter>
-    </ClInclude>
-    <ClInclude Include="IA\MachineState.h">
-      <Filter>Headers\IA</Filter>
-    </ClInclude>
-    <ClInclude Include="IA\StatesIA\Patrullar.h">
-      <Filter>Headers\IA</Filter>
     </ClInclude>
     <ClInclude Include="Entities\GroupEntity.h">
       <Filter>Headers\Entities</Filter>
@@ -567,6 +627,84 @@
     <ClInclude Include="Entities\Character.h">
       <Filter>Headers\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\Weapons\Sniper.h">
+      <Filter>Headers\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\WeaponDrops\SniperDrop.h">
+      <Filter>Headers\Entities\WeaponDrops</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyModule.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyRule.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyTerm.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzyVariable.h">
+      <Filter>Headers\IA\FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySet.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetLeftShoulder.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetRightShoulder.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetTriangle.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FuzzySetSingleton.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzSet.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzySet</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzAND.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzyOperators</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzOR.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzyOperators</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzVery.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzyEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\FuzzyLogic\FzFairly.h">
+      <Filter>Headers\IA\FuzzyLogic\FuzzyEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\SensorySystem\Memory.h">
+      <Filter>Headers\IA\SensoryMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\SensorySystem\SensoryMemory.h">
+      <Filter>Headers\IA\SensoryMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Patrullar.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\MachineState.h">
+      <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\BuscarVida.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\BuscarWeapon.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Disparar.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\StatesIA\Perseguir.h">
+      <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\WeaponSystem.h">
+      <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\TargetingSystem.h">
+      <Filter>Headers\IA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -700,6 +838,39 @@
     </Filter>
     <Filter Include="Source Code\EventSystem\events">
       <UniqueIdentifier>{e47cc754-e8a3-4db0-970d-067cecb33108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\FuzzyLogic">
+      <UniqueIdentifier>{ec730b27-642a-4ffd-bdd2-0076c3eb5dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\SensoryMemory">
+      <UniqueIdentifier>{ce96cbd4-4ef5-41c7-9ab3-650dc62b7948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\StatesIA">
+      <UniqueIdentifier>{f7780a3c-d95d-4990-807c-f64b4812e010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\SensoryMemory">
+      <UniqueIdentifier>{e80f6439-2609-4508-9465-19e1507b1e4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\FuzzyLogic">
+      <UniqueIdentifier>{0064db2b-b4fa-45bb-93cf-023a48529d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\FuzzyLogic\FuzzySet">
+      <UniqueIdentifier>{cde5f27a-cf29-4271-8532-9ef295c6f473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\FuzzyLogic\FuzzyOperators">
+      <UniqueIdentifier>{20f52995-7037-4db8-b925-00242df83621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\IA\FuzzyLogic\FuzzyEdges">
+      <UniqueIdentifier>{d2933daf-a40f-47bd-abbc-fea20a84fdbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\FuzzyLogic\FuzzySet">
+      <UniqueIdentifier>{63cdc11a-d655-4f46-9df6-dd3e54d1181d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\FuzzyLogic\FuzzyEdge">
+      <UniqueIdentifier>{58c1e73d-a92d-4b6d-af60-89efd70eda69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\IA\FuzzyLogic\FuzzyOperators">
+      <UniqueIdentifier>{7f1aad0f-89d7-48ad-bceb-bbfd785beb7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

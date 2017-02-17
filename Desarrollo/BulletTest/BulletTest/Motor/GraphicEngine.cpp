@@ -278,6 +278,7 @@ void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	irrScene->addToDeletionQueue(nodo->getNodo());
 }
 
+
 void GraphicEngine::setDebugDraw()
 {
 	debugDraw = new DebugDraw(irrDevice);
@@ -298,5 +299,15 @@ void GraphicEngine::setDebugDraw()
 	debugMat.Lighting = false;
 
 	debug_draw_bullet = true;
+}
+
+void GraphicEngine::apuntar()
+{
+	active_camera->apuntar();
+}
+
+void GraphicEngine::restablecerMirilla()
+{
+	active_camera->restablecerMira();
 }
 
