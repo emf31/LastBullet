@@ -1,9 +1,140 @@
-﻿  Lista.cpp
+﻿  NetPlayer.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\network\netplayer.cpp(35): warning C4101: 'elec': variable local sin referencia
+  WeaponSystem.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(22): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(26): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(30): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(34): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(60): warning C4244: 'argumento': conversión de 'const double' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(61): warning C4244: 'argumento': conversión de 'const double' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\ia\weaponsystem.cpp(62): warning C4244: 'argumento': conversión de 'const double' a 'float'; posible pérdida de datos
+  BuscarWeapon.cpp
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+  Game.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(246): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
+  Weapon.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Sniper.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Pistola.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  WeaponDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  RocketLauncherDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  PistolaDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  AsaltoDrop.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  Player.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(76): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(80): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(84): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(88): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
+  LifeObject.cpp
+  Macro definition of max detected - undefining
+  Macro definition of min detected - undefining
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+  EntityManager.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  main.cpp
+  World.cpp
+  Lista.cpp
+  LifeComponent.cpp
+  NetworkManager.cpp
+  NetworkDebugger.cpp
+  NetObject.cpp
+  NetBot.cpp
+  MapLoader.cpp
+  GunRecoil.cpp
+  GraphicEngine.cpp
+  CameraShake.cpp
+  PathPlanner.cpp
+  TargetingSystem.cpp
+  Perseguir.cpp
+  Patrullar.cpp
+  Disparar.cpp
+  BuscarVida.cpp
+  SensoryMemory.cpp
+  PathFollow.cpp
+  Partida.cpp
+  InputHandler.cpp
+  InGameHUD.cpp
+  DebugMenuGUI.cpp
+  RocketLauncher.cpp
+  Asalto.cpp
+  SniperDrop.cpp
+  RocketBullet.cpp
+  Granada.cpp
+  Enemy_Bot.cpp
+  Enemy.cpp
   BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

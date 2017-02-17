@@ -31,6 +31,9 @@ void WeaponSystem::Inicializar() {
 	sniper->inicializar();
 	sniper->cargarContenido();
 
+	rocket = new RocketLauncher(m_pOwner);
+	rocket->inicializar();
+	rocket->cargarContenido();
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);

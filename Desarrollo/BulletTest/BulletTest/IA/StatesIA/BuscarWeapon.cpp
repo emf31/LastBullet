@@ -32,14 +32,14 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 		}
 	}
 
-/*	if (!pEnemy->getWeaponSys()->buscar("RocketLauncher")) {
+	if (!pEnemy->getWeaponSys()->buscar("RocketLauncher")) {
 		actual = pEnemy->getPathPlanning()->CreatePathToItem("RocketLauncherDrop", m_camino);
 		if (actual < best) {
 			best = actual;
 			bestString = "RocketLauncherDrop";
 			m_camino.clear();
 		}
-	}*/
+	}
 	
 	std::cout << "El mejor es: " << bestString << std::endl;
 
