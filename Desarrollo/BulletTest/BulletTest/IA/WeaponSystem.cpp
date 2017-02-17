@@ -21,12 +21,15 @@ void WeaponSystem::Inicializar() {
 
 	pistola = new Pistola(m_pOwner);
 	pistola->inicializar();
+	pistola->cargarContenido();
 
 	asalto = new Asalto(m_pOwner);
 	asalto->inicializar();
+	asalto->cargarContenido();
 
 	sniper = new Sniper(m_pOwner);
 	sniper->inicializar();
+	sniper->cargarContenido();
 
 
 	listaWeapons = new Lista();

@@ -79,5 +79,6 @@ protected:
 
 	int disparosRestantes=0;
 
+
 };
 

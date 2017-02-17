@@ -140,14 +140,9 @@ void Game::inicializar()
 	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 
-	
 
-	std::string str;
 
-	printf("Introduce un nombre \n");
-	std::cin >> str;
-
-	Player *player = new Player(str, RakNet::UNASSIGNED_RAKNET_GUID);
+	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
 
 	ingameGUI.inicializar();
 	debugMenu.inicializar();

@@ -22,6 +22,7 @@ void PistolaDrop::update(Time elapsedTime)
 		if (clockRespawnWeapon.getElapsedTime().asSeconds() >= timeRespawnWeapon) {
 			estado = DISPONIBLE;
 			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(5.f, 5.f, 5.f));
+			
 			m_nodo->setVisible(true);
 		}
 	}
@@ -48,7 +49,6 @@ void PistolaDrop::handleMessage(const Message & message)
 		if (tipo == "Player" || tipo == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
-				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRespawnWeapon.restart();
 

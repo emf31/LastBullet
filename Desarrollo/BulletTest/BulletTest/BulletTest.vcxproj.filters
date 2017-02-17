@@ -226,9 +226,6 @@
     <ClCompile Include="Network\NetworkDebugger.cpp">
       <Filter>Source Code\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Character.cpp">
-      <Filter>Headers\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\Weapons\Sniper.cpp">
       <Filter>Source Code\Entities\Weapons</Filter>
     </ClCompile>
@@ -297,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="IA\WeaponSystem.cpp">
       <Filter>Source Code\IA</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Character.cpp">
+      <Filter>Source Code\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

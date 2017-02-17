@@ -1,9 +1,9 @@
 #include "Weapon.h"
 
 
-Weapon::Weapon() : Entity(-1, NULL)
+Weapon::Weapon() : Entity(-1, NULL), estadoWeapon(CARGADA)
 {
-	estadoWeapon = CARGADA;
+
 }
 
 

@@ -18,25 +18,20 @@ Sniper::~Sniper()
 
 void Sniper::inicializar()
 {
-	damage = 100;
-	capacidadAmmo = 5;
-	disparos = 0;
-	cadencia = milliseconds(2000);
-	recarga = milliseconds(1000);
-	numCargadores = numCargadoresSniper;
-	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
-	FUERZA = btVector3(300.f, 300.f, 300.f);
+		damage = 100;
+		capacidadAmmo = 5;
+		disparos = 0;
+		cadencia = milliseconds(2000);
+		recarga = milliseconds(1000);
+		numCargadores = numCargadoresSniper;
+		SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
+		FUERZA = btVector3(300.f, 300.f, 300.f);
+	
 }
 
 void Sniper::update(Time elapsedTime)
 {
 	if (equipada) {
-
-
-		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -69,16 +64,10 @@ void Sniper::handleInput()
 void Sniper::cargarContenido()
 {
 
-
-	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
+	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
 	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.5f, 0.5f, 0.5f), "", "../media/arma/Asalto.obj");
 	m_nodo->setVisible(false);
-	//m_nodo->setTexture("../media/ice0.jpg", 0);
-	//m_nodo->setTexture("../media/ice0.jpg", 1);
 
-
-
-	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
 
 }
 

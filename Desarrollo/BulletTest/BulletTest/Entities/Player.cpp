@@ -89,21 +89,26 @@ void Player::inicializar()
 	sniper->inicializar();
 	sniper->cargarContenido();
 
+	
+
+	listaWeapons = new Lista();
+
+	listaWeapons->insertar(pistola);
+	tienePistola = true;
+	pistola->setEquipada(true);
+	bindWeapon();
 
 	GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(pistola->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(sniper->getNode());
 
-	listaWeapons = new Lista();
+	listaWeapons->valorActual()->getNode()->setVisible(true);
 
-	listaWeapons->insertar(pistola);
-	tienePistola = true;
-
-	listaWeapons->insertar(sniper);
+	/*listaWeapons->insertar(sniper);
 	sniper->setEquipada(true);
 	tieneSniper = true;
-	bindWeapon();
+	bindWeapon();*/
 
 	
 }
@@ -187,7 +192,7 @@ void Player::cargarContenido()
 	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
 	m_nodo->setVisible(false);
 
-	listaWeapons->valorActual()->getNode()->setVisible(true);
+	
 
 	radius = 1.2f;
 	height = 7.3f;
@@ -205,6 +210,8 @@ void Player::cargarContenido()
 	p_controller->reset(PhysicsEngine::i().m_world);
 
 	setPosition(Map::i().searchSpawnPoint());
+
+	
 
 }
 
@@ -530,22 +537,13 @@ void Player::resetAll() {
 	tieneAsalto = false;
 	tieneSniper = false;
 
-
-	asalto->borrarContenido();
 	asalto->inicializar();
-	asalto->cargarContenido();
-
-	rocket->borrarContenido();
+	
 	rocket->inicializar();
-	rocket->cargarContenido();
-
-	pistola->borrarContenido();
+	
 	pistola->inicializar();
-	pistola->cargarContenido();
-
-	sniper->borrarContenido();
+	
 	sniper->inicializar();
-	sniper->cargarContenido();
 
 
 	listaWeapons->insertar(pistola);
