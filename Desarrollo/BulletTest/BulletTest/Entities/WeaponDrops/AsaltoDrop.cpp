@@ -62,8 +62,11 @@ void AsaltoDrop::handleMessage(const Message & message)
 
 				if (ClassName == "Player")
 					static_cast<Player*>(message.data)->setWeapon(ASALTO);
-				if (ClassName == "Enemy_Bot") 
+				if (ClassName == "Enemy_Bot") {
 					static_cast<Enemy_Bot*>(message.data)->setWeapon(ASALTO);
+					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
+
+				}
 				
 
 				m_nodo->setVisible(false);

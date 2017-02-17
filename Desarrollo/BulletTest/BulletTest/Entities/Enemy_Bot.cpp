@@ -264,17 +264,19 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 }
 
-void Enemy_Bot::createPathToItem(const std::string& tipo)
+float Enemy_Bot::createPathToItem(const std::string& tipo)
 {
 
 	//Camino actual a seguir
 	std::list<Vec2f> m_camino;
 
-	m_PathPlanner->CreatePathToItem(tipo, m_camino);
+	float result=m_PathPlanner->CreatePathToItem(tipo, m_camino);
 
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
+
+	return result;
 }
 
 void Enemy_Bot::updateAnimation()

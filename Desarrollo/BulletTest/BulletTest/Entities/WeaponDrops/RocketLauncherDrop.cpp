@@ -43,7 +43,11 @@ void RocketLauncherDrop::borrarContenido()
 void RocketLauncherDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+
+
+		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
+
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				estado = USADO;
@@ -54,7 +58,16 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 
 					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
 				}
-				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
+
+				if (ClassName == "Player")
+					static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
+				if (ClassName == "Enemy_Bot") {
+					static_cast<Enemy_Bot*>(message.data)->setWeapon(LANZACOHETES);
+					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
+
+				}
+
+
 				m_nodo->setVisible(false);
 
 			}
@@ -67,4 +80,7 @@ bool RocketLauncherDrop::handleTrigger(TriggerRecordStruct * Trigger)
 	ArmaCogida();
 	return true;
 }
+
+
+
 

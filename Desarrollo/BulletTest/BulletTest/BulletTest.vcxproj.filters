@@ -250,7 +250,6 @@
     <ClCompile Include="IA\TargetingSystem.cpp">
       <Filter>Source Code\IA</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\WeaponDrops\SniperDrop.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp">
       <Filter>Source Code\IA\StatesIA</Filter>
     </ClCompile>
@@ -265,6 +264,9 @@
     </ClCompile>
     <ClCompile Include="IA\StatesIA\BuscarWeapon.cpp">
       <Filter>Source Code\IA\StatesIA</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\WeaponDrops\SniperDrop.cpp">
+      <Filter>Source Code\Entities\WeaponDrops</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -514,7 +516,6 @@
     <ClInclude Include="Mapa\Celda.h">
       <Filter>Headers\Mapa</Filter>
     </ClInclude>
-    <ClInclude Include="Handlers\Partida.h" />
     <ClInclude Include="Observer\Subject.h">
       <Filter>Headers\Observer</Filter>
     </ClInclude>
@@ -635,7 +636,6 @@
     <ClInclude Include="IA\TargetingSystem.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\WeaponDrops\SniperDrop.h" />
     <ClInclude Include="IA\StatesIA\Perseguir.h">
       <Filter>Headers\IA\StatesIA</Filter>
     </ClInclude>
@@ -647,6 +647,10 @@
     </ClInclude>
     <ClInclude Include="IA\StatesIA\BuscarWeapon.h">
       <Filter>Headers\IA\StatesIA</Filter>
+    </ClInclude>
+    <ClInclude Include="Handlers\Partida.h" />
+    <ClInclude Include="Entities\WeaponDrops\SniperDrop.h">
+      <Filter>Headers\Entities\WeaponDrops</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

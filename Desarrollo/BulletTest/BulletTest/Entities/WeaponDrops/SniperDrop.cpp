@@ -44,7 +44,11 @@ void SniperDrop::borrarContenido()
 void SniperDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+
+
+		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
+
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				estado = USADO;
@@ -55,7 +59,16 @@ void SniperDrop::handleMessage(const Message & message)
 
 					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
 				}
-				static_cast<Player*>(message.data)->setWeapon(SNIPER);
+
+				if (ClassName == "Player")
+					static_cast<Player*>(message.data)->setWeapon(SNIPER);
+				if (ClassName == "Enemy_Bot") {
+					static_cast<Enemy_Bot*>(message.data)->setWeapon(SNIPER);
+					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
+
+				}
+
+
 				m_nodo->setVisible(false);
 
 			}

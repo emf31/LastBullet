@@ -5,6 +5,7 @@
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
 #include <Player.h>
 #include <Enemy_Bot.h>
+#include <StatesIA\BuscarWeapon.h>
 
 
 

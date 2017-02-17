@@ -68,7 +68,7 @@ public:
 
 
 	void createPathToPosition(Vec2f vec);
-	void createPathToItem(const std::string& tipo);
+	float createPathToItem(const std::string& tipo);
 
 	void elegirWeapon(float DistToTarget);
 
