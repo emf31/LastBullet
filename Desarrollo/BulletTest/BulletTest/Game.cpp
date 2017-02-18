@@ -3,18 +3,10 @@
 #include "MastEventReceiver.hpp"
 #include <Clock.hpp>
 #include <PhysicsEngine.h>
-#include <EntityManager.h>
-#include <PhysicsEntity.h>
-#include <LifeObject.h>
-#include <WeaponDrops/RocketLauncherDrop.h>
-#include <WeaponDrops/PistolaDrop.h>
-#include <WeaponDrops/AsaltoDrop.h>
-#include <WeaponDrops/SniperDrop.h>
 #include <GraphicEngine.h>
 #include <SceneNode.h>
 #include <MessageHandler.h>
 #include <EventSystem.h>
-#include <StateStack.hpp>
 #include <MapLoader.h>
 #include <RakPeerInterface.h>
 #include <MessageIdentifiers.h>
@@ -40,7 +32,7 @@ const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 
-Game::Game() : ingameGUI(), debugMenu()
+Game::Game() : stateStack(StateStack::i())
 {
 
 }
@@ -52,6 +44,8 @@ Game::~Game()
 
 void Game::run()
 {
+	//Game loop from Bullet Physics documentation example
+
 	Clock clock;
 
 	inicializar();
@@ -68,14 +62,11 @@ void Game::run()
 
 	
 	while (GraphicEngine::i().isRuning()) {
-		if (World::i().gamestarted) {
 			///Las fisicas se ejecutan 60 veces por segundo
 
 			time_physics_curr = clock.getElapsedTime();
 
-			//if (GraphicEngine::i().isWindowActive()) {
 			PhysicsEngine::i().update(time_physics_curr - time_physics_prev);
-			//}
 
 			time_physics_prev = time_physics_curr;
 
@@ -110,12 +101,13 @@ void Game::run()
 
 				render(interpolation, timePerFrame);
 			}
-		}
+		
 		
 
 
 	}
 
+	
 
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
@@ -123,7 +115,6 @@ void Game::run()
 	TriggerSystem::i().apagar();
 
 	NetworkManager::i().apagar();
-
 
 	MessageHandler::i().borrarContenido();
 
@@ -133,123 +124,42 @@ void Game::run()
 
 void Game::inicializar()
 {
-
-
 	
+
 	Settings::i().LoadSettings();
-	PhysicsEngine::i().inicializar();
 	GraphicEngine::i().inicializar();
 
-
+	
 
 	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
 
-	ingameGUI.inicializar();
-	debugMenu.inicializar();
-
-
 	player->m_network->inicializar();
-
-
-
-	
-
-
 
 }
 
 bool Game::processEvents()
 {
+	stateStack.GetCurrentState()->HandleEvent();
 
-	if (!debugMenu.debugInput) {
-		EntityManager::i().getEntity(PLAYER)->handleInput();
-	}
-
-	//Teclas debug
-	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
-
-		GraphicEngine::i().toggleDebug();
-
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
-
-		GraphicEngine::i().toggleCamera();
-
-	}
-	else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
-
-		ingameGUI.setTablaVisible(false);
-
-	}
-	else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
-
-		ingameGUI.setTablaVisible(true);
-		World::i().getPartida()->muestraTabla();
-
-	}
-	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
-
-		debugMenu.debugInput = !debugMenu.debugInput;
-		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
-		debugMenu.showMouseCursor(debugMenu.debugInput);
-		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
-		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
-
-		//TODO llevarlo al otro sitio
-		//debugMenu.mapa->setVisible(debugMenu.debugInput);
-
-	}
-	else if (MastEventReceiver::i().leftMouseDown()) {
-
-		debugMenu.injectLeftMouseButton();
-
-	}
-	else if (MastEventReceiver::i().leftMouseUp()) {
-
-		debugMenu.injectLeftMouseButtonUp();
-
-	}
-
-	return false;
+	return true;
 }
 
 void Game::update(Time elapsedTime)
 {
 
-	PhysicsEngine::i().cleanDeleteObjects();
-	EntityManager::i().cleanDeleteQueue();
-
-
-	EntityManager::i().update(elapsedTime);
-
-	TriggerSystem::i().Update();
-
-	PhysicsEngine::i().notifyCollisions();
-
-	MessageHandler::i().update();
-
-	EventSystem::i().update();
-
-	GUIManager::i().updateAllGuis();
-
+	stateStack.GetCurrentState()->Update(elapsedTime);
 
 }
 
 void Game::render(float interpolation, Time elapsedTime)
 {
 
-	EntityManager::i().updateRender(interpolation);
+	stateStack.GetCurrentState()->Render(interpolation, elapsedTime);
 
-	GraphicEngine::i().updateCamera();
+}
 
-	//GUI
-	debugMenu.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
-
-
-	//GraphicEngine::i().getGui().update();
-
-	GraphicEngine::i().renderAll();
-
+void Game::clear()
+{
 }
 
 

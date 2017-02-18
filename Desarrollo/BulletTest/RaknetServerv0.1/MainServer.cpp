@@ -123,9 +123,9 @@ int main() {
 				Player *p = new Player(t_player.name, t_player.guid);
 				p->setPosition(t_player.position);
 
-				EntityManager::i().mostrarClientes();
+				
 
-				TFilaTabla filaTabla;
+				/*TFilaTabla filaTabla;
 				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
 				filaTabla.mID = ACTUALIZA_TABLA;
 				filaTabla.guid = t_player.guid;
@@ -133,7 +133,7 @@ int main() {
 				filaTabla.kills = 0;
 				filaTabla.deaths = 0;
 				filaTabla.puntuacion = 0;
-				EntityManager::i().enviaFila(peer, filaTabla);
+				EntityManager::i().enviaFila(peer, filaTabla);*/
 
 
 			}
@@ -386,9 +386,6 @@ int main() {
 
 				enviarFilaTabla(rak.creador, rak.name);
 
-
-				//EntityManager::i().empezarPartida(peer, rak);
-
 				rak.mID = EMPEZAR_PARTIDA;
 
 				//Esto es temporal
@@ -401,12 +398,12 @@ int main() {
 			{
 				TPlayer rak = *reinterpret_cast<TPlayer*>(packet->data);
 
+				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
+				EntityManager::i().sendPlayer(rak, peer);
+
 				Player *p = new Player(rak.name, rak.guid);
 
 				enviarFilaTabla(rak.guid, rak.name);
-
-				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
-				EntityManager::i().sendPlayer(rak, peer);
 
 				TGameInfo info;
 				info.mID = EMPEZAR_PARTIDA;
@@ -432,6 +429,7 @@ int main() {
 	}
 
 	RakNet::RakPeerInterface::DestroyInstance(peer);
+
 	return 0;
 }
 

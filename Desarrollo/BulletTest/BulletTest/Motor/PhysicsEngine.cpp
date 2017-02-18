@@ -5,7 +5,7 @@
 #include <set>
 #include <BulletCollision\CollisionDispatch\btCollisionObject.h>
 
-
+#include <GraphicEngine.h>
 #include <MessageHandler.h>
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
@@ -67,7 +67,7 @@ void PhysicsEngine::inicializar()
 	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;
 
 
-
+	GraphicEngine::i().setDebugDraw();
 
 	
 }
@@ -75,8 +75,12 @@ void PhysicsEngine::inicializar()
 
 void PhysicsEngine::update(Time elapsedTime)
 {
-	//Como la simulacion va lenta multiplicamos por 2
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
+
+	if (m_world) {
+		//Como la simulacion va lenta multiplicamos por 1.25
+		m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
+	}
+	
 	
 
 	

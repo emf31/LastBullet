@@ -4,8 +4,10 @@
 #include <memory>
 #include <Windows.h>
 
+
 //Forward declaration - prevents circular reference
 class Player;
+class World;
 
 class NetPlayer : public NetObject {
 public:
@@ -35,7 +37,7 @@ public:
 
 private:
 
-	void startup(LPCTSTR lpApplicationName);
+	
 
 	Player* m_player;
 
@@ -43,6 +45,8 @@ private:
 
 	//Lista de servidores disponibles
 	std::vector<std::string> m_servers;
+
+	World& m_world;
 
 #ifdef NETWORK_DEBUG
 	std::shared_ptr<NetworkDebugger> debugger;

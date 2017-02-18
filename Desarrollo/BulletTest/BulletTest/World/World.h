@@ -12,7 +12,7 @@ public:
 		return singleton;
 	}
 
-	void inicializar(const std::string& mapa);
+	void inicializar();
 	void apagar();
 
 	bool gamestarted = false;
@@ -24,5 +24,5 @@ private:
 
 	Partida* partida;
 
-	World() { }
+	World();
 };

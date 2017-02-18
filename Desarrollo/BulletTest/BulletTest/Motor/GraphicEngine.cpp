@@ -203,7 +203,7 @@ void GraphicEngine::inicializar()
 		irrDevice->getCursorControl()->setVisible(0);
 		cargarTexturas();
 
-		setDebugDraw();
+		//setDebugDraw();
 
 		
 	//}

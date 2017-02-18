@@ -298,6 +298,21 @@
     <ClCompile Include="Entities\Character.cpp">
       <Filter>Source Code\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="States\InGame.cpp">
+      <Filter>Headers\States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\State.cpp">
+      <Filter>Headers\States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\StateFactory.cpp">
+      <Filter>Headers\States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\StateStack.cpp">
+      <Filter>Headers\States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\Menu.cpp">
+      <Filter>Headers\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -434,15 +449,6 @@
     </ClInclude>
     <ClInclude Include="Command\ShootRocket.h">
       <Filter>Headers\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="States\State.hpp">
-      <Filter>Headers\States</Filter>
-    </ClInclude>
-    <ClInclude Include="States\StateFactory.hpp">
-      <Filter>Headers\States</Filter>
-    </ClInclude>
-    <ClInclude Include="States\StateStack.hpp">
-      <Filter>Headers\States</Filter>
     </ClInclude>
     <ClInclude Include="Otros\Util.h">
       <Filter>Headers\Otros</Filter>
@@ -704,6 +710,24 @@
     </ClInclude>
     <ClInclude Include="IA\TargetingSystem.h">
       <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="States\InGame.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\State.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\StateFactory.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\StateStack.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\events\GameStartEvent.h">
+      <Filter>Headers\EventSystem\events</Filter>
+    </ClInclude>
+    <ClInclude Include="States\Menu.h">
+      <Filter>Headers\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

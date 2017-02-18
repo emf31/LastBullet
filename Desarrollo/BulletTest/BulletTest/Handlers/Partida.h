@@ -22,6 +22,8 @@ public:
 
 	void muestraTabla();
 
+	const std::string& getCurrentMap() const { return gameInfo.map; }
+
 private:
 
 	void nuevoPlayer(TFilaTabla fila);
@@ -33,4 +35,6 @@ private:
 	std::unordered_map <unsigned long, TFilaTabla> m_tabla;
 
 	InGameHUD* ingame;
+
+	TGameInfo gameInfo;
 };

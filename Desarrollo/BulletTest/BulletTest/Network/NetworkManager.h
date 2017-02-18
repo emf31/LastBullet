@@ -16,13 +16,14 @@ class NetworkManager {
 
 public:
 
+	~NetworkManager();
 
 	static NetworkManager& i() {
 		static NetworkManager singleton;
 		return singleton;
 	}
 
-	void inicializar(const std::string& address);
+	void createServer();
 	bool removeNetBotObject(std::shared_ptr<NetBot> netobj);
 	void apagar();
 	
@@ -32,6 +33,8 @@ public:
 
 	//Call handle packets for every netobject
 	void updateNetwork(Time elapsedTime);
+
+	void startup(LPCTSTR lpApplicationName);
 
 
 	//Send packet to server using netplayer peer (used for global messages like kills, deaths, life objects)
@@ -44,6 +47,12 @@ public:
 
 
 private:
+
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+	HANDLE hJob;
+	JOBOBJECT_EXTENDED_LIMIT_INFORMATION jeli;
+
 
 	std::shared_ptr<NetPlayer> m_netPlayer;
 

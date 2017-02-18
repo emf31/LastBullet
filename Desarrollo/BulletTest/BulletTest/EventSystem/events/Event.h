@@ -7,7 +7,8 @@ enum EventType {
 	E_AUMENTA_MUERTE = 1,
 	E_AUMENTA_KILL = 2,
 	E_FIN_PARTIDA = 3,
-	E_NETWORK_DEBUGGER = 4
+	E_NETWORK_DEBUGGER = 4,
+	E_GAME_START = 5
 };
 
 class Event

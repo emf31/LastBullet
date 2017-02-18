@@ -204,6 +204,7 @@
     <ClInclude Include="EventSystem\EventSystem.h" />
     <ClInclude Include="EventSystem\events\DebugNetEvent.h" />
     <ClInclude Include="EventSystem\events\Event.h" />
+    <ClInclude Include="EventSystem\events\GameStartEvent.h" />
     <ClInclude Include="EventSystem\events\KillEvent.h" />
     <ClInclude Include="EventSystem\events\MuerteEvent.h" />
     <ClInclude Include="EventSystem\events\PlayerEvent.h" />
@@ -291,9 +292,11 @@
     <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
-    <ClInclude Include="States\State.hpp" />
-    <ClInclude Include="States\StateFactory.hpp" />
-    <ClInclude Include="States\StateStack.hpp" />
+    <ClInclude Include="States\InGame.h" />
+    <ClInclude Include="States\Menu.h" />
+    <ClInclude Include="States\State.h" />
+    <ClInclude Include="States\StateFactory.h" />
+    <ClInclude Include="States\StateStack.h" />
     <ClInclude Include="TriggerSystem\TriggerRecordStruct.h" />
     <ClInclude Include="TriggerSystem\TriggerSystem.h" />
     <ClInclude Include="World\World.h" />
@@ -396,6 +399,11 @@
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
+    <ClCompile Include="States\InGame.cpp" />
+    <ClCompile Include="States\Menu.cpp" />
+    <ClCompile Include="States\State.cpp" />
+    <ClCompile Include="States\StateFactory.cpp" />
+    <ClCompile Include="States\StateStack.cpp" />
     <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
     <ClCompile Include="World\World.cpp" />
   </ItemGroup>

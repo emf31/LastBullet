@@ -3,28 +3,31 @@
 #include <Map.h>
 #include <PhysicsEngine.h>
 
+World::World()
+{
+	partida = new Partida();
+}
 
 World::~World()
 {
+	
 }
 
 
-void World::inicializar(const std::string& mapa)
+void World::inicializar()
 {
 	
-
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 
-	partida = new Partida();
-
+	std::string str = "../media/";
+	str.append(partida->getCurrentMap());
+	Map::i().inicializar(str);
 
 	//LLama al inicializar de todas las entities
 	EntityManager::i().inicializar();
 
 	EntityManager::i().cargarContenido();
-
-	//partida = new Partida();
 
 
 	//enviamos los paquetes del vida al servidor para que los cree

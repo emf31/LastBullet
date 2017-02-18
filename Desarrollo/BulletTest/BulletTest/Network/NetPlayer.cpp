@@ -10,12 +10,14 @@
 #include <events/PlayerEvent.h>
 #include <events/MuerteEvent.h>
 #include <events/KillEvent.h>
+#include <events\GameStartEvent.h>
 #include <NetworkManager.h>
 #include <Settings.h>
-#include <World.h>
 #include <Map.h>
+#include <World.h>
+#include <StateStack.h>
 
-NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player)
+NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player), m_world(World::i())
 {
 
 #ifdef NETWORK_DEBUG
@@ -32,11 +34,7 @@ NetPlayer::~NetPlayer()
 void NetPlayer::inicializar()
 {
 	char eleccion;
-	int elec;
-
-	std::string str;
 	
-	//do {
 
 		std::cout << "\t[a] - Crear partida" << std::endl;
 		std::cout << "\t[b] - Unirse a partida" << std::endl;
@@ -54,7 +52,6 @@ void NetPlayer::inicializar()
 			
 		}
 
-	//} while (eleccion != 'a' || eleccion != 'b');
 
 		
 		
@@ -63,38 +60,12 @@ void NetPlayer::inicializar()
 
 	
 }
-void NetPlayer::startup(LPCTSTR lpApplicationName)
-{
-	// additional information
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
 
-	// set the size of the structures
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
-
-	// start the program up
-	CreateProcess(lpApplicationName,   // the path
-		NULL,			// Command line
-		NULL,           // Process handle not inheritable
-		NULL,           // Thread handle not inheritable
-		FALSE,          // Set handle inheritance to FALSE
-		0,              // No creation flags
-		NULL,           // Use parent's environment block
-		NULL,           // Use parent's starting directory 
-		&si,            // Pointer to STARTUPINFO structure
-		&pi             // Pointer to PROCESS_INFORMATION structure (removed extra parentheses)
-	);
-
-
-	// Close process and thread handles. 
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
-}
 
 void NetPlayer::crearPartida()
 {
+	NetworkManager::i().createServer();
+
 	conectar("127.0.0.1", server_port);
 
 	while (isConnected() == false) {
@@ -111,23 +82,20 @@ void NetPlayer::crearPartida()
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
-	//TODO cuando halla estados estoy hay que arreglarlo
-	std::string str = "../media/";
-	str.append(gameinfo.map);
-	Map::i().inicializar(str);
+	
 
-	/*Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();*/
+	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();
 
-	Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
+	/*Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
 	bot2->m_network->inicializar();
 
 /*	Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot3->m_network->inicializar();
-	*/
-	while (World::i().gamestarted == false) {
+	bot3->m_network->inicializar();*/
+	
+	/*while (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}
+	}*/
 }
 
 
@@ -193,14 +161,10 @@ void NetPlayer::unirseLobby()
 
 	dispatchMessage(p, UNIRSE_PARTIDA);
 
-	//TODO cuando halla estados estoy hay que arreglarlo
-	std::string str2 = "../media/";
-	str2.append("laberinto.json");
-	Map::i().inicializar(str2);
 
-	while (World::i().gamestarted == false) {
+	/*while (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}
+	}*/
 
 }
 
@@ -256,9 +220,15 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TGameInfo info = *reinterpret_cast<TGameInfo*>(packet->data);
 
-			World::i().inicializar(info.map);
+			GameStartEvent* gev = new GameStartEvent(info);
 
-			World::i().gamestarted = true;
+			EventSystem::i().dispatchNow(gev);
+			
+			//When we recive a starting game message we change
+			//current state to INGAME
+			
+			StateStack::i().SetCurrentState(States::ID::InGame);
+			StateStack::i().GetCurrentState()->Inicializar();
 
 			break;
 		}
@@ -270,11 +240,12 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-			/*Enemy *e = new Enemy(p.name, p.guid);
+			Enemy *e = new Enemy(p.name, p.guid);
 			e->inicializar();
 			e->cargarContenido();
 			e->setPosition(p.position);
-			EntityManager::i().mostrarClientes();*/
+
+			EntityManager::i().registerRaknetEntity(e);
 
 #ifdef NETWORK_DEBUG
 			//debugger->addDebugMark(e->getID());
@@ -291,10 +262,11 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 
 			Enemy *e = new Enemy(p.name, p.guid);
-			/*e->inicializar();
+			e->inicializar();
 			e->cargarContenido();
 			e->setPosition(p.position);
-			EntityManager::i().mostrarClientes();*/
+
+			EntityManager::i().registerRaknetEntity(e);
 
 
 #ifdef NETWORK_DEBUG

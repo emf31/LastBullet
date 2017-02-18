@@ -2,6 +2,7 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
+#include <events\GameStartEvent.h>
 #include <EventSystem.h>
 #include <GUIManager.h>
  
@@ -40,6 +41,11 @@ void Partida::handleEvent(Event* e)
 		case E_FIN_PARTIDA: {
 			muestraTabla();
 			ingame->muestraFinPartida();
+			break;
+		}
+		case E_GAME_START: {
+			GameStartEvent* g_ev = static_cast<GameStartEvent*>(e);
+			gameInfo = g_ev->m_info;
 			break;
 		}
 
