@@ -113,9 +113,6 @@
     <ClInclude Include="TModel.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="TNode.h">
       <Filter>Archivos de encabezado\Nodes</Filter>
     </ClInclude>
