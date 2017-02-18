@@ -232,9 +232,7 @@ void Player::handleMessage(const Message & message)
 	}
 	else if (message.mensaje == "COLISION_BALA") {
 			//Este float * es una referencia a una variable de clase asi que no hay problema
-			TImpactoBala impacto;
-			impacto.damage = *static_cast<float*>(message.data);
-			impacto.guid = m_guid;
+			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
 			getLifeComponent().restaVida(impacto.damage, impacto.guid);
 			relojSangre.restart();

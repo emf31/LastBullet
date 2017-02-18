@@ -42,7 +42,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 0,0, 20);
+	weaponSystem = new WeaponSystem(this, 1 ,3, 20);
 	weaponSystem->Inicializar();
 
 
@@ -201,7 +201,9 @@ void Enemy_Bot::handleMessage(const Message & message)
 
 			//Este float * es una referencia a una variable estatica asi que no hay problema
 
-			life_component.restaVida(*static_cast<float*>(message.data));
+			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
+
+			getLifeComponent().restaVida(impacto.damage, impacto.guid);
 
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 

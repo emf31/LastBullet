@@ -17,6 +17,8 @@ World::~World()
 void World::inicializar()
 {
 	
+	partida->inicializar();
+
 	//Esto resetea valores
 	EntityManager::i().inicializarEntityManager();
 

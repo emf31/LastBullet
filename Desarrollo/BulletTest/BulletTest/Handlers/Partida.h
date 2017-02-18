@@ -17,6 +17,8 @@ public:
 	Partida();
 	~Partida();
 
+	void inicializar();
+
 	virtual void handleEvent(Event* e) override;
 
 

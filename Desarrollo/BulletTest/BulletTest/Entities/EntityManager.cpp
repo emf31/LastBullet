@@ -169,7 +169,7 @@ std::list<Entity*> EntityManager::getEnemies()
 {
 	std::list<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
-		if (i->second->getClassName() == "Enemy" || i->second->getClassName() == "Enemy_Bot")
+		if (i->second->getClassName() == "Enemy" || i->second->getClassName() == "Enemy_Bot" || i->second->getClassName() == "Player")
 			characters.push_back(i->second);
 	}
 	return characters;

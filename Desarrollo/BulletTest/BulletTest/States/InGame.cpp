@@ -21,10 +21,12 @@ void InGame::Inicializar()
 {
 	PhysicsEngine::i().inicializar();
 
-	World::i().inicializar();
-
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
+
+	World::i().inicializar();
+
+	
 	
 }
 

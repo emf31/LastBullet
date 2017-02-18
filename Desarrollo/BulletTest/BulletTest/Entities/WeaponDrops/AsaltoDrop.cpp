@@ -48,7 +48,7 @@ void AsaltoDrop::handleMessage(const Message & message)
 
 		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
 
-		if (ClassName == "Player" /*|| ClassName == "Enemy_Bot"*/) {
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				estado = USADO;

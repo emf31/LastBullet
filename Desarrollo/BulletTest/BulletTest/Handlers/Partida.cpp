@@ -9,11 +9,16 @@
 
 Partida::Partida() : EventListener()
 {
-	ingame = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+	
 }
 
 Partida::~Partida()
 {
+}
+
+void Partida::inicializar()
+{
+	ingame = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
 }
 
 void Partida::handleEvent(Event* e)

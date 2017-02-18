@@ -129,8 +129,12 @@ void Sniper::shoot(const Vec3<float>& target)
 					if (ent != m_ent)
 					{
 						if (ent->getClassName() == "Player" || ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-							Message msg(ent, "COLISION_BALA", &damage);
-							MessageHandler::i().sendMessage(msg);
+							TImpactoBala impacto;
+							impacto.damage = damage;
+							impacto.guid = m_ent->getGuid();
+
+							Message msg(ent, "COLISION_BALA", &impacto);
+							MessageHandler::i().sendMessageNow(msg);
 						}
 						//Para mover objetos del mapa
 						posicionImpacto = ray.m_hitPointWorld;
