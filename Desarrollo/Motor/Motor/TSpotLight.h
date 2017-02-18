@@ -36,12 +36,6 @@ private:
 	void setTransformacionTraslacion(TTransform* tras);
 
 
-
-
-
-
-
-
 	Shader* shaderLuz;
 	GLuint lightVAO;
 	GLuint lightVBO;

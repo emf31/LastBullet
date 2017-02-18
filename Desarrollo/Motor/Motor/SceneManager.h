@@ -3,7 +3,7 @@
 #include "TNode.h"
 #include "ResourceManager.h"
 #include "Shader.h"
-#include "Camera.h"
+//#include "Camera.h"
 #include "enum.h"
 #include "TSpotLight.h"
 #include "TCamera.h"
@@ -35,7 +35,7 @@ public:
 	//lo cual a parte de ser mas claro para quien lo use asi no tendriamos acceso a los nodos del arbol desde fuera del motor grafico para que no se pueda corromper este.
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
 	TSpotLight* crearNodoLuz();
-	TNode* crearNodoCamara();
+	TCamera* crearNodoCamara();
 	int getEntityCount() {
 		return nodeEntityCount;
 	}
@@ -52,7 +52,7 @@ public:
 	std::deque<glm::mat4> pilaMatrices;
 	std::vector<TSpotLight*> vectorLuces;
 	std::vector<TCamera*> vectorCamara;
-	Camera* camaraActiva;
+	TCamera* camaraActiva;
 private:
 	ResourceManager *rm;
 	TNode* scene;

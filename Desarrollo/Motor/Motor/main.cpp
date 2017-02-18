@@ -4,7 +4,7 @@ using namespace std;
 #include "EngineDevice.h"
 
 #include "Shader.h"
-#include "Camera.h"
+//#include "Camera.h"
 #include "TModel.h"
 #include "TSpotLight.h"
 

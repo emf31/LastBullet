@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-
+/*
 enum Camera_Movement {
 	FORWARD,
 	BACKWARD,
@@ -19,7 +19,7 @@ const GLfloat PITCH = 0.0f;
 const GLfloat SPEED = 3.0f;
 const GLfloat SENSITIVTY = 0.1f;
 const GLfloat ZOOM = 45.0f;
-
+*/
 
 // An abstract camera class that processes input and calculates the corresponding Eular Angles, Vectors and Matrices for use in OpenGL
 class Camera {

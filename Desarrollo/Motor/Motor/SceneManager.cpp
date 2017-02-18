@@ -27,7 +27,7 @@ void SceneManager::inicializar() {
 	scene = new TNode(-1);
 	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
-	camaraActiva = new Camera();
+	camaraActiva = crearNodoCamara();
 }
 
 
@@ -48,8 +48,8 @@ void SceneManager::draw(GLFWwindow* window) {
 	// Update matrices
 	projection = glm::perspective(camaraActiva->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
 	view = camaraActiva->GetViewMatrix();
-	activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
-
+	//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
+	activeCameraPos = camaraActiva->getPosition();
 	// Desencadena el dibujado de la escena
 	scene->draw();
 	//gui.draw();
@@ -184,8 +184,42 @@ TSpotLight * SceneManager::crearNodoLuz()
 
 
 
-TNode * SceneManager::crearNodoCamara()
+TCamera * SceneManager::crearNodoCamara()
 {
-	return nullptr;
+	TNode* cameraNode;
+	TNode * nuevoNodoRotacion;
+	TNode * nuevoNodoTraslacion;
+
+	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
+	TCamera* camara = new TCamera();
+	int id = camara->getID();
+
+	//rotacion antes de traslacion
+	nuevoNodoRotacion = crearNodoRotacion(scene, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoRotacion, id);
+	cameraNode = new TNode(id, nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(cameraNode);
+
+
+
+
+	//asignamos matrices de transformacion
+	camara->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	camara->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	camara->setMiNodo(cameraNode);
+
+	//seteamos la entity
+	cameraNode->setEntity(camara);
+	cameraNode->setType(T_CAMARA);
+
+	//la añadimos al vector de luces
+	vectorCamara.push_back(camara);
+
+
+	return camara;
 }
 
