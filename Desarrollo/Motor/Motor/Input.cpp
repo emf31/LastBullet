@@ -23,24 +23,24 @@ void Input::mouse_callbackImpl(GLFWwindow * window, double xpos, double ypos) {
 
 	lastX = xpos;
 	lastY = ypos;
-
-	camera.ProcessMouseMovement(xoffset, yoffset);
+	
+	sm.camaraActiva->ProcessMouseMovement(xoffset, yoffset);
 }
 
 void Input::scroll_callbackImpl(GLFWwindow * window, double xoffset, double yoffset) {
-	camera.ProcessMouseScroll(yoffset);
+	sm.camaraActiva->ProcessMouseScroll(yoffset);
 }
 
 void Input::Do_Movement(GLfloat deltaTime) {
 	// Camera controls
 	if (keys[GLFW_KEY_W])
-		camera.ProcessKeyboard(FORWARD, deltaTime);
+		sm.camaraActiva->ProcessKeyboard(FORWARD, deltaTime);
 	if (keys[GLFW_KEY_S])
-		camera.ProcessKeyboard(BACKWARD, deltaTime);
+		sm.camaraActiva->ProcessKeyboard(BACKWARD, deltaTime);
 	if (keys[GLFW_KEY_A])
-		camera.ProcessKeyboard(LEFT, deltaTime);
+		sm.camaraActiva->ProcessKeyboard(LEFT, deltaTime);
 	if (keys[GLFW_KEY_D])
-		camera.ProcessKeyboard(RIGHT, deltaTime);
+		sm.camaraActiva->ProcessKeyboard(RIGHT, deltaTime);
 	if (keys[GLFW_KEY_R]) {
 		rotarDerecha = true;
 	}

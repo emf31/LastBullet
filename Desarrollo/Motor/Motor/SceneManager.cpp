@@ -27,7 +27,7 @@ void SceneManager::inicializar() {
 	scene = new TNode(-1);
 	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
-	std::cout << "matriz actual reseteada" << std::endl;
+	camaraActiva = new Camera();
 }
 
 
@@ -46,9 +46,9 @@ void SceneManager::draw(GLFWwindow* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Update matrices
-	projection = glm::perspective(camera_ptr->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
-	view = camera_ptr->GetViewMatrix();
-	activeCameraPos = Vec3<float>(camera_ptr->getPosition().x, camera_ptr->getPosition().y, camera_ptr->getPosition().z) ;
+	projection = glm::perspective(camaraActiva->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
+	view = camaraActiva->GetViewMatrix();
+	activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 
 	// Desencadena el dibujado de la escena
 	scene->draw();

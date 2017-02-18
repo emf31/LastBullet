@@ -55,7 +55,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	setKeyCallbacks();
 
 	
-	sm.camera_ptr = &input.camera;
+	//sm.camera_ptr = &input.camera;
 	sm.screenWidth = &this->screenWidth;
 	sm.screenHeight = &this->screenHeight;
 	sm.inicializar();

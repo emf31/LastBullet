@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "enum.h"
 #include "TSpotLight.h"
+#include "TCamera.h"
 
 #include "GUI.h"
 #include <deque>
@@ -45,11 +46,13 @@ public:
 	glm::mat4 projection;
 	glm::mat4 view;
 	glm::mat4 m_matrizActual;
-	Camera *camera_ptr;
+	//Camera *camera_ptr;
 	Vec3<float> activeCameraPos;
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;
 	std::vector<TSpotLight*> vectorLuces;
+	std::vector<TCamera*> vectorCamara;
+	Camera* camaraActiva;
 private:
 	ResourceManager *rm;
 	TNode* scene;

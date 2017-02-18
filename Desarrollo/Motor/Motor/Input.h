@@ -5,12 +5,14 @@
 
 #include <GLFW/glfw3.h>
 #include "Camera.h"
+#include "SceneManager.h"
+
 class Input {
 public:
 	bool rotarDerecha;
 	bool rotarIzquierda;
 	// Camara
-	Camera camera;
+	//Camera camera;
 
 	bool keys[1024];
 	GLfloat lastX = 400, lastY = 300;
@@ -47,5 +49,6 @@ private:
 	}
 
 	Input(Input const&);
+	SceneManager& sm = SceneManager::i();
 };
 
