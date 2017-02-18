@@ -36,6 +36,11 @@ public:
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
 	TSpotLight* crearNodoLuz();
 	TCamera* crearNodoCamara();
+
+	void setActiveCamera(TCamera* cam) {
+		camaraActiva = cam;
+	}
+
 	int getEntityCount() {
 		return nodeEntityCount;
 	}
@@ -51,7 +56,7 @@ public:
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;
 	std::vector<TSpotLight*> vectorLuces;
-	std::vector<TCamera*> vectorCamara;
+	std::vector<TCamera*> vectorCamaras;
 	TCamera* camaraActiva;
 private:
 	ResourceManager *rm;

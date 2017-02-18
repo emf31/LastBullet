@@ -4,7 +4,7 @@ using namespace std;
 #include "EngineDevice.h"
 
 #include "Shader.h"
-//#include "Camera.h"
+#include "TCamera.h"
 #include "TModel.h"
 #include "TSpotLight.h"
 
@@ -24,10 +24,12 @@ int main() {
 	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
 	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
 
+	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	//n->setModelColor(0.33f, 0.42f, 0.18f);
 
+	//cartel
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
@@ -35,7 +37,7 @@ int main() {
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
-
+	//personaje
 	TModel* w = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	w->setPosition(Vec3<float>(3.5f, 3.5f, 3.5f));
@@ -45,14 +47,25 @@ int main() {
 	
 
 
-
+	//luces
 	TSpotLight* luz = sm.crearNodoLuz();
 	luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
 	//luz->setColor(1.0f, 0.9f, 0.9f);
 	
+	//poner luz como hijo del personaje
 	//w->addChild(luz);
+
+	//camaras
+	TCamera* cam1 = sm.crearNodoCamara();
+	TCamera* cam2 = sm.crearNodoCamara();
+
+	//pongo la camara 2 como hijo del modelo
+	w->addChild(cam2);
+	//sm.setActiveCamera(cam2);
 	
 	long int cont = 0;
+	long int tiempoCamara = 0;
+	int contCam = 0;
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
 
@@ -63,6 +76,15 @@ int main() {
 		engine.setWindowTitle(title.str());
 		
 		engine.doMovement();
+		if (tiempoCamara == 300) {
+			tiempoCamara = 0;
+			if (contCam >= sm.vectorCamaras.size()) {
+				contCam = 0;
+			}
+			std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
+			sm.setActiveCamera(sm.vectorCamaras[contCam]);
+			contCam++;
+		}
 		if (cont == 100) {
 			cont = 0;
 			aux = w->getPosition();
@@ -71,6 +93,7 @@ int main() {
 			
 		}
 		cont++;
+		tiempoCamara++;
 		/*
 				if (cont == 100) {
 			cont = 0;

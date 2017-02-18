@@ -217,7 +217,7 @@ TCamera * SceneManager::crearNodoCamara()
 	cameraNode->setType(T_CAMARA);
 
 	//la añadimos al vector de luces
-	vectorCamara.push_back(camara);
+	vectorCamaras.push_back(camara);
 
 
 	return camara;
