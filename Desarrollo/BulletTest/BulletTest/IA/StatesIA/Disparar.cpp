@@ -6,6 +6,7 @@
 
 
 void Disparar::Enter(Enemy_Bot* pEnemy) {
+	std::cout << "Entro en Disparar" << std::endl;
 
 }
 

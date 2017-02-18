@@ -87,12 +87,10 @@ public:
 
 	float getFOV();
 
-	void SetDamageTarget(float damage) { damageTarget += damage; }
-
 
 private:
 	
-	float damageTarget = 0;
+	float lifeTarget = 0;
 
 	float radius;
 	float height;

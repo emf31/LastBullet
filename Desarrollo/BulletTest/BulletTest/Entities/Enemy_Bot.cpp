@@ -42,7 +42,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 0,0, 20);
+	weaponSystem = new WeaponSystem(this, 1,400, 20);
 	weaponSystem->Inicializar();
 
 
@@ -120,7 +120,7 @@ void Enemy_Bot::update(Time elapsedTime)
 	weaponSystem->TakeAimAndShoot();
 
 	if (!this->getMachineState()->isInState("BuscarVida"))
-	FuzzyLifeObject();
+		FuzzyLifeObject();
 
 	if (this->getMachineState()->isInState("Patrullar"))
 		m_pStateMachine->ChangeState(&BuscarWeapon::i());
@@ -423,17 +423,17 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 void Enemy_Bot::FuzzyLifeObject() {
 
+		fm.Fuzzify("Life", life_component.getVida());
+		fm.Fuzzify("LifeTarget",100);
 
+		double k = fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av);
+	//	std::cout << "Valor FuzzyLifeObject: " << getTargetBot()->getLifeComponent().getVida() << std::endl;
 
-	fm.Fuzzify("Life", life_component.getVida());
-	fm.Fuzzify("LifeTarget", damageTarget);
+		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>30) {
+			m_pStateMachine->ChangeState(&BuscarVida::i());
+		}
+	
 
-	double k = fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av);
-	//std::cout << "Valor FuzzyLifeObject: " << k << std::endl;
-
-	if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>40) {
-		m_pStateMachine->ChangeState(&BuscarVida::i());
-	}
 
 
 }

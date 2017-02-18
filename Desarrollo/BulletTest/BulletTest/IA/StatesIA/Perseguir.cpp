@@ -4,6 +4,7 @@
 #include <StatesIa/Disparar.h>
 
 void Perseguir::Enter(Enemy_Bot* pEnemy) {
+	std::cout << "Entro en Perseguir" << std::endl;
 
 	try {
 		Vec3<float> vec3 = pEnemy->getTargetSys()->GetLastRecordedPosition();

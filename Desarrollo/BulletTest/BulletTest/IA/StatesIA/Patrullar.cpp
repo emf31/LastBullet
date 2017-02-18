@@ -4,6 +4,8 @@
 
 
 void Patrullar::Enter(Enemy_Bot* pEnemy) {
+	std::cout << "Entro en Patrullar" << std::endl;
+
 	//std::cout << "Zizu" << std::endl;
 }
 

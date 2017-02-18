@@ -48,7 +48,7 @@ void AsaltoDrop::handleMessage(const Message & message)
 
 		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
 
-		if (ClassName == "Player" /*|| ClassName == "Enemy_Bot"*/) {
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				estado = USADO;
@@ -65,6 +65,7 @@ void AsaltoDrop::handleMessage(const Message & message)
 				if (ClassName == "Enemy_Bot") {
 					static_cast<Enemy_Bot*>(message.data)->setWeapon(ASALTO);
 					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
+					std::cout << "Cojo un asaltoDrop" << std::endl;
 
 				}
 

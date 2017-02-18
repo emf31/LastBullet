@@ -64,7 +64,7 @@ void SniperDrop::handleMessage(const Message & message)
 				if (ClassName == "Enemy_Bot") {
 					static_cast<Enemy_Bot*>(message.data)->setWeapon(SNIPER);
 					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
-
+					std::cout << "Cojo un SniperDrop" << std::endl;
 				}
 
 
