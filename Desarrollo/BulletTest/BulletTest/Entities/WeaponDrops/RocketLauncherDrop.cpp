@@ -63,8 +63,10 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 				if (ClassName == "Player")
 					static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
 				if (ClassName == "Enemy_Bot") {
-					static_cast<Enemy_Bot*>(message.data)->setWeapon(LANZACOHETES);
-					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
+					Enemy_Bot* bot = static_cast<Enemy_Bot*>(message.data);
+					bot->setWeapon(LANZACOHETES);
+					if(bot->getMachineState()->isInState("BuscarWeapon"))
+						bot->getMachineState()->ChangeState(&BuscarWeapon::i());
 					std::cout << "Cojo un RocketLauncherDrop" << std::endl;
 				}
 

@@ -8,3 +8,7 @@ Character::Character(int id, std::shared_ptr<SceneNode> nodo, const std::string 
 Character::~Character()
 {
 }
+
+float Character::getVida() {
+	return 100;
+}

@@ -87,6 +87,8 @@ public:
 
 	float getFOV();
 
+	virtual float getVida() override;
+
 
 private:
 	

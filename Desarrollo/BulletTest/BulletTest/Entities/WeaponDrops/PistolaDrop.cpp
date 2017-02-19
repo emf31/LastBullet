@@ -52,8 +52,11 @@ void PistolaDrop::handleMessage(const Message & message)
 				estado = USADO;
 				clockRespawnWeapon.restart();
 
-				static_cast<Player*>(message.data)->setWeapon(PISTOLA);
-
+				if (tipo == "Player")
+					static_cast<Player*>(message.data)->setWeapon(PISTOLA);
+				if (tipo == "Enemy_Bot") {
+					static_cast<Enemy_Bot*>(message.data)->setWeapon(PISTOLA);
+				}
 				m_nodo->setVisible(false);
 
 				TId tID;

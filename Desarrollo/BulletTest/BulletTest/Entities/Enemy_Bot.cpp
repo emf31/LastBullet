@@ -426,17 +426,19 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 void Enemy_Bot::FuzzyLifeObject() {
 
+	if (getTargetBot()) {
+
 		fm.Fuzzify("Life", life_component.getVida());
-		fm.Fuzzify("LifeTarget",100);
+		fm.Fuzzify("LifeTarget", getTargetBot()->getVida());
 
-		double k = fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av);
-	//	std::cout << "Valor FuzzyLifeObject: " << getTargetBot()->getLifeComponent().getVida() << std::endl;
-
-		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av)>30) {
+		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) > 40) {
 			m_pStateMachine->ChangeState(&BuscarVida::i());
 		}
-	
 
 
+	}
+}
 
+float Enemy_Bot::getVida() {
+	return life_component.getVida();
 }

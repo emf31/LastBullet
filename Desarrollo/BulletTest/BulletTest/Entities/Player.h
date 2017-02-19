@@ -94,14 +94,14 @@ public:
 	//shared ptr, we can pass by value
 	std::shared_ptr<NetPlayer> m_network;
 
-public:
 	KinematicCharacterController* p_controller;
 
 	bool hit;
 	bool sangre;
 	Clock relojSangre, relojHit;
 
-	
+	virtual float getVida() override;
+
 	
 private:
 	
@@ -150,4 +150,3 @@ private:
 
 	
 };
-
