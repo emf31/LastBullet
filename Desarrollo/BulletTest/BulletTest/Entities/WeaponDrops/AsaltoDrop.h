@@ -19,7 +19,7 @@ public:
 	virtual void cargarContenido() override;
 
 	virtual void borrarContenido() override;
-
+	
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "AsaltoDrop"; }

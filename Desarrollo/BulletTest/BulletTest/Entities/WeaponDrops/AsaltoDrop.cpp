@@ -65,6 +65,7 @@ void AsaltoDrop::handleMessage(const Message & message)
 				if (ClassName == "Enemy_Bot") {
 					static_cast<Enemy_Bot*>(message.data)->setWeapon(ASALTO);
 					static_cast<Enemy_Bot*>(message.data)->getMachineState()->ChangeState(&BuscarWeapon::i());
+					std::cout << "Cojo un asaltoDrop" << std::endl;
 
 				}
 

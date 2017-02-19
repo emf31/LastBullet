@@ -6,6 +6,7 @@
 
 void BuscarVida::Enter(Enemy_Bot* pEnemy) {
 	pEnemy->createPathToItem("LifeObject");
+	std::cout << "Entro en BuscarVida" << std::endl;
 
 }
 
