@@ -10,6 +10,7 @@ void InGameHUD::inicializar() {
 	loadScheme("Generic.scheme");
 	loadLayout("LastBulletHUD.layout");
 
+
 	LabelVida = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1));
 	LabelArma = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));

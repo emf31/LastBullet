@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <State.h>
+#include <MenuGUI.h>
 
 
 
@@ -20,7 +21,7 @@ public:
 private:
 
 	float interpolation;
-
+	MenuGUI menuGUI;
 
 };
 

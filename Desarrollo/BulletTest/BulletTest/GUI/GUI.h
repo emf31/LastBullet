@@ -78,6 +78,7 @@ namespace Motor{
 
 		unsigned int m_lastTime = 0;
 		
+		std::string m_name;
 
 		
 

@@ -121,7 +121,7 @@ void Game::run()
 }
 
 
-
+	
 void Game::inicializar()
 {
 	

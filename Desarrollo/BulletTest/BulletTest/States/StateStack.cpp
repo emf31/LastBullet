@@ -8,8 +8,6 @@ StateStack::StateStack() {
 	
 	CreateStates();
 	//Solo inicializamos el estado menu
-
-	GetCurrentState()->Inicializar();
 }
 
 StateStack::~StateStack() {
@@ -53,4 +51,3 @@ void StateStack::SetCurrentState(States::ID id) {
 		
 	}
 }
-

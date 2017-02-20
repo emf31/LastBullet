@@ -313,6 +313,9 @@
     <ClCompile Include="States\Menu.cpp">
       <Filter>Headers\States</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\MenuGUI.cpp">
+      <Filter>Source Code\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -728,6 +731,9 @@
     </ClInclude>
     <ClInclude Include="States\Menu.h">
       <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\MenuGUI.h">
+      <Filter>Headers\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

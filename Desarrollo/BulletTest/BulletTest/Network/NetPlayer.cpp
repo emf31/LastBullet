@@ -33,7 +33,10 @@ NetPlayer::~NetPlayer()
 
 void NetPlayer::inicializar()
 {
-	char eleccion;
+	NetworkManager::i().createServer();
+	conectar("127.0.0.1", server_port);
+
+	/*char eleccion;
 	
 
 		std::cout << "\t[a] - Crear partida" << std::endl;
@@ -50,7 +53,7 @@ void NetPlayer::inicializar()
 
 			unirseLobby();
 			
-		}
+		}*/
 
 
 		
@@ -64,10 +67,10 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	NetworkManager::i().createServer();
+	/*NetworkManager::i().createServer();
 
 
-	conectar("127.0.0.1", server_port);
+	conectar("127.0.0.1", server_port);*/
 
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -227,7 +230,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			
 			//When we recive a starting game message we change
 			//current state to INGAME
-			
+			StateStack::i().GetCurrentState()->Clear();
 			StateStack::i().SetCurrentState(States::ID::InGame);
 			StateStack::i().GetCurrentState()->Inicializar();
 

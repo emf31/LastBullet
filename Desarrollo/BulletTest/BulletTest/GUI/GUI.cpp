@@ -19,11 +19,13 @@ void Motor::GUI::init(const std::string& resourcesPath, irr::IrrlichtDevice *dev
 	m_context->setRootWindow(m_root);
 
 	GUIManager::i().addGui(name, this);
+	m_name = name;
 }
 
 
 void Motor::GUI::destroy() {
 	CEGUI::System::getSingleton().destroyGUIContext(*m_context);
+	GUIManager::i().removeGUI(m_name);
 }
 
 void Motor::GUI::draw() {

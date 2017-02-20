@@ -50,6 +50,12 @@ public:
 		}
 	}
 
+	void removeGUI(const std::string& gui)
+	{
+		auto found = m_guis.find(gui);
+		if (found != m_guis.end())
+			m_guis.erase(gui);
+	}
 	Motor::GUI* getGUIbyName(const std::string& name) {
 		auto found = m_guis.find(name);
 		if (found != m_guis.end())

@@ -220,6 +220,7 @@
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="GUI\GUIManager.h" />
     <ClInclude Include="GUI\InGameHUD.h" />
+    <ClInclude Include="GUI\MenuGUI.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
@@ -337,6 +338,7 @@
     <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="GUI\GUIManager.cpp" />
     <ClCompile Include="GUI\InGameHUD.cpp" />
+    <ClCompile Include="GUI\MenuGUI.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="Handlers\Partida.cpp" />

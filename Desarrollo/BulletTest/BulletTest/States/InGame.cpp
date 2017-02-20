@@ -19,6 +19,7 @@ InGame::~InGame()
 
 void InGame::Inicializar()
 {
+
 	PhysicsEngine::i().inicializar();
 
 	ingameGUI.inicializar();
