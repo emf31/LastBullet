@@ -54,7 +54,6 @@ void Enemy_Bot::inicializar()
 
 
 	m_pStateMachine = new MachineState(this);
-	m_pStateMachine->SetCurrentState(&Patrullar::i());
 	//m_pStateMachine->SetGlobalState(&Patrullar::i());
 
 }
@@ -123,16 +122,13 @@ void Enemy_Bot::update(Time elapsedTime)
 	if (!this->getMachineState()->isInState("BuscarVida"))
 		FuzzyLifeObject();
 
-	if (this->getMachineState()->isInState("Patrullar"))
-		m_pStateMachine->ChangeState(&BuscarWeapon::i());
-
-
 	m_pStateMachine->Update();
 	
 }
 
 void Enemy_Bot::handleInput()
 {
+
 }
 
 void Enemy_Bot::cargarContenido()
@@ -179,6 +175,9 @@ void Enemy_Bot::cargarContenido()
 	setPosition(Map::i().searchSpawnPoint());
 
 	lookAt(Vec2f(0, 0));
+
+	m_pStateMachine->SetCurrentState(&BuscarWeapon::i());
+
 
 }
 
