@@ -21,22 +21,24 @@ void TMesh::beginDraw() {
 	for (GLuint i = 0; i < this->textures.size(); i++) {
 		glActiveTexture(GL_TEXTURE0 + i); // Activamos la textura que toca primero
 										  // + i para la que toca ahora diffuseI (siendo I el número de la textura difusa)
-		stringstream ss;
-		string number;
+
 		string name = this->textures[i].type;
-		if (name == "texture_diffuse")
-			ss << diffuseNr++; // GLuit << stream
-		else if (name == "texture_specular")
-			ss << specularNr++; // GLuit << stream
-		number = ss.str();
 		// Ponemos en el sampler la textura que toca
-		glUniform1i(glGetUniformLocation(shader->Program, (name + number).c_str()), i);
+		if (name == "texture_diffuse")
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_diffuse"), i);
+		else if (name == "texture_specular")
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_specular"), i);
+		else if (name == "texture_normal")
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), i);
+		
+	
+
 		// Bindeamos la textura
 		glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 	}
 
 	// Ponemos el brillo a su valor por defecto (se podría cambiar el valor??)
-	glUniform1f(glGetUniformLocation(shader->Program, "material.shininess"), 16.0f);
+	glUniform1f(glGetUniformLocation(shader->Program, "material.brillo"), 128.0f);
 
 	// Dibujamos!
 	glBindVertexArray(this->VAO);

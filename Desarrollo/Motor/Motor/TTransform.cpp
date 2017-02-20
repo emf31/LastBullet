@@ -29,6 +29,8 @@ void TTransform::invert() {
 void TTransform::setPosition(Vec3<float> position) {
 	m_position += position;
 	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));
+	//std::cout << "Vector posicion: " << m_position.getX()<<","<< m_position.getY()<<","<< m_position.getZ() << std::endl;
+	//std::cout << "MATRIZ posicion: " << m_matrix[3][0] << "," << m_matrix[3][1] << "," << m_matrix[3][2] << std::endl;
 }
 void TTransform::setScale(Vec3<float> scale) {
 	m_scale = m_scale * scale;
@@ -75,6 +77,7 @@ Vec3<float> TTransform::getRotation()
 Vec3<float> TTransform::getPosition()
 {
 	return m_position;
+	//return Vec3<float>(m_matrix[3][0], m_matrix[3][1], m_matrix[3][2]);
 }
 Vec3<float> TTransform::getScale()
 {

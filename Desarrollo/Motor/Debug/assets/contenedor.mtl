@@ -14,3 +14,4 @@ newmtl Material__3
 	Ke 0.0000 0.0000 0.0000
 	map_Ka Contenedor.jpg
 	map_Kd Contenedor.jpg
+	map_Ks Contenedor_spec.jpg

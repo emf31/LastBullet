@@ -99,6 +99,7 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 
 
 void TCamera::beginDraw() {
+
 }
 
 void TCamera::endDraw() {
