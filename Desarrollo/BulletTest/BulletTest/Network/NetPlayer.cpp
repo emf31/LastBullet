@@ -17,6 +17,7 @@
 #include <World.h>
 #include <StateStack.h>
 
+
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player), m_world(World::i())
 {
 
@@ -34,6 +35,9 @@ NetPlayer::~NetPlayer()
 void NetPlayer::inicializar()
 {
 	NetworkManager::i().createServer();
+
+
+	RakSleep(1000);
 	conectar("127.0.0.1", server_port);
 
 	/*char eleccion;
@@ -72,9 +76,9 @@ void NetPlayer::crearPartida()
 
 	conectar("127.0.0.1", server_port);*/
 
-	while (isConnected() == false) {
+	/*while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}
+	}*/
 
 	TGameInfo gameinfo;
 	gameinfo.creador = m_player->getGuid();
@@ -122,7 +126,7 @@ void NetPlayer::unirseLobby()
 
 	std::string str;
 
-	do {
+	/*do {
 		searchServersOnLAN();
 
 		//Lista de servidores en la red
@@ -151,7 +155,7 @@ void NetPlayer::unirseLobby()
 			}
 		}
 
-	} while (eleccion == 'a');
+	} while (eleccion == 'a');*/
 
 	conectar(str, server_port);
 
