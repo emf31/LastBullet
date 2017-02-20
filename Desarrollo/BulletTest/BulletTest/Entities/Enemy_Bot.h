@@ -87,6 +87,8 @@ public:
 
 	float getFOV();
 
+	virtual float getVida() override;
+
 
 private:
 	
@@ -144,7 +146,7 @@ private:
 
 	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 50, 250);
 	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 50, 250, 500);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 300, 500, 800);
+	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 300, 500, 8000);
 
 	//LifeDrop
 
@@ -180,6 +182,20 @@ private:
 	FzSet Ammo_LowAsalto = AmmoStatusAsalto.AddLeftShoulderSet("Ammo_LowAsalto", 0, 0, 10);
 	FzSet Ammo_OkayAsalto = AmmoStatusAsalto.AddTriangularSet("Ammo_OkayAsalto", 0, 30, 60);
 	FzSet Ammo_LoadsAsalto = AmmoStatusAsalto.AddRightShoulderSet("Ammo_LoadsAsalto", 30, 60, 150);
+
+
+	//DesirabilityRocketLauncher
+
+	FuzzyVariable& DesirabilityRocketLauncher = fm.CreateFLV("DesirabilityRocketLauncher");
+	FuzzyVariable& AmmoStatusRocketLauncher = fm.CreateFLV("AmmoStatusRocketLauncher");
+
+	FzSet UndesirableRocketLauncher = DesirabilityRocketLauncher.AddLeftShoulderSet("UndesirableRocketLauncher", 0, 25, 50);
+	FzSet DesirableRocketLauncher = DesirabilityRocketLauncher.AddTriangularSet("DesirableRocketLauncher", 25, 50, 75);
+	FzSet VeryDesirableRocketLauncher = DesirabilityRocketLauncher.AddRightShoulderSet("VeryDesirableRocketLauncher", 50, 75, 100);
+
+	FzSet Ammo_LowRocketLauncher = AmmoStatusRocketLauncher.AddLeftShoulderSet("Ammo_LowRocketLauncher", 0, 0, 5);
+	FzSet Ammo_OkayRocketLauncher = AmmoStatusRocketLauncher.AddTriangularSet("Ammo_OkayRocketLauncher", 0, 5, 10);
+	FzSet Ammo_LoadsRocketLauncher = AmmoStatusRocketLauncher.AddRightShoulderSet("Ammo_LoadsRocketLauncher", 5, 10, 15);
 
 	//DesirabilitySniper
 

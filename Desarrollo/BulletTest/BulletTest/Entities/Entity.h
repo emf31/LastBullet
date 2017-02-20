@@ -47,6 +47,7 @@ public:
 	int getID() const { return m_id; }
 	void setID(int id) { m_id = id; }
 	
+	virtual float getVida() { return 0; }
 
 	byte getTriggerFlags() const { return dwTriggerFlags; }
 

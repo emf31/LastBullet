@@ -81,6 +81,7 @@ void RocketBullet::handleMessage(const Message & message)
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
+
 		std::list<Entity*>characters = EntityManager::i().getCharacters();
 		///Explosion
 		for (std::list<Entity*>::iterator it = characters.begin(); it != characters.end(); it++) {

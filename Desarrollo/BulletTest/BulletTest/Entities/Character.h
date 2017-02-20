@@ -27,6 +27,8 @@ public:
 	virtual std::string getClassName() = 0;
 	virtual void setPosition(const Vec3<float>& vec) = 0;
 
+	virtual float getVida() override;
+
 private:
 
 	

@@ -573,3 +573,8 @@ void Player::updateRelojes() {
 		sangre = false;
 	}
 }
+
+
+float Player::getVida() {
+	return life_component.getVida();
+}
