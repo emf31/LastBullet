@@ -121,20 +121,19 @@ void Game::run()
 }
 
 
-	
+
 void Game::inicializar()
 {
 	
-
+	
 	Settings::i().LoadSettings();
 	GraphicEngine::i().inicializar();
-
-	
 
 	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
 
 	player->m_network->inicializar();
-
+	
+	StateStack::i().GetCurrentState()->Inicializar();
 }
 
 bool Game::processEvents()
