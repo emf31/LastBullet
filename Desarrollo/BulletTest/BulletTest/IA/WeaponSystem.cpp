@@ -37,6 +37,7 @@ void WeaponSystem::Inicializar() {
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
+	listaWeapons->insertar(rocket);
 	//listaWeapons->insertar(asalto);
 	//listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
@@ -108,26 +109,18 @@ void WeaponSystem::setWeapon(int newWeapon){
 
 void WeaponSystem::TakeAimAndShoot()const
 {
-	//aim the weapon only if the current target is shootable or if it has only
-	//very recently gone out of view (this latter condition is to ensure the 
-	//weapon is aimed at the target even if it temporarily dodges behind a wall
-	//or other cover)
 
-	//IF ORIGINAL
+
 	/*	if (m_pOwner->getTargetSys()->isTargetShootable() ||
 		(m_pOwner->getTargetSys()->GetTimeTargetHasBeenOutOfView() <
 			m_dAimPersistance))
 	{*/
-
-	
 
 	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
 	{
 
 		m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
 
-
-		//the position the weapon will be aimed at
 		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
 
 		float DistToTarget=Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
@@ -135,64 +128,37 @@ void WeaponSystem::TakeAimAndShoot()const
 		m_pOwner->elegirWeapon(DistToTarget);
 
 
-		//if the current weapon is not an instant hit type gun the target position
-		//must be adjusted to take into account the predicted movement of the 
-		//target
-
-		if (GetCurrentWeapon()->getClassName() == "RocketLauncher")
-		{
-		//	AimingPos = PredictFuturePositionOfTarget();
-
-			//if the weapon is aimed correctly, there is line of sight between the
-			//bot and the aiming position and it has been in view for a period longer
-			//than the bot's reaction time, shoot the weapon
-
-			//IF ORIGINAL
-			/*if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
-				(m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >
-					m_dReactionTime) &&
-				m_pOwner->hasLOSto(AimingPos))
-			{*/
-
-			//if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
-		//	{
-			
-			
-			AddNoiseToAim(AimingPos);
-
-				GetCurrentWeapon()->shoot(AimingPos);
-		//	}
-		}
-
-		//no need to predict movement, aim directly at target
-		else
-		{
-			//if the weapon is aimed correctly and it has been in view for a period
-			//longer than the bot's reaction time, shoot the weapon
-
-
-			//IF ORIGINAL
-			/*			if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
-				(m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >
-					m_dReactionTime))
-			{*/
-
-
-			if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
-			{
+		if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime){
 				
-				AddNoiseToAim(AimingPos);
-				GetCurrentWeapon()->shoot(AimingPos);
+			AddNoiseToAim(AimingPos);
+			GetCurrentWeapon()->shoot(AimingPos);
 
-			}
 		}
+		
 
 	}
 
-	//no target to shoot at so rotate facing to be parallel with the bot's
-	//heading direction
-	else
-	{
-		//m_pOwner->RotateFacingTowardPosition(m_pOwner->getRenderPosition() + m_pOwner->Heading());
-	}
+
 }
+
+
+/*
+Vec3<float> WeaponSystem::PredictFuturePositionOfTarget()const {
+
+	double MaxSpeed = 160;//160 es la velocidad que ponemos a nuestros RocketBullets
+
+	//if the target is ahead and facing the agent shoot at its current pos
+	float DistToEnemy = Vec3<float>::getDistance(m_pOwner->getTargetBot()->getRenderState()->getPosition(), m_pOwner->getRenderState()->getPosition());
+	
+	//the lookahead time is proportional to the distance between the enemy
+	//and the pursuer; and is inversely proportional to the sum of the
+	//agent's velocities
+	double LookAheadTime = DistToEnemy /
+		(MaxSpeed + 2);//2 es la velocidad del player
+
+	//return the predicted future position of the enemy
+	return m_pOwner->getTargetBot()->getRenderState()->getPosition() +
+		2 * LookAheadTime;
+}
+*/
+

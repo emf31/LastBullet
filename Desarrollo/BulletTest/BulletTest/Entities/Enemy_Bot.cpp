@@ -42,7 +42,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1 ,3, 20);
+	weaponSystem = new WeaponSystem(this, 1 ,10, 20);
 
 	weaponSystem->Inicializar();
 
@@ -379,6 +379,19 @@ void Enemy_Bot::crearFuzzyRules() {
 	fm.AddRule(FzAND(Target_Far, Ammo_OkaySniper), VeryDesirableSniper);
 	fm.AddRule(FzAND(Target_Far, Ammo_LoadsSniper), VeryDesirableSniper);
 
+	//RocketLauncher
+
+	fm.AddRule(FzAND(Target_Close, Ammo_LowRocketLauncher), UndesirableRocketLauncher);
+	fm.AddRule(FzAND(Target_Close, Ammo_OkayRocketLauncher), UndesirableRocketLauncher);
+	fm.AddRule(FzAND(Target_Close, Ammo_LoadsRocketLauncher), UndesirableRocketLauncher);
+
+	fm.AddRule(FzAND(Target_Medium, Ammo_LowRocketLauncher), DesirableRocketLauncher);
+	fm.AddRule(FzAND(Target_Medium, Ammo_OkayRocketLauncher), VeryDesirableRocketLauncher);
+	fm.AddRule(FzAND(Target_Medium, Ammo_LoadsRocketLauncher), VeryDesirableRocketLauncher);
+
+	fm.AddRule(FzAND(Target_Far, Ammo_LowRocketLauncher), UndesirableRocketLauncher);
+	fm.AddRule(FzAND(Target_Far, Ammo_OkayRocketLauncher), UndesirableRocketLauncher);
+	fm.AddRule(FzAND(Target_Far, Ammo_LoadsRocketLauncher), DesirableRocketLauncher);
 
 }
 
@@ -389,17 +402,19 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 	double DistToTarget = Dist;
 
+	double Desirability;
+
 	fm.Fuzzify("DistToTarget", DistToTarget);
 
 	if (weaponSystem->buscar("Asalto")) {
 
 		fm.Fuzzify("AmmoStatusAsalto", weaponSystem->getAmmoAsalto());
 
-		double DesAsalto = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
+		Desirability = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
 
 
-		if (DesAsalto > mejorScore) {
-			mejorScore = DesAsalto;
+		if (Desirability > mejorScore) {
+			mejorScore = Desirability;
 			bestWeapon = "Asalto";
 		}
 
@@ -409,16 +424,34 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 		fm.Fuzzify("AmmoStatusSniper", weaponSystem->getAmmoSniper());
 
-		double DesSniper = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
+		Desirability = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
 
 
-		if (DesSniper > mejorScore) {
-			mejorScore = DesSniper;
+		if (Desirability > mejorScore) {
+			mejorScore = Desirability;
 			bestWeapon = "Sniper";
 		}
 
 
 	}
+
+
+	if (weaponSystem->buscar("RocketLauncher")) {
+
+		fm.Fuzzify("AmmoStatusRocketLauncher", weaponSystem->getAmmoRocketLauncher());
+
+		Desirability = fm.DeFuzzify("DesirabilityRocketLauncher", FuzzyModule::max_av);
+
+
+		if (Desirability > mejorScore) {
+			mejorScore = Desirability;
+			bestWeapon = "RocketLauncher";
+		}
+
+	}
+
+	/*if (weaponSystem->buscar("RocketLauncher")) 
+		bestWeapon = "RocketLauncher";*/
 
 
 	weaponSystem->Equipar(bestWeapon);
@@ -434,7 +467,6 @@ void Enemy_Bot::FuzzyLifeObject() {
 		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) > 40) {
 			m_pStateMachine->ChangeState(&BuscarVida::i());
 		}
-
 
 	}
 }
