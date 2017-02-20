@@ -16,6 +16,7 @@ public:
 	void invert();
 
 	void setPosition(Vec3<float> position);
+	void updatePosition(Vec3<float> position);
 	void setScale(Vec3<float> scale);
 	void setRotation(Vec3<float> rotation);
 	void setRotationX(float angu);

@@ -27,6 +27,16 @@ void TTransform::invert() {
 }
 //TODO necesitamos el setPosition que te ponga la posicion donde le pasamos sin que vaya acumulando como ahora, ahora seria un update position
 void TTransform::setPosition(Vec3<float> position) {
+	//setea al objeto en la posicion del mundo que le pasamos
+	m_position = position;
+	m_matrix = glm::mat4();
+	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));
+	//std::cout << "Vector posicion: " << m_position.getX()<<","<< m_position.getY()<<","<< m_position.getZ() << std::endl;
+	//std::cout << "MATRIZ posicion: " << m_matrix[3][0] << "," << m_matrix[3][1] << "," << m_matrix[3][2] << std::endl;
+}
+void TTransform::updatePosition(Vec3<float> position)
+{	
+	//le suma a la posicion que ya tenia el objeto la nueva posicion
 	m_position += position;
 	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));
 	//std::cout << "Vector posicion: " << m_position.getX()<<","<< m_position.getY()<<","<< m_position.getZ() << std::endl;
@@ -107,6 +117,7 @@ void TTransform::loadMatrix(glm::mat4 mat) {
 
 void TTransform::beginDraw()
 {
+	//TODO PREGUNTA: aqui si fuera una camara en verdad estoy apilando matrices innecesarias pork la camara ya la he calculado antes de dibujar la escena
 	SceneManager::i().pilaMatrices.push_back(m_matrix);
 }
 

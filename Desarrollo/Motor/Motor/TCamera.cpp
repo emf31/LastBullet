@@ -37,7 +37,8 @@ TCamera::~TCamera() {
 
 
 glm::mat4 TCamera::GetViewMatrix() {
-	return glm::lookAt(getPositionglm(), getPositionglm() + this->Front, this->Up);
+	glm::vec3 posCamara = calcularPosicionVista();
+	return glm::lookAt(posCamara, posCamara + this->Front, this->Up);
 }
 
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
@@ -45,24 +46,24 @@ void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
 	glm::vec3 result;
 	if (direction == FORWARD) {
 		result = Front * velocity;
-		setPosition(Vec3<float>(result.x, result.y, result.z));
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 		//this->Position += this->Front * velocity;
 	}
 	if (direction == BACKWARD) {
 		result = Front * -velocity;
-		setPosition(Vec3<float>(result.x, result.y, result.z));
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 		//this->Position -= this->Front * velocity;
 	}
 
 	if (direction == LEFT) {
 		result = Right * -velocity;
-		setPosition(Vec3<float>(result.x, result.y, result.z));
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 		//this->Position -= this->Right * velocity;
 	}
 
 	if (direction == RIGHT) {
 		result = Right * velocity;
-		setPosition(Vec3<float>(result.x, result.y, result.z));
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 		//this->Position += this->Right * velocity;
 	}
 
@@ -96,6 +97,39 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 		this->Zoom = 45.0f;
 }
 
+glm::vec3 TCamera::calcularPosicionVista()
+{
+	TNode* nodoActual = getMiNodo();
+	Vec3<float> pos = Vec3<float>(0.0f, 0.0f, 0.0f);
+	float rot = 0.0f;
+	Vec3<float> aux ;
+	while ((nodoActual->getParentNode() != nullptr) && (nodoActual->getParentNode()->getNodeType()!=T_RAIZ)) {
+		nodoActual = nodoActual->getParentNode();
+		if (nodoActual->getNodeType() == T_TRASLACION) {
+
+			TTransform* t = static_cast<TTransform*> (nodoActual->getEntity());
+			aux = t->getPosition();
+			std::cout << "ENTRO A UN NODO TRASLACION PADRE DE LA CAMARA" << std::endl;
+			std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+			
+			pos += t->getPosition();
+
+		}
+		else if (nodoActual->getNodeType() == T_ROTACION) {
+			// TODO hacer que tambien devuelva la rotacion en grados para poder poner la misma que su padre
+		}
+		
+	}
+	
+	//delete nodoActual;
+
+	//NOTA ERROR YA COMETIDO: ANTES HACIAMOS UN SET POSITION PERO CLARO ESTO NO PUEDE SER PORK ENTONCES SI EL MODELO ESTA EN LA 30 Y LA CAMARA EN LA 10, EL MODELO AVANZA 5, ENTONCES LA CAMARA AHORA ESTARIA 
+	//EN LA 15 Y EL MODELO EN LA 35, PERO SI HACEMOS ESE SETPOSITION A LA CAMARA EN LA SIGUIENTE ITERACION SU TRANSFORMACION DEVUELVE QUE ESTA EN LA POS 35 Y LE VA A SUMAR DE NUEVO LA POS
+	//DE SU TRANSFORMACION PADRE QUE SERA LA DEL MODELO Y PONDRIA QUE LA CAMARA ESTA EN EL 70
+	//setPosition(pos);
+	return glm::vec3(pos.getX(), pos.getY(), pos.getZ());
+}
+
 
 
 void TCamera::beginDraw() {
@@ -105,8 +139,13 @@ void TCamera::beginDraw() {
 void TCamera::endDraw() {
 }
 
-void TCamera::setPosition(Vec3<float> pos) {
+void TCamera::setPosition(Vec3<float> pos)
+{
 	transTraslacion->setPosition(pos);
+}
+
+void TCamera::updatePosition(Vec3<float> pos) {
+	transTraslacion->updatePosition(pos);
 }
 
 void TCamera::setRotationX(float angu) {

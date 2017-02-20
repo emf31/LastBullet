@@ -31,6 +31,7 @@ public:
 	virtual void endDraw();
 
 	void setPosition(Vec3<float> pos);
+	void updatePosition(Vec3<float> pos);
 	void setRotationX(float angu);
 	void setRotationY(float angu);
 	void setRotationZ(float angu);
@@ -49,6 +50,8 @@ public:
 	void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true);
 	// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
 	void ProcessMouseScroll(GLfloat yoffset);
+
+	glm::vec3 calcularPosicionVista();
 
 	// Camera Attributes
 	//glm::vec3 Position;

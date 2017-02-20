@@ -8,13 +8,11 @@ out vec3 FragPos;
 out vec3 Normal;
 
 uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 modelview;
 
 void main()
 {
-
-    gl_Position = projection * view * model * vec4(position, 1.0f);
+    gl_Position =  modelview * vec4(position, 1.0f);
     TexCoords = texCoords;
 	FragPos = vec3(model * vec4(position, 1.0f));
 	//NOTA: necesitamos pasar el vector normal de coordenadas del mundo a coordenadas de la vista, pero para ello no podemos multiplicarla

@@ -19,7 +19,7 @@ public:
 private:
 	int entityID = -1;
 	TNode * miNodo;
-	TNode* getMiNodo();
+	
 
 
 
@@ -27,5 +27,6 @@ protected:
 	int getID();
 	void setID(int id);
 	void setMiNodo(TNode * nodo);
+	TNode* getMiNodo();
 };
 

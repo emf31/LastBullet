@@ -75,13 +75,12 @@ void TModel::beginDraw() {
 	*/
 
 
-
+	glm::mat4 modelview = projection * view * model;
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
 	//colores
@@ -225,6 +224,11 @@ void TModel::endDraw() {
 
 void TModel::setPosition(Vec3<float> pos) {
 	transTraslacion->setPosition(pos);
+}
+
+void TModel::updatePosition(Vec3<float> pos)
+{
+	transTraslacion->updatePosition(pos);
 }
 
 void TModel::setRotation(Vec3<float> rot) {

@@ -60,10 +60,10 @@ int main() {
 
 	//camaras
 	//TCamera* cam1 = sm.crearNodoCamara();
-	//TCamera* cam2 = sm.crearNodoCamara();
+	TCamera* cam2 = sm.crearNodoCamara();
 
 	//pongo la camara 2 como hijo del modelo
-	//w->addChild(cam2);
+	w->addChild(cam2);
 	//sm.setActiveCamera(cam2);
 	
 	long int cont = 0;
@@ -85,14 +85,14 @@ int main() {
 				contCam = 0;
 			}
 			std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
-			//sm.setActiveCamera(sm.vectorCamaras[contCam]);
+			sm.setActiveCamera(sm.vectorCamaras[contCam]);
 			contCam++;
 		}
 		if (cont == 100) {
 			cont = 0;
 			aux = w->getPosition();
 			std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-			//w->setPosition(Vec3<float>(1.5f, 0.0f, 0.0f));
+			w->updatePosition(Vec3<float>(1.5f, 0.0f, 0.0f));
 			
 		}
 		cont++;
@@ -130,6 +130,7 @@ int main() {
 		*/
 		
 		sm.draw(engine.getWindow());
+		std::cout << "siguiente iteracion" << std::endl;
 		
 		
 		

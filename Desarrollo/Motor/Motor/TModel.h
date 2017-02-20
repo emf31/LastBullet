@@ -61,6 +61,7 @@ public:
 	virtual void endDraw();
 
 	void setPosition(Vec3<float> pos);
+	void updatePosition(Vec3<float> pos);
 	void setRotation(Vec3<float> rot);
 	void setRotationX(float angu);
 	void setRotationY(float angu);
