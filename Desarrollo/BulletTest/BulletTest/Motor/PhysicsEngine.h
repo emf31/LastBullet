@@ -80,6 +80,10 @@ public:
 	int m_shapeIndex;
 };
 
+struct Shape {
+
+};
+
 
 class PhysicsEngine
 {
@@ -103,6 +107,8 @@ public:
 
 	//Crea un kinematic character controller
 	KinematicCharacterController* createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass);
+
+	btRigidBody* createCompoundShape(Entity* entity, const Vec3<float> &scale, float masa, const std::string& mesh, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
 	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa,bool haveMesh , Vec3<float> centerCol = Vec3<float>(0, 0, 0),int body_state = ACTIVE_TAG);

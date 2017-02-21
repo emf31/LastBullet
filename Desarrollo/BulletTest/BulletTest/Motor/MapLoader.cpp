@@ -42,7 +42,7 @@ void MapLoader::readMap(const std::string & name)
 				std::string nombre = "cubo"+s;
 
 				std::string nameMesh = obj["nombre"];
-				nameMesh = "../media/" +nameMesh+".obj";
+				nameMesh = "../media/Props/" +nameMesh+".obj";
 				io::path mesh=nameMesh.c_str();
 
 				std::string extraTags = obj["extraTags"];
@@ -60,7 +60,6 @@ void MapLoader::readMap(const std::string & name)
 					} else if (extraTags == "asalto") {
 						node->setTexture("../media/sniper.png", 0);
 					}
-
 
 				}
 					
@@ -86,6 +85,7 @@ void MapLoader::readMap(const std::string & name)
 					
 					createTriggerButton(pos, 5, type);
 				}
+
 					
 		}
 	}
@@ -95,11 +95,11 @@ void MapLoader::readMap(const std::string & name)
 std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const io::path & mesh, std::string &name, float mass)
 {
 	std::shared_ptr<BasicSceneNode> sceneNode;
-	if (mesh != "../media/cubo.obj"){
+	if (std::string(mesh.c_str()) != "../media/cubo.obj"){
 		 sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
 	}
 	else{
-		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "");
+		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
 	}
 	
 	
@@ -134,6 +134,37 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 	//std::cout << sceneNode->getPosition().getX() << '\n';
 	return sceneNode;
 }
+
+/*std::shared_ptr<BasicSceneNode> MapLoader::createConvexHullEntity(Vec3<float> posicion, Vec3<float> escala, Vec3<float> rotacion, const io::path & mesh, float mass)
+{
+	std::shared_ptr<BasicSceneNode> sceneNode;
+
+	sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
+
+	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, "");
+	float mymass = 0;
+	if (mass < 0.001) {//si la masa es muy pequeña la consideraremos 0
+		mymass = 0;
+	}
+	else {
+		mymass = mass;
+	}
+
+
+	physicent->setRigidBody(PhysicsEngine::i().createConvexHullRigidBody(physicent, escala, mymass, mesh.c_str()));
+
+	physicent->rotate(Vec3<float>(float(rotacion.getX()* PI / 180.0), float(rotacion.getY() * PI / 180.0), float(rotacion.getZ()* PI / 180.0)));
+
+	if (mass == 0) {
+		physicent->setCollisionGroup(col::Collisions::Static);
+		physicent->setCollisionMask(col::staticCollidesWith);
+		physicent->getRigidBody()->setFriction(0.7f);
+	}
+
+
+
+	return sceneNode;
+}*/
 
 Entity* MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const io::path & mesh = "")
 {

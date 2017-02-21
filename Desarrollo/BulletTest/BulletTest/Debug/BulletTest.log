@@ -1,9 +1,14 @@
-﻿  MenuGUI.cpp
+﻿  MapLoader.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
+  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(172): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(182): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(192): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(202): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(212): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

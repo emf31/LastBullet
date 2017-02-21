@@ -8,6 +8,8 @@
 #include <GraphicEngine.h>
 #include <MessageHandler.h>
 
+#include <Util.h>
+
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
 const Time PhysicsEngine::tickPhysics = seconds(1.f / 60.f);
@@ -154,6 +156,41 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	return p_controller;
 }
 
+btRigidBody * PhysicsEngine::createCompoundShape(Entity * entity, const Vec3<float>& scale, float masa, const std::string & mesh, int body_state)
+{
+
+	/*btTransform transform;
+	transform.setIdentity();
+	btVector3 pos = bt(entity->getRenderState()->getPosition());
+	transform.setOrigin((pos));
+
+	//create the motionState of the object
+	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
+
+	//now create the rigidBody
+	btRigidBody* rigidBody = new btRigidBody(masa, motionState, shape, localinertia);
+	rigidBody->setActivationState(body_state);
+
+
+	//add a pointer to rigidBody pointing to associated Entity
+	rigidBody->setUserPointer(entity);
+
+	//add the rigidBody to the world
+	m_world->addRigidBody(rigidBody);
+
+	//and add to the list of rigidBodies
+	m_rigidBodies.push_back(rigidBody);
+
+	//finally return created body
+	return rigidBody;*/
+
+	return NULL;
+}
+
+
+
+
+
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, Vec3<float>centerCol , int body_state)
 {
 	btTransform transform;
@@ -173,7 +210,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 	}	
 	else {
 		btVector3 halfExtents(scale.getX(), scale.getY(), scale.getZ());
-		 shape = new btBoxShape(halfExtents);
+		shape = new btBoxShape(halfExtents);
 	}
 		
 
