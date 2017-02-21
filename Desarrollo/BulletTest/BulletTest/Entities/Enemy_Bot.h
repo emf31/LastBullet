@@ -151,10 +151,11 @@ private:
 	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 50, 250, 500);
 	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 300, 500, 8000);
 
-	//LifeDrop
+	//LifeObject
 
 	FuzzyVariable& Life = fm.CreateFLV("Life");
 	FuzzyVariable& LifeTarget = fm.CreateFLV("LifeTarget");
+	FuzzyVariable& DistToLifeObject = fm.CreateFLV("DistToLifeObject");
 
 	FzSet Life_Low = Life.AddLeftShoulderSet("Life_Low", 0, 10, 30);
 	FzSet Life_Okay = Life.AddTriangularSet("Life_Okay", 10, 30, 60);
@@ -164,7 +165,11 @@ private:
 	FzSet Life_OkayTarget = LifeTarget.AddTriangularSet("Life_OkayTarget", 10, 30, 60);
 	FzSet Life_LoadsTarget = LifeTarget.AddRightShoulderSet("Life_LoadsTarget", 60, 70, 100);
 	
-	//DesirabilityLifeDrop
+	FzSet Life_Close = DistToLifeObject.AddLeftShoulderSet("Life_Close", 0, 40, 60);
+	FzSet Life_Medium = DistToLifeObject.AddTriangularSet("Life_Medium", 40, 65, 90);
+	FzSet Life_Far = DistToLifeObject.AddRightShoulderSet("Life_Far", 65, 90, 150);
+
+
 
 	FuzzyVariable& DesirabilityLifeDrop = fm.CreateFLV("DesirabilityLifeDrop");
 

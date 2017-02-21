@@ -42,7 +42,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1 ,0, 20);
+	weaponSystem = new WeaponSystem(this, 1 ,20, 20);
 
 	weaponSystem->Inicializar();
 
@@ -340,6 +340,13 @@ void Enemy_Bot::crearFuzzyRules() {
 
 	//LifeDrop
 
+	/*
+
+	fm.AddRule(Life_Far, UndesirableLifeDrop);
+	fm.AddRule(Life_Medium, DesirableLifeDrop);
+	fm.AddRule(Life_Close, VeryDesirableLifeDrop);
+
+	*/
 
 	fm.AddRule(FzAND(Life_Low, Life_LowTarget), UndesirableLifeDrop);
 	fm.AddRule(FzAND(Life_Low, Life_OkayTarget), DesirableLifeDrop);
@@ -462,15 +469,15 @@ void Enemy_Bot::FuzzyLifeObject() {
 
 	if (getTargetBot()) {
 
-		fm.Fuzzify("Life", life_component.getVida());
-		fm.Fuzzify("LifeTarget", getTargetBot()->getVida());
-
 
 		std::list<Vec2f> m_camino;
 
-		float actual = getPathPlanning()->CreatePathToItem("LifeObject", m_camino);
+	//	fm.Fuzzify("DistToLifeObject", getPathPlanning()->CreatePathToItem("LifeObject", m_camino));
 
-	//	std::cout << "Coste hacia Life Object: " << actual << std::endl;
+		fm.Fuzzify("Life", life_component.getVida());
+		fm.Fuzzify("LifeTarget", getTargetBot()->getVida());
+
+		std::cout << "Deseabilidad de fuzzyLifeObject: " << fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) << std::endl;
 
 		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) > 40) {
 			m_pStateMachine->ChangeState(&BuscarVida::i());
