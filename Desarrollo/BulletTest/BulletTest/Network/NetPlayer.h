@@ -34,14 +34,13 @@ public:
 
 		peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, getServerGUID(), false);
 	}
+	void searchServersOnLAN();
+
+	std::vector<std::string> getServers() { return m_servers; }
 
 private:
 
-	
-
 	Player* m_player;
-
-	void searchServersOnLAN();
 
 	//Lista de servidores disponibles
 	std::vector<std::string> m_servers;

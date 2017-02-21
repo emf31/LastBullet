@@ -11,7 +11,11 @@ public:
 	~MachineState();
 
 	//use these methods to initialize the FSM
-	void SetCurrentState(StateIA* s) {m_pCurrentState = s; }
+	void SetCurrentState(StateIA* s) {
+		m_pCurrentState = s; 
+		m_pCurrentState->Enter(m_pOwner);
+	}
+
 	void SetGlobalState(StateIA* s) { m_pGlobalState = s; }
 	void SetPreviousState(StateIA* s) { m_pPreviousState = s; }
 

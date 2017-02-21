@@ -1,5 +1,6 @@
 #include <StatesIA\BuscarWeapon.h>
 #include <StatesIA\Disparar.h>
+#include <StatesIA\Patrullar.h>
 #include <Enemy_Bot.h>
 #include <PathFollow.h>
 #include <PathPlanner.h>
@@ -45,8 +46,12 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 
 	std::cout << "El mejor es: " << bestString << std::endl;
 	
-	if(bestString!="Ninguno")
-	pEnemy->createPathToItem(bestString);
+	if (bestString != "Ninguno") 
+		pEnemy->createPathToItem(bestString);
+	else {
+		pEnemy->getMachineState()->ChangeState(&Patrullar::i());
+	}
+	
 
 
 }

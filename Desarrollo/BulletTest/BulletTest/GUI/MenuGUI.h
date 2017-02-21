@@ -24,10 +24,16 @@ public:
 
 private:
 	CEGUI::DefaultWindow* LastBullet;
+	CEGUI::DefaultWindow* UnirWindow;
+	CEGUI::DefaultWindow* UnirLabel;
+	CEGUI::DefaultWindow* Conexiones;
+	CEGUI::DefaultWindow* Titulo;
 
 	CEGUI::PushButton *CrearPartida;
 	CEGUI::PushButton *UnirPartida;
 	CEGUI::PushButton *Salir;
+	CEGUI::PushButton *Conexion1;
+	CEGUI::PushButton *Conexion2;
 
 	Player* p;
 

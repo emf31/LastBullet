@@ -4,26 +4,49 @@
     <Window type="DefaultWindow" name="DefaultWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="DefaultWindow" name="DefaultWindow" >
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="SampleBrowserSkin/Button" name="Button" >
+                <Property name="Area" value="{{0,487},{0,258},{0,823},{0,308}}" />
+                <Property name="Text" value="Crear Partida" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button2" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,487},{0,342},{0,823},{0,392}}" />
+                <Property name="Text" value="Unirse a partida" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button3" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,595},{0,452},{0,707},{0,502}}" />
+                <Property name="Text" value="Salir" />
+            </Window>
+        </Window>
         <Window type="SampleBrowserSkin/Label" name="Label" >
-            <Property name="ID" value="1" />
+            <Property name="ID" value="2" />
             <Property name="Area" value="{{0,452},{0,108},{1,-403},{1,-510}}" />
             <Property name="Text" value="Last Bullet" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
-        <Window type="SampleBrowserSkin/Button" name="Button" >
-            <Property name="ID" value="2" />
-            <Property name="Area" value="{{0,487},{0,258},{0,823},{0,308}}" />
-            <Property name="Text" value="Crear Partida" />
-        </Window>
-        <Window type="SampleBrowserSkin/Button" name="Button2" >
-            <Property name="ID" value="3" />
-            <Property name="Area" value="{{0,487},{0,342},{0,823},{0,392}}" />
-            <Property name="Text" value="Unirse a partida" />
-        </Window>
-        <Window type="SampleBrowserSkin/Button" name="Button3" >
-            <Property name="ID" value="4" />
-            <Property name="Area" value="{{0,595},{0,452},{0,707},{0,502}}" />
-            <Property name="Text" value="Salir" />
+        <Window type="DefaultWindow" name="DefaultWindow2" >
+            <Property name="ID" value="1" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="SampleBrowserSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,525},{0,224},{1,-484},{1,-382}}" />
+                <Property name="Text" value="Conexiones Disponnibles" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,424},{0,368},{0,622},{0,418}}" />
+                <Property name="Text" value="Conexion 1" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button2" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,701},{0,367},{0,935},{0,417}}" />
+                <Property name="Text" value="Conexion 2" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>
