@@ -48,11 +48,11 @@ int main() {
 
 
 	//luces
-	TSpotLight* luz = sm.crearNodoLuz();
-	luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
+	//TSpotLight* luz = sm.crearNodoLuz();
+	//luz->setPosition(Vec3<float>(3.0f, 5.0f, 2.0f));
 
 	TSpotLight* luz2 = sm.crearNodoLuz();
-	luz2->setPosition(Vec3<float>(5.0f, 3.0f, 2.0f));
+	luz2->setPosition(Vec3<float>(8.0f, 4.0f, 2.0f));
 	//luz->setColor(1.0f, 0.9f, 0.9f);
 	
 	//poner luz como hijo del personaje
@@ -61,7 +61,11 @@ int main() {
 	//camaras
 	//TCamera* cam1 = sm.crearNodoCamara();
 	TCamera* cam2 = sm.crearNodoCamara();
+	Vec3<float> posCam = w->getPosition();
+	posCam.setX(posCam.getX() + 1);
+	posCam.setY(posCam.getY() + 1);
 
+	cam2->setPosition(posCam);
 	//pongo la camara 2 como hijo del modelo
 	w->addChild(cam2);
 	//sm.setActiveCamera(cam2);

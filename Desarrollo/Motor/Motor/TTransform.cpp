@@ -117,7 +117,11 @@ void TTransform::loadMatrix(glm::mat4 mat) {
 
 void TTransform::beginDraw()
 {
-	//TODO PREGUNTA: aqui si fuera una camara en verdad estoy apilando matrices innecesarias pork la camara ya la he calculado antes de dibujar la escena
+	//el begin draw lo primero que hace es apilar la matriz actual y multiplicar esta por la suya, y esta multiplicacion seria la nueva matriz acutual
+	//que el siguiente nodo se encargaria de apilarla
+
+	//el enddraw desapilaria una matriz y pondria esa desapilada como actual.
+	
 	SceneManager::i().pilaMatrices.push_back(m_matrix);
 }
 
