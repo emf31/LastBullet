@@ -35,10 +35,13 @@ void MenuGUI::inicializar() {
 	UnirLabel = static_cast<CEGUI::DefaultWindow*>(UnirWindow->getChild(0));
 
 	Conexion1 = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(1));
-	Conexion1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onCrearPartidaClicked, this));
+	Conexion1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onConexion1Clicked, this));
 
 	Conexion2 = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(2));
-	Conexion2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
+	Conexion2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onConexion2Clicked, this));
+
+	Actualizar = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(3));
+	Actualizar->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
 
 	UnirWindow->setVisible(false);
 	
@@ -92,5 +95,17 @@ bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e)
 {
 	std::cout << "Le has dado a salir" << std::endl;
+	return true;
+}
+
+bool MenuGUI::onConexion1Clicked(const CEGUI::EventArgs & e)
+{
+	p->m_network->unirseLobby(Conexion1->getText().c_str());
+	return true;
+}
+
+bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
+{
+	p->m_network->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }

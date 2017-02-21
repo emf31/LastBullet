@@ -398,6 +398,8 @@ int main() {
 			{
 				TPlayer rak = *reinterpret_cast<TPlayer*>(packet->data);
 
+				
+
 				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
 				EntityManager::i().sendPlayer(rak, peer);
 
@@ -411,10 +413,10 @@ int main() {
 				info.map = gameinfo.map;
 				info.gameMode = gameinfo.gameMode;
 				info.numBots = gameinfo.numBots;
-			
+				info.playersTotales = EntityManager::i().getNumJugadores() - 1;
 
 				//Esto es temporal
-				peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
+				peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p->getGuid(), false);
 
 				break;
 			}

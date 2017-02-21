@@ -27,7 +27,16 @@ void InGame::Inicializar()
 
 	World::i().inicializar();
 
-	
+	const std::vector<TPlayer> enemies = NetworkManager::i().getEnemies();
+
+	for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+		Enemy *e = new Enemy(it->name, it->guid);
+		e->inicializar();
+		e->cargarContenido();
+		e->setPosition(it->position);
+
+		EntityManager::i().registerRaknetEntity(e);
+	}
 	
 }
 

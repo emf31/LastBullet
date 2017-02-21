@@ -34,11 +34,11 @@ NetPlayer::~NetPlayer()
 
 void NetPlayer::inicializar()
 {
-	NetworkManager::i().createServer();
+	//NetworkManager::i().createServer();
 
 
-	RakSleep(1000);
-	conectar("127.0.0.1", server_port);
+	//RakSleep(1000);
+	//conectar("127.0.0.1", server_port);
 
 	/*char eleccion;
 	
@@ -71,14 +71,13 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	/*NetworkManager::i().createServer();
+	NetworkManager::i().createServer();
+	RakSleep(1000);
+	conectar("127.0.0.1", server_port);
 
-
-	conectar("127.0.0.1", server_port);*/
-
-	/*while (isConnected() == false) {
+	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}*/
+	}
 
 	TGameInfo gameinfo;
 	gameinfo.creador = m_player->getGuid();
@@ -118,13 +117,13 @@ void NetPlayer::crearLobby()
 	
 }
 
-void NetPlayer::unirseLobby()
+void NetPlayer::unirseLobby(const std::string& str)
 {
 
 	char eleccion;
 	int elec;
 
-	std::string str;
+	//std::string str;
 
 	/*do {
 		searchServersOnLAN();
@@ -158,7 +157,7 @@ void NetPlayer::unirseLobby()
 	} while (eleccion == 'a');*/
 
 	conectar(str, server_port);
-
+	//RakSleep(1000);
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
@@ -168,12 +167,15 @@ void NetPlayer::unirseLobby()
 	p.name = m_player->getName();
 
 	dispatchMessage(p, UNIRSE_PARTIDA);
+	
 
-
-	/*while (World::i().gamestarted == false) {
+	/*swhile (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}*/
+	}
 
+	StateStack::i().GetCurrentState()->Clear();
+	StateStack::i().SetCurrentState(States::ID::InGame);
+	StateStack::i().GetCurrentState()->Inicializar();*/
 }
 
 void NetPlayer::handlePackets(Time elapsedTime)
@@ -228,6 +230,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TGameInfo info = *reinterpret_cast<TGameInfo*>(packet->data);
 
+
 			GameStartEvent* gev = new GameStartEvent(info);
 
 			EventSystem::i().dispatchNow(gev);
@@ -237,6 +240,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			StateStack::i().GetCurrentState()->Clear();
 			StateStack::i().SetCurrentState(States::ID::InGame);
 			StateStack::i().GetCurrentState()->Inicializar();
+
 
 			break;
 		}
@@ -268,13 +272,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-
-			Enemy *e = new Enemy(p.name, p.guid);
-			e->inicializar();
-			e->cargarContenido();
-			e->setPosition(p.position);
-
-			EntityManager::i().registerRaknetEntity(e);
+			m_enemies.push_back(p);
 
 
 #ifdef NETWORK_DEBUG

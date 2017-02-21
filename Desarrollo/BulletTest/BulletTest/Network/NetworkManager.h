@@ -44,7 +44,9 @@ public:
 		m_netPlayer->dispatchMessage(estructura, messageType);
 	}
 
+	bool isConnected() const { return m_netPlayer->isConnected(); }
 
+	const std::vector<TPlayer>& getEnemies() const { return m_netPlayer->getEnemies(); }
 
 private:
 

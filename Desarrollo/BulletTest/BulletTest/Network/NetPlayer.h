@@ -25,7 +25,7 @@ public:
 
 	void crearLobby();
 
-	void unirseLobby();
+	void unirseLobby(const std::string& str);
 
 	//Send packet to server using netplayer peer 
 	template<typename T>
@@ -38,12 +38,21 @@ public:
 
 	std::vector<std::string> getServers() { return m_servers; }
 
+	const std::vector<TPlayer>& getEnemies() const { return m_enemies; }
+
 private:
 
 	Player* m_player;
 
 	//Lista de servidores disponibles
 	std::vector<std::string> m_servers;
+
+	//Almacena los player recibidos al empezar una partida
+	//Lo hacemos para sincronizar la creacion de los enemigos del servidor
+	//con las demas entities locales
+	std::vector<TPlayer> m_enemies;
+
+	TGameInfo m_info;
 
 	World& m_world;
 

@@ -103,5 +103,6 @@ void NetworkManager::updateNetwork(Time elapsedTime)
 	}
 
 	//We call handle packets of netplayer too
+	
 	m_netPlayer->handlePackets(elapsedTime);
 }
