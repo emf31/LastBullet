@@ -1,9 +1,11 @@
-﻿  MenuGUI.cpp
+﻿  NetPlayer.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\enrique\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
 c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\netplayer.cpp(124): warning C4101: 'eleccion': variable local sin referencia
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\netplayer.cpp(125): warning C4101: 'elec': variable local sin referencia
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

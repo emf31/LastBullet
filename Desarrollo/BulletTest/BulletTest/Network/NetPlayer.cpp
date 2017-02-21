@@ -34,11 +34,11 @@ NetPlayer::~NetPlayer()
 
 void NetPlayer::inicializar()
 {
-	NetworkManager::i().createServer();
+	//NetworkManager::i().createServer();
 
 
-	RakSleep(1000);
-	conectar("127.0.0.1", server_port);
+	//RakSleep(1000);
+	//conectar("127.0.0.1", server_port);
 
 	/*char eleccion;
 	
@@ -71,10 +71,10 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	/*NetworkManager::i().createServer();
+	NetworkManager::i().createServer();
 
 
-	conectar("127.0.0.1", server_port);*/
+	conectar("127.0.0.1", server_port);
 
 	/*while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -118,13 +118,13 @@ void NetPlayer::crearLobby()
 	
 }
 
-void NetPlayer::unirseLobby()
+void NetPlayer::unirseLobby(const std::string& str)
 {
 
 	char eleccion;
 	int elec;
 
-	std::string str;
+	//std::string str;
 
 	/*do {
 		searchServersOnLAN();
@@ -168,12 +168,15 @@ void NetPlayer::unirseLobby()
 	p.name = m_player->getName();
 
 	dispatchMessage(p, UNIRSE_PARTIDA);
+	
 
-
-	/*while (World::i().gamestarted == false) {
+	/*swhile (World::i().gamestarted == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
-	}*/
+	}
 
+	StateStack::i().GetCurrentState()->Clear();
+	StateStack::i().SetCurrentState(States::ID::InGame);
+	StateStack::i().GetCurrentState()->Inicializar();*/
 }
 
 void NetPlayer::handlePackets(Time elapsedTime)

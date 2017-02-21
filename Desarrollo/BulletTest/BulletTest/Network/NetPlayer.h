@@ -25,7 +25,7 @@ public:
 
 	void crearLobby();
 
-	void unirseLobby();
+	void unirseLobby(const std::string& str);
 
 	//Send packet to server using netplayer peer 
 	template<typename T>

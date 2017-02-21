@@ -21,7 +21,8 @@ public:
 	bool onCrearPartidaClicked(const CEGUI::EventArgs& e);
 	bool onUnirPartidaClicked(const CEGUI::EventArgs & e);
 	bool onSalirClicked(const CEGUI::EventArgs & e);
-
+	bool onConexion1Clicked(const CEGUI::EventArgs & e);
+	bool onConexion2Clicked(const CEGUI::EventArgs & e);
 private:
 	CEGUI::DefaultWindow* LastBullet;
 	CEGUI::DefaultWindow* UnirWindow;
@@ -34,6 +35,8 @@ private:
 	CEGUI::PushButton *Salir;
 	CEGUI::PushButton *Conexion1;
 	CEGUI::PushButton *Conexion2;
+	CEGUI::PushButton *Actualizar;
+
 
 	Player* p;
 
