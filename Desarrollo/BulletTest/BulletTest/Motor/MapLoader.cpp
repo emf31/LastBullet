@@ -42,7 +42,7 @@ void MapLoader::readMap(const std::string & name)
 				std::string nombre = "cubo"+s;
 
 				std::string nameMesh = obj["nombre"];
-				nameMesh = "../media/Props/" +nameMesh+".obj";
+				nameMesh = "../media/" +nameMesh+".obj";
 				io::path mesh=nameMesh.c_str();
 
 				std::string extraTags = obj["extraTags"];
@@ -99,7 +99,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 		 sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
 	}
 	else{
-		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
+		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", "");
 	}
 	
 	

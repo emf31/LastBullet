@@ -109,7 +109,7 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 	{
 		//Veo la entity que colisiona
 		Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-		if (ent->getClassName()!="Player")
+		if (ent->getClassName()=="PhysicsEntity")
 		{
 			return true;
 		}
