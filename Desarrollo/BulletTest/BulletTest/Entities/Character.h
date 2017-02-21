@@ -28,6 +28,7 @@ public:
 	virtual void setPosition(const Vec3<float>& vec) = 0;
 
 	virtual float getVida() override;
+	virtual bool isDying() override;
 
 private:
 

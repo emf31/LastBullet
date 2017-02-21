@@ -88,6 +88,9 @@ public:
 	float getFOV();
 
 	virtual float getVida() override;
+	virtual bool isDying() override;
+
+	void decisionAfterKill();
 
 
 private:

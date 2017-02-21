@@ -45,7 +45,8 @@ public:
 
 	void lanzarGranada(TGranada g);
 
-	bool isDying() { return m_isDying; }
+	virtual bool isDying() override;
+
 	void setIsDying(bool die) { m_isDying = die; }
 
 	float getRadio(){

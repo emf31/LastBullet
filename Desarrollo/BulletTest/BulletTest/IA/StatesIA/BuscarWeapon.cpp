@@ -60,8 +60,12 @@ void BuscarWeapon::Execute(Enemy_Bot* pEnemy) {
 
 		if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 
-		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
-			pEnemy->getMachineState()->ChangeState(&Disparar::i());
+			if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
+				if (!pEnemy->getTargetBot()->isDying()) {
+					pEnemy->getMachineState()->ChangeState(&Disparar::i());
+				}
+			}
+
 	}
 
 }

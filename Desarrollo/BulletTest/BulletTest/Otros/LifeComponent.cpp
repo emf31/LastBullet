@@ -27,6 +27,14 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		nuevoplayer.name = m_pOwner->getName();
 
 
+		Entity* ent=EntityManager::i().getRaknetEntity(guid);
+
+		if (ent->getClassName() == "Enemy_Bot") {
+			Message msg(ent, "MATASTE", NULL);
+			MessageHandler::i().sendMessageNow(msg);
+		}
+
+
 
 		NetworkManager::i().dispatchMessage(nuevoplayer, MUERTE);
 
@@ -35,6 +43,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		kill.guidKill = guid;
 		kill.guidDeath = m_pOwner->getGuid();
 
+		
 
 		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
 	

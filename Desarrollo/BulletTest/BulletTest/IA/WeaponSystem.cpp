@@ -37,7 +37,6 @@ void WeaponSystem::Inicializar() {
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
-	listaWeapons->insertar(rocket);
 	//listaWeapons->insertar(asalto);
 	//listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
@@ -119,23 +118,28 @@ void WeaponSystem::TakeAimAndShoot()const
 	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
 	{
 
-		m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
+		if (!m_pOwner->getTargetBot()->isDying()) {
 
-		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
+			if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible()>m_dReactionTime) {
 
-		float DistToTarget=Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
+				m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
 
-		m_pOwner->elegirWeapon(DistToTarget);
+				Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
+
+				float DistToTarget = Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
+
+				m_pOwner->elegirWeapon(DistToTarget);
 
 
-		if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime){
-				
-			AddNoiseToAim(AimingPos);
-			GetCurrentWeapon()->shoot(AimingPos);
+
+
+				AddNoiseToAim(AimingPos);
+				GetCurrentWeapon()->shoot(AimingPos);
+
+			}
 
 		}
 		
-
 	}
 
 

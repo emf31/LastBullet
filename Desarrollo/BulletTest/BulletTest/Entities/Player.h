@@ -101,6 +101,7 @@ public:
 	Clock relojSangre, relojHit;
 
 	virtual float getVida() override;
+	virtual bool isDying() override;
 
 	
 private:

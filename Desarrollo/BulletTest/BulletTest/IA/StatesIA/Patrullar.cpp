@@ -14,8 +14,12 @@ void Patrullar::Execute(Enemy_Bot* pEnemy) {
 	//std::cout << "Patrullar" << std::endl;
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 
-		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
-			pEnemy->getMachineState()->ChangeState(&Disparar::i());
+		if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
+			if (!pEnemy->getTargetBot()->isDying()) {
+				pEnemy->getMachineState()->ChangeState(&Disparar::i());
+			}
+		}
+
 	}
 
 }

@@ -48,6 +48,7 @@ public:
 	void setID(int id) { m_id = id; }
 	
 	virtual float getVida() { return 0; }
+	virtual bool isDying() { return false; }
 
 	byte getTriggerFlags() const { return dwTriggerFlags; }
 

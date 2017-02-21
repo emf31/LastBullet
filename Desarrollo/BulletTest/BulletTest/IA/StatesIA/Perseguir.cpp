@@ -25,9 +25,12 @@ void Perseguir::Execute(Enemy_Bot* pEnemy) {
 	//std::cout << "Perseguir" << std::endl;
 
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
-		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
+		if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
+			if (!pEnemy->getTargetBot()->isDying()) {
+				pEnemy->getMachineState()->ChangeState(&Disparar::i());
+			}
+		}
 
-			pEnemy->getMachineState()->ChangeState(&Disparar::i());
 	}
 
 

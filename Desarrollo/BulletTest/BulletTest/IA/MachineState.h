@@ -33,6 +33,7 @@ public:
 	{
 
 		//keep a record of the previous state
+		if((m_pCurrentState->getStateName()!="Disparar") && (m_pCurrentState->getStateName() != "Perseguir"))
 		m_pPreviousState = m_pCurrentState;
 		//call the exit method of the existing state
 		m_pCurrentState->Exit(m_pOwner);

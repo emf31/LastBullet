@@ -264,3 +264,10 @@ void Enemy::updateState()
 		m_animState = quieto;
 	}
 }
+
+
+
+
+bool Enemy::isDying() {
+	return m_isDying;
+}

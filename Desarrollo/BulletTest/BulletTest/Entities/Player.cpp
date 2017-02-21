@@ -578,3 +578,7 @@ void Player::updateRelojes() {
 float Player::getVida() {
 	return life_component.getVida();
 }
+
+bool Player::isDying() {
+	return life_component.isDying();
+}

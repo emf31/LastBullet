@@ -42,7 +42,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1 ,10, 20);
+	weaponSystem = new WeaponSystem(this, 1 ,0, 20);
 
 	weaponSystem->Inicializar();
 
@@ -212,6 +212,9 @@ void Enemy_Bot::handleMessage(const Message & message)
 	else if (message.mensaje == "COLISION_ROCKET") {
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		delete message.data;
+	}
+	else if (message.mensaje == "MATASTE") {
+		decisionAfterKill();
 	}
 	
 }
@@ -434,7 +437,6 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 	}
 
-
 	if (weaponSystem->buscar("RocketLauncher")) {
 
 		fm.Fuzzify("AmmoStatusRocketLauncher", weaponSystem->getAmmoRocketLauncher());
@@ -463,6 +465,13 @@ void Enemy_Bot::FuzzyLifeObject() {
 		fm.Fuzzify("Life", life_component.getVida());
 		fm.Fuzzify("LifeTarget", getTargetBot()->getVida());
 
+
+		std::list<Vec2f> m_camino;
+
+		float actual = getPathPlanning()->CreatePathToItem("LifeObject", m_camino);
+
+	//	std::cout << "Coste hacia Life Object: " << actual << std::endl;
+
 		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) > 40) {
 			m_pStateMachine->ChangeState(&BuscarVida::i());
 		}
@@ -470,6 +479,30 @@ void Enemy_Bot::FuzzyLifeObject() {
 	}
 }
 
+
+void Enemy_Bot::decisionAfterKill() {
+
+
+	if (getVida() < 70) {
+		m_pStateMachine->ChangeState(&BuscarVida::i());
+	}
+	else {
+		std::cout << "ESTOY EN DECISIONAFTERKILL"<< std::endl;
+
+		std::cout << "El viejo estado es: " << m_pStateMachine->CurrentState()->getStateName() << std::endl;
+
+		m_pStateMachine->RevertToPreviousState();
+		std::cout << "El nuevo estado es: " << m_pStateMachine->CurrentState()->getStateName() << std::endl;
+	}
+
+}
+
+
+
 float Enemy_Bot::getVida() {
 	return life_component.getVida();
+}
+
+bool Enemy_Bot::isDying() {
+	return life_component.isDying();
 }
