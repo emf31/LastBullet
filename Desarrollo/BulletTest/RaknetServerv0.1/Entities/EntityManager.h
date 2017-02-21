@@ -58,6 +58,9 @@ public:
 	Entity * getEntityID(int id);
 	int MaxScore = 5;
 
+	int getNumJugadores() const { return m_jugadores.size(); }
+
+
 private:
 	EntityManager(EntityManager const&);
 	EntityManager() { m_nextID = 0;  m_jugadores = std::unordered_map<unsigned long, Entity*>();

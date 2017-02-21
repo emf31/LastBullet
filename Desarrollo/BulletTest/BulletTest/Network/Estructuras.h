@@ -174,6 +174,7 @@ struct TGameInfo {
 	std::string name;
 	int gameMode;
 	int numBots;
+	int playersTotales;
 	std::string map;
 };
 #pragma pack(pop)
@@ -217,4 +218,5 @@ enum GameMessages {
 	EMPEZAR_PARTIDA = ID_USER_PACKET_ENUM + 35,
 	NUEVO_BOT = ID_USER_PACKET_ENUM + 36,
 	UNIRSE_PARTIDA = ID_USER_PACKET_ENUM + 37,
+	RECIBO_DATOS = ID_USER_PACKET_ENUM + 38
 };

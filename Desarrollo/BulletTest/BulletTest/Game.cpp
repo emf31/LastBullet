@@ -90,7 +90,10 @@ void Game::run()
 
 				time_client_curr = clock.getElapsedTime();
 
-				NetworkManager::i().updateNetwork(time_client_curr - time_client_prev);
+				if (NetworkManager::i().isConnected()) {
+					NetworkManager::i().updateNetwork(time_client_curr - time_client_prev);
+				}
+				
 
 				time_client_prev = time_client_curr;
 
@@ -128,6 +131,7 @@ void Game::inicializar()
 	
 	Settings::i().LoadSettings();
 	GraphicEngine::i().inicializar();
+	
 
 	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
 
