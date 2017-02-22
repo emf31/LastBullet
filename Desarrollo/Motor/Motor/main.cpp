@@ -40,8 +40,8 @@ int main() {
 	//personaje
 	TModel* w = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	w->setPosition(Vec3<float>(3.5f, 3.5f, 3.5f));
-	w->setRotationY(0.0f);
+	w->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));
+	//w->setRotationY(0.0f);
 	//w->setModelColor(0.8f, 0.0f, 0.61f);
 	Vec3<float> aux = w->getRotation();
 	
@@ -61,9 +61,10 @@ int main() {
 	//camaras
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
-	Vec3<float> posCam = w->getPosition();
+	Vec3<float> posCam = sm.camaraActiva->getPosition();
+	sm.camaraActiva->addChild(w);
 	//posCam.setX(posCam.getX() + 1);
-	posCam.setY(posCam.getY() + 4);
+	//posCam.setY(posCam.getY() + 4);
 
 	//cam2->setPosition(posCam);
 	//pongo la camara 2 como hijo del modelo
@@ -85,13 +86,14 @@ int main() {
 		engine.setWindowTitle(title.str());
 		
 		engine.doMovement();
-		//rot=sm.camaraActiva->vecFrontCam();
-		std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
+		rot=sm.camaraActiva->vecFrontCam();
+		w->setRotation(rot);
+		//std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
 		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
 		//w->setRotationY(sm.camaraActiva->rotY);
-		w->setRotationY(sm.camaraActiva->rotX);
-		aux = w->getRotation();
-		std::cout << "La rotacion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+		//w->setRotationY(sm.camaraActiva->rotX);
+		//aux = w->getRotation();
+		//std::cout << "La rotacion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
 		
 		//w->setRotationY(sm.camaraActiva->aumentoenX);
 		if (tiempoCamara == 300) {

@@ -56,26 +56,32 @@ glm::mat4 TCamera::GetViewMatrix() {
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
 	GLfloat velocity = this->MovementSpeed * deltaTime;
 	glm::vec3 result;
+	//Front.y = -Front.y;
+	std::cout << "El vector direccion: " << Front.x << "," << Front.y << "," << Front.z<< "," << std::endl;
 	if (direction == FORWARD) {
 		result = Front * velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
+		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position += this->Front * velocity;
 	}
 	if (direction == BACKWARD) {
 		result = Front * -velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
+		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position -= this->Front * velocity;
 	}
 
 	if (direction == LEFT) {
 		result = Right * -velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
+		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position -= this->Right * velocity;
 	}
 
 	if (direction == RIGHT) {
 		result = Right * velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
+		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position += this->Right * velocity;
 	}
 
@@ -88,11 +94,11 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean c
 
 	this->Yaw += xoffset;
 	this->Pitch += yoffset;
-	rotX = Yaw;
-	rotY = Pitch;
-	std::cout<< " rotX: " << Yaw <<" rotY: "<< Pitch << std::endl;
-	setRotationY(-Yaw*0.01);
-	setRotationX(Pitch*0.01);
+	//rotX = Yaw;
+	//rotY = Pitch;
+	//std::cout<< " rotX: " << Yaw <<" rotY: "<< Pitch << std::endl;
+	//setRotationY(-Yaw*0.01);
+	//setRotationX(Pitch*0.01);
 	// Make sure that when pitch is out of bounds, screen doesn't get flipped
 	if (constrainPitch) {
 		if (this->Pitch > 89.0f)
@@ -103,7 +109,8 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean c
 
 	// Update Front, Right and Up Vectors using the updated Eular angles
 	this->updateCameraVectors();
-	//transRotacion->setRotation(vecFront);
+	transRotacion->setRotationDirection(vecFront);
+	std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
 }
 
 void TCamera::ProcessMouseScroll(GLfloat yoffset) {
@@ -139,13 +146,13 @@ glm::vec3 TCamera::calcularPosicionVista()
 		else if (nodoActual->getNodeType() == T_ROTACION) {
 			t = static_cast<TTransform*> (nodoActual->getEntity());
 			rotmatrix *= t->getRotation2();
-			std::cout << "MATRIZ VISTA ROTADA : " << std::endl;
-			for (int i = 0; i < rotmatrix.length(); i++) {
-				for (int j = 0; j < rotmatrix[0].length(); j++) {
-					std::cout << rotmatrix[i][j] << " ";
-				}
-				std::cout << std::endl;
-			}
+			//std::cout << "MATRIZ VISTA ROTADA : " << std::endl;
+			//for (int i = 0; i < rotmatrix.length(); i++) {
+			//	for (int j = 0; j < rotmatrix[0].length(); j++) {
+			//		std::cout << rotmatrix[i][j] << " ";
+			//	}
+			//	std::cout << std::endl;
+			//}
 		}
 		
 	}
@@ -220,7 +227,7 @@ void TCamera::updateCameraVectors() {
 	
 	
 	this->Front = glm::normalize(front);
-	vecFront = Vec3<float>(Front.x, Front.y, Front.z);
+	vecFront = Vec3<float>(Front.x, -Front.y, Front.z);
 	
 	// Also re-calculate the Right and Up vector
 	this->Right = glm::cross(this->Front, this->WorldUp);  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.

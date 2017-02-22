@@ -235,7 +235,7 @@ void TModel::updatePosition(Vec3<float> pos)
 }
 
 void TModel::setRotation(Vec3<float> rot) {
-	transRotacion->setRotation(rot);
+	transRotacion->setRotationDirection(rot);
 }
 
 void TModel::setRotationX(float angu) {

@@ -19,6 +19,7 @@ public:
 	void updatePosition(Vec3<float> position);
 	void setScale(Vec3<float> scale);
 	void setRotation(Vec3<float> rotation);
+	void setRotationDirection(Vec3<float> vecDir);
 	void setRotationX(float angu);
 	void setRotationY(float angu);
 	void setRotationZ(float angu);
