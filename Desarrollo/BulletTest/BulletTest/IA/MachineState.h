@@ -61,6 +61,7 @@ public:
 		return false;
 	}
 
+
 private:
 
 	//a pointer to the agent that owns this instance

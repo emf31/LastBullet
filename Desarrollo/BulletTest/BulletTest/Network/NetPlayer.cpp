@@ -92,7 +92,9 @@ void NetPlayer::crearPartida()
 	
 
 	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	bot->m_network->inicializar();
+	//bot2->m_network->inicializar();
 
 	/*
 	Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
@@ -466,6 +468,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 		case MUERTE:
 		{
+
 			TPlayer nuevoplayer = *reinterpret_cast<TPlayer*>(packet->data);
 
 			Entity* ent = EntityManager::i().getRaknetEntity(nuevoplayer.guid);
@@ -475,6 +478,11 @@ void NetPlayer::handlePackets(Time elapsedTime)
 				//es el player
 				Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 				player->resetAll();
+
+			}
+			else {
+				Enemy_Bot* bot = (Enemy_Bot*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
+				bot->resetAll();
 
 			}
 

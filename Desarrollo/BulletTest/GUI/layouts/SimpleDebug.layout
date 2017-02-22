@@ -200,7 +200,7 @@
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="VentanaIA" >
             <Property name="ID" value="30" />
-            <Property name="Area" value="{{0.0539063,599},{0.00277778,114},{0.28125,599},{0.780556,-164}}" />
+            <Property name="Area" value="{{0.0539063,547},{0.00277778,167},{0.28125,547},{0.780556,119}}" />
             <Property name="Text" value="Debug Menu" />
             <Property name="Visible" value="false" />
             <Property name="SizingEnabled" value="false" />
@@ -226,14 +226,14 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="BotonBuscarRocket" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0.0135039,-5},{0.133283,74},{0.0135039,234},{0.133283,107}}" />
+                <Property name="Area" value="{{0.0135039,-5},{0.133283,65},{0.0135039,234},{0.133283,101}}" />
                 <Property name="Text" value="Buscar Rocket" />
                 <Property name="TooltipText" value="Activa las debug shapes" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="BotonBuscarPistola" >
                 <Property name="ID" value="4" />
-                <Property name="Area" value="{{0.0888415,-5},{0.228484,146},{0.0888415,234},{0.228484,178}}" />
+                <Property name="Area" value="{{0.0888415,-5},{0.228484,131},{0.0888415,234},{0.228484,163}}" />
                 <Property name="Text" value="Buscar Pistola" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="BotonMapa" >
@@ -245,8 +245,18 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="BotonBuscarAsalto" >
                 <Property name="ID" value="3" />
-                <Property name="Area" value="{{0.0888415,-5},{0.228484,95},{0.0888415,234},{0.228484,127}}" />
+                <Property name="Area" value="{{0.0888415,-5},{0.228484,75},{0.0888415,234},{0.228484,107}}" />
                 <Property name="Text" value="Buscar Asalto" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0.355366,-78},{0.869656,-98},{0.355366,18},{0.869656,-66}}" />
+                <Property name="Text" value="BotA" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="ButtonBotB" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,24},{0,376},{0,120},{0,408}}" />
+                <Property name="Text" value="BotB" />
             </Window>
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="NetworkSync" >
@@ -375,6 +385,51 @@
                 <Property name="Area" value="{{0.362787,36},{0.926446,1},{0.066313,257},{0.884335,33}}" />
                 <Property name="StepSize" value="0.01" />
                 <Property name="CurrentProgress" value="0.01" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="DesirabilityWeapons" >
+            <Property name="ID" value="40" />
+            <Property name="Area" value="{{0,11},{0,13},{0.3,128},{0.3,-6}}" />
+            <Property name="Text" value="Deseabilidad Weapons" />
+            <Property name="Visible" value="false" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,205},{0,18},{0,461},{0,50}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar2" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,205},{0,61},{0,461},{0,93}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar3" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,205},{0,108},{0,461},{0,140}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="CurrentProgress" value="0.01" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="ID" value="20" />
+                <Property name="Area" value="{{0,3},{0,21},{0,181},{0,53}}" />
+                <Property name="Text" value="Deseabilidad Asalto" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="ID" value="21" />
+                <Property name="Area" value="{{0,0},{0,61},{0,185},{0,93}}" />
+                <Property name="Text" value="Deseabilidad Rocket" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="ID" value="22" />
+                <Property name="Area" value="{{0,12},{0,107},{0,178},{0,139}}" />
+                <Property name="Text" value="Deseabilidad Sniper" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
         </Window>
     </Window>

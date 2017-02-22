@@ -65,6 +65,10 @@ public:
 	virtual std::string getClassName() = 0;
 	virtual void setPosition(const Vec3<float>& vec) = 0;
 
+	virtual float getDesiAsalto() { return 0; }
+	virtual float getDesiRocketLauncher() { return 0; }
+	virtual float getDesiSniper() { return 0; }
+
 protected:
 	//Unique id de la entity
 	int m_id;

@@ -118,7 +118,7 @@ void WeaponSystem::TakeAimAndShoot()const
 	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
 	{
 
-		if (!m_pOwner->getTargetBot()->isDying()) {
+		if (!m_pOwner->getTargetBot()->isDying() && !m_pOwner->isDying()) {
 
 			if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible()>m_dReactionTime) {
 
@@ -166,3 +166,29 @@ Vec3<float> WeaponSystem::PredictFuturePositionOfTarget()const {
 }
 */
 
+void WeaponSystem::WeaponSystemResetAll() {
+
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+
+
+	listaWeapons->Vaciar();
+
+	asalto->inicializar();
+
+	rocket->inicializar();
+
+	pistola->inicializar();
+
+	sniper->inicializar();
+
+
+	listaWeapons->insertar(pistola);
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	rocket->setEquipada(false);
+	asalto->setEquipada(false);
+	sniper->setEquipada(false);
+
+	pistola->setEquipada(true);
+
+}

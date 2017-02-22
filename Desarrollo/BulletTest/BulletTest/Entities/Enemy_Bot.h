@@ -89,11 +89,23 @@ public:
 
 	virtual float getVida() override;
 	virtual bool isDying() override;
+	virtual float getDesiAsalto() override;
+	virtual float getDesiRocketLauncher() override;
+	virtual float getDesiSniper()  override;
+
 
 	void decisionAfterKill();
 
+	void resetAll();
+
+
 
 private:
+
+	float desiAsalto = 0;
+	float desiRocketLauncher = 0;
+	float desiSniper = 0;
+	
 	
 	float lifeTarget = 0;
 
@@ -129,6 +141,7 @@ private:
 
 
 
+
 	//the direction the bot is facing (and therefore the direction of aim). 
 	//Note that this may not be the same as the bot's heading, which always
 	//points in the direction of the bot's movement
@@ -147,15 +160,15 @@ private:
 
 	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
 
-	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 50, 250);
-	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 50, 250, 500);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 300, 500, 8000);
+	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 30, 70);
+	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 30, 70, 110);
+	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 70, 110, 8000);
 
 	//LifeObject
 
 	FuzzyVariable& Life = fm.CreateFLV("Life");
 	FuzzyVariable& LifeTarget = fm.CreateFLV("LifeTarget");
-	FuzzyVariable& DistToLifeObject = fm.CreateFLV("DistToLifeObject");
+//	FuzzyVariable& DistToLifeObject = fm.CreateFLV("DistToLifeObject");
 
 	FzSet Life_Low = Life.AddLeftShoulderSet("Life_Low", 0, 10, 30);
 	FzSet Life_Okay = Life.AddTriangularSet("Life_Okay", 10, 30, 60);
@@ -164,11 +177,12 @@ private:
 	FzSet Life_LowTarget = LifeTarget.AddLeftShoulderSet("Life_LowTarget", 0, 10, 30);
 	FzSet Life_OkayTarget = LifeTarget.AddTriangularSet("Life_OkayTarget", 10, 30, 60);
 	FzSet Life_LoadsTarget = LifeTarget.AddRightShoulderSet("Life_LoadsTarget", 60, 70, 100);
-	
+
+	/*
 	FzSet Life_Close = DistToLifeObject.AddLeftShoulderSet("Life_Close", 0, 40, 60);
 	FzSet Life_Medium = DistToLifeObject.AddTriangularSet("Life_Medium", 40, 65, 90);
 	FzSet Life_Far = DistToLifeObject.AddRightShoulderSet("Life_Far", 65, 90, 150);
-
+	*/
 
 
 	FuzzyVariable& DesirabilityLifeDrop = fm.CreateFLV("DesirabilityLifeDrop");

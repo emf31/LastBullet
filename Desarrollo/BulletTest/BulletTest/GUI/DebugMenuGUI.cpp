@@ -15,6 +15,8 @@ DebugMenuGUI::~DebugMenuGUI()
 void DebugMenuGUI::update() {
 	/*updateProgressBars();
 	updateNetworkWindowInfo();*/
+
+	updateFuzzyProgressBars();
 }
 
 void DebugMenuGUI::handleEvent(Event * ev)
@@ -55,6 +57,13 @@ void DebugMenuGUI::inicializar() {
 
 	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));
 
+	DesirabilityWeapons = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(40));
+	
+	DesiAsalto = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(1));
+	DesiRocketLauncher = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(2));
+	DesiSniper = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(3));
+	
+
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
 
@@ -80,6 +89,7 @@ void DebugMenuGUI::inicializar() {
 	aumentaKillPB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(8));
 	aumentaMuertePB = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(9));
 
+
 	closePushButtonNetSync = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(99)->getChild(100));
 	closePushButtonNetSync->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetSyncClicked, this));
 	closePushButtonNetDebug = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(60)->getChild(99)->getChild(100));
@@ -104,6 +114,12 @@ void DebugMenuGUI::inicializar() {
 
 	BuscarPistola = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(4));
 	BuscarPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAPISTOLAClicked, this));
+
+	BotA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(6));
+	BotA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotAClicked, this));
+
+	BotB = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(7));
+	BotB->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotBClicked, this));
 
 	closePushButtonIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(99)->getChild(100));
 	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));
@@ -139,6 +155,87 @@ bool DebugMenuGUI::onDebugIAMapaClicked(const CEGUI::EventArgs & e) {
 bool DebugMenuGUI::onDebugIAVIDAClicked(const CEGUI::EventArgs & e)
 {
 	return true;
+}
+
+bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
+
+	std::list<Entity*>bots = EntityManager::i().getBots();
+
+	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Entity* myentity = *it;
+
+		if(myentity->getID()==0){
+
+			std::cout << myentity->getClassName() << std::endl;
+			std::cout << myentity->getID() << std::endl;
+
+			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+
+			IDBotAbierto = myentity->getID();
+
+			
+
+		}
+
+	}
+	return true;
+
+}
+
+bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
+
+	std::list<Entity*>bots = EntityManager::i().getBots();
+
+	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Entity* myentity = *it;
+
+		if (myentity->getID() == 1) {
+
+
+			std::cout << myentity->getClassName() << std::endl;
+			std::cout << myentity->getID() << std::endl;
+
+			IDBotAbierto = myentity->getID();
+
+			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+
+
+		}
+
+
+
+	}
+	return true;
+
+}
+
+void DebugMenuGUI::updateFuzzyProgressBars() {
+
+	std::list<Entity*>bots = EntityManager::i().getBots();
+
+
+	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Entity* myentity = *it;
+
+		if (myentity->getID() == IDBotAbierto) {
+
+			progresoAsalto = myentity->getDesiAsalto();
+			progresoRocketLauncher = myentity->getDesiRocketLauncher();
+			progresoSniper = myentity->getDesiSniper();
+
+		}
+
+	}
+
+
+	DesiAsalto->setProgress(progresoAsalto / 100);
+	DesiRocketLauncher->setProgress(progresoRocketLauncher / 100);
+	DesiSniper->setProgress(progresoSniper / 100);
+
+
 }
 
 bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {

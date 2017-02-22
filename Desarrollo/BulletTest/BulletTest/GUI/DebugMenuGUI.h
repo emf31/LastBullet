@@ -6,6 +6,7 @@
 #include <EntityManager.h>
 #include <events\Event.h>
 #include <NetworkDebugger.h>
+#include <EntityManager.h>
 
 class DebugMenuGUI : public Motor::GUI {
 public:
@@ -18,6 +19,10 @@ public:
 	void inicializar();
 	
 private:
+	
+	bool onDebugBotAClicked(const CEGUI::EventArgs & e);
+	bool onDebugBotBClicked(const CEGUI::EventArgs & e);
+
 	bool onDebugShapesClicked(const CEGUI::EventArgs& e);
 	bool onCloseMenuButtonClicked(const CEGUI::EventArgs & e);
 	bool onMapClicked(const CEGUI::EventArgs & e);
@@ -33,6 +38,8 @@ private:
 	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
 
 	void updateProgressBars(NetworkDebugger* deb);
+	void updateFuzzyProgressBars();
+
 	void updateNetworkWindowInfo(NetworkDebugger* deb);
 
 	CEGUI::PushButton *DebugShapesButton;
@@ -71,14 +78,27 @@ private:
 	CEGUI::PushButton *DebugIA;
 	CEGUI::DefaultWindow *mapa;
 	CEGUI::DefaultWindow *IAWindow;
+	CEGUI::DefaultWindow *DesirabilityWeapons;
 	CEGUI::PushButton *BuscarVida;
 	CEGUI::PushButton *BuscarPistola;
 	CEGUI::PushButton *BuscarRocket;
 	CEGUI::PushButton *BuscarAsalto;
 	CEGUI::PushButton *BotonMapa;
+
+	CEGUI::ProgressBar *DesiAsalto;
+	CEGUI::ProgressBar *DesiRocketLauncher;
+	CEGUI::ProgressBar *DesiSniper;
+
+	CEGUI::PushButton *BotA;
+	CEGUI::PushButton *BotB;
+
 	CEGUI::PushButton *closePushButtonIA;
 
 
+	int IDBotAbierto=0;
+	float progresoAsalto = 0;
+	float progresoRocketLauncher = 0;
+	float progresoSniper = 0;
 
 	
 };

@@ -40,10 +40,10 @@ public:
 
 	const std::vector<TPlayer>& getEnemies() const { return m_enemies; }
 
+
 private:
 
 	Player* m_player;
-
 	//Lista de servidores disponibles
 	std::vector<std::string> m_servers;
 
