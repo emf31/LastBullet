@@ -44,7 +44,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	
-	glfwSwapInterval(-1); //vSync adaptativa!
+	//glfwSwapInterval(-1); //vSync adaptativa!
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 

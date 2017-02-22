@@ -1,6 +1,8 @@
 #include "TCamera.h"
 #include "SceneManager.h"
 
+#define PI 3.141592654 
+
 
 
 // Constructor with vectors
@@ -37,8 +39,18 @@ TCamera::~TCamera() {
 
 
 glm::mat4 TCamera::GetViewMatrix() {
+	view = glm::mat4();
 	glm::vec3 posCamara = calcularPosicionVista();
-	return glm::lookAt(posCamara, posCamara + this->Front, this->Up);
+	
+	//view = glm::translate(view, posCamara);
+	//glm::rotate;
+	view = glm::inverse(view);
+	return view;
+	//esto no se puede hacer aun pork necesitamos tener la rotacion del personaje desde el juego, si el personaje rota la camara al ser hija tendra que rotar en el mismo angulo, lo que significa 
+	//coger la matriz de rotacion del personaje
+
+	//return glm::lookAt(posCamara, posCamara + this->Front, this->Up);
+	
 }
 
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
@@ -73,9 +85,14 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean c
 	xoffset *= this->MouseSensitivity;
 	yoffset *= this->MouseSensitivity;
 
+
 	this->Yaw += xoffset;
 	this->Pitch += yoffset;
-
+	rotX = Yaw;
+	rotY = Pitch;
+	std::cout<< " rotX: " << Yaw <<" rotY: "<< Pitch << std::endl;
+	setRotationY(-Yaw*0.01);
+	setRotationX(Pitch*0.01);
 	// Make sure that when pitch is out of bounds, screen doesn't get flipped
 	if (constrainPitch) {
 		if (this->Pitch > 89.0f)
@@ -86,6 +103,7 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean c
 
 	// Update Front, Right and Up Vectors using the updated Eular angles
 	this->updateCameraVectors();
+	//transRotacion->setRotation(vecFront);
 }
 
 void TCamera::ProcessMouseScroll(GLfloat yoffset) {
@@ -103,24 +121,35 @@ glm::vec3 TCamera::calcularPosicionVista()
 	Vec3<float> pos = Vec3<float>(0.0f, 0.0f, 0.0f);
 	float rot = 0.0f;
 	Vec3<float> aux ;
+	TTransform* t;
+	glm::mat4 tras;
+	glm::mat4 rotmatrix;
 	while ((nodoActual->getParentNode() != nullptr) && (nodoActual->getParentNode()->getNodeType()!=T_RAIZ)) {
 		nodoActual = nodoActual->getParentNode();
 		if (nodoActual->getNodeType() == T_TRASLACION) {
 
-			TTransform* t = static_cast<TTransform*> (nodoActual->getEntity());
+			t = static_cast<TTransform*> (nodoActual->getEntity());
 			aux = t->getPosition();
-			std::cout << "ENTRO A UN NODO TRASLACION PADRE DE LA CAMARA" << std::endl;
-			std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-			
-			pos += t->getPosition();
+			//std::cout << "ENTRO A UN NODO TRASLACION PADRE DE LA CAMARA" << std::endl;
+			//std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+			tras = glm::translate(tras,glm::vec3(aux.getX(), aux.getY(), aux.getZ()));
+			//pos += t->getPosition();
 
 		}
 		else if (nodoActual->getNodeType() == T_ROTACION) {
-			// TODO hacer que tambien devuelva la rotacion en grados para poder poner la misma que su padre
+			t = static_cast<TTransform*> (nodoActual->getEntity());
+			rotmatrix *= t->getRotation2();
+			std::cout << "MATRIZ VISTA ROTADA : " << std::endl;
+			for (int i = 0; i < rotmatrix.length(); i++) {
+				for (int j = 0; j < rotmatrix[0].length(); j++) {
+					std::cout << rotmatrix[i][j] << " ";
+				}
+				std::cout << std::endl;
+			}
 		}
 		
 	}
-	
+	view = tras * rotmatrix;
 	//delete nodoActual;
 
 	//NOTA ERROR YA COMETIDO: ANTES HACIAMOS UN SET POSITION PERO CLARO ESTO NO PUEDE SER PORK ENTONCES SI EL MODELO ESTA EN LA 30 Y LA CAMARA EN LA 10, EL MODELO AVANZA 5, ENTONCES LA CAMARA AHORA ESTARIA 
@@ -183,12 +212,19 @@ Vec3<float> TCamera::getRotation() {
 
 void TCamera::updateCameraVectors() {
 	// Calculate the new Front vector
+	
 	glm::vec3 front;
 	front.x = cos(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
 	front.y = sin(glm::radians(this->Pitch));
 	front.z = sin(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
+	
+	
 	this->Front = glm::normalize(front);
+	vecFront = Vec3<float>(Front.x, Front.y, Front.z);
+	
 	// Also re-calculate the Right and Up vector
-	this->Right = glm::normalize(glm::cross(this->Front, this->WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+	this->Right = glm::cross(this->Front, this->WorldUp);  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+	//vecFront = Vec3<float>(Right.x, Right.y, Right.z);
+	this->Right = glm::normalize(this->Right);
 	this->Up = glm::normalize(glm::cross(this->Right, this->Front));
 }

@@ -67,17 +67,21 @@ public:
 	GLfloat MouseSensitivity;
 	GLfloat Zoom;
 
-
+	Vec3<float> vecFrontCam() {
+		return vecFront;
+	}
+	float rotX = 0.0f;
+	float rotY = 0.0f;
 private:
 
 
-
+	Vec3<float> vecFront;
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionTraslacion(TTransform* tras);
 	glm::vec3 getPositionglm();
 	// Calculates the front vector from the Camera's (updated) Eular Angles
 	void updateCameraVectors();
-
+	glm::mat4 view;
 	TTransform* transRotacion;
 	TTransform* transTraslacion;
 

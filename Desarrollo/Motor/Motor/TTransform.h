@@ -42,6 +42,7 @@ public:
 private: 
 	glm::mat4 m_matrix;
 	Vec3<float> m_rotation;
+	glm::vec3 m_rotation2;
 	Vec3<float> m_position;
 	Vec3<float> m_scale;
 	TNode *miNodo;

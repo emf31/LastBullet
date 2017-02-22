@@ -41,7 +41,7 @@ int main() {
 	TModel* w = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	w->setPosition(Vec3<float>(3.5f, 3.5f, 3.5f));
-	w->setRotationY(90.f);
+	w->setRotationY(0.0f);
 	//w->setModelColor(0.8f, 0.0f, 0.61f);
 	Vec3<float> aux = w->getRotation();
 	
@@ -60,19 +60,21 @@ int main() {
 
 	//camaras
 	//TCamera* cam1 = sm.crearNodoCamara();
-	TCamera* cam2 = sm.crearNodoCamara();
+	//TCamera* cam2 = sm.crearNodoCamara();
 	Vec3<float> posCam = w->getPosition();
-	posCam.setX(posCam.getX() + 1);
-	posCam.setY(posCam.getY() + 1);
+	//posCam.setX(posCam.getX() + 1);
+	posCam.setY(posCam.getY() + 4);
 
-	cam2->setPosition(posCam);
+	//cam2->setPosition(posCam);
 	//pongo la camara 2 como hijo del modelo
-	w->addChild(cam2);
+	//w->addChild(cam2);
 	//sm.setActiveCamera(cam2);
 	
 	long int cont = 0;
 	long int tiempoCamara = 0;
 	int contCam = 0;
+	Vec3<float> rot;
+	sm.camaraActiva->setPosition(posCam);
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
 
@@ -83,20 +85,29 @@ int main() {
 		engine.setWindowTitle(title.str());
 		
 		engine.doMovement();
+		//rot=sm.camaraActiva->vecFrontCam();
+		std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
+		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
+		//w->setRotationY(sm.camaraActiva->rotY);
+		w->setRotationY(sm.camaraActiva->rotX);
+		aux = w->getRotation();
+		std::cout << "La rotacion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+		
+		//w->setRotationY(sm.camaraActiva->aumentoenX);
 		if (tiempoCamara == 300) {
 			tiempoCamara = 0;
 			if (contCam >= sm.vectorCamaras.size()) {
 				contCam = 0;
 			}
-			std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
+			//std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
 			sm.setActiveCamera(sm.vectorCamaras[contCam]);
 			contCam++;
 		}
 		if (cont == 100) {
 			cont = 0;
 			aux = w->getPosition();
-			std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-			w->updatePosition(Vec3<float>(1.5f, 0.0f, 0.0f));
+			//std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+			//w->updatePosition(Vec3<float>(1.5f, 0.0f, 0.0f));
 			
 		}
 		cont++;
@@ -134,7 +145,7 @@ int main() {
 		*/
 		
 		sm.draw(engine.getWindow());
-		std::cout << "siguiente iteracion" << std::endl;
+		//std::cout << "siguiente iteracion" << std::endl;
 		
 		
 		

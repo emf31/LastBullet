@@ -94,9 +94,9 @@ void TSpotLight::beginDraw() {
 
 	glm::mat4 view = SceneManager::i().view;
 	glm::mat4 projection = SceneManager::i().projection;
-	glm::mat4 actual = SceneManager::i().m_matrizActual;
-	glm::mat4 model = glm::mat4();
-	int tam = SceneManager::i().pilaMatrices.size();
+	glm::mat4 model = SceneManager::i().m_matrizActual;
+	/*
+		int tam = SceneManager::i().pilaMatrices.size();
 	for (int i = 0; i < tam; i++) {
 		model = SceneManager::i().pilaMatrices.front()*model;
 		SceneManager::i().pilaMatrices.pop_front();
@@ -105,6 +105,8 @@ void TSpotLight::beginDraw() {
 	model = actual * model;
 	//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
 	SceneManager::i().m_matrizActual = model;
+	*/
+
 
 	/*
 	m_matrix = SceneManager::i().m_matrizActual;
