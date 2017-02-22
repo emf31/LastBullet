@@ -43,6 +43,15 @@ void MenuGUI::inicializar() {
 	Actualizar = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(3));
 	Actualizar->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
 
+	Atras = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(4));
+	Atras->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	escribirIP = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(6));
+	escribirIP->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onescribirIPClicked, this));
+
+	ConecarIP = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(7));
+	ConecarIP->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onconectarIPClicked, this));
+
 	UnirWindow->setVisible(false);
 	
 	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
@@ -108,4 +117,34 @@ bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 {
 	p->m_network->unirseLobby(Conexion1->getText().c_str());
 	return true;
+}
+
+bool MenuGUI::onescribirIPClicked(const CEGUI::EventArgs & e)
+{
+	escribirIP->setText("");
+	return true;
+}
+
+bool MenuGUI::onconectarIPClicked(const CEGUI::EventArgs & e)
+{
+	p->m_network->unirseLobby(escribirIP->getText().c_str());
+	return true;
+}
+
+bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
+{
+	UnirWindow->setVisible(false);
+	LastBullet->setVisible(true);
+	return true;
+}
+
+void MenuGUI::escribir(const std::string& w )
+{
+	escribirIP->insertText(w, escribirIP->getText().size());
+}
+
+void MenuGUI::borrarUltimo()
+{
+	CEGUI::String str = escribirIP->getText().substr(0,escribirIP->getText().size() - 1);
+	escribirIP->setText(str);
 }

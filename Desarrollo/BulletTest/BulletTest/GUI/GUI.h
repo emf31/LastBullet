@@ -42,9 +42,9 @@ namespace Motor{
 
 		CEGUI::Key::Scan irrlichtToCeguiKey(irr::EKEY_CODE key);
 
-		void injectKeyDown(irr::EKEY_CODE key);
+		bool injectKeyDown(irr::EKEY_CODE key);
 
-		void injectKeyUp(irr::EKEY_CODE key);
+		bool injectKeyUp(irr::EKEY_CODE key);
 
 		void injectMousePosition(float x, float y);
 

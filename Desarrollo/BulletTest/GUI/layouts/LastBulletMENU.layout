@@ -30,7 +30,7 @@
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow2" >
             <Property name="ID" value="1" />
-            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,525},{0,224},{1,-484},{1,-382}}" />
@@ -51,6 +51,27 @@
                 <Property name="ID" value="3" />
                 <Property name="Area" value="{{0,596},{0,452},{0,708},{0,502}}" />
                 <Property name="Text" value="Actualizar" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button4" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,1086},{0,636},{0,1236},{0,686}}" />
+                <Property name="Text" value="Atras" />
+            </Window>
+            <Window type="SampleBrowserSkin/Label" name="Label2" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,488},{0,527},{1,-458},{1,-154}}" />
+                <Property name="Text" value="Escribe la IP" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button5" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0,539},{0,603},{0,785},{0,646}}" />
+                <Property name="Text" value="Pincha para aqui para escribir IP" />
+            </Window>
+            <Window type="SampleBrowserSkin/Button" name="Button6" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,826},{0,659},{0,931},{0,703}}" />
+                <Property name="Text" value="Conectar a esta IP" />
             </Window>
         </Window>
     </Window>

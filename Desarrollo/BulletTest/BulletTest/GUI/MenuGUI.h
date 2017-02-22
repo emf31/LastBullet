@@ -23,6 +23,11 @@ public:
 	bool onSalirClicked(const CEGUI::EventArgs & e);
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
+	bool onescribirIPClicked(const CEGUI::EventArgs & e);
+	bool onconectarIPClicked(const CEGUI::EventArgs & e);
+	bool onAtrasClicked(const CEGUI::EventArgs & e);
+	void escribir(const std::string&);
+	void borrarUltimo();
 private:
 	CEGUI::DefaultWindow* LastBullet;
 	CEGUI::DefaultWindow* UnirWindow;
@@ -36,6 +41,9 @@ private:
 	CEGUI::PushButton *Conexion1;
 	CEGUI::PushButton *Conexion2;
 	CEGUI::PushButton *Actualizar;
+	CEGUI::PushButton *Atras;
+	CEGUI::PushButton *escribirIP;
+	CEGUI::PushButton *ConecarIP;
 
 
 	Player* p;

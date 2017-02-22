@@ -1,6 +1,7 @@
 #include "GUI.h"
 #include <GUIManager.h>
 #include <EventSystem.h>
+#include <iostream>
 
 Motor::GUI::GUI() : EventListener()
 {
@@ -155,12 +156,12 @@ CEGUI::Key::Scan Motor::GUI::irrlichtToCeguiKey(irr::EKEY_CODE key) {
 
 }
 
-void Motor::GUI::injectKeyDown(irr::EKEY_CODE key) {
-	m_context->injectKeyDown(irrlichtToCeguiKey(key));
+bool Motor::GUI::injectKeyDown(irr::EKEY_CODE key) {
+	return m_context->injectKeyDown(irrlichtToCeguiKey(key));
 }
 
-void Motor::GUI::injectKeyUp(irr::EKEY_CODE key) {
-	m_context->injectKeyUp(irrlichtToCeguiKey(key));
+bool Motor::GUI::injectKeyUp(irr::EKEY_CODE key) {
+	return m_context->injectKeyUp(irrlichtToCeguiKey(key));
 }
 
 void Motor::GUI::injectMousePosition(float x, float y) {
