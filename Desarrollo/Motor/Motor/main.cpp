@@ -62,7 +62,7 @@ int main() {
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
 	Vec3<float> posCam = sm.camaraActiva->getPosition();
-	sm.camaraActiva->addChild(w);
+	//sm.camaraActiva->addChild(w);
 	//posCam.setX(posCam.getX() + 1);
 	//posCam.setY(posCam.getY() + 4);
 
@@ -87,7 +87,7 @@ int main() {
 		
 		engine.doMovement();
 		rot=sm.camaraActiva->vecFrontCam();
-		w->setRotation(rot);
+		//w->setRotation(rot);
 		//std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
 		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
 		//w->setRotationY(sm.camaraActiva->rotY);
