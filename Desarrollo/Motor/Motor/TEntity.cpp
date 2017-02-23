@@ -11,7 +11,7 @@ TEntity::~TEntity() {
 }
 
 void TEntity::endDraw() {
-	std::cout << "Hola" << std::endl;
+	//std::cout << "Hola" << std::endl;
 }
 
 TNode * TEntity::getMiNodo() {

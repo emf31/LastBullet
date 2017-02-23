@@ -95,14 +95,14 @@ void TTransform::setRotation(Vec3<float> rotation) {
 	//m_matrix = glm::mat4();
 	//m_matrix = glm::orientation(normal, up);
 	
-	std::cout << "matriz orientacion : " << std::endl;
+	/*std::cout << "matriz orientacion : " << std::endl;
 	for (int i = 0; i < m_matrix.length(); i++) {
 		for (int j = 0; j < m_matrix[0].length(); j++) {
 			std::cout << m_matrix[i][j] << " ";
 		}
 		std::cout << std::endl;
 	}
-
+	*/
 
 
 

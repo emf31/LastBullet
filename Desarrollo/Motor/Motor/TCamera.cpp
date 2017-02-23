@@ -57,30 +57,30 @@ void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
 	GLfloat velocity = this->MovementSpeed * deltaTime;
 	glm::vec3 result;
 	//Front.y = -Front.y;
-	std::cout << "El vector direccion: " << Front.x << "," << Front.y << "," << Front.z<< "," << std::endl;
+	//std::cout << "El vector direccion: " << Front.x << "," << Front.y << "," << Front.z<< "," << std::endl;
 	if (direction == FORWARD) {
 		result = Front * velocity;
-		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
 		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position += this->Front * velocity;
 	}
 	if (direction == BACKWARD) {
 		result = Front * -velocity;
-		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
 		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position -= this->Front * velocity;
 	}
 
 	if (direction == LEFT) {
 		result = Right * -velocity;
-		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
 		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position -= this->Right * velocity;
 	}
 
 	if (direction == RIGHT) {
 		result = Right * velocity;
-		std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
+		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
 		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
 		//this->Position += this->Right * velocity;
 	}
@@ -110,7 +110,7 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean c
 	// Update Front, Right and Up Vectors using the updated Eular angles
 	this->updateCameraVectors();
 	transRotacion->setRotationDirection(vecFront);
-	std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
+	//std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
 }
 
 void TCamera::ProcessMouseScroll(GLfloat yoffset) {
