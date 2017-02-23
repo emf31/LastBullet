@@ -53,7 +53,7 @@ private:
 	int fps;
 	float screenWidth, screenHeight;
 
-	Input &input = Input::getInstance();
+	Input &input = Input::i();
 
 	void setKeyCallbacks();
 };

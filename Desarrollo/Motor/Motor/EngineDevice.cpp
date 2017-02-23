@@ -24,11 +24,13 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	//de la funcion glfwCreateWindow()
 
 	window = glfwCreateWindow(screenWidth, screenHeight, titleWindow.c_str(), nullptr, nullptr);
+	
 	if (window == nullptr) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		return -1;
 	}
+
 	glfwMakeContextCurrent(window);
 	
 	glewExperimental = GL_TRUE;

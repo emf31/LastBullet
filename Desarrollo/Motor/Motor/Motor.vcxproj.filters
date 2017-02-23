@@ -69,18 +69,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\DebugMenuGUI.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI\GUI.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI\GUIManager.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Billboard.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TEntity.h">
@@ -124,18 +112,6 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\DebugMenuGUI.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\GUI.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\GUIManager.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Billboard.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
     </ClInclude>
     <ClInclude Include="enum.h">
       <Filter>Archivos de encabezado\Otros</Filter>

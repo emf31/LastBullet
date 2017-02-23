@@ -88,68 +88,26 @@ int main() {
 		engine.doMovement();
 		rot=sm.camaraActiva->vecFrontCam();
 		w->setRotation(rot);
-		//std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
-		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
-		//w->setRotationY(sm.camaraActiva->rotY);
-		//w->setRotationY(sm.camaraActiva->rotX);
-		//aux = w->getRotation();
-		//std::cout << "La rotacion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-		
-		//w->setRotationY(sm.camaraActiva->aumentoenX);
+
 		if (tiempoCamara == 300) {
 			tiempoCamara = 0;
 			if (contCam >= sm.vectorCamaras.size()) {
 				contCam = 0;
 			}
-			//std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
+
 			sm.setActiveCamera(sm.vectorCamaras[contCam]);
 			contCam++;
 		}
 		if (cont == 100) {
 			cont = 0;
 			aux = w->getPosition();
-			//std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-			//w->updatePosition(Vec3<float>(1.5f, 0.0f, 0.0f));
+
 			
 		}
 		cont++;
 		tiempoCamara++;
-		/*
-				if (cont == 100) {
-			cont = 0;
-			std::cout << "reseteo: "<< std::endl;
-			rotacion = n->getRotation();
-			rotacion.setY(rotacion.getY() + 0.01);
-			n->setRotation(rotacion);
-		}
-		std::cout << cont << std::endl;
-		cont++;
-
-		if (engine.m_rotarDerecha) {
-			rotacion = n->getRotation();
-			rotacion.setY(rotacion.getY() + 0.1);
-			n->setRotation(rotacion);
-			std::cout << "La rotacion en el if es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
-		}
-		else {
-			n->setRotation(Vec3<float>(1.f,1.f,1.f));
-			std::cout << "La rotacion el else es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
-		}
-		
-		if (engine.m_rotarIzquierda) {
-			rotacion = n->getRotation();
-			rotacion.setY(rotacion.getY() - 0.1);
-			n->setRotation(rotacion);
-		}
-		else {
-			n->setRotation(Vec3<float>(1.f, 1.f, 1.f));
-		}
-		*/
 		
 		sm.draw(engine.getWindow());
-		//std::cout << "siguiente iteracion" << std::endl;
-		
-		
 		
 	}
 	engine.end();
