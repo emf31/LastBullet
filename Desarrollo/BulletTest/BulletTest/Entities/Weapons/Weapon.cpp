@@ -1,7 +1,7 @@
 #include "Weapon.h"
 
 
-Weapon::Weapon() : Entity(-1, NULL), estadoWeapon(CARGADA)
+Weapon::Weapon(Character* ent) : Entity(-1, NULL), estadoWeapon(CARGADA), m_ent (ent)
 {
 
 }
@@ -28,4 +28,15 @@ void Weapon::recargar() {
 
 void Weapon::setPosition(const Vec3<float>& pos)
 {
+}
+
+Vec3<float> Weapon::getBalaRotation()
+{
+	if (m_ent->getClassName() == "Player"){
+		return GraphicEngine::i().getActiveCamera()->getRotation();
+	}
+	if (m_ent->getClassName() == "Enemy_Bot") {
+		return m_ent->getRenderState()->getRenderRotation();
+	}
+	return Vec3<float>();
 }

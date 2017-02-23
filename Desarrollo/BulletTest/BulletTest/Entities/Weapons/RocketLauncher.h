@@ -1,6 +1,5 @@
 #pragma once
 #include "Weapon.h"
-#include <Character.h>
 
 
 class Player;
@@ -37,8 +36,6 @@ public:
 
 private:
 	btVector3 SIZE_OF_WORLD;
-
-	Character* m_ent;
 
 };
 

@@ -11,13 +11,14 @@
 #include <Message.h>
 
 
+
 #define CARGADA 0
 #define DESCARGADA 1
 
 class Weapon : public Entity
 {
 public:
-	Weapon();
+	Weapon(Character* ent);
 	virtual ~Weapon();
 
 	virtual void inicializar() = 0;
@@ -44,7 +45,7 @@ public:
 		disparos = capacidadAmmo;
 		numCargadores = 0;
 	}
-
+	Vec3<float> getBalaRotation();
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 
@@ -83,6 +84,8 @@ protected:
 	bool equipada=false;
 
 	int disparosRestantes=0;
+
+	Character* m_ent;
 
 
 };

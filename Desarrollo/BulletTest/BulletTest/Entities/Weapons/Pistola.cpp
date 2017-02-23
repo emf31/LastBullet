@@ -4,7 +4,7 @@
 #include <NetworkManager.h>
 #include <Player.h>
 
-Pistola::Pistola(Character* ent) : Weapon(), m_ent(ent)
+Pistola::Pistola(Character* ent) : Weapon(ent)
 {
 	
 }
@@ -146,7 +146,7 @@ void Pistola::shoot(const Vec3<float>& target) {
 
 			}
 
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), m_nodo->getRotation());
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
 			bala->cargarContenido();
 
 			TBala p_bala;

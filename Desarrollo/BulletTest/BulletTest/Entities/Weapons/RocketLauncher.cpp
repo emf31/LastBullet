@@ -4,7 +4,7 @@
 #include <Player.h>
 
 
-RocketLauncher::RocketLauncher(Character* ent) : Weapon(), m_ent(ent)
+RocketLauncher::RocketLauncher(Character* ent) : Weapon(ent)
 {
 	
 }

@@ -5,7 +5,7 @@
 #include <Player.h>
 
 
-Asalto::Asalto(Character* ent) : Weapon(), m_ent(ent)
+Asalto::Asalto(Character* ent) : Weapon(ent)
 {
 	
 
@@ -156,8 +156,22 @@ void Asalto::shoot(const Vec3<float>& target)
 				}
 
 			}
+			/*Vec3<float> rotacionBala;
+			if (m_ent->getClassName == "Player"){
+				rotacionBala = GraphicEngine::i().getActiveCamera()->getRotation();
+			}
+			else if (m_ent->getClassName == "Enemy_Bot"){
+				Enemy_Bot* e = static_cast<Enemy_Bot*> (m_ent);
+				rotacionBala = Vec3<float>(e->getFacing().x, 0, e->getFacing().y);
+			}
+			else if (m_ent->getClassName == "Enemy") {
+				Enemy* e = static_cast<Enemy*> (m_ent);
+				
+				rotacionBala = Vec3<float>(e->getFacing().x, 0, e->getFacing().y);
+			}
 
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), m_nodo->getRotation());
+			GraphicEngine::i().getActiveCamera()->getRotation();*/
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
 			bala->cargarContenido();
 
 			TBala t_bala;
