@@ -18,10 +18,10 @@ Granada::~Granada()
 
 void Granada::inicializar()
 {
-	fuerza = Vec3<float>(60.f ,100.f, 60.f);
-	radioExplosion = 30.f;
-	height = 1.2f;
-	radius = 0.5;
+	fuerza = Vec3<float>(15.f ,35.f, 15.f);
+	radioExplosion = 10.f;
+	height = 0.3f;
+	radius = 0.1;
 	mass = 1.f;
 	timeRecargaGranada = 2.f;
 	restitution = 1.f;
@@ -66,7 +66,7 @@ void Granada::handleInput()
 
 void Granada::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.15f, 0.15f, 0.15f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/Granada/granada.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "../media/WPNT_MK2Grenade_Base_Color.tga", "../media/Granada/granada.obj");
 	m_nodo->setVisible(false);
 
 }

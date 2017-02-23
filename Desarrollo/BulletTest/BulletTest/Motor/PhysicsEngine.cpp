@@ -56,7 +56,7 @@ void PhysicsEngine::inicializar()
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 
-	m_world->setGravity(btVector3(0, -40, 0));
+	m_world->setGravity(btVector3(0, -15, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
@@ -80,7 +80,7 @@ void PhysicsEngine::update(Time elapsedTime)
 
 	if (m_world) {
 		//Como la simulacion va lenta multiplicamos por 1.25
-		m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
+		m_world->stepSimulation(btScalar(elapsedTime.asSeconds() /** 1.25f*/), 20, tickPhysics.asSeconds());
 	}
 	
 	
@@ -120,7 +120,7 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	btCapsuleShape* m_pCollisionShape = new btCapsuleShape(radius, height);
 	m_pCollisionShape->setUserIndex(bodyPart::Body::CUERPO);
 
-	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(3.f,3.f,3.f));
+	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(1.f, 1.f, 1.f));
 	m_CollisionBox->setUserIndex(bodyPart::Body::EXTERNA);
 
 	btTransform t;

@@ -75,11 +75,10 @@ public class Exporter : MonoBehaviour
                             objeto.extraTags = mt.extratags.ToString();
                         }
 
-                        Rigidbody rb;
-                        if (rb = g.GetComponent<Rigidbody>())
+                        BoxCollider col = g.GetComponentInChildren<BoxCollider>();
+                        if (col != null)
                         {
-                            objeto.masa = rb.mass;
-                            BoxCollider col = g.GetComponent<BoxCollider>();
+                           
                             objeto.colliderX = col.center.x;
                             objeto.colliderY = col.center.y;
                             objeto.colliderZ = col.center.z;

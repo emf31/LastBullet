@@ -27,9 +27,9 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		nuevoplayer.name = m_pOwner->getName();
 
 
-		Entity* ent=EntityManager::i().getRaknetEntity(guid);
+		Entity* ent = EntityManager::i().getRaknetEntity(guid);
 
-		if (ent->getClassName() == "Enemy_Bot") {
+		if (ent != NULL && ent->getClassName() == "Enemy_Bot") {
 			Message msg(ent, "MATASTE", NULL);
 			MessageHandler::i().sendMessageNow(msg);
 		}
