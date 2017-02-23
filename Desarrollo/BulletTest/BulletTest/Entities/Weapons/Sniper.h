@@ -29,7 +29,6 @@ public:
 
 	virtual void shoot(const Vec3<float>& target);
 
-
 	virtual void resetAmmoTotal() { numCargadores = numCargadoresSniper; }
 
 private:

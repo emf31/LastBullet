@@ -37,6 +37,20 @@ private:
 	bool onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e);
 	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
 
+	bool onVaciarAsalto(const CEGUI::EventArgs & e);
+	bool onVaciarRocket(const CEGUI::EventArgs & e);
+	bool onVaciarSniper(const CEGUI::EventArgs & e);
+	bool onVaciarPistola(const CEGUI::EventArgs & e);
+
+
+	bool onInsAsalto(const CEGUI::EventArgs & e);
+	bool onInsRocket(const CEGUI::EventArgs & e);
+	bool onInsSniper(const CEGUI::EventArgs & e);
+	bool onInsPistola(const CEGUI::EventArgs & e);
+
+	bool onUpdateSlider(const CEGUI::EventArgs & e);
+
+
 	void updateProgressBars(NetworkDebugger* deb);
 	void updateFuzzyProgressBars();
 
@@ -79,11 +93,23 @@ private:
 	CEGUI::DefaultWindow *mapa;
 	CEGUI::DefaultWindow *IAWindow;
 	CEGUI::DefaultWindow *DesirabilityWeapons;
+	CEGUI::DefaultWindow *OpcionesIA;
 	CEGUI::PushButton *BuscarVida;
 	CEGUI::PushButton *BuscarPistola;
 	CEGUI::PushButton *BuscarRocket;
 	CEGUI::PushButton *BuscarAsalto;
 	CEGUI::PushButton *BotonMapa;
+
+	CEGUI::PushButton *VaciarAsalto;
+	CEGUI::PushButton *VaciarRocket;
+	CEGUI::PushButton *VaciarSniper;
+	CEGUI::PushButton *VaciarPistola;
+
+	CEGUI::PushButton *InsAsalto;
+	CEGUI::PushButton *InsRocket;
+	CEGUI::PushButton *InsSniper;
+	CEGUI::PushButton *InsPistola;
+
 
 	CEGUI::ProgressBar *DesiAsalto;
 	CEGUI::ProgressBar *DesiRocketLauncher;
@@ -94,11 +120,12 @@ private:
 
 	CEGUI::PushButton *closePushButtonIA;
 
+	CEGUI::Slider *sliderUpdate;
 
-	int IDBotAbierto=0;
 	float progresoAsalto = 0;
 	float progresoRocketLauncher = 0;
 	float progresoSniper = 0;
 
-	
+	Entity* entActual;
+	std::shared_ptr<BasicSceneNode> nodoState;
 };

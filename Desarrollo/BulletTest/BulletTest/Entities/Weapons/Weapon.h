@@ -40,6 +40,11 @@ public:
 
 	virtual void shoot(const Vec3<float>& target) = 0;
 
+	void vaciar() {
+		disparos = capacidadAmmo;
+		numCargadores = 0;
+	}
+
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 

@@ -36,6 +36,9 @@ public:
 	void WeaponSystemResetAll();
 	void setWeapon(int weapon);
 
+	void vaciarArma(std::string);
+	void InsertarArmaDebug(std::string);
+
 	bool buscar(std::string weapon) { return listaWeapons->Buscar(weapon); }
 
 

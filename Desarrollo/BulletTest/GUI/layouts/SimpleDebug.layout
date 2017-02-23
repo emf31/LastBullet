@@ -50,6 +50,16 @@
                 <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
+            <Window type="AlfiskoSkin/Button" name="ButtonBotB" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,26},{0,298},{0,122},{0,330}}" />
+                <Property name="Text" value="BotB" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0.355366,-74},{0.869656,-221},{0.355366,22},{0.869656,-189}}" />
+                <Property name="Text" value="BotA" />
+            </Window>
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label" >
             <Property name="Area" value="{{0.00234375,1067},{0.0430556,29},{0.14375,1067},{0.0902778,29}}" />
@@ -248,16 +258,6 @@
                 <Property name="Area" value="{{0.0888415,-5},{0.228484,75},{0.0888415,234},{0.228484,107}}" />
                 <Property name="Text" value="Buscar Asalto" />
             </Window>
-            <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
-                <Property name="ID" value="6" />
-                <Property name="Area" value="{{0.355366,-78},{0.869656,-98},{0.355366,18},{0.869656,-66}}" />
-                <Property name="Text" value="BotA" />
-            </Window>
-            <Window type="AlfiskoSkin/Button" name="ButtonBotB" >
-                <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,24},{0,376},{0,120},{0,408}}" />
-                <Property name="Text" value="BotB" />
-            </Window>
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="NetworkSync" >
             <Property name="ID" value="80" />
@@ -430,6 +430,61 @@
                 <Property name="Area" value="{{0,12},{0,107},{0,178},{0,139}}" />
                 <Property name="Text" value="Deseabilidad Sniper" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="OptionsIA" >
+            <Property name="ID" value="50" />
+            <Property name="Area" value="{{0,51},{0,329},{0.3,215},{0.3,448}}" />
+            <Property name="Text" value="Options Bot" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,5},{0,20},{0,125},{0,52}}" />
+                <Property name="Text" value="Vaciar Asalto" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button2" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,134},{0,20},{0,254},{0,52}}" />
+                <Property name="Text" value="Vaciar Rocket" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button3" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,265},{0,20},{0,385},{0,52}}" />
+                <Property name="Text" value="Vaciar Sniper" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button4" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,401},{0,20},{0,521},{0,52}}" />
+                <Property name="Text" value="Vaciar Pistola" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button5" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,5},{0,80},{0,101},{0,112}}" />
+                <Property name="Text" value="Ins. Asalto" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button6" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0,134},{0,80},{0,230},{0,112}}" />
+                <Property name="Text" value="Ins. Rocket" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button7" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,265},{0,80},{0,361},{0,112}}" />
+                <Property name="Text" value="Ins. Sniper" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button8" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0,401},{0,80},{0,497},{0,112}}" />
+                <Property name="Text" value="Ins. Pistola" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+                <Property name="ID" value="10" />
+                <Property name="Area" value="{{0,16},{0,139},{0,329},{0,171}}" />
+                <Property name="CurrentValue" value="84.6774" />
+                <Property name="MaximumValue" value="100" />
+                <Property name="ClickStepSize" value="1" />
             </Window>
         </Window>
     </Window>

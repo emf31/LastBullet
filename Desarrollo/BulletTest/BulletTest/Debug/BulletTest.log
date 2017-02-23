@@ -1,50 +1,9 @@
-﻿  Enemy_Bot.cpp
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
+﻿  DebugMenuGUI.cpp
   Macro definition of max detected - undefining
   Macro definition of min detected - undefining
 c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\cegui\propertyhelper.h(52): warning C4005: 'snprintf': redefinición de macro
   c:\users\jose_\documents\github\tba\desarrollo\bullettest\include\irrlitch\irrtypes.h(122): note: vea la definición anterior de 'snprintf'
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(441): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(460): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(480): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  World.cpp
-  StateFactory.cpp
-  InGame.cpp
-  LifeComponent.cpp
-  NetworkManager.cpp
-  NetworkDebugger.cpp
-  NetPlayer.cpp
-  NetObject.cpp
-  NetBot.cpp
-  MapLoader.cpp
-  PathPlanner.cpp
-  WeaponSystem.cpp
-  TargetingSystem.cpp
-  Perseguir.cpp
-  Patrullar.cpp
-  Disparar.cpp
-  BuscarWeapon.cpp
-  BuscarVida.cpp
-  SensoryMemory.cpp
-  PathFollow.cpp
-  Game.cpp
-  DebugMenuGUI.cpp
-  Sniper.cpp
-  RocketLauncher.cpp
-  Pistola.cpp
-  Asalto.cpp
-  WeaponDrop.cpp
-  SniperDrop.cpp
-  RocketLauncherDrop.cpp
-  PistolaDrop.cpp
-  AsaltoDrop.cpp
-  RocketBullet.cpp
-  Player.cpp
-  LifeObject.cpp
-  Granada.cpp
-  Enemy.cpp
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
+c:\users\jose_\documents\github\tba\desarrollo\bullettest\bullettest\otros\util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
   BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exe
   BulletTest.vcxproj -> C:\Users\jose_\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.pdb (Full PDB)

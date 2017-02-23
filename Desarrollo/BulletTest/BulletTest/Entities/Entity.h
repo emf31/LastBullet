@@ -69,6 +69,9 @@ public:
 	virtual float getDesiRocketLauncher() { return 0; }
 	virtual float getDesiSniper() { return 0; }
 
+	virtual void vaciarArma(std::string arma) {};
+	virtual void InsertarArmaDebug(std::string arma) {};
+
 protected:
 	//Unique id de la entity
 	int m_id;

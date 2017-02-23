@@ -94,46 +94,49 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
-	updateAnimation();
+		updateAnimation();
 
-	updateMovement();
+		updateMovement();
 
-	life_component.update();
+		life_component.update();
 
-	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
-
-
-	m_renderState.updatePositions(Vec3<float>(
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - p_controller->getStepHeight() / 2,
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
+		p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 
-	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+		m_renderState.updatePositions(Vec3<float>(
+			p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
+			p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - p_controller->getStepHeight() / 2,
+			p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
-	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 
-	if (m_network->isConnected()) {
+		float angle = std::atan2(m_vHeading.x, m_vHeading.y);
 
-		TMovimiento mov;
-		mov.isDying = getLifeComponent().isDying();
-		mov.position = getRenderState()->getPosition();
-		mov.rotation = getRenderState()->getRotation();
-		mov.guid = getGuid();
+		m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 
-		m_network->dispatchMessage(mov, MOVIMIENTO);
+		if (m_network->isConnected()) {
 
-	}
+			TMovimiento mov;
+			mov.isDying = getLifeComponent().isDying();
+			mov.position = getRenderState()->getPosition();
+			mov.rotation = getRenderState()->getRotation();
+			mov.guid = getGuid();
 
-	targetingSystem->Update();
-	sense->updateVision();
+			m_network->dispatchMessage(mov, MOVIMIENTO);
 
-	weaponSystem->TakeAimAndShoot();
+		}
 
-	if (!this->getMachineState()->isInState("BuscarVida"))
-		FuzzyLifeObject();
+		targetingSystem->Update();
+		sense->updateVision();
 
-	m_pStateMachine->Update();
+		weaponSystem->TakeAimAndShoot();
+
+		if (!this->getMachineState()->isInState("BuscarVida"))
+			FuzzyLifeObject();
+
+		m_pStateMachine->Update();
+	
+
+
 	
 }
 
@@ -554,4 +557,16 @@ float Enemy_Bot::getDesiRocketLauncher() {
 
 float Enemy_Bot::getDesiSniper() {
 	return desiSniper;
+}
+
+void Enemy_Bot::vaciarArma(std::string arma) {
+
+	weaponSystem->vaciarArma(arma);
+
+}
+
+void Enemy_Bot::InsertarArmaDebug(std::string arma) {
+
+	weaponSystem->InsertarArmaDebug(arma);
+
 }

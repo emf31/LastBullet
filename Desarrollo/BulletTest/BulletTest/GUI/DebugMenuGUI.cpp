@@ -17,6 +17,16 @@ void DebugMenuGUI::update() {
 	updateNetworkWindowInfo();*/
 
 	updateFuzzyProgressBars();
+
+	if (entActual) {
+		Vec3<float>posBox = entActual->getRenderState()->getPosition();
+		posBox.addY(posBox.getY() + 15);
+
+		nodoState->setPosition(posBox);
+
+		nodoState->setTexture("../media/Colores/verde.png", 0);
+
+	}
 }
 
 void DebugMenuGUI::handleEvent(Event * ev)
@@ -55,14 +65,7 @@ void DebugMenuGUI::inicializar() {
 	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(14));
 	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAClicked, this));
 
-	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));
-
-	DesirabilityWeapons = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(40));
-	
-	DesiAsalto = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(1));
-	DesiRocketLauncher = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(2));
-	DesiSniper = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(3));
-	
+	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));	
 
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
@@ -100,7 +103,7 @@ void DebugMenuGUI::inicializar() {
 	mapa = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(20));
 	mapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMapClicked, this));
 
-	BotonMapa = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(5));
+	BotonMapa = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(5));//ID del menu de IA = 30
 	BotonMapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAMapaClicked, this));
 
 	BuscarVida = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(1));
@@ -115,19 +118,53 @@ void DebugMenuGUI::inicializar() {
 	BuscarPistola = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(4));
 	BuscarPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAPISTOLAClicked, this));
 
-	BotA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(6));
-	BotA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotAClicked, this));
-
-	BotB = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(7));
-	BotB->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotBClicked, this));
-
 	closePushButtonIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(99)->getChild(100));
 	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));
 
+	BotA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(6));
+	BotA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotAClicked, this));
+
+	BotB = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(7));
+	BotB->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotBClicked, this));
+
+	DesirabilityWeapons = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(40));//ID del menu de deseabilidad = 40
+
+	DesiAsalto = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(1));
+	DesiRocketLauncher = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(2));
+	DesiSniper = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(3));
 
 
+
+	OpcionesIA = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(50));// ID del menu de opciones de IA = 50
+
+	VaciarAsalto = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(1));
+	VaciarAsalto->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onVaciarAsalto, this));
+
+	VaciarRocket = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(2));
+	VaciarRocket->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onVaciarRocket, this));
+
+	VaciarSniper = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(3));
+	VaciarSniper->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onVaciarSniper, this));
+
+	VaciarPistola = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(4));
+	VaciarPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onVaciarPistola, this));
+
+
+
+	InsAsalto = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(5));
+	InsAsalto->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsAsalto, this));
+
+	InsRocket = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(6));
+	InsRocket->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsRocket, this));
+
+	InsSniper = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(7));
+	InsSniper->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsSniper, this));
+
+	InsPistola = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(8));
+	InsPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsPistola, this));
 	
-
+	sliderUpdate = static_cast<CEGUI::Slider*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(10));
+	sliderUpdate->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&DebugMenuGUI::onUpdateSlider, this));
 
 }
 
@@ -167,15 +204,15 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 		if(myentity->getID()==0){
 
-			std::cout << myentity->getClassName() << std::endl;
-			std::cout << myentity->getID() << std::endl;
+			DesirabilityWeapons->setVisible(true);
+			OpcionesIA->setVisible(true);
 
-			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+			entActual = myentity;
 
-			IDBotAbierto = myentity->getID();
-
+			Vec3<float>posBox= entActual->getRenderState()->getPosition();
+			posBox.addY(posBox.getY()+15);
+			nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2,2,2), "../media/Colores/rojo.png", "");
 			
-
 		}
 
 	}
@@ -193,18 +230,23 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 		if (myentity->getID() == 1) {
 
+			DesirabilityWeapons->setVisible(true);
+			OpcionesIA->setVisible(true);
 
-			std::cout << myentity->getClassName() << std::endl;
-			std::cout << myentity->getID() << std::endl;
+			entActual = myentity;
+			/*			if (myentity == entActual && DesirabilityWeapons->isVisible()) {
+				DesirabilityWeapons->setVisible(false);
+				OpcionesIA->setVisible(false);
+			}
 
-			IDBotAbierto = myentity->getID();
+			if (myentity != entActual) {
+				DesirabilityWeapons->setVisible(true);
+				OpcionesIA->setVisible(true);
 
-			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+				entActual = myentity;
 
-
+			}*/
 		}
-
-
 
 	}
 	return true;
@@ -213,30 +255,93 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 void DebugMenuGUI::updateFuzzyProgressBars() {
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	if (entActual) {
+
+		progresoAsalto = entActual->getDesiAsalto();
+		progresoRocketLauncher = entActual->getDesiRocketLauncher();
+		progresoSniper = entActual->getDesiSniper();
 
 
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
-
-		Entity* myentity = *it;
-
-		if (myentity->getID() == IDBotAbierto) {
-
-			progresoAsalto = myentity->getDesiAsalto();
-			progresoRocketLauncher = myentity->getDesiRocketLauncher();
-			progresoSniper = myentity->getDesiSniper();
-
-		}
+		DesiAsalto->setProgress(progresoAsalto / 100);
+		DesiRocketLauncher->setProgress(progresoRocketLauncher / 100);
+		DesiSniper->setProgress(progresoSniper / 100);
 
 	}
 
+}
 
-	DesiAsalto->setProgress(progresoAsalto / 100);
-	DesiRocketLauncher->setProgress(progresoRocketLauncher / 100);
-	DesiSniper->setProgress(progresoSniper / 100);
+bool DebugMenuGUI::onVaciarAsalto(const CEGUI::EventArgs & e){
 
+	if (entActual)
+		entActual->vaciarArma("Asalto");
+	return true;
+}
+
+bool DebugMenuGUI::onVaciarRocket(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->vaciarArma("RocketLauncher");
+	return true;
 
 }
+
+bool DebugMenuGUI::onVaciarSniper(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->vaciarArma("Sniper");
+	return true;
+
+}
+
+bool DebugMenuGUI::onVaciarPistola(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->vaciarArma("Pistola");
+	return true;
+
+}
+
+bool DebugMenuGUI::onInsAsalto(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->InsertarArmaDebug("Asalto");
+	return true;
+}
+
+bool DebugMenuGUI::onInsRocket(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->InsertarArmaDebug("RocketLauncher");
+	return true;
+
+}
+
+bool DebugMenuGUI::onInsSniper(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->InsertarArmaDebug("Sniper");
+	return true;
+
+}
+
+bool DebugMenuGUI::onInsPistola(const CEGUI::EventArgs & e) {
+
+	if (entActual)
+		entActual->InsertarArmaDebug("Pistola");
+	return true;
+
+}
+
+
+bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
+
+	std::cout << "entra" << std::endl;
+
+	std::cout << "Valor del slider: "<< sliderUpdate->getCurrentValue() << std::endl;
+
+	return true;
+}
+
 
 bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
 	//Obama->createPathToItem("LifeObject");

@@ -192,3 +192,68 @@ void WeaponSystem::WeaponSystemResetAll() {
 	pistola->setEquipada(true);
 
 }
+
+void WeaponSystem::vaciarArma(std::string arma) {
+
+	if (arma == "Asalto")
+		if (buscar("Asalto"))
+			asalto->vaciar();
+
+
+	if (arma == "RocketLauncher")
+		if (buscar("RocketLauncher"))
+			rocket->vaciar();
+
+
+	if (arma == "Sniper")
+		if (buscar("Sniper"))
+			sniper->vaciar();
+
+	if (arma == "Pistola")
+		if (buscar("Pistola"))
+			pistola->vaciar();
+
+}
+
+void WeaponSystem::InsertarArmaDebug(std::string arma) {
+
+
+	if (arma == "Asalto") {
+		if (!buscar("Asalto")) {
+			listaWeapons->insertar(asalto);
+		}
+		else {
+			asalto->resetAmmoTotal();
+		}
+	}
+
+
+	if (arma == "RocketLauncher") {
+		if (!buscar("RocketLauncher")) {
+			listaWeapons->insertar(rocket);
+		}
+		else {
+			rocket->resetAmmoTotal();
+		}
+	}
+
+	if (arma == "Sniper") {
+		if (!buscar("Sniper")) {
+			listaWeapons->insertar(sniper);
+		}
+		else {
+			sniper->resetAmmoTotal();
+		}
+	}
+
+	if (arma == "Pistola") {
+		if (!buscar("Pistola")) {
+			listaWeapons->insertar(pistola);
+		}
+		else {
+			pistola->resetAmmoTotal();
+		}
+	}
+
+
+}

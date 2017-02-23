@@ -93,6 +93,9 @@ public:
 	virtual float getDesiRocketLauncher() override;
 	virtual float getDesiSniper()  override;
 
+	virtual void vaciarArma(std::string arma) override;
+	virtual void InsertarArmaDebug(std::string arma) override;
+
 
 	void decisionAfterKill();
 
@@ -101,6 +104,7 @@ public:
 
 
 private:
+
 
 	float desiAsalto = 0;
 	float desiRocketLauncher = 0;
