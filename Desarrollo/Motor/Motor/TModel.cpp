@@ -77,6 +77,13 @@ void TModel::beginDraw() {
 	}
 	*/
 
+	std::cout << "MATRIZ MODELO: " << std::endl;
+	for (int i = 0; i < model.length(); i++) {
+		for (int j = 0; j < model[0].length(); j++) {
+			std::cout << model[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
 
 	glm::mat4 modelview = projection * view * model;
 	// Activamos el shader que tenemos guardado

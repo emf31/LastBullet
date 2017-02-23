@@ -27,7 +27,7 @@ int main() {
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
-	//n->setModelColor(0.33f, 0.42f, 0.18f);
+	n->setModelColor(0.33f, 0.42f, 0.18f);
 
 	//cartel
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
@@ -61,7 +61,7 @@ int main() {
 	//camaras
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
-	Vec3<float> posCam = sm.camaraActiva->getPosition();
+//	Vec3<float> posCam = sm.camaraActiva->getPosition();
 	sm.camaraActiva->addChild(w);
 	//posCam.setX(posCam.getX() + 1);
 	//posCam.setY(posCam.getY() + 4);
@@ -75,7 +75,7 @@ int main() {
 	long int tiempoCamara = 0;
 	int contCam = 0;
 	Vec3<float> rot;
-	sm.camaraActiva->setPosition(posCam);
+	//sm.camaraActiva->setPosition(posCam);
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
 
@@ -87,7 +87,7 @@ int main() {
 		
 		engine.doMovement();
 		rot=sm.camaraActiva->vecFrontCam();
-		w->setRotation(rot);
+		//w->setRotation(rot);
 		//std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
 		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
 		//w->setRotationY(sm.camaraActiva->rotY);
@@ -147,7 +147,7 @@ int main() {
 		*/
 		
 		sm.draw(engine.getWindow());
-		//std::cout << "siguiente iteracion" << std::endl;
+		std::cout << "siguiente iteracion" << std::endl;
 		
 		
 		

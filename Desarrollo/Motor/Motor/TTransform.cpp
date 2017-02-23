@@ -221,6 +221,13 @@ void TTransform::beginDraw()
 	//que el siguiente nodo se encargaria de apilarla
 
 	//el enddraw desapilaria una matriz y pondria esa desapilada como actual.
+	std::cout << "APILO MATRIZ ACTUAL : " << std::endl;
+	for (int i = 0; i < SceneManager::i().m_matrizActual.length(); i++) {
+		for (int j = 0; j < SceneManager::i().m_matrizActual[0].length(); j++) {
+			std::cout << SceneManager::i().m_matrizActual[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
 	SceneManager::i().pilaMatrices.push_back(SceneManager::i().m_matrizActual);
 	SceneManager::i().m_matrizActual = m_matrix*SceneManager::i().m_matrizActual;
 }

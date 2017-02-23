@@ -30,12 +30,12 @@ public:
 	virtual void beginDraw();
 	virtual void endDraw();
 
-	void setPosition(Vec3<float> pos);
-	void updatePosition(Vec3<float> pos);
-	void setRotationX(float angu);
-	void setRotationY(float angu);
-	void setRotationZ(float angu);
-	Vec3<float> getRotation();
+	//void setPosition(Vec3<float> pos);
+	//void updatePosition(Vec3<float> pos);
+	//void setRotationX(float angu);
+	//void setRotationY(float angu);
+	//void setRotationZ(float angu);
+	//Vec3<float> getRotation();
 	Vec3<float> getPosition();
 
 	// Constructor with vectors
@@ -54,7 +54,7 @@ public:
 	glm::vec3 calcularPosicionVista();
 
 	// Camera Attributes
-	//glm::vec3 Position;
+	glm::vec3 Position;
 	glm::vec3 Front;
 	glm::vec3 Up;
 	glm::vec3 Right;
@@ -76,14 +76,16 @@ private:
 
 
 	Vec3<float> vecFront;
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionTraslacion(TTransform* tras);
+	//void setTransformacionRotacion(TTransform* rot);
+	//void setTransformacionTraslacion(TTransform* tras);
+	void setTransformacion(TTransform* trans);
 	glm::vec3 getPositionglm();
 	// Calculates the front vector from the Camera's (updated) Eular Angles
 	void updateCameraVectors();
-	glm::mat4 view;
-	TTransform* transRotacion;
-	TTransform* transTraslacion;
+	glm::mat4 miMatriz;
+	//TTransform* transRotacion;
+	//TTransform* transTraslacion;
+	TTransform* transformacion;
 
 
 

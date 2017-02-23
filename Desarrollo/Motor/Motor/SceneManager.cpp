@@ -103,6 +103,7 @@ TNode * SceneManager::crearNodoTransformacion(int entityID)
 	TNode* transNode = new TNode(entityID, scene);
 	TTransform* trans = new TTransform();
 	transNode->setType(T_TRANSFORM);
+	trans->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	transNode->setEntity(trans);
 
 	return transNode;
@@ -186,6 +187,10 @@ TSpotLight * SceneManager::crearNodoLuz()
 
 TCamera * SceneManager::crearNodoCamara()
 {
+
+	/*
+	ANTIGUAAA
+
 	TNode* cameraNode;
 	TNode * nuevoNodoRotacion;
 	TNode * nuevoNodoTraslacion;
@@ -210,6 +215,39 @@ TCamera * SceneManager::crearNodoCamara()
 	//asignamos matrices de transformacion
 	camara->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
 	camara->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	camara->setMiNodo(cameraNode);
+
+	//seteamos la entity
+	cameraNode->setEntity(camara);
+	cameraNode->setType(T_CAMARA);
+
+	//la añadimos al vector de camaras
+	vectorCamaras.push_back(camara);
+	
+	*/
+
+
+
+	TNode* cameraNode;
+	TNode * nuevoNodoTransformacion;
+
+	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
+	TCamera* camara = new TCamera();
+	int id = camara->getID();
+
+	//rotacion antes de traslacion
+	nuevoNodoTransformacion = crearNodoTransformacion(id);
+	cameraNode = new TNode(id, nuevoNodoTransformacion);
+
+	//asignamos los hijos
+	scene->addChild(nuevoNodoTransformacion);
+	nuevoNodoTransformacion->addChild(cameraNode);
+
+
+
+
+	//asignamos matrices de transformacion
+	camara->setTransformacion(static_cast<TTransform*> (nuevoNodoTransformacion->getEntity()));
 	camara->setMiNodo(cameraNode);
 
 	//seteamos la entity
