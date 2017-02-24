@@ -24,6 +24,24 @@ int main() {
 	TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
 	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
 
+	//pistola
+	
+	
+	TModel* p = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	/*
+	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p2 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p3= sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p4 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p5 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p6 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p7 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p8 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	TModel* p9 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	*/
+
+	
+	//n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
@@ -62,7 +80,7 @@ int main() {
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
 	Vec3<float> posCam = sm.camaraActiva->getPosition();
-	//sm.camaraActiva->addChild(w);
+	sm.camaraActiva->addChild(w);
 	//posCam.setX(posCam.getX() + 1);
 	//posCam.setY(posCam.getY() + 4);
 

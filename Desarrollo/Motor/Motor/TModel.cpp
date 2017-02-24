@@ -118,14 +118,12 @@ void TModel::beginDraw() {
 	float dirX = -SceneManager::i().camaraActiva->Front.x;
 	float dirY = SceneManager::i().camaraActiva->Front.y;
 	float dirZ = -SceneManager::i().camaraActiva->Front.z;
-	GLint flashlightColor = glGetUniformLocation(shader->Program, "flashlight.lightColor");
-	GLint flashlightPos = glGetUniformLocation(shader->Program, "flashlight.position");
-	GLint flashlightDir = glGetUniformLocation(shader->Program, "flashlight.direction");
-	GLint flashlightCutoff = glGetUniformLocation(shader->Program, "flashlight.cutOff");
-	glUniform3f(flashlightColor, 1.0f, 1.0f, 1.0f);
-	glUniform3f(flashlightPos, SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
-	glUniform3f(flashlightDir, dirX, dirY, dirZ);
-	glUniform1f(flashlightCutoff, glm::cos(glm::radians(12.5f)));
+	//pasamos los uniforms
+	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.lightColor"), 1.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.position"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
+	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.direction"), dirX, dirY, dirZ);
+	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.cutOff"), glm::cos(glm::radians(12.5f)));
+	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.outerCutOff"), glm::cos(glm::radians(17.5f)));
 	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.constant"), 1.0f);
 	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.linear"), 0.09);
 	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.quadratic"), 0.032);
