@@ -12,55 +12,6 @@ DebugMenuGUI::~DebugMenuGUI()
 {
 }
 
-void DebugMenuGUI::update() {
-	/*updateProgressBars();
-	updateNetworkWindowInfo();*/
-
-	updateFuzzyProgressBars();
-
-	if (entActual) {
-
-		Vec3<float>posBox = entActual->getRenderState()->getPosition();
-		posBox.addY(posBox.getY() + 15);
-
-		nodoState->setPosition(posBox);
-
-		nodoState->setTexture(elegirColor(), 0);
-
-	}
-}
-
-irr::io::path DebugMenuGUI::elegirColor() {
-
-	if (entActual) {
-
-		std::string estadoActual=entActual->getStateActual();
-
-		if (estadoActual == "BuscarVida") {
-			return "../media/Colores/verde.png";
-		}
-
-		if (estadoActual == "BuscarWeapon") {
-			return "../media/Colores/naranja.png";
-		}
-
-		if (estadoActual == "Disparar") {
-			return "../media/Colores/rojo.png";
-		}
-
-		if (estadoActual == "Patrullar") {
-			return "../media/Colores/azul.png";
-		}
-
-		if (estadoActual == "Perseguir") {
-			return "../media/Colores/rosa.png";
-		}
-
-	}
-
-	return "";
-
-}
 
 void DebugMenuGUI::handleEvent(Event * ev)
 {
@@ -201,6 +152,57 @@ void DebugMenuGUI::inicializar() {
 
 }
 
+void DebugMenuGUI::update() {
+	/*updateProgressBars();
+	updateNetworkWindowInfo();*/
+
+	updateFuzzyProgressBars();
+
+	if (entActual) {
+
+		Vec3<float>posBox = entActual->getRenderState()->getPosition();
+		posBox.addY(posBox.getY() + 15);
+
+		nodoState->setPosition(posBox);
+
+		nodoState->setTexture(elegirColor(), 0);
+
+	}
+}
+
+irr::io::path DebugMenuGUI::elegirColor() {
+
+	if (entActual) {
+
+		std::string estadoActual = entActual->getStateActual();
+
+		if (estadoActual == "BuscarVida") {
+			return "../media/Colores/verde.png";
+		}
+
+		if (estadoActual == "BuscarWeapon") {
+			return "../media/Colores/naranja.png";
+		}
+
+		if (estadoActual == "Disparar") {
+			return "../media/Colores/rojo.png";
+		}
+
+		if (estadoActual == "Patrullar") {
+			return "../media/Colores/azul.png";
+		}
+
+		if (estadoActual == "Perseguir") {
+			return "../media/Colores/rosa.png";
+		}
+
+	}
+
+	return "";
+
+}
+
+
 bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 	GraphicEngine::i().toggleDebug();
 	return true;
@@ -238,12 +240,15 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 		if(myentity->getID()==0){
 
 			if (myentity == entActual) {
-				DesirabilityWeapons->setVisible(false);
-				OpcionesIA->setVisible(false);
 
+					DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+					OpcionesIA->setVisible(!OpcionesIA->isVisible());
+				
 				
 			}
 			else {
+
+
 				DesirabilityWeapons->setVisible(true);
 				OpcionesIA->setVisible(true);
 
@@ -251,6 +256,8 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 				Vec3<float>posBox = entActual->getRenderState()->getPosition();
 				posBox.addY(posBox.getY() + 15);
+
+				if(!nodoState)
 				nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
 			}
 			
@@ -273,9 +280,10 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 
 			if (myentity == entActual) {
-				DesirabilityWeapons->setVisible(false);
-				OpcionesIA->setVisible(false);
 
+					DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+					OpcionesIA->setVisible(!OpcionesIA->isVisible());
+				
 
 			}
 			else {
@@ -286,21 +294,12 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 				Vec3<float>posBox = entActual->getRenderState()->getPosition();
 				posBox.addY(posBox.getY() + 15);
+
+				if (!nodoState)
 				nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
 			}
 
-			/*			if (myentity == entActual && DesirabilityWeapons->isVisible()) {
-				DesirabilityWeapons->setVisible(false);
-				OpcionesIA->setVisible(false);
-			}
 
-			if (myentity != entActual) {
-				DesirabilityWeapons->setVisible(true);
-				OpcionesIA->setVisible(true);
-
-				entActual = myentity;
-
-			}*/
 		}
 
 	}

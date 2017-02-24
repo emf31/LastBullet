@@ -538,6 +538,11 @@
                 <Property name="Text" value="BuscarVida" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
+            <Window type="AlfiskoSkin/Label" name="Label6" >
+                <Property name="Area" value="{{0,348},{0,139},{0,476},{0,171}}" />
+                <Property name="Text" value="Update de la IA" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>

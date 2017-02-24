@@ -92,7 +92,7 @@ void NetPlayer::crearPartida()
 	
 
 	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
+//	Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	bot->m_network->inicializar();
 //	bot2->m_network->inicializar();
 
