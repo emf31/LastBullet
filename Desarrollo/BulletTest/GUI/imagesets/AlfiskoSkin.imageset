@@ -187,4 +187,9 @@
     <Image height="118" name="SangreBorde" width="150" xPos="575" yPos="510" />
     <Image height="195" name="Mapa" width="195" xPos="552" yPos="640" />
     <Image height="130" name="scope" width="165" xPos="565" yPos="264" />
+    <Image height="30" name="Naranja" width="30" xPos="706" yPos="180" />
+    <Image height="30" name="Azul" width="30" xPos="706" yPos="131" />
+    <Image height="30" name="Rojo" width="30" xPos="705" yPos="81" />
+    <Image height="30" name="Rosa" width="30" xPos="754" yPos="82" />
+    <Image height="30" name="Verde" width="30" xPos="759" yPos="131" />
 </Imageset>

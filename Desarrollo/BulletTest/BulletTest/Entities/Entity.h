@@ -49,6 +49,8 @@ public:
 	
 	virtual float getVida() { return 0; }
 	virtual bool isDying() { return false; }
+	virtual std::string getStateActual() { return ""; }
+	virtual void setNumCiclos(int num) {}
 
 	byte getTriggerFlags() const { return dwTriggerFlags; }
 

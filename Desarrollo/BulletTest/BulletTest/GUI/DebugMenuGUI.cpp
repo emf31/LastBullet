@@ -19,14 +19,47 @@ void DebugMenuGUI::update() {
 	updateFuzzyProgressBars();
 
 	if (entActual) {
+
 		Vec3<float>posBox = entActual->getRenderState()->getPosition();
 		posBox.addY(posBox.getY() + 15);
 
 		nodoState->setPosition(posBox);
 
-		nodoState->setTexture("../media/Colores/verde.png", 0);
+		nodoState->setTexture(elegirColor(), 0);
 
 	}
+}
+
+irr::io::path DebugMenuGUI::elegirColor() {
+
+	if (entActual) {
+
+		std::string estadoActual=entActual->getStateActual();
+
+		if (estadoActual == "BuscarVida") {
+			return "../media/Colores/verde.png";
+		}
+
+		if (estadoActual == "BuscarWeapon") {
+			return "../media/Colores/naranja.png";
+		}
+
+		if (estadoActual == "Disparar") {
+			return "../media/Colores/rojo.png";
+		}
+
+		if (estadoActual == "Patrullar") {
+			return "../media/Colores/azul.png";
+		}
+
+		if (estadoActual == "Perseguir") {
+			return "../media/Colores/rosa.png";
+		}
+
+	}
+
+	return "";
+
 }
 
 void DebugMenuGUI::handleEvent(Event * ev)
@@ -338,6 +371,9 @@ bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
 	std::cout << "entra" << std::endl;
 
 	std::cout << "Valor del slider: "<< sliderUpdate->getCurrentValue() << std::endl;
+
+
+	entActual->setNumCiclos(sliderUpdate->getCurrentValue());
 
 	return true;
 }

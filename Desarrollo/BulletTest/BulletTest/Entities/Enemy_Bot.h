@@ -95,12 +95,14 @@ public:
 
 	virtual void vaciarArma(std::string arma) override;
 	virtual void InsertarArmaDebug(std::string arma) override;
+	virtual void setNumCiclos(int num) override;
 
 
 	void decisionAfterKill();
 
 	void resetAll();
 
+	virtual std::string getStateActual() override;
 
 
 private:
@@ -117,6 +119,9 @@ private:
 	float height;
 	float mass;
 	float FOV;
+
+	int ciclo = 0;
+	int valorCiclos = 1;
 
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 

@@ -94,47 +94,60 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
-		updateAnimation();
 
-		updateMovement();
+	if (valorCiclos < 25) {
 
-		life_component.update();
+		++ciclo;
 
-		p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
+		if (ciclo == valorCiclos) {
+
+			ciclo = 0;
+
+			updateAnimation();
+
+			updateMovement();
+
+			life_component.update();
+
+			p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
 
-		m_renderState.updatePositions(Vec3<float>(
-			p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-			p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - p_controller->getStepHeight() / 2,
-			p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
+			m_renderState.updatePositions(Vec3<float>(
+				p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
+				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - p_controller->getStepHeight() / 2,
+				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
 
-		float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+			float angle = std::atan2(m_vHeading.x, m_vHeading.y);
 
-		m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+			m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 
-		if (m_network->isConnected()) {
+			if (m_network->isConnected()) {
 
-			TMovimiento mov;
-			mov.isDying = getLifeComponent().isDying();
-			mov.position = getRenderState()->getPosition();
-			mov.rotation = getRenderState()->getRotation();
-			mov.guid = getGuid();
+				TMovimiento mov;
+				mov.isDying = getLifeComponent().isDying();
+				mov.position = getRenderState()->getPosition();
+				mov.rotation = getRenderState()->getRotation();
+				mov.guid = getGuid();
 
-			m_network->dispatchMessage(mov, MOVIMIENTO);
+				m_network->dispatchMessage(mov, MOVIMIENTO);
 
+			}
+
+			targetingSystem->Update();
+			sense->updateVision();
+
+			weaponSystem->TakeAimAndShoot();
+
+			if (!this->getMachineState()->isInState("BuscarVida"))
+				FuzzyLifeObject();
+
+			m_pStateMachine->Update();
 		}
 
-		targetingSystem->Update();
-		sense->updateVision();
 
-		weaponSystem->TakeAimAndShoot();
+	}
 
-		if (!this->getMachineState()->isInState("BuscarVida"))
-			FuzzyLifeObject();
-
-		m_pStateMachine->Update();
-	
 
 
 	
@@ -569,4 +582,20 @@ void Enemy_Bot::InsertarArmaDebug(std::string arma) {
 
 	weaponSystem->InsertarArmaDebug(arma);
 
+}
+
+std::string Enemy_Bot::getStateActual() {
+
+	return m_pStateMachine->getCurrentStateName();
+
+}
+
+void Enemy_Bot::setNumCiclos(int num) {
+
+	if (num == 0)
+		valorCiclos = 1;
+	else
+		valorCiclos = num;
+
+	ciclo = 0;
 }

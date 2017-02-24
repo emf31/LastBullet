@@ -50,6 +50,7 @@ private:
 
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
 
+	irr::io::path elegirColor();
 
 	void updateProgressBars(NetworkDebugger* deb);
 	void updateFuzzyProgressBars();

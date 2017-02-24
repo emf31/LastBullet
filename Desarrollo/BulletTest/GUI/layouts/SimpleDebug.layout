@@ -389,9 +389,8 @@
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="DesirabilityWeapons" >
             <Property name="ID" value="40" />
-            <Property name="Area" value="{{0,11},{0,13},{0.3,128},{0.3,-6}}" />
+            <Property name="Area" value="{{0,429},{0,518},{0.3,546},{0.3,499}}" />
             <Property name="Text" value="Deseabilidad Weapons" />
-            <Property name="Visible" value="false" />
             <AutoWindow namePath="__auto_titlebar__" >
                 <Property name="AlwaysOnTop" value="false" />
             </AutoWindow>
@@ -434,7 +433,7 @@
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="OptionsIA" >
             <Property name="ID" value="50" />
-            <Property name="Area" value="{{0,51},{0,329},{0.3,215},{0.3,448}}" />
+            <Property name="Area" value="{{0,14},{0,2},{0.3,178},{0.3,167}}" />
             <Property name="Text" value="Options Bot" />
             <AutoWindow namePath="__auto_titlebar__" >
                 <Property name="AlwaysOnTop" value="false" />
@@ -482,9 +481,60 @@
             <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
                 <Property name="ID" value="10" />
                 <Property name="Area" value="{{0,16},{0,139},{0,329},{0,171}}" />
-                <Property name="CurrentValue" value="84.6774" />
-                <Property name="MaximumValue" value="100" />
+                <Property name="CurrentValue" value="1" />
+                <Property name="MaximumValue" value="25" />
                 <Property name="ClickStepSize" value="1" />
+                <Property name="ReversedDirection" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Image" >
+                <Property name="Area" value="{{0,20},{0,190},{0,85},{0,210}}" />
+                <Property name="Image" value="AlfiskoSkin/Naranja" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image2" >
+                <Property name="Area" value="{{0,20},{0,220},{0,85},{0,240}}" />
+                <Property name="Image" value="AlfiskoSkin/Azul" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image3" >
+                <Property name="Area" value="{{0,20},{0,250},{0,85},{0,270}}" />
+                <Property name="Image" value="AlfiskoSkin/Rojo" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image4" >
+                <Property name="Area" value="{{0,20},{0,280},{0,85},{0,300}}" />
+                <Property name="Image" value="AlfiskoSkin/Rosa" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image5" >
+                <Property name="Area" value="{{0,20},{0,310},{0,85},{0,330}}" />
+                <Property name="Image" value="AlfiskoSkin/Verde" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,88},{0,185},{0,216},{0,217}}" />
+                <Property name="Text" value="BuscarWeapon" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,62},{0,215},{0,190},{0,247}}" />
+                <Property name="Text" value="Patrullar" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0,62},{0,247},{0,190},{0,279}}" />
+                <Property name="Text" value="Disparar" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label4" >
+                <Property name="Area" value="{{0,65},{0,274},{0,193},{0,306}}" />
+                <Property name="Text" value="Perseguir" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label5" >
+                <Property name="Area" value="{{0,71},{0,302},{0,199},{0,334}}" />
+                <Property name="Text" value="BuscarVida" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
         </Window>
     </Window>

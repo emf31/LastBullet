@@ -28,6 +28,10 @@ public:
 		if (m_pCurrentState) m_pCurrentState->Execute(m_pOwner);
 	}
 
+	std::string getCurrentStateName() {
+		return m_pCurrentState->getStateName();
+	}
+
 	//change to a new state
 	void ChangeState(StateIA* pNewState)
 	{
