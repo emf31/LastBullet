@@ -1,6 +1,5 @@
 #pragma once
 #include "Weapon.h"
-#include <Character.h>
 
 #define numCargadoresAsalto 5
 
@@ -35,9 +34,6 @@ public:
 private:
 	btVector3 SIZE_OF_WORLD;
 	btVector3 FUERZA;
-
-
-	Character* m_ent;
 
 };
 

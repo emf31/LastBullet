@@ -4,7 +4,7 @@
 #include <NetworkManager.h>
 
 
-Sniper::Sniper(Character* ent) : Weapon(), m_ent(ent)
+Sniper::Sniper(Character* ent) : Weapon(ent)
 {
 
 
@@ -148,7 +148,7 @@ void Sniper::shoot(const Vec3<float>& target)
 
 			}
 
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), m_nodo->getRotation());
+			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
 			bala->cargarContenido();
 
 			TBala t_bala;
