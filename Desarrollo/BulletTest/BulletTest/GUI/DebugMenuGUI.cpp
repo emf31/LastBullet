@@ -237,14 +237,22 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 		if(myentity->getID()==0){
 
-			DesirabilityWeapons->setVisible(true);
-			OpcionesIA->setVisible(true);
+			if (myentity == entActual) {
+				DesirabilityWeapons->setVisible(false);
+				OpcionesIA->setVisible(false);
 
-			entActual = myentity;
+				
+			}
+			else {
+				DesirabilityWeapons->setVisible(true);
+				OpcionesIA->setVisible(true);
 
-			Vec3<float>posBox= entActual->getRenderState()->getPosition();
-			posBox.addY(posBox.getY()+15);
-			nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2,2,2), "../media/Colores/rojo.png", "");
+				entActual = myentity;
+
+				Vec3<float>posBox = entActual->getRenderState()->getPosition();
+				posBox.addY(posBox.getY() + 15);
+				nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+			}
 			
 		}
 
@@ -263,10 +271,24 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 		if (myentity->getID() == 1) {
 
-			DesirabilityWeapons->setVisible(true);
-			OpcionesIA->setVisible(true);
 
-			entActual = myentity;
+			if (myentity == entActual) {
+				DesirabilityWeapons->setVisible(false);
+				OpcionesIA->setVisible(false);
+
+
+			}
+			else {
+				DesirabilityWeapons->setVisible(true);
+				OpcionesIA->setVisible(true);
+
+				entActual = myentity;
+
+				Vec3<float>posBox = entActual->getRenderState()->getPosition();
+				posBox.addY(posBox.getY() + 15);
+				nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+			}
+
 			/*			if (myentity == entActual && DesirabilityWeapons->isVisible()) {
 				DesirabilityWeapons->setVisible(false);
 				OpcionesIA->setVisible(false);

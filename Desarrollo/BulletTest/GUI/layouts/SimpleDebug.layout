@@ -391,6 +391,7 @@
             <Property name="ID" value="40" />
             <Property name="Area" value="{{0,429},{0,518},{0.3,546},{0.3,499}}" />
             <Property name="Text" value="Deseabilidad Weapons" />
+            <Property name="Visible" value="false" />
             <AutoWindow namePath="__auto_titlebar__" >
                 <Property name="AlwaysOnTop" value="false" />
             </AutoWindow>
@@ -435,6 +436,7 @@
             <Property name="ID" value="50" />
             <Property name="Area" value="{{0,14},{0,2},{0.3,178},{0.3,167}}" />
             <Property name="Text" value="Options Bot" />
+            <Property name="Visible" value="false" />
             <AutoWindow namePath="__auto_titlebar__" >
                 <Property name="AlwaysOnTop" value="false" />
             </AutoWindow>
