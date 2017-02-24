@@ -58,8 +58,7 @@ public:
 	const wchar_t * GetWC(const char *c);
 	
 	//Metodos de la camara
-	void createCamera(Vec3<float> position, Vec3<float> target);
-	void setCameraEntity(Entity* entity);
+	Camera* createCamera(const std::string &name, Vec3<float> position, Vec3<float> target);
 	void updateCamera();
 	Camera* getActiveCamera();
 	
@@ -71,7 +70,7 @@ public:
 	IGUIStaticText* balas;
 
 	//No hace nada aun
-	void setActiveCamera(int ID);
+	void setActiveCamera(const std::string &nameCamera);
 
 	
 	void renderAll();
@@ -94,6 +93,7 @@ public:
 	void restablecerMirilla();
 
 
+
 	IrrlichtDevice* getDevice() { return irrDevice; }
 private:
 	IrrlichtDevice *irrDevice;
@@ -105,8 +105,10 @@ private:
 
 	int lastFPS;
 
-	std::unordered_map<int, Camera*> cameras;
-	int m_camera;
+	std::string camaraActual = "";
+
+	std::unordered_map<std::string, Camera*> cameras;
+
 	Camera *active_camera;
 
 	bool debug_draw_bullet;

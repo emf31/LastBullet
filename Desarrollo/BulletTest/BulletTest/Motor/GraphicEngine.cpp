@@ -29,7 +29,6 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	//Asi no le afectan las luces
 	Node->setMaterialFlag(EMF_LIGHTING, false);
 
-	m_camera = 0;
 
 	//Si es diferente de "" asignamos una textura al nodo
 	if (texture != "") {
@@ -53,8 +52,6 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 	Node->setMaterialFlag(EMF_LIGHTING, false);
 
 	
-
-	m_camera = 0;
 
 	//Si es diferente de "" asignamos una textura al nodo
 	if (texture != "") {
@@ -104,7 +101,7 @@ const wchar_t * GraphicEngine::GetWC(const char *c)
 	return wc;
 }
 
-void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
+Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
 	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,irr::f32(100), irr::f32(0.05));
@@ -113,19 +110,12 @@ void GraphicEngine::createCamera(Vec3<float> position, Vec3<float> target)
 	cam->setInputReceiverEnabled(true);
 
 	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
-	Camera* myCamera=new Camera(cam);
-	cameras[m_camera] = myCamera;
+	Camera* myCamera=new Camera(cam, name);
+	cameras[name] = myCamera;
 
-	if (m_camera == 0)
-		active_camera = myCamera;
-
-	m_camera++;
+	return myCamera;
 }
 
-void GraphicEngine::setCameraEntity(Entity * entity)
-{
-	active_camera->asignarEntity(entity);
-}
 
 void GraphicEngine::updateCamera()
 {
@@ -141,9 +131,18 @@ Camera * GraphicEngine::getActiveCamera()
 }
 
 
-void GraphicEngine::setActiveCamera(int ID)
+void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 {
-	active_camera = cameras[ID];
+
+	auto found = cameras.find(nameCamera);
+	if (found != cameras.end()) {
+		active_camera = found->second;
+		irrScene->setActiveCamera(active_camera->getCameraNode());
+	}
+	else {
+		throw std::runtime_error("Camara no encontrada");
+	}
+
 }
 
 void GraphicEngine::renderAll()

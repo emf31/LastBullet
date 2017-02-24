@@ -42,6 +42,8 @@ private:
 	bool onVaciarSniper(const CEGUI::EventArgs & e);
 	bool onVaciarPistola(const CEGUI::EventArgs & e);
 
+	bool onCamaraAerea(const CEGUI::EventArgs & e);
+	bool onCamaraBot(const CEGUI::EventArgs & e);
 
 	bool onInsAsalto(const CEGUI::EventArgs & e);
 	bool onInsRocket(const CEGUI::EventArgs & e);
@@ -111,6 +113,9 @@ private:
 	CEGUI::PushButton *InsSniper;
 	CEGUI::PushButton *InsPistola;
 
+	CEGUI::PushButton *CamaraAerea;
+
+	CEGUI::PushButton *CamaraBot;
 
 	CEGUI::ProgressBar *DesiAsalto;
 	CEGUI::ProgressBar *DesiRocketLauncher;

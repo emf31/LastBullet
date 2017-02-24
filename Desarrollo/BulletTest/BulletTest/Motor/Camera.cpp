@@ -4,7 +4,7 @@
 #include <GunRecoil.h>
 
 
-Camera::Camera(ICameraSceneNode* camera) : m_camera(camera), m_entity(NULL)
+Camera::Camera(ICameraSceneNode* camera, const std::string &nombre) : m_camera(camera), m_pName(nombre),  m_entity(NULL)
 {
 	m_cameraShake = new CameraShake(*this);
 	m_GunRecoil = new GunRecoil(*this);

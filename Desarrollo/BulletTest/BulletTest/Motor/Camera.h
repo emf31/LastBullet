@@ -12,7 +12,7 @@ using namespace scene;
 class Camera
 {
 public:
-	Camera(ICameraSceneNode* camera);
+	Camera(ICameraSceneNode* camera, const std::string &nombre);
 	~Camera();
 
 	void setTarget(Vec3<float> target);
@@ -38,8 +38,18 @@ public:
 	void apuntar();
 	void restablecerMira();
 
+	const std::string getNameCamera() const{
+		return m_pName;
+	}
+
+	ICameraSceneNode* getCameraNode() const{
+		return m_camera;
+	}
+
 
 private:
+
+	std::string m_pName;
 	ICameraSceneNode* m_camera;
 	
 	Entity* m_entity;

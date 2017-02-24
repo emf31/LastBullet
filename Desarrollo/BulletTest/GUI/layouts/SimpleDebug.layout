@@ -60,6 +60,11 @@
                 <Property name="Area" value="{{0.355366,-74},{0.869656,-221},{0.355366,22},{0.869656,-189}}" />
                 <Property name="Text" value="BotA" />
             </Window>
+            <Window type="AlfiskoSkin/Button" name="Button4" >
+                <Property name="ID" value="20" />
+                <Property name="Area" value="{{0,159},{0,228},{0,269},{0,282}}" />
+                <Property name="Text" value="Cámara aérea" />
+            </Window>
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label" >
             <Property name="Area" value="{{0.00234375,1067},{0.0430556,29},{0.14375,1067},{0.0902778,29}}" />
@@ -542,6 +547,11 @@
                 <Property name="Area" value="{{0,348},{0,139},{0,476},{0,171}}" />
                 <Property name="Text" value="Update de la IA" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button9" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0,344},{0,186},{0,515},{0,221}}" />
+                <Property name="Text" value="Setear Camara" />
             </Window>
         </Window>
     </Window>

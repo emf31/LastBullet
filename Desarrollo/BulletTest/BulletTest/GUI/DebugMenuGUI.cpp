@@ -36,6 +36,9 @@ void DebugMenuGUI::inicializar() {
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(false);
 
+	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(100, 200, 100), Vec3<float>(100, 0, 100));
+
+
 	//MENU PRINCIPAL
 	DebugShapesButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));
 	DebugShapesButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugShapesClicked, this));
@@ -50,6 +53,9 @@ void DebugMenuGUI::inicializar() {
 	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAClicked, this));
 
 	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));	
+
+	CamaraAerea = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(20));
+	CamaraAerea->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCamaraAerea, this));
 
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
@@ -105,6 +111,7 @@ void DebugMenuGUI::inicializar() {
 	closePushButtonIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(99)->getChild(100));
 	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));
 
+
 	BotA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(6));
 	BotA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotAClicked, this));
 
@@ -146,6 +153,9 @@ void DebugMenuGUI::inicializar() {
 
 	InsPistola = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(8));
 	InsPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsPistola, this));
+
+	CamaraBot = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(11));
+	CamaraBot->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCamaraBot, this));
 	
 	sliderUpdate = static_cast<CEGUI::Slider*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(10));
 	sliderUpdate->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&DebugMenuGUI::onUpdateSlider, this));
@@ -428,11 +438,35 @@ bool DebugMenuGUI::onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e) {
 	mapa->setVisible(false);
 	return true;
 }
+
 bool DebugMenuGUI::onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e) {
 	NetworSyncWindow->setVisible(false);
 	//Cliente::i().windowsPacketOpen = false;
 	return true;
 }
+
+bool DebugMenuGUI::onCamaraAerea(const CEGUI::EventArgs & e) {
+
+	
+	if (GraphicEngine::i().getActiveCamera()->getNameCamera() != "CamaraAerea") {
+
+		GraphicEngine::i().setActiveCamera("CamaraAerea");
+	}
+	else {
+		GraphicEngine::i().setActiveCamera("CamaraPlayer");
+	}
+
+
+	return true;
+}
+
+bool DebugMenuGUI::onCamaraBot(const CEGUI::EventArgs & e) {
+
+	std::cout << "Julio es el puto amo" << std::endl;
+	return true;
+}
+
+
 
 bool DebugMenuGUI::onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e)
 {
