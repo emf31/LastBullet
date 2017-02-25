@@ -84,7 +84,7 @@ void InGame::HandleEvent()
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
-		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(1.0f);
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);
 
 		//TODO llevarlo al otro sitio
 		//debugMenu.mapa->setVisible(debugMenu.debugInput);

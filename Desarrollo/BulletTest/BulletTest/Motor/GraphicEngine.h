@@ -71,6 +71,7 @@ public:
 
 	//No hace nada aun
 	void setActiveCamera(const std::string &nameCamera);
+	void setTargetActiveCamera(const Vec3<float> target);
 
 	
 	void renderAll();

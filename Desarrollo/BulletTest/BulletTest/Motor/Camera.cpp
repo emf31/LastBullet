@@ -45,6 +45,7 @@ Vec3<float> Camera::getTarget()
 }
 
 
+
 void Camera::asignarEntity(Entity* ent)
 {
 	m_entity = ent;
@@ -54,11 +55,19 @@ void Camera::update()
 {
 
 	if (m_entity != nullptr) {
+
+		if(m_entity->getClassName()=="Player")
 		setPosition(Vec3<float>(
 			m_entity->getRenderPosition().getX(),
-			m_entity->getRenderPosition().getY() + 8,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)
+			m_entity->getRenderPosition().getY() + 8,	
 			m_entity->getRenderPosition().getZ())
 		);
+		if (m_entity->getClassName() == "Enemy_Bot")
+			setPosition(Vec3<float>(
+				m_entity->getRenderPosition().getX(),
+				m_entity->getRenderPosition().getY() + 10,	
+				m_entity->getRenderPosition().getZ())
+			);
 	}
 	m_cameraShake->update();
 	m_GunRecoil->update();

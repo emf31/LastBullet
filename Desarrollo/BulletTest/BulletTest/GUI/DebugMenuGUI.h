@@ -22,6 +22,8 @@ private:
 	
 	bool onDebugBotAClicked(const CEGUI::EventArgs & e);
 	bool onDebugBotBClicked(const CEGUI::EventArgs & e);
+	bool onDebugBotCClicked(const CEGUI::EventArgs & e);
+	bool onDebugBotDClicked(const CEGUI::EventArgs & e);
 
 	bool onDebugShapesClicked(const CEGUI::EventArgs& e);
 	bool onCloseMenuButtonClicked(const CEGUI::EventArgs & e);
@@ -123,6 +125,8 @@ private:
 
 	CEGUI::PushButton *BotA;
 	CEGUI::PushButton *BotB;
+	CEGUI::PushButton *BotC;
+	CEGUI::PushButton *BotD;
 
 	CEGUI::PushButton *closePushButtonIA;
 

@@ -118,6 +118,12 @@ void DebugMenuGUI::inicializar() {
 	BotB = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(7));
 	BotB->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotBClicked, this));
 
+	BotC = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(8));
+	BotC->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotCClicked, this));
+
+	BotD = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(9));
+	BotD->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotDClicked, this));
+
 	DesirabilityWeapons = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(40));//ID del menu de deseabilidad = 40
 
 	DesiAsalto = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(1));
@@ -317,6 +323,86 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 }
 
+bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
+
+	std::list<Entity*>bots = EntityManager::i().getBots();
+
+	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Entity* myentity = *it;
+
+		if (myentity->getID() == 1) {
+
+
+			if (myentity == entActual) {
+
+				DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+				OpcionesIA->setVisible(!OpcionesIA->isVisible());
+
+
+			}
+			else {
+				DesirabilityWeapons->setVisible(true);
+				OpcionesIA->setVisible(true);
+
+				entActual = myentity;
+
+				Vec3<float>posBox = entActual->getRenderState()->getPosition();
+				posBox.addY(posBox.getY() + 15);
+
+				if (!nodoState)
+					nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+			}
+
+
+		}
+
+	}
+	return true;
+
+}
+
+
+bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
+
+	std::list<Entity*>bots = EntityManager::i().getBots();
+
+	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Entity* myentity = *it;
+
+		if (myentity->getID() == 1) {
+
+
+			if (myentity == entActual) {
+
+				DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+				OpcionesIA->setVisible(!OpcionesIA->isVisible());
+
+
+			}
+			else {
+				DesirabilityWeapons->setVisible(true);
+				OpcionesIA->setVisible(true);
+
+				entActual = myentity;
+
+				Vec3<float>posBox = entActual->getRenderState()->getPosition();
+				posBox.addY(posBox.getY() + 15);
+
+				if (!nodoState)
+					nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+			}
+
+
+		}
+
+	}
+	return true;
+
+}
+
+
 void DebugMenuGUI::updateFuzzyProgressBars() {
 
 	if (entActual) {
@@ -425,7 +511,7 @@ bool DebugMenuGUI::onDebugIAASALTOClicked(const CEGUI::EventArgs & e) {
 
 
 bool DebugMenuGUI::onCloseMenuButtonClicked(const CEGUI::EventArgs & e) {
-	getContext()->getRootWindow()->getChild(0)->getChild(10)->setAlpha(0.0f);
+	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 	debugInput = !debugInput;
 	showMouseCursor(debugInput);
 	GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugInput);
@@ -462,7 +548,16 @@ bool DebugMenuGUI::onCamaraAerea(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onCamaraBot(const CEGUI::EventArgs & e) {
 
-	std::cout << "Julio es el puto amo" << std::endl;
+
+
+	if (GraphicEngine::i().getActiveCamera()->getNameCamera() != entActual->getName()) {
+
+		GraphicEngine::i().setActiveCamera(entActual->getName());
+	}
+	else {
+		GraphicEngine::i().setActiveCamera("CamaraPlayer");
+	}
+
 	return true;
 }
 

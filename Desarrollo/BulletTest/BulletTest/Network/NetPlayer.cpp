@@ -92,20 +92,22 @@ void NetPlayer::crearPartida()
 	
 
 	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-//	Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	bot->m_network->inicializar();
-//	bot2->m_network->inicializar();
+
+	/*Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot2->m_network->inicializar();*/
+
 
 	/*
-	Enemy_Bot *bot2 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot2->m_network->inicializar();
-
-	for (int i = 0; i < 2; i++) {
-		Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
-		bot3->m_network->inicializar();
-	}
+	Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot3->m_network->inicializar();*/
 	
-	*/
+	/*Enemy_Bot *bot4 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot4->m_network->inicializar();*/
+
+
+	
+	
 
 	
 	/*while (World::i().gamestarted == false) {

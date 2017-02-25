@@ -73,6 +73,7 @@ std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneN
 
 	return std::shared_ptr<BillboardSceneNode>(new BillboardSceneNode(billboard, irrDevice));
 }
+
 std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
 
 	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
@@ -104,6 +105,7 @@ const wchar_t * GraphicEngine::GetWC(const char *c)
 Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> position, Vec3<float> target)
 {
 	//camara tipo fps
+
 	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,irr::f32(100), irr::f32(0.05));
 	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
 	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
@@ -116,12 +118,15 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 	return myCamera;
 }
 
-
 void GraphicEngine::updateCamera()
 {
 	if(debug_camera && active_camera != NULL)
 		active_camera->update();
 	
+}
+
+void GraphicEngine::setTargetActiveCamera(const Vec3<float> target) {
+	active_camera->setTarget(target);
 }
 
 

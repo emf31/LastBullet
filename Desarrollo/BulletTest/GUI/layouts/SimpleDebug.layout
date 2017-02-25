@@ -9,7 +9,7 @@
             <Property name="ID" value="10" />
             <Property name="Area" value="{{0.0539063,891},{0.00277778,118},{0.28125,891},{0.780556,118}}" />
             <Property name="Text" value="Debug Menu" />
-            <Property name="Alpha" value="0" />
+            <Property name="Visible" value="false" />
             <Property name="SizingEnabled" value="false" />
             <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
             <AutoWindow namePath="__auto_titlebar__" >
@@ -52,18 +52,28 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotB" >
                 <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,26},{0,298},{0,122},{0,330}}" />
-                <Property name="Text" value="BotB" />
+                <Property name="Area" value="{{0,29},{0,345},{0,265},{0,377}}" />
+                <Property name="Text" value="Bot B" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
                 <Property name="ID" value="6" />
-                <Property name="Area" value="{{0.355366,-74},{0.869656,-221},{0.355366,22},{0.869656,-189}}" />
-                <Property name="Text" value="BotA" />
+                <Property name="Area" value="{{0.355366,-71},{0.869656,-169},{0.355366,165},{0.869656,-137}}" />
+                <Property name="Text" value="Bot A" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button4" >
                 <Property name="ID" value="20" />
-                <Property name="Area" value="{{0,159},{0,228},{0,269},{0,282}}" />
+                <Property name="Area" value="{{0,26},{0,225},{0,266},{0,261}}" />
                 <Property name="Text" value="Cámara aérea" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button5" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0,28},{0,403},{0,264},{0,435}}" />
+                <Property name="Text" value="Bot C" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button6" >
+                <Property name="ID" value="9" />
+                <Property name="Area" value="{{0,29},{0,458},{0,265},{0,490}}" />
+                <Property name="Text" value="Bot D" />
             </Window>
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label" >

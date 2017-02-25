@@ -48,6 +48,9 @@ void Enemy_Bot::inicializar()
 
 	weaponSystem->Inicializar();
 
+	Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	camaraBot->asignarEntity(this);
+
 
 	sense = new SensoryMemory(this,20);
 
@@ -93,6 +96,8 @@ float Enemy_Bot::getFOV()
 
 void Enemy_Bot::update(Time elapsedTime)
 {
+
+
 
 
 	if (valorCiclos < 25) {
@@ -143,6 +148,16 @@ void Enemy_Bot::update(Time elapsedTime)
 				FuzzyLifeObject();
 
 			m_pStateMachine->Update();
+
+
+
+			if (GraphicEngine::i().getActiveCamera()->getNameCamera() == m_name) {
+
+				Vec3<float> posCam = GraphicEngine::i().getActiveCamera()->getPosition();
+
+				GraphicEngine::i().setTargetActiveCamera(Vec3<float>(m_vHeading.x+ posCam.getX(), posCam.getY(), m_vHeading.y+ posCam.getZ()));
+
+			}
 		}
 
 
