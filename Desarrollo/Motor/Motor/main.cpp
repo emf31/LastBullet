@@ -56,7 +56,7 @@ int main() {
 
 	//personaje
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	origen->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	origen->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	//w->setRotationY(0.0f);
 	//origen->setModelColor(0.1f, 1.0f, 0.1f);
@@ -91,7 +91,7 @@ int main() {
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
 	//Vec3<float> posCam = sm.camaraActiva->getPosition();
-	//sm.camaraActiva->addChild(w);
+	sm.camaraActiva->addChild(origen);
 	//posCam.setX(posCam.getX() + 1);
 	//posCam.setY(posCam.getY() + 4);
 

@@ -46,7 +46,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Update matrices
-	projection = glm::perspective(camaraActiva->Zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
+	projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
 	view = camaraActiva->GetViewMatrix();
 	//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 	activeCameraPos = camaraActiva->getPosition();

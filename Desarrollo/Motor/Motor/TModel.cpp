@@ -115,9 +115,9 @@ void TModel::beginDraw() {
 	glUniform3f(sunlightdirection, 1.0f, 1.0f, 1.0f);
 
 	//LUZ LINTERNA, TODO arreglar esto para que sea una entity y herede de TLuz
-	float dirX = -SceneManager::i().camaraActiva->Front.x;
-	float dirY = SceneManager::i().camaraActiva->Front.y;
-	float dirZ = -SceneManager::i().camaraActiva->Front.z;
+	float dirX = -SceneManager::i().camaraActiva->getVectorDireccion().getX();
+	float dirY = SceneManager::i().camaraActiva->getVectorDireccion().getY();
+	float dirZ = -SceneManager::i().camaraActiva->getVectorDireccion().getZ();
 	//pasamos los uniforms
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.lightColor"), 1.0f, 1.0f, 1.0f);
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.position"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
