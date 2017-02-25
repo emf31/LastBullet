@@ -41,7 +41,6 @@ int main() {
 	*/
 
 	
-	//n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
@@ -51,17 +50,29 @@ int main() {
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
-	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
+	//m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
 	//personaje
-	TModel* w = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	w->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	w->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));
+	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	origen->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	origen->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	//w->setRotationY(0.0f);
-	//w->setModelColor(0.8f, 0.0f, 0.61f);
-	Vec3<float> aux = w->getRotation();
+	//origen->setModelColor(0.1f, 1.0f, 0.1f);
+	//Vec3<float> aux = w->getRotation();
+
+	TModel* destino1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	destino1->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	destino1->setPosition(Vec3<float>(0.0f, 0.0f, -1.0f));
+	//w->setRotationY(0.0f);
+
+	TModel* destino2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	destino2->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	destino2->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
+	//w->setRotationY(0.0f);
+
+	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
 	
 
 
@@ -79,8 +90,8 @@ int main() {
 	//camaras
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
-	Vec3<float> posCam = sm.camaraActiva->getPosition();
-	sm.camaraActiva->addChild(w);
+	//Vec3<float> posCam = sm.camaraActiva->getPosition();
+	//sm.camaraActiva->addChild(w);
 	//posCam.setX(posCam.getX() + 1);
 	//posCam.setY(posCam.getY() + 4);
 
@@ -93,7 +104,7 @@ int main() {
 	long int tiempoCamara = 0;
 	int contCam = 0;
 	Vec3<float> rot;
-	sm.camaraActiva->setPosition(posCam);
+	//sm.camaraActiva->setPosition(posCam);
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
 
@@ -104,7 +115,11 @@ int main() {
 		engine.setWindowTitle(title.str());
 		
 		engine.doMovement();
-		rot=sm.camaraActiva->vecFrontCam();
+
+		vecDir = sm.camaraActiva->getVectorDireccion();
+		destino2->setPosition(vecDir);
+
+		//rot=sm.camaraActiva->vecFrontCam();
 		//w->setRotation(rot);
 		//std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
 		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
@@ -125,7 +140,7 @@ int main() {
 		}
 		if (cont == 100) {
 			cont = 0;
-			aux = w->getPosition();
+			//aux = w->getPosition();
 			//std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
 			//w->updatePosition(Vec3<float>(1.5f, 0.0f, 0.0f));
 			

@@ -19,7 +19,7 @@ enum Camera_Movement {
 const GLfloat YAW = -90.0f;
 const GLfloat PITCH = 0.0f;
 const GLfloat SPEED = 3.0f;
-const GLfloat SENSITIVTY = 0.1f;
+const GLfloat SENSITIVTY = 0.001f;
 const GLfloat ZOOM = 45.0f;
 
 
@@ -70,6 +70,11 @@ public:
 	Vec3<float> vecFrontCam() {
 		return vecFront;
 	}
+
+	Vec3<float> getVectorDireccion() {
+		return Vec3<float>(direccion.x, direccion.y, direccion.z);
+	}
+
 	float rotX = 0.0f;
 	float rotY = 0.0f;
 private:
@@ -82,8 +87,11 @@ private:
 	// Calculates the front vector from the Camera's (updated) Eular Angles
 	void updateCameraVectors();
 	glm::mat4 view;
+	glm::mat4 vista;
 	TTransform* transRotacion;
 	TTransform* transTraslacion;
+	glm::vec3 direccion;
+	glm::vec3 derecha;
 
 
 
