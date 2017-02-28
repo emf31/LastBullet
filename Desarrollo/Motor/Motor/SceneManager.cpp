@@ -33,7 +33,7 @@ void SceneManager::inicializar() {
 
 
 
-TModel* SceneManager::getMesh(std::string path,Shader* shader) {
+TModel* SceneManager::getMesh(const std::string& path,Shader* shader) {
 	if (path != "") {
 		return ResourceManager::i().getMesh(path,shader);
 	}

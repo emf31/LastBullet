@@ -32,9 +32,9 @@ public:
 	/*  Mesh Data  */
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
-	vector<Texture> textures;
+	vector<Texture*> textures;
 
-	TMesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures, Shader *shader);
+	TMesh(vector<Vertex>& vertices, vector<GLuint>& indices, vector<Texture*>& textures, Shader *shader);
 	~TMesh();
 
 	void beginDraw();

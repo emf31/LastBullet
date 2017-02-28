@@ -94,9 +94,9 @@ private:
 
 
 	/*  Model Data  */
-	vector<TMesh> meshes;
+	vector<TMesh*> meshes;
 	string directory;
-	vector<Texture> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
+	vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
 	Shader *shader;
 	/*  Funciones   */
 	// Carga el modelo con ASSIMP
@@ -104,9 +104,9 @@ private:
 
 	void processNode(aiNode* node, const aiScene* scene);
 
-	TMesh processMesh(aiMesh* mesh, const aiScene* scene);
+	TMesh* processMesh(aiMesh* mesh, const aiScene* scene);
 
-	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
+	void loadMaterialTextures(vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, string typeName);
 
 	//TNode* transRotacion;
 	//TNode* transEscalado;

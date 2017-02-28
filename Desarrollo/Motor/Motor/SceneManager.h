@@ -25,7 +25,7 @@ public:
 	void inicializar();
 
 	//void getTexture(std::string path);
-	TModel* getMesh(std::string path, Shader* shader=nullptr);
+	TModel* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw(GLFWwindow* window);
 	TModel* crearNodoMalla(TModel * model);
 	TNode* crearNodoTransformacion(int entityID);

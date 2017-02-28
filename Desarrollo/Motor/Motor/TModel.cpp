@@ -131,7 +131,7 @@ void TModel::beginDraw() {
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i].beginDraw();
+		this->meshes[i]->beginDraw();
 }
 
 void TModel::loadModel(const string& path) {
@@ -165,11 +165,11 @@ void TModel::processNode(aiNode * node, const aiScene * scene) {
 	}
 }
 
-TMesh TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
+TMesh* TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Datos básicos de las mallas (vértices, índices y texturas)
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
-	vector<Texture> textures;
+	vector<Texture*> textures;
 
 	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -208,36 +208,37 @@ TMesh TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
 		// Diffuse: texture_diffuseN
+		//vector<Texture*> diffuseMaps;
 		// Specular: texture_specularN
+		//vector<Texture*> specularMaps;
 		// Normal: texture_normalN
+		//vector<Texture*> normalMaps;
 
 		// 1. Diffuse maps
-		vector<Texture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+		this->loadMaterialTextures(textures, material, aiTextureType_DIFFUSE, "texture_diffuse");
+		//textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 		// 2. Specular maps
-		vector<Texture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		this->loadMaterialTextures(textures, material, aiTextureType_SPECULAR, "texture_specular");
+		//textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		//3. Normal maps
-		vector<Texture> normalMaps = this->loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
-		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_normal");
+		//textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 	}
 
 	// Return del mesh preparado
-	return TMesh(vertices, indices, textures, shader);
+	return new TMesh(vertices, indices, textures, shader);
 }
 
-vector<Texture> TModel::loadMaterialTextures(aiMaterial * mat, aiTextureType type, string typeName) {
-	vector<Texture> textures;
+void TModel::loadMaterialTextures(vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, string typeName) {
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
 		aiString str;
 		mat->GetTexture(type, i, &str);
 		// Miramos si se ha cargado la textura con anterioridad en el ResourceManager
 		// Si no se ha cargado, el RM la carga. Si ya se había cargado, el RM nos da un puntero a ella :)
 		ResourceManager rm = ResourceManager::i();
-		Texture text = rm.getTexture(str.C_Str(), typeName, this->directory);
-		textures.push_back(text);
+		Texture* text = rm.getTexture(str.C_Str(), typeName, this->directory);
+		textVec.push_back(text);
 	}
-	return textures;
 }
 
 

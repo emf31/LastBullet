@@ -1,7 +1,10 @@
 
 #include <iostream>
 using namespace std;
+
+
 #include "EngineDevice.h"
+#include "ResourceManager.h"
 
 #include "Shader.h"
 #include "TCamera.h"
@@ -9,8 +12,12 @@ using namespace std;
 #include "TSpotLight.h"
 
 #include <GUI.h>
-
 #include "Billboard.h"
+
+#include <SPARK/SPARK.h>
+#include <SPARK/SPARK_GL.h>
+
+
 
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
@@ -25,6 +32,16 @@ int main() {
 	billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
 
 	//pistola
+
+	/*Texture* tex = ResourceManager::i().getTexture("res/explosion.bmp", , "texture_diffuse");
+
+	//vector<Texture> normalMaps = this->loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+
+	// Loads particle texture
+	GLuint textureParticle;
+	if (!loadTexture(textureParticle, "res/explosion.bmp", GL_LUMINANCE, GL_CLAMP, true))
+	{
+	}//	return 1;*/
 	
 	
 	TModel* p = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
