@@ -162,7 +162,7 @@ int main() {
 
 		
 		sm.draw(engine.getWindow());
-		std::cout << "siguiente iteracion" << std::endl;
+		//std::cout << "siguiente iteracion" << std::endl;
 		
 		
 		

@@ -111,21 +111,20 @@ float gradoLuzAmbiente = 0.2f;
 	color = vec4((ambient + diffuse + specular) * objectColor, 1.0f);
 */
 //*********************************LUZ LINTERNA*****************************************
-/*
+
 	lightDir = normalize(flashlight.position - FragPos);
     
     // Check if lighting is inside the spotlight cone
     float theta = dot(lightDir, normalize(-flashlight.direction)); 
     
-    if(theta > flashlight.cutOff) 
-    {    
+ 
         // Ambient
-        ambient = flashlight.lightColor*gradoLuzAmbiente * vec3(texture(material.texture_diffuse, TexCoords));
+        ambient = (flashlight.lightColor*gradoLuzAmbiente) * vec3(texture(material.texture_diffuse, TexCoords));
         
         // Diffuse 
         norm = normalize(Normal);        
         diff = max(dot(norm, lightDir), 0.0);
-        diffuse = flashlight.lightColor * diff * vec3(texture(material.texture_diffuse, TexCoords));  
+        diffuse = (flashlight.lightColor*0.6) * diff * vec3(texture(material.texture_diffuse, TexCoords));  
         
         // Specular
         viewDir = normalize(viewPos - FragPos);
@@ -135,7 +134,6 @@ float gradoLuzAmbiente = 0.2f;
         
 
         // Spotlight (soft edges)
-    	float theta = dot(lightDir, normalize(-flashlight.direction)); 
     	float epsilon = (flashlight.cutOff - flashlight.outerCutOff);
    		float intensity = clamp((theta - flashlight.outerCutOff) / epsilon, 0.0, 1.0);
     	diffuse  *= intensity;
@@ -147,20 +145,9 @@ float gradoLuzAmbiente = 0.2f;
        float attenuation = 1.0f / (flashlight.constant + flashlight.linear * distance + flashlight.quadratic * (distance * distance));    
 
 
-       ambient  *= attenuation;  // Also remove attenuation from ambient, because if we move too far, the light in spotlight would then be darker than outside (since outside spotlight we have ambient lighting).
        diffuse  *= attenuation;
        specular *= attenuation;   
                 
         color = vec4(ambient+diffuse + specular, 1.0f); 
-        color2 = vec4(flashlight.lightColor*gradoLuzAmbiente * vec3(texture(material.texture_diffuse, TexCoords)), 1.0f); 
-        if(color.x < color2.x && color.y < color2.y && color.z < color2.z){
-        	color=color2;
-        }
-    }
-    else{
-    	// else, use ambient light so scene isn't completely dark outside the spotlight.
-        color = vec4(flashlight.lightColor*gradoLuzAmbiente * vec3(texture(material.texture_diffuse, TexCoords)), 1.0f);
-     	//color = vec4(0.30f, 1.0f , 0.30f , 1.0f);
-    }    
-    */
+    
 }

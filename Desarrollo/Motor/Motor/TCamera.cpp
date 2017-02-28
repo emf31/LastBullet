@@ -77,7 +77,6 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
 
 	rotY -= xoffset;
 	rotX += yoffset;
-	std::cout << rotX << std::endl;
 
 	if (rotX > 1.5f)	  
 		rotX = 1.5f;	  
