@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(10), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(40), m_rotation(rotation), radioExplosion(10), m_owner(owner)
 {
 
 	m_lifetime = seconds(5);
@@ -59,7 +59,7 @@ void RocketBullet::cargarContenido()
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.05f, 0.05f, 0.05f), 1, false);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.1f, 0.1f, 0.1f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 	proxy->m_collisionFilterMask = col::rocketCollidesWith;
