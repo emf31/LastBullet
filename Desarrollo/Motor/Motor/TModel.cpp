@@ -122,11 +122,8 @@ void TModel::beginDraw() {
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.lightColor"), 1.0f, 1.0f, 1.0f);
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.position"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.direction"), dirX, dirY, dirZ);
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.cutOff"), glm::cos(glm::radians(13.f)));
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.outerCutOff"), glm::cos(glm::radians(18.f)));
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.linear"), 0.09);
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.quadratic"), 0.032);
+	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.radioInterior"), glm::cos(glm::radians(13.f)));
+	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.radioExterior"), glm::cos(glm::radians(18.f)));
 
 
 	//Dibujamos los hijos (Si los hay)

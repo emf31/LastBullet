@@ -46,6 +46,10 @@ int main() {
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	n->setPosition(Vec3<float>(3.0f, 2.0f, 3.0f));
+	TModel* n2 = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
+	n2->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	n2->setPosition(Vec3<float>(-3.0f, 0.0f, -3.0f));
 	//n->setModelColor(0.33f, 0.42f, 0.18f);
 
 	//cartel

@@ -17,12 +17,8 @@ struct FlashLight {
     vec3  position;
     vec3  direction;
     vec3 lightColor;
-    float cutOff;
-    float outerCutOff;
-    float constant;
-    float linear;
-    float quadratic;
-    
+    float radioInterior;
+    float radioExterior;
 };  
 
 struct PointLight {
@@ -65,6 +61,12 @@ vec3 reflectDir;
 float spec;
 vec3 specular;
 float gradoLuzAmbiente = 0.2f;
+
+//valores para que la luz deje de afectar cuando esta a una distancia de 100
+float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
+float linear=0.09; //la cantidad de atenueacion segun las distancia
+float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
+
 //*********************************POINT LIGHT*****************************************
 
 	//LUZ AMBIENTE
@@ -90,6 +92,11 @@ float gradoLuzAmbiente = 0.2f;
 	spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
 	specular =  (spec * pointlight.lightColor) * vec3(texture(material.texture_specular, TexCoords)) ; 
 
+    // atenuacion
+    float distance    = length(pointlight.position - FragPos);
+    float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
+    diffuse  *= attenuation;
+    specular *= attenuation;   
 
 	color = vec4((ambient + diffuse + specular) * objectColor, 1.0f);
 
@@ -111,43 +118,43 @@ float gradoLuzAmbiente = 0.2f;
 	color = vec4((ambient + diffuse + specular) * objectColor, 1.0f);
 */
 //*********************************LUZ LINTERNA*****************************************
-
+/*
 	lightDir = normalize(flashlight.position - FragPos);
     
     // Check if lighting is inside the spotlight cone
     float theta = dot(lightDir, normalize(-flashlight.direction)); 
     
  
-        // Ambient
+        //LUZ AMBIENTE
         ambient = (flashlight.lightColor*gradoLuzAmbiente) * vec3(texture(material.texture_diffuse, TexCoords));
         
-        // Diffuse 
+       //LUZ DIFUSA
         norm = normalize(Normal);        
         diff = max(dot(norm, lightDir), 0.0);
         diffuse = (flashlight.lightColor*0.6) * diff * vec3(texture(material.texture_diffuse, TexCoords));  
         
-        // Specular
+        //LUZ ESPECULAR
         viewDir = normalize(viewPos - FragPos);
         reflectDir = reflect(-lightDir, norm);  
         spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
         specular = flashlight.lightColor * spec * vec3(texture(material.texture_specular, TexCoords));
         
 
-        // Spotlight (soft edges)
-    	float epsilon = (flashlight.cutOff - flashlight.outerCutOff);
-   		float intensity = clamp((theta - flashlight.outerCutOff) / epsilon, 0.0, 1.0);
+        // para el suavizado de la luz del flash, se va interpolando desde el radio exterior hasata el radio interior
+    	float epsilon = (flashlight.radioInterior - flashlight.radioExterior);
+   		float intensity = clamp((theta - flashlight.radioExterior) / epsilon, 0.0, 1.0);
     	diffuse  *= intensity;
     	specular *= intensity;
 
 
-        // Attenuation
-       float distance    = length(flashlight.position - FragPos);
-       float attenuation = 1.0f / (flashlight.constant + flashlight.linear * distance + flashlight.quadratic * (distance * distance));    
+        // atenuacion
+       distance    = length(flashlight.position - FragPos);
+       attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
 
 
        diffuse  *= attenuation;
        specular *= attenuation;   
                 
         color = vec4(ambient+diffuse + specular, 1.0f); 
-    
+    */
 }
