@@ -7,32 +7,25 @@
 
 // Constructor with vectors
 
-TCamera::TCamera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM) {
+TCamera::TCamera() {
 
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 
-	//this->Position = position;
-	//setPosition(Vec3<float>(position.x, position.y, position.z));
-	this->WorldUp = up;
-	this->Yaw = yaw;
-	this->Pitch = pitch;
-	this->updateCameraVectors();
+	//paramtros camara
+	movementSpeed = SPEED;
+	mouseSensitivity = SENSITIVTY;
+	zoom=ZOOM;
+
+	//rotacion y vectores iniciales
+	rotX = 0.0f;
+	rotY = 0.0f;
+	direccion = glm::vec3(0.0f, 0.0f, -1.0f);
+	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+	derecha= glm::cross(direccion, worldUp);
+	derecha = glm::normalize(derecha);
 }
 
-// Constructor with scalar values
-
-TCamera::TCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat yaw, GLfloat pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM) {
-	setID(SceneManager::i().getEntityCount());
-	SceneManager::i().aumentaEntityCount();
-
-	//this->Position = glm::vec3(posX, posY, posZ);
-	//setPosition(Vec3<float>(posX, posY, posZ));
-	this->WorldUp = glm::vec3(upX, upY, upZ);
-	this->Yaw = yaw;
-	this->Pitch = pitch;
-	this->updateCameraVectors();
-}
 
 TCamera::~TCamera() {
 }
@@ -54,72 +47,60 @@ glm::mat4 TCamera::GetViewMatrix() {
 }
 
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
-	GLfloat velocity = this->MovementSpeed * deltaTime;
+	GLfloat velocity = movementSpeed * deltaTime;
 	glm::vec3 result;
-	//Front.y = -Front.y;
-	//std::cout << "El vector direccion: " << Front.x << "," << Front.y << "," << Front.z<< "," << std::endl;
+
 	if (direction == FORWARD) {
-		result = Front * velocity;
-		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
-		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
-		//this->Position += this->Front * velocity;
+		result = direccion * velocity;
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 	}
 	if (direction == BACKWARD) {
-		result = Front * -velocity;
-		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
-		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
-		//this->Position -= this->Front * velocity;
+		result = direccion * -velocity;
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 	}
 
 	if (direction == LEFT) {
-		result = Right * -velocity;
-		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
-		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
-		//this->Position -= this->Right * velocity;
+		result = derecha * -velocity;
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 	}
 
 	if (direction == RIGHT) {
-		result = Right * velocity;
-		//std::cout << "El vector resultado: " << result.x << "," << result.y << "," << result.z << "," << std::endl;
-		updatePosition(Vec3<float>(-result.x, result.y, -result.z));
-		//this->Position += this->Right * velocity;
+		result = derecha * velocity;
+		updatePosition(Vec3<float>(result.x, result.y, result.z));
 	}
 
 }
 
-void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch) {
-	xoffset *= this->MouseSensitivity;
-	yoffset *= this->MouseSensitivity;
+void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
+	xoffset *= mouseSensitivity;
+	yoffset *= mouseSensitivity;
 
+	rotY -= xoffset;
+	rotX += yoffset;
 
-	this->Yaw += xoffset;
-	this->Pitch += yoffset;
-	//rotX = Yaw;
-	//rotY = Pitch;
-	//std::cout<< " rotX: " << Yaw <<" rotY: "<< Pitch << std::endl;
-	//setRotationY(-Yaw*0.01);
-	//setRotationX(Pitch*0.01);
-	// Make sure that when pitch is out of bounds, screen doesn't get flipped
-	if (constrainPitch) {
-		if (this->Pitch > 89.0f)
-			this->Pitch = 89.0f;
-		if (this->Pitch < -89.0f)
-			this->Pitch = -89.0f;
-	}
+	if (rotX > 1.5f)	  
+		rotX = 1.5f;	  
+	if (rotX < -1.5f)  
+		rotX = -1.5f;
+	
+
 
 	// Update Front, Right and Up Vectors using the updated Eular angles
-	this->updateCameraVectors();
-	transRotacion->setRotationDirection(vecFront);
+	
+	transRotacion->setRotationY(rotY);
+	transRotacion->setRotationX(rotX);
+	updateCameraVectors();
+	//transRotacion->setRotationDirection(vecFront);
 	//std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
 }
 
 void TCamera::ProcessMouseScroll(GLfloat yoffset) {
-	if (this->Zoom >= 1.0f && this->Zoom <= 45.0f)
-		this->Zoom -= yoffset;
-	if (this->Zoom <= 1.0f)
-		this->Zoom = 1.0f;
-	if (this->Zoom >= 45.0f)
-		this->Zoom = 45.0f;
+	if (zoom >= 1.0f && zoom <= 45.0f)
+		zoom -= yoffset;
+	if (zoom <= 1.0f)
+		zoom = 1.0f;
+	if (zoom >= 45.0f)
+		zoom = 45.0f;
 }
 
 glm::vec3 TCamera::calcularPosicionVista()
@@ -218,20 +199,14 @@ Vec3<float> TCamera::getRotation() {
 }
 
 void TCamera::updateCameraVectors() {
-	// Calculate the new Front vector
-	
-	glm::vec3 front;
-	front.x = cos(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
-	front.y = sin(glm::radians(this->Pitch));
-	front.z = sin(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
-	
-	
-	this->Front = glm::normalize(front);
-	vecFront = Vec3<float>(Front.x, -Front.y, Front.z);
-	
-	// Also re-calculate the Right and Up vector
-	this->Right = glm::cross(this->Front, this->WorldUp);  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-	//vecFront = Vec3<float>(Right.x, Right.y, Right.z);
-	this->Right = glm::normalize(this->Right);
-	this->Up = glm::normalize(glm::cross(this->Right, this->Front));
+
+	glm::vec4 destino = glm::vec4(0, 0, -1, 1);
+	glm::mat4 rot = transRotacion->getRotation2();
+	rot = glm::inverse(rot);
+	destino = destino* rot;
+	destino = glm::normalize(destino);
+	direccion = glm::vec3(destino.x, destino.y, destino.z);
+	derecha = glm::cross(direccion, worldUp);
+	derecha = glm::normalize(derecha);
+
 }
