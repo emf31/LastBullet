@@ -30,7 +30,7 @@ int main() {
 	//TModel* p = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	//sm.camaraActiva->addChild(p);
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	p1->setScale(Vec3<float>(0.3, 0.3, 0.3));
+	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
 	/*
 	TModel* p2 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	TModel* p3= sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
@@ -49,17 +49,17 @@ int main() {
 	//n->setModelColor(0.33f, 0.42f, 0.18f);
 
 	//cartel
-	//TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
-	//m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
-	//m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
+	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
+	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
+	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
 	//m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
 	//personaje
-	//TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	//origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	//origen->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
+	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
 	//w->setRotationY(0.0f);
 	//origen->setModelColor(0.1f, 1.0f, 0.1f);
 	//Vec3<float> aux = w->getRotation();
@@ -132,10 +132,12 @@ int main() {
 		engine.doMovement();
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
-		newPos = vecDir * 5;
+		newPos = vecDir *0.3;
 		//p->setPosition(newPos);
-		p1->setPosition(newPos);
 		p1->setRotation(vecDir);
+		p1->setPosition(sm.camaraActiva->getPosition());
+		p1->updatePosition(newPos);
+		
 		//p->updatePosition(Vec3<float>(3.0f, 0.0f, 0.0f));
 		//p->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 		
