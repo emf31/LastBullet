@@ -123,21 +123,9 @@ void Enemy_Bot::update(Time elapsedTime)
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
 
-			float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+			
 
-			m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
-
-			if (m_network->isConnected()) {
-
-				TMovimiento mov;
-				mov.isDying = getLifeComponent().isDying();
-				mov.position = getRenderState()->getPosition();
-				mov.rotation = getRenderState()->getRotation();
-				mov.guid = getGuid();
-
-				m_network->dispatchMessage(mov, MOVIMIENTO);
-
-			}
+			
 
 			targetingSystem->Update();
 			sense->updateVision();
@@ -158,8 +146,23 @@ void Enemy_Bot::update(Time elapsedTime)
 				GraphicEngine::i().setTargetActiveCamera(Vec3<float>(m_vHeading.x+ posCam.getX(), posCam.getY(), m_vHeading.y+ posCam.getZ()));
 
 			}
+
+			if (m_network->isConnected()) {
+
+				TMovimiento mov;
+				mov.isDying = getLifeComponent().isDying();
+				mov.position = getRenderState()->getPosition();
+				mov.rotation = getRenderState()->getRotation();
+				mov.guid = getGuid();
+
+				m_network->dispatchMessage(mov, MOVIMIENTO);
+
+			}
 		}
 
+		if (m_renderState.getPosition().getY() < -200) {
+			getLifeComponent().restaVida(100, m_guid);
+		}
 
 	}
 
@@ -318,6 +321,13 @@ void Enemy_Bot::updateMovement()
 	
 }
 
+void Enemy_Bot::updateFacing()
+{
+	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+}
+
 void Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 
@@ -345,6 +355,21 @@ float Enemy_Bot::createPathToItem(const std::string& tipo)
 	m_PathFollow->FollowOn();
 
 	return result;
+}
+
+Vec2f Enemy_Bot::createRandomPath()
+{
+	//Camino actual a seguir
+	std::list<Vec2f> m_camino;
+
+	m_PathPlanner->CreateRandomPath(m_camino);
+
+	m_PathFollow->SetPath(m_camino);
+
+	m_PathFollow->FollowOn();
+
+	return m_camino.back();
+
 }
 
 void Enemy_Bot::updateAnimation()

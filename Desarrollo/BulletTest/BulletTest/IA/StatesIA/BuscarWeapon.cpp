@@ -58,15 +58,17 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 
 void BuscarWeapon::Execute(Enemy_Bot* pEnemy) {
 
-		if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
+	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 
-			if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
-				if (!pEnemy->getTargetBot()->isDying()) {
-					pEnemy->getMachineState()->ChangeState(&Disparar::i());
-				}
+		if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
+			if (!pEnemy->getTargetBot()->isDying()) {
+				pEnemy->getMachineState()->ChangeState(&Disparar::i());
 			}
+		}
 
 	}
+
+	pEnemy->updateFacing();
 
 }
 

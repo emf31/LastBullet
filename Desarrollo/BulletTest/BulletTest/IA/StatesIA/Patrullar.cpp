@@ -5,13 +5,17 @@
 
 void Patrullar::Enter(Enemy_Bot* pEnemy) {
 	std::cout << "Entro en Patrullar" << std::endl;
-
+	currTarget = pEnemy->createRandomPath();
 	//std::cout << "Zizu" << std::endl;
 }
 
 void Patrullar::Execute(Enemy_Bot* pEnemy) {
 	//std::cout << "Zizu" << std::endl;
 	//std::cout << "Patrullar" << std::endl;
+	if (pEnemy->isAtPosition(currTarget)) {
+		currTarget = pEnemy->createRandomPath();
+	}
+	
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 
 		if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
@@ -21,6 +25,8 @@ void Patrullar::Execute(Enemy_Bot* pEnemy) {
 		}
 
 	}
+
+	pEnemy->updateFacing();
 
 }
 

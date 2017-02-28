@@ -18,6 +18,12 @@ public:
 	//encuentra el camino menos costoso hasta un item (haria una llamada
 	//al metodo de buscar camino de Astar)
 	float CreatePathToItem(const std::string& tipo, std::list<Vec2f>& camino);
+
+	//crea un camino de random con un truco sencillo elije un punto de spawn aleatorio que no este
+	//a la vista
+	bool CreateRandomPath(std::list<Vec2f>& camino);
+
+
 private:
 	Enemy_Bot* m_Bot;
 	SparseGraph& m_grafo;
@@ -34,8 +40,7 @@ private:
 	//y si puede saltarse alguno porque no hay ningun obstaculo se lo saltara, es decir si el camino es 1-2-3,
 	//pero del 1 al 3 se puede ir con una linea recta porque no hay obstaculos entonces elimina al 2 del camino.
 	void SuavizarCamino(std::list<Vec2f>& listaCamino);
-	
-	
+
 	
 	
 

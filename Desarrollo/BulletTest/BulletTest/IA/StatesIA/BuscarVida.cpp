@@ -14,6 +14,8 @@ void BuscarVida::Execute(Enemy_Bot* pEnemy) {
 
 	//std::cout << "BUSCANDO VIDA" << std::endl;
 
+	pEnemy->updateFacing();
+
 }
 
 void BuscarVida::Exit(Enemy_Bot* pEnemy) {

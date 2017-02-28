@@ -70,9 +70,12 @@ public:
 
 	void updateMovement();
 
+	void updateFacing();
+
 
 	void createPathToPosition(Vec2f vec);
 	float createPathToItem(const std::string& tipo);
+	Vec2f createRandomPath();
 
 	std::shared_ptr<NetBot> m_network;
 	

@@ -107,6 +107,52 @@ float PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& c
 	return dij.getCostToTarget();
 }
 
+bool PathPlanner::CreateRandomPath(std::list<Vec2f>& camino)
+{
+
+	Vec2f TargetPos;
+
+	std::vector<Vec3<float>>& spawns = Map::i().getSpawnPoints();
+	
+	if (spawns.empty()) {
+		return false;
+	}
+
+	if (spawns.size() != 1) {
+		Vec3<float>& spawn = spawns.at(Randi(0, spawns.size() - 1));
+		TargetPos = Vec2f(spawn.getX(), spawn.getZ());
+	}
+	else {
+		TargetPos = Vec2f(spawns[0].getX(), spawns[0].getZ());
+	}
+
+	//Cogemos nodo mas cercano al bot
+	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAPos(TargetPos);
+
+	if (NodoMasCercanoAlBot == -1 || NodoMasCercanoAlObjetivo == -1) {
+		return false;
+	}
+
+	AStarSearch AStar(m_grafo, NodoMasCercanoAlBot, NodoMasCercanoAlObjetivo);
+
+	std::list<int> CaminoDeNodos = AStar.GetPathToTarget();
+	if (!CaminoDeNodos.empty()) {
+		Map::i().ConvertirNodosAPosiciones(CaminoDeNodos, camino);
+		if (CaminoDeNodos.size() > 1) {
+			//antes de salir del metodo suavizamos el camino para que sea mas natural el movimiento
+			SuavizarCamino(camino);
+		}
+		
+
+		return true;
+	}
+	
+	
+
+	return false;
+}
+
 
 int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 {
@@ -183,3 +229,4 @@ void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
 		}
 	}
 }
+
