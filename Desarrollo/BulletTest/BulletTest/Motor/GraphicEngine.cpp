@@ -8,6 +8,7 @@
 #include <sstream>
 #include <exception>
 
+
 #include <GUIManager.h>
 
 GraphicEngine::GraphicEngine() : debug_camera(true)
@@ -22,6 +23,10 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 		Node = irrScene->addMeshSceneNode(irrScene->getMesh(mesh));
 	else
 		Node = irrScene->addCubeSceneNode(2.0f);
+
+	if (!Node) {
+		throw std::runtime_error("No se ha encontrado la malla: " + std::string(mesh.c_str()));
+	}
 
 	
 	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
