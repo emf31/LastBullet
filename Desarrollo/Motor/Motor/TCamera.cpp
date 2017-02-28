@@ -75,13 +75,14 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
 	xoffset *= mouseSensitivity;
 	yoffset *= mouseSensitivity;
 
-	this->rotY -= xoffset;
-	this->rotX += yoffset;
+	rotY -= xoffset;
+	rotX += yoffset;
+	std::cout << rotX << std::endl;
 
-	if (this->rotX > 89.0f)	  
-		this->rotX = 89.0f;	  
-	if (this->rotX < -89.0f)  
-		this->rotX = -89.0f;
+	if (rotX > 1.5f)	  
+		rotX = 1.5f;	  
+	if (rotX < -1.5f)  
+		rotX = -1.5f;
 	
 
 
@@ -89,7 +90,7 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
 	
 	transRotacion->setRotationY(rotY);
 	transRotacion->setRotationX(rotX);
-	this->updateCameraVectors();
+	updateCameraVectors();
 	//transRotacion->setRotationDirection(vecFront);
 	//std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
 }

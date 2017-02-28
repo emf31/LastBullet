@@ -27,9 +27,11 @@ int main() {
 	//pistola
 	
 	
-	TModel* p = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	/*
+	//TModel* p = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	//sm.camaraActiva->addChild(p);
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	p1->setScale(Vec3<float>(0.3, 0.3, 0.3));
+	/*
 	TModel* p2 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	TModel* p3= sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	TModel* p4 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
@@ -47,33 +49,33 @@ int main() {
 	//n->setModelColor(0.33f, 0.42f, 0.18f);
 
 	//cartel
-	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
-	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
-	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
+	//TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
+	//m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
+	//m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
 	//m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
 	//personaje
-	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	origen->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
+	//TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	//origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	//origen->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	//w->setRotationY(0.0f);
 	//origen->setModelColor(0.1f, 1.0f, 0.1f);
 	//Vec3<float> aux = w->getRotation();
 
-	TModel* destino1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	destino1->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
-	destino1->setPosition(Vec3<float>(0.0f, 0.0f, -1.0f));
+	//TModel* destino1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	//destino1->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	//destino1->setPosition(Vec3<float>(0.0f, 0.0f, -1.0f));
 	//w->setRotationY(0.0f);
 
-	TModel* destino2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	destino2->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
-	destino2->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
+	//TModel* destino2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	//destino2->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	//destino2->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	//w->setRotationY(0.0f);
 
 	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
-	
+	Vec3<float> newPos;
 
 
 	//luces
@@ -91,7 +93,7 @@ int main() {
 	//TCamera* cam1 = sm.crearNodoCamara();
 	//TCamera* cam2 = sm.crearNodoCamara();
 	//Vec3<float> posCam = sm.camaraActiva->getPosition();
-	sm.camaraActiva->addChild(origen);
+	
 	//posCam.setX(posCam.getX() + 1);
 	//posCam.setY(posCam.getY() + 4);
 
@@ -105,6 +107,19 @@ int main() {
 	int contCam = 0;
 	Vec3<float> rot;
 	//sm.camaraActiva->setPosition(posCam);
+
+
+
+	//NOTA PREGUNTAR PROFE: queremos que una malla en este caso la pistola sea hermana de la camara, es decir qeu dependa de sus transformaciones
+	//para que asi si desplazamos o rotamos la camara tambien lo haga la pistola, hay 3 problemas:
+	// 1- si ponemos la malla en exactamente la misma posicion que la camara esta no se ve, pero si desplazamos la malla un poco hacia delante para que se vea todo el rato
+	//el desplazamiento lo hace bien pero a la hora de rotar como estas rotando un objeto que esta trasladado ya no lo hace bien
+	//2-si escalamos la malla, por ejemplo la pistola el modelo es muy grande y hay que escalarlo a la hora de multiplicar la matriz actual que le llega con la posicion y rotacion 
+	// de la camara por su matriz de escalado entonces si escalamos 0.3 esta reduciendo no solo el tamaño sino toda la matriz de la transformacion asi si la camara se ha desplazado
+	//5 unidades por ejemplo el modelo pone que se habria desplazado 1.5 unidades que es el resultado de 0.3*5
+	//3- habia un tercer problema que ahora mismo no me acuerdo que pasaba cuando hacias todo el rato el set position y set roation a mano directamente de la camara a la malla
+
+
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
 
@@ -117,18 +132,19 @@ int main() {
 		engine.doMovement();
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
-		destino2->setPosition(vecDir);
-
-		//rot=sm.camaraActiva->vecFrontCam();
-		//w->setRotation(rot);
-		//std::cout << "roto al personaje en X con angulo: " << sm.camaraActiva->rotX << std::endl;
-		//std::cout << "roto al personaje en Y con angulo: " << sm.camaraActiva->rotY << std::endl;
-		//w->setRotationY(sm.camaraActiva->rotY);
-		//w->setRotationY(sm.camaraActiva->rotX);
-		//aux = w->getRotation();
-		//std::cout << "La rotacion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
+		newPos = vecDir * 5;
+		//p->setPosition(newPos);
+		p1->setPosition(newPos);
+		p1->setRotation(vecDir);
+		//p->updatePosition(Vec3<float>(3.0f, 0.0f, 0.0f));
+		//p->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 		
-		//w->setRotationY(sm.camaraActiva->aumentoenX);
+		//newPos = vecDir * 2;
+		//origen->setPosition(sm.camaraActiva->getPosition());
+		//origen->setRotation(vecDir);
+		//origen->updatePosition(newPos);
+		//origen->updatePosition(Vec3<float>(0.0f, -5.0f, 0.0f));
+		
 		if (tiempoCamara == 300) {
 			tiempoCamara = 0;
 			if (contCam >= sm.vectorCamaras.size()) {
@@ -138,49 +154,13 @@ int main() {
 			sm.setActiveCamera(sm.vectorCamaras[contCam]);
 			contCam++;
 		}
-		if (cont == 100) {
-			cont = 0;
-			//aux = w->getPosition();
-			//std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
-			//w->updatePosition(Vec3<float>(1.5f, 0.0f, 0.0f));
-			
-		}
+
 		cont++;
 		tiempoCamara++;
-		/*
-				if (cont == 100) {
-			cont = 0;
-			std::cout << "reseteo: "<< std::endl;
-			rotacion = n->getRotation();
-			rotacion.setY(rotacion.getY() + 0.01);
-			n->setRotation(rotacion);
-		}
-		std::cout << cont << std::endl;
-		cont++;
 
-		if (engine.m_rotarDerecha) {
-			rotacion = n->getRotation();
-			rotacion.setY(rotacion.getY() + 0.1);
-			n->setRotation(rotacion);
-			std::cout << "La rotacion en el if es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
-		}
-		else {
-			n->setRotation(Vec3<float>(1.f,1.f,1.f));
-			std::cout << "La rotacion el else es: " << rotacion.getX() << "," << rotacion.getY() << "," << rotacion.getZ() << "," << std::endl;
-		}
-		
-		if (engine.m_rotarIzquierda) {
-			rotacion = n->getRotation();
-			rotacion.setY(rotacion.getY() - 0.1);
-			n->setRotation(rotacion);
-		}
-		else {
-			n->setRotation(Vec3<float>(1.f, 1.f, 1.f));
-		}
-		*/
 		
 		sm.draw(engine.getWindow());
-		//std::cout << "siguiente iteracion" << std::endl;
+		std::cout << "siguiente iteracion" << std::endl;
 		
 		
 		
