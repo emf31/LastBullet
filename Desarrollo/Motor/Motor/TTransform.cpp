@@ -222,7 +222,7 @@ void TTransform::beginDraw()
 
 	//el enddraw desapilaria una matriz y pondria esa desapilada como actual.
 	SceneManager::i().pilaMatrices.push_back(SceneManager::i().m_matrizActual);
-	SceneManager::i().m_matrizActual = m_matrix*SceneManager::i().m_matrizActual;
+	SceneManager::i().m_matrizActual = m_matrix * SceneManager::i().m_matrizActual;
 }
 
 void TTransform::endDraw()

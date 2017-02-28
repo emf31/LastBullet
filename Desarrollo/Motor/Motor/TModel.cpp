@@ -101,25 +101,27 @@ void TModel::beginDraw() {
 	for (int i = 0; i < SceneManager::i().vectorLuces.size(); i++) {
 		lightPos = SceneManager::i().vectorLuces[i]->getPosition();
 		lightColor = SceneManager::i().vectorLuces[i]->getColor();
-		GLint lightColorLoc = glGetUniformLocation(shader->Program, "pointlight.lightColor");
-		GLint lightPosLoc = glGetUniformLocation(shader->Program, "pointlight.position");
-		glUniform3f(lightColorLoc, lightColor.getX(), lightColor.getY(), lightColor.getZ());
-		glUniform3f(lightPosLoc, lightPos.getX(), lightPos.getY(), lightPos.getZ());
+		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.ambiente"), 0.1f, 0.1f, 0.1f);
+		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.difusa"), 0.5f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.especular"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.position"), lightPos.getX(), lightPos.getY(), lightPos.getZ());
 	}
 
 
 	//LUZ SOLAR TODO esto no se puede pasar directo, habria que crear una luz solar y que se le pase en el for
-	GLint sunlightcolor = glGetUniformLocation(shader->Program, "sunlight.lightcolor");
-	glUniform3f(sunlightcolor, -0.8f, -3.0f, -0.8f);
-	GLint sunlightdirection = glGetUniformLocation(shader->Program, "sunlight.direction");
-	glUniform3f(sunlightdirection, 1.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.ambiente"), 0.1f, 0.1f, 0.1f);
+	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.difusa"), 0.4f, 0.4f, 0.4f);
+	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.especular"), 1.f, 1.f, 1.f);
+	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.direction"), -0.8f, -3.0f, -0.8f);
 
 	//LUZ LINTERNA, TODO arreglar esto para que sea una entity y herede de TLuz
 	float dirX = SceneManager::i().camaraActiva->getVectorDireccion().getX();
 	float dirY = SceneManager::i().camaraActiva->getVectorDireccion().getY();
 	float dirZ = SceneManager::i().camaraActiva->getVectorDireccion().getZ();
 	//pasamos los uniforms
-	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.lightColor"), 1.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.ambiente"), 0.1f, 0.1f, 0.1f);
+	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.difusa"), 0.5f, 0.5f, 0.5f);
+	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.especular"), 1.0f, 1.0f, 1.0f);
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.position"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
 	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.direction"), dirX, dirY, dirZ);
 	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.radioInterior"), glm::cos(glm::radians(13.f)));

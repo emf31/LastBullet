@@ -48,6 +48,8 @@ int main() {
 	//sm.camaraActiva->addChild(p);
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
+	//sm.camaraActiva->addChild(p1);
+	//p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 	/*
 	TModel* p2 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	TModel* p3= sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
@@ -138,7 +140,12 @@ int main() {
 	//2-si escalamos la malla, por ejemplo la pistola el modelo es muy grande y hay que escalarlo a la hora de multiplicar la matriz actual que le llega con la posicion y rotacion 
 	// de la camara por su matriz de escalado entonces si escalamos 0.3 esta reduciendo no solo el tamaño sino toda la matriz de la transformacion asi si la camara se ha desplazado
 	//5 unidades por ejemplo el modelo pone que se habria desplazado 1.5 unidades que es el resultado de 0.3*5
-	//3- habia un tercer problema que ahora mismo no me acuerdo que pasaba cuando hacias todo el rato el set position y set roation a mano directamente de la camara a la malla
+	//3- tendriamos que poder hacer las transformadas de la pistola antes que la camara pork asi la desplazamos en z para alejarla y dejarla en su posicion buena y luego cuando pongamos 
+	//la rotacion de la camra esta rotara un objeto trasladado quedando esta siempre en la buena posicion de la camara
+
+	//POSIBLE SOLUCION: hacer una nueva variable que sea posRealativa que sea una posicion relativa al padre que este en TModel, por defecto esta es 0, lo que haria esta posicion es en cada
+	//draw hacer un update position de este valor multiplicado por el vec dir de la camara y asi esta posicion se la pondriamos una vez solo al crear el objeto y ya el en el draw se encargaria
+	//de desplazarse relativo al padre segun la posicion que tu has dicho.
 
 
 	while (!engine.shouldCloseWindw()){
