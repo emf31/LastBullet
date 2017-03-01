@@ -7,6 +7,9 @@ enum T_Nodos {
 	T_TRASLACION = 4,
 	T_MALLA = 5,
 	T_LUZ = 6,
-	T_CAMARA = 7
+	T_SUNLIGHT = 7,
+	T_POINTLIGHT = 8,
+	T_FLASHLIGHT = 9,
+	T_CAMARA = 10
 
 };

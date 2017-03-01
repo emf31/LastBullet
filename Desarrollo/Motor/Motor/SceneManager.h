@@ -5,7 +5,9 @@
 #include "Shader.h"
 //#include "Camera.h"
 #include "enum.h"
-#include "TSpotLight.h"
+#include "TSunLight.h"
+#include "TPointLight.h"
+#include "TFlashLight.h"
 #include "TCamera.h"
 
 #include "GUI.h"
@@ -34,11 +36,17 @@ public:
 	//NOTA : en mi cabeza tiene sentido que lo que devolvamos sea un TModel o un TSpotLight ya que luego desde el juego lo que manejariamos serian estas entities
 	//lo cual a parte de ser mas claro para quien lo use asi no tendriamos acceso a los nodos del arbol desde fuera del motor grafico para que no se pueda corromper este.
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
-	TSpotLight* crearNodoLuz();
+	TSunLight* crearNodoSunLight(Vec3<float> direccion);
+	TPointLight* crearNodoPointLight(Vec3<float> posicion);
+	TFlashLight* crearNodoFlashLight(Vec3<float> posicion, Vec3<float> direccion, float radioIn = 13.0f, float radioEx = 18.0f);
 	TCamera* crearNodoCamara();
 
 	void setActiveCamera(TCamera* cam) {
 		camaraActiva = cam;
+	}
+
+	void setSunLight(TSunLight* sun) {
+		sunlight = sun;
 	}
 
 	int getEntityCount() {
@@ -55,9 +63,12 @@ public:
 	Vec3<float> activeCameraPos;
 	float *screenWidth, *screenHeight;
 	std::deque<glm::mat4> pilaMatrices;
-	std::vector<TSpotLight*> vectorLuces;
+	TSunLight* sunlight;
+	std::vector<TPointLight*> vecPointLight;
+	std::vector<TFlashLight*> vecFlashLight;
 	std::vector<TCamera*> vectorCamaras;
 	TCamera* camaraActiva;
+	
 private:
 	ResourceManager *rm;
 	TNode* scene;

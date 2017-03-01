@@ -39,9 +39,6 @@
     <ClCompile Include="TTransform.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="TSpotLight.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="TCamera.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -81,15 +78,24 @@
     <ClCompile Include="Billboard.cpp">
       <Filter>Archivos de código fuente\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="TLuz.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="TSunLight.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="TPointLight.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="TFlashLight.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TEntity.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="TTransform.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="TSpotLight.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="TCamera.h">
@@ -139,6 +145,18 @@
     </ClInclude>
     <ClInclude Include="enum.h">
       <Filter>Archivos de encabezado\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="TLuz.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TSunLight.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TPointLight.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TFlashLight.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

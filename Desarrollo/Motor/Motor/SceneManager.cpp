@@ -28,6 +28,7 @@ void SceneManager::inicializar() {
 	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
 	camaraActiva = crearNodoCamara();
+	sunlight = nullptr;
 }
 
 
@@ -137,28 +138,24 @@ TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre, int entityID)
 	return transNode;
 }
 
-TSpotLight * SceneManager::crearNodoLuz()
+TSunLight * SceneManager::crearNodoSunLight(Vec3<float> direccion)
 {
-
 	TNode* luzNode;
 	TNode * nuevoNodoRotacion;
-	TNode * nuevoNodoEscalado;
 	TNode * nuevoNodoTraslacion;
 
 	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
-	TSpotLight* luz = new TSpotLight();
+	TSunLight* luz = new TSunLight(direccion);
 	int id = luz->getID();
 
 	//rotacion antes de traslacion
 	nuevoNodoRotacion = crearNodoRotacion(scene, id);
-	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion, id);
-	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoRotacion, id);
 	luzNode = new TNode(id, nuevoNodoTraslacion);
 
 	//asignamos los hijos
 	scene->addChild(nuevoNodoRotacion);
-	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
-	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
+	nuevoNodoRotacion->addChild(nuevoNodoTraslacion);
 	nuevoNodoTraslacion->addChild(luzNode);
 
 
@@ -166,22 +163,99 @@ TSpotLight * SceneManager::crearNodoLuz()
 
 	//asignamos matrices de transformacion
 	luz->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
-	luz->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
 	luz->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
 	luz->setMiNodo(luzNode);
 
 	//seteamos la entity
 	luzNode->setEntity(luz);
-	luzNode->setType(T_LUZ);
+	luzNode->setType(T_SUNLIGHT);
 
-	//la añadimos al vector de luces
-	vectorLuces.push_back(luz);
+	//la añadimos al sceneManager
+	setSunLight(luz);
+
+
+	return luz;
+}
+
+TPointLight * SceneManager::crearNodoPointLight(Vec3<float> posicion)
+{
+	TNode* luzNode;
+	TNode * nuevoNodoRotacion;
+	TNode * nuevoNodoTraslacion;
+
+	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
+	TPointLight* luz = new TPointLight(posicion);
+	int id = luz->getID();
+
+	//rotacion antes de traslacion
+	nuevoNodoRotacion = crearNodoRotacion(scene, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoRotacion, id);
+	luzNode = new TNode(id, nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(luzNode);
+
+
+
+
+	//asignamos matrices de transformacion
+	luz->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	luz->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	luz->setMiNodo(luzNode);
+
+	//seteamos la entity
+	luzNode->setEntity(luz);
+	luzNode->setType(T_POINTLIGHT);
+
+	//la añadimos al sceneManager
+	vecPointLight.push_back(luz);
+
+
+	return luz;
+}
+
+TFlashLight * SceneManager::crearNodoFlashLight(Vec3<float> posicion, Vec3<float> direccion, float radioIn, float radioEx)
+{
+
+	TNode* luzNode;
+	TNode * nuevoNodoRotacion;
+	TNode * nuevoNodoTraslacion;
+
+	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
+	TFlashLight* luz = new TFlashLight(posicion,direccion, radioIn, radioEx);
+	int id = luz->getID();
+
+	//rotacion antes de traslacion
+	nuevoNodoRotacion = crearNodoRotacion(scene, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoRotacion, id);
+	luzNode = new TNode(id, nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(luzNode);
+
+
+
+
+	//asignamos matrices de transformacion
+	luz->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	luz->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	luz->setMiNodo(luzNode);
+
+	//seteamos la entity
+	luzNode->setEntity(luz);
+	luzNode->setType(T_FLASHLIGHT);
+
+	//la añadimos al sceneManager
+	vecFlashLight.push_back(luz);
 
 
 	return luz;
 
 }
-
 
 
 TCamera * SceneManager::crearNodoCamara()

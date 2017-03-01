@@ -31,6 +31,7 @@ struct PointLight {
     vec3  position;
 };
 
+
 vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir);
 vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir);
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir);
@@ -49,9 +50,11 @@ uniform vec3 viewPos;
 uniform Material material;
 
 //luces
+uniform int num_pointlight;
+uniform int num_flashlight;
 uniform SunLight sunlight;
-uniform FlashLight flashlight;
-uniform PointLight pointlight;
+uniform FlashLight flashlight[10];
+uniform PointLight pointlight[10];
 
 
 void main()
@@ -62,14 +65,16 @@ void main()
 	vec3 norm = normalize(Normal);
 	//calculamos el vector vista (desde donde el observador ve el objeto)
 	vec3 viewDir = normalize(viewPos - FragPos);
-
 	//*********************************LUZ SOLAR*****************************************
 	colorFinal=calcularLuzSolar(sunlight,norm,viewDir);
 	//*********************************POINT LIGHT*****************************************
-	colorFinal+=calcularPointLight(pointlight,norm,viewDir);
+	for(int i=0;i<num_pointlight;i++){
+		colorFinal+=calcularPointLight(pointlight[i],norm,viewDir);
+	}
 	//*********************************LUZ LINTERNA*****************************************
-	colorFinal+=calcularFlashLight(flashlight,norm,viewDir);
-
+	for(int i=0;i<num_flashlight;i++){
+	colorFinal+=calcularFlashLight(flashlight[i],norm,viewDir);
+	}
 	color = vec4(colorFinal, 1.0);
 }
 
@@ -110,7 +115,7 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
 	vec3 specular =  (spec * light.especular) * vec3(texture(material.texture_specular, TexCoords)) ; 
 
     // atenuacion
-    float distance    = length(pointlight.position - FragPos);
+    float distance    = length(light.position - FragPos);
     float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
     diffuse  *= attenuation;
     specular *= attenuation;   
@@ -140,15 +145,15 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir){
     
 
     // para el suavizado de la luz del flash, se va interpolando desde el radio exterior hasata el radio interior
-    float theta = dot(lightDir, normalize(-flashlight.direction)); 
-	float epsilon = (flashlight.radioInterior - flashlight.radioExterior);
-	float intensity = clamp((theta - flashlight.radioExterior) / epsilon, 0.0, 1.0);
+    float theta = dot(lightDir, normalize(-light.direction)); 
+	float epsilon = (light.radioInterior - light.radioExterior);
+	float intensity = clamp((theta - light.radioExterior) / epsilon, 0.0, 1.0);
 	diffuse  *= intensity;
 	specular *= intensity;
 
 
     // atenuacion
-   float distance    = length(flashlight.position - FragPos);
+   float distance    = length(light.position - FragPos);
    float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
 
 

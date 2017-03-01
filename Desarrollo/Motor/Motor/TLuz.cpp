@@ -1,36 +1,85 @@
-#include "TSpotLight.h"
+#include "TLuz.h"
+
+
 #include "SceneManager.h"
 
 
 
 
-TSpotLight::TSpotLight() {
-	
+TLuz::TLuz() {
+
+	std::cout << "SI QUE ENTRO AL CONTRUCTOR DE LUZ CUANDO CREO UNA LUZ DE CUALQUIER TIPO" << std::endl;
+	gradoLuzAmbiente = 0.1f;
+	gradoLuzDifusa = 0.5f;
+	gradoLuzEspecular = 1.0f;
 	setColor(1.0f, 1.0f, 1.0f);
-	this->shaderLuz = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
+	shaderLuz = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	setLight();
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 }
 
 
-TSpotLight::~TSpotLight() {
+TLuz::~TLuz() {
 }
 
-void TSpotLight::setColor(int r, int g, int b, int a) {
+void TLuz::setColorAlpha(float r, float g, float b, float a) {
 	m_r = r;
 	m_g = g;
 	m_b = b;
 	m_a = a;
 }
 
-void TSpotLight::setColor(int r, int g, int b) {
+void TLuz::setColor(float r, float g, float b) {
 	m_r = r;
 	m_g = g;
 	m_b = b;
+	ambiente = Vec3<float>(r, g, b) * gradoLuzAmbiente;
+	difusa = Vec3<float>(r, g, b) * gradoLuzDifusa;
+	especular = Vec3<float>(r, g, b) * gradoLuzEspecular;
 }
 
-void TSpotLight::setLight()
+float TLuz::getR()
+{
+	return m_r;
+}
+
+float TLuz::getG()
+{
+	return m_g;
+}
+
+float TLuz::getB()
+{
+	return m_b;
+}
+
+void TLuz::setIntensidadAmbiente(float intensidad)
+{
+	gradoLuzAmbiente = intensidad;
+	ambiente = Vec3<float>(m_r, m_g, m_b) * gradoLuzAmbiente;
+	
+}
+
+void TLuz::setIntensidadDifusa(float intensidad)
+{
+	gradoLuzDifusa = intensidad;
+	difusa = Vec3<float>(m_r, m_g, m_b) * gradoLuzDifusa;
+	
+}
+
+void TLuz::setIntensidadEspecular(float intensidad)
+{
+	gradoLuzEspecular = intensidad;
+	especular = Vec3<float>(m_r, m_g, m_b) * gradoLuzEspecular;
+}
+
+Vec3<float> TLuz::getColor() {
+	return Vec3<float>(m_r, m_g, m_b);
+}
+
+
+void TLuz::setLight()
 {
 	GLfloat vertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -83,41 +132,18 @@ void TSpotLight::setLight()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glBindVertexArray(lightVAO);
 
-	
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 
 }
-void TSpotLight::beginDraw() {
-	
+void TLuz::beginDraw() {
+
 
 	glm::mat4 view = SceneManager::i().view;
 	glm::mat4 projection = SceneManager::i().projection;
 	glm::mat4 model = SceneManager::i().m_matrizActual;
-	/*
-		int tam = SceneManager::i().pilaMatrices.size();
-	for (int i = 0; i < tam; i++) {
-		model = SceneManager::i().pilaMatrices.front()*model;
-		SceneManager::i().pilaMatrices.pop_front();
-	}
-	//por si dependemos de la transformacion del padre, tenemos que multiplicar nuestra modelo por la de los padres que es la actual.
-	model = actual * model;
-	//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
-	SceneManager::i().m_matrizActual = model;
-	*/
-
-
-	/*
-	m_matrix = SceneManager::i().m_matrizActual;
-	m_matrix = glm::scale(m_matrix, glm::vec3(1.2f));
-	m_matrix = glm::translate(m_matrix, lightPos);
-	glm::mat4 view = SceneManager::i().view;
-	glm::mat4 projection = SceneManager::i().projection;
-	
-	//por si algo dependiera de la transformacion de la luz tenemos que cambiar la matriz actual a la nueva matriz de luz, si no depende nada de esto cuando lleguemos al nodo raiz se resetearia a la identidad
-	SceneManager::i().m_matrizActual = m_matrix;
-	*/
 
 	shaderLuz->Use();
 	// Le pasamos las matrices
@@ -133,58 +159,47 @@ void TSpotLight::beginDraw() {
 
 }
 
-void TSpotLight::endDraw() {
-	//SceneManager::i().m_matrizActual = m_matrix;
+void TLuz::endDraw() {
 }
 
 
-void TSpotLight::setPosition(Vec3<float> pos) {
+void TLuz::setPosition(Vec3<float> pos) {
 	transTraslacion->setPosition(pos);
 }
 
-void TSpotLight::setRotationX(float angu) {
+void TLuz::setRotationX(float angu) {
 	transRotacion->setRotationX(angu);
 }
 
-void TSpotLight::setRotationY(float angu) {
+void TLuz::setRotationY(float angu) {
 	transRotacion->setRotationY(angu);
 }
 
-void TSpotLight::setRotationZ(float angu) {
+void TLuz::setRotationZ(float angu) {
 	transRotacion->setRotationZ(angu);
 }
 
-void TSpotLight::setScale(Vec3<float> esc) {
-	transEscalado->setScale(esc);
+void TLuz::setRotation(Vec3<float> dir)
+{
+	transRotacion->setRotationDirection(dir);
 }
 
-void TSpotLight::setTransformacionRotacion(TTransform * rot) {
+void TLuz::setTransformacionRotacion(TTransform * rot) {
 	transRotacion = rot;
 }
-
-void TSpotLight::setTransformacionEscalado(TTransform * esc) {
-	transEscalado = esc;
-}
-
-void TSpotLight::setTransformacionTraslacion(TTransform * tras) {
+void TLuz::setTransformacionTraslacion(TTransform * tras) {
 	transTraslacion = tras;
 }
 
-Vec3<float> TSpotLight::getRotation() {
+Vec3<float> TLuz::getRotation() {
 	return transRotacion->getRotation();
 }
 
-Vec3<float> TSpotLight::getPosition()
+Vec3<float> TLuz::getPosition()
 {
 	return transTraslacion->getPosition();
 }
 
-Vec3<float> TSpotLight::getScale()
-{
-	return transEscalado->getScale();
-}
 
-Vec3<float> TSpotLight::getColor() {
-	return Vec3<float>(m_r, m_g, m_b);
-}
+
 

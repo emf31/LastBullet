@@ -32,11 +32,13 @@ TModel::~TModel() {
 
 void TModel::beginDraw() {
 
-	
+	SceneManager &sm = SceneManager::i();
 	glm::mat4 view = SceneManager::i().view;
 	glm::mat4 projection = SceneManager::i().projection;
 	glm::mat4 model= SceneManager::i().m_matrizActual;
+
 	/*
+	ESTO PUEDE SERVIR PARA HACER QUE LA PISTOLA GIRE CON LA CAMARA YA QUE SE PROCESARIA ANTES LO DE LA PISTOLA QUE LO DE LA CAMARA
 		int tam = SceneManager::i().pilaMatrices.size();
 	for (int i = 0; i < tam; i++) {
 		model = SceneManager::i().pilaMatrices.front()*model;
@@ -50,83 +52,31 @@ void TModel::beginDraw() {
 	*/
 
 
-
-
-
-	/*
-	DE ESTA FORMA SI VA (antiguo, el nuevo ahora tambien va , pero me guardo esto por si peta en un futuro)
-	glm::mat4 traslade = SceneManager::i().pilaMatrices.back();
-	SceneManager::i().pilaMatrices.pop_back();
-	glm::mat4 scale = SceneManager::i().pilaMatrices.back();
-	SceneManager::i().pilaMatrices.pop_back();
-	glm::mat4 rotation = SceneManager::i().pilaMatrices.back();
-	SceneManager::i().pilaMatrices.pop_back();
-
-	glm::mat4 model = actual* traslade * scale* rotation;
-	//SceneManager::i().m_matrizActual = model;
-
-	SceneManager::i().pilaMatrices.push_back(rotation);
-	SceneManager::i().pilaMatrices.push_back(scale);
-	SceneManager::i().pilaMatrices.push_back(traslade);
-	std::cout << "MATRIZ MODELO: " << std::endl;
-	for (int i = 0; i < model.length(); i++) {
-	for (int j = 0; j < model[0].length(); j++) {
-	std::cout << model[i][j] << " ";
-	}
-	std::cout << std::endl;
-	}
-	*/
-
-
 	glm::mat4 modelview = projection * view * model;
 	// Activamos el shader que tenemos guardado
 	shader->Use();
-
 	// Le pasamos las matrices
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
-	//colores
-	GLint objectColorLoc = glGetUniformLocation(shader->Program, "objectColor");
-	glUniform3f(objectColorLoc, m_r, m_g, m_b);
-	
+	glUniform1i(glGetUniformLocation(shader->Program, "num_pointlight"), sm.vecPointLight.size());
+	glUniform1i(glGetUniformLocation(shader->Program, "num_flashlight"), 1);
+	//color
+	glUniform3f(glGetUniformLocation(shader->Program, "objectColor"), m_r, m_g, m_b);
 	//camaras
-	//TODO en un futuro esto sera un vector de camaras que tendremos en SceneManager
-	GLint viewPosLoc = glGetUniformLocation(shader->Program, "viewPos");
-	glUniform3f(viewPosLoc, SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());	
+	glUniform3f(glGetUniformLocation(shader->Program, "viewPos"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
 	
-	//le pasamos las distintas luces al shader SpotLight
-	Vec3<float> lightPos;
-	Vec3<float> lightColor;
-	for (int i = 0; i < SceneManager::i().vectorLuces.size(); i++) {
-		lightPos = SceneManager::i().vectorLuces[i]->getPosition();
-		lightColor = SceneManager::i().vectorLuces[i]->getColor();
-		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.ambiente"), 0.1f, 0.1f, 0.1f);
-		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.difusa"), 0.5f, 0.5f, 0.5f);
-		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.especular"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(shader->Program, "pointlight.position"), lightPos.getX(), lightPos.getY(), lightPos.getZ());
+	//LUZ SOLAR
+	if (sm.sunlight != nullptr) {
+		sm.sunlight->pasarDatosAlShader(shader);
 	}
-
-
-	//LUZ SOLAR TODO esto no se puede pasar directo, habria que crear una luz solar y que se le pase en el for
-	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.ambiente"), 0.1f, 0.1f, 0.1f);
-	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.difusa"), 0.4f, 0.4f, 0.4f);
-	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.especular"), 1.f, 1.f, 1.f);
-	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.direction"), -0.8f, -3.0f, -0.8f);
-
-	//LUZ LINTERNA, TODO arreglar esto para que sea una entity y herede de TLuz
-	float dirX = SceneManager::i().camaraActiva->getVectorDireccion().getX();
-	float dirY = SceneManager::i().camaraActiva->getVectorDireccion().getY();
-	float dirZ = SceneManager::i().camaraActiva->getVectorDireccion().getZ();
-	//pasamos los uniforms
-	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.ambiente"), 0.1f, 0.1f, 0.1f);
-	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.difusa"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.especular"), 1.0f, 1.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.position"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
-	glUniform3f(glGetUniformLocation(shader->Program, "flashlight.direction"), dirX, dirY, dirZ);
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.radioInterior"), glm::cos(glm::radians(13.f)));
-	glUniform1f(glGetUniformLocation(shader->Program, "flashlight.radioExterior"), glm::cos(glm::radians(18.f)));
-
+	//POINTLIGHT
+	for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
+		sm.vecPointLight[i]->pasarDatosAlShader(shader, i);
+	}
+	//LUZ LINTERNA
+	for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
+		sm.vecFlashLight[i]->pasarDatosAlShader(shader, i);
+	}
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)

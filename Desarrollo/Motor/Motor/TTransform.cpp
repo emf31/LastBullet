@@ -75,68 +75,7 @@ void TTransform::setRotationZ(float angu)
 	m_rotation.setZ(m_rotation.getZ() + angu);
 	m_matrix = glm::rotate(m_matrix, angulo, glm::vec3(0.0, 0.0, 1.0));
 }
-void TTransform::setRotation(Vec3<float> rotation) {
-	
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	//glm::vec3 X = glm::vec3(0.0f, 1.0f, 0.0f);
-	//glm::vec3 Z = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 normal = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
 
-	glm::vec3 rot2 = glm::cross(up, normal);
-	float anguX = acos(glm::dot(normal, up));
-	//float anguY = acos(glm::dot(normal, X));
-	//float anguZ = acos(glm::dot(normal, Z));
-	rot2.z = 0.0f;
-	m_matrix = glm::mat4();
-	m_matrix = glm::rotate(m_matrix, anguX, rot2);
-	//setRotationY(anguY);
-	//setRotationX(anguX);
-	//setRotationZ(anguZ);
-	//m_matrix = glm::mat4();
-	//m_matrix = glm::orientation(normal, up);
-	
-	/*std::cout << "matriz orientacion : " << std::endl;
-	for (int i = 0; i < m_matrix.length(); i++) {
-		for (int j = 0; j < m_matrix[0].length(); j++) {
-			std::cout << m_matrix[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-	*/
-
-
-
-	/*
-	glm::vec3 rot = glm::vec3(rotation.getX(), rotation.getX(), rotation.getX());
-	std::cout<<"vector rotacion camara: " << rot.x << "," << rot.y << "," << rot.z << std::endl;
-	std::cout << "matriz rotacion : " << std::endl;
-	m_matrix = glm::orientation(rot, up);
-	for (int i = 0; i < m_matrix.length(); i++) {
-	for (int j = 0; j < m_matrix[0].length(); j++) {
-	std::cout << m_matrix[i][j] << " ";
-	}
-	std::cout << std::endl;
-	}
-	*/
-
-
-
-	
-
-
-	//glm::vec3 a = m_rotation2;
-	//glm::vec3 b = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
-	//m_rotation2 = glm::cross(b, a);
-	//angulo = acos(glm::dot(b, a) / (glm::length(b) * glm::length(a)));
-
-	//m_orientation = glm::rotate(m_orientation, rotation.getX(), glm::vec3(1.0, 0.0, 0.0));
-	//m_matrix = glm::rotate(m_matrix, angulo, glm::vec3(0.0, 1.0, 0.0));
-	//m_orientation = glm::rotate(m_orientation, rotation.getZ(), glm::vec3(0.0, 0.0, 1.0));
-
-	//m_rotation2 = glm::vec3(rotation.getX(), rotation.getY(), rotation.getZ());
-	//std::cout << "El angulo es: " << angulo << "y el vector: " << m_rotation.x << "," << m_rotation.y << "," << m_rotation.z << std::endl;
-	
-}
 void TTransform::setRotationDirection(Vec3<float> vecDir)
 {
 	m_matrix = glm::mat4();
