@@ -56,7 +56,7 @@ private:
 
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
 
-	irr::io::path elegirColor(std::string estadoActual);
+	Color4f elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);
 	void updateFuzzyProgressBars();
@@ -64,7 +64,7 @@ private:
 	void updateNetworkWindowInfo(NetworkDebugger* deb);
 	void crearNodosState();
 
-	void Prueba();
+	void crearNodoBot(Entity* myentity);
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
