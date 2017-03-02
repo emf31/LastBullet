@@ -92,7 +92,7 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 
 
 	
-	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
+	if (canShoot()) {
 
 		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
 

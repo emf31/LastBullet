@@ -30,6 +30,13 @@ void Weapon::setPosition(const Vec3<float>& pos)
 {
 }
 
+bool Weapon::canShoot()
+{
+	if (disparos < capacidadAmmo && estadoWeapon == CARGADA)
+		return true;
+	return false;
+}
+
 Vec3<float> Weapon::getBalaRotation()
 {
 	if (m_ent->getClassName() == "Player"){

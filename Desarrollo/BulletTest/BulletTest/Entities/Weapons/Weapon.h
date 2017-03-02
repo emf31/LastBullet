@@ -41,6 +41,8 @@ public:
 
 	virtual void shoot(const Vec3<float>& target) = 0;
 
+	virtual bool canShoot();
+
 	void vaciar() {
 		disparos = capacidadAmmo;
 		numCargadores = 0;
