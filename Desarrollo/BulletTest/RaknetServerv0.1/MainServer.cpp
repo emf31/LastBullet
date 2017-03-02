@@ -108,6 +108,10 @@ int main() {
 				//lo borramos de los clientes actuales del servidor
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
+				if (ent->getGuid() == gameinfo.creador) {
+					EntityManager::i().enviarTerminarPartida(peer);
+				}
+
 				break;
 			}
 

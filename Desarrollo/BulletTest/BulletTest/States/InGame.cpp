@@ -37,14 +37,23 @@ void InGame::Inicializar()
 
 		EntityManager::i().registerRaknetEntity(e);
 	}
+
+
+
+	
+
+
 	
 }
 
 void InGame::Clear()
 {
 	EntityManager::i().apagar();
-	
+	GraphicEngine::i().apagar();
+	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
+
+	NetworkManager::i().apagar();
 
 	MessageHandler::i().borrarContenido();
 }

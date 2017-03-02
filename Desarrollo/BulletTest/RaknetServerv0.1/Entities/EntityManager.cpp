@@ -82,7 +82,16 @@ void EntityManager::lanzarGranda(TGranada & g, RakNet::RakNetGUID owner, RakNet:
 
 }
 
+void EntityManager::enviarTerminarPartida(RakNet::RakPeerInterface *peer)
+{
+	RakID rakiD;
+	rakiD.mID = TERMINAR_PARTIDA;
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+		
+		peer->Send((const char*)&rakiD, sizeof(rakiD), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
 
+	}
+}
 
 void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface *peer)
 {

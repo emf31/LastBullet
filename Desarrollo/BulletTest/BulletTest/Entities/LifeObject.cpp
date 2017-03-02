@@ -78,7 +78,7 @@ void LifeObject::handleMessage(const Message & message)
 
 				if (ClassName == "Player")
 					static_cast<Player*>(message.data)->getLifeComponent().sumarVida();
-				if (ClassName == "Enemy_Bot") {
+				else if (ClassName == "Enemy_Bot") {
 
 					Enemy_Bot* bot = static_cast<Enemy_Bot*>(message.data);
 					bot->getLifeComponent().sumarVida();

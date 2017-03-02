@@ -91,8 +91,8 @@ void NetPlayer::crearPartida()
 
 	
 
-	/*Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();*/
+	Enemy_Bot *bot = new Enemy_Bot("Nixon", 2000, RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();
 
 	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	//bot2->m_network->inicializar();
@@ -320,6 +320,13 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 		}
 		break;
+
+		case TERMINAR_PARTIDA:
+		{
+			StateStack::i().GetCurrentState()->Clear();
+
+			break;
+		}
 
 		case DISPARAR_BALA:
 		{

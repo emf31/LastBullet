@@ -15,7 +15,7 @@
 #include <Map.h>
 #include <TriggerSystem.h>
 
-Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
+Enemy_Bot::Enemy_Bot(const std::string & name, int ID, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
 	life_component(this)
 {
 	//Creates object to send and receive packets

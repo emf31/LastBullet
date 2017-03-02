@@ -24,7 +24,7 @@ class Enemy_Bot : public Character {
 
 public:
 
-	Enemy_Bot(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Enemy_Bot(const std::string& name, int ID, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 
 	~Enemy_Bot();
 
