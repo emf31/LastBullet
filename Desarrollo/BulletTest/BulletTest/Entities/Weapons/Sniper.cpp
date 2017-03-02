@@ -89,13 +89,6 @@ bool Sniper::handleTrigger(TriggerRecordStruct * Trigger)
 void Sniper::shoot(const Vec3<float>& target)
 {
 
-	if (canShoot()) {
-
-		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
-
-		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
-
-
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
 
@@ -164,10 +157,7 @@ void Sniper::shoot(const Vec3<float>& target)
 
 			relojCadencia.restart();
 
-		}
 
-
-	}
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;

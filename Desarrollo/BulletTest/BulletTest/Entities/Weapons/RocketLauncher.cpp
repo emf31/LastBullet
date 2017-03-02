@@ -90,12 +90,6 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 
 void RocketLauncher::shoot(const Vec3<float>& target) {
 
-
-	
-	if (canShoot()) {
-
-		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
-
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
@@ -126,8 +120,6 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 
 			relojCadencia.restart();
 		}
-
-	}
 
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 			relojrecarga.restart();

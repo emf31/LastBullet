@@ -98,11 +98,6 @@ void Asalto::handleInput()
 void Asalto::shoot(const Vec3<float>& target)
 {
 
-
-
-	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
-
-
 		//aumentamos en uno el numero de disparos, para reducir la municion
 		disparos++;
 
@@ -184,9 +179,6 @@ void Asalto::shoot(const Vec3<float>& target)
 
 
 		relojCadencia.restart();
-
-	}
-
 
 
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
