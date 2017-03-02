@@ -4,7 +4,6 @@
 #include <Util.h>
 #include <Vec2f.h>
 #include <KinematicCharacterController.h>
-#include <NavGraphNode.h>
 #include <LifeComponent.h>
 #include <NetBot.h>
 #include <memory>

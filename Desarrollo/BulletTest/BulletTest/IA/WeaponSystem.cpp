@@ -115,33 +115,37 @@ void WeaponSystem::TakeAimAndShoot()const
 			m_dAimPersistance))
 	{*/
 
-	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
-	{
+	if (GetCurrentWeapon()->canShoot()) {
 
-		if (!m_pOwner->getTargetBot()->isDying() && !m_pOwner->isDying()) {
+		if (m_pOwner->getTargetSys()->isTargetWithinFOV())
+		{
 
-			if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible()>m_dReactionTime) {
+			if (!m_pOwner->getTargetBot()->isDying() && !m_pOwner->isDying()) {
 
-				m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
+				if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible()>m_dReactionTime) {
 
-				Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
+					//m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
 
-				float DistToTarget = Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
+					Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
 
-				m_pOwner->elegirWeapon(DistToTarget);
+					float DistToTarget = Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
+
+					m_pOwner->elegirWeapon(DistToTarget);
 
 
 
 
-				AddNoiseToAim(AimingPos);
-				GetCurrentWeapon()->shoot(AimingPos);
+					AddNoiseToAim(AimingPos);
+
+				
+						GetCurrentWeapon()->shoot(AimingPos);
+				
+				}
 
 			}
-
-		}
 		
+		}
 	}
-
 
 }
 

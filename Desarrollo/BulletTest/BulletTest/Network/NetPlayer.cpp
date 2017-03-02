@@ -91,8 +91,8 @@ void NetPlayer::crearPartida()
 
 	
 
-	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();
+	/*Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+	bot->m_network->inicializar();*/
 
 	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	//bot2->m_network->inicializar();
@@ -341,6 +341,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
 
 			//si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
+			//bala.guid = quien te ha disparado
 			m_player->getLifeComponent().restaVida(bala.damage, bala.guid);
 			m_player->relojSangre.restart();
 

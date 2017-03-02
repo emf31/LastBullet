@@ -142,7 +142,7 @@ void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
 		if (!m_isDying) {
-			//Este float * es una referencia a una variable de clase asi que no hay problema
+			
 			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
 			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);

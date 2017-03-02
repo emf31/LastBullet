@@ -11,6 +11,7 @@ LifeComponent::LifeComponent(Entity * owner)
 LifeComponent::~LifeComponent()
 {
 }
+//guid = quien te ha disparado
 void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 {
 	m_vida -= cantidad;
@@ -27,7 +28,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		nuevoplayer.name = m_pOwner->getName();
 
 		//TODO, se manda al netplayer, probablemente se tiene que enviar al netBot
-		Entity* ent=EntityManager::i().getRaknetEntity(guid);
+		Entity* ent = EntityManager::i().getRaknetEntity(guid);
 
 		if (ent->getClassName() == "Enemy_Bot") {
 			Message msg(ent, "MATASTE", NULL);

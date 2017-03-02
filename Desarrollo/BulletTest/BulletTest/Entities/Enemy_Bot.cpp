@@ -243,8 +243,6 @@ void Enemy_Bot::handleMessage(const Message & message)
 	if (message.mensaje == "COLISION_BALA") {
 		if (life_component.isDying() == false) {
 
-			//Este float * es una referencia a una variable estatica asi que no hay problema
-
 			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
 			getLifeComponent().restaVida(impacto.damage, impacto.guid);
