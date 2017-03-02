@@ -66,7 +66,6 @@ void SniperDrop::handleMessage(const Message & message)
 					bot->setWeapon(SNIPER);
 					if (bot->getMachineState()->isInState("BuscarWeapon"))
 						bot->getMachineState()->ChangeState(&BuscarWeapon::i());
-					std::cout << "Cojo un SniperDrop" << std::endl;
 				}
 
 

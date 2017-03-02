@@ -52,14 +52,19 @@ private:
 	bool onInsSniper(const CEGUI::EventArgs & e);
 	bool onInsPistola(const CEGUI::EventArgs & e);
 
+	bool onEstadosIA(const CEGUI::EventArgs & e);
+
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
 
-	irr::io::path elegirColor();
+	irr::io::path elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);
 	void updateFuzzyProgressBars();
 
 	void updateNetworkWindowInfo(NetworkDebugger* deb);
+	void crearNodosState();
+
+	void Prueba();
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
@@ -128,6 +133,8 @@ private:
 	CEGUI::PushButton *BotC;
 	CEGUI::PushButton *BotD;
 
+	CEGUI::PushButton *estadosIA;
+
 	CEGUI::PushButton *closePushButtonIA;
 
 	CEGUI::Slider *sliderUpdate;
@@ -135,7 +142,10 @@ private:
 	float progresoAsalto = 0;
 	float progresoRocketLauncher = 0;
 	float progresoSniper = 0;
+	bool VerEstadosIA=false;
 
 	Entity* entActual;
-	std::shared_ptr<BasicSceneNode> nodoState;
+
+	std::shared_ptr<BasicSceneNode> nodos[4];
+
 };

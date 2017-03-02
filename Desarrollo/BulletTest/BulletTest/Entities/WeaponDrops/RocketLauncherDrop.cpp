@@ -67,7 +67,6 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 					bot->setWeapon(LANZACOHETES);
 					if(bot->getMachineState()->isInState("BuscarWeapon"))
 						bot->getMachineState()->ChangeState(&BuscarWeapon::i());
-					std::cout << "Cojo un RocketLauncherDrop" << std::endl;
 				}
 
 

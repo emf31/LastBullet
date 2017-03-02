@@ -84,9 +84,6 @@ void LifeObject::handleMessage(const Message & message)
 					bot->getLifeComponent().sumarVida();
 					if (bot->getMachineState()->isInState("BuscarVida"))
 						bot->getMachineState()->RevertToPreviousState();
-
-
-					std::cout << "EN LIFE OBJECT: El nuevo estado es: " << bot->getMachineState()->CurrentState()->getStateName() << std::endl;
 				
 				}
 

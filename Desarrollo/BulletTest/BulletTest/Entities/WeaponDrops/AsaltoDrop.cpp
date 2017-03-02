@@ -67,8 +67,6 @@ void AsaltoDrop::handleMessage(const Message & message)
 					bot->setWeapon(ASALTO);
 					if (bot->getMachineState()->isInState("BuscarWeapon"))
 						bot->getMachineState()->ChangeState(&BuscarWeapon::i());
-					std::cout << "Cojo un asaltoDrop" << std::endl;
-
 				}
 
 				m_nodo->setVisible(false);

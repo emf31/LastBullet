@@ -124,6 +124,9 @@ void DebugMenuGUI::inicializar() {
 	BotD = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(9));
 	BotD->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugBotDClicked, this));
 
+	estadosIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(10));
+	estadosIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onEstadosIA, this));
+
 	DesirabilityWeapons = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(40));//ID del menu de deseabilidad = 40
 
 	DesiAsalto = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(40)->getChild(1));
@@ -166,6 +169,7 @@ void DebugMenuGUI::inicializar() {
 	sliderUpdate = static_cast<CEGUI::Slider*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(10));
 	sliderUpdate->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&DebugMenuGUI::onUpdateSlider, this));
 
+
 }
 
 void DebugMenuGUI::update() {
@@ -174,23 +178,39 @@ void DebugMenuGUI::update() {
 
 	updateFuzzyProgressBars();
 
-	if (entActual) {
 
-		Vec3<float>posBox = entActual->getRenderState()->getPosition();
-		posBox.addY(posBox.getY() + 15);
+	if (VerEstadosIA) {
 
-		nodoState->setPosition(posBox);
 
-		nodoState->setTexture(elegirColor(), 0);
+		if (nodos[0]) {
+
+			std::list<Entity*>bots = EntityManager::i().getBots();
+
+
+			for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+				Entity* myentity = *it;
+
+				Vec3<float>posBox = myentity->getRenderState()->getPosition();
+				posBox.addY(posBox.getY() + 15);
+
+				std::string estado = myentity->getStateActual();
+
+				int i = myentity->getID();
+
+				nodos[i]->setPosition(posBox);
+				nodos[i]->setTexture(elegirColor(estado), 0);
+
+			}
+		}
+		
 
 	}
+
 }
 
-irr::io::path DebugMenuGUI::elegirColor() {
+irr::io::path DebugMenuGUI::elegirColor(std::string estadoActual) {
 
-	if (entActual) {
-
-		std::string estadoActual = entActual->getStateActual();
 
 		if (estadoActual == "BuscarVida") {
 			return "../media/Colores/verde.png";
@@ -212,7 +232,7 @@ irr::io::path DebugMenuGUI::elegirColor() {
 			return "../media/Colores/rosa.png";
 		}
 
-	}
+	
 
 	return "";
 
@@ -245,6 +265,58 @@ bool DebugMenuGUI::onDebugIAVIDAClicked(const CEGUI::EventArgs & e)
 	return true;
 }
 
+bool DebugMenuGUI::onEstadosIA(const CEGUI::EventArgs & e) {
+
+	if (!VerEstadosIA) {
+
+		if (!nodos[0]) {
+			crearNodosState();
+		}
+		else {
+			for (int i = 0; i < 4; i++) {
+				if (nodos[i])
+					nodos[i]->setVisible(true);
+			}
+		}
+
+		VerEstadosIA = true;
+
+	}
+	else {
+		VerEstadosIA = false;
+
+		for (int i = 0; i < 4; i++) {
+			if (nodos[i])
+				nodos[i]->setVisible(false);
+		}
+
+	}
+
+	return true;
+
+}
+
+
+
+
+void DebugMenuGUI::crearNodosState() {
+
+	std::list<Entity*>bots = EntityManager::i().getBots();
+
+
+	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Entity* myentity = *it;
+
+		Vec3<float>posBox = myentity->getRenderState()->getPosition();
+		posBox.addY(posBox.getY() + 15);
+
+		nodos[myentity->getID()] = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+
+	}
+
+}
+
 bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 	std::list<Entity*>bots = EntityManager::i().getBots();
@@ -269,12 +341,6 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 				OpcionesIA->setVisible(true);
 
 				entActual = myentity;
-
-				Vec3<float>posBox = entActual->getRenderState()->getPosition();
-				posBox.addY(posBox.getY() + 15);
-
-				if(!nodoState)
-				nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
 			}
 			
 		}
@@ -308,11 +374,6 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 				entActual = myentity;
 
-				Vec3<float>posBox = entActual->getRenderState()->getPosition();
-				posBox.addY(posBox.getY() + 15);
-
-				if (!nodoState)
-				nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
 			}
 
 
@@ -331,7 +392,7 @@ bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
 		Entity* myentity = *it;
 
-		if (myentity->getID() == 1) {
+		if (myentity->getID() == 2) {
 
 
 			if (myentity == entActual) {
@@ -347,11 +408,6 @@ bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
 				entActual = myentity;
 
-				Vec3<float>posBox = entActual->getRenderState()->getPosition();
-				posBox.addY(posBox.getY() + 15);
-
-				if (!nodoState)
-					nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
 			}
 
 
@@ -371,7 +427,7 @@ bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
 		Entity* myentity = *it;
 
-		if (myentity->getID() == 1) {
+		if (myentity->getID() == 3) {
 
 
 			if (myentity == entActual) {
@@ -387,11 +443,6 @@ bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
 				entActual = myentity;
 
-				Vec3<float>posBox = entActual->getRenderState()->getPosition();
-				posBox.addY(posBox.getY() + 15);
-
-				if (!nodoState)
-					nodoState = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
 			}
 
 

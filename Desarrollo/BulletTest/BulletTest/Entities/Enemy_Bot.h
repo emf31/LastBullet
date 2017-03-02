@@ -73,7 +73,7 @@ public:
 	void updateFacing();
 
 
-	void createPathToPosition(Vec2f vec);
+	Vec2f createPathToPosition(Vec2f vec);
 	float createPathToItem(const std::string& tipo);
 	Vec2f createRandomPath();
 
@@ -99,6 +99,10 @@ public:
 	virtual void vaciarArma(std::string arma) override;
 	virtual void InsertarArmaDebug(std::string arma) override;
 	virtual void setNumCiclos(int num) override;
+
+	virtual void resetMachineState() {
+		m_pStateMachine->resetMachineState();
+	}
 
 
 	void decisionAfterKill();

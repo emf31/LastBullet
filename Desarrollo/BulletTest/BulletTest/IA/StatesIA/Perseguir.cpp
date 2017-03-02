@@ -4,7 +4,6 @@
 #include <StatesIa/Disparar.h>
 
 void Perseguir::Enter(Enemy_Bot* pEnemy) {
-	std::cout << "Entro en Perseguir" << std::endl;
 
 	try {
 		Vec3<float> vec3 = pEnemy->getTargetSys()->GetLastRecordedPosition();
@@ -12,7 +11,7 @@ void Perseguir::Enter(Enemy_Bot* pEnemy) {
 		vec.x = vec3.getX();
 		vec.y = vec3.getZ();
 
-		pEnemy->createPathToPosition(vec);
+		currTarget = pEnemy->createPathToPosition(vec);
 	}
 	catch (std::runtime_error e) {
 		pEnemy->getMachineState()->ChangeState(&Patrullar::i());
@@ -20,10 +19,7 @@ void Perseguir::Enter(Enemy_Bot* pEnemy) {
 
 }
 
-void Perseguir::Execute(Enemy_Bot* pEnemy) {
-
-	//std::cout << "Perseguir" << std::endl;
-	
+void Perseguir::Execute(Enemy_Bot* pEnemy) {	
 
 	if (pEnemy->getTargetSys()->isTargetWithinFOV()) {
 		if (!pEnemy->getMachineState()->isInState("BuscarVida")) {
@@ -33,6 +29,13 @@ void Perseguir::Execute(Enemy_Bot* pEnemy) {
 		}
 
 	}
+	else {
+		if (pEnemy->isAtPosition(currTarget)) {
+			pEnemy->getMachineState()->RevertToPreviousState();
+		}
+	}
+
+
 
 	pEnemy->updateFacing();
 }

@@ -2,7 +2,6 @@
 #include <Enemy_Bot.h>
 #include <Vec2f.h>
 
-#include "../IA/StatesIA/Perseguir.h"
 
 
 SensoryMemory::SensoryMemory(Enemy_Bot* myBot, double span):m_bot(myBot),m_memorySpan(span)
@@ -41,11 +40,9 @@ void SensoryMemory::updateVision()
 					}
 					else {
 						mymemory.m_inFOV = false;
-						//std::cout << "Entro en fov false" << std::endl;
 					}
 				}
 				else {
-					//std::cout << "Entro en raycast false" << std::endl;
 					mymemory.m_inFOV = false;
 					mymemory.m_isShootable = false;
 				}

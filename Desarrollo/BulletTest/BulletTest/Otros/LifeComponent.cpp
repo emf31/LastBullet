@@ -60,6 +60,7 @@ void LifeComponent::update()
 		m_vida = 100;
 
 		m_pOwner->setPosition(Map::i().searchSpawnPoint());
+		m_pOwner->resetMachineState();
 	}
 
 }

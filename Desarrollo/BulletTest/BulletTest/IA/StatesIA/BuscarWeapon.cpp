@@ -10,8 +10,6 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 
 	std::list<Vec2f> m_camino;
 
-	std::cout << "Entro en BuscarWeapon" << std::endl;
-
 	float best = 100000;
 	float actual;
 	std::string bestString = "Ninguno";
@@ -43,8 +41,6 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 			m_camino.clear();
 		}
 	}
-
-	std::cout << "El mejor es: " << bestString << std::endl;
 	
 	if (bestString != "Ninguno") 
 		pEnemy->createPathToItem(bestString);

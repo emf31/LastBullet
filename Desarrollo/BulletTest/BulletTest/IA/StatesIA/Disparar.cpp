@@ -6,7 +6,6 @@
 
 
 void Disparar::Enter(Enemy_Bot* pEnemy) {
-	std::cout << "Entro en Disparar" << std::endl;
 
 }
 
@@ -15,13 +14,9 @@ void Disparar::Execute(Enemy_Bot* pEnemy) {
 
 	pEnemy->getPathFollow()->FollowOff();
 
-	//std::cout << "Disparar" << std::endl;
-
-
-
 	if (!pEnemy->getTargetSys()->isTargetWithinFOV()) {
 
-		if(!pEnemy->getMachineState()->isInState("BuscarVida"))
+		if (!pEnemy->getMachineState()->isInState("BuscarVida"))
 		pEnemy->getMachineState()->ChangeState(&Perseguir::i());
 
 	}

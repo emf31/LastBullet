@@ -4,14 +4,11 @@
 
 
 void Patrullar::Enter(Enemy_Bot* pEnemy) {
-	std::cout << "Entro en Patrullar" << std::endl;
 	currTarget = pEnemy->createRandomPath();
-	//std::cout << "Zizu" << std::endl;
 }
 
 void Patrullar::Execute(Enemy_Bot* pEnemy) {
-	//std::cout << "Zizu" << std::endl;
-	//std::cout << "Patrullar" << std::endl;
+
 	if (pEnemy->isAtPosition(currTarget)) {
 		currTarget = pEnemy->createRandomPath();
 	}
@@ -31,6 +28,5 @@ void Patrullar::Execute(Enemy_Bot* pEnemy) {
 }
 
 void Patrullar::Exit(Enemy_Bot* pEnemy) {
-	//std::cout << "Zizu" << std::endl;
 
 }

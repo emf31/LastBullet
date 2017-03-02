@@ -1,5 +1,8 @@
 #pragma once
 #include "StateIA.h"
+#include <Vec2f.h>
+
+
 class Perseguir :
 	public StateIA
 {
@@ -20,5 +23,6 @@ public:
 private:
 	Perseguir() {};
 
+	Vec2f currTarget;
 };
 

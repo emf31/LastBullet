@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1 ,20, 20);
+	weaponSystem = new WeaponSystem(this, 1, 0, 20);
 
 	weaponSystem->Inicializar();
 
@@ -66,9 +66,8 @@ void Enemy_Bot::inicializar()
 void Enemy_Bot::resetAll() {
 
 
+
 	weaponSystem->WeaponSystemResetAll();
-	m_pStateMachine->SetPreviousState(&BuscarWeapon::i());
-	m_pStateMachine->SetCurrentState(&BuscarWeapon::i());
 
 	life_component.resetVida();
 
@@ -328,7 +327,7 @@ void Enemy_Bot::updateFacing()
 	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 }
 
-void Enemy_Bot::createPathToPosition(Vec2f vec) {
+Vec2f Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 
 	//Camino actual a seguir
@@ -339,6 +338,8 @@ void Enemy_Bot::createPathToPosition(Vec2f vec) {
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
+
+	return m_camino.back();
 
 }
 
@@ -566,7 +567,8 @@ void Enemy_Bot::FuzzyLifeObject() {
 	//	std::cout << "Deseabilidad de fuzzyLifeObject: " << fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) << std::endl;
 
 		if (fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) > 40) {
-			m_pStateMachine->ChangeState(&BuscarVida::i());
+			if(!m_pStateMachine->isInState("BuscarVida"))
+				m_pStateMachine->ChangeState(&BuscarVida::i());
 		}
 
 	}
@@ -577,15 +579,11 @@ void Enemy_Bot::decisionAfterKill() {
 
 
 	if (getVida() < 70) {
+		if (!m_pStateMachine->isInState("BuscarVida"))
 		m_pStateMachine->ChangeState(&BuscarVida::i());
 	}
 	else {
-		std::cout << "ESTOY EN DECISIONAFTERKILL"<< std::endl;
-
-		std::cout << "El viejo estado es: " << m_pStateMachine->CurrentState()->getStateName() << std::endl;
-
 		m_pStateMachine->RevertToPreviousState();
-		std::cout << "El nuevo estado es: " << m_pStateMachine->CurrentState()->getStateName() << std::endl;
 	}
 
 }

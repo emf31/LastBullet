@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../IA/StatesIA/StateIA.h"
+#include "StatesIA\BuscarWeapon.h"
 
 class MachineState
 {
@@ -65,6 +66,13 @@ public:
 		return false;
 	}
 
+
+	void resetMachineState() {
+
+		SetPreviousState(&BuscarWeapon::i());
+		SetCurrentState(&BuscarWeapon::i());
+
+	}
 
 private:
 
