@@ -199,7 +199,15 @@ void DebugMenuGUI::update() {
 				int i = myentity->getID();
 
 				nodos[i]->setPosition(posBox);
-				nodos[i]->setTexture(elegirColor(estado), 0);
+
+				if (myentity->isDying()) {
+					Color4f color(255, 255, 255, 0);
+					nodos[i]->setColor(color);
+
+				}
+				else {
+					nodos[i]->setColor(elegirColor(estado));
+				}
 
 			}
 		}
@@ -209,32 +217,38 @@ void DebugMenuGUI::update() {
 
 }
 
-irr::io::path DebugMenuGUI::elegirColor(std::string estadoActual) {
+Color4f DebugMenuGUI::elegirColor(std::string estadoActual) {
 
 
 		if (estadoActual == "BuscarVida") {
-			return "../media/Colores/verde.png";
+			Color4f color(0, 255, 0, 1);
+			return color;
 		}
 
 		if (estadoActual == "BuscarWeapon") {
-			return "../media/Colores/naranja.png";
+			Color4f color(255, 168, 0, 1);
+			return color;
 		}
 
 		if (estadoActual == "Disparar") {
-			return "../media/Colores/rojo.png";
+			Color4f color(255, 0, 0, 1);
+			return color;
 		}
 
 		if (estadoActual == "Patrullar") {
-			return "../media/Colores/azul.png";
+			Color4f color(0, 0, 255, 1);
+			return color;
+
 		}
 
 		if (estadoActual == "Perseguir") {
-			return "../media/Colores/rosa.png";
+			Color4f color(255, 0, 255, 1);
+			return color;
 		}
 
 	
-
-	return "";
+		Color4f color(0, 0, 0, 1);
+		return color;
 
 }
 
@@ -301,6 +315,7 @@ bool DebugMenuGUI::onEstadosIA(const CEGUI::EventArgs & e) {
 
 void DebugMenuGUI::crearNodosState() {
 
+
 	std::list<Entity*>bots = EntityManager::i().getBots();
 
 
@@ -327,6 +342,9 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 		if(myentity->getID()==0){
 
+			crearNodoBot(myentity);
+
+
 			if (myentity == entActual) {
 
 					DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
@@ -350,6 +368,8 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 }
 
+
+
 bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 	std::list<Entity*>bots = EntityManager::i().getBots();
@@ -359,6 +379,8 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 		Entity* myentity = *it;
 
 		if (myentity->getID() == 1) {
+
+			crearNodoBot(myentity);
 
 
 			if (myentity == entActual) {
@@ -394,6 +416,8 @@ bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
 		if (myentity->getID() == 2) {
 
+			crearNodoBot(myentity);
+
 
 			if (myentity == entActual) {
 
@@ -419,6 +443,7 @@ bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 }
 
 
+
 bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
 	std::list<Entity*>bots = EntityManager::i().getBots();
@@ -429,6 +454,7 @@ bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
 		if (myentity->getID() == 3) {
 
+			crearNodoBot(myentity);
 
 			if (myentity == entActual) {
 
@@ -450,6 +476,31 @@ bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
 	}
 	return true;
+
+}
+
+void DebugMenuGUI::crearNodoBot(Entity* myentity) {
+
+
+	if (!nodos[0]) {
+		crearNodosState();
+		VerEstadosIA = true;
+	}
+
+
+	for (int i = 0; i < 4; i++) {
+
+		if (nodos[i]) {
+
+			if (myentity->getID() == i) {
+				nodos[i]->setVisible(true);
+			}
+			else {
+				nodos[i]->setVisible(false);
+			}
+		}
+
+	}
 
 }
 
