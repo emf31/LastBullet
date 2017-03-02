@@ -7,11 +7,14 @@ out vec2 TexCoords;
 out vec3 FragPos;  
 out vec3 Normal;
 
+
 uniform mat4 model;
 uniform mat4 modelview;
 
+
 void main()
 {
+
     gl_Position =  modelview * vec4(position, 1.0f);
     TexCoords = texCoords;
 	FragPos = vec3(model * vec4(position, 1.0f));
@@ -21,5 +24,6 @@ void main()
 	//Nota2: esto es bastante costoso, para ganar rendimiento podriamos multiplicar el vector normal por la Normal Matrix (cuya 4 coordenada es 0 para perder la traslacion)
 	//pero entonces tendriamos que asegurarnos de que no hacemos ningun escalado no uniforme o sino las normales no servirian.
     Normal = mat3(transpose(inverse(model))) * normal;  
+ 
 }
 

@@ -51,7 +51,6 @@ void TMesh::beginDraw() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	glActiveTexture(GL_TEXTURE0);
-	//std::cout << "SE SUPONE QUE DIBUJO " << std::endl;
 }
 
 void TMesh::endDraw() {

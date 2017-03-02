@@ -59,7 +59,8 @@ uniform PointLight pointlight[10];
 
 void main()
 {    
-	
+
+
 	vec3 colorFinal;
 	//vector normal desde el modelo
 	vec3 norm = normalize(Normal);
@@ -76,6 +77,7 @@ void main()
 	colorFinal+=calcularFlashLight(flashlight[i],norm,viewDir);
 	}
 	color = vec4(colorFinal, 1.0);
+
 }
 
 vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir){

@@ -37,6 +37,7 @@ void TModel::beginDraw() {
 	glm::mat4 projection = SceneManager::i().projection;
 	glm::mat4 model= SceneManager::i().m_matrizActual;
 
+	
 	/*
 	ESTO PUEDE SERVIR PARA HACER QUE LA PISTOLA GIRE CON LA CAMARA YA QUE SE PROCESARIA ANTES LO DE LA PISTOLA QUE LO DE LA CAMARA
 		int tam = SceneManager::i().pilaMatrices.size();
@@ -53,6 +54,10 @@ void TModel::beginDraw() {
 
 
 	glm::mat4 modelview = projection * view * model;
+
+
+
+
 	// Activamos el shader que tenemos guardado
 	shader->Use();
 	// Le pasamos las matrices
