@@ -43,6 +43,8 @@ public:
 
 	virtual bool canShoot();
 
+	virtual bool cadenciaOk();
+
 	void vaciar() {
 		disparos = capacidadAmmo;
 		numCargadores = 0;

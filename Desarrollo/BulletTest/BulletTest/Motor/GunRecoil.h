@@ -11,7 +11,7 @@ public:
 	~GunRecoil() {};
 	void RecoilOn();
 	bool isRecoilActive() { return m_recoilActive; }
-	void update();
+	void update(bool isShooting);
 
 private:
 	Camera& m_camera;
@@ -23,5 +23,6 @@ private:
 	Vec3<float> velocidad ;
 	Vec3<float> xfin;
 	Vec3<float> xini;
+	float tiempo;
 
 };

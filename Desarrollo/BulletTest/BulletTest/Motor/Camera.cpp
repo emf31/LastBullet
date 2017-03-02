@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include <CameraShake.h>
 #include <GunRecoil.h>
+#include <Player.h>
 
 
 Camera::Camera(ICameraSceneNode* camera, const std::string &nombre) : m_camera(camera), m_pName(nombre),  m_entity(NULL)
@@ -56,12 +57,15 @@ void Camera::update()
 
 	if (m_entity != nullptr) {
 
-		if(m_entity->getClassName()=="Player")
-		setPosition(Vec3<float>(
-			m_entity->getRenderPosition().getX(),
-			m_entity->getRenderPosition().getY() + 8,	
-			m_entity->getRenderPosition().getZ())
-		);
+		if (m_entity->getClassName() == "Player") {
+			setPosition(Vec3<float>(
+						m_entity->getRenderPosition().getX(),
+						m_entity->getRenderPosition().getY() + 8,	
+						m_entity->getRenderPosition().getZ())
+			);
+			m_cameraShake->update();
+			m_GunRecoil->update(static_cast<Player*>(m_entity)->isShooting);
+		}
 		if (m_entity->getClassName() == "Enemy_Bot")
 			setPosition(Vec3<float>(
 				m_entity->getRenderPosition().getX(),
@@ -69,8 +73,7 @@ void Camera::update()
 				m_entity->getRenderPosition().getZ())
 			);
 	}
-	m_cameraShake->update();
-	m_GunRecoil->update();
+	
 
 }
 

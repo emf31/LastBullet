@@ -103,6 +103,8 @@ public:
 	virtual float getVida() override;
 	virtual bool isDying() override;
 
+	bool isShooting;
+
 	
 private:
 	
@@ -133,7 +135,7 @@ private:
 
 	bool apuntando=false;
 
-	bool isShooting;
+
 
 	bool isJumping;
 	bool isMoving;

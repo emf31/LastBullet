@@ -32,7 +32,14 @@ void Weapon::setPosition(const Vec3<float>& pos)
 
 bool Weapon::canShoot()
 {
-	if (disparos < capacidadAmmo && estadoWeapon == CARGADA)
+	if (disparos < capacidadAmmo && estadoWeapon == CARGADA && cadenciaOk())
+		return true;
+	return false;
+}
+
+bool Weapon::cadenciaOk()
+{
+	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds())
 		return true;
 	return false;
 }

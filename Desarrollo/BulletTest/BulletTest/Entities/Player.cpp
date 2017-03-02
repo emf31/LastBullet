@@ -120,6 +120,7 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 	isMoving = false;
+	isShooting = false;
 	
 	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
 	if (p_controller->onGround() && p_controller->jumpedOnAir) {
@@ -297,7 +298,7 @@ void Player::jump() {
 
 void Player::shoot() {
 
-	
+	isShooting = true;
 	
 	if (listaWeapons->valorActual()->canShoot()) {	
 		listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());

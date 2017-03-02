@@ -4,7 +4,7 @@
 #include <EntityManager.h>
 #include <stdlib.h>     /* srand, rand */
 
-GunRecoil::GunRecoil(Camera& camera) :m_camera(camera), m_recoilActive(false)
+GunRecoil::GunRecoil(Camera& camera) :m_camera(camera), m_recoilActive(false), tiempo(0.2f)
 {
 }
 
@@ -14,12 +14,12 @@ void GunRecoil::RecoilOn()
 	m_recoilTime.restart();
 }
 
-void GunRecoil::update()
+void GunRecoil::update(bool isShooting)
 {
 
 
 	if (m_recoilActive) {
-		if (m_recoilTime.getElapsedTime().asSeconds() < 0.1f) {
+		if (m_recoilTime.getElapsedTime().asSeconds() < tiempo || isShooting) {
 
 			//generamos los numeros randomizados
 			srand(m_recoilTime.getElapsedTime().asMilliseconds());
@@ -51,12 +51,12 @@ void GunRecoil::update()
 
 			xfin = Vec3<float>(m_camera.getTarget().getX() - randomAcumulativo.getX(), m_camera.getTarget().getY() - randomAcumulativo.getY(), m_camera.getTarget().getZ() - randomAcumulativo.getZ());
 			xini = Vec3<float>(m_camera.getTarget().getX(), m_camera.getTarget().getY(), m_camera.getTarget().getZ());
-			velocidad = (xfin - xini) / 0.1f;
+			velocidad = (xfin - xini) / tiempo;
 
 		}
-		else if (m_recoilTime.getElapsedTime().asSeconds() < 0.2f) {
-			
-			m_camera.setTarget(xini+(velocidad*(m_recoilTime.getElapsedTime().asSeconds()-0.1f)));
+		else if (m_recoilTime.getElapsedTime().asSeconds() < tiempo*2) {
+			std::cout << "Te odioooo" << std::endl;
+			m_camera.setTarget(xini+(velocidad*(m_recoilTime.getElapsedTime().asSeconds()- tiempo)));
 			
 		}
 		else {
