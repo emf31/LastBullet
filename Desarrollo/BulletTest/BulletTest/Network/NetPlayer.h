@@ -9,6 +9,7 @@
 class Player;
 class World;
 
+
 class NetPlayer : public NetObject {
 public:
 	NetPlayer(Player* player);
@@ -40,7 +41,7 @@ public:
 
 	const std::vector<TPlayer>& getEnemies() const { return m_enemies; }
 
-
+	const std::vector<TPlayer>& getBots() const { return m_bots; }
 private:
 
 	Player* m_player;
@@ -51,6 +52,8 @@ private:
 	//Lo hacemos para sincronizar la creacion de los enemigos del servidor
 	//con las demas entities locales
 	std::vector<TPlayer> m_enemies;
+
+	std::vector<TPlayer> m_bots;
 
 	TGameInfo m_info;
 

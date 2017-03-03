@@ -28,6 +28,7 @@ void InGame::Inicializar()
 	World::i().inicializar();
 
 	const std::vector<TPlayer> enemies = NetworkManager::i().getEnemies();
+	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 
 	for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 		Enemy *e = new Enemy(it->name, it->guid);
@@ -37,6 +38,17 @@ void InGame::Inicializar()
 
 		EntityManager::i().registerRaknetEntity(e);
 	}
+
+
+	for (auto it = bots.begin(); it != bots.end(); ++it) {
+		Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+		bot->m_network->inicializar();
+
+		bot->inicializar();
+		bot->cargarContenido();
+	}
+
+	
 
 
 

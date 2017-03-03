@@ -47,6 +47,7 @@ public:
 	bool isConnected() const { return m_netPlayer->isConnected(); }
 
 	const std::vector<TPlayer>& getEnemies() const { return m_netPlayer->getEnemies(); }
+	const std::vector<TPlayer>& getBots() const { return m_netPlayer->getBots(); }
 
 private:
 

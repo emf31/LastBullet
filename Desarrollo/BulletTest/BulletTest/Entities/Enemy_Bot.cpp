@@ -15,7 +15,7 @@
 #include <Map.h>
 #include <TriggerSystem.h>
 
-Enemy_Bot::Enemy_Bot(const std::string & name, int ID, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
+Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
 	life_component(this)
 {
 	//Creates object to send and receive packets
@@ -48,8 +48,8 @@ void Enemy_Bot::inicializar()
 
 	weaponSystem->Inicializar();
 
-	Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
-	camaraBot->asignarEntity(this);
+	//Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	//camaraBot->asignarEntity(this);
 
 
 	sense = new SensoryMemory(this,20);

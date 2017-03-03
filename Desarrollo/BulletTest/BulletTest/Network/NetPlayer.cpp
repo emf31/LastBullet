@@ -89,10 +89,10 @@ void NetPlayer::crearPartida()
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
-	
+	TPlayer p;
+	p.name = "Nixon";
 
-	Enemy_Bot *bot = new Enemy_Bot("Nixon", 2000, RakNet::UNASSIGNED_RAKNET_GUID);
-	bot->m_network->inicializar();
+	m_bots.push_back(p);
 
 	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	//bot2->m_network->inicializar();

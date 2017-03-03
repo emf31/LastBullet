@@ -112,7 +112,7 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 	cam->setInputReceiverEnabled(true);
 
 	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
-	Camera* myCamera=new Camera(cam, name);
+	Camera* myCamera = new Camera(cam, name);
 	cameras[name] = myCamera;
 
 	return myCamera;

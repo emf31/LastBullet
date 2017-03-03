@@ -66,6 +66,8 @@ void NetBot::handlePackets(Time elapsedTime)
 
 			dispatchMessage(nuevoplayer, NUEVO_BOT);
 
+			
+
 
 
 			break;

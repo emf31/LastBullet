@@ -184,10 +184,12 @@ void DebugMenuGUI::update() {
 
 		if (nodos[0]) {
 
-			std::list<Entity*>bots = EntityManager::i().getBots();
+			std::vector<Entity*>bots = EntityManager::i().getBots();
+
+			int i =0;
 
 
-			for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+			for (std::vector<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
 
 				Entity* myentity = *it;
 
@@ -196,7 +198,6 @@ void DebugMenuGUI::update() {
 
 				std::string estado = myentity->getStateActual();
 
-				int i = myentity->getID();
 
 				nodos[i]->setPosition(posBox);
 
@@ -208,6 +209,7 @@ void DebugMenuGUI::update() {
 				else {
 					nodos[i]->setColor(elegirColor(estado));
 				}
+				i++;
 
 			}
 		}
@@ -316,54 +318,50 @@ bool DebugMenuGUI::onEstadosIA(const CEGUI::EventArgs & e) {
 void DebugMenuGUI::crearNodosState() {
 
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Entity*>bots = EntityManager::i().getBots();
+	int i = 0;
 
-
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+	for (std::vector<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
 
 		Entity* myentity = *it;
 
 		Vec3<float>posBox = myentity->getRenderState()->getPosition();
 		posBox.addY(posBox.getY() + 15);
 
-		nodos[myentity->getID()] = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
-
+		nodos[i] = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+		i++;
 	}
 
 }
 
 bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Entity*>bots = EntityManager::i().getBots();
 
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
-
-		Entity* myentity = *it;
-
-		if(myentity->getID()==0){
-
-			crearNodoBot(myentity);
+	if (!bots.empty()) {
+		Entity* myentity = bots[0];
 
 
-			if (myentity == entActual) {
-
-					DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
-					OpcionesIA->setVisible(!OpcionesIA->isVisible());
-				
-				
-			}
-			else {
+		crearNodoBot(myentity);
 
 
-				DesirabilityWeapons->setVisible(true);
-				OpcionesIA->setVisible(true);
+		if (myentity == entActual) {
 
-				entActual = myentity;
-			}
-			
+			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+			OpcionesIA->setVisible(!OpcionesIA->isVisible());
+
+
 		}
+		else {
 
+
+			DesirabilityWeapons->setVisible(true);
+			OpcionesIA->setVisible(true);
+
+			entActual = myentity;
+		}
 	}
+	
 	return true;
 
 }
@@ -372,72 +370,64 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Entity*>bots = EntityManager::i().getBots();
 
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
-
-		Entity* myentity = *it;
-
-		if (myentity->getID() == 1) {
-
-			crearNodoBot(myentity);
+	if (bots.size() > 1) {
+		Entity* myentity = bots[1];
 
 
-			if (myentity == entActual) {
+		crearNodoBot(myentity);
 
-					DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
-					OpcionesIA->setVisible(!OpcionesIA->isVisible());
-				
 
-			}
-			else {
-				DesirabilityWeapons->setVisible(true);
-				OpcionesIA->setVisible(true);
+		if (myentity == entActual) {
 
-				entActual = myentity;
-
-			}
+			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+			OpcionesIA->setVisible(!OpcionesIA->isVisible());
 
 
 		}
+		else {
 
+
+			DesirabilityWeapons->setVisible(true);
+			OpcionesIA->setVisible(true);
+
+			entActual = myentity;
+		}
 	}
+
 	return true;
 
 }
 
 bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Entity*>bots = EntityManager::i().getBots();
 
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
-
-		Entity* myentity = *it;
-
-		if (myentity->getID() == 2) {
-
-			crearNodoBot(myentity);
+	if (bots.size() > 2) {
+		Entity* myentity = bots[2];
 
 
-			if (myentity == entActual) {
-
-				DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
-				OpcionesIA->setVisible(!OpcionesIA->isVisible());
+		crearNodoBot(myentity);
 
 
-			}
-			else {
-				DesirabilityWeapons->setVisible(true);
-				OpcionesIA->setVisible(true);
+		if (myentity == entActual) {
 
-				entActual = myentity;
-
-			}
+			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+			OpcionesIA->setVisible(!OpcionesIA->isVisible());
 
 
 		}
+		else {
 
+
+			DesirabilityWeapons->setVisible(true);
+			OpcionesIA->setVisible(true);
+
+			entActual = myentity;
+		}
 	}
+
 	return true;
 
 }
@@ -446,35 +436,32 @@ bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Entity*>bots = EntityManager::i().getBots();
 
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
-
-		Entity* myentity = *it;
-
-		if (myentity->getID() == 3) {
-
-			crearNodoBot(myentity);
-
-			if (myentity == entActual) {
-
-				DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
-				OpcionesIA->setVisible(!OpcionesIA->isVisible());
+	if (bots.size() > 3) {
+		Entity* myentity = bots[3];
 
 
-			}
-			else {
-				DesirabilityWeapons->setVisible(true);
-				OpcionesIA->setVisible(true);
+		crearNodoBot(myentity);
 
-				entActual = myentity;
 
-			}
+		if (myentity == entActual) {
+
+			DesirabilityWeapons->setVisible(!DesirabilityWeapons->isVisible());
+			OpcionesIA->setVisible(!OpcionesIA->isVisible());
 
 
 		}
+		else {
 
+
+			DesirabilityWeapons->setVisible(true);
+			OpcionesIA->setVisible(true);
+
+			entActual = myentity;
+		}
 	}
+
 	return true;
 
 }

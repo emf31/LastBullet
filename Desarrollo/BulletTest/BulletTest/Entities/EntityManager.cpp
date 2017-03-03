@@ -11,9 +11,9 @@ void EntityManager::inicializar()
 {
 	
 
-	std::list<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Entity*>bots = EntityManager::i().getBots();
 
-	for (std::list<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+	for (std::vector<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
 
 		Entity* myentity = *it;
 
@@ -185,9 +185,9 @@ std::list<Entity*> EntityManager::getEnemies()
 	return characters;
 }
 
-std::list<Entity*> EntityManager::getBots()
+std::vector<Entity*> EntityManager::getBots()
 {
-	std::list<Entity*>characters;
+	std::vector<Entity*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "Enemy_Bot")
 			characters.push_back(i->second);
