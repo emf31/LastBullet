@@ -49,7 +49,7 @@ void InGame::Inicializar()
 	}
 
 	
-
+	GraphicEngine::i().setActiveCamera("CamaraPlayer");
 
 
 	

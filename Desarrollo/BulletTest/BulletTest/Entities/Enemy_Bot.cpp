@@ -48,8 +48,9 @@ void Enemy_Bot::inicializar()
 
 	weaponSystem->Inicializar();
 
-	//Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
-	//camaraBot->asignarEntity(this);
+	Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	camaraBot->asignarEntity(this);
+
 
 
 	sense = new SensoryMemory(this,20);
