@@ -6,7 +6,7 @@
 
 
 
-TLuz::TLuz() {
+TLuz::TLuz() : sm(SceneManager::i()) {
 
 	std::cout << "SI QUE ENTRO AL CONTRUCTOR DE LUZ CUANDO CREO UNA LUZ DE CUALQUIER TIPO" << std::endl;
 	gradoLuzAmbiente = 0.1f;
@@ -141,9 +141,9 @@ void TLuz::setLight()
 void TLuz::beginDraw() {
 
 
-	glm::mat4 view = SceneManager::i().view;
-	glm::mat4 projection = SceneManager::i().projection;
-	glm::mat4 model = SceneManager::i().m_matrizActual;
+	const glm::mat4& view = sm.getViewMatrix();
+	const glm::mat4& projection = sm.getProjectionMatrix();
+	glm::mat4& model = sm.getMatrizActual();
 
 	shaderLuz->Use();
 	// Le pasamos las matrices

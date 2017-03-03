@@ -47,7 +47,7 @@ protected:
 	TTransform* transTraslacion;
 
 private:
-
+	SceneManager &sm;
 
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionTraslacion(TTransform* tras);

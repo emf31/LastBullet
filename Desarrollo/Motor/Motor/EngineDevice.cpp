@@ -104,6 +104,12 @@ bool  EngineDevice::shouldCloseWindw() {
 	return glfwWindowShouldClose(window);
 }
 
+void EngineDevice::shutdown()
+{
+	sm.shutdown();
+	
+}
+
 void EngineDevice::setKeyCallbacks() {
 	glfwSetKeyCallback(window, &Input::key_callback);
 	glfwSetCursorPosCallback(window, &Input::mouse_callback);

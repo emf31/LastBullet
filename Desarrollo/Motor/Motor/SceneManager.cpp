@@ -51,7 +51,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	view = camaraActiva->GetViewMatrix();
 	//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 	activeCameraPos = camaraActiva->getPosition();
-	// Desencadena el dibujado de la escena
+	
 	scene->draw();
 	//gui.draw();
 	glfwSwapBuffers(window);
@@ -295,5 +295,12 @@ TCamera * SceneManager::crearNodoCamara()
 
 
 	return camara;
+}
+
+void SceneManager::shutdown()
+{
+	delete scene;
+
+	ResourceManager::i().shutdown();
 }
 

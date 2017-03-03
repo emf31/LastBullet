@@ -41,39 +41,57 @@ public:
 	TFlashLight* crearNodoFlashLight(Vec3<float> posicion, Vec3<float> direccion, float radioIn = 13.0f, float radioEx = 18.0f);
 	TCamera* crearNodoCamara();
 
-	void setActiveCamera(TCamera* cam) {
-		camaraActiva = cam;
-	}
+	void setActiveCamera(TCamera* cam) { camaraActiva = cam; }
 
-	void setSunLight(TSunLight* sun) {
-		sunlight = sun;
-	}
+	void setSunLight(TSunLight* sun) { sunlight = sun; }
 
-	int getEntityCount() {
-		return nodeEntityCount;
-	}
-	void aumentaEntityCount() {
-		nodeEntityCount++;
-	}
+	int getEntityCount() { return nodeEntityCount; }
 
-	glm::mat4 projection;
-	glm::mat4 view;
-	glm::mat4 m_matrizActual;
-	//Camera *camera_ptr;
-	Vec3<float> activeCameraPos;
+	void aumentaEntityCount() { nodeEntityCount++; }
+
+	const Vec3<float>& getActiveCameraPos() { return activeCameraPos; }
+
+	const glm::mat4& getProjectionMatrix() { return projection; }
+
+	const glm::mat4& getViewMatrix() { return view; }
+
+	glm::mat4& getMatrizActual() { return m_matrizActual; }
+
+	void setMatrizActual(const glm::mat4& mat) { m_matrizActual = mat; }
+
+	std::deque<glm::mat4>& getPilaMatrices() { return pilaMatrices; }
+
+	TSunLight* getSunLight() { return sunlight; }
+	
 	float *screenWidth, *screenHeight;
-	std::deque<glm::mat4> pilaMatrices;
-	TSunLight* sunlight;
+	
 	std::vector<TPointLight*> vecPointLight;
 	std::vector<TFlashLight*> vecFlashLight;
 	std::vector<TCamera*> vectorCamaras;
 	TCamera* camaraActiva;
+
+	
 	
 private:
-	ResourceManager *rm;
 	TNode* scene;
+
 	int nodeEntityCount = 0;
 
+	glm::mat4 projection;
+	glm::mat4 view;
+	glm::mat4 m_matrizActual;
+
+	std::deque<glm::mat4> pilaMatrices;
+
+	Vec3<float> activeCameraPos;
+
+	TSunLight* sunlight;
+
 	//Motor::GUI gui;
+
+	void shutdown();
+
+
+	friend class EngineDevice;
 	
 };

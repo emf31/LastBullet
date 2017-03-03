@@ -1,6 +1,6 @@
 #include "TNode.h"
 #include "SceneManager.h"
-TNode::TNode(int entityID, TNode* nodoPadre)
+TNode::TNode(int entityID, TNode* nodoPadre) : sm(SceneManager::i()) 
 {
 	m_parentNode = nodoPadre;
 	myNodeEntityID = entityID;
@@ -10,7 +10,13 @@ TNode::TNode(int entityID, TNode* nodoPadre)
 
 TNode::~TNode()
 {
-	delete m_entity;
+	for (auto it = m_childNodes.begin(); it != m_childNodes.end(); ++it) {
+		delete *it;
+	}
+	if (type != T_MALLA) {
+		delete m_entity;
+	}
+	
 }
 void TNode::addChild(TNode* child) {
 	//child va a ser un nodo hoja es decir, un nodo malla, nodo luz o nodo camara
@@ -56,7 +62,7 @@ void TNode::draw() {
 		//si es el nodo raiz se dibuja sus hijos directamente
 		for (int i = 0; i < m_childNodes.size(); i++) {
 			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
-			SceneManager::i().m_matrizActual = glm::mat4();
+			sm.setMatrizActual(glm::mat4());
 			m_childNodes.at(i)->draw();
 		}
 	}

@@ -6,9 +6,6 @@ ResourceManager::ResourceManager() {
 }
 
 
-ResourceManager::~ResourceManager() {
-}
-
 TModel* ResourceManager::getMesh(const std::string& path, Shader* shader) {
 	if (path != "") {
 		if (models.find(path) != models.end()) {
@@ -60,10 +57,53 @@ Texture* ResourceManager::getTexture(const std::string& path, const std::string&
 		} else {
 			// Si no lop está, primero la cargamos :))
 			Texture* texture = new Texture();
-			texture->id = TModel::TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
+			texture->id = TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
 			texture->type = type;
 			textures[path] = texture;
 			return textures[path];
 		}
 	}
+}
+
+void ResourceManager::shutdown()
+{
+	//models
+	for (auto it = models.begin(); it != models.end(); ++it) {
+		delete it->second;
+	}
+	//textures
+	for (auto it = textures.begin(); it != textures.end(); ++it) {
+		delete it->second;
+	}
+	//shaders
+	for (auto it = shaders.begin(); it != shaders.end(); ++it) {
+		delete it->second;
+	}
+	models.clear();
+	textures.clear();
+	shaders.clear();
+}
+
+GLint ResourceManager::TextureFromFile(const char * path, string directory) {
+	// Generamos un ID de textura y cargamos la imagen con SOIL 
+	string filename = string(path);
+	filename = directory + '/' + filename;
+	cout << filename << endl;
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	int width, height;
+	unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB); // Podrian cambiarse a RGBA para imagenes con Alpha channel (es mejor?)
+																								 // Assignamos la textura al nuevo ID
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	// Parametros de filtrado
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	SOIL_free_image_data(image); // Liberamos la imagen de SOIL (Ya no hace falta)
+	return textureID;
 }

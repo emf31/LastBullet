@@ -44,6 +44,8 @@ public:
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 
+	void shutdown();
+
 private:
 	SceneManager& sm = SceneManager::i();
 	GLFWwindow *window;

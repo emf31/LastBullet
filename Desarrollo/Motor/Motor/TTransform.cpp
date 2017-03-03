@@ -3,7 +3,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 
-TTransform::TTransform() {
+TTransform::TTransform() : sm(SceneManager::i()) {
 
 	m_matrix = glm::mat4();
 	angulo = 0.0f;
@@ -159,15 +159,17 @@ void TTransform::beginDraw()
 	//el begin draw lo primero que hace es apilar la matriz actual y multiplicar esta por la suya, y esta multiplicacion seria la nueva matriz acutual
 	//que el siguiente nodo se encargaria de apilarla
 
+	
+
 	//el enddraw desapilaria una matriz y pondria esa desapilada como actual.
-	SceneManager::i().pilaMatrices.push_back(SceneManager::i().m_matrizActual);
-	SceneManager::i().m_matrizActual = m_matrix * SceneManager::i().m_matrizActual;
+	sm.getPilaMatrices().push_back(sm.getMatrizActual());
+	sm.setMatrizActual(m_matrix * sm.getMatrizActual());
 }
 
 void TTransform::endDraw()
 {
 	//PREGUNTA , COMO TENEMOS QUE DESAPILAR EN EL END DRAW? PORQUE YA ESTAMOS DESAPILANDO LAS MATRICES PARA PODER OBTENERLAS Y MULTIPLICARLAS A LA HORA DE DIBUJAR
-	SceneManager::i().m_matrizActual = SceneManager::i().pilaMatrices.back();
-	SceneManager::i().pilaMatrices.pop_back();
+	sm.setMatrizActual(sm.getPilaMatrices().back());
+	sm.getPilaMatrices().pop_back();
 }
 

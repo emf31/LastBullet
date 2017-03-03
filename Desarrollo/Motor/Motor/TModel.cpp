@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 
 
-TModel::TModel(GLchar * path, Shader* shaderPath) {
+TModel::TModel(GLchar * path, Shader* shaderPath) : sm(SceneManager::i()) {
 	/*Shader* shader;
 	if (*shaderPath) {
 		shader = ResourceManager::i().getShader(shaderPath);
@@ -28,14 +28,17 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 }
 
 TModel::~TModel() {
+	for (auto it = meshes.begin(); it != meshes.end(); ++it) {
+		delete *it;
+	}
+	meshes.clear();
 }
 
 void TModel::beginDraw() {
 
-	SceneManager &sm = SceneManager::i();
-	glm::mat4 view = SceneManager::i().view;
-	glm::mat4 projection = SceneManager::i().projection;
-	glm::mat4 model= SceneManager::i().m_matrizActual;
+	const glm::mat4& view = sm.getViewMatrix();
+	const glm::mat4& projection = sm.getProjectionMatrix();
+	glm::mat4& model = sm.getMatrizActual();
 
 	
 	/*
@@ -56,7 +59,7 @@ void TModel::beginDraw() {
 	glm::mat4 modelview = projection * view * model;
 
 
-
+	Vec3<float> activeCameraPos = sm.getActiveCameraPos();
 
 	// Activamos el shader que tenemos guardado
 	shader->Use();
@@ -68,11 +71,11 @@ void TModel::beginDraw() {
 	//color
 	glUniform3f(glGetUniformLocation(shader->Program, "objectColor"), m_r, m_g, m_b);
 	//camaras
-	glUniform3f(glGetUniformLocation(shader->Program, "viewPos"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
+	glUniform3f(glGetUniformLocation(shader->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	
 	//LUZ SOLAR
-	if (sm.sunlight != nullptr) {
-		sm.sunlight->pasarDatosAlShader(shader);
+	if (sm.getSunLight() != nullptr) {
+		sm.getSunLight()->pasarDatosAlShader(shader);
 	}
 	//POINTLIGHT
 	for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
@@ -189,7 +192,7 @@ void TModel::loadMaterialTextures(vector<Texture*>& textVec, aiMaterial * mat, a
 		mat->GetTexture(type, i, &str);
 		// Miramos si se ha cargado la textura con anterioridad en el ResourceManager
 		// Si no se ha cargado, el RM la carga. Si ya se había cargado, el RM nos da un puntero a ella :)
-		ResourceManager rm = ResourceManager::i();
+		ResourceManager& rm = ResourceManager::i();
 		Texture* text = rm.getTexture(str.C_Str(), typeName, this->directory);
 		textVec.push_back(text);
 	}

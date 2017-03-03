@@ -12,7 +12,5 @@ public:
 	GLuint id;
 	string type;
 	aiString path;
-
-	//static GLint TextureFromFile();
 };
 

@@ -24,7 +24,7 @@ using namespace std;
 //class TNode;
 
 class TModel : public TEntity {
-	friend class SceneManager;
+	
 public:
 	/*  Funciones   */
 	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
@@ -32,29 +32,7 @@ public:
 	~TModel();
 
 
-	static GLint TextureFromFile(const char* path, string directory) {
-		// Generamos un ID de textura y cargamos la imagen con SOIL 
-		string filename = string(path);
-		filename = directory + '/' + filename;
-		cout << filename << endl;
-		GLuint textureID;
-		glGenTextures(1, &textureID);
-		int width, height;
-		unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB); // Podrian cambiarse a RGBA para imagenes con Alpha channel (es mejor?)
-		// Assignamos la textura al nuevo ID
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-		// Parametros de filtrado
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		SOIL_free_image_data(image); // Liberamos la imagen de SOIL (Ya no hace falta)
-		return textureID;
-	}
+	
 
 	virtual void beginDraw();
 
@@ -82,7 +60,7 @@ public:
 
 private:
 
-
+	SceneManager &sm;
 
 
 	void setTransformacionRotacion(TTransform* rot);
@@ -108,9 +86,6 @@ private:
 
 	void loadMaterialTextures(vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, string typeName);
 
-	//TNode* transRotacion;
-	//TNode* transEscalado;
-	//TNode* transTraslacion;
 	TTransform* transRotacion;
 	TTransform* transEscalado;
 	TTransform* transTraslacion;
@@ -119,7 +94,7 @@ private:
 	float m_g;
 	float m_b;
 	
-
+	friend class SceneManager;
 };
 
 

@@ -28,6 +28,7 @@ TCamera::TCamera() {
 
 
 TCamera::~TCamera() {
+	
 }
 
 

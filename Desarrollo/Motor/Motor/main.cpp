@@ -32,14 +32,14 @@ int main() {
 
 	//window
 	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
-	//p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
+	
 
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
 	//sm.camaraActiva->addChild(p1);
-	//p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
+	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 	
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
@@ -71,7 +71,7 @@ int main() {
 
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-	//sol->setIntensidadAmbiente(1.0f);
+	sol->setIntensidadAmbiente(1.0f);
 	//bombilla
 	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(8.0f, 4.0f, 2.0f));
 	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(10.0f, 4.0f, 2.0f));
@@ -136,9 +136,10 @@ int main() {
 		//std::cout << "siguiente iteracion" << std::endl;
 		
 		
-		
 	}
 	engine.end();
+	engine.shutdown();
+
 	return 0;
 }
 
