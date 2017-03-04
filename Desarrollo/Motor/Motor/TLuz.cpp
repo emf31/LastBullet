@@ -13,7 +13,6 @@ TLuz::TLuz() {
 	gradoLuzDifusa = 0.5f;
 	gradoLuzEspecular = 1.0f;
 	setColor(1.0f, 1.0f, 1.0f);
-	shaderLuz = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	setLight();
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
@@ -140,16 +139,16 @@ void TLuz::setLight()
 }
 void TLuz::beginDraw() {
 
+	SceneManager &sm = SceneManager::i();
+	glm::mat4 view = sm.view;
+	glm::mat4 projection = sm.projection;
+	glm::mat4 model = sm.m_matrizActual;
 
-	glm::mat4 view = SceneManager::i().view;
-	glm::mat4 projection = SceneManager::i().projection;
-	glm::mat4 model = SceneManager::i().m_matrizActual;
-
-	shaderLuz->Use();
+	sm.shaderBombillas->Use();
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuz->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
 
 	glBindVertexArray(lightVAO);

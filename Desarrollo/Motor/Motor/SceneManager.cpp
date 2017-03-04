@@ -29,6 +29,15 @@ void SceneManager::inicializar() {
 	m_matrizActual = glm::mat4();
 	camaraActiva = crearNodoCamara();
 	sunlight = nullptr;
+	//shaderGeometria = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
+	shaderGeometria = ResourceManager::i().getShader("assets/geometria.vs", "assets/geometria.frag");
+	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
+	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
+	// Set samplers
+	shaderLuces->Use();
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gPosition"), 0);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gNormal"), 1);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gAlbedoSpec"), 2);
 }
 
 
@@ -45,7 +54,8 @@ void SceneManager::draw(GLFWwindow* window) {
 	// Clear
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	//enlazamos el buffer sobre el que queremos escribir
+	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 	// Update matrices
 	projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
 	view = camaraActiva->GetViewMatrix();
@@ -56,6 +66,57 @@ void SceneManager::draw(GLFWwindow* window) {
 	//gui.draw();
 	glfwSwapBuffers(window);
 	
+}
+
+void SceneManager::inicializarBuffers()
+{
+	GLuint screenWidth = 1280, screenHeight = 720;
+	// Set up G-Buffer
+	// 3 textures:
+	// 1. Positions (RGB)
+	// 2. Color (RGB) + Specular (A)
+	// 3. Normals (RGB) 
+	
+	glGenFramebuffers(1, &gBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+	
+	// - Position color buffer
+	glGenTextures(1, &gPosition);
+	glBindTexture(GL_TEXTURE_2D, gPosition);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPosition, 0);
+	// - Normal color buffer
+	glGenTextures(1, &gNormal);
+	glBindTexture(GL_TEXTURE_2D, gNormal);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gNormal, 0);
+	// - Color + Specular color buffer
+	glGenTextures(1, &gTextura);
+	glBindTexture(GL_TEXTURE_2D, gTextura);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, screenWidth, screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gTextura, 0);
+	// tenemos que juntar los 3 color buffers en el framebuffer que tenemos activo para ello los juntamos en el array
+	// pero como ahora tenemos 3 render targets en el fragment shader vamos a tener que definir 3 capas (layout)
+	GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+	glDrawBuffers(3, attachments);
+
+	// - Create and attach depth buffer (renderbuffer)
+	glGenRenderbuffers(1, &rboDepth);
+	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+	// - Finally check if framebuffer is complete
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		std::cout << "Framebuffer not complete!" << std::endl;
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
 TModel * SceneManager::crearNodoMalla(TModel * model)

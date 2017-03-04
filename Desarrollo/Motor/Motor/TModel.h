@@ -97,7 +97,6 @@ private:
 	vector<TMesh*> meshes;
 	string directory;
 	vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
-	Shader *shader;
 	/*  Funciones   */
 	// Carga el modelo con ASSIMP
 	void loadModel(const string& path);

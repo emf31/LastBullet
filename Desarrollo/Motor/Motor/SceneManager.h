@@ -29,6 +29,9 @@ public:
 	//void getTexture(std::string path);
 	TModel* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw(GLFWwindow* window);
+	void inicializarBuffers();
+
+
 	TModel* crearNodoMalla(TModel * model);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
@@ -68,6 +71,14 @@ public:
 	std::vector<TFlashLight*> vecFlashLight;
 	std::vector<TCamera*> vectorCamaras;
 	TCamera* camaraActiva;
+	Shader* shaderGeometria;
+	Shader* shaderLuces;
+	Shader* shaderBombillas;
+
+	//Buffers
+	GLuint gBuffer;
+	GLuint gPosition, gNormal, gTextura;
+	GLuint rboDepth;
 	
 private:
 	ResourceManager *rm;

@@ -12,12 +12,7 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	}*/
 
-	// Si no se especifica un shader se carga uno por defecto
-	if (shaderPath == NULL) {
-		this->shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
-	} else {
-		this->shader = shaderPath;
-	}
+
 	// Carmamos el modelo
 	this->loadModel(path);
 	m_r = 1.f;
@@ -59,28 +54,36 @@ void TModel::beginDraw() {
 
 
 	// Activamos el shader que tenemos guardado
-	shader->Use();
+	sm.shaderGeometria->Use();
 	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-	glUniform1i(glGetUniformLocation(shader->Program, "num_pointlight"), sm.vecPointLight.size());
-	glUniform1i(glGetUniformLocation(shader->Program, "num_flashlight"), 1);
+	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
+	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	//color
-	glUniform3f(glGetUniformLocation(shader->Program, "objectColor"), m_r, m_g, m_b);
+	glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
+	/*
+	ESTAMOS EN EL SHADER DE GEOMETRIA ASI QUE NO PASAMOS LUCES SOLO LA GEOMETRIA
+	
+	
+	
+	*/
+	//numero luces
+	glUniform1i(glGetUniformLocation(sm.shaderGeometria->Program, "num_pointlight"), sm.vecPointLight.size());
+	glUniform1i(glGetUniformLocation(sm.shaderGeometria->Program, "num_flashlight"), sm.vecFlashLight.size());
+
 	//camaras
-	glUniform3f(glGetUniformLocation(shader->Program, "viewPos"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
+	glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "viewPos"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
 	
 	//LUZ SOLAR
 	if (sm.sunlight != nullptr) {
-		sm.sunlight->pasarDatosAlShader(shader);
+		sm.sunlight->pasarDatosAlShader(sm.shaderGeometria);
 	}
 	//POINTLIGHT
 	for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
-		sm.vecPointLight[i]->pasarDatosAlShader(shader, i);
+		sm.vecPointLight[i]->pasarDatosAlShader(sm.shaderGeometria, i);
 	}
 	//LUZ LINTERNA
 	for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
-		sm.vecFlashLight[i]->pasarDatosAlShader(shader, i);
+		sm.vecFlashLight[i]->pasarDatosAlShader(sm.shaderGeometria, i);
 	}
 
 	//Dibujamos los hijos (Si los hay)
@@ -180,7 +183,7 @@ TMesh* TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	}
 
 	// Return del mesh preparado
-	return new TMesh(vertices, indices, textures, shader);
+	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria);
 }
 
 void TModel::loadMaterialTextures(vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, string typeName) {

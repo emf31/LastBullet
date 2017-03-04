@@ -94,9 +94,7 @@ int main() {
 
 
 
-
-
-
+	sm.inicializarBuffers();
 
 	while (!engine.shouldCloseWindw()){
 		engine.updateCurrentFrame();
