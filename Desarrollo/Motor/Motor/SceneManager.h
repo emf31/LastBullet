@@ -30,6 +30,7 @@ public:
 	TModel* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw(GLFWwindow* window);
 	void inicializarBuffers();
+	void renderLuces();
 
 
 	TModel* crearNodoMalla(TModel * model);

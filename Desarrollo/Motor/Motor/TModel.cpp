@@ -56,6 +56,9 @@ void TModel::beginDraw() {
 	// Activamos el shader que tenemos guardado
 	sm.shaderGeometria->Use();
 	// Le pasamos las matrices
+	//std::cout << "paso matriz modelview" << std::endl;
+	//std::cout << "paso matriz model" << std::endl;
+	//std::cout << "paso matriz objectColor" << std::endl;
 	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	//color
@@ -63,9 +66,6 @@ void TModel::beginDraw() {
 	/*
 	ESTAMOS EN EL SHADER DE GEOMETRIA ASI QUE NO PASAMOS LUCES SOLO LA GEOMETRIA
 	
-	
-	
-	*/
 	//numero luces
 	glUniform1i(glGetUniformLocation(sm.shaderGeometria->Program, "num_pointlight"), sm.vecPointLight.size());
 	glUniform1i(glGetUniformLocation(sm.shaderGeometria->Program, "num_flashlight"), sm.vecFlashLight.size());
@@ -85,6 +85,9 @@ void TModel::beginDraw() {
 	for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
 		sm.vecFlashLight[i]->pasarDatosAlShader(sm.shaderGeometria, i);
 	}
+	
+	*/
+	
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++)

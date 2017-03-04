@@ -126,15 +126,17 @@ void TLuz::setLight()
 
 	glGenVertexArrays(1, &lightVAO);
 	glGenBuffers(1, &lightVBO); // Un VBO
-
+	glBindVertexArray(lightVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, lightVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBindVertexArray(lightVAO);
-
+	glEnableVertexAttribArray(0);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-	glBindVertexArray(0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+
+	
+	
 
 }
 void TLuz::beginDraw() {

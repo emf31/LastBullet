@@ -97,6 +97,7 @@ int main() {
 	sm.inicializarBuffers();
 
 	while (!engine.shouldCloseWindw()){
+		//std::cout << "inicio iteracion" << std::endl;
 		engine.updateCurrentFrame();
 
 		// FPS
@@ -131,7 +132,7 @@ int main() {
 
 		
 		sm.draw(engine.getWindow());
-		//std::cout << "siguiente iteracion" << std::endl;
+		//std::cout << "final iteracion" << std::endl;
 		
 		
 		

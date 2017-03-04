@@ -59,6 +59,8 @@ void TNode::draw() {
 			SceneManager::i().m_matrizActual = glm::mat4();
 			m_childNodes.at(i)->draw();
 		}
+		//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
+
 	}
 
 }

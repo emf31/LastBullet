@@ -51,11 +51,14 @@ TModel* SceneManager::getMesh(const std::string& path,Shader* shader) {
 }
 
 void SceneManager::draw(GLFWwindow* window) {
-	// Clear
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//enlazamos el buffer sobre el que queremos escribir
+	//activamos el g buffer cuando vamos a dibujar modelos
+	
+	//std::cout << "activo gBuffer" << std::endl;
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	// Update matrices
 	projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, 0.1f, 100.0f); // Cambiar el plano cercano (así la interfaz no se corta?)
 	view = camaraActiva->GetViewMatrix();
@@ -64,7 +67,12 @@ void SceneManager::draw(GLFWwindow* window) {
 	// Desencadena el dibujado de la escena
 	scene->draw();
 	//gui.draw();
+	//std::cout << "desactivo gBuffer" << std::endl;
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	renderLuces();
+
 	glfwSwapBuffers(window);
+
 	
 }
 
@@ -105,8 +113,8 @@ void SceneManager::inicializarBuffers()
 	// pero como ahora tenemos 3 render targets en el fragment shader vamos a tener que definir 3 capas (layout)
 	GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
 	glDrawBuffers(3, attachments);
-
-	// - Create and attach depth buffer (renderbuffer)
+	/*
+		// - Create and attach depth buffer (renderbuffer)
 	glGenRenderbuffers(1, &rboDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
@@ -115,8 +123,53 @@ void SceneManager::inicializarBuffers()
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		std::cout << "Framebuffer not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	
+	*/
+
 
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+}
+
+void SceneManager::renderLuces()
+{
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	shaderLuces->Use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gPosition);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, gNormal);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, gTextura);
+	// Also send light relevant uniforms
+
+	//LUZ SOLAR
+	if (sunlight != nullptr) {
+		sunlight->pasarDatosAlShader(shaderLuces);
+	}
+	//POINTLIGHT
+	for (int i = 0; i < vecPointLight.size(); i++) {
+		vecPointLight[i]->pasarDatosAlShader(shaderLuces, i);
+	}
+	//LUZ LINTERNA
+	for (int i = 0; i < vecFlashLight.size(); i++) {
+		vecFlashLight[i]->pasarDatosAlShader(shaderLuces, i);
+	}
+
+	// Finally render quad
+	//RenderQuad();
+
+	//numero luces
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_pointlight"), vecPointLight.size());
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_flashlight"), vecFlashLight.size());
+
+	//camaras
+	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
+
+
+
+
+
 }
 
 TModel * SceneManager::crearNodoMalla(TModel * model)

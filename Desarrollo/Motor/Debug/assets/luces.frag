@@ -24,9 +24,9 @@ struct PointLight {
     vec3  position;
 };
 
-vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir, vec3 Diffuse, float Specular);
-vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir, vec3 Diffuse, float Specular);
-vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir, vec3 Diffuse, float Specular);
+vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
+vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
+vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 
 
 out vec4 color;
@@ -55,59 +55,38 @@ void main()
     vec3 Diffuse = texture(gTextura, TexCoords).rgb;
     float Specular = texture(gTextura, TexCoords).a;
     
-    // Then calculate lighting as usual
-    vec3 lighting  = Diffuse * 0.1; // hard-coded ambient component
-    for(int i = 0; i < NR_LIGHTS; ++i)
-    {
-        // Diffuse
-        vec3 lightDir = normalize(lights[i].Position - FragPos);
-        vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Diffuse * lights[i].Color;
-        // Specular
-        vec3 halfwayDir = normalize(lightDir + viewDir);  
-        float spec = pow(max(dot(Normal, halfwayDir), 0.0), 16.0);
-        vec3 specular = lights[i].Color * spec * Specular;
-        // Attenuation
-        float distance = length(lights[i].Position - FragPos);
-        float attenuation = 1.0 / (1.0 + lights[i].Linear * distance + lights[i].Quadratic * distance * distance);
-        diffuse *= attenuation;
-        specular *= attenuation;
-        lighting += diffuse + specular;
-    }    
-    FragColor = vec4(lighting, 1.0);
-
-
     vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
-    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir, Diffuse, Specular );
+    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
-        colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,Diffuse,Specular);
+        colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
-    colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,Diffuse,Specular);
+    colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     color = vec4(colorFinal, 1.0);
 
 }
 
 
-vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir, vec3 Diffuse, vec3 Specular){
+vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular){
         
     vec3 lightDir = normalize(-sunlight.direction);
     vec3 ambient = sunlight.ambiente * Diffuse ;
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = sunlight.difusa * diff * Diffuse; 
     vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
     vec3 specular =  (spec * sunlight.especular) * Specular;
 
     return (ambient + diffuse + specular);
 }
 
-vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 Diffuse, float Specular){
+vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos,vec3 Diffuse, float Specular){
 
 //valores para que la luz deje de afectar cuando esta a una distancia de 100
 float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
@@ -127,7 +106,7 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
     //LUZ ESPECULAR
     //calculamos el vector de reflexion de la luz
     vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
     vec3 specular =  (spec * light.especular) * Specular ; 
 
     // atenuacion
@@ -140,7 +119,7 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
 }
 
 
-vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 Diffuse, float Specular){
+vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,vec3 Diffuse, float Specular){
     //valores para que la luz deje de afectar cuando esta a una distancia de 100
     float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
     float linear=0.09; //la cantidad de atenueacion segun las distancia
@@ -156,7 +135,7 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 Diffuse, f
     
     //LUZ ESPECULAR
     vec3 reflectDir = reflect(-lightDir, norm);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
     vec3 specular = light.especular * spec * Specular;
     
 
