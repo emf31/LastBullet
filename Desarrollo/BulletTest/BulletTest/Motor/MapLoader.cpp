@@ -85,6 +85,25 @@ void MapLoader::readMap(const std::string & name)
 					
 					createTriggerButton(pos, 5, type);
 				}
+				if (obj["tag"] == "PointLight") {
+					Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
+					std::cout << "**************************************************************" << std::endl;
+					std::cout << "Creando Point Light" << std::endl;
+					std::cout << "Posicion " << pos.getX() << " " << pos.getY() << " " << pos.getZ() << std::endl;
+					std::cout << "Color " << rgb.getX() << " " << rgb.getY() << " " << rgb.getZ() << std::endl;
+					std::cout << "**************************************************************" << std::endl;
+				}
+					
+				if (obj["tag"] == "DirectionalLight") {
+					Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
+					std::cout << "**************************************************************" << std::endl;
+					std::cout << "Creando Directional Light" << std::endl;
+					std::cout << "Posicion " << pos.getX() << " " << pos.getY() << " " << pos.getZ() << std::endl;
+					std::cout << "Color " << rgb.getX() << " " << rgb.getY() << " " << rgb.getZ() << std::endl;
+					std::cout << "**************************************************************" << std::endl;
+					
+				}
+					
 
 					
 		}
