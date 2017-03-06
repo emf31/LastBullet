@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 #include "TTransform.h"
 
-
+void RenderQuad();
 
 void SceneManager::inicializar() {
 	//gui.init("GUI");
@@ -37,7 +37,7 @@ void SceneManager::inicializar() {
 	shaderLuces->Use();
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gPosition"), 0);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gNormal"), 1);
-	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gAlbedoSpec"), 2);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gTextura"), 2);
 }
 
 
@@ -113,7 +113,7 @@ void SceneManager::inicializarBuffers()
 	// pero como ahora tenemos 3 render targets en el fragment shader vamos a tener que definir 3 capas (layout)
 	GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
 	glDrawBuffers(3, attachments);
-	/*
+	
 		// - Create and attach depth buffer (renderbuffer)
 	glGenRenderbuffers(1, &rboDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
@@ -124,7 +124,7 @@ void SceneManager::inicializarBuffers()
 		std::cout << "Framebuffer not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	
-	*/
+	
 
 
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -132,7 +132,7 @@ void SceneManager::inicializarBuffers()
 
 void SceneManager::renderLuces()
 {
-
+	GLuint screenWidth = 1280, screenHeight = 720;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
@@ -156,15 +156,27 @@ void SceneManager::renderLuces()
 		vecFlashLight[i]->pasarDatosAlShader(shaderLuces, i);
 	}
 
-	// Finally render quad
-	//RenderQuad();
-
 	//numero luces
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_pointlight"), vecPointLight.size());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_flashlight"), vecFlashLight.size());
 
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
+	// Finally render quad
+	RenderQuad();
+	
+		// 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
+											   // blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
+											   // the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the 		
+											   // depth buffer in another stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
+	glBlitFramebuffer(0, 0, screenWidth, screenHeight, 0, 0, screenWidth, screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	
+
+
+
 
 
 
@@ -411,3 +423,33 @@ TCamera * SceneManager::crearNodoCamara()
 	return camara;
 }
 
+// RenderQuad() Renders a 1x1 quad in NDC, best used for framebuffer color targets
+// and post-processing effects.
+GLuint quadVAO = 0;
+GLuint quadVBO;
+void RenderQuad()
+{
+	if (quadVAO == 0)
+	{
+		GLfloat quadVertices[] = {
+			// Positions        // Texture Coords
+			-1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+			1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+			1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		};
+		// Setup plane VAO
+		glGenVertexArrays(1, &quadVAO);
+		glGenBuffers(1, &quadVBO);
+		glBindVertexArray(quadVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	}
+	glBindVertexArray(quadVAO);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glBindVertexArray(0);
+}

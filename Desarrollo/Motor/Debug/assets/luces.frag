@@ -55,20 +55,22 @@ void main()
     vec3 Diffuse = texture(gTextura, TexCoords).rgb;
     float Specular = texture(gTextura, TexCoords).a;
     
-    vec3 colorFinal;
+    
+        vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
-    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
+    //colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
-        colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+        //colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
-    colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+    colorFinal=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     color = vec4(colorFinal, 1.0);
+    
 
 }
 
