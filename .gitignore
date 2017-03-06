@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 
+
 # Compiled Object files
 *.slo
 *.lo
@@ -66,6 +67,7 @@ sysinfo.txt
 *.exe
 
 
+
 Desarrollo/BulletTest/BulletTest.VC.db
 Desarrollo/BulletTest/BulletTest.VC.VC.opendb
 Desarrollo/BulletTest/.vs/BulletTest/v14/.suo
@@ -76,3 +78,15 @@ Desarrollo/BulletTest/RaknetServerv0.1/Debug
 Desarrollo/BulletTest/RaknetServerv0.1/Release
 Desarrollo/BulletTest/RaknetServerv0.1/Debug/RaknetServerv0.1.tlog
 Desarrollo/BulletTest/RaknetServerv0.1/Release/RaknetServerv0.1.tlog
+
+Desarrollo/Motor/Motor.VC.db
+Desarrollo/Motor/Motor.VC.VC.opendb
+Desarrollo/Motor/.vs/Motor/v14/.suo
+Desarrollo/Motor/Motor/Debug/Motor.ilk
+Desarrollo/Motor/Motor/Debug/Motor.pdb
+Desarrollo/Motor/Motor/Release
+Desarrollo/Motor/Motor/Debug
+Desarrollo/Motor/Motor/x64
+
+
+
