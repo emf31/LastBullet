@@ -35,6 +35,13 @@ bool TNode::removeChild(TNode * child) {
 	}
 }
 
+void TNode::removeNode()
+{
+	m_parentNode->removeChild(this);
+	setParentNode(NULL);
+	delete this;
+}
+
 TNode * TNode::getParentNode() {
 	return m_parentNode;
 }

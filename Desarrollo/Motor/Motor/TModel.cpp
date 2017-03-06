@@ -25,6 +25,7 @@ TModel::TModel(GLchar * path, Shader* shaderPath) : sm(SceneManager::i()) {
 	m_b = 1.f;
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
+	visible = true;
 }
 
 TModel::~TModel() {
@@ -35,60 +36,66 @@ TModel::~TModel() {
 }
 
 void TModel::beginDraw() {
+	if (visible) {
 
-	const glm::mat4& view = sm.getViewMatrix();
-	const glm::mat4& projection = sm.getProjectionMatrix();
-	glm::mat4& model = sm.getMatrizActual();
 
-	
-	/*
-	ESTO PUEDE SERVIR PARA HACER QUE LA PISTOLA GIRE CON LA CAMARA YA QUE SE PROCESARIA ANTES LO DE LA PISTOLA QUE LO DE LA CAMARA
+		const glm::mat4& view = sm.getViewMatrix();
+		const glm::mat4& projection = sm.getProjectionMatrix();
+		glm::mat4& model = sm.getMatrizActual();
+
+
+		/*
+		ESTO PUEDE SERVIR PARA HACER QUE LA PISTOLA GIRE CON LA CAMARA YA QUE SE PROCESARIA ANTES LO DE LA PISTOLA QUE LO DE LA CAMARA
 		int tam = SceneManager::i().pilaMatrices.size();
-	for (int i = 0; i < tam; i++) {
+		for (int i = 0; i < tam; i++) {
 		model = SceneManager::i().pilaMatrices.front()*model;
 		SceneManager::i().pilaMatrices.pop_front();
+		}
+		//por si dependemos de la transformacion del padre, tenemos que multiplicar nuestra modelo por la de los padres que es la actual.
+		model = actual * model;
+		//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
+		SceneManager::i().m_matrizActual = model;
+
+		*/
+
+
+		glm::mat4 modelview = projection * view * model;
+
+
+		Vec3<float> activeCameraPos = sm.getActiveCameraPos();
+
+		// Activamos el shader que tenemos guardado
+		shader->Use();
+		// Le pasamos las matrices
+		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
+		glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(shader->Program, "num_pointlight"), sm.vecPointLight.size());
+		glUniform1i(glGetUniformLocation(shader->Program, "num_flashlight"), 1);
+		//color
+		glUniform3f(glGetUniformLocation(shader->Program, "objectColor"), m_r, m_g, m_b);
+		//camaras
+		glUniform3f(glGetUniformLocation(shader->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
+
+		//LUZ SOLAR
+		if (sm.getSunLight() != nullptr) {
+			sm.getSunLight()->pasarDatosAlShader(shader);
+		}
+		//POINTLIGHT
+		for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
+			sm.vecPointLight[i]->pasarDatosAlShader(shader, i);
+		}
+		//LUZ LINTERNA
+		for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
+			sm.vecFlashLight[i]->pasarDatosAlShader(shader, i);
+		}
+
+		//Dibujamos los hijos (Si los hay)
+		for (GLuint i = 0; i < this->meshes.size(); i++)
+			this->meshes[i]->beginDraw();
+
+
 	}
-	//por si dependemos de la transformacion del padre, tenemos que multiplicar nuestra modelo por la de los padres que es la actual.
-	model = actual * model;
-	//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
-	SceneManager::i().m_matrizActual = model;
-	
-	*/
 
-
-	glm::mat4 modelview = projection * view * model;
-
-
-	Vec3<float> activeCameraPos = sm.getActiveCameraPos();
-
-	// Activamos el shader que tenemos guardado
-	shader->Use();
-	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
-	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-	glUniform1i(glGetUniformLocation(shader->Program, "num_pointlight"), sm.vecPointLight.size());
-	glUniform1i(glGetUniformLocation(shader->Program, "num_flashlight"), 1);
-	//color
-	glUniform3f(glGetUniformLocation(shader->Program, "objectColor"), m_r, m_g, m_b);
-	//camaras
-	glUniform3f(glGetUniformLocation(shader->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
-	
-	//LUZ SOLAR
-	if (sm.getSunLight() != nullptr) {
-		sm.getSunLight()->pasarDatosAlShader(shader);
-	}
-	//POINTLIGHT
-	for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
-		sm.vecPointLight[i]->pasarDatosAlShader(shader, i);
-	}
-	//LUZ LINTERNA
-	for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
-		sm.vecFlashLight[i]->pasarDatosAlShader(shader, i);
-	}
-
-	//Dibujamos los hijos (Si los hay)
-	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i]->beginDraw();
 }
 
 void TModel::loadModel(const string& path) {

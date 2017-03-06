@@ -20,6 +20,7 @@ public:
 
 	void setParentNode(TNode* nodoPadre);
 	bool removeChild(TNode *child);
+	void removeNode();
 	void addChild(TNode* child);
 	
 

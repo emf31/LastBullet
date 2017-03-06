@@ -32,7 +32,6 @@ int main() {
 
 	//window
 	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
-	
 
 
 	//pistola
@@ -40,6 +39,7 @@ int main() {
 	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
 	//sm.camaraActiva->addChild(p1);
 	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
+	
 	
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
@@ -71,7 +71,7 @@ int main() {
 
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-	sol->setIntensidadAmbiente(1.0f);
+	
 	//bombilla
 	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(8.0f, 4.0f, 2.0f));
 	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(10.0f, 4.0f, 2.0f));
@@ -92,7 +92,7 @@ int main() {
 	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
 	Vec3<float> newPos;
 
-
+	window->removeNode();
 
 
 
@@ -126,6 +126,7 @@ int main() {
 			//std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
 			sm.setActiveCamera(sm.vectorCamaras[contCam]);
 			contCam++;
+			
 		}
 
 		cont++;

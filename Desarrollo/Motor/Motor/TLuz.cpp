@@ -8,7 +8,7 @@
 
 TLuz::TLuz() : sm(SceneManager::i()) {
 
-	std::cout << "SI QUE ENTRO AL CONTRUCTOR DE LUZ CUANDO CREO UNA LUZ DE CUALQUIER TIPO" << std::endl;
+	
 	gradoLuzAmbiente = 0.1f;
 	gradoLuzDifusa = 0.5f;
 	gradoLuzEspecular = 1.0f;

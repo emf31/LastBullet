@@ -34,9 +34,7 @@ public:
 
 	
 
-	virtual void beginDraw();
 
-	virtual void endDraw();
 
 	void setPosition(Vec3<float> pos);
 	void updatePosition(Vec3<float> pos);
@@ -48,6 +46,13 @@ public:
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
+
+	void setVisible(bool b) {
+		visible = b;
+	}
+	bool isVisible() {
+		return visible;
+	}
 
 
 	void setModelColor(float r, float g, float b) {
@@ -66,7 +71,12 @@ private:
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionEscalado(TTransform* esc);
 	void setTransformacionTraslacion(TTransform* tras);
-	
+
+	bool visible;
+
+	virtual void beginDraw();
+
+	virtual void endDraw();
 
 
 
