@@ -55,5 +55,15 @@ void Input::Do_Movement(GLfloat deltaTime) {
 	else {
 		rotarIzquierda = false;
 	}
+	if (keys[GLFW_KEY_1])
+		sm.draw_mode = 1;
+	if (keys[GLFW_KEY_2])
+		sm.draw_mode = 2;
+	if (keys[GLFW_KEY_3])
+		sm.draw_mode = 3;
+	if (keys[GLFW_KEY_4])
+		sm.draw_mode = 4;
+	if (keys[GLFW_KEY_5])
+		sm.draw_mode = 5;
 
 }

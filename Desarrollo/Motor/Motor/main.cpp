@@ -71,7 +71,7 @@ int main() {
 
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-	sol->setColor(0.0f, 0.0f, 0.f);
+	sol->setColor(1.0f, 1.0f, 1.0f);
 	sol->setIntensidadAmbiente(0.8);
 	//sol->setIntensidadAmbiente(1.0f);
 	//bombilla
@@ -82,7 +82,7 @@ int main() {
 	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-3.0f, 0.0f, 3.0f), Vec3<float>(0.0f, 0.0f, -1.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
 	flash->setIntensidadAmbiente(0.8);
-
+	
 
 
 	//*******CAMARAS*******

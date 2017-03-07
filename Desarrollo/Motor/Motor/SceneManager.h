@@ -78,9 +78,9 @@ public:
 
 	//Buffers
 	GLuint gBuffer;
-	GLuint gPosition, gNormal, gTextura;
+	GLuint gPosition, gNormal, gTextura, gSpecular;
 	GLuint rboDepth;
-	
+	GLuint draw_mode=1;
 private:
 	ResourceManager *rm;
 	TNode* scene;

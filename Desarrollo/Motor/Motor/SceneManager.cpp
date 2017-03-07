@@ -55,6 +55,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	//activamos el g buffer cuando vamos a dibujar modelos
 	
 	//std::cout << "activo gBuffer" << std::endl;
+	glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -69,7 +70,8 @@ void SceneManager::draw(GLFWwindow* window) {
 	//gui.draw();
 	//std::cout << "desactivo gBuffer" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	renderLuces();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		renderLuces();
 
 	glfwSwapBuffers(window);
 
@@ -109,6 +111,7 @@ void SceneManager::inicializarBuffers()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gTextura, 0);
+
 	// tenemos que juntar los 3 color buffers en el framebuffer que tenemos activo para ello los juntamos en el array
 	// pero como ahora tenemos 3 render targets en el fragment shader vamos a tener que definir 3 capas (layout)
 	GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
@@ -124,16 +127,13 @@ void SceneManager::inicializarBuffers()
 		std::cout << "Framebuffer not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	
-	
-
-
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
 void SceneManager::renderLuces()
 {
 	GLuint screenWidth = 1280, screenHeight = 720;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
@@ -162,6 +162,7 @@ void SceneManager::renderLuces()
 
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
 	// Finally render quad
 	RenderQuad();
 	
@@ -173,14 +174,6 @@ void SceneManager::renderLuces()
 											   // depth buffer in another stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
 	glBlitFramebuffer(0, 0, screenWidth, screenHeight, 0, 0, screenWidth, screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	
-
-
-
-
-
-
-
 
 }
 

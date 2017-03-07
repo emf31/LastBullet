@@ -17,7 +17,8 @@ void main()
 
     gl_Position =  modelview * vec4(position, 1.0f);
     TexCoords = texCoords;
-	FragPos = vec3(model * vec4(position, 1.0f));
+    vec4 worldPos = model * vec4(position, 1.0f);
+	FragPos = worldPos.xyz;
 	//NOTA: necesitamos pasar el vector normal de coordenadas del mundo a coordenadas de la vista, pero para ello no podemos multiplicarla
 	//por la view directamente como hacemos con la matriz modelo ya que este vector normal no se puede trasladar o dejaria de ser perpendicular a la cara del modelo
 	//entonces lo que hacemos es usar las traspuesta de la inversa del modelo y ademas la pasamos a una matriz de 3x3 para que se pierdan las coordenadas de traslacion.

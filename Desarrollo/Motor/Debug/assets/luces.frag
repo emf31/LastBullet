@@ -1,10 +1,10 @@
 #version 330 core
 
 struct SunLight {
-vec3 especular;
-vec3 difusa;
-vec3 ambiente;
-vec3 direction;
+    vec3 especular;
+    vec3 difusa;
+    vec3 ambiente;
+    vec3 direction;
 }; 
 
 struct FlashLight {
@@ -39,6 +39,8 @@ uniform sampler2D gTextura;
 uniform vec3 objectColor;
 uniform vec3 viewPos;
 
+uniform int draw_mode;
+
 //luces
 uniform int num_pointlight;
 uniform int num_flashlight;
@@ -60,16 +62,27 @@ void main()
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
-    //colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
+    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
-        //colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+        colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
-    colorFinal=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+        colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
-    color = vec4(colorFinal, 1.0);
+
+    if(draw_mode == 1)
+        color = vec4(colorFinal, 1.0);
+    else if(draw_mode == 2)
+        color = vec4(FragPos, 1.0);
+    else if(draw_mode == 3)
+        color = vec4(Normal, 1.0);
+    else if(draw_mode == 4)
+        color = vec4(Diffuse, 1.0);
+    else if(draw_mode == 5)
+        color = vec4(vec3(Specular), 1.0);
+    //color = vec4(colorFinal, 1.0);
     
 
 }
