@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #pragma once
 #include "irrlicht.h"
 #include <iostream>
@@ -43,5 +43,5 @@ private:
 	// Heredado vía SceneNode
 	
 
-};
+};*/
 

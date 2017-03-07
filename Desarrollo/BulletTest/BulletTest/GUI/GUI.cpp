@@ -1,6 +1,7 @@
 #include "GUI.h"
 #include <GUIManager.h>
 #include <EventSystem.h>
+#include <GLFW/glfw3.h>
 
 Motor::GUI::GUI() : EventListener()
 {
@@ -11,10 +12,10 @@ Motor::GUI::~GUI()
 {
 }
 
-void Motor::GUI::init(const std::string& resourcesPath, irr::IrrlichtDevice *device, const std::string& name){
-	GUIManager::i().init(resourcesPath, device);
+void Motor::GUI::init(const std::string& resourcesPath, const std::string& name){
+	GUIManager::i().init(resourcesPath);
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-	m_context = &CEGUI::System::getSingleton().createGUIContext(GUIManager::i().getIrrlichtRenderer()->getDefaultRenderTarget());
+	m_context = &CEGUI::System::getSingleton().createGUIContext(GUIManager::i().getRenderer()->getDefaultRenderTarget());
 	m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 	m_context->setRootWindow(m_root);
 
@@ -30,9 +31,9 @@ void Motor::GUI::destroy() {
 
 void Motor::GUI::draw() {
 	
-	GUIManager::i().getIrrlichtRenderer()->beginRendering();
+	GUIManager::i().getRenderer()->beginRendering();
 	m_context->draw();
-	GUIManager::i().getIrrlichtRenderer()->endRendering();
+	GUIManager::i().getRenderer()->endRendering();
 	//glDisable(GL_SCISSOR_TEST);
 }
 
@@ -85,7 +86,62 @@ void Motor::GUI::setMouseCursor(const std::string & mouse) {
 	m_context->getMouseCursor().setDefaultImage(mouse);
 }
 
-CEGUI::Key::Scan Motor::GUI::irrlichtToCeguiKey(irr::EKEY_CODE key) {
+unsigned int Motor::GUI::GlfwToCeguiKey(int glfwKey)
+{
+	switch (glfwKey)
+	{
+	case GLFW_KEY_UNKNOWN: return 0;
+	case GLFW_KEY_ESCAPE: return CEGUI::Key::Escape;
+	case GLFW_KEY_F1: return CEGUI::Key::F1;
+	case GLFW_KEY_F2: return CEGUI::Key::F2;
+	case GLFW_KEY_F3: return CEGUI::Key::F3;
+	case GLFW_KEY_F4: return CEGUI::Key::F4;
+	case GLFW_KEY_F5: return CEGUI::Key::F5;
+	case GLFW_KEY_F6: return CEGUI::Key::F6;
+	case GLFW_KEY_F7: return CEGUI::Key::F7;
+	case GLFW_KEY_F8: return CEGUI::Key::F8;
+	case GLFW_KEY_F9: return CEGUI::Key::F9;
+	case GLFW_KEY_F10: return CEGUI::Key::F10;
+	case GLFW_KEY_F11: return CEGUI::Key::F11;
+	case GLFW_KEY_F12: return CEGUI::Key::F12;
+	case GLFW_KEY_F13: return CEGUI::Key::F13;
+	case GLFW_KEY_F14: return CEGUI::Key::F14;
+	case GLFW_KEY_F15: return CEGUI::Key::F15;
+	case GLFW_KEY_UP: return CEGUI::Key::ArrowUp;
+	case GLFW_KEY_DOWN: return CEGUI::Key::ArrowDown;
+	case GLFW_KEY_LEFT: return CEGUI::Key::ArrowLeft;
+	case GLFW_KEY_RIGHT: return CEGUI::Key::ArrowRight;
+	case GLFW_KEY_LEFT_SHIFT: return CEGUI::Key::LeftShift;
+	case GLFW_KEY_RIGHT_SHIFT: return CEGUI::Key::RightShift;
+	case GLFW_KEY_LEFT_CONTROL: return CEGUI::Key::LeftControl;
+	case GLFW_KEY_RIGHT_CONTROL: return CEGUI::Key::RightControl;
+	case GLFW_KEY_LEFT_ALT: return CEGUI::Key::LeftAlt;
+	case GLFW_KEY_RIGHT_ALT: return CEGUI::Key::RightAlt;
+	case GLFW_KEY_TAB: return CEGUI::Key::Tab;
+	case GLFW_KEY_ENTER: return CEGUI::Key::Return;
+	case GLFW_KEY_BACKSPACE: return CEGUI::Key::Backspace;
+	case GLFW_KEY_INSERT: return CEGUI::Key::Insert;
+	case GLFW_KEY_DELETE: return CEGUI::Key::Delete;
+	case GLFW_KEY_PAGE_UP: return CEGUI::Key::PageUp;
+	case GLFW_KEY_PAGE_DOWN: return CEGUI::Key::PageDown;
+	case GLFW_KEY_HOME: return CEGUI::Key::Home;
+	case GLFW_KEY_END: return CEGUI::Key::End;
+	case GLFW_KEY_KP_ENTER: return CEGUI::Key::NumpadEnter;
+	default: return 0;
+	}
+}
+
+CEGUI::MouseButton  Motor::GUI::GlfwToCeguiButton(int glfwButton)
+{
+	switch (glfwButton)
+	{
+	case GLFW_MOUSE_BUTTON_LEFT: return CEGUI::LeftButton;
+	case GLFW_MOUSE_BUTTON_RIGHT: return CEGUI::RightButton;
+	case GLFW_MOUSE_BUTTON_MIDDLE: return CEGUI::MiddleButton;
+	default: return CEGUI::NoButton;
+	}
+}
+/*CEGUI::Key::Scan Motor::GUI::irrlichtToCeguiKey(irr::EKEY_CODE key) {
 	using namespace irr;
 	using namespace CEGUI;
 	switch (key) {
@@ -153,14 +209,14 @@ CEGUI::Key::Scan Motor::GUI::irrlichtToCeguiKey(irr::EKEY_CODE key) {
 		case     KEY_RCONTROL:  return Key::RightControl;
 	}
 
+}*/
+
+void Motor::GUI::injectKeyDown(int key) {
+	m_context->injectKeyDown(GlfwToCeguiKey(key));
 }
 
-void Motor::GUI::injectKeyDown(irr::EKEY_CODE key) {
-	m_context->injectKeyDown(irrlichtToCeguiKey(key));
-}
-
-void Motor::GUI::injectKeyUp(irr::EKEY_CODE key) {
-	m_context->injectKeyUp(irrlichtToCeguiKey(key));
+void Motor::GUI::injectKeyUp(int key) {
+	m_context->injectKeyUp(GlfwToCeguiKey(key));
 }
 
 void Motor::GUI::injectMousePosition(float x, float y) {

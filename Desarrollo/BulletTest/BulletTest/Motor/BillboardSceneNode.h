@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "irrlicht.h"
 #include <iostream>
 #include <string>
@@ -38,5 +38,5 @@ private:
 	IBillboardSceneNode* m_node;
 
 
-};
+};*/
 

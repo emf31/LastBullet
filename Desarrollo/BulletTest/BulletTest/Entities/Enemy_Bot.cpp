@@ -180,13 +180,13 @@ void Enemy_Bot::cargarContenido()
 {
 
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
 	m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
 	m_nodo->setTexture("../media/m4tex.png", 2);
 
 	//nodo, size, relposition, color
-	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(9, 3), Vec3<float>(0, 250, 0), Color4f(255, 0, 255, 0));
+	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(9, 3), Vec3<float>(0, 250, 0), Color4f(255, 0, 255, 0));
 
 	animation.addAnimation("Default", 0, 0);
 	animation.addAnimation("Run_Forwards", 1, 69);
@@ -236,7 +236,7 @@ void Enemy_Bot::borrarContenido()
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 
-	GraphicEngine::i().removeNode(m_nodo);
+	delete m_nodo.get();
 }
 
 void Enemy_Bot::handleMessage(const Message & message)

@@ -39,7 +39,7 @@ void Enemy::update(Time elapsedTime)
 	desencolaMovimiento();
 
 	updateState();
-	updateAnimation();
+	//updateAnimation();
 
 	/*//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
 	if (lastSyncPacket.getElapsedTime().asSeconds() >= 5) {
@@ -74,12 +74,12 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
 	m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
 	m_nodo->setTexture("../media/m4tex.png", 2);
 
-	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
+	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
 	
 
 	animation->addAnimation("Default", 0, 0);
@@ -116,7 +116,8 @@ void Enemy::borrarContenido()
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-	GraphicEngine::i().removeNode(m_nodo);
+	
+	delete m_nodo.get();
 }
 
 //Teletransporta un enemigo a la posicion que le pasas
@@ -226,7 +227,7 @@ void Enemy::setVisibilidadBilboardSync()
 }
 
 
-void Enemy::updateAnimation()
+/*void Enemy::updateAnimation()
 {
 	switch (m_animState)
 	{
@@ -254,7 +255,7 @@ void Enemy::updateAnimation()
 		break;
 
 	}
-}
+}*/
 
 void Enemy::updateState()
 {

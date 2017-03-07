@@ -48,9 +48,28 @@ public:
 		return Vec3<float>(direccion.x, direccion.y, direccion.z);
 	}
 
+	void setTarget(Vec3<float> target) {
+		Vec3<float> pos = getPosition();
+		Vec3<float> dir = target - pos;
+		dir.normalise();
+		setRotationDir(dir);
+	}
 
+	Vec3<float> getTarget() {
+		Vec3<float> pos = getPosition();
+		Vec3<float> dir = getRotation();
+		return (dir + pos)*1000;
+	}
+
+	void setRotationDir(Vec3<float> dir) {
+		transRotacion->setRotationDirection(dir);
+	}
+	void setInputEnable(bool b) {
+		inputEnable = b;
+	}
 private:
 
+	bool inputEnable;
 
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionTraslacion(TTransform* tras);

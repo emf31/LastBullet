@@ -11,9 +11,9 @@ public:
 		return singleton;
 	}
 
-	void init(const std::string& resourcesPath, irr::IrrlichtDevice *device) {
-		if (m_IrrlichtRenderer == nullptr) {
-			m_IrrlichtRenderer = &CEGUI::IrrlichtRenderer::bootstrapSystem(*device);
+	void init(const std::string& resourcesPath) {
+		if (m_renderer == nullptr) {
+			m_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 
 			CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 
@@ -60,16 +60,16 @@ public:
 		auto found = m_guis.find(name);
 		if (found != m_guis.end())
 			return found->second;
-		//no existe devolvemos 0
+		//no existe devolvemos 
 		return NULL;
 	}
 
-	CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_IrrlichtRenderer; }
+	CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
 private:
 	GUIManager() {
 
 	}
-	CEGUI::IrrlichtRenderer *m_IrrlichtRenderer; //TODO: CAMBIAR A OPENGL3RENDERER CUANDO CAMBIEMOS A NUESTRO MOTOR
+	CEGUI::OpenGL3Renderer *m_renderer; //TODO: CAMBIAR A OPENGL3RENDERER CUANDO CAMBIEMOS A NUESTRO MOTOR
 
 	std::map<std::string , Motor::GUI*> m_guis;
 };

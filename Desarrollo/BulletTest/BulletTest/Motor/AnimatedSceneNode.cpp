@@ -1,5 +1,5 @@
 
-#include "AnimatedSceneNode.h"
+/*#include "AnimatedSceneNode.h"
 
 
 AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IrrlichtDevice * irrDevice) : SceneNode(irrDevice),
@@ -76,3 +76,4 @@ void AnimatedSceneNode::setVisible(bool visible)
 {
 	m_node->setVisible(visible);
 }
+*/

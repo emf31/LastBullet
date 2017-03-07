@@ -84,9 +84,9 @@ void ResourceManager::shutdown()
 	shaders.clear();
 }
 
-GLint ResourceManager::TextureFromFile(const char * path, string directory) {
+GLint ResourceManager::TextureFromFile(const char * path, std::string directory) {
 	// Generamos un ID de textura y cargamos la imagen con SOIL 
-	string filename = string(path);
+	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
 	cout << filename << endl;
 	GLuint textureID;

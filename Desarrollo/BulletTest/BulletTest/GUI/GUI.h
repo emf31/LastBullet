@@ -2,7 +2,6 @@
 
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
-#include <CEGUI/RendererModules/Irrlicht/Renderer.h>
 
 #include "../MastEventReceiver.hpp"
 #include <EventListener.h>
@@ -19,7 +18,7 @@ namespace Motor{
 		GUI();
 		~GUI();
 
-		void init(const std::string& resourcesPath, irr::IrrlichtDevice *device, const std::string& name);
+		void init(const std::string& resourcesPath, const std::string& name);
 		void destroy();
 		void draw();
 
@@ -40,11 +39,12 @@ namespace Motor{
 
 		void setMouseCursor(const std::string& mouse);
 
-		CEGUI::Key::Scan irrlichtToCeguiKey(irr::EKEY_CODE key);
+		unsigned int GlfwToCeguiKey( int glfwKey);
+		CEGUI::MouseButton GlfwToCeguiButton( int glfwButton);
 
-		void injectKeyDown(irr::EKEY_CODE key);
+		void injectKeyDown(int key);
 
-		void injectKeyUp(irr::EKEY_CODE key);
+		void injectKeyUp(int key);
 
 		void injectMousePosition(float x, float y);
 

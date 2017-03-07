@@ -14,6 +14,7 @@ public:
 	virtual void beginDraw()=0;
 	virtual void endDraw()=0;
 	void addChild(TEntity* ent);
+	void removeChild(TEntity* ent);
 
 	void removeNode();
 

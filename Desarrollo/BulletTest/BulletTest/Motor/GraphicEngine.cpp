@@ -10,37 +10,30 @@
 
 #include <GUIManager.h>
 
-GraphicEngine::GraphicEngine() : debug_camera(true)
+GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 {
 	
 }
 
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
-	IMeshSceneNode *Node;
-	if(mesh!="")
-		Node = irrScene->addMeshSceneNode(irrScene->getMesh(mesh));
-	else
-		Node = irrScene->addCubeSceneNode(2.0f);
+
+	TModel* node;
+	node = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
+	
 
 	
-	Node->setScale(vector3df(TScale.getX(), TScale.getY(), TScale.getZ()));
-	Node->setPosition(vector3df(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
-	//Asi no le afectan las luces
-	Node->setMaterialFlag(EMF_LIGHTING, false);
+	node->setScale(Vec3<float>(TScale.getX(), TScale.getY(), TScale.getZ()));
+	node->setPosition(Vec3<float>(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
 
 
-	//Si es diferente de "" asignamos una textura al nodo
-	if (texture != "") {
-		Node->setMaterialTexture(0,irrDriver->getTexture(texture));
-	}
 	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(Node, irrDevice));
+	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(node));
 }
 
-std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+/*std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
 	IAnimatedMeshSceneNode *Node;
 
@@ -62,9 +55,9 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
 	return std::shared_ptr<AnimatedSceneNode>(new AnimatedSceneNode(Node, irrDevice));
-}
+}*/
 
-std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
+/*std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneNode> nodo, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
 
 	IBillboardSceneNode *billboard = irrScene->addBillboardSceneNode(nodo->getNodo(), vector2df(1, 1), vector3df(1, 1, 1));
 	billboard->setSize(core::dimension2df(vector2d.x, vector2d.y));
@@ -72,9 +65,9 @@ std::shared_ptr<SceneNode> GraphicEngine::createBillboard(std::shared_ptr<SceneN
 	billboard->setColor(video::SColor(color.a, color.r, color.g, color.b));
 
 	return std::shared_ptr<BillboardSceneNode>(new BillboardSceneNode(billboard, irrDevice));
-}
+}*/
 
-std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
+/*std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<SceneNode> nodo, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color) {
 
 	gui::IGUIFont* fnt = irrGUI->getFont("../media/lucida.xml");
 
@@ -91,7 +84,7 @@ std::shared_ptr<SceneNode> GraphicEngine::createBillboardText(std::shared_ptr<Sc
 	
 	
 	return std::shared_ptr<BillboardSceneNode>(new BillboardSceneNode(billboard, irrDevice));
-}
+}*/
 
 const wchar_t * GraphicEngine::GetWC(const char *c)
 {
@@ -106,10 +99,11 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 {
 	//camara tipo fps
 
-	ICameraSceneNode* cam = irrScene->addCameraSceneNodeFPS(NULL,irr::f32(100), irr::f32(0.05));
-	cam->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
-	cam->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
-	cam->setInputReceiverEnabled(true);
+	TCamera* cam = sm.crearNodoCamara();
+	cam->setPosition(position);
+	cam->setTarget(target);
+	cam->setInputEnable(false);
+
 
 	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
 	Camera* myCamera = new Camera(cam, name);
@@ -138,11 +132,11 @@ Camera * GraphicEngine::getActiveCamera()
 
 void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 {
-
+	
 	auto found = cameras.find(nameCamera);
 	if (found != cameras.end()) {
 		active_camera = found->second;
-		irrScene->setActiveCamera(active_camera->getCameraNode());
+		SceneManager::i().setActiveCamera(active_camera->getCameraNode());
 	}
 	else {
 		throw std::runtime_error("Camara no encontrada");
@@ -152,15 +146,11 @@ void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 
 void GraphicEngine::renderAll()
 {
-	irrDriver->beginScene(true, true, SColor(255, 100, 101, 140));
+	
 
-
-	irrScene->drawAll();
-	irrGUI->drawAll();
-
-
+	SceneManager::i().draw(engine.getWindow());
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
-	if (debug_draw_bullet)
+	/*if (debug_draw_bullet)
 	{
 
 		//material de irrlicht al que no le afectan las luces
@@ -170,73 +160,43 @@ void GraphicEngine::renderAll()
 		PhysicsEngine::i().m_world->debugDrawWorld();
 
 	}
-
+	*/
 	//gui.draw();
 	GUIManager::i().drawAllGuis();
 
-	irrDriver->endScene();
-	int fps = irrDriver->getFPS();
+	int fps = engine.getFPS();
 
-	if (lastFPS != fps)
-	{
-		core::stringw str = L"LAST BULLET PRE ALPHA MECHANICS [";
-		str += irrDriver->getName();
-		str += "] FPS:";
-		str += fps;
-
-		irrDevice->setWindowCaption(str.c_str());
-		lastFPS = fps;
-	}
+	std::ostringstream str;
+	str << u8"LAST BULLET - [FPS:" << fps<<"]";
 
 }
 
 void GraphicEngine::inicializar()
 {
-	//if(!irrDevice){
-		// Initialize irrlicht
-		irrDevice = createDevice(video::EDT_OPENGL, dimension2d<u32>(1280, 720), 32, false, false, false, &MastEventReceiver::i());
-		irrDevice->setWindowCaption(L"Test");
-
-		irrGUI = irrDevice->getGUIEnvironment();
-		irrScene = irrDevice->getSceneManager();
-		irrDriver = irrDevice->getVideoDriver();
-
-		//irrGUI->addImage(irrDriver->getTexture("../media/mirilla.png"), position2d<int>(1280 / 2 - 220 / 2, 720 / 2 - 165 / 2));
+	screenWidth = 1280;
+	screenHeight = 720;
+	engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet");
 
 
-		irrDevice->getCursorControl()->setVisible(0);
-		cargarTexturas();
+	sm = SceneManager::i();
 
-		//setDebugDraw();
 
-		
-	//}
+
 
 
 }
 
-bool GraphicEngine::isRuning()
-{
-	return irrDevice->run();
-}
 
 bool GraphicEngine::isWindowActive()
 {
-	return irrDevice->isWindowActive();
+	return !engine.shouldCloseWindw();
 }
 
 bool GraphicEngine::apagar()
 {
 	delete debugDraw;
 
-	irrDevice->setEventReceiver(NULL);
-	irrDevice->closeDevice();
-	irrDevice->run();
-	irrDevice->drop();
-
-
-
-	irrDevice = NULL;
+	engine.shutdown();
 	
 	return true;
 }
@@ -244,7 +204,7 @@ bool GraphicEngine::apagar()
 void GraphicEngine::cargarTexturas() {
 
 	//CARGAR TEXTURAS
-	irrDriver->getTexture("../media/wall.jpg");
+	/*irrDriver->getTexture("../media/wall.jpg");
 	irrDriver->getTexture("../media/ice0.jpg");
 	irrDriver->getTexture("../media/texture.jpg");
 	irrDriver->getTexture("../media/earth.jpg");
@@ -273,19 +233,19 @@ void GraphicEngine::cargarTexturas() {
 	
 	
 
-	irrGUI->getFont("../media/lucida.xml");
+	irrGUI->getFont("../media/lucida.xml");-*/
 	
 	
 }
 
-void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
+/*void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 	irrScene->addToDeletionQueue(nodo->getNodo());
-}
+}*/
 
 
 void GraphicEngine::setDebugDraw()
 {
-	debugDraw = new DebugDraw(irrDevice);
+	/*debugDraw = new DebugDraw(irrDevice);
 	//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
 	//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
 	//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
@@ -302,7 +262,7 @@ void GraphicEngine::setDebugDraw()
 
 	debugMat.Lighting = false;
 
-	debug_draw_bullet = true;
+	debug_draw_bullet = true;*/
 }
 
 void GraphicEngine::apuntar()

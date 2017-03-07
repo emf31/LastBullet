@@ -27,7 +27,7 @@ void DebugMenuGUI::handleEvent(Event * ev)
 }
 
 void DebugMenuGUI::inicializar() {
-	init("../GUI", GraphicEngine::i().getDevice(), "DebugMenuGUI");
+	init("../GUI", "DebugMenuGUI");
 
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("VanillaSkin.scheme");

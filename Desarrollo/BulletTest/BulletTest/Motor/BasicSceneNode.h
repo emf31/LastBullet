@@ -1,42 +1,33 @@
 #pragma once
-#include "irrlicht.h"
-#include <iostream>
-#include <string>
-#include <vec3.hpp>
-#include "SceneNode.h"
 
+#include <TModel.h>
 
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
+#include <SceneNode.h>
+
 
 class BasicSceneNode : public SceneNode
 {
 public:
-	BasicSceneNode(IMeshSceneNode* node, IrrlichtDevice * irrDevice);
+	BasicSceneNode(TModel* node);
 	~BasicSceneNode();
 
 	virtual void addChild(std::shared_ptr<SceneNode> child) override;
 	virtual void removeChild(std::shared_ptr<SceneNode> child) override;
-	virtual void setTexture(const io::path& texture, int material) override;
-	virtual void setPosition(Vec3<float> position) override;
-	virtual void setRotation(Vec3<float> rotation) override;
+	virtual void setTexture(const std::string& texture, int material) override;
+	virtual void setPosition(const Vec3<float>& position) override;
+	virtual void setRotation(const Vec3<float>& rotation) override;
 
 	virtual Vec3<float> getPosition() override;
 	virtual Vec3<float> getRotation() override;
 	virtual Vec3<float> getScale() override;
 	virtual void setVisible(bool visible) override;
-	virtual ISceneNode* getNodo() override;
-	virtual void setAnimation(int start, int end) override {};
+	//TModel* getNodo();
 	virtual void setColor(const Color4f& color) override;
-
+	
 private:
-	IMeshSceneNode* m_node;
+	TModel* m_node;
 
-	// Heredado vía SceneNode
+	virtual TEntity* getEntityNode() override  { return m_node; }
 	
 };
 

@@ -48,6 +48,11 @@ void TEntity::addChild(TEntity * ent) {
 
 }
 
+void TEntity::removeChild(TEntity * ent)
+{
+	miNodo->removeChild(ent->getMiNodo());
+}
+
  void TEntity::removeNode() {
 	miNodo->removeNode();
 }

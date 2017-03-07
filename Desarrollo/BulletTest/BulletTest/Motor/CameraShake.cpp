@@ -29,10 +29,8 @@ void CameraShake::update()
 			posicion = -m_amplitud*sin(m_frecuencia*m_shakeTime.getElapsedTime().asSeconds());
 
 			//m_camera.setTarget(Vec3<float>(m_camera.getTarget().getX(), m_camera.getTarget().getY()-(posicion), m_camera.getTarget().getZ()));
-			ISceneNode* nodo=static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getCurrentWeapon()->getNode()->getNodo();
-			nodo->setPosition(vector3df(nodo->getPosition().X, nodo->getPosition().Y + posicion, nodo->getPosition().Z));
-
-			
+			SceneNode* nodo=static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getCurrentWeapon()->getNode().get();
+			nodo->setPosition(Vec3<float>(nodo->getPosition().getX(), nodo->getPosition().getY() + posicion, nodo->getPosition().getZ()));
 		}
 		else{
 			m_shakeActive = false;

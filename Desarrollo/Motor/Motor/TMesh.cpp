@@ -1,6 +1,6 @@
 #include "TMesh.h"
 
-TMesh::TMesh(vector<Vertex>& vertices, vector<GLuint>& indices, vector<Texture*>& textures, Shader *shader) {
+TMesh::TMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures, Shader *shader) {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;

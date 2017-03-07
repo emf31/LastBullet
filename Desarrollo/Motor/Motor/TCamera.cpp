@@ -7,7 +7,7 @@
 
 // Constructor with vectors
 
-TCamera::TCamera() {
+TCamera::TCamera(){
 
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
@@ -24,6 +24,7 @@ TCamera::TCamera() {
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	derecha= glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
+	inputEnable = true;
 }
 
 

@@ -220,7 +220,7 @@ void Player::cargarContenido()
 
 void Player::borrarContenido()
 {
-	GraphicEngine::i().removeNode(m_nodo);
+	delete m_nodo.get();
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 }

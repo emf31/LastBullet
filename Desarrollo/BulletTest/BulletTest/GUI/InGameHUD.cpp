@@ -5,7 +5,7 @@ InGameHUD::InGameHUD() : GUI() {
 }
 
 void InGameHUD::inicializar() {
-	init("../GUI", GraphicEngine::i().getDevice(), "InGameHUD");
+	init("../GUI", "InGameHUD");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
 	loadLayout("LastBulletHUD.layout");

@@ -1,7 +1,7 @@
 #pragma once
-#include "irrlicht.h"
 #include <vec3.hpp>
 #include "../Entities/Entity.h"
+#include <TCamera.h>
 
 class CameraShake;
 class GunRecoil;
@@ -12,7 +12,7 @@ using namespace scene;
 class Camera
 {
 public:
-	Camera(ICameraSceneNode* camera, const std::string &nombre);
+	Camera(TCamera* camera, const std::string &nombre);
 	~Camera();
 
 	void setTarget(Vec3<float> target);
@@ -25,12 +25,12 @@ public:
 	void asignarEntity(Entity* ent);
 	void update();
 
-	void setInputReceiver(bool input) { m_camera->setInputReceiverEnabled(input);  }
+	void setInputReceiver(bool input) { m_camera->setInputEnable(input);  }
 
 	Vec3<float> getRotation();
 
 	void addChild(std::shared_ptr<SceneNode> nodo) { 
-		m_camera->addChild(nodo->getNodo()); 
+		m_camera->addChild(nodo->getEntityNode()); 
 
 	}
 	void cameraShake();
@@ -42,7 +42,7 @@ public:
 		return m_pName;
 	}
 
-	ICameraSceneNode* getCameraNode() const{
+	TCamera* getCameraNode() const{
 		return m_camera;
 	}
 
@@ -50,7 +50,7 @@ public:
 private:
 
 	std::string m_pName;
-	ICameraSceneNode* m_camera;
+	TCamera* m_camera;
 	
 	Entity* m_entity;
 	CameraShake* m_cameraShake;

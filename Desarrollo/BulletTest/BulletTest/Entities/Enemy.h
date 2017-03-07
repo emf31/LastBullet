@@ -31,7 +31,7 @@ public:
 
 	void updateEnemigo(Vec3<float> pos);
 
-	void updateAnimation();
+	//void updateAnimation();
 	void updateState();
 
 	virtual void handleMessage(const Message & message) override;

@@ -6,7 +6,7 @@ MenuGUI::MenuGUI() : GUI() {
 }
 
 void MenuGUI::inicializar() {
-	init("../GUI", GraphicEngine::i().getDevice(), "MenuGUI");
+	init("../GUI",  "MenuGUI");
 	loadScheme("SampleBrowser.scheme");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");

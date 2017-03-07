@@ -2,7 +2,7 @@
 #include "BasicSceneNode.h"
 
 
-BasicSceneNode::BasicSceneNode(IMeshSceneNode* node, IrrlichtDevice * irrDevice) : SceneNode(irrDevice),
+BasicSceneNode::BasicSceneNode(TModel* node) : 
 	m_node(node)
 {
 }
@@ -10,63 +10,55 @@ BasicSceneNode::BasicSceneNode(IMeshSceneNode* node, IrrlichtDevice * irrDevice)
 
 BasicSceneNode::~BasicSceneNode()
 {
+	m_node->removeNode();
 	m_node = nullptr;
 
 }
 
-void BasicSceneNode::setTexture(const io::path & texture, int material)
+void BasicSceneNode::setTexture(const std::string & texture, int material)
 {
-	m_node->getMaterial(material).setTexture(0, m_irrDevice->getVideoDriver()->getTexture(texture));
+	//m_node->getMaterial(material).setTexture(0, m_irrDevice->getVideoDriver()->getTexture(texture));
 }
 
 
-void BasicSceneNode::setPosition(Vec3<float> position)
+void BasicSceneNode::setPosition(const Vec3<float>& position)
 {
-	m_node->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
+	m_node->setPosition(Vec3<float>(position.getX(), position.getY(), position.getZ()));
 }
 
 Vec3<float> BasicSceneNode::getPosition()
 {
-	vector3df aux = m_node->getPosition();
-	return Vec3<float>(aux.X, aux.Y, aux.Z);
+	return m_node->getPosition();
 }
 
 Vec3<float> BasicSceneNode::getRotation()
 {
-	vector3df aux = m_node->getRotation();
-	return Vec3<float>(aux.X, aux.Y, aux.Z);
+	return m_node->getRotation();
 }
 
-void BasicSceneNode::setRotation(Vec3<float> rotation)
+void BasicSceneNode::setRotation(const Vec3<float>& rotation)
 {
-	m_node->setRotation(vector3df(rotation.getX(), rotation.getY(), rotation.getZ()));
+	m_node->setRotation(rotation);
 	
 }
 
 Vec3<float> BasicSceneNode::getScale()
 {
-	vector3df aux = m_node->getScale();
-	return Vec3<float>(aux.X, aux.Y, aux.Z);
+	return m_node->getScale();
 }
 
 void BasicSceneNode::addChild(std::shared_ptr<SceneNode> child) {
-	m_node->addChild(child->getNodo());
+	m_node->addChild(child->getEntityNode());
 }
 
 void BasicSceneNode::removeChild(std::shared_ptr<SceneNode> child)
 {
-	//child->getNodo()->grab();
-	m_node->removeChild(child->getNodo());
-}
-
-ISceneNode* BasicSceneNode::getNodo() {
-	return m_node;
+	m_node->removeChild(child->getEntityNode());
 }
 
 void BasicSceneNode::setColor(const Color4f & color)
 {
-	IMesh* mesh = m_node->getMesh();
-	m_irrDevice->getSceneManager()->getMeshManipulator()->setVertexColors(mesh, video::SColor(color.a, color.r, color.g, color.b));
+	m_node->setModelColor(color.r, color.g, color.b);
 }
 
 void BasicSceneNode::setVisible(bool visible)

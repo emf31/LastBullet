@@ -8,8 +8,6 @@
 #include "vec3.hpp"
 #include "TTransform.h"
 
-using namespace std;
-
 // GL Includes
 #include <GLEW/glew.h>
 #include <glm/glm.hpp>
@@ -82,19 +80,19 @@ private:
 
 
 	/*  Model Data  */
-	vector<TMesh*> meshes;
-	string directory;
-	vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
+	std::vector<TMesh*> meshes;
+	std::string directory;
+	std::vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
 	Shader *shader;
 	/*  Funciones   */
 	// Carga el modelo con ASSIMP
-	void loadModel(const string& path);
+	void loadModel(const std::string& path);
 
 	void processNode(aiNode* node, const aiScene* scene);
 
 	TMesh* processMesh(aiMesh* mesh, const aiScene* scene);
 
-	void loadMaterialTextures(vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, string typeName);
+	void loadMaterialTextures(vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, std::string typeName);
 
 	TTransform* transRotacion;
 	TTransform* transEscalado;

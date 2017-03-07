@@ -1,4 +1,4 @@
-
+/*
 #include "BillboardSceneNode.h"
 
 
@@ -72,3 +72,4 @@ void BillboardSceneNode::setVisible(bool visible)
 {
 	m_node->setVisible(visible);
 }
+*/

@@ -266,8 +266,8 @@ public:
     bool injectMouseLeaves(void);
     bool injectMouseButtonDown(MouseButton button);
     bool injectMouseButtonUp(MouseButton button);
-    bool injectKeyDown(Key::Scan scan_code);
-    bool injectKeyUp(Key::Scan scan_code);
+    bool injectKeyDown(int scan_code);
+    bool injectKeyUp(int scan_code);
     bool injectChar(String::value_type code_point);
     bool injectMouseWheelChange(float delta);
     bool injectMousePosition(float x_pos, float y_pos);
