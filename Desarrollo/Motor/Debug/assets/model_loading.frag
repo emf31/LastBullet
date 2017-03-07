@@ -87,7 +87,7 @@ vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir){
 	float diff = max(dot(norm, lightDir), 0.0);
 	vec3 diffuse = sunlight.difusa * diff * vec3(texture(material.texture_diffuse, TexCoords)); 
 	vec3 reflectDir = reflect(-lightDir, norm);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0);
 	vec3 specular =  (spec * sunlight.especular) * vec3(texture(material.texture_specular, TexCoords)) ;
 
 	return (ambient + diffuse + specular);
@@ -113,7 +113,7 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
 	//LUZ ESPECULAR
 	//calculamos el vector de reflexion de la luz
 	vec3 reflectDir = reflect(-lightDir, norm);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0);
 	vec3 specular =  (spec * light.especular) * vec3(texture(material.texture_specular, TexCoords)) ; 
 
     // atenuacion
@@ -142,7 +142,7 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir){
     
     //LUZ ESPECULAR
     vec3 reflectDir = reflect(-lightDir, norm);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brillo);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0);
     vec3 specular = light.especular * spec * vec3(texture(material.texture_specular, TexCoords));
     
 

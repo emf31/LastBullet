@@ -27,7 +27,7 @@ int main() {
 		return -1;
 	}
 	SceneManager &sm = SceneManager::i();	
-	
+	sm.inicializarBuffers();
 	//*******MODELOS***********
 
 	//window
@@ -71,8 +71,8 @@ int main() {
 
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-	sol->setColor(1.0f, 1.0f, 1.0f);
-	sol->setIntensidadAmbiente(0.8);
+	//sol->setColor(1.0f, 1.0f, 1.0f);
+	//sol->setIntensidadAmbiente(0.5);
 	//sol->setIntensidadAmbiente(1.0f);
 	//bombilla
 	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(8.0f, 4.0f, 2.0f));
@@ -80,8 +80,8 @@ int main() {
 	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(12.0f, 6.0f, 4.0f));
 	//linterna
 	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-3.0f, 0.0f, 3.0f), Vec3<float>(0.0f, 0.0f, -1.0f));
-	flash->setColor(0.0f, 1.0f, 0.0f);
-	flash->setIntensidadAmbiente(0.8);
+	//flash->setColor(0.0f, 1.0f, 0.0f);
+	//flash->setIntensidadAmbiente(0.8);
 	
 
 
@@ -98,7 +98,7 @@ int main() {
 
 
 
-	sm.inicializarBuffers();
+	
 
 	while (!engine.shouldCloseWindw()){
 		//std::cout << "inicio iteracion" << std::endl;
@@ -115,30 +115,13 @@ int main() {
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3;
 		//p->setPosition(newPos);
-		p1->setRotation(vecDir);
+		/*p1->setRotation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
-		p1->updatePosition(newPos);
+		p1->updatePosition(newPos);*/
 		
 
-		
-		if (tiempoCamara == 300) {
-			tiempoCamara = 0;
-			if (contCam >= sm.vectorCamaras.size()) {
-				contCam = 0;
-			}
-			//std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
-			sm.setActiveCamera(sm.vectorCamaras[contCam]);
-			contCam++;
-		}
-
-		cont++;
-		tiempoCamara++;
-
-		
 		sm.draw(engine.getWindow());
 		//std::cout << "final iteracion" << std::endl;
-		
-		
 		
 	}
 	engine.end();

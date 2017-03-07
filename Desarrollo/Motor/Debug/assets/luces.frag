@@ -1,4 +1,6 @@
 #version 330 core
+out vec4 FragColor;
+in vec2 TexCoords;
 
 struct SunLight {
     vec3 especular;
@@ -28,10 +30,6 @@ vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Di
 vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 
-
-out vec4 color;
-in vec2 TexCoords;
-
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
 uniform sampler2D gTextura;
@@ -52,9 +50,14 @@ uniform PointLight pointlight[10];
 void main()
 {             
     // Retrieve data from gbuffer
+    //TexCoords = gCoords.rg;
+
     vec3 FragPos = texture(gPosition, TexCoords).rgb;
     vec3 Normal = texture(gNormal, TexCoords).rgb;
-    vec3 Diffuse = texture(gTextura, TexCoords).rgb;
+    vec3 Diffuse;
+    Diffuse.r = texture(gTextura, TexCoords).r;
+    Diffuse.g = texture(gTextura, TexCoords).g;
+    Diffuse.b = texture(gTextura, TexCoords).b;
     float Specular = texture(gTextura, TexCoords).a;
     
     
@@ -62,7 +65,7 @@ void main()
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
-    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
+   colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
         colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
@@ -73,16 +76,16 @@ void main()
     }
 
     if(draw_mode == 1)
-        color = vec4(colorFinal, 1.0);
+        FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
-        color = vec4(FragPos, 1.0);
+        FragColor = vec4(FragPos, 1.0);
     else if(draw_mode == 3)
-        color = vec4(Normal, 1.0);
+        FragColor = vec4(Normal, 1.0);
     else if(draw_mode == 4)
-        color = vec4(Diffuse, 1.0);
+        FragColor = vec4(Diffuse, 1.0);
     else if(draw_mode == 5)
-        color = vec4(vec3(Specular), 1.0);
-    //color = vec4(colorFinal, 1.0);
+        FragColor = vec4(vec3(Specular), 1.0);
+    //FragColor = vec4(colorFinal, 1.0);
     
 
 }

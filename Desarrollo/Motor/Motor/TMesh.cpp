@@ -31,14 +31,12 @@ void TMesh::beginDraw() {
 		else if (name == "texture_normal")
 			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), i);
 		
-	
-
 		// Bindeamos la textura
 		glBindTexture(GL_TEXTURE_2D, this->textures[i]->id);
 	}
 
 	// Ponemos el brillo a su valor por defecto (se podría cambiar el valor??)
-	glUniform1f(glGetUniformLocation(shader->Program, "material.brillo"), 128.0f);
+	//glUniform1f(glGetUniformLocation(shader->Program, "material.brillo"), 128.0f);
 
 	// Dibujamos!
 	glBindVertexArray(this->VAO);
@@ -50,7 +48,7 @@ void TMesh::beginDraw() {
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	//glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0);
 }
 
 void TMesh::endDraw() {
@@ -81,6 +79,12 @@ void TMesh::setupMesh() {
 	// Coordenadas de texturas (2)
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoords));
+	// Vertex Tangent
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Tangent));
+	// Vertex Bitangent
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Bitangent));
 
 	glBindVertexArray(0);
 }

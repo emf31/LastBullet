@@ -24,6 +24,10 @@ struct Vertex {
 	glm::vec3 Normal;
 	// TexCoords
 	glm::vec2 TexCoords;
+	// Tangent
+	glm::vec3 Tangent;
+	// Bitangent
+	glm::vec3 Bitangent;
 };
 
 class TMesh : public TEntity {
