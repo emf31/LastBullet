@@ -142,36 +142,49 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
     float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
     float linear=0.09; //la cantidad de atenueacion segun las distancia
     float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
+    vec3 colorF=vec3(0.0f,0.0f,0.0f);
 
-    //LUZ AMBIENTE
-    vec3 ambient = light.ambiente * Diffuse;
-    
-   //LUZ DIFUSA   
-    vec3 lightDir = normalize(light.position - FragPos);
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.difusa * diff * Diffuse;  
-    
-    //LUZ ESPECULAR
-    vec3 reflectDir = reflect(-lightDir, norm);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
-    vec3 specular = light.especular * spec * Specular;
-    
-
-    // para el suavizado de la luz del flash, se va interpolando desde el radio exterior hasata el radio interior
+     vec3 lightDir = normalize(light.position - FragPos);
     float theta = dot(lightDir, normalize(-light.direction)); 
-    float epsilon = (light.radioInterior - light.radioExterior);
-    float intensity = clamp((theta - light.radioExterior) / epsilon, 0.0, 1.0);
-    diffuse  *= intensity;
-    specular *= intensity;
+    if(theta > light.radioExterior) {
+    //LUZ AMBIENTE
+        vec3 ambient = light.ambiente * Diffuse;
+        
+       //LUZ DIFUSA   
+       
+        float diff = max(dot(norm, lightDir), 0.0);
+        vec3 diffuse = light.difusa * diff * Diffuse;  
+        
+        //LUZ ESPECULAR
+        vec3 reflectDir = reflect(-lightDir, norm);  
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
+        vec3 specular = light.especular * spec * Specular;
+        
+
+        // para el suavizado de la luz del flash, se va interpolando desde el radio exterior hasata el radio interior
+        
+        float epsilon = (light.radioInterior - light.radioExterior);
+        float intensity = clamp((theta - light.radioExterior) / epsilon, 0.0, 1.0);
+        ambient  *= intensity;
+        diffuse  *= intensity;
+        specular *= intensity;
 
 
-    // atenuacion
-   float distance    = length(light.position - FragPos);
-   float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
+        // atenuacion
+       float distance    = length(light.position - FragPos);
+       float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
+
+        ambient  *= attenuation;
+       diffuse  *= attenuation;
+       specular *= attenuation;   
+
+        colorF = (ambient + diffuse + specular);
+
+      
+        
+    }
+        return colorF;
+   
 
 
-   diffuse  *= attenuation;
-   specular *= attenuation;   
-            
-   return (ambient + diffuse + specular); 
 }

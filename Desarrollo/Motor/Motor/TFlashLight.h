@@ -5,7 +5,7 @@
 class TFlashLight : public TLuz {
 
 public:
-	TFlashLight(Vec3<float> pos, Vec3<float> direccion, float radioIn = 13.0f, float radioEx=17.0f);
+	TFlashLight(Vec3<float> pos, Vec3<float> direccion, float radioIn = 12.0f, float radioEx=17.0f);
 	~TFlashLight();
 
 	void pasarDatosAlShader(Shader *shader, int i = 0);

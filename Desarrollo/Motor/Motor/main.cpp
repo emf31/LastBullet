@@ -79,8 +79,8 @@ int main() {
 	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(10.0f, 4.0f, 2.0f));
 	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(12.0f, 6.0f, 4.0f));
 	//linterna
-	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-3.0f, 0.0f, 3.0f), Vec3<float>(0.0f, 0.0f, -1.0f));
-	//flash->setColor(0.0f, 1.0f, 0.0f);
+	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-5.0f, 0.0f, 8.0f), Vec3<float>(0.5f, 0.0f, -1.0f));
+	flash->setColor(0.0f, 1.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
 	
 
