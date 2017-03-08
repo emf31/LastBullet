@@ -72,12 +72,15 @@ int main() {
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
 	//sol->setColor(1.0f, 1.0f, 1.0f);
-	//sol->setIntensidadAmbiente(0.5);
+	sol->setIntensidadAmbiente(0.2);
 	//sol->setIntensidadAmbiente(1.0f);
 	//bombilla
-	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(8.0f, 4.0f, 2.0f));
-	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(10.0f, 4.0f, 2.0f));
-	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(12.0f, 6.0f, 4.0f));
+	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
+	luz->setColor(1.0f, 0.5f, 2.f);
+	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f));
+	luz2->setColor(0.0f, 1.f, 0.5f);
+	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
+	luz3->setColor(1.0f, 0.5f, 0.5f);
 	//linterna
 	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-5.0f, 0.0f, 8.0f), Vec3<float>(0.5f, 0.0f, -1.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);

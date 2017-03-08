@@ -24,6 +24,8 @@ struct PointLight {
     vec3 difusa;
     vec3 ambiente;
     vec3  position;
+    float radio;
+
 };
 
 vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
@@ -68,6 +70,8 @@ void main()
    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
+        float distancia = length(pointlight[i].position - FragPos);
+        if(distancia<=pointlight[i].radio)
         colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     //*********************************LUZ LINTERNA*****************************************
@@ -129,9 +133,11 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
 
     // atenuacion
     float distance    = length(light.position - FragPos);
-    float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));    
+    float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));
+    ambient *= attenuation;
     diffuse  *= attenuation;
     specular *= attenuation;   
+
 
     return (ambient + diffuse + specular);
 }
