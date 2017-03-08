@@ -6,7 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
-using namespace std;
+
 #include <GLEW/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -30,11 +30,11 @@ class TMesh : public TEntity {
 public:
 
 	/*  Mesh Data  */
-	vector<Vertex> vertices;
-	vector<GLuint> indices;
-	vector<Texture*> textures;
+	std::vector<Vertex> vertices;
+	std::vector<GLuint> indices;
+	std::vector<Texture*> textures;
 
-	TMesh(vector<Vertex>& vertices, vector<GLuint>& indices, vector<Texture*>& textures, Shader *shader);
+	TMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures, Shader *shader);
 	~TMesh();
 
 	void beginDraw();

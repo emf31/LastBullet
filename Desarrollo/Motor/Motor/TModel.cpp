@@ -98,14 +98,14 @@ void TModel::beginDraw() {
 
 }
 
-void TModel::loadModel(const string& path) {
+void TModel::loadModel(const std::string& path) {
 	// Leemos con ASSIMP
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 	// Miramos si hay algún error
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // Si no es 0
 	{
-		cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
+		std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
 		return;
 	}
 	// Cogemos el directorio del recurso
@@ -131,9 +131,9 @@ void TModel::processNode(aiNode * node, const aiScene * scene) {
 
 TMesh* TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Datos básicos de las mallas (vértices, índices y texturas)
-	vector<Vertex> vertices;
-	vector<GLuint> indices;
-	vector<Texture*> textures;
+	std::vector<Vertex> vertices;
+	std::vector<GLuint> indices;
+	std::vector<Texture*> textures;
 
 	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -193,7 +193,7 @@ TMesh* TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	return new TMesh(vertices, indices, textures, shader);
 }
 
-void TModel::loadMaterialTextures(vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, string typeName) {
+void TModel::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, std::string typeName) {
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
 		aiString str;
 		mat->GetTexture(type, i, &str);

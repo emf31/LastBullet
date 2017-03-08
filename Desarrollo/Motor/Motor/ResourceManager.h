@@ -27,7 +27,7 @@ private:
 
 	void shutdown();
 
-	GLint TextureFromFile(const char* path, string directory);
+	GLint TextureFromFile(const char* path, std::string directory);
 
 	friend class SceneManager;
 };
