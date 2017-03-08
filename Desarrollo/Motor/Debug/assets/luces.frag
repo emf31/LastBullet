@@ -25,6 +25,7 @@ struct PointLight {
     vec3 ambiente;
     vec3  position;
     float radio;
+    float radioExt;
 
 };
 
@@ -71,12 +72,13 @@ void main()
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
         float distancia = length(pointlight[i].position - FragPos);
-        if(distancia<=pointlight[i].radio)
-        colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+        if(distancia<=pointlight[i].radioExt)
+       colorFinal+=calcularPointLight(pointlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
     }
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
-        colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+       // colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+        int a;
     }
 
     if(draw_mode == 1)
@@ -133,11 +135,29 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
 
     // atenuacion
     float distance    = length(light.position - FragPos);
+    float miatenuacion ;
     float attenuation = 1.0f / (constant + linear * distance + quadratic * (distance * distance));
-    ambient *= attenuation;
-    diffuse  *= attenuation;
-    specular *= attenuation;   
+    //ambient *= attenuation;
+  // diffuse  *= attenuation;
+    //specular *= attenuation;   
 
+
+    if(distance>light.radio){
+        miatenuacion = (distance-light.radio)*0.15;
+        ambient -= miatenuacion;
+
+        diffuse  -= miatenuacion;
+        specular -= miatenuacion;  
+        if(ambient.x<0.0f) ambient.x=0.f;
+        if(ambient.y<0.0f) ambient.y=0.f;
+        if(ambient.z<0.0f) ambient.z=0.f;
+        if(diffuse.x<0.0f) diffuse.x=0.f;
+        if(diffuse.y<0.0f) diffuse.y=0.f;
+        if(diffuse.z<0.0f) diffuse.z=0.f;
+        if(specular.x<0.0f) specular.x=0.f;
+        if(specular.y<0.0f) specular.y=0.f;
+        if(specular.z<0.0f) specular.z=0.f;
+    }
 
     return (ambient + diffuse + specular);
 }
