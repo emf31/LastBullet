@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 
 
-TModel::TModel(GLchar * path, Shader* shaderPath) {
+TModel::TModel(GLchar * path, Shader* shaderPath) : sm(SceneManager::i()) {
 	/*Shader* shader;
 	if (*shaderPath) {
 		shader = ResourceManager::i().getShader(shaderPath);
@@ -20,88 +20,51 @@ TModel::TModel(GLchar * path, Shader* shaderPath) {
 	m_b = 1.f;
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
+	visible = true;
 }
 
 TModel::~TModel() {
+	for (auto it = meshes.begin(); it != meshes.end(); ++it) {
+		delete *it;
+	}
+	meshes.clear();
 }
 
 void TModel::beginDraw() {
+	if (visible) {
 
-	SceneManager &sm = SceneManager::i();
-	glm::mat4 view = SceneManager::i().view;
-	glm::mat4 projection = SceneManager::i().projection;
-	glm::mat4 model= SceneManager::i().m_matrizActual;
 
-	
-	/*
-	ESTO PUEDE SERVIR PARA HACER QUE LA PISTOLA GIRE CON LA CAMARA YA QUE SE PROCESARIA ANTES LO DE LA PISTOLA QUE LO DE LA CAMARA
-		int tam = SceneManager::i().pilaMatrices.size();
-	for (int i = 0; i < tam; i++) {
-		model = SceneManager::i().pilaMatrices.front()*model;
-		SceneManager::i().pilaMatrices.pop_front();
+		const glm::mat4& view = sm.getViewMatrix();
+		const glm::mat4& projection = sm.getProjectionMatrix();
+		glm::mat4& model = sm.getMatrizActual();
+
+		glm::mat4 modelview = projection * view * model;
+
+
+		sm.shaderGeometria->Use();
+
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		//color
+		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
+
+		//Dibujamos los hijos (Si los hay)
+		for (GLuint i = 0; i < this->meshes.size(); i++) {
+			this->meshes[i]->beginDraw();
+		}
+			
 	}
-	//por si dependemos de la transformacion del padre, tenemos que multiplicar nuestra modelo por la de los padres que es la actual.
-	model = actual * model;
-	//seteamos la matrizActual a la del modelo por si acaso tiene algun hijo que necesita su matriz modelo
-	SceneManager::i().m_matrizActual = model;
-	
-	*/
 
-
-	glm::mat4 modelview = projection * view * model;
-
-
-
-
-	// Activamos el shader que tenemos guardado
-	sm.shaderGeometria->Use();
-	// Le pasamos las matrices
-	//std::cout << "paso matriz modelview" << std::endl;
-	//std::cout << "paso matriz model" << std::endl;
-	//std::cout << "paso matriz objectColor" << std::endl;
-	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
-	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-	//color
-	glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
-	/*
-	ESTAMOS EN EL SHADER DE GEOMETRIA ASI QUE NO PASAMOS LUCES SOLO LA GEOMETRIA
-	
-	//numero luces
-	glUniform1i(glGetUniformLocation(sm.shaderGeometria->Program, "num_pointlight"), sm.vecPointLight.size());
-	glUniform1i(glGetUniformLocation(sm.shaderGeometria->Program, "num_flashlight"), sm.vecFlashLight.size());
-
-	//camaras
-	glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "viewPos"), SceneManager::i().activeCameraPos.getX(), SceneManager::i().activeCameraPos.getY(), SceneManager::i().activeCameraPos.getZ());
-	
-	//LUZ SOLAR
-	if (sm.sunlight != nullptr) {
-		sm.sunlight->pasarDatosAlShader(sm.shaderGeometria);
-	}
-	//POINTLIGHT
-	for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
-		sm.vecPointLight[i]->pasarDatosAlShader(sm.shaderGeometria, i);
-	}
-	//LUZ LINTERNA
-	for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
-		sm.vecFlashLight[i]->pasarDatosAlShader(sm.shaderGeometria, i);
-	}
-	
-	*/
-	
-
-	//Dibujamos los hijos (Si los hay)
-	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i]->beginDraw();
 }
 
-void TModel::loadModel(const string& path) {
+void TModel::loadModel(const std::string& path) {
 	// Leemos con ASSIMP
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 	// Miramos si hay algún error
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // Si no es 0
 	{
-		cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
+		std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
 		return;
 	}
 	// Cogemos el directorio del recurso
@@ -127,9 +90,9 @@ void TModel::processNode(aiNode * node, const aiScene * scene) {
 
 TMesh* TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Datos básicos de las mallas (vértices, índices y texturas)
-	vector<Vertex> vertices;
-	vector<GLuint> indices;
-	vector<Texture*> textures;
+	std::vector<Vertex> vertices;
+	std::vector<GLuint> indices;
+	std::vector<Texture*> textures;
 
 	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -189,13 +152,13 @@ TMesh* TModel::processMesh(aiMesh * mesh, const aiScene * scene) {
 	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria);
 }
 
-void TModel::loadMaterialTextures(vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, string typeName) {
+void TModel::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, std::string typeName) {
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
 		aiString str;
 		mat->GetTexture(type, i, &str);
 		// Miramos si se ha cargado la textura con anterioridad en el ResourceManager
 		// Si no se ha cargado, el RM la carga. Si ya se había cargado, el RM nos da un puntero a ella :)
-		ResourceManager rm = ResourceManager::i();
+		ResourceManager& rm = ResourceManager::i();
 		Texture* text = rm.getTexture(str.C_Str(), typeName, this->directory);
 		textVec.push_back(text);
 	}

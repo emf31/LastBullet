@@ -44,13 +44,19 @@ public:
 
 	glm::vec3 calcularPosicionVista();
 
-	Vec3<float> getVectorDireccion() {
-		return Vec3<float>(direccion.x, direccion.y, direccion.z);
-	}
+	Vec3<float> getVectorDireccion() const { return Vec3<float>(direccion.x, direccion.y, direccion.z); }
+
+	void setTarget(const Vec3<float>& target);
+	
+	Vec3<float> getTarget();
+
+	void setRotationDir(const Vec3<float>& dir);
+
+	void setInputEnable(bool b) { inputEnable = b; }
 
 
 private:
-
+	bool inputEnable;
 
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionTraslacion(TTransform* tras);

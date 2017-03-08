@@ -6,12 +6,13 @@
 #include "enum.h"
 #include "TEntity.h"
 
+class SceneManager;
+
 
 class TNode
 {
-	friend class SceneManager;
 public:
-	TNode(int entityID, TNode* nodoPadre=nullptr);
+	TNode(int entityID, TNode* nodoPadre = nullptr);
 	~TNode();
 	
 
@@ -19,6 +20,7 @@ public:
 
 	void setParentNode(TNode* nodoPadre);
 	bool removeChild(TNode *child);
+	void removeNode();
 	void addChild(TNode* child);
 	
 
@@ -41,12 +43,13 @@ private:
 	std::vector<TNode*> m_childNodes;
 	int myNodeEntityID;
 	
-	
+	SceneManager& sm;
 	
 	//glm::vec3 scale;
 	//glm::vec3 position;
 	//glm::vec3 rotation;
 	T_Nodos type;
 	
+	friend class SceneManager;
 };
 

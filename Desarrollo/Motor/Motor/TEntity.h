@@ -15,6 +15,8 @@ public:
 	virtual void endDraw()=0;
 	void addChild(TEntity* ent);
 
+	void removeNode();
+	void removeChild(TEntity* ent);
 
 private:
 	int entityID = -1;

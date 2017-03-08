@@ -22,17 +22,8 @@
     <Filter Include="Archivos de encabezado\Otros">
       <UniqueIdentifier>{e3a9297c-7726-415a-9507-46814b7a4c7a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de código fuente\GUI">
-      <UniqueIdentifier>{78952751-1983-43a0-ba5d-8d7d1d941e9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\GUI">
-      <UniqueIdentifier>{630a3016-f4fe-4e92-841a-53fa9c27a2fc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="TEntity.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -66,18 +57,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\DebugMenuGUI.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI\GUI.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI\GUIManager.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Billboard.cpp">
-      <Filter>Archivos de código fuente\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="TLuz.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -88,6 +67,9 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="TFlashLight.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -130,18 +112,6 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\DebugMenuGUI.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\GUI.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI\GUIManager.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Billboard.h">
-      <Filter>Archivos de encabezado\GUI</Filter>
     </ClInclude>
     <ClInclude Include="enum.h">
       <Filter>Archivos de encabezado\Otros</Filter>

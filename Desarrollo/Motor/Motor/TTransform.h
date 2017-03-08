@@ -40,6 +40,9 @@ public:
 
 
 private: 
+
+	SceneManager &sm;
+
 	glm::mat4 m_matrix;
 	Vec3<float> m_rotation;
 	glm::vec3 m_rotation2;

@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 #include "TTransform.h"
 
-void RenderQuad();
+
 
 void SceneManager::inicializar() {
 	//gui.init("GUI");
@@ -22,6 +22,8 @@ void SceneManager::inicializar() {
 	perx.y = 0.0f;
 	perx.z = 0.0f;
 	perx.w = 0.0f;*/
+
+	quadVAO = 0;
 
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
 	scene = new TNode(-1);
@@ -60,7 +62,7 @@ void SceneManager::draw(GLFWwindow* window) {
 	view = camaraActiva->GetViewMatrix();
 	//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 	activeCameraPos = camaraActiva->getPosition();
-	// Desencadena el dibujado de la escena
+	
 	scene->draw();
 	//gui.draw();
 	//std::cout << "desactivo gBuffer" << std::endl;
@@ -417,11 +419,11 @@ TCamera * SceneManager::crearNodoCamara()
 	return camara;
 }
 
+
 // RenderQuad() Renders a 1x1 quad in NDC, best used for framebuffer color targets
 // and post-processing effects.
-GLuint quadVAO = 0;
-GLuint quadVBO;
-void RenderQuad()
+
+void SceneManager::RenderQuad()
 {
 	if (quadVAO == 0)
 	{
@@ -447,3 +449,11 @@ void RenderQuad()
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);
 }
+
+void SceneManager::shutdown()
+{
+	delete scene;
+
+	ResourceManager::i().shutdown();
+}
+

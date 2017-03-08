@@ -24,10 +24,12 @@ TCamera::TCamera() {
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	derecha= glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
+	inputEnable = true;
 }
 
 
 TCamera::~TCamera() {
+	
 }
 
 
@@ -145,6 +147,26 @@ glm::vec3 TCamera::calcularPosicionVista()
 	//DE SU TRANSFORMACION PADRE QUE SERA LA DEL MODELO Y PONDRIA QUE LA CAMARA ESTA EN EL 70
 	//setPosition(pos);
 	return glm::vec3(pos.getX(), pos.getY(), pos.getZ());
+}
+
+void TCamera::setTarget(const Vec3<float>& target) {
+	Vec3<float> pos = getPosition();
+	Vec3<float> dir = target - pos;
+	dir.normalise();
+	setRotationDir(dir);
+
+}
+
+Vec3<float> TCamera::getTarget() {
+	Vec3<float> pos = getPosition();
+	Vec3<float> dir = getRotation();
+	return (dir + pos) * 1000;
+
+}
+
+void TCamera::setRotationDir(const Vec3<float>& dir) {
+	transRotacion->setRotationDirection(dir);
+
 }
 
 

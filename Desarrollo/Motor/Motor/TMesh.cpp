@@ -1,6 +1,6 @@
 #include "TMesh.h"
 
-TMesh::TMesh(vector<Vertex>& vertices, vector<GLuint>& indices, vector<Texture*>& textures, Shader *shader) {
+TMesh::TMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures, Shader *shader) {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
@@ -11,6 +11,14 @@ TMesh::TMesh(vector<Vertex>& vertices, vector<GLuint>& indices, vector<Texture*>
 
 
 TMesh::~TMesh() {
+	// Properly de-allocate all resources once they've outlived their purpose
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+
+	vertices.clear();
+	indices.clear();
+	textures.clear();
 }
 
 
@@ -22,7 +30,7 @@ void TMesh::beginDraw() {
 		glActiveTexture(GL_TEXTURE0 + i); // Activamos la textura que toca primero
 										  // + i para la que toca ahora diffuseI (siendo I el número de la textura difusa)
 
-		string name = this->textures[i]->type;
+		std::string name = this->textures[i]->type;
 		// Ponemos en el sampler la textura que toca
 		if (name == "texture_diffuse")
 			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_diffuse"), i);
