@@ -81,16 +81,16 @@ void TModel::beginDraw() {
 			sm.getSunLight()->pasarDatosAlShader(shader);
 		}
 		//POINTLIGHT
-		for (int i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
+		for (size_t i = 0; i < SceneManager::i().vecPointLight.size(); i++) {
 			sm.vecPointLight[i]->pasarDatosAlShader(shader, i);
 		}
 		//LUZ LINTERNA
-		for (int i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
+		for (size_t i = 0; i < SceneManager::i().vecFlashLight.size(); i++) {
 			sm.vecFlashLight[i]->pasarDatosAlShader(shader, i);
 		}
 
 		//Dibujamos los hijos (Si los hay)
-		for (GLuint i = 0; i < this->meshes.size(); i++)
+		for (size_t i = 0; i < this->meshes.size(); i++)
 			this->meshes[i]->beginDraw();
 
 

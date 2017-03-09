@@ -55,7 +55,6 @@ public:
 		// 2. Compilamos los shaders que hemmos leido
 
 		GLuint vertex, fragment;
-		GLint success;
 		// Vertex Shader
 		vertex = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertex, 1, &vShaderCode, NULL);

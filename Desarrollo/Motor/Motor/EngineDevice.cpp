@@ -27,14 +27,14 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	if (window == nullptr) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
-		return -1;
+		return false;
 	}
 	glfwMakeContextCurrent(window);
 	
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
 		std::cout << "Failed to initialize GLEW" << std::endl;
-		return -1;
+		return false;
 	}
 
 	glViewport(0, 0, screenWidth, screenHeight);
@@ -61,7 +61,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	sm.screenHeight = &this->screenHeight;
 	sm.inicializar();
 
-	return 1;
+	return true;
 }
 
 
@@ -100,8 +100,11 @@ void EngineDevice::end() {
 	glfwTerminate();
 }
 
-bool  EngineDevice::shouldCloseWindw() {
-	return glfwWindowShouldClose(window);
+bool EngineDevice::shouldCloseWindw() {
+	if(glfwWindowShouldClose(window) == 1)
+		return true;
+
+	return false;
 }
 
 void EngineDevice::shutdown()

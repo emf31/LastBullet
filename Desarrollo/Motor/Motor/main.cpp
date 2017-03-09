@@ -36,7 +36,7 @@ int main() {
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
+	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	//sm.camaraActiva->addChild(p1);
 	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 	
@@ -116,22 +116,6 @@ int main() {
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
 		
-
-		
-		if (tiempoCamara == 300) {
-			tiempoCamara = 0;
-			if (contCam >= sm.vectorCamaras.size()) {
-				contCam = 0;
-			}
-			//std::cout << "CAMBIO DE CAMARA!!!!" << std::endl;
-			sm.setActiveCamera(sm.vectorCamaras[contCam]);
-			contCam++;
-			
-		}
-
-		cont++;
-		tiempoCamara++;
-
 		
 		sm.draw(engine.getWindow());
 		//std::cout << "siguiente iteracion" << std::endl;

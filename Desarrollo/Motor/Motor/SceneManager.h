@@ -63,7 +63,7 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 	
-	float *screenWidth, *screenHeight;
+	int *screenWidth, *screenHeight;
 	
 	std::vector<TPointLight*> vecPointLight;
 	std::vector<TFlashLight*> vecFlashLight;
