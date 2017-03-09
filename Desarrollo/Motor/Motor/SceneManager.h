@@ -9,8 +9,6 @@
 #include "TPointLight.h"
 #include "TFlashLight.h"
 #include "TCamera.h"
-
-#include "GUI.h"
 #include <deque>
 
 #include <GLEW/glew.h>

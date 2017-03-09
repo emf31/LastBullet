@@ -151,11 +151,11 @@ void SceneManager::renderLuces()
 		sunlight->pasarDatosAlShader(shaderLuces);
 	}
 	//POINTLIGHT
-	for (int i = 0; i < vecPointLight.size(); i++) {
+	for (size_t i = 0; i < vecPointLight.size(); i++) {
 		vecPointLight[i]->pasarDatosAlShader(shaderLuces, i);
 	}
 	//LUZ LINTERNA
-	for (int i = 0; i < vecFlashLight.size(); i++) {
+	for (size_t i = 0; i < vecFlashLight.size(); i++) {
 		vecFlashLight[i]->pasarDatosAlShader(shaderLuces, i);
 	}
 
