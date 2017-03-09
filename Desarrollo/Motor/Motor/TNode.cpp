@@ -58,7 +58,7 @@ void TNode::draw() {
 		//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
 		//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
 		getEntity()->beginDraw();//apilo la transformacion de la entidad a la matriz correspondiente
-		for (int i = 0; i < m_childNodes.size(); i++) {
+		for (size_t i = 0; i < m_childNodes.size(); i++) {
 			m_childNodes.at(i)->draw();
 		}
 		getEntity()->endDraw();//desapilo la transformacion que hice antes
@@ -67,7 +67,7 @@ void TNode::draw() {
 		//ELSE el modelo es null ¿cargar un modelo de "ERROR"?
 
 		//si es el nodo raiz se dibuja sus hijos directamente
-		for (int i = 0; i < m_childNodes.size(); i++) {
+		for (size_t i = 0; i < m_childNodes.size(); i++) {
 			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
 			sm.setMatrizActual(glm::mat4());
 			m_childNodes.at(i)->draw();
