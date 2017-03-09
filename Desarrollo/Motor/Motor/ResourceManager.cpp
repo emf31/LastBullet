@@ -63,6 +63,7 @@ Texture* ResourceManager::getTexture(const std::string& path, const std::string&
 			return textures[path];
 		}
 	}
+	return nullptr;
 }
 
 void ResourceManager::shutdown()

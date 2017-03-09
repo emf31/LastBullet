@@ -27,22 +27,22 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	if (window == nullptr) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
-		return -1;
+		return false;
 	}
 	glfwMakeContextCurrent(window);
 	
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
 		std::cout << "Failed to initialize GLEW" << std::endl;
-		return -1;
+		return false;
 	}
 
 	glViewport(0, 0, screenWidth, screenHeight);
 
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_BLEND);
+	glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glEnable(GL_SCISSOR_TEST);
 	//glfwSwapInterval(-1); //vSync adaptativa!
@@ -61,7 +61,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	sm.screenHeight = &this->screenHeight;
 	sm.inicializar();
 
-	return 1;
+	return true;
 }
 
 

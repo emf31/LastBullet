@@ -10,8 +10,6 @@ using namespace std;
 #include "TCamera.h"
 #include "TModel.h"
 #include "TSunLight.h"
-
-#include <GUI.h>
 #include "Billboard.h"
 
 //#include <SPARK/SPARK.h>
