@@ -5,10 +5,12 @@
 #include <set>
 #include <BulletCollision\CollisionDispatch\btCollisionObject.h>
 
-#include <GraphicEngine.h>
+
 #include <MessageHandler.h>
 
 #include <Util.h>
+
+#include <GraphicEngine.h>
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 

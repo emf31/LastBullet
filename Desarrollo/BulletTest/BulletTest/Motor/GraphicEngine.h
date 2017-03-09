@@ -17,7 +17,7 @@
 
 #include <GUI.h>
 
-#include <EngineDevice.h>
+#include <Engine/EngineDevice.h>
 
 /*
 #define _IRR_WINDOWS_

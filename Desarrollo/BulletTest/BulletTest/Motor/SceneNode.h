@@ -6,7 +6,7 @@
 #include "SceneNode.h"
 #include <memory>
 #include <Color4f.h>
-#include <TEntity.h>
+#include <Engine/TEntity.h>
 
 
 class SceneNode

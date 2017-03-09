@@ -86,11 +86,11 @@ void Motor::GUI::setMouseCursor(const std::string & mouse) {
 	m_context->getMouseCursor().setDefaultImage(mouse);
 }
 
-unsigned int Motor::GUI::GlfwToCeguiKey(int glfwKey)
+CEGUI::Key::Scan Motor::GUI::GlfwToCeguiKey(int glfwKey)
 {
 	switch (glfwKey)
 	{
-	case GLFW_KEY_UNKNOWN: return 0;
+	case GLFW_KEY_UNKNOWN: return CEGUI::Key::Unknown;
 	case GLFW_KEY_ESCAPE: return CEGUI::Key::Escape;
 	case GLFW_KEY_F1: return CEGUI::Key::F1;
 	case GLFW_KEY_F2: return CEGUI::Key::F2;
@@ -127,7 +127,7 @@ unsigned int Motor::GUI::GlfwToCeguiKey(int glfwKey)
 	case GLFW_KEY_HOME: return CEGUI::Key::Home;
 	case GLFW_KEY_END: return CEGUI::Key::End;
 	case GLFW_KEY_KP_ENTER: return CEGUI::Key::NumpadEnter;
-	default: return 0;
+	default: return CEGUI::Key::Unknown;
 	}
 }
 

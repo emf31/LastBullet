@@ -35,7 +35,7 @@
 
 #elif defined CEGUI_USE_GLEW
 
-#include<GL/glew.h>
+#include <GL/glew.h>
 
 // When using GLEW, there's no need to "#include" the OpenGL headers.
 #ifndef __APPLE__

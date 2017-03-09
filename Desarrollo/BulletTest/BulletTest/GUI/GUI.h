@@ -39,7 +39,7 @@ namespace Motor{
 
 		void setMouseCursor(const std::string& mouse);
 
-		unsigned int GlfwToCeguiKey( int glfwKey);
+		CEGUI::Key::Scan GlfwToCeguiKey( int glfwKey);
 		CEGUI::MouseButton GlfwToCeguiButton( int glfwButton);
 
 		void injectKeyDown(int key);

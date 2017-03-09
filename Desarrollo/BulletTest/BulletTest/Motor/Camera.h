@@ -1,7 +1,7 @@
 #pragma once
 #include <vec3.hpp>
 #include "../Entities/Entity.h"
-#include <TCamera.h>
+#include <Engine/TCamera.h>
 
 class CameraShake;
 class GunRecoil;
