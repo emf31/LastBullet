@@ -4,6 +4,7 @@
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <Estructuras.h>
+#include <Character.h>
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
 
 #define GRANADACARGADA 0
@@ -14,7 +15,7 @@ class Granada :
 	public Entity
 {
 public:
-	Granada();
+	Granada(Character* owner);
 	~Granada();
 
 	void setRigidBody(btRigidBody* rigidBody) { m_rigidBody = rigidBody; }
@@ -36,7 +37,7 @@ public:
 	void shoot(const btVector3& posicionPlayer);
 	void serverShoot(TGranada& g);
 
-	float explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio);
+	float explosion(Entity* player, const Vec3<float>& posExplosion, float radio);
 
 	btRigidBody* m_rigidBody;
 
@@ -55,6 +56,8 @@ private:
 	float radius;
 	float timeRecargaGranada;
 	float restitution;
+
+	Character* m_character;
 
 	btGhostObject* m_explosion;
 };

@@ -165,6 +165,16 @@ Entity * EntityManager::getEntity(int id)
 	return NULL;
 }
 
+std::list<Entity*> EntityManager::getPlayerAndBots()
+{
+	std::list<Entity*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy_Bot")
+			characters.push_back(i->second);
+	}
+	return characters;
+}
+
 std::list<Entity*> EntityManager::getCharacters()
 {
 	std::list<Entity*>characters;
