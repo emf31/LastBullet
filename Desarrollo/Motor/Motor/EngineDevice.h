@@ -1,10 +1,9 @@
 #pragma once
 
 //GLEW
-#define GLEW_STATIC
 #include <GLEW/glew.h>
 //GLFW
-#include <GLFW/glfw3.h>
+#include <GLFW/glfw.h>
 
 #include "SceneManager.h"
 
