@@ -1,929 +1,103 @@
-﻿  Button.cpp
-  Character.cpp
-  Enemy_Bot.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-Entities\Enemy_Bot.cpp(497): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Entities\Enemy_Bot.cpp(516): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Entities\Enemy_Bot.cpp(536): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  Granada.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  GroupEntity.cpp
-  GunBullet.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  Enemy.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Entity.cpp
-  EntityManager.cpp
-  KinematicCharacterController.cpp
-  LifeObject.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  PhysicsEntity.cpp
-  Player.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Entities\Player.cpp(78): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-Entities\Player.cpp(82): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-Entities\Player.cpp(86): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-Entities\Player.cpp(90): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
-  RocketBullet.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  RocketBulletEnemy.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  AsaltoDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  PistolaDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  RocketLauncherDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  SniperDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  WeaponDrop.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Compilando...
-  Asalto.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Pistola.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  RocketLauncher.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Sniper.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Weapon.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  EventListener.cpp
-  EventSystem.cpp
-  AStarSearch.cpp
-  GraphEdge.cpp
-  GraphNode.cpp
-  SparseGraph.cpp
-Graph\SparseGraph.cpp(210): warning C4018: '>=': no coinciden signed/unsigned
-  DebugMenuGUI.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-GUI\DebugMenuGUI.cpp(582): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-  GUI.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): warning C4005: 'snprintf': redefinición de macro
-  D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): note: vea la definición anterior de 'snprintf'
-  GUIManager.cpp
-  InGameHUD.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  MenuGUI.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  InputHandler.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  MessageHandler.cpp
-  Partida.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FuzzyModule.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Compilando...
-  FuzzyRule.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FuzzySet.cpp
-  FuzzySetLeftShoulder.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FuzzySetRightShoulder.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FuzzySetSingleton.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FuzzySetTriangle.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FuzzyVariable.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FzAND.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FzFairly.cpp
-  FzOR.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  FzSet.cpp
-  FzVery.cpp
-  MachineState.cpp
-  PathFollow.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  SensoryMemory.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  BuscarVida.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  BuscarWeapon.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  Disparar.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  Patrullar.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  Perseguir.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  Compilando...
-  TargetingSystem.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  WeaponSystem.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-IA\WeaponSystem.cpp(22): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-IA\WeaponSystem.cpp(26): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-IA\WeaponSystem.cpp(30): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
-IA\WeaponSystem.cpp(34): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-IA\WeaponSystem.cpp(60): warning C4244: 'argumento': conversión de 'const double' a 'float'; posible pérdida de datos
-IA\WeaponSystem.cpp(61): warning C4244: 'argumento': conversión de 'const double' a 'float'; posible pérdida de datos
-IA\WeaponSystem.cpp(62): warning C4244: 'argumento': conversión de 'const double' a 'float'; posible pérdida de datos
-  Celda.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Mapa\Celda.cpp(40): warning C4018: '>': no coinciden signed/unsigned
-Mapa\Celda.cpp(55): warning C4018: '<': no coinciden signed/unsigned
-  Dijkstra.cpp
-Mapa\Dijkstra.cpp(14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-  Map.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Mapa\Map.cpp(75): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
-Mapa\Map.cpp(76): warning C4244: 'argumento': conversión de 'int' a 'const btScalar'; posible pérdida de datos
-  PathPlanner.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  MastEventReceiver.cpp
-  Game.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  main.cpp
-  AnimatedSceneNode.cpp
-  Animation.cpp
-  BillboardSceneNode.cpp
-  Camera.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  CameraShake.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Motor\CameraShake.cpp(7): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-Motor\CameraShake.cpp(15): warning C4305: '=': truncamiento de 'double' a 'float'
-Motor\CameraShake.cpp(18): warning C4305: '=': truncamiento de 'double' a 'float'
-Motor\CameraShake.cpp(21): warning C4305: '=': truncamiento de 'double' a 'float'
-  Color4f.cpp
-  GraphicEngine.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(178): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-  GunRecoil.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  MapLoader.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Motor\MapLoader.cpp(172): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(182): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(192): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(202): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(212): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
-  PhysicsEngine.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  RenderState.cpp
-  Compilando...
-  BasicSceneNode.cpp
-  SceneNode.cpp
-  Lobby.cpp
-  NetBot.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  NetObject.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  NetPlayer.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Network\NetPlayer.cpp(133): warning C4101: 'eleccion': variable local sin referencia
-Network\NetPlayer.cpp(134): warning C4101: 'elec': variable local sin referencia
-  NetworkDebugger.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  NetworkManager.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Clock.cpp
-  DebugMarks.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-  LifeComponent.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  Lista.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  PriorityQueue.cpp
-  Settings.cpp
-  Time.cpp
-  Util.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-Otros\Util.cpp(38): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  Vec2f.cpp
-  ClockImpl.cpp
-  InGame.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-States\InGame.cpp(154): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
-  Menu.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-States\Menu.cpp(49): warning C4244: 'argumento': conversión de 'irr::s32' a 'float'; posible pérdida de datos
-  Compilando...
-  State.cpp
-  StateFactory.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-  StateStack.cpp
-  TriggerSystem.cpp
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
-  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
-          with
-          [
-              _Kty=unsigned short,
-              _Ty=TriggerRecordStruct *,
-              _Other1=unsigned long &,
-              _Other2=TriggerRecordStruct *&
-          ]
-  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
-          with
-          [
-              _Kty=unsigned short,
-              _Ty=TriggerRecordStruct *,
-              _Other1=unsigned long &,
-              _Other2=TriggerRecordStruct *&
-          ]
-  World.cpp
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\include\CEGUI/PropertyHelper.h(52): warning C4005: 'snprintf': redefinición de macro
-  d:\4ºcurso\repositorios\tba\desarrollo\bullettest\include\irrlitch\irrTypes.h(122): note: vea la definición anterior de 'snprintf'
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'float'; posible pérdida de datos
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\BulletTest\Otros\Util.h(16): warning C4244: 'inicializando': conversión de 'std::numeric_limits<double>::_Ty' a 'const float'; posible pérdida de datos
-assimp-vc140-mt.lib(D3MFOpcPackage.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Importer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(DefaultIOSystem.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(irrXML.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BaseImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(DefaultLogger.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Version.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BaseProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MaterialSystem.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ScenePreprocessor.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ValidateDataStructure.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ImporterRegistry.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(PostStepRegistry.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(DefaultIOStream.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ProcessHelper.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(XFileImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(3DSLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MD3Loader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MDLLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MD2Loader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(PlyLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ASELoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ObjFileImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(HMPLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SMDLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MDCLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MD5Loader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(STLLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(LWOLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(DXFLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(NFFLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(RawLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SIBImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OFFLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ACLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BVHLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IRRMeshLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IRRLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Q3DLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(B3DImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ColladaLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(TerragenLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(CSMLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(UnrealLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(LWSLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OgreImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OpenGEXImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MS3DLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(COBLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BlenderLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Q3BSPFileImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(NDOLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(XGLLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(AssbinLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(glTFImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(D3MFImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SpatialSort.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(CalcTangentsProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(JoinVerticesProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ConvertToLHProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(TriangulateProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(GenFaceNormalsProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(GenVertexNormalsProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(RemoveVCProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SplitLargeMeshes.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(PretransformVertices.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(LimitBoneWeightsProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ImproveCacheLocality.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FixNormalsStep.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(RemoveRedundantMaterials.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FindInvalidDataProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FindDegenerates.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SortByPTypeProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ComputeUVMappingProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(TextureTransform.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FindInstancesProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OptimizeMeshes.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OptimizeGraph.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SplitByBoneCountProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(DeboneProcess.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(XFileParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SGSpatialSort.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(3DSConverter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SceneCombiner.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(RemoveComments.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MDLMaterialLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(PlyParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ASEParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(SkeletonMeshBuilder.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ObjFileParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MD5Parser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(LWOBLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(LWOMaterial.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(StandardShapes.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Subdivision.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IRRShared.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ColladaParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(LWOAnimation.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OgreStructs.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OgreMaterial.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OgreBinarySerializer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OgreXmlSerializer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(MakeVerboseFormat.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OpenDDLCommon.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(DDLNode.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Value.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OpenDDLParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BlenderDNA.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BlenderScene.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(BlenderModifier.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Q3BSPZipArchive.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(Q3BSPFileParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(STEPFileReader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCReaderGen.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCUtil.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCMaterial.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCGeometry.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXTokenizer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXBinaryTokenizer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXDocument.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXConverter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(VertexTriangleAdjacency.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(ObjFileMtlImporter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(OpenDDLExport.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(STEPFileEncoding.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCProfile.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCBoolean.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCOpenings.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(IFCCurve.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXUtil.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXProperties.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXNodeAttribute.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXModel.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXMaterial.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXAnimation.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXDeformer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXMeshGeometry.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(FBXDocumentUtil.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(cdt.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(clipper.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(sweep_context.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(sweep.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(shapes.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-assimp-vc140-mt.lib(advancing_front.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(GUIContext.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ProgressBar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(BoundSlot.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PushButton.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Window.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(SubscriberSlot.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Slider.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(NamedXMLResourceManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WidgetLookManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Scheme.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(System.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DefaultResourceProvider.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Font.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FontManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ImageManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(String.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Logger.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ScriptModule.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Element.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(MouseCursor.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Exceptions.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WindowManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(SchemeManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Font_xmlHandler.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Scheme_xmlHandler.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(XMLHandler.cpp.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(EventSet.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderingSurface.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(SystemKeys.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderingWindow.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(SimpleTimer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderTarget.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Property.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PropertySet.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(NamedElement.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Event.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ButtonBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DefaultRenderedStringParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(XMLSerializer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PropertyHelper.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderedString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(BasicRenderedStringParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WindowRendererManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WindowFactoryManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Tooltip.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PropertyInitialiser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WidgetComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PropertyDefinitionBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WidgetLookFeel.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(GlobalEventSet.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(BidiVisualMapping.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Quaternion.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(WindowRenderer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Thumb.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Dimensions.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(EventAction.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(XMLHandler.cpp.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(EventLinkDefinition.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FactoryModule.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DynamicModule.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Win32StringTranscoder.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Clipboard.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DefaultLogger.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderEffectManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(AnimationManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Config_xmlHandler.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(XMLParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ImageCodec.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ClippedContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Combobox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Listbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ComboDropList.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DefaultWindow.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DragContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Editbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FrameWindow.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(GridLayoutContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(GroupBox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(HorizontalLayoutContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ItemEntry.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Scrollbar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ItemListbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(LayoutCell.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ListHeaderSegment.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ListHeader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Menubar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(MenuItem.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(MultiColumnList.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(MultiLineEditbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PopupMenu.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ToggleButton.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RadioButton.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ScrollablePane.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ScrolledContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Spinner.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(TabButton.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(TabControl.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Titlebar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Tree.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(VerticalLayoutContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PCRERegexMatcher.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(DataContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Image.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(PixmapFont.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FreeTypeFont.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ChainedXMLHandler.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(XMLAttributes.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(BasicImage.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Colour.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ColourRect.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(GUILayout_xmlHandler.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderQueue.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderedStringComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderedStringTextComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderedStringImageComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RenderedStringWidgetComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(XMLEnumHelper.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(StateImagery.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ComponentBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ImageryComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(TextComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FrameComponent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ImagerySection.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(NamedArea.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(AnimationInstance.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(CoordConverter.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(SectionSpecification.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(LayerSpecification.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Animation_xmlHandler.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(LinkedEvent.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FactoryRegisterer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Animation.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(TextUtils.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(LayoutContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(SequentialLayoutContainer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ItemListBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(ScrolledItemListBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(MenuBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(TreeItem.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(FormattedRenderedString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(LeftAlignedRenderedString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(RightAlignedRenderedString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(CentredRenderedString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(JustifiedRenderedString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(JustifiedRenderedStringWordWrapper.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(Affector.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(KeyFrame.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUISILLYImageCodec_Static.lib(ImageCodecModule.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUISILLYImageCodec_Static.lib(ImageCodec.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(ShaderManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(ViewportTarget.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(GeometryBufferBase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIOpenGLRenderer-0_Static.lib(TextureTarget.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Module.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Button.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Default.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Editbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(FrameWindow.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ItemEntry.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ListHeader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ListHeaderSegment.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Listbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Menubar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(MenuItem.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(MultiColumnList.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(MultiLineEditbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(PopupMenu.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ProgressBar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ScrollablePane.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Scrollbar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Slider.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Static.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(StaticImage.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(StaticText.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(TabButton.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(TabControl.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Titlebar.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ToggleButton.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Tooltip.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(ItemListbox.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUICoreWindowRendererSet_Static.lib(Tree.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIExpatParser_Static.lib(XMLParserModule.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIExpatParser_Static.lib(XMLParser.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(EngineDevice.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TEntity.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TCamera.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(SceneManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TModel.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(Input.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TNode.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TTransform.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TPointLight.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(ResourceManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TFlashLight.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TSunLight.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TLuz.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(TMesh.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-Motor.lib(Shader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCollisionWorld.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btGhostObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCollisionObject.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCompoundShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCollisionShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btDbvtBroadphase.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btConvexShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCollisionDispatcher.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btManifoldResult.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btBvhTriangleMeshShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btOverlappingPairCache.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btDbvt.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btConvexConvexAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btEmptyCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btConvexConcaveCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCompoundCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCompoundCompoundCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btConvexPlaneCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btBoxBoxCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btSphereSphereCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btSphereTriangleCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btPolyhedralConvexShape.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btQuantizedBvh.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btOptimizedBvh.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btActivatingCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btPolyhedralContactClipping.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btCollisionAlgorithm.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btHashedSimplePairCache.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btConvexPolyhedron.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletDynamics.lib(btRigidBody.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletDynamics.lib(btDiscreteDynamicsWorld.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletDynamics.lib(btSequentialImpulseConstraintSolver.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletDynamics.lib(btTypedConstraint.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletDynamics.lib(btConeTwistConstraint.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletDynamics.lib(btGeneric6DofConstraint.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-LinearMath.lib(btConvexHullComputer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-LinearMath.lib(btGeometryUtil.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(RakNetTypes.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(RakPeer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(BitStream.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(RakNetSocket2.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(RakString.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(PluginInterface2.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(RakThread.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(SimpleMutex.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(ReliabilityLayer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(StringCompressor.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(StringTable.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(RakMemoryOverride.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(TCPInterface.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(CCRakNetSlidingWindow.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(DR_SHA1.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(DS_HuffmanEncodingTree.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(DS_ByteQueue.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-RakNetLibStatic_RELEASE.lib(SocketLayer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(ios.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(locale0.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(cout.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(cerr.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(iosptrs.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(locale.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(xlock.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(xthrow.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(wlocale.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(xlocale.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(xdateord.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(winapisupp.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(StlCompareStringA.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(winapinls.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(StlCompareStringW.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(StlLCMapStringW.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-libcpmt.lib(StlLCMapStringA.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYImageLoaderManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYDataSource.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYMemoryDataSource.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYImage.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYTGAImageLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYJPGImageLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYPNGImageLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYImageContext.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYImageLoader.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYTGAImageContext.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYJPGImageContext.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-SILLY.lib(SILLYPNGImageContext.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-CEGUIBase-0_Static.lib(GeometryBuffer.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btSimulationIslandManager.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-BulletCollision.lib(btUnionFind.obj) : error LNK2038: se detectaron diferencias para 'RuntimeLibrary': el valor 'MT_StaticRelease' no coincide con el valor 'MD_DynamicRelease' en Button.obj
-     Creando biblioteca D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+﻿     Creando biblioteca D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+Motor.lib(EngineDevice.obj) : error LNK2001: símbolo externo _glewExperimental sin resolver
+Motor.lib(EngineDevice.obj) : error LNK2001: símbolo externo _glewInit@0 sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewEnableVertexAttribArray sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewEnableVertexAttribArray sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewBindVertexArray sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewBindVertexArray sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : error LNK2001: símbolo externo __imp____glewBindVertexArray sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewUseProgram sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : error LNK2001: símbolo externo __imp____glewUseProgram sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewUseProgram sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewVertexAttribPointer sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewVertexAttribPointer sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewBindBuffer sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewBindBuffer sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : error LNK2001: símbolo externo __imp____glewBindBuffer sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewBindBuffer sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewUniform1i sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : error LNK2001: símbolo externo __imp____glewUniform1i sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewDrawBuffers sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewBlitFramebuffer sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewGetUniformLocation sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetUniformLocation sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewBufferData sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewBufferData sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewActiveTexture sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : error LNK2001: símbolo externo __imp____glewActiveTexture sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewFramebufferTexture2D sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : error LNK2001: símbolo externo __imp____glewFramebufferTexture2D sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewFramebufferTexture2D sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewRenderbufferStorage sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewGenVertexArrays sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewGenVertexArrays sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewCheckFramebufferStatus sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : error LNK2001: símbolo externo __imp____glewCheckFramebufferStatus sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewFramebufferRenderbuffer sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewGenFramebuffers sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : error LNK2001: símbolo externo __imp____glewGenFramebuffers sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewGenFramebuffers sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewBindRenderbuffer sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewBindFramebuffer sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : error LNK2001: símbolo externo __imp____glewBindFramebuffer sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewBindFramebuffer sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewGenRenderbuffers sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewGenBuffers sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewGenBuffers sin resolver
+Motor.lib(SceneManager.obj) : error LNK2001: símbolo externo __imp____glewUniform3f sin resolver
+Motor.lib(TModel.obj) : error LNK2001: símbolo externo __imp____glewUniformMatrix4fv sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewUniformMatrix4fv sin resolver
+Motor.lib(TPointLight.obj) : error LNK2001: símbolo externo __imp____glewUniform1f sin resolver
+Motor.lib(ResourceManager.obj) : error LNK2001: símbolo externo __imp____glewGenerateMipmap sin resolver
+Motor.lib(TMesh.obj) : error LNK2001: símbolo externo __imp____glewDeleteVertexArrays sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewDeleteVertexArrays sin resolver
+Motor.lib(TMesh.obj) : error LNK2001: símbolo externo __imp____glewDeleteBuffers sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewDeleteBuffers sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetShaderiv sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetShaderiv sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewCompileShader sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewCompileShader sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewCreateShader sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewCreateShader sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewCreateProgram sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewCreateProgram sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetShaderInfoLog sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetShaderInfoLog sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetProgramiv sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetProgramiv sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewAttachShader sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewAttachShader sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewShaderSource sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewShaderSource sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetProgramInfoLog sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetProgramInfoLog sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewDeleteShader sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewDeleteShader sin resolver
+Motor.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewLinkProgram sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewLinkProgram sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : error LNK2001: símbolo externo __imp____glewBlendFuncSeparate sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : error LNK2001: símbolo externo __imp____glewBlendFuncSeparate sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : error LNK2001: símbolo externo __imp__glewInit sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : error LNK2001: símbolo externo __imp__glewGetErrorString sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : error LNK2001: símbolo externo __imp__glewExperimental sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewDeleteProgram sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewGetAttribLocation sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : error LNK2001: símbolo externo __imp____glewBindFragDataLocation sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : error LNK2001: símbolo externo __imp____glewBufferSubData sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : error LNK2001: símbolo externo __imp____glewDeleteFramebuffers sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewDeleteFramebuffers sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2001: símbolo externo __imp____glewGetStringi sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2001: símbolo externo __imp____GLEW_VERSION_1_3 sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2001: símbolo externo __imp____GLEW_VERSION_2_0 sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2001: símbolo externo __imp____GLEW_VERSION_3_1 sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2001: símbolo externo __imp____GLEW_VERSION_3_2 sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : error LNK2001: símbolo externo __imp____GLEW_ARB_texture_non_power_of_two sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewCompressedTexImage2D sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewCompressedTexSubImage2D sin resolver
+CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : error LNK2001: símbolo externo __imp____glewGetCompressedTexImage sin resolver
+CEGUIBase-0_Static.lib(System.obj) : error LNK2001: símbolo externo _createImageCodec sin resolver
+CEGUIBase-0_Static.lib(System.obj) : error LNK2001: símbolo externo _destroyImageCodec sin resolver
 CEGUIBase-0_Static.lib(WidgetLookFeel.obj) : error LNK2001: símbolo externo "public: virtual void __thiscall CEGUI::FormattingSetting<enum CEGUI::VerticalFormatting>::writeXMLTagToStream(class CEGUI::XMLSerializer &)const " (?writeXMLTagToStream@?$FormattingSetting@W4VerticalFormatting@CEGUI@@@CEGUI@@UBEXAAVXMLSerializer@2@@Z) sin resolver
 CEGUIBase-0_Static.lib(ImageryComponent.obj) : error LNK2001: símbolo externo "public: virtual void __thiscall CEGUI::FormattingSetting<enum CEGUI::VerticalFormatting>::writeXMLTagToStream(class CEGUI::XMLSerializer &)const " (?writeXMLTagToStream@?$FormattingSetting@W4VerticalFormatting@CEGUI@@@CEGUI@@UBEXAAVXMLSerializer@2@@Z) sin resolver
 CEGUIBase-0_Static.lib(FrameComponent.obj) : error LNK2001: símbolo externo "public: virtual void __thiscall CEGUI::FormattingSetting<enum CEGUI::VerticalFormatting>::writeXMLTagToStream(class CEGUI::XMLSerializer &)const " (?writeXMLTagToStream@?$FormattingSetting@W4VerticalFormatting@CEGUI@@@CEGUI@@UBEXAAVXMLSerializer@2@@Z) sin resolver
@@ -944,5 +118,4 @@ CEGUIBase-0_Static.lib(TextComponent.obj) : error LNK2001: símbolo externo "pub
 CEGUIBase-0_Static.lib(TextComponent.obj) : error LNK2001: símbolo externo "public: virtual void __thiscall CEGUI::FormattingSetting<enum CEGUI::VerticalTextFormatting>::writeXMLAttributesToStream(class CEGUI::XMLSerializer &)const " (?writeXMLAttributesToStream@?$FormattingSetting@W4VerticalTextFormatting@CEGUI@@@CEGUI@@UBEXAAVXMLSerializer@2@@Z) sin resolver
 CEGUIBase-0_Static.lib(TextComponent.obj) : error LNK2001: símbolo externo "public: virtual void __thiscall CEGUI::FormattingSetting<enum CEGUI::HorizontalTextFormatting>::writeXMLTagToStream(class CEGUI::XMLSerializer &)const " (?writeXMLTagToStream@?$FormattingSetting@W4HorizontalTextFormatting@CEGUI@@@CEGUI@@UBEXAAVXMLSerializer@2@@Z) sin resolver
 CEGUIBase-0_Static.lib(TextComponent.obj) : error LNK2001: símbolo externo "public: virtual void __thiscall CEGUI::FormattingSetting<enum CEGUI::HorizontalTextFormatting>::writeXMLAttributesToStream(class CEGUI::XMLSerializer &)const " (?writeXMLAttributesToStream@?$FormattingSetting@W4HorizontalTextFormatting@CEGUI@@@CEGUI@@UBEXAAVXMLSerializer@2@@Z) sin resolver
-Motor.lib(EngineDevice.obj) : error LNK2001: símbolo externo _glewInit@0 sin resolver
-D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1120: 9 externos sin resolver
+D:\UA\CUARTO\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1120: 68 externos sin resolver
