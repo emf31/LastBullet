@@ -156,6 +156,12 @@ void Game::update(Time elapsedTime)
 
 void Game::render(float interpolation, Time elapsedTime)
 {
+	// FPS
+	int fps = GraphicEngine::i().getDevice().getFPS();
+	std::ostringstream title;
+	title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
+	GraphicEngine::i().getDevice().setWindowTitle(title.str());
+
 	GraphicEngine::i().getDevice().updateCurrentFrame();
 	GraphicEngine::i().getDevice().doMovement();
 	stateStack.GetCurrentState()->Render(interpolation, elapsedTime);

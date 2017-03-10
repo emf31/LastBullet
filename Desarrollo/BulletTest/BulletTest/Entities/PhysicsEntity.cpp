@@ -42,7 +42,7 @@ void PhysicsEntity::update(Time elapsedTime)
 
 
 	// Set rotation
-	vector3df Euler;
+	btVector3 Euler;
 	const btQuaternion& TQuat = m_rigidBody->getOrientation();
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
 	q.toEuler(Euler);
@@ -57,7 +57,7 @@ void PhysicsEntity::update(Time elapsedTime)
 	//if(centerCollision==NULL)
 
 
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0]-centerCollision.getX(), (f32)Point[1]-centerCollision.getY(), (f32)Point[2]-centerCollision.getX()));
+	m_renderState.updatePositions(Vec3<float>((float)Point[0]-centerCollision.getX(), (float)Point[1]-centerCollision.getY(), (float)Point[2]-centerCollision.getX()));
 
 	//m_rigidBody->pos
 }

@@ -19,22 +19,6 @@
 
 #include <Engine/EngineDevice.h>
 
-/*
-#define _IRR_WINDOWS_
-
-#ifdef DEBUG
-#ifdef _IRR_WINDOWS_
-#pragma comment(lib, "Irrlicht.lib")
-#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
-#endif
-#else
-#ifdef _IRR_WINDOWS_
-//#pragma comment(lib, "IrrlichtStatic_RELEASE.lib")
-//#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
-#endif
-#endif
-*/
-
 
 
 

@@ -735,6 +735,9 @@
     <ClInclude Include="GUI\MenuGUI.h">
       <Filter>Headers\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Otros\Quaternion.h">
+      <Filter>Source Code\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

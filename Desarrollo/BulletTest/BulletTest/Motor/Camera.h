@@ -5,8 +5,6 @@
 
 class CameraShake;
 class GunRecoil;
-using namespace irr;
-using namespace scene;
 
 
 class Camera
@@ -55,8 +53,8 @@ private:
 	Entity* m_entity;
 	CameraShake* m_cameraShake;
 	GunRecoil* m_GunRecoil;
-	f32 defaultFOV;
-	f32 defaultAspect;
-	f32 zoomFOV;
+	float defaultFOV;
+	float defaultAspect;
+	float zoomFOV;
 };
 

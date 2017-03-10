@@ -1,5 +1,4 @@
 #pragma once
-#include "irrlicht.h"
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
