@@ -25,7 +25,7 @@ int main() {
 		return -1;
 	}
 	SceneManager &sm = SceneManager::i();	
-	sm.inicializarBuffers();
+
 	//*******MODELOS***********
 
 	//window
@@ -34,7 +34,7 @@ int main() {
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
+	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	//sm.camaraActiva->addChild(p1);
 	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 	
@@ -100,7 +100,7 @@ int main() {
 	Vec3<float> newPos;
 
 	
-
+	sm.setActiveCamera(sm.crearNodoCamara());
 	
 
 	while (!engine.shouldCloseWindw()){
@@ -116,7 +116,7 @@ int main() {
 		engine.doMovement();
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
-		newPos = vecDir *0.3;
+		newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());

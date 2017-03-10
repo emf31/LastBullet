@@ -70,7 +70,7 @@ GLFWwindow* EngineDevice::getWindow() {
 }
 
 void EngineDevice::updateCurrentFrame() {
-	GLfloat currentFrame = glfwGetTime();
+	GLfloat currentFrame = (GLfloat)glfwGetTime();
 
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
@@ -79,7 +79,7 @@ void EngineDevice::updateCurrentFrame() {
 
 int EngineDevice::getFPS() {
 
-	GLfloat currentFrame = glfwGetTime();
+	GLfloat currentFrame = (GLfloat)glfwGetTime();
 
 	if (currentFrame - lastTime >= 1.0) {
 		fps = numFrames;
@@ -101,7 +101,10 @@ void EngineDevice::end() {
 }
 
 bool  EngineDevice::shouldCloseWindw() {
-	return glfwWindowShouldClose(window);
+	if (glfwWindowShouldClose(window)) {
+		return true;
+	}
+	return false;
 }
 
 void EngineDevice::shutdown()

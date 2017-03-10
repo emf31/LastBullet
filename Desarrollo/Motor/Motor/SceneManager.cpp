@@ -29,12 +29,14 @@ void SceneManager::inicializar() {
 	scene = new TNode(-1);
 	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
-	camaraActiva = crearNodoCamara();
+	//camaraActiva = crearNodoCamara();
 	sunlight = nullptr;
 	//shaderGeometria = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	shaderGeometria = ResourceManager::i().getShader("assets/geometria.vs", "assets/geometria.frag");
 	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
+
+	inicializarBuffers();
 }
 
 
@@ -135,7 +137,7 @@ void SceneManager::inicializarBuffers()
 
 void SceneManager::renderLuces()
 {
-	GLuint screenWidth = 1280, screenHeight = 720;
+	//GLuint screenWidth = 1280, screenHeight = 720;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
@@ -175,9 +177,17 @@ void SceneManager::renderLuces()
 											   // blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
 											   // the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the 		
 											   // depth buffer in another stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
-	glBlitFramebuffer(0, 0, screenWidth, screenHeight, 0, 0, screenWidth, screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+}
+
+bool SceneManager::removeNode(TNode * node) {
+	if (node != nullptr) {
+		node->removeNode();
+		return true;
+	}
+	return false;
 }
 
 TModel * SceneManager::crearNodoMalla(TModel * model)
@@ -319,9 +329,6 @@ TPointLight * SceneManager::crearNodoPointLight(Vec3<float> posicion)
 	nuevoNodoRotacion->addChild(nuevoNodoTraslacion);
 	nuevoNodoTraslacion->addChild(luzNode);
 
-
-
-
 	//asignamos matrices de transformacion
 	luz->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
 	luz->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
@@ -373,7 +380,6 @@ TFlashLight * SceneManager::crearNodoFlashLight(Vec3<float> posicion, Vec3<float
 
 	//la añadimos al sceneManager
 	vecFlashLight.push_back(luz);
-
 
 	return luz;
 

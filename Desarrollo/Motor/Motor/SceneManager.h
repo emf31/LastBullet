@@ -30,7 +30,7 @@ public:
 	void inicializarBuffers();
 	void renderLuces();
 
-
+	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TModel * model);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
@@ -65,7 +65,7 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 	
-	float *screenWidth, *screenHeight;
+	int *screenWidth, *screenHeight;
 	
 	std::vector<TPointLight*> vecPointLight;
 	std::vector<TFlashLight*> vecFlashLight;
