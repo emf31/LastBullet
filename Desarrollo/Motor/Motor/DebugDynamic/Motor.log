@@ -1,0 +1,39 @@
+﻿  TTransform.cpp
+  TSunLight.cpp
+  TPointLight.cpp
+  TNode.cpp
+  TModel.cpp
+  TMesh.cpp
+  TLuz.cpp
+  TFlashLight.cpp
+  Texture.cpp
+  TEntity.cpp
+  TCamera.cpp
+  Shader.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  main.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\main.cpp(37): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\main.cpp(119): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+  Input.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(18): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(22): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(23): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(25): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(26): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\input.cpp(32): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  EngineDevice.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\enginedevice.cpp(52): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\enginedevice.cpp(53): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\enginedevice.cpp(73): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\enginedevice.cpp(82): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\enginedevice.cpp(104): warning C4800: 'int': forzando el valor a bool 'true' o 'false' (advertencia de rendimiento)
+  Generando código...
+  LINK : no se encontró D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugDynamic\Motor.dll o no lo generó el último vínculo incremental; ejecutando vínculo completo
+     Creando biblioteca D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugDynamic\Motor.lib y objeto D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugDynamic\Motor.exp
+LINK : warning LNK4098: la biblioteca predeterminada'LIBCMTD' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+glew_d.lib(glew.obj) : warning LNK4099: no se encontró PDB 'glew_static.pdb' con 'glew_d.lib(glew.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugDynamic\glew_static.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Motor.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugDynamic\Motor.dll
+  Motor.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugDynamic\Motor.pdb (Full PDB)
