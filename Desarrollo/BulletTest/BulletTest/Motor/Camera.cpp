@@ -61,8 +61,8 @@ void Camera::update()
 						m_entity->getRenderPosition().getY() + 8,	
 						m_entity->getRenderPosition().getZ())
 			);
-			m_cameraShake->update();
-			m_GunRecoil->update(static_cast<Player*>(m_entity)->isShooting);
+			//m_cameraShake->update();
+			//m_GunRecoil->update(static_cast<Player*>(m_entity)->isShooting);
 		}
 		if (m_entity->getClassName() == "Enemy_Bot")
 			setPosition(Vec3<float>(

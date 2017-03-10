@@ -15,11 +15,11 @@ GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 	
 }
 
-std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
+std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh)
 {
 
 	TModel* node;
-	node = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
+	node = sm.crearNodoMalla(sm.getMesh(mesh));
 	
 
 	
@@ -180,7 +180,10 @@ void GraphicEngine::inicializar()
 
 	sm = SceneManager::i();
 
+	sm.inicializarBuffers();
 
+	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, -1.0f));
+	dsa->setIntensidadAmbiente(0.8f); 
 
 
 

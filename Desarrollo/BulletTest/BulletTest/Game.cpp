@@ -156,7 +156,8 @@ void Game::update(Time elapsedTime)
 
 void Game::render(float interpolation, Time elapsedTime)
 {
-
+	GraphicEngine::i().getDevice().updateCurrentFrame();
+	GraphicEngine::i().getDevice().doMovement();
 	stateStack.GetCurrentState()->Render(interpolation, elapsedTime);
 
 }

@@ -61,7 +61,7 @@ void Player::inicializar()
 	tienePistola = false;
 
 	//Creamos la camara FPS
-	Camera* camaraPlayer=GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	Camera* camaraPlayer = GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	camaraPlayer->asignarEntity(this);
 	GraphicEngine::i().setActiveCamera("CamaraPlayer");
 
@@ -192,7 +192,7 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "assets/nanosuit.obj");
 	m_nodo->setVisible(false);
 
 	
