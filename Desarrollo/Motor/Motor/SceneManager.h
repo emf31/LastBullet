@@ -15,6 +15,18 @@
 //GLFW
 #include <GLFW/glfw.h>
 
+struct _LINE {
+	glm::vec3 from;
+	glm::vec3 to;
+
+	_LINE(glm::vec3 f, glm::vec3 t) {
+		from = f;
+		to = t;
+	}
+};
+
+
+
 class SceneManager {
 public:
 
@@ -80,12 +92,74 @@ public:
 	Shader* shaderGeometria;
 	Shader* shaderLuces;
 	Shader* shaderBombillas;
+	Shader* shaderLineas;
 
 	//Buffers
 	GLuint gBuffer;
 	GLuint gPosition, gNormal, gTextura, gSpecular, gCoords;
 	GLuint rboDepth;
 	GLuint draw_mode=1;
+
+	std::vector<_LINE> LINES;
+	std::vector<GLfloat> vertices;
+	std::vector<GLuint> indices;
+	GLuint linesvao, linesvbo, linesebo;
+
+	void drawLine(glm::vec3 from, glm::vec3 to) {
+		LINES.push_back(_LINE(from, to));
+	}
+
+	void rellenaVertices() {
+		glDisable(GL_CULL_FACE);
+		
+		unsigned int indexI = 0;
+
+		for (std::vector<_LINE>::iterator it = LINES.begin(); it != LINES.end(); it++)
+		{
+			_LINE l = *it;
+
+			vertices.push_back(l.from.x);
+			vertices.push_back(l.from.y);
+			vertices.push_back(l.from.z);
+
+			vertices.push_back(l.to.x);
+			vertices.push_back(l.to.y);
+			vertices.push_back(l.to.z);
+
+			indices.push_back(indexI);
+			indices.push_back(indexI + 1);
+			indexI += 2;
+		}
+
+
+		///////
+
+		//glBindVertexArray(linesvao);
+		//// Cargamos datos en el VAO
+		//glBindBuffer(GL_ARRAY_BUFFER, linesvbo);
+
+		//glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
+
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, linesebo);
+		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
+		//glBindVertexArray(0);
+		/////
+
+
+		glEnableVertexAttribArray(linesvao);
+		//glVertexAttribPointer(linesvao, 3, GL_FLOAT, GL_FALSE, 0, (void*)&(vertices.at(0)));
+
+		glm::mat4 mView = camaraActiva->GetViewMatrix();
+		glm::mat4 modelView = mView * glm::mat4(1.0);
+		glm::mat4 mProjection = getProjectionMatrix();
+		glm::mat4 mvp = mProjection * modelView;
+		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(mvp));
+
+		glBindVertexArray(linesvao);
+		glDrawArrays(GL_LINES, 0, indices[0]);
+
+		LINES.clear();
+	}
 
 private:
 	TNode* scene;
@@ -116,4 +190,5 @@ private:
 
 	friend class EngineDevice;
 	
+
 };

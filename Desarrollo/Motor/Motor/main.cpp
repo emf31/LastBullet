@@ -103,6 +103,20 @@ int main() {
 	sm.setActiveCamera(sm.crearNodoCamara());
 	
 
+	/////////////////
+
+	glLineWidth(10.0f);
+
+
+
+	glGenVertexArrays(1, &sm.linesvao); // Un VAO
+	glGenBuffers(1, &sm.linesvbo); // Un VBO
+	glGenBuffers(1, &sm.linesebo); // Un EBO
+
+	
+	
+	//////////////////
+
 	while (!engine.shouldCloseWindw()){
 		//std::cout << "inicio iteracion" << std::endl;
 		engine.updateCurrentFrame();
@@ -124,6 +138,13 @@ int main() {
 		
 
 		sm.draw();
+
+		sm.drawLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 50.0f, 0.0f));
+		sm.drawLine(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		sm.drawLine(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(5.0f, 50.0f, 5.0f));
+		sm.drawLine(glm::vec3(11.0f, 11.0f, 0.0f), glm::vec3(30.0f, 10.0f, 0.0f));
+		sm.drawLine(glm::vec3(10.f, 5.0f, 2.0f), glm::vec3(30.0f, 5.0f, 3.0f));
+		sm.rellenaVertices();
 		sm.renderFrame(engine.getWindow());
 
 		
