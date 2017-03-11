@@ -51,58 +51,65 @@ glm::mat4 TCamera::GetViewMatrix() {
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
 	GLfloat velocity = movementSpeed * deltaTime;
 	glm::vec3 result;
+	if (inputEnable) {
+		if (direction == FORWARD) {
+				result = direccion * velocity;
+				updatePosition(Vec3<float>(result.x, result.y, result.z));
+			}
+		if (direction == BACKWARD) {
+			result = direccion * -velocity;
+			updatePosition(Vec3<float>(result.x, result.y, result.z));
+		}
 
-	if (direction == FORWARD) {
-		result = direccion * velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
-	}
-	if (direction == BACKWARD) {
-		result = direccion * -velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
-	}
+		if (direction == LEFT) {
+			result = derecha * -velocity;
+			updatePosition(Vec3<float>(result.x, result.y, result.z));
+		}
 
-	if (direction == LEFT) {
-		result = derecha * -velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
+		if (direction == RIGHT) {
+			result = derecha * velocity;
+			updatePosition(Vec3<float>(result.x, result.y, result.z));
+		}
 	}
-
-	if (direction == RIGHT) {
-		result = derecha * velocity;
-		updatePosition(Vec3<float>(result.x, result.y, result.z));
-	}
-
+	
 }
 
 void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
-	xoffset *= mouseSensitivity;
-	yoffset *= mouseSensitivity;
+	if (inputEnable) {
+		xoffset *= mouseSensitivity;
+		yoffset *= mouseSensitivity;
 
-	rotY -= xoffset;
-	rotX += yoffset;
+		rotY -= xoffset;
+		rotX += yoffset;
 
-	if (rotX > 1.5f)	  
-		rotX = 1.5f;	  
-	if (rotX < -1.5f)  
-		rotX = -1.5f;
+		if (rotX > 1.5f)	  
+			rotX = 1.5f;	  
+		if (rotX < -1.5f)  
+			rotX = -1.5f;
 	
 
 
-	// Update Front, Right and Up Vectors using the updated Eular angles
+		// Update Front, Right and Up Vectors using the updated Eular angles
 	
-	transRotacion->setRotationY(rotY);
-	transRotacion->setRotationX(rotX);
-	updateCameraVectors();
-	//transRotacion->setRotationDirection(vecFront);
-	//std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
+		transRotacion->setRotationY(rotY);
+		transRotacion->setRotationX(rotX);
+		updateCameraVectors();
+		//transRotacion->setRotationDirection(vecFront);
+		//std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
+	}
+	
 }
 
 void TCamera::ProcessMouseScroll(GLfloat yoffset) {
-	if (zoom >= 1.0f && zoom <= 45.0f)
-		zoom -= yoffset;
-	if (zoom <= 1.0f)
-		zoom = 1.0f;
-	if (zoom >= 45.0f)
-		zoom = 45.0f;
+	if (inputEnable) {
+		if (zoom >= 1.0f && zoom <= 45.0f)
+			zoom -= yoffset;
+		if (zoom <= 1.0f)
+			zoom = 1.0f;
+		if (zoom >= 45.0f)
+			zoom = 45.0f;
+	}
+	
 }
 
 glm::vec3 TCamera::calcularPosicionVista()
@@ -150,17 +157,14 @@ glm::vec3 TCamera::calcularPosicionVista()
 }
 
 void TCamera::setTarget(const Vec3<float>& target) {
-	Vec3<float> pos = getPosition();
-	Vec3<float> dir = target - pos;
-	dir.normalise();
-	setRotationDir(dir);
-
+	direccion = glm::vec3(target.getX(),target.getY(),target.getZ());
+	direccion = glm::normalize(direccion);
+	setRotationDir(Vec3<float>(direccion.x,direccion.y,direccion.z));
 }
 
 Vec3<float> TCamera::getTarget() {
-	Vec3<float> pos = getPosition();
-	Vec3<float> dir = getRotation();
-	return (dir + pos) * 1000;
+	Vec3<float> dir = Vec3<float>(direccion.x, direccion.y, direccion.z);
+	return dir * 1000;
 
 }
 
