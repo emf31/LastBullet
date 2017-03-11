@@ -205,7 +205,7 @@ int SparseGraph::numEdges()
 	return tot;
 }
 
-bool SparseGraph::isNodePresent(int node) const
+bool SparseGraph::isNodePresent(std::size_t node) const
 {
 	if ((m_nodes[node].Index() == invalid_node_index) || (node >= m_nodes.size()))
 	{

@@ -65,6 +65,10 @@ public:
 	std::deque<glm::mat4>& getPilaMatrices() { return pilaMatrices; }
 
 	TSunLight* getSunLight() { return sunlight; }
+
+	void setNearPlane(float near);
+
+	void setFarPlane(float far);
 	
 	int *screenWidth, *screenHeight;
 	
@@ -108,6 +112,7 @@ private:
 
 	void RenderQuad();
 
+	float nearPlane = 0.1f, farPlane = 100.0f;
 
 	friend class EngineDevice;
 	

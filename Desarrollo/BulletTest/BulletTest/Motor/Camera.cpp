@@ -45,7 +45,8 @@ Vec3<float> Camera::getTarget()
 
 Vec3<float> Camera::getVecRight()
 {
-	return m_camera->getDerecha();
+	//return m_camera->getDerecha();
+	return Vec3<float>(0,0,0);
 }
 
 

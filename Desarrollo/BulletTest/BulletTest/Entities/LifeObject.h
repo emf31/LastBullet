@@ -1,4 +1,5 @@
-#pragma once
+
+
 #include "Entity.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>

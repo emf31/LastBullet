@@ -1,6 +1,6 @@
 
 #include "Entity.h"
-#include "../Motor/RenderState.h"
+#include <RenderState.h>
 #include "EntityManager.h"
 
 

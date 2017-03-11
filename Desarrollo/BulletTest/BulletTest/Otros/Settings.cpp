@@ -31,7 +31,7 @@ void Settings::LoadSettings()
 	}
 }
 
-const std::string& Settings::GetValue(const std::string & value)
+const std::string Settings::GetValue(const std::string & value)
 {
 	auto found = mSettings.find(value);
 	if (found != mSettings.end())

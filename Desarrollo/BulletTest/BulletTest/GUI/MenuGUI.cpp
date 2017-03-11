@@ -47,13 +47,7 @@ void MenuGUI::inicializar() {
 	
 	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 
-	p->m_network->crearPartida();
-	/*SceneManager::i().inicializarBuffers();
-	SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/nanosuit.obj"));
-	SceneManager::i().crearNodoCamara();
-	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f,0.0f,-1.0f));
-	dsa->setIntensidadAmbiente(0.8f);*/
-	//SceneManager::i().draw();
+
 	
 }
 

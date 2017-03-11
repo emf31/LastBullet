@@ -69,11 +69,11 @@ void Map::borrarContenido() {
 bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 {
 
-	int altura = 1;
+	btScalar altura = 1;
 	Vec2f aumento = posFinal - posIni;
 	//****************************RayCast central***************************************
-	btVector3 start = btVector3(posIni.x, altura, posIni.y);
-	btVector3 target = btVector3(posFinal.x, altura, posFinal.y);
+	btVector3 start = btVector3((btScalar)posIni.x, altura, (btScalar)posIni.y);
+	btVector3 target = btVector3((btScalar)posFinal.x, altura, (btScalar)posFinal.y);
 	//btVector3 distancia = target - start;
 	//distancia.length();	
 	/*btVector3 direccion = target - start;

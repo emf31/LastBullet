@@ -53,7 +53,7 @@ void GunBullet::handleMessage(const Message & message)
 {
 	if (message.mensaje == "BORRATE") {
 		EntityManager::i().removeEntity(this);
-		delete m_nodo.get();
+		
 	}
 }
 

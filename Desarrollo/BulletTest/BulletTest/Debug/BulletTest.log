@@ -1,10 +1,4 @@
-﻿  Player.cpp
-  Macro definition of max detected - undefining
-  Macro definition of min detected - undefining
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(78): warning C4316: 'Asalto': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(82): warning C4316: 'RocketLauncher': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(86): warning C4316: 'Pistola': puede que el objeto asignado en el montón no esté alineado 16
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\entities\player.cpp(90): warning C4316: 'Sniper': puede que el objeto asignado en el montón no esté alineado 16
+﻿  EntityManager.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'

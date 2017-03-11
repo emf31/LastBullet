@@ -24,7 +24,7 @@ void EntityManager::inicializar()
 	std::unordered_map<int, Entity*>::iterator iter = m_entities.begin();
 	for (iter; iter != m_entities.end(); ++iter) {
 		std::string className = iter->second->getClassName();
-		if (className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola"  && className != "Enemy_Bot") {
+		if (className != "Granada" && className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola"  && className != "Enemy_Bot") {
 			iter->second->inicializar();
 		}
 		
@@ -63,7 +63,7 @@ void EntityManager::cargarContenido()
 	std::unordered_map<int, Entity*>::iterator i = m_entities.begin();
 	for (; i != m_entities.end(); ++i) {
 		std::string className = i->second->getClassName();
-		if (className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola") {
+		if (className != "Granada" && className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola"  && className != "Enemy_Bot"){
 			i->second->cargarContenido();
 		}
 	}

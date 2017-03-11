@@ -12,7 +12,7 @@ class RocketBullet : public Entity
 {
 public:
 	RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
-	~RocketBullet();
+	virtual ~RocketBullet();
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -35,7 +35,7 @@ private:
 	Clock timelifeclock;
 
 	btRigidBody* m_rigidBody;
-	int estado=DISPONIBLE;
+	int estado = DISPONIBLE;
 
 	//Entity que dispara la bala
 	Character* m_owner;

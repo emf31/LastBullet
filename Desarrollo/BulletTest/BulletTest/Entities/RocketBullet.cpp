@@ -123,8 +123,6 @@ void RocketBullet::handleMessage(const Message & message)
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-	delete m_nodo.get();
-
 	EntityManager::i().removeEntity(this);
 }
 

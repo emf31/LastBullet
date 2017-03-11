@@ -14,7 +14,7 @@ public:
 	}
 
 	void LoadSettings();
-	const std::string& GetValue(const std::string& value);
+	const std::string GetValue(const std::string& value);
 
 private:
 	Settings() { }

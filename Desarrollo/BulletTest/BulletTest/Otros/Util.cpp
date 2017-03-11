@@ -35,7 +35,7 @@ float Randf(float min, float max)
 
 int Randi()
 {
-	std::srand(std::time(0));
+	std::srand((unsigned int)std::time(0));
 	return std::rand();
 }
 

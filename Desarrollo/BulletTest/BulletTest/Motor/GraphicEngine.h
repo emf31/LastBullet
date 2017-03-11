@@ -62,6 +62,9 @@ public:
 
 	void toggleCamera() { debug_camera = !debug_camera; }
 
+
+	void enableMouse(bool enable) { engine.enableMouse(enable); }
+
 	void setDebugDraw();
 
 	void apuntar();
@@ -87,6 +90,7 @@ private:
 
 	bool debug_draw_bullet;
 	bool debug_camera;
+	bool handleInput;
 
 
 	DebugDraw* debugDraw;

@@ -290,9 +290,9 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 			const float sqx = X*X;
 			const float sqy = Y*Y;
 			const float sqz = Z*Z;
-			float test = 2.0 * (Y*W - X*Z);
+			float test = 2.f * (Y*W - X*Z);
 
-			if (equals(test, 1.0, 0.000001))
+			if (equals(test, 1.f, 0.000001f))
 			{
 				// heading = rotation about z-axis
 				euler.setZ((float)(-2.0*atan2(X, W)));
@@ -301,7 +301,7 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 				// attitude = rotation about y-axis
 				euler.setY((float)(PI64 / 2.0));
 			}
-			else if (equals(test, -1.0, 0.000001))
+			else if (equals(test, -1.f, 0.000001f))
 			{
 				// heading = rotation about z-axis
 				euler.setZ((float)(2.0*atan2(X, W)));

@@ -1,6 +1,6 @@
 
 #include "BasicSceneNode.h"
-
+#include <GraphicEngine.h>
 
 BasicSceneNode::BasicSceneNode(TModel* node) : 
 	m_node(node)
@@ -13,6 +13,8 @@ BasicSceneNode::~BasicSceneNode()
 	//m_node->removeNode();
 	//m_node = nullptr;
 
+	//m_node->removeNode();
+	//delete m_node;
 }
 
 void BasicSceneNode::setTexture(const std::string & texture, int material)

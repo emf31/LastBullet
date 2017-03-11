@@ -494,7 +494,7 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 			Desirability = fm.DeFuzzify("DesirabilityAsalto", FuzzyModule::max_av);
 
-			desiAsalto = Desirability;
+			desiAsalto = (float)Desirability;
 
 			if (Desirability > mejorScore) {
 				mejorScore = Desirability;
@@ -513,7 +513,7 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 			Desirability = fm.DeFuzzify("DesirabilitySniper", FuzzyModule::max_av);
 
-			desiSniper = Desirability;
+			desiSniper = (float)Desirability;
 
 			if (Desirability > mejorScore) {
 				mejorScore = Desirability;
@@ -533,7 +533,7 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 			Desirability = fm.DeFuzzify("DesirabilityRocketLauncher", FuzzyModule::max_av);
 
-			desiRocketLauncher = Desirability;
+			desiRocketLauncher = (float)Desirability;
 
 			if (Desirability > mejorScore) {
 				mejorScore = Desirability;

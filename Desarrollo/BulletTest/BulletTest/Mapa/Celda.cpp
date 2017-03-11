@@ -32,10 +32,10 @@ CellSpacePartition::CellSpacePartition(float width, float height, int celdasX, i
 int CellSpacePartition::PositionToIndex(Vec2f& pos) {
 	//int indice = (int)(m_numCeldasX * pos.x / m_anchoCelda) + ((int)((m_numCeldasY)*pos.y / m_altoCelda)*m_numCeldasX);
 	//int indice = (int)(pos.x / m_anchoCelda) + (int)(pos.y / m_altoCelda);
-	int x = (int)(pos.x / m_anchoCelda);
-	int y = (int)(pos.y / m_altoCelda);
+	size_t x = (int)(pos.x / m_anchoCelda);
+	size_t y = (int)(pos.y / m_altoCelda);
 	y = y*m_numCeldasX;
-	int indice = x + y;
+	std::size_t indice = x + y;
 
 	if (indice > m_Celdas.size() - 1) {
 		indice = m_Celdas.size() - 1;
@@ -52,7 +52,7 @@ void CellSpacePartition::mostrarContenido()
 {
 	
 	
-	for (int i = 0; i < m_Celdas.size(); i++) {
+	for (size_t i = 0; i < m_Celdas.size(); i++) {
 		std::cout << "****** LA CELDA " << i << " TIENE LOS NODOS **********" << std::endl;
 		std::cout << "Proporciones celda: top: " << m_Celdas[i].Bbox.getTop() << " left: " << m_Celdas[i].Bbox.getLeft() << " bot: " << m_Celdas[i].Bbox.getBot() << " right: " << m_Celdas[i].Bbox.getRight() << std::endl;
 		for (std::list<NavGraphNode*>::iterator it = m_Celdas[i].Nodos.begin();it!=m_Celdas[i].Nodos.end();++it)

@@ -133,7 +133,9 @@ void Game::inicializar()
 	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
 
 	player->m_network->inicializar();
-	
+
+	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+
 	StateStack::i().GetCurrentState()->Inicializar();
 }
 
@@ -153,11 +155,7 @@ void Game::update(Time elapsedTime)
 
 void Game::render(float interpolation, Time elapsedTime)
 {
-	// FPS
-	int fps = GraphicEngine::i().getDevice().getFPS();
-	std::ostringstream title;
-	title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
-	GraphicEngine::i().getDevice().setWindowTitle(title.str());
+	
 
 	GraphicEngine::i().getDevice().updateCurrentFrame();
 	GraphicEngine::i().getDevice().doMovement();

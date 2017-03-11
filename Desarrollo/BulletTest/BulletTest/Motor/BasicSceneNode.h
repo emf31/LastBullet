@@ -25,6 +25,7 @@ public:
 	virtual void setColor(const Color4f& color) override;
 	
 private:
+
 	TModel* m_node;
 
 	virtual TEntity* getEntityNode() override  { return m_node; }

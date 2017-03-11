@@ -12,6 +12,9 @@ Menu::~Menu()
 void Menu::Inicializar()
 {
 	menuGUI.inicializar();
+
+	//GraphicEngine::i().getActiveCamera()->setInputReceiver(false);
+
 	
 }
 
@@ -44,8 +47,12 @@ void Menu::Update(Time timeElapsed)
 
 void Menu::Render(float interpolation, Time elapsedTime)
 {
+
+	float mouseX = (float)Input::i().getMouseX();
+	float mouseY = (float)Input::i().getMouseY();
+
 	//GUI
-	menuGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
+	menuGUI.injectMousePosition(mouseX, mouseY);
 
 	GraphicEngine::i().renderAll();
 }

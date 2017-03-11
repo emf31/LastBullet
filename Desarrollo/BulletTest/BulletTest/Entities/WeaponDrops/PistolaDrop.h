@@ -1,7 +1,6 @@
 #pragma once
 #include "WeaponDrop.h"
-class PistolaDrop:
-	public WeaponDrop
+class PistolaDrop : public WeaponDrop
 {
 public:
 	PistolaDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);

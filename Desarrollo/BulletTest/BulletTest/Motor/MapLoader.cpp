@@ -10,6 +10,12 @@
 #include "../Entities/Button.h"
 #include "../Otros/EnumParser.h"
 
+
+
+
+
+
+
 // for convenience
 using json = nlohmann::json;
 
@@ -232,3 +238,4 @@ void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTrigg
 	Button *btn = new Button(nullptr, "Boton", type, id);
 	btn->setPosition(posicion);
 }
+

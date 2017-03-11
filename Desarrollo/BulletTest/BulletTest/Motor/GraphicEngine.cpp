@@ -25,11 +25,11 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	node->setScale(Vec3<float>(TScale.getX(), TScale.getY(), TScale.getZ()));
 	node->setPosition(Vec3<float>(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
 
-
+	std::shared_ptr<BasicSceneNode> sharedptr(new BasicSceneNode(node));
 	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
-	return std::shared_ptr<BasicSceneNode>(new BasicSceneNode(node));
+	return sharedptr;
 }
 
 /*std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
@@ -102,14 +102,13 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 	cam->setPosition(position);
 	cam->setTarget(target);
 	cam->setInputEnable(false);
-	
-	sm.setActiveCamera(cam);
+
 
 	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
 	Camera* myCamera = new Camera(cam, name);
 	cameras[name] = myCamera;
 
-	
+	setActiveCamera(name);
 
 	return myCamera;
 }
@@ -149,8 +148,10 @@ void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 void GraphicEngine::renderAll()
 {
 	
-
+	
 	SceneManager::i().draw();
+
+
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	/*if (debug_draw_bullet)
 	{
@@ -163,13 +164,14 @@ void GraphicEngine::renderAll()
 
 	}
 	*/
-	//gui.draw();
-	//GUIManager::i().drawAllGuis();
+	
+	// FPS
+	int fps = GraphicEngine::i().getDevice().getFPS();
+	std::ostringstream title;
+	title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
+	GraphicEngine::i().getDevice().setWindowTitle(title.str());
 
-	/*int fps = engine.getFPS();
-
-	std::ostringstream str;
-	str << u8"LAST BULLET - [FPS:" << fps<<"]";*/
+	GUIManager::i().drawAllGuis();
 	sm.renderFrame(engine.getWindow());
 
 }
@@ -180,17 +182,19 @@ void GraphicEngine::inicializar()
 	screenHeight = 720;
 	engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet");
 
+	
 
 	sm = SceneManager::i();
+	sm.setFarPlane(1000.f);
+	
 
-	sm.inicializarBuffers();
+	//sm.inicializar();
 
 	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, -1.0f));
 	dsa->setIntensidadAmbiente(0.8f); 
 
 	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	setActiveCamera("CamaraPlayer");
-
 
 
 }
@@ -205,7 +209,8 @@ bool GraphicEngine::apagar()
 {
 	delete debugDraw;
 
-	engine.shutdown();
+	engine.end();
+	//engine.shutdown();
 	
 	return true;
 }

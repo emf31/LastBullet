@@ -579,7 +579,7 @@ bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
 	std::cout << "Valor del slider: "<< sliderUpdate->getCurrentValue() << std::endl;
 
 
-	entActual->setNumCiclos(sliderUpdate->getCurrentValue());
+	entActual->setNumCiclos((int)sliderUpdate->getCurrentValue());
 
 	return true;
 }

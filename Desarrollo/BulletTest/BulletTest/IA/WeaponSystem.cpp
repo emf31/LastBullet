@@ -3,6 +3,8 @@
 #include "Enemy_Bot.h"
 
 
+
+
 WeaponSystem::WeaponSystem(Enemy_Bot* Owner, double ReactionTime, double AimAccuracy, double AimPersistance) :
 	m_pOwner(Owner),
 	m_dReactionTime(ReactionTime), 
@@ -261,3 +263,4 @@ void WeaponSystem::InsertarArmaDebug(std::string arma) {
 
 
 }
+

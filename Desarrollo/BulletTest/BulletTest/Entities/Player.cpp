@@ -25,6 +25,7 @@
 
 
 
+
 Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid) , life_component(this)
 {
 	//Registramos la entity en el trigger system
@@ -60,9 +61,11 @@ void Player::inicializar()
 	tieneRocketLauncher = false;
 	tienePistola = false;
 
-	//Creamos la camara FPS
+	//Activamos la camara FPS
+	GraphicEngine::i().setActiveCamera("CamaraPlayer");
 	Camera* camaraPlayer = GraphicEngine::i().getActiveCamera();
 	camaraPlayer->asignarEntity(this);
+	
 	
 
 
@@ -100,10 +103,10 @@ void Player::inicializar()
 	pistola->setEquipada(true);
 	bindWeapon();
 
-	GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
+	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(pistola->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(sniper->getNode());
+	GraphicEngine::i().getActiveCamera()->addChild(sniper->getNode());*/
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
@@ -326,14 +329,11 @@ void Player::move_up()
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
 
-	if (!apuntando) {
-		speedFinal.addX(speed.getX());
-		speedFinal.addZ(speed.getZ());
-	}
-	else {
-		speedFinal.addX(speed.getX() / 3);
-		speedFinal.addZ(speed.getZ() / 3);
-	}
+
+	speedFinal.addX(speed.getX());
+	speedFinal.addZ(speed.getZ());
+
+
 
 	isMoving = true;
 }
@@ -345,14 +345,10 @@ void Player::move_down()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-	if (!apuntando) {
-		speedFinal.addX(-speed.getX());
-		speedFinal.addZ(-speed.getZ());
-	}
-	else {
-		speedFinal.addX(-speed.getX() / 3);
-		speedFinal.addZ(-speed.getZ() / 3);
-	}
+
+	speedFinal.addX(-speed.getX());
+	speedFinal.addZ(-speed.getZ());
+
 	isMoving = true;
 }
 
@@ -362,31 +358,25 @@ void Player::move_right()
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-	if (!apuntando) {
-		speedFinal.addX(speed.getZ());
-		speedFinal.addZ(-speed.getX());
-	}
-	else {
-		speedFinal.addX(speed.getZ() / 3);
-		speedFinal.addZ(-speed.getX() / 3);
-	}
+
+	speedFinal.addX(-speed.getZ());
+	speedFinal.addZ(speed.getX());
+
+
 	isMoving = true;
 }
 
 void Player::move_left()
 {
+	
+
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
-	if (!apuntando) {
-		speedFinal.addX(-speed.getZ());
-		speedFinal.addZ(speed.getX());
-	}
-	else {
-		speedFinal.addX(-speed.getZ() / 3);
-		speedFinal.addZ(speed.getX() / 3);
-	}
+
+	speedFinal.addX(speed.getZ());
+	speedFinal.addZ(-speed.getX());
 
 	isMoving = true;
 }
@@ -394,16 +384,16 @@ void Player::move_left()
 void Player::bindWeapon() {
 
 	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
-		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootAsalto()));
+		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootAsalto()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "Pistola") {
-		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootPistola()));
+		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootPistola()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
-		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootRocket()));
+		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootRocket()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "Sniper") {
-		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootSniper()));
+		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootSniper()));
 	}
 
 }
@@ -589,3 +579,4 @@ float Player::getVida() {
 bool Player::isDying() {
 	return life_component.isDying();
 }
+
