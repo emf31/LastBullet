@@ -105,6 +105,7 @@ public:
 	std::vector<GLuint> indices;
 	GLuint linesvao, linesvbo, linesebo;
 	GLuint LVAO,LVBO;
+	int indexI = 0;
 
 	void inicializarBuffersLineas() {
 		glGenVertexArrays(1, &LVAO);
@@ -119,7 +120,7 @@ public:
 	void rellenaVertices() {
 		//glDisable(GL_CULL_FACE);
 		
-		unsigned int indexI = 0;
+		indexI = 0;
 
 		for (std::vector<_LINE>::iterator it = LINES.begin(); it != LINES.end(); it++)
 		{
@@ -138,10 +139,16 @@ public:
 			indexI += 2;
 		}
 
+		GLfloat vertices2[] = {
+			0.0f, 0.0f, 0.0f, // Inicio  
+			0.0f, 50.f, 0.0f, // Fin 
+
+		};
+
 		glBindVertexArray(LVAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, LVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices.at(0), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(0);
@@ -179,6 +186,22 @@ public:
 		LINES.clear();
 		*/
 
+	}
+
+	void drawLine() {
+		rellenaVertices();
+		shaderLineas->Use();
+		glLineWidth(5.f);
+		const glm::mat4& view = getViewMatrix();
+		const glm::mat4& projection = getProjectionMatrix();
+		glm::mat4& model = glm::mat4();
+
+		glm::mat4 modelview = projection * view * model;
+		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
+		glBindVertexArray(LVAO);
+
+		glDrawArrays(GL_LINES, 0, 2);
+		glBindVertexArray(0);
 	}
 
 private:
