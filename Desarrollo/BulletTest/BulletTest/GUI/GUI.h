@@ -64,7 +64,7 @@ namespace Motor{
 		static void setWidgetDestRect(CEGUI::Window* widget, const vec4f& destRectPerc, const vec4f& destRectPix);
 
 		//Getters
-		CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
+		//CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
 		const CEGUI::GUIContext* getContext() { return m_context; }
 
 		bool debugInput = false;

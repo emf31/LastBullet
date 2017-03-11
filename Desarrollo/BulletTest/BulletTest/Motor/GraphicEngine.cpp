@@ -147,7 +147,7 @@ void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 void GraphicEngine::renderAll()
 {
 	
-
+	
 	SceneManager::i().draw(engine.getWindow());
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	/*if (debug_draw_bullet)
