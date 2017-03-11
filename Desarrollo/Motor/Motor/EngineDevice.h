@@ -43,6 +43,8 @@ public:
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 
+	void enableMouse(bool enable);
+
 	void shutdown();
 
 private:

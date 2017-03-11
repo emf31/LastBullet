@@ -107,6 +107,14 @@ bool  EngineDevice::shouldCloseWindw() {
 	return false;
 }
 
+void EngineDevice::enableMouse(bool enable) {
+	if (enable) {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	} else {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+}
+
 void EngineDevice::shutdown()
 {
 	sm.shutdown();
@@ -116,6 +124,7 @@ void EngineDevice::shutdown()
 void EngineDevice::setKeyCallbacks() {
 	glfwSetKeyCallback(window, &Input::key_callback);
 	glfwSetCursorPosCallback(window, &Input::mouse_callback);
+	glfwSetMouseButtonCallback(window, &Input::mouseButtonCallback);
 	glfwSetScrollCallback(window, &Input::scroll_callback);
 }
 

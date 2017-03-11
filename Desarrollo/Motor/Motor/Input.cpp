@@ -23,10 +23,32 @@ void Input::mouse_callbackImpl(GLFWwindow * window, double xpos, double ypos) {
 	lastX = (GLfloat)xpos;
 	lastY = (GLfloat)ypos;
 
-	mouse.X = (int)xoffset;
-	mouse.Y = (int)yoffset;
+	mouse.X = (int)lastX;
+	mouse.Y = (int)lastY;
 
 	sm.camaraActiva->ProcessMouseMovement(xoffset, yoffset);
+}
+
+void Input::mouseButtonCallbackImpl(int key, int action, int mods) {
+	
+	if (key == GLFW_MOUSE_BUTTON_1) {
+		//std::cout << "MOUSE - " << key << " - " << action << std::endl;
+		if (action == GLFW_PRESS) {
+			mouseButtonState[0] = PRESSED;
+			keys[key] = PRESSED;
+		} else if(action == GLFW_RELEASE) {
+			mouseButtonState[0] = RELEASED;
+			keys[key] = RELEASED;
+		}
+	} else if (key == GLFW_MOUSE_BUTTON_2) {
+		if(action == GLFW_PRESS) {
+			mouseButtonState[2] = PRESSED;
+			keys[key] = PRESSED;
+		} else if (action == GLFW_RELEASE) {
+			mouseButtonState[2] = RELEASED;
+			keys[key] = RELEASED;
+		}
+	}
 }
 
 void Input::scroll_callbackImpl(GLFWwindow * window, double xoffset, double yoffset) {
