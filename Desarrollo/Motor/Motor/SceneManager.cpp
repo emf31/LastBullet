@@ -72,6 +72,8 @@ void SceneManager::draw() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	renderLuces();
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void SceneManager::renderFrame(GLFWwindow* window) {
