@@ -136,7 +136,7 @@ void Game::inicializar()
 	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
 
 	player->m_network->inicializar();
-	
+	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	StateStack::i().GetCurrentState()->Inicializar();
 }
 

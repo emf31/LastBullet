@@ -34,7 +34,7 @@ void Motor::GUI::draw() {
 	GUIManager::i().getRenderer()->beginRendering();
 	m_context->draw();
 	GUIManager::i().getRenderer()->endRendering();
-	//glDisable(GL_SCISSOR_TEST);
+	glDisable(GL_SCISSOR_TEST);
 }
 
 /*void Motor::GUI::update() {

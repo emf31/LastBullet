@@ -104,11 +104,12 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 	cam->setTarget(target);
 	cam->setInputEnable(false);
 
+	
 
 	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
 	Camera* myCamera = new Camera(cam, name);
 	cameras[name] = myCamera;
-
+	setActiveCamera(name);
 	return myCamera;
 }
 
@@ -148,7 +149,8 @@ void GraphicEngine::renderAll()
 {
 	
 	
-	SceneManager::i().draw(engine.getWindow());
+	SceneManager::i().draw();
+
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	/*if (debug_draw_bullet)
 	{
@@ -162,13 +164,14 @@ void GraphicEngine::renderAll()
 	}
 	*/
 	//gui.draw();
-	GUIManager::i().drawAllGuis();
+	
 
 	int fps = engine.getFPS();
 
 	std::ostringstream str;
 	str << u8"LAST BULLET - [FPS:" << fps<<"]";
-
+	GUIManager::i().drawAllGuis();
+	SceneManager::i().renderFrame(engine.getWindow());
 }
 
 void GraphicEngine::inicializar()

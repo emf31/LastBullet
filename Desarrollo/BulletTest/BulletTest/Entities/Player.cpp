@@ -61,7 +61,7 @@ void Player::inicializar()
 	tienePistola = false;
 
 	//Creamos la camara FPS
-	Camera* camaraPlayer = GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	Camera* camaraPlayer = GraphicEngine::i().getActiveCamera();
 	camaraPlayer->asignarEntity(this);
 	GraphicEngine::i().setActiveCamera("CamaraPlayer");
 
