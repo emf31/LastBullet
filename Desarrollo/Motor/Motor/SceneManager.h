@@ -104,13 +104,20 @@ public:
 	std::vector<GLfloat> vertices;
 	std::vector<GLuint> indices;
 	GLuint linesvao, linesvbo, linesebo;
+	GLuint LVAO,LVBO;
+
+	void inicializarBuffersLineas() {
+		glGenVertexArrays(1, &LVAO);
+		glGenBuffers(1, &LVBO);
+		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+	}
 
 	void drawLine(glm::vec3 from, glm::vec3 to) {
 		LINES.push_back(_LINE(from, to));
 	}
 
 	void rellenaVertices() {
-		glDisable(GL_CULL_FACE);
+		//glDisable(GL_CULL_FACE);
 		
 		unsigned int indexI = 0;
 
@@ -131,6 +138,17 @@ public:
 			indexI += 2;
 		}
 
+		glBindVertexArray(LVAO);
+
+		glBindBuffer(GL_ARRAY_BUFFER, LVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices.at(0), GL_STATIC_DRAW);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+
+		glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
 		///////
 
@@ -145,7 +163,7 @@ public:
 		//glBindVertexArray(0);
 		/////
 
-
+		/*
 		glEnableVertexAttribArray(linesvao);
 		//glVertexAttribPointer(linesvao, 3, GL_FLOAT, GL_FALSE, 0, (void*)&(vertices.at(0)));
 
@@ -159,6 +177,8 @@ public:
 		glDrawArrays(GL_LINES, 0, indices[0]);
 
 		LINES.clear();
+		*/
+
 	}
 
 private:

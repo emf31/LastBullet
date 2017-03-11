@@ -24,8 +24,9 @@ int main() {
 	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
 		return -1;
 	}
-	SceneManager &sm = SceneManager::i();	
-
+	SceneManager &sm = SceneManager::i();
+	sm.inicializarBuffers();
+	sm.setActiveCamera(sm.crearNodoCamara());
 	//*******MODELOS***********
 
 	//window
@@ -34,11 +35,11 @@ int main() {
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
 	//sm.camaraActiva->addChild(p1);
 	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
-	
-	
+
+
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
@@ -47,7 +48,7 @@ int main() {
 	TModel* n2 = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n2->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	n2->setPosition(Vec3<float>(-3.0f, 0.0f, -3.0f));
-	
+
 
 	//cartel
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
@@ -60,7 +61,7 @@ int main() {
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
-	
+
 
 
 
@@ -85,13 +86,13 @@ int main() {
 	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-5.0f, 0.0f, 8.0f), Vec3<float>(0.5f, 0.0f, -1.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
-	
+
 
 
 	//*******CAMARAS*******
 	//TCamera* cam2 = sm.crearNodoCamara();
 	//sm.setActiveCamera(cam2);
-	
+
 	long int cont = 0;
 	long int tiempoCamara = 0;
 	int contCam = 0;
@@ -99,25 +100,29 @@ int main() {
 	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
 	Vec3<float> newPos;
 
-	
-	sm.setActiveCamera(sm.crearNodoCamara());
-	
+	GLuint  VAO, VBO;
+	GLfloat vertices[] = {
+		0.0f, 0.0f, 0.0f, // Inicio  
+		0.0f, 50.f, 0.0f, // Fin 
 
-	/////////////////
+	};
 
-	glLineWidth(10.0f);
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+	glBindVertexArray(VAO);
 
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
 
-	glGenVertexArrays(1, &sm.linesvao); // Un VAO
-	glGenBuffers(1, &sm.linesvbo); // Un VBO
-	glGenBuffers(1, &sm.linesebo); // Un EBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
 
-	
-	
-	//////////////////
+	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
-	while (!engine.shouldCloseWindw()){
+	while (!engine.shouldCloseWindw()) {
 		//std::cout << "inicio iteracion" << std::endl;
 		engine.updateCurrentFrame();
 
@@ -126,28 +131,39 @@ int main() {
 		std::ostringstream title;
 		title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
 		engine.setWindowTitle(title.str());
-		
+
 		engine.doMovement();
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
-		newPos = vecDir *0.3f;
+		newPos = vecDir *0.3;
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);*/
-		
+
 
 		sm.draw();
 
-		sm.drawLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 50.0f, 0.0f));
-		sm.drawLine(glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-		sm.drawLine(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(5.0f, 50.0f, 5.0f));
-		sm.drawLine(glm::vec3(11.0f, 11.0f, 0.0f), glm::vec3(30.0f, 10.0f, 0.0f));
-		sm.drawLine(glm::vec3(10.f, 5.0f, 2.0f), glm::vec3(30.0f, 5.0f, 3.0f));
-		sm.rellenaVertices();
-		sm.renderFrame(engine.getWindow());
 
-		
+		////////
+
+		sm.shaderLineas->Use();
+		glLineWidth(5.f);
+		const glm::mat4& view = sm.getViewMatrix();
+		const glm::mat4& projection = sm.getProjectionMatrix();
+		glm::mat4& model = glm::mat4();
+
+		glm::mat4 modelview = projection * view * model;
+
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "view"), 1, GL_FALSE, glm::value_ptr(modelview));
+		glBindVertexArray(VAO);
+
+		glDrawArrays(GL_LINES, 0, 2);
+		glBindVertexArray(0);
+
+		glfwSwapBuffers(engine.getWindow());
+
+
 	}
 	engine.end();
 	engine.shutdown();
