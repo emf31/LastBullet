@@ -123,7 +123,8 @@ int main() {
 		p1->updatePosition(newPos);*/
 		
 
-		sm.draw(engine.getWindow());
+		sm.draw();
+		sm.renderFrame(engine.getWindow());
 
 		
 	}

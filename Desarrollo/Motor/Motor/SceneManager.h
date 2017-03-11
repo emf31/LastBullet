@@ -26,7 +26,8 @@ public:
 
 	//void getTexture(std::string path);
 	TModel* getMesh(const std::string& path, Shader* shader=nullptr);
-	void draw(GLFWwindow* window);
+	void draw();
+	void renderFrame(GLFWwindow* window);
 	void inicializarBuffers();
 	void renderLuces();
 

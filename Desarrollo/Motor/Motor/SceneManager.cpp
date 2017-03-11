@@ -49,7 +49,7 @@ TModel* SceneManager::getMesh(const std::string& path,Shader* shader) {
 	return NULL;
 }
 
-void SceneManager::draw(GLFWwindow* window) {
+void SceneManager::draw() {
 	//enlazamos el buffer sobre el que queremos escribir
 	//activamos el g buffer cuando vamos a dibujar modelos
 	
@@ -72,9 +72,10 @@ void SceneManager::draw(GLFWwindow* window) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	renderLuces();
 
-	glfwSwapBuffers(window);
+}
 
-	
+void SceneManager::renderFrame(GLFWwindow* window) {
+	glfwSwapBuffers(window);
 }
 
 void SceneManager::inicializarBuffers()
