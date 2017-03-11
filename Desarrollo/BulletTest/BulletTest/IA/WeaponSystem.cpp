@@ -57,9 +57,9 @@ void WeaponSystem::AddNoiseToAim(Vec3<float>& AimingPos)const {
 
 	Vec3<float> toPos;
 
-	toPos.setX(AimingPos.getX() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
-	toPos.setY(AimingPos.getY() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
-	toPos.setZ(AimingPos.getZ() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
+	toPos.setX(AimingPos.getX() + Randf((float)-m_dAimAccuracy, (float)m_dAimAccuracy));
+	toPos.setY(AimingPos.getY() + Randf((float)-m_dAimAccuracy, (float)m_dAimAccuracy));
+	toPos.setZ(AimingPos.getZ() + Randf((float)-m_dAimAccuracy, (float)m_dAimAccuracy));
 
 	AimingPos = toPos;
 

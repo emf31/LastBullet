@@ -57,7 +57,7 @@ public:
 	bool apagar();
 
 	void cargarTexturas();
-	//void removeNode(std::shared_ptr<SceneNode> nodo);
+	void removeNode(std::shared_ptr<SceneNode> nodo);
 	void toggleDebug() { debug_draw_bullet = !debug_draw_bullet; }
 
 	void toggleCamera() { debug_camera = !debug_camera; }
@@ -72,7 +72,7 @@ public:
 	EngineDevice& getDevice() { return engine; }
 private:
 
-	float screenWidth, screenHeight;
+	int screenWidth, screenHeight;
 
 	EngineDevice engine;
 	SceneManager& sm;

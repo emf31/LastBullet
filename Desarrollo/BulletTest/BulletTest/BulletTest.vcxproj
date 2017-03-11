@@ -134,7 +134,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Opengl32.lib;glew.lib;zlibstatic.lib;zlib.lib;assimp-vc140-mt.lib;SOIL.lib;glfw3.lib;Motor.lib;SILLY.lib;freetype.lib;jpeg.lib;libexpat.lib;libpng.lib;pcre.lib;CEGUIExpatParser_Static.lib;CEGUICoreWindowRendererSet_Static.lib;CEGUIOpenGLRenderer-0_Static.lib;CEGUICommonDialogs-0_Static.lib;CEGUISILLYImageCodec_Static.lib;CEGUIBase-0_Static.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Opengl32.lib;glew.lib;zlibstatic.lib;zlib.lib;assimp-vc140-mt.lib;SOIL.lib;glfw3.lib;Motor.lib;SILLY.lib;freetype.lib;jpeg.lib;libexpat.lib;libpng.lib;pcre.lib;CEGUIExpatParser_Static.lib;CEGUICoreWindowRendererSet_Static.lib;CEGUIOpenGLRenderer-0_Static.lib;CEGUICommonDialogs-0_Static.lib;CEGUISILLYImageCodec_Static.lib;CEGUIBase-0_Static.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;ws2_32.lib;RakNetLibStatic_RELEASE.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;..\lib\Release</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
@@ -258,7 +258,6 @@
     <ClInclude Include="Mapa\Dijkstra.h" />
     <ClInclude Include="Mapa\Map.h" />
     <ClInclude Include="Mapa\PathPlanner.h" />
-    <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
     <ClInclude Include="Motor\BillboardSceneNode.h" />
@@ -370,7 +369,6 @@
     <ClCompile Include="Mapa\Dijkstra.cpp" />
     <ClCompile Include="Mapa\Map.cpp" />
     <ClCompile Include="Mapa\PathPlanner.cpp" />
-    <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motor\AnimatedSceneNode.cpp" />

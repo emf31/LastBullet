@@ -37,7 +37,7 @@ void RocketBullet::update(Time elapsedTime)
 	m_rigidBody->setLinearVelocity(aux*m_velocity);
 
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	m_renderState.updatePositions(Vec3<float>((float)Point[0], (float)Point[1], (float)Point[2]));
 
 
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
@@ -70,6 +70,7 @@ void RocketBullet::cargarContenido()
 
 void RocketBullet::borrarContenido()
 {
+	GraphicEngine::i().removeNode(m_nodo);
 }
 
 

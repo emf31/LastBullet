@@ -10,8 +10,8 @@ BasicSceneNode::BasicSceneNode(TModel* node) :
 
 BasicSceneNode::~BasicSceneNode()
 {
-	m_node->removeNode();
-	m_node = nullptr;
+	//m_node->removeNode();
+	//m_node = nullptr;
 
 }
 

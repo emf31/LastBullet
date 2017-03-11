@@ -1,6 +1,6 @@
 
 #include "PhysicsEntity.h"
-
+#include <Quaternion.h>
 
 PhysicsEntity::PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
 {
@@ -45,10 +45,11 @@ void PhysicsEntity::update(Time elapsedTime)
 	btVector3 Euler;
 	const btQuaternion& TQuat = m_rigidBody->getOrientation();
 	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(Euler);
+	q.toEuler(cons(Euler));
+
 	Euler *= RADTODEG;
 
-	m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+	m_renderState.updateRotations(Vec3<float>(Euler.getX(), Euler.getY(), Euler.getZ()));
 
 	// Set position
 	//m_rigidBody->setm

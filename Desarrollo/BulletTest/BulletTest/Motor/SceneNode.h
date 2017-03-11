@@ -13,6 +13,7 @@ class SceneNode
 {
 	friend class BasicSceneNode;
 	friend class Camera;
+	friend class GraphicEngine;
 public:
 	SceneNode();
 	~SceneNode();

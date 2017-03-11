@@ -1,7 +1,6 @@
 #include "Player.h"
 #include <PhysicsEngine.h>
 #include <GraphicEngine.h>
-#include "../MastEventReceiver.hpp"
 #include <MessageHandler.h>
 #include <Estructuras.h>
 #include <InputHandler.h>
@@ -22,6 +21,7 @@
 #include <Map.h>
 
 #include <NetworkManager.h>
+#include <glm\glm.hpp>
 
 
 
@@ -61,9 +61,9 @@ void Player::inicializar()
 	tienePistola = false;
 
 	//Creamos la camara FPS
-	Camera* camaraPlayer = GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	Camera* camaraPlayer = GraphicEngine::i().getActiveCamera();
 	camaraPlayer->asignarEntity(this);
-	GraphicEngine::i().setActiveCamera("CamaraPlayer");
+	
 
 
 	granada = new Granada();
@@ -248,7 +248,7 @@ void Player::handleMessage(const Message & message)
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 {
 
-	if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
+	/*if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
 		Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
 		if (ent->getID() == 65534) {
 			//Respawns
@@ -275,6 +275,7 @@ bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 
 		}
 	}
+	return true;*/
 	return true;
 }
 
@@ -330,12 +331,11 @@ void Player::move_up()
 		speedFinal.addZ(speed.getZ());
 	}
 	else {
-		speedFinal.addX(speed.getX()/3);
-		speedFinal.addZ(speed.getZ()/3);
+		speedFinal.addX(speed.getX() / 3);
+		speedFinal.addZ(speed.getZ() / 3);
 	}
 
 	isMoving = true;
-
 }
 
 
@@ -350,8 +350,8 @@ void Player::move_down()
 		speedFinal.addZ(-speed.getZ());
 	}
 	else {
-		speedFinal.addX(-speed.getX()/3);
-		speedFinal.addZ(-speed.getZ()/3);
+		speedFinal.addX(-speed.getX() / 3);
+		speedFinal.addZ(-speed.getZ() / 3);
 	}
 	isMoving = true;
 }
@@ -367,8 +367,8 @@ void Player::move_right()
 		speedFinal.addZ(-speed.getX());
 	}
 	else {
-		speedFinal.addX(speed.getZ()/3);
-		speedFinal.addZ(-speed.getX()/3);
+		speedFinal.addX(speed.getZ() / 3);
+		speedFinal.addZ(-speed.getX() / 3);
 	}
 	isMoving = true;
 }
@@ -384,8 +384,8 @@ void Player::move_left()
 		speedFinal.addZ(speed.getX());
 	}
 	else {
-		speedFinal.addX(-speed.getZ()/3);
-		speedFinal.addZ(speed.getX()/3);
+		speedFinal.addX(-speed.getZ() / 3);
+		speedFinal.addZ(speed.getX() / 3);
 	}
 
 	isMoving = true;
@@ -394,16 +394,16 @@ void Player::move_left()
 void Player::bindWeapon() {
 
 	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootAsalto()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootAsalto()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "Pistola") {
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootPistola()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootPistola()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootRocket()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootRocket()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "Sniper") {
-		InputHandler::i().bind(KEY_LBUTTON, CommandPtr(new ShootSniper()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootSniper()));
 	}
 
 }

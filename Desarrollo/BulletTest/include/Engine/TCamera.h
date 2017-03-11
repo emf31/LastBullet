@@ -49,6 +49,7 @@ public:
 	void setTarget(const Vec3<float>& target);
 	
 	Vec3<float> getTarget();
+	Vec3<float> getDerecha();
 
 	void setRotationDir(const Vec3<float>& dir);
 

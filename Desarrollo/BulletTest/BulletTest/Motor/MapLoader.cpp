@@ -115,7 +115,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 
 	physicent->centerCollision = centerCol;
 	physicent->setRigidBody(PhysicsEngine::i().createBoxRigidBody(physicent, sizeCol, mymass,true, centerCol));
-	physicent->rotate(Vec3<float>(float(rotacion.getX()* PI / 180.0), float(rotacion.getY() * PI / 180.0), float(rotacion.getZ()* PI / 180.0)));
+	physicent->rotate(Vec3<float>(float(rotacion.getX()* M_PI / 180.0), float(rotacion.getY() * M_PI / 180.0), float(rotacion.getZ()* M_PI / 180.0)));
 	
 	if(mass==0){
 		physicent->setCollisionGroup(col::Collisions::Static);

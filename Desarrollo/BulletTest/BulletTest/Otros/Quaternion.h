@@ -4,8 +4,13 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 
+//Version reducida de la clase quaternion de irrlitch. 
+
+
 #include <vec3.hpp>
-#include <algorithm>
+#include <Util.h>
+
+
 
 //! Constant for 64bit PI.
 const double PI64 = 3.1415926535897932384626433832795028841971693993751;
@@ -46,9 +51,6 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 			quaternion& operator*=(float s);
 
 			//! Multiplication operator
-			Vec3<float> operator*(const Vec3<float>& v) const;
-
-			//! Multiplication operator
 			quaternion& operator*=(const quaternion& other);
 
 			//! Calculates the dot product
@@ -85,19 +87,7 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 			*/
 			quaternion& lerp(quaternion q1, quaternion q2, float time);
 
-			//! Set this quaternion to the result of the spherical interpolation between two quaternions
-			/** \param q1 First quaternion to be interpolated.
-			\param q2 Second quaternion to be interpolated.
-			\param time Progress of interpolation. For time=0 the result is
-			q1, for time=1 the result is q2. Otherwise interpolation
-			between q1 and q2.
-			\param threshold To avoid inaccuracies at the end (time=1) the
-			interpolation switches to linear interpolation at some point.
-			This value defines how much of the remaining interpolation will
-			be calculated with lerp. Everything from 1-threshold up will be
-			linear interpolation.
-			*/
-			quaternion& slerp(quaternion q1, quaternion q2, float time, float threshold = .05f);
+
 
 			//! Create quaternion from rotation angle and rotation axis.
 			/** Axis must be unit length.
@@ -107,8 +97,6 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 			\param axis Rotation axis. */
 			quaternion& fromAngleAxis(float angle, const Vec3<float>& axis);
 
-			//! Fills an angle (radians) around an axis (unit vector)
-			void toAngleAxis(float &angle, Vec3<float>& axis) const;
 
 			//! Output this quaternion to an euler angle (radians)
 			void toEuler(Vec3<float>& euler) const;
@@ -116,8 +104,6 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 			//! Set quaternion to identity
 			quaternion& makeIdentity();
 
-			//! Set quaternion to represent a rotation from one vector to another.
-			quaternion& rotationFromTo(const Vec3<float>& from, const Vec3<float>& to);
 
 			//! Quaternion elements.
 			float X; // vectorial (imaginary) part
@@ -322,7 +308,7 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 				// bank = rotation about x-axis
 				euler.setX(0);
 				// attitude = rotation about y-axis
-				euler.setY = (float)(PI64 / -2.0);
+				euler.setY((float)(PI64 / -2.0));
 			}
 			else
 			{
@@ -330,72 +316,8 @@ const double PI64 = 3.1415926535897932384626433832795028841971693993751;
 				euler.setZ((float)atan2(2.0 * (X*Y + Z*W), (sqx - sqy - sqz + sqw)));
 				// bank = rotation about x-axis
 				euler.setX((float)atan2(2.0 * (Y*Z + X*W), (-sqx - sqy + sqz + sqw)));
-				// attitude = rotation about y-axis
-				euler.setY((float)asin(btClamp(test, -1.0, 1.0)));
+				// attitude = rotation about y-axix
+				euler.setY((float)asin(clip(test, -1.0, 1.0)));
 			}
 		}
-
-
-		inline vector3df quaternion::operator* (const vector3df& v) const
-		{
-			// nVidia SDK implementation
-
-			vector3df uv, uuv;
-			vector3df qvec(X, Y, Z);
-			uv = qvec.crossProduct(v);
-			uuv = qvec.crossProduct(uv);
-			uv *= (2.0f * W);
-			uuv *= 2.0f;
-
-			return v + uv + uuv;
-		}
-
-		// set quaternion to identity
-		inline core::quaternion& quaternion::makeIdentity()
-		{
-			W = 1.f;
-			X = 0.f;
-			Y = 0.f;
-			Z = 0.f;
-			return *this;
-		}
-
-		inline core::quaternion& quaternion::rotationFromTo(const vector3df& from, const vector3df& to)
-		{
-			// Based on Stan Melax's article in Game Programming Gems
-			// Copy, since cannot modify local
-			vector3df v0 = from;
-			vector3df v1 = to;
-			v0.normalize();
-			v1.normalize();
-
-			const f32 d = v0.dotProduct(v1);
-			if (d >= 1.0f) // If dot == 1, vectors are the same
-			{
-				return makeIdentity();
-			}
-			else if (d <= -1.0f) // exactly opposite
-			{
-				core::vector3df axis(1.0f, 0.f, 0.f);
-				axis = axis.crossProduct(v0);
-				if (axis.getLength() == 0)
-				{
-					axis.set(0.f, 1.f, 0.f);
-					axis = axis.crossProduct(v0);
-				}
-				// same as fromAngleAxis(core::PI, axis).normalize();
-				return set(axis.X, axis.Y, axis.Z, 0).normalize();
-			}
-
-			const f32 s = sqrtf((1 + d) * 2); // optimize inv_sqrt
-			const f32 invs = 1.f / s;
-			const vector3df c = v0.crossProduct(v1)*invs;
-			return set(c.X, c.Y, c.Z, s * 0.5f).normalize();
-		}
-
-
-	} // end namespace core
-} // end namespace irr
-
-#endif
 

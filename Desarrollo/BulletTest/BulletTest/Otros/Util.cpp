@@ -44,6 +44,10 @@ int Randi(int min, int max)
 	return Randi() % (max - min + 1) + min;
 }
 
+float clip(float n, float lower, float upper) {
+	return std::max(lower, std::min(n, upper));
+}
+
 btVector3 bt(const Vec3<float>& vec)
 {
 	return btVector3(vec.getX(), vec.getY(), vec.getZ());

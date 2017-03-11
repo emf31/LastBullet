@@ -1,10 +1,9 @@
 #pragma once
 
 //GLEW
-#define GLEW_STATIC
 #include <GLEW/glew.h>
 //GLFW
-#include <GLFW/glfw3.h>
+#include <GLFW/glfw.h>
 
 #include "SceneManager.h"
 
@@ -53,9 +52,9 @@ private:
 
 	int numFrames = 0;
 	int fps;
-	float screenWidth, screenHeight;
+	int screenWidth, screenHeight;
 
-	Input &input = Input::getInstance();
+	Input &input = Input::i();
 
 	void setKeyCallbacks();
 };

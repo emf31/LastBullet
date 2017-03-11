@@ -1,6 +1,5 @@
 
 #include "GraphicEngine.h"
-#include "../MastEventReceiver.hpp"
 #include <EntityManager.h>
 #include <Player.h>
 #include "PhysicsEngine.h"
@@ -103,11 +102,14 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 	cam->setPosition(position);
 	cam->setTarget(target);
 	cam->setInputEnable(false);
-
+	
+	sm.setActiveCamera(cam);
 
 	//Creamos el objeto camara y la metemos en unordermap de cameras y si es la primera se setea como activa
 	Camera* myCamera = new Camera(cam, name);
 	cameras[name] = myCamera;
+
+	
 
 	return myCamera;
 }
@@ -148,7 +150,7 @@ void GraphicEngine::renderAll()
 {
 	
 
-	SceneManager::i().draw(engine.getWindow());
+	SceneManager::i().draw();
 	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
 	/*if (debug_draw_bullet)
 	{
@@ -162,12 +164,13 @@ void GraphicEngine::renderAll()
 	}
 	*/
 	//gui.draw();
-	GUIManager::i().drawAllGuis();
+	//GUIManager::i().drawAllGuis();
 
-	int fps = engine.getFPS();
+	/*int fps = engine.getFPS();
 
 	std::ostringstream str;
-	str << u8"LAST BULLET - [FPS:" << fps<<"]";
+	str << u8"LAST BULLET - [FPS:" << fps<<"]";*/
+	sm.renderFrame(engine.getWindow());
 
 }
 
@@ -184,6 +187,9 @@ void GraphicEngine::inicializar()
 
 	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, -1.0f));
 	dsa->setIntensidadAmbiente(0.8f); 
+
+	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	setActiveCamera("CamaraPlayer");
 
 
 
@@ -241,9 +247,9 @@ void GraphicEngine::cargarTexturas() {
 	
 }
 
-/*void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
-	irrScene->addToDeletionQueue(nodo->getNodo());
-}*/
+void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
+	//SceneManager::i().removeNode(nodo->getEntityNode());
+}
 
 
 void GraphicEngine::setDebugDraw()

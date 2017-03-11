@@ -130,8 +130,8 @@ void NetPlayer::crearLobby()
 void NetPlayer::unirseLobby(const std::string& str)
 {
 
-	char eleccion;
-	int elec;
+	//char eleccion;
+	//int elec;
 
 	//std::string str;
 

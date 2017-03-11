@@ -1,5 +1,4 @@
 #include "Menu.h"
-#include "../MastEventReceiver.hpp"
 
 
 Menu::Menu()
@@ -24,12 +23,12 @@ void Menu::Clear()
 void Menu::HandleEvent()
 {
 
-	if (MastEventReceiver::i().leftMouseDown()) {
+	if (Input::i().leftMouseDown()) {
 
 		menuGUI.injectLeftMouseButton();
 
 	}
-	else if (MastEventReceiver::i().leftMouseUp()) {
+	else if (Input::i().leftMouseUp()) {
 
 		menuGUI.injectLeftMouseButtonUp();
 
@@ -46,7 +45,7 @@ void Menu::Update(Time timeElapsed)
 void Menu::Render(float interpolation, Time elapsedTime)
 {
 	//GUI
-	menuGUI.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+	menuGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
 	GraphicEngine::i().renderAll();
 }

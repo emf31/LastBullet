@@ -6,7 +6,6 @@
 #include <GraphicEngine.h>
 #include <MessageHandler.h>
 #include <GUIManager.h>
-#include "../MastEventReceiver.hpp"
 #include <World.h>
 
 InGame::InGame() : ingameGUI(), debugMenu()
@@ -78,28 +77,28 @@ void InGame::HandleEvent()
 	}
 
 	//Teclas debug
-	if (MastEventReceiver::i().keyPressed(KEY_KEY_1)) {
+	if (Input::i().keyPressed((unsigned char)GLFW_KEY_1)) {
 
 		GraphicEngine::i().toggleDebug();
 
 	}
-	else if (MastEventReceiver::i().keyPressed(KEY_KEY_2)) {
+	else if (Input::i().keyPressed((unsigned char)GLFW_KEY_2)) {
 
 		GraphicEngine::i().toggleCamera();
 
 	}
-	else if (MastEventReceiver::i().keyReleased(KEY_TAB)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
 
 	}
-	else if (MastEventReceiver::i().keyDown(KEY_TAB)) {
+	else if (Input::i().keyDown((unsigned char)GLFW_KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(true);
 		World::i().getPartida()->muestraTabla();
 
 	}
-	else if (MastEventReceiver::i().keyPressed(KEY_F2)) {
+	else if (Input::i().keyPressed((unsigned char)GLFW_KEY_F1)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
@@ -111,12 +110,12 @@ void InGame::HandleEvent()
 		//debugMenu.mapa->setVisible(debugMenu.debugInput);
 
 	}
-	else if (MastEventReceiver::i().leftMouseDown()) {
+	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();
 
 	}
-	else if (MastEventReceiver::i().leftMouseUp()) {
+	else if (Input::i().leftMouseUp()) {
 
 		debugMenu.injectLeftMouseButtonUp();
 
@@ -151,7 +150,7 @@ void InGame::Render(float interpolation, Time elapsedTime)
 	GraphicEngine::i().updateCamera();
 
 	//GUI
-	debugMenu.injectMousePosition(MastEventReceiver::i().mouseX(), MastEventReceiver::i().mouseY());
+	debugMenu.injectMousePosition(Input::i().mouse.X, Input::i().mouse.Y);
 
 	GraphicEngine::i().renderAll();
 }

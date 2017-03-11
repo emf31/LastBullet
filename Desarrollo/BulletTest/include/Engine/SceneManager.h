@@ -9,13 +9,11 @@
 #include "TPointLight.h"
 #include "TFlashLight.h"
 #include "TCamera.h"
-
-#include "GUI.h"
 #include <deque>
 
 #include <GLEW/glew.h>
 //GLFW
-#include <GLFW/glfw3.h>
+#include <GLFW/glfw.h>
 
 class SceneManager {
 public:
@@ -28,11 +26,12 @@ public:
 
 	//void getTexture(std::string path);
 	TModel* getMesh(const std::string& path, Shader* shader=nullptr);
-	void draw(GLFWwindow* window);
+	void draw();
+	void renderFrame(GLFWwindow* window);
 	void inicializarBuffers();
 	void renderLuces();
 
-
+	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TModel * model);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
@@ -67,7 +66,7 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 	
-	float *screenWidth, *screenHeight;
+	int *screenWidth, *screenHeight;
 	
 	std::vector<TPointLight*> vecPointLight;
 	std::vector<TFlashLight*> vecFlashLight;

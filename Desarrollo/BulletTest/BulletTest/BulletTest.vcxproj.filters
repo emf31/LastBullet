@@ -58,9 +58,6 @@
     <ClCompile Include="Motor\MapLoader.cpp">
       <Filter>Source Code\Motor</Filter>
     </ClCompile>
-    <ClCompile Include="MastEventReceiver.cpp">
-      <Filter>Source Code</Filter>
-    </ClCompile>
     <ClCompile Include="Handlers\MessageHandler.cpp">
       <Filter>Source Code\Handlers</Filter>
     </ClCompile>
@@ -539,9 +536,6 @@
     </ClInclude>
     <ClInclude Include="Mapa\Celda.h">
       <Filter>Headers\Mapa</Filter>
-    </ClInclude>
-    <ClInclude Include="MastEventReceiver.hpp">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Headers</Filter>

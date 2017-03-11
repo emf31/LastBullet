@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Game.h"
-#include "MastEventReceiver.hpp"
 #include <Clock.hpp>
 #include <PhysicsEngine.h>
 #include <GraphicEngine.h>
@@ -81,9 +80,7 @@ void Game::run()
 				dt -= timePerFrame;
 				time_gameclock += timePerFrame;
 
-				MastEventReceiver::i().endEventProcess();
 				processEvents();
-				MastEventReceiver::i().startEventProcess();
 
 				//Realizamos actualizaciones
 				update(timePerFrame);

@@ -43,6 +43,11 @@ Vec3<float> Camera::getTarget()
 	return m_camera->getTarget();
 }
 
+Vec3<float> Camera::getVecRight()
+{
+	return m_camera->getDerecha();
+}
+
 
 
 void Camera::asignarEntity(Entity* ent)

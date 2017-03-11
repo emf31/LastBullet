@@ -3,7 +3,7 @@
 #include <PhysicsEngine.h>
 #include <EntityManager.h>
 #include <NetworkManager.h>
-
+#include <Quaternion.h>
 
 Granada::Granada() : Entity(-1, NULL)
 {
@@ -33,15 +33,17 @@ void Granada::update(Time elapsedTime)
 {
 	if (estado == GRANADADISPARADA) {
 		btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-		getRenderState()->updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+		getRenderState()->updatePositions(Vec3<float>((float)Point[0], (float)Point[1], (float)Point[2]));
 		// Set rotation
-		vector3df Euler;
+		btVector3 Euler;
 		const btQuaternion& TQuat = m_rigidBody->getOrientation();
 		quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-		q.toEuler(Euler);
+		q.toEuler(cons(Euler));
+
 		Euler *= RADTODEG;
 
-		m_renderState.updateRotations(Vec3<float>(Euler.X, Euler.Y, Euler.Z));
+
+		m_renderState.updateRotations(Vec3<float>(Euler.getX(), Euler.getY(), Euler.getZ()));
 
 
 		if (clockRecargaGranada.getElapsedTime().asSeconds() > timeRecargaGranada) {
