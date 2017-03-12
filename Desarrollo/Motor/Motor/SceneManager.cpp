@@ -38,6 +38,8 @@ void SceneManager::inicializar() {
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 
 	inicializarBuffers();
+	inicializarBuffersLineas();
+	numLines = 0;
 }
 
 
@@ -75,6 +77,8 @@ void SceneManager::draw() {
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	drawAllLines();
 }
 
 void SceneManager::renderFrame(GLFWwindow* window) {

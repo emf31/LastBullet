@@ -100,13 +100,10 @@ public:
 	GLuint rboDepth;
 	GLuint draw_mode=1;
 
-	std::vector<_LINE> LINES;
 	std::vector<GLfloat> vertices3;
-	std::vector<GLfloat> vertices;
 	std::vector<GLuint> indices;
-	GLuint linesvao, linesvbo, linesebo;
 	GLuint LVAO,LVBO;
-	int indexI = 0;
+	int numLines;
 
 	void inicializarBuffersLineas() {
 		glGenVertexArrays(1, &LVAO);
@@ -115,52 +112,23 @@ public:
 	}
 
 	void drawLine(glm::vec3 from, glm::vec3 to) {
-		LINES.push_back(_LINE(from, to));
 		vertices3.push_back(from.x);
 		vertices3.push_back(from.y);
 		vertices3.push_back(from.z);
-		indexI++;
+		numLines++;
 		vertices3.push_back(to.x);
 		vertices3.push_back(to.y);
 		vertices3.push_back(to.z);
-		indexI++;
+		numLines++;
 		
 	}
 
 	void rellenaVertices() {
-		//glDisable(GL_CULL_FACE);
-		
-		
-
-		
-
-		//for (std::vector<_LINE>::iterator it = LINES.begin(); it != LINES.end(); it++)
-		//{
-		//	_LINE l = *it;
-
-		//	vertices3.push_back(l.from.x);
-		//	vertices3.push_back(l.from.y);
-		//	vertices3.push_back(l.from.z);
-
-		//	vertices3.push_back(l.to.x);
-		//	vertices3.push_back(l.to.y);
-		//	vertices3.push_back(l.to.z);
-
-		//	indices.push_back(indexI);
-		//	indices.push_back(indexI + 1);
-		//	indexI += 2;
-		//}
-
-		GLfloat vertices2[] = {
-			0.0f, 0.0f, 0.0f, // Inicio  
-			0.0f, 50.f, 0.0f, // Fin 
-
-		};
 
 		glBindVertexArray(LVAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, LVBO);
-		glBufferData(GL_ARRAY_BUFFER, vertices3.size(), &vertices3[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertices3.size()* sizeof(GLfloat), &vertices3[0], GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(0);
@@ -171,39 +139,12 @@ public:
 
 		///////
 
-		//glBindVertexArray(linesvao);
-		//// Cargamos datos en el VAO
-		//glBindBuffer(GL_ARRAY_BUFFER, linesvbo);
-
-		//glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
-
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, linesebo);
-		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
-		//glBindVertexArray(0);
-		/////
-
-		/*
-		glEnableVertexAttribArray(linesvao);
-		//glVertexAttribPointer(linesvao, 3, GL_FLOAT, GL_FALSE, 0, (void*)&(vertices.at(0)));
-
-		glm::mat4 mView = camaraActiva->GetViewMatrix();
-		glm::mat4 modelView = mView * glm::mat4(1.0);
-		glm::mat4 mProjection = getProjectionMatrix();
-		glm::mat4 mvp = mProjection * modelView;
-		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(mvp));
-
-		glBindVertexArray(linesvao);
-		glDrawArrays(GL_LINES, 0, indices[0]);
-
-		LINES.clear();
-		*/
-
 	}
 
 	void drawAllLines() {
 		rellenaVertices();
 		shaderLineas->Use();
-		glLineWidth(5.f);
+		
 		const glm::mat4& view = getViewMatrix();
 		const glm::mat4& projection = getProjectionMatrix();
 		glm::mat4& model = glm::mat4();
@@ -212,10 +153,16 @@ public:
 		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glBindVertexArray(LVAO);
 
-		glDrawArrays(GL_LINES, 0, indexI);
+		glDrawArrays(GL_LINES, 0, numLines);
 		glBindVertexArray(0);
 
-		
+		clearLines();
+
+	}
+
+	void clearLines() {
+		vertices3.clear();
+		numLines = 0;
 	}
 
 private:
