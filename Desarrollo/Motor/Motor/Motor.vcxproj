@@ -315,6 +315,7 @@
     <ClCompile Include="TFlashLight.cpp" />
     <ClCompile Include="TLuz.cpp" />
     <ClCompile Include="TMesh.cpp" />
+    <ClCompile Include="TMeshGroup.cpp" />
     <ClCompile Include="TModel.cpp" />
     <ClCompile Include="TNode.cpp" />
     <ClCompile Include="TPointLight.cpp" />
@@ -334,6 +335,7 @@
     <ClInclude Include="TFlashLight.h" />
     <ClInclude Include="TLuz.h" />
     <ClInclude Include="TMesh.h" />
+    <ClInclude Include="TMeshGroup.h" />
     <ClInclude Include="TModel.h" />
     <ClInclude Include="TNode.h" />
     <ClInclude Include="TPointLight.h" />

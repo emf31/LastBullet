@@ -18,7 +18,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include "TMesh.h"
+#include "TMeshGroup.h"
 
 //class TNode;
 
@@ -27,7 +27,7 @@ class TModel : public TEntity {
 public:
 	/*  Funciones   */
 	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
-	TModel(GLchar* path, Shader* shader=NULL);
+	TModel(TMeshGroup* meshGroup);
 	~TModel();
 
 
@@ -46,12 +46,8 @@ public:
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
 
-	void setVisible(bool b) {
-		visible = b;
-	}
-	bool isVisible() {
-		return visible;
-	}
+	void setVisible(bool b) { visible = b; }
+	bool isVisible() const { return visible; }
 
 
 	void setModelColor(float r, float g, float b) {
@@ -78,23 +74,8 @@ private:
 	virtual void endDraw();
 
 
-
-
 	/*  Model Data  */
-
-	std::vector<TMesh*> meshes;
-	std::string directory;
-	std::vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
-
-	/*  Funciones   */
-	// Carga el modelo con ASSIMP
-	void loadModel(const std::string& path);
-
-	void processNode(aiNode* node, const aiScene* scene);
-
-	TMesh* processMesh(aiMesh* mesh, const aiScene* scene);
-
-	void loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, std::string typeName);
+	TMeshGroup* m_meshGroup;
 
 	TTransform* transRotacion;
 	TTransform* transEscalado;

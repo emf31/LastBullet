@@ -25,14 +25,14 @@ public:
 	void inicializar();
 
 	//void getTexture(std::string path);
-	TModel* getMesh(const std::string& path, Shader* shader=nullptr);
+	TMeshGroup* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw();
 	void renderFrame(GLFWwindow* window);
 	void inicializarBuffers();
 	void renderLuces();
 
 	bool removeNode(TNode* node);
-	TModel* crearNodoMalla(TModel * model);
+	TModel* crearNodoMalla(TMeshGroup * mesh);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
 	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);

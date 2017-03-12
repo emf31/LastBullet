@@ -42,7 +42,7 @@ void SceneManager::inicializar() {
 
 
 
-TModel* SceneManager::getMesh(const std::string& path,Shader* shader) {
+TMeshGroup* SceneManager::getMesh(const std::string& path,Shader* shader) {
 	if (path != "") {
 		return ResourceManager::i().getMesh(path,shader);
 	}
@@ -193,12 +193,14 @@ bool SceneManager::removeNode(TNode * node) {
 	return false;
 }
 
-TModel * SceneManager::crearNodoMalla(TModel * model)
+TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 {
 	TNode * nuevoNodoMalla;
 	TNode * nuevoNodoRotacion;
 	TNode * nuevoNodoEscalado;
 	TNode * nuevoNodoTraslacion;
+
+	TModel* model = new TModel(mesh);
 
 	//creamos los nodos malla y los nodos transformaciones necesaria para esta
 	int id = model->getID();
@@ -216,7 +218,7 @@ TModel * SceneManager::crearNodoMalla(TModel * model)
 	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
 	
 	
-
+	
 
 	//asignamos matrices de transformacion
 	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));

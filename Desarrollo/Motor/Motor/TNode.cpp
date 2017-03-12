@@ -13,9 +13,8 @@ TNode::~TNode()
 	for (auto it = m_childNodes.begin(); it != m_childNodes.end(); ++it) {
 		delete *it;
 	}
-	if (type != T_MALLA) {
-		delete m_entity;
-	}
+
+	delete m_entity;
 	
 }
 void TNode::addChild(TNode* child) {
