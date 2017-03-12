@@ -75,7 +75,7 @@ void RocketBulletEnemy::handleMessage(const Message & message)
 
 		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		EntityManager::i().removeEntity(this);
-		delete m_nodo.get();
+	
 	}
 }
 

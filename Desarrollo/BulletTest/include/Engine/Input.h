@@ -32,11 +32,11 @@ public:
 		static Input instance;
 		return instance;
 	}
-	static void mouseButtonCallback(int key, int action) {
-		i().mouseButtonCallbackImpl(key, action);
+	static void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
+		i().mouseButtonCallbackImpl(button, action, mods);
 	}
 
-	void mouseButtonCallbackImpl(int key, int action);
+	void mouseButtonCallbackImpl(int button, int action, int mods);
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
 		i().key_callbackImpl(window, key, scancode, action, mode);

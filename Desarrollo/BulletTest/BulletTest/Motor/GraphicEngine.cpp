@@ -18,7 +18,7 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 {
 
 	TModel* node;
-	node = sm.crearNodoMalla(sm.getMesh(mesh));
+	node = SceneManager::i().crearNodoMalla(sm.getMesh(mesh));
 	
 
 	

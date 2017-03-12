@@ -33,7 +33,7 @@ public:
 	virtual void Render(float interpolation, Time elapsedTime) override;
 
 private:
-	InGameHUD ingameGUI;
+	//InGameHUD ingameGUI;
 	DebugMenuGUI debugMenu;
 	float interpolation;
 

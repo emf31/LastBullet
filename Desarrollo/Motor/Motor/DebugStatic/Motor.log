@@ -1,0 +1,15 @@
+﻿  main.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  Generando código...
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\scenemanager.cpp(47): warning C4172: devolución de dirección de la variable local o temporal
+  Omitiendo... (no se detectaron cambios relevantes)
+  TTransform.cpp
+  TNode.cpp
+  TModel.cpp
+  TLuz.cpp
+  TCamera.cpp
+  Input.cpp
+  EngineDevice.cpp
+  Motor.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
+  Motor.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)

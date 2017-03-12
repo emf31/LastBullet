@@ -236,7 +236,7 @@ void Enemy_Bot::borrarContenido()
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 
-	delete m_nodo.get();
+
 }
 
 void Enemy_Bot::handleMessage(const Message & message)

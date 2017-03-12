@@ -50,7 +50,7 @@ Vec3<float> BasicSceneNode::getScale()
 }
 
 void BasicSceneNode::addChild(std::shared_ptr<SceneNode> child) {
-	m_node->addChild(child->getEntityNode());
+	//m_node->addChild(child->getEntityNode());
 }
 
 void BasicSceneNode::removeChild(std::shared_ptr<SceneNode> child)
@@ -65,5 +65,5 @@ void BasicSceneNode::setColor(const Color4f & color)
 
 void BasicSceneNode::setVisible(bool visible)
 {
-	m_node->setVisible(visible);
+	//m_node->setVisible(visible);
 }
