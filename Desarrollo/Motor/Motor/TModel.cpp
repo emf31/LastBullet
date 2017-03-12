@@ -63,20 +63,24 @@ void TModel::updatePosition(Vec3<float> pos)
 	transTraslacion->updatePosition(pos);
 }
 
-void TModel::setRotation(Vec3<float> rot) {
+void TModel::setOrientation(Vec3<float> rot) {
 	transRotacion->setRotationDirection(rot);
 }
 
-void TModel::setRotationX(float angu) {
-	transRotacion->setRotationX(angu);
+void TModel::setRotationXYZ(Vec3<float> rot) {
+	
+	transRotacion->setRotationY(rot.getY());
+	transRotacion->setRotationX(rot.getX());
+	transRotacion->setRotationZ(rot.getZ());
 }
 
-void TModel::setRotationY(float angu) {
-	transRotacion->setRotationY(angu);
+void TModel::setRotationRadians(Vec3<float> rot)
+{
+	transRotacion->setRotationRadians(rot);
 }
 
-void TModel::setRotationZ(float angu) {
-	transRotacion->setRotationZ(angu);
+void TModel::setRotation(Vec3<float> rot) {
+	transRotacion->setRotationDegrees(rot);
 }
 
 void TModel::setScale(Vec3<float> esc) {
@@ -109,4 +113,19 @@ Vec3<float> TModel::getPosition()
 Vec3<float> TModel::getScale()
 {
 	return transEscalado->getScale();
+}
+
+glm::mat4 TModel::getRotationMatrix()
+{
+	return transRotacion->getRotationMatrix();
+}
+
+glm::mat4 TModel::getPositionMatrix()
+{
+	return transTraslacion->getPositionMatrix();
+}
+
+glm::mat4 TModel::getScaleMatrix()
+{
+	return transEscalado->getScaleMatrix();
 }

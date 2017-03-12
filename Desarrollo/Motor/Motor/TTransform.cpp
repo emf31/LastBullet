@@ -32,19 +32,16 @@ void TTransform::setPosition(Vec3<float> position) {
 	m_position = position;
 	m_matrix = glm::mat4();
 	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));
-	//std::cout << "Vector posicion: " << m_position.getX()<<","<< m_position.getY()<<","<< m_position.getZ() << std::endl;
-	//std::cout << "MATRIZ posicion: " << m_matrix[3][0] << "," << m_matrix[3][1] << "," << m_matrix[3][2] << std::endl;
 }
 void TTransform::updatePosition(Vec3<float> position)
 {	
 	//le suma a la posicion que ya tenia el objeto la nueva posicion
 	m_position += position;
 	m_matrix = glm::translate(m_matrix, glm::vec3(position.getX(), position.getY(), position.getZ()));
-	//std::cout << "Vector posicion: " << m_position.getX()<<","<< m_position.getY()<<","<< m_position.getZ() << std::endl;
-	//std::cout << "MATRIZ posicion: " << m_matrix[3][0] << "," << m_matrix[3][1] << "," << m_matrix[3][2] << std::endl;
 }
 void TTransform::setScale(Vec3<float> scale) {
-	m_scale = m_scale * scale;
+	m_scale = scale;
+	m_matrix = glm::mat4();
 	m_matrix = glm::scale(m_matrix, glm::vec3(scale.getX(), scale.getY(), scale.getZ()));
 }
 void TTransform::setRotationX(float angu)
@@ -57,22 +54,11 @@ void TTransform::setRotationY(float angu)
 	m_rotation.setY(angu);
 	m_matrix = glm::mat4();
 	m_matrix = glm::rotate(m_matrix, angu, glm::vec3(0.0, 1.0, 0.0));
-	
-	//m_rotation.setY(m_rotation.getY() + angu);
-	//m_matrix = glm::rotate(m_matrix, angu, glm::vec3(0.0, 1.0, 0.0));
-	//std::cout << "Angulo de rotacion es:" << angu << std::endl;
-	//std::cout << "matriz rotacion : " << std::endl;
-	//for (int i = 0; i < m_matrix.length(); i++) {
-	//	for (int j = 0; j < m_matrix[0].length(); j++) {
-	//		std::cout << m_matrix[i][j] << " ";
-	//	}
-	//	std::cout << std::endl;
-	//}
 
 }
 void TTransform::setRotationZ(float angu)
 {
-	m_rotation.setZ(m_rotation.getZ() + angu);
+	m_rotation.setZ(angu);
 	m_matrix = glm::rotate(m_matrix, angulo, glm::vec3(0.0, 0.0, 1.0));
 }
 
@@ -119,6 +105,37 @@ void TTransform::setRotationDirection(Vec3<float> vecDir)
 
 
 }
+void TTransform::setRotationRadians(Vec3<float> rotation)
+{
+	m_matrix = glm::mat4(); //reiniciamos la matriz
+	const double cr = cos(rotation.getX());
+	const double sr = sin(rotation.getX());
+	const double cp = cos(rotation.getY());
+	const double sp = sin(rotation.getY());
+	const double cy = cos(rotation.getZ());
+	const double sy = sin(rotation.getZ());
+
+	m_matrix[0][0] = float(cp*cy);
+	m_matrix[0][1] = float(cp*sy);
+	m_matrix[0][2] = float(-sp);
+
+	const float srsp = sr*sp;
+	const float crsp = cr*sp;
+
+	m_matrix[1][0] = float(srsp*cy - cr*sy);
+	m_matrix[1][1] = float(srsp*sy + cr*cy);
+	m_matrix[1][2] = float(sr*cp);
+
+	m_matrix[2][0] = float(crsp*cy + sr*sy);
+	m_matrix[2][1] = float(crsp*sy - sr*cy);
+	m_matrix[2][2] = float(cr*cp);
+
+		    
+}
+void TTransform::setRotationDegrees(Vec3<float> rotation)
+{
+	setRotationRadians(rotation * (M_PI/180));
+}
 Vec3<float> TTransform::getRotation()
 {
 	return m_rotation;
@@ -132,13 +149,13 @@ Vec3<float> TTransform::getScale()
 {
 	return m_scale;
 }
-glm::mat4 TTransform::getRotation2() {
+glm::mat4 TTransform::getRotationMatrix() {
 	return m_matrix;
 }
-glm::mat4 TTransform::getPosition2() {
+glm::mat4 TTransform::getPositionMatrix() {
 	return m_matrix;
 }
-glm::mat4 TTransform::getScale2() {
+glm::mat4 TTransform::getScaleMatrix() {
 	return m_matrix;
 }
 void TTransform::multiply(glm::mat4 mat) {
@@ -158,17 +175,12 @@ void TTransform::beginDraw()
 {
 	//el begin draw lo primero que hace es apilar la matriz actual y multiplicar esta por la suya, y esta multiplicacion seria la nueva matriz acutual
 	//que el siguiente nodo se encargaria de apilarla
-
-	
-
-	//el enddraw desapilaria una matriz y pondria esa desapilada como actual.
 	sm.getPilaMatrices().push_back(sm.getMatrizActual());
 	sm.setMatrizActual(m_matrix * sm.getMatrizActual());
 }
 
 void TTransform::endDraw()
 {
-	//PREGUNTA , COMO TENEMOS QUE DESAPILAR EN EL END DRAW? PORQUE YA ESTAMOS DESAPILANDO LAS MATRICES PARA PODER OBTENERLAS Y MULTIPLICARLAS A LA HORA DE DIBUJAR
 	sm.setMatrizActual(sm.getPilaMatrices().back());
 	sm.getPilaMatrices().pop_back();
 }

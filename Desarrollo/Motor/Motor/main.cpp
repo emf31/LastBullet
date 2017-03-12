@@ -29,7 +29,11 @@ int main() {
 	//*******MODELOS***********
 
 	//window
+	TModel* window2 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
+	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
+	window2->setRotationXYZ(Vec3<float>(0.0f, 25.0f, 0.0f));
+	
 
 
 	//pistola
@@ -69,7 +73,7 @@ int main() {
 
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-
+	//sol->setIntensidadAmbiente(0.8);
 
 
 	//bombilla
@@ -99,7 +103,8 @@ int main() {
 	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
 	Vec3<float> newPos;
 
-	
+	Vec3<float> newPos2 = Vec3<float>(50.0f, 20.0f, 10.0f);
+	newPos2.normalise();
 	sm.setActiveCamera(sm.crearNodoCamara());
 	
 
@@ -117,6 +122,7 @@ int main() {
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3f;
+		window->setRotation(newPos2);
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());

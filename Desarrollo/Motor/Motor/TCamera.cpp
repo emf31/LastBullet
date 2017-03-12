@@ -127,22 +127,12 @@ glm::vec3 TCamera::calcularPosicionVista()
 
 			t = static_cast<TTransform*> (nodoActual->getEntity());
 			aux = t->getPosition();
-			//std::cout << "ENTRO A UN NODO TRASLACION PADRE DE LA CAMARA" << std::endl;
-			//std::cout << "La posicion es: " << aux.getX() << "," << aux.getY() << "," << aux.getZ() << "," << std::endl;
 			tras = glm::translate(tras,glm::vec3(aux.getX(), aux.getY(), aux.getZ()));
-			//pos += t->getPosition();
 
 		}
 		else if (nodoActual->getNodeType() == T_ROTACION) {
 			t = static_cast<TTransform*> (nodoActual->getEntity());
-			rotmatrix *= t->getRotation2();
-			//std::cout << "MATRIZ VISTA ROTADA : " << std::endl;
-			//for (int i = 0; i < rotmatrix.length(); i++) {
-			//	for (int j = 0; j < rotmatrix[0].length(); j++) {
-			//		std::cout << rotmatrix[i][j] << " ";
-			//	}
-			//	std::cout << std::endl;
-			//}
+			rotmatrix *= t->getRotationMatrix();
 		}
 		
 	}
@@ -227,7 +217,7 @@ Vec3<float> TCamera::getRotation() {
 void TCamera::updateCameraVectors() {
 
 	glm::vec4 destino = glm::vec4(0, 0, -1, 1);
-	glm::mat4 rot = transRotacion->getRotation2();
+	glm::mat4 rot = transRotacion->getRotationMatrix();
 	rot = glm::inverse(rot);
 	destino = destino* rot;
 	destino = glm::normalize(destino);
