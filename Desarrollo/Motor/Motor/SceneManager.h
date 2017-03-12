@@ -101,6 +101,7 @@ public:
 	GLuint draw_mode=1;
 
 	std::vector<_LINE> LINES;
+	std::vector<GLfloat> vertices3;
 	std::vector<GLfloat> vertices;
 	std::vector<GLuint> indices;
 	GLuint linesvao, linesvbo, linesebo;
@@ -115,29 +116,40 @@ public:
 
 	void drawLine(glm::vec3 from, glm::vec3 to) {
 		LINES.push_back(_LINE(from, to));
+		vertices3.push_back(from.x);
+		vertices3.push_back(from.y);
+		vertices3.push_back(from.z);
+		indexI++;
+		vertices3.push_back(to.x);
+		vertices3.push_back(to.y);
+		vertices3.push_back(to.z);
+		indexI++;
+		
 	}
 
 	void rellenaVertices() {
 		//glDisable(GL_CULL_FACE);
 		
-		indexI = 0;
+		
 
-		for (std::vector<_LINE>::iterator it = LINES.begin(); it != LINES.end(); it++)
-		{
-			_LINE l = *it;
+		
 
-			vertices.push_back(l.from.x);
-			vertices.push_back(l.from.y);
-			vertices.push_back(l.from.z);
+		//for (std::vector<_LINE>::iterator it = LINES.begin(); it != LINES.end(); it++)
+		//{
+		//	_LINE l = *it;
 
-			vertices.push_back(l.to.x);
-			vertices.push_back(l.to.y);
-			vertices.push_back(l.to.z);
+		//	vertices3.push_back(l.from.x);
+		//	vertices3.push_back(l.from.y);
+		//	vertices3.push_back(l.from.z);
 
-			indices.push_back(indexI);
-			indices.push_back(indexI + 1);
-			indexI += 2;
-		}
+		//	vertices3.push_back(l.to.x);
+		//	vertices3.push_back(l.to.y);
+		//	vertices3.push_back(l.to.z);
+
+		//	indices.push_back(indexI);
+		//	indices.push_back(indexI + 1);
+		//	indexI += 2;
+		//}
 
 		GLfloat vertices2[] = {
 			0.0f, 0.0f, 0.0f, // Inicio  
@@ -148,7 +160,7 @@ public:
 		glBindVertexArray(LVAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, LVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertices3.size(), &vertices3[0], GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(0);
@@ -188,7 +200,7 @@ public:
 
 	}
 
-	void drawLine() {
+	void drawAllLines() {
 		rellenaVertices();
 		shaderLineas->Use();
 		glLineWidth(5.f);
@@ -200,8 +212,10 @@ public:
 		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glBindVertexArray(LVAO);
 
-		glDrawArrays(GL_LINES, 0, 2);
+		glDrawArrays(GL_LINES, 0, indexI);
 		glBindVertexArray(0);
+
+		
 	}
 
 private:

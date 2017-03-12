@@ -106,6 +106,8 @@ int main() {
 
 
 	sm.inicializarBuffersLineas();
+	//sm.drawLine(glm::vec3(0.0f, 50.0f, 0.0f), glm::vec3(50.0f, 50.f, 0.0f));
+
 
 	while (!engine.shouldCloseWindw()) {
 		//std::cout << "inicio iteracion" << std::endl;
@@ -131,10 +133,18 @@ int main() {
 
 
 		////////
-		//sm.drawLine();
-		sm.drawLine();
+		//sm.LINES.clear();
+		//sm.vertices3.clear();
+		sm.indexI = 0;
+		sm.drawLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 50.f, 0.0f));
+
+		sm.drawLine(glm::vec3(0.0f, 50.0f, 0.0f), glm::vec3(50.0f, 50.f, 0.0f));
+
+		sm.drawAllLines();
 
 		glfwSwapBuffers(engine.getWindow());
+
+		//sm.LINES.clear();
 
 
 	}
