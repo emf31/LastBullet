@@ -77,8 +77,10 @@ void SceneManager::draw() {
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	drawAllLines();
+	if (vertices3.size() > 0) {
+		drawAllLines();
+	}
+	
 }
 
 void SceneManager::renderFrame(GLFWwindow* window) {

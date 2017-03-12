@@ -104,10 +104,11 @@ int main() {
 	
 
 
-
+	Vec3<float> posCam;
+	Vec3<float> target;
 	
 	//sm.drawLine(glm::vec3(0.0f, 50.0f, 0.0f), glm::vec3(50.0f, 50.f, 0.0f));
-	glLineWidth(10.f);
+	
 
 	while (!engine.shouldCloseWindw()) {
 		//std::cout << "inicio iteracion" << std::endl;
@@ -127,10 +128,12 @@ int main() {
 		/*p1->setRotation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);*/
-		sm.drawLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 50.f, 0.0f));
+		posCam = sm.camaraActiva->getPosition();
+		target = sm.camaraActiva->getTarget();
+		sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
 
-		sm.drawLine(glm::vec3(0.0f, 50.0f, 0.0f), glm::vec3(50.0f, 50.f, 0.0f));
-		sm.drawLine(glm::vec3(50.0f, 50.0f, 0.0f), glm::vec3(50.0f, 0.f, 0.0f));
+		//sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
+
 
 		sm.draw();
 		glfwSwapBuffers(engine.getWindow());
