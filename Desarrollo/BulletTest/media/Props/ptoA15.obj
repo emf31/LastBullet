@@ -1,0 +1,31 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 12.03.2017 13:08:37
+
+mtllib ptoA15.mtl
+
+#
+# object ptoA15
+#
+
+v  -3.0779 0.0023 -18.9693
+v  3.0780 -0.0023 18.9693
+v  3.0702 0.0023 -18.9693
+v  -3.0701 -0.0023 18.9693
+# 4 vertices
+
+vn 0.0000 0.0000 -1.0000
+# 1 vertex normals
+
+vt 0.0020 0.5074 0.0000
+vt 0.0840 0.0020 0.0000
+vt 0.0839 0.5074 0.0000
+vt 0.0021 0.0020 0.0000
+# 4 texture coords
+
+g ptoA15
+usemtl blinn1
+s off
+f 1/1/1 2/2/1 3/3/1 
+f 1/1/1 4/4/1 2/2/1 
+# 0 polygons - 2 triangles
+
