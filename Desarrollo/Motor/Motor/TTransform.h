@@ -7,7 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "TNode.h"
 
-#define M_PI 3.1415926535897932384626433832795
+#define PI 3.1415926535897932384626433832795
 class TTransform : public TEntity {
 public:
 

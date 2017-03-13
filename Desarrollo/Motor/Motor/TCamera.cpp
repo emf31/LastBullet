@@ -82,12 +82,11 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
 		rotY -= xoffset;
 		rotX += yoffset;
 
-		if (rotX > 1.5f)	  
-			rotX = 1.5f;	  
-		if (rotX < -1.5f)  
-			rotX = -1.5f;
+		if (rotX > 89.9f)	  
+			rotX = 89.9f;	  
+		if (rotX < -89.9f)  
+			rotX = -89.9f;
 	
-
 
 		// Update Front, Right and Up Vectors using the updated Eular angles
 	

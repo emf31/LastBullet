@@ -47,19 +47,19 @@ void TTransform::setScale(Vec3<float> scale) {
 void TTransform::setRotationX(float angu)
 {	
 	m_rotation.setX(angu);
-	m_matrix = glm::rotate(m_matrix, angu, glm::vec3(1.0, 0.0, 0.0));
+	m_matrix = glm::rotate(m_matrix, glm::radians(angu), glm::vec3(1.0, 0.0, 0.0));
 }
 void TTransform::setRotationY(float angu)
 {
 	m_rotation.setY(angu);
 	m_matrix = glm::mat4();
-	m_matrix = glm::rotate(m_matrix, angu, glm::vec3(0.0, 1.0, 0.0));
+	m_matrix = glm::rotate(m_matrix, glm::radians(angu), glm::vec3(0.0, 1.0, 0.0));
 
 }
 void TTransform::setRotationZ(float angu)
 {
 	m_rotation.setZ(angu);
-	m_matrix = glm::rotate(m_matrix, angulo, glm::vec3(0.0, 0.0, 1.0));
+	m_matrix = glm::rotate(m_matrix, glm::radians(angu), glm::vec3(0.0, 0.0, 1.0));
 }
 
 void TTransform::setRotationDirection(Vec3<float> vecDir)
@@ -108,10 +108,10 @@ void TTransform::setRotationDirection(Vec3<float> vecDir)
 void TTransform::setRotationRadians(Vec3<float> rotation)
 {
 	m_matrix = glm::mat4(); //reiniciamos la matriz
-	const double ch = cos(rotation.getX());
-	const double sh = sin(rotation.getX());
-	const double ca = cos(rotation.getY());
-	const double sa = sin(rotation.getY());
+	const double ch = cos(rotation.getY());
+	const double sh = sin(rotation.getY());
+	const double ca = cos(rotation.getX());
+	const double sa = sin(rotation.getX());
 	const double cb = cos(rotation.getZ());
 	const double sb = sin(rotation.getZ());
 
@@ -131,7 +131,7 @@ void TTransform::setRotationRadians(Vec3<float> rotation)
 }
 void TTransform::setRotationDegrees(Vec3<float> rotation)
 {
-	setRotationRadians(rotation * (M_PI/180));
+	setRotationRadians(rotation * (PI/180));
 }
 Vec3<float> TTransform::getRotation()
 {

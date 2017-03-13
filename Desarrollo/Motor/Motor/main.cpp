@@ -33,7 +33,8 @@ int main() {
 	TModel* window2 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
-	window2->setRotationXYZ(Vec3<float>(0.0f, 25.0f, 0.0f));
+	window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
+	window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
 	
 
 
