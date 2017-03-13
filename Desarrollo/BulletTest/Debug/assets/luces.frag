@@ -77,7 +77,7 @@ void main()
     }
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
-       // colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+       colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
         int a;
     }
 
@@ -91,7 +91,9 @@ void main()
         FragColor = vec4(Diffuse, 1.0);
     else if(draw_mode == 5)
         FragColor = vec4(vec3(Specular), 1.0);
-    //FragColor = vec4(colorFinal, 1.0);
+
+
+    FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
     
 
 }

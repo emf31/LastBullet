@@ -64,7 +64,7 @@ void Camera::update()
 		if (m_entity->getClassName() == "Player") {
 			setPosition(Vec3<float>(
 						m_entity->getRenderPosition().getX(),
-						m_entity->getRenderPosition().getY() + 8,	
+						m_entity->getRenderPosition().getY() + 1.7,
 						m_entity->getRenderPosition().getZ())
 			);
 			//m_cameraShake->update();
@@ -73,9 +73,10 @@ void Camera::update()
 		if (m_entity->getClassName() == "Enemy_Bot")
 			setPosition(Vec3<float>(
 				m_entity->getRenderPosition().getX(),
-				m_entity->getRenderPosition().getY() + 10,	
+				m_entity->getRenderPosition().getY() + 1.7,
 				m_entity->getRenderPosition().getZ())
 			);
+
 	}
 	
 

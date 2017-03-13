@@ -7,6 +7,7 @@
 #include <sstream>
 #include <exception>
 
+
 #include <GUIManager.h>
 
 GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
@@ -17,8 +18,15 @@ GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh)
 {
 
+
 	TModel* node;
 	node = SceneManager::i().crearNodoMalla(sm.getMesh(mesh));
+
+	if (!node) {
+		throw std::runtime_error("No se ha encontrado la malla: " + std::string(mesh.c_str()));
+	}
+
+
 	
 
 	

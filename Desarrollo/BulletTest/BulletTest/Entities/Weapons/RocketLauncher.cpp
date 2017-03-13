@@ -96,14 +96,18 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 
 			// posicion de la camara
 			btVector3 start = bt(m_ent->getRenderState()->getPosition());
-			start += btVector3(0.f, 12.f, 0.f);
+			start += btVector3(0.f, 1.7f, 0.f);
 
 			//añadimos un poco de desvio en el arma
-			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
+			//start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
+
+			
 
 			btVector3 tg = bt(target);
 			btVector3 direccion = tg - start;
 			direccion.normalize();
+
+			start += direccion * 3.f;
 
 			RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
 			bala->cargarContenido();

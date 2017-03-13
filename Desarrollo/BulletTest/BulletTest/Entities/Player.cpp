@@ -98,9 +98,9 @@ void Player::inicializar()
 
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(pistola);
-	tienePistola = true;
-	pistola->setEquipada(true);
+	listaWeapons->insertar(rocket);
+	tieneRocketLauncher = true;
+	rocket->setEquipada(true);
 	bindWeapon();
 
 	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
@@ -195,20 +195,22 @@ void Player::cargarContenido()
 {
 	//Creas el nodo(grafico)
 
+
 	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "assets/nanosuit.obj");
+
 	m_nodo->setVisible(false);
 
 	
 
-	radius = 1.2f;
-	height = 7.3f;
+	radius = 0.35f;
+	height = 1.7f;
 	mass = 70.f;
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
-	p_controller->m_acceleration_walk = 5.3f;
-	p_controller->m_deceleration_walk = 8.5f;
-	p_controller->m_maxSpeed_walk = 4.f;
+	p_controller->m_acceleration_walk = 0.8;
+	p_controller->m_deceleration_walk = 5.f;
+	p_controller->m_maxSpeed_walk = 0.7;
 
 
 	life_component.resetVida();
@@ -295,7 +297,7 @@ void Player::jump() {
 
 	TriggerSystem::i().RegisterTrigger(kTrig_EnemyNear, 1001, this->getID(), this->getRenderPosition(), 50, milliseconds(800), false);
 	
-	p_controller->jump(btVector3(0, 60, 0));
+	p_controller->jump(btVector3(0, 15, 0));
 	
 }
 

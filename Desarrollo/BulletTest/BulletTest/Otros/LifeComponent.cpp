@@ -27,10 +27,10 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		nuevoplayer.guid = m_pOwner->getGuid();
 		nuevoplayer.name = m_pOwner->getName();
 
-		//TODO, se manda al netplayer, probablemente se tiene que enviar al netBot
+
 		Entity* ent = EntityManager::i().getRaknetEntity(guid);
 
-		if (ent->getClassName() == "Enemy_Bot") {
+		if (ent != NULL && ent->getClassName() == "Enemy_Bot") {
 			Message msg(ent, "MATASTE", NULL);
 			MessageHandler::i().sendMessageNow(msg);
 		}
