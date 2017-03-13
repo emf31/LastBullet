@@ -1,7 +1,7 @@
 
 #include "BasicSceneNode.h"
 #include <GraphicEngine.h>
-
+#include <Util.h>
 BasicSceneNode::BasicSceneNode(TModel* node) : 
 	m_node(node)
 {
@@ -38,10 +38,12 @@ Vec3<float> BasicSceneNode::getRotation()
 	return m_node->getRotation();
 }
 
-void BasicSceneNode::setRotation(const Vec3<float>& rotation)
+void BasicSceneNode::setRotation(Vec3<float>& rotation)
 {
 	m_node->setRotation(rotation);
-	
+	//rotation.display();
+	/*rotation.normalise();
+	m_node->setOrientation(rotation);*/
 }
 
 Vec3<float> BasicSceneNode::getScale()

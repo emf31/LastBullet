@@ -37,15 +37,43 @@ void PhysicsEntity::inicializar()
 {
 }
 
+static Vec3<float> toEulerianAngle(const btQuaternion& q)
+{
+	Vec3<float> result;
+
+	double ysqr = q.y() * q.y();
+
+	// roll (x-axis rotation)
+	double t0 = +2.0 * (q.w() * q.x() + q.y() * q.z());
+	double t1 = +1.0 - 2.0 * (q.x() * q.x() + ysqr);
+	result.setX(std::atan2(t0, t1));
+
+	// pitch (y-axis rotation)
+	double t2 = +2.0 * (q.w() * q.y() - q.z() * q.x());
+	t2 = t2 > 1.0 ? 1.0 : t2;
+	t2 = t2 < -1.0 ? -1.0 : t2;
+	result.setY(std::asin(t2));
+
+	// yaw (z-axis rotation)
+	double t3 = +2.0 * (q.w() * q.z() + q.x() * q.y());
+	double t4 = +1.0 - 2.0 * (ysqr + q.z() * q.z());
+
+	result.setZ(std::atan2(t3, t4));
+
+	return result;
+}
+
 void PhysicsEntity::update(Time elapsedTime)
 {
 
 
 	// Set rotation
-	btVector3 Euler;
+	//btVector3 Euler;
 	const btQuaternion& TQuat = m_rigidBody->getOrientation();
-	quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
-	q.toEuler(cons(Euler));
+	//quaternion q(TQuat.getX(), TQuat.getY(), TQuat.getZ(), TQuat.getW());
+	//q.toEuler(cons(Euler));
+
+	Vec3<float> Euler = toEulerianAngle(TQuat);
 
 	Euler *= RADTODEG;
 

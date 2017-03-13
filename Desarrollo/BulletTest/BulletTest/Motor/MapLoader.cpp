@@ -102,7 +102,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 {
 	std::shared_ptr<BasicSceneNode> sceneNode;
 	if (std::string(mesh.c_str()) != "../media/cubo.obj"){
-		 //sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
+		 sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/ice0.jpg", mesh);
 	}
 	else{
 		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);

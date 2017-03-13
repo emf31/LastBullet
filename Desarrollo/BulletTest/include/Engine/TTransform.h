@@ -6,6 +6,8 @@
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "TNode.h"
+
+#define M_PI 3.1415926535897932384626433832795
 class TTransform : public TEntity {
 public:
 
@@ -18,16 +20,23 @@ public:
 	void setPosition(Vec3<float> position);
 	void updatePosition(Vec3<float> position);
 	void setScale(Vec3<float> scale);
+
 	void setRotationDirection(Vec3<float> vecDir);
+	void setRotationRadians(Vec3<float> rotation);
+	void setRotationDegrees(Vec3<float> rotation);
+
 	void setRotationX(float angu);
 	void setRotationY(float angu);
 	void setRotationZ(float angu);
+
+
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
-	glm::mat4 getRotation2();
-	glm::mat4 getPosition2();
-	glm::mat4 getScale2();
+
+	glm::mat4 getRotationMatrix();
+	glm::mat4 getPositionMatrix();
+	glm::mat4 getScaleMatrix();
 
 	void multiply(glm::mat4 mat);
 	void multiply(glm::vec4 vec);

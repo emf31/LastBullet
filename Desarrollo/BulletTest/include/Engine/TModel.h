@@ -37,14 +37,22 @@ public:
 
 	void setPosition(Vec3<float> pos);
 	void updatePosition(Vec3<float> pos);
+
+	void setOrientation(Vec3<float> rot);
+	void setRotationXYZ(Vec3<float> rot);
 	void setRotation(Vec3<float> rot);
-	void setRotationX(float angu);
-	void setRotationY(float angu);
-	void setRotationZ(float angu);
+	void setRotationRadians(Vec3<float> rot);
+
 	void setScale(Vec3<float> esc);
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
+
+	glm::mat4 getRotationMatrix();
+	glm::mat4 getPositionMatrix();
+	glm::mat4 getScaleMatrix();
+
+
 
 	void setVisible(bool b) { visible = b; }
 	bool isVisible() const { return visible; }

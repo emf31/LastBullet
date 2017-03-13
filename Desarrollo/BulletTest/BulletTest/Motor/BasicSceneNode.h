@@ -15,7 +15,7 @@ public:
 	virtual void removeChild(std::shared_ptr<SceneNode> child) override;
 	virtual void setTexture(const std::string& texture, int material) override;
 	virtual void setPosition(const Vec3<float>& position) override;
-	virtual void setRotation(const Vec3<float>& rotation) override;
+	virtual void setRotation(Vec3<float>& rotation) override;
 
 	virtual Vec3<float> getPosition() override;
 	virtual Vec3<float> getRotation() override;
