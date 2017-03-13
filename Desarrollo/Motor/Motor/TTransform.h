@@ -24,6 +24,8 @@ public:
 	void setRotationDirection(Vec3<float> vecDir);
 	void setRotationRadians(Vec3<float> rotation);
 	void setRotationDegrees(Vec3<float> rotation);
+	void setRotationDegreesLeftHand(Vec3<float> rotation);
+	void setRotationRadiansLeftHand(Vec3<float> rotation);
 
 	void setRotationX(float angu);
 	void setRotationY(float angu);

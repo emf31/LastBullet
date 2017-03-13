@@ -133,6 +133,35 @@ void TTransform::setRotationDegrees(Vec3<float> rotation)
 {
 	setRotationRadians(rotation * (PI/180));
 }
+void TTransform::setRotationDegreesLeftHand(Vec3<float> rotation)
+{
+	setRotationRadiansLeftHand(rotation * (PI / 180));
+}
+void TTransform::setRotationRadiansLeftHand(Vec3<float> rotation)
+{
+	m_matrix = glm::mat4(); //reiniciamos la matriz
+	const double cr = cos(rotation.getX());
+	const double sr = sin(rotation.getX());
+	const double cp = cos(rotation.getY());
+	const double sp = sin(rotation.getY());
+	const double cy = cos(rotation.getZ());
+	const double sy = sin(rotation.getZ());
+
+	m_matrix[0][0] = float(cp*cy);
+	m_matrix[0][1] = float(cp*sy);
+	m_matrix[0][2] = float(-sp);
+
+	const float srsp = sr*sp;
+	const float crsp = cr*sp;
+
+	m_matrix[1][0] = float(srsp*cy - cr*sy);
+	m_matrix[1][1] = float(srsp*sy + cr*cy);
+	m_matrix[1][2] = float(sr*cp);
+
+	m_matrix[2][0] = float(crsp*cy + sr*sy);
+	m_matrix[2][1] = float(crsp*sy - sr*cy);
+	m_matrix[2][2] = float(cr*cp);
+}
 Vec3<float> TTransform::getRotation()
 {
 	return m_rotation;

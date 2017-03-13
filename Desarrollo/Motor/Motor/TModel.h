@@ -41,6 +41,7 @@ public:
 	void setOrientation(Vec3<float> rot);
 	void setRotationXYZ(Vec3<float> rot);
 	void setRotation(Vec3<float> rot);
+	void setRotationLeftHand(Vec3<float> rot);
 	void setRotationRadians(Vec3<float> rot);
 
 	void setScale(Vec3<float> esc);

@@ -83,6 +83,11 @@ void TModel::setRotation(Vec3<float> rot) {
 	transRotacion->setRotationDegrees(rot);
 }
 
+void TModel::setRotationLeftHand(Vec3<float> rot)
+{
+	transRotacion->setRotationDegreesLeftHand(rot);
+}
+
 void TModel::setScale(Vec3<float> esc) {
 	transEscalado->setScale(esc);
 }
