@@ -42,7 +42,7 @@ private:
 	TNode *m_parentNode;
 	std::vector<TNode*> m_childNodes;
 	int myNodeEntityID;
-	
+	bool visible;
 	SceneManager& sm;
 	
 	//glm::vec3 scale;

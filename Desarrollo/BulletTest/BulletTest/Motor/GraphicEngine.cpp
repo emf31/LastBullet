@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 #include <exception>
-
+#include <StateStack.h>
 
 #include <GUIManager.h>
 
@@ -172,6 +172,14 @@ void GraphicEngine::renderAll()
 
 	}
 	*/
+	StateStack& s = StateStack::i();
+	if (s.currentState == States::ID::InGame)
+	{
+
+		PhysicsEngine::i().m_world->debugDrawWorld();
+
+	}
+	//mandas que se dibuje el debug a las fisicas
 	
 	// FPS
 	int fps = GraphicEngine::i().getDevice().getFPS();
@@ -267,7 +275,7 @@ void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
 
 void GraphicEngine::setDebugDraw()
 {
-	/*debugDraw = new DebugDraw(irrDevice);
+	debugDraw = new DebugDraw();
 	//DebugDraw viene a ser una clase fachada que hereda de btIDebugDraw,
 	//esto es necesario para que despues puedas setear al mundo fisico con setDebugDraw
 	//setDebugMode pone varios parametros pero cuidado que al final solo devuelve un entero
@@ -282,9 +290,8 @@ void GraphicEngine::setDebugDraw()
 	PhysicsEngine::i().m_world->setDebugDrawer(debugDraw);
 
 
-	debugMat.Lighting = false;
 
-	debug_draw_bullet = true;*/
+	debug_draw_bullet = true;
 }
 
 void GraphicEngine::apuntar()
