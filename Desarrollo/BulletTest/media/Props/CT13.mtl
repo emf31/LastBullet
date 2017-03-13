@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 13.03.2017 20:47:51
+# File Created: 13.03.2017 22:37:01
 
 newmtl CTMid
 	Ns 26.5805
@@ -12,3 +12,6 @@ newmtl CTMid
 	Kd 0.8000 0.8000 0.8000
 	Ks 0.5000 0.5000 0.5000
 	Ke 0.0000 0.0000 0.0000
+	map_Ka Props\texturasMapa\ChannelCTMidDiffuse.png
+	map_Kd Props\texturasMapa\ChannelCTMidDiffuse.png
+	map_Ks Props\texturasMapa\ChannelCTMidSpecular.png
