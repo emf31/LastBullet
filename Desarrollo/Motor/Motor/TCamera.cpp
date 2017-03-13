@@ -13,7 +13,7 @@ TCamera::TCamera() {
 	SceneManager::i().aumentaEntityCount();
 
 	//paramtros camara
-	movementSpeed = SPEED;
+	movementSpeed = SPEED*3;
 	mouseSensitivity = SENSITIVTY;
 	zoom=ZOOM;
 

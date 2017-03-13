@@ -24,8 +24,9 @@ int main() {
 	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
 		return -1;
 	}
-	SceneManager &sm = SceneManager::i();	
-
+	SceneManager &sm = SceneManager::i();
+	sm.inicializarBuffers();
+	sm.setActiveCamera(sm.crearNodoCamara());
 	//*******MODELOS***********
 
 	//window
@@ -38,11 +39,11 @@ int main() {
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
 	//sm.camaraActiva->addChild(p1);
 	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
-	
-	
+
+
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
@@ -51,7 +52,7 @@ int main() {
 	TModel* n2 = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n2->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	n2->setPosition(Vec3<float>(-3.0f, 0.0f, -3.0f));
-	
+
 
 	//cartel
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
@@ -64,7 +65,7 @@ int main() {
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
-	
+
 
 
 
@@ -89,13 +90,13 @@ int main() {
 	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-5.0f, 0.0f, 8.0f), Vec3<float>(0.5f, 0.0f, -1.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
-	
+
 
 
 	//*******CAMARAS*******
 	//TCamera* cam2 = sm.crearNodoCamara();
 	//sm.setActiveCamera(cam2);
-	
+
 	long int cont = 0;
 	long int tiempoCamara = 0;
 	int contCam = 0;
@@ -103,12 +104,21 @@ int main() {
 	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
 	Vec3<float> newPos;
 
+
 	Vec3<float> newPos2 = Vec3<float>(50.0f, 20.0f, 10.0f);
 	newPos2.normalise();
 	sm.setActiveCamera(sm.crearNodoCamara());
+
 	
 
-	while (!engine.shouldCloseWindw()){
+
+	Vec3<float> posCam;
+	Vec3<float> target;
+	
+
+	
+
+	while (!engine.shouldCloseWindw()) {
 		//std::cout << "inicio iteracion" << std::endl;
 		engine.updateCurrentFrame();
 
@@ -117,22 +127,30 @@ int main() {
 		std::ostringstream title;
 		title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
 		engine.setWindowTitle(title.str());
-		
+
 		engine.doMovement();
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
-		newPos = vecDir *0.3f;
-		window->setRotation(newPos2);
+
+		newPos = vecDir *0.3;
+
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);*/
-		
+		posCam = sm.camaraActiva->getPosition();
+		target = sm.camaraActiva->getTarget();
+		sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
+
+		sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
+
 
 		sm.draw();
-		sm.renderFrame(engine.getWindow());
+		glfwSwapBuffers(engine.getWindow());
 
-		
+		//sm.LINES.clear();
+
+
 	}
 	engine.end();
 	engine.shutdown();

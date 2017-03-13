@@ -35,8 +35,12 @@ void SceneManager::inicializar() {
 	shaderGeometria = ResourceManager::i().getShader("assets/geometria.vs", "assets/geometria.frag");
 	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
+	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 
 	inicializarBuffers();
+	inicializarBuffersLineas();
+	numLines = 0;
+	drawTarget = false;
 }
 
 
@@ -74,6 +78,10 @@ void SceneManager::draw() {
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
+	if (vertices3.size() > 0) {
+		drawAllLines();
+	}
+	
 }
 
 void SceneManager::renderFrame(GLFWwindow* window) {
