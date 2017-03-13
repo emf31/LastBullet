@@ -37,8 +37,8 @@ void MapLoader::readMap(const std::string & name)
 			//if (obj["nombre"] = "cubo") {
 				//std::cout << "Entro?" << '\n';
 				cont++;
-				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
-				Vec3<float> rot = Vec3<float>(obj["rotZ"], obj["rotY"], obj["rotX"]);
+				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]*-1);
+				Vec3<float> rot = Vec3<float>(obj["rotZ"], obj["rotY"]+180, obj["rotX"]);
 				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 
 				Vec3<float> centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]);

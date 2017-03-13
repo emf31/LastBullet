@@ -206,7 +206,7 @@ void GraphicEngine::inicializar()
 
 	//sm.inicializar();
 
-	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, -1.0f));
+	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, -10.0f));
 	dsa->setIntensidadAmbiente(0.8f); 
 
 	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));

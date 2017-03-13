@@ -93,7 +93,7 @@ void main()
         FragColor = vec4(vec3(Specular), 1.0);
 
 
-    FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
+    //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
     
 
 }
