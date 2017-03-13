@@ -40,7 +40,7 @@ Vec3<float> BasicSceneNode::getRotation()
 
 void BasicSceneNode::setRotation(Vec3<float>& rotation)
 {
-	m_node->setRotation(rotation);
+	m_node->setRotationLeftHand(rotation);
 	//rotation.display();
 	/*rotation.normalise();
 	m_node->setOrientation(rotation);*/

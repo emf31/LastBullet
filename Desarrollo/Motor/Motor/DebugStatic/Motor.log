@@ -1,0 +1,31 @@
+﻿  TTransform.cpp
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(134): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(138): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
+  TSunLight.cpp
+  TPointLight.cpp
+  TNode.cpp
+  TModel.cpp
+  TMeshGroup.cpp
+  TMesh.cpp
+  TLuz.cpp
+  TFlashLight.cpp
+  Texture.cpp
+  TEntity.cpp
+  TCamera.cpp
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\tcamera.cpp(4): warning C4005: 'PI': redefinición de macro
+  d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.h(10): note: vea la definición anterior de 'PI'
+  Shader.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  main.cpp
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\main.cpp(136): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+  Input.cpp
+  EngineDevice.cpp
+  Generando código...
+Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  Motor.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\Motor.lib
