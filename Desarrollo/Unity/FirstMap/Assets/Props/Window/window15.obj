@@ -1,0 +1,31 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 14.03.2017 16:43:25
+
+mtllib window15.mtl
+
+#
+# object window15
+#
+
+v  1.5850 -0.1939 -0.0000
+v  -1.5850 0.1940 -0.0000
+v  1.5850 0.1940 -0.0000
+v  -1.5850 -0.1939 -0.0000
+# 4 vertices
+
+vn 0.0000 -1.0000 -0.0000
+# 1 vertex normals
+
+vt 0.0666 0.8271 0.0000
+vt 0.0617 0.8675 0.0000
+vt 0.0617 0.8271 0.0000
+vt 0.0666 0.8675 0.0000
+# 4 texture coords
+
+g window15
+usemtl lambert1
+s off
+f 1/1/1 2/2/1 3/3/1 
+f 1/1/1 4/4/1 2/2/1 
+# 0 polygons - 2 triangles
+
