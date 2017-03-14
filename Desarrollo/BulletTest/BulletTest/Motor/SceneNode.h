@@ -25,6 +25,7 @@ public:
 	virtual void setTexture(const std::string& texture, int material) = 0;
 	virtual void setPosition(const Vec3<float>& position) = 0;
 	virtual void setRotation(Vec3<float>& rotation) = 0;
+	virtual void setOrientation(Vec3<float>& orientation) = 0;
 	virtual Vec3<float> getPosition() = 0;
 	virtual Vec3<float> getRotation() = 0;
 	virtual Vec3<float> getScale() = 0;

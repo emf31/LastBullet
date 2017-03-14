@@ -8,7 +8,7 @@
 #include <GUIManager.h>
 #include <World.h>
 
-InGame::InGame() /*: ingameGUI(),*/ /*debugMenu()*/
+InGame::InGame() : ingameGUI(), debugMenu()
 {
 }
 
@@ -21,8 +21,8 @@ void InGame::Inicializar()
 
 	PhysicsEngine::i().inicializar();
 
-	//ingameGUI.inicializar();
-	//debugMenu.inicializar();
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
 
 	World::i().inicializar();
 
@@ -88,7 +88,7 @@ void InGame::HandleEvent()
 		GraphicEngine::i().toggleCamera();
 
 	}
-	/*else if (Input::i().keyReleased((unsigned char)GLFW_KEY_TAB)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
 
@@ -110,8 +110,8 @@ void InGame::HandleEvent()
 		//TODO llevarlo al otro sitio
 		//debugMenu.mapa->setVisible(debugMenu.debugInput);
 
-	}*/
-	/*else if (Input::i().leftMouseDown()) {
+	}
+	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();
 
@@ -120,9 +120,10 @@ void InGame::HandleEvent()
 
 		debugMenu.injectLeftMouseButtonUp();
 
-	}*/
-
-
+	}
+	float x = (float)Input::i().mouse.X;
+	float y = (float)Input::i().mouse.Y;
+	//std::cout << "X : " << x << " ,  Y : " << y << std::endl;
 }
 
 void InGame::Update(Time timeElapsed)
@@ -151,7 +152,7 @@ void InGame::Render(float interpolation, Time elapsedTime)
 	GraphicEngine::i().updateCamera();
 
 	//GUI
-	//debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
+	debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
 	GraphicEngine::i().renderAll();
 }

@@ -17,6 +17,8 @@ public:
 	virtual void setPosition(const Vec3<float>& position) override;
 	virtual void setRotation(Vec3<float>& rotation) override;
 
+	virtual void setOrientation(Vec3<float>& orientation) override;
+
 	virtual Vec3<float> getPosition() override;
 	virtual Vec3<float> getRotation() override;
 	virtual Vec3<float> getScale() override;

@@ -43,8 +43,8 @@ InputHandler::InputHandler()
 	commands[GLFW_KEY_3] = list_up;
 	commands[GLFW_KEY_4] = list_down;
 	commands[GLFW_KEY_SPACE] = jump;
-	commands[GLFW_KEY_7] = shoot_pistola;
-	commands[GLFW_KEY_8] = apuntar;
+	commands[GLFW_MOUSE_BUTTON_1] = shoot_pistola;
+	commands[GLFW_MOUSE_BUTTON_2] = apuntar;
 	commands[GLFW_KEY_G] = shoot_commandGranada;
 
 	

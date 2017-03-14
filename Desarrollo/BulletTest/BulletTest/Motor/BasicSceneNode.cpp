@@ -46,6 +46,11 @@ void BasicSceneNode::setRotation(Vec3<float>& rotation)
 	m_node->setOrientation(rotation);*/
 }
 
+void BasicSceneNode::setOrientation(Vec3<float>& orientation)
+{
+	m_node->setOrientation(orientation);
+}
+
 Vec3<float> BasicSceneNode::getScale()
 {
 	return m_node->getScale();

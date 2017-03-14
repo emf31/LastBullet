@@ -37,7 +37,7 @@ void DebugMenuGUI::inicializar() {
 	showMouseCursor(false);
 
 	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(100, 200, 100), Vec3<float>(100, 0, 100));
-
+	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 
 	//MENU PRINCIPAL
 	DebugShapesButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));

@@ -56,7 +56,7 @@ void RocketBullet::cargarContenido()
 {
 	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.1, 0.1, 0.1), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
-	m_renderState.setRotation(m_rotation);
+	//m_nodo->setOrientation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.1f, 0.1f, 0.1f), 1, false);

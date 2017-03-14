@@ -106,7 +106,7 @@ vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Di
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = sunlight.difusa * diff * Diffuse; 
     vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16.0f);
     vec3 specular =  (spec * sunlight.especular) * Specular;
 
     return (ambient + diffuse + specular);

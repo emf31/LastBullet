@@ -18,7 +18,7 @@ RocketLauncher::~RocketLauncher()
 
 void RocketLauncher::inicializar()
 {
-	capacidadAmmo = 5;
+	capacidadAmmo = 100;
 	disparos = 0;
 	recarga = milliseconds(1000);
 	cadencia = milliseconds(400);
@@ -102,13 +102,16 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 			//start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
 			
+			Vec3<float> hack = target;
+			hack.display();
 
 			btVector3 tg = bt(target);
+			
 			btVector3 direccion = tg - start;
 			direccion.normalize();
 
 			start += direccion * 3.f;
-
+			//direccion = tg - start;
 			RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
 			bala->cargarContenido();
 
