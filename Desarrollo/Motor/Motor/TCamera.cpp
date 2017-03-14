@@ -40,11 +40,11 @@ glm::mat4 TCamera::GetViewMatrix() {
 	//view = glm::translate(view, posCamara);
 	//glm::rotate;
 	view = glm::inverse(view);
-	return view;
+	//return view;
 	//esto no se puede hacer aun pork necesitamos tener la rotacion del personaje desde el juego, si el personaje rota la camara al ser hija tendra que rotar en el mismo angulo, lo que significa 
 	//coger la matriz de rotacion del personaje
 
-	//return glm::lookAt(posCamara, posCamara + this->Front, this->Up);
+	return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
 	
 }
 
@@ -114,7 +114,7 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 glm::vec3 TCamera::calcularPosicionVista()
 {
 	TNode* nodoActual = getMiNodo();
-	Vec3<float> pos = Vec3<float>(0.0f, 0.0f, 0.0f);
+	
 	float rot = 0.0f;
 	Vec3<float> aux ;
 	TTransform* t;
@@ -137,12 +137,12 @@ glm::vec3 TCamera::calcularPosicionVista()
 	}
 	view = tras * rotmatrix;
 	//delete nodoActual;
-
+	glm::vec3 pos = glm::vec3(tras[3][0], tras[3][1], tras[3][2]);
 	//NOTA ERROR YA COMETIDO: ANTES HACIAMOS UN SET POSITION PERO CLARO ESTO NO PUEDE SER PORK ENTONCES SI EL MODELO ESTA EN LA 30 Y LA CAMARA EN LA 10, EL MODELO AVANZA 5, ENTONCES LA CAMARA AHORA ESTARIA 
 	//EN LA 15 Y EL MODELO EN LA 35, PERO SI HACEMOS ESE SETPOSITION A LA CAMARA EN LA SIGUIENTE ITERACION SU TRANSFORMACION DEVUELVE QUE ESTA EN LA POS 35 Y LE VA A SUMAR DE NUEVO LA POS
 	//DE SU TRANSFORMACION PADRE QUE SERA LA DEL MODELO Y PONDRIA QUE LA CAMARA ESTA EN EL 70
 	//setPosition(pos);
-	return glm::vec3(pos.getX(), pos.getY(), pos.getZ());
+	return pos;
 }
 
 void TCamera::setTarget(const Vec3<float>& target) {

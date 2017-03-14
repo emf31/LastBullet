@@ -39,7 +39,8 @@ void RenderState::updateRender(float interpolation, std::shared_ptr<SceneNode> m
 
 	if (m_nodo != NULL) {
 		m_nodo->setPosition(m_renderPos);
-		m_nodo->setRotation(m_renderRotation);
+		//cambiar rotaciones aqui
+		m_nodo->setRotationXYZ(Vec3<float>(m_renderRotation.getX(), m_renderRotation.getY(), m_renderRotation.getZ()));
 	}
 
 

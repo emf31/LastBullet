@@ -141,9 +141,11 @@ int main() {
 		p1->updatePosition(newPos);*/
 		posCam = sm.camaraActiva->getPosition();
 		target = sm.camaraActiva->getTarget();
-		sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
+		//sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
 
-		sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
+		//sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
+		sm.drawLine(glm::vec3(-0.5f, 0.0f, 0.0f), glm::vec3(0.5f, 0.f, 0.0f));
+		sm.drawLine(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
 
 
 		sm.draw();

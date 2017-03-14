@@ -37,8 +37,8 @@ void MapLoader::readMap(const std::string & name)
 			//if (obj["nombre"] = "cubo") {
 				//std::cout << "Entro?" << '\n';
 				cont++;
-				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]*-1);
-				Vec3<float> rot = Vec3<float>(obj["rotZ"], obj["rotY"]+180, obj["rotX"]);
+				Vec3<float> pos = Vec3<float>(obj["posX"]*-1, obj["posY"], obj["posZ"]);
+				Vec3<float> rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
 				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 
 				Vec3<float> centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]);
@@ -110,7 +110,18 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 	else{
 		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
 	}
-	
+	//sceneNode->setRotationRightHand(rotacion);
+	//Vec3<float> aux = escala;
+	//Vec3<float> aux2 = Vec3<float>(rotacion.getX(), rotacion.getY()+180, rotacion.getZ()+180);
+	////aux.setX(aux.getX()*-1);
+	//aux.setZ(aux.getZ()*-1);
+	//aux.setY(aux.getY()*-1);
+	//sceneNode->setScale(aux);
+	//sceneNode->setRotationXYZ(aux2);
+
+	//Vec3<float> aux = escala;
+	//aux.setZ(aux.getZ()*-1);
+	//sceneNode->setScale(aux);
 	
 	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
 	float mymass=0;

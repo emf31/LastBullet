@@ -27,8 +27,8 @@ void PhysicsEntity::rotate(Vec3<float> rot)
 {
 
 	btQuaternion quat;
-	quat.setEulerZYX(rot.getX(), rot.getY(), rot.getZ()); //or quat.setEulerZYX depending on the ordering you want
-
+	//quat.setEulerZYX(rot.getZ(), rot.getY(), rot.getX()); //or quat.setEulerZYX depending on the ordering you want
+	quat.setEulerZYX(rot.getZ(), rot.getY(), rot.getX());
 	m_rigidBody->getWorldTransform().setRotation(quat);
 
 }
