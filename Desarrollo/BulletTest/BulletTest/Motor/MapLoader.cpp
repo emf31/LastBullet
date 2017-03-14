@@ -56,6 +56,7 @@ void MapLoader::readMap(const std::string & name)
 				std::string extraTags = obj["extraTags"];
 				//std::cout << "ExtraTags: " << extraTags << std::endl;
 				if (obj["tag"] == "PhysicEntity") {
+					std::cout << "Soy " << nameMesh << " y mi rotacion Y =" << rot.getY() << std::endl;
 					std::shared_ptr<BasicSceneNode> node = createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
 					if (extraTags == "life") {
 						node->setTexture("../media/life.png",0);
