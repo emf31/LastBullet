@@ -139,6 +139,18 @@ Camera * GraphicEngine::getActiveCamera()
 }
 
 
+bool GraphicEngine::createPointLight(Vec3<float> pos, Vec3<float> color)
+{
+	SceneManager::i().crearNodoPointLight(pos);
+	return true;
+}
+
+bool GraphicEngine::createDirectionalLight(Vec3<float> pos, Vec3<float> direccion, Vec3<float> color)
+{
+	SceneManager::i().crearNodoFlashLight(pos,direccion);
+	return true;
+}
+
 void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 {
 	

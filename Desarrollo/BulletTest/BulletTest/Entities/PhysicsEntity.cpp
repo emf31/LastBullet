@@ -77,7 +77,9 @@ void PhysicsEntity::update(Time elapsedTime)
 
 	Euler *= RADTODEG;
 
-	m_renderState.updateRotations(Vec3<float>(Euler.getX(), Euler.getY(), Euler.getZ()));
+	//m_nodo->setRotationXYZ(Vec3<float>(-m_renderRotation.getX(), m_renderRotation.getY() + 180, -m_renderRotation.getZ()));
+
+	m_renderState.updateRotations(Vec3<float>(-Euler.getX(), Euler.getY() + 180, -Euler.getZ()));
 
 	// Set position
 	//m_rigidBody->setm

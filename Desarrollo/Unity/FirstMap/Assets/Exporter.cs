@@ -23,7 +23,7 @@ public class Exporter : MonoBehaviour
         foreach (object o in obj)
         {
             GameObject g = (GameObject)o;
-            if (!g.name.Equals("Script") && !g.name.Equals("Main Camera") && !g.name.Equals("Directional Light") && !g.name.Equals("Waypoint Editor"))
+            if (!g.name.Equals("Script") && !g.name.Equals("Main Camera")  && !g.name.Equals("Waypoint Editor"))
             {
                 GameObject parent = g.transform.parent.gameObject;
                 if (parent != null)
@@ -82,7 +82,13 @@ public class Exporter : MonoBehaviour
 
                             }
                         }
-
+                        if (g.tag == "PointLight" || g.tag == "DirectionalLight")
+                        {
+                            Light l = (Light)g.GetComponent(typeof(Light));
+                            objeto.color_r = l.color.r;
+                            objeto.color_g = l.color.g;
+                            objeto.color_b = l.color.b;
+                        }
                         if (mt != null)
                         {
                             objeto.extraTags = mt.extratags.ToString();
@@ -155,6 +161,10 @@ public class Objeto
     public string tag;
     public string extraTags;
     public bool hasChild;
+    public float color_r;
+    public float color_g;
+    public float color_b;
+
 
     [SerializeField]
     public List<Nodo> children;

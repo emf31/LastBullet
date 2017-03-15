@@ -1,81 +1,42 @@
-﻿     Creando biblioteca D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
-LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+﻿     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
   Generando código
-d:\4ºcurso\repositorios\tba\desarrollo\bullettest\bullettest\otros\settings.cpp(40): warning C4172: devolución de dirección de la variable local o temporal
-  1080 of 11575 functions ( 9.3%) were compiled, the rest were copied from previous compilation.
-    437 functions were new in current compilation
-    312 functions had inline decision re-evaluated but remain unchanged
-  Generación de código finalizada
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewUniform1i definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewUseProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewUseProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : warning LNK4049: se importó el símbolo _glewInit definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : warning LNK4049: se importó el símbolo _glewGetErrorString definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : warning LNK4049: se importó el símbolo _glewExperimental definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewAttachShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewCompileShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewCreateProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewCreateShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewDeleteProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewDeleteShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetAttribLocation definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetProgramInfoLog definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetProgramiv definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetShaderInfoLog definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetShaderiv definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetUniformLocation definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewLinkProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewShaderSource definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewBindFragDataLocation definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBufferData definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBufferSubData definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewDeleteBuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewGenBuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewEnableVertexAttribArray definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewUniformMatrix4fv definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewVertexAttribPointer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBindVertexArray definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : warning LNK4049: se importó el símbolo ___glewBindVertexArray definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewDeleteVertexArrays definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewGenVertexArrays definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewBindFramebuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewBindFramebuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewCheckFramebufferStatus definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewDeleteFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewDeleteFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewFramebufferTexture2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewFramebufferTexture2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewGenFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGenFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___glewGetStringi definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_1_3 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_2_0 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_3_1 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_3_2 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_ARB_texture_non_power_of_two definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexImage2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexSubImage2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
-Motor.lib(EngineDevice.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(EngineDevice.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TEntity.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TEntity.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(Input.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Input.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TCamera.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TCamera.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(SceneManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(SceneManager.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TModel.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TModel.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TLuz.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TLuz.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TNode.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TNode.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TTransform.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TTransform.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TPointLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TPointLight.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(ResourceManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(ResourceManager.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TFlashLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TFlashLight.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TSunLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TSunLight.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMesh.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(Shader.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Shader.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+c:\users\julio\downloads\compressed\soil\simple opengl image library\src\image_dxt.c : fatal error C1001: Error interno en el compilador.
+  Archivo del compilador 'f:\dd\vctools\compiler\utc\src\p2\main.c', línea 255
+   Para solucionar este problema, intente simplificar o cambiar el programa en aquellas líneas próximas a las ubicaciones que se enumeran a continuación.
+  Elija el comando Soporte técnico en el menú Ayuda de Visual C++ 
+   o abra el archivo de ayuda de soporte técnico para obtener más información
+    link!RaiseException()+0x62
+    link!RaiseException()+0x62
+    link!CxxThrowException()+0x65
+    link!std::_Xout_of_range()+0x1f
+    link!InvokeCompilerPass()+0x2bbbc
+    link!InvokeCompilerPass()+0x1ecb1
+    link!InvokeCompilerPass()+0x1ec27
+    link!InvokeCompilerPass()+0x1eec8
+    link!InvokeCompilerPass()+0x1ec27
+    link!InvokeCompilerPass()+0x1f05e
+    link!InvokeCompilerPass()+0x1ef92
+    link!InvokeCompilerPass()+0x21ed1
+    link!InvokeCompilerPass()+0x21979
+    link!DllGetC2Telemetry()+0xe9d5c
+  
+c:\users\julio\downloads\compressed\soil\simple opengl image library\src\image_dxt.c : fatal error C1001: Error interno en el compilador.
+  Archivo del compilador 'f:\dd\vctools\compiler\utc\src\p2\main.c', línea 255
+   Para solucionar este problema, intente simplificar o cambiar el programa en aquellas líneas próximas a las ubicaciones que se enumeran a continuación.
+  Elija el comando Soporte técnico en el menú Ayuda de Visual C++ 
+   o abra el archivo de ayuda de soporte técnico para obtener más información
+    link!RaiseException()+0x62
+    link!CxxThrowException()+0x65
+    link!std::_Xout_of_range()+0x1f
+    link!InvokeCompilerPass()+0x2bbbc
+    link!InvokeCompilerPass()+0x1ecb1
+    link!InvokeCompilerPass()+0x1ec27
+    link!InvokeCompilerPass()+0x1eec8
+    link!InvokeCompilerPass()+0x1ec27
+    link!InvokeCompilerPass()+0x1f05e
+    link!InvokeCompilerPass()+0x1ef92
+    link!InvokeCompilerPass()+0x21ed1
+    link!InvokeCompilerPass()+0x21979
+    link!DllGetC2Telemetry()+0xe9d5c
+  
+LINK : fatal error LNK1257: error de generación de código

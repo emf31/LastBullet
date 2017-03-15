@@ -44,7 +44,9 @@ public:
 	void updateCamera();
 	Camera* getActiveCamera();
 	
-
+	//Metodos de las luces
+	bool createPointLight(Vec3<float> pos, Vec3<float> color);
+	bool createDirectionalLight(Vec3<float> pos, Vec3<float> direccion, Vec3<float> color);
 
 	//No hace nada aun
 	void setActiveCamera(const std::string &nameCamera);
