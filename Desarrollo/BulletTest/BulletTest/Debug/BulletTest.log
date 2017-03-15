@@ -1,10 +1,4 @@
-﻿  MapLoader.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(40): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(199): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(209): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(219): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(229): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(239): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+﻿  RenderState.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'

@@ -38,10 +38,10 @@ void MapLoader::readMap(const std::string & name)
 				//std::cout << "Entro?" << '\n';
 				cont++;
 				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]*-1);
-				Vec3<float> rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]*-1);
-				if (rot.getZ() !=0 ) {
+				Vec3<float> rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
+				if (rot.getX() !=0 ) {
 					//rot.setY(180.f);
-					rot.setZ(-rot.getZ());
+					rot.setX(-rot.getX());
 				}
 			
 				
