@@ -77,7 +77,7 @@ void main()
     }
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
-       // colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
+       colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
         int a;
     }
 

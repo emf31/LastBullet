@@ -153,7 +153,9 @@ void TCamera::setTarget(const Vec3<float>& target) {
 
 Vec3<float> TCamera::getTarget() {
 	Vec3<float> dir = Vec3<float>(direccion.x, direccion.y, direccion.z);
-	return dir * 1000;
+	//return dir * 1000;
+
+	return dir + transTraslacion->getPosition();
 
 }
 

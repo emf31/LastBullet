@@ -39,6 +39,8 @@ void RocketBullet::update(Time elapsedTime)
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((float)Point[0], (float)Point[1], (float)Point[2]));
 
+	m_renderState.setRotation(m_nodo->getRotation());
+
 
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
 
@@ -56,8 +58,10 @@ void RocketBullet::cargarContenido()
 {
 	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.1, 0.1, 0.1), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
-	//m_nodo->setOrientation(m_rotation);
-	m_renderState.setRenderRot(m_rotation);
+	m_nodo->setRotationXYZ(m_rotation);
+
+	//m_rotation.display();
+	//m_renderState.setRenderRot(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.1f, 0.1f, 0.1f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();

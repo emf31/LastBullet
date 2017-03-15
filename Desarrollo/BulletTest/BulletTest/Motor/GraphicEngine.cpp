@@ -141,6 +141,22 @@ Camera * GraphicEngine::getActiveCamera()
 }
 
 
+bool GraphicEngine::createPointLight(Vec3<float> pos, Vec3<float> color)
+{
+	TPointLight* light = SceneManager::i().crearNodoPointLight(pos);
+	light->setColor(color.getX(), color.getY(), color.getZ());
+	return true;
+}
+
+bool GraphicEngine::createDirectionalLight(Vec3<float> pos, Vec3<float> direccion, Vec3<float> color)
+{
+	TFlashLight* light =SceneManager::i().crearNodoFlashLight(pos,Vec3<float>(0,-1,0));
+	light->setColor(color.getX(), color.getY(), color.getZ());
+	light->setIntensidadDifusa(0.8f);
+	light->setIntensidadAmbiente(0.4f);
+	return true;
+}
+
 void GraphicEngine::setActiveCamera(const std::string &nameCamera)
 {
 	
@@ -218,7 +234,7 @@ void GraphicEngine::inicializar()
 	//sm.inicializar();
 
 	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 1.0f, -1.0f));
-	dsa->setIntensidadAmbiente(0.4f); 
+	dsa->setIntensidadAmbiente(0.05f); 
 	dsa->setIntensidadEspecular(0.6f);
 
 	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));

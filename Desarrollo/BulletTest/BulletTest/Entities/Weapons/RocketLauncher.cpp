@@ -101,9 +101,6 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 			//añadimos un poco de desvio en el arma
 			//start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
 
-			
-			Vec3<float> hack = target;
-			hack.display();
 
 			btVector3 tg = bt(target);
 			

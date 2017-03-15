@@ -37,7 +37,8 @@ void MapLoader::readMap(const std::string & name)
 			//if (obj["nombre"] = "cubo") {
 				//std::cout << "Entro?" << '\n';
 				cont++;
-				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]*-1);
+				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
+				pos.setZ(pos.getZ() * -1.f);
 				Vec3<float> rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
 				if (rot.getX() !=0 ) {
 					//rot.setY(180.f);
@@ -50,7 +51,7 @@ void MapLoader::readMap(const std::string & name)
 				
 				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 
-				Vec3<float> centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]);
+				Vec3<float> centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"] - 2);
 				Vec3<float> sizeColllider = Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
 				float mass = obj["masa"];
 				std::string s = std::to_string(cont);
@@ -61,11 +62,14 @@ void MapLoader::readMap(const std::string & name)
 				nameMesh = "../media/Props/" +nameMesh+".obj";
 				std::string mesh=nameMesh.c_str();
 
+				if (nameMesh == "../media/Props/PtoA9.obj") {
+					int a = 0;
+				}
 
 				std::string extraTags = obj["extraTags"];
 				//std::cout << "ExtraTags: " << extraTags << std::endl;
 				if (obj["tag"] == "PhysicEntity") {
-					std::cout << "Soy " << nameMesh << " y mi rotacion Y =" << rot.getY() << std::endl;
+					//std::cout << "Soy " << nameMesh << " y mi rotacion Y =" << rot.getY() << std::endl;
 					std::shared_ptr<BasicSceneNode> node = createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
 					if (extraTags == "life") {
 						node->setTexture("../media/life.png",0);
@@ -103,7 +107,27 @@ void MapLoader::readMap(const std::string & name)
 					
 					createTriggerButton(pos, 5, type);
 				}
-
+				if (obj["tag"] == "PointLight") {
+					Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
+					GraphicEngine::i().createPointLight(pos, rgb);
+					/*std::cout << "**************************************************************" << std::endl;
+					std::cout << "Creando Point Light" << std::endl;
+					std::cout << "Posicion " << pos.getX() << " " << pos.getY() << " " << pos.getZ() << std::endl;
+					std::cout << "Color " << rgb.getX() << " " << rgb.getY() << " " << rgb.getZ() << std::endl;
+					std::cout << "**************************************************************" << std::endl;*/
+					
+				}
+				
+				if (obj["tag"] == "DirectionalLight") {
+					Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
+					rot.normalise();
+					GraphicEngine::i().createDirectionalLight(pos,rot, rgb);
+					/*std::cout << "**************************************************************" << std::endl;
+					std::cout << "Creando Directional Light" << std::endl;
+					std::cout << "Posicion " << pos.getX() << " " << pos.getY() << " " << pos.getZ() << std::endl;
+					std::cout << "Color " << rgb.getX() << " " << rgb.getY() << " " << rgb.getZ() << std::endl;
+					std::cout << "**************************************************************" << std::endl;*/
+				}
 					
 		}
 	}
