@@ -43,7 +43,10 @@ void MapLoader::readMap(const std::string & name)
 					//rot.setY(180.f);
 					rot.setX(-rot.getX());
 				}
-			
+				
+				if (rot.getY() != 0) {
+					rot.setY(-rot.getY());
+				}
 				
 				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 
