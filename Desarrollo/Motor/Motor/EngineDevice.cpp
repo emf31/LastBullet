@@ -47,6 +47,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	glEnable(GL_SCISSOR_TEST);
 	//glfwSwapInterval(-1); //vSync adaptativa!
 
+	//glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	this->screenHeight = screenHeight;

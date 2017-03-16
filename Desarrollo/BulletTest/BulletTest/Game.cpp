@@ -61,6 +61,7 @@ void Game::run()
 
 	
 	while (GraphicEngine::i().isWindowActive()) {
+
 			///Las fisicas se ejecutan 60 veces por segundo
 
 			time_physics_curr = clock.getElapsedTime();
@@ -104,7 +105,7 @@ void Game::run()
 		
 		
 
-
+			
 	}
 
 	

@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(40), m_rotation(rotation), radioExplosion(10), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(60), m_rotation(rotation), radioExplosion(10), m_owner(owner)
 {
 
 	m_lifetime = seconds(5);
@@ -56,7 +56,7 @@ void RocketBullet::handleInput()
 
 void RocketBullet::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.1, 0.1, 0.1), "", "../media/bullets/rocketbullet.obj");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.3, 0.3, 0.3), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_nodo->setRotationXYZ(m_rotation);
 
@@ -166,7 +166,7 @@ float RocketBullet::explosion(Entity* player, const Vec3<float>& posExplosion, f
 		}
 
 
-		btVector3 FUERZA(vidaRestada, vidaRestada, vidaRestada);
+		btVector3 FUERZA(vidaRestada / 3, vidaRestada / 3, vidaRestada / 3);
 
 		Vec3<float> posExplosion = cons(m_rigidBody->getCenterOfMassPosition());
 		Vec3<float> posPlayer = player->getRenderPosition();

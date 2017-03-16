@@ -1,13 +1,62 @@
 #include "Input.h"
 #include "TCamera.h"
 
+
+void Input::endEventProcess() {
+	//Keyboard Key States
+	for (std::size_t i = 0; i < 1024; i++)
+	{
+		if (keys[i] == RELEASED)
+			keys[i] = UP;
+
+		if (keys[i] == PRESSED)
+			keys[i] = DOWN;
+	}
+
+	//Mouse Button States
+	for (std::size_t i = 0; i < 1024; i++)
+	{
+		if (mouseButtonState[i] == RELEASED)
+			mouseButtonState[i] = UP;
+
+		if (mouseButtonState[i] == PRESSED)
+			mouseButtonState[i] = DOWN;
+	}
+
+	//glfwPollEvents();
+
+}
+
+
+
 void Input::key_callbackImpl(GLFWwindow * window, int key, int scancode, int action, int mode) {
-	/*if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);*/
+	
+	// si alguna tecla se presiona
 	if (action == GLFW_PRESS)
+	{
+		//Si la tecla no estaba ya pulsada
+		if (keys[key] != DOWN)
+			keys[key] = PRESSED; // Set to Pressed
+		else
+			// si ya estaba en down la ponemos a down
+			keys[key] = DOWN; // Set to Down
+	}
+	else if(action == GLFW_RELEASE)
+	{
+		// if the key is down
+		if (keys[key] != UP)
+			keys[key] = RELEASED; // Set to Released
+	}
+	else if (action == GLFW_REPEAT) {
+		keys[key] = DOWN;
+	}
+	
+
+
+	/*if (action == GLFW_PRESS)
 		keys[key] = PRESSED;
 	else if (action == GLFW_RELEASE)
-		keys[key] = RELEASED;
+		keys[key] = RELEASED;*/
 }
 
 void Input::mouse_callbackImpl(GLFWwindow * window, double xpos, double ypos) {
@@ -146,7 +195,7 @@ bool Input::rightMouseUp() {
 		return false;
 }
 
-bool Input::ightMousePressed() {
+bool Input::rightMousePressed() {
 	if (mouseButtonState[2] == PRESSED)
 		return true;
 	else

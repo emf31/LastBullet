@@ -9,7 +9,12 @@ class Input {
 private:
 	enum keyStatesENUM { UP, DOWN, PRESSED, RELEASED };
 
+	enum processStateENUM { STARTED, ENDED };
+
 	keyStatesENUM keys[1024];
+
+	processStateENUM processState; // STARTED = handling events, ENDED = not handling events
+
 
 
 public:
@@ -49,7 +54,8 @@ public:
 	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
 		i().scroll_callbackImpl(window, xoffset, yoffset);
 	}
-	
+
+	void endEventProcess();
 
 	void Do_Movement(GLfloat deltaTime);
 
@@ -77,7 +83,7 @@ public:
 
 	bool rightMouseUp();
 
-	bool ightMousePressed();
+	bool rightMousePressed();
 
 	bool rightMouseDown();
 
@@ -91,6 +97,7 @@ public:
 
 private:
 	Input(void) {
+
 	}
 
 	Input(Input const&);

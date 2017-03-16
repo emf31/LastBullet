@@ -30,11 +30,14 @@ void Motor::GUI::destroy() {
 }
 
 void Motor::GUI::draw() {
-	
+	glDisable(GL_DEPTH_TEST);
 	GUIManager::i().getRenderer()->beginRendering();
 	m_context->draw();
 	GUIManager::i().getRenderer()->endRendering();
 	glDisable(GL_SCISSOR_TEST);
+	//glDepthFunc(GL_NEVER);
+	
+	glEnable(GL_DEPTH_TEST);
 }
 
 /*void Motor::GUI::update() {

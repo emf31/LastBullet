@@ -1,42 +1,4 @@
-﻿     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
-  Generando código
-c:\users\julio\downloads\compressed\soil\simple opengl image library\src\image_dxt.c : fatal error C1001: Error interno en el compilador.
-  Archivo del compilador 'f:\dd\vctools\compiler\utc\src\p2\main.c', línea 255
-   Para solucionar este problema, intente simplificar o cambiar el programa en aquellas líneas próximas a las ubicaciones que se enumeran a continuación.
-  Elija el comando Soporte técnico en el menú Ayuda de Visual C++ 
-   o abra el archivo de ayuda de soporte técnico para obtener más información
-    link!RaiseException()+0x62
-    link!RaiseException()+0x62
-    link!CxxThrowException()+0x65
-    link!std::_Xout_of_range()+0x1f
-    link!InvokeCompilerPass()+0x2bbbc
-    link!InvokeCompilerPass()+0x1ecb1
-    link!InvokeCompilerPass()+0x1ec27
-    link!InvokeCompilerPass()+0x1eec8
-    link!InvokeCompilerPass()+0x1ec27
-    link!InvokeCompilerPass()+0x1f05e
-    link!InvokeCompilerPass()+0x1ef92
-    link!InvokeCompilerPass()+0x21ed1
-    link!InvokeCompilerPass()+0x21979
-    link!DllGetC2Telemetry()+0xe9d5c
-  
-c:\users\julio\downloads\compressed\soil\simple opengl image library\src\image_dxt.c : fatal error C1001: Error interno en el compilador.
-  Archivo del compilador 'f:\dd\vctools\compiler\utc\src\p2\main.c', línea 255
-   Para solucionar este problema, intente simplificar o cambiar el programa en aquellas líneas próximas a las ubicaciones que se enumeran a continuación.
-  Elija el comando Soporte técnico en el menú Ayuda de Visual C++ 
-   o abra el archivo de ayuda de soporte técnico para obtener más información
-    link!RaiseException()+0x62
-    link!CxxThrowException()+0x65
-    link!std::_Xout_of_range()+0x1f
-    link!InvokeCompilerPass()+0x2bbbc
-    link!InvokeCompilerPass()+0x1ecb1
-    link!InvokeCompilerPass()+0x1ec27
-    link!InvokeCompilerPass()+0x1eec8
-    link!InvokeCompilerPass()+0x1ec27
-    link!InvokeCompilerPass()+0x1f05e
-    link!InvokeCompilerPass()+0x1ef92
-    link!InvokeCompilerPass()+0x21ed1
-    link!InvokeCompilerPass()+0x21979
-    link!DllGetC2Telemetry()+0xe9d5c
-  
-LINK : fatal error LNK1257: error de generación de código
+﻿LINK : warning C4743: 'class Input `static class Input & __cdecl Input::i(void)'::`2'::instance' tiene un tamaño diferente en 'd:\4�curso\repositorios\asd\tba\desarrollo\motor\motor\enginedevice.cpp' y 'd:\4�curso\repositorios\asd\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp': 4136 y 4140 bytes
+     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+InGame.obj : error LNK2001: símbolo externo "public: void __thiscall Input::endEventProcess(void)" (?endEventProcess@Input@@QAEXXZ) sin resolver
+D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1120: 1 externos sin resolver

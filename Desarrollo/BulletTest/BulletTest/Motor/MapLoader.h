@@ -12,21 +12,26 @@
 class MapLoader
 {
 public:
-	MapLoader() {
-	}
+	MapLoader() { }
 	~MapLoader();
 	void readMap(const std::string& name);
-	std::shared_ptr<BasicSceneNode> createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass);
-	static Entity* createLifeObject(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const std::string & mesh );
-	static Entity* createAsaltoDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const std::string & mesh);
-	static Entity* createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const std::string & mesh);
-	static Entity* createRocektLauncherDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const std::string & mesh);
-	static Entity* createSniperDrop(Vec3<float>posicion, Vec3<float>escala, const std::string &name, const std::string & mesh);
-	void createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type);
+
+	static Entity* createLifeObject(Vec3<float>posicion, Vec3<float>escala, const std::string & mesh);
+	static Entity* createAsaltoDrop(Vec3<float>posicion, Vec3<float>escala, const std::string & mesh);
+	static Entity* createPistolaDrop(Vec3<float>posicion, Vec3<float>escala, const std::string & mesh);
+	static Entity* createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh);
+	static Entity* createSniperDrop(Vec3<float>posicion, Vec3<float>escala, const std::string & mesh);
 
 	std::vector<Vec3<float>> getSpawnPoints() const { return spawnPoints; } 
 
 private:
+	static std::shared_ptr<BasicSceneNode> CreateNodeExceptionSafe(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh);
+
+	std::shared_ptr<BasicSceneNode> createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass);
+	
+	void createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type);
+
+	void UnityCoordsToOpenGL(Vec3<float>& pos, Vec3<float>& rot, Vec3<float>& scale);
 
 	std::vector<Vec3<float>> spawnPoints;
 

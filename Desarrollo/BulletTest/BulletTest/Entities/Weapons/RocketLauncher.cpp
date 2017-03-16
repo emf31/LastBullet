@@ -108,7 +108,7 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 			direccion.normalize();
 
 			start += direccion * 3.f;
-			//direccion = tg - start;
+
 			RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
 			bala->cargarContenido();
 

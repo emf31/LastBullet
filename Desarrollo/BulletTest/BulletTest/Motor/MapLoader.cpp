@@ -23,149 +23,136 @@ MapLoader::~MapLoader(){
 
 }
 
+void MapLoader::UnityCoordsToOpenGL(Vec3<float>& pos,
+	Vec3<float>& rot,
+	Vec3<float>& scale)
+{
+	//LeftHand to RightHand
+	pos.setZ(pos.getZ() * -1.f);
+
+	if (rot.getX() != 0) {
+		rot.setX(-rot.getX());
+	}
+
+	if (rot.getY() != 0) {
+		rot.setY(-rot.getY());
+	}
+}
+
 
 void MapLoader::readMap(const std::string & name)
 {	
 	std::ifstream i(name);
 	if(i){
 		json j = json::parse(i);
-		int cont = 0;
+		
 		for (json::iterator it = j.begin(); it != j.end(); ++it) {
 			
 			json obj = *it;
-			//std::cout << "Nombre " << obj["nombre"] << '\n';
-			//if (obj["nombre"] = "cubo") {
-				//std::cout << "Entro?" << '\n';
-				cont++;
-				Vec3<float> pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
-				pos.setZ(pos.getZ() * -1.f);
-				Vec3<float> rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
-				if (rot.getX() !=0 ) {
-					//rot.setY(180.f);
-					rot.setX(-rot.getX());
-				}
-				
-				if (rot.getY() != 0) {
-					rot.setY(-rot.getY());
-				}
-				
-				Vec3<float> es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 
-				Vec3<float> centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"] - 2);
-				Vec3<float> sizeColllider = Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
-				float mass = obj["masa"];
-				std::string s = std::to_string(cont);
-				std::string nombre = "cubo"+s;
+			Vec3<float> pos =					Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
+			Vec3<float> rot =					Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
+			Vec3<float> es =					Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
+			Vec3<float> centerCollider =		Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]);
+			Vec3<float> sizeColllider =			Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
+			float mass =						obj["masa"];
+			std::string nameMesh =				obj["nombre"];
 
-				std::string nameMesh = obj["nombre"];
+			//Modify vectors so OpenGL can understand them
+			UnityCoordsToOpenGL(pos, rot, es);
 
-				nameMesh = "../media/Props/" +nameMesh+".obj";
-				std::string mesh=nameMesh.c_str();
+			nameMesh = "../media/Props/" + nameMesh+ ".obj";
+			std::string mesh = nameMesh.c_str();
 
-				if (nameMesh == "../media/Props/PtoA9.obj") {
-					int a = 0;
-				}
 
-				std::string extraTags = obj["extraTags"];
-				//std::cout << "ExtraTags: " << extraTags << std::endl;
-				if (obj["tag"] == "PhysicEntity") {
-					//std::cout << "Soy " << nameMesh << " y mi rotacion Y =" << rot.getY() << std::endl;
-					std::shared_ptr<BasicSceneNode> node = createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nombre, mass);
-					if (extraTags == "life") {
-						node->setTexture("../media/life.png",0);
-					} else if (extraTags == "pistola") {
-						node->setTexture("../media/pistola.jpg", 0);
-					} else if (extraTags == "rocket") {
-						node->setTexture("../media/lanzacohetes.jpg", 0);
-					} else if (extraTags == "asalto") {
-						node->setTexture("../media/asalto.jpg", 0);
-					} else if (extraTags == "asalto") {
-						node->setTexture("../media/sniper.png", 0);
-					}
 
-				}
+			std::string extraTags = obj["extraTags"];
+
+			if (obj["tag"] == "PhysicEntity") {
+
+				std::shared_ptr<BasicSceneNode> node = createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nameMesh, mass);
+
+				/*if (extraTags == "life") {
+					node->setTexture("../media/life.png",0);
+				} else if (extraTags == "pistola") {
+					node->setTexture("../media/pistola.jpg", 0);
+				} else if (extraTags == "rocket") {
+					node->setTexture("../media/lanzacohetes.jpg", 0);
+				} else if (extraTags == "asalto") {
+					node->setTexture("../media/asalto.jpg", 0);
+				} else if (extraTags == "asalto") {
+					node->setTexture("../media/sniper.png", 0);
+				}*/
+
+			}
 					
-				if (obj["tag"] == "LifeObject")
-					createLifeObject(pos, es, nombre, mesh);
-				if (obj["tag"] == "PistolaDrop")
-					createPistolaDrop(pos, es, nombre, mesh);
-				if (obj["tag"] == "AsaltoDrop")
-					createAsaltoDrop(pos, es, nombre, mesh);
-				if (obj["tag"] == "RocketLauncherDrop")
-					createRocektLauncherDrop(pos, es, nombre, mesh);
-				if (obj["tag"] == "SniperDrop")
-					createSniperDrop(pos, es, nombre, mesh);
-				if (obj["tag"] == "Grafo")
-					std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
-				if (obj["tag"] == "Spawn") {
+			if (obj["tag"] == "LifeObject")
+				createLifeObject(pos, es, mesh);
+			if (obj["tag"] == "PistolaDrop")
+				createPistolaDrop(pos, es, mesh);
+			if (obj["tag"] == "AsaltoDrop")
+				createAsaltoDrop(pos, es, mesh);
+			if (obj["tag"] == "RocketLauncherDrop")
+				createRocektLauncherDrop(pos, es, mesh);
+			if (obj["tag"] == "SniperDrop")
+				createSniperDrop(pos, es, mesh);
+			if (obj["tag"] == "Grafo")
+				std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
+			if (obj["tag"] == "Spawn") {
 				
-					spawnPoints.push_back(pos);
-				}
-				if (obj["tag"] == "TriggerButton") {
-					EnumParser<EnumTriggerType> parser;
-					EnumTriggerType type = parser.parseEnum(obj["nombre"]);
+				spawnPoints.push_back(pos);
+			}
+			if (obj["tag"] == "TriggerButton") {
+				EnumParser<EnumTriggerType> parser;
+				EnumTriggerType type = parser.parseEnum(obj["nombre"]);
 					
-					createTriggerButton(pos, 5, type);
-				}
-				if (obj["tag"] == "PointLight") {
-					Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
-					GraphicEngine::i().createPointLight(pos, rgb);
-					/*std::cout << "**************************************************************" << std::endl;
-					std::cout << "Creando Point Light" << std::endl;
-					std::cout << "Posicion " << pos.getX() << " " << pos.getY() << " " << pos.getZ() << std::endl;
-					std::cout << "Color " << rgb.getX() << " " << rgb.getY() << " " << rgb.getZ() << std::endl;
-					std::cout << "**************************************************************" << std::endl;*/
+				createTriggerButton(pos, 5, type);
+			}
+			if (obj["tag"] == "PointLight") {
+				Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
+				GraphicEngine::i().createPointLight(pos, rgb);
 					
-				}
+			}
 				
-				if (obj["tag"] == "DirectionalLight") {
-					Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
-					rot.normalise();
-					GraphicEngine::i().createDirectionalLight(pos,rot, rgb);
-					/*std::cout << "**************************************************************" << std::endl;
-					std::cout << "Creando Directional Light" << std::endl;
-					std::cout << "Posicion " << pos.getX() << " " << pos.getY() << " " << pos.getZ() << std::endl;
-					std::cout << "Color " << rgb.getX() << " " << rgb.getY() << " " << rgb.getZ() << std::endl;
-					std::cout << "**************************************************************" << std::endl;*/
-				}
+			if (obj["tag"] == "DirectionalLight") {
+				Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
+				rot.normalise();
+				GraphicEngine::i().createDirectionalLight(pos,rot, rgb);
+			}
 					
 		}
 	}
 
 	//std::cout << j.dump() << std::endl;
 }
+
+
+std::shared_ptr<BasicSceneNode> MapLoader::CreateNodeExceptionSafe(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh) {
+
+	std::shared_ptr<BasicSceneNode> sceneNode;
+	try {
+		sceneNode = GraphicEngine::i().createNode(TPosition, TScale, texture, mesh);
+	}
+	catch (std::exception e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	return sceneNode;
+}
 std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass)
 {
-	std::shared_ptr<BasicSceneNode> sceneNode;
-	if (std::string(mesh.c_str()) != "../media/cubo.obj"){
-		 sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
-	}
-	else{
-		sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
-	}
-	//sceneNode->setRotationRightHand(rotacion);
-	//Vec3<float> aux = escala;
-	//Vec3<float> aux2 = Vec3<float>(rotacion.getX(), rotacion.getY()+180, rotacion.getZ()+180);
-	////aux.setX(aux.getX()*-1);
-	//aux.setZ(aux.getZ()*-1);
-	//aux.setY(aux.getY()*-1);
-	//sceneNode->setScale(aux);
-	//sceneNode->setRotationXYZ(aux2);
+	//Creates node
+	std::shared_ptr<BasicSceneNode> sceneNode = CreateNodeExceptionSafe(posicion, escala, "", mesh);
 
-	//Vec3<float> aux = escala;
-	//aux.setZ(aux.getZ()*-1);
-	//sceneNode->setScale(aux);
-	
 	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
+
 	float mymass=0;
-	if (mass < 0.001) {//si la masa es muy pequeña la consideraremos 0
-		mymass = 0;
-	}
-	else {
-		mymass = mass;
-		//sizeCol = sizeCol*(escala / 2);
-	}
-	sizeCol = sizeCol*(escala / 2);
+	//si la masa es muy pequeña la consideraremos 0
+	if (mass < 0.001) { mymass = 0; }
+	else { mymass = mass; }
+
+	//Keep physics right if has some scale
+	sizeCol = sizeCol * (escala / 2);
 
 	physicent->centerCollision = centerCol;
 	physicent->setRigidBody(PhysicsEngine::i().createBoxRigidBody(physicent, sizeCol, mymass,true, centerCol));
@@ -184,86 +171,60 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 		physicent->getRigidBody()->setAngularFactor(btScalar(0.3f));
 	}
 	
-	//std::cout << "WorldTransform: " << physicent->getRigidBody()->getWorldTransform().getOrigin().x() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().y() << "," << physicent->getRigidBody()->getWorldTransform().getOrigin().z() << '\n';
-	//std::cout << sceneNode->getPosition().getX() << '\n';
+
 	return sceneNode;
 }
 
-/*std::shared_ptr<BasicSceneNode> MapLoader::createConvexHullEntity(Vec3<float> posicion, Vec3<float> escala, Vec3<float> rotacion, const io::path & mesh, float mass)
+
+Entity* MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh = "")
 {
-	std::shared_ptr<BasicSceneNode> sceneNode;
-
-	sceneNode = GraphicEngine::i().createNode(posicion, escala, "../media/wall.jpg", mesh);
-
-	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, "");
-	float mymass = 0;
-	if (mass < 0.001) {//si la masa es muy pequeña la consideraremos 0
-		mymass = 0;
-	}
-	else {
-		mymass = mass;
-	}
-
-
-	physicent->setRigidBody(PhysicsEngine::i().createConvexHullRigidBody(physicent, escala, mymass, mesh.c_str()));
-
-	physicent->rotate(Vec3<float>(float(rotacion.getX()* PI / 180.0), float(rotacion.getY() * PI / 180.0), float(rotacion.getZ()* PI / 180.0)));
-
-	if (mass == 0) {
-		physicent->setCollisionGroup(col::Collisions::Static);
-		physicent->setCollisionMask(col::staticCollidesWith);
-		physicent->getRigidBody()->setFriction(0.7f);
-	}
-
-
-
-	return sceneNode;
-}*/
-
-Entity* MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const std::string & mesh = "")
-{
-	std::shared_ptr<BasicSceneNode> vida = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/life.png", "../media/cubo.obj");
-	LifeObject *vidaEnt = new LifeObject(vida, name);
+	//Creates node
+	std::shared_ptr<BasicSceneNode> vida = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	LifeObject *vidaEnt = new LifeObject(vida, "LifeObject");
 	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, escala*2.f));
 	vidaEnt->setPosition(posicion);
 
 	return vidaEnt;
 }
 
-Entity* MapLoader::createAsaltoDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const std::string & mesh = "")
+Entity* MapLoader::createAsaltoDrop(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh = "")
 {
-	std::shared_ptr<BasicSceneNode> asaltodrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/Asalto.jpg", "../media/cubo.obj");
-	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(asaltodrop, name);
+	//Creates node
+	std::shared_ptr<BasicSceneNode> asaltodrop = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(asaltodrop, "AsaltoDrop");
 	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, escala*2.f));
 	AsaltoDropEnt->setPosition(posicion);
 
 	return AsaltoDropEnt;
 }
 
-Entity* MapLoader::createPistolaDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const std::string & mesh = "")
+Entity* MapLoader::createPistolaDrop(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh = "")
 {
-	std::shared_ptr<BasicSceneNode> pistoladrop = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/pistola.jpg", "../media/cubo.obj");
-	PistolaDrop *pistolaEnt = new PistolaDrop(pistoladrop, name);
+	//Creates node
+	std::shared_ptr<BasicSceneNode> pistoladrop = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	PistolaDrop *pistolaEnt = new PistolaDrop(pistoladrop, "PistolaDrop");
 	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, escala*2.f));
 	pistolaEnt->setPosition(posicion);
 
 	return pistolaEnt;
 }
 
-Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const std::string & mesh = "")
+Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh = "")
 {
-	std::shared_ptr<BasicSceneNode> lanzacohete = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/lanzacohetes.jpg", "../media/cubo.obj");
-	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(lanzacohete,name);
+	//Creates node
+	std::shared_ptr<BasicSceneNode> lanzacohete = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(lanzacohete,"RocketDrop");
 	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, escala*2.f));
 	RocketLauncherDropEnt->setPosition(posicion);
 
 	return RocketLauncherDropEnt;
 }
 
-Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, const std::string &name, const std::string & mesh = "")
+Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh = "")
 {
-	std::shared_ptr<BasicSceneNode> sniper = GraphicEngine::i().createNode(Vec3<float>(0, 0, 0), escala, "../media/sniper.png", "../media/cubo.obj");
-	SniperDrop *SniperDropEnt = new SniperDrop(sniper, name);
+	//Creates node
+	std::shared_ptr<BasicSceneNode> sniper = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	SniperDrop *SniperDropEnt = new SniperDrop(sniper, "SniperDrop");
 	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, escala*2.f));
 	SniperDropEnt->setPosition(posicion);
 

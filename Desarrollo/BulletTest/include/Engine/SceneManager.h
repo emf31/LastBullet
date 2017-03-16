@@ -105,11 +105,13 @@ public:
 	GLuint LVAO,LVBO;
 	int numLines;
 
+	void setLineWidth(float width) { glLineWidth(width); }
+
 	void inicializarBuffersLineas() {
 		glGenVertexArrays(1, &LVAO);
 		glGenBuffers(1, &LVBO);
 		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-		glLineWidth(5.0f);
+		glLineWidth(1.0f);
 	}
 
 	void drawLine(glm::vec3 from, glm::vec3 to) {

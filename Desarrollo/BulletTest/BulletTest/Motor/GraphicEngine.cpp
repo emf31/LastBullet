@@ -173,29 +173,17 @@ void GraphicEngine::renderAll()
 {
 	
 	
-	SceneManager::i().draw();
-
-
-	//debug_draw_bullet se setea al inicializar graphicEngine asi que se pone a falso en vez de comentar codigo
-	/*if (debug_draw_bullet)
-	{
-
-		//material de irrlicht al que no le afectan las luces
-		irrDriver->setMaterial(debugMat);
-		irrDriver->setTransform(irr::video::ETS_WORLD, irr::core::IdentityMatrix);
-		//mandas que se dibuje el debug a las fisicas
-		PhysicsEngine::i().m_world->debugDrawWorld();
-
-	}
-	*/
-	StateStack& s = StateStack::i();
-	if (s.currentState == States::ID::InGame)
-	{
-
-		PhysicsEngine::i().m_world->debugDrawWorld();
-
-	}
 	//mandas que se dibuje el debug a las fisicas
+	if (debug_draw_bullet)
+	{
+
+		PhysicsEngine::i().m_world->debugDrawWorld();
+
+	}
+
+
+	SceneManager::i().draw();
+	
 	
 	// FPS
 	int fps = GraphicEngine::i().getDevice().getFPS();
@@ -229,7 +217,7 @@ void GraphicEngine::inicializar()
 	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	setActiveCamera("CamaraPlayer");
 
-
+	
 }
 
 
@@ -243,7 +231,7 @@ bool GraphicEngine::apagar()
 	delete debugDraw;
 
 	engine.end();
-	//engine.shutdown();
+	engine.shutdown();
 	
 	return true;
 }
@@ -286,7 +274,7 @@ void GraphicEngine::cargarTexturas() {
 }
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
-	//SceneManager::i().removeNode(nodo->getEntityNode());
+	nodo->getEntityNode()->removeNode();
 }
 
 

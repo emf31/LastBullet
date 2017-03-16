@@ -73,17 +73,18 @@ void InGame::Clear()
 void InGame::HandleEvent()
 {
 
+
 	if (!debugMenu.debugInput) {
 		EntityManager::i().getEntity(PLAYER)->handleInput();
 	}
 
 	//Teclas debug
-	if (Input::i().keyPressed((unsigned char)GLFW_KEY_1)) {
+	if (Input::i().keyReleased((unsigned char)GLFW_KEY_1)) {
 
 		GraphicEngine::i().toggleDebug();
 
 	}
-	else if (Input::i().keyPressed((unsigned char)GLFW_KEY_2)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_2)) {
 
 		GraphicEngine::i().toggleCamera();
 
@@ -99,7 +100,7 @@ void InGame::HandleEvent()
 		World::i().getPartida()->muestraTabla();
 
 	}
-	else if (Input::i().keyPressed((unsigned char)GLFW_KEY_F1)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_LEFT_ALT)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
@@ -107,8 +108,6 @@ void InGame::HandleEvent()
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);
 
-		//TODO llevarlo al otro sitio
-		//debugMenu.mapa->setVisible(debugMenu.debugInput);
 
 	}
 	else if (Input::i().leftMouseDown()) {
@@ -121,9 +120,9 @@ void InGame::HandleEvent()
 		debugMenu.injectLeftMouseButtonUp();
 
 	}
-	float x = (float)Input::i().mouse.X;
-	float y = (float)Input::i().mouse.Y;
-	//std::cout << "X : " << x << " ,  Y : " << y << std::endl;
+
+	Input::i().endEventProcess();
+
 }
 
 void InGame::Update(Time timeElapsed)
