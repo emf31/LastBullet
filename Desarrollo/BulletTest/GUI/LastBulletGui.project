@@ -7,6 +7,8 @@
             <Item path="imagesets/FairChar.imageset" type="file" />
             <Item path="imagesets/GameMenu.imageset" type="file" />
             <Item path="imagesets/HUDDemo.imageset" type="file" />
+            <Item path="imagesets/LastBulletMenu.imageset" type="file" />
+            <Item path="imagesets/LastBulletMenuBackground.imageset" type="file" />
             <Item path="imagesets/OgreTray.imageset" type="file" />
             <Item path="imagesets/SampleBrowser.imageset" type="file" />
             <Item path="imagesets/TaharezLook.imageset" type="file" />
@@ -34,6 +36,7 @@
             <Item path="layouts/VanillaLookOverview.layout" type="file" />
             <Item path="layouts/VanillaWindows.layout" type="file" />
             <Item path="layouts/application_templates.layout" type="file" />
+            <Item path="layouts/LastBulletMENU.layout" type="file" />
         </Item>
     </Items>
 </Project>
