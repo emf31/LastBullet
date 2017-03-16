@@ -10,6 +10,8 @@
 
 #include <GUIManager.h>
 
+#include <AnimationReader.h>
+
 GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 {
 	
@@ -206,7 +208,16 @@ void GraphicEngine::inicializar()
 
 	sm = SceneManager::i();
 	sm.setFarPlane(1000.f);
+
+	/*std::vector<TMeshGroup*> meshes;
+	try {
+		AnimationReader::LoadMeshesFromDirectory("../media/Props", meshes);
+	}
+	catch (std::exception e) {
+		std::cout << e.what() << std::endl;
+	}*/
 	
+
 
 	//sm.inicializar();
 
