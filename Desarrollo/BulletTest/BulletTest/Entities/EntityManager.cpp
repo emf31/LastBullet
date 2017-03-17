@@ -29,6 +29,10 @@ void EntityManager::inicializar()
 		}
 		
 	}
+	std::unordered_map<int, EntPassive*>::iterator iter2 = m_entPassive.begin();
+	for (iter2; iter2 != m_entPassive.end(); ++iter2) {
+		iter2->second->inicializar();
+	}
 
 }
 
@@ -38,6 +42,9 @@ void EntityManager::update(Time elapsedTime)
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		i->second->update(elapsedTime);
 	}
+	/*for (auto i = m_entPassive.begin(); i != m_entPassive.end(); ++i) {
+		i->second->update(elapsedTime);
+	}*/
 
 }
 
@@ -66,6 +73,11 @@ void EntityManager::cargarContenido()
 		if (className != "Granada" && className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola"  && className != "Enemy_Bot"){
 			i->second->cargarContenido();
 		}
+	}
+
+	std::unordered_map<int, EntPassive*>::iterator iter2 = m_entPassive.begin();
+	for (iter2; iter2 != m_entPassive.end(); ++iter2) {
+		iter2->second->cargarContenido();
 	}
 }
 

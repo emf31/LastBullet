@@ -9,7 +9,7 @@ EntActive::EntActive(int id, std::shared_ptr<SceneNode> nodo, const std::string&
 {
 
 	if (m_nodo) {
-		m_renderState.setPosition(m_nodo.get()->getPosition());
+		m_renderState.setPosition(m_nodo->getPosition());
 	}
 	else {
 		m_renderState.setPosition(Vec3<float>(0,0,0));
