@@ -1,12 +1,12 @@
 #pragma once
 
 #include <vec3.hpp>
-#include "Entity.h"
+#include "EntActive.h"
 #include "EntityManager.h"
 #include <Time.hpp>
 #include <Clock.hpp>
 
-class GunBullet : public Entity
+class GunBullet : public EntActive
 {
 public:
 	GunBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation);

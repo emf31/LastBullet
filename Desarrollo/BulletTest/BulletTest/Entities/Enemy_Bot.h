@@ -59,7 +59,7 @@ public:
 
 	MachineState* const getMachineState()const { return m_pStateMachine; }
 
-	Entity* const getTargetBot()const { return targetingSystem->GetTarget(); }
+	Character* const getTargetBot()const { return targetingSystem->GetTarget(); }
 
 
 	void lookAt(Vec2f at);

@@ -178,6 +178,8 @@
     <ClInclude Include="Entities\Button.h" />
     <ClInclude Include="Entities\Character.h" />
     <ClInclude Include="Entities\Enemy_Bot.h" />
+    <ClInclude Include="Entities\EntActive.h" />
+    <ClInclude Include="Entities\EntPassive.h" />
     <ClInclude Include="Entities\Granada.h" />
     <ClInclude Include="Entities\GroupEntity.h" />
     <ClInclude Include="Entities\GunBullet.h" />
@@ -306,6 +308,8 @@
     <ClCompile Include="Entities\Button.cpp" />
     <ClCompile Include="Entities\Character.cpp" />
     <ClCompile Include="Entities\Enemy_Bot.cpp" />
+    <ClCompile Include="Entities\EntActive.cpp" />
+    <ClCompile Include="Entities\EntPassive.cpp" />
     <ClCompile Include="Entities\Granada.cpp" />
     <ClCompile Include="Entities\GroupEntity.cpp" />
     <ClCompile Include="Entities\GunBullet.cpp" />

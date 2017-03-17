@@ -1,5 +1,5 @@
 #pragma once
-#include <Entity.h>
+#include <EntActive.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
@@ -9,7 +9,7 @@
 
 
 
-class WeaponDrop : public Entity
+class WeaponDrop : public EntActive
 {
 public:
 	WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);

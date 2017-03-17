@@ -1,14 +1,14 @@
 #pragma once
 
 #include <vec3.hpp>
-#include <Entity.h>
+#include <EntActive.h>
 #include <EntityManager.h>
 #include <Time.hpp>
 #include <Clock.hpp>
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
 #include <Character.h>
 
-class RocketBullet : public Entity
+class RocketBullet : public EntActive
 {
 public:
 	RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);
@@ -40,6 +40,6 @@ private:
 	//Entity que dispara la bala
 	Character* m_owner;
 
-	float explosion(Entity* player, const Vec3<float>& posExplosion, float radio);
+	float explosion(Character* player, const Vec3<float>& posExplosion, float radio);
 
 };

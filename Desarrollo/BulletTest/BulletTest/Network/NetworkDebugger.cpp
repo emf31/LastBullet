@@ -22,7 +22,7 @@ bool NetworkDebugger::addDebugMark(int entID)
 	Entity* ent = EntityManager::i().getEntity(entID);
 
 	if (ent != NULL) {
-		DebugMarks* debugMark = new DebugMarks(ent, 11.f);
+		DebugMarks* debugMark = new DebugMarks(dynamic_cast<Character*>(ent), 11.f);
 
 		debugMark->inicializar();
 		debugMark->cargarContenido();

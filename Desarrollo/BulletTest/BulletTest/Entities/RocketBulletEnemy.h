@@ -1,13 +1,13 @@
 #pragma once
 
 #include <vec3.hpp>
-#include <Entity.h>
+#include <EntActive.h>
 #include <EntityManager.h>
 #include <Time.hpp>
 #include <Clock.hpp>
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
 
-class RocketBulletEnemy : public Entity
+class RocketBulletEnemy : public EntActive
 {
 public:
 	RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation);

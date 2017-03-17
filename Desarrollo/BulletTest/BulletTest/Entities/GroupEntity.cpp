@@ -1,6 +1,6 @@
 #include "GroupEntity.h"
 
-GroupEntity::GroupEntity(const std::string &name, int id) : Entity(id, NULL, name) 
+GroupEntity::GroupEntity(const std::string &name, int id) : EntActive(id, NULL, name) 
 {
 }
 
@@ -16,7 +16,7 @@ void GroupEntity::update(Time elapsedTime)
 {
 	Vec3<float> pos_media;
 	float x = 0, y = 0, z = 0;
-	for (std::unordered_set<Entity*>::iterator it = lista_entities.begin(); it != lista_entities.end(); ++it) {
+	for (std::unordered_set<EntActive*>::iterator it = lista_entities.begin(); it != lista_entities.end(); ++it) {
 		x += (*it)->getRenderState()->getPosition().getX();
 		y += (*it)->getRenderState()->getPosition().getY();
 		z += (*it)->getRenderState()->getPosition().getZ();
@@ -51,7 +51,7 @@ void GroupEntity::handleMessage(const Message & message)
 bool GroupEntity::handleTrigger(TriggerRecordStruct* Trigger)
 {
 	//Hay que llamar al handle trigger de todas las entities de tu lista
-	for(std::unordered_set<Entity*>::iterator it = lista_entities.begin(); it != lista_entities.end(); ++it){
+	for(std::unordered_set<EntActive*>::iterator it = lista_entities.begin(); it != lista_entities.end(); ++it){
 		(*it)->handleTrigger(Trigger);
 	}
 
@@ -68,17 +68,17 @@ void GroupEntity::setPosition(const Vec3<float>& pos)
 }
 
 //Añade una entity, si esta duplicada no la añade
-void GroupEntity::addEntity(Entity * ent)
+void GroupEntity::addEntity(EntActive * ent)
 {
 	lista_entities.insert(ent);
 }
 
-void GroupEntity::removeEntity(Entity * ent)
+void GroupEntity::removeEntity(EntActive * ent)
 {
 	lista_entities.erase(ent);
 }
 
-void GroupEntity::addEntityList(std::list<Entity*> entityList) {
+void GroupEntity::addEntityList(std::list<EntActive*> entityList) {
 	for (auto i = entityList.begin(); i != entityList.end(); ++i) {
 		addEntity(*i);
 	}

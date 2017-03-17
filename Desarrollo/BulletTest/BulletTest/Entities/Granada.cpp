@@ -5,7 +5,7 @@
 #include <NetworkManager.h>
 #include <Quaternion.h>
 
-Granada::Granada() : Entity(-1, NULL)
+Granada::Granada() : EntActive(-1, NULL)
 {
 
 }

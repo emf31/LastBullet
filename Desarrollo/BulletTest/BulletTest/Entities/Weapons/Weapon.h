@@ -1,12 +1,12 @@
 #pragma once
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
-#include <Entity.h>
+#include <EntActive.h>
 #include <MessageHandler.h>
 #include "../GunBullet.h"
 #include "../RocketBullet.h"
 #include "math.h"
-#include "../../Otros/Vec3f.h"
+#include <vec3.hpp>
 #include <Util.h>
 #include <Message.h>
 
@@ -15,7 +15,7 @@
 #define CARGADA 0
 #define DESCARGADA 1
 
-class Weapon : public Entity
+class Weapon : public EntActive
 {
 public:
 	Weapon(Character* ent);

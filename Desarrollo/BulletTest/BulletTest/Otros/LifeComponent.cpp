@@ -3,7 +3,7 @@
 #include <Map.h>
 #include <NetworkManager.h>
 
-LifeComponent::LifeComponent(Entity * owner) 
+LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)
 {
 }

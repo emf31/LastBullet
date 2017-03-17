@@ -197,7 +197,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 {
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition() + centerCol);
+	btVector3 pos = Vec3<float>::convertVec(entity->getPosition() + centerCol);
 	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
 	transform.setOrigin((pos));
 
@@ -246,7 +246,7 @@ btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float heigh
 {
 	btCollisionShape* m_pCollisionShape = new btCapsuleShape(radius, height);
 	//create the motionState of the object
-	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getRenderState()->getPosition().getX(), entity->getRenderState()->getPosition().getY(), entity->getRenderState()->getPosition().getZ())));
+	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getPosition().getX(), entity->getPosition().getY(), entity->getPosition().getZ())));
 
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(masa, intertia);
@@ -276,7 +276,7 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	// Create the shape
 	btCollisionShape *m_pCollisionShape = new btSphereShape(radius);
 	//create the motionState of the object
-	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getRenderState()->getPosition().getX(), entity->getRenderState()->getPosition().getY(), entity->getRenderState()->getPosition().getZ())));
+	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getPosition().getX(), entity->getPosition().getY(), entity->getPosition().getZ())));
 
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(mass, intertia);
@@ -308,7 +308,7 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	btVector3 pos = Vec3<float>::convertVec(entity->getPosition());
 	transform.setOrigin(pos);
 
 	btGhostObject* ghostObj = new btGhostObject();
@@ -336,7 +336,7 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	btVector3 pos = Vec3<float>::convertVec(entity->getPosition());
 	transform.setOrigin(pos);
 
 	btGhostObject* ghostObj = new btGhostObject();

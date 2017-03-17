@@ -51,7 +51,7 @@ Vec3<float> Camera::getVecRight()
 
 
 
-void Camera::asignarEntity(Entity* ent)
+void Camera::asignarEntity(Character* ent)
 {
 	m_entity = ent;
 }
