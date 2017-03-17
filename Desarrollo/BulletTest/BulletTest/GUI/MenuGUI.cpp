@@ -10,12 +10,13 @@ void MenuGUI::inicializar() {
 	loadScheme("SampleBrowser.scheme");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
+	loadScheme("LastBulletMenuBackground.scheme");
 	loadLayout("LastBulletMENU.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(true);
 
 	//Menu principal
-	Titulo = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
+	//Titulo = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
 

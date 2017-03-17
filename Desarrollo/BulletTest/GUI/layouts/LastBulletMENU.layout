@@ -4,52 +4,54 @@
     <Window type="DefaultWindow" name="DefaultWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="DefaultWindow" name="DefaultWindow" >
-            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Image" >
+            <Property name="ID" value="2" />
+            <Property name="Area" value="{{0,0},{0,0},{0,1920},{0,1080}}" />
+            <Property name="Image" value="LastBulletMenuBackGround/Background" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow" >
+            <Property name="Area" value="{{0,222},{0,80},{1,222},{1,80}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Button" name="Button" >
-                <Property name="Area" value="{{0,487},{0,258},{0,823},{0,308}}" />
+                <Property name="Area" value="{{0,593},{0,192},{0,929},{0,242}}" />
                 <Property name="Text" value="Crear Partida" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button2" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,487},{0,342},{0,823},{0,392}}" />
+                <Property name="Area" value="{{0,599},{0,330},{0,935},{0,380}}" />
                 <Property name="Text" value="Unirse a partida" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button3" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,595},{0,452},{0,707},{0,502}}" />
+                <Property name="Area" value="{{0,1117},{0,696},{0,1229},{0,746}}" />
                 <Property name="Text" value="Salir" />
             </Window>
         </Window>
-        <Window type="SampleBrowserSkin/Label" name="Label" >
-            <Property name="ID" value="2" />
-            <Property name="Area" value="{{0,452},{0,108},{1,-403},{1,-510}}" />
-            <Property name="Text" value="Last Bullet" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        </Window>
         <Window type="DefaultWindow" name="DefaultWindow2" >
             <Property name="ID" value="1" />
-            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Area" value="{{0,-346},{0,-102},{1,-346},{1,-102}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
-                <Property name="Area" value="{{0,525},{0,224},{1,-484},{1,-382}}" />
+                <Property name="Area" value="{{0,873},{0,296},{1,-136},{1,-310}}" />
                 <Property name="Text" value="Conexiones Disponnibles" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,424},{0,368},{0,622},{0,418}}" />
+                <Property name="Area" value="{{0,1028},{0,606},{0,1226},{0,656}}" />
                 <Property name="Text" value="Conexion 1" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button2" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,701},{0,367},{0,935},{0,417}}" />
+                <Property name="Area" value="{{0,1425},{0,615},{0,1659},{0,665}}" />
                 <Property name="Text" value="Conexion 2" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button3" >
                 <Property name="ID" value="3" />
-                <Property name="Area" value="{{0,596},{0,452},{0,708},{0,502}}" />
+                <Property name="Area" value="{{0,1260},{0,756},{0,1372},{0,806}}" />
                 <Property name="Text" value="Actualizar" />
             </Window>
         </Window>
