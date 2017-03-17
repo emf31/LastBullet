@@ -23,7 +23,7 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor
   ResourceManager.cpp
   main.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(147): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(151): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
   Input.cpp
   EngineDevice.cpp
   Generando código...

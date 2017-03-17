@@ -2,8 +2,8 @@
 layout (location = 0) out vec3 gPosition;
 layout (location = 1) out vec3 gNormal;
 layout (location = 2) out vec4 gTextura;
-layout (location = 3) out vec4 gTangent;
-layout (location = 4) out vec4 gBitangent;
+layout (location = 3) out vec3 gTangent;
+layout (location = 4) out vec3 gBitangent;
 
 
 
@@ -19,7 +19,7 @@ struct Material {
 in vec2 txtcoords;
 in vec3 FrgPs;
 in vec3 Normal;
-in mat4 normalMatrix;
+in mat3 normalMatrix;
 
 uniform Material material;
 
@@ -30,7 +30,7 @@ void main()
     gPosition.xyz = FrgPs;
 
     //leemos las normales de la textura, como la textura identifica un color y va de 0 a 1 tenemos que pasarlo a rango de -1 a 1 para que sea un vector de normales.
-    gNormal = texture(material.texture_normal, txtcoords);
+    gNormal = texture(material.texture_normal, txtcoords).rgb;
     gNormal = normalize(gNormal * 2.0 - 1.0);   
     
     
@@ -42,14 +42,14 @@ void main()
     gTextura.a = texture(material.texture_specular, txtcoords).r;
 
     //leemos las tangentes que nos las da assimp
-    gTangent = texture(material.texture_tangent, txtcoords);
+    gTangent = texture(material.texture_tangent, txtcoords).rgb;
 
     //leemos las bitangentes que nos las da assimp
-    gBiTangent = texture(material.texture_bitangent, txtcoords);
+    gBitangent = texture(material.texture_bitangent, txtcoords).rgb;
 
     //calculamos la matriz BTN para pasar el vector normal de coordenadas tangentes a coordenadas del mundo
     vec3 T = normalize(normalMatrix * gTangent);
-    vec3 B = normalize(normalMatrix * gBiTangent);
+    vec3 B = normalize(normalMatrix * gBitangent);
     vec3 N = normalize(normalMatrix * Normal);  
     mat3 TBN = mat3(T,B,N);
 
