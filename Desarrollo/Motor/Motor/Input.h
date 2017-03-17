@@ -11,7 +11,7 @@ private:
 
 	enum processStateENUM { STARTED, ENDED };
 
-	keyStatesENUM keys[1024];
+	keyStatesENUM keys[123];
 
 	processStateENUM processState; // STARTED = handling events, ENDED = not handling events
 
@@ -96,12 +96,10 @@ public:
 	bool keyReleased(unsigned char keycode);
 
 private:
-	Input(void) {
-
-	}
+	Input();
 
 	Input(Input const&);
-	SceneManager& sm = SceneManager::i();
+	SceneManager& sm;
 
 	void mouse_callbackImpl(GLFWwindow* window, double xpos, double ypos);
 	void scroll_callbackImpl(GLFWwindow* window, double xoffset, double yoffset);
