@@ -36,6 +36,8 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos, v
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
 uniform sampler2D gTextura;
+uniform sampler2D gTangent;
+uniform sampler2D gBitangent;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;

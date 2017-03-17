@@ -38,6 +38,10 @@ void TMesh::beginDraw() {
 			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_specular"), i);
 		else if (name == "texture_normal")
 			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), i);
+		else if (name == "texture_tangent")
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_tangent"), i);
+		else if (name == "texture_bitangent")
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), i);
 		
 		// Bindeamos la textura
 		glBindTexture(GL_TEXTURE_2D, this->textures[i]->id);
