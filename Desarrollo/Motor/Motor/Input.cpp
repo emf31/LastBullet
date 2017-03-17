@@ -1,10 +1,14 @@
 #include "Input.h"
 #include "TCamera.h"
 
+Input::Input() : sm(SceneManager::i()) {
+
+}
+
 
 void Input::endEventProcess() {
 	//Keyboard Key States
-	for (std::size_t i = 0; i < 1024; i++)
+	for (std::size_t i = 0; i < 122; i++)
 	{
 		if (keys[i] == RELEASED)
 			keys[i] = UP;
@@ -14,7 +18,7 @@ void Input::endEventProcess() {
 	}
 
 	//Mouse Button States
-	for (std::size_t i = 0; i < 1024; i++)
+	for (std::size_t i = 0; i < 3; i++)
 	{
 		if (mouseButtonState[i] == RELEASED)
 			mouseButtonState[i] = UP;
@@ -107,13 +111,13 @@ void Input::scroll_callbackImpl(GLFWwindow * window, double xoffset, double yoff
 
 void Input::Do_Movement(GLfloat deltaTime) {
 	// Camera controls
-	if (keys[GLFW_KEY_W] == PRESSED)
+	if (keys[GLFW_KEY_W] == DOWN)
 		sm.camaraActiva->ProcessKeyboard(FORWARD, deltaTime);
-	if (keys[GLFW_KEY_S] == PRESSED)
+	if (keys[GLFW_KEY_S] == DOWN)
 		sm.camaraActiva->ProcessKeyboard(BACKWARD, deltaTime);
-	if (keys[GLFW_KEY_A] == PRESSED)
+	if (keys[GLFW_KEY_A] == DOWN)
 		sm.camaraActiva->ProcessKeyboard(LEFT, deltaTime);
-	if (keys[GLFW_KEY_D] == PRESSED)
+	if (keys[GLFW_KEY_D] == DOWN)
 		sm.camaraActiva->ProcessKeyboard(RIGHT, deltaTime);
 }
 

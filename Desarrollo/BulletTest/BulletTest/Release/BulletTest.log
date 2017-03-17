@@ -1,4 +1,4 @@
-﻿LINK : warning C4743: 'class Input `static class Input & __cdecl Input::i(void)'::`2'::instance' tiene un tamaño diferente en 'd:\4�curso\repositorios\asd\tba\desarrollo\motor\motor\enginedevice.cpp' y 'd:\4�curso\repositorios\asd\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp': 4136 y 4140 bytes
-     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+﻿LINK : warning C4743: 'class Input `static class Input & __cdecl Input::i(void)'::`2'::instance' tiene un tamaño diferente en 'd:\4�curso\repositorios\asd\tba\desarrollo\motor\motor\enginedevice.cpp' y 'c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\handlers\inputhandler.cpp': 4136 y 4140 bytes
+     Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 InGame.obj : error LNK2001: símbolo externo "public: void __thiscall Input::endEventProcess(void)" (?endEventProcess@Input@@QAEXXZ) sin resolver
-D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1120: 1 externos sin resolver
+C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1120: 1 externos sin resolver

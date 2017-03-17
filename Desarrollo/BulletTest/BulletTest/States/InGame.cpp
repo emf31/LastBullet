@@ -100,7 +100,7 @@ void InGame::HandleEvent()
 		World::i().getPartida()->muestraTabla();
 
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_LEFT_ALT)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_3)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
