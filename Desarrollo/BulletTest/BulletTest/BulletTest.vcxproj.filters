@@ -313,6 +313,12 @@
     <ClCompile Include="GUI\MenuGUI.cpp">
       <Filter>Source Code\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\EntActive.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\EntPassive.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -731,6 +737,12 @@
     </ClInclude>
     <ClInclude Include="Otros\Quaternion.h">
       <Filter>Source Code\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntActive.h">
+      <Filter>Source Code\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntPassive.h">
+      <Filter>Source Code\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ void EntityManager::inicializar()
 
 	}
 
-	std::unordered_map<int, Entity*>::iterator iter = m_entities.begin();
+	std::unordered_map<int, EntActive*>::iterator iter = m_entities.begin();
 	for (iter; iter != m_entities.end(); ++iter) {
 		std::string className = iter->second->getClassName();
 		if (className != "Granada" && className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola"  && className != "Enemy_Bot") {
@@ -60,7 +60,7 @@ void EntityManager::handleInput()
 
 void EntityManager::cargarContenido()
 {
-	std::unordered_map<int, Entity*>::iterator i = m_entities.begin();
+	std::unordered_map<int, EntActive*>::iterator i = m_entities.begin();
 	for (; i != m_entities.end(); ++i) {
 		std::string className = i->second->getClassName();
 		if (className != "Granada" && className != "Asalto" && className != "RocketLauncher" && className != "Sniper" && className != "Pistola"  && className != "Enemy_Bot"){
@@ -91,7 +91,7 @@ void EntityManager::apagar()
 
 }
 
-void EntityManager::registerEntity(Entity * entity)
+void EntityManager::registerEntityActive(EntActive * entity)
 {
 
 	// comprobamos si la Entity tiene un ID
@@ -112,6 +112,27 @@ void EntityManager::registerEntity(Entity * entity)
 	//si todo ha ido bien le asignamos el entity al map
 	m_entities[entity->getID()] = entity;
 
+}
+
+void EntityManager::registerEntityPassive(EntPassive * entity)
+{
+	// comprobamos si la Entity tiene un ID
+	if (entity->getID() == -1) {
+		//Si no tiene, le damos una que este disponible
+		//Lo hago asi porque no puedo asegurar que el id siguiente no este asignado ya
+		while (m_entities.find(m_nextID) != m_entities.end()) {
+			++m_nextID;
+		}
+		entity->setID(m_nextID++);
+	}
+	//en caso de que tenga ya id comprobamos que no este en uso
+	else if (m_entities.find(entity->getID()) != m_entities.end()) {
+		//mostramos error
+		std::cout << "Error registrando entity de ID: " + entity->getID() << std::endl;
+		return;
+	}
+	//si todo ha ido bien le asignamos el entity al map
+	m_entPassive[entity->getID()] = entity;
 }
 
 void EntityManager::registerRaknetEntity(Entity * entity) 
@@ -165,19 +186,19 @@ Entity * EntityManager::getEntity(int id)
 	return NULL;
 }
 
-std::list<Entity*> EntityManager::getCharacters()
+std::list<Character*> EntityManager::getCharacters()
 {
-	std::list<Entity*>characters;
+	std::list<Character*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy" || i->second->getClassName() == "Enemy_Bot")
-			characters.push_back(i->second);
+			characters.push_back(static_cast<Character*>(i->second));
 	}
 	return characters;
 }
 
-std::list<Entity*> EntityManager::getEnemies()
+std::list<EntActive*> EntityManager::getEnemies()
 {
-	std::list<Entity*>characters;
+	std::list<EntActive*>characters;
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		if (i->second->getClassName() == "Enemy" || i->second->getClassName() == "Enemy_Bot" || i->second->getClassName() == "Player")
 			characters.push_back(i->second);
@@ -268,7 +289,7 @@ void EntityManager::mostrarClientes() {
 		i->second->getGuid();
 		
 		std::cout << "Nombre del player: " << i->second->getName() << std::endl;
-		std::cout << "Posicion: " << i->second->getRenderState()->getPosition().getX() << ", " << i->second->getRenderState()->getPosition().getZ() << std::endl;
+		std::cout << "Posicion: " << i->second->getPosition().getX() << ", " << i->second->getPosition().getZ() << std::endl;
 		std::cout << "GUID de la Entity: " << RakNet::RakNetGUID::ToUint32(i->second->getGuid()) << std::endl;
 		std::cout << "GUID de la Clave: " << i->first << std::endl;
 		std::cout << "ID: " << i->second->getID() << std::endl;

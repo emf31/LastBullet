@@ -1,8 +1,8 @@
 #pragma once
-#include "Entity.h"
+#include "EntPassive.h"
 #include "../Motor/BasicSceneNode.h"
 #include <PhysicsEngine.h>
-class Button : public Entity {
+class Button : public EntPassive {
 public:
 	Button(std::shared_ptr<BasicSceneNode> nodo, const std::string& name, EnumTriggerType type, int id);
 	~Button();

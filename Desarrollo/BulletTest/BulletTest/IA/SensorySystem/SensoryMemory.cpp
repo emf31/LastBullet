@@ -16,8 +16,8 @@ void SensoryMemory::updateVision()
 {
 	try {
 
-		std::list<Entity*>lista = EntityManager::i().getCharacters();
-		for (std::list<Entity*>::iterator it = lista.begin(); it != lista.end(); ++it) {
+		std::list<Character*>lista = EntityManager::i().getCharacters();
+		for (std::list<Character*>::iterator it = lista.begin(); it != lista.end(); ++it) {
 			if (m_bot != (*it)) {
 				updateNewEnemies(*it);
 				Memory& mymemory = m_botMemory[*it];
@@ -56,7 +56,7 @@ void SensoryMemory::updateVision()
 	}
 }
 
-void SensoryMemory::updateSound(Entity * ent)
+void SensoryMemory::updateSound(Character * ent)
 {
 	updateNewEnemies(ent);
 	Memory& mymemory = m_botMemory[ent];
@@ -70,7 +70,7 @@ void SensoryMemory::updateSound(Entity * ent)
 	mymemory.m_lastTimeSensed = sensoryClock.getElapsedTime().asSeconds();
 }
 
-bool SensoryMemory::isEnemyShootable(Entity * ent) const
+bool SensoryMemory::isEnemyShootable(Character * ent) const
 {
 	if (m_botMemory.find(ent) != m_botMemory.end()) {
 		Memory mem = m_botMemory.find(ent)->second;
@@ -79,7 +79,7 @@ bool SensoryMemory::isEnemyShootable(Entity * ent) const
 	return false;
 }
 
-bool SensoryMemory::isEnemyInFOV(Entity * ent) const
+bool SensoryMemory::isEnemyInFOV(Character * ent) const
 {
 	if (m_botMemory.find(ent) != m_botMemory.end()) {
 		Memory mem = m_botMemory.find(ent)->second;
@@ -88,7 +88,7 @@ bool SensoryMemory::isEnemyInFOV(Entity * ent) const
 	return false;
 }
 
-bool SensoryMemory::isRaycastObstructed(Entity * ent) const
+bool SensoryMemory::isRaycastObstructed(Character * ent) const
 {
 	//****************************RayCast central***************************************
 	btVector3 start = btVector3(m_bot->getRenderState()->getPosition().getX(), m_bot->getRenderState()->getPosition().getY(), m_bot->getRenderState()->getPosition().getZ());
@@ -115,7 +115,7 @@ bool SensoryMemory::isRaycastObstructed(Entity * ent) const
 	return false;
 }
 
-bool SensoryMemory::isInFOV(Entity * ent) const
+bool SensoryMemory::isInFOV(Character * ent) const
 {
 
 	//std::cout << "facing= " << m_bot->getFacing() << std::endl;
@@ -146,7 +146,7 @@ bool SensoryMemory::isInFOV(Entity * ent) const
 	return angle <= m_bot->getFOV();
 }
 
-Vec3<float> SensoryMemory::GetLastRecordedPositionOfOpponent(Entity *ent) const
+Vec3<float> SensoryMemory::GetLastRecordedPositionOfOpponent(Character *ent) const
 {
 	auto it=m_botMemory.find(ent);
 	if (it != m_botMemory.end()) {
@@ -156,7 +156,7 @@ Vec3<float> SensoryMemory::GetLastRecordedPositionOfOpponent(Entity *ent) const
 	throw std::runtime_error("SENSORYMEMORY::GetLastRecordedPositionOfOpponent>: Intentando conseguir posicion de un bot que no has guardado");
 }
 
-double SensoryMemory::GetTimeOpponentHasBeenVisible(Entity * ent) const
+double SensoryMemory::GetTimeOpponentHasBeenVisible(Character * ent) const
 {
 	auto it = m_botMemory.find(ent);
 	if (it != m_botMemory.end() && (*it).second.m_inFOV == true) {
@@ -166,7 +166,7 @@ double SensoryMemory::GetTimeOpponentHasBeenVisible(Entity * ent) const
 	return 0.0;
 }
 
-double SensoryMemory::GetTimeSinceLastSensed(Entity * ent) const
+double SensoryMemory::GetTimeSinceLastSensed(Character * ent) const
 {
 	auto it = m_botMemory.find(ent);
 	if (it != m_botMemory.end() && (*it).second.m_inFOV == true) {
@@ -176,7 +176,7 @@ double SensoryMemory::GetTimeSinceLastSensed(Entity * ent) const
 	return 0.0;
 }
 
-double SensoryMemory::GetTimeOpponentHasBeenOutOfView(Entity * ent) const
+double SensoryMemory::GetTimeOpponentHasBeenOutOfView(Character * ent) const
 {
 	auto it = m_botMemory.find(ent);
 	if (it != m_botMemory.end()) {
@@ -186,10 +186,10 @@ double SensoryMemory::GetTimeOpponentHasBeenOutOfView(Entity * ent) const
 	return 0.0;
 }
 
-std::list<Entity*> SensoryMemory::GetListOfRecentlySensedEnemies() const
+std::list<Character*> SensoryMemory::GetListOfRecentlySensedEnemies() const
 {
 	//TODO
-	std::list<Entity*>myEnemies;
+	std::list<Character*>myEnemies;
 	double currentTime = sensoryClock.getElapsedTime().asSeconds();
 	for (auto it = m_botMemory.begin(); it != m_botMemory.end(); ++it) {
 		if (currentTime - (*it).second.m_lastTimeSensed <= m_memorySpan){
@@ -199,7 +199,7 @@ std::list<Entity*> SensoryMemory::GetListOfRecentlySensedEnemies() const
 	return myEnemies;
 }
 
-void SensoryMemory::updateNewEnemies(Entity* ent)
+void SensoryMemory::updateNewEnemies(Character* ent)
 {
 	if (m_botMemory.find(ent) == m_botMemory.end()) {
 		m_botMemory[ent] = Memory();

@@ -2,7 +2,7 @@
 #include "PhysicsEntity.h"
 #include <Quaternion.h>
 
-PhysicsEntity::PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
+PhysicsEntity::PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : EntPassive(-1, nodo, name)
 {
 	
 }
@@ -35,6 +35,7 @@ void PhysicsEntity::rotate(Vec3<float> rot)
 
 void PhysicsEntity::inicializar()
 {
+	update(Time::Zero);
 }
 
 static Vec3<float> toEulerianAngle(const btQuaternion& q)
@@ -78,8 +79,9 @@ void PhysicsEntity::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	//m_nodo->setRotationXYZ(Vec3<float>(-m_renderRotation.getX(), m_renderRotation.getY() + 180, -m_renderRotation.getZ()));
-
-	m_renderState.updateRotations(Vec3<float>(-Euler.getX(), Euler.getY() + 180, -Euler.getZ()));
+	m_rotation = Vec3<float>(-Euler.getX(), Euler.getY() + 180, -Euler.getZ());
+	m_nodo->setRotationXYZ(m_rotation);
+	//m_renderState.updateRotations();
 
 	// Set position
 	//m_rigidBody->setm
@@ -87,8 +89,9 @@ void PhysicsEntity::update(Time elapsedTime)
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	//if(centerCollision==NULL)
 
-
-	m_renderState.updatePositions(Vec3<float>((float)Point[0]-centerCollision.getX(), (float)Point[1]-centerCollision.getY(), (float)Point[2]-centerCollision.getX()));
+	m_position = Vec3<float>((float)Point[0] - centerCollision.getX(), (float)Point[1] - centerCollision.getY(), (float)Point[2] - centerCollision.getX());
+	m_nodo->setPosition(m_position);
+	//m_renderState.updatePositions();
 
 	//m_rigidBody->pos
 }
@@ -119,9 +122,9 @@ bool PhysicsEntity::handleTrigger(TriggerRecordStruct * Trigger)
 
 void PhysicsEntity::setPosition(const Vec3<float>& pos)
 {
-	m_renderState.setPosition(pos);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
 	m_nodo->setPosition(pos);
+	update(Time::Zero);
 }

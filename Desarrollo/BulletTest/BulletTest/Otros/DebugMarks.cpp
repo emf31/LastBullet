@@ -4,12 +4,12 @@
 #include <Color4f.h>
 
 //Creates a billboard in the position of the entity
-DebugMarks::DebugMarks(Entity* ent, float yOffset) : 
+DebugMarks::DebugMarks(Character* ent, float yOffset) : 
 	m_ent(ent), 
 	mIsActive(false), 
 	entYOffset(yOffset), 
 	losedConnection(seconds(5)), 
-	Entity(-1, NULL)
+	EntActive(-1, NULL)
 {
 	
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "EntActive.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <Estructuras.h>
@@ -9,8 +9,7 @@
 #define GRANADADISPARADA 1
 
 
-class Granada :
-	public Entity
+class Granada : public EntActive
 {
 public:
 	Granada();

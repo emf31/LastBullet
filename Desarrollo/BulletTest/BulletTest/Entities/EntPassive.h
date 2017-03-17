@@ -2,20 +2,21 @@
 
 #include <vec3.hpp>
 #include <Time.hpp>
-#include <Clock.hpp>
-#include <RenderState.h>
 
-#include <EntActive.h>
+#include <Entity.h>
+
+#include <memory>
+#include <TriggerRecordStruct.h>
 
 
 
-class Character : public EntActive
+class EntPassive : public Entity
 {
 public:
-	
 
-	Character(int id, std::shared_ptr<SceneNode> nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
-	virtual ~Character();
+
+	EntPassive(int id, std::shared_ptr<SceneNode> nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	virtual ~EntPassive();
 
 	virtual void inicializar() = 0;
 	virtual void update(Time elapsedTime) = 0;
@@ -26,12 +27,16 @@ public:
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
 	virtual std::string getClassName() = 0;
 	virtual void setPosition(const Vec3<float>& vec) = 0;
+	virtual Vec3<float> getPosition() override { return m_position; }
 
-	virtual float getVida() override;
-	virtual bool isDying() override;
+
+protected:
+
+	Vec3<float> m_position;
+	Vec3<float> m_rotation;
+	Vec3<float> m_scale;
 
 private:
 
-	
-};
 
+};

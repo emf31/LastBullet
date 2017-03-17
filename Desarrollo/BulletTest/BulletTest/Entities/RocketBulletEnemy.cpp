@@ -12,7 +12,7 @@
 //normal es que este cuando colisiona no hace daño ya que esta comprobacion ya se hace desde el cliente enemigo
 //que dispara dicho rocket.
 
-RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
+RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation)
 {
 	m_lifetime = seconds(5);

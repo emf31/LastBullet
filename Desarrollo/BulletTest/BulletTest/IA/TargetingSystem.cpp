@@ -18,10 +18,10 @@ void TargetingSystem::Update()
 
 	//grab a list of all the opponents the owner can sense
 
-	std::list<Entity*> SensedBots;
+	std::list<Character*> SensedBots;
 	SensedBots = m_pOwner->GetSensoryMemory()->GetListOfRecentlySensedEnemies();
 
-	std::list<Entity*>::const_iterator curBot = SensedBots.begin();
+	std::list<Character*>::const_iterator curBot = SensedBots.begin();
 	for (curBot; curBot != SensedBots.end(); ++curBot)
 	{
 		//make sure the bot is alive and that it is not the owner

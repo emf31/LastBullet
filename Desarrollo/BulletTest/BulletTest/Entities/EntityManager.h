@@ -8,7 +8,8 @@
 #include <list>
 #include <Estructuras.h>
 #include <string>
-
+#include <Character.h>
+#include <EntPassive.h>
 
 
 static const int PLAYER = 1000;
@@ -23,16 +24,12 @@ public:
 		return singleton;
 	}
 
-	int numClientes() const {
-		return m_jugadores.size();
-	}
+	int numClientes() const { return m_jugadores.size(); }
 	
 	void mostrarClientes();
 	void muestraPosClientes();
 
-	void inicializarEntityManager() {
-		m_nextID = 0;
-	}
+	void inicializarEntityManager() { m_nextID = 0; }
 
 	//Inicializa todas las entities
 	void inicializar();
@@ -51,7 +48,10 @@ public:
 	void apagar();
 
 	//Registra una entity en el mapa
-	void registerEntity(Entity* entity);
+	void registerEntityActive(EntActive* entity);
+
+	void registerEntityPassive(EntPassive* entity);
+
 	//Registra una entity con representacion en la red
 	void registerRaknetEntity(Entity* entity);
 
@@ -63,8 +63,8 @@ public:
 
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
-	std::list<Entity*> getCharacters();
-	std::list<Entity*> getEnemies();
+	std::list<Character*> getCharacters();
+	std::list<EntActive*> getEnemies();
 	std::vector<Entity*> getBots();
 	std::list<Entity*> getLifeObjects();
 	std::list<Entity*> getWeapons();
@@ -82,7 +82,8 @@ private:
 
 	int m_nextID;
 	
-	std::unordered_map<int, Entity*> m_entities;
+	std::unordered_map<int, EntActive*> m_entities;
+	std::unordered_map<int, EntPassive*> m_entPassive;
 	std::unordered_map<unsigned long, Entity*> m_jugadores;
 	
 	std::unordered_set<Entity*> delete_set;

@@ -1,6 +1,6 @@
 #pragma once
 #include <vec3.hpp>
-#include "../Entities/Entity.h"
+#include <Character.h>
 #include <Engine/TCamera.h>
 
 class CameraShake;
@@ -21,7 +21,7 @@ public:
 	Vec3<float> getPosition();
 
 	//La camara sigue al nodo que le asignas
-	void asignarEntity(Entity* ent);
+	void asignarEntity(Character* ent);
 	void update();
 
 	void setInputReceiver(bool input) { m_camera->setInputEnable(input);  }
@@ -51,7 +51,7 @@ private:
 	std::string m_pName;
 	TCamera* m_camera;
 	
-	Entity* m_entity;
+	Character* m_entity;
 	CameraShake* m_cameraShake;
 	GunRecoil* m_GunRecoil;
 	float defaultFOV;
