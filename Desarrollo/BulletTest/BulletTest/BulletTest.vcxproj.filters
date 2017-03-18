@@ -313,6 +313,15 @@
     <ClCompile Include="GUI\MenuGUI.cpp">
       <Filter>Source Code\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="States\LoadingState.cpp">
+      <Filter>Headers\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\LoadingStateGUI.cpp">
+      <Filter>Source Code\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ParalellTask.cpp">
+      <Filter>Source Code\Otros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -731,6 +740,15 @@
     </ClInclude>
     <ClInclude Include="Otros\Quaternion.h">
       <Filter>Source Code\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="States\LoadingState.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\LoadingStateGUI.h">
+      <Filter>Headers\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\ParalellTask.h">
+      <Filter>Headers\Otros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@
 #include <Map.h>
 #include <World.h>
 #include <StateStack.h>
+#include <thread>
 
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player), m_world(World::i())
@@ -248,6 +249,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			
 			//When we recive a starting game message we change
 			//current state to INGAME
+			//std::thread first(&MenuGUI::threadCrearPartida,this);
 			StateStack::i().GetCurrentState()->Clear();
 			StateStack::i().SetCurrentState(States::ID::InGame);
 			StateStack::i().GetCurrentState()->Inicializar();

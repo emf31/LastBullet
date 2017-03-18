@@ -42,7 +42,7 @@ void Menu::HandleEvent()
 
 void Menu::Update(Time timeElapsed)
 {
-	
+	menuGUI.update();
 }
 
 void Menu::Render(float interpolation, Time elapsedTime)

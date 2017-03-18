@@ -11,47 +11,88 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow" >
-            <Property name="Area" value="{{0,222},{0,80},{1,222},{1,80}}" />
+            <Property name="Area" value="{{0,0},{0,0},{1,1280},{1,-12}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Button" name="Button" >
-                <Property name="Area" value="{{0,593},{0,192},{0,929},{0,242}}" />
+                <Property name="Area" value="{{0,93},{0,221},{0,405},{0,260}}" />
                 <Property name="Text" value="Crear Partida" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button2" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,599},{0,330},{0,935},{0,380}}" />
+                <Property name="Area" value="{{0,83},{0,262},{0,397},{0,293}}" />
                 <Property name="Text" value="Unirse a partida" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button3" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,1117},{0,696},{0,1229},{0,746}}" />
+                <Property name="Area" value="{{0,845},{0,439},{0,957},{0,481}}" />
                 <Property name="Text" value="Salir" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,439},{0,216},{0,486},{0,260}}" />
+                <Property name="HoverImage" value="AssetsMenu/StartIcon" />
+                <Property name="NormalImage" value="AssetsMenu/StartIcon" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton2" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,808},{0,444},{0,847},{0,479}}" />
+                <Property name="HoverImage" value="AssetsMenu/exitIcon" />
+                <Property name="NormalImage" value="AssetsMenu/exitIcon" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton3" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,806},{0,237},{0,839},{0,268}}" />
+                <Property name="HoverImage" value="AssetsMenu/optionsIcon" />
+                <Property name="NormalImage" value="AssetsMenu/optionsIcon" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton4" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0,241},{0,213},{0,443},{0,293}}" />
+                <Property name="HoverImage" value="AssetsMenu/scheme2" />
+                <Property name="NormalImage" value="AssetsMenu/scheme2" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton5" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,830},{0,204},{0,1036},{0,254}}" />
+                <Property name="HoverImage" value="AssetsMenu/scheme1" />
+                <Property name="NormalImage" value="AssetsMenu/scheme1" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton6" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0,833},{0,456},{0,961},{0,509}}" />
+                <Property name="HoverImage" value="AssetsMenu/scheme3" />
+                <Property name="NormalImage" value="AssetsMenu/scheme3" />
+            </Window>
+            <Window type="Generic/Image" name="Image" >
+                <Property name="Area" value="{{0,473},{0,209},{0,791},{0,502}}" />
+                <Property name="Image" value="AssetsMenu/planet" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow2" >
             <Property name="ID" value="1" />
-            <Property name="Area" value="{{0,-346},{0,-102},{1,-346},{1,-102}}" />
+            <Property name="Area" value="{{0,0},{0,-1},{1,-4},{1,-1}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
-                <Property name="Area" value="{{0,873},{0,296},{1,-136},{1,-310}}" />
+                <Property name="Area" value="{{0,496},{0,238},{1,-513},{1,-368}}" />
                 <Property name="Text" value="Conexiones Disponnibles" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,1028},{0,606},{0,1226},{0,656}}" />
+                <Property name="Area" value="{{0,409},{0,326},{0,607},{0,376}}" />
                 <Property name="Text" value="Conexion 1" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button2" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,1425},{0,615},{0,1659},{0,665}}" />
+                <Property name="Area" value="{{0,648},{0,325},{0,882},{0,375}}" />
                 <Property name="Text" value="Conexion 2" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button3" >
                 <Property name="ID" value="3" />
-                <Property name="Area" value="{{0,1260},{0,756},{0,1372},{0,806}}" />
+                <Property name="Area" value="{{0,569},{0,392},{0,681},{0,442}}" />
                 <Property name="Text" value="Actualizar" />
             </Window>
         </Window>

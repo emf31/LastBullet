@@ -7,6 +7,7 @@
 #include <Player.h>
 
 
+
 class MenuGUI : public Motor::GUI {
 public:
 
@@ -36,7 +37,14 @@ private:
 	CEGUI::PushButton *Conexion1;
 	CEGUI::PushButton *Conexion2;
 	CEGUI::PushButton *Actualizar;
+	CEGUI::PushButton *IconoPartida;
+	CEGUI::PushButton *IconoOpciones;
+	CEGUI::PushButton *IconoSalir;
+	CEGUI::PushButton *SchemePartida;
+	CEGUI::PushButton *SchemeOpciones;
+	CEGUI::PushButton *SchemeSalir;
 
+	//std::thread t;
 
 	Player* p;
 

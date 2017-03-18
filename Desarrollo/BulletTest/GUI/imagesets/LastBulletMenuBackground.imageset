@@ -1,3 +1,3 @@
-<Imageset autoScaled="vertical" imagefile="LastBulletBackground.png" name="LastBulletMenuBackGround" nativeHorzRes="1920" nativeVertRes="1080" version="2">
-    <Image height="1080" name="Background" width="1920" xPos="0" yPos="0" />
+<Imageset autoScaled="vertical" imagefile="LastBulletBackground.png" name="LastBulletMenuBackGround" nativeHorzRes="1280" nativeVertRes="720" version="2">
+    <Image height="720" name="Background" width="1280" xPos="0" yPos="0" />
 </Imageset>

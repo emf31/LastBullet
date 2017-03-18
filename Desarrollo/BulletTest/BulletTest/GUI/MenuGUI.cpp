@@ -1,6 +1,7 @@
 #include <MenuGUI.h>
 #include <iostream>
 #include <NetPlayer.h>
+#include <StateStack.h>
 
 MenuGUI::MenuGUI() : GUI() {
 }
@@ -10,24 +11,42 @@ void MenuGUI::inicializar() {
 	loadScheme("SampleBrowser.scheme");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
+	loadScheme("AssetsMenu.scheme");
 	loadScheme("LastBulletMenuBackground.scheme");
 	loadLayout("LastBulletMENU.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(true);
 
 	//Menu principal
-	//Titulo = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
 
 	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(0));
 	CrearPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onCrearPartidaClicked, this));
+	CrearPartida->setVisible(false);
 
 	UnirPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(1));
 	UnirPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
+	UnirPartida->setVisible(false);
 
 	Salir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
 	Salir->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onSalirClicked, this));
+	Salir->setVisible(false);
+
+	IconoPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(3));
+
+	IconoSalir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(4));
+
+	IconoOpciones = static_cast<CEGUI::PushButton*>(LastBullet->getChild(5));
+
+	SchemePartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(6)); 
+	SchemePartida->setVisible(false);
+
+	SchemeOpciones= static_cast<CEGUI::PushButton*>(LastBullet->getChild(7)); 
+	SchemeOpciones->setVisible(false);
+
+	SchemeSalir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(8));
+	SchemeSalir->setVisible(false);
 
 	//Unirse a partida
 
@@ -54,16 +73,41 @@ void MenuGUI::inicializar() {
 
 void MenuGUI::update()
 {
+	if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
+		SchemePartida->setVisible(true);
+		CrearPartida->setVisible(true);
+		UnirPartida->setVisible(true);
+	}
+	else {
+		SchemePartida->setVisible(false);
+		CrearPartida->setVisible(false);
+		UnirPartida->setVisible(false);
+	}
 
+	if (IconoOpciones->isHovering() || SchemeOpciones->isHovering()) {
+		SchemeOpciones->setVisible(true);
+	}
+	else {
+		SchemeOpciones->setVisible(false);
+	}
+
+	if (IconoSalir->isHovering() || SchemeSalir->isHovering() || Salir->isHovering()) {
+		SchemeSalir->setVisible(true);
+		Salir->setVisible(true);
+	}
+	else {
+		SchemeSalir->setVisible(false);
+		Salir->setVisible(false);
+	}
 }
 
 void MenuGUI::handleEvent(Event * ev)
 {
 
 }
-
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
+
 	std::cout << "Le has dado a crear" << std::endl;
 	p->m_network->crearPartida();
 	return true;
