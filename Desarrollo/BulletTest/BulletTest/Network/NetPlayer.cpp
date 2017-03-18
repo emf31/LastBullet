@@ -251,7 +251,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//current state to INGAME
 			//std::thread first(&MenuGUI::threadCrearPartida,this);
 			StateStack::i().GetCurrentState()->Clear();
-			StateStack::i().SetCurrentState(States::ID::Carga);
+			StateStack::i().SetCurrentState(States::ID::InGame);
 			StateStack::i().GetCurrentState()->Inicializar();
 
 
