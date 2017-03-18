@@ -267,7 +267,7 @@ bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 	Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
 	if (ent->getID() != m_id && Trigger->eTriggerType == kTrig_EnemyShootSound) {
 		printf("Trigger tipo sonido de arma enemigo\n");
-		sense->updateSound(ent);
+		sense->updateSound(static_cast<Character*>(ent));
 	}
 	return true;
 }

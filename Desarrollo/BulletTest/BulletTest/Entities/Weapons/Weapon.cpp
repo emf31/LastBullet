@@ -1,7 +1,7 @@
 #include "Weapon.h"
 
 
-Weapon::Weapon(Character* ent) : Entity(-1, NULL), estadoWeapon(CARGADA), m_ent (ent)
+Weapon::Weapon(Character* ent) : EntActive(-1, NULL), estadoWeapon(CARGADA), m_ent (ent)
 {
 
 }

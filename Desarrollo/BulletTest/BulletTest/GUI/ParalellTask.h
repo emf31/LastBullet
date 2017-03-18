@@ -11,6 +11,7 @@ public:
 	void    write();
 	bool	IsFinished();
 	float	GetCompletion();
+	std::thread t1;
 private:
 	void	RunTask();
 
@@ -20,6 +21,6 @@ private:
 	bool	mFinished;
 	bool	loading;
 	bool    mFinishedRunInGame;
-	std::thread t1;
+
 
 };

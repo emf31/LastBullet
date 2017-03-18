@@ -2,7 +2,7 @@
 #include "../../Motor/PhysicsEngine.h"
 
 
-WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name), timeRespawnWeapon(3)
+WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name), timeRespawnWeapon(3)
 {
 }
 

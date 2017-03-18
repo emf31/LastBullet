@@ -5,11 +5,11 @@
 #include <Clock.hpp>
 #include <RenderState.h>
 
-#include <Entity.h>
+#include <EntActive.h>
 
 
 
-class Character : public Entity
+class Character : public EntActive
 {
 public:
 	

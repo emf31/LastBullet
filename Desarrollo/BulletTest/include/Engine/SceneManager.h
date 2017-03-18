@@ -96,7 +96,7 @@ public:
 
 	//Buffers
 	GLuint gBuffer;
-	GLuint gPosition, gNormal, gTextura, gSpecular, gCoords;
+	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords;
 	GLuint rboDepth;
 	GLuint draw_mode=1;
 

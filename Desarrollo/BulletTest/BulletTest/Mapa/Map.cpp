@@ -3,6 +3,7 @@
 #include <EntityManager.h>
 #include <Util.h>
 #include <PhysicsEngine.h>
+#include <EntActive.h>
 
 
 
@@ -207,11 +208,11 @@ Vec3<float> Map::searchSpawnPoint()
 		return m_spawns.at(0);
 	}
 
-	std::list<Entity*> enemies = EntityManager::i().getEnemies();
+	std::list<EntActive*> enemies = EntityManager::i().getEnemies();
 
 	std::vector<Vec3<float>> auxSpawns;
 
-	std::list<Entity*>::iterator it;
+	std::list<EntActive*>::iterator it;
 	std::vector<Vec3<float>>::iterator it2;
 
 	for (it2 = m_spawns.begin(); it2 != m_spawns.end(); ++it2) {

@@ -15,3 +15,4 @@ newmtl CTMid
 	map_Ka Props\texturasMapa\ChannelCTMidDiffuse.png
 	map_Kd Props\texturasMapa\ChannelCTMidDiffuse.png
 	map_Ks Props\texturasMapa\ChannelCTMidSpecular.png
+	map_Kn Props\texturasMapa\middleNRM.jpg

@@ -15,3 +15,4 @@ newmtl CT2A
 	map_Ka Props\texturasMapa\ChannelCT2ADiffuse.png
 	map_Kd Props\texturasMapa\ChannelCT2ADiffuse.png
 	map_Ks Props\texturasMapa\ChannelCT2ASpecular.png
+	map_Kn Props\texturasMapa\WindowNoWallsNRM.jpg

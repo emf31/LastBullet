@@ -110,6 +110,21 @@ void InGame::HandleEvent()
 
 
 	}
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_4)) {
+		SceneManager::i().draw_mode = 1;
+	}
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_5)) {
+		SceneManager::i().draw_mode = 2;
+	}
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_6)) {
+		SceneManager::i().draw_mode = 3;
+	}
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_7)) {
+		SceneManager::i().draw_mode = 4;
+	}
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_8)) {
+		SceneManager::i().draw_mode = 5;
+	}
 	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();

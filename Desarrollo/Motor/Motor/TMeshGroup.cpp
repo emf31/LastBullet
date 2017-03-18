@@ -36,7 +36,7 @@ void TMeshGroup::beginDraw() {
 void TMeshGroup::loadModel(const std::string& path) {
 	// Leemos con ASSIMP
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	// Miramos si hay algún error
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // Si no es 0
 	{
@@ -84,6 +84,18 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 		vector.y = mesh->mNormals[i].y;
 		vector.z = mesh->mNormals[i].z;
 		vertex.Normal = vector;
+
+		//tangentes
+		vector.x = mesh->mTangents[i].x;
+		vector.y = mesh->mTangents[i].y;
+		vector.z = mesh->mTangents[i].z;
+		vertex.Tangent = vector;
+		//bitangentes
+		vector.x = mesh->mBitangents[i].x;
+		vector.y = mesh->mBitangents[i].y;
+		vector.z = mesh->mBitangents[i].z;
+		vertex.Bitangent = vector;
+
 		// Coordenadas de textura
 		if (mesh->mTextureCoords[0]) // Tiene coordenadas de texturas?
 		{
@@ -122,6 +134,10 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 		//3. Normal maps
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_normal");
 		//textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		//4.Tangent
+		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_tangent");
+		//5.Bitangent
+		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_bitangent");
 	}
 
 	// Return del mesh preparado

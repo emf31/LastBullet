@@ -1,12 +1,13 @@
 #pragma once
-#include <Entity.h>
+#include <EntActive.h>
+#include <Character.h>
 #include <Time.hpp>
 #include <Color4f.h>
 
 //Creates a billboard in the position of the entity
-class DebugMarks : public Entity{
+class DebugMarks : public EntActive{
 public:
-	DebugMarks(Entity* ent, float yOffset);
+	DebugMarks(Character* ent, float yOffset);
 	~DebugMarks();
 
 	// Heredado vía Entity
@@ -30,7 +31,7 @@ public:
 private:
 
 	//Entity sobre la que se posiciona
-	Entity* m_ent;
+	Character* m_ent;
 
 	Time m_lifetime;
 

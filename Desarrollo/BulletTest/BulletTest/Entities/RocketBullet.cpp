@@ -12,7 +12,7 @@
 //comprueba mediante un radio de explosion si ha impactado con algun jugador. Esta clase es responsable
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
-RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
+RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(60), m_rotation(rotation), radioExplosion(10), m_owner(owner)
 {
 
@@ -87,11 +87,11 @@ void RocketBullet::handleMessage(const Message & message)
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
 
-		std::list<Entity*>characters = EntityManager::i().getCharacters();
+		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
-		for (std::list<Entity*>::iterator it = characters.begin(); it != characters.end(); it++) {
+		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {
 
-			Entity* myentity = *it;
+			Character* myentity = *it;
 
 			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 3.f;
 
@@ -151,7 +151,7 @@ void RocketBullet::setPosition(const Vec3<float>& pos)
 //Calcula la el daño que hace la explosion de un rocket en funcion del punto
 //de impacto, la posicion del player impactado y un radio de alcance. Además aplica un impulso
 //y en caso de ser un enemigo lo comunica al servidor.
-float RocketBullet::explosion(Entity* player, const Vec3<float>& posExplosion, float radio)
+float RocketBullet::explosion(Character* player, const Vec3<float>& posExplosion, float radio)
 {
 	float vidaRestada = 0;
 

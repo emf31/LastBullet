@@ -193,7 +193,7 @@ void DebugMenuGUI::update() {
 
 				Entity* myentity = *it;
 
-				Vec3<float>posBox = myentity->getRenderState()->getPosition();
+				Vec3<float>posBox = myentity->getPosition();
 				posBox.addY(posBox.getY() + 15);
 
 				std::string estado = myentity->getStateActual();
@@ -325,7 +325,7 @@ void DebugMenuGUI::crearNodosState() {
 
 		Entity* myentity = *it;
 
-		Vec3<float>posBox = myentity->getRenderState()->getPosition();
+		Vec3<float>posBox = myentity->getPosition();
 		posBox.addY(posBox.getY() + 15);
 
 		nodos[i] = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");

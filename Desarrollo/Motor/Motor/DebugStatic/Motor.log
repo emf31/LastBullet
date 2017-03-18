@@ -1,10 +1,31 @@
-﻿  Input.cpp
-  Generando código...
-  Compilando...
+﻿  TTransform.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(134): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(138): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
+  TSunLight.cpp
+  TPointLight.cpp
+  TNode.cpp
+  TModel.cpp
+  TMeshGroup.cpp
+  TMesh.cpp
+  TLuz.cpp
+  TFlashLight.cpp
+  Texture.cpp
+  TEntity.cpp
+  TCamera.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.cpp(4): warning C4005: 'PI': redefinición de macro
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.h(10): note: vea la definición anterior de 'PI'
+  Shader.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
   main.cpp
-d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\main.cpp(151): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(151): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+  Input.cpp
   EngineDevice.cpp
   Generando código...
 Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
-  Motor.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugStatic\Motor.lib
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib

@@ -33,10 +33,6 @@ public:
 	Entity(int id, std::shared_ptr<SceneNode> nodo, const std::string& name = "", RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	virtual ~Entity();
 
-	void updateRender(float interpolation);
-	Vec3<float> getRenderPosition();
-
-	RenderState* getRenderState() { return &m_renderState; }
 
 	const RakNet::RakNetGUID& getGuid() { return m_guid; }
 	void setGUID(const RakNet::RakNetGUID& guid) { m_guid = guid; }
@@ -67,6 +63,7 @@ public:
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
 	virtual std::string getClassName() = 0;
 	virtual void setPosition(const Vec3<float>& vec) = 0;
+	virtual Vec3<float> getPosition() = 0;
 
 	virtual float getDesiAsalto() { return 0; }
 	virtual float getDesiRocketLauncher() { return 0; }
@@ -84,8 +81,6 @@ protected:
 	std::string m_name;
 	//Nodo respresentativo de la entity
 	std::shared_ptr<SceneNode> m_nodo;
-	//Para interpolar el nodo
-	RenderState m_renderState;
 	
 	//Flag para trigger system
 	byte dwTriggerFlags;
