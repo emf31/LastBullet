@@ -9,16 +9,17 @@ ParalellTask::ParalellTask()
 void ParalellTask::Execute()
 {
 	mFinishedRunInGame = false;
-	t1=std::thread(&ParalellTask::RunInGame, this);
+	f1 = std::async(std::launch::async,&ParalellTask::RunInGame, this);
+	
 }
 
 void ParalellTask::RunInGame()
 {	
-	
 	StateStack::i().GetState(States::ID::InGame)->Inicializar();
 	StateStack::i().GetState(States::ID::Carga)->Clear();
 	StateStack::i().SetCurrentState(States::ID::InGame);
 	mFinishedRunInGame = true;
+
 }
 
 void ParalellTask::write()

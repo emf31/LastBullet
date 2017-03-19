@@ -186,12 +186,15 @@ void GraphicEngine::renderAll()
 
 	SceneManager::i().draw();
 	
-	
+	//if (StateStack::i().GetCurrentState()->id == States::ID::InGame) {
+
+
 	// FPS
 	int fps = GraphicEngine::i().getDevice().getFPS();
 	std::ostringstream title;
 	title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
 	GraphicEngine::i().getDevice().setWindowTitle(title.str());
+	//}
 
 	GUIManager::i().drawAllGuis();
 	sm.renderFrame(engine.getWindow());
