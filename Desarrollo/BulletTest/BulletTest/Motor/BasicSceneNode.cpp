@@ -87,5 +87,5 @@ void BasicSceneNode::setColor(const Color4f & color)
 
 void BasicSceneNode::setVisible(bool visible)
 {
-	//m_node->setVisible(visible);
+	m_node->setVisible(visible);
 }

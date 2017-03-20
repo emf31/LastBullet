@@ -41,8 +41,6 @@ int main() {
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	p1->setScale(Vec3<float>(0.1, 0.1, 0.1));
-	//sm.camaraActiva->addChild(p1);
-	p1->setPosition(Vec3<float>(0.0f, 0.0f, -10.0f));
 
 
 	//contenedor
@@ -147,8 +145,11 @@ int main() {
 
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
-
 		newPos = vecDir *0.3;
+		//p->setPosition(newPos);
+		p1->setOrientation(vecDir);
+		p1->setPosition(sm.camaraActiva->getPosition());
+		p1->updatePosition(newPos);
 
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);
