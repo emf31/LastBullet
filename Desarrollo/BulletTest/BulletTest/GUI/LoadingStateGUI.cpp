@@ -23,7 +23,7 @@ void LoadingStateGUI::inicializar() {
 
 void LoadingStateGUI::update()
 {
-	int a;
+	
 }
 
 void LoadingStateGUI::handleEvent(Event * ev)

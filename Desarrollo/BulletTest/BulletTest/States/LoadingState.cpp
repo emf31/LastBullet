@@ -12,7 +12,7 @@ LoadingState::~LoadingState()
 
 void LoadingState::Inicializar()
 {
-	//loadingStateGUI.inicializar();
+	loadingStateGUI.inicializar();
 	task = new ParalellTask();
 	task->Execute();
 
@@ -28,12 +28,12 @@ void LoadingState::HandleEvent()
 
 	if (Input::i().leftMouseDown()) {
 
-	//loadingStateGUI.injectLeftMouseButton();
+	loadingStateGUI.injectLeftMouseButton();
 
 	}
 	else if (Input::i().leftMouseUp()) {
 
-	//loadingStateGUI.injectLeftMouseButtonUp();
+	loadingStateGUI.injectLeftMouseButtonUp();
 
 	}
 
@@ -42,8 +42,10 @@ void LoadingState::HandleEvent()
 
 void LoadingState::Update(Time timeElapsed)
 {
-	//loadingStateGUI.update();
+	loadingStateGUI.update();
 	std::cout << "Updateando loadingstate" << std::endl;
+	//if(task->mFinishedRunInGame)
+	//task->f1.get();
 }
 
 void LoadingState::Render(float interpolation, Time elapsedTime)
@@ -53,7 +55,7 @@ void LoadingState::Render(float interpolation, Time elapsedTime)
 	float mouseY = (float)Input::i().getMouseY();
 
 	//GUI
-	//loadingStateGUI.injectMousePosition(mouseX, mouseY);
+	loadingStateGUI.injectMousePosition(mouseX, mouseY);
 
 	GraphicEngine::i().renderAll();
 }
