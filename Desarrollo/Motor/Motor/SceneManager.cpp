@@ -79,6 +79,8 @@ void SceneManager::inicializarBuffers()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gPosition"), 0);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gNormal"), 1);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gTextura"), 2);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gTangent"), 3);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBitangent"), 4);
 	// Set up G-Buffer
 	// 3 textures:
 	// 1. Positions (RGB)
@@ -154,6 +156,10 @@ void SceneManager::renderLuces()
 	glBindTexture(GL_TEXTURE_2D, gNormal);
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, gTextura);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, gTangent);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, gBitangent);
 	// Also send light relevant uniforms
 
 	//LUZ SOLAR
