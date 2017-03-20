@@ -22,6 +22,8 @@ public:
 
 	virtual void setOrientation(Vec3<float>& orientation) override;
 
+	virtual void updatePosition(Vec3<float> pos) override { m_node->updatePosition(pos); }
+
 	virtual Vec3<float> getPosition() override;
 	virtual Vec3<float> getRotation() override;
 	virtual Vec3<float> getScale() override;
