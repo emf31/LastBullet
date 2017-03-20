@@ -20,6 +20,8 @@ public:
 	Vec3<float> getVecRight();
 	Vec3<float> getPosition();
 
+	Vec3<float> getVectorDirection() { return m_camera->getVectorDireccion(); }
+	
 	//La camara sigue al nodo que le asignas
 	void asignarEntity(Character* ent);
 	void update();

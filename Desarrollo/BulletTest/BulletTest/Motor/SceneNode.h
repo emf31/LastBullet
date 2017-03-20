@@ -29,6 +29,7 @@ public:
 	virtual void setScale(Vec3<float>& scale) = 0;
 	virtual void setRotationXYZ(Vec3<float>& rot) = 0;
 	virtual void setRotationRightHand(Vec3<float>& rot) = 0;
+	virtual void updatePosition(Vec3<float> pos) = 0;
 
 	virtual Vec3<float> getPosition() = 0;
 	virtual Vec3<float> getRotation() = 0;

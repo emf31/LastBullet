@@ -3,6 +3,7 @@
 #include "../EntityManager.h"
 #include <NetworkManager.h>
 #include <Player.h>
+#include <Camera.h>
 
 Pistola::Pistola(Character* ent) : Weapon(ent)
 {
@@ -29,7 +30,36 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
+	//if (cont == 100) {
+		Camera* cam = GraphicEngine::i().getActiveCamera();
+		Vec3<float> posCamera = cam->getPosition();
+		/*Vec3<float> vecDir = cam->getTarget();
 
+		Vec3<float> direccion = vecDir - posCamera;
+		//Vec3<float> newPos = vecDir * 2.f;
+		//p->setPosition(newPos);
+		//m_nodo->setOrientation(vecDir);
+		direccion.normalise();
+
+		posCamera += direccion * 1.4f;*/
+
+		Vec3<float> pos = m_ent->getRenderState()->getPosition();
+		pos.addY(1.7f);
+		m_renderState.updatePositions(pos);
+
+
+		//m_renderState.updateRotations(cam->getRotation() );
+		//m_nodo->setPosition(pos);
+		//m_nodo->getPosition().display();
+		//m_nodo->updatePosition(newPos);
+		//m_nodo->setVisible(true);
+
+	//	cont = 0;
+	//}
+	//else {
+	//	cont++;
+	//}
+	
 
 	if (equipada) {
 
@@ -64,9 +94,9 @@ void Pistola::handleInput()
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "../media/arma/pistola_diff.png", "../media/arma/pistolaTexturizada.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "assets/pistolaTexturizada.obj");
 	
-	m_nodo->setVisible(false);
+	m_nodo->setVisible(true);
 
 	
 

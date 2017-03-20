@@ -98,9 +98,9 @@ void Player::inicializar()
 
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(rocket);
-	tieneRocketLauncher = true;
-	rocket->setEquipada(true);
+	listaWeapons->insertar(pistola);
+	tienePistola = true;
+	pistola->setEquipada(true);
 	bindWeapon();
 
 	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
