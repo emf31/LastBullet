@@ -15,3 +15,4 @@ newmtl lambert1
 	map_Ka Props\texturasMapa\Window_Diffuse.png
 	map_Kd Props\texturasMapa\Window_Diffuse.png
 	map_Ks Props\texturasMapa\Window_Specular.png
+	map_Kn Props\texturasMapa\Window_Normal.jpg

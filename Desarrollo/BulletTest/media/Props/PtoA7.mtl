@@ -15,3 +15,4 @@ newmtl blinn1
 	map_Ka Props/texturasMapa/PtoA_Diffuse.png
 	map_Kd Props/texturasMapa/PtoA_Diffuse.png
 	map_Ks Props/texturasMapa/PtoA_Specular.png
+	map_Kn Props\texturasMapa\PtoA_Normal.png

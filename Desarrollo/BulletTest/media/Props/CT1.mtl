@@ -15,5 +15,5 @@ newmtl CT2Window
 	map_Ka Props\texturasMapa\ChannelCT2WindowDiffuse.png
 	map_Kd Props\texturasMapa\ChannelCT2WindowDiffuse.png
 	map_Ks Props\texturasMapa\ChannelCT2WindowSpecular.png
-	map_Kn Props\texturasMapa\ctWindowNRM.jpg
+	map_Kn Props\texturasMapa\ChannelCT2WindowNormal.jpg
 	
