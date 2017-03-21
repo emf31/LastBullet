@@ -10,6 +10,9 @@ public:
 	Asalto(Character* ent);
 	~Asalto();
 
+	void* operator new(size_t size) { return  _aligned_malloc(size, 16); }
+	void operator delete(void *p) { _aligned_free(p); }
+
 	virtual void inicializar() override;
 
 	virtual void update(Time elapsedTime) override;
