@@ -103,6 +103,17 @@ void Player::inicializar()
 	pistola->setEquipada(true);
 	bindWeapon();
 
+
+
+	listaWeapons->insertar(sniper);
+	tieneSniper = true;
+
+	listaWeapons->insertar(asalto);
+	tieneAsalto = true;
+
+	listaWeapons->insertar(rocket);
+	tieneRocketLauncher = true;
+
 	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(pistola->getNode());

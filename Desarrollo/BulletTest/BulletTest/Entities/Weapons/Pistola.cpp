@@ -31,36 +31,6 @@ void Pistola::inicializar()
 
 void Pistola::update(Time elapsedTime)
 {
-	//if (cont == 100) {
-		Camera* cam = GraphicEngine::i().getActiveCamera();
-		Vec3<float> posCamera = cam->getPosition();
-		/*Vec3<float> vecDir = cam->getTarget();
-
-		Vec3<float> direccion = vecDir - posCamera;
-		//Vec3<float> newPos = vecDir * 2.f;
-		//p->setPosition(newPos);
-		//m_nodo->setOrientation(vecDir);
-		direccion.normalise();
-
-		posCamera += direccion * 1.4f;*/
-
-		/*Vec3<float> pos = m_ent->getRenderState()->getPosition();
-		pos.addY(3.f);
-		m_renderState.updatePositions(pos);*/
-
-
-		//m_renderState.updateRotations(cam->getRotation() );
-		//m_nodo->setPosition(pos);
-		//m_nodo->getPosition().display();
-		//m_nodo->updatePosition(newPos);
-		//m_nodo->setVisible(true);
-
-	//	cont = 0;
-	//}
-	//else {
-	//	cont++;
-	//}
-	
 
 	if (equipada) {
 
