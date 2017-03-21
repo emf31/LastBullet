@@ -28,6 +28,7 @@ void Pistola::inicializar()
 }
 
 
+
 void Pistola::update(Time elapsedTime)
 {
 	//if (cont == 100) {
@@ -43,9 +44,9 @@ void Pistola::update(Time elapsedTime)
 
 		posCamera += direccion * 1.4f;*/
 
-		Vec3<float> pos = m_ent->getRenderState()->getPosition();
-		pos.addY(1.7f);
-		m_renderState.updatePositions(pos);
+		/*Vec3<float> pos = m_ent->getRenderState()->getPosition();
+		pos.addY(3.f);
+		m_renderState.updatePositions(pos);*/
 
 
 		//m_renderState.updateRotations(cam->getRotation() );
@@ -128,7 +129,7 @@ void Pistola::shoot(const Vec3<float>& target) {
 
 		// posicion de la camara
 		btVector3 start = bt(m_ent->getRenderState()->getPosition());
-		start += btVector3(0.f, 1.7f, 0.f);
+		start += btVector3(0.f, 3.f, 0.f);
 
 		//añadimos un poco de desvio en el arma
 		//start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;

@@ -74,7 +74,7 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/ArmyPilot.b3d");
 	m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
 	m_nodo->setTexture("../media/m4tex.png", 2);
@@ -97,8 +97,8 @@ void Enemy::cargarContenido()
 
 	m_animState = quieto;
 
-	radius = 1.2f;
-	height = 7.3f;
+	radius = 0.5f;
+	height = 3.f;
 	mass = 1000.f;
 
 
@@ -131,9 +131,11 @@ void Enemy::setPosition(const Vec3<float>& pos)
 
 
 void Enemy::updateEnemigo(Vec3<float> pos) {
-	m_renderState.updatePositions(pos);
+	Vec3<float> aux = pos;
+	aux.setY(aux.getY() - 0.5f);
+	m_renderState.updatePositions(aux);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
-	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2) + radius, pos.getZ()));
+	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2)/* + radius*/ , pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
 
 }

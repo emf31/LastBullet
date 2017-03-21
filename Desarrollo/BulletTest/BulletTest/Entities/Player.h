@@ -105,6 +105,10 @@ public:
 
 	bool isShooting;
 
+
+	void updateCurrentWeaponPosition() {
+		listaWeapons->valorActual()->updatePositionAndRotation();
+	}
 	
 private:
 	
