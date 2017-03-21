@@ -15,3 +15,4 @@ newmtl Material__3
 	map_Ka Props\Contenedor_Diffuse.png
 	map_Kd Props\Contenedor_Diffuse.png
 	map_Ks Props\Contenedor_Specular.png
+	map_Kn Props\Contenedor_NRM.jpg

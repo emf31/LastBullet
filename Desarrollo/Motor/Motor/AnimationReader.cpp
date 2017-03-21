@@ -1,5 +1,5 @@
-#include <AnimationReader.h>
-#include <dirent.h>
+#include "AnimationReader.h"
+#include "dirent.h"
 
 
 void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, std::vector<TMeshGroup*>& vector)

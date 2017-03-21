@@ -303,12 +303,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationReader.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="TAnimation.cpp" />
     <ClCompile Include="TCamera.cpp" />
     <ClCompile Include="TEntity.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -323,12 +325,14 @@
     <ClCompile Include="TTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationReader.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="TAnimation.h" />
     <ClInclude Include="TCamera.h" />
     <ClInclude Include="TEntity.h" />
     <ClInclude Include="Texture.h" />

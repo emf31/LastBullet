@@ -3,8 +3,8 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd WindowTestDiff.jpg
-map_Ka WindowTestDiff_OCC.jpg
+map_Kd WindowTestDiff.png
+map_Ka WindowTestDiff.png
 Ni 1.00
 Ks 0.00 0.00 0.00
 map_Ks WindowTestSpec.png

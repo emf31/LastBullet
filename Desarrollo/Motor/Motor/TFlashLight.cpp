@@ -4,7 +4,7 @@ TFlashLight::TFlashLight(Vec3<float> pos, Vec3<float> direccion, float radioIn, 
 {
 	
 	m_posicion = pos;
-	m_direccion = direccion;
+	m_direccion = Vec3<float>(0.0f, 0.0f, -1.0f);
 	m_radioInterior = radioIn;
 	m_radioExterior = radioEx;
 }
@@ -37,8 +37,12 @@ Vec3<float> TFlashLight::getPosition()
 
 void TFlashLight::setDirection(Vec3<float> dir)
 {
-	m_direccion = dir;
-	transRotacion->setRotationDirection(dir);
+	//m_direccion = dir;
+	transRotacion->setRotationY(dir.getY());
+	transRotacion->setRotationX(dir.getX());
+	transRotacion->setRotationZ(dir.getZ());
+
+	updateVectorDireccion();
 }
 
 void TFlashLight::setRadioInterior(float radio)
@@ -49,6 +53,17 @@ void TFlashLight::setRadioInterior(float radio)
 void TFlashLight::setRadioExterior(float radio)
 {
 	m_radioExterior = radio;
+}
+
+void TFlashLight::updateVectorDireccion()
+{
+	glm::vec4 destino = glm::vec4(0, 0, -1, 1);
+	glm::mat4 rot = transRotacion->getRotationMatrix();
+	rot = glm::inverse(rot);
+	destino = destino* rot;
+	destino = glm::normalize(destino);
+	m_direccion = Vec3<float>(destino.x, destino.y, destino.z);
+
 }
 
 Vec3<float> TFlashLight::getDireccion()
