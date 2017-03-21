@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Engine/ResourceManager.h>
-#include <Engine/TMeshGroup.h>
+#include "ResourceManager.h"
+#include "TMeshGroup.h"
 #include <vector>
 
 class AnimationReader {
