@@ -53,7 +53,7 @@ void MapLoader::readMap(const std::string & name)
 			Vec3<float> pos =					Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
 			Vec3<float> rot =					Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
 			Vec3<float> es =					Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
-			Vec3<float> centerCollider =		Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]);
+			Vec3<float> centerCollider =		Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]*-1);
 			Vec3<float> sizeColllider =			Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
 			float mass =						obj["masa"];
 			std::string nameMesh =				obj["nombre"];

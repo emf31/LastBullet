@@ -97,7 +97,6 @@ public class Exporter : MonoBehaviour
                         BoxCollider col = g.GetComponentInChildren<BoxCollider>();
                         if (col != null)
                         {
-                           
                             objeto.colliderX = col.center.x;
                             objeto.colliderY = col.center.y;
                             objeto.colliderZ = col.center.z;
