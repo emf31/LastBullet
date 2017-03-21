@@ -31,6 +31,16 @@ public:
 
 	virtual void shoot(const Vec3<float>& target);
 
+	virtual void updatePositionAndRotation() override {
+
+		Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();
+		Vec3<float> newPos = vecDir * 0.3f;
+		m_nodo->setOrientation(vecDir);
+		m_nodo->setPosition(GraphicEngine::i().getActiveCamera()->getPosition());
+		m_nodo->updatePosition(newPos);
+
+	}
+
 
 	virtual void resetAmmoTotal() { numCargadores = numCargadoresRocket; }
 

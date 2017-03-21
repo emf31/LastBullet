@@ -163,7 +163,12 @@ void InGame::Render(float interpolation, Time elapsedTime)
 {
 	EntityManager::i().updateRender(interpolation);
 
+	
+
 	GraphicEngine::i().updateCamera();
+
+	Player* player = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	player->updateCurrentWeaponPosition();
 
 	//GUI
 	debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);

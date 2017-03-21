@@ -122,7 +122,7 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	btCapsuleShape* m_pCollisionShape = new btCapsuleShape(radius, height);
 	m_pCollisionShape->setUserIndex(bodyPart::Body::CUERPO);
 
-	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(1.f, 1.f, 1.f));
+	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(1.5f, 1.5f, 1.5f));
 	m_CollisionBox->setUserIndex(bodyPart::Body::EXTERNA);
 
 	btTransform t;

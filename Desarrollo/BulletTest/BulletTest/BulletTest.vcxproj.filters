@@ -322,6 +322,8 @@
     <ClCompile Include="GUI\ParalellTask.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\EntActive.cpp" />
+    <ClCompile Include="Entities\EntPassive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -750,6 +752,8 @@
     <ClInclude Include="GUI\ParalellTask.h">
       <Filter>Headers\Otros</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\EntActive.h" />
+    <ClInclude Include="Entities\EntPassive.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -196,14 +196,15 @@ void Player::cargarContenido()
 	//Creas el nodo(grafico)
 
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.03f, 0.03f, 0.03f), "", "assets/nanosuit.obj");
-
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "assets/nanosuit.obj");
+	ResourceManager::i().getMesh("../media/bullet.obj");
+	ResourceManager::i().getMesh("../media/bullets/rocketbullet.obj");
 	m_nodo->setVisible(false);
 
 	
 
-	radius = 0.35f;
-	height = 1.7f;
+	radius = 0.5f;
+	height = 3.f;
 	mass = 70.f;
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);

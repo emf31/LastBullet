@@ -69,7 +69,7 @@ public:
 	virtual void recargar();
 
 
-
+	virtual void updatePositionAndRotation() = 0;
 protected:
 	Time cadencia;
 	Clock relojCadencia;
