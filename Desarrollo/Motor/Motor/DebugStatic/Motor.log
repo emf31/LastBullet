@@ -1,34 +1,19 @@
-﻿  TTransform.cpp
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(134): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(138): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
-  TSunLight.cpp
-  TPointLight.cpp
-  TNode.cpp
-  TModel.cpp
-  TMeshGroup.cpp
-  TMesh.cpp
-  TLuz.cpp
-  TFlashLight.cpp
-  Texture.cpp
-  TEntity.cpp
-  TCamera.cpp
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\tcamera.cpp(4): warning C4005: 'PI': redefinición de macro
-  d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\ttransform.h(10): note: vea la definición anterior de 'PI'
-  Shader.cpp
-  SceneManager.cpp
-  ResourceManager.cpp
-  main.cpp
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\main.cpp(148): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-  Input.cpp
-  EngineDevice.cpp
-  Generando código...
-     Creando biblioteca D:\4║curso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\Motor.lib y objeto D:\4║curso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\Motor.exp
+﻿  main.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(157): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+     Creando biblioteca E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib y objeto E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-glew_d.lib(glew.obj) : warning LNK4099: no se encontr¾ PDB 'glew_static.pdb' con 'glew_d.lib(glew.obj)' o en 'D:\4║curso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\glew_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
-  Motor.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
-  Motor.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)
+TSunLight.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'TSunLight.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+TPointLight.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'TPointLight.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+TMesh.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'TMesh.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Texture.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'Texture.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+TEntity.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'TEntity.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Shader.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'Shader.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+ResourceManager.obj : warning LNK4099: no se encontr¾ PDB 'vc140.pdb' con 'ResourceManager.obj' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\vc140.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontr¾ PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontr¾ PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontr¾ PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontr¾ PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+glew_d.lib(glew.obj) : warning LNK4099: no se encontr¾ PDB 'glew_static.pdb' con 'glew_d.lib(glew.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\glew_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)

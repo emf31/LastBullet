@@ -33,8 +33,8 @@ int main() {
 	TModel* window2 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
-	window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
-	window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
+	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
+	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
 	
 
 
@@ -77,17 +77,26 @@ int main() {
 
 
 	//bombilla
-	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
-	luz->setColor(1.0f, 0.5f, 2.f);
-	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f));
-	luz2->setColor(0.0f, 1.f, 0.5f);
-	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
-	luz3->setColor(1.0f, 0.3f, 0.3f);
-	luz3->setIntensidadAmbiente(0.5f);
+	//TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
+	//luz->setColor(1.0f, 0.5f, 2.f);
+	//TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f));
+	//luz2->setColor(0.0f, 1.f, 0.5f);
+	//TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
+	//luz3->setColor(1.0f, 0.3f, 0.3f);
+	//luz3->setIntensidadAmbiente(0.5f);
 
 	//linterna
-	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(-5.0f, 0.0f, 8.0f), Vec3<float>(0.5f, 0.0f, -1.0f));
+	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 0.0f, 0.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
+	//linterna
+	TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
+	flash1->setColor(1.0f, 1.0f, 1.0f);
+	//linterna
+	TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
+	flash2->setColor(0.0f, 0.0f, 1.0f);
+	//linterna
+	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 270.0f, 0.0f));
+	flash3->setColor(1.0f, 0.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
 
 
