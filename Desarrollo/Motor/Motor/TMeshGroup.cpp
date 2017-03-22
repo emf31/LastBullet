@@ -84,18 +84,20 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 		vector.y = mesh->mNormals[i].y;
 		vector.z = mesh->mNormals[i].z;
 		vertex.Normal = vector;
-
-		//tangentes
-		vector.x = mesh->mTangents[i].x;
-		vector.y = mesh->mTangents[i].y;
-		vector.z = mesh->mTangents[i].z;
-		vertex.Tangent = vector;
-		//bitangentes
-		vector.x = mesh->mBitangents[i].x;
-		vector.y = mesh->mBitangents[i].y;
-		vector.z = mesh->mBitangents[i].z;
-		vertex.Bitangent = vector;
-
+		if (mesh->mTangents != NULL) {
+			//tangentes
+			vector.x = mesh->mTangents[i].x;
+			vector.y = mesh->mTangents[i].y;
+			vector.z = mesh->mTangents[i].z;
+			vertex.Tangent = vector;
+		}
+		if (mesh->mBitangents != NULL) {
+			//bitangentes
+			vector.x = mesh->mBitangents[i].x;
+			vector.y = mesh->mBitangents[i].y;
+			vector.z = mesh->mBitangents[i].z;
+			vertex.Bitangent = vector;
+		}
 		// Coordenadas de textura
 		if (mesh->mTextureCoords[0]) // Tiene coordenadas de texturas?
 		{

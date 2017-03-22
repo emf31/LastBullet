@@ -243,6 +243,48 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	return model;
 }
 
+TAnimation * SceneManager::crearNodoAnimacion(const std::string & directory)
+{
+	TNode * nuevoNodoAnimacion;
+	TNode * nuevoNodoRotacion;
+	TNode * nuevoNodoEscalado;
+	TNode * nuevoNodoTraslacion;
+
+	TAnimation* animation = new TAnimation(directory);
+
+	//creamos los nodos malla y los nodos transformaciones necesaria para esta
+	int id = animation->getID();
+
+	//rotacion antes de traslacion
+	nuevoNodoRotacion = crearNodoRotacion(scene, id);
+	nuevoNodoEscalado = crearNodoEscalado(nuevoNodoRotacion, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado, id);
+	nuevoNodoAnimacion = new TNode(id, nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	scene->addChild(nuevoNodoRotacion);
+	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
+	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(nuevoNodoAnimacion);
+
+
+
+
+	//asignamos matrices de transformacion
+	animation->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));
+	animation->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
+	animation->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	animation->setMiNodo(nuevoNodoAnimacion);
+
+	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
+	nuevoNodoAnimacion->setEntity(animation);
+	nuevoNodoAnimacion->setType(T_ANIMATION);
+	//nuevoNodoMalla->setModel(model);
+	//nuevoNodoMalla->getEntity()->setModel();
+
+	return animation;
+}
+
 TNode * SceneManager::crearNodoTransformacion(int entityID)
 {
 	//DUDA aqui tendriamos que tener tambien algun identificador en el nodo no? porque yo estoy creando 3 nodos de transformacion pero no se cual es cual.
