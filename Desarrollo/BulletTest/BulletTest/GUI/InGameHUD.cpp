@@ -8,6 +8,7 @@ void InGameHUD::inicializar() {
 	init("../GUI", "InGameHUD");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
+	loadScheme("LastBulletHUD.scheme");
 	loadLayout("LastBulletHUD.layout");
 
 
@@ -15,6 +16,9 @@ void InGameHUD::inicializar() {
 	LabelArma = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 	LabelMunicionTotal = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(4));
+	m_ranking = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(81));
+	m_kills = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(82));
+	m_deaths = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(83));
 
 	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(54));
 
@@ -52,6 +56,7 @@ void InGameHUD::update() {
 	updateLabelArma();
 	updateLabelMunicion();
 	updateLabelMunicionTotal();
+
 
 	updateRelojes();
 
@@ -119,8 +124,7 @@ void InGameHUD::updateLabelVida() {
 	 oss << kills;
 	 switch (player) {
 	 case 1:
-		 player1.bajas->setText(oss.str());
-		 
+		 player1.bajas->setText(oss.str());	 
 		 break;
 
 	 case 2:
@@ -135,6 +139,8 @@ void InGameHUD::updateLabelVida() {
 		 player4.bajas->setText(oss.str());
 		 break;
 	 }
+	 
+	
  }
 
  void InGameHUD::setPlayerDeaths(int player, int deaths) {
@@ -183,6 +189,27 @@ void InGameHUD::updateLabelVida() {
 		 player4.puntos->setText(oss.str());
 		 break;
 	 }
+ }
+ 
+ void InGameHUD::setRanking(int rank)
+ {
+	 std::ostringstream oss;
+	 oss << rank;
+	 m_ranking->setText(oss.str());
+ }
+
+ void InGameHUD::setKills(int kills)
+ {
+	 std::ostringstream oss;
+	 oss << kills;
+	 m_kills->setText(oss.str());
+ }
+
+ void InGameHUD::setDeaths(int death)
+ {
+	 std::ostringstream oss;
+	 oss << death;
+	 m_deaths->setText(oss.str());
  }
 
  void InGameHUD::setPlayerName(int player, const std::string & nombre) {

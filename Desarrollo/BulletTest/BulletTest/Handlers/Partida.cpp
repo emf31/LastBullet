@@ -37,6 +37,7 @@ void Partida::handleEvent(Event* e)
 			break;
 		}
 
+
 		case E_AUMENTA_MUERTE: {
 			MuerteEvent* m_ev = static_cast<MuerteEvent*>(e);
 			aumentaMuerte(m_ev->m_guid);
@@ -60,25 +61,6 @@ void Partida::handleEvent(Event* e)
 void Partida::muestraTabla()
 {
 	//queremos hacer una copia asi que no hacemos puntero aqui
-	std::unordered_map <unsigned long, TFilaTabla> aux;
-	std::vector<TFilaTabla> ordenado;
-	int max = -1;
-	RakNet::RakNetGUID guid;
-	TFilaTabla fila;
-	aux = m_tabla;
-	while (aux.size() > 0) {
-		for (auto i = aux.begin(); i != aux.end(); ++i) {
-			if (i->second.kills > max) {
-				max = i->second.kills;
-				guid = i->second.guid;
-			}
-
-		}
-		ordenado.push_back(aux.find(RakNet::RakNetGUID::ToUint32(guid))->second);
-		aux.erase(RakNet::RakNetGUID::ToUint32(guid));
-		max = -1;
-	}
-
 	int a = 1;
 	for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
 
@@ -116,6 +98,44 @@ void Partida::muestraTabla()
 		}
 		a++;
 	}
+}
+
+void Partida::muestraMarcador()
+{
+	ordenaTabla();
+	int rank = 1;
+	for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
+		if (i->guid == EntityManager::i().getEntity(PLAYER)->getGuid()) {
+			ingame->setKills(i->kills);
+			ingame->setDeaths(i->deaths);
+			ingame->setRanking(rank);
+		}
+		rank++;
+	}
+	//a = 0;
+}
+
+void Partida::ordenaTabla()
+{
+	std::unordered_map <unsigned long, TFilaTabla> aux;
+	int max = -1;
+	RakNet::RakNetGUID guid;
+	TFilaTabla fila;
+	aux = m_tabla;
+	ordenado.clear();
+	while (aux.size() > 0) {
+		for (auto i = aux.begin(); i != aux.end(); ++i) {
+			if (i->second.kills > max) {
+				max = i->second.kills;
+				guid = i->second.guid;
+			}
+
+		}
+		ordenado.push_back(aux.find(RakNet::RakNetGUID::ToUint32(guid))->second);
+		aux.erase(RakNet::RakNetGUID::ToUint32(guid));
+		max = -1;
+	}
+
 }
 
 void Partida::nuevoPlayer(TFilaTabla fila) {

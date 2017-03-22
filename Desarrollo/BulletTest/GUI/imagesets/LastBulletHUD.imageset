@@ -1,0 +1,5 @@
+<Imageset autoScaled="vertical" imagefile="LastBulletHUD.png" name="LastBulletHUD" nativeHorzRes="1280" nativeVertRes="720" version="2">
+    <Image height="140" name="HUD_abajo_iz" width="344" xPos="117" yPos="899" />
+    <Image height="142" name="HUD_abajo_der" width="356" xPos="1467" yPos="887" />
+    <Image height="85" name="HUD_arriba" width="452" xPos="754" yPos="31" />
+</Imageset>
