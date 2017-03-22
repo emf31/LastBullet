@@ -511,6 +511,8 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			PlayerEvent* evento = new PlayerEvent(nuevaFila);
 
+			World::i().getPartida()->muestraMarcador();
+
 			EventSystem::i().dispatchNow(evento);
 
 		}

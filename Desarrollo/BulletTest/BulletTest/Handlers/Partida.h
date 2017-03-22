@@ -24,6 +24,10 @@ public:
 
 	void muestraTabla();
 
+	void muestraMarcador();
+
+	void ordenaTabla();
+
 	const std::string& getCurrentMap() const { return gameInfo.map; }
 
 private:
@@ -39,4 +43,6 @@ private:
 	InGameHUD* ingame;
 
 	TGameInfo gameInfo;
+
+	std::vector<TFilaTabla> ordenado;
 };
