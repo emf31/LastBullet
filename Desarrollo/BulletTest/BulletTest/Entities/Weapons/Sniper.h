@@ -37,7 +37,7 @@ public:
 		Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();
 		Vec3<float> newPos = vecDir * 0.3f;
 		m_nodo->setOrientation(vecDir);
-		m_nodo->setPosition(m_ent->getRenderPosition());
+		m_nodo->setPosition(GraphicEngine::i().getActiveCamera()->getPosition());
 		m_nodo->updatePosition(newPos);
 
 	}

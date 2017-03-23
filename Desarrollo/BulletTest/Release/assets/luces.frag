@@ -36,6 +36,8 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos, v
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
 uniform sampler2D gTextura;
+uniform sampler2D gTangent;
+uniform sampler2D gBitangent;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
@@ -78,7 +80,7 @@ void main()
     //*********************************LUZ LINTERNA*****************************************
     for(int i=0;i<num_flashlight;i++){
        colorFinal+=calcularFlashLight(flashlight[i],Normal,viewDir,FragPos,Diffuse,Specular);
-        int a;
+        
     }
 
     if(draw_mode == 1)
@@ -116,8 +118,8 @@ vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
 
 //valores para que la luz deje de afectar cuando esta a una distancia de 100
 float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
-float linear=0.09; //la cantidad de atenueacion segun las distancia
-float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
+float linear=0.05; //la cantidad de atenueacion segun las distancia
+float quadratic=0.015; //cantidad de atenuacion segun la distancia al cuadrado
 
     //LUZ AMBIENTE
     vec3 ambient = light.ambiente * Diffuse;
@@ -168,8 +170,8 @@ float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,vec3 Diffuse, float Specular){
     //valores para que la luz deje de afectar cuando esta a una distancia de 100
     float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
-    float linear=0.09; //la cantidad de atenueacion segun las distancia
-    float quadratic=0.032; //cantidad de atenuacion segun la distancia al cuadrado
+    float linear=0.005; //la cantidad de atenueacion segun las distancia
+    float quadratic=0.0001; //cantidad de atenuacion segun la distancia al cuadrado
     vec3 colorF=vec3(0.0f,0.0f,0.0f);
 
      vec3 lightDir = normalize(light.position - FragPos);

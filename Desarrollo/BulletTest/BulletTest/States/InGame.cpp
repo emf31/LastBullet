@@ -102,11 +102,11 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_3)) {
 
-		debugMenu.debugInput = !debugMenu.debugInput;
+		/*debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
-		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);*/
 
 
 	}

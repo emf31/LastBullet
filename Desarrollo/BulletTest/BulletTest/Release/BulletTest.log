@@ -1,67 +1,5 @@
-﻿  Enemy.cpp
-  Enemy_Bot.cpp
-  Granada.cpp
-Entities\Granada.cpp(24): warning C4305: '=': truncamiento de 'double' a 'float'
-  LifeObject.cpp
-  Player.cpp
-Entities\Player.cpp(223): warning C4305: '=': truncamiento de 'double' a 'float'
-Entities\Player.cpp(225): warning C4305: '=': truncamiento de 'double' a 'float'
-  RocketBullet.cpp
-Entities\RocketBullet.cpp(59): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  AsaltoDrop.cpp
-  PistolaDrop.cpp
-  RocketLauncherDrop.cpp
-  SniperDrop.cpp
-  WeaponDrop.cpp
-  Asalto.cpp
-  Pistola.cpp
-  RocketLauncher.cpp
-  Sniper.cpp
-  DebugMenuGUI.cpp
-  InGameHUD.cpp
-  LoadingStateGUI.cpp
-  MenuGUI.cpp
-  Game.cpp
-  Generando código...
-  Compilando...
-  InputHandler.cpp
-  Partida.cpp
-  PathFollow.cpp
-  SensoryMemory.cpp
-  BuscarVida.cpp
-  BuscarWeapon.cpp
-  Disparar.cpp
-  Patrullar.cpp
-  Perseguir.cpp
-  TargetingSystem.cpp
-  WeaponSystem.cpp
-  PathPlanner.cpp
-  Camera.cpp
-  CameraShake.cpp
-  GraphicEngine.cpp
-  GunRecoil.cpp
-  MapLoader.cpp
-Motor\MapLoader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-Motor\MapLoader.cpp(183): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(194): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(205): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
-  NetBot.cpp
-  NetObject.cpp
-  NetPlayer.cpp
-  Generando código...
-  Compilando...
-  NetworkDebugger.cpp
-  NetworkManager.cpp
-  LifeComponent.cpp
-  Lista.cpp
-  InGame.cpp
-  Menu.cpp
-  StateFactory.cpp
-  World.cpp
-  Generando código...
-     Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+﻿  PhysicsEngine.cpp
+     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
   0 of 2365 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
@@ -124,25 +62,5 @@ CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símb
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexSubImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
-Motor.lib(EngineDevice.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(EngineDevice.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(ResourceManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(ResourceManager.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(Input.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Input.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TCamera.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TCamera.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TEntity.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TEntity.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TModel.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TModel.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TLuz.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TLuz.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(SceneManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(SceneManager.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(Shader.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Shader.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TMeshGroup.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMeshGroup.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TTransform.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TTransform.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TNode.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TNode.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TPointLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TPointLight.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TFlashLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TFlashLight.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TSunLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TSunLight.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-Motor.lib(TMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMesh.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
