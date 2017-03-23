@@ -304,6 +304,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationReader.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -315,6 +316,7 @@
     <ClCompile Include="TEntity.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TFlashLight.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="TLuz.cpp" />
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshGroup.cpp" />
@@ -323,9 +325,11 @@
     <ClCompile Include="TPointLight.cpp" />
     <ClCompile Include="TSunLight.cpp" />
     <ClCompile Include="TTransform.cpp" />
+    <ClCompile Include="Win32\ClockImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationReader.h" />
+    <ClInclude Include="Clock.hpp" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="Input.h" />
@@ -337,6 +341,7 @@
     <ClInclude Include="TEntity.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TFlashLight.h" />
+    <ClInclude Include="Time.hpp" />
     <ClInclude Include="TLuz.h" />
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshGroup.h" />
@@ -346,6 +351,7 @@
     <ClInclude Include="TSunLight.h" />
     <ClInclude Include="TTransform.h" />
     <ClInclude Include="vec3.hpp" />
+    <ClInclude Include="Win32\ClockImpl.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

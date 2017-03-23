@@ -2,6 +2,8 @@
 #include "TMeshGroup.h"
 #include "TTransform.h"
 #include "AnimationReader.h"
+#include "Clock.hpp"
+
 
 class TAnimation : public TEntity {
 
@@ -16,7 +18,7 @@ public:
 
 	bool setAnimation(const std::string& animName, int desde, int hasta);
 	void setCurrentAnimation(const std::string& animName);
-	void selectCurrentFrame();
+	void setFrameTime(Time time);
 
 	void setPosition(Vec3<float> pos);
 	void updatePosition(Vec3<float> pos);
@@ -72,6 +74,10 @@ private:
 	std::unordered_map<std::string, std::vector<TMeshGroup*>> animMap;
 	int numAnims;
 	int currentFrame;
+	Time timeFrame;
+	Clock currentTime;
+	void selectCurrentFrame();
+
 
 	TTransform* transRotacion;
 	TTransform* transEscalado;

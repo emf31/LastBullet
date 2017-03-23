@@ -142,6 +142,7 @@ void InGame::HandleEvent()
 
 void InGame::Update(Time timeElapsed)
 {
+
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
 
@@ -151,6 +152,8 @@ void InGame::Update(Time timeElapsed)
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
+
+	World::i().getPartida()->muestraMarcador();
 
 	MessageHandler::i().update();
 

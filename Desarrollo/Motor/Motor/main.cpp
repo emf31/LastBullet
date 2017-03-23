@@ -66,14 +66,20 @@ int main() {
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
 
 
-
+	//animacion
+	TAnimation* pruebaAnim = sm.crearNodoAnimacion("assets/personaje3");
+	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	pruebaAnim->setAnimation("idle",0,32);
+	pruebaAnim->setCurrentAnimation("idle");
+	//pruebaAnim->setFrameTime(seconds(2.0));
 
 
 	//*******LUCES*******
 
 	//sol
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-	//sol->setIntensidadAmbiente(0.8);
+	sol->setIntensidadAmbiente(0.5);
 
 
 	//bombilla

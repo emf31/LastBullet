@@ -41,6 +41,13 @@ public:
 
 	void setPlayerPoints(int player, int points);
 
+	void setRanking(int rank);
+
+	void setKills(int kills);
+
+	void setDeaths(int death);
+
+
 	void updateRelojes();
 
 	void updateApuntando();
@@ -70,7 +77,9 @@ private:
 
 	CEGUI::DefaultWindow* windowTabla;
 
-	
+	CEGUI::DefaultWindow* m_ranking;
+	CEGUI::DefaultWindow* m_kills;
+	CEGUI::DefaultWindow* m_deaths;
 
 	Player *p;
 

@@ -8,6 +8,7 @@ TAnimation::TAnimation(const std::string & directory): sm(SceneManager::i())
 	visible = true;
 	numAnims = 0;
 	currentFrame = 0;
+	timeFrame = seconds(0.175);
 }
 
 TAnimation::~TAnimation()
@@ -17,11 +18,12 @@ TAnimation::~TAnimation()
 bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta)
 {
 	int tam = hasta - desde;
-	if (tam < 0 || (tam + numAnims > vectorModelos.size())) {
+	if (tam < 0 || (tam + numAnims >= vectorModelos.size())) {
+		std::cout << "error, estas intentando poner mas animaciones que obj" << std::endl;
 		return false;
 	}
 	std::vector<TMeshGroup*> animacion;
-	for (int i = desde; i < hasta; i++) {
+	for (int i = desde; i <= hasta; i++) {
 		animacion.push_back(vectorModelos[i]);
 	}
 
@@ -36,17 +38,31 @@ bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta)
 
 void TAnimation::setCurrentAnimation(const std::string & animName)
 {
+	//TODO mostrar mensaje de error si no encuentra la animacion que le pasas
 	currentAnimation = animMap[animName];
 	currentFrame = 0;
+	currentTime.restart();
 }
 
+
+
 void TAnimation::selectCurrentFrame()
-{
-	//TODO HACER UN SETANIMTIME o algo asi para que no cambie en cada frame sino que cambie de un modelo a otro cada cierto tiempo
-	currentFrame++;
-	if (currentFrame >= currentAnimation.size()) {
-		currentFrame = 0;
+{	
+
+	if (currentTime.getElapsedTime().asMilliseconds() > timeFrame.asMilliseconds()) {
+		
+		currentFrame++;
+		currentTime.restart();
+		if (currentFrame >= currentAnimation.size()) {
+			currentFrame = 0;
+		}
 	}
+
+}
+
+void TAnimation::setFrameTime(Time time)
+{
+	timeFrame = time;
 }
 
 void TAnimation::beginDraw() {
