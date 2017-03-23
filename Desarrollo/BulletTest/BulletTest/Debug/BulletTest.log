@@ -1,66 +1,20 @@
-﻿  MapLoader.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(183): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(194): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(205): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+﻿  InGame.cpp
+  NetPlayer.cpp
   GraphicEngine.cpp
+  Partida.cpp
+  InGameHUD.cpp
+  Pistola.cpp
+  Player.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\entities\player.cpp(223): warning C4305: '=': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\entities\player.cpp(225): warning C4305: '=': truncamiento de 'double' a 'float'
   Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
+  Compilando...
   World.cpp
   StateFactory.cpp
-  Menu.cpp
-  LoadingState.cpp
-  InGame.cpp
-  Lista.cpp
-  LifeComponent.cpp
-  DebugMarks.cpp
-  NetworkManager.cpp
-  NetworkDebugger.cpp
-  NetPlayer.cpp
-  NetObject.cpp
-  NetBot.cpp
-  PhysicsEngine.cpp
-  GunRecoil.cpp
-  CameraShake.cpp
-  Camera.cpp
-  BasicSceneNode.cpp
-  PathPlanner.cpp
-  WeaponSystem.cpp
-  TargetingSystem.cpp
-  Perseguir.cpp
-  Patrullar.cpp
-  Disparar.cpp
-  BuscarWeapon.cpp
-  BuscarVida.cpp
-  SensoryMemory.cpp
-  PathFollow.cpp
-  Partida.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
   InputHandler.cpp
   Game.cpp
-  MenuGUI.cpp
-  LoadingStateGUI.cpp
-  InGameHUD.cpp
-  DebugMenuGUI.cpp
-  Weapon.cpp
-  Sniper.cpp
-  RocketLauncher.cpp
-  Pistola.cpp
-  Asalto.cpp
-  WeaponDrop.cpp
-  SniperDrop.cpp
-  RocketLauncherDrop.cpp
-  PistolaDrop.cpp
-  AsaltoDrop.cpp
-  RocketBulletEnemy.cpp
-  RocketBullet.cpp
-  Player.cpp
-  LifeObject.cpp
-  GunBullet.cpp
-  Granada.cpp
-  Enemy_Bot.cpp
-  Enemy.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'

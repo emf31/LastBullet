@@ -91,8 +91,28 @@ int main() {
 	//luz3->setColor(1.0f, 0.3f, 0.3f);
 	//luz3->setIntensidadAmbiente(0.5f);
 
+
+	//personaje
+	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+	////personaje
+	//TModel* l2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	//l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	//l2->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	////personaje
+	//TModel* l3 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	//l3->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	//l3->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	////personaje
+	//TModel* l4 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	//l4->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	//l4->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+
+
 	//linterna
-	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 0.0f, 0.0f));
+	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 0.0f, 0.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
 	//linterna
 	TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
@@ -101,7 +121,7 @@ int main() {
 	TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
 	flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
-	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 270.0f, 0.0f));
+	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
 	flash3->setColor(1.0f, 0.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
 
