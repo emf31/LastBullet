@@ -19,6 +19,8 @@ void InGameHUD::inicializar() {
 	m_ranking = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(81));
 	m_kills = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(82));
 	m_deaths = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(83));
+	ProgressBarVida = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(78));
+	ProgressBarMunicion = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(79));
 
 	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(54));
 
@@ -56,6 +58,8 @@ void InGameHUD::update() {
 	updateLabelArma();
 	updateLabelMunicion();
 	updateLabelMunicionTotal();
+	updateProgressBarVida();
+	updateProgressBarMunicion();
 
 
 	updateRelojes();
@@ -210,6 +214,16 @@ void InGameHUD::updateLabelVida() {
 	 std::ostringstream oss;
 	 oss << death;
 	 m_deaths->setText(oss.str());
+ }
+
+ void InGameHUD::updateProgressBarVida()
+ {
+	 ProgressBarVida->setProgress(p->getVida() / 100);
+ }
+
+ void InGameHUD::updateProgressBarMunicion()
+ {
+	 ProgressBarMunicion->setProgress((float)p->getAmmoActual() / (float)p->getCargadorActual());
  }
 
  void InGameHUD::setPlayerName(int player, const std::string & nombre) {

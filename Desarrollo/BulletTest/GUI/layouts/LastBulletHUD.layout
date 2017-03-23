@@ -183,10 +183,11 @@
         </Window>
         <Window type="Generic/Image" name="Scope" >
             <Property name="ID" value="77" />
-            <Property name="Area" value="{{0,-1},{0,1},{0,1307},{0,719}}" />
+            <Property name="Area" value="{{0,-2},{0,1},{0,1306},{0,719}}" />
             <Property name="Image" value="AlfiskoSkin/scope" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="Visible" value="false" />
+            <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="Generic/Image" name="Image2" >
             <Property name="Area" value="{{0,102},{0,574},{0,352},{0,674}}" />
@@ -205,31 +206,36 @@
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label6" >
             <Property name="ID" value="2" />
-            <Property name="Area" value="{{0.0859375,923},{0.791667,28},{0.0859375,1051},{0.791667,60}}" />
+            <Property name="Area" value="{{0.0859375,967},{0.791667,28},{0.0859375,1061},{0.791667,45}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Rotation" value="w:0.984808 x:0 y:0.173648 z:0" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
             <Property name="NormalTextColour" value="FF000000" />
+            <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label7" >
             <Property name="ID" value="3" />
-            <Property name="Area" value="{{0.0859375,864},{0.854167,-5},{0.0859375,992},{0.854167,27}}" />
+            <Property name="Area" value="{{0.0859375,988},{0.854167,5},{0.0859375,1045},{0.854167,28}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Rotation" value="w:0.984808 x:0 y:0.173648 z:0" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
             <Property name="NormalTextColour" value="FF000000" />
+            <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label8" >
             <Property name="ID" value="4" />
-            <Property name="Area" value="{{0.0859375,949},{0.916667,-43},{0.0859375,1077},{0.916667,-11}}" />
+            <Property name="Area" value="{{0.0859375,867},{0.916667,-75},{0.0859375,902},{0.916667,-45}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
             <Property name="NormalTextColour" value="FF000000" />
+            <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label5" >
             <Property name="ID" value="1" />
-            <Property name="Area" value="{{0.0859375,52},{0.736111,76},{0.0859375,180},{0.736111,108}}" />
+            <Property name="Area" value="{{0.0859375,21},{0.736111,79},{0.0859375,65},{0.736111,112}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
@@ -249,6 +255,24 @@
             <Property name="ID" value="83" />
             <Property name="Area" value="{{0,732},{0,25},{0,772},{0,57}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar" >
+            <Property name="ID" value="78" />
+            <Property name="Area" value="{{0,198},{0,612},{0,333},{0,630}}" />
+            <Property name="Rotation" value="w:0.984808 x:0 y:-0.173648 z:0" />
+            <Property name="StepSize" value="0.01" />
+            <Property name="AlwaysOnTop" value="true" />
+            <Property name="CurrentProgress" value="1" />
+            <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar2" >
+            <Property name="ID" value="79" />
+            <Property name="Area" value="{{0,952},{0,616},{0,1080},{0,634}}" />
+            <Property name="Rotation" value="w:-0.21644 x:-0 y:0.976296 z:-0" />
+            <Property name="StepSize" value="0.01" />
+            <Property name="AlwaysOnTop" value="true" />
+            <Property name="CurrentProgress" value="1" />
+            <Property name="AutoRenderingSurface" value="true" />
         </Window>
     </Window>
 </GUILayout>

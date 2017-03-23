@@ -8,6 +8,7 @@
             <Item path="imagesets/FairChar.imageset" type="file" />
             <Item path="imagesets/GameMenu.imageset" type="file" />
             <Item path="imagesets/HUDDemo.imageset" type="file" />
+            <Item path="imagesets/LastBulletHUD.imageset" type="file" />
             <Item path="imagesets/LastBulletMenu.imageset" type="file" />
             <Item path="imagesets/LastBulletMenuBackground.imageset" type="file" />
             <Item path="imagesets/OgreTray.imageset" type="file" />
@@ -15,7 +16,6 @@
             <Item path="imagesets/TaharezLook.imageset" type="file" />
             <Item path="imagesets/Vanilla.imageset" type="file" />
             <Item path="imagesets/WindowsLook.imageset" type="file" />
-            <Item path="imagesets/LastBulletHUD.imageset" type="file" />
         </Item>
         <Item name="Layouts" type="folder">
             <Item path="layouts/Demo8.layout" type="file" />
@@ -42,6 +42,7 @@
             <Item path="layouts/VanillaLookOverview.layout" type="file" />
             <Item path="layouts/VanillaWindows.layout" type="file" />
             <Item path="layouts/application_templates.layout" type="file" />
+            <Item path="layouts/SimpleDebug.layout" type="file" />
         </Item>
     </Items>
 </Project>
