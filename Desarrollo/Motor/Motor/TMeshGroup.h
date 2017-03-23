@@ -56,7 +56,7 @@ private:
 
 	TMesh* processMesh(aiMesh* mesh, const aiScene* scene);
 
-	void loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, std::string typeName);
+	void loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, const std::string& typeName);
 
 	
 	friend class SceneManager;

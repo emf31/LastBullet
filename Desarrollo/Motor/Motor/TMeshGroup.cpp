@@ -105,8 +105,10 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 			vec.x = mesh->mTextureCoords[0][i].x;
 			vec.y = mesh->mTextureCoords[0][i].y;
 			vertex.TexCoords = vec;
-		} else
-			vertex.TexCoords = glm::vec2(0.0f, 0.0f); //Si no las tiene le ponemos unas por defecto
+		} else {
+			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+		}
+		//Si no las tiene le ponemos unas por defecto
 		vertices.push_back(vertex);
 	}
 	// Recorremos todas las caras de la malla (triángulos) y nos guardamos sus vertex index
@@ -146,7 +148,7 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria);
 }
 
-void TMeshGroup::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, std::string typeName) {
+void TMeshGroup::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, const std::string& typeName) {
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
 		aiString str;
 		mat->GetTexture(type, i, &str);

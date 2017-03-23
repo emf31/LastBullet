@@ -1,8 +1,9 @@
 #include "TAnimation.h"
 #include "SceneManager.h"
-TAnimation::TAnimation(const std::string & directory): sm(SceneManager::i())
+TAnimation::TAnimation(const std::string & directory, unsigned int numAnimations) : sm(SceneManager::i())
 {
-	animReader.LoadMeshesFromDirectory(directory,vectorModelos);
+	AnimationReader::LoadMeshesFromDirectory(directory, numAnimations, vectorModelos);
+
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 	visible = true;
