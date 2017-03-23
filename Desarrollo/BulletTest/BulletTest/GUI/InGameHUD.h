@@ -47,6 +47,9 @@ public:
 
 	void setDeaths(int death);
 
+	void updateProgressBarVida();
+
+	void updateProgressBarMunicion();
 
 	void updateRelojes();
 
@@ -68,6 +71,8 @@ private:
 	CEGUI::DefaultWindow* LabelArma;
 	CEGUI::DefaultWindow* LabelMunicion;
 	CEGUI::DefaultWindow* LabelMunicionTotal;
+	CEGUI::ProgressBar  * ProgressBarVida;
+	CEGUI::ProgressBar  * ProgressBarMunicion;
 
 	CEGUI::DefaultWindow* LabelEndGame;
 
