@@ -6,7 +6,7 @@
 
 class AnimationReader {
 public:
-	static void LoadMeshesFromDirectory(const std::string& directory, std::vector<TMeshGroup*>& vector);
+	static void LoadMeshesFromDirectory(const std::string& directory, unsigned int numAnimations, std::vector<TMeshGroup*>& vector);
 
 
 };

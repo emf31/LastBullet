@@ -10,7 +10,7 @@ class TAnimation : public TEntity {
 public:
 	/*  Funciones   */
 	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
-	TAnimation(const std::string& directory);
+	TAnimation(const std::string& directory, unsigned int numAnimations);
 	~TAnimation();
 
 
@@ -70,7 +70,6 @@ private:
 	std::vector<TMeshGroup*> vectorModelos;
 	std::vector<TMeshGroup*> currentAnimation;
 
-	AnimationReader animReader;
 	std::unordered_map<std::string, std::vector<TMeshGroup*>> animMap;
 	int numAnims;
 	int currentFrame;

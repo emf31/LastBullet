@@ -250,7 +250,7 @@ TAnimation * SceneManager::crearNodoAnimacion(const std::string & directory)
 	TNode * nuevoNodoEscalado;
 	TNode * nuevoNodoTraslacion;
 
-	TAnimation* animation = new TAnimation(directory);
+	TAnimation* animation = new TAnimation(directory, 25);
 
 	//creamos los nodos malla y los nodos transformaciones necesaria para esta
 	int id = animation->getID();
