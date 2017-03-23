@@ -156,7 +156,7 @@
         </Window>
         <Window type="Generic/Image" name="Scope" >
             <Property name="ID" value="77" />
-            <Property name="Area" value="{{0,-6},{0,-18},{0,1302},{0,700}}" />
+            <Property name="Area" value="{{0,-54},{0,-8},{0,1254},{0,710}}" />
             <Property name="Image" value="AlfiskoSkin/scope" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="Visible" value="false" />
@@ -177,20 +177,9 @@
             <Property name="Image" value="LastBulletHUD/HUD_arriba" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
-        <Window type="AlfiskoSkin/Label" name="Label6" >
-            <Property name="ID" value="2" />
-            <Property name="Area" value="{{0.0859375,967},{0.791667,28},{0.0859375,1061},{0.791667,45}}" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="Rotation" value="w:0.984808 x:0 y:0.173648 z:0" />
-            <Property name="AlwaysOnTop" value="true" />
-            <Property name="HorzFormatting" value="LeftAligned" />
-            <Property name="NormalTextColour" value="FF000000" />
-            <Property name="DisabledTextColour" value="FFFFFFFF" />
-            <Property name="AutoRenderingSurface" value="true" />
-        </Window>
         <Window type="AlfiskoSkin/Label" name="Label7" >
             <Property name="ID" value="3" />
-            <Property name="Area" value="{{0.0859375,988},{0.854167,5},{0.0859375,1045},{0.854167,28}}" />
+            <Property name="Area" value="{{0.0859375,921},{0.854167,-25},{0.0859375,978},{0.854167,-2}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="Rotation" value="w:0.984808 x:0 y:0.173648 z:0" />
             <Property name="AlwaysOnTop" value="true" />
@@ -209,7 +198,7 @@
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label5" >
             <Property name="ID" value="1" />
-            <Property name="Area" value="{{0.0859375,21},{0.736111,79},{0.0859375,65},{0.736111,112}}" />
+            <Property name="Area" value="{{0.0859375,21},{0.736111,87},{0.0859375,52},{0.736111,112}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
@@ -248,6 +237,39 @@
             <Property name="CurrentProgress" value="1" />
             <Property name="ReversedProgress" value="true" />
             <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="Generic/Image" name="Image4" >
+            <Property name="Area" value="{{0,155},{0,605},{0,198},{0,648}}" />
+            <Property name="Image" value="LastBulletHUD/HUD_vida" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="Generic/Image" name="Image5" >
+            <Property name="ID" value="61" />
+            <Property name="Area" value="{{0,1104},{0,597},{0,1165},{0,646}}" />
+            <Property name="Image" value="LastBulletHUD/HUD_pistola" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Rotation" value="w:0.976296 x:0 y:0.21644 z:0" />
+            <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="Generic/Image" name="Image6" >
+            <Property name="ID" value="62" />
+            <Property name="Area" value="{{0,1085},{0,595},{0,1177},{0,655}}" />
+            <Property name="Image" value="LastBulletHUD/HUD_Asalto" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Rotation" value="w:0.976296 x:0 y:0.21644 z:0" />
+            <Property name="AutoRenderingSurface" value="true" />
+        </Window>
+        <Window type="Generic/Image" name="Image7" >
+            <Property name="ID" value="63" />
+            <Property name="Area" value="{{0,2182},{0,1166},{0,1179},{0,649}}" />
+            <Property name="Image" value="LastBulletHUD/HUD_sniper" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="Generic/Image" name="Image8" >
+            <Property name="ID" value="64" />
+            <Property name="Area" value="{{0,1205},{0,1126},{0,1180},{0,647}}" />
+            <Property name="Image" value="LastBulletHUD/HUD_vida" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
     </Window>
 </GUILayout>

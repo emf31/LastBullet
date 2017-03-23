@@ -68,7 +68,11 @@ private:
 	CEGUI::DefaultWindow* scope;
 
 	CEGUI::DefaultWindow* LabelVida;
-	CEGUI::DefaultWindow* LabelArma;
+	//CEGUI::DefaultWindow* LabelArma;
+	CEGUI::DefaultWindow* ImagenPistola;
+	CEGUI::DefaultWindow* ImagenAsalto;
+	CEGUI::DefaultWindow* ImagenRocket;
+	CEGUI::DefaultWindow* ImagenSniper;
 	CEGUI::DefaultWindow* LabelMunicion;
 	CEGUI::DefaultWindow* LabelMunicionTotal;
 	CEGUI::ProgressBar  * ProgressBarVida;

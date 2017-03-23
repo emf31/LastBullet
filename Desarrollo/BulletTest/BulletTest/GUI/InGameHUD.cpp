@@ -13,7 +13,7 @@ void InGameHUD::inicializar() {
 
 
 	LabelVida = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1));
-	LabelArma = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
+	//LabelArma = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 	LabelMunicionTotal = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(4));
 	m_ranking = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(81));
@@ -21,6 +21,15 @@ void InGameHUD::inicializar() {
 	m_deaths = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(83));
 	ProgressBarVida = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(78));
 	ProgressBarMunicion = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(79));
+
+	ImagenPistola = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(61));
+	ImagenPistola->setVisible(true);
+	ImagenAsalto = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(62));
+	ImagenAsalto->setVisible(false);
+	ImagenRocket = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(63));
+	ImagenRocket->setVisible(false);
+	ImagenSniper = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(64));
+	ImagenSniper->setVisible(false);
 
 	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(54));
 
@@ -93,10 +102,34 @@ void InGameHUD::updateLabelVida() {
 }
 
  void InGameHUD::updateLabelArma() {
-	CEGUI::String str;
+	/*CEGUI::String str;
 	std::string string = p->getCurrentWeaponName();
-	str = string.c_str();
-	LabelArma->setText(str);
+	str = string.c_str();*/
+	 if (p->getCurrentWeaponName() == "Pistola"){
+		 ImagenPistola->setVisible(true);
+		 ImagenAsalto->setVisible(false);
+		 ImagenRocket->setVisible(false);
+		 ImagenSniper->setVisible(false);
+	 }
+	 if (p->getCurrentWeaponName() == "Asalto") {
+		 ImagenPistola->setVisible(false);
+		 ImagenAsalto->setVisible(true);
+		 ImagenRocket->setVisible(false);
+		 ImagenSniper->setVisible(false);
+	 }
+	 if (p->getCurrentWeaponName() == "RocketLauncher") {
+		 ImagenPistola->setVisible(false);
+		 ImagenAsalto->setVisible(false);
+		 ImagenRocket->setVisible(true);
+		 ImagenSniper->setVisible(false);
+	 }
+	 if (p->getCurrentWeaponName() == "Sniper") {
+		 ImagenPistola->setVisible(false);
+		 ImagenAsalto->setVisible(false);
+		 ImagenRocket->setVisible(false);
+		 ImagenSniper->setVisible(true);
+	 }
+		 
 }
 
  void InGameHUD::updateLabelMunicion() {
