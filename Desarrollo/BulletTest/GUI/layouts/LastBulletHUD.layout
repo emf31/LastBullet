@@ -4,34 +4,6 @@
     <Window type="DefaultWindow" name="DefaultWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="AlfiskoSkin/Label" name="Label" >
-            <Property name="Area" value="{{0.0390625,-24},{0.736111,-503},{0.0390625,104},{0.736111,-471}}" />
-            <Property name="Text" value="Vida: " />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="HorzFormatting" value="RightAligned" />
-            <Property name="NormalTextColour" value="FFFF3030" />
-        </Window>
-        <Window type="AlfiskoSkin/Label" name="Label2" >
-            <Property name="Area" value="{{0.0390625,-24},{0.854167,-502},{0.0390625,104},{0.854167,-470}}" />
-            <Property name="Text" value="Municion:" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="HorzFormatting" value="RightAligned" />
-            <Property name="NormalTextColour" value="FF000000" />
-        </Window>
-        <Window type="AlfiskoSkin/Label" name="Label3" >
-            <Property name="Area" value="{{0.0390625,-24},{0.791667,-503},{0.0390625,104},{0.791667,-471}}" />
-            <Property name="Text" value="Arma:" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="HorzFormatting" value="RightAligned" />
-            <Property name="NormalTextColour" value="FF000000" />
-        </Window>
-        <Window type="AlfiskoSkin/Label" name="Label4" >
-            <Property name="Area" value="{{0.0390625,-24},{0.916667,-503},{0.0390625,104},{0.916667,-471}}" />
-            <Property name="Text" value="Municion total:" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="HorzFormatting" value="RightAligned" />
-            <Property name="NormalTextColour" value="FF000000" />
-        </Window>
         <Window type="DefaultWindow" name="DefaultWindow" >
             <Property name="ID" value="10" />
             <Property name="Area" value="{{0.192969,0},{0.147222,0},{0.83125,0},{0.695833,0}}" />
@@ -180,10 +152,11 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="Visible" value="false" />
             <Property name="VerticalAlignment" value="Centre" />
+            <Property name="DisabledTextColour" value="FFFFFFFF" />
         </Window>
         <Window type="Generic/Image" name="Scope" >
             <Property name="ID" value="77" />
-            <Property name="Area" value="{{0,-2},{0,1},{0,1306},{0,719}}" />
+            <Property name="Area" value="{{0,-6},{0,-18},{0,1302},{0,700}}" />
             <Property name="Image" value="AlfiskoSkin/scope" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="Visible" value="false" />
@@ -212,6 +185,7 @@
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
             <Property name="NormalTextColour" value="FF000000" />
+            <Property name="DisabledTextColour" value="FFFFFFFF" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label7" >
@@ -221,7 +195,7 @@
             <Property name="Rotation" value="w:0.984808 x:0 y:0.173648 z:0" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
-            <Property name="NormalTextColour" value="FF000000" />
+            <Property name="DisabledTextColour" value="FFFFFFFF" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label8" >
@@ -230,7 +204,7 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
-            <Property name="NormalTextColour" value="FF000000" />
+            <Property name="DisabledTextColour" value="FFFFFFFF" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label5" >
@@ -239,7 +213,7 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="HorzFormatting" value="LeftAligned" />
-            <Property name="NormalTextColour" value="FFFF3030" />
+            <Property name="DisabledTextColour" value="FFFFFFFF" />
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label10" >
             <Property name="ID" value="81" />
@@ -268,10 +242,11 @@
         <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar2" >
             <Property name="ID" value="79" />
             <Property name="Area" value="{{0,952},{0,616},{0,1080},{0,634}}" />
-            <Property name="Rotation" value="w:-0.21644 x:-0 y:0.976296 z:-0" />
+            <Property name="Rotation" value="w:0.976296 x:0 y:0.21644 z:0" />
             <Property name="StepSize" value="0.01" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="CurrentProgress" value="1" />
+            <Property name="ReversedProgress" value="true" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>
     </Window>
