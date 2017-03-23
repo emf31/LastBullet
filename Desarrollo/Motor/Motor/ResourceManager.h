@@ -4,6 +4,8 @@
 #include "TEntity.h"
 #include "TModel.h"
 #include <assimp/Importer.hpp>
+#include "TAnimationGroupMesh.h"
+
 class ResourceManager {
 public:
 	
@@ -24,7 +26,7 @@ private:
 	std::unordered_map<std::string, TMeshGroup*> models;
 	std::unordered_map<std::string, Shader*> shaders;
 	std::unordered_map<std::string, Texture*> textures;
-
+	std::unordered_map<std::string, TAnimationGroupMesh*> animations;
 	void shutdown();
 
 	GLint TextureFromFile(const char* path, std::string directory);
