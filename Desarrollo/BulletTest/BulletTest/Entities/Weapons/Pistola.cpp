@@ -65,7 +65,7 @@ void Pistola::handleInput()
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "assets/pistolaTexturizada.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/Weapons/pistolaTexturizada.obj");
 	
 	m_nodo->setVisible(true);
 

@@ -223,10 +223,11 @@ Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> es
 Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, const std::string & mesh = "")
 {
 	//Creates node
-	std::shared_ptr<BasicSceneNode> sniper = CreateNodeExceptionSafe(posicion, escala, "", mesh);
-	SniperDrop *SniperDropEnt = new SniperDrop(sniper, "SniperDrop");
-	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, escala*2.f));
-	SniperDropEnt->setPosition(posicion);
+	//std::shared_ptr<BasicSceneNode> sniper = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	SniperDrop *SniperDropEnt = new SniperDrop(nullptr, "SniperDrop");
+	SniperDropEnt->getRenderState()->setPosition(posicion);
+	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, Vec3<float>(4.f, 8.f, 4.f)));
+	//SniperDropEnt->setPosition(posicion);
 
 	return SniperDropEnt;
 }

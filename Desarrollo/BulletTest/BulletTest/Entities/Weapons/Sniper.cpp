@@ -65,7 +65,7 @@ void Sniper::cargarContenido()
 {
 
 	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/arma/Sniper3.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/Weapons/sniperFinalv2.obj");
 	m_nodo->setVisible(false);
 
 
