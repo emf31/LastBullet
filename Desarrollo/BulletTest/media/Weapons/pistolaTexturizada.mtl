@@ -1,49 +1,41 @@
-# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 23.02.2017 17:39:34
-
-newmtl 01___Default
-	Ns 10.0000
-	Ni 1.5000
-	d 1.0000
-	Tr 0.0000
-	Tf 1.0000 1.0000 1.0000 
-	illum 2
-	Ka 0.5880 0.5880 0.5880
-	Kd 0.5880 0.5880 0.5880
-	Ks 0.5880 0.5880 0.5880
-	Ke 0.0000 0.0000 0.0000
-	map_Ka Weapons/pistola1.png
-	map_Kd Weapons/pistola1.png
-	map_Ks Weapons/pistola1spec.png
-
-newmtl 09___Default
-	Ns 10.0000
-	Ni 1.5000
-	d 1.0000
-	Tr 0.0000
-	Tf 1.0000 1.0000 1.0000 
-	illum 2
-	Ka 0.5880 0.5880 0.5880
-	Kd 0.5880 0.5880 0.5880
-	Ks 0.5880 0.5880 0.5880
-	Ke 0.0000 0.0000 0.0000
-	map_Ka Weapons/pistola9.png
-	map_Kd Weapons/pistola9.png
-	map_Ks Weapons/pistola9spec.png
-
-newmtl 02___Default
-	Ns 10.0000
-	Ni 1.5000
-	d 1.0000
-	Tr 0.0000
-	Tf 1.0000 1.0000 1.0000 
-	illum 2
-	Ka 0.5880 0.5880 0.5880
-	Kd 0.5880 0.5880 0.5880
-	Ks 0.5880 0.5880 0.5880
-	Ke 0.0000 0.0000 0.0000
-	map_Ka Weapons/pistola2.png
-	map_Kd Weapons/pistola2.png
-	map_Ks Weapons/pistola2spec.png
-
-
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/azul_brazos.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pistolaTexturizada:___Default
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/pistola1.png
+map_Ka Weapons/pistola1.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+map_Ks Weapons/pistola1spec.png
+Ns 10.00
+newmtl pistolaTexturizada:___Default2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/pistola9.png
+map_Ka Weapons/pistola9.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+map_Ks Weapons/pistola9spec.png
+Ns 10.00
+newmtl pistolaTexturizada:___Default4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/pistola2.png
+map_Ka Weapons/pistola2.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+map_Ks Weapons/pistola2spec.png
+Ns 10.00
