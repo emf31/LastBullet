@@ -284,6 +284,7 @@
     <ClInclude Include="Network\NetPlayer.h" />
     <ClInclude Include="Network\NetworkDebugger.h" />
     <ClInclude Include="Network\NetworkManager.h" />
+    <ClInclude Include="Otros\AssetsReader.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\DebugMarks.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
@@ -400,6 +401,7 @@
     <ClCompile Include="Network\NetPlayer.cpp" />
     <ClCompile Include="Network\NetworkDebugger.cpp" />
     <ClCompile Include="Network\NetworkManager.cpp" />
+    <ClCompile Include="Otros\AssetsReader.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\DebugMarks.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />

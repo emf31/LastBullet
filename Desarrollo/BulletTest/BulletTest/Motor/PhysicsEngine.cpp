@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <set>
 #include <BulletCollision\CollisionDispatch\btCollisionObject.h>
+#include "../game.h"
 
 
 #include <MessageHandler.h>

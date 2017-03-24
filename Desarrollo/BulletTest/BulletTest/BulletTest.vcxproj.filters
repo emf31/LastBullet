@@ -324,6 +324,7 @@
     </ClCompile>
     <ClCompile Include="Entities\EntActive.cpp" />
     <ClCompile Include="Entities\EntPassive.cpp" />
+    <ClCompile Include="Otros\AssetsReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -754,6 +755,9 @@
     </ClInclude>
     <ClInclude Include="Entities\EntActive.h" />
     <ClInclude Include="Entities\EntPassive.h" />
+    <ClInclude Include="Otros\AssetsReader.h">
+      <Filter>Source Code\Otros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

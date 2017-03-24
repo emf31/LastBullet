@@ -20,9 +20,13 @@ public:
 
 private:
 
+	void readAllAssets();
+
+
 	float interpolation;
 	LoadingStateGUI loadingStateGUI;
 	ParalellTask* task;
+	std::queue<std::string> colaAssets;
 
 };
 

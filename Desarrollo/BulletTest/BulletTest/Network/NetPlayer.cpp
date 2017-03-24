@@ -250,9 +250,11 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//When we recive a starting game message we change
 			//current state to INGAME
 			//std::thread first(&MenuGUI::threadCrearPartida,this);
+			//GraphicEngine::i().readAllAssets();
 			StateStack::i().GetCurrentState()->Clear();
-			StateStack::i().SetCurrentState(States::ID::InGame);
+			StateStack::i().SetCurrentState(States::ID::Carga);
 			StateStack::i().GetCurrentState()->Inicializar();
+			
 
 
 			break;
