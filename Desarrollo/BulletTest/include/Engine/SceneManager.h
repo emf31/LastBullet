@@ -50,8 +50,6 @@ public:
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
 	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);
-	//NOTA : en mi cabeza tiene sentido que lo que devolvamos sea un TModel o un TSpotLight ya que luego desde el juego lo que manejariamos serian estas entities
-	//lo cual a parte de ser mas claro para quien lo use asi no tendriamos acceso a los nodos del arbol desde fuera del motor grafico para que no se pueda corromper este.
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
 	TSunLight* crearNodoSunLight(Vec3<float> direccion);
 	TPointLight* crearNodoPointLight(Vec3<float> posicion);

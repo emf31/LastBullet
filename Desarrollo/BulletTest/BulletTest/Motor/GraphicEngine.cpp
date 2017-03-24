@@ -152,7 +152,7 @@ bool GraphicEngine::createPointLight(Vec3<float> pos, Vec3<float> color)
 
 bool GraphicEngine::createDirectionalLight(Vec3<float> pos, Vec3<float> direccion, Vec3<float> color)
 {
-	TFlashLight* light =SceneManager::i().crearNodoFlashLight(pos,Vec3<float>(0,-1,0));
+	TFlashLight* light =SceneManager::i().crearNodoFlashLight(pos,direccion);
 	light->setColor(color.getX(), color.getY(), color.getZ());
 	light->setIntensidadDifusa(0.8f);
 	light->setIntensidadAmbiente(0.4f);
