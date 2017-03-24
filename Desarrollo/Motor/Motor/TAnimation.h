@@ -1,5 +1,5 @@
 #pragma once
-#include "TMeshGroup.h"
+#include "TAnimationGroupMesh.h"
 #include "TTransform.h"
 #include "AnimationReader.h"
 #include "Clock.hpp"
@@ -10,7 +10,7 @@ class TAnimation : public TEntity {
 public:
 	/*  Funciones   */
 	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
-	TAnimation(const std::string& directory, unsigned int numAnimations);
+	TAnimation(TAnimationGroupMesh* meshGroup);
 	~TAnimation();
 
 
@@ -66,6 +66,8 @@ private:
 	virtual void beginDraw();
 
 	virtual void endDraw();
+
+	TAnimationGroupMesh* meshes;
 
 	std::vector<TMeshGroup*> vectorModelos;
 	std::vector<TMeshGroup*> currentAnimation;

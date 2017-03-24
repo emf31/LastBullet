@@ -4,7 +4,9 @@
 #include "TEntity.h"
 #include "TModel.h"
 #include <assimp/Importer.hpp>
-#include "TAnimationGroupMesh.h"
+
+
+class TAnimationGroupMesh;
 
 class ResourceManager {
 public:
@@ -18,7 +20,7 @@ public:
 	TMeshGroup* getMesh(const std::string& path, Shader* shader=NULL);
 	Shader* getShader(const std::string& vertexShader, std::string fragmentShader="");
 	Texture* getTexture(const std::string& path, const std::string& type, const std::string& directory);
-
+	TAnimationGroupMesh* getAnimationMesh(const std::string& path, unsigned int numFrames, Shader* shader = NULL);
 	
 private:
 	ResourceManager();

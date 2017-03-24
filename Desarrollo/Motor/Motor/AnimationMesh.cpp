@@ -4,18 +4,9 @@
 #include "SceneManager.h"
 
 
-AnimationMesh::AnimationMesh(const std::string& path/*, std::vector<Texture*>& text, aiMaterial* mat,*/ ,Shader* shader) : 
+AnimationMesh::AnimationMesh(const std::string& path, Shader* shader) : 
 	sm(SceneManager::i())
-	/*textures_loaded(text),
-	material(mat)*/
 {
-	/*Shader* shader;
-	if (*shaderPath) {
-		shader = ResourceManager::i().getShader(shaderPath);
-	} else {
-		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
-	}*/
-
 
 	// Carmamos el modelo
 	this->loadModel(path);
@@ -39,7 +30,6 @@ void AnimationMesh::beginDraw() {
 
 void AnimationMesh::loadModel(const std::string& path) {
 	// Leemos con ASSIMP
-	Assimp::Importer importer;
 	scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	// Miramos si hay algún error
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // Si no es 0
@@ -69,18 +59,19 @@ void AnimationMesh::processNodeRecursively(aiNode * node, const aiScene * scene)
 	}
 }
 
-void AnimationMesh::processNode(aiMaterial** mat, std::vector<Texture*>& text) {
-	material = mat;
-	textures_loaded = text;
+void AnimationMesh::processNode(aiMaterial** mat) {
+	materialArray = mat;
 
 	processNodeRecursively(scene->mRootNode, scene);
+
+	
 }
 
 TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Datos básicos de las mallas (vértices, índices y texturas)
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
-	//std::vector<Texture*> textures;
+	std::vector<Texture*> textures;
 
 	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -130,17 +121,10 @@ TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 			indices.push_back(face.mIndices[j]);
 	}
-	//scene->mMaterials
-	// Materiales!
-	/*if (mesh->mMaterialIndex >= 0) {
-		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-		// Diffuse: texture_diffuseN
-		//vector<Texture*> diffuseMaps;
-		// Specular: texture_specularN
-		//vector<Texture*> specularMaps;
-		// Normal: texture_normalN
-		//vector<Texture*> normalMaps;
+	// Materiales!
+	if (mesh->mMaterialIndex >= 0) {
+		aiMaterial* material = materialArray[mesh->mMaterialIndex];
 
 		// 1. Diffuse maps
 		this->loadMaterialTextures(textures, material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -155,11 +139,11 @@ TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_tangent");
 		//5.Bitangent
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_bitangent");
-	}*/
+	}
 
 
 	// Return del mesh preparado
-	return new TMesh(vertices, indices, textures_loaded, SceneManager::i().shaderGeometria);
+	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria);
 }
 
 void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, const std::string& typeName) {
@@ -176,8 +160,7 @@ void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMater
 
 
 void AnimationMesh::endDraw() {
-	//std::cout << u8"Adiós" << std::endl;
-	//TEntity::endDraw();
+
 }
 
 

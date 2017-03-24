@@ -36,9 +36,9 @@ public:
 
 	virtual void endDraw();
 	
-	const aiMaterial ** AnimationMesh::getMaterials() const { return scene->mMaterials; }
+	aiMaterial ** AnimationMesh::getMaterials() const { return scene->mMaterials; }
 
-	void processNode(aiMaterial** mat, std::vector<Texture*>& text);
+	void processNode(aiMaterial** mat);
 
 private:
 
@@ -50,7 +50,7 @@ private:
 	std::vector<TMesh*> meshes;
 	std::string directory;
 	std::vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
-	aiMaterial** material;
+	aiMaterial** materialArray;
 
 	/*  Funciones   */
 	// Carga el modelo con ASSIMP
@@ -64,7 +64,12 @@ private:
 
 	const aiScene* scene;
 
+	Assimp::Importer importer;
 
+
+
+
+	friend class TAnimationGroupMesh;
 	friend class SceneManager;
 };
 

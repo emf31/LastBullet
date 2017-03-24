@@ -48,15 +48,14 @@ private:
 	std::vector<std::string> paths;
 	std::vector<AnimationMesh*> meshes;
 	std::string directory;
-	std::vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
-	const aiMaterial** material;
+	aiMaterial** material;
 
 
 	void processAnimations();
 	/*  Funciones   */
 	// Carga el modelo con ASSIMP
 	
-
+	unsigned int NumFrames;
 	
 	friend class SceneManager;
 };
