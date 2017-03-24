@@ -1,5 +1,5 @@
 #include "ResourceManager.h"
-
+#include "TAnimationGroupMesh.h"
 
 
 ResourceManager::ResourceManager() {
@@ -64,6 +64,28 @@ Texture* ResourceManager::getTexture(const std::string& path, const std::string&
 		}
 	}
 	return nullptr;
+}
+
+TAnimationGroupMesh * ResourceManager::getAnimationMesh(const std::string & path, unsigned int numFrames, Shader * shader)
+{
+	if (path != "") {
+		if (animations.find(path) != animations.end()) {
+			//Si ya esta en el mapa lo devolvemos al instante. No lo cargamos dos veces!
+			return animations[path];
+		}
+		else {
+			//Creamos un modelo nuevo y le pasamos el path
+			TAnimationGroupMesh *model = new TAnimationGroupMesh(path, numFrames);
+			//Guardamos el puntero en el mapa de models
+			animations[path] = model;
+			//Devolvemos el puntero del modelo en el mapa
+			return animations[path];
+		}
+		std::cout << "ERROR CARGANDO ANIMATION: " << path << std::endl;
+		return NULL;
+	}
+	std::cout << "ERROR CARGANDO ANIMATION: NO SE HA ESPECIFICADO UN ANIMATION..." << std::endl;
+	return NULL;
 }
 
 void ResourceManager::shutdown()

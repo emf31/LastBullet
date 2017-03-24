@@ -67,12 +67,13 @@ int main() {
 
 
 	//animacion
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion("assets/personaje2");
+	/*TAnimation* pruebaAnim = sm.crearNodoAnimacion("assets/personaje2");
 	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
 	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
 	pruebaAnim->setAnimation("idle",0,32);
-	pruebaAnim->setCurrentAnimation("idle");
+	pruebaAnim->setCurrentAnimation("idle");*/
 	//pruebaAnim->setFrameTime(seconds(2.0));
+	TAnimationGroupMesh* anim = ResourceManager::i().getAnimationMesh("assets/personaje2", 25);
 
 
 	//*******LUCES*******

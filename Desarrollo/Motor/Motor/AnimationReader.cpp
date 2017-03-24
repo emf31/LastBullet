@@ -2,7 +2,7 @@
 #include "dirent.h"
 
 
-void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, unsigned int numAnimations, std::vector<TMeshGroup*>& vector)
+void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, unsigned int numAnimations, std::vector<std::string>& vector)
 {
 	vector.clear();
 
@@ -13,6 +13,8 @@ void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, uns
 
 	for (std::size_t i = 0; i < numAnimations; i++) {
 		std::string path = directory + "/" + std::to_string(i) + ".obj";
+		vector.push_back(path);
+		//ResourceManager::i().getAnimationMesh();
 	}
 	//std::string carpeta = "assets/";
 
