@@ -1,8 +1,10 @@
 #include "TPointLight.h"
 
-TPointLight::TPointLight(Vec3<float> posicion)
+TPointLight::TPointLight(Vec3<float> posicion, float radioInterio, float radioExterior)
 {
 	m_posicion = posicion;
+	m_radioInterior = radioInterio;
+	m_radioExterior = radioExterior;
 }
 
 TPointLight::~TPointLight()

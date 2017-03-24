@@ -366,14 +366,14 @@ TSunLight * SceneManager::crearNodoSunLight(Vec3<float> direccion)
 	return luz;
 }
 
-TPointLight * SceneManager::crearNodoPointLight(Vec3<float> posicion)
+TPointLight * SceneManager::crearNodoPointLight(Vec3<float> posicion, float radioIn, float radioEx )
 {
 	TNode* luzNode;
 	TNode * nuevoNodoRotacion;
 	TNode * nuevoNodoTraslacion;
 
 	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
-	TPointLight* luz = new TPointLight(posicion);
+	TPointLight* luz = new TPointLight(posicion, radioIn, radioEx);
 	int id = luz->getID();
 
 	//rotacion antes de traslacion
@@ -437,7 +437,7 @@ TFlashLight * SceneManager::crearNodoFlashLight(Vec3<float> posicion, Vec3<float
 	luzNode->setType(T_FLASHLIGHT);
 
 
-	luz->setDirection(direccion);
+	//luz->setDirection(direccion);
 	//la añadimos al sceneManager
 	vecFlashLight.push_back(luz);
 

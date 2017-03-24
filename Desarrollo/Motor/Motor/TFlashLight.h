@@ -17,6 +17,7 @@ public:
 
 	void setPosition(Vec3<float> pos);
 	void setDirection(Vec3<float> dir);
+	void setRotationXYZ(Vec3<float> dir);
 	void setRadioInterior(float radio);
 	void setRadioExterior(float radio);
 	void updateVectorDireccion();
