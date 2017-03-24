@@ -44,6 +44,10 @@ public class Exporter : MonoBehaviour
                         objeto.rotY = g.transform.rotation.eulerAngles.y;
                         objeto.rotZ = g.transform.rotation.eulerAngles.z;
 
+                        objeto.forwardX = g.transform.forward.x;
+                        objeto.forwardY = g.transform.forward.y;
+                        objeto.forwardZ = g.transform.forward.z;
+
 
                         objeto.tag = g.tag;
                         if (g.transform.childCount == 1)
@@ -151,6 +155,7 @@ public class Objeto
     public float posX, posY, posZ;
     public float sizeX, sizeY, sizeZ;
     public float rotX, rotY, rotZ;
+    public float forwardX, forwardY, forwardZ;
     public float masa;
     public string textura;
     public string mesh;
