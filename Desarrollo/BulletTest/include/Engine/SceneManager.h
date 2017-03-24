@@ -9,6 +9,7 @@
 #include "TPointLight.h"
 #include "TFlashLight.h"
 #include "TCamera.h"
+#include "TAnimation.h"
 #include <deque>
 
 #include <GLEW/glew.h>
@@ -45,6 +46,7 @@ public:
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
+	TAnimation* crearNodoAnimacion(const std::string& directory);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
 	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);

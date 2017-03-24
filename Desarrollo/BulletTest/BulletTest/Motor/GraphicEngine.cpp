@@ -10,7 +10,7 @@
 
 #include <GUIManager.h>
 
-#include <AnimationReader.h>
+
 
 GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 {

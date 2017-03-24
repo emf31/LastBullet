@@ -11,7 +11,7 @@ private:
 
 	enum processStateENUM { STARTED, ENDED };
 
-	keyStatesENUM keys[123];
+	keyStatesENUM keys[348];
 
 	processStateENUM processState; // STARTED = handling events, ENDED = not handling events
 
