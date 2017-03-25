@@ -19,6 +19,8 @@
 
 #include <Engine/EngineDevice.h>
 
+#include <AssetsReader.h>
+
 
 
 
@@ -98,6 +100,8 @@ private:
 	DebugDraw* debugDraw;
 
 	GraphicEngine();
+
+	AssetsReader reader;
 
 };
 

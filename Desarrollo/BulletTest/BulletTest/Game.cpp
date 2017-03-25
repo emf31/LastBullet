@@ -13,6 +13,7 @@
 #include <RakNetTypes.h>
 #include <TriggerSystem.h>
 #include <MessageHandler.h>
+#include <TimePerFrame.h>
 
 #include <Map.h>
 #include <GUIManager.h>
@@ -27,8 +28,7 @@
 #include <World.h>
 
 const int Game::server_port = 65535;
-const Time Game::timePerFrame = seconds(1.f / 15.f);
-
+//const Time Game::timePerFrame = seconds(1.f / 15.f);
 
 
 Game::Game() : stateStack(StateStack::i())
@@ -44,6 +44,7 @@ Game::~Game()
 void Game::run()
 {
 	//Game loop from Bullet Physics documentation example
+	TimePerFrameClass::timePerFrameDefault();
 
 	Clock clock;
 
@@ -76,15 +77,15 @@ void Game::run()
 			Time dt = clock.getElapsedTime() - time_gameclock;
 
 			//Llevamos control en las actualizaciones por frame
-			while (dt >= timePerFrame) // 15 veces/segundo
+			while (dt >= TimePerFrameClass::GetTimePerFrame()) // 15 veces/segundo
 			{
-				dt -= timePerFrame;
-				time_gameclock += timePerFrame;
+				dt -= TimePerFrameClass::GetTimePerFrame();
+				time_gameclock += TimePerFrameClass::GetTimePerFrame();
 
 				processEvents();
 
 				//Realizamos actualizaciones
-				update(timePerFrame);
+				update(dt);
 
 				time_client_curr = clock.getElapsedTime();
 
@@ -98,9 +99,9 @@ void Game::run()
 			}
 
 			if (GraphicEngine::i().isWindowActive()) {
-				interpolation = (float)std::min(1.f, dt.asSeconds() / timePerFrame.asSeconds());
+				interpolation = (float)std::min(1.f, dt.asSeconds() / TimePerFrameClass::GetTimePerFrame().asSeconds());
 
-				render(interpolation, timePerFrame);
+				render(interpolation, TimePerFrameClass::GetTimePerFrame());
 			}
 		
 		

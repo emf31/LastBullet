@@ -12,6 +12,7 @@
 
 
 
+
 GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 {
 	
@@ -324,4 +325,5 @@ void GraphicEngine::restablecerMirilla()
 {
 	active_camera->restablecerMira();
 }
+
 

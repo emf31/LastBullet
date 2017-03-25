@@ -1,5 +1,5 @@
 #pragma once
-#include <future>
+#include <thread>
 
 class ParalellTask {
 public:
@@ -11,7 +11,7 @@ public:
 	void    write();
 	bool	IsFinished();
 	float	GetCompletion();
-	std::future<void> f1;
+	std::thread f1;
 	bool    mFinishedRunInGame;
 private:
 	void	RunTask();

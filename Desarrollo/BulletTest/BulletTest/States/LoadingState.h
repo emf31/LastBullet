@@ -6,6 +6,8 @@
 #include <ParalellTask.h>
 
 
+
+
 class LoadingState : public State {
 public:
 	LoadingState();
@@ -20,9 +22,15 @@ public:
 
 private:
 
+	void readAllAssets();
+
+
 	float interpolation;
 	LoadingStateGUI loadingStateGUI;
 	ParalellTask* task;
+	std::queue<std::string> colaAssets;
+	Clock pruebas;
+	bool needRender;
 
 };
 

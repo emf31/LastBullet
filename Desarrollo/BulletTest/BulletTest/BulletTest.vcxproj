@@ -284,6 +284,7 @@
     <ClInclude Include="Network\NetPlayer.h" />
     <ClInclude Include="Network\NetworkDebugger.h" />
     <ClInclude Include="Network\NetworkManager.h" />
+    <ClInclude Include="Otros\AssetsReader.h" />
     <ClInclude Include="Otros\Clock.hpp" />
     <ClInclude Include="Otros\DebugMarks.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
@@ -294,6 +295,7 @@
     <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Settings.h" />
     <ClInclude Include="Otros\Time.hpp" />
+    <ClInclude Include="Otros\TimePerFrame.h" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />
@@ -400,6 +402,7 @@
     <ClCompile Include="Network\NetPlayer.cpp" />
     <ClCompile Include="Network\NetworkDebugger.cpp" />
     <ClCompile Include="Network\NetworkManager.cpp" />
+    <ClCompile Include="Otros\AssetsReader.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
     <ClCompile Include="Otros\DebugMarks.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
@@ -407,6 +410,7 @@
     <ClCompile Include="Otros\PriorityQueue.cpp" />
     <ClCompile Include="Otros\Settings.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
+    <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />

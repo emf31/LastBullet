@@ -1,5 +1,7 @@
 #include "LoadingState.h"
-
+#include <StateStack.h>
+#include <AssetsReader.h>
+#include <TimePerFrame.h>
 
 
 LoadingState::LoadingState()
@@ -13,8 +15,10 @@ LoadingState::~LoadingState()
 void LoadingState::Inicializar()
 {
 	loadingStateGUI.inicializar();
-	task = new ParalellTask();
-	task->Execute();
+	TimePerFrameClass::timePerFrameLoadingState();
+	readAllAssets();
+//	pruebas.restart();
+	needRender = false;
 
 }
 
@@ -42,22 +46,50 @@ void LoadingState::HandleEvent()
 
 void LoadingState::Update(Time timeElapsed)
 {
+	if (!needRender) {
+	//std::cout << "Entro en update" << std::endl;
 	loadingStateGUI.update();
-	std::cout << "Updateando loadingstate" << std::endl;
-	//if(task->mFinishedRunInGame)
-	//task->f1.get();
+	//std::cout << timeElapsed.asMilliseconds() << std::endl;
+	if (!colaAssets.empty()) {
+		std::string path = colaAssets.front();
+		ResourceManager::i().getMesh(path);
+		colaAssets.pop();
+
+	}
+	
+	if (colaAssets.empty()) {
+	//	float mytime = pruebas.getElapsedTime().asSeconds();
+		TimePerFrameClass::timePerFrameDefault();
+		StateStack::i().GetCurrentState()->Clear();
+		StateStack::i().SetCurrentState(States::ID::InGame);
+		StateStack::i().GetCurrentState()->Inicializar();
+	}
+	needRender = true;
+}
+
+		
 }
 
 void LoadingState::Render(float interpolation, Time elapsedTime)
 {
-
-	float mouseX = (float)Input::i().getMouseX();
+//	std::cout << "Entro en render" << std::endl;
+	/*float mouseX = (float)Input::i().getMouseX();
 	float mouseY = (float)Input::i().getMouseY();
 
 	//GUI
-	loadingStateGUI.injectMousePosition(mouseX, mouseY);
+	loadingStateGUI.injectMousePosition(mouseX, mouseY);*/
 
 	GraphicEngine::i().renderAll();
+
+	needRender = false;
+}
+
+void LoadingState::readAllAssets()
+{
+	AssetsReader::read("../media/Props",colaAssets);
+	AssetsReader::read("../media/arma", colaAssets);
+	AssetsReader::read("../media/bullets", colaAssets);
+	AssetsReader::read("../media/Granada", colaAssets);
 }
 
 
