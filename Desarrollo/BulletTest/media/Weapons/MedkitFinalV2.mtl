@@ -1,0 +1,9 @@
+newmtl Gengon001SG
+illum 4
+Kd 0.00 0.00 0.00 Weapons/medkitUV.jpg
+Ka 0.59 0.59 0.59 Weapons/medkitUV.jpg
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00 Weapons/medkitUV_SPEC.png
+Ns 0.00
+Kn 0.00 0.00 0.00 Weapons/medkitUV_NRM.png

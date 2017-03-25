@@ -56,14 +56,14 @@ void RocketBullet::handleInput()
 
 void RocketBullet::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.3, 0.3, 0.3), "", "../media/bullets/rocketbullet.obj");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.3f, 0.3f, 0.3f), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_nodo->setRotationXYZ(m_rotation);
 
 	//m_rotation.display();
 	//m_renderState.setRenderRot(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.1f, 0.1f, 0.1f), 1, false);
+	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.5f, 0.3f, 0.2f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 	proxy->m_collisionFilterMask = col::rocketCollidesWith;

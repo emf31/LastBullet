@@ -1,7 +1,7 @@
 #include "GunBullet.h"
 #include <MessageHandler.h>
 #include <GraphicEngine.h>
-
+#include <TimePerFrame.h>
 
 GunBullet::GunBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
 m_position(position), m_direction(direction), m_velocity(450), m_rotation(rotation)
@@ -23,7 +23,7 @@ void GunBullet::inicializar()
 
 void GunBullet::update(Time elapsedTime)
 {
-	m_renderState.updateVelocity(elapsedTime.asSeconds(), (m_direction*m_velocity));
+	m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*m_velocity));
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
 
 		//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
