@@ -32,8 +32,9 @@ CellSpacePartition::CellSpacePartition(float width, float height, int celdasX, i
 int CellSpacePartition::PositionToIndex(Vec2f& pos) {
 	//int indice = (int)(m_numCeldasX * pos.x / m_anchoCelda) + ((int)((m_numCeldasY)*pos.y / m_altoCelda)*m_numCeldasX);
 	//int indice = (int)(pos.x / m_anchoCelda) + (int)(pos.y / m_altoCelda);
+	float auxY = -pos.y;
 	size_t x = (int)(pos.x / m_anchoCelda);
-	size_t y = (int)(pos.y / m_altoCelda);
+	size_t y = (int)(auxY / m_altoCelda);
 	y = y*m_numCeldasX;
 	std::size_t indice = x + y;
 

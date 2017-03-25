@@ -15,7 +15,6 @@ public:
 	void inicializar();
 	void apagar();
 
-	bool gamestarted = false;
 
 	Partida* getPartida() const { return partida; }
 

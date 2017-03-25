@@ -29,7 +29,7 @@ void Map::inicializar(const std::string& mapa)
 
 	//dimensiones del mapa 647x475
 	//se crea la division del espacio en celdas
-	cellSpace = new CellSpacePartition(200, 200, 5, 5);
+	cellSpace = new CellSpacePartition(100, 100, 10, 10);
 
 	//Lee el mapa
 	map.readMap(mapa);
@@ -39,13 +39,14 @@ void Map::inicializar(const std::string& mapa)
 	
 	//True, grafo dirigido
 	grafo = new SparseGraph(true);
-	grafo->readGraph("../media/laberinto.json");
+	grafo->readGraph("../media/landing.json");
 
 
 	//se meten los nodos a las celdas correspondientes
 	
 	std::cout << "AÑADIMOS LOS NODOS A LAS CELDAS" << std::endl;
 	addNodosToCells();
+
 #ifdef NAV_INFO
 	cellSpace->mostrarContenido();
 #endif // NAV_INFO

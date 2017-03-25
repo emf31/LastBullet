@@ -93,7 +93,7 @@ void NetPlayer::crearPartida()
 	TPlayer p;
 	p.name = "Nixon";
 
-	//m_bots.push_back(p);
+	m_bots.push_back(p);
 
 
 	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);

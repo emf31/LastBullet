@@ -44,12 +44,12 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 0, 20);
+	weaponSystem = new WeaponSystem(this, 1, 10, 20);
 
 	weaponSystem->Inicializar();
 
-	Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
-	camaraBot->asignarEntity(this);
+	/*Camera* camaraBot = GraphicEngine::i().createCamera(m_name, Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	camaraBot->asignarEntity(this);*/
 
 
 
@@ -119,7 +119,7 @@ void Enemy_Bot::update(Time elapsedTime)
 
 			m_renderState.updatePositions(Vec3<float>(
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - p_controller->getStepHeight() / 2,
+				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - radius,
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
 
@@ -180,7 +180,7 @@ void Enemy_Bot::cargarContenido()
 {
 
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/ArmyPilot.b3d");
 	m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
 	m_nodo->setTexture("../media/m4tex.png", 2);
@@ -199,8 +199,8 @@ void Enemy_Bot::cargarContenido()
 
 	m_animState = andando;
 
-	radius = 1.2f;
-	height = 7.3f;
+	radius = 0.5f;
+	height = 3.f;
 	mass = 70.f;
 
 
@@ -213,9 +213,9 @@ void Enemy_Bot::cargarContenido()
 
 	
 
-	p_controller->m_acceleration_walk = 4.3f;
-	p_controller->m_deceleration_walk = 6.5f;
-	p_controller->m_maxSpeed_walk = 2.f;
+	p_controller->m_acceleration_walk = 0.8;
+	p_controller->m_deceleration_walk = 5.f;
+	p_controller->m_maxSpeed_walk = 0.7;
 
 	setPosition(Map::i().searchSpawnPoint());
 
