@@ -295,6 +295,7 @@
     <ClInclude Include="Otros\SafeQueue.h" />
     <ClInclude Include="Otros\Settings.h" />
     <ClInclude Include="Otros\Time.hpp" />
+    <ClInclude Include="Otros\TimePerFrame.h" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />
@@ -409,6 +410,7 @@
     <ClCompile Include="Otros\PriorityQueue.cpp" />
     <ClCompile Include="Otros\Settings.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
+    <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />

@@ -2,6 +2,7 @@
 
 #include <Time.hpp>
 #include <StateStack.h>
+class TimePerFrame;
 
 class Game
 {
@@ -12,7 +13,7 @@ public:
 	void run();
 
 	static const int server_port;
-	static const Time timePerFrame;
+	
 
 private:
 	void inicializar();

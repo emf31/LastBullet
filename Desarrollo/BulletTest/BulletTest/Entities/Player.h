@@ -18,10 +18,12 @@
 #include "Weapons/Sniper.h"
 
 
+
 #include <Character.h>
 
 
 class NetPlayer;
+
 
 class Player : public Character
 {

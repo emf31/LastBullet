@@ -1,66 +1,89 @@
-﻿  PhysicsEngine.cpp
-     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+﻿  Button.cpp
+  Enemy_Bot.cpp
+  Granada.cpp
+Entities\Granada.cpp(24): warning C4305: '=': truncamiento de 'double' a 'float'
+  GunBullet.cpp
+  Enemy.cpp
+  LifeObject.cpp
+  PhysicsEntity.cpp
+Entities\PhysicsEntity.cpp(50): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(56): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+  Player.cpp
+Entities\Player.cpp(224): warning C4305: '=': truncamiento de 'double' a 'float'
+Entities\Player.cpp(226): warning C4305: '=': truncamiento de 'double' a 'float'
+  RocketBullet.cpp
+Entities\RocketBullet.cpp(59): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  RocketBulletEnemy.cpp
+  AsaltoDrop.cpp
+  PistolaDrop.cpp
+  RocketLauncherDrop.cpp
+  SniperDrop.cpp
+  WeaponDrop.cpp
+  Asalto.cpp
+  Pistola.cpp
+  RocketLauncher.cpp
+  Sniper.cpp
+  Weapon.cpp
+  Generando código...
+  Compilando...
+  DebugMenuGUI.cpp
+  InGameHUD.cpp
+  LoadingStateGUI.cpp
+  MenuGUI.cpp
+  ParalellTask.cpp
+  InputHandler.cpp
+  MessageHandler.cpp
+  Partida.cpp
+  PathFollow.cpp
+  SensoryMemory.cpp
+  BuscarVida.cpp
+  BuscarWeapon.cpp
+  Disparar.cpp
+  Patrullar.cpp
+  Perseguir.cpp
+  TargetingSystem.cpp
+  WeaponSystem.cpp
+  Map.cpp
+  PathPlanner.cpp
+  Game.cpp
+  Generando código...
+  Compilando...
+  main.cpp
+  Camera.cpp
+  CameraShake.cpp
+  GraphicEngine.cpp
+  GunRecoil.cpp
+  MapLoader.cpp
+Motor\MapLoader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+Motor\MapLoader.cpp(183): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(194): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(205): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+  PhysicsEngine.cpp
+  RenderState.cpp
+  BasicSceneNode.cpp
+  NetBot.cpp
+  NetObject.cpp
+  NetPlayer.cpp
+  NetworkDebugger.cpp
+  NetworkManager.cpp
+  AssetsReader.cpp
+  DebugMarks.cpp
+  LifeComponent.cpp
+  Lista.cpp
+  InGame.cpp
+  LoadingState.cpp
+  Generando código...
+  Compilando...
+  Menu.cpp
+  StateFactory.cpp
+  World.cpp
+  Generando código...
+     Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-  Generando código
-  0 of 2365 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Generación de código finalizada
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewUniform1i definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewUseProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewUseProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : warning LNK4049: se importó el símbolo _glewInit definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : warning LNK4049: se importó el símbolo _glewGetErrorString definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(RendererBase.obj) : warning LNK4049: se importó el símbolo _glewExperimental definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewAttachShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewCompileShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewCreateProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewCreateShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewDeleteProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewDeleteShader definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetAttribLocation definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetProgramInfoLog definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetProgramiv definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetShaderInfoLog definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetShaderiv definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewGetUniformLocation definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewLinkProgram definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewShaderSource definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Shader.obj) : warning LNK4049: se importó el símbolo ___glewBindFragDataLocation definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewBindBuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBufferData definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBufferSubData definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewDeleteBuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewGenBuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewEnableVertexAttribArray definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewUniformMatrix4fv definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewVertexAttribPointer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewBindVertexArray definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(StateChangeWrapper.obj) : warning LNK4049: se importó el símbolo ___glewBindVertexArray definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewDeleteVertexArrays definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3GeometryBuffer.obj) : warning LNK4049: se importó el símbolo ___glewGenVertexArrays definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewBindFramebuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewBindFramebuffer definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewCheckFramebufferStatus definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewDeleteFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewDeleteFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewFramebufferTexture2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewFramebufferTexture2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL3FBOTextureTarget.obj) : warning LNK4049: se importó el símbolo ___glewGenFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGenFramebuffers definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___glewGetStringi definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_1_3 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_2_0 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_3_1 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_VERSION_3_2 definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símbolo ___GLEW_ARB_texture_non_power_of_two definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexImage2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexSubImage2D definido localmente
-CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+Player.obj : error LNK2001: símbolo externo "public: static class Time TimePerFrame::timePerFrame" (?timePerFrame@TimePerFrame@@2VTime@@A) sin resolver
+Game.obj : error LNK2001: símbolo externo "public: static class Time TimePerFrame::timePerFrame" (?timePerFrame@TimePerFrame@@2VTime@@A) sin resolver
+LoadingState.obj : error LNK2001: símbolo externo "public: static class Time TimePerFrame::timePerFrame" (?timePerFrame@TimePerFrame@@2VTime@@A) sin resolver
+C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exe : fatal error LNK1120: 1 externos sin resolver

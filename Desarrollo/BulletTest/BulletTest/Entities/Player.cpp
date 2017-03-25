@@ -18,6 +18,8 @@
 #include <ShootSniper.h>
 #include <TriggerSystem.h>
 #include <Map.h>
+#include <TimePerFrame.h>
+
 
 #include <NetworkManager.h>
 #include <glm\glm.hpp>
@@ -161,7 +163,7 @@ void Player::update(Time elapsedTime)
 
 	life_component.update();
 	
-	p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
+	p_controller->updateAction(PhysicsEngine::i().m_world, TimePerFrameClass::GetTimePerFrame().asSeconds());
 
 	
 

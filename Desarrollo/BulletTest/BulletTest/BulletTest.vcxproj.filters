@@ -325,6 +325,7 @@
     <ClCompile Include="Entities\EntActive.cpp" />
     <ClCompile Include="Entities\EntPassive.cpp" />
     <ClCompile Include="Otros\AssetsReader.cpp" />
+    <ClCompile Include="Otros\TimePerFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -757,6 +758,9 @@
     <ClInclude Include="Entities\EntPassive.h" />
     <ClInclude Include="Otros\AssetsReader.h">
       <Filter>Source Code\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\TimePerFrame.h">
+      <Filter>Headers\Otros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
