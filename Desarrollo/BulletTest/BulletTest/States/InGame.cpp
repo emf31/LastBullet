@@ -100,7 +100,7 @@ void InGame::HandleEvent()
 		World::i().getPartida()->muestraTabla();
 
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_3)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F1)) {
 
 		/*debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
@@ -110,19 +110,19 @@ void InGame::HandleEvent()
 
 
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_4)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F2)) {
 		SceneManager::i().draw_mode = 1;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_5)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F3)) {
 		SceneManager::i().draw_mode = 2;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_6)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F4)) {
 		SceneManager::i().draw_mode = 3;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_7)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F5)) {
 		SceneManager::i().draw_mode = 4;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_8)) {
+	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F6)) {
 		SceneManager::i().draw_mode = 5;
 	}
 	else if (Input::i().leftMouseDown()) {

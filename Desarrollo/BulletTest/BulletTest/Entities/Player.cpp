@@ -99,21 +99,21 @@ void Player::inicializar()
 
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(pistola);
-	tienePistola = true;
-	pistola->setEquipada(true);
+	listaWeapons->insertar(asalto);
+	tieneAsalto = true;
+	asalto->setEquipada(true);
 	bindWeapon();
 
 
 
-	listaWeapons->insertar(sniper);
+	/*listaWeapons->insertar(sniper);
 	tieneSniper = true;
 
 	listaWeapons->insertar(asalto);
 	tieneAsalto = true;
 
 	listaWeapons->insertar(rocket);
-	tieneRocketLauncher = true;
+	tieneRocketLauncher = true;*/
 
 	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
 	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
@@ -399,16 +399,16 @@ void Player::move_left()
 void Player::bindWeapon() {
 
 	if (listaWeapons->valorActual()->getClassName() == "Asalto") {
-		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootAsalto()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootAsalto()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "Pistola") {
-		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootPistola()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootPistola()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "RocketLauncher") {
-		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootRocket()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootRocket()));
 	}
 	else if (listaWeapons->valorActual()->getClassName() == "Sniper") {
-		InputHandler::i().bind(GLFW_KEY_7, CommandPtr(new ShootSniper()));
+		InputHandler::i().bind(GLFW_MOUSE_BUTTON_1, CommandPtr(new ShootSniper()));
 	}
 
 }

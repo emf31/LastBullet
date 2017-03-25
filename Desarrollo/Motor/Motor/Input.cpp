@@ -8,7 +8,7 @@ Input::Input() : sm(SceneManager::i()) {
 
 void Input::endEventProcess() {
 	//Keyboard Key States
-	for (std::size_t i = 0; i < 122; i++)
+	for (std::size_t i = 0; i < 348; i++)
 	{
 		if (keys[i] == RELEASED)
 			keys[i] = UP;

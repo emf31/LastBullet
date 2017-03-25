@@ -115,9 +115,11 @@ void MapLoader::readMap(const std::string & name)
 			}
 				
 			if (obj["tag"] == "DirectionalLight") {
+				Vec3<float> vecDir = Vec3<float>(obj["forwardX"], obj["forwardY"], obj["forwardZ"]);
+				vecDir.setZ(vecDir.getZ()*-1.0f);
 				Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
 				rot.normalise();
-				GraphicEngine::i().createDirectionalLight(pos,rot, rgb);
+				GraphicEngine::i().createDirectionalLight(pos, vecDir, rgb);
 			}
 					
 		}
