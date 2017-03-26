@@ -17,7 +17,7 @@ void LoadingState::Inicializar()
 	loadingStateGUI.inicializar();
 	TimePerFrameClass::timePerFrameLoadingState();
 	readAllAssets();
-//	pruebas.restart();
+	loadingStateGUI.setTotalAssets(colaAssets.size());
 	needRender = false;
 
 }
@@ -54,7 +54,9 @@ void LoadingState::Update(Time timeElapsed)
 		std::string path = colaAssets.front();
 		ResourceManager::i().getMesh(path);
 		colaAssets.pop();
-
+		loadingStateGUI.aumetarAssetActual();
+		loadingStateGUI.setAssetName(path);
+		loadingStateGUI.update();
 	}
 	
 	if (colaAssets.empty()) {

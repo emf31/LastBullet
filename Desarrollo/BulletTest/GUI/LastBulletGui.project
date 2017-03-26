@@ -8,6 +8,7 @@
             <Item path="imagesets/FairChar.imageset" type="file" />
             <Item path="imagesets/GameMenu.imageset" type="file" />
             <Item path="imagesets/HUDDemo.imageset" type="file" />
+            <Item path="imagesets/LastBulletCarga.imageset" type="file" />
             <Item path="imagesets/LastBulletHUD.imageset" type="file" />
             <Item path="imagesets/LastBulletMenu.imageset" type="file" />
             <Item path="imagesets/LastBulletMenuBackground.imageset" type="file" />
@@ -31,6 +32,7 @@
             <Item path="layouts/LoadingStateGUI.layout" type="file" />
             <Item path="layouts/SampleBrowser.layout" type="file" />
             <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
+            <Item path="layouts/SimpleDebug.layout" type="file" />
             <Item path="layouts/TabControlDemo.layout" type="file" />
             <Item path="layouts/TabPage.layout" type="file" />
             <Item path="layouts/TabPage1.layout" type="file" />
@@ -42,7 +44,6 @@
             <Item path="layouts/VanillaLookOverview.layout" type="file" />
             <Item path="layouts/VanillaWindows.layout" type="file" />
             <Item path="layouts/application_templates.layout" type="file" />
-            <Item path="layouts/SimpleDebug.layout" type="file" />
         </Item>
     </Items>
 </Project>
