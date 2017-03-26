@@ -213,9 +213,9 @@ void Enemy_Bot::cargarContenido()
 
 	
 
-	p_controller->m_acceleration_walk = 0.8;
+	p_controller->m_acceleration_walk = 0.8f;
 	p_controller->m_deceleration_walk = 5.f;
-	p_controller->m_maxSpeed_walk = 0.7;
+	p_controller->m_maxSpeed_walk = 0.7f;
 
 	setPosition(Map::i().searchSpawnPoint());
 

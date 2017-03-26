@@ -69,7 +69,7 @@ void Asalto::handleInput()
 {
 
 	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
-	TMeshGroup* meshgroup = ResourceManager::i().getMesh("../media/arma/asalto.obj");
+	
 	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.5f, 0.5f, 0.5f), "", "../media/arma/asalto.obj");
 	m_nodo->setVisible(false);
 

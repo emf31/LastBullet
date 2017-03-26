@@ -21,7 +21,7 @@ void Granada::inicializar()
 	fuerza = Vec3<float>(15.f ,35.f, 15.f);
 	radioExplosion = 10.f;
 	height = 0.3f;
-	radius = 0.1;
+	radius = 0.1f;
 	mass = 1.f;
 	timeRecargaGranada = 2.f;
 	restitution = 1.f;

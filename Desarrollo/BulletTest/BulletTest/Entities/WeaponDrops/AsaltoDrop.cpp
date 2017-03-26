@@ -24,6 +24,11 @@ void AsaltoDrop::update(Time elapsedTime)
 
 		}
 	}
+	else {
+		Vec3<float> prev_rot = m_renderState.getRotation();
+		prev_rot.addY(5);
+		m_renderState.updateRotations(prev_rot);
+	}
 }
 
 void AsaltoDrop::handleInput()
@@ -33,7 +38,11 @@ void AsaltoDrop::handleInput()
 void AsaltoDrop::cargarContenido()
 {
 
-
+	Vec3<float> pos = getPosition();
+	pos.addY(2.f);
+	nodo_platform = GraphicEngine::i().createNode(m_renderState.getPosition(), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Props/Plataforma.obj");
+	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.6f, 0.6f, 0.6f), "", "../media/arma/asalto.obj");
+	m_renderState.setPosition(pos);
 }
 
 void AsaltoDrop::borrarContenido()

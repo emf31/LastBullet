@@ -23,6 +23,11 @@ void RocketLauncherDrop::update(Time elapsedTime)
 			m_nodo->setVisible(true);
 		}
 	}
+	else {
+		Vec3<float> prev_rot = m_renderState.getRotation();
+		prev_rot.addY(5);
+		m_renderState.updateRotations(prev_rot);
+	}
 }
 
 void RocketLauncherDrop::handleInput()
@@ -31,7 +36,11 @@ void RocketLauncherDrop::handleInput()
 
 void RocketLauncherDrop::cargarContenido()
 {
-
+	Vec3<float> pos = getPosition();
+	pos.addY(2.f);
+	nodo_platform = GraphicEngine::i().createNode(m_renderState.getPosition(), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Props/Plataforma.obj");
+	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.6f, 0.6f, 0.6f), "", "../media/arma/rocket.obj");
+	m_renderState.setPosition(pos);
 
 }
 

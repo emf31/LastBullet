@@ -221,9 +221,9 @@ void Player::cargarContenido()
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
-	p_controller->m_acceleration_walk = 0.8;
+	p_controller->m_acceleration_walk = 0.8f;
 	p_controller->m_deceleration_walk = 5.f;
-	p_controller->m_maxSpeed_walk = 0.7;
+	p_controller->m_maxSpeed_walk = 0.7f;
 
 
 	life_component.resetVida();

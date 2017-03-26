@@ -100,15 +100,15 @@ void InGame::HandleEvent()
 		World::i().getPartida()->muestraTabla();
 
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F1)) {
+	else if (Input::i().keyPressed((unsigned char)GLFW_KEY_5)) {
 
-		/*debugMenu.debugInput = !debugMenu.debugInput;
+		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
-		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);*/
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);
 
-
+		
 	}
 	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F2)) {
 		SceneManager::i().draw_mode = 1;

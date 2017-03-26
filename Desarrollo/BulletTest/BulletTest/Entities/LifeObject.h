@@ -46,4 +46,6 @@ private:
 	btGhostObject* m_ghostObject;
 	
 	btVector3 m_currentPosition;
+
+	std::shared_ptr<SceneNode> nodo_platform;
 };
