@@ -25,24 +25,18 @@ void LoadingStateGUI::inicializar() {
 
 void LoadingStateGUI::update()
 {
+	assetActual++;
 	ProgressBar->setProgress((float)assetActual / (float)totalAssets);
 	Label->setText(Assetname.c_str());
 }
 
 void LoadingStateGUI::handleEvent(Event * ev)
 {
-
-
 }
 
 void LoadingStateGUI::setTotalAssets(int total)
 {
 	totalAssets = total;
-}
-
-void LoadingStateGUI::aumetarAssetActual()
-{
-	assetActual++;
 }
 
 void LoadingStateGUI::setAssetName(std::string & name)

@@ -20,8 +20,6 @@ public:
 
 	void setTotalAssets(int total);
 
-	void aumetarAssetActual();
-
 	void setAssetName(std::string& name);
 
 private:
