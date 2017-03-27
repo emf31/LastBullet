@@ -24,37 +24,32 @@ void MenuGUI::inicializar() {
 	imagen1_x = 0;
 	imagen2_x = -1280;
 
+
+
 	imagen = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
 
-	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(0));
+	Planeta = static_cast<CEGUI::Image*>(LastBullet->getChild(0));
+
+	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
 	CrearPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onCrearPartidaClicked, this));
-	CrearPartida->setVisible(false);
 
-	UnirPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(1));
+	UnirPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(3));
 	UnirPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
-	UnirPartida->setVisible(false);
 
-	Salir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
+	OpcionesAudio = static_cast<CEGUI::PushButton*>(LastBullet->getChild(4));
+	OpcionesAudio->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesAudioClicked, this));
+
+	OpcionesVideo = static_cast<CEGUI::PushButton*>(LastBullet->getChild(5));
+	OpcionesVideo->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesVideoClicked, this));
+
+	OpcionesGame = static_cast<CEGUI::PushButton*>(LastBullet->getChild(6));
+	OpcionesGame->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesGameClicked, this));
+
+	Salir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(7));
 	Salir->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onSalirClicked, this));
-	Salir->setVisible(false);
-
-	IconoPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(3));
-
-	IconoSalir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(4));
-
-	IconoOpciones = static_cast<CEGUI::PushButton*>(LastBullet->getChild(5));
-
-	SchemePartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(6)); 
-	SchemePartida->setVisible(false);
-
-	SchemeOpciones= static_cast<CEGUI::PushButton*>(LastBullet->getChild(7)); 
-	SchemeOpciones->setVisible(false);
-
-	SchemeSalir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(8));
-	SchemeSalir->setVisible(false);
 
 	//Unirse a partida
 
@@ -84,7 +79,7 @@ void MenuGUI::update()
 
 	updateFondo(2);
 
-	if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
+	/*if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
 		SchemePartida->setVisible(true);
 		CrearPartida->setVisible(true);
 		UnirPartida->setVisible(true);
@@ -109,7 +104,7 @@ void MenuGUI::update()
 	else {
 		SchemeSalir->setVisible(false);
 		Salir->setVisible(false);
-	}
+	}*/
 }
 
 void MenuGUI::handleEvent(Event * ev)
@@ -131,7 +126,7 @@ bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 	p->m_network->searchServersOnLAN();
 	std::vector<std::string> servers= p->m_network->getServers();
 	int size = servers.size();
-	//std::cout << size << std::endl;
+	std::cout << size << std::endl;
 	if (size == 2) {
 		Conexion1->setText(servers.at(0));
 		Conexion2->setText(servers.at(1));
@@ -145,8 +140,26 @@ bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 		Conexion2->setVisible(false);
 	}
 		
-	std::cout << "Le has dado a unir" << std::endl;
+	//std::cout << "Le has dado a unir" << std::endl;
 	return true;
+}
+
+bool MenuGUI::onOpcionesAudioClicked(const CEGUI::EventArgs & e)
+{
+	std::cout << "Le has dado a opciones audio" << std::endl;
+	return false;
+}
+
+bool MenuGUI::onOpcionesVideoClicked(const CEGUI::EventArgs & e)
+{
+	std::cout << "Le has dado a opciones video" << std::endl;
+	return false;
+}
+
+bool MenuGUI::onOpcionesGameClicked(const CEGUI::EventArgs & e)
+{
+	std::cout << "Le has dado a opciones game" << std::endl;
+	return false;
 }
 
 bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e)

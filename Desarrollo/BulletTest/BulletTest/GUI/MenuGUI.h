@@ -21,6 +21,9 @@ public:
 
 	bool onCrearPartidaClicked(const CEGUI::EventArgs& e);
 	bool onUnirPartidaClicked(const CEGUI::EventArgs & e);
+	bool onOpcionesAudioClicked(const CEGUI::EventArgs & e);
+	bool onOpcionesVideoClicked(const CEGUI::EventArgs & e);
+	bool onOpcionesGameClicked(const CEGUI::EventArgs & e);
 	bool onSalirClicked(const CEGUI::EventArgs & e);
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
@@ -31,6 +34,8 @@ private:
 	int imagen1_x;
 	int imagen2_x;
 
+	CEGUI::Image* Planeta;
+
 	CEGUI::DefaultWindow* LastBullet;
 	CEGUI::DefaultWindow* UnirWindow;
 	CEGUI::DefaultWindow* UnirLabel;
@@ -39,16 +44,15 @@ private:
 
 	CEGUI::PushButton *CrearPartida;
 	CEGUI::PushButton *UnirPartida;
+	CEGUI::PushButton *OpcionesVideo;
+	CEGUI::PushButton *OpcionesAudio;
+	CEGUI::PushButton *OpcionesGame;
 	CEGUI::PushButton *Salir;
+
+
 	CEGUI::PushButton *Conexion1;
 	CEGUI::PushButton *Conexion2;
 	CEGUI::PushButton *Actualizar;
-	CEGUI::PushButton *IconoPartida;
-	CEGUI::PushButton *IconoOpciones;
-	CEGUI::PushButton *IconoSalir;
-	CEGUI::PushButton *SchemePartida;
-	CEGUI::PushButton *SchemeOpciones;
-	CEGUI::PushButton *SchemeSalir;
 
 	CEGUI::DefaultWindow *imagen;
 	CEGUI::DefaultWindow *imagen2;

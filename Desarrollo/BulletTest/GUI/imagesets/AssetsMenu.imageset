@@ -6,4 +6,7 @@
     <Image height="80" name="scheme2" width="190" xPos="1041" yPos="102" />
     <Image height="72" name="scheme3" width="91" xPos="1050" yPos="210" />
     <Image height="310" name="planet" width="343" xPos="17" yPos="0" />
+    <Image height="54" name="optionSelected" width="303" xPos="699" yPos="120" />
+    <Image height="330" name="MenuLetras" width="297" xPos="395" yPos="2" />
+    <Image height="47" name="Seleccion" width="342" xPos="62" yPos="333" />
 </Imageset>

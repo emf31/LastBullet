@@ -11,63 +11,49 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow" >
-            <Property name="Area" value="{{0,0},{0,0},{1,1280},{1,-12}}" />
+            <Property name="Area" value="{{0.00078125,3},{0,0},{1.00078,1283},{1,-12}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
-            <Window type="SampleBrowserSkin/Button" name="Button" >
-                <Property name="Area" value="{{0,93},{0,221},{0,405},{0,260}}" />
-                <Property name="Text" value="Crear Partida" />
-            </Window>
-            <Window type="SampleBrowserSkin/Button" name="Button2" >
-                <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,83},{0,262},{0,397},{0,293}}" />
-                <Property name="Text" value="Unirse a partida" />
-            </Window>
-            <Window type="SampleBrowserSkin/Button" name="Button3" >
-                <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,845},{0,439},{0,957},{0,481}}" />
-                <Property name="Text" value="Salir" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton" >
-                <Property name="ID" value="3" />
-                <Property name="Area" value="{{0,439},{0,216},{0,486},{0,260}}" />
-                <Property name="HoverImage" value="AssetsMenu/StartIcon" />
-                <Property name="NormalImage" value="AssetsMenu/StartIcon" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton2" >
-                <Property name="ID" value="4" />
-                <Property name="Area" value="{{0,808},{0,444},{0,847},{0,479}}" />
-                <Property name="HoverImage" value="AssetsMenu/exitIcon" />
-                <Property name="NormalImage" value="AssetsMenu/exitIcon" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton3" >
-                <Property name="ID" value="5" />
-                <Property name="Area" value="{{0,806},{0,237},{0,839},{0,268}}" />
-                <Property name="HoverImage" value="AssetsMenu/optionsIcon" />
-                <Property name="NormalImage" value="AssetsMenu/optionsIcon" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton4" >
-                <Property name="ID" value="6" />
-                <Property name="Area" value="{{0,241},{0,213},{0,443},{0,293}}" />
-                <Property name="HoverImage" value="AssetsMenu/scheme2" />
-                <Property name="NormalImage" value="AssetsMenu/scheme2" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton5" >
-                <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,830},{0,204},{0,1036},{0,254}}" />
-                <Property name="HoverImage" value="AssetsMenu/scheme1" />
-                <Property name="NormalImage" value="AssetsMenu/scheme1" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton6" >
-                <Property name="ID" value="8" />
-                <Property name="Area" value="{{0,833},{0,456},{0,961},{0,509}}" />
-                <Property name="HoverImage" value="AssetsMenu/scheme3" />
-                <Property name="NormalImage" value="AssetsMenu/scheme3" />
-            </Window>
             <Window type="Generic/Image" name="Image" >
-                <Property name="Area" value="{{0,473},{0,209},{0,791},{0,502}}" />
+                <Property name="Area" value="{{-0.195313,513},{-0.00564972,209},{-0.195313,831},{-0.00564972,502}}" />
                 <Property name="Image" value="AssetsMenu/planet" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image2" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,696},{0,204},{0,996},{0,504}}" />
+                <Property name="Image" value="AssetsMenu/MenuLetras" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,673},{0,215},{0.075,877},{0.0451977,220}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton2" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,673},{0,265},{0.075,877},{0.0451977,270}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton3" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,673},{0,310},{0.075,877},{0.0451977,315}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton4" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,673},{0,355},{0.075,877},{0.0451977,360}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton5" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{0,673},{0,405},{0.075,877},{0.0451977,410}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton6" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,673},{0,455},{0.075,877},{0.0451977,460}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow2" >
