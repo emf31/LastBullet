@@ -17,10 +17,10 @@ TAnimationGroupMesh::TAnimationGroupMesh(const std::string & directory, unsigned
 }
 
 TAnimationGroupMesh::~TAnimationGroupMesh() {
-	for (auto it = meshes.begin(); it != meshes.end(); ++it) {
+	for (auto it = vectorModelos.begin(); it != vectorModelos.end(); ++it) {
 		delete *it;
 	}
-	meshes.clear();
+	vectorModelos.clear();
 
 	paths.clear();
 }
@@ -36,12 +36,12 @@ void TAnimationGroupMesh::processAnimations()
 	fAnim->processNode(material);
 
 	//Lo añadimos al vector de meshes
-	meshes.push_back(fAnim);
+	vectorModelos.push_back(fAnim);
 
 	for (std::size_t i = 1; i < NumFrames; i++) {
-		AnimationMesh* anim = new AnimationMesh(paths.at(0));
+		AnimationMesh* anim = new AnimationMesh(paths.at(i));
 		anim->processNode(material);
-		meshes.push_back(anim);
+		vectorModelos.push_back(anim);
 		anim->importer.FreeScene();
 	}
 
@@ -53,8 +53,8 @@ void TAnimationGroupMesh::processAnimations()
 void TAnimationGroupMesh::beginDraw() {
 
 	//Dibujamos los hijos (Si los hay)
-	for (GLuint i = 0; i < this->meshes.size(); i++) {
-		this->meshes[i]->beginDraw();
+	for (GLuint i = 0; i < this->vectorModelos.size(); i++) {
+		this->vectorModelos[i]->beginDraw();
 	}
 
 }

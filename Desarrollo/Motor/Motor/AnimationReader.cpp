@@ -12,7 +12,7 @@ void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, uns
 	std::vector<std::string> strings;
 
 	for (std::size_t i = 0; i < numAnimations; i++) {
-		std::string path = directory + "/" + std::to_string(i) + ".obj";
+		std::string path = directory + "/0" + std::to_string(i) + ".obj";
 		vector.push_back(path);
 		//ResourceManager::i().getAnimationMesh();
 	}

@@ -37,7 +37,7 @@ public:
 
 	virtual void endDraw();
 	
-
+	std::vector<AnimationMesh*> vectorModelos;
 private:
 
 	SceneManager &sm;
@@ -46,7 +46,7 @@ private:
 	/*  Model Data  */
 
 	std::vector<std::string> paths;
-	std::vector<AnimationMesh*> meshes;
+	
 	std::string directory;
 	aiMaterial** material;
 

@@ -18,13 +18,13 @@ TAnimation::~TAnimation()
 bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta)
 {
 	int tam = hasta - desde;
-	if (tam < 0 || (tam + numAnims >= vectorModelos.size())) {
+	if (tam < 0 || (tam + numAnims >= meshes->vectorModelos.size())) {
 		std::cout << "error, estas intentando poner mas animaciones que obj" << std::endl;
 		return false;
 	}
-	std::vector<TMeshGroup*> animacion;
+	std::vector<AnimationMesh*> animacion;
 	for (int i = desde; i <= hasta; i++) {
-		animacion.push_back(vectorModelos[i]);
+		animacion.push_back(meshes->vectorModelos[i]);
 	}
 
 	//al salir del moto animacion se borra pork es local pero su contenido no ya que son punteros a TMeshGroup

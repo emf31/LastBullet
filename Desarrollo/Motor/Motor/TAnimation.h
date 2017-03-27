@@ -69,10 +69,10 @@ private:
 
 	TAnimationGroupMesh* meshes;
 
-	std::vector<TMeshGroup*> vectorModelos;
-	std::vector<TMeshGroup*> currentAnimation;
+	//std::vector<TMeshGroup*> vectorModelos;
+	std::vector<AnimationMesh*> currentAnimation;
 
-	std::unordered_map<std::string, std::vector<TMeshGroup*>> animMap;
+	std::unordered_map<std::string, std::vector<AnimationMesh*>> animMap;
 	int numAnims;
 	int currentFrame;
 	Time timeFrame;
