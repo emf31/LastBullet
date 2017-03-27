@@ -13,11 +13,19 @@ void MenuGUI::inicializar() {
 	loadScheme("Generic.scheme");
 	loadScheme("AssetsMenu.scheme");
 	loadScheme("LastBulletMenuBackground.scheme");
+	loadScheme("LastBulletMenuBackgroundVolteado.scheme");
+	loadScheme("LastBulletHeader.scheme");
 	loadLayout("LastBulletMENU.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(true);
 
 	//Menu principal
+
+	imagen1_x = 0;
+	imagen2_x = -1280;
+
+	imagen = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
+	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
 
@@ -73,6 +81,9 @@ void MenuGUI::inicializar() {
 
 void MenuGUI::update()
 {
+
+	updateFondo(2);
+
 	if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
 		SchemePartida->setVisible(true);
 		CrearPartida->setVisible(true);
@@ -154,4 +165,34 @@ bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 {
 	p->m_network->unirseLobby(Conexion1->getText().c_str());
 	return true;
+}
+
+void MenuGUI::updateFondo(int velocidad)
+{
+	CEGUI::UDim suma;
+	suma.d_offset = velocidad;
+
+	CEGUI::UVector2 newposition(CEGUI::UDim(imagen->getPosition().d_x) + suma, CEGUI::UDim(imagen->getPosition().d_y));
+	CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) + suma, CEGUI::UDim(imagen2->getPosition().d_y));
+
+	imagen->setPosition(newposition);
+	imagen2->setPosition(newposition2);
+
+	imagen1_x += velocidad;
+	imagen2_x += velocidad;
+
+	if (imagen1_x >= 1280) {
+		CEGUI::UDim resta;
+		resta.d_offset = 2560;
+		CEGUI::UVector2 newposition(CEGUI::UDim(imagen->getPosition().d_x) - resta, CEGUI::UDim(imagen->getPosition().d_y));
+		imagen->setPosition(newposition);
+		imagen1_x = -1280;
+	}
+	if (imagen2_x >= 1280) {
+		CEGUI::UDim resta;
+		resta.d_offset = 2560;
+		CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) - resta, CEGUI::UDim(imagen2->getPosition().d_y));
+		imagen2->setPosition(newposition2);
+		imagen2_x = -1280;
+	}
 }

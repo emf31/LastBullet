@@ -1,4 +1,11 @@
-﻿  LoadingStateGUI.cpp
+﻿  MenuGUI.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\gui\menugui.cpp(173): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  Menu.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  StateFactory.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'

@@ -1,0 +1,3 @@
+<Imageset autoScaled="vertical" imagefile="LastBulletHeader.png" name="LastBulletHeader" nativeHorzRes="1280" nativeVertRes="720" version="2">
+    <Image height="720" name="Header" width="1280" xPos="0" yPos="0" />
+</Imageset>

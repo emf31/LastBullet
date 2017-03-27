@@ -96,5 +96,17 @@
                 <Property name="Text" value="Actualizar" />
             </Window>
         </Window>
+        <Window type="Generic/Image" name="Image2" >
+            <Property name="ID" value="3" />
+            <Property name="Area" value="{{0,-1280},{0,0},{0,0},{0,720}}" />
+            <Property name="Image" value="LastBulletMenuBackGroundVolteado/BackGroundVolteado" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="Generic/Image" name="Image3" >
+            <Property name="ID" value="4" />
+            <Property name="Area" value="{{0,0},{0,0},{0,1280},{0,720}}" />
+            <Property name="Image" value="LastBulletHeader/Header" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
     </Window>
 </GUILayout>
