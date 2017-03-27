@@ -87,13 +87,13 @@ public:
 
 	bool rightMouseDown();
 
-	bool keyPressed(unsigned char keycode);
+	bool keyPressed(unsigned int keycode);
 
-	bool keyDown(unsigned char keycode);
+	bool keyDown(unsigned int keycode);
 
-	bool keyUp(unsigned char keycode);
+	bool keyUp(unsigned int keycode);
 
-	bool keyReleased(unsigned char keycode);
+	bool keyReleased(unsigned int keycode);
 
 private:
 	Input();

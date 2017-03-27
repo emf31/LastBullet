@@ -10,8 +10,11 @@ void Input::endEventProcess() {
 	//Keyboard Key States
 	for (std::size_t i = 0; i < 348; i++)
 	{
-		if (keys[i] == RELEASED)
+		if (keys[i] == RELEASED) {
 			keys[i] = UP;
+			std::cout << "Libero tecla -> " << i << std::endl;
+		}
+			
 
 		if (keys[i] == PRESSED)
 			keys[i] = DOWN;
@@ -27,7 +30,7 @@ void Input::endEventProcess() {
 			mouseButtonState[i] = DOWN;
 	}
 
-	//glfwPollEvents();
+	
 
 }
 
@@ -213,28 +216,28 @@ bool Input::rightMouseDown() {
 		return false;
 }
 
-bool Input::keyPressed(unsigned char keycode) {
+bool Input::keyPressed(unsigned int keycode) {
 	if (keys[keycode] == PRESSED)
 		return true;
 	else
 		return false;
 }
 
-bool Input::keyDown(unsigned char keycode) {
+bool Input::keyDown(unsigned int keycode) {
 	if (keys[keycode] == DOWN || keys[keycode] == PRESSED)
 		return true;
 	else
 		return false;
 }
 
-bool Input::keyUp(unsigned char keycode) {
+bool Input::keyUp(unsigned int keycode) {
 	if (keys[keycode] == UP || keys[keycode] == RELEASED)
 		return true;
 	else
 		return false;
 }
 
-bool Input::keyReleased(unsigned char keycode) {
+bool Input::keyReleased(unsigned int keycode) {
 	if (keys[keycode] == RELEASED)
 		return true;
 	else

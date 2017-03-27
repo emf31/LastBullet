@@ -79,28 +79,28 @@ void InGame::HandleEvent()
 	}
 
 	//Teclas debug
-	if (Input::i().keyReleased((unsigned char)GLFW_KEY_1)) {
+	if (Input::i().keyReleased((unsigned int)GLFW_KEY_1)) {
 
 		GraphicEngine::i().toggleDebug();
 
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_2)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 
 		GraphicEngine::i().toggleCamera();
 
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_TAB)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(false);
 
 	}
-	else if (Input::i().keyDown((unsigned char)GLFW_KEY_TAB)) {
+	else if (Input::i().keyDown((unsigned int)GLFW_KEY_TAB)) {
 
 		ingameGUI.setTablaVisible(true);
 		World::i().getPartida()->muestraTabla();
 
 	}
-	else if (Input::i().keyPressed((unsigned char)GLFW_KEY_5)) {
+	else if (Input::i().keyPressed((unsigned int)GLFW_KEY_F1)) {
 
 		debugMenu.debugInput = !debugMenu.debugInput;
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
@@ -110,19 +110,19 @@ void InGame::HandleEvent()
 
 		
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F2)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F2)) {
 		SceneManager::i().draw_mode = 1;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F3)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F3)) {
 		SceneManager::i().draw_mode = 2;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F4)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F4)) {
 		SceneManager::i().draw_mode = 3;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F5)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F5)) {
 		SceneManager::i().draw_mode = 4;
 	}
-	else if (Input::i().keyReleased((unsigned char)GLFW_KEY_F6)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F6)) {
 		SceneManager::i().draw_mode = 5;
 	}
 	else if (Input::i().leftMouseDown()) {

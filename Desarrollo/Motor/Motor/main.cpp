@@ -168,17 +168,23 @@ int main() {
 		engine.doMovement();
 
 		
-
+		
 		if (Input::i().keyReleased(GLFW_KEY_1)) {
-			std::cout << "Has soltado la tecla 1" << std::endl;
+			std::cout << "Has soltado la tecla TAB" << std::endl;
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_1)) {
-			std::cout << "Has presionado la tecla 1" << std::endl;
+			std::cout << "Has presionado la tecla TAB" << std::endl;
 		}
-
+		else if (Input::i().keyReleased(GLFW_KEY_TAB)) {
+			std::cout << "Has soltado la tecla TAB" << std::endl;
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_TAB)) {
+			std::cout << "Has presionado la tecla TAB" << std::endl;
+		}
+		
 		Input::i().endEventProcess();
 
-
+		
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3;
