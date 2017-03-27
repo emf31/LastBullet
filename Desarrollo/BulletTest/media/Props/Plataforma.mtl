@@ -14,3 +14,4 @@ newmtl Material__26
 	Ke 0.0000 0.0000 0.0000
 	map_Ka Props\plataforma_diffuse.png
 	map_Kd Props\plataforma_diffuse.png
+	map_Kn Props\plataforma_Normal.jpg
