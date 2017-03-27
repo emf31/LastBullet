@@ -135,11 +135,6 @@ void Player::inicializar()
 void Player::update(Time elapsedTime)
 {
 
-
-	std::cout << "X: " << getRenderState()->getPosition().getX() << std::endl;
-	std::cout << "Y: " << getRenderState()->getPosition().getY() << std::endl;
-	std::cout << "Z: " << getRenderState()->getPosition().getZ() << std::endl;
-
 	isMoving = false;
 	isShooting = false;
 	
