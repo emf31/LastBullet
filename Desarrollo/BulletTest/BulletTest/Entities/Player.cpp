@@ -134,6 +134,7 @@ void Player::inicializar()
 
 void Player::update(Time elapsedTime)
 {
+
 	isMoving = false;
 	isShooting = false;
 	

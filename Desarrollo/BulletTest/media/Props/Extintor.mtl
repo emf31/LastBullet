@@ -15,3 +15,4 @@ newmtl 01___Default
 	map_Ka Props\Extintor_Diffuse.png
 	map_Kd Props\Extintor_Diffuse.png
 	map_Ks Props\Extintor_Specular.png
+	map_Kn Props\Extintor_Normal.jpg

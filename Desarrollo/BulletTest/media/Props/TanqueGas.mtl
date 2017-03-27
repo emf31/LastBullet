@@ -15,3 +15,4 @@ newmtl 01___Default
 	map_Ka Props\TanqueGas_Diffuse.png
 	map_Kd Props\TanqueGas_Diffuse.png
 	map_Ks Props\TanqueGas_Specular.png
+	map_Kn Props\TanqueGas_Normal.jpg

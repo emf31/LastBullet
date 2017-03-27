@@ -36,7 +36,7 @@ void DebugMenuGUI::inicializar() {
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(false);
 
-	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(100, 200, 100), Vec3<float>(100, 0, 100));
+	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(50, 150, -50), Vec3<float>(50, 0, -50));
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 
 	//MENU PRINCIPAL
@@ -328,7 +328,7 @@ void DebugMenuGUI::crearNodosState() {
 		Vec3<float>posBox = myentity->getPosition();
 		posBox.addY(posBox.getY() + 15);
 
-		nodos[i] = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "");
+		nodos[i] = GraphicEngine::i().createNode(posBox, Vec3<float>(2, 2, 2), "", "../media/box.obj");
 		i++;
 	}
 

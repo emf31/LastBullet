@@ -121,7 +121,7 @@ Camera* GraphicEngine::createCamera(const std::string &name, Vec3<float> positio
 	Camera* myCamera = new Camera(cam, name);
 	cameras[name] = myCamera;
 
-	setActiveCamera(name);
+	//setActiveCamera(name);
 
 	return myCamera;
 }

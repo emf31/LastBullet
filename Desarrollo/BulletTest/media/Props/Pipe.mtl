@@ -14,3 +14,4 @@ newmtl Loft001SG
 	Ke 0.0000 0.0000 0.0000
 	map_Ka Props\Pipe_Diffuse.png
 	map_Kd Props\Pipe_Diffuse.png
+	map_Kn Props\Pipe_Normal.jpg
