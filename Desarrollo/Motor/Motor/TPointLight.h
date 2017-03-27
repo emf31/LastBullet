@@ -5,7 +5,7 @@
 class TPointLight : public TLuz {
 
 public:
-	TPointLight(Vec3<float> posicion, float radioInterio, float radioExterior);
+	TPointLight(Vec3<float> posicion, float radioIn = 6.3f, float radioEx = 10.3f);
 	~TPointLight();
 
 	void pasarDatosAlShader(Shader *shader, int i = 0);
