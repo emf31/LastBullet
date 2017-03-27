@@ -15,3 +15,4 @@ newmtl 01___Default
 	map_Ka Props\Barril_Diffuse.png
 	map_Kd Props\Barril_Diffuse.png
 	map_Ks Props\Barril_Specular.png
+	map_Kn Props\Barril_Normal.jpg
