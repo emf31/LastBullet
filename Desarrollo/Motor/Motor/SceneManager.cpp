@@ -243,14 +243,14 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	return model;
 }
 
-TAnimation * SceneManager::crearNodoAnimacion(const std::string & directory)
+TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)
 {
 	TNode * nuevoNodoAnimacion;
 	TNode * nuevoNodoRotacion;
 	TNode * nuevoNodoEscalado;
 	TNode * nuevoNodoTraslacion;
 
-	/*TAnimation* animation = new TAnimation(directory, 25);
+	TAnimation* animation = new TAnimation(animGroup);
 
 	//creamos los nodos malla y los nodos transformaciones necesaria para esta
 	int id = animation->getID();
@@ -282,7 +282,7 @@ TAnimation * SceneManager::crearNodoAnimacion(const std::string & directory)
 	//nuevoNodoMalla->setModel(model);
 	//nuevoNodoMalla->getEntity()->setModel();
 
-	return animation;*/
+	return animation;
 
 	return nullptr;
 }
