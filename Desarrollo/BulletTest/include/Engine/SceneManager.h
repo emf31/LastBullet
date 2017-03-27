@@ -46,7 +46,7 @@ public:
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
-	TAnimation* crearNodoAnimacion(const std::string& directory);
+	TAnimation* crearNodoAnimacion(TAnimationGroupMesh * animGroup);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
 	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);
