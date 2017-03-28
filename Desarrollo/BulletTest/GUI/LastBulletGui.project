@@ -12,12 +12,13 @@
             <Item path="imagesets/LastBulletHUD.imageset" type="file" />
             <Item path="imagesets/LastBulletMenu.imageset" type="file" />
             <Item path="imagesets/LastBulletMenuBackground.imageset" type="file" />
+            <Item path="imagesets/LastBulletMenuBackgroundVolteado.imageset" type="file" />
             <Item path="imagesets/OgreTray.imageset" type="file" />
             <Item path="imagesets/SampleBrowser.imageset" type="file" />
             <Item path="imagesets/TaharezLook.imageset" type="file" />
             <Item path="imagesets/Vanilla.imageset" type="file" />
             <Item path="imagesets/WindowsLook.imageset" type="file" />
-            <Item path="imagesets/LastBulletMenuBackgroundVolteado.imageset" type="file" />
+            <Item path="imagesets/Planeta.imageset" type="file" />
         </Item>
         <Item name="Layouts" type="folder">
             <Item path="layouts/Demo8.layout" type="file" />

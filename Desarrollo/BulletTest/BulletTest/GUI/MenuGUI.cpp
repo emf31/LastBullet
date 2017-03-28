@@ -3,6 +3,7 @@
 #include <NetPlayer.h>
 #include <StateStack.h>
 
+
 MenuGUI::MenuGUI() : GUI() {
 }
 
@@ -15,6 +16,7 @@ void MenuGUI::inicializar() {
 	loadScheme("LastBulletMenuBackground.scheme");
 	loadScheme("LastBulletMenuBackgroundVolteado.scheme");
 	loadScheme("LastBulletHeader.scheme");
+	loadScheme("Planeta.scheme");
 	loadLayout("LastBulletMENU.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(true);
@@ -23,15 +25,12 @@ void MenuGUI::inicializar() {
 
 	imagen1_x = 0;
 	imagen2_x = -1280;
-
-
+	FrameActual = 0;
 
 	imagen = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
-
-	Planeta = static_cast<CEGUI::Image*>(LastBullet->getChild(0));
 
 	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
 	CrearPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onCrearPartidaClicked, this));
@@ -50,6 +49,8 @@ void MenuGUI::inicializar() {
 
 	Salir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(7));
 	Salir->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onSalirClicked, this));
+
+	Planeta = static_cast<CEGUI::DefaultWindow*>(LastBullet->getChild(8)->getChild(0));
 
 	//Unirse a partida
 
@@ -70,7 +71,7 @@ void MenuGUI::inicializar() {
 	
 	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 
-
+	rellenarAnimacionPlaneta();
 	
 }
 
@@ -78,6 +79,9 @@ void MenuGUI::update()
 {
 
 	updateFondo(2);
+	reproducirAnimacionPlaneta();
+
+	//Planeta->setProperty("Image","Planeta/1Planeta2");
 
 	/*if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
 		SchemePartida->setVisible(true);
@@ -207,5 +211,34 @@ void MenuGUI::updateFondo(int velocidad)
 		CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) - resta, CEGUI::UDim(imagen2->getPosition().d_y));
 		imagen2->setPosition(newposition2);
 		imagen2_x = -1280;
+	}
+}
+
+void MenuGUI::rellenarAnimacionPlaneta()
+{
+	for (int i = 1; i <= 11; i++) {
+		std::string auxi = std::to_string(i);
+		for (int j = 1; j <= 26; j++) {
+			std::string auxj = std::to_string(j);
+			animacionPlaneta.push_back("Planeta/"+auxi+"Planeta" + auxj);
+			//std::cout << "Planeta/" + auxj + "Planeta" + auxi << std::endl;
+		}
+	}
+
+	for (int i = 1; i <= 15; i++) {
+		std::string auxi = std::to_string(i);
+		animacionPlaneta.push_back("Planeta/12Planeta" + auxi);
+	}
+}
+
+void MenuGUI::reproducirAnimacionPlaneta()
+{
+	//Planeta->setProperty();
+	CEGUI::Property* PropiedadesPlaneta=Planeta->getPropertyInstance("Image");
+	PropiedadesPlaneta->set(Planeta,animacionPlaneta.at(FrameActual));
+	//std::cout << animacionPlaneta.at(FrameActual) << std::endl;
+	FrameActual++;
+	if (FrameActual == animacionPlaneta.size()) {
+		FrameActual = 0;
 	}
 }

@@ -34,7 +34,7 @@ private:
 	int imagen1_x;
 	int imagen2_x;
 
-	CEGUI::Image* Planeta;
+	CEGUI::DefaultWindow* Planeta;
 
 	CEGUI::DefaultWindow* LastBullet;
 	CEGUI::DefaultWindow* UnirWindow;
@@ -57,9 +57,14 @@ private:
 	CEGUI::DefaultWindow *imagen;
 	CEGUI::DefaultWindow *imagen2;
 
+	std::vector < CEGUI::String > animacionPlaneta;
+
 	//std::thread t;
 
 	Player* p;
+	int FrameActual;
 
 	void updateFondo(int velocidad);
+	void rellenarAnimacionPlaneta();
+	void reproducirAnimacionPlaneta();
 };
