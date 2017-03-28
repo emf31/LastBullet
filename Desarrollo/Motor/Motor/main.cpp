@@ -65,6 +65,7 @@ int main() {
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
+	origen->setModelColor(1.0f,0.2f,0.2f);
 
 
 	//animacion

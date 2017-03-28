@@ -5,6 +5,7 @@ layout (location = 2) out vec4 gTextura;
 layout (location = 3) out vec3 gTangent;
 layout (location = 4) out vec3 gBitangent;
 layout (location = 5) out vec3 gEmisivo;
+layout (location = 6) out vec3 gObjectColor;
 
 
 
@@ -15,6 +16,7 @@ struct Material {
     sampler2D texture_tangent;
     sampler2D texture_bitangent;
     vec3 emisivo;
+    vec3 objectColor;
     float brillo;
 }; 
 
@@ -60,5 +62,7 @@ void main()
 
     //color emisivo
     gEmisivo = material.emisivo;
+
+    gObjectColor = material.objectColor;
 
 }

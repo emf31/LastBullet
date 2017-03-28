@@ -81,7 +81,8 @@ void SceneManager::inicializarBuffers()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gTextura"), 2);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gTangent"), 3);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBitangent"), 4);
-	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gEmisivo"), 5);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gEmisivo"), 5); 
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gObjectColor"), 6);
 
 	
 	glGenFramebuffers(1, &gBuffer);
@@ -129,12 +130,19 @@ void SceneManager::inicializarBuffers()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT5, GL_TEXTURE_2D, gEmisivo, 0);
+	//objectColor
+	glGenTextures(1, &gObjectColor);
+	glBindTexture(GL_TEXTURE_2D, gObjectColor);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT6, GL_TEXTURE_2D, gObjectColor, 0);
 
 
 	// tenemos que juntar los 3 color buffers en el framebuffer que tenemos activo para ello los juntamos en el array
 	// pero como ahora tenemos 3 render targets en el fragment shader vamos a tener que definir 3 capas (layout)
-	GLuint attachments[6] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT5 };
-	glDrawBuffers(6, attachments);
+	GLuint attachments[7] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT5, GL_COLOR_ATTACHMENT6 };
+	glDrawBuffers(7, attachments);
 	
 		//Depthbuffer
 	glGenRenderbuffers(1, &rboDepth);
@@ -164,6 +172,8 @@ void SceneManager::renderLuces()
 	glBindTexture(GL_TEXTURE_2D, gBitangent);
 	glActiveTexture(GL_TEXTURE5);
 	glBindTexture(GL_TEXTURE_2D, gEmisivo);
+	glActiveTexture(GL_TEXTURE6);
+	glBindTexture(GL_TEXTURE_2D, gObjectColor);
 	
 
 	//LUZ SOLAR

@@ -39,6 +39,7 @@ uniform sampler2D gTextura;
 uniform sampler2D gTangent;
 uniform sampler2D gBitangent;
 uniform sampler2D gEmisivo;
+uniform sampler2D gObjectColor;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
@@ -66,6 +67,7 @@ void main()
     Diffuse.b = texture(gTextura, TexCoords).b;
     float Specular = texture(gTextura, TexCoords).a;
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
+    vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
     
     
         vec3 colorFinal;
@@ -86,6 +88,7 @@ void main()
     }
 
     colorFinal += emissive;
+    colorFinal = colorFinal * modelColor;
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
