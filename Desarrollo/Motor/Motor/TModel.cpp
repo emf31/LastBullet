@@ -18,6 +18,7 @@ TModel::TModel(TMeshGroup* meshGroup) : sm(SceneManager::i()) {
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 	visible = true;
+	m_emisivo = Vec3<float>(0.0f, 0.0f, 0.0f);
 }
 
 TModel::~TModel() {
@@ -39,8 +40,8 @@ void TModel::beginDraw() {
 
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		//color
-		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
+		//color emisivo
+		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.emisivo"), m_emisivo.getX(), m_emisivo.getY(), m_emisivo.getZ());
 
 		//Dibujamos el modelo
 		m_meshGroup->beginDraw();

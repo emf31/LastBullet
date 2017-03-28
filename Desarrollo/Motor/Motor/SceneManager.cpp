@@ -158,9 +158,9 @@ void SceneManager::renderLuces()
 	glBindTexture(GL_TEXTURE_2D, gNormal);
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, gTextura);
-	glActiveTexture(GL_TEXTURE2);
+	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, gTangent);
-	glActiveTexture(GL_TEXTURE2);
+	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, gBitangent);
 	glActiveTexture(GL_TEXTURE5);
 	glBindTexture(GL_TEXTURE_2D, gEmisivo);

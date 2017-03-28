@@ -15,49 +15,85 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="Generic/Image" name="Image2" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0,271},{0,178},{0,538},{0,211}}" />
+                <Property name="Image" value="AssetsMenu/mStart" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image22" >
+                <Property name="ID" value="12" />
+                <Property name="Area" value="{{0,218},{0,325},{0,485},{0,358}}" />
+                <Property name="Image" value="AssetsMenu/mJoin" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image23" >
+                <Property name="ID" value="13" />
+                <Property name="Area" value="{{0,827},{0,492},{0,1094},{0,525}}" />
+                <Property name="Image" value="AssetsMenu/mAudio" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image24" >
+                <Property name="ID" value="14" />
+                <Property name="Area" value="{{0,826},{0,173},{0,1093},{0,206}}" />
+                <Property name="Image" value="AssetsMenu/mVideo" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image25" >
+                <Property name="ID" value="15" />
+                <Property name="Area" value="{{0,906},{0,329},{0,1173},{0,362}}" />
+                <Property name="Image" value="AssetsMenu/mGame" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image26" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,696},{0,204},{0,996},{0,504}}" />
-                <Property name="Image" value="AssetsMenu/MenuLetras" />
+                <Property name="Area" value="{{0,304},{0,492},{0,571},{0,525}}" />
+                <Property name="Image" value="AssetsMenu/mExit" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="DefaultWindow" name="DefaultWindow32" >
                 <Property name="ID" value="8" />
-                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Area" value="{{0,-2},{0,0},{1,-2},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Window type="Generic/Image" name="1Planeta1" >
-                    <Property name="Area" value="{{0,243},{0,205},{0,543},{0,505}}" />
+                    <Property name="Area" value="{{0,543},{0,243},{0,743},{0,443}}" />
                     <Property name="Image" value="Planeta/11Planeta1" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AlwaysOnTop" value="true" />
+                </Window>
+                <Window type="Generic/Image" name="Image" >
+                    <Property name="Area" value="{{0,441},{0,151},{0,849},{0,551}}" />
+                    <Property name="Image" value="AssetsMenu/planet" />
                     <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 </Window>
             </Window>
             <Window type="Generic/ImageButton" name="ImageButton" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{-0.021875,699},{-0.00282486,215},{0.133594,795},{0.00706215,247}}" />
-                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton2" >
-                <Property name="ID" value="3" />
-                <Property name="Area" value="{{-0.021875,699},{-0.00282486,265},{0.208594,699},{0.0522599,265}}" />
-                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton3" >
-                <Property name="ID" value="4" />
-                <Property name="Area" value="{{-0.021875,699},{-0.00282486,310},{0.133594,795},{0.00706215,342}}" />
+                <Property name="Area" value="{{-0.021875,271},{-0.00282486,177},{0.133594,367},{0.00706215,209}}" />
                 <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
             <Window type="Generic/ImageButton" name="ImageButton4" >
                 <Property name="ID" value="5" />
-                <Property name="Area" value="{{-0.021875,699},{-0.00282486,355},{0.133594,795},{0.00706215,387}}" />
-                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton5" >
-                <Property name="ID" value="6" />
-                <Property name="Area" value="{{-0.021875,699},{-0.00282486,405},{0.133594,795},{0.00706215,437}}" />
+                <Property name="Area" value="{{-0.021875,826},{-0.00282486,170},{0.133594,922},{0.00706215,202}}" />
                 <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
             <Window type="Generic/ImageButton" name="ImageButton6" >
                 <Property name="ID" value="7" />
-                <Property name="Area" value="{{-0.021875,699},{-0.00282486,455},{0.133594,795},{0.00706215,487}}" />
+                <Property name="Area" value="{{-0.021875,304},{-0.00282486,492},{0.133594,400},{0.00706215,524}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton3" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{-0.021875,827},{-0.00282486,491},{0.133594,923},{0.00706215,523}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton5" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{-0.021875,906},{-0.00282486,327},{0.133594,1002},{0.00706215,359}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton2" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{-0.021875,219},{-0.00282486,325},{0.208594,219},{0.0522599,325}}" />
                 <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
         </Window>
