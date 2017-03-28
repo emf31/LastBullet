@@ -85,7 +85,7 @@ void Game::run()
 				processEvents();
 
 				//Realizamos actualizaciones
-				update(dt);
+				update(TimePerFrameClass::GetTimePerFrame());
 
 				time_client_curr = clock.getElapsedTime();
 
