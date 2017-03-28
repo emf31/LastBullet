@@ -15,7 +15,6 @@ newmtl 01___Default
 	map_Ka pistola1.png
 	map_Kd pistola1.png
 	map_Ks pistola1spec.png
-	map_Kn pistola1_NRM.jpg
 
 newmtl 09___Default
 	Ns 10.0000
@@ -31,7 +30,6 @@ newmtl 09___Default
 	map_Ka pistola9.png
 	map_Kd pistola9.png
 	map_Ks pistola9spec.png
-	map_Kn pistola9_NRM.jpg
 
 newmtl 02___Default
 	Ns 10.0000
@@ -47,6 +45,5 @@ newmtl 02___Default
 	map_Ka pistola2.png
 	map_Kd pistola2.png
 	map_Ks pistola2spec.png
-	map_Kn pistola2_NRM.jpg
 
 
