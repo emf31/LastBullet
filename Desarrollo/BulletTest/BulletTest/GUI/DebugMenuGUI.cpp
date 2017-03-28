@@ -178,7 +178,6 @@ void DebugMenuGUI::update() {
 
 	updateFuzzyProgressBars();
 
-
 	if (VerEstadosIA) {
 
 
@@ -626,6 +625,8 @@ bool DebugMenuGUI::onCamaraAerea(const CEGUI::EventArgs & e) {
 	if (GraphicEngine::i().getActiveCamera()->getNameCamera() != "CamaraAerea") {
 
 		GraphicEngine::i().setActiveCamera("CamaraAerea");
+		GraphicEngine::i().getActiveCamera()->setTarget(Vec3<float>(50, 0, 50) - GraphicEngine::i().getActiveCamera()->getPosition());
+
 	}
 	else {
 		GraphicEngine::i().setActiveCamera("CamaraPlayer");
