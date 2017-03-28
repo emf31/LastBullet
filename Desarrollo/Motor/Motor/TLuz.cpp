@@ -141,23 +141,23 @@ void TLuz::setLight()
 }
 void TLuz::beginDraw() {
 
-	SceneManager &sm = SceneManager::i();
-	const glm::mat4& view = sm.getViewMatrix();
-	const glm::mat4& projection = sm.getProjectionMatrix();
-	glm::mat4& model = sm.getMatrizActual();
+	//SceneManager &sm = SceneManager::i();
+	//const glm::mat4& view = sm.getViewMatrix();
+	//const glm::mat4& projection = sm.getProjectionMatrix();
+	//glm::mat4& model = sm.getMatrizActual();
 
 
-	sm.shaderBombillas->Use();
+	//sm.shaderBombillas->Use();
 
-	// Le pasamos las matrices
-	glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	//// Le pasamos las matrices
+	//glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	//glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	//glUniformMatrix4fv(glGetUniformLocation(sm.shaderBombillas->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
 
-	glBindVertexArray(lightVAO);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
+	//glBindVertexArray(lightVAO);
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+	//glBindVertexArray(0);
 
 
 }
