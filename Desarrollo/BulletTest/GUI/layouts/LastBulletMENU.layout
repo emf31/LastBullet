@@ -67,24 +67,29 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
-                <Property name="Area" value="{{0,496},{0,238},{1,-513},{1,-368}}" />
+                <Property name="Area" value="{{0,499},{0,155},{1,-510},{1,-451}}" />
                 <Property name="Text" value="Conexiones Disponnibles" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,409},{0,326},{0,607},{0,376}}" />
+                <Property name="Area" value="{{0,406},{0,290},{0,604},{0,340}}" />
                 <Property name="Text" value="Conexion 1" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button2" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,648},{0,325},{0,882},{0,375}}" />
+                <Property name="Area" value="{{0,648},{0,291},{0,882},{0,341}}" />
                 <Property name="Text" value="Conexion 2" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button3" >
                 <Property name="ID" value="3" />
-                <Property name="Area" value="{{0,569},{0,392},{0,681},{0,442}}" />
+                <Property name="Area" value="{{0,570},{0,354},{0,682},{0,404}}" />
                 <Property name="Text" value="Actualizar" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button4" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
             </Window>
         </Window>
         <Window type="Generic/Image" name="Image2" >
@@ -98,6 +103,116 @@
             <Property name="Area" value="{{0,0},{0,0},{0,1280},{0,720}}" />
             <Property name="Image" value="LastBulletHeader/Header" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow3" >
+            <Property name="ID" value="5" />
+            <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,515},{0,168},{0,732},{0,250}}" />
+                <Property name="Text" value="Audio Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,419},{0,284},{0,598},{0,338}}" />
+                <Property name="Text" value="Souns volume" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+                <Property name="Area" value="{{0,645},{0,299},{0,901},{0,331}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0,902},{0,300},{0,1030},{0,332}}" />
+                <Property name="Text" value="0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label22" >
+                <Property name="Area" value="{{0,421},{0,347},{0,600},{0,401}}" />
+                <Property name="Text" value="Music Volume" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider2" >
+                <Property name="Area" value="{{0,647},{0,362},{0,903},{0,394}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label32" >
+                <Property name="Area" value="{{0,904},{0,363},{0,1032},{0,395}}" />
+                <Property name="Text" value="0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
+            </Window>
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow5" >
+            <Property name="ID" value="6" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Text" value="Video Options" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,516},{0,168},{0,732},{0,252}}" />
+                <Property name="Text" value="Video Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox" >
+                <Property name="Area" value="{{0,671},{0,278},{0,820},{0,316}}" />
+                <Property name="Text" value="Full Screen" />
+            </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox2" >
+                <Property name="Area" value="{{0,671},{0,324},{0,824},{0,361}}" />
+                <Property name="Text" value="Window" />
+                <Property name="Selected" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,414},{0,291},{0,598},{0,339}}" />
+                <Property name="Text" value="Type of screen" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
+            </Window>
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow4" >
+            <Property name="ID" value="7" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,515},{0,171},{0,732},{0,248}}" />
+                <Property name="Text" value="Game Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,417},{0,289},{0,598},{0,339}}" />
+                <Property name="Text" value="Number of bots" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0,419},{0,347},{0,601},{0,401}}" />
+                <Property name="Text" value="Map" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+                <Property name="Area" value="{{0,645},{0,298},{0,901},{0,330}}" />
+                <Property name="ClickStepSize" value="0.25" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label4" >
+                <Property name="Area" value="{{0,903},{0,300},{0,1031},{0,332}}" />
+                <Property name="Text" value="0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Editbox" name="Editbox" >
+                <Property name="Area" value="{{0,651},{0,361},{0,907},{0,393}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>

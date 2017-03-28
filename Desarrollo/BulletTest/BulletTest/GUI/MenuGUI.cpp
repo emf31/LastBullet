@@ -26,6 +26,7 @@ void MenuGUI::inicializar() {
 	imagen1_x = 0;
 	imagen2_x = -1280;
 	FrameActual = 0;
+	m_stateMenu = stateMenu::enumPrincipal;
 
 	imagen = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
@@ -67,7 +68,39 @@ void MenuGUI::inicializar() {
 	Actualizar = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(3));
 	Actualizar->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
 
+	Atras1 = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(99));
+	Atras1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
 	UnirWindow->setVisible(false);
+
+	//Opciones Audio
+
+	OpcionesAudioWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(5));
+
+	Atras2 = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(99));
+	Atras2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	OpcionesAudioWindow->setVisible(false);
+
+	//Opciones Video
+
+	OpcionesVideoWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(6));
+
+	Atras3 = static_cast<CEGUI::PushButton*>(OpcionesVideoWindow->getChild(99));
+	Atras3->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	OpcionesVideoWindow->setVisible(false);
+
+	//Opciones Game
+
+	OpcionesGameWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(7));
+
+	Atras4 = static_cast<CEGUI::PushButton*>(OpcionesGameWindow->getChild(99));
+	Atras4->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	OpcionesGameWindow->setVisible(false);
+
+	//------------------------------------------------
 	
 	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 
@@ -125,8 +158,7 @@ bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 
 bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 {
-	UnirWindow->setVisible(true);
-	LastBullet->setVisible(false);
+	changeState(stateMenu::enumUnir);
 	p->m_network->searchServersOnLAN();
 	std::vector<std::string> servers= p->m_network->getServers();
 	int size = servers.size();
@@ -150,18 +182,21 @@ bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 
 bool MenuGUI::onOpcionesAudioClicked(const CEGUI::EventArgs & e)
 {
+	changeState(stateMenu::enumOpcionesAudio);
 	std::cout << "Le has dado a opciones audio" << std::endl;
 	return false;
 }
 
 bool MenuGUI::onOpcionesVideoClicked(const CEGUI::EventArgs & e)
 {
+	changeState(stateMenu::enumOpcionesVideo);
 	std::cout << "Le has dado a opciones video" << std::endl;
 	return false;
 }
 
 bool MenuGUI::onOpcionesGameClicked(const CEGUI::EventArgs & e)
 {
+	changeState(stateMenu::enumOpcionesGame);
 	std::cout << "Le has dado a opciones game" << std::endl;
 	return false;
 }
@@ -181,6 +216,12 @@ bool MenuGUI::onConexion1Clicked(const CEGUI::EventArgs & e)
 bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 {
 	p->m_network->unirseLobby(Conexion1->getText().c_str());
+	return true;
+}
+
+bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
+{
+	changeState(stateMenu::enumPrincipal);
 	return true;
 }
 
@@ -240,5 +281,36 @@ void MenuGUI::reproducirAnimacionPlaneta()
 	FrameActual++;
 	if (FrameActual == animacionPlaneta.size()) {
 		FrameActual = 0;
+	}
+}
+
+void MenuGUI::changeState(stateMenu Newstate)
+{
+	setStateVisible(m_stateMenu, false);
+
+	m_stateMenu = Newstate;
+
+	setStateVisible(m_stateMenu, true);
+
+
+
+}
+
+void MenuGUI::setStateVisible(stateMenu state, bool visible)
+{
+	if (state == stateMenu::enumPrincipal) {
+		LastBullet->setVisible(visible);
+	}
+	else if (state == stateMenu::enumUnir) {
+		UnirWindow->setVisible(visible);
+	}
+	else if (state == stateMenu::enumOpcionesAudio) {
+		OpcionesAudioWindow->setVisible(visible);
+	}
+	else if (state == stateMenu::enumOpcionesVideo) {
+		OpcionesVideoWindow->setVisible(visible);
+	}
+	else if (state == stateMenu::enumOpcionesGame) {
+		OpcionesGameWindow->setVisible(visible);
 	}
 }
