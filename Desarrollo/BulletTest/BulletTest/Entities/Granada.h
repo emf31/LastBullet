@@ -11,8 +11,7 @@
 #define GRANADADISPARADA 1
 
 
-class Granada :
-	public Entity
+class Granada : public Entity
 {
 public:
 	Granada(Character* owner);

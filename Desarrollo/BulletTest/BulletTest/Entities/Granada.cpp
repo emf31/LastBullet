@@ -108,6 +108,7 @@ void Granada::handleMessage(const Message & message)
 				TImpactoRocket gran;
 				gran.guidDisparado = m_character->getGuid();
 				gran.guidImpactado = myentity->getGuid();
+				gran.damage = damage;
 
 				Message msg(myentity, "COLISION_GRANADA", &gran);
 				MessageHandler::i().sendMessageNow(msg);

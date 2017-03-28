@@ -259,6 +259,11 @@ void Enemy_Bot::handleMessage(const Message & message)
 	else if (message.mensaje == "MATASTE") {
 		decisionAfterKill();
 	}
+	else if (message.mensaje == "COLISION_GRANADA") {
+		TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
+		getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
+		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+	}
 	
 }
 
