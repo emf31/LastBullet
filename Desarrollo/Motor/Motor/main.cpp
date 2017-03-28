@@ -168,7 +168,7 @@ int main() {
 
 		engine.doMovement();
 
-		
+		//std::cout << "Scroll: " << Input::i().getMouseScroll() << std::endl;
 		
 		if (Input::i().keyReleased(GLFW_KEY_1)) {
 			std::cout << "Has soltado la tecla TAB" << std::endl;

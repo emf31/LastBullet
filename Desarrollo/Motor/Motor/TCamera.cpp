@@ -108,6 +108,8 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 		if (zoom >= 45.0f)
 			zoom = 45.0f;
 	}
+
+	
 	
 }
 
