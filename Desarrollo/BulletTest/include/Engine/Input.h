@@ -15,6 +15,7 @@ private:
 
 	processStateENUM processState; // STARTED = handling events, ENDED = not handling events
 
+	float yScroll = 0.f;
 
 
 public:
@@ -24,13 +25,16 @@ public:
 	keyStatesENUM mouseButtonState[2]; //Left(0), Middle(1), Right(2)
 
 	struct Mouse {
-		int X;
-		int Y;
+		unsigned int X;
+		unsigned int Y;
 		float wheel; //wheel is how far the wheel has moved
 	};
 
 	Mouse mouse;
 	GLfloat lastX = 400, lastY = 300;
+	float getMouseScroll() const { return yScroll; }
+	void resetMouseScroll() { yScroll = 0.f; }
+	
 	bool firstMouse = true;
 
 	static Input& i() { // Singleton

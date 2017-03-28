@@ -15,7 +15,8 @@ void Menu::Inicializar()
 
 	//GraphicEngine::i().getActiveCamera()->setInputReceiver(false);
 
-	
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	GraphicEngine::i().enableMouse(true);
 }
 
 void Menu::Clear()
@@ -50,6 +51,7 @@ void Menu::Render(float interpolation, Time elapsedTime)
 
 	float mouseX = (float)Input::i().getMouseX();
 	float mouseY = (float)Input::i().getMouseY();
+
 
 	//GUI
 	menuGUI.injectMousePosition(mouseX, mouseY);

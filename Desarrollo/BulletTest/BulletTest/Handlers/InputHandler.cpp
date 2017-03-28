@@ -40,12 +40,12 @@ InputHandler::InputHandler()
 	commands[GLFW_KEY_S] = move_down;
 	commands[GLFW_KEY_D] = move_right;
 	commands[GLFW_KEY_R] = reload;
-	commands[GLFW_KEY_3] = list_up;
-	commands[GLFW_KEY_4] = list_down;
+	/*commands[GLFW_KEY_UNKNOWN] = list_up;
+	commands[GLFW_KEY_UNKNOWN] = list_down;*/
 	commands[GLFW_KEY_SPACE] = jump;
 	commands[GLFW_MOUSE_BUTTON_1] = shoot_pistola;
 	commands[GLFW_MOUSE_BUTTON_2] = apuntar;
-	commands[GLFW_MOUSE_BUTTON_MIDDLE] = shoot_commandGranada;
+	commands[GLFW_MOUSE_BUTTON_3] = shoot_commandGranada;
 
 	
 }
@@ -66,6 +66,17 @@ void InputHandler::excuteCommands(Player* p)
 		command_queue.back()->execute(p);
 		command_queue.pop_back();
 	}
+
+	float scroll = Input::i().getMouseScroll();
+
+	if (scroll == 1.f) {
+		list_up->execute(p);
+	}
+	else if(scroll == -1.f){
+		list_down->execute(p);
+	}
+
+	Input::i().resetMouseScroll();
 }
 
 bool InputHandler::generate_input_commands(std::vector<CommandPtr> &command_queue)

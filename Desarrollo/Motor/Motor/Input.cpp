@@ -12,7 +12,6 @@ void Input::endEventProcess() {
 	{
 		if (keys[i] == RELEASED) {
 			keys[i] = UP;
-			std::cout << "Libero tecla -> " << i << std::endl;
 		}
 			
 
@@ -79,8 +78,10 @@ void Input::mouse_callbackImpl(GLFWwindow * window, double xpos, double ypos) {
 	lastX = (GLfloat)xpos;
 	lastY = (GLfloat)ypos;
 
-	mouse.X = (int)lastX;
-	mouse.Y = (int)lastY;
+	mouse.X = (unsigned int)lastX;
+	mouse.Y = (unsigned int)lastY;
+
+	
 
 	sm.camaraActiva->ProcessMouseMovement(xoffset, yoffset);
 }
@@ -108,8 +109,7 @@ void Input::mouseButtonCallbackImpl(int key, int action, int mods) {
 }
 
 void Input::scroll_callbackImpl(GLFWwindow * window, double xoffset, double yoffset) {
-
-	sm.camaraActiva->ProcessMouseScroll((GLfloat)yoffset);
+	yScroll = (float)yoffset;
 }
 
 void Input::Do_Movement(GLfloat deltaTime) {
