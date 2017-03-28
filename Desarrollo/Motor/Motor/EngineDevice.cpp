@@ -71,6 +71,8 @@ GLFWwindow* EngineDevice::getWindow() {
 }
 
 void EngineDevice::updateCurrentFrame() {
+	glfwPollEvents();
+
 	GLfloat currentFrame = (GLfloat)glfwGetTime();
 
 	deltaTime = currentFrame - lastFrame;
@@ -91,7 +93,7 @@ int EngineDevice::getFPS() {
 }
 
 void EngineDevice::doMovement() {
-	glfwPollEvents();
+	//glfwPollEvents();
 	input.Do_Movement(deltaTime);
 	m_rotarDerecha = &Input::rotarDerecha;
 	m_rotarIzquierda = &Input::rotarIzquierda;
@@ -110,7 +112,7 @@ bool  EngineDevice::shouldCloseWindw() {
 
 void EngineDevice::enableMouse(bool enable) {
 	if (enable) {
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	} else {
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}

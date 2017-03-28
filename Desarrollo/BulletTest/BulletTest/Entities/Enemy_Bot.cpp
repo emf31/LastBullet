@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 10, 20);
+	weaponSystem = new WeaponSystem(this, 1, 3, 20);
 
 	weaponSystem->Inicializar();
 
@@ -258,6 +258,11 @@ void Enemy_Bot::handleMessage(const Message & message)
 	}
 	else if (message.mensaje == "MATASTE") {
 		decisionAfterKill();
+	}
+	else if (message.mensaje == "COLISION_GRANADA") {
+		TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
+		getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
+		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 	}
 	
 }

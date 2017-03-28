@@ -228,7 +228,7 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
 void MenuGUI::updateFondo(int velocidad)
 {
 	CEGUI::UDim suma;
-	suma.d_offset = velocidad;
+	suma.d_offset = (float) velocidad;
 
 	CEGUI::UVector2 newposition(CEGUI::UDim(imagen->getPosition().d_x) + suma, CEGUI::UDim(imagen->getPosition().d_y));
 	CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) + suma, CEGUI::UDim(imagen2->getPosition().d_y));

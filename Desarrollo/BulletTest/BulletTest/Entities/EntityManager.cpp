@@ -198,6 +198,17 @@ Entity * EntityManager::getEntity(int id)
 	return NULL;
 }
 
+
+std::list<Character*> EntityManager::getPlayerAndBots()
+{
+	std::list<Character*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "Player" || i->second->getClassName() == "Enemy_Bot")
+			characters.push_back(static_cast<Character*>(i->second));
+	}
+	return characters;
+}
+
 std::list<Character*> EntityManager::getCharacters()
 {
 	std::list<Character*>characters;

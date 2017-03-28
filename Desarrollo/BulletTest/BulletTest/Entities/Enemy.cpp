@@ -29,7 +29,7 @@ Enemy::~Enemy()
 void Enemy::inicializar()
 {
 	animation = new Animation();
-	granada = new Granada();
+	granada = new Granada(this);
 	m_isDying = false;
 	
 }
