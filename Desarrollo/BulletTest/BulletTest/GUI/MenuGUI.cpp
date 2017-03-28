@@ -3,6 +3,7 @@
 #include <NetPlayer.h>
 #include <StateStack.h>
 
+
 MenuGUI::MenuGUI() : GUI() {
 }
 
@@ -15,6 +16,7 @@ void MenuGUI::inicializar() {
 	loadScheme("LastBulletMenuBackground.scheme");
 	loadScheme("LastBulletMenuBackgroundVolteado.scheme");
 	loadScheme("LastBulletHeader.scheme");
+	loadScheme("Planeta.scheme");
 	loadLayout("LastBulletMENU.layout");
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(true);
@@ -23,38 +25,33 @@ void MenuGUI::inicializar() {
 
 	imagen1_x = 0;
 	imagen2_x = -1280;
+	FrameActual = 0;
+	m_stateMenu = stateMenu::enumPrincipal;
 
 	imagen = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
 
-	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(0));
+	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
 	CrearPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onCrearPartidaClicked, this));
-	CrearPartida->setVisible(false);
 
-	UnirPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(1));
+	UnirPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(3));
 	UnirPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
-	UnirPartida->setVisible(false);
 
-	Salir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
+	OpcionesAudio = static_cast<CEGUI::PushButton*>(LastBullet->getChild(4));
+	OpcionesAudio->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesAudioClicked, this));
+
+	OpcionesVideo = static_cast<CEGUI::PushButton*>(LastBullet->getChild(5));
+	OpcionesVideo->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesVideoClicked, this));
+
+	OpcionesGame = static_cast<CEGUI::PushButton*>(LastBullet->getChild(6));
+	OpcionesGame->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesGameClicked, this));
+
+	Salir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(7));
 	Salir->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onSalirClicked, this));
-	Salir->setVisible(false);
 
-	IconoPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(3));
-
-	IconoSalir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(4));
-
-	IconoOpciones = static_cast<CEGUI::PushButton*>(LastBullet->getChild(5));
-
-	SchemePartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(6)); 
-	SchemePartida->setVisible(false);
-
-	SchemeOpciones= static_cast<CEGUI::PushButton*>(LastBullet->getChild(7)); 
-	SchemeOpciones->setVisible(false);
-
-	SchemeSalir = static_cast<CEGUI::PushButton*>(LastBullet->getChild(8));
-	SchemeSalir->setVisible(false);
+	Planeta = static_cast<CEGUI::DefaultWindow*>(LastBullet->getChild(8)->getChild(0));
 
 	//Unirse a partida
 
@@ -71,11 +68,43 @@ void MenuGUI::inicializar() {
 	Actualizar = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(3));
 	Actualizar->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
 
+	Atras1 = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(99));
+	Atras1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
 	UnirWindow->setVisible(false);
+
+	//Opciones Audio
+
+	OpcionesAudioWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(5));
+
+	Atras2 = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(99));
+	Atras2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	OpcionesAudioWindow->setVisible(false);
+
+	//Opciones Video
+
+	OpcionesVideoWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(6));
+
+	Atras3 = static_cast<CEGUI::PushButton*>(OpcionesVideoWindow->getChild(99));
+	Atras3->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	OpcionesVideoWindow->setVisible(false);
+
+	//Opciones Game
+
+	OpcionesGameWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(7));
+
+	Atras4 = static_cast<CEGUI::PushButton*>(OpcionesGameWindow->getChild(99));
+	Atras4->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
+
+	OpcionesGameWindow->setVisible(false);
+
+	//------------------------------------------------
 	
 	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 
-
+	rellenarAnimacionPlaneta();
 	
 }
 
@@ -83,8 +112,11 @@ void MenuGUI::update()
 {
 
 	updateFondo(2);
+	reproducirAnimacionPlaneta();
 
-	if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
+	//Planeta->setProperty("Image","Planeta/1Planeta2");
+
+	/*if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
 		SchemePartida->setVisible(true);
 		CrearPartida->setVisible(true);
 		UnirPartida->setVisible(true);
@@ -109,7 +141,7 @@ void MenuGUI::update()
 	else {
 		SchemeSalir->setVisible(false);
 		Salir->setVisible(false);
-	}
+	}*/
 }
 
 void MenuGUI::handleEvent(Event * ev)
@@ -126,12 +158,11 @@ bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 
 bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 {
-	UnirWindow->setVisible(true);
-	LastBullet->setVisible(false);
+	changeState(stateMenu::enumUnir);
 	p->m_network->searchServersOnLAN();
 	std::vector<std::string> servers= p->m_network->getServers();
 	int size = servers.size();
-	//std::cout << size << std::endl;
+	std::cout << size << std::endl;
 	if (size == 2) {
 		Conexion1->setText(servers.at(0));
 		Conexion2->setText(servers.at(1));
@@ -145,8 +176,29 @@ bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 		Conexion2->setVisible(false);
 	}
 		
-	std::cout << "Le has dado a unir" << std::endl;
+	//std::cout << "Le has dado a unir" << std::endl;
 	return true;
+}
+
+bool MenuGUI::onOpcionesAudioClicked(const CEGUI::EventArgs & e)
+{
+	changeState(stateMenu::enumOpcionesAudio);
+	std::cout << "Le has dado a opciones audio" << std::endl;
+	return false;
+}
+
+bool MenuGUI::onOpcionesVideoClicked(const CEGUI::EventArgs & e)
+{
+	changeState(stateMenu::enumOpcionesVideo);
+	std::cout << "Le has dado a opciones video" << std::endl;
+	return false;
+}
+
+bool MenuGUI::onOpcionesGameClicked(const CEGUI::EventArgs & e)
+{
+	changeState(stateMenu::enumOpcionesGame);
+	std::cout << "Le has dado a opciones game" << std::endl;
+	return false;
 }
 
 bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e)
@@ -167,10 +219,16 @@ bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 	return true;
 }
 
+bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
+{
+	changeState(stateMenu::enumPrincipal);
+	return true;
+}
+
 void MenuGUI::updateFondo(int velocidad)
 {
 	CEGUI::UDim suma;
-	suma.d_offset = velocidad;
+	suma.d_offset = (float) velocidad;
 
 	CEGUI::UVector2 newposition(CEGUI::UDim(imagen->getPosition().d_x) + suma, CEGUI::UDim(imagen->getPosition().d_y));
 	CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) + suma, CEGUI::UDim(imagen2->getPosition().d_y));
@@ -194,5 +252,65 @@ void MenuGUI::updateFondo(int velocidad)
 		CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) - resta, CEGUI::UDim(imagen2->getPosition().d_y));
 		imagen2->setPosition(newposition2);
 		imagen2_x = -1280;
+	}
+}
+
+void MenuGUI::rellenarAnimacionPlaneta()
+{
+	for (int i = 1; i <= 11; i++) {
+		std::string auxi = std::to_string(i);
+		for (int j = 1; j <= 26; j++) {
+			std::string auxj = std::to_string(j);
+			animacionPlaneta.push_back("Planeta/"+auxi+"Planeta" + auxj);
+			//std::cout << "Planeta/" + auxj + "Planeta" + auxi << std::endl;
+		}
+	}
+
+	for (int i = 1; i <= 15; i++) {
+		std::string auxi = std::to_string(i);
+		animacionPlaneta.push_back("Planeta/12Planeta" + auxi);
+	}
+}
+
+void MenuGUI::reproducirAnimacionPlaneta()
+{
+	//Planeta->setProperty();
+	CEGUI::Property* PropiedadesPlaneta=Planeta->getPropertyInstance("Image");
+	PropiedadesPlaneta->set(Planeta,animacionPlaneta.at(FrameActual));
+	//std::cout << animacionPlaneta.at(FrameActual) << std::endl;
+	FrameActual++;
+	if (FrameActual == animacionPlaneta.size()) {
+		FrameActual = 0;
+	}
+}
+
+void MenuGUI::changeState(stateMenu Newstate)
+{
+	setStateVisible(m_stateMenu, false);
+
+	m_stateMenu = Newstate;
+
+	setStateVisible(m_stateMenu, true);
+
+
+
+}
+
+void MenuGUI::setStateVisible(stateMenu state, bool visible)
+{
+	if (state == stateMenu::enumPrincipal) {
+		LastBullet->setVisible(visible);
+	}
+	else if (state == stateMenu::enumUnir) {
+		UnirWindow->setVisible(visible);
+	}
+	else if (state == stateMenu::enumOpcionesAudio) {
+		OpcionesAudioWindow->setVisible(visible);
+	}
+	else if (state == stateMenu::enumOpcionesVideo) {
+		OpcionesVideoWindow->setVisible(visible);
+	}
+	else if (state == stateMenu::enumOpcionesGame) {
+		OpcionesGameWindow->setVisible(visible);
 	}
 }

@@ -11,63 +11,90 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow" >
-            <Property name="Area" value="{{0,0},{0,0},{1,1280},{1,-12}}" />
+            <Property name="Area" value="{{0.00078125,3},{0,0},{1.00078,1283},{1,-12}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
-            <Window type="SampleBrowserSkin/Button" name="Button" >
-                <Property name="Area" value="{{0,93},{0,221},{0,405},{0,260}}" />
-                <Property name="Text" value="Crear Partida" />
+            <Window type="Generic/Image" name="Image2" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0,271},{0,178},{0,538},{0,211}}" />
+                <Property name="Image" value="AssetsMenu/mStart" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="SampleBrowserSkin/Button" name="Button2" >
+            <Window type="Generic/Image" name="Image22" >
+                <Property name="ID" value="12" />
+                <Property name="Area" value="{{0,218},{0,325},{0,485},{0,358}}" />
+                <Property name="Image" value="AssetsMenu/mJoin" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image23" >
+                <Property name="ID" value="13" />
+                <Property name="Area" value="{{0,827},{0,492},{0,1094},{0,525}}" />
+                <Property name="Image" value="AssetsMenu/mAudio" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image24" >
+                <Property name="ID" value="14" />
+                <Property name="Area" value="{{0,826},{0,173},{0,1093},{0,206}}" />
+                <Property name="Image" value="AssetsMenu/mVideo" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image25" >
+                <Property name="ID" value="15" />
+                <Property name="Area" value="{{0,906},{0,329},{0,1173},{0,362}}" />
+                <Property name="Image" value="AssetsMenu/mGame" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image26" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,83},{0,262},{0,397},{0,293}}" />
-                <Property name="Text" value="Unirse a partida" />
+                <Property name="Area" value="{{0,304},{0,492},{0,571},{0,525}}" />
+                <Property name="Image" value="AssetsMenu/mExit" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="SampleBrowserSkin/Button" name="Button3" >
-                <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,845},{0,439},{0,957},{0,481}}" />
-                <Property name="Text" value="Salir" />
+            <Window type="DefaultWindow" name="DefaultWindow32" >
+                <Property name="ID" value="8" />
+                <Property name="Area" value="{{0,-2},{0,0},{1,-2},{1,0}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Window type="Generic/Image" name="1Planeta1" >
+                    <Property name="Area" value="{{0,543},{0,243},{0,743},{0,443}}" />
+                    <Property name="Image" value="Planeta/11Planeta1" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AlwaysOnTop" value="true" />
+                </Window>
+                <Window type="Generic/Image" name="Image" >
+                    <Property name="Area" value="{{0,441},{0,151},{0,849},{0,551}}" />
+                    <Property name="Image" value="AssetsMenu/planet" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
             </Window>
             <Window type="Generic/ImageButton" name="ImageButton" >
-                <Property name="ID" value="3" />
-                <Property name="Area" value="{{0,439},{0,216},{0,486},{0,260}}" />
-                <Property name="HoverImage" value="AssetsMenu/StartIcon" />
-                <Property name="NormalImage" value="AssetsMenu/StartIcon" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton2" >
-                <Property name="ID" value="4" />
-                <Property name="Area" value="{{0,808},{0,444},{0,847},{0,479}}" />
-                <Property name="HoverImage" value="AssetsMenu/exitIcon" />
-                <Property name="NormalImage" value="AssetsMenu/exitIcon" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton3" >
-                <Property name="ID" value="5" />
-                <Property name="Area" value="{{0,806},{0,237},{0,839},{0,268}}" />
-                <Property name="HoverImage" value="AssetsMenu/optionsIcon" />
-                <Property name="NormalImage" value="AssetsMenu/optionsIcon" />
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{-0.021875,271},{-0.00282486,177},{0.133594,367},{0.00706215,209}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
             <Window type="Generic/ImageButton" name="ImageButton4" >
-                <Property name="ID" value="6" />
-                <Property name="Area" value="{{0,241},{0,213},{0,443},{0,293}}" />
-                <Property name="HoverImage" value="AssetsMenu/scheme2" />
-                <Property name="NormalImage" value="AssetsMenu/scheme2" />
-            </Window>
-            <Window type="Generic/ImageButton" name="ImageButton5" >
-                <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,830},{0,204},{0,1036},{0,254}}" />
-                <Property name="HoverImage" value="AssetsMenu/scheme1" />
-                <Property name="NormalImage" value="AssetsMenu/scheme1" />
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{-0.021875,826},{-0.00282486,170},{0.133594,922},{0.00706215,202}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
             <Window type="Generic/ImageButton" name="ImageButton6" >
-                <Property name="ID" value="8" />
-                <Property name="Area" value="{{0,833},{0,456},{0,961},{0,509}}" />
-                <Property name="HoverImage" value="AssetsMenu/scheme3" />
-                <Property name="NormalImage" value="AssetsMenu/scheme3" />
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{-0.021875,304},{-0.00282486,492},{0.133594,400},{0.00706215,524}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
-            <Window type="Generic/Image" name="Image" >
-                <Property name="Area" value="{{0,473},{0,209},{0,791},{0,502}}" />
-                <Property name="Image" value="AssetsMenu/planet" />
-                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Generic/ImageButton" name="ImageButton3" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{-0.021875,827},{-0.00282486,491},{0.133594,923},{0.00706215,523}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton5" >
+                <Property name="ID" value="6" />
+                <Property name="Area" value="{{-0.021875,906},{-0.00282486,327},{0.133594,1002},{0.00706215,359}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton2" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{-0.021875,219},{-0.00282486,325},{0.208594,219},{0.0522599,325}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
             </Window>
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow2" >
@@ -76,24 +103,29 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
-                <Property name="Area" value="{{0,496},{0,238},{1,-513},{1,-368}}" />
+                <Property name="Area" value="{{0,499},{0,155},{1,-510},{1,-451}}" />
                 <Property name="Text" value="Conexiones Disponnibles" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button" >
                 <Property name="ID" value="1" />
-                <Property name="Area" value="{{0,409},{0,326},{0,607},{0,376}}" />
+                <Property name="Area" value="{{0,406},{0,290},{0,604},{0,340}}" />
                 <Property name="Text" value="Conexion 1" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button2" >
                 <Property name="ID" value="2" />
-                <Property name="Area" value="{{0,648},{0,325},{0,882},{0,375}}" />
+                <Property name="Area" value="{{0,648},{0,291},{0,882},{0,341}}" />
                 <Property name="Text" value="Conexion 2" />
             </Window>
             <Window type="SampleBrowserSkin/Button" name="Button3" >
                 <Property name="ID" value="3" />
-                <Property name="Area" value="{{0,569},{0,392},{0,681},{0,442}}" />
+                <Property name="Area" value="{{0,570},{0,354},{0,682},{0,404}}" />
                 <Property name="Text" value="Actualizar" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button4" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
             </Window>
         </Window>
         <Window type="Generic/Image" name="Image2" >
@@ -107,6 +139,116 @@
             <Property name="Area" value="{{0,0},{0,0},{0,1280},{0,720}}" />
             <Property name="Image" value="LastBulletHeader/Header" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow3" >
+            <Property name="ID" value="5" />
+            <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,515},{0,168},{0,732},{0,250}}" />
+                <Property name="Text" value="Audio Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,419},{0,284},{0,598},{0,338}}" />
+                <Property name="Text" value="Souns volume" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+                <Property name="Area" value="{{0,645},{0,299},{0,901},{0,331}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0,902},{0,300},{0,1030},{0,332}}" />
+                <Property name="Text" value="0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label22" >
+                <Property name="Area" value="{{0,421},{0,347},{0,600},{0,401}}" />
+                <Property name="Text" value="Music Volume" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider2" >
+                <Property name="Area" value="{{0,647},{0,362},{0,903},{0,394}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label32" >
+                <Property name="Area" value="{{0,904},{0,363},{0,1032},{0,395}}" />
+                <Property name="Text" value="0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
+            </Window>
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow5" >
+            <Property name="ID" value="6" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Text" value="Video Options" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,516},{0,168},{0,732},{0,252}}" />
+                <Property name="Text" value="Video Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox" >
+                <Property name="Area" value="{{0,671},{0,278},{0,820},{0,316}}" />
+                <Property name="Text" value="Full Screen" />
+            </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox2" >
+                <Property name="Area" value="{{0,671},{0,324},{0,824},{0,361}}" />
+                <Property name="Text" value="Window" />
+                <Property name="Selected" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,414},{0,291},{0,598},{0,339}}" />
+                <Property name="Text" value="Type of screen" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
+            </Window>
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow4" >
+            <Property name="ID" value="7" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Label" name="Label" >
+                <Property name="Area" value="{{0,515},{0,171},{0,732},{0,248}}" />
+                <Property name="Text" value="Game Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label2" >
+                <Property name="Area" value="{{0,417},{0,289},{0,598},{0,339}}" />
+                <Property name="Text" value="Number of bots" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0,419},{0,347},{0,601},{0,401}}" />
+                <Property name="Text" value="Map" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+                <Property name="Area" value="{{0,645},{0,298},{0,901},{0,330}}" />
+                <Property name="ClickStepSize" value="0.25" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label4" >
+                <Property name="Area" value="{{0,903},{0,300},{0,1031},{0,332}}" />
+                <Property name="Text" value="0" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Editbox" name="Editbox" >
+                <Property name="Area" value="{{0,651},{0,361},{0,907},{0,393}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button" >
+                <Property name="ID" value="99" />
+                <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
+                <Property name="Text" value="Back" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>

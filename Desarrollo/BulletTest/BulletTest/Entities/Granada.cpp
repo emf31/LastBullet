@@ -5,9 +5,10 @@
 #include <NetworkManager.h>
 #include <Quaternion.h>
 
-Granada::Granada() : EntActive(-1, NULL)
-{
 
+Granada::Granada(Character* owner) : EntActive(-1, NULL)
+{
+	m_character = owner;
 }
 
 
@@ -89,9 +90,35 @@ void Granada::handleMessage(const Message & message)
 		m_explosion = PhysicsEngine::i().createSphereShape(this, radioExplosion);
 
 
-		//solo se comprueba si te han quitado vida a ti mismo ya que la granada esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
-		Player* myentity = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
-		myentity->getLifeComponent().restaVida(explosion(m_renderState.getPosition(), myentity->getRenderPosition(), 30.f),guidLanzador);
+
+
+		//solo se comprueba si te han quitado vida a ti mismo y a los bots si tienes ya que la granada 
+		//esta en todos los clientes y cada uno comprueba si le han quitado vida a el.
+
+		std::list<Character*>characters = EntityManager::i().getPlayerAndBots();
+
+		float damage;
+		///Recorremos todos el player y los enemies para ver si le ha dado a alguno
+		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {
+
+			Character* myentity = *it;
+
+			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion);
+
+
+			if (damage > 0) {
+
+				TImpactoRocket gran;
+				gran.guidDisparado = m_character->getGuid();
+				gran.guidImpactado = myentity->getGuid();
+				gran.damage = damage;
+
+				Message msg(myentity, "COLISION_GRANADA", &gran);
+				MessageHandler::i().sendMessageNow(msg);
+
+			}
+		}
+
 
 		//volvemos a resetear el guidLanzador
 		guidLanzador = RakNet::UNASSIGNED_RAKNET_GUID;
@@ -201,26 +228,26 @@ void Granada::serverShoot(TGranada& g) {
 
 }
 
-float Granada::explosion(Vec3<float> posExplosion, Vec3<float> posCharacter, float radio)
+//Calcula la el daño que hace la explosion de un rocket en funcion del punto
+//de impacto, la posicion del player impactado y un radio de alcance. Además aplica un impulso
+//y en caso de ser un enemigo lo comunica al servidor.
+float Granada::explosion(Character* player, const Vec3<float>& posExplosion, float radio)
 {
-
 	int vidaRestada = 0;
 
-	Vec3<float> vector = posExplosion - posCharacter;
+	Vec3<float> vector = posExplosion - player->getRenderState()->getPosition();
 	float distancia = vector.Magnitude();
 	if (distancia < radio) {
-		
-		
 		if (distancia < radio / 3) {
 			vidaRestada = 100;
 		}
 		else {
 			//(radio-distancia)/((2*radio)/3)
-			vidaRestada = int(100*((radio - distancia) / ((2 * radio) / 3)));
+			vidaRestada = int(100 * ((radio - distancia) / ((2 * radio) / 3)));
 
 		}
 	}
-	
+
 
 	return float(vidaRestada);
 

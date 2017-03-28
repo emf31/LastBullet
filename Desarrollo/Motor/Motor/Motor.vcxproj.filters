@@ -72,9 +72,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="TMeshGroup.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>

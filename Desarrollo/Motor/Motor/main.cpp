@@ -57,6 +57,7 @@ int main() {
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
+	m->setEmisivo(Vec3<float>(0.f, 25.0f, 0.0f));
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
@@ -64,6 +65,7 @@ int main() {
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
+	origen->setModelColor(1.0f,0.2f,0.2f);
 
 
 	//animacion
@@ -167,7 +169,7 @@ int main() {
 
 		engine.doMovement();
 
-		
+		//std::cout << "Scroll: " << Input::i().getMouseScroll() << std::endl;
 		
 		if (Input::i().keyReleased(GLFW_KEY_1)) {
 			std::cout << "Has soltado la tecla TAB" << std::endl;
@@ -192,6 +194,8 @@ int main() {
 		p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
+		flash3->setPosition(sm.camaraActiva->getPosition());
+		flash3->setDirection(vecDir);
 
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);

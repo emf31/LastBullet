@@ -70,7 +70,7 @@ void Player::inicializar()
 	
 
 
-	granada = new Granada();
+	granada = new Granada(this);
 	granada->inicializar();
 	granada->cargarContenido();
 
@@ -260,6 +260,11 @@ void Player::handleMessage(const Message & message)
 			relojSangre.restart();
 			//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		
+	}
+	else if (message.mensaje == "COLISION_GRANADA") {
+		TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
+		getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
+		relojSangre.restart();
 	}
 
 }
