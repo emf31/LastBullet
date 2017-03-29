@@ -74,15 +74,7 @@ void Enemy_Bot::resetAll() {
 
 }
 
-void Enemy_Bot::lookAt(Vec2f at) {
 
-	m_vHeading = at - vec3ToVec2(m_renderState.getPosition());
-
-	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
-
-	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
-
-}
 
 Vec2f Enemy_Bot::getFacing()
 {
@@ -180,7 +172,7 @@ void Enemy_Bot::cargarContenido()
 {
 
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/ArmyPilot.b3d");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/ArmyPilot.obj");
 	m_nodo->setTexture("../media/body01.png", 1);
 	m_nodo->setTexture("../media/head01.png", 0);
 	m_nodo->setTexture("../media/m4tex.png", 2);
@@ -255,6 +247,8 @@ void Enemy_Bot::handleMessage(const Message & message)
 	else if (message.mensaje == "COLISION_ROCKET") {
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 		delete message.data;
+
+		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 	}
 	else if (message.mensaje == "MATASTE") {
 		decisionAfterKill();
@@ -322,6 +316,16 @@ void Enemy_Bot::updateMovement()
 	}
 	
 	
+}
+
+void Enemy_Bot::lookAt(Vec2f at) {
+
+	m_vHeading = at - vec3ToVec2(m_renderState.getPosition());
+
+	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
+
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+
 }
 
 void Enemy_Bot::updateFacing()
