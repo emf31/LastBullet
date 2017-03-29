@@ -157,7 +157,13 @@ bool PathPlanner::CreateRandomPath(std::list<Vec2f>& camino)
 int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 {
 	std::list<NavGraphNode*> nodosCercanos;
-	Map::i().CalcularNodosCercanos(pos, nodosCercanos, vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+	try {
+		Map::i().CalcularNodosCercanos(pos, nodosCercanos, vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+	}
+	catch (std::runtime_error e) {
+		std::cout << e.what() << std::endl;
+	}
+	
 	float menorDist;
 	float distAux;
 	Vec2f vecLong;
