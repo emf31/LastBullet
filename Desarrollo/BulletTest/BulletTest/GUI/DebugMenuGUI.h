@@ -52,6 +52,8 @@ private:
 	bool onInsSniper(const CEGUI::EventArgs & e);
 	bool onInsPistola(const CEGUI::EventArgs & e);
 
+	bool onPrueba(const CEGUI::EventArgs & e);
+
 	bool onEstadosIA(const CEGUI::EventArgs & e);
 
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
