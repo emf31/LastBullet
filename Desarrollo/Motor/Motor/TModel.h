@@ -65,9 +65,7 @@ public:
 		m_b = b;
 	}
 
-	void setEmisivo(Vec3<float> emi) {
-		m_emisivo = emi;
-	}
+
 	
 
 private:
@@ -96,8 +94,6 @@ private:
 	float m_r;
 	float m_g;
 	float m_b;
-
-	Vec3<float> m_emisivo;
 	
 	friend class SceneManager;
 };

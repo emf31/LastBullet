@@ -41,7 +41,10 @@ void TMesh::beginDraw() {
 		else if (name == "texture_tangent")
 			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_tangent"), i);
 		else if (name == "texture_bitangent")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), i);
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), i); 
+		else if (name == "texture_emisivo") {
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_emisivo"), i);
+		}
 		
 		// Bindeamos la textura
 		glBindTexture(GL_TEXTURE_2D, this->textures[i]->id);

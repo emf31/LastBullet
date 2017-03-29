@@ -196,7 +196,7 @@ void SceneManager::renderLuces()
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
-	// Finally render quad
+	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
 	RenderQuad();
 	
 	//copiamos el frame burffer leido

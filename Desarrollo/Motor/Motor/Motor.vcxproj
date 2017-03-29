@@ -309,6 +309,7 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />

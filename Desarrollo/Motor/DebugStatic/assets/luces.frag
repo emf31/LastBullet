@@ -69,7 +69,6 @@ void main()
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
     
-    
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
@@ -88,7 +87,7 @@ void main()
     }
 
     colorFinal += emissive;
-    colorFinal = colorFinal * modelColor;
+    //colorFinal = colorFinal * modelColor;
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)

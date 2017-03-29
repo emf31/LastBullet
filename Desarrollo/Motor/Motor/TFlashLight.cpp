@@ -38,7 +38,6 @@ Vec3<float> TFlashLight::getPosition()
 void TFlashLight::setDirection(Vec3<float> dir)
 {
 	m_direccion = dir;
-	std::cout << "cambio m_direccion" << std::endl;
 
 }
 
@@ -68,7 +67,6 @@ void TFlashLight::updateVectorDireccion()
 	rot = glm::inverse(rot);
 	destino = destino* rot;
 	destino = glm::normalize(destino);
-	std::cout << "cambio m_direccion" << std::endl;
 	m_direccion = Vec3<float>(destino.x, destino.y, destino.z);
 
 }

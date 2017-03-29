@@ -57,7 +57,6 @@ int main() {
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
-	m->setEmisivo(Vec3<float>(0.f, 25.0f, 0.0f));
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
