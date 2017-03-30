@@ -14,4 +14,6 @@
     <Image height="31" name="mVideo" width="267" xPos="395" yPos="200" />
     <Image height="31" name="mGame" width="267" xPos="395" yPos="260" />
     <Image height="31" name="mExit" width="267" xPos="395" yPos="312" />
+    <Image height="31" name="mExit_copy" width="267" xPos="395" yPos="367" />
+    <Image height="47" name="Seleccion_copy" width="342" xPos="62" yPos="415" />
 </Imageset>

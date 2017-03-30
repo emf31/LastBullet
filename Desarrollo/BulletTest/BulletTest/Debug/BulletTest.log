@@ -1,11 +1,4 @@
-﻿  MenuGUI.cpp
-c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\gui\menugui.cpp(173): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-  Generando código...
-  Compilando...
-  Menu.cpp
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  StateFactory.cpp
+﻿  InGame.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'
@@ -87,6 +80,7 @@ Motor.lib(Input.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:
 Motor.lib(ResourceManager.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 Motor.lib(SceneManager.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 Motor.lib(Shader.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TAnimation.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 Motor.lib(TAnimationGroupMesh.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 Motor.lib(TCamera.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 Motor.lib(TEntity.obj) : warning LNK4204: falta informaci¾n de depuraci¾n de 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\Motor.pdb' para hacer referencia al m¾dulo; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n

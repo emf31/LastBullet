@@ -18,7 +18,7 @@
 #include <State.h>
 #include <InGameHUD.h>
 #include <DebugMenuGUI.h>
-
+#include <SalirHUD.h>
 
 class InGame : public State {
 public:
@@ -35,6 +35,7 @@ public:
 private:
 	InGameHUD ingameGUI;
 	DebugMenuGUI debugMenu;
+	SalirHUD salirGUI;
 	float interpolation;
 
 

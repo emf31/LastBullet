@@ -226,6 +226,7 @@
     <ClInclude Include="GUI\LoadingStateGUI.h" />
     <ClInclude Include="GUI\MenuGUI.h" />
     <ClInclude Include="GUI\ParalellTask.h" />
+    <ClInclude Include="GUI\SalirHUD.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
@@ -351,6 +352,7 @@
     <ClCompile Include="GUI\LoadingStateGUI.cpp" />
     <ClCompile Include="GUI\MenuGUI.cpp" />
     <ClCompile Include="GUI\ParalellTask.cpp" />
+    <ClCompile Include="GUI\SalirHUD.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="Handlers\Partida.cpp" />

@@ -8,7 +8,7 @@
 #include <GUIManager.h>
 #include <World.h>
 
-InGame::InGame() : ingameGUI(), debugMenu()
+InGame::InGame() : ingameGUI(), debugMenu(), salirGUI()
 {
 }
 
@@ -23,6 +23,7 @@ void InGame::Inicializar()
 
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
+	salirGUI.inicializar();
 
 	World::i().inicializar();
 
@@ -72,7 +73,7 @@ void InGame::HandleEvent()
 {
 
 
-	if (!debugMenu.debugInput) {
+	if (!debugMenu.debugInput && !salirGUI.escapeInput) {
 		EntityManager::i().getEntity(PLAYER)->handleInput();
 	}
 
@@ -105,9 +106,17 @@ void InGame::HandleEvent()
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
-		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(true);
-
+		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(debugMenu.debugInput);
 		
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_ESCAPE)) {
+		salirGUI.escapeInput = !salirGUI.escapeInput;
+		GraphicEngine::i().enableMouse(salirGUI.escapeInput);
+		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
+		salirGUI.showMouseCursor(salirGUI.escapeInput);
+		GraphicEngine::i().getActiveCamera()->setInputReceiver(!salirGUI.escapeInput);
+		salirGUI.Window->setVisible(salirGUI.escapeInput);
+		ingameGUI.getContext()->getRootWindow()->getChild(0)->setVisible(!salirGUI.escapeInput);
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F2)) {
 		SceneManager::i().draw_mode = 1;
@@ -124,14 +133,17 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F6)) {
 		SceneManager::i().draw_mode = 5;
 	}
+	
 	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();
+		salirGUI.injectLeftMouseButton();
 
 	}
 	else if (Input::i().leftMouseUp()) {
 
 		debugMenu.injectLeftMouseButtonUp();
+		salirGUI.injectLeftMouseButtonUp();
 
 	}
 
@@ -174,6 +186,7 @@ void InGame::Render(float interpolation, Time elapsedTime)
 
 	//GUI
 	debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
+	salirGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
 	GraphicEngine::i().renderAll();
 }

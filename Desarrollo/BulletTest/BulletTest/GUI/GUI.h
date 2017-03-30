@@ -67,6 +67,7 @@ namespace Motor{
 		const CEGUI::GUIContext* getContext() { return m_context; }
 
 		bool debugInput = false;
+		bool escapeInput = false;
 
 	private:
 		CEGUI::OpenGL3Renderer* m_renderer;

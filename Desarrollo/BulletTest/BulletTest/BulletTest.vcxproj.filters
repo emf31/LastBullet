@@ -326,6 +326,7 @@
     <ClCompile Include="Entities\EntPassive.cpp" />
     <ClCompile Include="Otros\AssetsReader.cpp" />
     <ClCompile Include="Otros\TimePerFrame.cpp" />
+    <ClCompile Include="GUI\SalirHUD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -761,6 +762,9 @@
     </ClInclude>
     <ClInclude Include="Otros\TimePerFrame.h">
       <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\SalirHUD.h">
+      <Filter>Headers\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

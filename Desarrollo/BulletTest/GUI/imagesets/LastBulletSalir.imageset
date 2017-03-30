@@ -1,0 +1,3 @@
+<Imageset autoScaled="vertical" imagefile="LastBulletSalir.png" name="LastBulletSalir" nativeHorzRes="1280" nativeVertRes="720" version="2">
+    <Image height="720" name="SalirBackground" width="1280" xPos="0" yPos="0" />
+</Imageset>
