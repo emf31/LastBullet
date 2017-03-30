@@ -88,7 +88,7 @@ void main()
     }
 
     //colorFinal += emissive;
-    colorFinal =  modelColor;
+    //colorFinal =  modelColor;
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
@@ -112,7 +112,7 @@ vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Di
     vec3 lightDir = normalize(-sunlight.direction);
     vec3 ambient = sunlight.ambiente * Diffuse ;
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = sunlight.difusa * diff * Diffuse; 
+    vec3 diffuse = sunlight.difusa * diff * Diffuse * 2.0f; 
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16.0f);
     vec3 specular =  (spec * sunlight.especular) * Specular;
@@ -135,7 +135,7 @@ float quadratic=0.015; //cantidad de atenuacion segun la distancia al cuadrado
     vec3 lightDir = normalize(light.position - FragPos);
     //calculamos el impacto de la luz dependiendo de su angulo respecto a la normal del modelo
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = (light.difusa * diff) * Diffuse;  
+    vec3 diffuse = (light.difusa * diff) * Diffuse * 2.0f;  
     
     //LUZ ESPECULAR
     //calculamos el vector de reflexion de la luz
@@ -189,7 +189,7 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
        //LUZ DIFUSA   
        
         float diff = max(dot(norm, lightDir), 0.0);
-        vec3 diffuse = light.difusa * diff * Diffuse;  
+        vec3 diffuse = (light.difusa*10) * diff * Diffuse*2.0f;  
         
         //LUZ ESPECULAR
         vec3 reflectDir = reflect(-lightDir, norm);  

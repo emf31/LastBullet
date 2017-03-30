@@ -45,6 +45,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glEnable(GL_SCISSOR_TEST);
+	glEnable(GL_FRAMEBUFFER_SRGB);
 	//glfwSwapInterval(-1); //vSync adaptativa!
 
 	//glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);

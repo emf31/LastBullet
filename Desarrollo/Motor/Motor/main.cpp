@@ -124,7 +124,7 @@ int main() {
 	flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
 	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
-	flash3->setColor(1.0f, 0.0f, 0.0f);
+	flash3->setColor(15.0f, 0.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
 
 
