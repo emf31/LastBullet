@@ -153,7 +153,7 @@ void DebugMenuGUI::inicializar() {
 
 	InsAsalto = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(5));
 	InsAsalto->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsAsalto, this));
-
+	
 	InsRocket = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(50)->getChild(6));
 	InsRocket->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onInsRocket, this));
 
@@ -203,7 +203,7 @@ void DebugMenuGUI::update() {
 				if (myentity->isDying()) {
 					Color4f color(255, 255, 255, 0);
 					nodos[i]->setColor(color);
-
+					
 				}
 				else {
 					nodos[i]->setColor(elegirColor(estado));
