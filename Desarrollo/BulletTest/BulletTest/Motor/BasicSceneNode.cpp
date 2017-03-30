@@ -80,9 +80,9 @@ void BasicSceneNode::removeChild(std::shared_ptr<SceneNode> child)
 	m_node->removeChild(child->getEntityNode());
 }
 
-void BasicSceneNode::setColor(const Color4f & color)
+void BasicSceneNode::setColor(Vec3<float> color)
 {
-	m_node->setModelColor(color.r, color.g, color.b);
+	m_node->setModelColor(color.getX(), color.getY(), color.getZ());
 }
 
 void BasicSceneNode::setVisible(bool visible)

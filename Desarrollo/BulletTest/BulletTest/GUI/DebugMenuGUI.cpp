@@ -202,11 +202,13 @@ void DebugMenuGUI::update() {
 
 				if (myentity->isDying()) {
 					Color4f color(255, 255, 255, 0);
-					nodos[i]->setColor(color);
+					nodos[i]->setColor(Vec3<float>(0.32,0.92,0.32));
 					
 				}
 				else {
-					nodos[i]->setColor(elegirColor(estado));
+					
+					//nodos[i]->setColor(elegirColor(estado));
+					nodos[i]->setColor(Vec3<float>(0.92, 0.02, 0.32));
 				}
 				i++;
 
@@ -222,7 +224,7 @@ Color4f DebugMenuGUI::elegirColor(std::string estadoActual) {
 
 
 		if (estadoActual == "BuscarVida") {
-			Color4f color(0, 255, 0, 1);
+			Color4f color(0, 0.1, 0, 1);
 			return color;
 		}
 

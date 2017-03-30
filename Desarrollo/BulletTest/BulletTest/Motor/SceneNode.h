@@ -37,7 +37,7 @@ public:
 
 
 	
-	virtual void setColor(const Color4f& color) = 0;
+	virtual void setColor(const Vec3<float> color) = 0;
 
 private:
 	virtual TEntity* getEntityNode() = 0;
