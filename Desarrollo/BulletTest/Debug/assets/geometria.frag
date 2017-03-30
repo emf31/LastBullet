@@ -15,7 +15,7 @@ struct Material {
 	sampler2D texture_normal;
     sampler2D texture_tangent;
     sampler2D texture_bitangent;
-    vec3 emisivo;
+    sampler2D texture_emisivo;
     vec3 objectColor;
     float brillo;
 }; 
@@ -61,7 +61,7 @@ void main()
     gNormal = normalize(TBN * gNormal);
 
     //color emisivo
-    gEmisivo = material.emisivo;
+    gEmisivo = texture(material.texture_emisivo, txtcoords).rgb;
 
     gObjectColor = material.objectColor;
 

@@ -16,3 +16,4 @@ newmtl CTMid
 	map_Kd Props\texturasMapa\ChannelCTMidDiffuse.png
 	map_Ks Props\texturasMapa\ChannelCTMidSpecular.png
 	map_Kn Props\texturasMapa\ChannelCTMidNormal.jpg
+	map_Ke Props\noemisivo.jpg

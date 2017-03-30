@@ -16,3 +16,4 @@ newmtl 01___Default
 	map_Kd Props\Luz_Diffuse.png
 	map_Ks Props\Luz_Specular.jpg
 	map_Kn Props\Luz_Normal.jpg
+	map_Ke Props\Luz_Emisiva.png

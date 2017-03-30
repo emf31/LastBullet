@@ -16,3 +16,4 @@ newmtl blinn1SG
 	map_Kd Props\texturasMapa\Mid_Diffuse.png
 	map_Ks Props\texturasMapa\Mid_Specular.png
 	map_Kn Props\texturasMapa\Mid_Normal.jpg
+	map_Ke Props\noemisivo.jpg

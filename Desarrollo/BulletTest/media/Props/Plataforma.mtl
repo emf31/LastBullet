@@ -15,3 +15,4 @@ newmtl Material__26
 	map_Ka Props\plataforma_diffuse.png
 	map_Kd Props\plataforma_diffuse.png
 	map_Kn Props\plataforma_Normal.jpg
+	map_Ke Props\noemisivo.jpg

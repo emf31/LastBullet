@@ -15,3 +15,4 @@ newmtl Loft001SG
 	map_Ka Props\Pipe_Diffuse.png
 	map_Kd Props\Pipe_Diffuse.png
 	map_Kn Props\Pipe_Normal.jpg
+	map_Ke Props\noemisivo.jpg

@@ -16,3 +16,4 @@ newmtl blinn1SG
 	map_Kd Props/texturasMapa/PtoA_Diffuse.png
 	map_Ks Props/texturasMapa/PtoA_Specular.png
 	map_Kn Props\texturasMapa\PtoA_Normal.jpg
+	map_Ke Props\noemisivo.jpg

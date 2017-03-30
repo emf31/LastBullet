@@ -38,12 +38,12 @@ void InGame::Inicializar()
 		EntityManager::i().registerRaknetEntity(e);
 	}
 	GraphicEngine::i().enableMouse(false);
-	for (auto it = bots.begin(); it != bots.end(); ++it) {
-		Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
-		bot->m_network->inicializar();
-		bot->inicializar();
-		bot->cargarContenido();
-	}
+	//for (auto it = bots.begin(); it != bots.end(); ++it) {
+	//	Enemy_Bot *bot = new Enemy_Bot("Nixon", RakNet::UNASSIGNED_RAKNET_GUID);
+	//	bot->m_network->inicializar();
+	//	bot->inicializar();
+	//	bot->cargarContenido();
+	//}
 
 	
 	
