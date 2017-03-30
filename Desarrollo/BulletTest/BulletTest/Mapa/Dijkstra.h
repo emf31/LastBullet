@@ -21,7 +21,18 @@ public:
 	//le pasamos el grafo, el nodo del que partimos, y el tipo de nodo al que queremos ir (vida, pistola...)
 	Dijkstra(SparseGraph& grafo, int source, const std::string& tipo) : m_grafo(grafo), m_ShortestPathTree(grafo.numNodes()),
 		m_SearchFrontier(grafo.numNodes()), m_CostToThisNode(grafo.numNodes()), m_tipo(tipo), m_Source(source) {
-		Search();
+		/*try {
+			m_grafo.getNode(source);
+		}
+		catch (std::runtime_error e) {
+			std::cout << e.what() << std::endl;
+		}*/
+
+		if ( source < 0 || source >= grafo.m_nodes.size()) {
+			Search();
+		}
+
+		
 	}
 
 	std::vector<GraphEdge*> GetSPT() {

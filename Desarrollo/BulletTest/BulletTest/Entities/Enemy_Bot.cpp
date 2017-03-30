@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 3, 20);
+	weaponSystem = new WeaponSystem(this, 0, 0, 20);
 
 	weaponSystem->Inicializar();
 
@@ -201,7 +201,7 @@ void Enemy_Bot::cargarContenido()
 
 	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
 	proxy->m_collisionFilterGroup = col::Collisions::Character;
-	proxy->m_collisionFilterMask = col::characterCollidesWith;
+	proxy->m_collisionFilterMask = col::BotCollidesWith;
 
 	
 

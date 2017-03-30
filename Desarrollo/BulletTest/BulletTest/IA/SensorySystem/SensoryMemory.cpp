@@ -53,6 +53,7 @@ void SensoryMemory::updateVision()
 	}
 	catch (std::runtime_error e) {
 		//Se sale de la ejecucion en caso de que de un error matematico en el angulo porque da NAN
+		std::cout << e.what() << std::endl;
 	}
 }
 
@@ -94,6 +95,12 @@ bool SensoryMemory::isRaycastObstructed(Character * ent) const
 	btVector3 start = btVector3(m_bot->getRenderState()->getPosition().getX(), m_bot->getRenderState()->getPosition().getY(), m_bot->getRenderState()->getPosition().getZ());
 	btVector3 target = btVector3(ent->getRenderState()->getPosition().getX(), ent->getRenderState()->getPosition().getY(), ent->getRenderState()->getPosition().getZ());
 	btVector3 vector = target - start;
+
+	//No se que deberia devolver aqui xD
+	if (vector.isZero()) {
+		return false;
+	}
+
 	vector.normalize();
 
 	start = start + (vector * 5);

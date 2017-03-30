@@ -7,7 +7,9 @@
 
 
 NavGraphNode & SparseGraph::getNode(int idx) {
-
+	if (idx < 0 || idx >= m_nodes.size()) {
+		throw std::runtime_error("Error Nodo no encontrado");
+	}
 	return m_nodes.at(idx);
 }
 
