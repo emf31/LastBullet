@@ -117,6 +117,7 @@ void WeaponSystem::TakeAimAndShoot()const
 			m_dAimPersistance))
 	{*/
 
+
 	if (GetCurrentWeapon()->canShoot()) {
 
 		if (m_pOwner->getTargetSys()->isTargetWithinFOV())
@@ -134,13 +135,10 @@ void WeaponSystem::TakeAimAndShoot()const
 
 					m_pOwner->elegirWeapon(DistToTarget);
 
-
-
-
 					AddNoiseToAim(AimingPos);
 
 				
-						GetCurrentWeapon()->shoot(AimingPos);
+					GetCurrentWeapon()->shoot(AimingPos);
 				
 				}
 

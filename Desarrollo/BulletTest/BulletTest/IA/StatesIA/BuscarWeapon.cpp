@@ -19,7 +19,6 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 		if (actual < best) {
 			best = actual;
 			bestString = "AsaltoDrop";
-			
 		}
 		m_camino.clear();
 	}

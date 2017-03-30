@@ -32,6 +32,7 @@ void Weapon::setPosition(const Vec3<float>& pos)
 
 bool Weapon::canShoot()
 {
+
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA && cadenciaOk())
 		return true;
 	return false;
