@@ -42,7 +42,9 @@ public:
 	}
 
 
-	virtual void resetAmmoTotal() { numCargadores = numCargadoresAsalto; }
+	virtual void resetAmmoTotal() { 
+		numCargadores = numCargadoresAsalto; 
+	}
 
 private:
 	btVector3 SIZE_OF_WORLD;

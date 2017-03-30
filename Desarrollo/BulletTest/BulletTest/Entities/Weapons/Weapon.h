@@ -48,7 +48,9 @@ public:
 	void vaciar() {
 		disparos = capacidadAmmo;
 		numCargadores = 0;
+		estadoWeapon = DESCARGADA;
 	}
+
 	Vec3<float> getBalaRotation();
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }

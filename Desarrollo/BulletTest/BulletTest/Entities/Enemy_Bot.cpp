@@ -90,8 +90,6 @@ void Enemy_Bot::update(Time elapsedTime)
 {
 
 
-
-
 	if (valorCiclos < 25) {
 
 		++ciclo;
@@ -113,11 +111,6 @@ void Enemy_Bot::update(Time elapsedTime)
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - radius,
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-
-
-			
-
-			
 
 			targetingSystem->Update();
 			sense->updateVision();
