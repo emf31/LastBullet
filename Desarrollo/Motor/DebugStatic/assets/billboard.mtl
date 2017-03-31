@@ -14,3 +14,4 @@ newmtl Material__26
 	Ke 0.0000 0.0000 0.0000
 	map_Ka cubo.png
 	map_Kd cubo.png
+	map_ke noemisivo.jpg

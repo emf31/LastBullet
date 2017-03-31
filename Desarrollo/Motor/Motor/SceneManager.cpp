@@ -19,8 +19,11 @@ void SceneManager::inicializar() {
 	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
+	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
+	shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
 
 	inicializarBuffers();
+	inicializarBuffersBlur();
 	inicializarBuffersLineas();
 	numLines = 0;
 	drawTarget = false;
@@ -43,27 +46,41 @@ void SceneManager::draw() {
 	//std::cout << "activo gBuffer" << std::endl;
 	glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
 	
-	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// Update matrices
-	projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
-	view = camaraActiva->GetViewMatrix();
-	//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
-	activeCameraPos = camaraActiva->getPosition();
-	
-	scene->draw();
-	//gui.draw();
-	//std::cout << "desactivo gBuffer" << std::endl;
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	renderLuces();
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	if (vertices3.size() > 0) {
-		drawAllLines();
-	}
+	//****************RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
+		//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
+			//activamos el gBuffer donde nos vamos a guardar toda la informacion de geometria y texturas
+			glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+			// Update matrices
+			projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
+			view = camaraActiva->GetViewMatrix();
+			//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
+			activeCameraPos = camaraActiva->getPosition();
+	
+			scene->draw();
+			//gui.draw();
+			//std::cout << "desactivo gBuffer" << std::endl;
+		//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
+			glBindFramebuffer(GL_FRAMEBUFFER, gDeferred);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			renderLuces();
+
+	//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			renderBlur();
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			renderBloom();
+
+
+	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		if (vertices3.size() > 0) {
+			drawAllLines();
+		}
+	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 	
 }
 
@@ -155,6 +172,47 @@ void SceneManager::inicializarBuffers()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
+void SceneManager::inicializarBuffersBlur()
+{
+	GLuint screenWidth = 1280, screenHeight = 720;
+
+	glGenFramebuffers(2, bloomFBO);
+	glGenTextures(2, bloomBuffers);
+	for (GLuint i = 0; i < 2; i++)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, bloomFBO[i]);
+		glBindTexture(GL_TEXTURE_2D, bloomBuffers[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, bloomBuffers[i], 0);
+	}
+}
+
+void SceneManager::inicializarBuffersLineas() {
+	glGenVertexArrays(1, &LVAO);
+	glGenBuffers(1, &LVBO);
+	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+	glLineWidth(1.0f);
+}
+
+void SceneManager::inicializarBufferDeferred()
+{
+	GLuint screenWidth = 1280, screenHeight = 720;
+
+	glGenFramebuffers(1, &gDeferred);
+	glBindFramebuffer(GL_FRAMEBUFFER, gDeferred);
+
+	glGenTextures(1, &gEscena);
+	glBindTexture(GL_TEXTURE_2D, gEscena);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gEscena, 0);
+}
+
 void SceneManager::renderLuces()
 {
 	//GLuint screenWidth = 1280, screenHeight = 720;
@@ -197,14 +255,45 @@ void SceneManager::renderLuces()
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
 	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
-	RenderQuad();
+	//RenderQuad();
 	
 	//copiamos el frame burffer leido
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
-	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
+	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+}
+
+void SceneManager::renderBlur()
+{
+	GLboolean horizontal = true, first_iteration = true;
+	GLuint amount = 10;
+	shaderBlur->Use();
+	for (GLuint i = 0; i < amount; i++)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, bloomFBO[horizontal]);
+		glUniform1i(glGetUniformLocation(shaderBlur->Program, "horizontal"), horizontal);
+		//si es la priemera iteracion activamos la textura de gEmisivo que es sobre la que se tiene que hacer blur
+		//si no es la primera iteracion activamos la textura de bloomBuffers que es la de emisivo pero sobre la que ya se ha hecho alguna iteracion de blur
+		glBindTexture(GL_TEXTURE_2D, first_iteration ? gEmisivo : bloomBuffers[!horizontal]); 
+		RenderQuad();
+		horizontal = !horizontal;
+		first_iteration = false;
+	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void SceneManager::renderBloom()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	shaderBloom->Use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gEscena);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	//glUniform1f(glGetUniformLocation(shaderBloom->Program, "exposure"), exposure);
+	RenderQuad();
 }
 
 bool SceneManager::removeNode(TNode * node) {

@@ -35,14 +35,20 @@ public:
 		static SceneManager singleton;
 		return singleton;
 	}
-	void inicializar();
+
 
 	//void getTexture(std::string path);
 	TMeshGroup* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw();
 	void renderFrame(GLFWwindow* window);
+	void inicializar();
 	void inicializarBuffers();
+	void inicializarBuffersBlur();
+	void inicializarBuffersLineas();
+	void inicializarBufferDeferred();
 	void renderLuces();
+	void renderBlur();
+	void renderBloom();
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
@@ -95,12 +101,18 @@ public:
 	Shader* shaderLuces;
 	Shader* shaderBombillas;
 	Shader* shaderLineas;
+	Shader* shaderBlur;
+	Shader* shaderBloom;
 
 	//Buffers
-	GLuint gBuffer;
-	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor;
+	GLuint gBuffer,gDeferred;
+	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gEscena;
 	GLuint rboDepth;
 	GLuint draw_mode=1;
+
+	//Buffers Bloom
+	GLuint bloomFBO[2];
+	GLuint bloomBuffers[2];
 
 	std::vector<GLfloat> vertices3;
 	std::vector<GLuint> indices;
@@ -109,12 +121,7 @@ public:
 
 	void setLineWidth(float width) { glLineWidth(width); }
 
-	void inicializarBuffersLineas() {
-		glGenVertexArrays(1, &LVAO);
-		glGenBuffers(1, &LVBO);
-		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-		glLineWidth(1.0f);
-	}
+
 
 	void drawLine(glm::vec3 from, glm::vec3 to) {
 		vertices3.push_back(from.x);
@@ -204,6 +211,8 @@ private:
 	float nearPlane = 0.1f, farPlane = 100.0f;
 
 	friend class EngineDevice;
+
+
 	
 
 };

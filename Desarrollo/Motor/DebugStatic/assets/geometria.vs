@@ -27,6 +27,6 @@ void main()
 	//pero entonces tendriamos que asegurarnos de que no hacemos ningun escalado no uniforme o sino las normales no servirian.
 
 	//llevarnos esto fuera del shader
-	normalMatrix = normalMatrix = transpose(inverse(mat3(model)));
+	normalMatrix = transpose(inverse(mat3(model)));
     Normal = normal;  
 }

@@ -28,7 +28,7 @@ TModel::~TModel() {
 void TModel::beginDraw() {
 	if (visible) {
 
-
+		
 		const glm::mat4& view = sm.getViewMatrix();
 		const glm::mat4& projection = sm.getProjectionMatrix();
 		glm::mat4& model = sm.getMatrizActual();
