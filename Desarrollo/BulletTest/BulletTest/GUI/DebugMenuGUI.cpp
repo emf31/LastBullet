@@ -36,7 +36,7 @@ void DebugMenuGUI::inicializar() {
 	setMouseCursor("AlfiskoSkin/MouseArrow");
 	showMouseCursor(false);
 
-	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(50, 150, -50), Vec3<float>(50, 0, -50));
+	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(40, 150, -40), Vec3<float>(40, 0, -40));
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 
 	//MENU PRINCIPAL
@@ -580,15 +580,15 @@ bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
 
 
 bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {
-	//Obama->createPathToItem("LifeObject");
+	static_cast<Enemy_Bot*>(entActual)->createPathToItem("LifeObject");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAROCKETClicked(const CEGUI::EventArgs & e) {
-	//Obama->createPathToItem("RocketLauncherDrop");
+	static_cast<Enemy_Bot*>(entActual)->createPathToItem("RocketLauncherDrop");
 	return true;
 }
 bool DebugMenuGUI::onDebugIAASALTOClicked(const CEGUI::EventArgs & e) {
-	//Obama->createPathToItem("AsaltoDrop");
+	static_cast<Enemy_Bot*>(entActual)->createPathToItem("AsaltoDrop");
 	return true;
 }
 
@@ -620,7 +620,7 @@ bool DebugMenuGUI::onCamaraAerea(const CEGUI::EventArgs & e) {
 	if (GraphicEngine::i().getActiveCamera()->getNameCamera() != "CamaraAerea") {
 
 		GraphicEngine::i().setActiveCamera("CamaraAerea");
-		GraphicEngine::i().getActiveCamera()->setTarget(Vec3<float>(50, 0, -45) - GraphicEngine::i().getActiveCamera()->getPosition());
+		GraphicEngine::i().getActiveCamera()->setTarget(Vec3<float>(40, 0, -45) - GraphicEngine::i().getActiveCamera()->getPosition());
 
 	}
 	else {

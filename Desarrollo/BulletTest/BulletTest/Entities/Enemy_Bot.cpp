@@ -194,7 +194,7 @@ void Enemy_Bot::cargarContenido()
 
 
 	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
-	proxy->m_collisionFilterGroup = col::Collisions::Character;
+	proxy->m_collisionFilterGroup = col::Collisions::Bot;
 	proxy->m_collisionFilterMask = col::BotCollidesWith;
 
 	
@@ -285,7 +285,7 @@ void Enemy_Bot::impulsar(Vec3<float> force)
 
 bool Enemy_Bot::isAtPosition(Vec2f pos)
 {
-	const static double tolerance = 3.0;
+	const static double tolerance = 0.7;
 	Vec2f curr_pos = vec3ToVec2(m_renderState.getPosition());
 
 	return Vec2f(curr_pos - pos).Magnitude() < tolerance * tolerance;

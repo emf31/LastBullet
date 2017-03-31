@@ -38,9 +38,10 @@ void WeaponSystem::Inicializar() {
 	rocket->cargarContenido();
 
 	listaWeapons = new Lista();
-	listaWeapons->insertar(rocket);
-	listaWeapons->insertar(asalto);
 	listaWeapons->insertar(pistola);
+
+	listaWeapons->insertar(asalto);
+	listaWeapons->insertar(rocket);
 	listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
 
