@@ -166,8 +166,8 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 		physicent->getRigidBody()->setFriction(0.7f);
 	}
 	else{
-		physicent->setCollisionGroup(col::Collisions::Caja);
-		physicent->setCollisionMask(col::cajaCollidesWith);
+	//	physicent->setCollisionGroup(col::Collisions::Caja);
+		//physicent->setCollisionMask(col::cajaCollidesWith);
 		physicent->getRigidBody()->setDamping(btScalar(0.f), btScalar(0.85f));
 		physicent->getRigidBody()->setFriction(btScalar(0.8f));
 		physicent->getRigidBody()->setAngularFactor(btScalar(0.3f));

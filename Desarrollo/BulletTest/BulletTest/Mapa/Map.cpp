@@ -193,7 +193,7 @@ void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec
 //Busca un punto de respawn seguro en el mapa
 Vec3<float> Map::searchSpawnPoint()
 {
-	float radio = 100;
+	float radio = 30.f;
 	float fDistance = 0;
 	int spawn = 0;
 
@@ -275,7 +275,7 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCerca
 		if (nodosCercanos.size() == 0) {
 			int tam2 = celdasVecinas.size();
 			int inicio = tam;
-			for (inicio; inicio < tam2; inicio++) {
+			/*for (inicio; inicio < tam2; inicio++) {
 
 				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
 				try {
@@ -285,7 +285,8 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCerca
 				}
 				
 
-			}
+			}*/
+			throw std::runtime_error("FOR DEL INFIERNO");
 		}
 
 		

@@ -38,9 +38,10 @@ void WeaponSystem::Inicializar() {
 	rocket->cargarContenido();
 
 	listaWeapons = new Lista();
+	listaWeapons->insertar(rocket);
+	listaWeapons->insertar(asalto);
 	listaWeapons->insertar(pistola);
-	//listaWeapons->insertar(asalto);
-	//listaWeapons->insertar(sniper);
+	listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
 
 }
@@ -117,6 +118,7 @@ void WeaponSystem::TakeAimAndShoot()const
 			m_dAimPersistance))
 	{*/
 
+
 	if (GetCurrentWeapon()->canShoot()) {
 
 		if (m_pOwner->getTargetSys()->isTargetWithinFOV())
@@ -134,13 +136,10 @@ void WeaponSystem::TakeAimAndShoot()const
 
 					m_pOwner->elegirWeapon(DistToTarget);
 
-
-
-
 					AddNoiseToAim(AimingPos);
 
 				
-						GetCurrentWeapon()->shoot(AimingPos);
+					GetCurrentWeapon()->shoot(AimingPos);
 				
 				}
 
@@ -263,4 +262,3 @@ void WeaponSystem::InsertarArmaDebug(std::string arma) {
 
 
 }
-

@@ -72,7 +72,7 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	NetworkManager::i().createServer();
+	//NetworkManager::i().createServer();
 	RakSleep(1000);
 	conectar("127.0.0.1", server_port);
 

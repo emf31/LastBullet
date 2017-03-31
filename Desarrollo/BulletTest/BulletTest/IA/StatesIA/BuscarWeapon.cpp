@@ -19,8 +19,8 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 		if (actual < best) {
 			best = actual;
 			bestString = "AsaltoDrop";
-			m_camino.clear();
 		}
+		m_camino.clear();
 	}
 
 
@@ -29,8 +29,8 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 		if (actual < best) {
 			best = actual;
 			bestString = "SniperDrop";
-			m_camino.clear();
 		}
+		m_camino.clear();
 	}
 
 	if (!pEnemy->getWeaponSys()->buscar("RocketLauncher")) {
@@ -38,8 +38,8 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 		if (actual < best) {
 			best = actual;
 			bestString = "RocketLauncherDrop";
-			m_camino.clear();
 		}
+		m_camino.clear();
 	}
 	
 	if (bestString != "Ninguno") 

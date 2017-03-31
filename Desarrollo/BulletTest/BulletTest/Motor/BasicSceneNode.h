@@ -29,7 +29,7 @@ public:
 	virtual Vec3<float> getScale() override;
 	virtual void setVisible(bool visible) override;
 	//TModel* getNodo();
-	virtual void setColor(const Color4f& color) override;
+	virtual void setColor(const Vec3<float> color) override;
 	
 private:
 

@@ -88,7 +88,7 @@ void NetworkDebugger::receivedSyncPacket(const TSyncMessage & sync)
 		mark->syncRecevied();
 
 		if (sync.packageType != MOVIMIENTO /*&& windowsPacketOpen*/) {
-			mark->activateMark(seconds(2), Color4f(51,255,0,128));
+			mark->activateMark(seconds(2), Vec3<float>(0.2,1,0));
 		}
 		
 	}

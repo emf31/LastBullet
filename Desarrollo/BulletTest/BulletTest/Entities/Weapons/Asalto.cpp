@@ -34,9 +34,9 @@ void Asalto::inicializar()
 {
 	if (equipada) {
 
-
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
+				std::cout << numCargadores << std::endl;
 				if (relojrecarga.getElapsedTime() >= recarga) {
 					estadoWeapon = CARGADA;
 					disparos = 0;

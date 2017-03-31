@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 3, 20);
+	weaponSystem = new WeaponSystem(this, 0, 0, 20);
 
 	weaponSystem->Inicializar();
 
@@ -89,8 +89,7 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
-
-
+	//std::cout << "BALAS: " << weaponSystem->GetCurrentWeapon()->getMunicionTotal() << std::endl;
 
 	if (valorCiclos < 25) {
 
@@ -113,11 +112,6 @@ void Enemy_Bot::update(Time elapsedTime)
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - radius,
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-
-
-			
-
-			
 
 			targetingSystem->Update();
 			sense->updateVision();
@@ -201,7 +195,7 @@ void Enemy_Bot::cargarContenido()
 
 	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
 	proxy->m_collisionFilterGroup = col::Collisions::Character;
-	proxy->m_collisionFilterMask = col::characterCollidesWith;
+	proxy->m_collisionFilterMask = col::BotCollidesWith;
 
 	
 

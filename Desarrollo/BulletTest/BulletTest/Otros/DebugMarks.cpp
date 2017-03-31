@@ -39,7 +39,7 @@ void DebugMarks::update(Time elapsedTime)
 
 	//If we are not visible for 5 seconds, billboard shows red
 	if (mlastSyncPacket.getElapsedTime() >= losedConnection) {
-		activateMark(Time::Zero, Color4f(22, 220, 48, 0));
+		activateMark(Time::Zero,Vec3<float>(0.1,0.9,0.2));
 	}
 
 	if (mbillboardTime.getElapsedTime() >= m_lifetime) {
@@ -77,7 +77,7 @@ void DebugMarks::setPosition(const Vec3<float>& vec)
 }
 
 //Activates billboard during time passed
-void DebugMarks::activateMark(Time time, const Color4f & color)
+void DebugMarks::activateMark(Time time, const Vec3<float> color)
 {
 
 	//Change the color to billboard 
