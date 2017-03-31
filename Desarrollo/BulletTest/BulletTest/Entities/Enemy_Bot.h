@@ -174,9 +174,9 @@ private:
 
 	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
 
-	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 30, 70);
-	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 30, 70, 110);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 70, 110, 8000);
+	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 5, 10);
+	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 10, 15, 20);
+	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 20, 40, 8000);
 
 	//LifeObject
 

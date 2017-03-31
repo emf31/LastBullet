@@ -89,6 +89,7 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
+	//std::cout << "BALAS: " << weaponSystem->GetCurrentWeapon()->getMunicionTotal() << std::endl;
 
 	if (valorCiclos < 25) {
 
@@ -536,6 +537,8 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 			Desirability = fm.DeFuzzify("DesirabilityRocketLauncher", FuzzyModule::max_av);
 
 			desiRocketLauncher = (float)Desirability;
+
+			std::cout << "DESIROCKET: " << desiRocketLauncher << std::endl;
 
 			if (Desirability > mejorScore) {
 				mejorScore = Desirability;
