@@ -201,8 +201,8 @@ void DebugMenuGUI::update() {
 				nodos[i]->setPosition(posBox);
 
 				if (myentity->isDying()) {
-					Color4f color(255, 255, 255, 0);
-					nodos[i]->setColor(color);
+
+					nodos[i]->setColor(Vec3<float>(1,1,1));
 
 				}
 				else {
@@ -218,38 +218,32 @@ void DebugMenuGUI::update() {
 
 }
 
-Color4f DebugMenuGUI::elegirColor(std::string estadoActual) {
+Vec3<float> DebugMenuGUI::elegirColor(std::string estadoActual) {
 
 
 		if (estadoActual == "BuscarVida") {
-			Color4f color(0, 255, 0, 1);
-			return color;
+			return Vec3<float>(0,1,0);
 		}
 
 		if (estadoActual == "BuscarWeapon") {
-			Color4f color(255, 168, 0, 1);
-			return color;
+			return Vec3<float>(1, 0.55, 0);
 		}
 
 		if (estadoActual == "Disparar") {
-			Color4f color(255, 0, 0, 1);
-			return color;
+			return Vec3<float>(1, 0, 0);
 		}
 
 		if (estadoActual == "Patrullar") {
-			Color4f color(0, 0, 255, 1);
-			return color;
+			return Vec3<float>(0, 0, 1);
 
 		}
 
 		if (estadoActual == "Perseguir") {
-			Color4f color(255, 0, 255, 1);
-			return color;
+			return Vec3<float>(1, 0, 1);
 		}
 
 	
-		Color4f color(0, 0, 0, 1);
-		return color;
+		return Vec3<float>(0, 0, 0);
 
 }
 

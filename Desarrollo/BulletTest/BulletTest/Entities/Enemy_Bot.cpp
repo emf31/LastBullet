@@ -538,8 +538,6 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 			desiRocketLauncher = (float)Desirability;
 
-			std::cout << "DESIROCKET: " << desiRocketLauncher << std::endl;
-
 			if (Desirability > mejorScore) {
 				mejorScore = Desirability;
 				bestWeapon = "RocketLauncher";

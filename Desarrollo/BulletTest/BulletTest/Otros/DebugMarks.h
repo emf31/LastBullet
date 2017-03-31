@@ -22,7 +22,7 @@ public:
 	virtual void setPosition(const Vec3<float>& vec) override;
 
 	//Activates mark during the time passed and the color desired (if time -1 keeps activated indefinitely)
-	void activateMark(Time time, const Color4f& color);
+	void activateMark(Time time, const Vec3<float> color);
 
 	bool isActive() const { return mIsActive;  }
 

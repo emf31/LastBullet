@@ -56,7 +56,7 @@ private:
 
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
 
-	Color4f elegirColor(std::string estadoActual);
+	Vec3<float> elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);
 	void updateFuzzyProgressBars();
