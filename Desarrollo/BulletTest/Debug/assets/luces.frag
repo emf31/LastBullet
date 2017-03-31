@@ -58,7 +58,8 @@ void main()
 {             
     // Retrieve data from gbuffer
     //TexCoords = gCoords.rg;
-
+    const float gamma = 0.4;
+    const float exposure = 3.2;
     vec3 FragPos = texture(gPosition, TexCoords).rgb;
     vec3 Normal = texture(gNormal, TexCoords).rgb;
     vec3 Diffuse;
@@ -68,7 +69,6 @@ void main()
     float Specular = texture(gTextura, TexCoords).a;
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
-    
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
@@ -87,8 +87,15 @@ void main()
         
     }
 
+
     //colorFinal += emissive;
-    colorFinal =  modelColor;
+    //colorFinal = colorFinal * modelColor;
+
+    //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
+           
+    //result = pow(result, vec3(1.0 / gamma));
+    //colorFinal = result;
+
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
