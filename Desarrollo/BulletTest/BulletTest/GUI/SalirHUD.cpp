@@ -30,6 +30,7 @@ void SalirHUD::inicializar()
 
 void SalirHUD::update()
 {
+	Window->getChild(0)->moveToBack();
 }
 
 void SalirHUD::handleEvent(Event * ev)

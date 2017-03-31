@@ -155,6 +155,7 @@ void InGame::HandleEvent()
 void InGame::Update(Time timeElapsed)
 {
 
+
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
 

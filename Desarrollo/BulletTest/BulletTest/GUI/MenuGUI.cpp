@@ -32,6 +32,7 @@ void MenuGUI::inicializar() {
 	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
 
 	LastBullet = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(0));
+	
 
 	CrearPartida = static_cast<CEGUI::PushButton*>(LastBullet->getChild(2));
 	CrearPartida->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onCrearPartidaClicked, this));
@@ -114,6 +115,9 @@ void MenuGUI::update()
 	updateFondo(2);
 	reproducirAnimacionPlaneta();
 
+	for(int i=2;i<=7;i++)
+	static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();
+
 	//Planeta->setProperty("Image","Planeta/1Planeta2");
 
 	/*if (IconoPartida->isHovering()|| SchemePartida->isHovering() || CrearPartida->isHovering() || UnirPartida->isHovering()) {
@@ -146,7 +150,6 @@ void MenuGUI::update()
 
 void MenuGUI::handleEvent(Event * ev)
 {
-
 }
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
@@ -313,4 +316,9 @@ void MenuGUI::setStateVisible(stateMenu state, bool visible)
 	else if (state == stateMenu::enumOpcionesGame) {
 		OpcionesGameWindow->setVisible(visible);
 	}
+}
+
+void MenuGUI::actualizarTopOpciones()
+{
+	
 }

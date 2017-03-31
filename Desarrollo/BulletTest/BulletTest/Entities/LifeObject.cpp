@@ -31,7 +31,6 @@ void LifeObject::inicializar()
 void LifeObject::update(Time elapsedTime)
 {
 
-
 	if (estado == USADO) {
 		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
 			estado = DISPONIBLE;
@@ -44,7 +43,6 @@ void LifeObject::update(Time elapsedTime)
 		prev_rot.addY(5);
 		m_renderState.updateRotations(prev_rot);
 	}
-	
 }
 
 void LifeObject::handleInput()

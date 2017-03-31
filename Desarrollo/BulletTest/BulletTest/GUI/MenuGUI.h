@@ -83,4 +83,5 @@ private:
 	void reproducirAnimacionPlaneta();
 	void changeState(stateMenu Newstate);
 	void setStateVisible(stateMenu state, bool visible);
+	void actualizarTopOpciones();
 };
