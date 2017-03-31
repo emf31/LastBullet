@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 0, 0, 20);
+	weaponSystem = new WeaponSystem(this, 1, 50, 20);
 
 	weaponSystem->Inicializar();
 
@@ -546,9 +546,6 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 		}
 
 	}
-
-	/*if (weaponSystem->buscar("RocketLauncher")) 
-		bestWeapon = "RocketLauncher";*/
 
 
 	weaponSystem->Equipar(bestWeapon);

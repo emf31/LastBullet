@@ -174,9 +174,9 @@ private:
 
 	FuzzyVariable& DistToTarget = fm.CreateFLV("DistToTarget");
 
-	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 5, 10);
-	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 10, 15, 20);
-	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 20, 40, 8000);
+	FzSet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 15, 25);
+	FzSet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 15, 25, 30);
+	FzSet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 25, 30, 8000);
 
 	//LifeObject
 
@@ -186,11 +186,11 @@ private:
 
 	FzSet Life_Low = Life.AddLeftShoulderSet("Life_Low", 0, 10, 30);
 	FzSet Life_Okay = Life.AddTriangularSet("Life_Okay", 10, 30, 60);
-	FzSet Life_Loads = Life.AddRightShoulderSet("Life_Loads", 60, 70, 100);
+	FzSet Life_Loads = Life.AddRightShoulderSet("Life_Loads", 30, 60, 100);
 	
 	FzSet Life_LowTarget = LifeTarget.AddLeftShoulderSet("Life_LowTarget", 0, 10, 30);
 	FzSet Life_OkayTarget = LifeTarget.AddTriangularSet("Life_OkayTarget", 10, 30, 60);
-	FzSet Life_LoadsTarget = LifeTarget.AddRightShoulderSet("Life_LoadsTarget", 60, 70, 100);
+	FzSet Life_LoadsTarget = LifeTarget.AddRightShoulderSet("Life_LoadsTarget", 30, 60, 100);
 
 	/*
 	FzSet Life_Close = DistToLifeObject.AddLeftShoulderSet("Life_Close", 0, 40, 60);
@@ -215,9 +215,9 @@ private:
 	FzSet DesirableAsalto = DesirabilityAsalto.AddTriangularSet("DesirableAsalto", 25, 50, 75);
 	FzSet VeryDesirableAsalto = DesirabilityAsalto.AddRightShoulderSet("VeryDesirableAsalto", 50, 75, 100);
 
-	FzSet Ammo_LowAsalto = AmmoStatusAsalto.AddLeftShoulderSet("Ammo_LowAsalto", 0, 0, 10);
-	FzSet Ammo_OkayAsalto = AmmoStatusAsalto.AddTriangularSet("Ammo_OkayAsalto", 0, 30, 60);
-	FzSet Ammo_LoadsAsalto = AmmoStatusAsalto.AddRightShoulderSet("Ammo_LoadsAsalto", 30, 60, 150);
+	FzSet Ammo_LowAsalto = AmmoStatusAsalto.AddLeftShoulderSet("Ammo_LowAsalto", 0, 30, 45);
+	FzSet Ammo_OkayAsalto = AmmoStatusAsalto.AddTriangularSet("Ammo_OkayAsalto", 30, 45, 70);
+	FzSet Ammo_LoadsAsalto = AmmoStatusAsalto.AddRightShoulderSet("Ammo_LoadsAsalto", 45, 70, 150);
 
 
 	//DesirabilityRocketLauncher
@@ -229,9 +229,9 @@ private:
 	FzSet DesirableRocketLauncher = DesirabilityRocketLauncher.AddTriangularSet("DesirableRocketLauncher", 25, 50, 75);
 	FzSet VeryDesirableRocketLauncher = DesirabilityRocketLauncher.AddRightShoulderSet("VeryDesirableRocketLauncher", 50, 75, 100);
 
-	FzSet Ammo_LowRocketLauncher = AmmoStatusRocketLauncher.AddLeftShoulderSet("Ammo_LowRocketLauncher", 0, 0, 5);
-	FzSet Ammo_OkayRocketLauncher = AmmoStatusRocketLauncher.AddTriangularSet("Ammo_OkayRocketLauncher", 0, 5, 10);
-	FzSet Ammo_LoadsRocketLauncher = AmmoStatusRocketLauncher.AddRightShoulderSet("Ammo_LoadsRocketLauncher", 5, 10, 15);
+	FzSet Ammo_LowRocketLauncher = AmmoStatusRocketLauncher.AddLeftShoulderSet("Ammo_LowRocketLauncher", 0, 2, 5);
+	FzSet Ammo_OkayRocketLauncher = AmmoStatusRocketLauncher.AddTriangularSet("Ammo_OkayRocketLauncher", 2, 5, 7);
+	FzSet Ammo_LoadsRocketLauncher = AmmoStatusRocketLauncher.AddRightShoulderSet("Ammo_LoadsRocketLauncher", 5, 7, 15);
 
 	//DesirabilitySniper
 
@@ -242,9 +242,9 @@ private:
 	FzSet DesirableSniper = DesirabilitySniper.AddTriangularSet("DesirableSniper", 25, 50, 75);
 	FzSet VeryDesirableSniper = DesirabilitySniper.AddRightShoulderSet("VeryDesirableSniper", 50, 75, 100);
 
-	FzSet Ammo_LowSniper = AmmoStatusSniper.AddLeftShoulderSet("Ammo_LowSniper", 0, 0, 5);
-	FzSet Ammo_OkaySniper = AmmoStatusSniper.AddTriangularSet("Ammo_OkaySniper", 0, 5, 10);
-	FzSet Ammo_LoadsSniper = AmmoStatusSniper.AddRightShoulderSet("Ammo_LoadsSniper", 5, 10, 15);
+	FzSet Ammo_LowSniper = AmmoStatusSniper.AddLeftShoulderSet("Ammo_LowSniper", 0, 2, 5);
+	FzSet Ammo_OkaySniper = AmmoStatusSniper.AddTriangularSet("Ammo_OkaySniper", 2, 5, 7);
+	FzSet Ammo_LoadsSniper = AmmoStatusSniper.AddRightShoulderSet("Ammo_LoadsSniper", 5, 7, 15);
 
 	friend class PathPlanner;
 };
