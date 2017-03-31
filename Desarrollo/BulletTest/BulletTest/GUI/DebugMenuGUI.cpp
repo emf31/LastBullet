@@ -201,15 +201,10 @@ void DebugMenuGUI::update() {
 				nodos[i]->setPosition(posBox);
 
 				if (myentity->isDying()) {
-<<<<<<< HEAD
-					Color4f color(255, 255, 255, 0);
-					nodos[i]->setColor(color);
-					
-=======
+
 
 					nodos[i]->setColor(Vec3<float>(1,1,1));
 
->>>>>>> refs/remotes/origin/FixingMultiplayerProblem
 				}
 				else {
 					nodos[i]->setColor(elegirColor(estado));
