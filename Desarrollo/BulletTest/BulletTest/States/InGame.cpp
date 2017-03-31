@@ -186,7 +186,10 @@ void InGame::Render(float interpolation, Time elapsedTime)
 	player->updateCurrentWeaponPosition();
 
 	//GUI
+	if(debugMenu.debugInput)
 	debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
+
+	if(salirGUI.escapeInput)
 	salirGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
 	GraphicEngine::i().renderAll();

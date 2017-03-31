@@ -51,9 +51,9 @@ void SensoryMemory::updateVision()
 			}
 		}
 	}
-	catch (std::runtime_error e) {
+	catch (std::exception e) {
 		//Se sale de la ejecucion en caso de que de un error matematico en el angulo porque da NAN
-		std::cout << e.what() << std::endl;
+		//std::cout << e.what() << std::endl;
 	}
 }
 
@@ -145,7 +145,7 @@ bool SensoryMemory::isInFOV(Character * ent) const
 	
 
 	if (std::isnan(angle)) {
-		throw std::runtime_error("SENSORYMEMORY::isInFOV: Da un numero NAN");
+		throw std::exception("SENSORYMEMORY::isInFOV: Da un numero NAN");
 	}
 
 	//std::cout << "Angulo= " << (angle) << std::endl;

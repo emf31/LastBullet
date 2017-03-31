@@ -220,7 +220,7 @@ Vec3<float> Map::searchSpawnPoint()
 			Vec3<float> vector = (*it)->getRenderState()->getPosition() - (*it2);
 			fDistance = vector.Magnitude();
 
-			if (fDistance < 100) {
+			if (fDistance < 60) {
 				valid = false;
 				break;
 			}
