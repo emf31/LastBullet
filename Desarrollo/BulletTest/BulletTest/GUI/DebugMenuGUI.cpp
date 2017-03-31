@@ -203,7 +203,7 @@ void DebugMenuGUI::update() {
 				if (myentity->isDying()) {
 
 
-					nodos[i]->setColor(Vec3<float>(1,1,1));
+					nodos[i]->setColor(Vec3<float>(1, 1, 1));
 
 				}
 				else {
