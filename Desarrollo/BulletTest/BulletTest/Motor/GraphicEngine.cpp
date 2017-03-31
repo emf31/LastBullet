@@ -29,9 +29,6 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 		throw std::runtime_error("No se ha encontrado la malla: " + std::string(mesh.c_str()));
 	}
 
-
-	
-
 	
 	node->setScale(Vec3<float>(TScale.getX(), TScale.getY(), TScale.getZ()));
 	node->setPosition(Vec3<float>(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
