@@ -20,6 +20,13 @@ void Disparar::Execute(Enemy_Bot* pEnemy) {
 		pEnemy->getMachineState()->ChangeState(&Perseguir::i());
 
 	}
+	else {
+
+		if (pEnemy->getTargetSys()->GetTarget()->isDying()) {
+			pEnemy->getMachineState()->RevertToPreviousState();
+		}
+
+	}
 
 }
 
