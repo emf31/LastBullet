@@ -14,6 +14,7 @@
 #include <StatesIA\BuscarWeapon.h>
 #include <Map.h>
 #include <TriggerSystem.h>
+#include <LogIA.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
 	life_component(this)
@@ -28,7 +29,6 @@ Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Charac
 
 Enemy_Bot::~Enemy_Bot()
 {
-	
 }
 
 
@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 50, 20);
+	weaponSystem = new WeaponSystem(this, 1, 0, 20);
 
 	weaponSystem->Inicializar();
 
@@ -61,6 +61,7 @@ void Enemy_Bot::inicializar()
 
 	m_pStateMachine = new MachineState(this);
 	//m_pStateMachine->SetGlobalState(&Patrullar::i());
+	//GraphicEngine::i().setActiveCamera("CamaraAerea");
 
 }
 
@@ -124,15 +125,17 @@ void Enemy_Bot::update(Time elapsedTime)
 			m_pStateMachine->Update();
 
 
-
 			if (GraphicEngine::i().getActiveCamera()->getNameCamera() == m_name) {
 
 				Vec3<float> posCam = GraphicEngine::i().getActiveCamera()->getPosition();
 
-				GraphicEngine::i().setTargetActiveCamera(Vec3<float>(m_vHeading.x+ posCam.getX(), posCam.getY(), m_vHeading.y+ posCam.getZ()));
+				GraphicEngine::i().setTargetActiveCamera(Vec3<float>(m_vHeading.x + m_renderState.getRenderPos().getX(), m_renderState.getRenderPos().getY(), m_vHeading.y + m_renderState.getRenderPos().getZ()));
+				std::cout << "TargetCamara" << m_vHeading.x + posCam.getX() << " " << posCam.getY() << " " << m_vHeading.y + posCam.getZ() << std::endl;
+				
 
 			}
-
+			//GraphicEngine::i().createNode((Vec3<float>(m_vHeading.x  + m_renderState.getRenderPos().getX(), m_renderState.getRenderPos().getY(), m_vHeading.y  + m_renderState.getRenderPos().getZ())), Vec3<float>(1.f, 1.f, 1.f), "", "../media/box.obj");
+			
 			if (m_network->isConnected()) {
 
 				TMovimiento mov;
@@ -340,6 +343,7 @@ Vec2f Enemy_Bot::createPathToPosition(Vec2f vec) {
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
+	LogIA::log.push_back("CreatePathToPosition" + std::to_string(m_camino.back().x) + " " + std::to_string(m_camino.back().y));
 
 	return m_camino.back();
 
@@ -347,7 +351,7 @@ Vec2f Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 float Enemy_Bot::createPathToItem(const std::string& tipo)
 {
-
+	std::cout << "Create camino to" << tipo << std::endl;
 	//Camino actual a seguir
 	std::list<Vec2f> m_camino;
 
@@ -356,6 +360,9 @@ float Enemy_Bot::createPathToItem(const std::string& tipo)
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
+
+	m_camino.back().x;
+	LogIA::log.push_back("CreatePathToItemTo"+ std::to_string(m_camino.back().x)+" "+ std::to_string(m_camino.back().y));
 
 	return result;
 }
@@ -370,6 +377,7 @@ Vec2f Enemy_Bot::createRandomPath()
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
+	LogIA::log.push_back("CreateRandomPath" + std::to_string(m_camino.back().x) + " " + std::to_string(m_camino.back().y));
 
 	return m_camino.back();
 

@@ -327,6 +327,7 @@
     <ClCompile Include="Otros\AssetsReader.cpp" />
     <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="GUI\SalirHUD.cpp" />
+    <ClCompile Include="IA\LogIA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -765,6 +766,9 @@
     </ClInclude>
     <ClInclude Include="GUI\SalirHUD.h">
       <Filter>Headers\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="IA\LogIA.h">
+      <Filter>Headers\IA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

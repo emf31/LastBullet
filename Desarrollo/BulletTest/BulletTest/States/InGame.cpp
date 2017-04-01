@@ -7,6 +7,7 @@
 #include <MessageHandler.h>
 #include <GUIManager.h>
 #include <World.h>
+#include <LogIA.h>
 
 InGame::InGame() : ingameGUI(), debugMenu(), salirGUI()
 {
@@ -133,6 +134,10 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F6)) {
 		SceneManager::i().draw_mode = 5;
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F7)) {
+		
+		LogIA::writeLog();
 	}
 	
 	else if (Input::i().leftMouseDown()) {

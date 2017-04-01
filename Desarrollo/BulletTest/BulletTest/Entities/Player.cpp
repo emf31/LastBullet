@@ -173,7 +173,7 @@ void Player::update(Time elapsedTime)
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
-
+	
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 
 	if (m_network->isConnected()) {

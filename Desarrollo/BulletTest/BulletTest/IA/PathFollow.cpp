@@ -49,7 +49,7 @@ Vec2f PathFollow::Arrive(const Vec2f & target)
 	double dist = ToTarget.Magnitude();
 
 
-	if (dist > 5)
+	if (dist > 1)
 	{
 		return ToTarget.Normalize();
 	}

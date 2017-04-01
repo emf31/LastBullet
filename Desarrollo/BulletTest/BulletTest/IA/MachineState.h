@@ -2,6 +2,7 @@
 
 #include "../IA/StatesIA/StateIA.h"
 #include "StatesIA\BuscarWeapon.h"
+#include <LogIA.h>
 
 class MachineState
 {
@@ -14,7 +15,9 @@ public:
 	//use these methods to initialize the FSM
 	void SetCurrentState(StateIA* s) {
 		m_pCurrentState = s; 
+		LogIA::log.push_back("-----------State ::" + m_pCurrentState->getStateName() + "----------");
 		m_pCurrentState->Enter(m_pOwner);
+		
 	}
 
 	void SetGlobalState(StateIA* s) { m_pGlobalState = s; }
@@ -44,8 +47,12 @@ public:
 		m_pCurrentState->Exit(m_pOwner);
 		//change state to the new state
 		m_pCurrentState = pNewState;
+
+		LogIA::log.push_back("-----------State ::" + m_pCurrentState->getStateName() + "----------");
 		//call the entry method of the new state
 		m_pCurrentState->Enter(m_pOwner);
+
+		
 	}
 
 	//change state back to the previous state

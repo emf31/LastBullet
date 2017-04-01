@@ -246,6 +246,7 @@
     <ClInclude Include="IA\FuzzyLogic\FzOR.h" />
     <ClInclude Include="IA\FuzzyLogic\FzSet.h" />
     <ClInclude Include="IA\FuzzyLogic\FzVery.h" />
+    <ClInclude Include="IA\LogIA.h" />
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
@@ -369,6 +370,7 @@
     <ClCompile Include="IA\FuzzyLogic\FzOR.cpp" />
     <ClCompile Include="IA\FuzzyLogic\FzSet.cpp" />
     <ClCompile Include="IA\FuzzyLogic\FzVery.cpp" />
+    <ClCompile Include="IA\LogIA.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\PathFollow.cpp" />
     <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp" />
