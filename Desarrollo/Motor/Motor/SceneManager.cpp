@@ -169,7 +169,7 @@ void SceneManager::inicializarBuffers()
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
 void SceneManager::inicializarBuffersBlur()
@@ -216,7 +216,7 @@ void SceneManager::inicializarBufferDeferred()
 void SceneManager::renderLuces()
 {
 	//GLuint screenWidth = 1280, screenHeight = 720;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
