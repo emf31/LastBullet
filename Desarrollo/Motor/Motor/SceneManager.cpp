@@ -23,9 +23,9 @@ void SceneManager::inicializar() {
 	shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
 
 	inicializarBuffers();
-	inicializarBufferDeferred();
+	//inicializarBufferDeferred();
 	inicializarBuffersBlur();
-	inicializarBufferBloom();
+	//inicializarBufferBloom();
 	inicializarBuffersLineas();
 	numLines = 0;
 	drawTarget = false;
@@ -65,15 +65,17 @@ void SceneManager::draw() {
 			//gui.draw();
 			//std::cout << "desactivo gBuffer" << std::endl;
 		//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
-			glBindFramebuffer(GL_FRAMEBUFFER, gDeferred);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			renderBlur();
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			renderLuces();
 
 	//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			renderBlur();
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			renderBloom();
+			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			//renderBlur();
+			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			//renderBloom();
 
 
 	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
@@ -102,6 +104,7 @@ void SceneManager::inicializarBuffers()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBitangent"), 4);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gEmisivo"), 5); 
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gObjectColor"), 6);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBloom"), 7);
 
 	
 	glGenFramebuffers(1, &gBuffer);
@@ -239,6 +242,8 @@ void SceneManager::renderLuces()
 	glBindTexture(GL_TEXTURE_2D, gEmisivo);
 	glActiveTexture(GL_TEXTURE6);
 	glBindTexture(GL_TEXTURE_2D, gObjectColor);
+	glActiveTexture(GL_TEXTURE7);
+	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
 	
 
 	//LUZ SOLAR
@@ -262,13 +267,15 @@ void SceneManager::renderLuces()
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
 	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
-	RenderQuad();
+	
 	
 	//copiamos el frame burffer leido
-	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
-	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
-	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
+	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	RenderQuad();
 
 }
 
