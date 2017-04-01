@@ -135,7 +135,6 @@ void WeaponSystem::TakeAimAndShoot()const
 
 					float DistToTarget = Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
 
-
 					m_pOwner->elegirWeapon(DistToTarget);
 
 					AddNoiseToAim(AimingPos);

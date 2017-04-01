@@ -13,9 +13,7 @@
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
-	/*m_pStateMachine = new MachineState(this);
-	m_pStateMachine->SetCurrentState(&Patrullar::i());
-	m_pStateMachine->SetGlobalState(&Patrullar::i());*/
+
 
 	EntityManager::i().registerRaknetEntity(this);
 }
