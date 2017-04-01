@@ -44,6 +44,7 @@ public:
 	void inicializar();
 	void inicializarBuffers();
 	void inicializarBuffersBlur();
+	void inicializarBufferBloom();
 	void inicializarBuffersLineas();
 	void inicializarBufferDeferred();
 	void renderLuces();

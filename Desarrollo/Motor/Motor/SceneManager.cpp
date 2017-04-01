@@ -25,6 +25,7 @@ void SceneManager::inicializar() {
 	inicializarBuffers();
 	inicializarBufferDeferred();
 	inicializarBuffersBlur();
+	inicializarBufferBloom();
 	inicializarBuffersLineas();
 	numLines = 0;
 	drawTarget = false;
@@ -192,6 +193,11 @@ void SceneManager::inicializarBuffersBlur()
 	}
 }
 
+void SceneManager::inicializarBufferBloom() {
+	glUniform1i(glGetUniformLocation(shaderBloom->Program, "scene"), 0);
+	glUniform1i(glGetUniformLocation(shaderBloom->Program, "bloomBlur"), 1);
+}
+
 void SceneManager::inicializarBuffersLineas() {
 	glGenVertexArrays(1, &LVAO);
 	glGenBuffers(1, &LVBO);
@@ -259,10 +265,10 @@ void SceneManager::renderLuces()
 	RenderQuad();
 	
 	//copiamos el frame burffer leido
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
-	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
+	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 }
 
@@ -271,9 +277,9 @@ void SceneManager::renderBlur()
 	GLboolean horizontal = true, first_iteration = true;
 	GLuint amount = 10;
 	shaderBlur->Use();
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, gDeferred);
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gDeferred);
+	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	glActiveTexture(GL_TEXTURE0);
 	for (GLuint i = 0; i < amount; i++)
 	{
@@ -291,17 +297,17 @@ void SceneManager::renderBlur()
 
 void SceneManager::renderBloom()
 {
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderBloom->Use();
+
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, gEscena);
+	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	glBindTexture(GL_TEXTURE_2D, gEscena);
 	//glUniform1f(glGetUniformLocation(shaderBloom->Program, "exposure"), exposure);
 	RenderQuad();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 }
 
 bool SceneManager::removeNode(TNode * node) {
