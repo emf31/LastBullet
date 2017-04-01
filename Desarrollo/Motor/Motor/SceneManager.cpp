@@ -23,6 +23,7 @@ void SceneManager::inicializar() {
 	shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
 
 	inicializarBuffers();
+	inicializarBufferDeferred();
 	inicializarBuffersBlur();
 	inicializarBuffersLineas();
 	numLines = 0;
@@ -210,7 +211,7 @@ void SceneManager::inicializarBufferDeferred()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gEscena, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gEscena, 0);
 }
 
 void SceneManager::renderLuces()
@@ -255,13 +256,13 @@ void SceneManager::renderLuces()
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
 	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
-	//RenderQuad();
+	RenderQuad();
 	
 	//copiamos el frame burffer leido
-	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
-	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
-	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
+	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 }
 
@@ -270,6 +271,10 @@ void SceneManager::renderBlur()
 	GLboolean horizontal = true, first_iteration = true;
 	GLuint amount = 10;
 	shaderBlur->Use();
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, gDeferred);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	glActiveTexture(GL_TEXTURE0);
 	for (GLuint i = 0; i < amount; i++)
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, bloomFBO[horizontal]);
@@ -286,11 +291,14 @@ void SceneManager::renderBlur()
 
 void SceneManager::renderBloom()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	shaderBloom->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gEscena);
 	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
 	//glUniform1f(glGetUniformLocation(shaderBloom->Program, "exposure"), exposure);
 	RenderQuad();
