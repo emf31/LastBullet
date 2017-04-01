@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(60), m_rotation(rotation), radioExplosion(10), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(60), m_rotation(rotation), radioExplosion(5), m_owner(owner)
 {
 
 	m_lifetime = seconds(5);
@@ -93,8 +93,9 @@ void RocketBullet::handleMessage(const Message & message)
 
 			Character* myentity = *it;
 
-			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 3.f;
+			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 1.5f;
 
+			std::cout << "Damage: " << damage << std::endl;
 
 			if (damage > 0) {
 
