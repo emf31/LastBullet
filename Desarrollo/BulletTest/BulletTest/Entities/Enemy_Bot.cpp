@@ -351,7 +351,7 @@ Vec2f Enemy_Bot::createPathToPosition(Vec2f vec) {
 
 float Enemy_Bot::createPathToItem(const std::string& tipo)
 {
-	std::cout << "Create camino to" << tipo << std::endl;
+	//std::cout << "Create camino to" << tipo << std::endl;
 	//Camino actual a seguir
 	std::list<Vec2f> m_camino;
 
@@ -362,7 +362,9 @@ float Enemy_Bot::createPathToItem(const std::string& tipo)
 	m_PathFollow->FollowOn();
 
 	m_camino.back().x;
-	LogIA::log.push_back("CreatePathToItemTo"+ std::to_string(m_camino.back().x)+" "+ std::to_string(m_camino.back().y));
+
+	LogIA::log.push_back("Tamano: " + m_camino.size());
+	LogIA::log.push_back("CreatePathToItemTo: "+ std::to_string(m_camino.back().x)+" "+ std::to_string(m_camino.back().y));
 
 	return result;
 }

@@ -28,9 +28,10 @@ public:
 			std::cout << e.what() << std::endl;
 		}*/
 
-		if ( source < 0 || source >= grafo.m_nodes.size()) {
+		if ( source >= 0 && source < grafo.m_nodes.size()) {
 			Search();
 		}
+
 
 		
 	}
