@@ -16,11 +16,14 @@ protected:
 	Vec2f m_position;//guardamos la posicion en el espacio del nodo en 2D
 
 	Entity* m_extraInfo;//Aqui se puede añadir mas informacion en caso de que sea necesario
+
+	float m_height;
 public:
 
-	NavGraphNode(int idx, Vec2f pos) :
+	NavGraphNode(int idx, Vec2f pos, float m_height) :
 		GraphNode(idx),
-		m_position(pos)
+		m_position(pos),
+		m_height(m_height)
 	{}
 
 	Entity* extraInfo() const { return m_extraInfo; };
@@ -28,4 +31,6 @@ public:
 	void setExtraInfo(Entity* extra_inf) { m_extraInfo = extra_inf; }
 
 	Vec2f getPosition() const { return m_position; }
+
+	float getHeight() const { return m_height; }
 };

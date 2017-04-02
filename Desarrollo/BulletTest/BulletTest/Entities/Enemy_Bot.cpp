@@ -332,20 +332,20 @@ void Enemy_Bot::updateFacing()
 	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
 }
 
-Vec2f Enemy_Bot::createPathToPosition(Vec2f vec) {
+Vec2f Enemy_Bot::createPathToPosition(Vec3<float> vec) {
 
 
 	//Camino actual a seguir
-	std::list<Vec2f> m_camino;
+	std::list<Vec3<float>> m_camino;
 
 	m_PathPlanner->CreatePathToPosition(vec, m_camino);
 
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
-	LogIA::log.push_back("CreatePathToPosition" + std::to_string(m_camino.back().x) + " " + std::to_string(m_camino.back().y));
+	LogIA::log.push_back("CreatePathToPosition" + std::to_string(m_camino.back().getX()) + " " + std::to_string(m_camino.back().getZ()));
 
-	return m_camino.back();
+	return vec3ToVec2( m_camino.back());
 
 }
 
@@ -353,7 +353,7 @@ float Enemy_Bot::createPathToItem(const std::string& tipo)
 {
 	//std::cout << "Create camino to" << tipo << std::endl;
 	//Camino actual a seguir
-	std::list<Vec2f> m_camino;
+	std::list<Vec3<float>> m_camino;
 
 	float result=m_PathPlanner->CreatePathToItem(tipo, m_camino);
 
@@ -361,10 +361,10 @@ float Enemy_Bot::createPathToItem(const std::string& tipo)
 
 	m_PathFollow->FollowOn();
 
-	m_camino.back().x;
+	m_camino.back().getX();
 
 	LogIA::log.push_back("Tamano: " + m_camino.size());
-	LogIA::log.push_back("CreatePathToItemTo: "+ std::to_string(m_camino.back().x)+" "+ std::to_string(m_camino.back().y));
+	LogIA::log.push_back("CreatePathToItemTo: "+ std::to_string(m_camino.back().getX())+" "+ std::to_string(m_camino.back().getX()));
 
 	return result;
 }
@@ -372,16 +372,16 @@ float Enemy_Bot::createPathToItem(const std::string& tipo)
 Vec2f Enemy_Bot::createRandomPath()
 {
 	//Camino actual a seguir
-	std::list<Vec2f> m_camino;
+	std::list<Vec3<float>> m_camino;
 
 	m_PathPlanner->CreateRandomPath(m_camino);
 
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
-	LogIA::log.push_back("CreateRandomPath" + std::to_string(m_camino.back().x) + " " + std::to_string(m_camino.back().y));
+	LogIA::log.push_back("CreateRandomPath" + std::to_string(m_camino.back().getX()) + " " + std::to_string(m_camino.back().getZ()));
 
-	return m_camino.back();
+	return vec3ToVec2(m_camino.back());
 
 }
 

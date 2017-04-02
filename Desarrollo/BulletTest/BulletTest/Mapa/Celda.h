@@ -37,14 +37,14 @@ public:
 
 	CellSpacePartition(float width, float height, int celdasX, int celdasY);
 
-	int PositionToIndex(Vec2f& pos);
+	int PositionToIndex(float posX, float posY);
 
 	void addNodoACelda(NavGraphNode& nodo);
 
 	void mostrarContenido();
 
-	void CalculaNodoEnCelda(int ind, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot);
+	bool CalculaNodoEnCelda(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec3<float>& posBot);
 
-	void CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec2f& posBot);
+	void CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec3<float>& posBot);
 
 };

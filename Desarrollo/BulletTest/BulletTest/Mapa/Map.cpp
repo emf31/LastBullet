@@ -27,7 +27,7 @@ void Map::inicializar(const std::string& mapa)
 
 	//dimensiones del mapa 647x475
 	//se crea la division del espacio en celdas
-	cellSpace = new CellSpacePartition(100, 100, 10, 10);
+	cellSpace = new CellSpacePartition(100, 100, 5, 5);
 
 	//Lee el mapa
 	map.readMap(mapa);
@@ -66,14 +66,14 @@ void Map::borrarContenido() {
 	delete grafo;
 	delete cellSpace;
 }
-bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
+bool Map::isPathObstructed(Vec3<float> posIni, Vec3<float> posFinal, float radio)
 {
 
-	btScalar altura = 1;
-	Vec2f aumento = posFinal - posIni;
+	btScalar altura = 2;
+	Vec3<float> aumento = posFinal - posIni;
 	//****************************RayCast central***************************************
-	btVector3 start = btVector3((btScalar)posIni.x, altura, (btScalar)posIni.y);
-	btVector3 target = btVector3((btScalar)posFinal.x, altura, (btScalar)posFinal.y);
+	btVector3 start = btVector3((btScalar)posIni.getX(), (btScalar)posIni.getY()+1, (btScalar)posIni.getZ());
+	btVector3 target = btVector3((btScalar)posFinal.getX(), (btScalar)posFinal.getY()+1, (btScalar)posFinal.getZ());
 	//btVector3 distancia = target - start;
 	//distancia.length();	
 	/*btVector3 direccion = target - start;
@@ -92,7 +92,7 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 	{
 		//Veo la entity que colisiona
 		Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-		if (ent != EntityManager::i().getEntity(PLAYER))
+		if (ent->getClassName() == "PhysicsEntity")
 		{
 			//ha colisionado con una entity que no es el player
 			//std::cout << " EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
@@ -181,11 +181,11 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 	
 }
 
-void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec2f>& camino)
+void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec3<float>>& camino)
 {
 	//Iteramos la lista de node index y obtenemos el nodo del grafo para meter la pos en el camino
 	for (std::list<int>::const_iterator it = CaminoDeNodos.begin(); it != CaminoDeNodos.end(); ++it) {
-		camino.push_back(grafo->getNode(*it).getPosition());
+		camino.push_back(Vec3<float>(grafo->getNode(*it).getPosition().x,grafo->getNode(*it).getHeight(), grafo->getNode(*it).getPosition().y));
 		
 	}
 }
@@ -250,13 +250,13 @@ Vec3<float> Map::searchSpawnPoint()
 	}
 }
 
-void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot)
+void Map::CalcularNodosCercanos(Vec3<float>& pos, std::list<NavGraphNode*>& nodosCercanos, Vec3<float>& posBot)
 {
 	
 	std::vector<int> celdasVecinas;
-	int indCelda = cellSpace->PositionToIndex(pos);
+	int indCelda = cellSpace->PositionToIndex(pos.getX(),pos.getZ());
 	//std::cout << "ESTOY EN LA CELDA NUMERO: " << indCelda << std::endl;
-	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos, pos);
+	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos,celdasVecinas, pos);
 	
 	if (nodosCercanos.size() == 0) {
 		cellSpace->CalculaNodosEnCeldasVecinas(indCelda, nodosCercanos, celdasVecinas, pos);
@@ -273,7 +273,6 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCerca
 			
 		}
 		if (nodosCercanos.size() == 0) {
-			int tam2 = celdasVecinas.size();
 			int inicio = tam;
 			/*for (inicio; inicio < tam2; inicio++) {
 
