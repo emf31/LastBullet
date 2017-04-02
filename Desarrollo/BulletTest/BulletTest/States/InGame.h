@@ -18,6 +18,8 @@
 #include <State.h>
 #include <InGameHUD.h>
 #include <DebugMenuGUI.h>
+#include <fstream>
+
 
 
 class InGame : public State {
@@ -36,7 +38,11 @@ private:
 	InGameHUD ingameGUI;
 	DebugMenuGUI debugMenu;
 	float interpolation;
-
+	Clock tiempo;
+	double tiempo1;
+	double tiempo2;
+	double tiempoFinal;
+	std::ofstream myfile;
 
 };
 

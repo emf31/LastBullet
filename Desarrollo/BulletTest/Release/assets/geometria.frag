@@ -4,6 +4,8 @@ layout (location = 1) out vec3 gNormal;
 layout (location = 2) out vec4 gTextura;
 layout (location = 3) out vec3 gTangent;
 layout (location = 4) out vec3 gBitangent;
+layout (location = 5) out vec3 gEmisivo;
+layout (location = 6) out vec3 gObjectColor;
 
 
 
@@ -13,6 +15,8 @@ struct Material {
 	sampler2D texture_normal;
     sampler2D texture_tangent;
     sampler2D texture_bitangent;
+    sampler2D texture_emisivo;
+    vec3 objectColor;
     float brillo;
 }; 
 
@@ -47,6 +51,7 @@ void main()
     //leemos las bitangentes que nos las da assimp
     gBitangent = texture(material.texture_bitangent, txtcoords).rgb;
 
+    
     //calculamos la matriz BTN para pasar el vector normal de coordenadas tangentes a coordenadas del mundo
     vec3 T = normalize(normalMatrix * gTangent);
     vec3 B = normalize(normalMatrix * gBitangent);
@@ -55,5 +60,10 @@ void main()
 
     //convertimos la normal a coordenadas del mundo
     gNormal = normalize(TBN * gNormal);
+
+    //color emisivo
+    gEmisivo = texture(material.texture_emisivo, txtcoords).rgb;
+
+    gObjectColor = material.objectColor;
 
 }
