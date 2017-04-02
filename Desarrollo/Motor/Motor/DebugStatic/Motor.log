@@ -1,3 +1,45 @@
-﻿  SceneManager.cpp
-  Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
-  Motor.vcxproj -> D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)
+﻿  ClockImpl.cpp
+  TTransform.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(134): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(138): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(155): warning C4244: 'inicializando': conversión de 'double' a 'const float'; posible pérdida de datos
+  TSunLight.cpp
+  TPointLight.cpp
+  TNode.cpp
+  TModel.cpp
+  TMeshGroup.cpp
+  TMesh.cpp
+  TLuz.cpp
+  Time.cpp
+  TFlashLight.cpp
+  Texture.cpp
+  TEntity.cpp
+  TCamera.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.cpp(4): warning C4005: 'PI': redefinición de macro
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.h(10): note: vea la definición anterior de 'PI'
+  TAnimationGroupMesh.cpp
+  TAnimation.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tanimation.cpp(11): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tanimation.cpp(21): warning C4018: '>=': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tanimation.cpp(56): warning C4018: '>=': no coinciden signed/unsigned
+  Shader.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  main.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(191): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+  Generando código...
+  Compilando...
+  Input.cpp
+  EngineDevice.cpp
+  Clock.cpp
+  AnimationReader.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\animationreader.cpp(9): warning C4101: 'dir': variable local sin referencia
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\animationreader.cpp(10): warning C4101: 'ent': variable local sin referencia
+  AnimationMesh.cpp
+  Generando código...
+Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib

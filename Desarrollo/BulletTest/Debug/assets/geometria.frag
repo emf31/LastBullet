@@ -51,6 +51,7 @@ void main()
     //leemos las bitangentes que nos las da assimp
     gBitangent = texture(material.texture_bitangent, txtcoords).rgb;
 
+    
     //calculamos la matriz BTN para pasar el vector normal de coordenadas tangentes a coordenadas del mundo
     vec3 T = normalize(normalMatrix * gTangent);
     vec3 B = normalize(normalMatrix * gBitangent);

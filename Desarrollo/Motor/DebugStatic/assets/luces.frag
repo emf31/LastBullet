@@ -97,6 +97,9 @@ void main()
            
     //result = pow(result, vec3(1.0 / gamma));
     //colorFinal = result;
+
+
+
     colorFinal += bloom;
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
@@ -105,7 +108,7 @@ void main()
     else if(draw_mode == 3)
         FragColor = vec4(Normal, 1.0);
     else if(draw_mode == 4)
-        FragColor = vec4(Diffuse, 1.0);
+        FragColor = vec4(bloom, 1.0);
     else if(draw_mode == 5)
         FragColor = vec4(vec3(Specular), 1.0);
 
