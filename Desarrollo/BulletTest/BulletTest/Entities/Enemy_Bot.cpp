@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 0, 20);
+	weaponSystem = new WeaponSystem(this, 1, 1, 20);
 
 	weaponSystem->Inicializar();
 

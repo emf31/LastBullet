@@ -160,7 +160,7 @@ void SparseGraph::readGraph(const std::string & path) {
 					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], posZ));
 					nodo.setExtraInfo(ent);
 					addNode(nodo);
-					GraphicEngine::i().createNode(Vec3<float>(nodoJson["posX"], nodoJson["posY"],posZ), Vec3<float>(1.f, 1.f, 1.f), "", "../media/box.obj");
+				//	GraphicEngine::i().createNode(Vec3<float>(nodoJson["posX"], nodoJson["posY"],posZ), Vec3<float>(1.f, 1.f, 1.f), "", "../media/box.obj");
 				}
 				for (json::iterator arrayIterador1 = jsonArray.begin(); arrayIterador1 != jsonArray.end(); ++arrayIterador1) {
 					json nodoJson = *arrayIterador1;
