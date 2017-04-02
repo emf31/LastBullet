@@ -16,4 +16,4 @@ newmtl lambert1
 	map_Kd Props\texturasMapa\Window_Diffuse.png
 	map_Ks Props\texturasMapa\Window_Specular.png
 	map_Kn Props\texturasMapa\Window_Normal.jpg
-	map_Ke Props\noemisivo.jpg
+	map_Ke Props\texturasMapa\Window_Emisiva.png
