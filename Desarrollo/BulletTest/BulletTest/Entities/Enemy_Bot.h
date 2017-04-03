@@ -72,7 +72,7 @@ public:
 	void updateFacing();
 
 
-	Vec2f createPathToPosition(Vec2f vec);
+	Vec2f createPathToPosition(Vec3<float> vec);
 	float createPathToItem(const std::string& tipo);
 	Vec2f createRandomPath();
 

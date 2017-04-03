@@ -11,7 +11,7 @@ void Perseguir::Enter(Enemy_Bot* pEnemy) {
 		vec.x = vec3.getX();
 		vec.y = vec3.getZ();
 
-		currTarget = pEnemy->createPathToPosition(vec);
+		currTarget = pEnemy->createPathToPosition(vec3);
 	}
 	catch (std::runtime_error e) {
 		pEnemy->getMachineState()->ChangeState(&Patrullar::i());

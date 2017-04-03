@@ -59,19 +59,19 @@ Vec2f PathFollow::Arrive(const Vec2f & target)
 
 Vec2f PathFollow::FollowPath()
 {
-	if (m_owner->isAtPosition(m_pPath->CurrentWaypoint()))
+	if (m_owner->isAtPosition(vec3ToVec2 (m_pPath->CurrentWaypoint())))
 	{
 		m_pPath->SetNextWaypoint();
 	}
 
 	if (!m_pPath->Finished())
 	{
-		return Seek(m_pPath->CurrentWaypoint());
+		return Seek(vec3ToVec2(m_pPath->CurrentWaypoint()));
 	}
 
 	else
 	{
-		return Arrive(m_pPath->CurrentWaypoint());
+		return Arrive(vec3ToVec2 (m_pPath->CurrentWaypoint()));
 	}
 
 }

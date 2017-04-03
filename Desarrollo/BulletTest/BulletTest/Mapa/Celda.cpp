@@ -2,6 +2,7 @@
 #include <SparseGraph.h>
 #include <Map.h>
 #include <Util.h>
+#include <GraphicEngine.h>
 
 
 
@@ -15,6 +16,8 @@ CellSpacePartition::CellSpacePartition(float width, float height, int celdasX, i
 	m_anchoCelda = width / celdasX;
 	m_altoCelda = height / celdasY;
 
+	
+
 	//creacion de celdas
 	for (int y = 0; y < m_numCeldasY; y++) {
 		for (int x = 0; x < m_numCeldasX; x++) {
@@ -23,17 +26,21 @@ CellSpacePartition::CellSpacePartition(float width, float height, int celdasX, i
 			float right = left + m_anchoCelda;
 			float bot = top + m_altoCelda;
 
+			/*GraphicEngine::i().createNode(Vec3<float>(left, 10, top*-1), Vec3<float>(1, 1, 1), "", "../media/box.obj");
+			GraphicEngine::i().createNode(Vec3<float>(left, 10, bot*-1), Vec3<float>(1, 1, 1), "", "../media/box.obj");
+			GraphicEngine::i().createNode(Vec3<float>(right, 10, top*-1), Vec3<float>(1, 1, 1), "", "../media/box.obj");
+			GraphicEngine::i().createNode(Vec3<float>(right, 10, bot*-1), Vec3<float>(1, 1, 1), "", "../media/box.obj");*/
 			//metemos cada celda del mapa al vector de celdas
 			m_Celdas.push_back(Celda(top, left, right, bot));
 		}
 	}
 }
 
-int CellSpacePartition::PositionToIndex(Vec2f& pos) {
+int CellSpacePartition::PositionToIndex(float posX, float posY) {
 	//int indice = (int)(m_numCeldasX * pos.x / m_anchoCelda) + ((int)((m_numCeldasY)*pos.y / m_altoCelda)*m_numCeldasX);
 	//int indice = (int)(pos.x / m_anchoCelda) + (int)(pos.y / m_altoCelda);
-	float auxY = -pos.y;
-	size_t x = (int)(pos.x / m_anchoCelda);
+	float auxY = -posY;
+	size_t x = (int)(posX/ m_anchoCelda);
 	size_t y = (int)(auxY / m_altoCelda);
 	y = y*m_numCeldasX;
 	std::size_t indice = x + y;
@@ -45,7 +52,7 @@ int CellSpacePartition::PositionToIndex(Vec2f& pos) {
 }
 
 void CellSpacePartition::addNodoACelda(NavGraphNode& nodo) {
-	int indice = PositionToIndex(nodo.getPosition());
+	int indice = PositionToIndex(nodo.getPosition().x,nodo.getPosition().y);
 	m_Celdas[indice].Nodos.push_back(&nodo);
 }
 
@@ -64,43 +71,28 @@ void CellSpacePartition::mostrarContenido()
 	}
 }
 
-void CellSpacePartition::CalculaNodoEnCelda(int ind, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot)
+bool CellSpacePartition::CalculaNodoEnCelda(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec3<float>& posBot)
 {
+	if (ind >= 0 && ind < m_numCeldasX*m_numCeldasY) {
+
 	for (std::list<NavGraphNode*>::iterator it = m_Celdas[ind].Nodos.begin(); it != m_Celdas[ind].Nodos.end(); ++it)
 	{
-		if (!Map::i().isPathObstructed(posBot, (*it)->getPosition(), 1.2f)) {
+		Vec3<float>position3D = Vec3<float>((*it)->getPosition().x, (*it)->getHeight(), (*it)->getPosition().y);
+		if (!Map::i().isPathObstructed(posBot, position3D, 1.2f)) {
 			//std::cout << "Añado nodo: " << (*it)->Index() << "a la lista " << std::endl;
 			nodosCercanos.push_back((*it));
+			celdasVecinas.push_back(ind);
 		}
 
 	}
+	return true;
+	}
+	return false;
 }
 
-void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec2f& posBot)
+void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraphNode*>& nodosCercanos, std::vector<int>& celdasVecinas, Vec3<float>& posBot)
 {
 
-	bool esBordeDerecho = false;
-	bool esBordeIzquierdo = false;
-	bool esBordeArriba = false;
-	bool esBordeAbajo = false;
-
-	//con esto lo que conseguimos es saber si la celda esta en un borde izquierdo o un borde derecho
-	//ya que nuestro vector es unidimensional pero estamos representando una matriz bidimensional
-	if (ind%m_numCeldasX == 0) {
-		//la fila de izquierda es multiplo del numCeldasdeX
-		esBordeIzquierdo = true;
-	}else if(ind + 1 >= m_numCeldasX && (ind + 1) % m_numCeldasX==0){
-		//ind+1>= m_numCeldasX && ind+1%m_numCeldasX==0
-		//la fila de la derecha sumandole 1 seria multiplo del numCeldasX
-		esBordeDerecho = true;
-	}
-
-	if (ind - m_numCeldasX < 0) {
-		esBordeArriba = true;
-	}
-	else if (ind + m_numCeldasX > ((m_numCeldasX*m_numCeldasY)-1)) {
-		esBordeAbajo = true;
-	}
 
 	int arrIzq = ind - m_numCeldasX - 1;
 	int arrDer = ind - m_numCeldasX + 1;
@@ -110,47 +102,16 @@ void CellSpacePartition::CalculaNodosEnCeldasVecinas(int ind, std::list<NavGraph
 	int abajo = ind + m_numCeldasX;
 	int abaIzq = ind + m_numCeldasX - 1;
 	int abaDer = ind + m_numCeldasX + 1;
-	if (esBordeIzquierdo == false) {
-		if (esBordeArriba == false) {
-			//arriba-izquierda
-			CalculaNodoEnCelda(arrIzq, nodosCercanos, posBot);
-			celdasVecinas.push_back(arrIzq);
-		}
 
-		//izquierda
-		CalculaNodoEnCelda(izq, nodosCercanos,  posBot);
-		celdasVecinas.push_back(izq);
-		if (esBordeAbajo == false) {
-			//abajo izquierda
-			CalculaNodoEnCelda(abaIzq, nodosCercanos, posBot);
-			celdasVecinas.push_back(abaIzq);
-		}
 
-	}
-	if (esBordeDerecho == false) {
-		if (esBordeArriba == false) {
-			//arriba-derecha
-			CalculaNodoEnCelda(arrDer, nodosCercanos, posBot);
-			celdasVecinas.push_back(arrDer);
-		}
+	CalculaNodoEnCelda(arrIzq, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(arrDer, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(arriba, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(izq, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(der, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(abajo, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(abaIzq, nodosCercanos, celdasVecinas, posBot);
+	CalculaNodoEnCelda(abaDer, nodosCercanos, celdasVecinas, posBot);
 
-		//derecha
-		CalculaNodoEnCelda(der, nodosCercanos, posBot);
-		celdasVecinas.push_back(der);
-		if (esBordeAbajo == false) {
-			//abajo derecha
-			CalculaNodoEnCelda(abaDer, nodosCercanos, posBot);
-			celdasVecinas.push_back(abaDer);
-		}
-
-	}
-	if (esBordeArriba == false) {
-		CalculaNodoEnCelda(arriba, nodosCercanos, posBot);
-		celdasVecinas.push_back(arriba);
-	}
-	if (esBordeAbajo == false) {
-		CalculaNodoEnCelda(abajo, nodosCercanos, posBot);
-		celdasVecinas.push_back(abajo);
-	}
 
 }

@@ -24,7 +24,7 @@ public:
 	void   SetTarget(Vec2f& t) { m_vTarget = t; }
 	Vec2f  Target()const { return m_vTarget; }
 
-	void  SetPath(std::list<Vec2f>& new_path) { m_pPath->Set(new_path); }
+	void  SetPath(std::list<Vec3<float>>& new_path) { m_pPath->Set(new_path); }
 
 	void FollowOn() { m_cBehaviour = follow_path; }
 

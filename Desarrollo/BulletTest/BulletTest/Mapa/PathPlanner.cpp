@@ -15,15 +15,15 @@ PathPlanner::~PathPlanner()
 {
 }
 
-bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& camino)
+bool PathPlanner::CreatePathToPosition(Vec3<float> posObjetivo, std::list<Vec3<float>>& camino)
 {
-	m_posDestino = posObjetivo;
-	if (!Map::i().isPathObstructed(vec3ToVec2(m_Bot->getRenderState()->getPosition()), posObjetivo, m_Bot->getRadio())) {
-		camino.push_back(posObjetivo);
+	m_posDestino = (posObjetivo);
+	if (!Map::i().isPathObstructed((m_Bot->getRenderState()->getPosition()), posObjetivo, m_Bot->getRadio())) {
+		camino.push_back((posObjetivo));
 		return true;
 	}
 
-	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+	int NodoMasCercanoAlBot = getNodoMasCercanoAPos((m_Bot->getRenderState()->getPosition()));
 	
 
 	if (NodoMasCercanoAlBot == -1) {
@@ -31,7 +31,7 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 	}
 
 
-	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAPos(posObjetivo);
+	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAPos((posObjetivo));
 	
 
 	if (NodoMasCercanoAlObjetivo == -1) {
@@ -86,16 +86,17 @@ bool PathPlanner::CreatePathToPosition(Vec2f posObjetivo, std::list<Vec2f>& cami
 	}
 }
 
-float PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& camino)
+float PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec3<float>>& camino)
 {
 	std::list<int> listaNodos;
-	
-	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
-
+	int NodoMasCercanoAlBot = getNodoMasCercanoAPos((m_Bot->getRenderState()->getPosition()));
 
 	if (NodoMasCercanoAlBot == -1) {
+
 		throw std::runtime_error("Excepcion del PathPlanner");
+
 	}
+	
 
 	Dijkstra dij(m_grafo, NodoMasCercanoAlBot, tipo);
 	listaNodos = dij.getPathToTarget();
@@ -105,12 +106,14 @@ float PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec2f>& c
 	SuavizarCamino(camino);
 
 	return dij.getCostToTarget();
+		
+	
 }
 
-bool PathPlanner::CreateRandomPath(std::list<Vec2f>& camino)
+bool PathPlanner::CreateRandomPath(std::list<Vec3<float>>& camino)
 {
 
-	Vec2f TargetPos;
+	Vec3<float> TargetPos;
 
 	std::vector<Vec3<float>>& spawns = Map::i().getSpawnPoints();
 	
@@ -120,14 +123,14 @@ bool PathPlanner::CreateRandomPath(std::list<Vec2f>& camino)
 
 	if (spawns.size() != 1) {
 		Vec3<float>& spawn = spawns.at(Randi(0, spawns.size() - 1));
-		TargetPos = Vec2f(spawn.getX(), spawn.getZ());
+		TargetPos = spawn;
 	}
 	else {
-		TargetPos = Vec2f(spawns[0].getX(), spawns[0].getZ());
+		TargetPos = spawns[0];
 	}
 
 	//Cogemos nodo mas cercano al bot
-	int NodoMasCercanoAlBot = getNodoMasCercanoAPos(vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+	int NodoMasCercanoAlBot = getNodoMasCercanoAPos((m_Bot->getRenderState()->getPosition()));
 	int NodoMasCercanoAlObjetivo = getNodoMasCercanoAPos(TargetPos);
 
 	if (NodoMasCercanoAlBot == -1 || NodoMasCercanoAlObjetivo == -1) {
@@ -154,11 +157,11 @@ bool PathPlanner::CreateRandomPath(std::list<Vec2f>& camino)
 }
 
 
-int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
+int PathPlanner::getNodoMasCercanoAPos(Vec3<float> pos) const
 {
 	std::list<NavGraphNode*> nodosCercanos;
 	try {
-		Map::i().CalcularNodosCercanos(pos, nodosCercanos, vec3ToVec2(m_Bot->getRenderState()->getPosition()));
+		Map::i().CalcularNodosCercanos(pos, nodosCercanos, (m_Bot->getRenderState()->getPosition()));
 	}
 	catch (std::runtime_error e) {
 		std::cout << e.what() << std::endl;
@@ -171,12 +174,12 @@ int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 	int NodoMasCercano=-1;
 	for (std::list<NavGraphNode*>::iterator it= nodosCercanos.begin(); it != nodosCercanos.end(); ++it) {
 		if (primero == true ) {
-			vecLong = (pos - (*it)->getPosition());
+			vecLong = (vec3ToVec2(pos) - (*it)->getPosition());
 			menorDist= vecLong.Magnitude();
 			NodoMasCercano = (*it)->Index();
 			primero = false;
 		}
-		vecLong = (pos - (*it)->getPosition());
+		vecLong = (vec3ToVec2(pos) - (*it)->getPosition());
 		distAux= vecLong.Magnitude();
 		if (menorDist > distAux) {
 			menorDist = distAux;
@@ -187,9 +190,9 @@ int PathPlanner::getNodoMasCercanoAPos(Vec2f pos) const
 	return NodoMasCercano;
 }
 
-void PathPlanner::SuavizarCamino(std::list<Vec2f>& listaCamino)
+void PathPlanner::SuavizarCamino(std::list<Vec3<float>>& listaCamino)
 {
-	std::list<Vec2f>::iterator e1(listaCamino.begin()), e2(listaCamino.begin());
+	std::list<Vec3<float>>::iterator e1(listaCamino.begin()), e2(listaCamino.begin());
 	/*
 	++e2;
 	

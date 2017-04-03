@@ -8,7 +8,7 @@
 
 void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 
-	std::list<Vec2f> m_camino;
+	std::list<Vec3<float>> m_camino;
 
 	float best = 100000;
 	float actual;
