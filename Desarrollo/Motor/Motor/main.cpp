@@ -68,12 +68,17 @@ int main() {
 
 
 	//animacion
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 35));
+	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
 	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
 	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	pruebaAnim->setAnimation("idle",0,34);
-	pruebaAnim->setCurrentAnimation("idle");
 	pruebaAnim->setFrameTime(milliseconds(10));
+	pruebaAnim->setAnimation("idle",0,34);
+	pruebaAnim->setAnimation("saltar", 40, 109);
+	pruebaAnim->setAnimation("correr", 110, 190);
+	pruebaAnim->setCurrentAnimation("idle");
+
+
+	
 	//pruebaAnim->setFrameTime(seconds(2.0));
 
 
@@ -181,6 +186,18 @@ int main() {
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_TAB)) {
 			std::cout << "Has presionado la tecla TAB" << std::endl;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_J)) {
+			std::cout << "Has cambiado animacion a saltar" << std::endl;
+			pruebaAnim->setCurrentAnimation("saltar");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_C)) {
+			std::cout << "Has cambiado animacion a correr" << std::endl;
+			pruebaAnim->setCurrentAnimation("correr");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_I)) {
+			std::cout << "Has cambiado animacion a idle" << std::endl;
+			pruebaAnim->setCurrentAnimation("idle");
 		}
 		
 		Input::i().endEventProcess();
