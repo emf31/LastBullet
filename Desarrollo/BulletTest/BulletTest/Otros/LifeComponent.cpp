@@ -43,7 +43,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		TKill kill;
 		kill.guidKill = guid;
 		kill.guidDeath = m_pOwner->getGuid();
-
+		//std::cout << "HA MATADO " << guid <<std::endl;
 		
 
 		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);

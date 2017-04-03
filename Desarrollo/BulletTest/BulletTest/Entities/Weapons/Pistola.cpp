@@ -129,7 +129,7 @@ void Pistola::shoot(const Vec3<float>& target) {
 						if (ent->getClassName() == "Player" || ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
 							TImpactoBala impacto;
 							impacto.damage = damage;
-							impacto.guid = ent->getGuid();
+							impacto.guid = m_ent->getGuid();
 
 							Message msg(ent, "COLISION_BALA", &impacto);
 							MessageHandler::i().sendMessageNow(msg);
