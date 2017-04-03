@@ -70,9 +70,7 @@ void main()
     float Specular = texture(gTextura, TexCoords).a;
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
-
     vec3 bloom = texture(gBloom, TexCoords).rgb;
-
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
@@ -93,7 +91,6 @@ void main()
 
 
     //colorFinal += emissive;
-
     colorFinal = colorFinal * modelColor;
 
     //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
@@ -103,9 +100,7 @@ void main()
 
 
 
-
     colorFinal += bloom;
-
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
