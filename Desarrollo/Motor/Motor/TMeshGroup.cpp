@@ -142,6 +142,8 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_tangent");
 		//5.Bitangent
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_bitangent");
+		//6.Emisivo
+		this->loadMaterialTextures(textures, material, aiTextureType_EMISSIVE, "texture_emisivo");
 	}
 
 	// Return del mesh preparado

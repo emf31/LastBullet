@@ -57,7 +57,6 @@ int main() {
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
-	m->setEmisivo(Vec3<float>(0.f, 25.0f, 0.0f));
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
@@ -125,7 +124,7 @@ int main() {
 	flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
 	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
-	flash3->setColor(1.0f, 0.0f, 0.0f);
+	flash3->setColor(15.0f, 0.0f, 0.0f);
 	//flash->setIntensidadAmbiente(0.8);
 
 

@@ -40,6 +40,7 @@ uniform sampler2D gTangent;
 uniform sampler2D gBitangent;
 uniform sampler2D gEmisivo;
 uniform sampler2D gObjectColor;
+uniform sampler2D gBloom;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
@@ -69,6 +70,9 @@ void main()
     float Specular = texture(gTextura, TexCoords).a;
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
+
+    vec3 bloom = texture(gBloom, TexCoords).rgb;
+
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
@@ -89,12 +93,18 @@ void main()
 
 
     //colorFinal += emissive;
+
     colorFinal = colorFinal * modelColor;
 
     //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
            
     //result = pow(result, vec3(1.0 / gamma));
     //colorFinal = result;
+
+
+
+
+    colorFinal += bloom;
 
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
@@ -103,7 +113,7 @@ void main()
     else if(draw_mode == 3)
         FragColor = vec4(Normal, 1.0);
     else if(draw_mode == 4)
-        FragColor = vec4(Diffuse, 1.0);
+        FragColor = vec4(bloom, 1.0);
     else if(draw_mode == 5)
         FragColor = vec4(vec3(Specular), 1.0);
 

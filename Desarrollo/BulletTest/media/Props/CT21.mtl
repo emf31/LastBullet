@@ -16,3 +16,4 @@ newmtl CT2A
 	map_Kd Props\texturasMapa\ChannelCT2ADiffuse.png
 	map_Ks Props\texturasMapa\ChannelCT2ASpecular.png
 	map_Kn Props\texturasMapa\ChannelCT2ANormal.jpg
+	map_Ke Props\noemisivo.jpg

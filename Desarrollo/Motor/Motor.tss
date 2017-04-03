@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Motor\SceneManager.cpp</string>
+      <string>D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Motor\SceneManager.h</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Motor\AnimationMesh.h</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\UA\CUARTO\ABP\TBA\Desarrollo\Motor\Motor\TMesh.cpp</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+</ArrayOfArrayOfArrayOfString>

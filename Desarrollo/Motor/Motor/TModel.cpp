@@ -18,7 +18,6 @@ TModel::TModel(TMeshGroup* meshGroup) : sm(SceneManager::i()) {
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 	visible = true;
-	m_emisivo = Vec3<float>(0.0f, 0.0f, 0.0f);
 	setModelColor(1.0f, 1.0f, 1.0f);
 }
 
@@ -29,7 +28,7 @@ TModel::~TModel() {
 void TModel::beginDraw() {
 	if (visible) {
 
-
+		
 		const glm::mat4& view = sm.getViewMatrix();
 		const glm::mat4& projection = sm.getProjectionMatrix();
 		glm::mat4& model = sm.getMatrizActual();
@@ -41,8 +40,8 @@ void TModel::beginDraw() {
 
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		//color emisivo
-		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.emisivo"), m_emisivo.getX(), m_emisivo.getY(), m_emisivo.getZ());
+		//color emisivo antes el emisivo era un color ahora es una textura
+		//glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.emisivo"), m_emisivo.getX(), m_emisivo.getY(), m_emisivo.getZ());
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo

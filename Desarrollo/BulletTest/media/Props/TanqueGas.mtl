@@ -16,3 +16,4 @@ newmtl 01___Default
 	map_Kd Props\TanqueGas_Diffuse.png
 	map_Ks Props\TanqueGas_Specular.png
 	map_Kn Props\TanqueGas_Normal.jpg
+	map_Ke Props\noemisivo.jpg

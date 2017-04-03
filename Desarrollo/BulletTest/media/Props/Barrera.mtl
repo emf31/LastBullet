@@ -14,3 +14,4 @@ newmtl Material__1
 	Ke 0.0000 0.0000 0.0000
 	map_Ka Props\Barrera_Diffuse.png
 	map_Kd Props\Barrera_Diffuse.png
+	map_Ke Props\noemisivo.jpg

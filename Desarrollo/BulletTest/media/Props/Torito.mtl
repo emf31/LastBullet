@@ -16,3 +16,4 @@ newmtl 01___Default
 	map_Kd Props\Torito_Diffuse.png
 	map_Ks Props\Torito_Specular.png
 	map_Kn Props\Torito_Normal.jpg
+	map_Ke Props\noemisivo.jpg

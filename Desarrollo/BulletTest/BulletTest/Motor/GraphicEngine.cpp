@@ -32,7 +32,6 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	
 	node->setScale(Vec3<float>(TScale.getX(), TScale.getY(), TScale.getZ()));
 	node->setPosition(Vec3<float>(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
-
 	
 
 	std::shared_ptr<BasicSceneNode> sharedptr(new BasicSceneNode(node));

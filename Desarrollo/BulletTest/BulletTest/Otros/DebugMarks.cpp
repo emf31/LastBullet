@@ -81,7 +81,7 @@ void DebugMarks::activateMark(Time time, const Vec3<float> color)
 {
 
 	//Change the color to billboard 
-	m_nodo->setColor(color);
+	m_nodo->setColor(Vec3<float>(0.32, 0.92, 0.32));
 
 	//Turn visible
 	m_nodo->setVisible(true);
