@@ -90,7 +90,6 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
-	//std::cout << "BALAS: " << weaponSystem->GetCurrentWeapon()->getMunicionTotal() << std::endl;
 
 	if (valorCiclos < 25) {
 
@@ -262,7 +261,7 @@ bool Enemy_Bot::handleTrigger(TriggerRecordStruct * Trigger)
 {
 	Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
 	if (ent->getID() != m_id && Trigger->eTriggerType == kTrig_EnemyShootSound) {
-		printf("Trigger tipo sonido de arma enemigo\n");
+
 		sense->updateSound(static_cast<Character*>(ent));
 	}
 	return true;

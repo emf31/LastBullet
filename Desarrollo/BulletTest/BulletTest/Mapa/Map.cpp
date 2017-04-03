@@ -275,8 +275,6 @@ void Map::CalcularNodosCercanos(Vec3<float>& pos, std::list<NavGraphNode*>& nodo
 		if (nodosCercanos.size() == 0) {
 			int inicio = tam;
 			/*for (inicio; inicio < tam2; inicio++) {
-
-				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
 				try {
 					cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[inicio], nodosCercanos, celdasVecinas, pos);
 				} catch (std::runtime_error e) {

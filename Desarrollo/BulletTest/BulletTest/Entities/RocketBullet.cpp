@@ -95,8 +95,6 @@ void RocketBullet::handleMessage(const Message & message)
 
 			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 1.5f;
 
-			std::cout << "Damage: " << damage << std::endl;
-
 			if (damage > 0) {
 
 				if (myentity->getID() == m_owner->getID()) {
