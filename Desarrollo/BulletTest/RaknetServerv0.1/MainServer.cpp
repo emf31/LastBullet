@@ -344,10 +344,13 @@ int main() {
 				TKill kill = *reinterpret_cast<TKill*>(packet->data);
 
 				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+				std::cout << "Aumenta muerte: " << EntityManager::i().getRaknetEntity(kill.guidDeath)->getName()<< std::endl;
 
 				if (kill.guidDeath != kill.guidKill) {
 					//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado
-					EntityManager::i().aumentaKill(kill.guidKill, peer);	
+					EntityManager::i().aumentaKill(kill.guidKill, peer);
+
+					std::cout << "Aumenta kill: " << EntityManager::i().getRaknetEntity(kill.guidKill)->getName() << std::endl;
 				}
 				
 				

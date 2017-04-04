@@ -126,13 +126,24 @@ void Pistola::shoot(const Vec3<float>& target) {
 					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
 					if (ent != m_ent)
 					{
-						if (ent->getClassName() == "Player" || ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-							TImpactoBala impacto;
-							impacto.damage = damage;
-							impacto.guid = m_ent->getGuid();
+						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot") {
+							if (ent->getClassName() == "Enemy") {
+								TImpactoBala impacto;
+								impacto.damage = damage;
+								impacto.guid = ent->getGuid();
 
-							Message msg(ent, "COLISION_BALA", &impacto);
-							MessageHandler::i().sendMessageNow(msg);
+								Message msg(ent, "COLISION_BALA", &impacto);
+								MessageHandler::i().sendMessageNow(msg);
+							}
+							else {
+								TImpactoBala impacto;
+								impacto.damage = damage;
+								impacto.guid = m_ent->getGuid();
+
+								Message msg(ent, "COLISION_BALA", &impacto);
+								MessageHandler::i().sendMessageNow(msg);
+							}
+
 						}
 						//Para mover objetos del mapa
 						posicionImpacto = ray.m_hitPointWorld;
