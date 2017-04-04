@@ -91,7 +91,7 @@ void main()
 
 
     //colorFinal += emissive;
-    //colorFinal = colorFinal * modelColor;
+    colorFinal = colorFinal * modelColor;
 
     //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
            

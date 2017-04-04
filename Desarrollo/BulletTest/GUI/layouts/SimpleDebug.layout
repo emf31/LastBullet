@@ -81,15 +81,10 @@
             </Window>
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label" >
-            <Property name="Area" value="{{0.00234375,1067},{0.0430556,29},{0.14375,1067},{0.0902778,29}}" />
-            <Property name="Text" value="F2 - Debug menu" />
+            <Property name="Area" value="{{0.00234375,1057},{0.0430556,22},{0.14375,1057},{0.0902778,22}}" />
+            <Property name="Text" value="F1 - Debug menu" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
-        </Window>
-        <Window type="AlfiskoSkin/Label" name="Label2" >
-            <Property name="Area" value="{{0.835938,0},{0.0277778,0},{0.876562,128},{0.0277778,32}}" />
-            <Property name="Text" value="F1 - Console Log" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="LogWindow" >
             <Property name="ID" value="1" />
