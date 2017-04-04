@@ -66,12 +66,12 @@ int main() {
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
 	origen->setModelColor(1.0f,0.2f,0.2f);
 
-
+	int velocidadAnim = 10;
 	//animacion
 	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
 	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
 	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	pruebaAnim->setFrameTime(milliseconds(10));
+	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 	pruebaAnim->setAnimation("idle",0,34);
 	pruebaAnim->setAnimation("saltar", 40, 109);
 	pruebaAnim->setAnimation("correr", 110, 190);
@@ -94,7 +94,7 @@ int main() {
 	luz->setColor(1.0f, 0.5f, 1.f);
 	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f), 100.0f, 150.0f);
 	luz2->setColor(0.0f, 1.f, 0.5f);
-	//TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
+	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
 	//luz3->setColor(1.0f, 0.3f, 0.3f);
 	//luz3->setIntensidadAmbiente(0.5f);
 
@@ -129,7 +129,7 @@ int main() {
 	flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
 	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
-	flash3->setColor(15.0f, 0.0f, 0.0f);
+	flash3->setColor(1.0f, 1.0f, 1.0f);
 	//flash->setIntensidadAmbiente(0.8);
 
 
@@ -176,10 +176,36 @@ int main() {
 		//std::cout << "Scroll: " << Input::i().getMouseScroll() << std::endl;
 		
 		if (Input::i().keyReleased(GLFW_KEY_1)) {
-			std::cout << "Has soltado la tecla TAB" << std::endl;
+			std::cout << "Modo de color : Color Final" << std::endl;
+			sm.draw_mode = 1;
 		}
-		else if (Input::i().keyPressed(GLFW_KEY_1)) {
-			std::cout << "Has presionado la tecla TAB" << std::endl;
+		else if (Input::i().keyReleased(GLFW_KEY_2)) {
+			std::cout << "Modo de color : Posicion" << std::endl;
+			sm.draw_mode = 2;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_3)) {
+			std::cout << "Modo de color : Normales" << std::endl;
+			sm.draw_mode = 3;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_4)) {
+			std::cout << "Modo de color : Difuso" << std::endl;
+			sm.draw_mode = 4;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_5)) {
+			std::cout << "Modo de color : Especular " << std::endl;
+			sm.draw_mode = 5;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_6)) {
+			std::cout << "Modo de color : Model Color" << std::endl;
+			sm.draw_mode = 6;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_7)) {
+			std::cout << "Modo de color : Emisivo" << std::endl;
+			sm.draw_mode = 7;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_8)) {
+			std::cout << "Modo de color : Bloom " << std::endl;
+			sm.draw_mode = 8;
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_TAB)) {
 			std::cout << "Has soltado la tecla TAB" << std::endl;
@@ -198,6 +224,15 @@ int main() {
 		else if (Input::i().keyReleased(GLFW_KEY_I)) {
 			std::cout << "Has cambiado animacion a idle" << std::endl;
 			pruebaAnim->setCurrentAnimation("idle");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_R)) {
+			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_L)) {
+			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 		}
 		
 		Input::i().endEventProcess();
@@ -218,12 +253,12 @@ int main() {
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);*/
 		/*posCam = sm.camaraActiva->getPosition();
-		target = sm.camaraActiva->getTarget();
+		target = sm.camaraActiva->getTarget();*/
 		sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
 
 		sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
 		sm.drawLine(glm::vec3(-0.5f, 0.0f, 0.0f), glm::vec3(0.5f, 0.f, 0.0f));
-		sm.drawLine(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));*/
+		sm.drawLine(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
 
 
 		sm.draw();

@@ -91,7 +91,7 @@ void main()
 
 
     //colorFinal += emissive;
-    //colorFinal = colorFinal * modelColor;
+    colorFinal = colorFinal * modelColor;
 
     //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
            
@@ -108,9 +108,15 @@ void main()
     else if(draw_mode == 3)
         FragColor = vec4(Normal, 1.0);
     else if(draw_mode == 4)
-        FragColor = vec4(bloom, 1.0);
+        FragColor = vec4(Diffuse, 1.0);
     else if(draw_mode == 5)
         FragColor = vec4(vec3(Specular), 1.0);
+    else if(draw_mode == 6)
+        FragColor = vec4(modelColor, 1.0);
+    else if(draw_mode == 7)
+        FragColor = vec4(emissive, 1.0);
+    else if(draw_mode == 8)
+        FragColor = vec4(bloom, 1.0);
 
 
     //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);

@@ -79,6 +79,9 @@ void SceneManager::draw() {
 
 
 	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//hacemos un clear de la profundidad para que las lineas salgas por delante del resto de la escena
+		glClear(GL_DEPTH_BUFFER_BIT);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		if (vertices3.size() > 0) {
