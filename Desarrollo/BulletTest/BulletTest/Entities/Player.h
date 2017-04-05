@@ -65,6 +65,8 @@ public:
 
 	void impulsar(Vec3<float> force);
 
+	void godMode();
+
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
@@ -138,6 +140,7 @@ private:
 	bool tieneRocketLauncher;
 	bool tienePistola;
 	bool tieneSniper;
+	bool m_godMode;
 
 	bool apuntando=false;
 

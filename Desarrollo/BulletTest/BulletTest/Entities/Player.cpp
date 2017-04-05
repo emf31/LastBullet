@@ -27,7 +27,7 @@
 
 
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid) , life_component(this)
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid) , life_component(this), m_godMode(false)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
@@ -246,27 +246,30 @@ void Player::borrarContenido()
 
 void Player::handleMessage(const Message & message)
 {
-	if (message.mensaje == "COLLISION") {
-		
-	}else if (message.mensaje == "COLISION_ROCKET") {
-		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
-		delete message.data;
-	}
-	else if (message.mensaje == "COLISION_BALA") {
-			//Este float * es una referencia a una variable de clase asi que no hay problema
-			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
+	if (!m_godMode) {
 
-			getLifeComponent().restaVida(impacto.damage, impacto.guid);
+	
+		if (message.mensaje == "COLLISION") {
+		
+		}else if (message.mensaje == "COLISION_ROCKET") {
+			NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+			delete message.data;
+		}
+		else if (message.mensaje == "COLISION_BALA") {
+				//Este float * es una referencia a una variable de clase asi que no hay problema
+				TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
+
+				getLifeComponent().restaVida(impacto.damage, impacto.guid);
+				relojSangre.restart();
+				//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+		
+		}
+		else if (message.mensaje == "COLISION_GRANADA") {
+			TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
+			getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
 			relojSangre.restart();
-			//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
-		
+		}
 	}
-	else if (message.mensaje == "COLISION_GRANADA") {
-		TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
-		getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
-		relojSangre.restart();
-	}
-
 }
 
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
@@ -485,6 +488,12 @@ void Player::impulsar(Vec3<float> force)
 {
 	btVector3 fuerza(force.getX(), force.getY(), force.getZ());
 	p_controller->applyImpulse(fuerza);
+}
+
+void Player::godMode()
+{
+	std::cout << "God mode" << std::endl;
+	m_godMode = !m_godMode;
 }
 
 void Player::setWeapon(int newWeapon) {

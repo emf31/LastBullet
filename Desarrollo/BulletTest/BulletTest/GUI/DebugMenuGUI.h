@@ -58,6 +58,8 @@ private:
 
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
 
+	bool onGodMode(const CEGUI::EventArgs & e);
+
 	Vec3<float> elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);
