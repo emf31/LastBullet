@@ -108,9 +108,15 @@ void main()
     else if(draw_mode == 3)
         FragColor = vec4(Normal, 1.0);
     else if(draw_mode == 4)
-        FragColor = vec4(bloom, 1.0);
+        FragColor = vec4(Diffuse, 1.0);
     else if(draw_mode == 5)
         FragColor = vec4(vec3(Specular), 1.0);
+    else if(draw_mode == 6)
+        FragColor = vec4(modelColor, 1.0);
+    else if(draw_mode == 7)
+        FragColor = vec4(emissive, 1.0);
+    else if(draw_mode == 8)
+        FragColor = vec4(bloom, 1.0);
 
 
     //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
@@ -188,8 +194,8 @@ float quadratic=0.015; //cantidad de atenuacion segun la distancia al cuadrado
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,vec3 Diffuse, float Specular){
     //valores para que la luz deje de afectar cuando esta a una distancia de 100
     float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
-    float linear=0.005; //la cantidad de atenueacion segun las distancia
-    float quadratic=0.0001; //cantidad de atenuacion segun la distancia al cuadrado
+    float linear=0.03; //la cantidad de atenueacion segun las distancia
+    float quadratic=0.0003; //cantidad de atenuacion segun la distancia al cuadrado
     vec3 colorF=vec3(0.0f,0.0f,0.0f);
 
      vec3 lightDir = normalize(light.position - FragPos);

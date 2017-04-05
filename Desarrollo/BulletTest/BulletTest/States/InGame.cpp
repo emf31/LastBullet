@@ -139,6 +139,18 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F7)) {
 		
+		SceneManager::i().draw_mode = 6;
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F8)) {
+
+		SceneManager::i().draw_mode = 7;
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F9)) {
+
+		SceneManager::i().draw_mode = 8;
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
+
 		LogIA::writeLog();
 	}
 	
