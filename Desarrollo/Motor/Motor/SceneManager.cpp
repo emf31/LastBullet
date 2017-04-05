@@ -20,7 +20,7 @@ void SceneManager::inicializar() {
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
-	shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
+	//shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
 
 	inicializarBuffers();
 	//inicializarBufferDeferred();
@@ -79,9 +79,13 @@ void SceneManager::draw() {
 
 
 	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		
 		//hacemos un clear de la profundidad para que las lineas salgas por delante del resto de la escena
-		glClear(GL_DEPTH_BUFFER_BIT);
+		//glClear(GL_DEPTH_BUFFER_BIT);
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+		glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		if (vertices3.size() > 0) {
@@ -200,8 +204,8 @@ void SceneManager::inicializarBuffersBlur()
 }
 
 void SceneManager::inicializarBufferBloom() {
-	glUniform1i(glGetUniformLocation(shaderBloom->Program, "scene"), 0);
-	glUniform1i(glGetUniformLocation(shaderBloom->Program, "bloomBlur"), 1);
+	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "scene"), 0);
+	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "bloomBlur"), 1);
 }
 
 void SceneManager::inicializarBuffersLineas() {
@@ -307,16 +311,16 @@ void SceneManager::renderBlur()
 
 void SceneManager::renderBloom()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	shaderBloom->Use();
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//shaderBloom->Use();
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, gEscena);
-	//glUniform1f(glGetUniformLocation(shaderBloom->Program, "exposure"), exposure);
-	RenderQuad();
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	//glActiveTexture(GL_TEXTURE1);
+	//glBindTexture(GL_TEXTURE_2D, gEscena);
+	////glUniform1f(glGetUniformLocation(shaderBloom->Program, "exposure"), exposure);
+	//RenderQuad();
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 }
 

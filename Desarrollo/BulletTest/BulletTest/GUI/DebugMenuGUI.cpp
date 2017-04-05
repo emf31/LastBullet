@@ -57,6 +57,9 @@ void DebugMenuGUI::inicializar() {
 	CamaraAerea = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(20));
 	CamaraAerea->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCamaraAerea, this));
 
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
+	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
+
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
 
@@ -575,6 +578,12 @@ bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
 
 	entActual->setNumCiclos((int)sliderUpdate->getCurrentValue());
 
+	return true;
+}
+
+bool DebugMenuGUI::onGodMode(const CEGUI::EventArgs & e)
+{
+	static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->godMode();
 	return true;
 }
 
