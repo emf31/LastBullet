@@ -65,9 +65,16 @@ int main() {
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
 	origen->setModelColor(1.0f,0.2f,0.2f);
+	//personaje
+	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
 
-	int velocidadAnim = 10;
+	
 	//animacion
+	int velocidadAnim = 10;
+	std::cout << "Cargando animaciones..." << std::endl;
 	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
 	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
 	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
@@ -99,11 +106,7 @@ int main() {
 	//luz3->setIntensidadAmbiente(0.5f);
 
 
-	//personaje
-	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
-	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+
 	////personaje
 	//TModel* l2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	//l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
@@ -149,13 +152,27 @@ int main() {
 	Vec3<float> newPos2 = Vec3<float>(50.0f, 20.0f, 10.0f);
 	newPos2.normalise();
 	sm.setActiveCamera(sm.crearNodoCamara());
+	
 
+		
+	
 	
 
 
 	Vec3<float> posCam;
 	Vec3<float> target;
-	
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "Instrucciones :" << std::endl;
+	std::cout << "Esperar mientras la pantalla esta en blanco (se estan cargando modelos, animaciones, texturas,etc)--" << std::endl;
+	std::cout << "Mover camara: WASD" << std::endl;
+	std::cout << "Activar animacion Idle : I" << std::endl;
+	std::cout << "Activar animacion Correr: C" << std::endl;
+	std::cout << "Activar animacion Saltar: J" << std::endl;
+	std::cout << "Aumentar velocidad animaciones : R" << std::endl;
+	std::cout << "Disminuir velocidad de animaciones : D" << std::endl;
+	std::cout << "Activar modos de color : 1-8" << std::endl;
 
 	
 
@@ -207,22 +224,13 @@ int main() {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
 		}
-		else if (Input::i().keyReleased(GLFW_KEY_TAB)) {
-			std::cout << "Has soltado la tecla TAB" << std::endl;
-		}
-		else if (Input::i().keyPressed(GLFW_KEY_TAB)) {
-			std::cout << "Has presionado la tecla TAB" << std::endl;
-		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
-			std::cout << "Has cambiado animacion a saltar" << std::endl;
 			pruebaAnim->setCurrentAnimation("saltar");
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_C)) {
-			std::cout << "Has cambiado animacion a correr" << std::endl;
 			pruebaAnim->setCurrentAnimation("correr");
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_I)) {
-			std::cout << "Has cambiado animacion a idle" << std::endl;
 			pruebaAnim->setCurrentAnimation("idle");
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_R)) {
@@ -254,11 +262,11 @@ int main() {
 		p1->updatePosition(newPos);*/
 		/*posCam = sm.camaraActiva->getPosition();
 		target = sm.camaraActiva->getTarget();*/
-		sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
+		//sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
 
-		sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
-		sm.drawLine(glm::vec3(-0.5f, 0.0f, 0.0f), glm::vec3(0.5f, 0.f, 0.0f));
-		sm.drawLine(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
+		//sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
+		//sm.drawLine(glm::vec3(-0.5f, 0.0f, 0.0f), glm::vec3(0.5f, 0.f, 0.0f));
+		//sm.drawLine(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
 
 
 		sm.draw();

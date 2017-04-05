@@ -51,8 +51,8 @@ void InGame::Inicializar()
 	
 	
 	GraphicEngine::i().getActiveCamera()->setInputReceiver(true);
-	tiempo.restart();
-	myfile.open("tiempos.txt");
+	//tiempo.restart();
+	//myfile.open("tiempos.txt");
 
 	GraphicEngine::i().enableMouse(false);
 
@@ -62,7 +62,7 @@ void InGame::Inicializar()
 
 void InGame::Clear()
 {
-	myfile.close();
+	//myfile.close();
 	EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
@@ -213,13 +213,13 @@ void InGame::Render(float interpolation, Time elapsedTime)
 	if(salirGUI.escapeInput)
 	salirGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
-	tiempo1 = tiempo.getElapsedTime().asMilliseconds();
+	//tiempo1 = tiempo.getElapsedTime().asMilliseconds();
 
 	GraphicEngine::i().renderAll();
-	tiempo2 = tiempo.getElapsedTime().asMilliseconds();
-	tiempoFinal = tiempo2 - tiempo1;
-	
-	myfile << tiempoFinal << "\n";
+	//tiempo2 = tiempo.getElapsedTime().asMilliseconds();
+	//tiempoFinal = tiempo2 - tiempo1;
+	//
+	//myfile << tiempoFinal << "\n";
 }
 
 

@@ -103,7 +103,7 @@ public:
 	Shader* shaderBombillas;
 	Shader* shaderLineas;
 	Shader* shaderBlur;
-	Shader* shaderBloom;
+	//Shader* shaderBloom;
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
