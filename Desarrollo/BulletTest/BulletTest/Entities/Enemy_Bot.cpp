@@ -234,7 +234,7 @@ void Enemy_Bot::handleMessage(const Message & message)
 
 			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
-			getLifeComponent().restaVida(impacto.damage, impacto.guid);
+			getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 
 			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 

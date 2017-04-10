@@ -259,7 +259,7 @@ void Player::handleMessage(const Message & message)
 				//Este float * es una referencia a una variable de clase asi que no hay problema
 				TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
-				getLifeComponent().restaVida(impacto.damage, impacto.guid);
+				getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 				relojSangre.restart();
 				//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		

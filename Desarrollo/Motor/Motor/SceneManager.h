@@ -182,6 +182,8 @@ public:
 		drawTarget = b;
 	}
 
+
+
 private:
 	TNode* scene;
 

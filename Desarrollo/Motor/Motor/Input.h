@@ -109,4 +109,5 @@ private:
 	void scroll_callbackImpl(GLFWwindow* window, double xoffset, double yoffset);
 	void key_callbackImpl(GLFWwindow* window, int key, int scancode, int action, int mode);
 
+	void toggleWindowMode();
 };

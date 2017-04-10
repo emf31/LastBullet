@@ -55,7 +55,8 @@ struct TBala {
 struct TImpactoBala {
 	unsigned char mID;
 	float damage;
-	RakNet::RakNetGUID guid;
+	RakNet::RakNetGUID guidImpactado;
+	RakNet::RakNetGUID guidDisparado;
 };
 #pragma pack(pop)
 

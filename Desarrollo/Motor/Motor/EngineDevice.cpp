@@ -125,6 +125,23 @@ void EngineDevice::shutdown()
 	
 }
 
+void EngineDevice::toggleWindowMode() {
+	if (glfwGetWindowMonitor(window))
+	{
+		glfwSetWindowMonitor(window, NULL,
+			0, screenWidth,
+			0, screenHeight, 60);
+	}
+	else
+	{
+		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+		if (monitor)
+		{
+			glfwSetWindowMonitor(window, monitor, 0, 0, screenWidth, screenHeight, 60);
+		}
+	}
+}
+
 void EngineDevice::setKeyCallbacks() {
 	glfwSetKeyCallback(window, &Input::key_callback);
 	glfwSetCursorPosCallback(window, &Input::mouse_callback);

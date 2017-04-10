@@ -357,7 +357,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			//si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
 			//bala.guid = quien te ha disparado
-			m_player->getLifeComponent().restaVida(bala.damage, bala.guid);
+			m_player->getLifeComponent().restaVida(bala.damage, bala.guidDisparado);
 			m_player->relojSangre.restart();
 
 #ifdef NETWORK_DEBUG
