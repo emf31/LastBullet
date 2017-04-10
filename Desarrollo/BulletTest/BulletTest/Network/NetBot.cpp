@@ -80,7 +80,7 @@ void NetBot::handlePackets(Time elapsedTime)
 			//nos guardamos el guid de quien dispara por si mata al jugador poder actualizar la tabla
 
 			//si recibimos este mensaje es pork nos han dado a nosotros, por lo que nos restamos vida;
-			m_bot->getLifeComponent().restaVida(bala.damage, bala.guid);
+			m_bot->getLifeComponent().restaVida(bala.damage, bala.guidDisparado);
 			
 
 			break;

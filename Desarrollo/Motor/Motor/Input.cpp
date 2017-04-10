@@ -57,7 +57,22 @@ void Input::key_callbackImpl(GLFWwindow * window, int key, int scancode, int act
 		keys[key] = DOWN;
 	}
 	
-
+	if (key == GLFW_KEY_ENTER && mode == GLFW_MOD_ALT) {
+		if (glfwGetWindowMonitor(window))
+		{
+			glfwSetWindowMonitor(window, NULL,
+				0, *SceneManager::i().screenWidth,
+				0, *SceneManager::i().screenHeight, 60);
+		}
+		else
+		{
+			GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+			if (monitor)
+			{
+				glfwSetWindowMonitor(window, monitor, 0, 0, *SceneManager::i().screenWidth, *SceneManager::i().screenHeight, 60);
+			}
+		}
+	}
 
 	/*if (action == GLFW_PRESS)
 		keys[key] = PRESSED;

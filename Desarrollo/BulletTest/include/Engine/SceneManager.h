@@ -184,6 +184,8 @@ public:
 	void ziZoom(float z);
 	void zoomZout();
 
+
+
 private:
 	TNode* scene;
 

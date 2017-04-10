@@ -131,23 +131,30 @@ void Asalto::shoot(const Vec3<float>& target)
 				if (ent != m_ent)
 				{
 					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot") {
-						if (ent->getClassName() == "Enemy") {
+						/*if (ent->getClassName() == "Enemy") {
 							TImpactoBala impacto;
 							impacto.damage = damage;
-							impacto.guid = ent->getGuid();
+							impacto.guidImpactado = ent->getGuid();
+							impacto.guidDisparado = m_ent->getGuid();
 
 							Message msg(ent, "COLISION_BALA", &impacto);
 							MessageHandler::i().sendMessageNow(msg);
 						}
 						else {
 							TImpactoBala impacto;
-							impacto.damage = damage;
-							impacto.guid = m_ent->getGuid();
+							impacto.guidImpactado = ent->getGuid();
+							impacto.guidDisparado = m_ent->getGuid();
 
 							Message msg(ent, "COLISION_BALA", &impacto);
 							MessageHandler::i().sendMessageNow(msg);
-						}
+						}*/
+						TImpactoBala impacto;
+						impacto.damage = damage;
+						impacto.guidImpactado = ent->getGuid();
+						impacto.guidDisparado = m_ent->getGuid();
 
+						Message msg(ent, "COLISION_BALA", &impacto);
+						MessageHandler::i().sendMessageNow(msg);
 					}
 					//Para mover objetos del mapa
 					posicionImpacto = ray.m_hitPointWorld;
