@@ -50,7 +50,7 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(251): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(254): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
   Generando código...
   Compilando...
   Input.cpp
