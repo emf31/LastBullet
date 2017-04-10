@@ -12,8 +12,8 @@ newmtl 01___Default
 	Kd 0.5882 0.5882 0.5882
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka Props\Pantalla_Diffuse.png
-	map_Kd Props\Pantalla_Diffuse.png
+	map_Ka Props\Pantalla2_Diffuse.png
+	map_Kd Props\Pantalla2_Diffuse.png
 	map_Ks Props\Pantalla_Specular.png
 	map_Kn Props\Pantalla_Normal.jpg
-	map_Ke Props\noemisivo.jpg
+	map_Ke Props\Pantalla_Emisivo.png

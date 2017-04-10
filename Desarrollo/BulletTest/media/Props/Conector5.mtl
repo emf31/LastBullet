@@ -15,4 +15,5 @@ newmtl cosasDeMid_lambert2
 	map_Ka Props\Conector_Diffuse.png
 	map_Kd Props\Conector_Diffuse.png
 	map_Ks Props\Conector_Specular.png
+	map_Kn Props\Conector_NRM.jpg
 	map_Ke Props\noemisivo.jpg

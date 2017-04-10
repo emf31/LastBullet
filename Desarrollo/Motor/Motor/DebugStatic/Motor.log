@@ -1,5 +1,7 @@
 ﻿  ClockImpl.cpp
   TTransform.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(134): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(138): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.cpp(154): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
@@ -9,44 +11,61 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor
   TSunLight.cpp
   TPointLight.cpp
   TNode.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   TModel.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   TMeshGroup.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   TMesh.cpp
   TLuz.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   Time.cpp
   TFlashLight.cpp
   Texture.cpp
   TEntity.cpp
   TCamera.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.cpp(4): warning C4005: 'PI': redefinición de macro
   e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\ttransform.h(10): note: vea la definición anterior de 'PI'
   TAnimationGroupMesh.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   TAnimation.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tanimation.cpp(11): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tanimation.cpp(21): warning C4018: '>=': no coinciden signed/unsigned
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tanimation.cpp(56): warning C4018: '>=': no coinciden signed/unsigned
   Shader.cpp
   SceneManager.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   ResourceManager.cpp
   main.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(251): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
   Generando código...
   Compilando...
   Input.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   EngineDevice.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   Clock.cpp
   AnimationReader.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\animationreader.cpp(9): warning C4101: 'dir': variable local sin referencia
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\animationreader.cpp(10): warning C4101: 'ent': variable local sin referencia
   AnimationMesh.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\tcamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   Generando código...
-     Creando biblioteca E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib y objeto E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exp
-LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glew_d.lib(glew.obj) : warning LNK4099: no se encontró PDB 'glew_static.pdb' con 'glew_d.lib(glew.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\glew_static.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)
+Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib

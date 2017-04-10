@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<GUIScheme version="5" name="sniper">
+    <Font filename="DejaVuSans-12.font" />
+    <Imageset filename="sniper.imageset" />
+    <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+
+    
+</GUIScheme>
+
