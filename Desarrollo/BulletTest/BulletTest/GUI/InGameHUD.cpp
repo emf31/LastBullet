@@ -9,7 +9,9 @@ void InGameHUD::inicializar() {
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
 	loadScheme("LastBulletHUD.scheme");
+	loadScheme("sniper.scheme");
 	loadLayout("LastBulletHUD.layout");
+	
 
 
 	LabelVida = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1));
