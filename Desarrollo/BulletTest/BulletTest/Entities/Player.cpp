@@ -327,13 +327,19 @@ void Player::jump() {
 void Player::shoot() {
 
 	isShooting = true;
-	
+	bool hitted = false;
+
 	if (listaWeapons->valorActual()->canShoot()) {	
-		listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
+		
+		hitted = listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
 		GraphicEngine::i().getActiveCamera()->cameraRecoil();
 		TriggerSystem::i().RegisterTrigger(kTrig_EnemyShootSound, 1002, m_id, m_renderState.getPosition(), 50, milliseconds(50), false);
 	}
 	
+
+	if (hitted) {
+		relojHit.restart();
+	}
 
 
 }

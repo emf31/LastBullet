@@ -147,7 +147,6 @@ void Enemy::handleMessage(const Message & message)
 
 			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);
 
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		}
 
 	}

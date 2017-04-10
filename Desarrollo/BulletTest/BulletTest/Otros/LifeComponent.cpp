@@ -43,6 +43,12 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		TKill kill;
 		kill.guidKill = guid;
 		kill.guidDeath = m_pOwner->getGuid();
+
+		Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
+		Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
+
+		std::cout << "KILL: " << entKill->getName() << std::endl;
+		std::cout << "DEATH: " << entDeath->getName() << std::endl;
 		//std::cout << "HA MATADO " << guid <<std::endl;
 		
 

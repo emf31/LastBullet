@@ -88,9 +88,12 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 
 
 
-void RocketLauncher::shoot(const Vec3<float>& target) {
+bool RocketLauncher::shoot(const Vec3<float>& target) {
 	
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+
+			
+
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
 
@@ -130,6 +133,9 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 		
 		estadoWeapon = DESCARGADA;
 	}
+
+
+	return false;
 	
 	
 }

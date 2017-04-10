@@ -1,15 +1,2 @@
-﻿  RenderState.cpp
-  Vec3f.cpp
-  MainServer.cpp
-  Player.cpp
-  Life.cpp
-  EntityManager.cpp
-  Entity.cpp
-  Bot.cpp
-  DropObject.cpp
-  ClockImpl.cpp
-  Time.cpp
-  Clock.cpp
-  Generando código...
-  RaknetServerv0.1.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.exe
+﻿  RaknetServerv0.1.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.exe
   RaknetServerv0.1.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.pdb (Full PDB)
