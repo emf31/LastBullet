@@ -425,6 +425,7 @@ void Player::bindWeapon() {
 
 void Player::UpWeapon()
 {
+	SceneManager::i().zoomZout();
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Siguiente();
 	if (apuntando) {
@@ -442,6 +443,7 @@ void Player::UpWeapon()
 
 void Player::DownWeapon()
 {
+	SceneManager::i().zoomZout();
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Anterior();
 	if (apuntando) {
@@ -468,11 +470,11 @@ void Player::apuntar()
 
 	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
 		if (!apuntando) {
-			GraphicEngine::i().getActiveCamera()->apuntar();
+			SceneManager::i().ziZoom(38.0f);
 			apuntando = true;
 		}
 		else {
-			GraphicEngine::i().getActiveCamera()->restablecerMira();
+			SceneManager::i().zoomZout();
 			apuntando = false;
 		}
 	}
@@ -481,7 +483,7 @@ void Player::apuntar()
 
 void Player::restablecerMira()
 {
-	GraphicEngine::i().getActiveCamera()->restablecerMira();
+	SceneManager::i().zoomZout();
 }
 
 void Player::impulsar(Vec3<float> force)

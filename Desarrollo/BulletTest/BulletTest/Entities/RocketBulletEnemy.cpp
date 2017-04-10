@@ -13,9 +13,9 @@
 //que dispara dicho rocket.
 
 RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation)
+m_position(position), m_direction(direction), m_velocity(120), m_rotation(rotation)
 {
-	m_lifetime = seconds(5);
+	m_lifetime = seconds(3);
 	cargarContenido();
 }
 
@@ -50,10 +50,9 @@ void RocketBulletEnemy::handleInput()
 
 void RocketBulletEnemy::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "", "../media/bullets/rocketbullet.obj");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.3f, 0.3f, 0.3f), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
-	m_renderState.setRotation(m_rotation);
-	m_renderState.setRenderRot(m_rotation);
+	m_nodo->setRotationXYZ(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
@@ -64,7 +63,7 @@ void RocketBulletEnemy::cargarContenido()
 
 void RocketBulletEnemy::borrarContenido()
 {
-
+	GraphicEngine::i().removeNode(m_nodo);
 
 }
 

@@ -54,6 +54,17 @@ public:
 
 	void setInputEnable(bool b) { inputEnable = b; }
 
+	void aumentarMira(float z) {
+		//38.0f
+		zoom = z;
+		movementSpeed = SPEED*0.3;
+		mouseSensitivity = SENSITIVTY*0.4;
+	}
+	void resetMira() {
+		zoom = ZOOM;
+		movementSpeed = SPEED;
+		mouseSensitivity = SENSITIVTY;
+	}
 
 private:
 	bool inputEnable;
