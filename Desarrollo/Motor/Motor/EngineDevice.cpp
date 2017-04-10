@@ -18,6 +18,7 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	glfwWindowHint(GLFW_SAMPLES, 16);
 
 	//GLFWmonitor* prMonitor = glfwGetPrimaryMonitor();
 	//Para pantalla completa se debe especificar un monitor (el principal en caso de haber mas de uno) en el cuarto parametro
@@ -38,7 +39,8 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	}
 
 	glViewport(0, 0, screenWidth, screenHeight);
-
+	
+	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
