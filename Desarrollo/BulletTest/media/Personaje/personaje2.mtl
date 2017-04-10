@@ -1,0 +1,60 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 10.04.2017 19:56:39
+
+newmtl wire_027177148
+	Ns 15.7531
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.7600 0.6200 0.5200
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Personaje/azul_traje.jpg
+	map_Kd Personaje/azul_traje.jpg
+
+
+newmtl Cabeza
+	Ns 15.7531
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.7600 0.6200 0.5200
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Personaje/azul_casco.jpg
+	map_Kd Personaje/azul_casco.jpg
+
+newmtl Brazos
+	Ns 15.7531
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.7600 0.6200 0.5200
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Personaje/azul_brazos.jpg
+	map_Kd Personaje/azul_brazos.jpg
+
+newmtl 07___Default
+	Ns 15.7531
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.7600 0.6200 0.5200
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Personaje/azul_piernas.jpg
+	map_Kd Personaje/azul_piernas.jpg
+

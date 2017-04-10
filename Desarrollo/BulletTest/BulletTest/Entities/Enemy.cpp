@@ -72,10 +72,10 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/ArmyPilot.obj");
-	m_nodo->setTexture("../media/body01.png", 1);
-	m_nodo->setTexture("../media/head01.png", 0);
-	m_nodo->setTexture("../media/m4tex.png", 2);
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.075f, 0.075f, 0.075f), "", "../media/Personaje/personaje2.obj");
+//	m_nodo->setTexture("../media/body01.png", 1);
+	//m_nodo->setTexture("../media/head01.png", 0);
+	//m_nodo->setTexture("../media/m4tex.png", 2);
 
 	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
 	
