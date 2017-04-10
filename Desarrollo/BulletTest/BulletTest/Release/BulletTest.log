@@ -1,7 +1,161 @@
-﻿  Sniper.cpp
+﻿  Enemy.cpp
 E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Enemy_Bot.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Granada.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  LifeObject.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Player.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  RocketBullet.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  AsaltoDrop.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  PistolaDrop.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  RocketLauncherDrop.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  SniperDrop.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  WeaponDrop.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Asalto.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Pistola.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  RocketLauncher.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Sniper.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Weapon.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  DebugMenuGUI.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+GUI\DebugMenuGUI.cpp(233): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  InGameHUD.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  LoadingStateGUI.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  MenuGUI.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Generando código...
+  Compilando...
+  Game.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  InputHandler.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Partida.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  PathFollow.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  SensoryMemory.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  BuscarVida.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  BuscarWeapon.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Disparar.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Patrullar.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Perseguir.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  TargetingSystem.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  WeaponSystem.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  PathPlanner.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\BulletTest\Mapa\Dijkstra.h(31): warning C4018: '<': no coinciden signed/unsigned
+  Camera.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  CameraShake.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  GraphicEngine.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  GunRecoil.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  MapLoader.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+Motor\MapLoader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+Motor\MapLoader.cpp(183): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(194): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(205): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(215): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+  NetBot.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  NetObject.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Generando código...
+  Compilando...
   NetPlayer.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  NetworkDebugger.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  NetworkManager.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  LifeComponent.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Lista.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  InGame.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Menu.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  StateFactory.cpp
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  World.cpp
 E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
 E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
   Generando código...
