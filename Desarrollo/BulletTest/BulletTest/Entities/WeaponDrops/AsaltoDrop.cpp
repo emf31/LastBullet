@@ -41,7 +41,7 @@ void AsaltoDrop::cargarContenido()
 	Vec3<float> pos = getPosition();
 	pos.addY(2.f);
 	nodo_platform = GraphicEngine::i().createNode(m_renderState.getPosition(), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Props/Plataforma.obj");
-	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.6f, 0.6f, 0.6f), "", "../media/arma/asalto.obj");
+	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.45f, 0.45f, 0.45f), "", "../media/Weapons/asaltoDrop.obj");
 	m_renderState.setPosition(pos);
 }
 

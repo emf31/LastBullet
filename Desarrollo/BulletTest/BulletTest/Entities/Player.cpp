@@ -259,7 +259,7 @@ void Player::handleMessage(const Message & message)
 				//Este float * es una referencia a una variable de clase asi que no hay problema
 				TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
-				getLifeComponent().restaVida(impacto.damage, impacto.guid);
+				getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 				relojSangre.restart();
 				//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		
@@ -327,13 +327,19 @@ void Player::jump() {
 void Player::shoot() {
 
 	isShooting = true;
-	
+	bool hitted = false;
+
 	if (listaWeapons->valorActual()->canShoot()) {	
-		listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
+		
+		hitted = listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
 		GraphicEngine::i().getActiveCamera()->cameraRecoil();
 		TriggerSystem::i().RegisterTrigger(kTrig_EnemyShootSound, 1002, m_id, m_renderState.getPosition(), 50, milliseconds(50), false);
 	}
 	
+
+	if (hitted) {
+		relojHit.restart();
+	}
 
 
 }
@@ -425,6 +431,7 @@ void Player::bindWeapon() {
 
 void Player::UpWeapon()
 {
+	SceneManager::i().zoomZout();
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Siguiente();
 	if (apuntando) {
@@ -442,6 +449,7 @@ void Player::UpWeapon()
 
 void Player::DownWeapon()
 {
+	SceneManager::i().zoomZout();
 	listaWeapons->valorActual()->getNode()->setVisible(false);
 	listaWeapons->Anterior();
 	if (apuntando) {
@@ -468,11 +476,11 @@ void Player::apuntar()
 
 	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
 		if (!apuntando) {
-			GraphicEngine::i().getActiveCamera()->apuntar();
+			SceneManager::i().ziZoom(38.0f);
 			apuntando = true;
 		}
 		else {
-			GraphicEngine::i().getActiveCamera()->restablecerMira();
+			SceneManager::i().zoomZout();
 			apuntando = false;
 		}
 	}
@@ -481,7 +489,7 @@ void Player::apuntar()
 
 void Player::restablecerMira()
 {
-	GraphicEngine::i().getActiveCamera()->restablecerMira();
+	SceneManager::i().zoomZout();
 }
 
 void Player::impulsar(Vec3<float> force)

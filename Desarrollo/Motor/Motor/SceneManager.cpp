@@ -654,7 +654,15 @@ void SceneManager::RenderQuad()
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);
 }
+void SceneManager::ziZoom(float z)
+{
+	camaraActiva->aumentarMira(z);
+}
 
+void SceneManager::zoomZout()
+{
+	camaraActiva->resetMira();
+}
 void SceneManager::shutdown()
 {
 	delete scene;

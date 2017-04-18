@@ -20,6 +20,7 @@ class EngineDevice {
 
 
 public:
+
 	EngineDevice();
 	~EngineDevice();
 
@@ -46,6 +47,8 @@ public:
 	void enableMouse(bool enable);
 
 	void shutdown();
+
+	void toggleWindowMode();
 
 private:
 	SceneManager& sm = SceneManager::i();

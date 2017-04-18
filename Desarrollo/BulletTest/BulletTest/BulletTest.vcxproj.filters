@@ -328,6 +328,9 @@
     <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="GUI\SalirHUD.cpp" />
     <ClCompile Include="IA\LogIA.cpp" />
+    <ClCompile Include="ParticleSystem\ExplosionParticleSystem.cpp">
+      <Filter>Source Code\ParticleSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -770,6 +773,9 @@
     <ClInclude Include="IA\LogIA.h">
       <Filter>Headers\IA</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleSystem\ExplosionParticleSystem.h">
+      <Filter>Headers\ParticleSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -936,6 +942,12 @@
     </Filter>
     <Filter Include="Source Code\IA\FuzzyLogic\FuzzyOperators">
       <UniqueIdentifier>{7f1aad0f-89d7-48ad-bceb-bbfd785beb7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\ParticleSystem">
+      <UniqueIdentifier>{49e08e7e-8651-4698-849f-a27b4981745e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ParticleSystem">
+      <UniqueIdentifier>{335e67ea-4334-4065-91e6-7c6a729008cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

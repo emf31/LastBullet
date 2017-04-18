@@ -242,6 +242,9 @@ int main() {
 			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
 			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 		}
+		else if (Input::i().keyPressed(GLFW_KEY_P)) {
+			engine.toggleWindowMode();
+		}
 		
 		Input::i().endEventProcess();
 

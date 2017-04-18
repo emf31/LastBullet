@@ -87,10 +87,13 @@ void LoadingState::Render(float interpolation, Time elapsedTime)
 
 void LoadingState::readAllAssets()
 {
+	AssetsReader::read("../media/Personaje", colaAssets);
 	AssetsReader::read("../media/Props",colaAssets);
-	AssetsReader::read("../media/arma", colaAssets);
+	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
 	AssetsReader::read("../media/Granada", colaAssets);
+	//AssetsReader::read("assets", colaAssets);
+
 }
 
 

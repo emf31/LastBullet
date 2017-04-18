@@ -181,6 +181,10 @@ public:
 	void setDrawTarget(bool b) {
 		drawTarget = b;
 	}
+	void ziZoom(float z);
+	void zoomZout();
+
+
 
 private:
 	TNode* scene;

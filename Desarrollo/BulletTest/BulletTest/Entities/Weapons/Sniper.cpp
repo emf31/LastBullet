@@ -86,8 +86,11 @@ bool Sniper::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 
-void Sniper::shoot(const Vec3<float>& target)
+bool Sniper::shoot(const Vec3<float>& target)
 {
+	//si impacta con algun personaje devuelve true
+	bool hitted = false;
+
 
 	//aumentamos en uno el numero de disparos, para reducir la municion
 	disparos++;
@@ -122,22 +125,16 @@ void Sniper::shoot(const Vec3<float>& target)
 			if (ent != m_ent)
 			{
 				if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot"){
-					if (ent->getClassName() == "Enemy") {
-						TImpactoBala impacto;
-						impacto.damage = damage;
-						impacto.guid = ent->getGuid();
+					//golpea algo
+					hitted = true;
 
-						Message msg(ent, "COLISION_BALA", &impacto);
-						MessageHandler::i().sendMessageNow(msg);
-					}
-					else {
-						TImpactoBala impacto;
-						impacto.damage = damage;
-						impacto.guid = m_ent->getGuid();
+					TImpactoBala impacto;
+					impacto.damage = damage;
+					impacto.guidImpactado = ent->getGuid();
+					impacto.guidDisparado = m_ent->getGuid();
 
-						Message msg(ent, "COLISION_BALA", &impacto);
-						MessageHandler::i().sendMessageNow(msg);
-					}
+					Message msg(ent, "COLISION_BALA", &impacto);
+					MessageHandler::i().sendMessageNow(msg);
 
 					}
 
@@ -152,21 +149,7 @@ void Sniper::shoot(const Vec3<float>& target)
 		}
 
 	}
-	/*Vec3<float> rotacionBala;
-	if (m_ent->getClassName == "Player"){
-	rotacionBala = GraphicEngine::i().getActiveCamera()->getRotation();
-	}
-	else if (m_ent->getClassName == "Enemy_Bot"){
-	Enemy_Bot* e = static_cast<Enemy_Bot*> (m_ent);
-	rotacionBala = Vec3<float>(e->getFacing().x, 0, e->getFacing().y);
-	}
-	else if (m_ent->getClassName == "Enemy") {
-	Enemy* e = static_cast<Enemy*> (m_ent);
 
-	rotacionBala = Vec3<float>(e->getFacing().x, 0, e->getFacing().y);
-	}
-
-	GraphicEngine::i().getActiveCamera()->getRotation();*/
 	GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
 	bala->cargarContenido();
 
@@ -188,5 +171,7 @@ void Sniper::shoot(const Vec3<float>& target)
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
+	return hitted;
 
 }

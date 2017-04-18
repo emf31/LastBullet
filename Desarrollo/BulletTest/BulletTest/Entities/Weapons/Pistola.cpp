@@ -91,7 +91,9 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 
 
 
-void Pistola::shoot(const Vec3<float>& target) {
+bool Pistola::shoot(const Vec3<float>& target) {
+	//si impacta con algun personaje devuelve true
+	bool hitted = false;
 
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 		//aumentamos en uno el numero de disparos, para reducir la municion
@@ -127,22 +129,16 @@ void Pistola::shoot(const Vec3<float>& target) {
 					if (ent != m_ent)
 					{
 						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot") {
-							if (ent->getClassName() == "Enemy") {
-								TImpactoBala impacto;
-								impacto.damage = damage;
-								impacto.guid = ent->getGuid();
+							
+							hitted = true;
 
-								Message msg(ent, "COLISION_BALA", &impacto);
-								MessageHandler::i().sendMessageNow(msg);
-							}
-							else {
-								TImpactoBala impacto;
-								impacto.damage = damage;
-								impacto.guid = m_ent->getGuid();
+							TImpactoBala impacto;
+							impacto.damage = damage;
+							impacto.guidImpactado = ent->getGuid();
+							impacto.guidDisparado = m_ent->getGuid();
 
-								Message msg(ent, "COLISION_BALA", &impacto);
-								MessageHandler::i().sendMessageNow(msg);
-							}
+							Message msg(ent, "COLISION_BALA", &impacto);
+							MessageHandler::i().sendMessageNow(msg);
 
 						}
 						//Para mover objetos del mapa
@@ -181,5 +177,6 @@ void Pistola::shoot(const Vec3<float>& target) {
 		estadoWeapon = DESCARGADA;
 	}
 
+	return hitted;
 
 }

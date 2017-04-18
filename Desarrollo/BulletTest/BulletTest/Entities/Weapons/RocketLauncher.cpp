@@ -62,7 +62,7 @@ void RocketLauncher::handleInput()
 void RocketLauncher::cargarContenido()
 {
 	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(1.f, 1.f, 1.f), "", "../media/arma/rocket.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Weapons/rocket.obj");
 	m_nodo->setVisible(false);
 
 	
@@ -88,9 +88,12 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 
 
 
-void RocketLauncher::shoot(const Vec3<float>& target) {
+bool RocketLauncher::shoot(const Vec3<float>& target) {
 	
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+
+			
+
 			//aumentamos en uno el numero de disparos, para reducir la municion
 			disparos++;
 
@@ -130,6 +133,9 @@ void RocketLauncher::shoot(const Vec3<float>& target) {
 		
 		estadoWeapon = DESCARGADA;
 	}
+
+
+	return false;
 	
 	
 }

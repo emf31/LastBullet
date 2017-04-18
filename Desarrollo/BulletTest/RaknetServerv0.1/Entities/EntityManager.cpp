@@ -111,12 +111,12 @@ void EntityManager::enviaDesconexion(RakNet::RakNetGUID & guid, RakNet::RakPeerI
 //imp tiene el daño del arma y el guid del que han dado, dispara es el guid de quien lo dispara
 void EntityManager::enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer)
 {
-	RakNet::RakNetGUID guid = imp.guid;
-	imp.guid = dispara;
+	/*RakNet::RakNetGUID guid = imp.guid;
+	imp.guid = dispara;*/
 
 	//se envia unicamente al cliente que ha sido disparado
 
-	peer->Send((const char*)&imp, sizeof(imp), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, guid, false);
+	peer->Send((const char*)&imp, sizeof(imp), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, imp.guidImpactado, false);
 
 }
 

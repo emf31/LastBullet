@@ -1,0 +1,33 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Weapons/Cilindros.jpg
+map_Ks Weapons/Cilindros_SPEC.jpg
+map_Kn Weapons/Cilindros_NRM.jpg
+map_Ke Props/noemisivo.jpg
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Weapons/CentroMira.jpg
+map_Ks Weapons/CentroMira_SPEC2.jpg
+map_Kn Weapons/CentroMira_NRM.jpg
+map_Ke Props/noemisivo.jpg
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Weapons/AbajoRocketLauncher.jpg
+map_Ks Weapons/AbajoRocketLauncher_SPEC.jpg
+map_Kn Weapons/AbajoRocketLauncher_NRM.jpg
+map_Ke Props/noemisivo.jpg
