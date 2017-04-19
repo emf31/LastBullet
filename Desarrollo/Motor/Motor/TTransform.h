@@ -7,10 +7,11 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include "TNode.h"
 
-#define PI 3.1415926535897932384626433832795
+static const float PI_MOTOR = 3.1415926535897932384626433832795f;
 class TTransform : public TEntity {
 public:
 
+	
 	TTransform();
 	~TTransform();
 

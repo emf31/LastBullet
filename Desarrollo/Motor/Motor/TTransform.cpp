@@ -131,11 +131,11 @@ void TTransform::setRotationRadians(Vec3<float> rotation)
 }
 void TTransform::setRotationDegrees(Vec3<float> rotation)
 {
-	setRotationRadians(rotation * (PI/180));
+	setRotationRadians(rotation * (PI_MOTOR /180));
 }
 void TTransform::setRotationDegreesLeftHand(Vec3<float> rotation)
 {
-	setRotationRadiansLeftHand(rotation * (PI / 180));
+	setRotationRadiansLeftHand(rotation * (PI_MOTOR / 180));
 }
 void TTransform::setRotationRadiansLeftHand(Vec3<float> rotation)
 {
@@ -151,8 +151,8 @@ void TTransform::setRotationRadiansLeftHand(Vec3<float> rotation)
 	m_matrix[0][1] = float(cp*sy);
 	m_matrix[0][2] = float(-sp);
 
-	const float srsp = sr*sp;
-	const float crsp = cr*sp;
+	const float srsp = float(sr*sp);
+	const float crsp = float(cr*sp);
 
 	m_matrix[1][0] = float(srsp*cy - cr*sy);
 	m_matrix[1][1] = float(srsp*sy + cr*cy);

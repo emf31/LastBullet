@@ -6,8 +6,8 @@ void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, uns
 {
 	vector.clear();
 
-	DIR *dir;
-	struct dirent *ent;
+	/*DIR *dir;
+	struct dirent *ent;*/
 	int zizu = 0;
 	std::vector<std::string> strings;
 

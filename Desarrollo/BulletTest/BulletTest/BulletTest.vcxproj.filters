@@ -331,6 +331,9 @@
     <ClCompile Include="ParticleSystem\ExplosionParticleSystem.cpp">
       <Filter>Source Code\ParticleSystem</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleSystem\ParticleSystem.cpp">
+      <Filter>Source Code\ParticleSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -774,6 +777,9 @@
       <Filter>Headers\IA</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem\ExplosionParticleSystem.h">
+      <Filter>Headers\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem\ParticleSystem.h">
       <Filter>Headers\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>

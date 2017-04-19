@@ -87,9 +87,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -122,13 +122,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -303,6 +304,7 @@
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="ParticleSystem\ExplosionParticleSystem.h" />
+    <ClInclude Include="ParticleSystem\ParticleSystem.h" />
     <ClInclude Include="States\InGame.h" />
     <ClInclude Include="States\LoadingState.h" />
     <ClInclude Include="States\Menu.h" />
@@ -420,6 +422,7 @@
     <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="ParticleSystem\ExplosionParticleSystem.cpp" />
+    <ClCompile Include="ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="States\InGame.cpp" />
     <ClCompile Include="States\LoadingState.cpp" />
     <ClCompile Include="States\Menu.cpp" />

@@ -23,7 +23,7 @@
 
 
 
-
+class ParticleSystem;
 class InGame : public State {
 public:
 	InGame();
@@ -41,6 +41,7 @@ private:
 	DebugMenuGUI debugMenu;
 	SalirHUD salirGUI;
 	float interpolation;
+	ParticleSystem &particleSystem;
 	//Clock tiempo;
 	//double tiempo1;
 	//double tiempo2;

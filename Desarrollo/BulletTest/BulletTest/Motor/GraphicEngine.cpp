@@ -9,7 +9,7 @@
 #include <StateStack.h>
 
 #include <GUIManager.h>
-
+#include <ParticleSystem.h>
 
 
 
@@ -185,6 +185,8 @@ void GraphicEngine::renderAll()
 
 	SceneManager::i().draw();
 	
+
+	ParticleSystem::i().render();
 	//if (StateStack::i().GetCurrentState()->id == States::ID::InGame) {
 
 

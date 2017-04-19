@@ -8,7 +8,7 @@ TAnimation::TAnimation(TAnimationGroupMesh* meshGroup) : sm(SceneManager::i()), 
 	visible = true;
 	numAnims = 0;
 	currentFrame = 0;
-	timeFrame = seconds(0.175);
+	timeFrame = seconds(0.175f);
 }
 
 TAnimation::~TAnimation()
@@ -18,7 +18,7 @@ TAnimation::~TAnimation()
 bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta)
 {
 	int tam = hasta - desde;
-	if (tam < 0 || (tam + numAnims >= meshes->vectorModelos.size())) {
+	if (tam < 0 || ((size_t)(tam + numAnims) >= meshes->vectorModelos.size())) {
 		std::cout << "error, estas intentando poner mas animaciones que obj" << std::endl;
 		return false;
 	}
@@ -53,7 +53,7 @@ void TAnimation::selectCurrentFrame()
 		
 		currentFrame++;
 		currentTime.restart();
-		if (currentFrame >= currentAnimation.size()) {
+		if ((size_t)currentFrame >= currentAnimation.size()) {
 			currentFrame = 0;
 		}
 	}

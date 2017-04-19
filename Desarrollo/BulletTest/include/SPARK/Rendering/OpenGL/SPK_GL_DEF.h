@@ -44,7 +44,8 @@
 #ifndef SPK_NO_GL_INC
 
 #if defined(WIN32) || defined(_WIN32)
-#include <windows.h>
+//#define _WINSOCKAPI_
+//#include <windows.h>
 #endif
 
 #if defined(__APPLE__)
@@ -63,9 +64,9 @@
 #endif
 
 // Defines the APIENTRY if not already done
-#ifndef APIENTRY
-#define APIENTRY
-#endif
+//#ifndef APIENTRY
+//#define APIENTRY
+//#endif
 
 /**
 * @namespace SPK::GL

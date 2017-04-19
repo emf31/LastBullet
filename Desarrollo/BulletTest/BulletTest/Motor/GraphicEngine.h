@@ -16,7 +16,7 @@
 #include "DebugDraw.h"
 
 #include <GUI.h>
-
+#include <windows.h>
 #include <Engine/EngineDevice.h>
 
 #include <AssetsReader.h>

@@ -57,8 +57,8 @@ public:
 	void aumentarMira(float z) {
 		//38.0f
 		zoom = z;
-		movementSpeed = SPEED*0.3;
-		mouseSensitivity = SENSITIVTY*0.4;
+		movementSpeed = (GLfloat)SPEED*0.3f;
+		mouseSensitivity = (GLfloat)SENSITIVTY*0.4f;
 	}
 	void resetMira() {
 		zoom = ZOOM;

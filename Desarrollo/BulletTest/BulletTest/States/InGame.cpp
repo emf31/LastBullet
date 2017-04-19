@@ -9,8 +9,10 @@
 #include <World.h>
 #include <LogIA.h>
 
-InGame::InGame() : ingameGUI(), debugMenu(), salirGUI()
+#include <ParticleSystem.h>
+InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
 {
+	
 }
 
 InGame::~InGame()
@@ -56,7 +58,7 @@ void InGame::Inicializar()
 
 	GraphicEngine::i().enableMouse(false);
 
-
+	particleSystem.inicializar();
 	
 }
 
@@ -71,6 +73,8 @@ void InGame::Clear()
 	NetworkManager::i().apagar();
 
 	MessageHandler::i().borrarContenido();
+
+	particleSystem.apagar();
 }
 
 void InGame::HandleEvent()
@@ -152,6 +156,8 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
 
 		LogIA::writeLog();
+	} else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
+		particleSystem.createExplosion(EntityManager::i().getEntity(PLAYER)->getPosition());
 	}
 	
 	else if (Input::i().leftMouseDown()) {
@@ -191,6 +197,8 @@ void InGame::Update(Time timeElapsed)
 
 	EventSystem::i().update();
 
+	particleSystem.update(timeElapsed);
+
 	GUIManager::i().updateAllGuis();
 }
 
@@ -214,7 +222,7 @@ void InGame::Render(float interpolation, Time elapsedTime)
 	salirGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
 	//tiempo1 = tiempo.getElapsedTime().asMilliseconds();
-
+	
 	GraphicEngine::i().renderAll();
 	//tiempo2 = tiempo.getElapsedTime().asMilliseconds();
 	//tiempoFinal = tiempo2 - tiempo1;
