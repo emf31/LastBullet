@@ -6,7 +6,6 @@
 #include <EntityManager.h>
 #include <events\Event.h>
 #include <NetworkDebugger.h>
-#include <EntityManager.h>
 
 class DebugMenuGUI : public Motor::GUI {
 public:
@@ -148,7 +147,7 @@ private:
 	float progresoSniper = 0;
 	bool VerEstadosIA=false;
 
-	Entity* entActual;
+	Character* entActual;
 
 	std::shared_ptr<BasicSceneNode> nodos[4];
 

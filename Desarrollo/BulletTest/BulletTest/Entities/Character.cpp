@@ -9,10 +9,3 @@ Character::~Character()
 {
 }
 
-float Character::getVida() {
-	return 100;
-}
-
-bool Character::isDying() {
-	return true;
-}

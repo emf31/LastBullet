@@ -95,11 +95,11 @@ void Asalto::handleInput()
  
 
 
-bool Asalto::shoot(const Vec3<float>& target)
+Character* Asalto::shoot(const Vec3<float>& target)
 {
 
-		//si impacta con algun personaje devuelve true
-		bool hitted = false;
+	//si impacta con algun personaje devuelve true
+	Character* hitted = nullptr;
 
 		//aumentamos en uno el numero de disparos, para reducir la municion
 		disparos++;
@@ -135,7 +135,7 @@ bool Asalto::shoot(const Vec3<float>& target)
 				{
 					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot") {
 						
-						hitted = true;
+						hitted = static_cast<Character*>(ent);
 
 						TImpactoBala impacto;
 						impacto.damage = damage;

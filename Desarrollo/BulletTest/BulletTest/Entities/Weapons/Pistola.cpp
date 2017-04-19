@@ -91,9 +91,9 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 
 
 
-bool Pistola::shoot(const Vec3<float>& target) {
+Character* Pistola::shoot(const Vec3<float>& target) {
 	//si impacta con algun personaje devuelve true
-	bool hitted = false;
+	Character* hitted = nullptr;
 
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 		//aumentamos en uno el numero de disparos, para reducir la municion
@@ -130,7 +130,7 @@ bool Pistola::shoot(const Vec3<float>& target) {
 					{
 						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot") {
 							
-							hitted = true;
+							hitted = static_cast<Character*>(ent);
 
 							TImpactoBala impacto;
 							impacto.damage = damage;

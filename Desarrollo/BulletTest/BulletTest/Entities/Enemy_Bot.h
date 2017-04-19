@@ -151,7 +151,7 @@ private:
 
 	KinematicCharacterController* p_controller;
 
-	LifeComponent life_component;
+	//LifeComponent life_component;
 
 
 

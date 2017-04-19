@@ -27,7 +27,7 @@
 
 
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid) , life_component(this), m_godMode(false)
+Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
@@ -130,27 +130,23 @@ void Player::inicializar()
 	
 }
 
-
-
-void Player::update(Time elapsedTime)
-{
-
+void Player::calcularMovimiento() {
 	isMoving = false;
 	isShooting = false;
-	
+
 	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
 	if (p_controller->onGround() && p_controller->jumpedOnAir) {
 		p_controller->jumpedOnAir = false;
 	}
 
 	//Detectamos si chocamos al suelo con una velocidad previa muy rapida
-	 if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
-		 //printf("He caido de alto\n");
-		 GraphicEngine::i().getActiveCamera()->cameraShake();
-	 }
-	 p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
+	if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
+		//printf("He caido de alto\n");
+		GraphicEngine::i().getActiveCamera()->cameraShake();
+	}
+	p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
 
-	 //Deteccion de movimiento
+	//Deteccion de movimiento
 	speedFinal = Vec3<float>(0, 0, 0);
 
 	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
@@ -161,6 +157,13 @@ void Player::update(Time elapsedTime)
 
 	speedFinal.normalise();
 	p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
+}
+
+
+void Player::update(Time elapsedTime)
+{
+
+	calcularMovimiento();
 
 	life_component.update();
 	

@@ -186,14 +186,14 @@ void DebugMenuGUI::update() {
 
 		if (nodos[0]) {
 
-			std::vector<Entity*>bots = EntityManager::i().getBots();
+			std::vector<Character*>bots = EntityManager::i().getBots();
 
 			int i =0;
 
 
-			for (std::vector<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+			for (std::vector<Character*>::iterator it = bots.begin(); it != bots.end(); it++) {
 
-				Entity* myentity = *it;
+				Character* myentity = *it;
 
 				Vec3<float>posBox = myentity->getPosition();
 				posBox.addY(posBox.getY() + 15);
@@ -315,12 +315,12 @@ bool DebugMenuGUI::onEstadosIA(const CEGUI::EventArgs & e) {
 void DebugMenuGUI::crearNodosState() {
 
 
-	std::vector<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Character*>bots = EntityManager::i().getBots();
 	int i = 0;
 
-	for (std::vector<Entity*>::iterator it = bots.begin(); it != bots.end(); it++) {
+	for (std::vector<Character*>::iterator it = bots.begin(); it != bots.end(); it++) {
 
-		Entity* myentity = *it;
+		Character* myentity = *it;
 
 		Vec3<float>posBox = myentity->getPosition();
 		posBox.addY(posBox.getY() + 15);
@@ -333,10 +333,10 @@ void DebugMenuGUI::crearNodosState() {
 
 bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
-	std::vector<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Character*>bots = EntityManager::i().getBots();
 
 	if (!bots.empty()) {
-		Entity* myentity = bots[0];
+		Character* myentity = bots[0];
 
 
 		crearNodoBot(myentity);
@@ -367,10 +367,10 @@ bool DebugMenuGUI::onDebugBotAClicked(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
-	std::vector<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Character*>bots = EntityManager::i().getBots();
 
 	if (bots.size() > 1) {
-		Entity* myentity = bots[1];
+		Character* myentity = bots[1];
 
 
 		crearNodoBot(myentity);
@@ -399,10 +399,10 @@ bool DebugMenuGUI::onDebugBotBClicked(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
-	std::vector<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Character*>bots = EntityManager::i().getBots();
 
 	if (bots.size() > 2) {
-		Entity* myentity = bots[2];
+		Character* myentity = bots[2];
 
 
 		crearNodoBot(myentity);
@@ -433,10 +433,10 @@ bool DebugMenuGUI::onDebugBotCClicked(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onDebugBotDClicked(const CEGUI::EventArgs & e) {
 
-	std::vector<Entity*>bots = EntityManager::i().getBots();
+	std::vector<Character*>bots = EntityManager::i().getBots();
 
 	if (bots.size() > 3) {
-		Entity* myentity = bots[3];
+		Character* myentity = bots[3];
 
 
 		crearNodoBot(myentity);

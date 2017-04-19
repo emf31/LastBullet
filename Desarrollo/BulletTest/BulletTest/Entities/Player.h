@@ -46,6 +46,7 @@ public:
 
 	void setWeapon(int weapon);
 
+	void calcularMovimiento();
 	void jump();
 
 	void shoot();
@@ -130,7 +131,7 @@ private:
 	RocketLauncher* rocket;
 	Sniper* sniper;
 
-	LifeComponent life_component;
+	
 
 	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
