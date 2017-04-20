@@ -1,5 +1,6 @@
 #include "ExplosionParticleSystem.h"
 #include <Util.h>
+#include <SPARK_GL.h>
 
 ExplosionParticleSystem::ExplosionParticleSystem(Vec3<float> &position) {
 
@@ -75,7 +76,7 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 	smokeRenderer->setTexturingMode(SPK::TEXTURE_MODE_2D);
 	smokeRenderer->setTexture(textureExplosion);
 	smokeRenderer->setAtlasDimensions(2, 2); // uses 4 different patterns in the texture
-	smokeRenderer->setBlendMode(SPK::BLEND_MODE_NONE);
+	smokeRenderer->setBlendMode(SPK::BLEND_MODE_ALPHA);
 	smokeRenderer->enableRenderingOption(SPK::RENDERING_OPTION_DEPTH_WRITE, false);
 	smokeRenderer->setShared(true);
 
@@ -84,7 +85,7 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 	flameRenderer->setTexturingMode(SPK::TEXTURE_MODE_2D);
 	flameRenderer->setTexture(textureExplosion);
 	flameRenderer->setAtlasDimensions(2, 2);
-	flameRenderer->setBlendMode(SPK::BLEND_MODE_NONE);
+	flameRenderer->setBlendMode(SPK::BLEND_MODE_ADD);
 	flameRenderer->enableRenderingOption(SPK::RENDERING_OPTION_DEPTH_WRITE, false);
 	flameRenderer->setShared(true);
 
@@ -92,7 +93,7 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 	SPK::Ref<SPK::GL::GLQuadRenderer> flashRenderer = SPK::GL::GLQuadRenderer::create();
 	flashRenderer->setTexturingMode(SPK::TEXTURE_MODE_2D);
 	flashRenderer->setTexture(textureFlash);
-	flashRenderer->setBlendMode(SPK::BLEND_MODE_NONE);
+	flashRenderer->setBlendMode(SPK::BLEND_MODE_ADD);
 	flashRenderer->enableRenderingOption(SPK::RENDERING_OPTION_DEPTH_WRITE, false);
 	flashRenderer->setShared(true);
 
@@ -100,17 +101,17 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 	SPK::Ref<SPK::GL::GLQuadRenderer> spark1Renderer = SPK::GL::GLQuadRenderer::create();
 	spark1Renderer->setTexturingMode(SPK::TEXTURE_MODE_2D);
 	spark1Renderer->setTexture(textureSpark1);
-	spark1Renderer->setBlendMode(SPK::BLEND_MODE_NONE);
+	spark1Renderer->setBlendMode(SPK::BLEND_MODE_ADD);
 	spark1Renderer->enableRenderingOption(SPK::RENDERING_OPTION_DEPTH_WRITE, false);
 	spark1Renderer->setOrientation(SPK::DIRECTION_ALIGNED); // sparks are oriented function of their velocity
-	spark1Renderer->setScale(0.05f, 1000.0f); // thin rectangles
+	spark1Renderer->setScale(0.05f, 1.0f); // thin rectangles
 	spark1Renderer->setShared(true);
 
 	// spark 2 renderer
 	SPK::Ref<SPK::GL::GLRenderer> spark2Renderer = SPK_NULL_REF;
 	if (SPK::GL::GLPointRenderer::isPointSpriteSupported() && SPK::GL::GLPointRenderer::isWorldSizeSupported())// uses point sprite if possible
 	{
-		SPK::GL::GLPointRenderer::setPixelPerUnit(45.0f * M_PI / 180.f, 720); //TODO Cambiar altura por variable
+		SPK::GL::GLPointRenderer::setPixelPerUnit(45.0f * M_PI / 180.f, 720.f);
 		SPK::Ref<SPK::GL::GLPointRenderer> pointRenderer = SPK::GL::GLPointRenderer::create();
 		pointRenderer->setType(SPK::POINT_TYPE_SPRITE);
 		pointRenderer->setTexture(textureSpark2);
@@ -122,7 +123,7 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 		quadRenderer->setTexture(textureSpark2);
 		spark2Renderer = quadRenderer;
 	}
-	spark2Renderer->setBlendMode(SPK::BLEND_MODE_NONE);
+	spark2Renderer->setBlendMode(SPK::BLEND_MODE_ADD);
 	spark2Renderer->enableRenderingOption(SPK::RENDERING_OPTION_DEPTH_WRITE, false);
 	spark2Renderer->setShared(true);
 
@@ -130,7 +131,7 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 	SPK::Ref<SPK::GL::GLQuadRenderer> waveRenderer = SPK::GL::GLQuadRenderer::create();
 	waveRenderer->setTexturingMode(SPK::TEXTURE_MODE_2D);
 	waveRenderer->setTexture(textureWave);
-	waveRenderer->setBlendMode(SPK::BLEND_MODE_NONE);
+	waveRenderer->setBlendMode(SPK::BLEND_MODE_ALPHA);
 	waveRenderer->enableRenderingOption(SPK::RENDERING_OPTION_DEPTH_WRITE, false);
 	waveRenderer->enableRenderingOption(SPK::RENDERING_OPTION_ALPHA_TEST, true); // uses the alpha test
 	waveRenderer->setAlphaTestThreshold(0.0f);
@@ -294,20 +295,30 @@ inline SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystemBase(G
 }
 
 void ExplosionParticleSystem::render() {
-	glDepthFunc(GL_LEQUAL);
-	glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
 
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
 	// Renders all the particle systems
+	SPK::GL::GLRenderer::saveGLStates();
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glDepthFunc(GL_LEQUAL);
+
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_SCISSOR_TEST);
+	glEnable(GL_TEXTURE_2D);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	for (SystemList::const_iterator it = particleSystems.begin(); it != particleSystems.end(); ++it) {
 		//drawBoundingBox(**it);
+
 		(*it)->renderParticles();
 	}
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	SPK::GL::GLRenderer::restoreGLStates();
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+	glEnable(GL_SCISSOR_TEST);
+	
 }
 
 // Creates a particle system from the base system
@@ -318,9 +329,9 @@ SPK::Ref<SPK::System> ExplosionParticleSystem::createParticleSystem(Vec3<float> 
 
 	SPK::Vector3D pos;
 
-	pos.x = 0;
-	pos.y = 0;
-	pos.z = 0;
+	pos.x = position.getX();
+	pos.y = position.getY();
+	pos.z = position.getZ();
 
 	// Locates the system at the given position
 	system->initialize();

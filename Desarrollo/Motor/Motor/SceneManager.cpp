@@ -92,6 +92,8 @@ void SceneManager::draw() {
 			drawAllLines();
 		}
 	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+
+		//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 	
 }
 

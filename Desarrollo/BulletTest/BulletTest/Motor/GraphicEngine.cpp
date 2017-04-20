@@ -196,8 +196,9 @@ void GraphicEngine::renderAll()
 	title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
 	GraphicEngine::i().getDevice().setWindowTitle(title.str());
 	//}
-
+	
 	GUIManager::i().drawAllGuis();
+	
 	sm.renderFrame(engine.getWindow());
 
 }
