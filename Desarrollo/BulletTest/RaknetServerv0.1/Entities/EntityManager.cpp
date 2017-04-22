@@ -20,7 +20,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		nuevocli.mID = NUEVO_CLIENTE;
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
-		nuevocli.position = i->second->getPosition();
+		//nuevocli.position = i->second->getPosition();
 		
 		peer->Send((const char*)&nuevocli, sizeof(nuevocli), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p.guid, false);
 	}

@@ -7,14 +7,7 @@
 #include <RakString.h>
 
 
-namespace CharacterData {
-	enum Color {
-		RED,
-		BLUE,
-		GREEN,
-		ORANGE
-	};
-};
+
 
 
 #pragma pack(push, 1)

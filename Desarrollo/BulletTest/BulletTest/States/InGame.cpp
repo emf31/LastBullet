@@ -28,19 +28,11 @@ void InGame::Inicializar()
 	m_player = new Player("UNDEFINED", NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
 	 
 
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
+	salirGUI.inicializar();
+
 	World::i().inicializar();
-
-	/*const std::vector<TPlayer> enemies = NetworkManager::i().getEnemies();
-	
-
-	for (auto it = enemies.begin(); it != enemies.end(); ++it) {
-		Enemy *e = new Enemy(it->name, it->guid);
-		e->inicializar();
-		e->cargarContenido();
-		e->setPosition(it->position);
-
-		EntityManager::i().registerRaknetEntity(e);
-	}*/
 
 	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 
@@ -57,9 +49,7 @@ void InGame::Inicializar()
 
 	GraphicEngine::i().enableMouse(false);
 
-	ingameGUI.inicializar();
-	debugMenu.inicializar();
-	salirGUI.inicializar();
+	
 	
 }
 

@@ -17,7 +17,7 @@
 #include <World.h>
 #include <StateStack.h>
 #include <thread>
-
+#include <Settings.h>
 
 NetPlayer::NetPlayer() : NetObject(), m_player(nullptr), m_world(World::i())
 {
@@ -183,8 +183,8 @@ void NetPlayer::unirseLobby(const std::string& str)
 	}
 
 	TPlayer p;
-	p.guid = m_player->getGuid();
-	p.name = m_player->getName();
+	p.guid = peer->GetMyGUID();
+	p.name = Settings::i().GetValue("name");
 
 	dispatchMessage(p, UNIRSE_PARTIDA);
 	

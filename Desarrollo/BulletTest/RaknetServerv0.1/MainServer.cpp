@@ -14,6 +14,7 @@
 #include <Bot.h>
 #include <NetworkLog.h>
 #include <StringCompressor.h>
+#include <PacketLogger.h>
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -22,6 +23,7 @@
 TGameInfo gameinfo;
 NetworkLog networkLog;
 RakNet::RakPeerInterface *peer;
+//RakNet::PacketLogger logger;
 
 
 void muestraPlayer(Player *p) {
@@ -54,6 +56,7 @@ void enviarFilaTabla(RakNet::RakNetGUID& rakID, const std::string& name);
 
 int main() {
 	peer = RakNet::RakPeerInterface::GetInstance();
+	//peer->AttachPlugin(&logger);
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	sd.socketFamily = AF_INET;
 	RakNet::Packet *packet;
@@ -128,7 +131,7 @@ int main() {
 				EntityManager::i().sendPlayer(t_player, peer);
 
 				Player *p = new Player(t_player.name, t_player.guid);
-				p->setPosition(t_player.position);
+				p->setPosition(Vec3<float>(0,0,0));
 
 				
 
@@ -157,7 +160,7 @@ int main() {
 				//EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
 
 				Bot *bot = new Bot(t_player.name, t_player.guid);
-				bot->setPosition(t_player.position);
+				bot->setPosition(Vec3<float>(0,0,0));
 
 				break;
 			}
@@ -435,7 +438,7 @@ int main() {
 			{
 				RakID rak = *reinterpret_cast<RakID*>(packet->data);
 
-				Player* p = static_cast<Player*>(EntityManager::i().getRaknetEntity(rak.guid));
+				Entity* p = EntityManager::i().getRaknetEntity(rak.guid);
 
 				if (p != nullptr) {
 					enviarFilaTabla(p->getGuid(), p->getName());

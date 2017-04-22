@@ -1,10 +1,9 @@
-﻿  CharacterTypes.cpp
-     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+﻿     Creando biblioteca D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  3 of 2698 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 2698 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente
@@ -62,5 +61,9 @@ CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símb
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexSubImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
+  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
