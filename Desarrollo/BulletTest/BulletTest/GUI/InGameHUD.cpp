@@ -96,6 +96,7 @@ void InGameHUD::muestraFinPartida() {
 	setTablaVisible(true);
 
 }
+
 void InGameHUD::updateLabelVida() {
 	std::ostringstream oss;
 	oss << p->getLifeComponent().getVida();

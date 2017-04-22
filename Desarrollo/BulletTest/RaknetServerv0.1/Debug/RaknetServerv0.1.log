@@ -1,15 +1,10 @@
-﻿  RenderState.cpp
-  Vec3f.cpp
-  MainServer.cpp
-  Player.cpp
-  Life.cpp
-  EntityManager.cpp
-  Entity.cpp
-  Bot.cpp
-  DropObject.cpp
-  ClockImpl.cpp
-  Time.cpp
-  Clock.cpp
+﻿  Entity.cpp
   Generando código...
+  Compilando...
+  MainServer.cpp
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  NetworkLog.cpp
+  EntityManager.cpp
   RaknetServerv0.1.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.exe
   RaknetServerv0.1.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Debug\RaknetServerv0.1.pdb (Full PDB)

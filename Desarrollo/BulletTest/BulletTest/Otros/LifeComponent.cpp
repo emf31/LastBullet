@@ -23,11 +23,9 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 
 
 
-		TPlayer nuevoplayer;
-		nuevoplayer.position = m_pOwner->getRenderState()->getPosition();
+		RakID nuevoplayer;
 		nuevoplayer.guid = m_pOwner->getGuid();
-		nuevoplayer.name = m_pOwner->getName();
-
+		
 
 		Entity* ent = EntityManager::i().getRaknetEntity(guid);
 

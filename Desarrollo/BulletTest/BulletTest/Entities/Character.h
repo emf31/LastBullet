@@ -27,8 +27,8 @@ public:
 	virtual std::string getClassName() = 0;
 	virtual void setPosition(const Vec3<float>& vec) = 0;
 
-	virtual float getVida() { return life_component.getVida(); }
-	virtual bool isDying() { return life_component.isDying(); }
+	virtual float getVida() { return life_component->getVida(); }
+	virtual bool isDying() { return life_component->isDying(); }
 	virtual std::string getStateActual() { return ""; }
 	virtual void resetMachineState() {};
 	virtual void setNumCiclos(int num) {}
@@ -40,8 +40,15 @@ public:
 	virtual void vaciarArma(std::string arma) {};
 	virtual void InsertarArmaDebug(std::string arma) {};
 
+
+	void setAvailable(bool a) { available = a; }
+	bool isAvailable() { return available; }
+
 protected:
 
-	LifeComponent life_component;
+	LifeComponent* life_component;
+
+	//Say if this player is ready to play
+	bool available;
 };
 

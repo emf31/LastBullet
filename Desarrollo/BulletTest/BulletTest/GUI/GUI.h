@@ -69,6 +69,11 @@ namespace Motor{
 		bool debugInput = false;
 		bool escapeInput = false;
 
+
+		void toggleVisible() {
+			getContext()->getRootWindow()->setVisible(!getContext()->getRootWindow()->isVisible());
+		}
+
 	private:
 		CEGUI::OpenGL3Renderer* m_renderer;
 

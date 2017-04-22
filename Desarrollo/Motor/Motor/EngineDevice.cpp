@@ -68,6 +68,9 @@ bool EngineDevice::createEngineDevice(int screenWidth, int screenHeight, std::st
 	return true;
 }
 
+void EngineDevice::vSync(int a) {
+	glfwSwapInterval(a);
+}
 
 GLFWwindow* EngineDevice::getWindow() {
 	return window;

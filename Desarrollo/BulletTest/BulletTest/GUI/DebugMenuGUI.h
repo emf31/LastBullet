@@ -6,6 +6,7 @@
 #include <EntityManager.h>
 #include <events\Event.h>
 #include <NetworkDebugger.h>
+#include <NetworkLog.h>
 
 class DebugMenuGUI : public Motor::GUI {
 public:
@@ -51,7 +52,8 @@ private:
 	bool onInsSniper(const CEGUI::EventArgs & e);
 	bool onInsPistola(const CEGUI::EventArgs & e);
 
-	bool onPrueba(const CEGUI::EventArgs & e);
+	bool onLogNetworkClicked(const CEGUI::EventArgs & e);
+	bool onUpdateLogButtonClicked(const CEGUI::EventArgs & e);
 
 	bool onEstadosIA(const CEGUI::EventArgs & e);
 
@@ -71,6 +73,14 @@ private:
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
+	
+
+	//NetworkLog
+	CEGUI::PushButton *NetworkLogButton;
+	CEGUI::DefaultWindow *NetworkLogWindow;
+	CEGUI::MultiLineEditbox *serverLog;
+	CEGUI::MultiLineEditbox *clientLog;
+	CEGUI::PushButton *UpdateLogButton;
 
 	//Network
 	CEGUI::PushButton *DebugNetwork;
@@ -150,5 +160,7 @@ private:
 	Character* entActual;
 
 	std::shared_ptr<BasicSceneNode> nodos[4];
+
+	NetworkLog netWorkLog;
 
 };

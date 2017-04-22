@@ -41,11 +41,8 @@ private:
 	DebugMenuGUI debugMenu;
 	SalirHUD salirGUI;
 	float interpolation;
-	//Clock tiempo;
-	//double tiempo1;
-	//double tiempo2;
-	//double tiempoFinal;
-	//std::ofstream myfile;
+	
+	Player* m_player;
 
 };
 

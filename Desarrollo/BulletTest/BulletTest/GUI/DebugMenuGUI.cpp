@@ -1,7 +1,8 @@
 #include "DebugMenuGUI.h"
 #include <Map.h>
 #include <events\DebugNetEvent.h>
-
+#include <NetworkManager.h>
+#include <GUIManager.h>
 
 DebugMenuGUI::DebugMenuGUI() : GUI()
 {
@@ -39,6 +40,7 @@ void DebugMenuGUI::inicializar() {
 	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(40, 150, -40), Vec3<float>(40, 0, -40));
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 
+	
 	//MENU PRINCIPAL
 	DebugShapesButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));
 	DebugShapesButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugShapesClicked, this));
@@ -59,6 +61,20 @@ void DebugMenuGUI::inicializar() {
 
 	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
 	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
+
+	
+
+	//MENU LOG NETWORK
+	NetworkLogWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(200));
+	serverLog = static_cast<CEGUI::MultiLineEditbox*>(NetworkLogWindow->getChild(201));
+	clientLog = static_cast<CEGUI::MultiLineEditbox*>(NetworkLogWindow->getChild(202));
+
+	NetworkLogButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(13));
+	NetworkLogButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onLogNetworkClicked, this));
+
+	UpdateLogButton = static_cast<CEGUI::PushButton*>(NetworkLogWindow->getChild(203));
+	UpdateLogButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onUpdateLogButtonClicked, this));
+
 
 	//MENU NETWORK
 	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
@@ -566,6 +582,26 @@ bool DebugMenuGUI::onInsPistola(const CEGUI::EventArgs & e) {
 		entActual->InsertarArmaDebug("Pistola");
 	return true;
 
+}
+
+bool DebugMenuGUI::onLogNetworkClicked(const CEGUI::EventArgs & e)
+{
+	GUIManager::i().getGUIbyName("InGameHUD")->toggleVisible();
+	NetworkLogWindow->setVisible(!NetworkLogWindow->isVisible());
+	CEGUI::Window* MenuItems = getContext()->getRootWindow()->getChild(0)->getChild(10);
+	MenuItems->setVisible(!MenuItems->isVisible());
+
+	return true;
+}
+
+bool DebugMenuGUI::onUpdateLogButtonClicked(const CEGUI::EventArgs & e)
+{
+	//Llamar a NetworkManager?
+	serverLog->setText(NetworkManager::i().serverLogInfo());
+
+	clientLog->setText(netWorkLog.updateAndGenerateTable());
+
+	return false;
 }
 
 

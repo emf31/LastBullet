@@ -17,19 +17,21 @@ InGame::~InGame()
 {
 }
 
+
+
 void InGame::Inicializar()
 {
 
 	PhysicsEngine::i().inicializar();
 
-	ingameGUI.inicializar();
-	debugMenu.inicializar();
-	salirGUI.inicializar();
+
+	m_player = new Player("UNDEFINED", NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
+	 
 
 	World::i().inicializar();
 
-	const std::vector<TPlayer> enemies = NetworkManager::i().getEnemies();
-	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
+	/*const std::vector<TPlayer> enemies = NetworkManager::i().getEnemies();
+	
 
 	for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 		Enemy *e = new Enemy(it->name, it->guid);
@@ -38,8 +40,9 @@ void InGame::Inicializar()
 		e->setPosition(it->position);
 
 		EntityManager::i().registerRaknetEntity(e);
-	}
+	}*/
 
+	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 
 	for (auto it = bots.begin(); it != bots.end(); ++it) {
 		Enemy_Bot *bot = new Enemy_Bot(it->name, RakNet::UNASSIGNED_RAKNET_GUID);
@@ -51,20 +54,18 @@ void InGame::Inicializar()
 	
 	
 	GraphicEngine::i().getActiveCamera()->setInputReceiver(true);
-	//tiempo.restart();
-	//myfile.open("tiempos.txt");
 
 	GraphicEngine::i().enableMouse(false);
 
-
+	ingameGUI.inicializar();
+	debugMenu.inicializar();
+	salirGUI.inicializar();
 	
 }
 
 void InGame::Clear()
 {
-	//myfile.close();
 	EntityManager::i().apagar();
-	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
 
@@ -110,6 +111,8 @@ void InGame::HandleEvent()
 		//GraphicEngine::i().setCursorVisible(GraphicEngine::i().getGui().debugInput);
 		debugMenu.showMouseCursor(debugMenu.debugInput);
 		GraphicEngine::i().getActiveCamera()->setInputReceiver(!debugMenu.debugInput);
+		
+
 		debugMenu.getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(debugMenu.debugInput);
 		
 	}
@@ -185,7 +188,7 @@ void InGame::Update(Time timeElapsed)
 
 	PhysicsEngine::i().notifyCollisions();
 
-	World::i().getPartida()->muestraMarcador();
+	//World::i().getPartida()->muestraMarcador();
 
 	MessageHandler::i().update();
 
@@ -202,24 +205,23 @@ void InGame::Render(float interpolation, Time elapsedTime)
 
 	GraphicEngine::i().updateCamera();
 
+	//Hack para el player, no podemos hacer que el arma siga la camara
+	//de otra forma
 	Player* player = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 	player->updateCurrentWeaponPosition();
 
 	//GUI
 	if(debugMenu.debugInput)
-	debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
+		debugMenu.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
 
 	if(salirGUI.escapeInput)
-	salirGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
+		salirGUI.injectMousePosition((float)Input::i().mouse.X, (float)Input::i().mouse.Y);
 
-	//tiempo1 = tiempo.getElapsedTime().asMilliseconds();
+
 
 	GraphicEngine::i().renderAll();
-	//tiempo2 = tiempo.getElapsedTime().asMilliseconds();
-	//tiempoFinal = tiempo2 - tiempo1;
-	//
-	//myfile << tiempoFinal << "\n";
+
 }
 
 

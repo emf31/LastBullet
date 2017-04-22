@@ -12,12 +12,15 @@
 #include "Estructuras.h"
 #include "Entities/EntityManager.h"
 #include <Bot.h>
+#include <NetworkLog.h>
+#include <StringCompressor.h>
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
 
 
 TGameInfo gameinfo;
+NetworkLog networkLog;
 RakNet::RakPeerInterface *peer;
 
 
@@ -238,7 +241,7 @@ int main() {
 			break;
 			case MUERTE: {
 
-				TPlayer p_struct = *reinterpret_cast<TPlayer*>(packet->data);
+				RakID p_struct = *reinterpret_cast<RakID*>(packet->data);
 
 				EntityManager::i().notificarMuerte(p_struct, peer);
 
@@ -391,7 +394,7 @@ int main() {
 				Player *p = new Player(rak.name, rak.creador);
 
 
-				enviarFilaTabla(rak.creador, rak.name);
+				//enviarFilaTabla(rak.creador, rak.name);
 
 				rak.mID = EMPEZAR_PARTIDA;
 
@@ -412,7 +415,7 @@ int main() {
 
 				Player *p = new Player(rak.name, rak.guid);
 
-				enviarFilaTabla(rak.guid, rak.name);
+				//enviarFilaTabla(rak.guid, rak.name);
 
 				TGameInfo info;
 				info.mID = EMPEZAR_PARTIDA;
@@ -428,7 +431,36 @@ int main() {
 				break;
 			}
 			
+			case CARGA_COMPLETA:
+			{
+				RakID rak = *reinterpret_cast<RakID*>(packet->data);
 
+				Player* p = static_cast<Player*>(EntityManager::i().getRaknetEntity(rak.guid));
+
+				if (p != nullptr) {
+					enviarFilaTabla(p->getGuid(), p->getName());
+					p->setAvailable(true);
+					EntityManager::i().notificarDisponibilidad(rak, peer);
+				}
+				
+
+			}
+
+
+			case SOLICITAR_INFO:
+			{
+
+
+				RakNet::RakString rakString = networkLog.updateAndGenerateTable().c_str();
+
+				RakNet::BitStream w;
+				w.Write((RakNet::MessageID)SOLICITAR_INFO);
+				w.WriteCompressed(rakString);
+
+				peer->Send(&w, HIGH_PRIORITY, RELIABLE_ORDERED, 0, packet->guid, false);
+
+				break;
+			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;

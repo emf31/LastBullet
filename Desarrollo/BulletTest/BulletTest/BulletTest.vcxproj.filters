@@ -328,6 +328,18 @@
     <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="GUI\SalirHUD.cpp" />
     <ClCompile Include="IA\LogIA.cpp" />
+    <ClCompile Include="Network\AsyncEnemyFactory.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\CharacterTypes.cpp">
+      <Filter>Headers\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\ResourceProvider.cpp">
+      <Filter>Headers\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetworkLog.cpp">
+      <Filter>Headers\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -769,6 +781,18 @@
     </ClInclude>
     <ClInclude Include="IA\LogIA.h">
       <Filter>Headers\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\AsyncEnemyFactory.h">
+      <Filter>Source Code\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\CharacterTypes.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\ResourceProvider.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetworkLog.h">
+      <Filter>Headers\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
