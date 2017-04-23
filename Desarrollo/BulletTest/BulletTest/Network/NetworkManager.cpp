@@ -98,9 +98,9 @@ std::shared_ptr<NetBot> NetworkManager::createNetBot(Enemy_Bot * bot)
 void NetworkManager::updateNetwork(Time elapsedTime)
 {
 	//No updatear la red si estamos cargando el mapa
-	if (StateStack::i().GetCurrentState()->id == States::ID::Carga) {
+	/*if (StateStack::i().GetCurrentStateID() == States::ID::Carga) {
 		return;
-	}
+	}*/
 
 	std::list<std::shared_ptr<NetBot>>::iterator it;
 	for (it = m_netBots.begin(); it != m_netBots.end(); ++it) {
@@ -109,6 +109,8 @@ void NetworkManager::updateNetwork(Time elapsedTime)
 
 	//We call handle packets of netplayer too
 	m_netPlayer->handlePackets(elapsedTime);
+
+	
 }
 
 void NetworkManager::configureNetwork()

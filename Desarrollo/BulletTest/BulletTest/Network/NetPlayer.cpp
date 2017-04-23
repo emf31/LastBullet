@@ -245,7 +245,12 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//Un jugador ha terminado de cargar la partida, y esta listo para jugar
 			RakID info = *reinterpret_cast<RakID*>(packet->data);
 			m_enemyFactory.markEnemyAsAvailable(info.guid);
-			m_enemyFactory.createEnemyIfAvailable(info.guid);
+
+			//Solo lo creamos si no estamos en estado de carga
+			if (StateStack::i().GetCurrentStateID() != States::ID::Carga) {
+				m_enemyFactory.createEnemyIfAvailable(info.guid);
+			}
+			
 
 			break;
 		}

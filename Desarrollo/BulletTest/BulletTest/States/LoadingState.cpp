@@ -51,6 +51,8 @@ void LoadingState::NotificarServerCargaCompletada() {
 
 	NetworkManager::i().dispatchMessage(rak, CARGA_COMPLETA);
 
+	
+
 }
 
 void LoadingState::Update(Time timeElapsed)

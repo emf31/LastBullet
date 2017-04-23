@@ -19,20 +19,30 @@ void AsyncEnemyFactory::addEnemyToBeCreated(TPlayer & p)
 	}
 
 	m_enemies[RakNet::RakNetGUID::ToUint32(p.guid)] = p;
+
+	//createEnemyIfAvailable(p.guid);
 }
 
 void AsyncEnemyFactory::createEnemiesIfAvailable()
 {
-
-	for (auto it = m_enemies.begin(); it != m_enemies.end(); it++) {
-		if (it->second.available == true) {
+	//Avoid error on delete element while looping
+	for (auto it = m_enemies.cbegin(); it != m_enemies.cend(); /*no increment*/) {
+		bool available = it->second.available;
+		if (available) {
 			Enemy *e = new Enemy(it->second.name, it->second.guid);
 			e->inicializar();
 			e->cargarContenido();
 
 			EntityManager::i().registerRaknetEntity(e);
+
+			it = m_enemies.erase(it);
+		}
+		else {
+			++it;
 		}
 	}
+
+	
 }
 
 void AsyncEnemyFactory::createEnemyIfAvailable(RakNet::RakNetGUID & rakID)
@@ -46,6 +56,8 @@ void AsyncEnemyFactory::createEnemyIfAvailable(RakNet::RakNetGUID & rakID)
 			e->cargarContenido();
 
 			EntityManager::i().registerRaknetEntity(e);
+
+			m_enemies.erase(RakNet::RakNetGUID::ToUint32(rakID));
 		}
 	}
 }

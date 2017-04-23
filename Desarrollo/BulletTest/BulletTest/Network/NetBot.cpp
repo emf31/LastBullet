@@ -60,7 +60,7 @@ void NetBot::handlePackets(Time elapsedTime)
 			nuevoplayer.guid = peer->GetMyGUID();
 			nuevoplayer.name = m_bot->getName();
 			nuevoplayer.color = 1;
-			nuevoplayer.available = 0;
+			nuevoplayer.available = 1;
 
 			m_bot->setGUID(peer->GetMyGUID());
 
@@ -68,9 +68,9 @@ void NetBot::handlePackets(Time elapsedTime)
 
 			dispatchMessage(nuevoplayer, NUEVO_BOT);
 
-			RakID rakID;
+			/*RakID rakID;
 			rakID.guid = peer->GetMyGUID();
-			NetworkManager::i().dispatchMessage(rakID, CARGA_COMPLETA);
+			NetworkManager::i().dispatchMessage(rakID, CARGA_COMPLETA);*/
 
 			
 

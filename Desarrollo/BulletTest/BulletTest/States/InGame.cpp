@@ -50,7 +50,7 @@ void InGame::Inicializar()
 	GraphicEngine::i().enableMouse(false);
 
 	
-	
+	NetworkManager::i().getNetPlayer()->getEnemyFactory().createEnemiesIfAvailable();
 }
 
 void InGame::Clear()
