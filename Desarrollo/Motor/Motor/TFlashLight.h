@@ -11,7 +11,7 @@ public:
 	void pasarDatosAlShader(Shader *shader, int i = 0);
 	
 	void setPosition(Vec3<float> pos);
-	//void setRotationXYZ(Vec3<float> dir);
+	void setRotationXYZ(Vec3<float> dir);
 	Vec3<float> getPosition();
 	Vec3<float> getDireccion();
 
