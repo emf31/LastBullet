@@ -3,8 +3,6 @@
 #include "TNode.h"
 #include "ResourceManager.h"
 #include "Shader.h"
-//#include "Camera.h"
-#include "enum.h"
 #include "TSunLight.h"
 #include "TPointLight.h"
 #include "TFlashLight.h"

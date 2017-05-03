@@ -42,7 +42,7 @@ public:
 	void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset);
 	void ProcessMouseScroll(GLfloat yoffset);
 
-	glm::vec3 calcularPosicionVista();
+	void calcularPosicionVista();
 
 	Vec3<float> getVectorDireccion() const { return Vec3<float>(direccion.x, direccion.y, direccion.z); }
 

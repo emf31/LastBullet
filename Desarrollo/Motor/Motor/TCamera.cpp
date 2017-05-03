@@ -35,17 +35,10 @@ TCamera::~TCamera() {
 
 glm::mat4 TCamera::GetViewMatrix() {
 	view = glm::mat4();
-	glm::vec3 posCamara = calcularPosicionVista();
-	
-	//view = glm::translate(view, posCamara);
-	//glm::rotate;
+	calcularPosicionVista();
 	view = glm::inverse(view);
-	//return view;
-	//esto no se puede hacer aun pork necesitamos tener la rotacion del personaje desde el juego, si el personaje rota la camara al ser hija tendra que rotar en el mismo angulo, lo que significa 
-	//coger la matriz de rotacion del personaje
-
-	return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
-	
+	return view;
+	//return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
 }
 
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
@@ -113,38 +106,12 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 	
 }
 
-glm::vec3 TCamera::calcularPosicionVista()
+void TCamera::calcularPosicionVista()
 {
-	TNode* nodoActual = getMiNodo();
-	
-	float rot = 0.0f;
-	Vec3<float> aux ;
-	TTransform* t;
-	glm::mat4 tras;
-	glm::mat4 rotmatrix;
-	while ((nodoActual->getParentNode() != nullptr) && (nodoActual->getParentNode()->getNodeType()!=T_RAIZ)) {
-		nodoActual = nodoActual->getParentNode();
-		if (nodoActual->getNodeType() == T_TRASLACION) {
 
-			t = static_cast<TTransform*> (nodoActual->getEntity());
-			aux = t->getPosition();
-			tras = glm::translate(tras,glm::vec3(aux.getX(), aux.getY(), aux.getZ()));
-
-		}
-		else if (nodoActual->getNodeType() == T_ROTACION) {
-			t = static_cast<TTransform*> (nodoActual->getEntity());
-			rotmatrix *= t->getRotationMatrix();
-		}
-		
-	}
+	glm::mat4 tras = transTraslacion->getPositionMatrix() ;
+	glm::mat4 rotmatrix = transRotacion->getRotationMatrix();
 	view = tras * rotmatrix;
-	//delete nodoActual;
-	glm::vec3 pos = glm::vec3(tras[3][0], tras[3][1], tras[3][2]);
-	//NOTA ERROR YA COMETIDO: ANTES HACIAMOS UN SET POSITION PERO CLARO ESTO NO PUEDE SER PORK ENTONCES SI EL MODELO ESTA EN LA 30 Y LA CAMARA EN LA 10, EL MODELO AVANZA 5, ENTONCES LA CAMARA AHORA ESTARIA 
-	//EN LA 15 Y EL MODELO EN LA 35, PERO SI HACEMOS ESE SETPOSITION A LA CAMARA EN LA SIGUIENTE ITERACION SU TRANSFORMACION DEVUELVE QUE ESTA EN LA POS 35 Y LE VA A SUMAR DE NUEVO LA POS
-	//DE SU TRANSFORMACION PADRE QUE SERA LA DEL MODELO Y PONDRIA QUE LA CAMARA ESTA EN EL 70
-	//setPosition(pos);
-	return pos;
 }
 
 void TCamera::setTarget(const Vec3<float>& target) {

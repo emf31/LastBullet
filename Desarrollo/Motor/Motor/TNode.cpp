@@ -50,7 +50,7 @@ void TNode::setParentNode(TNode * nodoPadre) {
 }
 
 void TNode::draw() {
-	if (type != T_RAIZ) {
+	if (getEntity() != nullptr) {
 		//primero se dibuja el nodo actual (la entity) y luego los hijos
 		//explicacion: el primer begin draw sera el nodo rotacion, se encarga de multiplicar la matriz actual por su rotacion
 		//el segundo nodo es el de escala multiplica la matriz actual que ya estaba rotada y la escala
@@ -63,8 +63,6 @@ void TNode::draw() {
 		getEntity()->endDraw();//desapilo la transformacion que hice antes
 	}
 	else {
-		//ELSE el modelo es null ¿cargar un modelo de "ERROR"?
-
 		//si es el nodo raiz se dibuja sus hijos directamente
 		for (size_t i = 0; i < m_childNodes.size(); i++) {
 			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
@@ -83,18 +81,6 @@ TEntity * TNode::getEntity() {
 
 void TNode::setEntity(TEntity * entidad) {
 	m_entity = entidad;
-}
-
-T_Nodos TNode::getNodeType() {
-	return type;
-}
-
-T_Nodos TNode::getType() {
-	return type;
-}
-
-void TNode::setType(T_Nodos tipo) {
-	type = tipo;
 }
 
 int TNode::getMyNodeEntityID() {
