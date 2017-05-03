@@ -18,6 +18,70 @@ GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
 	
 }
 
+void GraphicEngine::updateClippingPlanes()
+{
+	glm::mat4 projection = sm.getProjectionMatrix();
+	glm::mat4 view = sm.getViewMatrix();
+	glm::mat4 viewProjection = view*projection;
+	double d_projection[16] = { 0.0 };
+	const float *pSource = (const float*)glm::value_ptr(viewProjection);
+	//std::cout <<"--------------------"<< std::endl;
+	for (int i = 0; i < 16; ++i){
+		d_projection[i] = pSource[i];
+		//std::cout << d_projection[i] << std::endl;
+	}
+	//std::cout << "--------------------" << std::endl;*/
+		
+
+	// Right clipping plane.
+	planes[0][0]=  d_projection[3] - d_projection[0];
+	planes[0][1] = d_projection[7] - d_projection[4];
+	planes[0][2] = d_projection[11] - d_projection[8];
+	planes[0][3] = d_projection[15] - d_projection[12];
+	//std::cout << "RIGHT: " << planes[0][0]<<"x+" << planes[0][1] << "y+" << planes[0][2] << "z+"<< planes[0][3]<<std::endl;
+	//mPlanes[0].set(mvp[3] - mvp[0], mvp[7] - mvp[4], mvp[11] - mvp[8], mvp[15] - mvp[12]);
+
+	// Left clipping plane.
+	planes[1][0] = d_projection[3] + d_projection[0];
+	planes[1][1] = d_projection[7] + d_projection[4];
+	planes[1][2] = d_projection[11] + d_projection[8];
+	planes[1][3] = d_projection[15] + d_projection[12];
+	//planes[1].set(mvp[3] + mvp[0], mvp[7] + mvp[4], mvp[11] + mvp[8], mvp[15] + mvp[12]);
+
+	// Bottom clipping plane.
+	planes[2][0] = d_projection[3] + d_projection[1];
+	planes[2][1] = d_projection[7] + d_projection[5];
+	planes[2][2] = d_projection[11] + d_projection[9];
+	planes[2][3] = d_projection[15] + d_projection[10];
+	//planes[2].set(mvp[3] + mvp[1], mvp[7] + mvp[5], mvp[11] + mvp[9], mvp[15] + mvp[13]);
+
+	// Top clipping plane.
+	planes[3][0] = d_projection[3] - d_projection[1];
+	planes[3][1] = d_projection[7] - d_projection[5];
+	planes[3][2] = d_projection[11] - d_projection[9];
+	planes[3][3] = d_projection[15] - d_projection[10];
+	//planes[3].set(mvp[3] - mvp[1], mvp[7] - mvp[5], mvp[11] - mvp[9], mvp[15] - mvp[13]);
+
+	// Far clipping plane.
+	planes[4][0] = d_projection[3] - d_projection[2];
+	planes[4][1] = d_projection[7] - d_projection[6];
+	planes[4][2] = d_projection[11] - d_projection[10];
+	planes[4][3] = d_projection[15] - d_projection[14];
+	//planes[4].set(mvp[3] - mvp[2], mvp[7] - mvp[6], mvp[11] - mvp[10], mvp[15] - mvp[14]);
+
+	// Near clipping plane.
+	planes[5][0] = d_projection[3] + d_projection[2];
+	planes[5][1] = d_projection[7] + d_projection[6];
+	planes[5][2] = d_projection[11] + d_projection[10];
+	planes[5][3] = d_projection[15] + d_projection[14];
+	//planes[5].set(mvp[3] + mvp[2], mvp[7] + mvp[6], mvp[11] + mvp[10], mvp[15] + mvp[14]);
+
+	/*for (unsigned int i = 0; i < 6; i++)
+	{
+		planes[i].normalize();
+	}*/
+}
+
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh)
 {
 
@@ -213,6 +277,8 @@ void GraphicEngine::inicializar()
 
 	sm = SceneManager::i();
 	sm.setFarPlane(1000.f);
+
+	
 
 	/*std::vector<TMeshGroup*> meshes;
 	try {

@@ -156,8 +156,24 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
 
 		LogIA::writeLog();
-	} else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
+	}/* else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
 		particleSystem.createExplosion(EntityManager::i().getEntity(PLAYER)->getPosition());
+	}*/
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {		//Prueba para borrar de clipping//En caso de que le des a f12 comprueba si el punto 0,0,0 esta en su frustrum
+		GraphicEngine::i().updateClippingPlanes();
+		float x = 0.f;
+		float y = 0.f;
+		float z = 0.f;
+
+		float plano1[4] = { GraphicEngine::i().planes[0][0],GraphicEngine::i().planes[0][1],GraphicEngine::i().planes[0][2],GraphicEngine::i().planes[0][3] };
+		float val_DER = plano1[0] * x + plano1[1] * y + plano1[2] * z + plano1[3];
+		float plano2[4] = { GraphicEngine::i().planes[1][0],GraphicEngine::i().planes[1][1],GraphicEngine::i().planes[1][2],GraphicEngine::i().planes[1][3] };
+		float val_IZ = plano2[0] * x + plano2[1] * y + plano2[2] * z + plano2[3];
+		std::cout << "Izquierda " << val_IZ << std::endl;
+		std::cout << "Derecha " << val_DER << std::endl;
+
+		if(val_DER<0 && val_IZ>0)
+			std::cout << "ESTO FUNCIONA SOY DIOS"<< std::endl;
 	}
 	
 	else if (Input::i().leftMouseDown()) {

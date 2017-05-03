@@ -1,229 +1,10 @@
-﻿  Button.cpp
-  Character.cpp
-  Enemy_Bot.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  EntActive.cpp
-  EntPassive.cpp
-  Granada.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  GroupEntity.cpp
-  GunBullet.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Enemy.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Entity.cpp
-  EntityManager.cpp
-  KinematicCharacterController.cpp
-  LifeObject.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  PhysicsEntity.cpp
-Entities\PhysicsEntity.cpp(50): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
-Entities\PhysicsEntity.cpp(56): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
-Entities\PhysicsEntity.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
-  Player.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  RocketBullet.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  RocketBulletEnemy.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  AsaltoDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  PistolaDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  RocketLauncherDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Generando código...
-  Compilando...
-  SniperDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  WeaponDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Asalto.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Pistola.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  RocketLauncher.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Sniper.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Weapon.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  EventListener.cpp
-  EventSystem.cpp
-  AStarSearch.cpp
-  GraphEdge.cpp
-  GraphNode.cpp
-  SparseGraph.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-Graph\SparseGraph.cpp(11): warning C4018: '>=': no coinciden signed/unsigned
-  DebugMenuGUI.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-GUI\DebugMenuGUI.cpp(233): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  GUI.cpp
-  GUIManager.cpp
-  InGameHUD.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  LoadingStateGUI.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  MenuGUI.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  ParalellTask.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Generando código...
-d:\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
-  Compilando...
-  SalirHUD.cpp
-  InputHandler.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  MessageHandler.cpp
-  Partida.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  FuzzyModule.cpp
-  FuzzyRule.cpp
-  FuzzySet.cpp
-  FuzzySetLeftShoulder.cpp
-  FuzzySetRightShoulder.cpp
-  FuzzySetSingleton.cpp
-  FuzzySetTriangle.cpp
-  FuzzyVariable.cpp
-  FzAND.cpp
-  FzFairly.cpp
-  FzOR.cpp
-  FzSet.cpp
-  FzVery.cpp
-  LogIA.cpp
-  MachineState.cpp
-  PathFollow.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  Generando código...
-  Compilando...
-  SensoryMemory.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-  BuscarVida.cpp
-  BuscarWeapon.cpp
-  Disparar.cpp
-  Patrullar.cpp
-  Perseguir.cpp
-  TargetingSystem.cpp
-  WeaponSystem.cpp
-  Celda.cpp
-  Dijkstra.cpp
-D:\TBA\Desarrollo\BulletTest\BulletTest\Mapa\Dijkstra.h(31): warning C4018: '<': no coinciden signed/unsigned
-  Map.cpp
-  PathPlanner.cpp
-D:\TBA\Desarrollo\BulletTest\BulletTest\Mapa\Dijkstra.h(31): warning C4018: '<': no coinciden signed/unsigned
-  Game.cpp
-  main.cpp
-  AnimatedSceneNode.cpp
-  Animation.cpp
-  BillboardSceneNode.cpp
-  Camera.cpp
-  CameraShake.cpp
-  Color4f.cpp
-  Generando código...
-  Compilando...
-  GraphicEngine.cpp
-  GunRecoil.cpp
-  MapLoader.cpp
-Motor\MapLoader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-Motor\MapLoader.cpp(183): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(194): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(205): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(215): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
-  PhysicsEngine.cpp
-  RenderState.cpp
-  BasicSceneNode.cpp
-  SceneNode.cpp
-  Lobby.cpp
-  NetBot.cpp
-  NetObject.cpp
-  NetPlayer.cpp
-  NetworkDebugger.cpp
-Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  NetworkManager.cpp
-  AssetsReader.cpp
-  Clock.cpp
-  DebugMarks.cpp
-Otros\DebugMarks.cpp(42): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-Otros\DebugMarks.cpp(84): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  LifeComponent.cpp
-  Lista.cpp
-  PriorityQueue.cpp
-  Settings.cpp
-  Generando código...
-  Compilando...
-  Time.cpp
-  TimePerFrame.cpp
-  Util.cpp
-  Vec2f.cpp
-  ClockImpl.cpp
-  ExplosionParticleSystem.cpp
-ParticleSystem\ExplosionParticleSystem.cpp(113): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-ParticleSystem\ExplosionParticleSystem.cpp(217): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-ParticleSystem\ExplosionParticleSystem.cpp(239): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-ParticleSystem\ExplosionParticleSystem.cpp(253): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  ParticleSystem.cpp
-  InGame.cpp
-  LoadingState.cpp
-  Menu.cpp
-  State.cpp
-  StateFactory.cpp
-  StateStack.cpp
-  TriggerSystem.cpp
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
-  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
-          with
-          [
-              _Kty=unsigned short,
-              _Ty=TriggerRecordStruct *,
-              _Other1=unsigned long &,
-              _Other2=TriggerRecordStruct *&
-          ]
-  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
-          with
-          [
-              _Kty=unsigned short,
-              _Ty=TriggerRecordStruct *,
-              _Other1=unsigned long &,
-              _Other2=TriggerRecordStruct *&
-          ]
-  World.cpp
-  Generando código...
-     Creando biblioteca D:\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+﻿  Menu.cpp
+     Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  2688 of 2698 functions (99.6%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  0 of 2698 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente
@@ -281,9 +62,29 @@ CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símb
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexSubImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
-SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  BulletTest.vcxproj -> D:\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> D:\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(EngineDevice.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(EngineDevice.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(ResourceManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(ResourceManager.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(SceneManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(SceneManager.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(Input.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Input.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TCamera.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TCamera.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TEntity.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TEntity.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TModel.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TModel.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TLuz.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TLuz.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(Shader.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Shader.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TAnimationGroupMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TAnimationGroupMesh.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TMeshGroup.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMeshGroup.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TPointLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TPointLight.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TTransform.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TTransform.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TAnimation.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TAnimation.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TFlashLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TFlashLight.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TSunLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TSunLight.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TNode.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TNode.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(AnimationReader.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(AnimationReader.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(AnimationMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(AnimationMesh.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMesh.obj)' o en 'C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
+  BulletTest.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
