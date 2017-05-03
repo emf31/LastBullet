@@ -41,10 +41,6 @@ private:
 	bool visible;
 	SceneManager& sm;
 	
-	//glm::vec3 scale;
-	//glm::vec3 position;
-	//glm::vec3 rotation;
-	
-	//friend class SceneManager;
+
 };
 

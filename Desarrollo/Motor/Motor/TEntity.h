@@ -3,6 +3,7 @@
 #include "Shader.h"
 
 class TNode;
+class TTransform;
 
 
 class TEntity {
@@ -29,5 +30,13 @@ protected:
 	void setID(int id);
 	void setMiNodo(TNode * nodo);
 	TNode* getMiNodo();
+	void setTransformacionRotacion(TTransform* rot);
+	void setTransformacionEscalado(TTransform* esc);
+	void setTransformacionTraslacion(TTransform* tras);
+
+
+	TTransform* transRotacion;
+	TTransform* transEscalado;
+	TTransform* transTraslacion;
 };
 

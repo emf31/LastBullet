@@ -35,20 +35,15 @@ Vec3<float> TFlashLight::getPosition()
 	return m_posicion;
 }
 
-void TFlashLight::setDirection(Vec3<float> dir)
-{
-	m_direccion = dir;
-
-}
-
-void TFlashLight::setRotationXYZ(Vec3<float> dir)
-{
-	transRotacion->setRotationY(dir.getY());
-	transRotacion->setRotationX(dir.getX() - 90.0f);
-	transRotacion->setRotationZ(dir.getZ());
-
-	updateVectorDireccion();
-}
+//void TFlashLight::setRotationXYZ(Vec3<float> dir)
+//{
+//	transRotacion->resetMatrix();
+//	transRotacion->setRotationY(dir.getY());
+//	transRotacion->setRotationX(dir.getX() - 90.0f);
+//	transRotacion->setRotationZ(dir.getZ());
+//
+//	updateVectorDireccion();
+//}
 
 void TFlashLight::setRadioInterior(float radio)
 {

@@ -122,14 +122,14 @@ int main() {
 
 
 	//linterna
-	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 0.0f, 0.0f));
+	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 45.0f, 0.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
 	//linterna
-	TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
-	flash1->setColor(1.0f, 1.0f, 1.0f);
-	//linterna
-	TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
-	flash2->setColor(0.0f, 0.0f, 1.0f);
+	//TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
+	//flash1->setColor(1.0f, 1.0f, 1.0f);
+	////linterna
+	//TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
+	//flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
 	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
 	flash3->setColor(1.0f, 1.0f, 1.0f);
@@ -253,11 +253,11 @@ int main() {
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
-		p1->setOrientation(vecDir);
+		//p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
 		flash3->setPosition(sm.camaraActiva->getPosition());
-		flash3->setDirection(vecDir);
+		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);

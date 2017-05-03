@@ -70,7 +70,7 @@ private:
 
 
 	friend class TAnimationGroupMesh;
-	friend class SceneManager;
+	
 };
 
 

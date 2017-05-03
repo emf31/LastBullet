@@ -17,13 +17,29 @@ void TSunLight::pasarDatosAlShader(Shader * shader, int i)
 	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.direction"), m_direccion.getX(), m_direccion.getY(), m_direccion.getZ());
 }
 
-void TSunLight::setDirection(Vec3<float> dir)
+
+void TSunLight::setRotationXYZ(Vec3<float> dir)
 {
-	m_direccion = dir;
-	transRotacion->setRotationDirection(dir);
+	transRotacion->resetMatrix();
+	transRotacion->setRotationY(dir.getY());
+	transRotacion->setRotationX(dir.getX() - 90.0f);
+	transRotacion->setRotationZ(dir.getZ());
+
+	updateVectorDireccion();
 }
 
 Vec3<float> TSunLight::getDireccion()
 {
 	return m_direccion;
+}
+
+void TSunLight::updateVectorDireccion()
+{
+	glm::vec4 destino = glm::vec4(0, 0, 1, 1);
+	glm::mat4 rot = transRotacion->getRotationMatrix();
+	rot = glm::inverse(rot);
+	destino = destino* rot;
+	destino = glm::normalize(destino);
+	m_direccion = Vec3<float>(destino.x, destino.y, destino.z);
+
 }

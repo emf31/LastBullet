@@ -10,16 +10,16 @@ public:
 
 	void pasarDatosAlShader(Shader *shader, int i = 0);
 	
+	void setPosition(Vec3<float> pos);
+	//void setRotationXYZ(Vec3<float> dir);
 	Vec3<float> getPosition();
 	Vec3<float> getDireccion();
+
+	void setRadioInterior(float radio);
+	void setRadioExterior(float radio);
 	float getRadioInterior();
 	float getRadioExterior();
 
-	void setPosition(Vec3<float> pos);
-	void setDirection(Vec3<float> dir);
-	void setRotationXYZ(Vec3<float> dir);
-	void setRadioInterior(float radio);
-	void setRadioExterior(float radio);
 	void updateVectorDireccion();
 	
 
