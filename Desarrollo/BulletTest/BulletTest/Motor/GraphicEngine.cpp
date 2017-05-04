@@ -22,7 +22,7 @@ void GraphicEngine::updateClippingPlanes()
 {
 	glm::mat4 projection = sm.getProjectionMatrix();
 	glm::mat4 view = sm.getViewMatrix();
-	glm::mat4 viewProjection = view*projection;
+	glm::mat4 viewProjection = projection*view;
 	double d_projection[16] = { 0.0 };
 	const float *pSource = (const float*)glm::value_ptr(viewProjection);
 	//std::cout <<"--------------------"<< std::endl;
@@ -52,14 +52,14 @@ void GraphicEngine::updateClippingPlanes()
 	planes[2][0] = d_projection[3] + d_projection[1];
 	planes[2][1] = d_projection[7] + d_projection[5];
 	planes[2][2] = d_projection[11] + d_projection[9];
-	planes[2][3] = d_projection[15] + d_projection[10];
+	planes[2][3] = d_projection[15] + d_projection[13];
 	//planes[2].set(mvp[3] + mvp[1], mvp[7] + mvp[5], mvp[11] + mvp[9], mvp[15] + mvp[13]);
 
 	// Top clipping plane.
 	planes[3][0] = d_projection[3] - d_projection[1];
 	planes[3][1] = d_projection[7] - d_projection[5];
 	planes[3][2] = d_projection[11] - d_projection[9];
-	planes[3][3] = d_projection[15] - d_projection[10];
+	planes[3][3] = d_projection[15] - d_projection[13];
 	//planes[3].set(mvp[3] - mvp[1], mvp[7] - mvp[5], mvp[11] - mvp[9], mvp[15] - mvp[13]);
 
 	// Far clipping plane.

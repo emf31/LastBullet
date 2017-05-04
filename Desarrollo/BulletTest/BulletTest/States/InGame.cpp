@@ -161,19 +161,39 @@ void InGame::HandleEvent()
 	}*/
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {		//Prueba para borrar de clipping//En caso de que le des a f12 comprueba si el punto 0,0,0 esta en su frustrum
 		GraphicEngine::i().updateClippingPlanes();
-		float x = 0.f;
-		float y = 0.f;
-		float z = 0.f;
+		float x = 90.9;
+		float y = 8.33;
+		float z = -92.3;
+		GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
 
 		float plano1[4] = { GraphicEngine::i().planes[0][0],GraphicEngine::i().planes[0][1],GraphicEngine::i().planes[0][2],GraphicEngine::i().planes[0][3] };
 		float val_DER = plano1[0] * x + plano1[1] * y + plano1[2] * z + plano1[3];
 		float plano2[4] = { GraphicEngine::i().planes[1][0],GraphicEngine::i().planes[1][1],GraphicEngine::i().planes[1][2],GraphicEngine::i().planes[1][3] };
 		float val_IZ = plano2[0] * x + plano2[1] * y + plano2[2] * z + plano2[3];
+
+		float plano3[4] = { GraphicEngine::i().planes[2][0],GraphicEngine::i().planes[2][1],GraphicEngine::i().planes[2][2],GraphicEngine::i().planes[2][3] };
+		float val_BOT = plano3[0] * x + plano3[1] * y + plano3[2] * z + plano3[3];
+		float plano4[4] = { GraphicEngine::i().planes[3][0],GraphicEngine::i().planes[3][1],GraphicEngine::i().planes[3][2],GraphicEngine::i().planes[3][3] };
+		float val_TOP = plano4[0] * x + plano4[1] * y + plano4[2] * z + plano4[3];
+
+		float plano5[4] = { GraphicEngine::i().planes[4][0],GraphicEngine::i().planes[4][1],GraphicEngine::i().planes[4][2],GraphicEngine::i().planes[4][3] };
+		float val_FAR= plano5[0] * x + plano5[1] * y + plano5[2] * z + plano5[3];
+		float plano6[4] = { GraphicEngine::i().planes[5][0],GraphicEngine::i().planes[5][1],GraphicEngine::i().planes[5][2],GraphicEngine::i().planes[5][3] };
+		float val_NEAR = plano6[0] * x + plano6[1] * y + plano6[2] * z + plano6[3];
+
+		std::cout << "--------------------" << std::endl;
 		std::cout << "Izquierda " << val_IZ << std::endl;
 		std::cout << "Derecha " << val_DER << std::endl;
+		std::cout << "--------------------" << std::endl;
+		std::cout << "Bot " << val_BOT << std::endl;
+		std::cout << "TOp " << val_TOP << std::endl;
+		std::cout << "--------------------" << std::endl;
+		std::cout << "Far " << val_FAR << std::endl;
+		std::cout << "Near " << val_NEAR << std::endl;
+		std::cout << "--------------------" << std::endl;
 
-		if(val_DER<0 && val_IZ>0)
-			std::cout << "ESTO FUNCIONA SOY DIOS"<< std::endl;
+		if(val_DER>0 && val_IZ>0 && val_BOT>0 && val_TOP>0 && val_FAR>0 && val_NEAR>0)
+			std::cout << "ESTO FUNCIONA"<< std::endl;
 	}
 	
 	else if (Input::i().leftMouseDown()) {
