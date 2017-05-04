@@ -35,6 +35,8 @@ public:
 	void setRotationXYZ(Vec3<float> rot);
 	void setScale(Vec3<float> esc);
 
+	void setRotationMatrix(glm::mat4 matRot);
+
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();

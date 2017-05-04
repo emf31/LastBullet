@@ -43,9 +43,7 @@ Vec3<float> Camera::getTarget()
 	return m_camera->getTarget();
 }
 
-void Camera::setRotationDir(const Vec3<float>& dir) {
-	m_camera->setRotationDir(dir);
-}
+
 
 
 void Camera::setRotationX(float angulo) {

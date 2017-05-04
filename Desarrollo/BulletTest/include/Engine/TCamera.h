@@ -42,15 +42,14 @@ public:
 	void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset);
 	void ProcessMouseScroll(GLfloat yoffset);
 
-	glm::vec3 calcularPosicionVista();
+	void calcularPosicionVista();
 
 	Vec3<float> getVectorDireccion() const { return Vec3<float>(direccion.x, direccion.y, direccion.z); }
 
 	void setTarget(const Vec3<float>& target);
 	
 	Vec3<float> getTarget();
-
-	void setRotationDir(const Vec3<float>& dir);
+	void setRotationDir(Vec3<float>& dir);
 
 	void setInputEnable(bool b) { inputEnable = b; }
 
@@ -69,14 +68,9 @@ public:
 private:
 	bool inputEnable;
 
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionTraslacion(TTransform* tras);
 	glm::vec3 getPositionglm();
 	void updateCameraVectors();
 
-
-	TTransform* transRotacion;
-	TTransform* transTraslacion;
 
 	glm::mat4 view;
 	glm::mat4 vista;

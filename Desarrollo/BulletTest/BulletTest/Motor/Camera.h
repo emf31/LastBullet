@@ -51,7 +51,7 @@ public:
 	void setRotationY(float angulo);
 	void setRotationZ(float angulo);
 
-	void setRotationDir(const Vec3<float>& dir);
+
 
 
 private:

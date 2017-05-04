@@ -59,7 +59,7 @@ private:
 	void loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, const std::string& typeName);
 
 	
-	friend class SceneManager;
+	
 };
 
 

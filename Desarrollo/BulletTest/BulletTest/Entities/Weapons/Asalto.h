@@ -38,6 +38,7 @@ public:
 		m_nodo->setOrientation(vecDir);
 		m_nodo->setPosition(GraphicEngine::i().getActiveCamera()->getPosition());
 		m_nodo->updatePosition(newPos);
+		
 
 	}
 

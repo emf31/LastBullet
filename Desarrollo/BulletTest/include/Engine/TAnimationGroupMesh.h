@@ -57,7 +57,6 @@ private:
 	
 	unsigned int NumFrames;
 	
-	friend class SceneManager;
 };
 
 

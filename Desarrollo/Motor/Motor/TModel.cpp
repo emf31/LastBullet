@@ -78,6 +78,11 @@ void TModel::setScale(Vec3<float> esc) {
 	transEscalado->setScale(esc);
 }
 
+void TModel::setRotationMatrix(glm::mat4 matRot)
+{
+	transRotacion->loadMatrix(matRot);
+}
+
 Vec3<float> TModel::getRotation() {
 	return transRotacion->getRotation();
 }

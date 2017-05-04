@@ -20,17 +20,14 @@ public:
 
 	void setPosition(Vec3<float> position);
 	void updatePosition(Vec3<float> position);
-	void setScale(Vec3<float> scale);
 
-	void setRotationDirection(Vec3<float> vecDir);
-	void setRotationRadians(Vec3<float> rotation);
-	void setRotationDegrees(Vec3<float> rotation);
-	void setRotationDegreesLeftHand(Vec3<float> rotation);
-	void setRotationRadiansLeftHand(Vec3<float> rotation);
+	void setScale(Vec3<float> scale);
 
 	void setRotationX(float angu);
 	void setRotationY(float angu);
 	void setRotationZ(float angu);
+
+	void resetMatrix();
 
 
 	Vec3<float> getRotation();
@@ -42,7 +39,6 @@ public:
 	glm::mat4 getScaleMatrix();
 
 	void multiply(glm::mat4 mat);
-	void multiply(glm::vec4 vec);
 	void loadMatrix(glm::mat4 mat);
 
 	
@@ -54,15 +50,9 @@ public:
 private: 
 
 	SceneManager &sm;
-
 	glm::mat4 m_matrix;
 	Vec3<float> m_rotation;
-	glm::vec3 m_rotation2;
 	Vec3<float> m_position;
 	Vec3<float> m_scale;
-	TNode *miNodo;
-	float angulo;
-	
-	
 };
 

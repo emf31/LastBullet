@@ -24,11 +24,9 @@ public:
 	//virtual void remove() = 0;
 	virtual void setTexture(const std::string& texture, int material) = 0;
 	virtual void setPosition(const Vec3<float>& position) = 0;
-	virtual void setRotation(Vec3<float>& rotation) = 0;
 	virtual void setOrientation(Vec3<float>& orientation) = 0;
 	virtual void setScale(Vec3<float>& scale) = 0;
 	virtual void setRotationXYZ(Vec3<float>& rot) = 0;
-	virtual void setRotationRightHand(Vec3<float>& rot) = 0;
 	virtual void updatePosition(Vec3<float> pos) = 0;
 
 	virtual Vec3<float> getPosition() = 0;
