@@ -25,7 +25,7 @@ class SceneManager;
 //Inherits from TEntity to have access to beginDraw and endDraw. This class should be managed with ResourceManager,
 //preventing mulitple instances from the same path.
 
-class TAnimationGroupMesh : public TEntity {
+class TAnimationGroupMesh {
 	
 public:
 	/*  Funciones   */
@@ -33,9 +33,7 @@ public:
 	TAnimationGroupMesh(const std::string & directory, unsigned int numAnimations);
 	~TAnimationGroupMesh();
 
-	virtual void beginDraw();
-
-	virtual void endDraw();
+	void draw();
 	
 	std::vector<AnimationMesh*> vectorModelos;
 private:

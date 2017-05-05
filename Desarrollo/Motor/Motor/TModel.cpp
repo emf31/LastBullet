@@ -45,7 +45,7 @@ void TModel::beginDraw() {
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo
-		m_meshGroup->beginDraw();
+		m_meshGroup->draw();
 			
 	}
 

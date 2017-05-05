@@ -83,7 +83,7 @@ void TAnimation::beginDraw() {
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo
-		currentAnimation[currentFrame]->beginDraw();
+		currentAnimation[currentFrame]->draw();
 		selectCurrentFrame();
 
 	}

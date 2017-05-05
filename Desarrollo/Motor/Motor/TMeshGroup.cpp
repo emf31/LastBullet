@@ -24,11 +24,11 @@ TMeshGroup::~TMeshGroup() {
 	meshes.clear();
 }
 
-void TMeshGroup::beginDraw() {
+void TMeshGroup::draw() {
 
 	//Dibujamos los hijos (Si los hay)
 	for (GLuint i = 0; i < this->meshes.size(); i++) {
-		this->meshes[i]->beginDraw();
+		this->meshes[i]->draw();
 	}
 
 }
@@ -162,8 +162,3 @@ void TMeshGroup::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial
 	}
 }
 
-
-void TMeshGroup::endDraw() {
-	//std::cout << u8"Adiós" << std::endl;
-	//TEntity::endDraw();
-}

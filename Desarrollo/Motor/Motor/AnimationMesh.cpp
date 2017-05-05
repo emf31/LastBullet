@@ -19,11 +19,11 @@ AnimationMesh::~AnimationMesh() {
 	meshes.clear();
 }
 
-void AnimationMesh::beginDraw() {
+void AnimationMesh::draw() {
 
 	//Dibujamos los hijos (Si los hay)
-	for (GLuint i = 0; i < this->meshes.size(); i++) {
-		this->meshes[i]->beginDraw();
+	for (std::vector<TMesh*>::iterator it = meshes.begin(); it != meshes.end(); it++) {
+		(*it)->draw();
 	}
 
 }
@@ -161,8 +161,5 @@ void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMater
 }
 
 
-void AnimationMesh::endDraw() {
-
-}
 
 
