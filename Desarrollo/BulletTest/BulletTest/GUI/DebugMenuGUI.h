@@ -16,6 +16,14 @@ public:
 	virtual void update() override;
 	virtual void handleEvent(Event * ev) override;
 
+	//Imprime un texto por pantalla
+	void addPrintText(const std::string& str) {
+		if () {
+
+		}
+		PrintText.push_back(str);
+	}
+
 	void inicializar();
 	
 private:
@@ -163,4 +171,8 @@ private:
 
 	NetworkLog netWorkLog;
 
+	//String para imprimir por pantalla cualquier info de debug
+	std::vector<std::string> PrintText;
+	//Controla el maximo de mensajes que se imprimen al mismo tiempo
+	int maxPrintableTexts;
 };

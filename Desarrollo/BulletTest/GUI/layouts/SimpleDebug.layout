@@ -596,5 +596,13 @@
                 <Property name="Text" value="God mode" />
             </Window>
         </Window>
+        <Window type="AlfiskoSkin/Label" name="PrintText" >
+            <Property name="ID" value="110" />
+            <Property name="Area" value="{{0.00234375,15},{0.0430556,-19},{0.14375,15},{0.943056,-19}}" />
+            <Property name="Text" value="Hola" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VertFormatting" value="TopAligned" />
+            <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+        </Window>
     </Window>
 </GUILayout>

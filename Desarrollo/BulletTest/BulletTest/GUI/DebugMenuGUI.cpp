@@ -4,7 +4,9 @@
 #include <NetworkManager.h>
 #include <GUIManager.h>
 
-DebugMenuGUI::DebugMenuGUI() : GUI()
+DebugMenuGUI::DebugMenuGUI() : 
+	GUI(), 
+	maxPrintableTexts(10)
 {
 
 }
