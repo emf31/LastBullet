@@ -65,6 +65,16 @@ public:
 		mouseSensitivity = SENSITIVTY;
 	}
 
+
+	//projection
+	void setNearPlane(float near);
+
+	void setFarPlane(float far);
+
+	void setPerspective(float fov, float screenwidth, float screeheight, float nearplane, float farplane);
+
+	glm::mat4 getProjectionMatrix();
+
 private:
 	bool inputEnable;
 
@@ -74,6 +84,7 @@ private:
 
 	glm::mat4 view;
 	glm::mat4 vista;
+	glm::mat4 projection;
 	glm::vec3 direccion;
 	glm::vec3 derecha;
 	glm::vec3 worldUp;
@@ -84,6 +95,8 @@ private:
 	GLfloat movementSpeed;
 	GLfloat mouseSensitivity;
 	GLfloat zoom;
+	float nearPlane = 0.1f, farPlane = 100.0f;
+
 
 
 

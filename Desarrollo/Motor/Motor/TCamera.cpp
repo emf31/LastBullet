@@ -25,6 +25,7 @@ TCamera::TCamera() {
 	derecha= glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
 	inputEnable = true;
+	projection = glm::perspective(zoom, (float)1280 / (float)720, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
 }
 
 
@@ -225,4 +226,22 @@ void TCamera::updateCameraVectors() {
 	derecha = glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
 
+}
+
+void TCamera::setNearPlane(float near) {
+	nearPlane = near;
+}
+
+void TCamera::setFarPlane(float far) {
+	farPlane = far;
+}
+
+void TCamera::setPerspective(float fov, float screenwidth, float screeheight, float nearplane, float farplane)
+{
+	projection = glm::perspective(fov, screenwidth / screeheight, nearplane, farplane);
+}
+
+glm::mat4 TCamera::getProjectionMatrix()
+{
+	return projection;
 }

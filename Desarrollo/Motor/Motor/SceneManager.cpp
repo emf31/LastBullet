@@ -55,7 +55,7 @@ void SceneManager::draw() {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 			// Update matrices
-			projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
+			projection = camaraActiva->getProjectionMatrix();
 			view = camaraActiva->GetViewMatrix();
 			//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 			activeCameraPos = camaraActiva->getPosition();
@@ -607,13 +607,7 @@ TCamera * SceneManager::crearNodoCamara()
 	return camara;
 }
 
-void SceneManager::setNearPlane(float near) {
-	nearPlane = near;
-}
 
-void SceneManager::setFarPlane(float far) {
-	farPlane = far;
-}
 
 
 
