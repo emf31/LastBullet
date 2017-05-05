@@ -27,7 +27,7 @@
 
 
 
-Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid) , life_component(this), m_godMode(false)
+Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
@@ -39,8 +39,10 @@ Player::Player(const std::string& name, RakNet::RakNetGUID guid) : Character(100
 	////////////////////////////////////////
 	//NETWORK
 	//Creates object to send and receive packets
-	m_network.reset();
-	m_network = NetworkManager::i().createNetPlayer(this);
+	m_network = netPlayer;
+	m_network->setPlayerObject(this);
+	setGUID(NetworkManager::i().getNetPlayer()->getMyGUID());
+	EntityManager::i().registerRaknetEntity(this);
 
 }
 
@@ -130,39 +132,42 @@ void Player::inicializar()
 	
 }
 
-
-
-void Player::update(Time elapsedTime)
-{
-
+void Player::calcularMovimiento() {
 	isMoving = false;
 	isShooting = false;
-	
+
 	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
 	if (p_controller->onGround() && p_controller->jumpedOnAir) {
 		p_controller->jumpedOnAir = false;
 	}
 
 	//Detectamos si chocamos al suelo con una velocidad previa muy rapida
-	 if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
-		 //printf("He caido de alto\n");
-		 GraphicEngine::i().getActiveCamera()->cameraShake();
-	 }
-	 p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
+	if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
+		//printf("He caido de alto\n");
+		GraphicEngine::i().getActiveCamera()->cameraShake();
+	}
+	p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
 
-	 //Deteccion de movimiento
+	//Deteccion de movimiento
 	speedFinal = Vec3<float>(0, 0, 0);
 
 	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
-	if (life_component.isDying() == false) {
+	if (life_component->isDying() == false) {
 		// Ejecuta todos los comandos
 		InputHandler::i().excuteCommands(this);
 	}
 
 	speedFinal.normalise();
 	p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
+}
 
-	life_component.update();
+
+void Player::update(Time elapsedTime)
+{
+
+	calcularMovimiento();
+
+	life_component->update();
 	
 	p_controller->updateAction(PhysicsEngine::i().m_world, TimePerFrameClass::GetTimePerFrame().asSeconds());
 
@@ -209,9 +214,8 @@ void Player::cargarContenido()
 	//Creas el nodo(grafico)
 
 
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "assets/nanosuit.obj");
-	ResourceManager::i().getMesh("../media/bullet.obj");
-	ResourceManager::i().getMesh("../media/bullets/rocketbullet.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/Weapons/asalto.obj");
+
 	m_nodo->setVisible(false);
 
 	
@@ -227,7 +231,7 @@ void Player::cargarContenido()
 	p_controller->m_maxSpeed_walk = 0.7f;
 
 
-	life_component.resetVida();
+	life_component->resetVida();
 
 	p_controller->reset(PhysicsEngine::i().m_world);
 
@@ -327,17 +331,20 @@ void Player::jump() {
 void Player::shoot() {
 
 	isShooting = true;
-	bool hitted = false;
+	Entity* hitted = nullptr;
 
 	if (listaWeapons->valorActual()->canShoot()) {	
-		
-		hitted = listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
+		//Devuelve una entity si le ha dado a alguien
+		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+		targetToWorld(target);
+
+		hitted = listaWeapons->valorActual()->shoot(target);
 		GraphicEngine::i().getActiveCamera()->cameraRecoil();
 		TriggerSystem::i().RegisterTrigger(kTrig_EnemyShootSound, 1002, m_id, m_renderState.getPosition(), 50, milliseconds(50), false);
 	}
 	
 
-	if (hitted) {
+	if (hitted != nullptr) {
 		relojHit.restart();
 	}
 
@@ -355,6 +362,7 @@ void Player::shootGranada() {
 void Player::move_up()
 {
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+	targetToWorld(target);
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
@@ -372,6 +380,7 @@ void Player::move_up()
 void Player::move_down()
 {
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+	targetToWorld(target);
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
@@ -385,6 +394,7 @@ void Player::move_down()
 void Player::move_right()
 {
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+	targetToWorld(target);
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
@@ -396,11 +406,19 @@ void Player::move_right()
 	isMoving = true;
 }
 
+//Por necesidad de nuestro motor le sumamos al target devuelvto por la camara la posicion del player
+void Player::targetToWorld(Vec3<float>& target) {
+	Vec3<float> pos = getPosition();
+	pos.addY(3.f);
+	target += pos;
+}
+
 void Player::move_left()
 {
 	
 
 	Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
+	targetToWorld(target);
 
 	Vec3<float> posicion = getRenderState()->getPosition();
 	Vec3<float> speed = target - posicion;
@@ -589,7 +607,7 @@ void Player::resetAll() {
 	pistola->setEquipada(true);
 	tienePistola = true;
 
-	life_component.resetVida();
+	life_component->resetVida();
 
 }
 
@@ -611,10 +629,10 @@ void Player::updateRelojes() {
 
 
 float Player::getVida() {
-	return life_component.getVida();
+	return life_component->getVida();
 }
 
 bool Player::isDying() {
-	return life_component.isDying();
+	return life_component->isDying();
 }
 

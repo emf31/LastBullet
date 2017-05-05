@@ -88,7 +88,7 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 
 
 
-bool RocketLauncher::shoot(const Vec3<float>& target) {
+Entity* RocketLauncher::shoot(const Vec3<float>& target) {
 	
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 
@@ -135,7 +135,7 @@ bool RocketLauncher::shoot(const Vec3<float>& target) {
 	}
 
 
-	return false;
+	return nullptr;
 	
 	
 }

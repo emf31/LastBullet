@@ -46,6 +46,7 @@ void StateStack::SetCurrentState(States::ID id) {
 		States::ID aux = currentState;
 
 		currentState = id;
+
 		if(id == States::ID::InGame){
 			
 		}

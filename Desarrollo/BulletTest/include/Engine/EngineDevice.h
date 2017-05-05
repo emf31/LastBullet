@@ -32,6 +32,7 @@ public:
 	GLFWwindow * getWindow();
 	
 	void setWindowTitle(std::string title);
+	void vSync(int a);
 
 	void updateCurrentFrame();
 	int getFPS();

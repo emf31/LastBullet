@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
+#include <ResourceProvider.h>
 
 class Settings {
 
@@ -15,6 +16,8 @@ public:
 
 	void LoadSettings();
 	const std::string GetValue(const std::string& value);
+
+	ResourceProvider& GetResourceProvider() { return m_resourceProvider; }
 
 private:
 	Settings() { }
@@ -28,4 +31,6 @@ private:
 	void Close();
 
 	std::unordered_map<std::string, std::string> mSettings;
+
+	ResourceProvider m_resourceProvider;
 };

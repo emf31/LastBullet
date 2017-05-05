@@ -28,7 +28,7 @@ public:
 	bool isConnected() const { return connected; }
 	const std::string& getServerIp() { return servidorAdr.ToString(); }
 	const RakNet::RakNetGUID& getServerGUID() const { return servidor; }
-	const RakNet::RakNetGUID& getMyGUID() const { return peer->GetMyGUID(); }
+	const RakNet::RakNetGUID getMyGUID() const { return peer->GetMyGUID(); }
 
 
 protected:

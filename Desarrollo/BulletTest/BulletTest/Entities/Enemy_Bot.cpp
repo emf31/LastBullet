@@ -16,8 +16,7 @@
 #include <TriggerSystem.h>
 #include <LogIA.h>
 
-Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid) ,
-	life_component(this)
+Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
 	//Creates object to send and receive packets
 	m_network.reset();
@@ -71,7 +70,7 @@ void Enemy_Bot::resetAll() {
 
 	weaponSystem->WeaponSystemResetAll();
 
-	life_component.resetVida();
+	life_component->resetVida();
 
 }
 
@@ -103,7 +102,7 @@ void Enemy_Bot::update(Time elapsedTime)
 
 			updateMovement();
 
-			life_component.update();
+			life_component->update();
 
 			p_controller->updateAction(PhysicsEngine::i().m_world, elapsedTime.asSeconds());
 
@@ -230,7 +229,7 @@ void Enemy_Bot::borrarContenido()
 void Enemy_Bot::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		if (life_component.isDying() == false) {
+		if (life_component->isDying() == false) {
 
 			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
@@ -295,7 +294,7 @@ bool Enemy_Bot::isAtPosition(Vec2f pos)
 
 void Enemy_Bot::updateMovement()
 {
-	if (life_component.isDying() == false) {
+	if (life_component->isDying() == false) {
 		Vec2f direccion = m_PathFollow->Calculate();
 
 		if (!direccion.Zero()) {
@@ -348,19 +347,19 @@ Vec2f Enemy_Bot::createPathToPosition(Vec3<float> vec) {
 
 }
 
+//tipo es un drop xD
 float Enemy_Bot::createPathToItem(const std::string& tipo)
 {
 	//std::cout << "Create camino to" << tipo << std::endl;
 	//Camino actual a seguir
 	std::list<Vec3<float>> m_camino;
 
-	float result=m_PathPlanner->CreatePathToItem(tipo, m_camino);
+	float result = m_PathPlanner->CreatePathToItem(tipo, m_camino);
 
 	m_PathFollow->SetPath(m_camino);
 
 	m_PathFollow->FollowOn();
 
-	m_camino.back().getX();
 
 	LogIA::log.push_back("Tamano: " + m_camino.size());
 	LogIA::log.push_back("CreatePathToItemTo: "+ std::to_string(m_camino.back().getX())+" "+ std::to_string(m_camino.back().getX()));
@@ -382,6 +381,13 @@ Vec2f Enemy_Bot::createRandomPath()
 
 	return vec3ToVec2(m_camino.back());
 
+}
+
+void Enemy_Bot::followPathAlreadyCreated(std::list<Vec3<float>> &camino)
+{
+	m_PathFollow->SetPath(camino);
+
+	m_PathFollow->FollowOn();
 }
 
 void Enemy_Bot::updateAnimation()
@@ -569,7 +575,7 @@ void Enemy_Bot::FuzzyLifeObject() {
 
 	//	fm.Fuzzify("DistToLifeObject", getPathPlanning()->CreatePathToItem("LifeObject", m_camino));
 
-		fm.Fuzzify("Life", life_component.getVida());
+		fm.Fuzzify("Life", life_component->getVida());
 		fm.Fuzzify("LifeTarget", getTargetBot()->getVida());
 
 	//	std::cout << "Deseabilidad de fuzzyLifeObject: " << fm.DeFuzzify("DesirabilityLifeDrop", FuzzyModule::max_av) << std::endl;
@@ -599,11 +605,11 @@ void Enemy_Bot::decisionAfterKill() {
 
 
 float Enemy_Bot::getVida() {
-	return life_component.getVida();
+	return life_component->getVida();
 }
 
 bool Enemy_Bot::isDying() {
-	return life_component.isDying();
+	return life_component->isDying();
 }
 
 float Enemy_Bot::getDesiAsalto() {

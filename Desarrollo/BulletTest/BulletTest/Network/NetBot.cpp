@@ -59,12 +59,18 @@ void NetBot::handlePackets(Time elapsedTime)
 			TPlayer nuevoplayer;
 			nuevoplayer.guid = peer->GetMyGUID();
 			nuevoplayer.name = m_bot->getName();
+			nuevoplayer.color = 1;
+			nuevoplayer.available = 1;
 
 			m_bot->setGUID(peer->GetMyGUID());
 
 			EntityManager::i().registerRaknetEntity(m_bot);
 
 			dispatchMessage(nuevoplayer, NUEVO_BOT);
+
+			/*RakID rakID;
+			rakID.guid = peer->GetMyGUID();
+			NetworkManager::i().dispatchMessage(rakID, CARGA_COMPLETA);*/
 
 			
 

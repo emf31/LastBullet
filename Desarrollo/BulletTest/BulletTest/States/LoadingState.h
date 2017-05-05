@@ -23,7 +23,7 @@ public:
 private:
 
 	void readAllAssets();
-
+	void NotificarServerCargaCompletada();
 
 	float interpolation;
 	LoadingStateGUI loadingStateGUI;

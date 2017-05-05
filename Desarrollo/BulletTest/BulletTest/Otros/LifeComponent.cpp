@@ -2,6 +2,7 @@
 #include <Player.h>
 #include <Map.h>
 #include <NetworkManager.h>
+#include <Character.h>
 
 LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)
@@ -22,11 +23,9 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 
 
 
-		TPlayer nuevoplayer;
-		nuevoplayer.position = m_pOwner->getRenderState()->getPosition();
+		RakID nuevoplayer;
 		nuevoplayer.guid = m_pOwner->getGuid();
-		nuevoplayer.name = m_pOwner->getName();
-
+		
 
 		Entity* ent = EntityManager::i().getRaknetEntity(guid);
 
@@ -47,8 +46,8 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
 		Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
 
-		std::cout << "KILL: " << entKill->getName() << std::endl;
-		std::cout << "DEATH: " << entDeath->getName() << std::endl;
+		//std::cout << "KILL: " << entKill->getName() << std::endl;
+		//std::cout << "DEATH: " << entDeath->getName() << std::endl;
 		//std::cout << "HA MATADO " << guid <<std::endl;
 		
 

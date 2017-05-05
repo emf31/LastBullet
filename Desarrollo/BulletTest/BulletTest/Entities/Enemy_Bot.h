@@ -49,7 +49,7 @@ public:
 
 	PathFollow* getPathFollow() const { return m_PathFollow; }
 
-	LifeComponent& getLifeComponent() { return life_component; }
+	LifeComponent& getLifeComponent() { return *life_component; }
 
 	SensoryMemory* const GetSensoryMemory()const { return sense; }
 
@@ -75,6 +75,7 @@ public:
 	Vec2f createPathToPosition(Vec3<float> vec);
 	float createPathToItem(const std::string& tipo);
 	Vec2f createRandomPath();
+	void followPathAlreadyCreated(std::list<Vec3<float>> &camino);
 
 	std::shared_ptr<NetBot> m_network;
 	
@@ -99,9 +100,7 @@ public:
 	virtual void InsertarArmaDebug(std::string arma) override;
 	virtual void setNumCiclos(int num) override;
 
-	virtual void resetMachineState() {
-		m_pStateMachine->resetMachineState();
-	}
+	virtual void resetMachineState() { m_pStateMachine->resetMachineState(); }
 
 
 	void decisionAfterKill();
@@ -151,7 +150,7 @@ private:
 
 	KinematicCharacterController* p_controller;
 
-	LifeComponent life_component;
+	//LifeComponent life_component;
 
 
 

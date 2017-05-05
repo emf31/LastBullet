@@ -43,11 +43,17 @@ public:
 	virtual void borrarContenido() = 0;
 	virtual std::string getClassName() = 0;
 
+	bool isAvailable() const { return m_available; }
+	void setAvailable(bool a) { m_available = a; }
+
 protected:
 	RakNet::RakNetGUID m_guid;
 	int m_id;
 	std::string m_name;
 	Vec3<float> m_position;
+
+	//Si el player ha cargado el mundo o no, y esta preparado para jugar
+	bool m_available;
 
 private:
 

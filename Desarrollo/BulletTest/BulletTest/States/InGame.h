@@ -41,12 +41,10 @@ private:
 	DebugMenuGUI debugMenu;
 	SalirHUD salirGUI;
 	float interpolation;
+
 	ParticleSystem &particleSystem;
-	//Clock tiempo;
-	//double tiempo1;
-	//double tiempo2;
-	//double tiempoFinal;
-	//std::ofstream myfile;
+
+	Player* m_player;
 
 };
 

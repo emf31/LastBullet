@@ -63,6 +63,7 @@ public:
 	fila_tabla player4;
 
 	
+	
 
 private:
 	CEGUI::DefaultWindow* scope;

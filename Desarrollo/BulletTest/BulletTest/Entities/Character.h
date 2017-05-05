@@ -6,7 +6,7 @@
 #include <RenderState.h>
 
 #include <EntActive.h>
-
+#include <LifeComponent.h>
 
 
 class Character : public EntActive
@@ -27,11 +27,28 @@ public:
 	virtual std::string getClassName() = 0;
 	virtual void setPosition(const Vec3<float>& vec) = 0;
 
-	virtual float getVida() override;
-	virtual bool isDying() override;
+	virtual float getVida() { return life_component->getVida(); }
+	virtual bool isDying() { return life_component->isDying(); }
+	virtual std::string getStateActual() { return ""; }
+	virtual void resetMachineState() {};
+	virtual void setNumCiclos(int num) {}
 
-private:
+	virtual float getDesiAsalto() { return 0; }
+	virtual float getDesiRocketLauncher() { return 0; }
+	virtual float getDesiSniper() { return 0; }
 
-	
+	virtual void vaciarArma(std::string arma) {};
+	virtual void InsertarArmaDebug(std::string arma) {};
+
+
+	void setAvailable(bool a) { available = a; }
+	bool isAvailable() { return available; }
+
+protected:
+
+	LifeComponent* life_component;
+
+	//Say if this player is ready to play
+	bool available;
 };
 

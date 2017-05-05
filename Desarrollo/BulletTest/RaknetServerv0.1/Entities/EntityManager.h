@@ -27,7 +27,7 @@ public:
 	void enviarTerminarPartida(RakNet::RakPeerInterface *peer);
 	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
 	void enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface *peer);
-	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void notificarMuerte(RakID &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualArma(DropObject *d, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarDisparoCliente(TBala &b, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
@@ -42,7 +42,7 @@ public:
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
 	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);;
 	void empezarPartida(RakNet::RakPeerInterface *peer, TGameInfo& info);;
-
+	void notificarDisponibilidad(RakID &p, RakNet::RakPeerInterface *peer);
 
 	//Inicializa todas las entities
 	void inicializar();
@@ -60,6 +60,8 @@ public:
 	int MaxScore = 5;
 
 	int getNumJugadores() const { return m_jugadores.size(); }
+
+	std::list<Entity*> getAllPlayers();
 
 
 private:

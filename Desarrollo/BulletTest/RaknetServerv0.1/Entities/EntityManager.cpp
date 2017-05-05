@@ -20,7 +20,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		nuevocli.mID = NUEVO_CLIENTE;
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
-		nuevocli.position = i->second->getPosition();
+		//nuevocli.position = i->second->getPosition();
 		
 		peer->Send((const char*)&nuevocli, sizeof(nuevocli), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p.guid, false);
 	}
@@ -129,7 +129,7 @@ void EntityManager::enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeer
 }
 
 
-void EntityManager::notificarMuerte(TPlayer & p, RakNet::RakPeerInterface *peer)
+void EntityManager::notificarMuerte(RakID & p, RakNet::RakPeerInterface *peer)
 {
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
@@ -319,6 +319,17 @@ Entity * EntityManager::getEntityID(int id)
 	return NULL;
 }
 
+std::list<Entity*> EntityManager::getAllPlayers()
+{
+	std::list<Entity*> players;
+
+	for (auto it = m_jugadores.begin(); it != m_jugadores.end(); it++) {
+		players.push_back(it->second);
+	}
+
+	return players;
+}
+
 void EntityManager::mostrarClientes() {
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
@@ -450,5 +461,17 @@ void EntityManager::empezarPartida(RakNet::RakPeerInterface * peer, TGameInfo & 
 
 		peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 
+	}
+}
+
+//Notificamos a todos de que hay un player disponible
+void EntityManager::notificarDisponibilidad(RakID & p, RakNet::RakPeerInterface * peer)
+{
+	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+		//No notificamos de disp a nosotros mismos
+		if (i->second->getGuid() != p.guid) {
+			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		}
+		
 	}
 }

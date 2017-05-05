@@ -357,9 +357,6 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	nuevoNodoRotacion->addChild(nuevoNodoEscalado);
 	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
 	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
-	
-	
-	
 
 	//asignamos matrices de transformacion
 	model->setTransformacionRotacion(static_cast<TTransform*> (nuevoNodoRotacion->getEntity()));

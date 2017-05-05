@@ -208,23 +208,15 @@ void GraphicEngine::inicializar()
 	screenWidth = 1280;
 	screenHeight = 720;
 	engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet");
-
+	
 	
 
 	sm = SceneManager::i();
 	sm.setFarPlane(1000.f);
 
-	/*std::vector<TMeshGroup*> meshes;
-	try {
-		AnimationReader::LoadMeshesFromDirectory("../media/Props", meshes);
-	}
-	catch (std::exception e) {
-		std::cout << e.what() << std::endl;
-	}*/
 	
 
-
-	//sm.inicializar();
+	engine.vSync(0);
 
 	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 1.0f, -1.0f));
 	dsa->setIntensidadAmbiente(0.45f); 
