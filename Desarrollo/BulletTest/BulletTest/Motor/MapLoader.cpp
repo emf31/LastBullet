@@ -1,5 +1,4 @@
 #include "MapLoader.h"
-#include "../json/json.hpp"
 #include "../Entities\PhysicsEntity.h"
 #include "../Entities\LifeObject.h"
 #include "../Entities\WeaponDrops/AsaltoDrop.h"
@@ -21,6 +20,30 @@ using json = nlohmann::json;
 
 MapLoader::~MapLoader(){
 
+}
+
+Object* MapLoader::createObject(json& obj) {
+	Object* o = new Object();
+	
+	o->pos = Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
+	o->rot = Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
+	o->es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
+	o->centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"] * -1);
+	o->sizeColllider = Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
+	float mass = obj["masa"];
+	std::string nameMesh = obj["nombre"];
+
+	//Modify vectors so OpenGL can understand them
+	UnityCoordsToOpenGL(o->pos, o->rot, o->es);
+
+	nameMesh = "../media/Props/" + nameMesh + ".obj";
+	o->nameMesh = nameMesh;
+	o->mesh = nameMesh.c_str();
+
+	std::string extraTags = obj["extraTags"];
+	o->extraTags = extraTags;
+
+	return o;
 }
 
 void MapLoader::UnityCoordsToOpenGL(Vec3<float>& pos,
@@ -50,67 +73,40 @@ void MapLoader::readMap(const std::string & name)
 			
 			json obj = *it;
 
-			Vec3<float> pos =					Vec3<float>(obj["posX"], obj["posY"], obj["posZ"]);
-			Vec3<float> rot =					Vec3<float>(obj["rotX"], obj["rotY"], obj["rotZ"]);
-			Vec3<float> es =					Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
-			Vec3<float> centerCollider =		Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"]*-1);
-			Vec3<float> sizeColllider =			Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
-			float mass =						obj["masa"];
-			std::string nameMesh =				obj["nombre"];
+			Object* o=createObject(obj);
 
-			//Modify vectors so OpenGL can understand them
-			UnityCoordsToOpenGL(pos, rot, es);
+			if (obj["tag"] == "Zona") {
 
-			nameMesh = "../media/Props/" + nameMesh+ ".obj";
-			std::string mesh = nameMesh.c_str();
+				json jsonArray = obj["o_children"];
+				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
+					json objzone = *arrayIt;
+					Object* o_child = createObject(obj);
+					if (objzone["tag"] == "PhysicEntity") {
+						std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o_child->pos, o_child->es, o_child->rot, o_child->centerCollider, o_child->sizeColllider, o_child->mesh, o_child->nameMesh, o_child->mass);
+					}
+					delete o_child;
+				}
 
-
-
-			std::string extraTags = obj["extraTags"];
+			}
 
 			if (obj["tag"] == "PhysicEntity") {
-
-				std::shared_ptr<BasicSceneNode> node = createPhysicEntity(pos, es, rot, centerCollider, sizeColllider, mesh, nameMesh, mass);
-
-				/*if (extraTags == "life") {
-					node->setTexture("../media/life.png",0);
-				} else if (extraTags == "pistola") {
-					node->setTexture("../media/pistola.jpg", 0);
-				} else if (extraTags == "rocket") {
-					node->setTexture("../media/lanzacohetes.jpg", 0);
-				} else if (extraTags == "asalto") {
-					node->setTexture("../media/asalto.jpg", 0);
-				} else if (extraTags == "asalto") {
-					node->setTexture("../media/sniper.png", 0);
-				}*/
+				std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o->pos, o->es, o->rot, o->centerCollider, o->sizeColllider, o->mesh, o->nameMesh, o->mass);
 
 			}
 					
-			if (obj["tag"] == "LifeObject")
-				createLifeObject(pos, es, mesh);
-			if (obj["tag"] == "PistolaDrop")
-				createPistolaDrop(pos, es, mesh);
-			if (obj["tag"] == "AsaltoDrop")
-				createAsaltoDrop(pos, es, mesh);
-			if (obj["tag"] == "RocketLauncherDrop")
-				createRocektLauncherDrop(pos, es, mesh);
-			if (obj["tag"] == "SniperDrop")
-				createSniperDrop(pos, es, mesh);
-			if (obj["tag"] == "Grafo")
-				std::cout << "Grafo en " << obj["posX"] << ',' << obj["posY"] << ',' << obj["posZ"] << '\n';
 			if (obj["tag"] == "Spawn") {
 				
-				spawnPoints.push_back(pos);
+				spawnPoints.push_back(o->pos);
 			}
 			if (obj["tag"] == "TriggerButton") {
 				EnumParser<EnumTriggerType> parser;
 				EnumTriggerType type = parser.parseEnum(obj["nombre"]);
 					
-				createTriggerButton(pos, 5, type);
+				createTriggerButton(o->pos, 5, type);
 			}
 			if (obj["tag"] == "PointLight") {
 				Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
-				GraphicEngine::i().createPointLight(pos, rgb);
+				GraphicEngine::i().createPointLight(o->pos, rgb);
 					
 			}
 				
@@ -118,10 +114,11 @@ void MapLoader::readMap(const std::string & name)
 				Vec3<float> vecDir = Vec3<float>(obj["forwardX"], obj["forwardY"], obj["forwardZ"]);
 				vecDir.setZ(vecDir.getZ()*-1.0f);
 				Vec3<float> rgb = Vec3<float>(obj["color_r"], obj["color_g"], obj["color_b"]);
-				rot.normalise();
-				GraphicEngine::i().createDirectionalLight(pos, vecDir, rgb);
+				o->rot.normalise();
+				GraphicEngine::i().createDirectionalLight(o->pos, vecDir, rgb);
 			}
-					
+
+			delete o;
 		}
 	}
 
@@ -248,4 +245,3 @@ void MapLoader::createTriggerButton(Vec3<float> posicion, float radio, EnumTrigg
 	Button *btn = new Button(nullptr, "Boton", type, id);
 	btn->setPosition(posicion);
 }
-

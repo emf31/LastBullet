@@ -122,7 +122,7 @@ void SparseGraph::readGraph(const std::string & path) {
 		for (json::iterator it = j.begin(); it != j.end(); ++it) {
 			json obj = *it;
 			if (obj["tag"] == "Grafo") {
-				json jsonArray = obj["children"];
+				json jsonArray = obj["n_children"];
 				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
 					json nodoJson = *arrayIt;
 					Entity* ent = NULL;
