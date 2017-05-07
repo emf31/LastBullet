@@ -121,6 +121,7 @@ public class Exporter : MonoBehaviour
                                 nodo.posX = waypoint.transform.position.x;
                                 nodo.posY = waypoint.transform.position.y;
                                 nodo.posZ = waypoint.transform.position.z;
+                                Debug.Log(waypoint.name);
                                 foreach (WayPointPercent p in waypoint.outs) {
                                     objeto.hasChild = true;
 
@@ -215,16 +216,20 @@ public class Objeto
     public string toJson()
     {
         string s=JsonUtility.ToJson(this);
-        string modify =s.Split('}')[0];
+        string modify = s.Substring(0,s.Length-1);
+        // =s.Split('}')[0];
         int count=o_children.Count;
         int i = 0;
         modify += ",\"o_children\":[";
         foreach (Objeto child in o_children)
         {
-            modify += child.toJson();
-            if (i < count - 1)
-                modify += ",";
-            i++;
+            if (child.tag == "PhysicEntity")
+            {
+                modify += child.toJson();
+                if (i < count - 1)
+                    modify += ",";
+                i++;
+            }  
         }
         return modify+ "]}";
     }

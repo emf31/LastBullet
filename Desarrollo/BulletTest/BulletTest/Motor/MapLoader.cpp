@@ -30,7 +30,7 @@ Object* MapLoader::createObject(json& obj) {
 	o->es = Vec3<float>(obj["sizeX"], obj["sizeY"], obj["sizeZ"]);
 	o->centerCollider = Vec3<float>(obj["colliderX"], obj["colliderY"], obj["colliderZ"] * -1);
 	o->sizeColllider = Vec3<float>(obj["colliderSizeX"], obj["colliderSizeY"], obj["colliderSizeZ"]);
-	float mass = obj["masa"];
+	o->mass = obj["masa"];
 	std::string nameMesh = obj["nombre"];
 
 	//Modify vectors so OpenGL can understand them
@@ -80,11 +80,11 @@ void MapLoader::readMap(const std::string & name)
 				json jsonArray = obj["o_children"];
 				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
 					json objzone = *arrayIt;
-					Object* o_child = createObject(obj);
+					Object* o_child = createObject(objzone);
 					if (objzone["tag"] == "PhysicEntity") {
 						std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o_child->pos, o_child->es, o_child->rot, o_child->centerCollider, o_child->sizeColllider, o_child->mesh, o_child->nameMesh, o_child->mass);
 					}
-					delete o_child;
+					//delete o_child;
 				}
 
 			}
@@ -118,7 +118,7 @@ void MapLoader::readMap(const std::string & name)
 				GraphicEngine::i().createDirectionalLight(o->pos, vecDir, rgb);
 			}
 
-			delete o;
+			//delete o;
 		}
 	}
 
