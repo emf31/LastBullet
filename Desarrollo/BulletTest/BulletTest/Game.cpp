@@ -109,35 +109,43 @@ void Game::run()
 			
 	}
 
+	clear();
 	
-
-	EntityManager::i().apagar();
+	/*EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
 
 	NetworkManager::i().apagar();
 
-	MessageHandler::i().borrarContenido();
+	MessageHandler::i().borrarContenido();*/
 
 }
 
+void Game::inicializarRutas() {
 
+	//We get the resource provider
+	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
+
+	resourceProvider.setResourceGroupDirectory("characters", "../media/Personaje");
+	resourceProvider.setResourceGroupDirectory("weapons", "../media/Weapons");
+}
 
 void Game::inicializar()
 {
 	
-	
+	//Cargamos configuraciones de la aplicación y esablecemos rutas para las resources
 	Settings::i().LoadSettings();
+	inicializarRutas();
+
 	GraphicEngine::i().inicializar();
 	
-
-	Player *player = new Player("UNDEFINED", RakNet::UNASSIGNED_RAKNET_GUID);
-
-	player->m_network->inicializar();
+	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
+	NetworkManager::i().configureNetwork();
 
 	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 
+	//Inicializamos el MENU
 	StateStack::i().GetCurrentState()->Inicializar();
 }
 
@@ -167,6 +175,9 @@ void Game::render(float interpolation, Time elapsedTime)
 
 void Game::clear()
 {
+	GraphicEngine::i().apagar();
+
+	stateStack.GetCurrentState()->Clear();
 }
 
 

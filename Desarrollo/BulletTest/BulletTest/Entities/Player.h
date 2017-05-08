@@ -28,7 +28,7 @@ class NetPlayer;
 class Player : public Character
 {
 public:
-	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Player(const std::string& names, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
 
@@ -46,6 +46,7 @@ public:
 
 	void setWeapon(int weapon);
 
+	void calcularMovimiento();
 	void jump();
 
 	void shoot();
@@ -71,7 +72,7 @@ public:
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
 
-	LifeComponent& getLifeComponent() { return life_component; }
+	LifeComponent& getLifeComponent() { return *life_component; }
 
 	std::string getCurrentWeaponName() { return listaWeapons->valorActual()->getClassName(); };
 
@@ -116,6 +117,7 @@ public:
 	
 private:
 	
+	void targetToWorld(Vec3<float>& target);
 
 	Animation* animation;
 
@@ -130,7 +132,7 @@ private:
 	RocketLauncher* rocket;
 	Sniper* sniper;
 
-	LifeComponent life_component;
+	
 
 	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;

@@ -75,7 +75,7 @@ private:
 
 	//std::thread t;
 
-	Player* p;
+	std::shared_ptr<NetPlayer> netPlayer;
 	int FrameActual;
 
 	void updateFondo(int velocidad);

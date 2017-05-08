@@ -6,6 +6,7 @@
 #include <EntityManager.h>
 #include <iostream>
 #include <NetworkManager.h>
+#include <Settings.h>
 
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
@@ -71,11 +72,15 @@ void Enemy::handleInput()
 
 void Enemy::cargarContenido()
 {
+	ResourceProvider& rp = Settings::i().GetResourceProvider();
+	
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.075f, 0.075f, 0.075f), "", "../media/Personaje/personaje2.obj");
-//	m_nodo->setTexture("../media/body01.png", 1);
-	//m_nodo->setTexture("../media/head01.png", 0);
-	//m_nodo->setTexture("../media/m4tex.png", 2);
+	m_nodo = GraphicEngine::i().createNode(
+		Vec3<float>(0, 100, 0), 
+		Vec3<float>(0.075f, 0.075f, 0.075f), 
+		"", 
+		rp.getFinalFilename("personaje2.obj", "characters"));
+
 
 	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
 	

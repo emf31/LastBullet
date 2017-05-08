@@ -104,14 +104,22 @@ void Partida::muestraMarcador()
 {
 	ordenaTabla();
 	int rank = 1;
-	for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
-		if (i->guid == EntityManager::i().getEntity(PLAYER)->getGuid()) {
-			ingame->setKills(i->kills);
-			ingame->setDeaths(i->deaths);
-			ingame->setRanking(rank);
+	Entity* ent = EntityManager::i().getEntity(PLAYER);
+
+	if (ent) {
+		for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
+
+			if (i->guid == ent->getGuid()) {
+				ingame->setKills(i->kills);
+				ingame->setDeaths(i->deaths);
+				ingame->setRanking(rank);
+			}
+
+			rank++;
 		}
-		rank++;
 	}
+
+	
 	//a = 0;
 }
 

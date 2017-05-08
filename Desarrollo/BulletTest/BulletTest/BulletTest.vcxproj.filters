@@ -322,8 +322,6 @@
     <ClCompile Include="GUI\ParalellTask.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\EntActive.cpp" />
-    <ClCompile Include="Entities\EntPassive.cpp" />
     <ClCompile Include="Otros\AssetsReader.cpp" />
     <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="GUI\SalirHUD.cpp" />
@@ -333,6 +331,24 @@
     </ClCompile>
     <ClCompile Include="ParticleSystem\ParticleSystem.cpp">
       <Filter>Source Code\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\CharacterTypes.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\AsyncEnemyFactory.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetworkLog.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\EntPassive.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\EntActive.cpp">
+      <Filter>Source Code\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\ResourceProvider.cpp">
+      <Filter>Source Code\Otros</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -762,8 +778,6 @@
     <ClInclude Include="GUI\ParalellTask.h">
       <Filter>Headers\Otros</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\EntActive.h" />
-    <ClInclude Include="Entities\EntPassive.h" />
     <ClInclude Include="Otros\AssetsReader.h">
       <Filter>Source Code\Otros</Filter>
     </ClInclude>
@@ -781,6 +795,24 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem\ParticleSystem.h">
       <Filter>Headers\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\AsyncEnemyFactory.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\CharacterTypes.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetworkLog.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntPassive.h">
+      <Filter>Source Code\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EntActive.h">
+      <Filter>Source Code\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\ResourceProvider.h">
+      <Filter>Source Code\Otros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

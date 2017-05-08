@@ -15,6 +15,8 @@ public:
 	State* GetState(States::ID id) const;
 	State* GetCurrentState() const;
 	void   SetCurrentState(States::ID id);
+
+	States::ID GetCurrentStateID() { return currentState; }
 	
 	
 	States::ID currentState;

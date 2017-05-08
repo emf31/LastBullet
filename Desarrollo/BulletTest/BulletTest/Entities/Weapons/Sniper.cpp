@@ -86,10 +86,10 @@ bool Sniper::handleTrigger(TriggerRecordStruct * Trigger)
 }
 
 
-bool Sniper::shoot(const Vec3<float>& target)
+Entity* Sniper::shoot(const Vec3<float>& target)
 {
 	//si impacta con algun personaje devuelve true
-	bool hitted = false;
+	Entity* hitted = nullptr;
 
 
 	//aumentamos en uno el numero de disparos, para reducir la municion
@@ -125,8 +125,7 @@ bool Sniper::shoot(const Vec3<float>& target)
 			if (ent != m_ent)
 			{
 				if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot"){
-					//golpea algo
-					hitted = true;
+					hitted = ent;
 
 					TImpactoBala impacto;
 					impacto.damage = damage;

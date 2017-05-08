@@ -28,14 +28,16 @@ public:
 	void apagar();
 	
 	//Creates a pointer of NetPlayer
-	std::shared_ptr<NetPlayer> createNetPlayer(Player* player);
+	std::shared_ptr<NetPlayer> createNetPlayer();
 	std::shared_ptr<NetBot> createNetBot(Enemy_Bot* bot);
 
 	//Call handle packets for every netobject
 	void updateNetwork(Time elapsedTime);
 
-	void startup(LPCTSTR lpApplicationName);
+	void configureNetwork();
 
+	//Solicita al servidor informacion de la conexión
+	std::string serverLogInfo();
 
 	//Send packet to server using netplayer peer (used for global messages like kills, deaths, life objects)
 	template<typename T>
@@ -48,8 +50,10 @@ public:
 
 	const std::vector<TPlayer>& getEnemies() const { return m_netPlayer->getEnemies(); }
 	const std::vector<TPlayer>& getBots() const { return m_netPlayer->getBots(); }
-
+	std::shared_ptr<NetPlayer> getNetPlayer() const { return m_netPlayer; }
 private:
+
+	void startup(LPCTSTR lpApplicationName);
 
 	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
@@ -62,6 +66,7 @@ private:
 	std::list<std::shared_ptr<NetBot>> m_netBots;
 
 	std::string serverIP;
+
 
 	NetworkManager() { }
 };

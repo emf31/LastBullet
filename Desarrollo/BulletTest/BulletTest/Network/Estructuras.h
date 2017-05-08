@@ -7,17 +7,16 @@
 #include <MessageIdentifiers.h>
 #include <Clock.hpp>
 #include <vec3.hpp>
-
+#include <CharacterTypes.h>
 
 
 #pragma pack(push, 1)
 struct TPlayer {
 	unsigned char mID;
-	Vec3<float> position;
 	RakNet::RakNetGUID guid;
 	std::string name;
-
-	
+	int color;
+	bool available;
 };
 #pragma pack(pop)
 
@@ -180,6 +179,12 @@ struct TGameInfo {
 #pragma pack(pop)
 
 
+
+struct TLogInfo {
+	unsigned char mID;
+	std::string info;
+};
+
 enum GameMessages {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
 	MENSAJE_POSICION = ID_USER_PACKET_ENUM + 2,
@@ -219,5 +224,7 @@ enum GameMessages {
 	NUEVO_BOT = ID_USER_PACKET_ENUM + 36,
 	UNIRSE_PARTIDA = ID_USER_PACKET_ENUM + 37,
 	RECIBO_DATOS = ID_USER_PACKET_ENUM + 38,
-	TERMINAR_PARTIDA = ID_USER_PACKET_ENUM + 39
+	TERMINAR_PARTIDA = ID_USER_PACKET_ENUM + 39,
+	CARGA_COMPLETA = ID_USER_PACKET_ENUM + 40,
+	SOLICITAR_INFO = ID_USER_PACKET_ENUM + 41
 };

@@ -2,7 +2,8 @@
 #include <StateStack.h>
 #include <AssetsReader.h>
 #include <TimePerFrame.h>
-
+#include <Estructuras.h>
+#include <NetworkManager.h>
 
 LoadingState::LoadingState()
 {
@@ -44,41 +45,47 @@ void LoadingState::HandleEvent()
 
 }
 
+void LoadingState::NotificarServerCargaCompletada() {
+	RakID rak;
+	rak.guid = NetworkManager::i().getNetPlayer()->getMyGUID();
+
+	NetworkManager::i().dispatchMessage(rak, CARGA_COMPLETA);
+
+	
+
+}
+
 void LoadingState::Update(Time timeElapsed)
 {
 	if (!needRender) {
-	//std::cout << "Entro en update" << std::endl;
-	//loadingStateGUI.update();
-	//std::cout << timeElapsed.asMilliseconds() << std::endl;
-	if (!colaAssets.empty()) {
-		std::string path = colaAssets.front();
-		ResourceManager::i().getMesh(path);
-		colaAssets.pop();
-		loadingStateGUI.setAssetName(path);
-		loadingStateGUI.update();
+
+		if (!colaAssets.empty()) {
+			std::string path = colaAssets.front();
+			ResourceManager::i().getMesh(path);
+			colaAssets.pop();
+			loadingStateGUI.setAssetName(path);
+			loadingStateGUI.update();
+		}
+
+		if (colaAssets.empty()) {
+			TimePerFrameClass::timePerFrameDefault();
+
+			StateStack::i().GetCurrentState()->Clear();
+			StateStack::i().SetCurrentState(States::ID::InGame);
+			StateStack::i().GetCurrentState()->Inicializar();
+
+			//Notify to other players
+			NotificarServerCargaCompletada();
+		}
+
+		needRender = true;
 	}
-	
-	if (colaAssets.empty()) {
-	//	float mytime = pruebas.getElapsedTime().asSeconds();
-		TimePerFrameClass::timePerFrameDefault();
-		StateStack::i().GetCurrentState()->Clear();
-		StateStack::i().SetCurrentState(States::ID::InGame);
-		StateStack::i().GetCurrentState()->Inicializar();
-	}
-	needRender = true;
-}
 
 		
 }
 
 void LoadingState::Render(float interpolation, Time elapsedTime)
 {
-//	std::cout << "Entro en render" << std::endl;
-	/*float mouseX = (float)Input::i().getMouseX();
-	float mouseY = (float)Input::i().getMouseY();
-
-	//GUI
-	loadingStateGUI.injectMousePosition(mouseX, mouseY);*/
 
 	GraphicEngine::i().renderAll();
 
@@ -92,7 +99,6 @@ void LoadingState::readAllAssets()
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
 	AssetsReader::read("../media/Granada", colaAssets);
-	//AssetsReader::read("assets", colaAssets);
 
 }
 

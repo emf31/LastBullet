@@ -1,7 +1,9 @@
 #pragma once
 #include <RakPeerInterface.h>
 #include "Clock.hpp"
-#include <Character.h>
+
+
+class Character;
 
 class LifeComponent {
 public:

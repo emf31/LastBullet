@@ -1,7 +1,6 @@
 #pragma once
 #include "StateIA.h"
-class BuscarWeapon :
-	public StateIA
+class BuscarWeapon : public StateIA
 {
 public:
 
@@ -17,5 +16,7 @@ public:
 
 private:
 	BuscarWeapon() {};
+
+	bool NeedFindWeapon(Enemy_Bot* pEnemy);
 };
 

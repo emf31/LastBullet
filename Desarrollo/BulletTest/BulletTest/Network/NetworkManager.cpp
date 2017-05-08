@@ -72,14 +72,14 @@ void NetworkManager::apagar()
 }
 
 //Creates net player object and stores it in shared ptr
-std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer(Player* player)
+std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer()
 {
-	NetPlayer* netp = new NetPlayer(player);
+	NetPlayer* netp = new NetPlayer();
 
 	// takes ownership of pointer
 	// if acquires new pointer, deletes managed object 
 	m_netPlayer.reset(netp);
-	
+
 	return m_netPlayer;
 	
 }
@@ -97,9 +97,10 @@ std::shared_ptr<NetBot> NetworkManager::createNetBot(Enemy_Bot * bot)
 
 void NetworkManager::updateNetwork(Time elapsedTime)
 {
-	if (StateStack::i().GetCurrentState()->id == States::ID::Carga) {
+	//No updatear la red si estamos cargando el mapa
+	/*if (StateStack::i().GetCurrentStateID() == States::ID::Carga) {
 		return;
-	}
+	}*/
 
 	std::list<std::shared_ptr<NetBot>>::iterator it;
 	for (it = m_netBots.begin(); it != m_netBots.end(); ++it) {
@@ -107,6 +108,54 @@ void NetworkManager::updateNetwork(Time elapsedTime)
 	}
 
 	//We call handle packets of netplayer too
-	
 	m_netPlayer->handlePackets(elapsedTime);
+
+	
+}
+
+void NetworkManager::configureNetwork()
+{
+	std::shared_ptr<NetPlayer> netPlayer = NetworkManager::i().createNetPlayer();
+	netPlayer->inicializar();
+}
+
+#include <StringCompressor.h>
+
+std::string NetworkManager::serverLogInfo()
+{
+	RakID rakid;
+	rakid.guid = m_netPlayer->getMyGUID();
+	dispatchMessage(rakid, SOLICITAR_INFO);
+
+	RakNet::Packet *packet;
+
+	while (true) {
+		//Now wait to receive answer
+		for (packet = m_netPlayer->peer->Receive(); packet; m_netPlayer->peer->DeallocatePacket(packet), packet = m_netPlayer->peer->Receive()) {
+			if (packet == 0) {
+				RakSleep(1000);
+				continue;
+			}
+			if (packet->data[0] == SOLICITAR_INFO) {
+				
+				RakNet::RakString rakString;
+				RakNet::BitStream r(packet->data, packet->length, false);
+				r.IgnoreBytes(1);
+				r.ReadCompressed(rakString);
+
+				/*char buffer[1000];
+				RakNet::StringCompressor::Instance()->DecodeString(rakString, 0, &r, 0);*/
+
+				//TLogInfo* info = static_cast<TLogInfo*>(packet->data);
+
+
+
+				return std::string(rakString.C_String());
+			}
+
+		}
+	}
+
+	
+
 }

@@ -17,6 +17,7 @@ public:
 
 private:
 	void inicializar();
+	void inicializarRutas();
 
 	bool processEvents(); 
 	void update(Time elapsedTime);

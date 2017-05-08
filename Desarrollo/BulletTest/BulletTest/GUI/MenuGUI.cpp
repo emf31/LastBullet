@@ -2,6 +2,7 @@
 #include <iostream>
 #include <NetPlayer.h>
 #include <StateStack.h>
+#include <NetworkManager.h>
 
 
 MenuGUI::MenuGUI() : GUI() {
@@ -103,7 +104,7 @@ void MenuGUI::inicializar() {
 
 	//------------------------------------------------
 	
-	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	netPlayer = NetworkManager::i().getNetPlayer();
 
 	rellenarAnimacionPlaneta();
 	
@@ -154,16 +155,15 @@ void MenuGUI::handleEvent(Event * ev)
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
 
-	std::cout << "Le has dado a crear" << std::endl;
-	p->m_network->crearPartida();
+	NetworkManager::i().getNetPlayer()->crearPartida();
 	return true;
 }
 
 bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 {
 	changeState(stateMenu::enumUnir);
-	p->m_network->searchServersOnLAN();
-	std::vector<std::string> servers= p->m_network->getServers();
+	netPlayer->searchServersOnLAN();
+	std::vector<std::string> servers= netPlayer->getServers();
 	int size = servers.size();
 	std::cout << size << std::endl;
 	if (size == 2) {
@@ -212,13 +212,13 @@ bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e)
 
 bool MenuGUI::onConexion1Clicked(const CEGUI::EventArgs & e)
 {
-	p->m_network->unirseLobby(Conexion1->getText().c_str());
+	netPlayer->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }
 
 bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 {
-	p->m_network->unirseLobby(Conexion1->getText().c_str());
+	netPlayer->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }
 

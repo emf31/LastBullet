@@ -43,11 +43,7 @@ public:
 	int getID() const { return m_id; }
 	void setID(int id) { m_id = id; }
 	
-	virtual float getVida() { return 0; }
-	virtual bool isDying() { return false; }
-	virtual std::string getStateActual() { return ""; }
-	virtual void resetMachineState() {};
-	virtual void setNumCiclos(int num) {}
+	
 
 	byte getTriggerFlags() const { return dwTriggerFlags; }
 
@@ -65,12 +61,7 @@ public:
 	virtual void setPosition(const Vec3<float>& vec) = 0;
 	virtual Vec3<float> getPosition() = 0;
 
-	virtual float getDesiAsalto() { return 0; }
-	virtual float getDesiRocketLauncher() { return 0; }
-	virtual float getDesiSniper() { return 0; }
-
-	virtual void vaciarArma(std::string arma) {};
-	virtual void InsertarArmaDebug(std::string arma) {};
+	
 
 protected:
 	//Unique id de la entity
