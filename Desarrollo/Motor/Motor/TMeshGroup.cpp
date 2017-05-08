@@ -66,9 +66,19 @@ void TMeshGroup::processNode(aiNode * node, const aiScene * scene) {
 
 TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Datos básicos de las mallas (vértices, índices y texturas)
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
+
 	std::vector<Texture*> textures;
+	int numIndices=0;
+
+	for (GLuint i = 0; i < mesh->mNumFaces; i++) {
+		aiFace face = mesh->mFaces[i];
+		// Nos guardamos todos los índices
+		for (GLuint j = 0; j < face.mNumIndices; j++)
+			numIndices++;
+	}
+
+	Vertex *vertices = new Vertex[mesh->mNumVertices];
+	GLuint *indices = new GLuint[numIndices];
 
 	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -109,14 +119,17 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 		}
 		//Si no las tiene le ponemos unas por defecto
-		vertices.push_back(vertex);
+		vertices[i] = vertex;
 	}
 	// Recorremos todas las caras de la malla (triángulos) y nos guardamos sus vertex index
+	int cont = 0;
 	for (GLuint i = 0; i < mesh->mNumFaces; i++) {
 		aiFace face = mesh->mFaces[i];
 		// Nos guardamos todos los índices
-		for (GLuint j = 0; j < face.mNumIndices; j++)
-			indices.push_back(face.mIndices[j]);
+		for (GLuint j = 0; j < face.mNumIndices; j++) {
+			indices[cont] = face.mIndices[j];
+			cont++;
+		}
 	}
 	// Materiales!
 	if (mesh->mMaterialIndex >= 0) {
@@ -147,7 +160,7 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 	}
 
 	// Return del mesh preparado
-	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria);
+	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria,mesh->mNumVertices, numIndices);
 }
 
 void TMeshGroup::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, const std::string& typeName) {

@@ -1,10 +1,12 @@
 #include "TMesh.h"
 
-TMesh::TMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures, Shader *shader) {
+TMesh::TMesh(Vertex* vertices, GLuint *indices, const std::vector<Texture*>& textures, Shader *shader, int tamVertices, int tamIndices) {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
 	this->shader = shader;
+	vertexCount = tamVertices;
+	indexCount = tamIndices;
 
 	this->setupMesh();
 }
@@ -16,8 +18,8 @@ TMesh::~TMesh() {
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 
-	vertices.clear();
-	indices.clear();
+	delete vertices;
+	delete indices;
 	textures.clear();
 }
 
@@ -58,7 +60,7 @@ void TMesh::draw() {
 
 	// Dibujamos!
 	glBindVertexArray(this->VAO);
-	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
 	cont = 0;
@@ -85,10 +87,10 @@ void TMesh::setupMesh() {
 	// Cargamos datos en el VAO
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 
-	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
 
 	// Vértices (0)
 	glEnableVertexAttribArray(0);
