@@ -7,6 +7,8 @@
 #include <iostream>
 #include <NetworkManager.h>
 #include <Settings.h>
+#include <GUIManager.h>
+#include <DebugMenuGUI.h>
 
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
@@ -216,6 +218,9 @@ void Enemy::desencolaMovimiento()
 		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 
 	}
+
+	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+	menu->addPrintText("LLega Movimiento");
 
 }
 

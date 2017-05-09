@@ -3,12 +3,17 @@
 #include <events\DebugNetEvent.h>
 #include <NetworkManager.h>
 #include <GUIManager.h>
+#include <NetworkDebugger.h>
+#include <NetworkLog.h>
+#include <events\Event.h>
+#include <EntityManager.h>
+
 
 DebugMenuGUI::DebugMenuGUI() : 
 	GUI(), 
 	maxPrintableTexts(10)
 {
-
+	netWorkLog = new NetworkLog();
 }
 
 DebugMenuGUI::~DebugMenuGUI()
@@ -29,6 +34,32 @@ void DebugMenuGUI::handleEvent(Event * ev)
 	}
 }
 
+
+//Imprime un texto por pantalla
+
+void DebugMenuGUI::addPrintText(const std::string & str) {
+	//Si nos pasamos de textos en pantalla borramos el primero en entrar(head)
+	if (PrintText.size() > (std::size_t)maxPrintableTexts) {
+		//Obtenemos el string de la cabeza
+		std::string auxStr = PrintText.back();
+		//Borramos del current text el tamaño + 1 para el \n
+		currentText.erase(0, auxStr.size() + 1);
+
+		PrintText.pop_back();
+	}
+
+	//Añadimos el nuevo al final
+	PrintText.push_back(str);
+
+	//Lo añadimos con un salto de linea al print final
+	currentText.append(str + "\n");
+
+	//Lo seteamos al label de debug
+	debugPrintText->setText(currentText);
+
+
+}
+
 void DebugMenuGUI::inicializar() {
 	init("../GUI", "DebugMenuGUI");
 
@@ -42,6 +73,8 @@ void DebugMenuGUI::inicializar() {
 	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(40, 150, -40), Vec3<float>(40, 0, -40));
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 
+	//PrintText
+	debugPrintText = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(110));
 	
 	//MENU PRINCIPAL
 	DebugShapesButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));
@@ -601,7 +634,7 @@ bool DebugMenuGUI::onUpdateLogButtonClicked(const CEGUI::EventArgs & e)
 	//Llamar a NetworkManager?
 	serverLog->setText(NetworkManager::i().serverLogInfo());
 
-	clientLog->setText(netWorkLog.updateAndGenerateTable());
+	clientLog->setText(netWorkLog->updateAndGenerateTable());
 
 	return false;
 }

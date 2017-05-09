@@ -3,10 +3,9 @@
 #include <GraphicEngine.h>
 #include <GUI.h>
 #include <Enemy_Bot.h>
-#include <EntityManager.h>
-#include <events\Event.h>
-#include <NetworkDebugger.h>
-#include <NetworkLog.h>
+
+class Event;
+class NetworkLog;
 
 class DebugMenuGUI : public Motor::GUI {
 public:
@@ -17,16 +16,14 @@ public:
 	virtual void handleEvent(Event * ev) override;
 
 	//Imprime un texto por pantalla
-	void addPrintText(const std::string& str) {
-		if () {
-
-		}
-		PrintText.push_back(str);
-	}
+	void addPrintText(const std::string& str);
 
 	void inicializar();
 	
 private:
+
+	std::string currentText;
+	
 	
 	bool onDebugBotAClicked(const CEGUI::EventArgs & e);
 	bool onDebugBotBClicked(const CEGUI::EventArgs & e);
@@ -79,9 +76,12 @@ private:
 
 	void crearNodoBot(Entity* myentity);
 
+	
+	
+	//Debug
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
-	
+	CEGUI::DefaultWindow *debugPrintText;
 
 	//NetworkLog
 	CEGUI::PushButton *NetworkLogButton;
@@ -169,7 +169,7 @@ private:
 
 	std::shared_ptr<BasicSceneNode> nodos[4];
 
-	NetworkLog netWorkLog;
+	NetworkLog* netWorkLog;
 
 	//String para imprimir por pantalla cualquier info de debug
 	std::vector<std::string> PrintText;
