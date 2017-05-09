@@ -602,6 +602,7 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VertFormatting" value="TopAligned" />
             <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
+            <Property name="NormalTextColour" value="FFFF0000" />
         </Window>
     </Window>
 </GUILayout>
