@@ -11,6 +11,7 @@ public:
 	std::vector<Vec3<float>> getPoints();
 	void setVisible(bool visible);
 	bool getVisible() { return m_visible; };
+	bool isPlayerinside();
 	std::string m_name;
 
 private:
