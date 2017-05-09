@@ -24,7 +24,7 @@ class SceneManager;
 //Inherits from TEntity to have a access to beginDraw and endDraw. This class should be managed with ResourceManager,
 //preventing mulitple instances from the same path.
 
-class TMeshGroup : public TEntity {
+class TMeshGroup {
 	
 public:
 	/*  Funciones   */
@@ -32,9 +32,7 @@ public:
 	TMeshGroup(GLchar* path, Shader* shader=NULL);
 	~TMeshGroup();
 
-	virtual void beginDraw();
-
-	virtual void endDraw();
+	void draw();
 	
 
 private:
@@ -59,7 +57,7 @@ private:
 	void loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, const std::string& typeName);
 
 	
-	friend class SceneManager;
+	
 };
 
 

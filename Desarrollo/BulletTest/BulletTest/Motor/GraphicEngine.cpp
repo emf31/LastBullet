@@ -276,7 +276,7 @@ void GraphicEngine::inicializar()
 	
 
 	sm = SceneManager::i();
-	sm.setFarPlane(1000.f);
+	
 
 	
 
@@ -298,7 +298,7 @@ void GraphicEngine::inicializar()
 
 	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	setActiveCamera("CamaraPlayer");
-
+	sm.camaraActiva->setFarPlane(1000.f);
 	
 }
 

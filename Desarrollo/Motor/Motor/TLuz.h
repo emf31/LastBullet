@@ -12,7 +12,7 @@ public:
 	void endDraw();
 	virtual void pasarDatosAlShader(Shader *shader, int i=0) = 0;
 
-	void setLight();
+	
 	void setColorAlpha(float r, float g, float b, float a);
 	void setColor(float r, float g, float b);
 	float getR();
@@ -24,11 +24,6 @@ public:
 	
 
 
-	void setPosition(Vec3<float> pos);
-	void setRotationX(float angu);
-	void setRotationY(float angu);
-	void setRotationZ(float angu);
-	void setRotation(Vec3<float> dir);
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getColor();
@@ -43,22 +38,9 @@ protected:
 	float gradoLuzAmbiente;
 	float gradoLuzDifusa;
 	float gradoLuzEspecular;
-	TTransform* transRotacion;
-	TTransform* transTraslacion;
+
 
 private:
 	SceneManager &sm;
-
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionTraslacion(TTransform* tras);
-
-
-
-	GLuint lightVAO;
-	GLuint lightVBO;
-
-
-
-
 };
 

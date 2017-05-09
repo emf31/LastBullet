@@ -83,7 +83,7 @@ void TAnimation::beginDraw() {
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo
-		currentAnimation[currentFrame]->beginDraw();
+		currentAnimation[currentFrame]->draw();
 		selectCurrentFrame();
 
 	}
@@ -106,45 +106,17 @@ void TAnimation::updatePosition(Vec3<float> pos)
 	transTraslacion->updatePosition(pos);
 }
 
-void TAnimation::setOrientation(Vec3<float> rot) {
-	transRotacion->setRotationDirection(rot);
-}
-
 void TAnimation::setRotationXYZ(Vec3<float> rot) {
-
+	transRotacion->resetMatrix();
 	transRotacion->setRotationY(rot.getY());
 	transRotacion->setRotationX(rot.getX());
 	transRotacion->setRotationZ(rot.getZ());
 }
 
-void TAnimation::setRotationRadians(Vec3<float> rot)
-{
-	transRotacion->setRotationRadians(rot);
-}
 
-void TAnimation::setRotation(Vec3<float> rot) {
-	transRotacion->setRotationDegrees(rot);
-}
-
-void TAnimation::setRotationLeftHand(Vec3<float> rot)
-{
-	transRotacion->setRotationDegreesLeftHand(rot);
-}
 
 void TAnimation::setScale(Vec3<float> esc) {
 	transEscalado->setScale(esc);
-}
-
-void TAnimation::setTransformacionRotacion(TTransform * rot) {
-	transRotacion = rot;
-}
-
-void TAnimation::setTransformacionEscalado(TTransform * esc) {
-	transEscalado = esc;
-}
-
-void TAnimation::setTransformacionTraslacion(TTransform * tras) {
-	transTraslacion = tras;
 }
 
 

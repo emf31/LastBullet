@@ -45,7 +45,7 @@ void TModel::beginDraw() {
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo
-		m_meshGroup->beginDraw();
+		m_meshGroup->draw();
 			
 	}
 
@@ -65,48 +65,23 @@ void TModel::updatePosition(Vec3<float> pos)
 	transTraslacion->updatePosition(pos);
 }
 
-void TModel::setOrientation(Vec3<float> rot) {
-	transRotacion->setRotationDirection(rot);
-}
 
 void TModel::setRotationXYZ(Vec3<float> rot) {
-	
+	transRotacion->resetMatrix();
 	transRotacion->setRotationY(rot.getY());
 	transRotacion->setRotationX(rot.getX());
 	transRotacion->setRotationZ(rot.getZ());
 }
 
-void TModel::setRotationRadians(Vec3<float> rot)
-{
-	transRotacion->setRotationRadians(rot);
-}
-
-void TModel::setRotation(Vec3<float> rot) {
-	transRotacion->setRotationDegrees(rot);
-}
-
-void TModel::setRotationLeftHand(Vec3<float> rot)
-{
-	transRotacion->setRotationDegreesLeftHand(rot);
-}
 
 void TModel::setScale(Vec3<float> esc) {
 	transEscalado->setScale(esc);
 }
 
-void TModel::setTransformacionRotacion(TTransform * rot) {
-	transRotacion = rot;
+void TModel::setRotationMatrix(glm::mat4 matRot)
+{
+	transRotacion->loadMatrix(matRot);
 }
-
-void TModel::setTransformacionEscalado(TTransform * esc) {
-	transEscalado = esc;
-}
-
-void TModel::setTransformacionTraslacion(TTransform * tras) {
-	transTraslacion = tras;
-}
-
-
 
 Vec3<float> TModel::getRotation() {
 	return transRotacion->getRotation();

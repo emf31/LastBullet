@@ -13,9 +13,6 @@ TPointLight::~TPointLight()
 
 void TPointLight::pasarDatosAlShader(Shader * shader, int i)
 {
-
-
-
 	glUniform3f(glGetUniformLocation(shader->Program, std::string("pointlight[" + std::to_string(i) + "].ambiente").c_str()), ambiente.getX(), ambiente.getY(), ambiente.getZ());
 	glUniform3f(glGetUniformLocation(shader->Program, std::string("pointlight[" + std::to_string(i) + "].difusa").c_str()), difusa.getX(), difusa.getY(), difusa.getZ());
 	glUniform3f(glGetUniformLocation(shader->Program, std::string("pointlight[" + std::to_string(i) + "].especular").c_str()), especular.getX(), especular.getY(), especular.getZ());
@@ -29,6 +26,7 @@ void TPointLight::setPosition(Vec3<float> pos)
 	m_posicion = pos;
 	transTraslacion->setPosition(pos);
 }
+
 
 Vec3<float> TPointLight::getPosition()
 {

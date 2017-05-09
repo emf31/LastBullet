@@ -50,16 +50,12 @@ void TAnimationGroupMesh::processAnimations()
 
 
 
-void TAnimationGroupMesh::beginDraw() {
+void TAnimationGroupMesh::draw() {
 
 	//Dibujamos los hijos (Si los hay)
-	for (GLuint i = 0; i < this->vectorModelos.size(); i++) {
-		this->vectorModelos[i]->beginDraw();
+	for (std::vector<AnimationMesh*>::iterator it = vectorModelos.begin(); it != vectorModelos.end(); it++) {
+		(*it)->draw();
 	}
-
 }
 
-void TAnimationGroupMesh::endDraw()
-{
-}
 

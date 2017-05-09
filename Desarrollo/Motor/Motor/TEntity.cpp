@@ -1,5 +1,6 @@
 #include "TEntity.h"
 #include "TNode.h"
+#include "TTransform.h"
 
 
 
@@ -55,4 +56,16 @@ void TEntity::addChild(TEntity * ent) {
 void TEntity::removeChild(TEntity * ent)
 {
 	miNodo->removeChild(ent->getMiNodo());
+}
+
+void TEntity::setTransformacionRotacion(TTransform * rot) {
+	transRotacion = rot;
+}
+
+void TEntity::setTransformacionEscalado(TTransform * esc) {
+	transEscalado = esc;
+}
+
+void TEntity::setTransformacionTraslacion(TTransform * tras) {
+	transTraslacion = tras;
 }

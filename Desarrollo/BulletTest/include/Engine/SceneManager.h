@@ -3,8 +3,6 @@
 #include "TNode.h"
 #include "ResourceManager.h"
 #include "Shader.h"
-//#include "Camera.h"
-#include "enum.h"
 #include "TSunLight.h"
 #include "TPointLight.h"
 #include "TFlashLight.h"
@@ -87,9 +85,7 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 
-	void setNearPlane(float near);
 
-	void setFarPlane(float far);
 	
 	int *screenWidth, *screenHeight;
 	
@@ -212,8 +208,6 @@ private:
 	GLuint quadVBO;
 
 	void RenderQuad();
-
-	float nearPlane = 0.1f, farPlane = 100.0f;
 
 	friend class EngineDevice;
 

@@ -50,26 +50,24 @@ void TNode::setParentNode(TNode * nodoPadre) {
 }
 
 void TNode::draw() {
-	if (type != T_RAIZ) {
+	if (getEntity() != nullptr) {
 		//primero se dibuja el nodo actual (la entity) y luego los hijos
 		//explicacion: el primer begin draw sera el nodo rotacion, se encarga de multiplicar la matriz actual por su rotacion
 		//el segundo nodo es el de escala multiplica la matriz actual que ya estaba rotada y la escala
 		//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
 		//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
 		getEntity()->beginDraw();//apilo la transformacion de la entidad a la matriz correspondiente
-		for (size_t i = 0; i < m_childNodes.size(); i++) {
-			m_childNodes.at(i)->draw();
+		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+			(*it)->draw();
 		}
 		getEntity()->endDraw();//desapilo la transformacion que hice antes
 	}
 	else {
-		//ELSE el modelo es null ¿cargar un modelo de "ERROR"?
-
 		//si es el nodo raiz se dibuja sus hijos directamente
-		for (size_t i = 0; i < m_childNodes.size(); i++) {
+		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
 			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
 			sm.setMatrizActual(glm::mat4());
-			m_childNodes.at(i)->draw();
+			(*it)->draw();
 		}
 		//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
 
@@ -83,18 +81,6 @@ TEntity * TNode::getEntity() {
 
 void TNode::setEntity(TEntity * entidad) {
 	m_entity = entidad;
-}
-
-T_Nodos TNode::getNodeType() {
-	return type;
-}
-
-T_Nodos TNode::getType() {
-	return type;
-}
-
-void TNode::setType(T_Nodos tipo) {
-	type = tipo;
 }
 
 int TNode::getMyNodeEntityID() {

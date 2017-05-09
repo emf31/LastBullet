@@ -1,10 +1,12 @@
 #include "TMesh.h"
 
-TMesh::TMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures, Shader *shader) {
+TMesh::TMesh(Vertex* vertices, GLuint *indices, const std::vector<Texture*>& textures, Shader *shader, int tamVertices, int tamIndices) {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
 	this->shader = shader;
+	vertexCount = tamVertices;
+	indexCount = tamIndices;
 
 	this->setupMesh();
 }
@@ -16,38 +18,41 @@ TMesh::~TMesh() {
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 
-	vertices.clear();
-	indices.clear();
+	delete vertices;
+	delete indices;
 	textures.clear();
 }
 
 
-void TMesh::beginDraw() {
+void TMesh::draw() {
 
 	GLuint diffuseNr = 1;
 	GLuint specularNr = 1;
-	for (GLuint i = 0; i < this->textures.size(); i++) {
-		glActiveTexture(GL_TEXTURE0 + i); // Activamos la textura que toca primero
-										  // + i para la que toca ahora diffuseI (siendo I el número de la textura difusa)
+	int cont = 0;
 
-		std::string name = this->textures[i]->type;
+	for (std::vector<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) {
+		glActiveTexture(GL_TEXTURE0 + cont); // Activamos la textura que toca primero
+										  // + cont para la que toca ahora diffuseI (siendo I el número de la textura difusa)
+
+		std::string name = (*it)->type;
 		// Ponemos en el sampler la textura que toca
 		if (name == "texture_diffuse")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_diffuse"), i);
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_diffuse"), cont);
 		else if (name == "texture_specular")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_specular"), i);
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_specular"), cont);
 		else if (name == "texture_normal")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), i);
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), cont);
 		else if (name == "texture_tangent")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_tangent"), i);
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_tangent"), cont);
 		else if (name == "texture_bitangent")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), i); 
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), cont); 
 		else if (name == "texture_emisivo") {
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_emisivo"), i);
+			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_emisivo"), cont);
 		}
 		
 		// Bindeamos la textura
-		glBindTexture(GL_TEXTURE_2D, this->textures[i]->id);
+		glBindTexture(GL_TEXTURE_2D, (*it)->id);
+		cont++;
 	}
 
 	// Ponemos el brillo a su valor por defecto (se podría cambiar el valor??)
@@ -55,21 +60,22 @@ void TMesh::beginDraw() {
 
 	// Dibujamos!
 	glBindVertexArray(this->VAO);
-	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
+	cont = 0;
 	// Dejamos todo como estaba y activamos la primera textura
-	for (GLuint i = 0; i < this->textures.size(); i++) {
-		glActiveTexture(GL_TEXTURE0 + i);
+	for (std::vector<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) {
+		glActiveTexture(GL_TEXTURE0 + cont);
 		glBindTexture(GL_TEXTURE_2D, 0);
+		cont++;
 	}
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void TMesh::endDraw() {
 
-}
 
 void TMesh::setupMesh() {
 	// Creamos los buffers y arrays
@@ -81,10 +87,10 @@ void TMesh::setupMesh() {
 	// Cargamos datos en el VAO
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 
-	glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex), &this->vertices[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(GLuint), &this->indices[0], GL_STATIC_DRAW);
 
 	// Vértices (0)
 	glEnableVertexAttribArray(0);

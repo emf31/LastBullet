@@ -25,6 +25,7 @@ TCamera::TCamera() {
 	derecha= glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
 	inputEnable = true;
+	projection = glm::perspective(zoom, (float)1280 / (float)720, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
 }
 
 
@@ -35,17 +36,10 @@ TCamera::~TCamera() {
 
 glm::mat4 TCamera::GetViewMatrix() {
 	view = glm::mat4();
-	glm::vec3 posCamara = calcularPosicionVista();
-	
-	//view = glm::translate(view, posCamara);
-	//glm::rotate;
+	calcularPosicionVista();
 	view = glm::inverse(view);
-	//return view;
-	//esto no se puede hacer aun pork necesitamos tener la rotacion del personaje desde el juego, si el personaje rota la camara al ser hija tendra que rotar en el mismo angulo, lo que significa 
-	//coger la matriz de rotacion del personaje
-
-	return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
-	
+	return view;
+	//return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
 }
 
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {
@@ -88,13 +82,12 @@ void TCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset) {
 			rotX = -89.9f;
 	
 
-		// Update Front, Right and Up Vectors using the updated Eular angles
-	
+		
+		transRotacion->resetMatrix();
 		transRotacion->setRotationY(rotY);
 		transRotacion->setRotationX(rotX);
 		updateCameraVectors();
-		//transRotacion->setRotationDirection(vecFront);
-		//std::cout << "El vector rotacion es: " << vecFront.getX() << "," << vecFront.getY() << "," << vecFront.getZ() << "," << std::endl;
+		
 	}
 	
 }
@@ -113,38 +106,12 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 	
 }
 
-glm::vec3 TCamera::calcularPosicionVista()
+void TCamera::calcularPosicionVista()
 {
-	TNode* nodoActual = getMiNodo();
-	
-	float rot = 0.0f;
-	Vec3<float> aux ;
-	TTransform* t;
-	glm::mat4 tras;
-	glm::mat4 rotmatrix;
-	while ((nodoActual->getParentNode() != nullptr) && (nodoActual->getParentNode()->getNodeType()!=T_RAIZ)) {
-		nodoActual = nodoActual->getParentNode();
-		if (nodoActual->getNodeType() == T_TRASLACION) {
 
-			t = static_cast<TTransform*> (nodoActual->getEntity());
-			aux = t->getPosition();
-			tras = glm::translate(tras,glm::vec3(aux.getX(), aux.getY(), aux.getZ()));
-
-		}
-		else if (nodoActual->getNodeType() == T_ROTACION) {
-			t = static_cast<TTransform*> (nodoActual->getEntity());
-			rotmatrix *= t->getRotationMatrix();
-		}
-		
-	}
+	glm::mat4 tras = transTraslacion->getPositionMatrix() ;
+	glm::mat4 rotmatrix = transRotacion->getRotationMatrix();
 	view = tras * rotmatrix;
-	//delete nodoActual;
-	glm::vec3 pos = glm::vec3(tras[3][0], tras[3][1], tras[3][2]);
-	//NOTA ERROR YA COMETIDO: ANTES HACIAMOS UN SET POSITION PERO CLARO ESTO NO PUEDE SER PORK ENTONCES SI EL MODELO ESTA EN LA 30 Y LA CAMARA EN LA 10, EL MODELO AVANZA 5, ENTONCES LA CAMARA AHORA ESTARIA 
-	//EN LA 15 Y EL MODELO EN LA 35, PERO SI HACEMOS ESE SETPOSITION A LA CAMARA EN LA SIGUIENTE ITERACION SU TRANSFORMACION DEVUELVE QUE ESTA EN LA POS 35 Y LE VA A SUMAR DE NUEVO LA POS
-	//DE SU TRANSFORMACION PADRE QUE SERA LA DEL MODELO Y PONDRIA QUE LA CAMARA ESTA EN EL 70
-	//setPosition(pos);
-	return pos;
 }
 
 void TCamera::setTarget(const Vec3<float>& target) {
@@ -161,10 +128,50 @@ Vec3<float> TCamera::getTarget() {
 
 }
 
-void TCamera::setRotationDir(const Vec3<float>& dir) {
-	transRotacion->setRotationDirection(dir);
+void TCamera::setRotationDir(Vec3<float>& vecDir)
+{
+	glm::mat4 m_matrix = glm::mat4();
+	glm::vec3 column1;
+	glm::vec3 column2;
+	glm::vec3 column3;
+	glm::vec3 up = glm::vec3(0, 1, 0);
+	glm::vec3 direction = glm::vec3(vecDir.getX(), vecDir.getY(), vecDir.getZ());
 
+	glm::vec3 xaxis = glm::cross(up, direction);
+	xaxis = glm::normalize(xaxis);
+
+	glm::vec3 yaxis = glm::cross(direction, xaxis);
+
+	yaxis = glm::normalize(yaxis);
+
+	column1.x = xaxis.x;
+	column1.y = yaxis.x;
+	column1.z = direction.x;
+
+	column2.x = xaxis.y;
+	column2.y = yaxis.y;
+	column2.z = direction.y;
+
+	column3.x = xaxis.z;
+	column3.y = yaxis.z;
+	column3.z = direction.z;
+
+	m_matrix[0][0] = column1.x;
+	m_matrix[1][0] = column1.y;
+	m_matrix[2][0] = column1.z;
+
+	m_matrix[0][1] = column2.x;
+	m_matrix[1][1] = column2.y;
+	m_matrix[2][1] = column2.z;
+
+	m_matrix[0][2] = column3.x;
+	m_matrix[1][2] = column3.y;
+	m_matrix[2][2] = column3.z;
+
+	transTraslacion->loadMatrix(m_matrix);
 }
+
+
 
 
 
@@ -195,15 +202,6 @@ void TCamera::setRotationY(float angu) {
 void TCamera::setRotationZ(float angu) {
 	transRotacion->setRotationZ(angu);
 }
-
-void TCamera::setTransformacionRotacion(TTransform * rot) {
-	transRotacion = rot;
-}
-
-void TCamera::setTransformacionTraslacion(TTransform * tras) {
-	transTraslacion = tras;
-}
-
 glm::vec3 TCamera::getPositionglm() {
 	return glm::vec3(transTraslacion->getPosition().getX(), transTraslacion->getPosition().getY(), transTraslacion->getPosition().getZ());
 }
@@ -228,4 +226,22 @@ void TCamera::updateCameraVectors() {
 	derecha = glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
 
+}
+
+void TCamera::setNearPlane(float near) {
+	nearPlane = near;
+}
+
+void TCamera::setFarPlane(float far) {
+	farPlane = far;
+}
+
+void TCamera::setPerspective(float fov, float screenwidth, float screeheight, float nearplane, float farplane)
+{
+	projection = glm::perspective(fov, screenwidth / screeheight, nearplane, farplane);
+}
+
+glm::mat4 TCamera::getProjectionMatrix()
+{
+	return projection;
 }
