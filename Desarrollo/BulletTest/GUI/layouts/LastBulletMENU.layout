@@ -250,5 +250,46 @@
                 <Property name="Text" value="Back" />
             </Window>
         </Window>
+        <Window type="DefaultWindow" name="LobbyWindow" >
+            <Property name="ID" value="1000" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Button" name="ReadyBtn" >
+                <Property name="ID" value="200" />
+                <Property name="Area" value="{{0,932},{0,535},{0,1058},{0,579}}" />
+                <Property name="Text" value="Ready" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayersLbl" >
+                <Property name="Area" value="{{0,810},{0,117},{0,1093},{0,149}}" />
+                <Property name="Text" value="Players" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot1Lbl" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,809},{0,156},{0,1092},{0,188}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot2Lbl" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,810},{0,196},{0,1093},{0,228}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot3Lbl" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,811},{0,237},{0,1094},{0,269}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot4Lbl" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,813},{0,281},{0,1096},{0,313}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="InviteBtn" >
+                <Property name="ID" value="201" />
+                <Property name="Area" value="{{0,931},{0,488},{0,1059},{0,530}}" />
+                <Property name="Text" value="Invite Friends" />
+            </Window>
+        </Window>
     </Window>
 </GUILayout>

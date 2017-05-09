@@ -3,7 +3,7 @@
 #include <NetPlayer.h>
 #include <StateStack.h>
 #include <NetworkManager.h>
-
+#include <steam_api.h>
 
 MenuGUI::MenuGUI() : GUI() {
 }
@@ -54,6 +54,24 @@ void MenuGUI::inicializar() {
 	Salir->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onSalirClicked, this));
 
 	Planeta = static_cast<CEGUI::DefaultWindow*>(LastBullet->getChild(8)->getChild(0));
+
+	//Lobby
+
+	LobbyWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1000));
+
+	ReadyBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(200));
+	ReadyBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onReadyBtnClicked, this));
+
+	InviteBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(201));
+	InviteBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onInviteBtnClicked, this));
+
+	PlayerSlot1Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1));
+	PlayerSlot2Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(2));
+	PlayerSlot3Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(3));
+	PlayerSlot4Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(4));
+
+	LobbyWindow->setVisible(false);
+
 
 	//Unirse a partida
 
@@ -154,7 +172,7 @@ void MenuGUI::handleEvent(Event * ev)
 }
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
-
+	changeState(stateMenu::enumLobby);
 	NetworkManager::i().getNetPlayer()->crearPartida();
 	return true;
 }
@@ -225,6 +243,16 @@ bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
 {
 	changeState(stateMenu::enumPrincipal);
+	return true;
+}
+
+bool  MenuGUI::onReadyBtnClicked(const CEGUI::EventArgs & e) {
+	return true;
+}
+bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
+
+	
+	SteamFriends()->ActivateGameOverlayInviteDialog(NetworkManager::i().getNetPlayer()->crearLobby());
 	return true;
 }
 
@@ -316,7 +344,7 @@ void MenuGUI::setStateVisible(stateMenu state, bool visible)
 	else if (state == stateMenu::enumOpcionesGame) {
 		OpcionesGameWindow->setVisible(visible);
 	} else if (state == stateMenu::enumLobby) {
-
+		LobbyWindow->setVisible(visible);
 	}
 }
 

@@ -28,6 +28,8 @@ public:
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
+	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
+	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
 private:
 
 	int imagen1_x;
@@ -46,6 +48,7 @@ private:
 	CEGUI::DefaultWindow* OpcionesAudioWindow;
 	CEGUI::DefaultWindow* OpcionesVideoWindow;
 	CEGUI::DefaultWindow* OpcionesGameWindow;
+	CEGUI::DefaultWindow* LobbyWindow;
 
 	CEGUI::DefaultWindow* UnirLabel;
 	CEGUI::DefaultWindow* Conexiones;
@@ -73,6 +76,13 @@ private:
 
 	std::vector < CEGUI::String > animacionPlaneta;
 
+	//Lobby
+	CEGUI::PushButton *ReadyBtn;
+	CEGUI::PushButton *InviteBtn;
+	CEGUI::DefaultWindow* PlayerSlot1Lbl;
+	CEGUI::DefaultWindow* PlayerSlot2Lbl;
+	CEGUI::DefaultWindow* PlayerSlot3Lbl;
+	CEGUI::DefaultWindow* PlayerSlot4Lbl;
 	//std::thread t;
 
 	std::shared_ptr<NetPlayer> netPlayer;

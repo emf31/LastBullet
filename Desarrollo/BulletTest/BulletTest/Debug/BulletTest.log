@@ -1,9 +1,4 @@
-﻿  ExplosionParticleSystem.cpp
-d:\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(114): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-d:\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(114): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-d:\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(218): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-d:\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(240): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-d:\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(254): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+﻿  NetPlayer.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'
@@ -78,6 +73,26 @@ zlib_d.lib(inffast.obj) : warning LNK4099: no se encontr¾ PDB 'zlib_static.pdb'
 zlib_d.lib(inflate.obj) : warning LNK4099: no se encontr¾ PDB 'zlib_static.pdb' con 'zlib_d.lib(inflate.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\zlib_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 zlib_d.lib(inftrees.obj) : warning LNK4099: no se encontr¾ PDB 'zlib_static.pdb' con 'zlib_d.lib(inftrees.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\zlib_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 zlib_d.lib(zutil.obj) : warning LNK4099: no se encontr¾ PDB 'zlib_static.pdb' con 'zlib_d.lib(zutil.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\zlib_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(AnimationMesh.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(AnimationMesh.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(AnimationReader.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(AnimationReader.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(EngineDevice.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(EngineDevice.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(Input.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(Input.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(ResourceManager.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(ResourceManager.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(SceneManager.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(SceneManager.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(Shader.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(Shader.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TAnimation.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TAnimation.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TAnimationGroupMesh.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TAnimationGroupMesh.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TCamera.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TCamera.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TEntity.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TEntity.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TFlashLight.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TFlashLight.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TLuz.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TLuz.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TMesh.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TMesh.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TMeshGroup.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TMeshGroup.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TModel.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TModel.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TNode.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TNode.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TPointLight.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TPointLight.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TSunLight.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TSunLight.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+Motor.lib(TTransform.obj) : warning LNK4099: no se encontr¾ PDB 'Motor.pdb' con 'Motor.lib(TTransform.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\Motor.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 SILLY_d.lib(SILLYDataSource.obj) : warning LNK4099: no se encontr¾ PDB 'SILLY_static.pdb' con 'SILLY_d.lib(SILLYDataSource.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\SILLY_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 SILLY_d.lib(SILLYImage.obj) : warning LNK4099: no se encontr¾ PDB 'SILLY_static.pdb' con 'SILLY_d.lib(SILLYImage.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\SILLY_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
 SILLY_d.lib(SILLYImageContext.obj) : warning LNK4099: no se encontr¾ PDB 'SILLY_static.pdb' con 'SILLY_d.lib(SILLYImageContext.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Debug\SILLY_static.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n

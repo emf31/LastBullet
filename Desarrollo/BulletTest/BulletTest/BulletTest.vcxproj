@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam;Network\Lobby2\;Network\Lobby2\Steam</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -124,7 +124,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam;Network\Lobby2\;Network\Lobby2\Steam</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -283,6 +283,22 @@
     <ClInclude Include="Network\AsyncEnemyFactory.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
+    <ClInclude Include="Network\Lobby2\LibVoice\LibVoice.h" />
+    <ClInclude Include="Network\Lobby2\Lobby2Client.h" />
+    <ClInclude Include="Network\Lobby2\Lobby2Message.h" />
+    <ClInclude Include="Network\Lobby2\Lobby2Plugin.h" />
+    <ClInclude Include="Network\Lobby2\Lobby2Presence.h" />
+    <ClInclude Include="Network\Lobby2\Lobby2ResultCode.h" />
+    <ClInclude Include="Network\Lobby2\Lobby2Server.h" />
+    <ClInclude Include="Network\Lobby2\Rooms\IntervalTimer.h" />
+    <ClInclude Include="Network\Lobby2\Rooms\ProfanityFilter.h" />
+    <ClInclude Include="Network\Lobby2\Rooms\RoomsContainer.h" />
+    <ClInclude Include="Network\Lobby2\Rooms\RoomsErrorCodes.h" />
+    <ClInclude Include="Network\Lobby2\Rooms\RoomsPlugin.h" />
+    <ClInclude Include="Network\Lobby2\Rooms\RoomTypes.h" />
+    <ClInclude Include="Network\Lobby2\Steam\Lobby2Client_Steam.h" />
+    <ClInclude Include="Network\Lobby2\Steam\Lobby2Client_Steam_Impl.h" />
+    <ClInclude Include="Network\Lobby2\Steam\Lobby2Message_Steam.h" />
     <ClInclude Include="Network\NetBot.h" />
     <ClInclude Include="Network\NetObject.h" />
     <ClInclude Include="Network\NetPlayer.h" />
@@ -409,6 +425,22 @@
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Network\AsyncEnemyFactory.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
+    <ClCompile Include="Network\Lobby2\LibVoice\LibVoice.cpp" />
+    <ClCompile Include="Network\Lobby2\Lobby2Client.cpp" />
+    <ClCompile Include="Network\Lobby2\Lobby2Message.cpp" />
+    <ClCompile Include="Network\Lobby2\Lobby2Plugin.cpp" />
+    <ClCompile Include="Network\Lobby2\Lobby2Presence.cpp" />
+    <ClCompile Include="Network\Lobby2\Lobby2ResultCode.cpp" />
+    <ClCompile Include="Network\Lobby2\Lobby2Server.cpp" />
+    <ClCompile Include="Network\Lobby2\Rooms\IntervalTimer.cpp" />
+    <ClCompile Include="Network\Lobby2\Rooms\ProfanityFilter.cpp" />
+    <ClCompile Include="Network\Lobby2\Rooms\RoomsContainer.cpp" />
+    <ClCompile Include="Network\Lobby2\Rooms\RoomsErrorCodes.cpp" />
+    <ClCompile Include="Network\Lobby2\Rooms\RoomsPlugin.cpp" />
+    <ClCompile Include="Network\Lobby2\Rooms\RoomTypes.cpp" />
+    <ClCompile Include="Network\Lobby2\Steam\Lobby2Client_Steam.cpp" />
+    <ClCompile Include="Network\Lobby2\Steam\Lobby2Client_Steam_Impl.cpp" />
+    <ClCompile Include="Network\Lobby2\Steam\Lobby2Message_Steam.cpp" />
     <ClCompile Include="Network\NetBot.cpp" />
     <ClCompile Include="Network\NetObject.cpp" />
     <ClCompile Include="Network\NetPlayer.cpp" />

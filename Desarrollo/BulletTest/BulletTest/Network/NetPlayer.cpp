@@ -35,38 +35,15 @@ NetPlayer::~NetPlayer()
 
 void NetPlayer::inicializar()
 {
-	//NetworkManager::i().createServer();
+	messageFactory = new RakNet::Lobby2MessageFactory_Steam;
+	fcm2 = RakNet::FullyConnectedMesh2::GetInstance();
+	lobby2Client = RakNet::Lobby2Client_Steam::GetInstance();
 
+	lobby2Client->AddCallbackInterface(&steamResults);
+	lobby2Client->SetMessageFactory(messageFactory);
 
-	//RakSleep(1000);
-	//conectar("127.0.0.1", server_port);
-
-	/*char eleccion;
-	
-
-		std::cout << "\t[a] - Crear partida" << std::endl;
-		std::cout << "\t[b] - Unirse a partida" << std::endl;
-		std::cout << "Elige una opcion: ";
-
-		std::cin >> eleccion;
-
-		if (eleccion == 'a') {
-
-			crearPartida();
-		}
-		else if (eleccion == 'b') {
-
-			unirseLobby();
-			
-		}*/
-
-
-		
-		
-	//Nos conectamos a la lobby del servidor
-	//lobby.join(str, SERVER_PORT);
-
-	
+	peer->AttachPlugin(lobby2Client);
+	peer->AttachPlugin(fcm2);
 }
 
 
@@ -79,8 +56,8 @@ void NetPlayer::crearPartida()
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
-
-	TGameInfo gameinfo;
+	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
+	/*TGameInfo gameinfo;
 	gameinfo.creador = getMyGUID();
 	gameinfo.name = Settings::i().GetValue("name");
 	gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
@@ -95,7 +72,7 @@ void NetPlayer::crearPartida()
 	//TPlayer p2;
 	//p2.name = "Kennedy";
 
-	m_bots.push_back(p);
+	m_bots.push_back(p);*/
 	//m_bots.push_back(p2);
 
 
@@ -126,15 +103,22 @@ void NetPlayer::setPlayerObject(Player * player)
 }
 
 
-void NetPlayer::crearLobby()
+uint64_t NetPlayer::crearLobby()
 {
-	RakID rakID;
+	if (lobby2Client->GetRoomID() != 0) {
+		printf("Already in a room\n");
+	}
 
-	rakID.guid = m_player->getGuid();
+	RakNet::Console_CreateRoom_Steam* msg = (RakNet::Console_CreateRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_CreateRoom);
+	char rgchLobbyName[256];
+	msg->roomIsPublic = true;
+	_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "%s's lobby", SteamFriends()->GetPersonaName());
+	msg->roomName = rgchLobbyName;
+	msg->publicSlots = 8;
+	lobby2Client->SendMsg(msg);
+	messageFactory->Dealloc(msg);
 
-	//startup(L"RaknetServerv0.1.exe");
-	//dispatchMessage(rakID, CREAR_LOBBY);
-	
+	return lobby2Client->GetRoomID();
 }
 
 void NetPlayer::unirseLobby(const std::string& str)
@@ -621,20 +605,6 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 	}
 
-	/*if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC && mPacketIdentifier != PING)
-		countPacketsIn++;*/
-
-	//std::cout << (unsigned int)mPacketIdentifier << std::endl;
-
-
-
-
-	/*countPacketsTotal = countPacketsIn + countPacketsOut;
-	countMovementPacketsTotal = countMovementPacketsIn + countMovementPacketsOut;
-	duracionFor = timeFor.getElapsedTime().asMilliseconds();
-	//pingMS = pingMS - (elapsedTime.asMilliseconds() - duracionFor);
-	//pingMS = duracionFor;
-	timeFor.restart();*/
 }
 
 void NetPlayer::apagar()

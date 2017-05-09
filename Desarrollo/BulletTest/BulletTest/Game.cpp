@@ -140,16 +140,6 @@ void Game::inicializar()
 	Settings::i().LoadSettings();
 	inicializarRutas();
 
-	GraphicEngine::i().inicializar();
-	
-	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
-	NetworkManager::i().configureNetwork();
-
-	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
-
-	//Inicializamos el MENU
-	StateStack::i().GetCurrentState()->Inicializar();
-
 	//Inicializamos la API de Steam :)
 	if (SteamAPI_RestartAppIfNecessary(480)) {
 		// if Steam is not running or the game wasn't started through Steam, SteamAPI_RestartAppIfNecessary starts the 
@@ -166,6 +156,18 @@ void Game::inicializar()
 		printf("Fatal Error\n", "Steam must be running to play this game (SteamAPI_Init() failed).\n");
 		//exit(0);
 	}
+
+	GraphicEngine::i().inicializar();
+	
+	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
+	NetworkManager::i().configureNetwork();
+
+	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+
+	//Inicializamos el MENU
+	StateStack::i().GetCurrentState()->Inicializar();
+
+	
 }
 
 bool Game::processEvents()
