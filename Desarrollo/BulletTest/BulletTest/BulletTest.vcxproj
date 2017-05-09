@@ -305,6 +305,7 @@
     <ClInclude Include="Network\NetworkDebugger.h" />
     <ClInclude Include="Network\NetworkLog.h" />
     <ClInclude Include="Network\NetworkManager.h" />
+    <ClInclude Include="Network\SteamResults.h" />
     <ClInclude Include="Otros\AssetsReader.h" />
     <ClInclude Include="Otros\CharacterTypes.h" />
     <ClInclude Include="Otros\Clock.hpp" />
@@ -447,6 +448,7 @@
     <ClCompile Include="Network\NetworkDebugger.cpp" />
     <ClCompile Include="Network\NetworkLog.cpp" />
     <ClCompile Include="Network\NetworkManager.cpp" />
+    <ClCompile Include="Network\SteamResults.cpp" />
     <ClCompile Include="Otros\AssetsReader.cpp" />
     <ClCompile Include="Otros\CharacterTypes.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />

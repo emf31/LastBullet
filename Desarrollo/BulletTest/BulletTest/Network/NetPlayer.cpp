@@ -107,17 +107,18 @@ uint64_t NetPlayer::crearLobby()
 {
 	if (lobby2Client->GetRoomID() != 0) {
 		printf("Already in a room\n");
+
+	} else {
+		RakNet::Console_CreateRoom_Steam* msg = (RakNet::Console_CreateRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_CreateRoom);
+		char rgchLobbyName[256];
+		msg->roomIsPublic = true;
+		_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "%s's lobby", SteamFriends()->GetPersonaName());
+		msg->roomName = rgchLobbyName;
+		msg->publicSlots = 8;
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+
 	}
-
-	RakNet::Console_CreateRoom_Steam* msg = (RakNet::Console_CreateRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_CreateRoom);
-	char rgchLobbyName[256];
-	msg->roomIsPublic = true;
-	_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "%s's lobby", SteamFriends()->GetPersonaName());
-	msg->roomName = rgchLobbyName;
-	msg->publicSlots = 8;
-	lobby2Client->SendMsg(msg);
-	messageFactory->Dealloc(msg);
-
 	return lobby2Client->GetRoomID();
 }
 

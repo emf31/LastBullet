@@ -398,6 +398,9 @@
     <ClCompile Include="Network\Lobby2\Steam\Lobby2Message_Steam.cpp">
       <Filter>Source Code\Network\Lobby2\Steam</Filter>
     </ClCompile>
+    <ClCompile Include="Network\SteamResults.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -909,6 +912,9 @@
     </ClInclude>
     <ClInclude Include="Network\Lobby2\Steam\Lobby2Message_Steam.h">
       <Filter>Headers\Network\Lobby2\Steam</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\SteamResults.h">
+      <Filter>Headers\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

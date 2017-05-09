@@ -30,6 +30,10 @@ public:
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
 	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
+
+	void setNameOnPlayerSlot(const std::string& name);
+
+	void setSlotFree(const std::string& str);
 private:
 
 	int imagen1_x;
@@ -94,4 +98,20 @@ private:
 	void changeState(stateMenu Newstate);
 	void setStateVisible(stateMenu state, bool visible);
 	void actualizarTopOpciones();
+
+	CEGUI::DefaultWindow* findEmptyNameSlot() {
+		if (PlayerSlot1Lbl->getText() == "") {
+			return PlayerSlot1Lbl;
+		}
+		if (PlayerSlot2Lbl->getText() == "") {
+			return PlayerSlot2Lbl;
+		}
+		if (PlayerSlot3Lbl->getText() == "") {
+			return PlayerSlot3Lbl;
+		}
+		if (PlayerSlot4Lbl->getText() == "") {
+			return PlayerSlot4Lbl;
+		}
+		return nullptr;
+	}
 };

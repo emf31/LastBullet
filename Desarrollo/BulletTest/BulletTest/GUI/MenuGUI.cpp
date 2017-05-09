@@ -173,7 +173,10 @@ void MenuGUI::handleEvent(Event * ev)
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
 	changeState(stateMenu::enumLobby);
+	
 	NetworkManager::i().getNetPlayer()->crearPartida();
+	NetworkManager::i().getNetPlayer()->crearLobby();
+
 	return true;
 }
 
@@ -254,6 +257,30 @@ bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
 	
 	SteamFriends()->ActivateGameOverlayInviteDialog(NetworkManager::i().getNetPlayer()->crearLobby());
 	return true;
+}
+
+void MenuGUI::setNameOnPlayerSlot(const std::string & name) {
+	findEmptyNameSlot()->setText(name);
+}
+
+void MenuGUI::setSlotFree(const std::string & str) {
+	if (PlayerSlot1Lbl->getText() == str) {
+		PlayerSlot1Lbl->setText("");
+		return;
+	}
+	if (PlayerSlot2Lbl->getText() == str) {
+		PlayerSlot2Lbl->setText("");
+		return;
+	}
+	if (PlayerSlot3Lbl->getText() == str) {
+		PlayerSlot3Lbl->setText("");
+		return;
+	}
+	if (PlayerSlot4Lbl->getText() == str) {
+		PlayerSlot4Lbl->setText("");
+		return;
+	}
+
 }
 
 void MenuGUI::updateFondo(int velocidad)

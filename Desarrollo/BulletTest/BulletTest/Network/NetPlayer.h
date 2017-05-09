@@ -9,12 +9,11 @@
 #include <FullyConnectedMesh2.h>
 #include <steam_api.h>
 #include <RakNetTypes.h>
-
+#include <SteamResults.h>
 
 //Forward declaration - prevents circular reference
 class Player;
 class World;
-
 
 class NetPlayer : public NetObject {
 public:
@@ -52,40 +51,12 @@ public:
 
 	AsyncEnemyFactory& getEnemyFactory() { return m_enemyFactory; }
 
-	struct SteamResults : public RakNet::Lobby2Callbacks {
-		virtual void MessageResult(RakNet::Notification_Console_MemberJoinedRoom *message) {
-			RakNet::Notification_Console_MemberJoinedRoom_Steam *msgSteam = (RakNet::Notification_Console_MemberJoinedRoom_Steam *) message;
-			RakNet::RakString msg;
-			msgSteam->DebugMsg(msg);
-			printf("%s\n", msg.C_String());
-			// Guy with the lower ID connects to the guy with the higher ID
-			uint64_t mySteamId = SteamUser()->GetSteamID().ConvertToUint64();
-			if (mySteamId < msgSteam->srcMemberId) {
-				// Steam's NAT punch is implicit, so it takes a long time to connect. Give it extra time
-				unsigned int sendConnectionAttemptCount = 24;
-				unsigned int timeBetweenSendConnectionAttemptsMS = 500;
-				RakNet::ConnectionAttemptResult car = RakNet::RakPeerInterface::GetInstance()->Connect(msgSteam->remoteSystem.ToString(false), msgSteam->remoteSystem.GetPort(), 0, 0, 0, 0, sendConnectionAttemptCount, timeBetweenSendConnectionAttemptsMS);
-				RakAssert(car == CONNECTION_ATTEMPT_STARTED);
-			}
+	uint64_t getLobbyID() {
+		if (lobby2Client != nullptr) {
+			return lobby2Client->GetRoomID();
 		}
-
-		virtual void MessageResult(RakNet::Console_SearchRooms *message) {
-			RakNet::Console_SearchRooms_Steam *msgSteam = (RakNet::Console_SearchRooms_Steam *) message;
-			RakNet::RakString msg;
-			msgSteam->DebugMsg(msg);
-			printf("%s\n", msg.C_String());
-			if (msgSteam->roomIds.GetSize()>0) {
-				lastRoom = msgSteam->roomIds[0];
-			}
-		}
-
-		virtual void ExecuteDefaultResult(RakNet::Lobby2Message *message) {
-			RakNet::RakString out;
-			message->DebugMsg(out);
-			printf("%s\n", out.C_String());
-		}
-		uint64_t lastRoom;
-	};
+		return 0;
+	}
 private:
 
 	Player* m_player;
