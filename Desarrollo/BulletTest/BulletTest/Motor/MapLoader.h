@@ -10,6 +10,7 @@
 #include <Entity.h>
 #include "../json/json.hpp"
 
+class ClippingZone;
 
 class Object
 {
@@ -49,7 +50,7 @@ public:
 private:
 	static std::shared_ptr<BasicSceneNode> CreateNodeExceptionSafe(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh);
 
-	std::shared_ptr<BasicSceneNode> createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass);
+	std::shared_ptr<BasicSceneNode> createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass, ClippingZone* zone);
 	
 	void createTriggerButton(Vec3<float> posicion, float radio, EnumTriggerType type);
 

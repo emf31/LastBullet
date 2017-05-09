@@ -271,6 +271,8 @@
     <ClInclude Include="Motor\BillboardSceneNode.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\CameraShake.h" />
+    <ClInclude Include="Motor\ClippingManager.h" />
+    <ClInclude Include="Motor\ClippingZone.h" />
     <ClInclude Include="Motor\Color4f.h" />
     <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
@@ -395,6 +397,8 @@
     <ClCompile Include="Motor\BillboardSceneNode.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\CameraShake.cpp" />
+    <ClCompile Include="Motor\ClippingManager.cpp" />
+    <ClCompile Include="Motor\ClippingZone.cpp" />
     <ClCompile Include="Motor\Color4f.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\GunRecoil.cpp" />

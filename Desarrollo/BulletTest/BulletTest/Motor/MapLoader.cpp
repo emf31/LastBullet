@@ -8,6 +8,8 @@
 #include "GraphicEngine.h"
 #include "../Entities/Button.h"
 #include "../Otros/EnumParser.h"
+#include <ClippingManager.h>
+
 
 
 
@@ -76,21 +78,23 @@ void MapLoader::readMap(const std::string & name)
 			Object* o=createObject(obj);
 
 			if (obj["tag"] == "Zona") {
+				
+				ClippingZone* zone =ClippingManager::i().createClippingZone(o->centerCollider, o->sizeColllider, o->nameMesh);
 
 				json jsonArray = obj["o_children"];
 				for (json::iterator arrayIt = jsonArray.begin(); arrayIt != jsonArray.end(); ++arrayIt) {
 					json objzone = *arrayIt;
 					Object* o_child = createObject(objzone);
 					if (objzone["tag"] == "PhysicEntity") {
-						std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o_child->pos, o_child->es, o_child->rot, o_child->centerCollider, o_child->sizeColllider, o_child->mesh, o_child->nameMesh, o_child->mass);
+						std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o_child->pos, o_child->es, o_child->rot, o_child->centerCollider, o_child->sizeColllider, o_child->mesh, o_child->nameMesh, o_child->mass,zone);
 					}
-					//delete o_child;
+					delete o_child;
 				}
 
 			}
 
 			if (obj["tag"] == "PhysicEntity") {
-				std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o->pos, o->es, o->rot, o->centerCollider, o->sizeColllider, o->mesh, o->nameMesh, o->mass);
+				//std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o->pos, o->es, o->rot, o->centerCollider, o->sizeColllider, o->mesh, o->nameMesh, o->mass);
 
 			}
 					
@@ -118,7 +122,7 @@ void MapLoader::readMap(const std::string & name)
 				GraphicEngine::i().createDirectionalLight(o->pos, vecDir, rgb);
 			}
 
-			//delete o;
+			delete o;
 		}
 	}
 
@@ -138,7 +142,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::CreateNodeExceptionSafe(const Vec3<fl
 
 	return sceneNode;
 }
-std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass)
+std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass, ClippingZone* zone)
 {
 	//Creates node
 	std::shared_ptr<BasicSceneNode> sceneNode = CreateNodeExceptionSafe(posicion, escala, "", mesh);
@@ -169,7 +173,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 		physicent->getRigidBody()->setFriction(btScalar(0.8f));
 		physicent->getRigidBody()->setAngularFactor(btScalar(0.3f));
 	}
-	
+	zone->addEntity(physicent);
 
 	return sceneNode;
 }
