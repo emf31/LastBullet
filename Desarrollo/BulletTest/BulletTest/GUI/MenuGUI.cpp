@@ -315,6 +315,8 @@ void MenuGUI::setStateVisible(stateMenu state, bool visible)
 	}
 	else if (state == stateMenu::enumOpcionesGame) {
 		OpcionesGameWindow->setVisible(visible);
+	} else if (state == stateMenu::enumLobby) {
+
 	}
 }
 

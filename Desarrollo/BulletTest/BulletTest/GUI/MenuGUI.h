@@ -34,7 +34,7 @@ private:
 	int imagen2_x;
 
 	enum stateMenu {
-		enumPrincipal, enumUnir, enumOpcionesAudio, enumOpcionesVideo, enumOpcionesGame
+		enumPrincipal, enumUnir, enumOpcionesAudio, enumOpcionesVideo, enumOpcionesGame, enumLobby
 	} m_stateMenu;
 
 	
