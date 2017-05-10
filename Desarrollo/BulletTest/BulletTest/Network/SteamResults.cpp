@@ -11,17 +11,24 @@
 	printf("%s\n", msg.C_String());
 	// Guy with the lower ID connects to the guy with the higher ID
 	uint64_t mySteamId = SteamUser()->GetSteamID().ConvertToUint64();
-	
+
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	menu->changeStateToLobbyView();
+
 	if (mySteamId < msgSteam->srcMemberId) {
 		// Steam's NAT punch is implicit, so it takes a long time to connect. Give it extra time
 		unsigned int sendConnectionAttemptCount = 24;
 		unsigned int timeBetweenSendConnectionAttemptsMS = 500;
 		RakNet::ConnectionAttemptResult car = RakNet::RakPeerInterface::GetInstance()->Connect(msgSteam->remoteSystem.ToString(false), msgSteam->remoteSystem.GetPort(), 0, 0, 0, 0, sendConnectionAttemptCount, timeBetweenSendConnectionAttemptsMS);
 		RakAssert(car == CONNECTION_ATTEMPT_STARTED);
+		//menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
 	}
 
-	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	
+	//menu->freeAllSlots();
 	menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
+
+	//menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
 }
 
 
@@ -32,6 +39,11 @@
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
 	menu->setSlotFree(msgSteam->memberName.C_String());
 
+ }
+
+ void SteamResults::MessageResult(RakNet::Console_GetRoomDetails * message) {
+	 RakNet::Console_GetRoomDetails_Steam *msgSteam = (RakNet::Console_GetRoomDetails_Steam *) message;
+	
  }
 
  void SteamResults::oninvite(GameLobbyJoinRequested_t * pCallback) {
@@ -66,3 +78,4 @@
 	message->DebugMsg(out);
 	printf("%s\n", out.C_String());
 }
+

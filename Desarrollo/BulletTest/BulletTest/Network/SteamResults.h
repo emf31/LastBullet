@@ -22,6 +22,7 @@ public:
 		
 	virtual void MessageResult(RakNet::Notification_Console_MemberLeftRoom *message);
 
+	virtual void MessageResult(RakNet::Console_GetRoomDetails *message);
 private:
 	STEAM_CALLBACK(SteamResults, oninvite, GameLobbyJoinRequested_t);
 	uint64_t lastRoom;

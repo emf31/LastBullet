@@ -51,6 +51,8 @@ public:
 	const std::vector<TPlayer>& getEnemies() const { return m_netPlayer->getEnemies(); }
 	const std::vector<TPlayer>& getBots() const { return m_netPlayer->getBots(); }
 	std::shared_ptr<NetPlayer> getNetPlayer() const { return m_netPlayer; }
+
+	
 private:
 
 	void startup(LPCTSTR lpApplicationName);

@@ -10,6 +10,8 @@
 #include <steam_api.h>
 #include <RakNetTypes.h>
 #include <SteamResults.h>
+#include <GUIManager.h>
+#include <MenuGUI.h>
 
 //Forward declaration - prevents circular reference
 class Player;
@@ -70,8 +72,67 @@ public:
 		std::cout << "Joining Lobby: " << lobbyID << std::endl;
 		lobby2Client->SendMsg(msg);
 		messageFactory->Dealloc(msg);
-
+		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+		menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
 		//conectar(ip, server_port);
+	}
+
+	void receiveSteamPackets() {
+		RakNet::Packet *packet;
+		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
+			switch (packet->data[0]) {
+			case ID_DISCONNECTION_NOTIFICATION:
+				// Connection lost normally
+				printf("ID_DISCONNECTION_NOTIFICATION\n");
+				break;
+			case ID_ALREADY_CONNECTED:
+				// Connection lost normally
+				printf("ID_ALREADY_CONNECTED\n");
+				break;
+			case ID_REMOTE_DISCONNECTION_NOTIFICATION: // Server telling the clients of another client disconnecting gracefully.  You can manually broadcast this in a peer to peer enviroment if you want.
+				printf("ID_REMOTE_DISCONNECTION_NOTIFICATION\n");
+				break;
+			case ID_REMOTE_CONNECTION_LOST: // Server telling the clients of another client disconnecting forcefully.  You can manually broadcast this in a peer to peer enviroment if you want.
+				printf("ID_REMOTE_CONNECTION_LOST\n");
+				break;
+			case ID_REMOTE_NEW_INCOMING_CONNECTION: // Server telling the clients of another client connecting.  You can manually broadcast this in a peer to peer enviroment if you want.
+				printf("ID_REMOTE_NEW_INCOMING_CONNECTION\n");
+				break;
+			case ID_CONNECTION_BANNED: // Banned from this server
+				printf("We are banned from this server.\n");
+				break;
+			case ID_CONNECTION_ATTEMPT_FAILED:
+				printf("Connection attempt failed\n");
+				break;
+			case ID_NO_FREE_INCOMING_CONNECTIONS:
+				// Sorry, the server is full.  I don't do anything here but
+				// A real app should tell the user
+				printf("ID_NO_FREE_INCOMING_CONNECTIONS\n");
+				break;
+			case ID_INVALID_PASSWORD:
+				printf("ID_INVALID_PASSWORD\n");
+				break;
+
+			case ID_CONNECTION_LOST:
+				// Couldn't deliver a reliable packet - i.e. the other system was abnormally
+				// terminated
+				printf("ID_CONNECTION_LOST\n");
+				break;
+
+			case ID_CONNECTION_REQUEST_ACCEPTED:
+				// This tells the client they have connected
+				printf("ID_CONNECTION_REQUEST_ACCEPTED to %s with GUID %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
+				break;
+
+			case ID_NEW_INCOMING_CONNECTION:
+				printf("ID_NEW_INCOMING_CONNECTION\n");
+				break;
+			default:
+				// It's a client, so just show the message
+				printf("Unknown Message ID %i\n", packet->data[0]);
+				break;
+			}
+		}
 	}
 private:
 

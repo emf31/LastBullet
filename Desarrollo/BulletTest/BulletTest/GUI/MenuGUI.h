@@ -34,6 +34,17 @@ public:
 	void setNameOnPlayerSlot(const std::string& name);
 
 	void setSlotFree(const std::string& str);
+
+	void changeStateToLobbyView() {
+		changeState(stateMenu::enumLobby);
+	}
+
+	void freeAllSlots() {
+		PlayerSlot1Lbl->setText("");
+		PlayerSlot2Lbl->setText("");
+		PlayerSlot3Lbl->setText("");
+		PlayerSlot4Lbl->setText("");
+	}
 private:
 
 	int imagen1_x;

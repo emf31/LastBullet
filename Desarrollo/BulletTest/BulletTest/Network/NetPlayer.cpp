@@ -44,6 +44,20 @@ void NetPlayer::inicializar()
 
 	peer->AttachPlugin(lobby2Client);
 	peer->AttachPlugin(fcm2);
+
+
+	fcm2->SetConnectOnNewRemoteConnection(false, "");
+
+	RakNet::Lobby2Message* msg = messageFactory->Alloc(RakNet::L2MID_Client_Login);
+	lobby2Client->SendMsg(msg);
+	messageFactory->Dealloc(msg);
+
+
+	/*RakNet::Console_SearchRooms *msgSteam = (RakNet::Console_SearchRooms *) messageFactory->Alloc(RakNet::L2MID_Console_SearchRooms);
+
+	lobby2Client->SendMsg(msgSteam);
+
+	messageFactory->Dealloc(msgSteam);*/
 }
 
 
@@ -56,6 +70,7 @@ void NetPlayer::crearPartida()
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
+
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
 	/*TGameInfo gameinfo;
 	gameinfo.creador = getMyGUID();
@@ -114,7 +129,7 @@ uint64_t NetPlayer::crearLobby()
 		msg->roomIsPublic = true;
 		_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "%s's lobby", SteamFriends()->GetPersonaName());
 		msg->roomName = rgchLobbyName;
-		msg->publicSlots = 8;
+		msg->publicSlots = 4;
 		lobby2Client->SendMsg(msg);
 		messageFactory->Dealloc(msg);
 

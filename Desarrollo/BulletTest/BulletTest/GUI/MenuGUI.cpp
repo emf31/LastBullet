@@ -260,7 +260,9 @@ bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
 }
 
 void MenuGUI::setNameOnPlayerSlot(const std::string & name) {
-	findEmptyNameSlot()->setText(name);
+	CEGUI::DefaultWindow* emptySlot = findEmptyNameSlot();
+	if (emptySlot != nullptr)
+		emptySlot->setText(name);
 }
 
 void MenuGUI::setSlotFree(const std::string & str) {

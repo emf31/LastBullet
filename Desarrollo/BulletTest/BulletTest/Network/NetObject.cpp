@@ -5,7 +5,10 @@ NetObject::NetObject()
 {
 	peer = RakNet::RakPeerInterface::GetInstance();
 	peer->AllowConnectionResponseIPMigration(false);
-	peer->Startup(1, &sd, 1);
+	RakNet::SocketDescriptor sdd(1234, 0);
+	peer->Startup(8, &sdd, 1);
+	peer->SetMaximumIncomingConnections(8);
+
 }
 
 NetObject::~NetObject()
