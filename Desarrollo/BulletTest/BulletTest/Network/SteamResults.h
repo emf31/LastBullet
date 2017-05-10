@@ -14,15 +14,15 @@ public:
 	
 	virtual void MessageResult(RakNet::Notification_Console_MemberJoinedRoom *message);
 
-		virtual void MessageResult(RakNet::Console_CreateRoom *message);
+	virtual void MessageResult(RakNet::Console_CreateRoom *message);
 
-		virtual void MessageResult(RakNet::Console_SearchRooms *message);
+	virtual void MessageResult(RakNet::Console_SearchRooms *message);
 
-		virtual void ExecuteDefaultResult(RakNet::Lobby2Message *message);
+	virtual void ExecuteDefaultResult(RakNet::Lobby2Message *message);
 		
-		virtual void MessageResult(RakNet::Notification_Console_MemberLeftRoom *message);
+	virtual void MessageResult(RakNet::Notification_Console_MemberLeftRoom *message);
 
 private:
-
+	STEAM_CALLBACK(SteamResults, oninvite, GameLobbyJoinRequested_t);
 	uint64_t lastRoom;
 };

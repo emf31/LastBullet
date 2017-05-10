@@ -24,12 +24,19 @@
 	menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
 }
 
+
  void SteamResults::MessageResult(RakNet::Notification_Console_MemberLeftRoom *message) {
 	RakNet::Notification_Console_MemberLeftRoom_Steam *msgSteam = (RakNet::Notification_Console_MemberLeftRoom_Steam *) message;
 	RakNet::RakString msg;
 	msgSteam->DebugMsg(msg);
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
 	menu->setSlotFree(msgSteam->memberName.C_String());
+
+ }
+
+ void SteamResults::oninvite(GameLobbyJoinRequested_t * pCallback) {
+	 std::cout << "CALLBACK_INVITE" << std::endl;
+	 NetworkManager::i().getNetPlayer()->joinSteamLobby(pCallback->m_steamIDLobby.ConvertToUint64());
 
  }
 

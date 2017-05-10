@@ -57,6 +57,22 @@ public:
 		}
 		return 0;
 	}
+	RakNet::Lobby2MessageFactory_Steam* getMessageFactory() {
+		return messageFactory;
+	}
+	RakNet::Lobby2Client_Steam* getLobby2Client() {
+		return lobby2Client;
+	}
+
+	void joinSteamLobby(/*const std::string& ip,*/ uint64 lobbyID) {
+		RakNet::Console_JoinRoom_Steam* msg = (RakNet::Console_JoinRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_JoinRoom);
+		msg->roomId = lobbyID;
+		std::cout << "Joining Lobby: " << lobbyID << std::endl;
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+
+		//conectar(ip, server_port);
+	}
 private:
 
 	Player* m_player;

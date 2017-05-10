@@ -89,6 +89,7 @@ protected:
 	STEAM_CALLBACK( Lobby2Client_Steam_Impl, OnP2PSessionRequest, P2PSessionRequest_t, m_CallbackP2PSessionRequest );
 	STEAM_CALLBACK( Lobby2Client_Steam_Impl, OnP2PSessionConnectFail, P2PSessionConnectFail_t, m_CallbackP2PSessionConnectFail );
 
+	
 	DataStructures::Multilist<ML_UNORDERED_LIST, Lobby2Message *, uint64_t > deferredCallbacks;
 
 	uint64_t roomId;
