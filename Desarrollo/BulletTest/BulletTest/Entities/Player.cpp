@@ -188,6 +188,7 @@ void Player::update(Time elapsedTime)
 		mov.position = getRenderState()->getPosition();
 		mov.rotation = getRenderState()->getRotation();
 		mov.guid = getGuid();
+		mov.time = RakNet::GetTimeMS();
 	
 		m_network->dispatchMessage(mov, MOVIMIENTO);
 		

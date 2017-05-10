@@ -34,6 +34,7 @@ struct TMovimiento {
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
+	RakNet::TimeMS time;
 };
 #pragma pack(pop)
 

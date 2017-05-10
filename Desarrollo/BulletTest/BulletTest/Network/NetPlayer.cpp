@@ -312,7 +312,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
 
 			if (e != NULL) {
-				e->encolaMovimiento(m);
+				e->getNetworkPrediction()->addMovement(m);
 			}
 			/*countMovementPacketsIn++;*/
 
@@ -689,4 +689,5 @@ void NetPlayer::searchServersOnLAN() {
 	}
 	//Destruyo el RakPeer. Ya no hace falta
 	RakNet::RakPeerInterface::DestroyInstance(client);
+
 }

@@ -2,7 +2,7 @@
 #include <Character.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
-
+#include <NetworkPrediction.h>
 
 #include <Estructuras.h>
 #include <Message.h>
@@ -54,6 +54,8 @@ public:
 	}
 
 	void setVisibilidadBilboardSync();
+
+	NetworkPrediction* getNetworkPrediction() { return &nPrediction; }
 	
 
 private:
@@ -72,7 +74,7 @@ private:
 
 	Clock relojMuerte;
 	
-	
+	NetworkPrediction nPrediction;
 
 
 	btRigidBody* m_rigidBody;

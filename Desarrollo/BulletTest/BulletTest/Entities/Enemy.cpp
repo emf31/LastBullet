@@ -14,7 +14,7 @@
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
 {
 
 
@@ -37,7 +37,11 @@ void Enemy::inicializar()
 
 void Enemy::update(Time elapsedTime)
 {
-	desencolaMovimiento();
+	//desencolaMovimiento();
+
+
+	nPrediction.interpolate(elapsedTime);
+
 
 	updateState();
 	//updateAnimation();
@@ -190,8 +194,7 @@ void Enemy::encolaMovimiento(TMovimiento& mov)
 
 void Enemy::desencolaMovimiento()
 {
-	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-	menu->addPrintText(std::to_string(m_positions.size()));
+	
 
 
 	if (m_positions.size() > 3) {

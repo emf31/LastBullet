@@ -29,6 +29,8 @@ struct RakID {
 };
 #pragma pack(pop)
 
+
+
 #pragma pack(push, 1)
 struct TMovimiento {
 	unsigned char mID;
@@ -36,6 +38,7 @@ struct TMovimiento {
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
+	RakNet::TimeMS time;
 };
 #pragma pack(pop)
 
