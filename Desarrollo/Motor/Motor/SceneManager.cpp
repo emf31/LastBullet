@@ -13,16 +13,17 @@ void SceneManager::inicializar() {
 	m_matrizActual = glm::mat4();
 	//camaraActiva = crearNodoCamara();
 	sunlight = nullptr;
-	//shaderGeometria = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	shaderGeometria = ResourceManager::i().getShader("assets/geometria.vs", "assets/geometria.frag");
 	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
-	//shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
+	shaderSombras = ResourceManager::i().getShader("assets/sombras.vs", "assets/sombras.frag");
+	
 
 	inicializarBuffers();
 	inicializarBuffersBlur();
+	inicializarBuffersSombras();
 	inicializarBuffersLineas();
 	numLines = 0;
 	drawTarget = false;
@@ -90,7 +91,7 @@ void SceneManager::renderFrame(GLFWwindow* window) {
 
 void SceneManager::inicializarBuffers()
 {
-	GLuint screenWidth = 1280, screenHeight = 720;
+	
 
 	shaderLuces->Use();
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gPosition"), 0);
@@ -109,49 +110,49 @@ void SceneManager::inicializarBuffers()
 	// Posicion
 	glGenTextures(1, &gPosition);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPosition, 0);
 	//Normales
 	glGenTextures(1, &gNormal);
 	glBindTexture(GL_TEXTURE_2D, gNormal);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gNormal, 0);
 	// Difuso + especular
 	glGenTextures(1, &gTextura);
 	glBindTexture(GL_TEXTURE_2D, gTextura);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, screenWidth, screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gTextura, 0);
 	//tangente
 	glGenTextures(1, &gTangent);
 	glBindTexture(GL_TEXTURE_2D, gTangent);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gTangent, 0);
 	//bitangente
 	glGenTextures(1, &gBitangent);
 	glBindTexture(GL_TEXTURE_2D, gBitangent);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, gBitangent, 0);
 	//emisivo
 	glGenTextures(1, &gEmisivo);
 	glBindTexture(GL_TEXTURE_2D, gEmisivo);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT5, GL_TEXTURE_2D, gEmisivo, 0);
 	//objectColor
 	glGenTextures(1, &gObjectColor);
 	glBindTexture(GL_TEXTURE_2D, gObjectColor);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT6, GL_TEXTURE_2D, gObjectColor, 0);
@@ -165,7 +166,7 @@ void SceneManager::inicializarBuffers()
 		//Depthbuffer
 	glGenRenderbuffers(1, &rboDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -187,7 +188,7 @@ void SceneManager::inicializarBuffersSombras()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMap, 0);
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
@@ -197,7 +198,7 @@ void SceneManager::inicializarBuffersSombras()
 
 void SceneManager::inicializarBuffersBlur()
 {
-	GLuint screenWidth = 1280, screenHeight = 720;
+	
 
 	glGenFramebuffers(2, bloomFBO);
 	glGenTextures(2, bloomBuffers);
@@ -205,7 +206,7 @@ void SceneManager::inicializarBuffersBlur()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, bloomFBO[i]);
 		glBindTexture(GL_TEXTURE_2D, bloomBuffers[i]);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -225,7 +226,7 @@ void SceneManager::inicializarBuffersLineas() {
 
 void SceneManager::renderLuces()
 {
-	//GLuint screenWidth = 1280, screenHeight = 720;
+	;
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
@@ -244,6 +245,8 @@ void SceneManager::renderLuces()
 	glBindTexture(GL_TEXTURE_2D, gObjectColor);
 	glActiveTexture(GL_TEXTURE7);
 	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	glActiveTexture(GL_TEXTURE8);
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
 	
 
 	//LUZ SOLAR
@@ -322,9 +325,18 @@ void SceneManager::renderSombras()
 	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
-	ConfigureShaderAndMatrices();
-	RenderScene();
+	//ConfigureShaderAndMatrices();
+	shaderSombras->Use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gPosition);
+	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(sunlight->getLightSpaceMatrix()));
+	//RenderScene();
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
+	RenderQuad();
+	// reset viewport
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 bool SceneManager::removeNode(TNode * node) {

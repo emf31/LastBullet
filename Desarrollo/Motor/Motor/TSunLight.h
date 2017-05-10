@@ -13,8 +13,15 @@ public:
 	Vec3<float> getDireccion();
 	void setRotationXYZ(Vec3<float> dir);
 	void updateVectorDireccion();
+	glm::mat4 getLightProjection();
+	glm::mat4 getLightView();
+	glm::mat4 getLightSpaceMatrix();
+	void calcularMatrices();
+	
 
 private:
 	Vec3<float> m_direccion;
+	glm::mat4 lightProjection, lightView;
+	glm::mat4 lightSpaceMatrix;
 
 };

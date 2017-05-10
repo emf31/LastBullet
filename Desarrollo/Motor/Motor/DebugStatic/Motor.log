@@ -1,20 +1,3 @@
-﻿  SceneManager.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.cpp(325): error C3861: 'ConfigureShaderAndMatrices': no se encontró el identificador
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.cpp(326): error C3861: 'RenderScene': no se encontró el identificador
-  Generando código...
-  Compilando...
-  AnimationMesh.cpp
-  Generando código...
-  Compilando...
-  main.cpp
-  TTransform.cpp
-  TNode.cpp
-  TModel.cpp
-  TMeshGroup.cpp
-  TLuz.cpp
-  TCamera.cpp
-  TAnimationGroupMesh.cpp
-  TAnimation.cpp
-  Input.cpp
-  EngineDevice.cpp
-  Generando código...
+﻿  TSunLight.cpp
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)

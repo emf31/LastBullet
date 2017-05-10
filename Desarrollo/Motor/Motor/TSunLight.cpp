@@ -1,8 +1,11 @@
 #include "TSunLight.h"
+#include "SceneManager.h"
 
 TSunLight::TSunLight(Vec3<float> direccion)
 {
 	m_direccion = direccion;
+
+	calcularMatrices();
 }
 
 TSunLight::~TSunLight()
@@ -15,6 +18,7 @@ void TSunLight::pasarDatosAlShader(Shader * shader, int i)
 	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.difusa"), difusa.getX(), difusa.getY(), difusa.getZ());
 	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.especular"), especular.getX(), especular.getY(), especular.getZ());
 	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.direction"), m_direccion.getX(), m_direccion.getY(), m_direccion.getZ());
+	glUniformMatrix4fv(glGetUniformLocation(shader->Program, "sunlight.lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
 }
 
 
@@ -42,4 +46,29 @@ void TSunLight::updateVectorDireccion()
 	destino = glm::normalize(destino);
 	m_direccion = Vec3<float>(destino.x, destino.y, destino.z);
 
+	calcularMatrices();
+}
+
+glm::mat4 TSunLight::getLightProjection()
+{
+	return lightProjection;
+}
+
+glm::mat4 TSunLight::getLightView()
+{
+	return lightView;
+}
+
+glm::mat4 TSunLight::getLightSpaceMatrix()
+{
+	return lightSpaceMatrix;
+}
+
+void TSunLight::calcularMatrices()
+{
+	lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 1000.0f);
+	lightView = glm::lookAt(glm::vec3(-30.f,0.f,0.f), glm::vec3(m_direccion.getX(), m_direccion.getY(), m_direccion.getX()), glm::vec3(0.0, 1.0, 0.0));
+	lightView = lightView * glm::inverse(SceneManager::i().getViewMatrix());
+	//glm::inverse(view);
+	lightSpaceMatrix = lightProjection * lightView;
 }

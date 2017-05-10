@@ -99,7 +99,7 @@ public:
 	Shader* shaderBombillas;
 	Shader* shaderLineas;
 	Shader* shaderBlur;
-	//Shader* shaderBloom;
+	Shader* shaderSombras;
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
@@ -162,6 +162,7 @@ private:
 	void RenderQuad();
 
 	GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+	GLuint SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 720;
 
 	friend class EngineDevice;
 
