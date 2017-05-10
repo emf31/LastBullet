@@ -54,11 +54,6 @@ bool ClippingZone::isPlayerinside()
 	Vec3<float> playerPos = static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition();
 	if (playerPos.getX() > m_points.at(0).getX() && playerPos.getY() > m_points.at(0).getY() && playerPos.getZ() > m_points.at(0).getZ()) {
 		if (playerPos.getX() < m_points.at(7).getX() && playerPos.getY()  < m_points.at(7).getY() && playerPos.getZ() < m_points.at(7).getZ()) {
-		/*	std::cout<<m_name<<
-				"->INF->"<< m_points.at(0).getX() <<","<< m_points.at(0).getY() << "," << m_points.at(0).getZ()<<
-				"->SUP->" << m_points.at(7).getX() << "," << m_points.at(7).getY() << "," << m_points.at(7).getZ()<<
-				"->Player->" << playerPos.getX() << "," << playerPos.getY() << "," << playerPos.getZ() <<
-				std::endl;*/
 			setVisible(true);
 			return true;
 		}
