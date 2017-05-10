@@ -190,6 +190,9 @@ void Enemy::encolaMovimiento(TMovimiento& mov)
 
 void Enemy::desencolaMovimiento()
 {
+	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+	menu->addPrintText(std::to_string(m_positions.size()));
+
 
 	if (m_positions.size() > 3) {
 		TMovimiento mov;
@@ -215,12 +218,11 @@ void Enemy::desencolaMovimiento()
 		m_isDying = mov.isDying;
 	}
 	else {
-		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
+		//updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
 
 	}
 
-	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-	menu->addPrintText("LLega Movimiento");
+	
 
 }
 
