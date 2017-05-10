@@ -36,17 +36,17 @@ NetPlayer::~NetPlayer()
 void NetPlayer::inicializar()
 {
 	messageFactory = new RakNet::Lobby2MessageFactory_Steam;
-	fcm2 = RakNet::FullyConnectedMesh2::GetInstance();
+	//fcm2 = RakNet::FullyConnectedMesh2::GetInstance();
 	lobby2Client = RakNet::Lobby2Client_Steam::GetInstance();
 
 	lobby2Client->AddCallbackInterface(&steamResults);
 	lobby2Client->SetMessageFactory(messageFactory);
 
 	peer->AttachPlugin(lobby2Client);
-	peer->AttachPlugin(fcm2);
+	//peer->AttachPlugin(fcm2);
 
 
-	fcm2->SetConnectOnNewRemoteConnection(false, "");
+	//fcm2->SetConnectOnNewRemoteConnection(false, "");
 
 	RakNet::Lobby2Message* msg = messageFactory->Alloc(RakNet::L2MID_Client_Login);
 	lobby2Client->SendMsg(msg);
@@ -135,11 +135,26 @@ uint64_t NetPlayer::crearLobby()
 		IamHost = true;
 
 		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-		menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+		if (menu != nullptr) {
+			menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+		}
 		addPlayerInLobby(lobby2Client->GetMyUserID());
 	}
 	return lobby2Client->GetRoomID();
 }
+
+void NetPlayer::sendServerIPtoNewClient() {
+	if (IamHost) {
+		std::string ipMessage = "IP|";
+		RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
+		ipMessage = ipMessage + peer->GetLocalIP(0);
+		msg->message = ipMessage.c_str();
+		msg->roomId = lobby2Client->GetRoomID();
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+	}
+}
+
 
 void NetPlayer::unirseLobby(const std::string& str)
 {
@@ -188,7 +203,7 @@ void NetPlayer::unirseLobby(const std::string& str)
 
 	TPlayer p;
 	p.guid = peer->GetMyGUID();
-	p.name = Settings::i().GetValue("name");
+	p.name = SteamFriends()->GetPersonaName();
 
 	dispatchMessage(p, UNIRSE_PARTIDA);
 	
@@ -282,7 +297,9 @@ void NetPlayer::joinSteamLobby(uint64 lobbyID) {
 	messageFactory->Dealloc(msg);
 
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+	if (menu != nullptr) {
+		menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+	}
 	addPlayerInLobby(lobby2Client->GetMyUserID());
 	//conectar(ip, server_port);
 }

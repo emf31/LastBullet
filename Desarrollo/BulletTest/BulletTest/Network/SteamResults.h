@@ -11,26 +11,20 @@ class SteamResults : public RakNet::Lobby2Callbacks {
 public:
 
 
-	
+	virtual void ExecuteDefaultResult(RakNet::Lobby2Message *message);
+
 	virtual void MessageResult(RakNet::Notification_Console_MemberJoinedRoom *message);
 
 	virtual void MessageResult(RakNet::Console_CreateRoom *message);
 
 	virtual void MessageResult(RakNet::Console_SearchRooms *message);
-
-	virtual void ExecuteDefaultResult(RakNet::Lobby2Message *message);
 		
 	virtual void MessageResult(RakNet::Notification_Console_MemberLeftRoom *message);
 
 	virtual void MessageResult(RakNet::Console_GetRoomDetails *message);
 
-	virtual void MessageResult(RakNet::Notification_Console_RoomChatMessage *message) {
-		RakNet::Notification_Console_RoomChatMessage *msgSteam = (RakNet::Notification_Console_RoomChatMessage *) message;
+	virtual void MessageResult(RakNet::Notification_Console_RoomChatMessage *message);
 
-		std::cout<<"MENSAJE: "<<msgSteam->message<<std::endl;
-
-		
-	}
 private:
 	STEAM_CALLBACK(SteamResults, oninvite, GameLobbyJoinRequested_t);
 	uint64_t lastRoom;

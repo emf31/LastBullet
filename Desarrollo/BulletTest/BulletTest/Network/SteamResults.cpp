@@ -19,8 +19,11 @@
 		RakAssert(car == CONNECTION_ATTEMPT_STARTED);
 	}
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	menu->changeStateToLobbyView();
-	menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
+	if (menu != nullptr) {
+		menu->changeStateToLobbyView();
+		menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
+	}
+	
 	NetworkManager::i().getNetPlayer()->addPlayerInLobby(msgSteam->srcMemberId);
 
 	NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
@@ -34,14 +37,43 @@
 	msgSteam->DebugMsg(msg);
 
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	menu->setSlotFree(msgSteam->memberName.C_String());
-	NetworkManager::i().getNetPlayer()->substractPlayerInLobby(msgSteam->srcMemberId);
+	if (menu != nullptr) {
+		menu->setSlotFree(msgSteam->memberName.C_String());
+		NetworkManager::i().getNetPlayer()->substractPlayerInLobby(msgSteam->srcMemberId);
+	}
  }
 
  void SteamResults::MessageResult(RakNet::Console_GetRoomDetails * message) {
 	 RakNet::Console_GetRoomDetails_Steam *msgSteam = (RakNet::Console_GetRoomDetails_Steam *) message;
 	
  }
+
+ void SteamResults::MessageResult(RakNet::Notification_Console_RoomChatMessage * message) {
+	 RakNet::Notification_Console_RoomChatMessage_Steam *msgSteam = (RakNet::Notification_Console_RoomChatMessage_Steam *) message;
+
+	 std::cout << "MENSAJE: " << msgSteam->message.C_String() << std::endl;
+
+	 std::string s = msgSteam->message.C_String();
+	 std::string delimiter = "|";
+	 size_t pos = 0;
+	 pos = s.find(delimiter);
+
+	 std::string value = s.substr((pos + delimiter.length()), s.length() - pos);
+	 std::string token = s.substr(0, s.find(delimiter));
+
+	 if (token == "IP") {
+		 NetworkManager::i().getNetPlayer()->setHostIp(value);
+	 } else if(token == "R") {
+		 if (value == "1") {
+			 //ready
+			 NetworkManager::i().getNetPlayer()->playerReadyCallback();
+		 } else {
+			 //Not ready
+			 NetworkManager::i().getNetPlayer()->playerNotReadyCallback();
+		 }
+	 }
+ }
+
 
  void SteamResults::oninvite(GameLobbyJoinRequested_t * pCallback) {
 	 std::cout << "CALLBACK_INVITE" << std::endl;

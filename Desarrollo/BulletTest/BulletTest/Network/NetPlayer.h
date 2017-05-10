@@ -59,79 +59,134 @@ public:
 
 	void joinSteamLobby(/*const std::string& ip,*/ uint64 lobbyID);
 
-	void sendServerIPtoNewClient() {
-		if (IamHost) {
-			RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
-			msg->message = "THISISATEST.";
-			msg->roomId = lobby2Client->GetRoomID();
-			lobby2Client->SendMsg(msg);
-			messageFactory->Dealloc(msg);
+	void sendServerIPtoNewClient();
+
+	void sendReadyStatus() {
+		std::string mensaje = "R|";
+		RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
+		IamReady = !IamReady;
+		if (IamReady) {
+			mensaje = mensaje + "1";
+			msg->message = mensaje.c_str();
+		} else {
+			mensaje = mensaje + "0";
+			msg->message = mensaje.c_str();
 		}
+		msg->roomId = lobby2Client->GetRoomID();
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+	}
+
+	void playerReadyCallback() {
+		//IamReady = true;
+		playersReady = playersReady + 1;
+		if ((size_t)playersReady >= SteamIDs.size()) {
+			//EMPEZAR PARTIDA AQUI
+			std::cout << "EMPEZANDO PARTIDA" << std::endl;
+			inLobby = false;
+			if (IamHost) {
+				comenzarPartida();
+			} else {
+				unirseLobby(hostIp);
+			}
+		}
+		std::cout << "Ready players: " << playersReady << " / " << SteamIDs.size() << std::endl;
+	}
+
+	void comenzarPartida() {
+		TGameInfo gameinfo;
+		gameinfo.creador = getMyGUID();
+		gameinfo.name = SteamFriends()->GetPersonaName();
+		gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
+		gameinfo.map = Settings::i().GetValue("mapa");
+		gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+
+		dispatchMessage(gameinfo, CREAR_PARTIDA);
+	}
+
+	void playerNotReadyCallback() {
+		//IamReady = false;
+		playersReady = playersReady - 1;
+		if (playersReady < 0) {
+			playersReady = 0;
+		}
+		std::cout << "Ready players: " << playersReady << " / " << SteamIDs.size() << std::endl;
 	}
 
 	void receiveSteamPackets() {
-		RakNet::Packet *packet;
-		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-			switch (packet->data[0]) {
-			case ID_DISCONNECTION_NOTIFICATION:
-				// Connection lost normally
-				printf("ID_DISCONNECTION_NOTIFICATION\n");
-				break;
-			case ID_ALREADY_CONNECTED:
-				// Connection lost normally
-				printf("ID_ALREADY_CONNECTED\n");
-				break;
-			case ID_REMOTE_DISCONNECTION_NOTIFICATION: // Server telling the clients of another client disconnecting gracefully.  You can manually broadcast this in a peer to peer enviroment if you want.
-				printf("ID_REMOTE_DISCONNECTION_NOTIFICATION\n");
-				break;
-			case ID_REMOTE_CONNECTION_LOST: // Server telling the clients of another client disconnecting forcefully.  You can manually broadcast this in a peer to peer enviroment if you want.
-				printf("ID_REMOTE_CONNECTION_LOST\n");
-				break;
-			case ID_REMOTE_NEW_INCOMING_CONNECTION: // Server telling the clients of another client connecting.  You can manually broadcast this in a peer to peer enviroment if you want.
-				printf("ID_REMOTE_NEW_INCOMING_CONNECTION\n");
-				break;
-			case ID_CONNECTION_BANNED: // Banned from this server
-				printf("We are banned from this server.\n");
-				break;
-			case ID_CONNECTION_ATTEMPT_FAILED:
-				printf("Connection attempt failed\n");
-				break;
-			case ID_NO_FREE_INCOMING_CONNECTIONS:
-				// Sorry, the server is full.  I don't do anything here but
-				// A real app should tell the user
-				printf("ID_NO_FREE_INCOMING_CONNECTIONS\n");
-				break;
-			case ID_INVALID_PASSWORD:
-				printf("ID_INVALID_PASSWORD\n");
-				break;
+		if (inLobby) {
+			RakNet::Packet *packet;
+			for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
+				switch (packet->data[0]) {
+				case ID_DISCONNECTION_NOTIFICATION:
+					// Connection lost normally
+					printf("ID_DISCONNECTION_NOTIFICATION\n");
+					break;
+				case ID_ALREADY_CONNECTED:
+					// Connection lost normally
+					printf("ID_ALREADY_CONNECTED\n");
+					break;
+				case ID_REMOTE_DISCONNECTION_NOTIFICATION: // Server telling the clients of another client disconnecting gracefully.  You can manually broadcast this in a peer to peer enviroment if you want.
+					printf("ID_REMOTE_DISCONNECTION_NOTIFICATION\n");
+					break;
+				case ID_REMOTE_CONNECTION_LOST: // Server telling the clients of another client disconnecting forcefully.  You can manually broadcast this in a peer to peer enviroment if you want.
+					printf("ID_REMOTE_CONNECTION_LOST\n");
+					break;
+				case ID_REMOTE_NEW_INCOMING_CONNECTION: // Server telling the clients of another client connecting.  You can manually broadcast this in a peer to peer enviroment if you want.
+					printf("ID_REMOTE_NEW_INCOMING_CONNECTION\n");
+					break;
+				case ID_CONNECTION_BANNED: // Banned from this server
+					printf("We are banned from this server.\n");
+					break;
+				case ID_CONNECTION_ATTEMPT_FAILED:
+					printf("Connection attempt failed\n");
+					break;
+				case ID_NO_FREE_INCOMING_CONNECTIONS:
+					// Sorry, the server is full.  I don't do anything here but
+					// A real app should tell the user
+					printf("ID_NO_FREE_INCOMING_CONNECTIONS\n");
+					break;
+				case ID_INVALID_PASSWORD:
+					printf("ID_INVALID_PASSWORD\n");
+					break;
 
-			case ID_CONNECTION_LOST:
-				// Couldn't deliver a reliable packet - i.e. the other system was abnormally
-				// terminated
-				printf("ID_CONNECTION_LOST\n");
-				break;
+				case ID_CONNECTION_LOST:
+					// Couldn't deliver a reliable packet - i.e. the other system was abnormally
+					// terminated
+					printf("ID_CONNECTION_LOST\n");
+					break;
 
-			case ID_CONNECTION_REQUEST_ACCEPTED:
-				// This tells the client they have connected
-				printf("ID_CONNECTION_REQUEST_ACCEPTED to %s with GUID %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
-				break;
+				case ID_CONNECTION_REQUEST_ACCEPTED:
+					// This tells the client they have connected
+					printf("ID_CONNECTION_REQUEST_ACCEPTED to %s with GUID %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
+					break;
 
-			case ID_NEW_INCOMING_CONNECTION:
-				printf("ID_NEW_INCOMING_CONNECTION\n");
-				break;
-			default:
-				// It's a client, so just show the message
-				printf("Unknown Message ID %i\n", packet->data[0]);
-				break;
+				case ID_NEW_INCOMING_CONNECTION:
+					printf("ID_NEW_INCOMING_CONNECTION\n");
+					break;
+				default:
+					// It's a client, so just show the message
+					printf("Unknown Message ID %i\n", packet->data[0]);
+					break;
+				}
 			}
 		}
+		
 	}
 
 	void addPlayerInLobby(uint64_t steamID);
 
 	void substractPlayerInLobby(uint64_t steamID);
 
+	void setHostIp(const std::string& ip) {
+		hostIp = ip;
+	}
 
+
+
+	bool isReady() {
+		return IamReady;
+	}
 private:
 
 	Player* m_player;
@@ -157,10 +212,15 @@ private:
 	RakNet::FullyConnectedMesh2 *fcm2;
 	SteamResults steamResults;
 	
-	int numPlayersInLobby = 0;
 	std::vector<uint64_t> SteamIDs;
 
 	bool IamHost = false;
+	std::string hostIp;
+	int playersReady = 0;
+	bool IamReady = false;
+
+	bool inLobby = true;
+
 #ifdef NETWORK_DEBUG
 	std::shared_ptr<NetworkDebugger> debugger;
 #endif

@@ -250,6 +250,7 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
 }
 
 bool  MenuGUI::onReadyBtnClicked(const CEGUI::EventArgs & e) {
+	NetworkManager::i().getNetPlayer()->sendReadyStatus();
 	return true;
 }
 bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
