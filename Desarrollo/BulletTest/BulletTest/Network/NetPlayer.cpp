@@ -295,7 +295,6 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-
 			m_enemyFactory.addEnemyToBeCreated(p);
 
 #ifdef NETWORK_DEBUG
