@@ -127,12 +127,16 @@ uint64_t NetPlayer::crearLobby()
 		RakNet::Console_CreateRoom_Steam* msg = (RakNet::Console_CreateRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_CreateRoom);
 		char rgchLobbyName[256];
 		msg->roomIsPublic = true;
-		_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "%s's lobby", SteamFriends()->GetPersonaName());
+		_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "Sala de %s", SteamFriends()->GetPersonaName());
 		msg->roomName = rgchLobbyName;
 		msg->publicSlots = 4;
 		lobby2Client->SendMsg(msg);
 		messageFactory->Dealloc(msg);
+		IamHost = true;
 
+		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+		menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+		addPlayerInLobby(lobby2Client->GetMyUserID());
 	}
 	return lobby2Client->GetRoomID();
 }
@@ -198,8 +202,145 @@ void NetPlayer::unirseLobby(const std::string& str)
 	StateStack::i().GetCurrentState()->Inicializar();*/
 }
 
-void NetPlayer::handlePackets(Time elapsedTime)
+
+
+void NetPlayer::apagar()
 {
+	if (isConnected()) {
+		//First call shutdown from base class
+		NetObject::apagar();
+
+		//Do what you need here
+		m_servers.clear();
+	}
+	
+}
+
+
+
+void NetPlayer::searchServersOnLAN() {
+	//Creo un RakPeer para lanzar un paquete de b�squeda
+	RakNet::RakPeerInterface *client;
+	client = RakNet::RakPeerInterface::GetInstance();
+
+	RakNet::SocketDescriptor socketDescriptor(65534, 0);
+	socketDescriptor.socketFamily = AF_INET;
+
+	client->Startup(1, &socketDescriptor, 1);
+
+	RakNet::RakNetGUID rakID = client->GetMyGUID();
+
+	//Hacemos ping a bradcast en el puerto en el que sabemos que est� escuchando el server
+	client->Ping("255.255.255.255", 65535, false);
+	std::cout << "Buscando servidores en la red local..." << std::endl;
+	RakSleep(1000);
+	RakNet::Packet *packet;
+	//Limpiamos la lista de servidores primero.
+	m_servers.clear();
+
+	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
+		if (packet == 0) {
+			RakSleep(1000);
+			continue;
+		}
+		if (packet->data[0] == ID_UNCONNECTED_PONG) {
+			RakNet::TimeMS time;
+			RakNet::BitStream bsIn(packet->data, packet->length, false);
+
+			bsIn.IgnoreBytes(1);
+			bsIn.Read(time);
+			//printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
+			m_servers.push_back(packet->systemAddress.ToString());
+		}
+
+		RakSleep(1000);
+	}
+	//Destruyo el RakPeer. Ya no hace falta
+	RakNet::RakPeerInterface::DestroyInstance(client);
+}
+
+uint64_t NetPlayer::getLobbyID() {
+	if (lobby2Client != nullptr) {
+		return lobby2Client->GetRoomID();
+	}
+	return 0;
+}
+
+RakNet::Lobby2MessageFactory_Steam * NetPlayer::getMessageFactory() {
+	return messageFactory;
+}
+
+RakNet::Lobby2Client_Steam * NetPlayer::getLobby2Client() {
+	return lobby2Client;
+}
+
+void NetPlayer::joinSteamLobby(uint64 lobbyID) {
+	RakNet::Console_JoinRoom_Steam* msg = (RakNet::Console_JoinRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_JoinRoom);
+	msg->roomId = lobbyID;
+	std::cout << "Joining Lobby: " << lobbyID << std::endl;
+	lobby2Client->SendMsg(msg);
+	messageFactory->Dealloc(msg);
+
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+	addPlayerInLobby(lobby2Client->GetMyUserID());
+	//conectar(ip, server_port);
+}
+
+void NetPlayer::addPlayerInLobby(uint64_t steamID) {
+	SteamIDs.push_back(steamID);
+}
+
+void NetPlayer::substractPlayerInLobby(uint64_t steamID) {
+	for (auto it = SteamIDs.begin(); it < SteamIDs.end(); ++it) {
+		if ((*(it)) == steamID) {
+			SteamIDs.erase(it);
+			break;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void NetPlayer::handlePackets(Time elapsedTime) {
 
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
@@ -235,7 +376,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//Esta variable indica que el servidor ha aceptado la conexion
 			connected = true;
 
-		
+
 
 			break;
 		}
@@ -250,7 +391,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			if (StateStack::i().GetCurrentStateID() != States::ID::Carga) {
 				m_enemyFactory.createEnemyIfAvailable(info.guid);
 			}
-			
+
 
 			break;
 		}
@@ -263,7 +404,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			GameStartEvent* gev = new GameStartEvent(info);
 
 			EventSystem::i().dispatchNow(gev);
-			
+
 			//When we recive a starting game message we change
 			//current state to CARGA
 			StateStack::i().GetCurrentState()->Clear();
@@ -452,7 +593,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			if (v != NULL) {
 				v->asignaTiempo(armaServer.tiempo);
 			}
-			
+
 
 		}
 		break;
@@ -502,8 +643,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 				Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 				player->resetAll();
 
-			}
-			else if(ent->getClassName()=="Enemy_Bot"){
+			} else if (ent->getClassName() == "Enemy_Bot") {
 				Enemy_Bot* bot = (Enemy_Bot*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 				bot->resetAll();
 
@@ -581,8 +721,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			if (t_cambioArma.cambio == 1) {
 				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
 				MessageHandler::i().sendMessage(msg1);
-			}
-			else {
+			} else {
 				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
 				MessageHandler::i().sendMessage(msg1);
 			}
@@ -603,13 +742,13 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 		/*case PING:
 		{
-			//Ping
+		//Ping
 
-			TPing pingStruct = *reinterpret_cast<TPing*>(packet->data);
-			//+1 milisegundo que tarda en hacer el for
-			//pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor + 1;
+		TPing pingStruct = *reinterpret_cast<TPing*>(packet->data);
+		//+1 milisegundo que tarda en hacer el for
+		//pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor + 1;
 
-			break;
+		break;
 		}*/
 		default:
 			printf("Un mensaje con identificador %i ha llegado.\n", mPacketIdentifier);
@@ -621,59 +760,4 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 	}
 
-}
-
-void NetPlayer::apagar()
-{
-	if (isConnected()) {
-		//First call shutdown from base class
-		NetObject::apagar();
-
-		//Do what you need here
-		m_servers.clear();
-	}
-	
-}
-
-
-
-void NetPlayer::searchServersOnLAN() {
-	//Creo un RakPeer para lanzar un paquete de b�squeda
-	RakNet::RakPeerInterface *client;
-	client = RakNet::RakPeerInterface::GetInstance();
-
-	RakNet::SocketDescriptor socketDescriptor(65534, 0);
-	socketDescriptor.socketFamily = AF_INET;
-
-	client->Startup(1, &socketDescriptor, 1);
-
-	RakNet::RakNetGUID rakID = client->GetMyGUID();
-
-	//Hacemos ping a bradcast en el puerto en el que sabemos que est� escuchando el server
-	client->Ping("255.255.255.255", 65535, false);
-	std::cout << "Buscando servidores en la red local..." << std::endl;
-	RakSleep(1000);
-	RakNet::Packet *packet;
-	//Limpiamos la lista de servidores primero.
-	m_servers.clear();
-
-	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
-		if (packet == 0) {
-			RakSleep(1000);
-			continue;
-		}
-		if (packet->data[0] == ID_UNCONNECTED_PONG) {
-			RakNet::TimeMS time;
-			RakNet::BitStream bsIn(packet->data, packet->length, false);
-
-			bsIn.IgnoreBytes(1);
-			bsIn.Read(time);
-			//printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
-			m_servers.push_back(packet->systemAddress.ToString());
-		}
-
-		RakSleep(1000);
-	}
-	//Destruyo el RakPeer. Ya no hace falta
-	RakNet::RakPeerInterface::DestroyInstance(client);
 }

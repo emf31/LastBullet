@@ -53,28 +53,20 @@ public:
 
 	AsyncEnemyFactory& getEnemyFactory() { return m_enemyFactory; }
 
-	uint64_t getLobbyID() {
-		if (lobby2Client != nullptr) {
-			return lobby2Client->GetRoomID();
-		}
-		return 0;
-	}
-	RakNet::Lobby2MessageFactory_Steam* getMessageFactory() {
-		return messageFactory;
-	}
-	RakNet::Lobby2Client_Steam* getLobby2Client() {
-		return lobby2Client;
-	}
+	uint64_t getLobbyID();
+	RakNet::Lobby2MessageFactory_Steam* getMessageFactory();
+	RakNet::Lobby2Client_Steam* getLobby2Client();
 
-	void joinSteamLobby(/*const std::string& ip,*/ uint64 lobbyID) {
-		RakNet::Console_JoinRoom_Steam* msg = (RakNet::Console_JoinRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_JoinRoom);
-		msg->roomId = lobbyID;
-		std::cout << "Joining Lobby: " << lobbyID << std::endl;
-		lobby2Client->SendMsg(msg);
-		messageFactory->Dealloc(msg);
-		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-		menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
-		//conectar(ip, server_port);
+	void joinSteamLobby(/*const std::string& ip,*/ uint64 lobbyID);
+
+	void sendServerIPtoNewClient() {
+		if (IamHost) {
+			RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
+			msg->message = "THISISATEST.";
+			msg->roomId = lobby2Client->GetRoomID();
+			lobby2Client->SendMsg(msg);
+			messageFactory->Dealloc(msg);
+		}
 	}
 
 	void receiveSteamPackets() {
@@ -134,6 +126,12 @@ public:
 			}
 		}
 	}
+
+	void addPlayerInLobby(uint64_t steamID);
+
+	void substractPlayerInLobby(uint64_t steamID);
+
+
 private:
 
 	Player* m_player;
@@ -159,6 +157,10 @@ private:
 	RakNet::FullyConnectedMesh2 *fcm2;
 	SteamResults steamResults;
 	
+	int numPlayersInLobby = 0;
+	std::vector<uint64_t> SteamIDs;
+
+	bool IamHost = false;
 #ifdef NETWORK_DEBUG
 	std::shared_ptr<NetworkDebugger> debugger;
 #endif

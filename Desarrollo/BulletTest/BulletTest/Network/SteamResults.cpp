@@ -11,24 +11,20 @@
 	printf("%s\n", msg.C_String());
 	// Guy with the lower ID connects to the guy with the higher ID
 	uint64_t mySteamId = SteamUser()->GetSteamID().ConvertToUint64();
-
-	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	menu->changeStateToLobbyView();
-
 	if (mySteamId < msgSteam->srcMemberId) {
 		// Steam's NAT punch is implicit, so it takes a long time to connect. Give it extra time
 		unsigned int sendConnectionAttemptCount = 24;
 		unsigned int timeBetweenSendConnectionAttemptsMS = 500;
 		RakNet::ConnectionAttemptResult car = RakNet::RakPeerInterface::GetInstance()->Connect(msgSteam->remoteSystem.ToString(false), msgSteam->remoteSystem.GetPort(), 0, 0, 0, 0, sendConnectionAttemptCount, timeBetweenSendConnectionAttemptsMS);
 		RakAssert(car == CONNECTION_ATTEMPT_STARTED);
-		//menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
 	}
-
-	
-	//menu->freeAllSlots();
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	menu->changeStateToLobbyView();
 	menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
+	NetworkManager::i().getNetPlayer()->addPlayerInLobby(msgSteam->srcMemberId);
 
-	//menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+	NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+	
 }
 
 
@@ -36,9 +32,10 @@
 	RakNet::Notification_Console_MemberLeftRoom_Steam *msgSteam = (RakNet::Notification_Console_MemberLeftRoom_Steam *) message;
 	RakNet::RakString msg;
 	msgSteam->DebugMsg(msg);
+
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
 	menu->setSlotFree(msgSteam->memberName.C_String());
-
+	NetworkManager::i().getNetPlayer()->substractPlayerInLobby(msgSteam->srcMemberId);
  }
 
  void SteamResults::MessageResult(RakNet::Console_GetRoomDetails * message) {
@@ -58,8 +55,7 @@
 	msgSteam->DebugMsg(msg);
 	std::cout << "Console_CreateRoom called" << std::endl;
 	std::cout << "Room ID: " << NetworkManager::i().getNetPlayer()->getLobbyID() << std::endl;
-	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+	
 }
 
  void SteamResults::MessageResult(RakNet::Console_SearchRooms * message) {
