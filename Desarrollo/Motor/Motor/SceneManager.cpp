@@ -22,9 +22,7 @@ void SceneManager::inicializar() {
 	//shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
 
 	inicializarBuffers();
-	//inicializarBufferDeferred();
 	inicializarBuffersBlur();
-	//inicializarBufferBloom();
 	inicializarBuffersLineas();
 	numLines = 0;
 	drawTarget = false;
@@ -41,46 +39,37 @@ TMeshGroup* SceneManager::getMesh(const std::string& path,Shader* shader) {
 }
 
 void SceneManager::draw() {
-	//enlazamos el buffer sobre el que queremos escribir
-	//activamos el g buffer cuando vamos a dibujar modelos
-	
-	//std::cout << "activo gBuffer" << std::endl;
+
 	glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
 	
 
 	//****************RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
 		//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
+
 			//activamos el gBuffer donde nos vamos a guardar toda la informacion de geometria y texturas
 			glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
 			// Update matrices
 			projection = camaraActiva->getProjectionMatrix();
 			view = camaraActiva->GetViewMatrix();
-			//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 			activeCameraPos = camaraActiva->getPosition();
-	
 			scene->draw();
-			//gui.draw();
-			//std::cout << "desactivo gBuffer" << std::endl;
-		//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
+			//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
+			renderSombras();
+			//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			renderBlur();
+			//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			renderLuces();
 
 	//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
-			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			//renderBlur();
-			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			//renderBloom();
 
 
 	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 		
-		//hacemos un clear de la profundidad para que las lineas salgas por delante del resto de la escena
-		//glClear(GL_DEPTH_BUFFER_BIT);
+
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 		glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
@@ -92,7 +81,6 @@ void SceneManager::draw() {
 		}
 	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 
-		//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 	
 }
 
@@ -185,6 +173,28 @@ void SceneManager::inicializarBuffers()
 	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
+void SceneManager::inicializarBuffersSombras()
+{
+	
+	
+	glGenFramebuffers(1, &shadowMapDepthFBO);
+	glGenTextures(1, &shadowMap);
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMap, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	
+}
+
 void SceneManager::inicializarBuffersBlur()
 {
 	GLuint screenWidth = 1280, screenHeight = 720;
@@ -204,10 +214,6 @@ void SceneManager::inicializarBuffersBlur()
 	}
 }
 
-void SceneManager::inicializarBufferBloom() {
-	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "scene"), 0);
-	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "bloomBlur"), 1);
-}
 
 void SceneManager::inicializarBuffersLineas() {
 	glGenVertexArrays(1, &LVAO);
@@ -216,20 +222,6 @@ void SceneManager::inicializarBuffersLineas() {
 	glLineWidth(1.0f);
 }
 
-void SceneManager::inicializarBufferDeferred()
-{
-	GLuint screenWidth = 1280, screenHeight = 720;
-
-	glGenFramebuffers(1, &gDeferred);
-	glBindFramebuffer(GL_FRAMEBUFFER, gDeferred);
-
-	glGenTextures(1, &gEscena);
-	glBindTexture(GL_TEXTURE_2D, gEscena);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gEscena, 0);
-}
 
 void SceneManager::renderLuces()
 {
@@ -323,6 +315,16 @@ void SceneManager::renderBloom()
 	//RenderQuad();
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+}
+
+void SceneManager::renderSombras()
+{
+	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	ConfigureShaderAndMatrices();
+	RenderScene();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 bool SceneManager::removeNode(TNode * node) {
@@ -637,6 +639,60 @@ void SceneManager::RenderQuad()
 	glBindVertexArray(quadVAO);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);
+}
+void SceneManager::setLineWidth(float width) { glLineWidth(width); }
+void SceneManager::drawLine(glm::vec3 from, glm::vec3 to) {
+	vertices3.push_back(from.x);
+	vertices3.push_back(from.y);
+	vertices3.push_back(from.z);
+	numLines++;
+	vertices3.push_back(to.x);
+	vertices3.push_back(to.y);
+	vertices3.push_back(to.z);
+	numLines++;
+
+}
+void SceneManager::rellenaVertices() {
+
+	glBindVertexArray(LVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, LVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices3.size() * sizeof(GLfloat), &vertices3[0], GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+
+	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+
+						  ///////
+
+}
+void SceneManager::drawAllLines() {
+	rellenaVertices();
+	shaderLineas->Use();
+
+	const glm::mat4& view = getViewMatrix();
+	const glm::mat4& projection = getProjectionMatrix();
+	glm::mat4& model = glm::mat4();
+
+	glm::mat4 modelview = projection * view * model;
+	glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
+	glBindVertexArray(LVAO);
+
+	glDrawArrays(GL_LINES, 0, numLines);
+	glBindVertexArray(0);
+
+	clearLines();
+
+}
+void SceneManager::clearLines() {
+	vertices3.clear();
+	numLines = 0;
+}
+void SceneManager::setDrawTarget(bool b) {
+	drawTarget = b;
 }
 void SceneManager::ziZoom(float z)
 {

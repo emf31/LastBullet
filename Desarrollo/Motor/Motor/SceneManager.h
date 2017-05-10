@@ -41,13 +41,13 @@ public:
 	void renderFrame(GLFWwindow* window);
 	void inicializar();
 	void inicializarBuffers();
+	void inicializarBuffersSombras();
 	void inicializarBuffersBlur();
-	void inicializarBufferBloom();
 	void inicializarBuffersLineas();
-	void inicializarBufferDeferred();
 	void renderLuces();
 	void renderBlur();
 	void renderBloom();
+	void renderSombras();
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
@@ -105,6 +105,7 @@ public:
 	GLuint gBuffer,gDeferred;
 	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gEscena;
 	GLuint rboDepth;
+	GLuint shadowMapDepthFBO, shadowMap;
 	GLuint draw_mode=1;
 
 	//Buffers Bloom
@@ -116,73 +117,24 @@ public:
 	GLuint LVAO,LVBO;
 	int numLines;
 
-	void setLineWidth(float width) { glLineWidth(width); }
+	void setLineWidth(float width);
 
+	void drawLine(glm::vec3 from, glm::vec3 to);
 
+	void rellenaVertices();
 
-	void drawLine(glm::vec3 from, glm::vec3 to) {
-		vertices3.push_back(from.x);
-		vertices3.push_back(from.y);
-		vertices3.push_back(from.z);
-		numLines++;
-		vertices3.push_back(to.x);
-		vertices3.push_back(to.y);
-		vertices3.push_back(to.z);
-		numLines++;
-		
-	}
+	void drawAllLines();
 
-	void rellenaVertices() {
+	void clearLines();
 
-		glBindVertexArray(LVAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, LVBO);
-		glBufferData(GL_ARRAY_BUFFER, vertices3.size()* sizeof(GLfloat), &vertices3[0], GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-		glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
-
-		///////
-
-	}
-
-	void drawAllLines() {
-		rellenaVertices();
-		shaderLineas->Use();
-		
-		const glm::mat4& view = getViewMatrix();
-		const glm::mat4& projection = getProjectionMatrix();
-		glm::mat4& model = glm::mat4();
-
-		glm::mat4 modelview = projection * view * model;
-		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
-		glBindVertexArray(LVAO);
-
-		glDrawArrays(GL_LINES, 0, numLines);
-		glBindVertexArray(0);
-
-		clearLines();
-
-	}
-
-	void clearLines() {
-		vertices3.clear();
-		numLines = 0;
-	}
-
-	void setDrawTarget(bool b) {
-		drawTarget = b;
-	}
+	void setDrawTarget(bool b);
 	void ziZoom(float z);
 	void zoomZout();
 
 
 
 private:
+
 	TNode* scene;
 
 	bool drawTarget;
@@ -208,6 +160,8 @@ private:
 	GLuint quadVBO;
 
 	void RenderQuad();
+
+	GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 
 	friend class EngineDevice;
 
