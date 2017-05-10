@@ -350,6 +350,9 @@
     <ClCompile Include="Otros\ResourceProvider.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
+    <ClCompile Include="Otros\PrintableText.cpp">
+      <Filter>Source Code\Otros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -812,6 +815,9 @@
       <Filter>Source Code\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Otros\ResourceProvider.h">
+      <Filter>Source Code\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\PrintableText.h">
       <Filter>Source Code\Otros</Filter>
     </ClInclude>
   </ItemGroup>

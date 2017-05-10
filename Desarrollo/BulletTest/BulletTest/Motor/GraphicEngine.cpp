@@ -186,7 +186,7 @@ void GraphicEngine::renderAll()
 	SceneManager::i().draw();
 	
 
-	ParticleSystem::i().render();
+	//ParticleSystem::i().render();
 	//if (StateStack::i().GetCurrentState()->id == States::ID::InGame) {
 
 

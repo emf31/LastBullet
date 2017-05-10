@@ -3,6 +3,7 @@
 #include <GraphicEngine.h>
 #include <GUI.h>
 #include <Enemy_Bot.h>
+#include <PrintableText.h>
 
 class Event;
 class NetworkLog;
@@ -15,15 +16,11 @@ public:
 	virtual void update() override;
 	virtual void handleEvent(Event * ev) override;
 
-	//Imprime un texto por pantalla
-	void addPrintText(const std::string& str);
+	void addPrintText(const std::string & str);
 
 	void inicializar();
 	
 private:
-
-	std::string currentText;
-	
 	
 	bool onDebugBotAClicked(const CEGUI::EventArgs & e);
 	bool onDebugBotBClicked(const CEGUI::EventArgs & e);
@@ -171,8 +168,5 @@ private:
 
 	NetworkLog* netWorkLog;
 
-	//String para imprimir por pantalla cualquier info de debug
-	std::vector<std::string> PrintText;
-	//Controla el maximo de mensajes que se imprimen al mismo tiempo
-	int maxPrintableTexts;
+	PrintableText printable;
 };

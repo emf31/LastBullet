@@ -192,7 +192,7 @@ void InGame::Update(Time timeElapsed)
 
 	EventSystem::i().update();
 
-	particleSystem.update(timeElapsed);
+	//particleSystem.update(timeElapsed);
 
 	GUIManager::i().updateAllGuis();
 }

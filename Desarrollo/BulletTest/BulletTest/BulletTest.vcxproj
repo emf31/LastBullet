@@ -296,6 +296,7 @@
     <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
+    <ClInclude Include="Otros\PrintableText.h" />
     <ClInclude Include="Otros\PriorityQueue.h" />
     <ClInclude Include="Otros\Quaternion.h" />
     <ClInclude Include="Otros\ResourceProvider.h" />
@@ -421,6 +422,7 @@
     <ClCompile Include="Otros\DebugMarks.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
+    <ClCompile Include="Otros\PrintableText.cpp" />
     <ClCompile Include="Otros\PriorityQueue.cpp" />
     <ClCompile Include="Otros\ResourceProvider.cpp" />
     <ClCompile Include="Otros\Settings.cpp" />

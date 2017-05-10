@@ -10,14 +10,15 @@
 
 
 DebugMenuGUI::DebugMenuGUI() : 
-	GUI(), 
-	maxPrintableTexts(10)
+	GUI()
 {
 	netWorkLog = new NetworkLog();
+
 }
 
 DebugMenuGUI::~DebugMenuGUI()
 {
+	delete netWorkLog;
 }
 
 
@@ -38,26 +39,7 @@ void DebugMenuGUI::handleEvent(Event * ev)
 //Imprime un texto por pantalla
 
 void DebugMenuGUI::addPrintText(const std::string & str) {
-	//Si nos pasamos de textos en pantalla borramos el primero en entrar(head)
-	if (PrintText.size() > (std::size_t)maxPrintableTexts) {
-		//Obtenemos el string de la cabeza
-		std::string auxStr = PrintText.back();
-		//Borramos del current text el tamaño + 1 para el \n
-		currentText.erase(0, auxStr.size() + 1);
-
-		PrintText.pop_back();
-	}
-
-	//Añadimos el nuevo al final
-	PrintText.push_back(str);
-
-	//Lo añadimos con un salto de linea al print final
-	currentText.append(str + "\n");
-
-	//Lo seteamos al label de debug
-	debugPrintText->setText(currentText);
-
-
+	debugPrintText->setText(printable.addPrintText(str));
 }
 
 void DebugMenuGUI::inicializar() {
@@ -227,8 +209,9 @@ void DebugMenuGUI::inicializar() {
 }
 
 void DebugMenuGUI::update() {
-	/*updateProgressBars();
-	updateNetworkWindowInfo();*/
+	
+	//Check duration of printable text
+	//if (printable.checkIfShouldClearText()) { debugPrintText->setText(""); }
 
 	updateFuzzyProgressBars();
 

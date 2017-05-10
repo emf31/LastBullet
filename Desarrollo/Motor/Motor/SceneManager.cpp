@@ -414,7 +414,6 @@ TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)
 
 	return animation;
 
-	return nullptr;
 }
 
 TNode * SceneManager::crearNodoTransformacion(int entityID)
