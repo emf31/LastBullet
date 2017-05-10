@@ -85,7 +85,7 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 
-
+	TNode* getRootNode() const { return scene; }
 	
 	int *screenWidth, *screenHeight;
 	

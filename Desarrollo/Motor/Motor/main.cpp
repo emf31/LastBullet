@@ -36,7 +36,7 @@ int main() {
 	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
 	
-
+	
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));

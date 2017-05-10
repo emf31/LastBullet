@@ -14,6 +14,7 @@ class SceneNode
 	friend class BasicSceneNode;
 	friend class Camera;
 	friend class GraphicEngine;
+	friend class ClippingZone;
 public:
 	SceneNode();
 	~SceneNode();

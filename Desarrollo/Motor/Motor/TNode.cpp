@@ -1,6 +1,6 @@
 #include "TNode.h"
 #include "SceneManager.h"
-TNode::TNode(int entityID, TNode* nodoPadre) : sm(SceneManager::i()) 
+TNode::TNode(int entityID, TNode* nodoPadre) : sm(SceneManager::i()), visible(true)
 {
 	m_parentNode = nodoPadre;
 	myNodeEntityID = entityID;
@@ -50,28 +50,33 @@ void TNode::setParentNode(TNode * nodoPadre) {
 }
 
 void TNode::draw() {
-	if (getEntity() != nullptr) {
-		//primero se dibuja el nodo actual (la entity) y luego los hijos
-		//explicacion: el primer begin draw sera el nodo rotacion, se encarga de multiplicar la matriz actual por su rotacion
-		//el segundo nodo es el de escala multiplica la matriz actual que ya estaba rotada y la escala
-		//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
-		//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
-		getEntity()->beginDraw();//apilo la transformacion de la entidad a la matriz correspondiente
-		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
-			(*it)->draw();
-		}
-		getEntity()->endDraw();//desapilo la transformacion que hice antes
-	}
-	else {
-		//si es el nodo raiz se dibuja sus hijos directamente
-		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
-			//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
-			sm.setMatrizActual(glm::mat4());
-			(*it)->draw();
-		}
-		//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
+	//Solo continua el arbol(recorrido de sus hijos) si el nodo es visible
+	if (visible) {
+		if (getEntity() != nullptr) {
+			//primero se dibuja el nodo actual (la entity) y luego los hijos
+			//explicacion: el primer begin draw sera el nodo rotacion, se encarga de multiplicar la matriz actual por su rotacion
+			//el segundo nodo es el de escala multiplica la matriz actual que ya estaba rotada y la escala
+			//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
+			//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
+			getEntity()->beginDraw();//apilo la transformacion de la entidad a la matriz correspondiente
+			for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+				(*it)->draw();
+			}
+			getEntity()->endDraw();//desapilo la transformacion que hice antes
 
+		}
+		else {
+			//si es el nodo raiz se dibuja sus hijos directamente
+			for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+				//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
+				sm.setMatrizActual(glm::mat4());
+				(*it)->draw();
+			}
+			//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
+
+		}
 	}
+	
 
 }
 

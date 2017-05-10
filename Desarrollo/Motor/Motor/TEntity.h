@@ -18,23 +18,25 @@ public:
 	void removeNode();
 	void removeChild(TEntity* ent);
 
+	void setVisible(bool b);
+	bool isVisible() const;
+
+	void setMiNodo(TNode * nodo);
+	TNode* getMiNodo();
+
 private:
 	int entityID = -1;
 	TNode * miNodo;
-	
-
-
 
 protected:
 	int getID();
 	void setID(int id);
-	void setMiNodo(TNode * nodo);
-	TNode* getMiNodo();
+	
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionEscalado(TTransform* esc);
 	void setTransformacionTraslacion(TTransform* tras);
 
-
+	
 	TTransform* transRotacion;
 	TTransform* transEscalado;
 	TTransform* transTraslacion;

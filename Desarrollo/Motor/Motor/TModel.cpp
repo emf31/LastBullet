@@ -17,7 +17,7 @@ TModel::TModel(TMeshGroup* meshGroup) : sm(SceneManager::i()) {
 
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
-	visible = true;
+	//visible = true;
 	setModelColor(1.0f, 1.0f, 1.0f);
 }
 
@@ -26,7 +26,7 @@ TModel::~TModel() {
 }
 
 void TModel::beginDraw() {
-	if (visible) {
+	//if (visible) {
 
 		
 		const glm::mat4& view = sm.getViewMatrix();
@@ -47,7 +47,7 @@ void TModel::beginDraw() {
 		//Dibujamos el modelo
 		m_meshGroup->draw();
 			
-	}
+	//}
 
 }
 

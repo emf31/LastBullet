@@ -19,5 +19,5 @@ private:
 	std::vector<Vec3<float>> m_points;
 	bool m_visible;
 	void putAllEntitiesInVisible(bool visible);
-	
+	TNode* nodo;
 };

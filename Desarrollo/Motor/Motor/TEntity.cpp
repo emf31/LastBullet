@@ -58,6 +58,10 @@ void TEntity::removeChild(TEntity * ent)
 	miNodo->removeChild(ent->getMiNodo());
 }
 
+void TEntity::setVisible(bool b) { miNodo->setVisible(b); }
+
+bool TEntity::isVisible() const { return miNodo->isVisible(); }
+
 void TEntity::setTransformacionRotacion(TTransform * rot) {
 	transRotacion = rot;
 }

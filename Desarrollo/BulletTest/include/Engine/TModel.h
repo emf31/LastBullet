@@ -47,8 +47,7 @@ public:
 
 
 
-	void setVisible(bool b) { visible = b; }
-	bool isVisible() const { return visible; }
+	
 	void setModelColor(float r, float g, float b) {
 		m_r = r;
 		m_g = g;
@@ -61,8 +60,7 @@ public:
 private:
 
 	SceneManager &sm;
-
-	bool visible;
+	
 	virtual void beginDraw();
 	virtual void endDraw();
 
