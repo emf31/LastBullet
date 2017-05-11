@@ -45,6 +45,8 @@ public:
 	const std::vector<TPlayer>& getBots() const { return m_bots; }
 
 	AsyncEnemyFactory& getEnemyFactory() { return m_enemyFactory; }
+
+	RakNet::Time getConnectTime() { return connectTime; }
 private:
 
 	Player* m_player;
@@ -64,6 +66,8 @@ private:
 	World& m_world;
 
 	AsyncEnemyFactory m_enemyFactory;
+
+	RakNet::Time connectTime;
 
 #ifdef NETWORK_DEBUG
 	std::shared_ptr<NetworkDebugger> debugger;

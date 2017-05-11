@@ -67,6 +67,7 @@ private:
 
 	std::string serverIP;
 
+	
 
 	NetworkManager() { }
 };

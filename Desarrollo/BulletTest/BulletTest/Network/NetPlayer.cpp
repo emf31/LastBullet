@@ -236,6 +236,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			//Esta variable indica que el servidor ha aceptado la conexion
 			connected = true;
 
+			connectTime = RakNet::GetTimeMS();
 		
 
 			break;
