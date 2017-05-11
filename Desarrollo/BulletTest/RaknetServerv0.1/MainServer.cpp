@@ -15,6 +15,7 @@
 #include <NetworkLog.h>
 #include <StringCompressor.h>
 #include <PacketLogger.h>
+#include <GetTime.h>
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
@@ -167,7 +168,13 @@ int main() {
 
 			case MOVIMIENTO: {
 
+
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
+				
+
+				RakNet::TimeMS currtime = RakNet::GetTimeMS() - mov.time;
+
+				mov.time = currtime + RakNet::GetTimeMS();
 
 				EntityManager::i().enviaNuevaPos(mov, gameinfo.creador, peer);
 
@@ -175,6 +182,10 @@ int main() {
 
 				if (ent != NULL) {
 					ent->setPosition(mov.position);
+				}
+
+				if (mov.guid != gameinfo.creador) {
+					std::cout << currtime << std::endl;
 				}
 				
 

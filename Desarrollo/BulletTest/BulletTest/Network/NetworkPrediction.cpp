@@ -14,8 +14,12 @@ NetworkPrediction::~NetworkPrediction()
 void NetworkPrediction::addMovement(TMovimiento & mov)
 {
 	//if (m_positions.size() > 0) {
-		m_positions.push(mov);
+		//m_positions.push(mov);
 	//}
+		updateMovement(mov);
+
+		/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+		menu->addPrintText("LLega Movimiento");*/
 }
 
 
@@ -28,16 +32,17 @@ void NetworkPrediction::updateMovement(TMovimiento & mov)
 
 void NetworkPrediction::interpolate(Time elapsedTime)
 {
-	
-	interpolation = (float)std::min(1.f, newMovement.time - RakNet::GetTimeMS() / elapsedTime.asSeconds());
+	Time time = milliseconds(RakNet::GetTimeMS() - newMovement.time);
 
-	if (interpolation == 1.f) {
+	interpolation = (float)std::min(1.f, (time.asSeconds())  / elapsedTime.asSeconds());
+
+	/*if (interpolation == 1.f) {
 		updateMovement(m_positions.top());
 
 		while (!m_positions.empty()) {
 			m_positions.pop();
 		}
-	}
+	}*/
 
 	
 
@@ -58,5 +63,5 @@ void NetworkPrediction::interpolate(Time elapsedTime)
 	display.append(std::to_string(m_renderPos.getZ()));
 	display.append(" )");
 
-	menu->addPrintText(std::to_string(interpolation));
+	menu->addPrintText(std::to_string(time.asSeconds()));
 }
