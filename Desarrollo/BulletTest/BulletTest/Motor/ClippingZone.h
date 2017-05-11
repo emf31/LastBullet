@@ -5,7 +5,7 @@
 
 class ClippingZone {
 public:
-	ClippingZone(Vec3<float> center, Vec3<float> size, std::string name);
+	ClippingZone(Vec3<float> center, Vec3<float> size, std::string name,int id);
 	~ClippingZone() {};
 	void addEntity(Entity* ent);
 	std::vector<Vec3<float>> getPoints();
@@ -13,6 +13,7 @@ public:
 	bool getVisible() { return m_visible; };
 	bool isPlayerinside();
 	std::string m_name;
+	int id;
 
 private:
 	std::vector<Entity*> m_entities;
@@ -20,4 +21,5 @@ private:
 	bool m_visible;
 	void putAllEntitiesInVisible(bool visible);
 	TNode* nodo;
+	
 };

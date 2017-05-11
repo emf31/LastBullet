@@ -7,15 +7,17 @@ void ClippingManager::addClippingZone(ClippingZone * zone)
 
 ClippingZone* ClippingManager::createClippingZone(Vec3<float> pos, Vec3<float> size, std::string name)
 {
-	ClippingZone* zona = new ClippingZone(pos,size,name);
+	ClippingZone* zona = new ClippingZone(pos,size,name,m_clippingZones.size());
 	m_clippingZones.push_back(zona);
 	return zona;
 }
 
 void ClippingManager::update()
 {
-	if (canUpdate) {
 
+	
+	if (canUpdate) {
+		return;
 		//Updateamos los planos del frustrum y nos lo guardamos en variable para analizarla despues
 
 		GraphicEngine::i().updateClippingPlanes();
@@ -26,11 +28,17 @@ void ClippingManager::update()
 		}
 
 
+		std::vector<ClippingZone*> lastZones;
+		for (std::size_t i = 0; i < m_clippingZones.size();i++) {
+			if (m_clippingZones.at(i)->isPlayerinside()) {
+				updateZoneOclusions(int(i),lastZones);
+			}
+		}
+
 		bool isVisible;
 		bool pointVisible;
 
-		for (std::vector<ClippingZone*>::iterator it = m_clippingZones.begin(); it != m_clippingZones.end(); ++it) {
-			if (!(*it)->isPlayerinside()) {
+		for (std::vector<ClippingZone*>::iterator it = lastZones.begin(); it != lastZones.end(); ++it) {
 				std::vector<Vec3<float>> points = (*it)->getPoints();
 				isVisible = false;
 				for (std::vector<Vec3<float>>::iterator it2 = points.begin(); it2 != points.end(); ++it2) {
@@ -48,7 +56,6 @@ void ClippingManager::update()
 				(*it)->setVisible(isVisible);
 			}
 		}
-	}
 }
 
 void ClippingManager::printZonesVisibility()
@@ -60,6 +67,22 @@ void ClippingManager::printZonesVisibility()
 	std::cout << "---------------------------------------------------" << std::endl;
 }
 
+void ClippingManager::updateZoneOclusions(int id, std::vector<ClippingZone*> &zonesOclusionOut)
+{
+	for (int i = 0; i < 6; i++) {
+		if (oclusionMatrix[id][i] == true) {
+			zonesOclusionOut.push_back(m_clippingZones.at(i));
+			m_clippingZones.at(i)->setVisible(true);
+		}
+		else {
+			m_clippingZones.at(i)->setVisible(false);
+		}
+	}
+}
+
 ClippingManager::ClippingManager():canUpdate(false)
 {
+	//oclusionMatrix = 
+	//oclusionMatrix = p_oclusionMatrix;
+	
 }

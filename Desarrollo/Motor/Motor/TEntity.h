@@ -14,6 +14,17 @@ public:
 	virtual void beginDraw()=0;
 	virtual void endDraw()=0;
 	void addChild(TEntity* ent);
+	void addParent(TNode* node){
+		TNode* nuevoHijo = node;
+		TNode* padre = node->getParentNode();
+
+		while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() != entityID) {
+			//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
+			nuevoHijo = nuevoHijo->getParentNode();
+			padre = padre->getParentNode();
+		}
+		
+	}
 
 	void removeNode();
 	void removeChild(TEntity* ent);

@@ -2,7 +2,7 @@
 #include <EntityManager.h>
 #include <Player.h>
 
-ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name) : m_name(name)
+ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name, int id) : m_name(name), id(id)
 {
 	Vec3<float> point1 = Vec3<float>(center.getX() - (size.getX() / 2), center.getY() - (size.getY() / 2), center.getZ() - (size.getZ() / 2));
 	Vec3<float> point2 = Vec3<float>(center.getX() - (size.getX() / 2), center.getY() - (size.getY() / 2), center.getZ() + (size.getZ() / 2));
@@ -31,7 +31,7 @@ ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name
 	m_points.push_back(point8);
 
 	nodo = new TNode(-1, SceneManager::i().getRootNode());
-	
+	nodo->setVisible(false);
 }
 
 void ClippingZone::addEntity(Entity * ent)

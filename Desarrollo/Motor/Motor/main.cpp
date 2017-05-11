@@ -15,7 +15,23 @@ using namespace std;
 //#include <SPARK/SPARK.h>
 //#include <SPARK/SPARK_GL.h>
 
+void addChild(TNode* miNodo, TEntity * ent) {
+	TNode* nuevoHijo = ent->getMiNodo();
+	TNode* padre = ent->getMiNodo()->getParentNode();
 
+	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() != miNodo->getMyNodeEntityID()) {
+		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
+		nuevoHijo = nuevoHijo->getParentNode();
+		padre = padre->getParentNode();
+	}
+	padre->removeChild(nuevoHijo);
+	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el madre de miNodo y no directamente miNodo
+	//pues es bien sencillo, simplemente pork estamos en un nodo malla que son a los que se tiene acceso desde el juego
+	//y el padre no puede ser el nodo malla sino la transformacion de la que depende este nodo malla , es decir, el padre del nodo malla. De nada futuro yo ;)
+	nuevoHijo->setParentNode(miNodo->getParentNode());
+	miNodo->getParentNode()->addChild(nuevoHijo);
+
+}
 
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
@@ -35,7 +51,10 @@ int main() {
 	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
 	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
-	
+	TNode* nodo = new TNode(-1, SceneManager::i().getRootNode());
+	addChild(nodo, window);
+	addChild(nodo, window2);
+	nodo->setVisible(false);
 	
 
 	//pistola

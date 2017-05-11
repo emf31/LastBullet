@@ -9,8 +9,12 @@
 #include <World.h>
 #include <LogIA.h>
 #include <ClippingManager.h>
-
+#include <irrKlang\irrKlang.h>
 #include <ParticleSystem.h>
+using namespace irrklang;
+
+
+#pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
 {
 	
@@ -168,6 +172,9 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {
 		//GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
 		ClippingManager::i().canUpdate = true;
+		ISoundEngine* engine = createIrrKlangDevice();
+		engine->setSoundVolume(0.3);
+		engine->play2D("../media/allStar.mp3", true);
 
 	}
 	
