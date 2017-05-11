@@ -21,4 +21,5 @@ private:
 	// Heredado vía Entity
 	virtual void inicializar() override;
 	virtual void borrarContenido() override;
+	virtual std::string getClassName() { return "DropObject"; };
 };

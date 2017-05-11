@@ -3,19 +3,20 @@
 #include <PhysicsEngine.h>
 #include <GraphicEngine.h>
 #include <Estructuras.h>
-#include <Cliente.h>
 #include <EntityManager.h>
 #include <iostream>
+#include <NetworkManager.h>
+#include <Settings.h>
 
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Entity(-1, NULL, name, guid)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
-	/*m_pStateMachine = new MachineState(this);
-	m_pStateMachine->SetCurrentState(&Patrullar::i());
-	m_pStateMachine->SetGlobalState(&Patrullar::i());*/
+
+
+	EntityManager::i().registerRaknetEntity(this);
 }
 
 
@@ -27,7 +28,7 @@ Enemy::~Enemy()
 void Enemy::inicializar()
 {
 	animation = new Animation();
-	granada = new Granada();
+	granada = new Granada(this);
 	m_isDying = false;
 	
 }
@@ -37,17 +38,20 @@ void Enemy::update(Time elapsedTime)
 	desencolaMovimiento();
 
 	updateState();
-	updateAnimation();
-	//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
+	//updateAnimation();
+
+	/*//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
 	if (lastSyncPacket.getElapsedTime().asSeconds() >= 5) {
 		m_nodo->setTexture("../media/body01red.png", 1);
 	}
 	//si el verde supera los 2 segundos se reestablece la skin original
-	if (billboardTime.getElapsedTime().asSeconds() >= 2 && lastSyncPacket.getElapsedTime().asSeconds() < 5) {
+	if (billboardTime.getElapsedTime().asSeconds() >= 2) {
 		m_nodo->setTexture("../media/body01.png", 1);
 		billboardTime.restart();
-	}
+	}*/
+
 	isMoving = true;
+
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
@@ -68,17 +72,19 @@ void Enemy::handleInput()
 
 void Enemy::cargarContenido()
 {
+	ResourceProvider& rp = Settings::i().GetResourceProvider();
+	
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(0, 100, 0), Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/ArmyPilot.b3d");
-	m_nodo.get()->setTexture("../media/body01.png", 1);
-	m_nodo.get()->setTexture("../media/head01.png", 0);
-	m_nodo.get()->setTexture("../media/m4tex.png", 2);
+	m_nodo = GraphicEngine::i().createNode(
+		Vec3<float>(0, 100, 0), 
+		Vec3<float>(0.075f, 0.075f, 0.075f), 
+		"", 
+		rp.getFinalFilename("personaje2.obj", "characters"));
 
-	GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0));
+
+	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
 	
 
-	//m_renderState.setPosition(Vec3<float>(0, 100, 0));
-	billboardTime.restart();
 	animation->addAnimation("Default", 0, 0);
 	animation->addAnimation("Run_Forwards", 1, 69);
 	animation->addAnimation("Run_backwards", 70, 138);
@@ -94,8 +100,8 @@ void Enemy::cargarContenido()
 
 	m_animState = quieto;
 
-	radius = 1.2f;
-	height = 7.3f;
+	radius = 0.5f;
+	height = 3.f;
 	mass = 1000.f;
 
 
@@ -113,8 +119,9 @@ void Enemy::borrarContenido()
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
-	GraphicEngine::i().removeNode(m_nodo);
+	
 }
+
 //Teletransporta un enemigo a la posicion que le pasas
 void Enemy::setPosition(const Vec3<float>& pos)
 {
@@ -127,9 +134,11 @@ void Enemy::setPosition(const Vec3<float>& pos)
 
 
 void Enemy::updateEnemigo(Vec3<float> pos) {
-	m_renderState.updatePositions(pos);
+	Vec3<float> aux = pos;
+	aux.setY(aux.getY() - 0.5f);
+	m_renderState.updatePositions(aux);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
-	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2) + radius, pos.getZ()));
+	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2)/* + radius*/ , pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
 
 }
@@ -138,14 +147,11 @@ void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
 		if (!m_isDying) {
-			//Este float * es una referencia a una variable de clase asi que no hay problema
-			TImpactoBala impacto;
-			impacto.damage = *static_cast<float*>(message.data);
-			impacto.guid = m_guid;
+			
+			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
-			Cliente::i().dispatchMessage(impacto, IMPACTO_BALA);
+			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);
 
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		}
 
 	}
@@ -158,9 +164,13 @@ void Enemy::handleMessage(const Message & message)
 
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
-		Cliente::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+
+		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+
 		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+
 		delete message.data;
+
 	}
 }
 
@@ -216,11 +226,11 @@ void Enemy::lanzarGranada(TGranada g)
 
 void Enemy::setVisibilidadBilboardSync()
 {
-	m_nodo.get()->setTexture("../media/body01green.png", 1);
+	m_nodo->setTexture("../media/body01green.png", 1);
 }
 
 
-void Enemy::updateAnimation()
+/*void Enemy::updateAnimation()
 {
 	switch (m_animState)
 	{
@@ -248,7 +258,7 @@ void Enemy::updateAnimation()
 		break;
 
 	}
-}
+}*/
 
 void Enemy::updateState()
 {
@@ -258,4 +268,11 @@ void Enemy::updateState()
 	else {
 		m_animState = quieto;
 	}
+}
+
+
+
+
+bool Enemy::isDying() {
+	return m_isDying;
 }

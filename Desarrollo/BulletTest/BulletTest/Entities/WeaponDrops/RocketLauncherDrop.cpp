@@ -1,6 +1,5 @@
 #include "RocketLauncherDrop.h"
-#include <Cliente.h>
-
+#include <NetworkManager.h>
 
 RocketLauncherDrop::RocketLauncherDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
@@ -24,6 +23,11 @@ void RocketLauncherDrop::update(Time elapsedTime)
 			m_nodo->setVisible(true);
 		}
 	}
+	else {
+		Vec3<float> prev_rot = m_renderState.getRotation();
+		prev_rot.addY(5);
+		m_renderState.updateRotations(prev_rot);
+	}
 }
 
 void RocketLauncherDrop::handleInput()
@@ -32,7 +36,11 @@ void RocketLauncherDrop::handleInput()
 
 void RocketLauncherDrop::cargarContenido()
 {
-
+	Vec3<float> pos = getPosition();
+	pos.addY(2.f);
+	nodo_platform = GraphicEngine::i().createNode(m_renderState.getPosition(), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Props/Plataforma.obj");
+	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.8f, 0.8f, 0.8f), "", "../media/Weapons/rocketDrop.obj");
+	m_renderState.setPosition(pos);
 
 }
 
@@ -43,18 +51,34 @@ void RocketLauncherDrop::borrarContenido()
 void RocketLauncherDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+
+
+
+		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
+
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				estado = USADO;
 				clockRespawnWeapon.restart();
-				if (Cliente::i().isConected()) {
-					TId tID;
-					tID.id = m_id;
 
-					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
+
+				TId tID;
+				tID.id = m_id;
+
+				NetworkManager::i().dispatchMessage(tID, ARMA_COGIDA);
+
+
+				if (ClassName == "Player")
+					static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
+				if (ClassName == "Enemy_Bot") {
+					Enemy_Bot* bot = static_cast<Enemy_Bot*>(message.data);
+					bot->setWeapon(LANZACOHETES);
+					if(bot->getMachineState()->isInState("BuscarWeapon"))
+						bot->getMachineState()->ChangeState(&BuscarWeapon::i());
 				}
-				static_cast<Player*>(message.data)->setWeapon(LANZACOHETES);
+
+
 				m_nodo->setVisible(false);
 
 			}
@@ -64,7 +88,9 @@ void RocketLauncherDrop::handleMessage(const Message & message)
 
 bool RocketLauncherDrop::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	ArmaCogida();
 	return true;
 }
+
+
+
 

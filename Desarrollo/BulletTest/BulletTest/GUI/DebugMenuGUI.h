@@ -4,13 +4,27 @@
 #include <GUI.h>
 #include <Enemy_Bot.h>
 #include <EntityManager.h>
-#include <Cliente.h>
+#include <events\Event.h>
+#include <NetworkDebugger.h>
+#include <NetworkLog.h>
+
 class DebugMenuGUI : public Motor::GUI {
 public:
+	DebugMenuGUI();
+	~DebugMenuGUI();
+
 	virtual void update() override;
+	virtual void handleEvent(Event * ev) override;
+
 	void inicializar();
 	
 private:
+	
+	bool onDebugBotAClicked(const CEGUI::EventArgs & e);
+	bool onDebugBotBClicked(const CEGUI::EventArgs & e);
+	bool onDebugBotCClicked(const CEGUI::EventArgs & e);
+	bool onDebugBotDClicked(const CEGUI::EventArgs & e);
+
 	bool onDebugShapesClicked(const CEGUI::EventArgs& e);
 	bool onCloseMenuButtonClicked(const CEGUI::EventArgs & e);
 	bool onMapClicked(const CEGUI::EventArgs & e);
@@ -25,11 +39,49 @@ private:
 	bool onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e);
 	bool onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e);
 
-	void updateProgressBars();
-	void updateNetworkWindowInfo();
+	bool onVaciarAsalto(const CEGUI::EventArgs & e);
+	bool onVaciarRocket(const CEGUI::EventArgs & e);
+	bool onVaciarSniper(const CEGUI::EventArgs & e);
+	bool onVaciarPistola(const CEGUI::EventArgs & e);
+
+	bool onCamaraAerea(const CEGUI::EventArgs & e);
+	bool onCamaraBot(const CEGUI::EventArgs & e);
+
+	bool onInsAsalto(const CEGUI::EventArgs & e);
+	bool onInsRocket(const CEGUI::EventArgs & e);
+	bool onInsSniper(const CEGUI::EventArgs & e);
+	bool onInsPistola(const CEGUI::EventArgs & e);
+
+	bool onLogNetworkClicked(const CEGUI::EventArgs & e);
+	bool onUpdateLogButtonClicked(const CEGUI::EventArgs & e);
+
+	bool onEstadosIA(const CEGUI::EventArgs & e);
+
+	bool onUpdateSlider(const CEGUI::EventArgs & e);
+
+	bool onGodMode(const CEGUI::EventArgs & e);
+
+	Vec3<float> elegirColor(std::string estadoActual);
+
+	void updateProgressBars(NetworkDebugger* deb);
+	void updateFuzzyProgressBars();
+
+	void updateNetworkWindowInfo(NetworkDebugger* deb);
+	void crearNodosState();
+
+	void crearNodoBot(Entity* myentity);
 
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
+	
+
+	//NetworkLog
+	CEGUI::PushButton *NetworkLogButton;
+	CEGUI::DefaultWindow *NetworkLogWindow;
+	CEGUI::MultiLineEditbox *serverLog;
+	CEGUI::MultiLineEditbox *clientLog;
+	CEGUI::PushButton *UpdateLogButton;
+
 	//Network
 	CEGUI::PushButton *DebugNetwork;
 	CEGUI::DefaultWindow *NetworkWindow;
@@ -63,17 +115,52 @@ private:
 	CEGUI::PushButton *DebugIA;
 	CEGUI::DefaultWindow *mapa;
 	CEGUI::DefaultWindow *IAWindow;
+	CEGUI::DefaultWindow *DesirabilityWeapons;
+	CEGUI::DefaultWindow *OpcionesIA;
 	CEGUI::PushButton *BuscarVida;
 	CEGUI::PushButton *BuscarPistola;
 	CEGUI::PushButton *BuscarRocket;
 	CEGUI::PushButton *BuscarAsalto;
 	CEGUI::PushButton *BotonMapa;
+
+	CEGUI::PushButton *VaciarAsalto;
+	CEGUI::PushButton *VaciarRocket;
+	CEGUI::PushButton *VaciarSniper;
+	CEGUI::PushButton *VaciarPistola;
+
+	CEGUI::PushButton *InsAsalto;
+	CEGUI::PushButton *InsRocket;
+	CEGUI::PushButton *InsSniper;
+	CEGUI::PushButton *InsPistola;
+
+	CEGUI::PushButton *CamaraAerea;
+
+	CEGUI::PushButton *CamaraBot;
+
+	CEGUI::ProgressBar *DesiAsalto;
+	CEGUI::ProgressBar *DesiRocketLauncher;
+	CEGUI::ProgressBar *DesiSniper;
+
+	CEGUI::PushButton *BotA;
+	CEGUI::PushButton *BotB;
+	CEGUI::PushButton *BotC;
+	CEGUI::PushButton *BotD;
+
+	CEGUI::PushButton *estadosIA;
+
 	CEGUI::PushButton *closePushButtonIA;
 
+	CEGUI::Slider *sliderUpdate;
 
-	Enemy_Bot* botJuliyo;
-	//Enemy_Bot* botTonire;
-	//Enemy_Bot* botRucri;
+	float progresoAsalto = 0;
+	float progresoRocketLauncher = 0;
+	float progresoSniper = 0;
+	bool VerEstadosIA=false;
 
-	
+	Character* entActual;
+
+	std::shared_ptr<BasicSceneNode> nodos[4];
+
+	NetworkLog netWorkLog;
+
 };

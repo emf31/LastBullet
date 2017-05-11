@@ -1,10 +1,10 @@
 #pragma once
-#include "Entity.h"
+#include "EntPassive.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/BasicSceneNode.h"
 #include <PhysicsEngine.h>
-class PhysicsEntity : public Entity
+class PhysicsEntity : public EntPassive
 {
 public:
 	PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);

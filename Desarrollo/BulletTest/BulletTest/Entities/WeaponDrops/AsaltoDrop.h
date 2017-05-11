@@ -15,11 +15,10 @@ public:
 	virtual void update(Time elapsedTime) override;
 
 	virtual void handleInput() override;
-
 	virtual void cargarContenido() override;
 
 	virtual void borrarContenido() override;
-
+	
 	virtual void handleMessage(const Message& message) override;
 
 	virtual std::string getClassName() { return "AsaltoDrop"; }

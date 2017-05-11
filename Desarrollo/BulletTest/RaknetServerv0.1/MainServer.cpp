@@ -11,10 +11,19 @@
 #include "Entities/Life.h"
 #include "Estructuras.h"
 #include "Entities/EntityManager.h"
+#include <Bot.h>
+#include <NetworkLog.h>
+#include <StringCompressor.h>
+#include <PacketLogger.h>
 
 #define MAX_CLIENTS 10
 #define SERVER_PORT 65535
 
+
+TGameInfo gameinfo;
+NetworkLog networkLog;
+RakNet::RakPeerInterface *peer;
+//RakNet::PacketLogger logger;
 
 
 void muestraPlayer(Player *p) {
@@ -42,10 +51,12 @@ unsigned char getPacketIdentifier(RakNet::Packet * pPacket)
 		return (unsigned char)pPacket->data[0];
 }
 
+void enviarFilaTabla(RakNet::RakNetGUID& rakID, const std::string& name);
 
 
 int main() {
-	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
+	peer = RakNet::RakPeerInterface::GetInstance();
+	//peer->AttachPlugin(&logger);
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	sd.socketFamily = AF_INET;
 	RakNet::Packet *packet;
@@ -90,20 +101,26 @@ int main() {
 
 			break;
 			case ID_DISCONNECTION_NOTIFICATION:
-				printf("Un cliente se ha desconectado.\n");
-				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
-				break;
-			case ID_CONNECTION_LOST: {
+			{
+
+				Entity* ent = EntityManager::i().getRaknetEntity(packet->guid);
 
 				printf("Un cliente se ha desconectado.\n");
-				std::cout << "su nombre es:" << EntityManager::i().getRaknetEntity(packet->guid)->getName() << std::endl;
+
+				std::cout << "su nombre es:" << ent->getName() << std::endl;
+
 				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
 				EntityManager::i().enviaDesconexion(packet->guid, peer);
 				//lo borramos de los clientes actuales del servidor
 				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
+				if (ent->getGuid() == gameinfo.creador) {
+					EntityManager::i().enviarTerminarPartida(peer);
+				}
+
+				break;
 			}
-			break;
+
 			case NUEVO_PLAYER: {
 
 				//Cuando se conecta un nuevo player se crea este en el servidor, se envía a todos los clientes conectados y se añade al vector de clientes
@@ -114,11 +131,11 @@ int main() {
 				EntityManager::i().sendPlayer(t_player, peer);
 
 				Player *p = new Player(t_player.name, t_player.guid);
-				p->setPosition(t_player.position);
+				p->setPosition(Vec3<float>(0,0,0));
 
-				EntityManager::i().mostrarClientes();
+				
 
-				TFilaTabla filaTabla;
+				/*TFilaTabla filaTabla;
 				//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
 				filaTabla.mID = ACTUALIZA_TABLA;
 				filaTabla.guid = t_player.guid;
@@ -126,18 +143,39 @@ int main() {
 				filaTabla.kills = 0;
 				filaTabla.deaths = 0;
 				filaTabla.puntuacion = 0;
-				EntityManager::i().enviaFila(peer, filaTabla);
+				EntityManager::i().enviaFila(peer, filaTabla);*/
 
 
 			}
 			break;
 
+			case NUEVO_BOT: {
+
+				TPlayer t_player = *reinterpret_cast<TPlayer*>(packet->data);
+
+				enviarFilaTabla(t_player.guid, t_player.name);
+
+				//Enviamos el nuevo bot a todos los players menos al host 
+				//EntityManager::i().sendPlayer(t_player, peer);
+				//EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
+
+				Bot *bot = new Bot(t_player.name, t_player.guid);
+				bot->setPosition(Vec3<float>(0,0,0));
+
+				break;
+			}
+
 			case MOVIMIENTO: {
 
 				TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
-				EntityManager::i().enviaNuevaPos(mov, peer);
-				EntityManager::i().getRaknetEntity(mov.guid)->setPosition(mov.position);
 
+				EntityManager::i().enviaNuevaPos(mov, gameinfo.creador, peer);
+
+				Entity* ent = EntityManager::i().getRaknetEntity(mov.guid);
+
+				if (ent != NULL) {
+					ent->setPosition(mov.position);
+				}
 				
 
 			}
@@ -148,7 +186,7 @@ int main() {
 				TGranada p_granada = *reinterpret_cast<TGranada*>(packet->data);
 
 
-				EntityManager::i().lanzarGranda(p_granada, peer);
+				EntityManager::i().lanzarGranda(p_granada, gameinfo.creador, peer);
 
 			}
 			break;
@@ -189,7 +227,7 @@ int main() {
 				TBala bala = *reinterpret_cast<TBala*>(packet->data);
 
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviarDisparoCliente(bala, peer);
+				EntityManager::i().enviarDisparoCliente(bala, gameinfo.creador, peer);
 
 			}
 			break;
@@ -200,15 +238,16 @@ int main() {
 				TBala p_bala = *reinterpret_cast<TBala*>(packet->data);
 
 				//notifico a ese cliente que ha sido disparado
-				EntityManager::i().enviarDisparoClienteRocket(p_bala, peer);
+				EntityManager::i().enviarDisparoClienteRocket(p_bala, gameinfo.creador, peer);
 
 			}
 			break;
 			case MUERTE: {
 
-				TPlayer p_struct = *reinterpret_cast<TPlayer*>(packet->data);
+				RakID p_struct = *reinterpret_cast<RakID*>(packet->data);
 
 				EntityManager::i().notificarMuerte(p_struct, peer);
+
 
 			}
 			break;
@@ -311,10 +350,13 @@ int main() {
 				TKill kill = *reinterpret_cast<TKill*>(packet->data);
 
 				EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+				std::cout << "Aumenta muerte: " << EntityManager::i().getRaknetEntity(kill.guidDeath)->getName()<< std::endl;
 
 				if (kill.guidDeath != kill.guidKill) {
 					//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado
-					EntityManager::i().aumentaKill(kill.guidKill, peer);	
+					EntityManager::i().aumentaKill(kill.guidKill, peer);
+
+					std::cout << "Aumenta kill: " << EntityManager::i().getRaknetEntity(kill.guidKill)->getName() << std::endl;
 				}
 				
 				
@@ -334,7 +376,7 @@ int main() {
 			case SYNC:
 			{
 				TSyncMessage sync = *reinterpret_cast<TSyncMessage*>(packet->data);
-				//std::cout << "Paquete: " << std::endl << "Origen: " << RakNet::RakNetGUID::ToUint32(sync.origen) << std::endl << "Destino: " << RakNet::RakNetGUID::ToUint32(sync.destino) << std::endl << "Tipo: " << (unsigned int)sync.packageType << std::endl;
+				
 				EntityManager::i().enviaSync(peer, sync);
 				break;
 			}
@@ -345,7 +387,83 @@ int main() {
 
 				break;
 			}
+			case CREAR_PARTIDA:
+			{
+				TGameInfo rak = *reinterpret_cast<TGameInfo*>(packet->data);
 
+				gameinfo = rak;
+
+
+				Player *p = new Player(rak.name, rak.creador);
+
+
+				//enviarFilaTabla(rak.creador, rak.name);
+
+				rak.mID = EMPEZAR_PARTIDA;
+
+				//Esto es temporal
+				peer->Send((const char*)&rak, sizeof(rak), HIGH_PRIORITY, RELIABLE_ORDERED, 0, p->getGuid(), false);
+
+				break;
+			}
+
+			case UNIRSE_PARTIDA:
+			{
+				TPlayer rak = *reinterpret_cast<TPlayer*>(packet->data);
+
+				
+
+				//Enviamos el nuevo player a todos los players y le enviamos a ese nuevo player todos los anteriores
+				EntityManager::i().sendPlayer(rak, peer);
+
+				Player *p = new Player(rak.name, rak.guid);
+
+				//enviarFilaTabla(rak.guid, rak.name);
+
+				TGameInfo info;
+				info.mID = EMPEZAR_PARTIDA;
+				info.creador = gameinfo.creador;
+				info.map = gameinfo.map;
+				info.gameMode = gameinfo.gameMode;
+				info.numBots = gameinfo.numBots;
+				info.playersTotales = EntityManager::i().getNumJugadores() - 1;
+
+				//Esto es temporal
+				peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p->getGuid(), false);
+
+				break;
+			}
+			
+			case CARGA_COMPLETA:
+			{
+				RakID rak = *reinterpret_cast<RakID*>(packet->data);
+
+				Entity* p = EntityManager::i().getRaknetEntity(rak.guid);
+
+				if (p != nullptr) {
+					enviarFilaTabla(p->getGuid(), p->getName());
+					p->setAvailable(true);
+					EntityManager::i().notificarDisponibilidad(rak, peer);
+				}
+				
+
+			}
+
+
+			case SOLICITAR_INFO:
+			{
+
+
+				RakNet::RakString rakString = networkLog.updateAndGenerateTable().c_str();
+
+				RakNet::BitStream w;
+				w.Write((RakNet::MessageID)SOLICITAR_INFO);
+				w.WriteCompressed(rakString);
+
+				peer->Send(&w, HIGH_PRIORITY, RELIABLE_ORDERED, 0, packet->guid, false);
+
+				break;
+			}
 			default:
 				printf("Un mensaje con identificador %i ha llegado.\n", packet->data[0]);
 				break;
@@ -355,5 +473,20 @@ int main() {
 	}
 
 	RakNet::RakPeerInterface::DestroyInstance(peer);
+
 	return 0;
+}
+
+
+void enviarFilaTabla(RakNet::RakNetGUID& rakID, const std::string& name) {
+	TFilaTabla filaTabla;
+	//Cada vez que se conecta un nuevo player se añade una fila a la tabla de este player
+	filaTabla.mID = ACTUALIZA_TABLA;
+	filaTabla.guid = rakID;
+	filaTabla.name = name;
+	filaTabla.kills = 0;
+	filaTabla.deaths = 0;
+	filaTabla.puntuacion = 0;
+
+	EntityManager::i().enviaFila(peer, filaTabla);
 }

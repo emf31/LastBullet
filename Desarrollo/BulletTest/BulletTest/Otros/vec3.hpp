@@ -3,18 +3,9 @@
 #define VEC3_HPP
 
 #include <iostream>
-#include <irrlicht.h>
 
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
-
-
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
 
 
 template <class T> class Vec3

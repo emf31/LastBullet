@@ -57,7 +57,7 @@ public:
 	bool isEmpty()const { return m_nodes.empty(); };
 
 
-	bool isNodePresent(int node)const;
+	bool isNodePresent(std::size_t node)const;
 
 	bool isEdgePresent(int from, int to);
 

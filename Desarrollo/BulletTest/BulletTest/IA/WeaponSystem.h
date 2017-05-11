@@ -5,7 +5,6 @@
 #include "Weapons/Sniper.h"
 #include "../Otros/Lista.h"
 #include <Vec2f.h>
-#include <Transformations.h>
 
 
 
@@ -33,6 +32,13 @@ public:
 	int getAmmoPistola() { return pistola->getMunicionTotal(); }
 	int getAmmoRocketLauncher() { return rocket->getMunicionTotal(); }
 
+
+	void WeaponSystemResetAll();
+	void setWeapon(int weapon);
+
+	void vaciarArma(std::string);
+	void InsertarArmaDebug(std::string);
+
 	bool buscar(std::string weapon) { return listaWeapons->Buscar(weapon); }
 
 
@@ -54,6 +60,7 @@ private:
 	Pistola* pistola;
 	Sniper* sniper;
 	RocketLauncher* rocket;
+
 
 };
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include <Character.h>
 
 class Enemy_Bot;
 
@@ -24,13 +24,13 @@ public:
 
 	double      GetTimeTargetHasBeenOutOfView()const;
 
-	Entity* GetTarget()const { return m_pCurrentTarget; }
+	Character* GetTarget()const { return m_pCurrentTarget; }
 
 	void       ClearTarget() { m_pCurrentTarget = 0; }
 private:
 	
 	Enemy_Bot* m_pOwner;
-	Entity* m_pCurrentTarget;
+	Character* m_pCurrentTarget;
 
 };
 

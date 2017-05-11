@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #pragma once
 #include "irrlicht.h"
 #include <iostream>
@@ -17,7 +17,7 @@ using namespace gui;
 class AnimatedSceneNode : public SceneNode
 {
 public:
-	AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver* irrDriver);
+	AnimatedSceneNode(IAnimatedMeshSceneNode* node, IrrlichtDevice * irrDevice);
 	~AnimatedSceneNode();
 
 	virtual void addChild(std::shared_ptr<SceneNode> child) override;
@@ -27,15 +27,14 @@ public:
 	virtual void setRotation(Vec3<float> rotation) override;
 
 	virtual Vec3<float> getPosition() override;
+	virtual Vec3<float> getRotation() override;
 	virtual Vec3<float> getScale() override;
 
 	virtual ISceneNode* getNodo() override;
 	virtual void setVisible(bool visible) override;
 	virtual void setAnimation(int start,int end) override;
-
-	virtual void updateAbsolutePosition() override {
-		m_node->updateAbsolutePosition();
-	}
+	virtual void setColor(const Color4f& color) override { }
+	
 
 private:
 	IAnimatedMeshSceneNode* m_node;
@@ -44,5 +43,5 @@ private:
 	// Heredado vía SceneNode
 	
 
-};
+};*/
 

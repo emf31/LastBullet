@@ -61,7 +61,7 @@ void TriggerSystem::UpdatePos(TriggerRecordStruct *trigger) {
 
 	Entity* ent = EntityManager::i().getEntity(idCreator);
 
-	trigger->vPos = ent->getRenderPosition();
+	trigger->vPos = ent->getPosition();
 
 }
 
@@ -118,7 +118,7 @@ void TriggerSystem::Update() {
 				continue;
 			}
 			
-			Vec3<float> vector = (*it2)->getRenderState()->getPosition() - pRec->vPos;
+			Vec3<float> vector = (*it2)->getPosition() - pRec->vPos;
 			fDistance = vector.Magnitude();
 			
 			//Si es Entity con trigger punto - radio

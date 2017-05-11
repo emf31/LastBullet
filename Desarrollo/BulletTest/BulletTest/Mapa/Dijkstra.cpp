@@ -11,7 +11,7 @@ void Dijkstra::Search()
 		if (isSatisfied(NextClosestNode)) return;
 
 		for (std::list<GraphEdge>::iterator curEdge = m_grafo.m_Edges[NextClosestNode].begin(); curEdge != m_grafo.m_Edges[NextClosestNode].end(); ++curEdge) {
-			float NewCost = m_CostToThisNode[NextClosestNode] + curEdge->Cost();
+			float NewCost = m_CostToThisNode[NextClosestNode] + (float)curEdge->Cost();
 
 			if (m_SearchFrontier[curEdge->To()] == 0) {
 				m_CostToThisNode[curEdge->To()] = NewCost;

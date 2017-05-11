@@ -66,6 +66,12 @@
     <ClCompile Include="Otros\Vec3f.cpp">
       <Filter>Archivos de código fuente\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\Bot.cpp">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Otros\NetworkLog.cpp">
+      <Filter>Archivos de código fuente\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\BulletTest\Otros\vec3.hpp">
@@ -106,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="Otros\Vec3f.h">
       <Filter>Archivos de encabezado\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Bot.h">
+      <Filter>Archivos de código fuente\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\NetworkLog.h">
+      <Filter>Archivos de código fuente\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

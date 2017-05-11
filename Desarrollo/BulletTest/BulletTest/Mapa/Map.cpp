@@ -3,8 +3,7 @@
 #include <EntityManager.h>
 #include <Util.h>
 #include <PhysicsEngine.h>
-
-
+#include <EntActive.h>
 
 
 void Map::addNodosToCells()
@@ -22,29 +21,30 @@ Map::Map() : grafo(NULL), cellSpace(NULL)
 
 
 
-void Map::inicializar()
+void Map::inicializar(const std::string& mapa)
 {
 
 
 	//dimensiones del mapa 647x475
 	//se crea la division del espacio en celdas
-	cellSpace = new CellSpacePartition(200, 200, 5, 5);
+	cellSpace = new CellSpacePartition(100, 100, 5, 5);
 
 	//Lee el mapa
-	map.readMap("../media/laberinto.json");
+	map.readMap(mapa);
 
 
 	//GRAFO
 	
 	//True, grafo dirigido
 	grafo = new SparseGraph(true);
-	grafo->readGraph("../media/laberinto.json");
+	grafo->readGraph("../media/landing.json");
 
 
 	//se meten los nodos a las celdas correspondientes
 	
 	std::cout << "AÑADIMOS LOS NODOS A LAS CELDAS" << std::endl;
 	addNodosToCells();
+
 #ifdef NAV_INFO
 	cellSpace->mostrarContenido();
 #endif // NAV_INFO
@@ -66,14 +66,14 @@ void Map::borrarContenido() {
 	delete grafo;
 	delete cellSpace;
 }
-bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
+bool Map::isPathObstructed(Vec3<float> posIni, Vec3<float> posFinal, float radio)
 {
 
-	int altura = 1;
-	Vec2f aumento = posFinal - posIni;
+	btScalar altura = 2;
+	Vec3<float> aumento = posFinal - posIni;
 	//****************************RayCast central***************************************
-	btVector3 start = btVector3(posIni.x, altura, posIni.y);
-	btVector3 target = btVector3(posFinal.x, altura, posFinal.y);
+	btVector3 start = btVector3((btScalar)posIni.getX(), (btScalar)posIni.getY()+1, (btScalar)posIni.getZ());
+	btVector3 target = btVector3((btScalar)posFinal.getX(), (btScalar)posFinal.getY()+1, (btScalar)posFinal.getZ());
 	//btVector3 distancia = target - start;
 	//distancia.length();	
 	/*btVector3 direccion = target - start;
@@ -92,7 +92,7 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 	{
 		//Veo la entity que colisiona
 		Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-		if (ent != EntityManager::i().getEntity(PLAYER))
+		if (ent->getClassName() == "PhysicsEntity")
 		{
 			//ha colisionado con una entity que no es el player
 			//std::cout << " EL RAY CAST CENTRAL HA COLISIONADO CON UNA PARED" << std::endl;
@@ -181,11 +181,11 @@ bool Map::isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio)
 	
 }
 
-void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec2f>& camino)
+void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec3<float>>& camino)
 {
 	//Iteramos la lista de node index y obtenemos el nodo del grafo para meter la pos en el camino
 	for (std::list<int>::const_iterator it = CaminoDeNodos.begin(); it != CaminoDeNodos.end(); ++it) {
-		camino.push_back(grafo->getNode(*it).getPosition());
+		camino.push_back(Vec3<float>(grafo->getNode(*it).getPosition().x,grafo->getNode(*it).getHeight(), grafo->getNode(*it).getPosition().y));
 		
 	}
 }
@@ -193,21 +193,25 @@ void Map::ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec
 //Busca un punto de respawn seguro en el mapa
 Vec3<float> Map::searchSpawnPoint()
 {
-	float radio = 100;
+	float radio = 30.f;
 	float fDistance = 0;
 	int spawn = 0;
 
 	std::vector<Vec3<float>> m_spawns = map.getSpawnPoints();
 
+	if (m_spawns.empty()) {
+		return Vec3<float>(0,0,0);
+	}
+
 	if (m_spawns.size() == 1) {
 		return m_spawns.at(0);
 	}
 
-	std::list<Entity*> enemies = EntityManager::i().getEnemies();
+	std::list<EntActive*> enemies = EntityManager::i().getEnemies();
 
 	std::vector<Vec3<float>> auxSpawns;
 
-	std::list<Entity*>::iterator it;
+	std::list<EntActive*>::iterator it;
 	std::vector<Vec3<float>>::iterator it2;
 
 	for (it2 = m_spawns.begin(); it2 != m_spawns.end(); ++it2) {
@@ -216,7 +220,7 @@ Vec3<float> Map::searchSpawnPoint()
 			Vec3<float> vector = (*it)->getRenderState()->getPosition() - (*it2);
 			fDistance = vector.Magnitude();
 
-			if (fDistance < 100) {
+			if (fDistance < radio) {
 				valid = false;
 				break;
 			}
@@ -246,13 +250,13 @@ Vec3<float> Map::searchSpawnPoint()
 	}
 }
 
-void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot)
+void Map::CalcularNodosCercanos(Vec3<float>& pos, std::list<NavGraphNode*>& nodosCercanos, Vec3<float>& posBot)
 {
 	
 	std::vector<int> celdasVecinas;
-	int indCelda = cellSpace->PositionToIndex(pos);
+	int indCelda = cellSpace->PositionToIndex(pos.getX(),pos.getZ());
 	//std::cout << "ESTOY EN LA CELDA NUMERO: " << indCelda << std::endl;
-	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos, pos);
+	cellSpace->CalculaNodoEnCelda(indCelda, nodosCercanos,celdasVecinas, pos);
 	
 	if (nodosCercanos.size() == 0) {
 		cellSpace->CalculaNodosEnCeldasVecinas(indCelda, nodosCercanos, celdasVecinas, pos);
@@ -269,16 +273,17 @@ void Map::CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCerca
 			
 		}
 		if (nodosCercanos.size() == 0) {
-			int tam2 = celdasVecinas.size();
 			int inicio = tam;
-			for (inicio; inicio < tam2; inicio++) {
+			/*for (inicio; inicio < tam2; inicio++) {
+				try {
+					cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[inicio], nodosCercanos, celdasVecinas, pos);
+				} catch (std::runtime_error e) {
+					break;
+				}
+				
 
-				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
-				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
-				std::cout << "ENTRA EN EL FOR DEL INFIERNO" << std::endl;
-				cellSpace->CalculaNodosEnCeldasVecinas(celdasVecinas[inicio], nodosCercanos, celdasVecinas, pos);
-
-			}
+			}*/
+			throw std::runtime_error("FOR DEL INFIERNO");
 		}
 
 		

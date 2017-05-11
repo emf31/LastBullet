@@ -1,5 +1,7 @@
 #pragma once
 #include "StateIA.h"
+#include <Vec2f.h>
+
 class Patrullar :
 	public StateIA
 {
@@ -13,8 +15,11 @@ public:
 	virtual void Execute(Enemy_Bot* pEnemy);
 	virtual void Exit(Enemy_Bot* pEnemy);
 
+	virtual std::string getStateName() { return "Patrullar"; }
+
 private:
 	Patrullar() {};
 
+	Vec2f currTarget;
 };
 

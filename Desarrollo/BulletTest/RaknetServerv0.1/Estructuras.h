@@ -4,13 +4,19 @@
 #include <RakPeerInterface.h>
 #include <iostream>
 #include <MessageIdentifiers.h>
+#include <RakString.h>
+
+
+
+
 
 #pragma pack(push, 1)
 struct TPlayer {
 	unsigned char mID;
-	Vec3<float> position;
 	RakNet::RakNetGUID guid;
 	std::string name;
+	int color;
+	bool available;
 };
 #pragma pack(pop)
 
@@ -54,7 +60,8 @@ struct TBala {
 struct TImpactoBala {
 	unsigned char mID;
 	float damage;
-	RakNet::RakNetGUID guid;
+	RakNet::RakNetGUID guidImpactado;
+	RakNet::RakNetGUID guidDisparado;
 };
 #pragma pack(pop)
 
@@ -139,6 +146,25 @@ struct TSyncMessage {
 };
 #pragma pack(pop)
 
+#pragma pack(push, 1)
+struct TGameInfo {
+	unsigned char mID;
+
+	RakNet::RakNetGUID creador;
+	std::string name;
+	int gameMode;
+	int numBots;
+	int playersTotales;
+	std::string map;
+};
+#pragma pack(pop)
+
+
+struct TLogInfo {
+	unsigned char mID;
+	std::string info;
+};
+
 
 enum GameMessages {
 	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
@@ -171,7 +197,15 @@ enum GameMessages {
 	AUMENTA_MUERTE = ID_USER_PACKET_ENUM + 28,
 	FIN_PARTIDA = ID_USER_PACKET_ENUM + 29,
 	SYNC = ID_USER_PACKET_ENUM + 30,
-	PING = ID_USER_PACKET_ENUM + 31
-
-
+	PING = ID_USER_PACKET_ENUM + 31,
+	CREAR_PARTIDA = ID_USER_PACKET_ENUM + 32,
+	CREAR_LOBBY = ID_USER_PACKET_ENUM + 33,
+	UNIRSE_LOBBY = ID_USER_PACKET_ENUM + 34,
+	EMPEZAR_PARTIDA = ID_USER_PACKET_ENUM + 35,
+	NUEVO_BOT = ID_USER_PACKET_ENUM + 36,
+	UNIRSE_PARTIDA = ID_USER_PACKET_ENUM + 37,
+	RECIBO_DATOS = ID_USER_PACKET_ENUM + 38,
+	TERMINAR_PARTIDA = ID_USER_PACKET_ENUM + 39,
+	CARGA_COMPLETA = ID_USER_PACKET_ENUM + 40,
+	SOLICITAR_INFO = ID_USER_PACKET_ENUM + 41
 };

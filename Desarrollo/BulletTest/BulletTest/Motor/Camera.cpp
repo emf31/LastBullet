@@ -2,14 +2,15 @@
 #include "Camera.h"
 #include <CameraShake.h>
 #include <GunRecoil.h>
+#include <Player.h>
 
 
-Camera::Camera(ICameraSceneNode* camera) : m_camera(camera), m_entity(NULL)
+Camera::Camera(TCamera* camera, const std::string &nombre) : m_camera(camera), m_pName(nombre),  m_entity(NULL)
 {
 	m_cameraShake = new CameraShake(*this);
 	m_GunRecoil = new GunRecoil(*this);
-	defaultFOV = m_camera->getFOV(); // this is in radians 
-	defaultAspect = m_camera->getAspectRatio();
+	//defaultFOV = m_camera->getFOV(); // this is in radians 
+	//defaultAspect = m_camera->getAspectRatio();
 	zoomFOV = 0.25f;
 }
 
@@ -23,29 +24,51 @@ Camera::~Camera()
 
 void Camera::setTarget(Vec3<float> target)
 {
-	m_camera->setTarget(vector3df(target.getX(), target.getY(), target.getZ()));
+	m_camera->setTarget(target);
 }
 
 void Camera::setPosition(Vec3<float> position)
 {
-	m_camera->setPosition(vector3df(position.getX(), position.getY(), position.getZ()));
+	m_camera->setPosition(position);
 	
 }
 
 Vec3<float> Camera::getPosition()
 {
-	vector3df aux = m_camera->getPosition();
-	return Vec3<float>(aux.X, aux.Y, aux.Z);
+	return m_camera->getPosition();
 }
 
 Vec3<float> Camera::getTarget()
 {
-	vector3df aux = m_camera->getTarget();
-	return Vec3<float>(aux.X, aux.Y, aux.Z);
+	return m_camera->getTarget();
+}
+
+void Camera::setRotationDir(const Vec3<float>& dir) {
+	m_camera->setRotationDir(dir);
 }
 
 
-void Camera::asignarEntity(Entity* ent)
+void Camera::setRotationX(float angulo) {
+	m_camera->setRotationX(angulo);
+}
+
+void Camera::setRotationY(float angulo) {
+	m_camera->setRotationY(angulo);
+}
+
+void Camera::setRotationZ(float angulo) {
+	m_camera->setRotationZ(angulo);
+}
+
+Vec3<float> Camera::getVecRight()
+{
+	//return m_camera->getDerecha();
+	return Vec3<float>(0,0,0);
+}
+
+
+
+void Camera::asignarEntity(Character* ent)
 {
 	m_entity = ent;
 }
@@ -54,19 +77,30 @@ void Camera::update()
 {
 
 	if (m_entity != nullptr) {
-		setPosition(Vec3<float>(
-			m_entity->getRenderPosition().getX(),
-			m_entity->getRenderPosition().getY() + 8,	//Situamos la camara en el top del player(el +50 es por el mesh que no situa la camara bien)
-			m_entity->getRenderPosition().getZ())
-		);
+
+		if (m_entity->getClassName() == "Player") {
+			setPosition(Vec3<float>(
+						m_entity->getRenderPosition().getX(),
+						m_entity->getRenderPosition().getY() + 3.f,
+						m_entity->getRenderPosition().getZ())
+			);
+			//m_cameraShake->update();
+			//m_GunRecoil->update(static_cast<Player*>(m_entity)->isShooting);
+		}
+		if (m_entity->getClassName() == "Enemy_Bot")
+			setPosition(Vec3<float>(
+				m_entity->getRenderPosition().getX(),
+				m_entity->getRenderPosition().getY() + 3.f,
+				m_entity->getRenderPosition().getZ())
+			);
+
 	}
-	m_cameraShake->update();
-	m_GunRecoil->update();
+	
 
 }
 
 Vec3<float> Camera::getRotation() {
-	return Vec3<float> (m_camera->getRotation().X, m_camera->getRotation().Y, m_camera->getRotation().Z);
+	return m_camera->getRotation();
 }
 
 void Camera::cameraShake()
@@ -80,11 +114,11 @@ void Camera::cameraRecoil()
 
 void Camera::apuntar()
 {
-	m_camera->setFOV(zoomFOV);
+	//m_camera->setFOV(zoomFOV);
 
 }
 
 void Camera::restablecerMira()
 {
-	m_camera->setFOV(defaultFOV);
+	//m_camera->setFOV(defaultFOV);
 }

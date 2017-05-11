@@ -16,14 +16,14 @@ public class Exporter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        object[] obj = FindSceneObjectsOfType(typeof(GameObject));
+        object[] obj = FindObjectsOfType(typeof(GameObject));
 
         Raiz raiz = new Raiz();
 
         foreach (object o in obj)
         {
             GameObject g = (GameObject)o;
-            if (!g.name.Equals("Script") && !g.name.Equals("Main Camera") && !g.name.Equals("Directional Light") && !g.name.Equals("Waypoint Editor"))
+            if (!g.name.Equals("Script") && !g.name.Equals("Main Camera")  && !g.name.Equals("Waypoint Editor"))
             {
                 GameObject parent = g.transform.parent.gameObject;
                 if (parent != null)
@@ -44,8 +44,25 @@ public class Exporter : MonoBehaviour
                         objeto.rotY = g.transform.rotation.eulerAngles.y;
                         objeto.rotZ = g.transform.rotation.eulerAngles.z;
 
+                        objeto.forwardX = g.transform.forward.x;
+                        objeto.forwardY = g.transform.forward.y;
+                        objeto.forwardZ = g.transform.forward.z;
+
 
                         objeto.tag = g.tag;
+                        if (g.transform.childCount == 1)
+                        {
+                            GameObject child = g.transform.GetChild(0).gameObject;
+                            if (child.GetComponent<Renderer>().material.mainTexture != null)
+                            {
+                                //Debug.Log(child.GetComponent<Renderer>().material.mainTexture.name);
+                                objeto.textura = child.GetComponent<Renderer>().material.mainTexture.name;
+                                //Debug.Log(child.GetComponent<MeshFilter>().name);
+                                objeto.mesh = child.GetComponent<MeshFilter>().name;
+                            }
+                                
+                        }
+                        
                         
                         multipleTags mt = g.GetComponent<multipleTags>();
 
@@ -69,17 +86,21 @@ public class Exporter : MonoBehaviour
 
                             }
                         }
-
+                        if (g.tag == "PointLight" || g.tag == "DirectionalLight")
+                        {
+                            Light l = (Light)g.GetComponent(typeof(Light));
+                            objeto.color_r = l.color.r;
+                            objeto.color_g = l.color.g;
+                            objeto.color_b = l.color.b;
+                        }
                         if (mt != null)
                         {
                             objeto.extraTags = mt.extratags.ToString();
                         }
 
-                        Rigidbody rb;
-                        if (rb = g.GetComponent<Rigidbody>())
+                        BoxCollider col = g.GetComponentInChildren<BoxCollider>();
+                        if (col != null)
                         {
-                            objeto.masa = rb.mass;
-                            BoxCollider col = g.GetComponent<BoxCollider>();
                             objeto.colliderX = col.center.x;
                             objeto.colliderY = col.center.y;
                             objeto.colliderZ = col.center.z;
@@ -134,13 +155,20 @@ public class Objeto
     public float posX, posY, posZ;
     public float sizeX, sizeY, sizeZ;
     public float rotX, rotY, rotZ;
+    public float forwardX, forwardY, forwardZ;
     public float masa;
+    public string textura;
+    public string mesh;
 
     public float colliderX, colliderY, colliderZ;
     public float colliderSizeX, colliderSizeY, colliderSizeZ;
     public string tag;
     public string extraTags;
     public bool hasChild;
+    public float color_r;
+    public float color_g;
+    public float color_b;
+
 
     [SerializeField]
     public List<Nodo> children;

@@ -1,0 +1,11 @@
+<Imageset autoScaled="vertical" imagefile="LastBulletHUD2.png" name="LastBulletHUD" nativeHorzRes="1280" nativeVertRes="720" version="2">
+    <Image height="140" name="HUD_abajo_iz" width="344" xPos="117" yPos="899" />
+    <Image height="140" name="HUD_abajo_der" width="344" xPos="1476" yPos="899" />
+    <Image height="85" name="HUD_arriba" width="452" xPos="754" yPos="31" />
+    <Image height="50" name="HUD_vida" width="50" xPos="1819" yPos="511" />
+    <Image height="64" name="HUD_pistola" width="90" xPos="1787" yPos="591" />
+    <Image height="58" name="HUD_rocketLauncher" width="152" xPos="1733" yPos="661" />
+    <Image height="68" name="HUD_Asalto" width="158" xPos="1729" yPos="727" />
+    <Image height="57" name="HUD_sniper" width="168" xPos="1719" yPos="801" />
+    <Image height="642" name="HUD_tabla" width="1118" xPos="415" yPos="167" />
+</Imageset>

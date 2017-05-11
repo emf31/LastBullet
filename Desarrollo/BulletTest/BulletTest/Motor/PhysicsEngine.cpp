@@ -4,9 +4,14 @@
 #include <unordered_map>
 #include <set>
 #include <BulletCollision\CollisionDispatch\btCollisionObject.h>
+#include "../game.h"
 
 
 #include <MessageHandler.h>
+
+#include <Util.h>
+
+#include <GraphicEngine.h>
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
@@ -54,7 +59,7 @@ void PhysicsEngine::inicializar()
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_config);
 
-	m_world->setGravity(btVector3(0, -40, 0));
+	m_world->setGravity(btVector3(0, -15, 0));
 
 	m_pGhostPairCallBack = new btGhostPairCallback();
 
@@ -67,7 +72,7 @@ void PhysicsEngine::inicializar()
 	gContactProcessedCallback = (ContactProcessedCallback)HandleContacts;
 
 
-
+	GraphicEngine::i().setDebugDraw();
 
 	
 }
@@ -75,8 +80,12 @@ void PhysicsEngine::inicializar()
 
 void PhysicsEngine::update(Time elapsedTime)
 {
-	//Como la simulacion va lenta multiplicamos por 2
-	m_world->stepSimulation(btScalar(elapsedTime.asSeconds()) * 1.25f, 20, tickPhysics.asSeconds());
+
+	if (m_world) {
+		//Como la simulacion va lenta multiplicamos por 1.25
+		m_world->stepSimulation(btScalar(elapsedTime.asSeconds() /** 1.25f*/), 20, tickPhysics.asSeconds());
+	}
+	
 	
 
 	
@@ -114,7 +123,7 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	btCapsuleShape* m_pCollisionShape = new btCapsuleShape(radius, height);
 	m_pCollisionShape->setUserIndex(bodyPart::Body::CUERPO);
 
-	btBoxShape* m_CollisionBox = new btBoxShape(btVector3(3.f,3.f,3.f));
+	btCylinderShape* m_CollisionBox = new btCylinderShape(btVector3(1.5f, 0.5f, 1.5f));
 	m_CollisionBox->setUserIndex(bodyPart::Body::EXTERNA);
 
 	btTransform t;
@@ -129,7 +138,9 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	btScalar masses[2] = { mass, mass};
 
 	btVector3 intertia;
-	shape->calculatePrincipalAxisTransform(masses, t, inertia);
+	shape->calculateLocalInertia(mass, inertia);
+
+	
 
 
 	btPairCachingGhostObject* actorGhost = new btPairCachingGhostObject();
@@ -148,11 +159,46 @@ KinematicCharacterController* PhysicsEngine::createCapsuleKinematicCharacter(Ent
 	return p_controller;
 }
 
+btRigidBody * PhysicsEngine::createCompoundShape(Entity * entity, const Vec3<float>& scale, float masa, const std::string & mesh, int body_state)
+{
+
+	/*btTransform transform;
+	transform.setIdentity();
+	btVector3 pos = bt(entity->getRenderState()->getPosition());
+	transform.setOrigin((pos));
+
+	//create the motionState of the object
+	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
+
+	//now create the rigidBody
+	btRigidBody* rigidBody = new btRigidBody(masa, motionState, shape, localinertia);
+	rigidBody->setActivationState(body_state);
+
+
+	//add a pointer to rigidBody pointing to associated Entity
+	rigidBody->setUserPointer(entity);
+
+	//add the rigidBody to the world
+	m_world->addRigidBody(rigidBody);
+
+	//and add to the list of rigidBodies
+	m_rigidBodies.push_back(rigidBody);
+
+	//finally return created body
+	return rigidBody;*/
+
+	return NULL;
+}
+
+
+
+
+
 btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<float>& scale, float masa, bool haveMesh, Vec3<float>centerCol , int body_state)
 {
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition()+centerCol);
+	btVector3 pos = Vec3<float>::convertVec(entity->getPosition() + centerCol);
 	//std::cout << "Posicion de la entidad fisica" << pos.x() << "," << pos.y() << "," << pos.z() << '\n';
 	transform.setOrigin((pos));
 
@@ -167,7 +213,7 @@ btRigidBody * PhysicsEngine::createBoxRigidBody(Entity * entity, const Vec3<floa
 	}	
 	else {
 		btVector3 halfExtents(scale.getX(), scale.getY(), scale.getZ());
-		 shape = new btBoxShape(halfExtents);
+		shape = new btBoxShape(halfExtents);
 	}
 		
 
@@ -201,7 +247,7 @@ btRigidBody * PhysicsEngine::createCapsuleRigidBody(Entity * entity, float heigh
 {
 	btCollisionShape* m_pCollisionShape = new btCapsuleShape(radius, height);
 	//create the motionState of the object
-	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getRenderState()->getPosition().getX(), entity->getRenderState()->getPosition().getY(), entity->getRenderState()->getPosition().getZ())));
+	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getPosition().getX(), entity->getPosition().getY(), entity->getPosition().getZ())));
 
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(masa, intertia);
@@ -231,7 +277,7 @@ btRigidBody * PhysicsEngine::createSphereRigidBody(Entity * entity, float radius
 	// Create the shape
 	btCollisionShape *m_pCollisionShape = new btSphereShape(radius);
 	//create the motionState of the object
-	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getRenderState()->getPosition().getX(), entity->getRenderState()->getPosition().getY(), entity->getRenderState()->getPosition().getZ())));
+	btDefaultMotionState* m_pMotionState = new btDefaultMotionState(btTransform(btQuaternion(1.0f, 0.0f, 0.0f, 0.0f).normalized(), btVector3(entity->getPosition().getX(), entity->getPosition().getY(), entity->getPosition().getZ())));
 
 	btVector3 intertia;
 	m_pCollisionShape->calculateLocalInertia(mass, intertia);
@@ -263,7 +309,7 @@ btGhostObject * PhysicsEngine::createBoxGhostObject(Entity * entity, const Vec3<
 
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	btVector3 pos = Vec3<float>::convertVec(entity->getPosition());
 	transform.setOrigin(pos);
 
 	btGhostObject* ghostObj = new btGhostObject();
@@ -291,7 +337,7 @@ btGhostObject * PhysicsEngine::createSphereShape(Entity* entity, float radio) {
 
 	btTransform transform;
 	transform.setIdentity();
-	btVector3 pos = Vec3<float>::convertVec(entity->getRenderState()->getPosition());
+	btVector3 pos = Vec3<float>::convertVec(entity->getPosition());
 	transform.setOrigin(pos);
 
 	btGhostObject* ghostObj = new btGhostObject();

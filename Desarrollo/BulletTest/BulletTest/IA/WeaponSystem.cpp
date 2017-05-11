@@ -3,6 +3,8 @@
 #include "Enemy_Bot.h"
 
 
+
+
 WeaponSystem::WeaponSystem(Enemy_Bot* Owner, double ReactionTime, double AimAccuracy, double AimPersistance) :
 	m_pOwner(Owner),
 	m_dReactionTime(ReactionTime), 
@@ -19,20 +21,28 @@ WeaponSystem::~WeaponSystem()
 
 void WeaponSystem::Inicializar() {
 
-	pistola = new Pistola();
+	pistola = new Pistola(m_pOwner);
 	pistola->inicializar();
+	pistola->cargarContenido();
 
-	asalto = new Asalto();
+	asalto = new Asalto(m_pOwner);
 	asalto->inicializar();
+	asalto->cargarContenido();
 
-	sniper = new Sniper();
+	sniper = new Sniper(m_pOwner);
 	sniper->inicializar();
+	sniper->cargarContenido();
 
+	rocket = new RocketLauncher(m_pOwner);
+	rocket->inicializar();
+	rocket->cargarContenido();
 
 	listaWeapons = new Lista();
 	listaWeapons->insertar(pistola);
-	listaWeapons->insertar(asalto);
-	listaWeapons->insertar(sniper);
+
+	//listaWeapons->insertar(asalto);
+	//listaWeapons->insertar(rocket);
+	//listaWeapons->insertar(sniper);
 	pistola->setEquipada(true);
 
 }
@@ -51,9 +61,9 @@ void WeaponSystem::AddNoiseToAim(Vec3<float>& AimingPos)const {
 
 	Vec3<float> toPos;
 
-	toPos.setX(AimingPos.getX() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
-	toPos.setY(AimingPos.getY() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
-	toPos.setZ(AimingPos.getZ() + Randf(-m_dAimAccuracy, m_dAimAccuracy));
+	toPos.setX(AimingPos.getX() + Randf((float)-m_dAimAccuracy, (float)m_dAimAccuracy));
+	toPos.setY(AimingPos.getY() + Randf((float)-m_dAimAccuracy, (float)m_dAimAccuracy));
+	toPos.setZ(AimingPos.getZ() + Randf((float)-m_dAimAccuracy, (float)m_dAimAccuracy));
 
 	AimingPos = toPos;
 
@@ -61,88 +71,195 @@ void WeaponSystem::AddNoiseToAim(Vec3<float>& AimingPos)const {
 
 }
 
+void WeaponSystem::setWeapon(int newWeapon){
+
+	switch (newWeapon) {
+	case LANZACOHETES:
+		if (!buscar("RocketLauncher")) {
+			listaWeapons->insertar(rocket);
+		}
+		else {
+			rocket->resetAmmoTotal();
+		}
+		break;
+	case ASALTO:
+		if (!buscar("Asalto")) {
+			listaWeapons->insertar(asalto);
+		}
+		else {
+			asalto->resetAmmoTotal();
+		}
+		break;
+	case PISTOLA:
+		if (!buscar("Pistola")) {
+			listaWeapons->insertar(pistola);
+		}
+		else {
+			pistola->resetAmmoTotal();
+		}
+		break;
+	case SNIPER:
+		if (!buscar("Sniper")) {
+			listaWeapons->insertar(sniper);
+		}
+		else {
+			sniper->resetAmmoTotal();
+		}
+		break;
+	}
+
+}
+
 void WeaponSystem::TakeAimAndShoot()const
 {
-	//aim the weapon only if the current target is shootable or if it has only
-	//very recently gone out of view (this latter condition is to ensure the 
-	//weapon is aimed at the target even if it temporarily dodges behind a wall
-	//or other cover)
 
-	//IF ORIGINAL
+
 	/*	if (m_pOwner->getTargetSys()->isTargetShootable() ||
 		(m_pOwner->getTargetSys()->GetTimeTargetHasBeenOutOfView() <
 			m_dAimPersistance))
 	{*/
-	if (m_pOwner->getTargetSys()->isTargetWithinFOV())
-	{
-
-		//the position the weapon will be aimed at
-		Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
-
-		float DistToTarget=Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
-
-		m_pOwner->elegirWeapon(DistToTarget);
 
 
-		//if the current weapon is not an instant hit type gun the target position
-		//must be adjusted to take into account the predicted movement of the 
-		//target
+	if (GetCurrentWeapon()->canShoot()) {
 
-		if (GetCurrentWeapon()->getClassName() == "RocketLauncher")
+		if (m_pOwner->getTargetSys()->isTargetWithinFOV())
 		{
-		//	AimingPos = PredictFuturePositionOfTarget();
 
-			//if the weapon is aimed correctly, there is line of sight between the
-			//bot and the aiming position and it has been in view for a period longer
-			//than the bot's reaction time, shoot the weapon
+			if (!m_pOwner->getTargetBot()->isDying() && !m_pOwner->isDying()) {
 
-			//IF ORIGINAL
-			/*if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
-				(m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >
-					m_dReactionTime) &&
-				m_pOwner->hasLOSto(AimingPos))
-			{*/
+				if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible()>m_dReactionTime) {
 
-			//if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
-		//	{
-			
-			
-			AddNoiseToAim(AimingPos);
+					//m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
 
-				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
-		//	}
-		}
+					Vec3<float> AimingPos = m_pOwner->getTargetBot()->getRenderState()->getPosition();
 
-		//no need to predict movement, aim directly at target
-		else
-		{
-			//if the weapon is aimed correctly and it has been in view for a period
-			//longer than the bot's reaction time, shoot the weapon
+					float DistToTarget = Vec3<float>::getDistance(m_pOwner->getRenderState()->getPosition(), AimingPos);
 
+					m_pOwner->elegirWeapon(DistToTarget);
 
-			//IF ORIGINAL
-			/*			if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
-				(m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >
-					m_dReactionTime))
-			{*/
+					AddNoiseToAim(AimingPos);
 
-
-			if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() >m_dReactionTime)
-			{
 				
-			
-			AddNoiseToAim(AimingPos);
+					GetCurrentWeapon()->shoot(AimingPos);
+				
+				}
 
-				GetCurrentWeapon()->shootBot(m_pOwner->getRenderState()->getPosition(), AimingPos);
 			}
+		
 		}
-
 	}
 
-	//no target to shoot at so rotate facing to be parallel with the bot's
-	//heading direction
-	else
-	{
-		//m_pOwner->RotateFacingTowardPosition(m_pOwner->getRenderPosition() + m_pOwner->Heading());
+}
+
+
+/*
+Vec3<float> WeaponSystem::PredictFuturePositionOfTarget()const {
+
+	double MaxSpeed = 160;//160 es la velocidad que ponemos a nuestros RocketBullets
+
+	//if the target is ahead and facing the agent shoot at its current pos
+	float DistToEnemy = Vec3<float>::getDistance(m_pOwner->getTargetBot()->getRenderState()->getPosition(), m_pOwner->getRenderState()->getPosition());
+	
+	//the lookahead time is proportional to the distance between the enemy
+	//and the pursuer; and is inversely proportional to the sum of the
+	//agent's velocities
+	double LookAheadTime = DistToEnemy /
+		(MaxSpeed + 2);//2 es la velocidad del player
+
+	//return the predicted future position of the enemy
+	return m_pOwner->getTargetBot()->getRenderState()->getPosition() +
+		2 * LookAheadTime;
+}
+*/
+
+void WeaponSystem::WeaponSystemResetAll() {
+
+	listaWeapons->valorActual()->getNode()->setVisible(false);
+
+
+	listaWeapons->Vaciar();
+
+	asalto->inicializar();
+
+	rocket->inicializar();
+
+	pistola->inicializar();
+
+	sniper->inicializar();
+
+
+	listaWeapons->insertar(pistola);
+	listaWeapons->valorActual()->getNode()->setVisible(true);
+
+	rocket->setEquipada(false);
+	asalto->setEquipada(false);
+	sniper->setEquipada(false);
+
+	pistola->setEquipada(true);
+
+}
+
+void WeaponSystem::vaciarArma(std::string arma) {
+
+	if (arma == "Asalto")
+		if (buscar("Asalto"))
+			asalto->vaciar();
+
+
+	if (arma == "RocketLauncher")
+		if (buscar("RocketLauncher"))
+			rocket->vaciar();
+
+
+	if (arma == "Sniper")
+		if (buscar("Sniper"))
+			sniper->vaciar();
+
+	if (arma == "Pistola")
+		if (buscar("Pistola"))
+			pistola->vaciar();
+
+}
+
+void WeaponSystem::InsertarArmaDebug(std::string arma) {
+
+
+	if (arma == "Asalto") {
+		if (!buscar("Asalto")) {
+			listaWeapons->insertar(asalto);
+		}
+		else {
+			asalto->resetAmmoTotal();
+		}
 	}
+
+
+	if (arma == "RocketLauncher") {
+		if (!buscar("RocketLauncher")) {
+			listaWeapons->insertar(rocket);
+		}
+		else {
+			rocket->resetAmmoTotal();
+		}
+	}
+
+	if (arma == "Sniper") {
+		if (!buscar("Sniper")) {
+			listaWeapons->insertar(sniper);
+		}
+		else {
+			sniper->resetAmmoTotal();
+		}
+	}
+
+	if (arma == "Pistola") {
+		if (!buscar("Pistola")) {
+			listaWeapons->insertar(pistola);
+		}
+		else {
+			pistola->resetAmmoTotal();
+		}
+	}
+
+
 }

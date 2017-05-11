@@ -1,13 +1,15 @@
 #pragma once
-#include <Entity.h>
+#include <EntActive.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision\CollisionDispatch\btGhostObject.h>
 #include <Player.h>
+#include <Enemy_Bot.h>
+#include <StatesIA\BuscarWeapon.h>
 
 
 
-class WeaponDrop : public Entity
+class WeaponDrop : public EntActive
 {
 public:
 	WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name);
@@ -30,7 +32,7 @@ public:
 
 	virtual void handleMessage(const Message& message) =0;
 
-	virtual std::string getClassName() { return "WeaponDrop"; }
+	virtual std::string getClassName() = 0;
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) = 0;
 
@@ -47,5 +49,7 @@ protected:
 	int estado = DISPONIBLE;
 	btGhostObject* m_ghostObject;							
 	btVector3 m_currentPosition;
+
+	std::shared_ptr<SceneNode> nodo_platform;
 };
 

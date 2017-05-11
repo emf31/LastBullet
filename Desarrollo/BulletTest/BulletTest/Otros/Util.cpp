@@ -35,13 +35,17 @@ float Randf(float min, float max)
 
 int Randi()
 {
-	std::srand(std::time(0));
+	std::srand((unsigned int)std::time(0));
 	return std::rand();
 }
 
 int Randi(int min, int max)
 {
 	return Randi() % (max - min + 1) + min;
+}
+
+float clip(float n, float lower, float upper) {
+	return std::max(lower, std::min(n, upper));
 }
 
 btVector3 bt(const Vec3<float>& vec)

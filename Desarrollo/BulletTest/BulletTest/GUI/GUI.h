@@ -2,9 +2,8 @@
 
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
-#include <CEGUI/RendererModules/Irrlicht/Renderer.h>
 
-#include "../MastEventReceiver.hpp"
+#include <EventListener.h>
 
 
 struct vec4f{
@@ -12,13 +11,20 @@ struct vec4f{
 };
 
 namespace Motor{
-	class GUI {
+	class GUI : public EventListener {
+
 	public:
-		void init(const std::string& resourcesPath, irr::IrrlichtDevice *device);
+		GUI();
+		~GUI();
+
+		void init(const std::string& resourcesPath, const std::string& name);
 		void destroy();
 		void draw();
 
-		virtual void update()=0;
+		virtual void update() = 0;
+
+		// Heredado vía EventListener
+		virtual void handleEvent(Event * ev) = 0;
 
 		void loadScheme(const std::string& schemeFile);
 		void setFont(const std::string& fontFile);
@@ -32,11 +38,12 @@ namespace Motor{
 
 		void setMouseCursor(const std::string& mouse);
 
-		CEGUI::Key::Scan irrlichtToCeguiKey(irr::EKEY_CODE key);
+		CEGUI::Key::Scan GlfwToCeguiKey( int glfwKey);
+		CEGUI::MouseButton GlfwToCeguiButton( int glfwButton);
 
-		void injectKeyDown(irr::EKEY_CODE key);
+		void injectKeyDown(int key);
 
-		void injectKeyUp(irr::EKEY_CODE key);
+		void injectKeyUp(int key);
 
 		void injectMousePosition(float x, float y);
 
@@ -54,22 +61,32 @@ namespace Motor{
 
 
 		static void setWidgetDestRect(CEGUI::Window* widget, const vec4f& destRectPerc, const vec4f& destRectPix);
+
 		//Getters
-		CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
-		//CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_rendererIrrlicht; }
+		//CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
 		const CEGUI::GUIContext* getContext() { return m_context; }
 
 		bool debugInput = false;
+		bool escapeInput = false;
+
+
+		void toggleVisible() {
+			getContext()->getRootWindow()->setVisible(!getContext()->getRootWindow()->isVisible());
+		}
 
 	private:
 		CEGUI::OpenGL3Renderer* m_renderer;
-		//CEGUI::IrrlichtRenderer* m_rendererIrrlicht;
+
 		CEGUI::GUIContext* m_context = nullptr;
 
 		CEGUI::Window* m_root = nullptr;
 
 		unsigned int m_lastTime = 0;
 		
+		std::string m_name;
+
+		
+
 	};
 }
 

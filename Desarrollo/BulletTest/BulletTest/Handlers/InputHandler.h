@@ -24,7 +24,7 @@ public:
 	void borrarContenido();
 
 	bool generate_input_commands(std::vector<CommandPtr> &command_queue);
-	void bind(EKEY_CODE key, CommandPtr command);
+	void bind(int key, CommandPtr command);
 
 	
 
@@ -45,20 +45,20 @@ private:
 	CommandPtr reload;
 	CommandPtr apuntar;
 
-	std::map <EKEY_CODE, CommandPtr> commands;
+	std::map <int, CommandPtr> commands;
 
 
-	std::map <EKEY_CODE, State> state_map;
-	std::map <EKEY_CODE, Action> action_map;
+	std::map <int, State> state_map;
+	std::map <int, Action> action_map;
 
 	bool input_mapping();
 	void fill_command_queue(std::vector<CommandPtr> &command_queue);
 
-	void keydown(EKEY_CODE keyCode);
-	void keyup(EKEY_CODE keyCode);
+	void keydown(int keyCode);
+	void keyup(int keyCode);
 
-	bool is_held(EKEY_CODE key);
-	bool was_pressed(EKEY_CODE key);
+	bool is_held(int key);
+	bool was_pressed(int key);
 
 	std::vector<CommandPtr> command_queue;
 

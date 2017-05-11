@@ -1,0 +1,37 @@
+
+newmtl TriggerSniperAndScope
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_Trigger_Diffuse.png
+map_Ke Weapons/BottomSniper_EMI.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_BackSniper_Diffuse.png
+map_Ke Weapons/BackSniper_EMI.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_ScopeAndBarrel_Diffuse.png
+map_Ke Props/noemisivo.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_MiddleSniper_Diffuse.png
+map_Ke Weapons/MiddleSniper_EMI.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50

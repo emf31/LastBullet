@@ -1,9 +1,10 @@
 #include "LifeComponent.h"
 #include <Player.h>
-#include <Cliente.h>
 #include <Map.h>
+#include <NetworkManager.h>
+#include <Character.h>
 
-LifeComponent::LifeComponent(Entity * owner) 
+LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)
 {
 }
@@ -11,6 +12,7 @@ LifeComponent::LifeComponent(Entity * owner)
 LifeComponent::~LifeComponent()
 {
 }
+//guid = quien te ha disparado
 void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 {
 	m_vida -= cantidad;
@@ -19,24 +21,38 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		m_isDying = true;
 		relojMuerte.restart();
 
-		if (Cliente::i().isConected()) {
-
-			TPlayer nuevoplayer;
-			nuevoplayer.position = m_pOwner->getRenderState()->getPosition();
-			nuevoplayer.guid = m_pOwner->getGuid();
-			nuevoplayer.name = m_pOwner->getName();
 
 
-			Cliente::i().dispatchMessage(nuevoplayer, MUERTE);
+		RakID nuevoplayer;
+		nuevoplayer.guid = m_pOwner->getGuid();
+		
 
+		Entity* ent = EntityManager::i().getRaknetEntity(guid);
 
-			TKill kill;
-			kill.guidKill = guid;
-			kill.guidDeath = m_pOwner->getGuid();
-
-			Cliente::i().dispatchMessage(kill, ACTUALIZA_TABLA);
-	
+		if (ent != NULL && ent->getClassName() == "Enemy_Bot") {
+			Message msg(ent, "MATASTE", NULL);
+			MessageHandler::i().sendMessageNow(msg);
 		}
+
+
+
+		NetworkManager::i().dispatchMessage(nuevoplayer, MUERTE);
+
+
+		TKill kill;
+		kill.guidKill = guid;
+		kill.guidDeath = m_pOwner->getGuid();
+
+		Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
+		Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
+
+		//std::cout << "KILL: " << entKill->getName() << std::endl;
+		//std::cout << "DEATH: " << entDeath->getName() << std::endl;
+		//std::cout << "HA MATADO " << guid <<std::endl;
+		
+
+		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+	
 
 	}
 	
@@ -50,6 +66,7 @@ void LifeComponent::update()
 		m_vida = 100;
 
 		m_pOwner->setPosition(Map::i().searchSpawnPoint());
+		m_pOwner->resetMachineState();
 	}
 
 }

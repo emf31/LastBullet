@@ -1,8 +1,8 @@
 
-#include "AnimatedSceneNode.h"
+/*#include "AnimatedSceneNode.h"
 
 
-AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver* irrDriver) : SceneNode(irrDriver),
+AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IrrlichtDevice * irrDevice) : SceneNode(irrDevice),
 	m_node(node)
 {
 }
@@ -10,13 +10,12 @@ AnimatedSceneNode::AnimatedSceneNode(IAnimatedMeshSceneNode* node, IVideoDriver*
 
 AnimatedSceneNode::~AnimatedSceneNode()
 {
-	m_node = nullptr;
-	m_irrDriver = nullptr;
+
 }
 
 void AnimatedSceneNode::setTexture(const io::path & texture, int material)
 {
-	m_node->getMaterial(material).setTexture(0, m_irrDriver->getTexture(texture));
+	m_node->getMaterial(material).setTexture(0, m_irrDevice->getVideoDriver()->getTexture(texture));
 }
 
 
@@ -30,6 +29,12 @@ void AnimatedSceneNode::setPosition(Vec3<float> position)
 Vec3<float> AnimatedSceneNode::getPosition()
 {
 	vector3df aux = m_node->getPosition();
+	return Vec3<float>(aux.X, aux.Y, aux.Z);
+}
+
+Vec3<float> AnimatedSceneNode::getRotation()
+{
+	vector3df aux = m_node->getRotation();
 	return Vec3<float>(aux.X, aux.Y, aux.Z);
 }
 
@@ -71,3 +76,4 @@ void AnimatedSceneNode::setVisible(bool visible)
 {
 	m_node->setVisible(visible);
 }
+*/

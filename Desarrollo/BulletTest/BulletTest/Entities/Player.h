@@ -4,27 +4,33 @@
 #include <btBulletDynamicscommon.h>
 #include "KinematicCharacterController.h"
 #include "Granada.h"
-#include "Weapons/Weapon.h"
-#include "../Motor/AnimatedSceneNode.h"
-#include "../Motor/Animation.h"
+#include <Weapons\Weapon.h>
+#include <AnimatedSceneNode.h>
+#include <Animation.h>
 #include <vector>
-#include "../Otros/Lista.h"
-#include "../Otros/LifeComponent.h"
-#include <Subject.h>
-#include <Observer.h>
+
+#include <Lista.h>
+#include <LifeComponent.h>
+
 #include "Weapons/Asalto.h"
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
 #include "Weapons/Sniper.h"
 
-class Player : public Entity, public Subject
+
+
+#include <Character.h>
+
+
+class NetPlayer;
+
+
+class Player : public Character
 {
 public:
-	Player(const std::string& names, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
+	Player(const std::string& names, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 	~Player();
 
-	
-	
 
 	// Heredado vía Entity
 	virtual void inicializar() override;
@@ -40,6 +46,7 @@ public:
 
 	void setWeapon(int weapon);
 
+	void calcularMovimiento();
 	void jump();
 
 	void shoot();
@@ -59,35 +66,27 @@ public:
 
 	void impulsar(Vec3<float> force);
 
+	void godMode();
+
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
 
-	LifeComponent& getLifeComponent() { return life_component; }
+	LifeComponent& getLifeComponent() { return *life_component; }
 
-	std::string getCurrentWeaponName() {
-		return listaWeapons->valorActual()->getClassName();
-	};
+	std::string getCurrentWeaponName() { return listaWeapons->valorActual()->getClassName(); };
 
-	Weapon* getCurrentWeapon() {
-		return listaWeapons->valorActual();
-	};
+	Weapon* getCurrentWeapon() { return listaWeapons->valorActual(); };
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
+
 	int getCargadorActual() { return listaWeapons->valorActual()->getCapacidadCargador(); }
-	int getAmmoTotal() { 
+	int getAmmoTotal();
 
-		if (listaWeapons->valorActual()->getEstadoWeapon() == CARGADA) {
-			return listaWeapons->valorActual()->getNumCargadores()*getCargadorActual() + listaWeapons->valorActual()->getBalasRestantes();
-		}
-		else {
-			return -1;
-		}
-	}
 
-	btPairCachingGhostObject* getGhostObject() {
-		return p_controller->getGhostObject();
-	}
+
+	btPairCachingGhostObject* getGhostObject() const{ return p_controller->getGhostObject(); }
+
 
 	bool getApuntando() {
 		return apuntando;
@@ -95,21 +94,30 @@ public:
 
 	void resetAll();
 
-	KinematicCharacterController* p_controller;
-
 	void updateRelojes();
+
+	//shared ptr, we can pass by value
+	std::shared_ptr<NetPlayer> m_network;
+
+	KinematicCharacterController* p_controller;
 
 	bool hit;
 	bool sangre;
-
-	bool endGame = false;
-
 	Clock relojSangre, relojHit;
 
+	virtual float getVida() override;
+	virtual bool isDying() override;
+
+	bool isShooting;
+
+
+	void updateCurrentWeaponPosition() {
+		listaWeapons->valorActual()->updatePositionAndRotation();
+	}
 	
 private:
-
-	Asalto* asalto;
+	
+	void targetToWorld(Vec3<float>& target);
 
 	Animation* animation;
 
@@ -119,11 +127,12 @@ private:
 	//LISTA DE ARMAS
 	Lista* listaWeapons;
 
+	Asalto* asalto;
 	Pistola* pistola;
 	RocketLauncher* rocket;
 	Sniper* sniper;
 
-	LifeComponent life_component;
+	
 
 	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
@@ -133,10 +142,11 @@ private:
 	bool tieneRocketLauncher;
 	bool tienePistola;
 	bool tieneSniper;
+	bool m_godMode;
 
 	bool apuntando=false;
 
-	bool isShooting;
+
 
 	bool isJumping;
 	bool isMoving;
@@ -154,4 +164,3 @@ private:
 
 	
 };
-

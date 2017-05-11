@@ -5,7 +5,7 @@
 #include <vec3.hpp>
 #include <map>
 #include <Clock.hpp>
-
+#include <Character.h>
 
 class Enemy_Bot;
 
@@ -16,13 +16,13 @@ private:
 	//propietario de la instancia
 	Enemy_Bot* m_bot;
 
-	std::map<Entity*, Memory> m_botMemory;
+	std::map<Character*, Memory> m_botMemory;
 
 	double m_memorySpan;
 
 	Clock sensoryClock;
 
-	void updateNewEnemies(Entity* ent);
+	void updateNewEnemies(Character* ent);
 
 public:
 
@@ -30,19 +30,19 @@ public:
 	~SensoryMemory();
 
 	void updateVision();
-	void updateSound();
-	bool isEnemyShootable(Entity* ent)const;
-	bool isEnemyInFOV(Entity* ent)const;
-	bool isRaycastObstructed(Entity* ent)const;
-	bool isInFOV(Entity* ent)const;
+	void updateSound(Character* ent);
+	bool isEnemyShootable(Character* ent)const;
+	bool isEnemyInFOV(Character* ent)const;
+	bool isRaycastObstructed(Character* ent)const;
+	bool isInFOV(Character* ent)const;
 
-	Vec3<float> GetLastRecordedPositionOfOpponent(Entity* ent)const;
-	double GetTimeOpponentHasBeenVisible(Entity* ent)const;
-	double GetTimeSinceLastSensed(Entity* ent)const;
-	double GetTimeOpponentHasBeenOutOfView(Entity* ent)const;
+	Vec3<float> GetLastRecordedPositionOfOpponent(Character* ent)const;
+	double GetTimeOpponentHasBeenVisible(Character* ent)const;
+	double GetTimeSinceLastSensed(Character* ent)const;
+	double GetTimeOpponentHasBeenOutOfView(Character* ent)const;
 
 
-	std::list<Entity*> GetListOfRecentlySensedEnemies()const;
+	std::list<Character*> GetListOfRecentlySensedEnemies()const;
 
 
 };

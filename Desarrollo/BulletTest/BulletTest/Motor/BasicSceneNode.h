@@ -1,44 +1,41 @@
 #pragma once
-#include "irrlicht.h"
-#include <iostream>
-#include <string>
-#include <vec3.hpp>
-#include "SceneNode.h"
 
+#include <Engine/TModel.h>
 
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
+#include <SceneNode.h>
+
 
 class BasicSceneNode : public SceneNode
 {
 public:
-	BasicSceneNode(ISceneNode* node, IVideoDriver* irrDriver);
+	BasicSceneNode(TModel* node);
 	~BasicSceneNode();
 
 	virtual void addChild(std::shared_ptr<SceneNode> child) override;
 	virtual void removeChild(std::shared_ptr<SceneNode> child) override;
-	virtual void setTexture(const io::path& texture, int material) override;
-	virtual void setPosition(Vec3<float> position) override;
-	virtual void setRotation(Vec3<float> rotation) override;
+	virtual void setTexture(const std::string& texture, int material) override;
+	virtual void setPosition(const Vec3<float>& position) override;
+	virtual void setRotation(Vec3<float>& rotation) override;
+	virtual void setScale(Vec3<float>& scale) override;
+	virtual void setRotationXYZ(Vec3<float>& rot) override;
+	virtual void setRotationRightHand(Vec3<float>& rot) override;
+
+	virtual void setOrientation(Vec3<float>& orientation) override;
+
+	virtual void updatePosition(Vec3<float> pos) override { m_node->updatePosition(pos); }
 
 	virtual Vec3<float> getPosition() override;
+	virtual Vec3<float> getRotation() override;
 	virtual Vec3<float> getScale() override;
 	virtual void setVisible(bool visible) override;
-	virtual ISceneNode* getNodo() override;
-	virtual void setAnimation(int start, int end) override {};
-
-	virtual void updateAbsolutePosition() override {
-		m_node->updateAbsolutePosition();
-	}
-
+	//TModel* getNodo();
+	virtual void setColor(const Vec3<float> color) override;
+	
 private:
-	ISceneNode* m_node;
 
-	// Heredado vía SceneNode
+	TModel* m_node;
+
+	virtual TEntity* getEntityNode() override  { return m_node; }
 	
 };
 

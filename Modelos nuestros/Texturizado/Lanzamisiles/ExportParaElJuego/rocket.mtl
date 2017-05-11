@@ -1,0 +1,102 @@
+newmtl Box003SG
+illum 4
+Kd 0.10 0.10 0.10
+Ka 0.10 0.10 0.10
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl Cylinder001SG
+illum 4
+Kd 0.00 0.20 0.95
+Ka 0.00 0.20 0.95
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl Cylinder001SG1
+illum 4
+Kd 0.02 0.02 0.02
+Ka 0.02 0.02 0.02
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl Cylinder003SG
+illum 4
+Kd 0.18 0.22 0.27
+Ka 0.18 0.22 0.27
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl Cylinder010SG
+illum 4
+Kd 0.40 0.69 0.90
+Ka 0.40 0.69 0.90
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl ___Default
+illum 4
+Kd 0.00 0.20 0.95
+Ka 0.00 0.20 0.95
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl ___Default2
+illum 4
+Kd 0.18 0.22 0.27
+Ka 0.18 0.22 0.27
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl ___Default4
+illum 4
+Kd 0.40 0.69 0.90
+Ka 0.40 0.69 0.90
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl ___Default6
+illum 4
+Kd 0.10 0.10 0.10
+Ka 0.10 0.10 0.10
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.00 0.00 0.00
+Ns 10.00
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Cilindros.jpg
+map_Ks Cilindros_SPEC.jpg
+map_Kn Cilindros_NRM.jpg
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd CentroMira.jpg
+map_Ks CentroMira_SPEC2.jpg
+map_Kn CentroMira_NRM.jpg
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd AbajoRocketLauncher.jpg
+map_Ks AbajoRocketLauncher_SPEC.jpg
+map_Kn AbajoRocketLauncher_NRM.jpg

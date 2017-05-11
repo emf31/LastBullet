@@ -15,7 +15,7 @@ public:
 	}
 
 
-	void inicializar();
+	void inicializar(const std::string& mapa);
 
 	
 	void borrarContenido();
@@ -25,8 +25,8 @@ public:
 	}
 
 	//este metodo se encarga de comprobar si hay algun obstaculo entre las dos posiciones (un raycast por ejemplo), si no hay ningun obstaculo se sigue un camino recto, sino hay que calcular el camino.
-	bool isPathObstructed(Vec2f posIni, Vec2f posFinal, float radio);
-	void ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec2f>& camino);
+	bool isPathObstructed(Vec3<float> posIni, Vec3<float> posFinal, float radio);
+	void ConvertirNodosAPosiciones(std::list<int>& CaminoDeNodos, std::list<Vec3<float>>& camino);
 	void addNodosToCells();
 
 
@@ -36,7 +36,7 @@ public:
 
 	std::vector<Vec3<float>> getSpawnPoints() { return map.getSpawnPoints(); };
 
-	void CalcularNodosCercanos(Vec2f& pos, std::list<NavGraphNode*>& nodosCercanos, Vec2f& posBot);
+	void CalcularNodosCercanos(Vec3<float>& pos, std::list<NavGraphNode*>& nodosCercanos, Vec3<float>& posBot);
 
 
 	

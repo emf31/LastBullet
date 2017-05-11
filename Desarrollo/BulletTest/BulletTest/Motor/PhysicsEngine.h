@@ -18,20 +18,20 @@ namespace col {
 		Granada = BIT(1),
 		Character = BIT(2),
 		Rocket = BIT(3),
-		Caja = BIT(4),
+		Bot = BIT(4),
 		Enemy = BIT(5),
 		Sensor = BIT(6),
 		RocketEnemy = BIT(7),
-		Static = BIT(8)
+		Static = BIT(8),
 	};
 
-	const int staticCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Rocket | Collisions::Caja | Collisions::Enemy | Collisions::RocketEnemy;
-	const int characterCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Caja;
-	const int rocketCollidesWith = Collisions::Static | Collisions::Caja | Collisions::Enemy;
-	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Caja;
-	const int sensorCollidesWith = Collisions::Character;
-	const int cajaCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Caja;
-	const int enemyCollidesWith = Collisions::RAY_CAST | Collisions::Static | Collisions::Character | Collisions::Rocket| Collisions::Caja | Collisions::Enemy;
+	const int staticCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Rocket | Collisions::Bot | Collisions::Enemy | Collisions::RocketEnemy;
+	const int characterCollidesWith = Collisions::RAY_CAST | Collisions::Character | Collisions::Static | Collisions::Sensor | Collisions::Enemy | Collisions::RocketEnemy| Collisions::Bot;
+	const int rocketCollidesWith = Collisions::Static | Collisions::Bot | Collisions::Enemy;
+	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Bot;
+	const int sensorCollidesWith = Collisions::Character | Collisions::Bot;
+	const int BotCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Sensor | Collisions::RocketEnemy | Collisions::Enemy | Collisions::Bot;
+	const int enemyCollidesWith = Collisions::RAY_CAST | Collisions::Static | Collisions::Character | Collisions::Rocket | Collisions::Bot | Collisions::Enemy;
 }
 
 namespace bodyPart {
@@ -79,6 +79,10 @@ public:
 	int m_shapeIndex;
 };
 
+struct Shape {
+
+};
+
 
 class PhysicsEngine
 {
@@ -102,6 +106,8 @@ public:
 
 	//Crea un kinematic character controller
 	KinematicCharacterController* createCapsuleKinematicCharacter(Entity* ent, float radius, float height, float mass);
+
+	btRigidBody* createCompoundShape(Entity* entity, const Vec3<float> &scale, float masa, const std::string& mesh, int body_state = ACTIVE_TAG);
 
 	//creamos y registramos un rigidbody cuadrado - asumimos que la posicion esta puesta
 	btRigidBody* createBoxRigidBody(Entity* entity, const Vec3<float> &scale, float masa,bool haveMesh , Vec3<float> centerCol = Vec3<float>(0, 0, 0),int body_state = ACTIVE_TAG);

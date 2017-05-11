@@ -1,10 +1,10 @@
 #include "Sniper.h"
-#include <Cliente.h>
 #include <Estructuras.h>
 #include <Util.h>
+#include <NetworkManager.h>
 
 
-Sniper::Sniper() : Weapon()
+Sniper::Sniper(Character* ent) : Weapon(ent)
 {
 
 
@@ -18,25 +18,20 @@ Sniper::~Sniper()
 
 void Sniper::inicializar()
 {
-	damage = 100;
-	capacidadAmmo = 5;
-	disparos = 0;
-	cadencia = milliseconds(2000);
-	recarga = milliseconds(1000);
-	numCargadores = numCargadoresSniper;
-	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
-	FUERZA = btVector3(300.f, 300.f, 300.f);
+		damage = 100;
+		capacidadAmmo = 5;
+		disparos = 0;
+		cadencia = milliseconds(2000);
+		recarga = milliseconds(1000);
+		numCargadores = numCargadoresSniper;
+		SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
+		FUERZA = btVector3(300.f, 300.f, 300.f);
+	
 }
 
 void Sniper::update(Time elapsedTime)
 {
 	if (equipada) {
-
-
-		/*Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-		Vec3<float> player_rot = GraphicEngine::i().getActiveCamera()->getRotation();
-		m_renderState.updatePositions(Vec3<float>(player_pos.getX(), player_pos.getY() + 5.5f, player_pos.getZ()));
-		m_renderState.updateRotations(player_rot);*/
 
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
@@ -69,16 +64,10 @@ void Sniper::handleInput()
 void Sniper::cargarContenido()
 {
 
-
-	Vec3<float> player_pos = EntityManager::i().getEntity(PLAYER)->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createAnimatedNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.5f, 0.5f, 0.5f), "", "../media/arma/Asalto.obj");
+	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/Weapons/sniperFinalv2.obj");
 	m_nodo->setVisible(false);
-	//m_nodo->setTexture("../media/ice0.jpg", 0);
-	//m_nodo->setTexture("../media/ice0.jpg", 1);
 
-
-
-	GraphicEngine::i().getActiveCamera()->addChild(m_nodo);
 
 }
 
@@ -96,183 +85,92 @@ bool Sniper::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-void Sniper::shootBot(Vec3<float> posOwner, Vec3<float> posTarget) {
 
-
-	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
-
-		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
-
-			disparos++;
-
-
-			btVector3 start = bt(posOwner);
-
-			btVector3 target = bt(posTarget);
-
-			btVector3 direccion = target - start;
-			direccion.normalize();
-
-			btVector3 end = start + (direccion*SIZE_OF_WORLD);
-
-
-			btKinematicClosestShapeResultCallback ray(start, end);
-
-			PhysicsEngine::i().m_world->rayTest(start, end, ray);
-
-			btVector3 posicionImpacto;
-
-
-			if (ray.hasHit())//si ray ha golpeado algo entro
-			{
-
-				if (ray.parte != bodyPart::Body::EXTERNA) {
-					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-
-
-
-					if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot" || ent->getClassName() == "Player") {
-
-						Message msg(ent, "COLISION_BALA", &damage);
-						MessageHandler::i().sendMessage(msg);
-					}
-					//Para mover objetos del mapa
-					posicionImpacto = ray.m_hitPointWorld;
-
-					if (ent->getClassName() == "PhysicsEntity") {
-						btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-						btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-					}
-
-				}
-
-			}
-
-
-
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
-			bala->cargarContenido();
-
-			relojCadencia.restart();
-
-		}
-
-	}
-
-
-	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
-		relojrecarga.restart();
-		estadoWeapon = DESCARGADA;
-	}
-}
-
-void Sniper::shoot()
+Entity* Sniper::shoot(const Vec3<float>& target)
 {
+	//si impacta con algun personaje devuelve true
+	Entity* hitted = nullptr;
 
-	if (disparos < capacidadAmmo && estadoWeapon == CARGADA) {
 
+	//aumentamos en uno el numero de disparos, para reducir la municion
+	disparos++;
 
-		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
+	// posicion de la camara
+	btVector3 start = bt(m_ent->getRenderState()->getPosition());
+	start += btVector3(0.f, 3.f, 0.f);
 
-			GraphicEngine::i().getActiveCamera()->cameraRecoil();
+	btVector3 tg = bt(target);
 
-			//aumentamos en uno el numero de disparos, para reducir la municion
-			disparos++;
+	btVector3 direccion = tg - start;
+	direccion.normalize();
 
-			// posicion de la camara
-			btVector3 start = bt(GraphicEngine::i().getActiveCamera()->getPosition());
+	start += direccion * 3.f;
 
-			//añadimos un poco de desvio en el arma
-			start += btVector3(Randf(-1.f, 1.f), Randf(-1.f, 1.f), Randf(-1.f, 1.f)) / 10.f;
+	btVector3 end = start + (direccion*SIZE_OF_WORLD);
 
-			btVector3 target = bt(GraphicEngine::i().getActiveCamera()->getTarget());
-			btVector3 direccion = target - bt(GraphicEngine::i().getActiveCamera()->getPosition());
-			direccion.normalize();
+	btKinematicClosestShapeResultCallback ray(start, end);
 
-			btVector3 end = start + (direccion*SIZE_OF_WORLD);
+	PhysicsEngine::i().m_world->rayTest(start, end, ray);
 
-			btKinematicClosestShapeResultCallback ray(start, end);
-
-			PhysicsEngine::i().m_world->rayTest(start, end, ray);
-
-			btVector3 posicionImpacto;
+	btVector3 posicionImpacto;
 
 
 
-			if (ray.hasHit())//si ray ha golpeado algo entro
+	if (ray.hasHit())//si ray ha golpeado algo entro
+	{
+
+		if (ray.parte != bodyPart::Body::EXTERNA) {
+			Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
+
+			if (ent != m_ent)
 			{
+				if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot"){
+					hitted = ent;
 
-				if (ray.parte != bodyPart::Body::EXTERNA) {
-					Entity* ent = static_cast<Entity*>(ray.m_collisionObject->getUserPointer());
-					if (ent != EntityManager::i().getEntity(PLAYER))
-					{
-						if (ent->getClassName() == "Enemy" || ent->getClassName() == "Enemy_Bot") {
-							Message msg(ent, "COLISION_BALA", &damage);
-							MessageHandler::i().sendMessage(msg);
-						}
-						//Para mover objetos del mapa
-						posicionImpacto = ray.m_hitPointWorld;
+					TImpactoBala impacto;
+					impacto.damage = damage;
+					impacto.guidImpactado = ent->getGuid();
+					impacto.guidDisparado = m_ent->getGuid();
 
-						if (ent->getClassName() == "PhysicsEntity") {
-							btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-							btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-						}
+					Message msg(ent, "COLISION_BALA", &impacto);
+					MessageHandler::i().sendMessageNow(msg);
+
 					}
+
+				//Para mover objetos del mapa
+				posicionImpacto = ray.m_hitPointWorld;
+
+				if (ent->getClassName() == "PhysicsEntity") {
+					btRigidBody::upcast(ray.m_collisionObject)->activate(true);
+					btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
 				}
-
 			}
-
-			GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), GraphicEngine::i().getActiveCamera()->getRotation());
-			bala->cargarContenido();
-
-			if (Cliente::i().isConected()) {
-				TBala bala;
-				bala.position = cons(start);
-				bala.direction = cons(direccion);
-				bala.finalposition = cons(posicionImpacto);
-				bala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
-				bala.guid = EntityManager::i().getEntity(PLAYER)->getGuid();
-
-				//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
-				Cliente::i().dispatchMessage(bala, DISPARAR_BALA);
-				//Cliente::i().dispararBala();
-			}
-
-			relojCadencia.restart();
-
 		}
 
-
 	}
+
+	GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
+	bala->cargarContenido();
+
+	TBala t_bala;
+	t_bala.position = cons(start);
+	t_bala.direction = cons(direccion);
+	t_bala.finalposition = cons(posicionImpacto);
+	t_bala.rotation = m_nodo->getRotation();
+	t_bala.guid = m_ent->getGuid();
+
+	//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
+	NetworkManager::i().dispatchMessage(t_bala, DISPARAR_BALA);
+
+
+	relojCadencia.restart();
+
+
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
 	}
+
+	return hitted;
+
 }
-/*
-double Sniper::getDesirability(double dist) {
-
-	fm.Fuzzify("DistToTarget", dist);
-	fm.Fuzzify("AmmoStatus", capacidadAmmo*numCargadores + disparosRestantes);
-
-	double desirability = fm.DeFuzzify("Desirability", FuzzyModule::max_av);
-
-	std::cout << "Deseabilidad del francotirador: " << desirability << "\n";
-
-	return desirability;
-}
-
-void Sniper::CalcularRules() {
-
-	fm.AddRule(FzAND(Target_Close, Ammo_Low), Undesirable);
-	fm.AddRule(FzAND(Target_Close, Ammo_Okay), Undesirable);
-	fm.AddRule(FzAND(Target_Close, Ammo_Loads), Undesirable);
-
-	fm.AddRule(FzAND(Target_Medium, Ammo_Low), Undesirable);
-	fm.AddRule(FzAND(Target_Medium, Ammo_Okay), Undesirable);
-	fm.AddRule(FzAND(Target_Medium, Ammo_Loads), Desirable);
-
-	fm.AddRule(FzAND(Target_Far, Ammo_Low), VeryDesirable);
-	fm.AddRule(FzAND(Target_Far, Ammo_Okay), VeryDesirable);
-	fm.AddRule(FzAND(Target_Far, Ammo_Loads), VeryDesirable);
-}*/

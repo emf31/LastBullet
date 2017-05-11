@@ -19,17 +19,19 @@ public:
 	}
 	//Envia un nuevo player a todos los clientes
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::RakPeerInterface *peer);
 	//este metodo ahora envia la posicion y la rotacion del jugador
-	void enviaNuevaPos(TMovimiento p, RakNet::RakPeerInterface *peer);
-	void lanzarGranda(TGranada &g, RakNet::RakPeerInterface *peer);
+	void enviaNuevaPos(TMovimiento p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
+	void lanzarGranda(TGranada &g, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
+	void enviarTerminarPartida(RakNet::RakPeerInterface *peer);
 	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
 	void enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface *peer);
-	void notificarMuerte(TPlayer &p, RakNet::RakPeerInterface *peer);
+	void notificarMuerte(RakID &p, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualVida(Life *l, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviaTiempoActualArma(DropObject *d, RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
-	void enviarDisparoCliente(TBala &b, RakNet::RakPeerInterface *peer);
-	void enviarDisparoClienteRocket(TBala &b, RakNet::RakPeerInterface *peer);
+	void enviarDisparoCliente(TBala &b, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
+	void enviarDisparoClienteRocket(TBala &b, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
 	void VidaCogida(TId &idVida, RakNet::RakPeerInterface *peer);
 	void ArmaCogida(TId &idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
@@ -38,8 +40,9 @@ public:
 	void aumentaKill(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
-	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);
-
+	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);;
+	void empezarPartida(RakNet::RakPeerInterface *peer, TGameInfo& info);;
+	void notificarDisponibilidad(RakID &p, RakNet::RakPeerInterface *peer);
 
 	//Inicializa todas las entities
 	void inicializar();
@@ -55,6 +58,11 @@ public:
 	Entity * getRaknetEntity(RakNet::RakNetGUID guid);
 	Entity * getEntityID(int id);
 	int MaxScore = 5;
+
+	int getNumJugadores() const { return m_jugadores.size(); }
+
+	std::list<Entity*> getAllPlayers();
+
 
 private:
 	EntityManager(EntityManager const&);

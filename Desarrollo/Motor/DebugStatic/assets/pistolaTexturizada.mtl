@@ -1,0 +1,52 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 23.02.2017 17:39:34
+
+newmtl 01___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.5880 0.5880 0.5880
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pistola1.png
+	map_Kd pistola1.png
+	map_Ks pistola1spec.png
+	map_ke noemisivo.jpg
+
+newmtl 09___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.5880 0.5880 0.5880
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pistola9.png
+	map_Kd pistola9.png
+	map_Ks pistola9spec.png
+	map_ke noemisivo.jpg
+
+newmtl 02___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.5880 0.5880 0.5880
+	Ke 0.0000 0.0000 0.0000
+	map_Ka pistola2.png
+	map_Kd pistola2.png
+	map_Ks pistola2spec.png
+	map_ke noemisivo.jpg
+
+

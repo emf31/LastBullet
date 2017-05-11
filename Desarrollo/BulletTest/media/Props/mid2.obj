@@ -1,0 +1,31 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 11.03.2017 01:37:29
+
+mtllib mid2.mtl
+
+#
+# object mid2
+#
+
+v  -10.4394 -0.0001 2.7661
+v  10.4394 -0.0001 -2.7661
+v  -10.4394 -0.0001 -2.7661
+v  10.4394 -0.0001 2.7661
+# 4 vertices
+
+vn 0.0000 1.0000 -0.0000
+# 1 vertex normals
+
+vt 0.8141 0.4164 0.0000
+vt 0.8666 0.2182 0.0000
+vt 0.8666 0.4164 0.0000
+vt 0.8141 0.2182 0.0000
+# 4 texture coords
+
+g mid2
+usemtl blinn1SG
+s off
+f 1/1/1 2/2/1 3/3/1 
+f 1/1/1 4/4/1 2/2/1 
+# 0 polygons - 2 triangles
+

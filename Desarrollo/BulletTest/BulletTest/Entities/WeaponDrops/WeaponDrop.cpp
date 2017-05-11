@@ -2,7 +2,7 @@
 #include "../../Motor/PhysicsEngine.h"
 
 
-WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name), timeRespawnWeapon(3)
+WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name), timeRespawnWeapon(3)
 {
 }
 
@@ -26,8 +26,7 @@ void WeaponDrop::setPosition(const Vec3<float>& pos)
 
 void WeaponDrop::asignaTiempo(Clock tiempo) {
 	//ponemos el tiempo al tiempo real que el server te envia, cambiamos el estado a usado y quitamos la colision.
-	
-	//PhysicsEngine::i().removeGhostObject(m_ghostObject);
+	PhysicsEngine::i().removeGhostObject(m_ghostObject);
 	estado = USADO;
 	m_nodo->setVisible(false);
 	clockRespawnWeapon = tiempo;
@@ -35,10 +34,10 @@ void WeaponDrop::asignaTiempo(Clock tiempo) {
 
 void WeaponDrop::ArmaCogida()
 {
-	if (estado == DISPONIBLE) {
-		//PhysicsEngine::i().removeGhostObject(m_ghostObject);
+	//if (estado == DISPONIBLE) {
+		PhysicsEngine::i().removeGhostObject(m_ghostObject);
 		estado = USADO;
 		clockRespawnWeapon.restart();
 		m_nodo->setVisible(false);
-	}
+	//}
 }

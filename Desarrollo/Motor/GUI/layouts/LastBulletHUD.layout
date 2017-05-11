@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="AlfiskoSkin/Label" name="Label" >
+            <Property name="Area" value="{{0.0390625,0},{0.736111,-1},{0.0390625,128},{0.736111,31}}" />
+            <Property name="Text" value="Vida: " />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FFFF3030" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label2" >
+            <Property name="Area" value="{{0.0390625,0},{0.854167,0},{0.0390625,128},{0.854167,32}}" />
+            <Property name="Text" value="Municion:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label3" >
+            <Property name="Area" value="{{0.0390625,0},{0.791667,-1},{0.0390625,128},{0.791667,31}}" />
+            <Property name="Text" value="Arma:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label4" >
+            <Property name="Area" value="{{0.0390625,0},{0.916667,-1},{0.0390625,128},{0.916667,31}}" />
+            <Property name="Text" value="Municion total:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="RightAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label5" >
+            <Property name="ID" value="1" />
+            <Property name="Area" value="{{0.0859375,75},{0.736111,0},{0.0859375,203},{0.736111,32}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FFFF3030" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label6" >
+            <Property name="ID" value="2" />
+            <Property name="Area" value="{{0.0859375,75},{0.791667,-1},{0.0859375,203},{0.791667,31}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label7" >
+            <Property name="ID" value="3" />
+            <Property name="Area" value="{{0.0859375,75},{0.854167,-1},{0.0859375,203},{0.854167,31}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label8" >
+            <Property name="ID" value="4" />
+            <Property name="Area" value="{{0.0859375,75},{0.916667,-1},{0.0859375,203},{0.916667,31}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorzFormatting" value="LeftAligned" />
+            <Property name="NormalTextColour" value="FF000000" />
+        </Window>
+        <Window type="DefaultWindow" name="DefaultWindow" >
+            <Property name="ID" value="10" />
+            <Property name="Area" value="{{0.192969,0},{0.147222,0},{0.83125,0},{0.695833,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
+            <Window type="Generic/Image" name="Image" >
+                <Property name="Area" value="{{0.291816,-173},{0.280556,-44},{0.291816,505},{0.280556,213}}" />
+                <Property name="Alpha" value="0.85" />
+                <Property name="Image" value="AlfiskoSkin/TablaFondo" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Window type="AlfiskoSkin/Label" name="Label" >
+                    <Property name="Area" value="{{0.190972,0},{0.0268817,0},{0.347222,0},{0.198925,0}}" />
+                    <Property name="Text" value="Jugador" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label2" >
+                    <Property name="Area" value="{{0.542969,0},{0.0268817,0},{0.647135,0},{0.198925,0}}" />
+                    <Property name="Text" value="Bajas" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label3" >
+                    <Property name="Area" value="{{0.684028,0},{0.0268817,0},{0.796875,0},{0.198925,0}}" />
+                    <Property name="Text" value="Muertes" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label4" >
+                    <Property name="Area" value="{{0.846354,0},{0.0282258,0},{0.959201,0},{0.200269,0}}" />
+                    <Property name="Text" value="Puntos" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label5" >
+                    <Property name="ID" value="1" />
+                    <Property name="Area" value="{{0.0434028,0},{0.268817,0},{0.494792,0},{0.403226,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="HorzFormatting" value="LeftAligned" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label6" >
+                    <Property name="ID" value="2" />
+                    <Property name="Area" value="{{0.0425347,0},{0.450269,0},{0.493924,0},{0.584677,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="HorzFormatting" value="LeftAligned" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label62" >
+                    <Property name="ID" value="3" />
+                    <Property name="Area" value="{{0.043139,0},{0.626344,0},{0.494528,0},{0.760753,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="HorzFormatting" value="LeftAligned" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label7" >
+                    <Property name="ID" value="4" />
+                    <Property name="Area" value="{{0.0432792,0},{0.801371,0},{0.494668,0},{0.93578,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="HorzFormatting" value="LeftAligned" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label8" >
+                    <Property name="ID" value="11" />
+                    <Property name="Area" value="{{0.542535,0},{0.251344,0},{0.646701,0},{0.423387,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label9" >
+                    <Property name="ID" value="21" />
+                    <Property name="Area" value="{{0.541667,0},{0.435484,0},{0.645833,0},{0.596774,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label10" >
+                    <Property name="ID" value="31" />
+                    <Property name="Area" value="{{0.541233,0},{0.615591,0},{0.645399,0},{0.776882,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label11" >
+                    <Property name="ID" value="41" />
+                    <Property name="Area" value="{{0.541233,0},{0.798387,0},{0.645399,0},{0.959678,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label102" >
+                    <Property name="ID" value="32" />
+                    <Property name="Area" value="{{0.684028,0},{0.61828,0},{0.788194,0},{0.77957,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label112" >
+                    <Property name="ID" value="42" />
+                    <Property name="Area" value="{{0.684028,0},{0.806452,0},{0.788194,0},{0.967743,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label92" >
+                    <Property name="ID" value="22" />
+                    <Property name="Area" value="{{0.684014,0},{0.436903,0},{0.788181,0},{0.598193,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label82" >
+                    <Property name="ID" value="12" />
+                    <Property name="Area" value="{{0.683594,0},{0.254032,0},{0.78776,0},{0.426075,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label922" >
+                    <Property name="ID" value="23" />
+                    <Property name="Area" value="{{0.848958,0},{0.434139,0},{0.953125,0},{0.59543,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label1022" >
+                    <Property name="ID" value="33" />
+                    <Property name="Area" value="{{0.85026,0},{0.619624,0},{0.954427,0},{0.780914,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label822" >
+                    <Property name="ID" value="13" />
+                    <Property name="Area" value="{{0.849826,0},{0.255376,0},{0.953993,0},{0.427419,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+                <Window type="AlfiskoSkin/Label" name="Label1122" >
+                    <Property name="ID" value="43" />
+                    <Property name="Area" value="{{0.85026,0},{0.807796,0},{0.954427,0},{0.969086,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                </Window>
+            </Window>
+        </Window>
+        <Window type="Generic/Image" name="Mirilla" >
+            <Property name="ID" value="50" />
+            <Property name="Area" value="{{0,0},{0,0},{0,32},{0,32}}" />
+            <Property name="Image" value="AlfiskoSkin/mirilla" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Generic/Image" name="Hitmarker" >
+            <Property name="ID" value="51" />
+            <Property name="Area" value="{{0,0},{0,0},{0,32},{0,32}}" />
+            <Property name="Image" value="AlfiskoSkin/hitmarker" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Generic/Image" name="Sangre" >
+            <Property name="ID" value="52" />
+            <Property name="Area" value="{{0,-1},{0,0},{1,127},{1,128}}" />
+            <Property name="Image" value="AlfiskoSkin/SangreBorde" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
+        </Window>
+        <Window type="AlfiskoSkin/Label" name="Label9" >
+            <Property name="ID" value="54" />
+            <Property name="Area" value="{{0.367969,0},{-0.313889,0},{0.638281,0},{-0.269444,0}}" />
+            <Property name="Font" value="DejaVuSans-12" />
+            <Property name="Text" value="FIN DE LA PARTIDA" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
+            <Property name="VerticalAlignment" value="Centre" />
+        </Window>
+    </Window>
+</GUILayout>

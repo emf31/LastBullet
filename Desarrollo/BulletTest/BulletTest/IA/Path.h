@@ -1,7 +1,7 @@
 #include <list>
 #include <cassert>
 
-#include <Vec2f.h>
+#include <vec3.hpp>
 
 
 
@@ -10,9 +10,9 @@ class Path
 {
 private:
 
-	std::list<Vec2f> m_WayPoints;
+	std::list<Vec3<float>> m_WayPoints;
 
-	std::list<Vec2f>::iterator curWaypoint;
+	std::list<Vec3<float>>::iterator curWaypoint;
 
 
 public:
@@ -20,7 +20,7 @@ public:
 	Path() {}
 
 
-	Vec2f CurrentWaypoint() { 
+	Vec3<float> CurrentWaypoint() {
 		if (!Finished()) {
 			return *curWaypoint;
 		}
@@ -32,13 +32,13 @@ public:
 	inline void SetNextWaypoint();
 
 
-	void Set(std::list<Vec2f> new_path) { m_WayPoints = new_path; curWaypoint = m_WayPoints.begin(); }
+	void Set(std::list<Vec3<float>> new_path) { m_WayPoints = new_path; curWaypoint = m_WayPoints.begin(); }
 	void Set(const Path& path) { m_WayPoints = path.GetPath(); curWaypoint = m_WayPoints.begin(); }
 
 
 	void Clear() { m_WayPoints.clear(); }
 
-	std::list<Vec2f> GetPath()const { return m_WayPoints; }
+	std::list<Vec3<float>> GetPath()const { return m_WayPoints; }
 
 
 };

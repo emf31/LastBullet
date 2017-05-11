@@ -2,60 +2,65 @@
 #include <events/PlayerEvent.h>
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
+#include <events\GameStartEvent.h>
+#include <EventSystem.h>
+#include <GUIManager.h>
  
 
-void Partida::onNotify(Event& event)
+Partida::Partida() : EventListener()
 {
-	switch (event.event_type)
+	
+}
+
+Partida::~Partida()
+{
+}
+
+void Partida::inicializar()
+{
+	ingame = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+}
+
+void Partida::handleEvent(Event* e)
+{
+	switch (e->event_type)
 	{
 		case E_NUEVO_PLAYER: {
-			PlayerEvent* p_ev = static_cast<PlayerEvent*>(&event);
+			PlayerEvent* p_ev = static_cast<PlayerEvent*>(e);
 			nuevoPlayer(p_ev->m_fila);
-		
+			break;
 		}
-		break;
+
 		case E_AUMENTA_KILL: {
-			KillEvent* k_ev = static_cast<KillEvent*>(&event);
+			KillEvent* k_ev = static_cast<KillEvent*>(e);
 			aumentaKill(k_ev->m_guid);
+			break;
 		}
-		break;
+
+
 		case E_AUMENTA_MUERTE: {
-			MuerteEvent* m_ev = static_cast<MuerteEvent*>(&event);
+			MuerteEvent* m_ev = static_cast<MuerteEvent*>(e);
 			aumentaMuerte(m_ev->m_guid);
+			break;
 		}
-		break;
+
 		case E_FIN_PARTIDA: {
 			muestraTabla();
 			ingame->muestraFinPartida();
+			break;
 		}
-		break;
+		case E_GAME_START: {
+			GameStartEvent* g_ev = static_cast<GameStartEvent*>(e);
+			gameInfo = g_ev->m_info;
+			break;
+		}
 
 	}
-
 }
 
 void Partida::muestraTabla()
 {
 	//queremos hacer una copia asi que no hacemos puntero aqui
-	std::unordered_map <unsigned long, TFilaTabla> aux;
-	std::vector<TFilaTabla> ordenado;
-	int max = -1;
-	RakNet::RakNetGUID guid;
-	TFilaTabla fila;
-	aux = m_tabla;
-	while (aux.size() > 0) {
-		for (auto i = aux.begin(); i != aux.end(); ++i) {
-			if (i->second.kills > max) {
-				max = i->second.kills;
-				guid = i->second.guid;
-			}
-
-		}
-		ordenado.push_back(aux.find(RakNet::RakNetGUID::ToUint32(guid))->second);
-		aux.erase(RakNet::RakNetGUID::ToUint32(guid));
-		max = -1;
-	}
-
 	int a = 1;
 	for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
 
@@ -93,6 +98,52 @@ void Partida::muestraTabla()
 		}
 		a++;
 	}
+}
+
+void Partida::muestraMarcador()
+{
+	ordenaTabla();
+	int rank = 1;
+	Entity* ent = EntityManager::i().getEntity(PLAYER);
+
+	if (ent) {
+		for (auto i = ordenado.begin(); i != ordenado.end(); ++i) {
+
+			if (i->guid == ent->getGuid()) {
+				ingame->setKills(i->kills);
+				ingame->setDeaths(i->deaths);
+				ingame->setRanking(rank);
+			}
+
+			rank++;
+		}
+	}
+
+	
+	//a = 0;
+}
+
+void Partida::ordenaTabla()
+{
+	std::unordered_map <unsigned long, TFilaTabla> aux;
+	int max = -1;
+	RakNet::RakNetGUID guid;
+	TFilaTabla fila;
+	aux = m_tabla;
+	ordenado.clear();
+	while (aux.size() > 0) {
+		for (auto i = aux.begin(); i != aux.end(); ++i) {
+			if (i->second.kills > max) {
+				max = i->second.kills;
+				guid = i->second.guid;
+			}
+
+		}
+		ordenado.push_back(aux.find(RakNet::RakNetGUID::ToUint32(guid))->second);
+		aux.erase(RakNet::RakNetGUID::ToUint32(guid));
+		max = -1;
+	}
+
 }
 
 void Partida::nuevoPlayer(TFilaTabla fila) {

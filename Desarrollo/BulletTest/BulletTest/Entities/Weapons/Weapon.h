@@ -1,24 +1,24 @@
 #pragma once
 #include <GraphicEngine.h>
 #include <PhysicsEngine.h>
-#include <Entity.h>
+#include <EntActive.h>
 #include <MessageHandler.h>
 #include "../GunBullet.h"
 #include "../RocketBullet.h"
 #include "math.h"
-#include "../../Otros/Vec3f.h"
+#include <vec3.hpp>
 #include <Util.h>
 #include <Message.h>
+
 
 
 #define CARGADA 0
 #define DESCARGADA 1
 
-class Weapon :
-	public Entity
+class Weapon : public EntActive
 {
 public:
-	Weapon();
+	Weapon(Character* ent);
 	virtual ~Weapon();
 
 	virtual void inicializar() = 0;
@@ -39,10 +39,19 @@ public:
 
 	virtual void setPosition(const Vec3<float> &pos) override;
 
-	virtual void shoot() = 0;
+	virtual Entity* shoot(const Vec3<float>& target) = 0;
 
-	virtual void shootBot(Vec3<float> posOwner, Vec3<float> posTarget)=0;
+	virtual bool canShoot();
 
+	virtual bool cadenciaOk();
+
+	void vaciar() {
+		disparos = capacidadAmmo;
+		numCargadores = 0;
+		estadoWeapon = DESCARGADA;
+	}
+
+	Vec3<float> getBalaRotation();
 
 	virtual int getEstadoWeapon() { return estadoWeapon; }
 
@@ -62,7 +71,7 @@ public:
 	virtual void recargar();
 
 
-
+	virtual void updatePositionAndRotation() = 0;
 protected:
 	Time cadencia;
 	Clock relojCadencia;
@@ -81,6 +90,9 @@ protected:
 	bool equipada=false;
 
 	int disparosRestantes=0;
+
+	Character* m_ent;
+
 
 };
 

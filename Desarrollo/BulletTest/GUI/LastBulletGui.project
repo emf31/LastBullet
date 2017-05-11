@@ -3,15 +3,24 @@
     <Items>
         <Item name="Imagesets" type="folder">
             <Item path="imagesets/AlfiskoSkin.imageset" type="file" />
+            <Item path="imagesets/AssetsMenu.imageset" type="file" />
             <Item path="imagesets/DriveIcons.imageset" type="file" />
             <Item path="imagesets/FairChar.imageset" type="file" />
             <Item path="imagesets/GameMenu.imageset" type="file" />
             <Item path="imagesets/HUDDemo.imageset" type="file" />
+            <Item path="imagesets/LastBulletCarga.imageset" type="file" />
+            <Item path="imagesets/LastBulletHUD.imageset" type="file" />
+            <Item path="imagesets/LastBulletMenu.imageset" type="file" />
+            <Item path="imagesets/LastBulletMenuBackground.imageset" type="file" />
+            <Item path="imagesets/LastBulletMenuBackgroundVolteado.imageset" type="file" />
+            <Item path="imagesets/LastBulletSalir.imageset" type="file" />
             <Item path="imagesets/OgreTray.imageset" type="file" />
+            <Item path="imagesets/Planeta.imageset" type="file" />
             <Item path="imagesets/SampleBrowser.imageset" type="file" />
             <Item path="imagesets/TaharezLook.imageset" type="file" />
             <Item path="imagesets/Vanilla.imageset" type="file" />
             <Item path="imagesets/WindowsLook.imageset" type="file" />
+            <Item path="imagesets/sniper.imageset" type="file" />
         </Item>
         <Item name="Layouts" type="folder">
             <Item path="layouts/Demo8.layout" type="file" />
@@ -21,8 +30,14 @@
             <Item path="layouts/GameMenu.layout" type="file" />
             <Item path="layouts/HUDDemoGameOver.layout" type="file" />
             <Item path="layouts/HUDDemoIngame.layout" type="file" />
+            <Item path="layouts/LastBulletHUD.layout" type="file" />
+            <Item path="layouts/LastBulletHUD.layout" type="file" />
+            <Item path="layouts/LastBulletMENU.layout" type="file" />
+            <Item path="layouts/LastBulletSalir.layout" type="file" />
+            <Item path="layouts/LoadingStateGUI.layout" type="file" />
             <Item path="layouts/SampleBrowser.layout" type="file" />
             <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
+            <Item path="layouts/SimpleDebug.layout" type="file" />
             <Item path="layouts/TabControlDemo.layout" type="file" />
             <Item path="layouts/TabPage.layout" type="file" />
             <Item path="layouts/TabPage1.layout" type="file" />

@@ -1,6 +1,5 @@
 #include "AsaltoDrop.h"
-#include <Cliente.h>
-
+#include <NetworkManager.h>
 
 AsaltoDrop::AsaltoDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
@@ -25,6 +24,11 @@ void AsaltoDrop::update(Time elapsedTime)
 
 		}
 	}
+	else {
+		Vec3<float> prev_rot = m_renderState.getRotation();
+		prev_rot.addY(5);
+		m_renderState.updateRotations(prev_rot);
+	}
 }
 
 void AsaltoDrop::handleInput()
@@ -34,7 +38,11 @@ void AsaltoDrop::handleInput()
 void AsaltoDrop::cargarContenido()
 {
 
-
+	Vec3<float> pos = getPosition();
+	pos.addY(2.f);
+	nodo_platform = GraphicEngine::i().createNode(m_renderState.getPosition(), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Props/Plataforma.obj");
+	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.45f, 0.45f, 0.45f), "", "../media/Weapons/asaltoDrop.obj");
+	m_renderState.setPosition(pos);
 }
 
 void AsaltoDrop::borrarContenido()
@@ -44,27 +52,40 @@ void AsaltoDrop::borrarContenido()
 void AsaltoDrop::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+
+
+
+		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
+
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				estado = USADO;
 				clockRespawnWeapon.restart();
-				if (Cliente::i().isConected()) {
-					TId tID;
-					tID.id = m_id;
 
-					Cliente::i().dispatchMessage(tID, ARMA_COGIDA);
+				TId tID;
+				tID.id = m_id;
+
+				NetworkManager::i().dispatchMessage(tID, ARMA_COGIDA);
+
+
+				if (ClassName == "Player")
+					static_cast<Player*>(message.data)->setWeapon(ASALTO);
+				if (ClassName == "Enemy_Bot") {
+					Enemy_Bot* bot = static_cast<Enemy_Bot*>(message.data);
+					bot->setWeapon(ASALTO);
+					if (bot->getMachineState()->isInState("BuscarWeapon"))
+						bot->getMachineState()->ChangeState(&BuscarWeapon::i());
 				}
-				static_cast<Player*>(message.data)->setWeapon(ASALTO);
+
 				m_nodo->setVisible(false);
 
 			}
 		}
-		}
+	}
 }
 
 bool AsaltoDrop::handleTrigger(TriggerRecordStruct * Trigger)
 {
-	ArmaCogida();
 	return true;
 }

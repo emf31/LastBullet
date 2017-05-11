@@ -1,0 +1,19 @@
+<Imageset autoScaled="vertical" imagefile="AssetsMenuHD.png" name="AssetsMenu" nativeHorzRes="1280" nativeVertRes="720" version="2">
+    <Image height="34" name="optionsIcon" width="35" xPos="784" yPos="45" />
+    <Image height="34" name="exitIcon" width="36" xPos="831" yPos="45" />
+    <Image height="59" name="StartIcon" width="61" xPos="878" yPos="30" />
+    <Image height="70" name="scheme1" width="192" xPos="1050" yPos="17" />
+    <Image height="80" name="scheme2" width="190" xPos="1041" yPos="102" />
+    <Image height="72" name="scheme3" width="91" xPos="1050" yPos="210" />
+    <Image height="270" name="planet" width="270" xPos="24" yPos="0" />
+    <Image height="54" name="optionSelected" width="303" xPos="699" yPos="120" />
+    <Image height="33" name="mStart" width="267" xPos="395" yPos="31" />
+    <Image height="47" name="Seleccion" width="342" xPos="62" yPos="333" />
+    <Image height="31" name="mJoin" width="267" xPos="395" yPos="85" />
+    <Image height="31" name="mAudio" width="267" xPos="395" yPos="142" />
+    <Image height="31" name="mVideo" width="267" xPos="395" yPos="200" />
+    <Image height="31" name="mGame" width="267" xPos="395" yPos="260" />
+    <Image height="31" name="mExit" width="267" xPos="395" yPos="312" />
+    <Image height="31" name="mExit_copy" width="267" xPos="395" yPos="367" />
+    <Image height="47" name="Seleccion_copy" width="342" xPos="62" yPos="415" />
+</Imageset>

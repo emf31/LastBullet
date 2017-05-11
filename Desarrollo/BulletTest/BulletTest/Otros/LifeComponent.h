@@ -1,11 +1,13 @@
 #pragma once
 #include <RakPeerInterface.h>
 #include "Clock.hpp"
-#include <Entity.h>
+
+
+class Character;
 
 class LifeComponent {
 public:
-	LifeComponent(Entity* owner);
+	LifeComponent(Character* owner);
 	~LifeComponent();
 
 	void restaVida(float cantidad, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
@@ -23,5 +25,5 @@ private:
 	bool m_isDying;
 	Clock relojMuerte;
 
-	Entity* m_pOwner;
+	Character* m_pOwner;
 };

@@ -87,17 +87,17 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Observer;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;../lib/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Irrlicht.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletSoftBody_Debug.lib;LinearMath_Debug.lib;RakNet.lib;CEGUIIrrlichtRenderer-0_d.lib;CEGUIBase-0_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;../lib/Debug;..\Debug;../../Motor/Motor/lib/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Winmm.lib;Dbghelp.lib;Opengl32.lib;glew_d.lib;zlib_d.lib;assimp-vc140-mt.lib;SOIL.lib;glfw3.lib;Motor.lib;SILLY_d.lib;freetype_d.lib;jpeg_d.lib;libexpat_d.lib;libpng_d.lib;pcre_d.lib;pugixml_d.lib;SPARK_debug.lib;SPARK_GL_debug.lib;CEGUISILLYImageCodec_Static_d.lib;CEGUIExpatParser_Static_d.lib;CEGUICoreWindowRendererSet_Static_d.lib;CEGUIOpenGLRenderer-0_Static_d.lib;CEGUICommonDialogs-0_Static_d.lib;CEGUIBase-0_Static_d.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletSoftBody_Debug.lib;LinearMath_Debug.lib;RakNet.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -122,20 +122,22 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_IRR_STATIC_LIB_;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;..\include\irrlitch;..\include\bullet;..\include\Raknet</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>IrrlichtStatic_RELEASE.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;ws2_32.lib;RakNetLibStatic_RELEASE.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Opengl32.lib;glew.lib;zlibstatic.lib;zlib.lib;assimp-vc140-mt.lib;SOIL.lib;glfw3.lib;Motor.lib;SILLY.lib;freetype.lib;jpeg.lib;libexpat.lib;libpng.lib;pcre.lib;pugixml.lib;SPARK.lib;SPARK_GL.lib;CEGUIExpatParser_Static.lib;CEGUICoreWindowRendererSet_Static.lib;CEGUIOpenGLRenderer-0_Static.lib;CEGUICommonDialogs-0_Static.lib;CEGUISILLYImageCodec_Static.lib;CEGUIBase-0_Static.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;ws2_32.lib;RakNetLibStatic_RELEASE.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib;..\lib\irrlitch;..\lib\bullet;..\lib\Release</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
@@ -162,7 +164,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Command\Apuntar.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
     <ClInclude Include="Command\ListWeaponDown.h" />
@@ -176,9 +177,11 @@
     <ClInclude Include="Command\ShootCommandGranada.h" />
     <ClInclude Include="Command\ShootPistola.h" />
     <ClInclude Include="Command\ShootRocket.h" />
-    <ClInclude Include="Command\ShootSniper.h" />
     <ClInclude Include="Entities\Button.h" />
+    <ClInclude Include="Entities\Character.h" />
     <ClInclude Include="Entities\Enemy_Bot.h" />
+    <ClInclude Include="Entities\EntActive.h" />
+    <ClInclude Include="Entities\EntPassive.h" />
     <ClInclude Include="Entities\Granada.h" />
     <ClInclude Include="Entities\GroupEntity.h" />
     <ClInclude Include="Entities\GunBullet.h" />
@@ -201,6 +204,14 @@
     <ClInclude Include="Entities\Weapons\RocketLauncher.h" />
     <ClInclude Include="Entities\Weapons\Sniper.h" />
     <ClInclude Include="Entities\Weapons\Weapon.h" />
+    <ClInclude Include="EventSystem\EventListener.h" />
+    <ClInclude Include="EventSystem\EventSystem.h" />
+    <ClInclude Include="EventSystem\events\DebugNetEvent.h" />
+    <ClInclude Include="EventSystem\events\Event.h" />
+    <ClInclude Include="EventSystem\events\GameStartEvent.h" />
+    <ClInclude Include="EventSystem\events\KillEvent.h" />
+    <ClInclude Include="EventSystem\events\MuerteEvent.h" />
+    <ClInclude Include="EventSystem\events\PlayerEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph\AStarSearch.h" />
     <ClInclude Include="Graph\GraphEdge.h" />
@@ -213,6 +224,10 @@
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="GUI\GUIManager.h" />
     <ClInclude Include="GUI\InGameHUD.h" />
+    <ClInclude Include="GUI\LoadingStateGUI.h" />
+    <ClInclude Include="GUI\MenuGUI.h" />
+    <ClInclude Include="GUI\ParalellTask.h" />
+    <ClInclude Include="GUI\SalirHUD.h" />
     <ClInclude Include="Handlers\InputHandler.h" />
     <ClInclude Include="Handlers\input_constants.h" />
     <ClInclude Include="Handlers\Message.h" />
@@ -232,11 +247,15 @@
     <ClInclude Include="IA\FuzzyLogic\FzOR.h" />
     <ClInclude Include="IA\FuzzyLogic\FzSet.h" />
     <ClInclude Include="IA\FuzzyLogic\FzVery.h" />
+    <ClInclude Include="IA\LogIA.h" />
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
     <ClInclude Include="IA\SensorySystem\Memory.h" />
     <ClInclude Include="IA\SensorySystem\SensoryMemory.h" />
+    <ClInclude Include="IA\StatesIA\BuscarVida.h" />
+    <ClInclude Include="IA\StatesIA\BuscarWeapon.h" />
+    <ClInclude Include="IA\StatesIA\Disparar.h" />
     <ClInclude Include="IA\StatesIA\Patrullar.h" />
     <ClInclude Include="IA\StatesIA\Perseguir.h" />
     <ClInclude Include="IA\StatesIA\StateIA.h" />
@@ -247,11 +266,12 @@
     <ClInclude Include="Mapa\Dijkstra.h" />
     <ClInclude Include="Mapa\Map.h" />
     <ClInclude Include="Mapa\PathPlanner.h" />
-    <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Motor\AnimatedSceneNode.h" />
     <ClInclude Include="Motor\Animation.h" />
+    <ClInclude Include="Motor\BillboardSceneNode.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\CameraShake.h" />
+    <ClInclude Include="Motor\Color4f.h" />
     <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
     <ClInclude Include="Motor\GunRecoil.h" />
@@ -260,38 +280,51 @@
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
-    <ClInclude Include="Network\Cliente.h" />
+    <ClInclude Include="Network\AsyncEnemyFactory.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
-    <ClInclude Include="Observer\events\Event.h" />
-    <ClInclude Include="Observer\events\KillEvent.h" />
-    <ClInclude Include="Observer\events\MuerteEvent.h" />
-    <ClInclude Include="Observer\events\PlayerEvent.h" />
-    <ClInclude Include="Observer\Observer.h" />
-    <ClInclude Include="Observer\Subject.h" />
-    <ClInclude Include="Otros\C2DMatrix.h" />
+    <ClInclude Include="Network\NetBot.h" />
+    <ClInclude Include="Network\NetObject.h" />
+    <ClInclude Include="Network\NetPlayer.h" />
+    <ClInclude Include="Network\NetworkDebugger.h" />
+    <ClInclude Include="Network\NetworkLog.h" />
+    <ClInclude Include="Network\NetworkManager.h" />
+    <ClInclude Include="Otros\AssetsReader.h" />
+    <ClInclude Include="Otros\CharacterTypes.h" />
     <ClInclude Include="Otros\Clock.hpp" />
-    <ClInclude Include="Otros\EnumParser.h" />
+    <ClInclude Include="Otros\DebugMarks.h" />
     <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
     <ClInclude Include="Otros\PriorityQueue.h" />
+    <ClInclude Include="Otros\Quaternion.h" />
+    <ClInclude Include="Otros\ResourceProvider.h" />
     <ClInclude Include="Otros\SafeQueue.h" />
+    <ClInclude Include="Otros\Settings.h" />
     <ClInclude Include="Otros\Time.hpp" />
-    <ClInclude Include="Otros\Transformations.h" />
+    <ClInclude Include="Otros\TimePerFrame.h" />
     <ClInclude Include="Otros\Util.h" />
     <ClInclude Include="Otros\Vec2f.h" />
     <ClInclude Include="Otros\vec3.hpp" />
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
-    <ClInclude Include="States\State.hpp" />
-    <ClInclude Include="States\StateFactory.hpp" />
-    <ClInclude Include="States\StateStack.hpp" />
+    <ClInclude Include="ParticleSystem\ExplosionParticleSystem.h" />
+    <ClInclude Include="ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="States\InGame.h" />
+    <ClInclude Include="States\LoadingState.h" />
+    <ClInclude Include="States\Menu.h" />
+    <ClInclude Include="States\State.h" />
+    <ClInclude Include="States\StateFactory.h" />
+    <ClInclude Include="States\StateStack.h" />
     <ClInclude Include="TriggerSystem\TriggerRecordStruct.h" />
     <ClInclude Include="TriggerSystem\TriggerSystem.h" />
+    <ClInclude Include="World\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Button.cpp" />
+    <ClCompile Include="Entities\Character.cpp" />
     <ClCompile Include="Entities\Enemy_Bot.cpp" />
+    <ClCompile Include="Entities\EntActive.cpp" />
+    <ClCompile Include="Entities\EntPassive.cpp" />
     <ClCompile Include="Entities\Granada.cpp" />
     <ClCompile Include="Entities\GroupEntity.cpp" />
     <ClCompile Include="Entities\GunBullet.cpp" />
@@ -314,6 +347,8 @@
     <ClCompile Include="Entities\Weapons\RocketLauncher.cpp" />
     <ClCompile Include="Entities\Weapons\Sniper.cpp" />
     <ClCompile Include="Entities\Weapons\Weapon.cpp" />
+    <ClCompile Include="EventSystem\EventListener.cpp" />
+    <ClCompile Include="EventSystem\EventSystem.cpp" />
     <ClCompile Include="Graph\AStarSearch.cpp" />
     <ClCompile Include="Graph\GraphEdge.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />
@@ -322,6 +357,10 @@
     <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="GUI\GUIManager.cpp" />
     <ClCompile Include="GUI\InGameHUD.cpp" />
+    <ClCompile Include="GUI\LoadingStateGUI.cpp" />
+    <ClCompile Include="GUI\MenuGUI.cpp" />
+    <ClCompile Include="GUI\ParalellTask.cpp" />
+    <ClCompile Include="GUI\SalirHUD.cpp" />
     <ClCompile Include="Handlers\InputHandler.cpp" />
     <ClCompile Include="Handlers\MessageHandler.cpp" />
     <ClCompile Include="Handlers\Partida.cpp" />
@@ -338,9 +377,13 @@
     <ClCompile Include="IA\FuzzyLogic\FzOR.cpp" />
     <ClCompile Include="IA\FuzzyLogic\FzSet.cpp" />
     <ClCompile Include="IA\FuzzyLogic\FzVery.cpp" />
+    <ClCompile Include="IA\LogIA.cpp" />
     <ClCompile Include="IA\MachineState.cpp" />
     <ClCompile Include="IA\PathFollow.cpp" />
     <ClCompile Include="IA\SensorySystem\SensoryMemory.cpp" />
+    <ClCompile Include="IA\StatesIA\BuscarVida.cpp" />
+    <ClCompile Include="IA\StatesIA\BuscarWeapon.cpp" />
+    <ClCompile Include="IA\StatesIA\Disparar.cpp" />
     <ClCompile Include="IA\StatesIA\Patrullar.cpp" />
     <ClCompile Include="IA\StatesIA\Perseguir.cpp" />
     <ClCompile Include="IA\TargetingSystem.cpp" />
@@ -349,13 +392,14 @@
     <ClCompile Include="Mapa\Dijkstra.cpp" />
     <ClCompile Include="Mapa\Map.cpp" />
     <ClCompile Include="Mapa\PathPlanner.cpp" />
-    <ClCompile Include="MastEventReceiver.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motor\AnimatedSceneNode.cpp" />
     <ClCompile Include="Motor\Animation.cpp" />
+    <ClCompile Include="Motor\BillboardSceneNode.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\CameraShake.cpp" />
+    <ClCompile Include="Motor\Color4f.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\GunRecoil.cpp" />
     <ClCompile Include="Motor\MapLoader.cpp" />
@@ -363,19 +407,38 @@
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
-    <ClCompile Include="Network\Cliente.cpp" />
+    <ClCompile Include="Network\AsyncEnemyFactory.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
-    <ClCompile Include="Observer\Observer.cpp" />
-    <ClCompile Include="Observer\Subject.cpp" />
+    <ClCompile Include="Network\NetBot.cpp" />
+    <ClCompile Include="Network\NetObject.cpp" />
+    <ClCompile Include="Network\NetPlayer.cpp" />
+    <ClCompile Include="Network\NetworkDebugger.cpp" />
+    <ClCompile Include="Network\NetworkLog.cpp" />
+    <ClCompile Include="Network\NetworkManager.cpp" />
+    <ClCompile Include="Otros\AssetsReader.cpp" />
+    <ClCompile Include="Otros\CharacterTypes.cpp" />
     <ClCompile Include="Otros\Clock.cpp" />
+    <ClCompile Include="Otros\DebugMarks.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
     <ClCompile Include="Otros\PriorityQueue.cpp" />
+    <ClCompile Include="Otros\ResourceProvider.cpp" />
+    <ClCompile Include="Otros\Settings.cpp" />
     <ClCompile Include="Otros\Time.cpp" />
+    <ClCompile Include="Otros\TimePerFrame.cpp" />
     <ClCompile Include="Otros\Util.cpp" />
     <ClCompile Include="Otros\Vec2f.cpp" />
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
+    <ClCompile Include="ParticleSystem\ExplosionParticleSystem.cpp" />
+    <ClCompile Include="ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="States\InGame.cpp" />
+    <ClCompile Include="States\LoadingState.cpp" />
+    <ClCompile Include="States\Menu.cpp" />
+    <ClCompile Include="States\State.cpp" />
+    <ClCompile Include="States\StateFactory.cpp" />
+    <ClCompile Include="States\StateStack.cpp" />
     <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
+    <ClCompile Include="World\World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

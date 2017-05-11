@@ -12,10 +12,10 @@
 //normal es que este cuando colisiona no hace daño ya que esta comprobacion ya se hace desde el cliente enemigo
 //que dispara dicho rocket.
 
-RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : Entity(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(160), m_rotation(rotation)
+RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
+m_position(position), m_direction(direction), m_velocity(120), m_rotation(rotation)
 {
-	m_lifetime = seconds(5);
+	m_lifetime = seconds(3);
 	cargarContenido();
 }
 
@@ -34,7 +34,7 @@ void RocketBulletEnemy::update(Time elapsedTime)
 	m_rigidBody->setLinearVelocity(aux*m_velocity);
 
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
-	m_renderState.updatePositions(Vec3<float>((f32)Point[0], (f32)Point[1], (f32)Point[2]));
+	m_renderState.updatePositions(Vec3<float>((float)Point[0], (float)Point[1], (float)Point[2]));
 
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
 
@@ -50,10 +50,9 @@ void RocketBulletEnemy::handleInput()
 
 void RocketBulletEnemy::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(1, 1, 1), "", "../media/bullets/rocketbullet.obj");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.3f, 0.3f, 0.3f), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
-	m_renderState.setRotation(m_rotation);
-	m_renderState.setRenderRot(m_rotation);
+	m_nodo->setRotationXYZ(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
@@ -64,7 +63,7 @@ void RocketBulletEnemy::cargarContenido()
 
 void RocketBulletEnemy::borrarContenido()
 {
-
+	GraphicEngine::i().removeNode(m_nodo);
 
 }
 
@@ -75,7 +74,7 @@ void RocketBulletEnemy::handleMessage(const Message & message)
 
 		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		EntityManager::i().removeEntity(this);
-		GraphicEngine::i().removeNode(m_nodo);
+	
 	}
 }
 

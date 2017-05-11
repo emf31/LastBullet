@@ -1,12 +1,14 @@
-#pragma once
-#include "Entity.h"
+
+
+#include "EntActive.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
-#include "Player.h"
+#include <Player.h>
+#include <Enemy_Bot.h>
 
 
-class LifeObject : public Entity
+class LifeObject : public EntActive
 {
 public:
 	LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name);
@@ -44,4 +46,6 @@ private:
 	btGhostObject* m_ghostObject;
 	
 	btVector3 m_currentPosition;
+
+	std::shared_ptr<SceneNode> nodo_platform;
 };

@@ -4,10 +4,13 @@
 
 #include "../json/json.hpp"
 #include <MapLoader.h>
+#include <GraphicEngine.h>
 
 
 NavGraphNode & SparseGraph::getNode(int idx) {
-
+	if (idx < 0 || idx >= m_nodes.size()) {
+		throw std::runtime_error("Error Nodo no encontrado");
+	}
 	return m_nodes.at(idx);
 }
 
@@ -125,29 +128,39 @@ void SparseGraph::readGraph(const std::string & path) {
 					Entity* ent = NULL;
 					std::string extra = nodoJson["extraInfo"];
 					if (extra == "LifeObject") {
-						ent = MapLoader::createLifeObject(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "LifeObject", "");
+						float auxZ = nodoJson["posZ"];
+						auxZ *= -1.f;
+						ent = MapLoader::createLifeObject(Vec3<float>(nodoJson["posX"], nodoJson["posY"], auxZ), Vec3<float>(2.f, 2.f, 2.f), "");
 						//std::cout << "Leemos nodo vida \n";
 					}
 					else if (extra == "AsaltoDrop") {
-						//std::cout << "Leemos nodo asaltoDrop \n";
-						ent = MapLoader::createAsaltoDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "AsaltoDrop", "");
+						float auxZ = nodoJson["posZ"];
+						auxZ *= -1.f;
+						ent = MapLoader::createAsaltoDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], auxZ), Vec3<float>(2.f, 2.f, 2.f), "");
 					}
 					else if (extra == "PistolaDrop") {
-						//std::cout << "Leemos nodo pistolaDrop \n";
-						ent = MapLoader::createPistolaDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "PistolaDrop", "");
+						float auxZ = nodoJson["posZ"];
+						auxZ *= -1.f;
+						ent = MapLoader::createPistolaDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], auxZ), Vec3<float>(2.f, 2.f, 2.f), "");
 					}
 					else if (extra == "RocketLauncherDrop") {
-						//std::cout << "Leemos nodo RocketLauncherDrop \n";
-						ent = MapLoader::createRocektLauncherDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "RocketDrop", "");
+						float auxZ = nodoJson["posZ"];
+						auxZ *= -1.f;
+						ent = MapLoader::createRocektLauncherDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], auxZ), Vec3<float>(2.f, 2.f, 2.f), "");
 					}
 					else if (extra == "SniperDrop") {
 						//std::cout << "Leemos nodo RocketLauncherDrop \n";
-						ent = MapLoader::createSniperDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], nodoJson["posZ"]), Vec3<float>(2.f, 2.f, 2.f), "SniperDrop", "");
+						float auxZ = nodoJson["posZ"];
+						auxZ *= -1.f;
+						ent = MapLoader::createSniperDrop(Vec3<float>(nodoJson["posX"], nodoJson["posY"], auxZ), Vec3<float>(2.f, 2.f, 2.f), "");
 					}
 
-					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], nodoJson["posZ"]));
+					float posZ = nodoJson["posZ"];
+					posZ *= -1.f;
+					NavGraphNode nodo(getNextFreeNodeIndex(), Vec2f(nodoJson["posX"], posZ), nodoJson["posY"]);
 					nodo.setExtraInfo(ent);
 					addNode(nodo);
+				//	GraphicEngine::i().createNode(Vec3<float>(nodoJson["posX"], nodoJson["posY"],posZ), Vec3<float>(1.f, 1.f, 1.f), "", "../media/box.obj");
 				}
 				for (json::iterator arrayIterador1 = jsonArray.begin(); arrayIterador1 != jsonArray.end(); ++arrayIterador1) {
 					json nodoJson = *arrayIterador1;
@@ -205,7 +218,7 @@ int SparseGraph::numEdges()
 	return tot;
 }
 
-bool SparseGraph::isNodePresent(int node) const
+bool SparseGraph::isNodePresent(std::size_t node) const
 {
 	if ((m_nodes[node].Index() == invalid_node_index) || (node >= m_nodes.size()))
 	{

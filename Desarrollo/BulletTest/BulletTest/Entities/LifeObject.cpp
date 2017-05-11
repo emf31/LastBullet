@@ -1,9 +1,9 @@
 #include "LifeObject.h"
 #include <PhysicsEngine.h>
-#include <Cliente.h>
 #include <TriggerSystem.h>
+#include <NetworkManager.h>
 
-LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : Entity(-1, nodo, name)
+LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name)
 {
 	//TriggerSystem::i().RegisterEntity(this);
 }
@@ -31,7 +31,6 @@ void LifeObject::inicializar()
 void LifeObject::update(Time elapsedTime)
 {
 
-
 	if (estado == USADO) {
 		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
 			estado = DISPONIBLE;
@@ -39,7 +38,11 @@ void LifeObject::update(Time elapsedTime)
 			m_nodo->setVisible(true);
 		}
 	}
-	
+	else {
+		Vec3<float> prev_rot = m_renderState.getRotation();
+		prev_rot.addY(5);
+		m_renderState.updateRotations(prev_rot);
+	}
 }
 
 void LifeObject::handleInput()
@@ -48,7 +51,11 @@ void LifeObject::handleInput()
 
 void LifeObject::cargarContenido()
 {
-
+	Vec3<float> pos = getPosition();
+	pos.addY(2.f);
+	nodo_platform = GraphicEngine::i().createNode(m_renderState.getPosition(), Vec3<float>(1.f, 1.f, 1.f), "", "../media/Props/Plataforma.obj");
+	m_nodo = GraphicEngine::i().createNode(pos, Vec3<float>(0.6f, 0.6f, 0.6f), "", "../media/Weapons/MedkitFinalV2.obj");
+	m_renderState.setPosition(pos);
 
 }
 
@@ -59,25 +66,33 @@ void LifeObject::borrarContenido()
 void LifeObject::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLLISION") {
-		if (static_cast<Entity*>(message.data)->getClassName() == "Player") {
+
+		std::string ClassName = static_cast<Entity*>(message.data)->getClassName();
+
+		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
 				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRecargaLife.restart();
 
-				if (Cliente::i().isConected()) {
-					TId s_id;
-					s_id.id = m_id;
+				TId s_id;
+				s_id.id = m_id;
 
-					Cliente::i().dispatchMessage(s_id, VIDA_COGIDA);
-				}
-				
-
+				NetworkManager::i().dispatchMessage(s_id, VIDA_COGIDA);
 				
 				m_nodo->setVisible(false);
 
-				static_cast<Player*>(message.data)->getLifeComponent().sumarVida();
+				if (ClassName == "Player")
+					static_cast<Player*>(message.data)->getLifeComponent().sumarVida();
+				else if (ClassName == "Enemy_Bot") {
+
+					Enemy_Bot* bot = static_cast<Enemy_Bot*>(message.data);
+					bot->getLifeComponent().sumarVida();
+					if (bot->getMachineState()->isInState("BuscarVida"))
+						bot->getMachineState()->RevertToPreviousState();
+				
+				}
 
 			}
 
@@ -136,11 +151,11 @@ void LifeObject::asignaTiempo(Clock tiempo) {
 
 void LifeObject::VidaCogida()
 {
-	if (estado == DISPONIBLE) {
+	
 		PhysicsEngine::i().removeGhostObject(m_ghostObject);
 		estado = USADO;
 		m_nodo->setVisible(false);
 		clockRecargaLife.restart();
-	}
+
 }
 

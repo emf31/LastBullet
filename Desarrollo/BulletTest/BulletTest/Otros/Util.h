@@ -9,11 +9,15 @@
 #include "vec3.hpp"
 #include <Vec2f.h>
 
+#include <algorithm>
+
+//! float constant para convertir de rad a deg
+const float RADTODEG = 180.0f / (float)M_PI;
 
 const float pif = static_cast<float>(M_PI);
 const float degToRadMultiplier = pif / 180.0f;
 const double  MaxDouble = (std::numeric_limits<double>::max)();
-const float   MinDouble = (std::numeric_limits<double>::min)();
+const double   MinDouble = (std::numeric_limits<double>::min)();
 
 float DegToRad(float deg);
 float RadToDeg(float rad);
@@ -29,6 +33,10 @@ float Randf(float min, float max);
 int Randi();
 
 int Randi(int min, int max);
+
+
+float clip(float n, float lower, float upper);
+
 
 
 

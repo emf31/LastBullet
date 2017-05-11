@@ -104,6 +104,7 @@ bool Lista::Buscar(std::string str) {
 	pnodo nodo = actual;
 
 	do {
+		if(nodo->valor)
 		if (nodo->valor->getClassName() == str)
 			return true;
 		nodo = nodo->siguiente;

@@ -2,6 +2,7 @@
 
 #include <list>
 #include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
 #include <GUI.h>
 
 class GUIManager {
@@ -10,9 +11,10 @@ public:
 		static GUIManager singleton;
 		return singleton;
 	}
-	void init(const std::string& resourcesPath, irr::IrrlichtDevice *device) {
-		if (m_IrrlichtRenderer == nullptr) {
-			m_IrrlichtRenderer = &CEGUI::IrrlichtRenderer::bootstrapSystem(*device);
+
+	void init(const std::string& resourcesPath) {
+		if (m_renderer == nullptr) {
+			m_renderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 
 			CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 
@@ -31,29 +33,44 @@ public:
 			CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 		}
 	}
-	void addGui(Motor::GUI *gui) {
-		m_guis.push_back(gui);
+	void addGui(const std::string& name, Motor::GUI *gui) {
+		m_guis[name] = gui;
 	}
 
 	void updateAllGuis() {
-		std::list<Motor::GUI*>::iterator it;
+		std::map<std::string, Motor::GUI*>::iterator it;
 		for (it = m_guis.begin(); it != m_guis.end(); ++it) {
-			(*it)->update();
+			it->second->update();
 		}
 	}
 
 	void drawAllGuis() {
-		std::list<Motor::GUI*>::iterator it;
+		std::map<std::string, Motor::GUI*>::iterator it;
 		for (it = m_guis.begin(); it != m_guis.end(); ++it) {
-			(*it)->draw();
+			it->second->draw();
 		}
 	}
 
-	CEGUI::IrrlichtRenderer* getIrrlichtRenderer() { return m_IrrlichtRenderer; }
+	void removeGUI(const std::string& gui)
+	{
+		auto found = m_guis.find(gui);
+		if (found != m_guis.end())
+			m_guis.erase(gui);
+	}
+	Motor::GUI* getGUIbyName(const std::string& name) {
+		auto found = m_guis.find(name);
+		if (found != m_guis.end())
+			return found->second;
+		//no existe devolvemos 
+		return NULL;
+	}
+
+	CEGUI::OpenGL3Renderer* getRenderer() { return m_renderer; }
 private:
 	GUIManager() {
 
 	}
-	CEGUI::IrrlichtRenderer *m_IrrlichtRenderer; //TODO: CAMBIAR A OPENGL3RENDERER CUANDO CAMBIEMOS A NUESTRO MOTOR
-	std::list<Motor::GUI*> m_guis;
+	CEGUI::OpenGL3Renderer *m_renderer; //TODO: CAMBIAR A OPENGL3RENDERER CUANDO CAMBIEMOS A NUESTRO MOTOR
+
+	std::map<std::string , Motor::GUI*> m_guis;
 };

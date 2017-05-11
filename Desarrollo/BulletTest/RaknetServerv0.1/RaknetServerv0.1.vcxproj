@@ -122,7 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\BulletTest\include\Raknet;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\BulletTest\include\Raknet;Otros;Entities</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,11 +155,13 @@
     <ClCompile Include="..\BulletTest\Otros\Time.cpp" />
     <ClCompile Include="..\BulletTest\Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="DropObject.cpp" />
+    <ClCompile Include="Entities\Bot.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\EntityManager.cpp" />
     <ClCompile Include="Entities\Life.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="MainServer.cpp" />
+    <ClCompile Include="Otros\NetworkLog.cpp" />
     <ClCompile Include="Otros\Vec3f.cpp" />
     <ClCompile Include="RenderState.cpp" />
   </ItemGroup>
@@ -169,12 +171,14 @@
     <ClInclude Include="..\BulletTest\Otros\vec3.hpp" />
     <ClInclude Include="..\BulletTest\Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="DropObject.h" />
+    <ClInclude Include="Entities\Bot.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="Entities\Life.h" />
     <ClInclude Include="Entities\Player.h" />
     <ClInclude Include="Estructuras.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
+    <ClInclude Include="Otros\NetworkLog.h" />
     <ClInclude Include="Otros\Vec3f.h" />
     <ClInclude Include="RenderState.h" />
   </ItemGroup>
