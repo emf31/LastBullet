@@ -21,7 +21,9 @@
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
 	if (menu != nullptr) {
 		menu->changeStateToLobbyView();
-		menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
+		MenuGUI::PlayerSlot* playerSlot;
+		playerSlot = menu->setNameOnPlayerSlot(msgSteam->memberName.C_String());
+		playerSlot->setReady(false);
 	}
 	
 	NetworkManager::i().getNetPlayer()->addPlayerInLobby(msgSteam->srcMemberId);
@@ -64,12 +66,15 @@
 	 if (token == "IP") {
 		 NetworkManager::i().getNetPlayer()->setHostIp(value);
 	 } else if(token == "R") {
+		 pos = value.find(delimiter);
+		 std::string name = value.substr((pos+delimiter.length()), value.length() - pos);
+		 value = value.substr(0, value.find(delimiter));
 		 if (value == "1") {
 			 //ready
-			 NetworkManager::i().getNetPlayer()->playerReadyCallback();
+			 NetworkManager::i().getNetPlayer()->playerReadyCallback(name);
 		 } else {
 			 //Not ready
-			 NetworkManager::i().getNetPlayer()->playerNotReadyCallback();
+			 NetworkManager::i().getNetPlayer()->playerNotReadyCallback(name);
 		 }
 	 }
  }

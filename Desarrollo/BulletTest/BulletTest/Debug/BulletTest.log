@@ -1,4 +1,45 @@
-﻿  NetPlayer.cpp
+﻿  MenuGUI.cpp
+  Generando código...
+  Compilando...
+  World.cpp
+  StateFactory.cpp
+  Menu.cpp
+  LoadingState.cpp
+  InGame.cpp
+  LifeComponent.cpp
+  SteamResults.cpp
+  NetworkManager.cpp
+  NetworkLog.cpp
+  NetworkDebugger.cpp
+d:\tba\desarrollo\bullettest\bullettest\network\networkdebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  NetPlayer.cpp
+  NetObject.cpp
+  NetBot.cpp
+  Game.cpp
+d:\tba\desarrollo\bullettest\bullettest\game.cpp(150): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  d:\tba\desarrollo\bullettest\bullettest\game.cpp(150): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+d:\tba\desarrollo\bullettest\bullettest\game.cpp(156): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  d:\tba\desarrollo\bullettest\bullettest\game.cpp(156): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+  LoadingStateGUI.cpp
+  DebugMenuGUI.cpp
+d:\tba\desarrollo\bullettest\bullettest\gui\debugmenugui.cpp(249): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  Sniper.cpp
+  RocketLauncher.cpp
+  Pistola.cpp
+  Asalto.cpp
+  Generando código...
+  Compilando...
+  SniperDrop.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
+  AsaltoDrop.cpp
+  RocketBullet.cpp
+  Player.cpp
+  LifeObject.cpp
+  Granada.cpp
+  Enemy_Bot.cpp
+  Enemy.cpp
+  Generando código...
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'

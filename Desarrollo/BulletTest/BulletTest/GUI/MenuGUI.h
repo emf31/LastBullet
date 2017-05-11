@@ -10,6 +10,44 @@
 
 class MenuGUI : public Motor::GUI {
 public:
+	struct PlayerSlot {
+		CEGUI::DefaultWindow* name;
+		CEGUI::DefaultWindow* ReadyImage;
+		CEGUI::DefaultWindow* NotReadyImage;
+
+		bool isEmpty() {
+			if (name->getText() == "") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		void setReady(bool ready) {
+			if (ready) {
+				NotReadyImage->setVisible(false);
+				ReadyImage->setVisible(true);
+			} else {
+				NotReadyImage->setVisible(true);
+				ReadyImage->setVisible(false);
+			}
+		}
+
+		std::string getName() {
+			return name->getText().c_str();
+		}
+
+		void setName(const std::string& nombre) {
+			name->setText(nombre);
+		}
+
+		void setFree() {
+			setName("");
+			NotReadyImage->setVisible(false);
+			ReadyImage->setVisible(false);
+		}
+
+	};
 
 	MenuGUI();
 
@@ -30,8 +68,9 @@ public:
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
 	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
+	bool onBackButtonClicked(const CEGUI::EventArgs & e);
 
-	void setNameOnPlayerSlot(const std::string& name);
+	PlayerSlot* setNameOnPlayerSlot(const std::string& name);
 
 	void setSlotFree(const std::string& str);
 
@@ -39,11 +78,37 @@ public:
 		changeState(stateMenu::enumLobby);
 	}
 
-	void freeAllSlots() {
-		PlayerSlot1Lbl->setText("");
-		PlayerSlot2Lbl->setText("");
-		PlayerSlot3Lbl->setText("");
-		PlayerSlot4Lbl->setText("");
+	PlayerSlot* findSlotByName(const std::string& name) {
+		if (PlayerSlot1.getName() == name) {
+			return &PlayerSlot1;
+		}
+		if (PlayerSlot2.getName() == name) {
+			return &PlayerSlot2;
+		}
+		if (PlayerSlot3.getName() == name) {
+			return &PlayerSlot3;
+		}
+		if (PlayerSlot4.getName() == name) {
+			return &PlayerSlot4;
+		}
+		return nullptr;
+	}
+
+	PlayerSlot* findEmptyNameSlot() {
+
+		if (PlayerSlot1.isEmpty()) {
+			return &PlayerSlot1;
+		}
+		if (PlayerSlot2.isEmpty()) {
+			return &PlayerSlot2;
+		}
+		if (PlayerSlot3.isEmpty()) {
+			return &PlayerSlot3;
+		}
+		if (PlayerSlot4.isEmpty()) {
+			return &PlayerSlot4;
+		}
+		return nullptr;
 	}
 private:
 
@@ -94,10 +159,26 @@ private:
 	//Lobby
 	CEGUI::PushButton *ReadyBtn;
 	CEGUI::PushButton *InviteBtn;
-	CEGUI::DefaultWindow* PlayerSlot1Lbl;
+	CEGUI::PushButton *BackBtn;
+
+	PlayerSlot PlayerSlot1;
+	PlayerSlot PlayerSlot2;
+	PlayerSlot PlayerSlot3;
+	PlayerSlot PlayerSlot4;
+
+	/*CEGUI::DefaultWindow* PlayerSlot1Lbl;
 	CEGUI::DefaultWindow* PlayerSlot2Lbl;
 	CEGUI::DefaultWindow* PlayerSlot3Lbl;
 	CEGUI::DefaultWindow* PlayerSlot4Lbl;
+	CEGUI::DefaultWindow* Player1Ready;
+	CEGUI::DefaultWindow* Player2Ready;
+	CEGUI::DefaultWindow* Player3Ready;
+	CEGUI::DefaultWindow* Player4Ready;
+	CEGUI::DefaultWindow* Player1NotReady;
+	CEGUI::DefaultWindow* Player2NotReady;
+	CEGUI::DefaultWindow* Player3NotReady;
+	CEGUI::DefaultWindow* Player4NotReady;*/
+
 	//std::thread t;
 
 	std::shared_ptr<NetPlayer> netPlayer;
@@ -110,19 +191,7 @@ private:
 	void setStateVisible(stateMenu state, bool visible);
 	void actualizarTopOpciones();
 
-	CEGUI::DefaultWindow* findEmptyNameSlot() {
-		if (PlayerSlot1Lbl->getText() == "") {
-			return PlayerSlot1Lbl;
-		}
-		if (PlayerSlot2Lbl->getText() == "") {
-			return PlayerSlot2Lbl;
-		}
-		if (PlayerSlot3Lbl->getText() == "") {
-			return PlayerSlot3Lbl;
-		}
-		if (PlayerSlot4Lbl->getText() == "") {
-			return PlayerSlot4Lbl;
-		}
-		return nullptr;
-	}
+	
+
+	
 };

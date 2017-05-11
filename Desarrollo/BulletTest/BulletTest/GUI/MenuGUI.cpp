@@ -65,10 +65,23 @@ void MenuGUI::inicializar() {
 	InviteBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(201));
 	InviteBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onInviteBtnClicked, this));
 
-	PlayerSlot1Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1));
-	PlayerSlot2Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(2));
-	PlayerSlot3Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(3));
-	PlayerSlot4Lbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(4));
+	BackBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(203));
+	BackBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onBackButtonClicked, this));
+
+	PlayerSlot1.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1));
+	PlayerSlot2.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(2));
+	PlayerSlot3.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(3));
+	PlayerSlot4.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(4));
+
+	PlayerSlot1.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(11));
+	PlayerSlot2.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(21));
+	PlayerSlot3.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(31));
+	PlayerSlot4.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(41));
+
+	PlayerSlot1.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(10));
+	PlayerSlot2.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(20));
+	PlayerSlot3.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(30));
+	PlayerSlot4.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(40));
 
 	LobbyWindow->setVisible(false);
 
@@ -260,27 +273,35 @@ bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 
-void MenuGUI::setNameOnPlayerSlot(const std::string & name) {
-	CEGUI::DefaultWindow* emptySlot = findEmptyNameSlot();
-	if (emptySlot != nullptr)
-		emptySlot->setText(name);
+bool MenuGUI::onBackButtonClicked(const CEGUI::EventArgs & e) {
+	NetworkManager::i().getNetPlayer()->leaveLobby();
+	changeState(stateMenu::enumPrincipal);
+	return true;
+}
+
+MenuGUI::PlayerSlot* MenuGUI::setNameOnPlayerSlot(const std::string & name) {
+	PlayerSlot* emptySlot = findEmptyNameSlot();
+	if (emptySlot != nullptr) {
+		emptySlot->setName(name);
+	}
+	return emptySlot;
 }
 
 void MenuGUI::setSlotFree(const std::string & str) {
-	if (PlayerSlot1Lbl->getText() == str) {
-		PlayerSlot1Lbl->setText("");
+	if (PlayerSlot1.getName() == str) {
+		PlayerSlot1.setFree();
 		return;
 	}
-	if (PlayerSlot2Lbl->getText() == str) {
-		PlayerSlot2Lbl->setText("");
+	if (PlayerSlot2.getName() == str) {
+		PlayerSlot2.setFree();
 		return;
 	}
-	if (PlayerSlot3Lbl->getText() == str) {
-		PlayerSlot3Lbl->setText("");
+	if (PlayerSlot3.getName() == str) {
+		PlayerSlot3.setFree();
 		return;
 	}
-	if (PlayerSlot4Lbl->getText() == str) {
-		PlayerSlot4Lbl->setText("");
+	if (PlayerSlot4.getName() == str) {
+		PlayerSlot4.setFree();
 		return;
 	}
 

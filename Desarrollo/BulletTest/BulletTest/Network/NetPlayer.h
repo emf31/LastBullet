@@ -61,25 +61,42 @@ public:
 
 	void sendServerIPtoNewClient();
 
+	void leaveLobby() {
+		if (lobby2Client->GetRoomID() != 0) {
+			RakNet::Console_LeaveRoom_Steam* msg = (RakNet::Console_LeaveRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_LeaveRoom);
+			msg->roomId = lobby2Client->GetRoomID();
+			
+			lobby2Client->SendMsg(msg);
+			messageFactory->Dealloc(msg);
+		}
+	}
+
 	void sendReadyStatus() {
 		std::string mensaje = "R|";
 		RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
 		IamReady = !IamReady;
 		if (IamReady) {
-			mensaje = mensaje + "1";
-			msg->message = mensaje.c_str();
+			mensaje = mensaje + "1|" + SteamFriends()->GetPersonaName();
 		} else {
-			mensaje = mensaje + "0";
-			msg->message = mensaje.c_str();
+			mensaje = mensaje + "0|" + SteamFriends()->GetPersonaName();
 		}
+		msg->message = mensaje.c_str();
 		msg->roomId = lobby2Client->GetRoomID();
 		lobby2Client->SendMsg(msg);
 		messageFactory->Dealloc(msg);
 	}
 
-	void playerReadyCallback() {
+	void playerReadyCallback(const std::string& name) {
 		//IamReady = true;
 		playersReady = playersReady + 1;
+
+		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+		if (menu != nullptr) {
+			MenuGUI::PlayerSlot* playerSlot;
+			playerSlot = menu->findSlotByName(name);
+			playerSlot->setReady(true);
+		}
+
 		if ((size_t)playersReady >= SteamIDs.size()) {
 			//EMPEZAR PARTIDA AQUI
 			std::cout << "EMPEZANDO PARTIDA" << std::endl;
@@ -104,9 +121,17 @@ public:
 		dispatchMessage(gameinfo, CREAR_PARTIDA);
 	}
 
-	void playerNotReadyCallback() {
+	void playerNotReadyCallback(const std::string& name) {
 		//IamReady = false;
 		playersReady = playersReady - 1;
+
+		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+		if (menu != nullptr) {
+			MenuGUI::PlayerSlot* playerSlot;
+			playerSlot = menu->findSlotByName(name);
+			playerSlot->setReady(false);
+		}
+
 		if (playersReady < 0) {
 			playersReady = 0;
 		}
@@ -171,7 +196,6 @@ public:
 				}
 			}
 		}
-		
 	}
 
 	void addPlayerInLobby(uint64_t steamID);

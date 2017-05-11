@@ -246,7 +246,7 @@ Vec3<float> DebugMenuGUI::elegirColor(std::string estadoActual) {
 		}
 
 		if (estadoActual == "BuscarWeapon") {
-			return Vec3<float>(1, 0.55, 0);
+			return Vec3<float>(1, 0.55f, 0);
 		}
 
 		if (estadoActual == "Disparar") {

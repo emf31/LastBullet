@@ -136,7 +136,11 @@ uint64_t NetPlayer::crearLobby()
 
 		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
 		if (menu != nullptr) {
-			menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+			MenuGUI::PlayerSlot* playerSlot;
+			playerSlot = menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+			if (playerSlot != nullptr) {
+				playerSlot->setReady(false);
+			}
 		}
 		addPlayerInLobby(lobby2Client->GetMyUserID());
 	}
