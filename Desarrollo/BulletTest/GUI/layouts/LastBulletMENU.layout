@@ -250,5 +250,172 @@
                 <Property name="Text" value="Back" />
             </Window>
         </Window>
+        <Window type="DefaultWindow" name="LobbyWindow" >
+            <Property name="ID" value="1000" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="AlfiskoSkin/Button" name="ReadyBtn" >
+                <Property name="ID" value="2000" />
+                <Property name="Area" value="{{0,935},{0,535},{0,1061},{0,579}}" />
+                <Property name="Text" value="Ready" />
+                <Property name="Visible" value="false" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayersLbl" >
+                <Property name="Area" value="{{0,816},{0,-43},{0,1099},{0,-11}}" />
+                <Property name="Text" value="Players" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot1Lbl" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0,750},{0,172},{0,1033},{0,204}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot2Lbl" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0,750},{0,212},{0,1033},{0,244}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot3Lbl" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,750},{0,253},{0,1033},{0,285}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="PlayerSlot4Lbl" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,750},{0,297},{0,1033},{0,329}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorzFormatting" value="LeftAligned" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="InviteBtn" >
+                <Property name="ID" value="2000" />
+                <Property name="Area" value="{{0,932},{0,485},{0,1060},{0,527}}" />
+                <Property name="Text" value="Invite Friends" />
+                <Property name="Visible" value="false" />
+            </Window>
+            <Window type="Generic/Image" name="Shadow" >
+                <Property name="Area" value="{{0,227},{0,127},{0,444},{0,604}}" />
+                <Property name="Image" value="AssetsMenu/BlackFace" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="ReadyText" >
+                <Property name="Area" value="{{0,277},{0,179},{0,394},{0,210}}" />
+                <Property name="Image" value="AssetsMenu/ReadyText" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Players" >
+                <Property name="Area" value="{{0,750},{0,126},{0,894},{0,159}}" />
+                <Property name="Image" value="AssetsMenu/Players" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Player2ReadyImg" >
+                <Property name="ID" value="21" />
+                <Property name="Area" value="{{0,712},{0,211},{0,743},{0,243}}" />
+                <Property name="Image" value="AssetsMenu/Ready" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Player1ReadyImg" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0,712},{0,172},{0,743},{0,204}}" />
+                <Property name="Image" value="AssetsMenu/Ready" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Player3ReadyImg" >
+                <Property name="ID" value="31" />
+                <Property name="Area" value="{{0,711},{0,253},{0,742},{0,285}}" />
+                <Property name="Image" value="AssetsMenu/Ready" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Player4ReadyImg" >
+                <Property name="ID" value="41" />
+                <Property name="Area" value="{{0,710},{0,299},{0,741},{0,331}}" />
+                <Property name="Image" value="AssetsMenu/Ready" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/ImageButton" name="BackImgButton" >
+                <Property name="ID" value="203" />
+                <Property name="Area" value="{{0,257},{0,552},{0,450},{0,590}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="BackImg" >
+                <Property name="Area" value="{{0,287},{0,554},{0,503},{0,585}}" />
+                <Property name="Image" value="AssetsMenu/mExit_copy" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="InviteImg" >
+                <Property name="Area" value="{{0,277},{0,226},{0,456},{0,254}}" />
+                <Property name="Image" value="AssetsMenu/Invite" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ReadyImgButton" >
+                <Property name="ID" value="200" />
+                <Property name="Area" value="{{0,248},{0,176},{0,441},{0,214}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/ImageButton" name="InviteImgButton" >
+                <Property name="ID" value="201" />
+                <Property name="Area" value="{{0,248},{0,221},{0,441},{0,259}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="HorizontalLine" >
+                <Property name="Area" value="{{0,233},{0,269},{0,443},{0,277}}" />
+                <Property name="Alpha" value="0.8" />
+                <Property name="Image" value="AssetsMenu/HorizontalWhiteLine" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="HorizontalLine2" >
+                <Property name="Area" value="{{0,231},{0,541},{0,441},{0,549}}" />
+                <Property name="Alpha" value="0.8" />
+                <Property name="Image" value="AssetsMenu/HorizontalWhiteLine" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Player3NotReadyImg2" >
+                <Property name="ID" value="30" />
+                <Property name="Area" value="{{0,711},{0,253},{0,742},{0,285}}" />
+                <Property name="Image" value="AssetsMenu/NotReady" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Player1NotReadyImg2" >
+                <Property name="ID" value="10" />
+                <Property name="Area" value="{{0,712},{0,172},{0,743},{0,204}}" />
+                <Property name="Image" value="AssetsMenu/NotReady" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Player2NotReadyImg2" >
+                <Property name="ID" value="20" />
+                <Property name="Area" value="{{0,712},{0,211},{0,743},{0,243}}" />
+                <Property name="Image" value="AssetsMenu/NotReady" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Player4NotReadyImg2" >
+                <Property name="ID" value="40" />
+                <Property name="Area" value="{{0,710},{0,299},{0,741},{0,331}}" />
+                <Property name="Image" value="AssetsMenu/NotReady" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="Visible" value="false" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+        </Window>
     </Window>
 </GUILayout>

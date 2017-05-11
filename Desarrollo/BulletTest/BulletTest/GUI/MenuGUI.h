@@ -10,6 +10,44 @@
 
 class MenuGUI : public Motor::GUI {
 public:
+	struct PlayerSlot {
+		CEGUI::DefaultWindow* name;
+		CEGUI::DefaultWindow* ReadyImage;
+		CEGUI::DefaultWindow* NotReadyImage;
+
+		bool isEmpty() {
+			if (name->getText() == "") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		void setReady(bool ready) {
+			if (ready) {
+				NotReadyImage->setVisible(false);
+				ReadyImage->setVisible(true);
+			} else {
+				NotReadyImage->setVisible(true);
+				ReadyImage->setVisible(false);
+			}
+		}
+
+		std::string getName() {
+			return name->getText().c_str();
+		}
+
+		void setName(const std::string& nombre) {
+			name->setText(nombre);
+		}
+
+		void setFree() {
+			setName("");
+			NotReadyImage->setVisible(false);
+			ReadyImage->setVisible(false);
+		}
+
+	};
 
 	MenuGUI();
 
@@ -28,13 +66,57 @@ public:
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
+	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
+	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
+	bool onBackButtonClicked(const CEGUI::EventArgs & e);
+
+	PlayerSlot* setNameOnPlayerSlot(const std::string& name);
+
+	void setSlotFree(const std::string& str);
+
+	void changeStateToLobbyView() {
+		changeState(stateMenu::enumLobby);
+	}
+
+	PlayerSlot* findSlotByName(const std::string& name) {
+		if (PlayerSlot1.getName() == name) {
+			return &PlayerSlot1;
+		}
+		if (PlayerSlot2.getName() == name) {
+			return &PlayerSlot2;
+		}
+		if (PlayerSlot3.getName() == name) {
+			return &PlayerSlot3;
+		}
+		if (PlayerSlot4.getName() == name) {
+			return &PlayerSlot4;
+		}
+		return nullptr;
+	}
+
+	PlayerSlot* findEmptyNameSlot() {
+
+		if (PlayerSlot1.isEmpty()) {
+			return &PlayerSlot1;
+		}
+		if (PlayerSlot2.isEmpty()) {
+			return &PlayerSlot2;
+		}
+		if (PlayerSlot3.isEmpty()) {
+			return &PlayerSlot3;
+		}
+		if (PlayerSlot4.isEmpty()) {
+			return &PlayerSlot4;
+		}
+		return nullptr;
+	}
 private:
 
 	int imagen1_x;
 	int imagen2_x;
 
 	enum stateMenu {
-		enumPrincipal, enumUnir, enumOpcionesAudio, enumOpcionesVideo, enumOpcionesGame
+		enumPrincipal, enumUnir, enumOpcionesAudio, enumOpcionesVideo, enumOpcionesGame, enumLobby
 	} m_stateMenu;
 
 	
@@ -46,6 +128,7 @@ private:
 	CEGUI::DefaultWindow* OpcionesAudioWindow;
 	CEGUI::DefaultWindow* OpcionesVideoWindow;
 	CEGUI::DefaultWindow* OpcionesGameWindow;
+	CEGUI::DefaultWindow* LobbyWindow;
 
 	CEGUI::DefaultWindow* UnirLabel;
 	CEGUI::DefaultWindow* Conexiones;
@@ -73,6 +156,29 @@ private:
 
 	std::vector < CEGUI::String > animacionPlaneta;
 
+	//Lobby
+	CEGUI::PushButton *ReadyBtn;
+	CEGUI::PushButton *InviteBtn;
+	CEGUI::PushButton *BackBtn;
+
+	PlayerSlot PlayerSlot1;
+	PlayerSlot PlayerSlot2;
+	PlayerSlot PlayerSlot3;
+	PlayerSlot PlayerSlot4;
+
+	/*CEGUI::DefaultWindow* PlayerSlot1Lbl;
+	CEGUI::DefaultWindow* PlayerSlot2Lbl;
+	CEGUI::DefaultWindow* PlayerSlot3Lbl;
+	CEGUI::DefaultWindow* PlayerSlot4Lbl;
+	CEGUI::DefaultWindow* Player1Ready;
+	CEGUI::DefaultWindow* Player2Ready;
+	CEGUI::DefaultWindow* Player3Ready;
+	CEGUI::DefaultWindow* Player4Ready;
+	CEGUI::DefaultWindow* Player1NotReady;
+	CEGUI::DefaultWindow* Player2NotReady;
+	CEGUI::DefaultWindow* Player3NotReady;
+	CEGUI::DefaultWindow* Player4NotReady;*/
+
 	//std::thread t;
 
 	std::shared_ptr<NetPlayer> netPlayer;
@@ -84,4 +190,8 @@ private:
 	void changeState(stateMenu Newstate);
 	void setStateVisible(stateMenu state, bool visible);
 	void actualizarTopOpciones();
+
+	
+
+	
 };

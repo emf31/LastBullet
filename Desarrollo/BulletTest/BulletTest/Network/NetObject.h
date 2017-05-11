@@ -42,10 +42,10 @@ protected:
 	RakNet::SystemAddress servidorAdr;
 
 	bool connected;
-
+	RakNet::SocketDescriptor sd;
 private:
 
-	RakNet::SocketDescriptor sd;
+	
 
 	
 

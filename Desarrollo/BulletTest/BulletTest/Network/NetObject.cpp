@@ -3,6 +3,12 @@
 
 NetObject::NetObject()
 {
+	peer = RakNet::RakPeerInterface::GetInstance();
+	peer->AllowConnectionResponseIPMigration(false);
+	RakNet::SocketDescriptor sdd(1234, 0);
+	peer->Startup(8, &sdd, 1);
+	peer->SetMaximumIncomingConnections(8);
+
 }
 
 NetObject::~NetObject()
@@ -13,9 +19,7 @@ NetObject::~NetObject()
 
 void NetObject::conectar(const std::string& ip, int port)
 {
-	peer = RakNet::RakPeerInterface::GetInstance();
-	peer->AllowConnectionResponseIPMigration(false);
-	peer->Startup(1, &sd, 1);
+	
 	peer->Connect(ip.c_str(), port, 0, 0);
 	peer->SetOccasionalPing(true);
 

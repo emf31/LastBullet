@@ -3,7 +3,7 @@
 #include <NetPlayer.h>
 #include <StateStack.h>
 #include <NetworkManager.h>
-
+#include <steam_api.h>
 
 MenuGUI::MenuGUI() : GUI() {
 }
@@ -54,6 +54,37 @@ void MenuGUI::inicializar() {
 	Salir->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onSalirClicked, this));
 
 	Planeta = static_cast<CEGUI::DefaultWindow*>(LastBullet->getChild(8)->getChild(0));
+
+	//Lobby
+
+	LobbyWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1000));
+
+	ReadyBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(200));
+	ReadyBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onReadyBtnClicked, this));
+
+	InviteBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(201));
+	InviteBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onInviteBtnClicked, this));
+
+	BackBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(203));
+	BackBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onBackButtonClicked, this));
+
+	PlayerSlot1.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1));
+	PlayerSlot2.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(2));
+	PlayerSlot3.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(3));
+	PlayerSlot4.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(4));
+
+	PlayerSlot1.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(11));
+	PlayerSlot2.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(21));
+	PlayerSlot3.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(31));
+	PlayerSlot4.ReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(41));
+
+	PlayerSlot1.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(10));
+	PlayerSlot2.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(20));
+	PlayerSlot3.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(30));
+	PlayerSlot4.NotReadyImage = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(40));
+
+	LobbyWindow->setVisible(false);
+
 
 	//Unirse a partida
 
@@ -154,8 +185,11 @@ void MenuGUI::handleEvent(Event * ev)
 }
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
-
+	changeState(stateMenu::enumLobby);
+	
 	NetworkManager::i().getNetPlayer()->crearPartida();
+	NetworkManager::i().getNetPlayer()->crearLobby();
+
 	return true;
 }
 
@@ -226,6 +260,51 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
 {
 	changeState(stateMenu::enumPrincipal);
 	return true;
+}
+
+bool  MenuGUI::onReadyBtnClicked(const CEGUI::EventArgs & e) {
+	NetworkManager::i().getNetPlayer()->sendReadyStatus();
+	return true;
+}
+bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
+
+	
+	SteamFriends()->ActivateGameOverlayInviteDialog(NetworkManager::i().getNetPlayer()->crearLobby());
+	return true;
+}
+
+bool MenuGUI::onBackButtonClicked(const CEGUI::EventArgs & e) {
+	NetworkManager::i().getNetPlayer()->leaveLobby();
+	changeState(stateMenu::enumPrincipal);
+	return true;
+}
+
+MenuGUI::PlayerSlot* MenuGUI::setNameOnPlayerSlot(const std::string & name) {
+	PlayerSlot* emptySlot = findEmptyNameSlot();
+	if (emptySlot != nullptr) {
+		emptySlot->setName(name);
+	}
+	return emptySlot;
+}
+
+void MenuGUI::setSlotFree(const std::string & str) {
+	if (PlayerSlot1.getName() == str) {
+		PlayerSlot1.setFree();
+		return;
+	}
+	if (PlayerSlot2.getName() == str) {
+		PlayerSlot2.setFree();
+		return;
+	}
+	if (PlayerSlot3.getName() == str) {
+		PlayerSlot3.setFree();
+		return;
+	}
+	if (PlayerSlot4.getName() == str) {
+		PlayerSlot4.setFree();
+		return;
+	}
+
 }
 
 void MenuGUI::updateFondo(int velocidad)
@@ -315,6 +394,8 @@ void MenuGUI::setStateVisible(stateMenu state, bool visible)
 	}
 	else if (state == stateMenu::enumOpcionesGame) {
 		OpcionesGameWindow->setVisible(visible);
+	} else if (state == stateMenu::enumLobby) {
+		LobbyWindow->setVisible(visible);
 	}
 }
 

@@ -350,6 +350,57 @@
     <ClCompile Include="Otros\ResourceProvider.cpp">
       <Filter>Source Code\Otros</Filter>
     </ClCompile>
+    <ClCompile Include="Network\Lobby2\Lobby2Client.cpp">
+      <Filter>Source Code\Network\Lobby2</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Lobby2Message.cpp">
+      <Filter>Source Code\Network\Lobby2</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Lobby2Plugin.cpp">
+      <Filter>Source Code\Network\Lobby2</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Lobby2Presence.cpp">
+      <Filter>Source Code\Network\Lobby2</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Lobby2ResultCode.cpp">
+      <Filter>Source Code\Network\Lobby2</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Lobby2Server.cpp">
+      <Filter>Source Code\Network\Lobby2</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\LibVoice\LibVoice.cpp">
+      <Filter>Source Code\Network\Lobby2\LibVoice</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Rooms\IntervalTimer.cpp">
+      <Filter>Source Code\Network\Lobby2\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Rooms\ProfanityFilter.cpp">
+      <Filter>Source Code\Network\Lobby2\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Rooms\RoomsContainer.cpp">
+      <Filter>Source Code\Network\Lobby2\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Rooms\RoomsErrorCodes.cpp">
+      <Filter>Source Code\Network\Lobby2\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Rooms\RoomsPlugin.cpp">
+      <Filter>Source Code\Network\Lobby2\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Rooms\RoomTypes.cpp">
+      <Filter>Source Code\Network\Lobby2\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Steam\Lobby2Client_Steam.cpp">
+      <Filter>Source Code\Network\Lobby2\Steam</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Steam\Lobby2Client_Steam_Impl.cpp">
+      <Filter>Source Code\Network\Lobby2\Steam</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Lobby2\Steam\Lobby2Message_Steam.cpp">
+      <Filter>Source Code\Network\Lobby2\Steam</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\SteamResults.cpp">
+      <Filter>Source Code\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -814,6 +865,57 @@
     <ClInclude Include="Otros\ResourceProvider.h">
       <Filter>Source Code\Otros</Filter>
     </ClInclude>
+    <ClInclude Include="Network\Lobby2\Lobby2Client.h">
+      <Filter>Headers\Network\Lobby2</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Lobby2Message.h">
+      <Filter>Headers\Network\Lobby2</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Lobby2Plugin.h">
+      <Filter>Headers\Network\Lobby2</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Lobby2Presence.h">
+      <Filter>Headers\Network\Lobby2</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Lobby2ResultCode.h">
+      <Filter>Headers\Network\Lobby2</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Lobby2Server.h">
+      <Filter>Headers\Network\Lobby2</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\LibVoice\LibVoice.h">
+      <Filter>Headers\Network\Lobby2\LibVoice</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Rooms\IntervalTimer.h">
+      <Filter>Headers\Network\Lobby2\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Rooms\ProfanityFilter.h">
+      <Filter>Headers\Network\Lobby2\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Rooms\RoomsContainer.h">
+      <Filter>Headers\Network\Lobby2\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Rooms\RoomsErrorCodes.h">
+      <Filter>Headers\Network\Lobby2\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Rooms\RoomsPlugin.h">
+      <Filter>Headers\Network\Lobby2\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Rooms\RoomTypes.h">
+      <Filter>Headers\Network\Lobby2\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Steam\Lobby2Client_Steam.h">
+      <Filter>Headers\Network\Lobby2\Steam</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Steam\Lobby2Client_Steam_Impl.h">
+      <Filter>Headers\Network\Lobby2\Steam</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Lobby2\Steam\Lobby2Message_Steam.h">
+      <Filter>Headers\Network\Lobby2\Steam</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\SteamResults.h">
+      <Filter>Headers\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -986,6 +1088,36 @@
     </Filter>
     <Filter Include="Headers\ParticleSystem">
       <UniqueIdentifier>{335e67ea-4334-4065-91e6-7c6a729008cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Network\Lobby2">
+      <UniqueIdentifier>{4677c94f-6850-4406-b80b-dfe15f4d7c42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Network\Lobby2\Steam">
+      <UniqueIdentifier>{86d34882-6597-4e3d-ae99-78dba160f9af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Network\Lobby2\LibVoice">
+      <UniqueIdentifier>{cb653e18-d619-41a6-ad27-ee3e47e89b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Network\Lobby2\PGSQL">
+      <UniqueIdentifier>{c8e31d83-51b8-4273-a54f-843c23817dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Network\Lobby2\Rooms">
+      <UniqueIdentifier>{36b2f08f-731d-427c-96eb-caedb19103de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Network\Lobby2">
+      <UniqueIdentifier>{df699e02-1526-4237-a3ad-1fdc916343fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Network\Lobby2\Steam">
+      <UniqueIdentifier>{0d4f3644-6b75-4365-a096-2a01ee95ed3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Network\Lobby2\LibVoice">
+      <UniqueIdentifier>{121df35e-332b-4274-b857-5de3e2ee8235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Network\Lobby2\PGSQL">
+      <UniqueIdentifier>{02d27f5e-974e-4a1d-875c-6cf0f4734eea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Network\Lobby2\Rooms">
+      <UniqueIdentifier>{38b262ec-fef1-4146-93d1-0720673df850}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -16,4 +16,12 @@
     <Image height="31" name="mExit" width="267" xPos="395" yPos="312" />
     <Image height="31" name="mExit_copy" width="267" xPos="395" yPos="367" />
     <Image height="47" name="Seleccion_copy" width="342" xPos="62" yPos="415" />
+    <Image height="27" name="Invite" width="170" xPos="404" yPos="435" />
+    <Image height="30" name="NotReady" width="30" xPos="59" yPos="501" />
+    <Image height="30" name="Ready" width="30" xPos="59" yPos="545" />
+    <Image height="358" name="BlackFace" width="130" xPos="1105" yPos="304" />
+    <Image height="534" name="VerticalWhiteLine" width="6" xPos="1258" yPos="149" />
+    <Image height="32" name="ReadyText" width="110" xPos="406" yPos="486" />
+    <Image height="36" name="Players" width="148" xPos="408" yPos="533" />
+    <Image height="6" name="HorizontalWhiteLine" width="539" xPos="708" yPos="705" />
 </Imageset>

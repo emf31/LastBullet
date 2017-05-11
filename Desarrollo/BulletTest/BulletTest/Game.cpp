@@ -27,6 +27,8 @@
 
 #include <World.h>
 
+#include <steam_api.h>
+
 const int Game::server_port = 65535;
 //const Time Game::timePerFrame = seconds(1.f / 15.f);
 
@@ -138,6 +140,23 @@ void Game::inicializar()
 	Settings::i().LoadSettings();
 	inicializarRutas();
 
+	//Inicializamos la API de Steam :)
+	if (SteamAPI_RestartAppIfNecessary(480)) {
+		// if Steam is not running or the game wasn't started through Steam, SteamAPI_RestartAppIfNecessary starts the 
+		// local Steam client and also launches this game again.
+
+		// Once you get a public Steam AppID assigned for this game, you need to replace k_uAppIdInvalid with it and
+		// removed steam_appid.txt from the game depot.
+		printf("Fatal Error\n", "Steam must be running to play this game (SteamAPI_RestartAppIfNecessary() failed).\n");
+		//exit(0);
+	}
+
+	if (!SteamAPI_Init()) {
+		//OutputDebugString("SteamAPI_Init() failed\n");
+		printf("Fatal Error\n", "Steam must be running to play this game (SteamAPI_Init() failed).\n");
+		//exit(0);
+	}
+
 	GraphicEngine::i().inicializar();
 	
 	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
@@ -147,6 +166,8 @@ void Game::inicializar()
 
 	//Inicializamos el MENU
 	StateStack::i().GetCurrentState()->Inicializar();
+
+	
 }
 
 bool Game::processEvents()

@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-
+#include <NetworkManager.h>
 Menu::Menu()
 {
 }
@@ -22,6 +22,7 @@ void Menu::Inicializar()
 void Menu::Clear()
 {
 	menuGUI.destroy();
+	//TODO: Terminar Steam
 }
 
 void Menu::HandleEvent()
@@ -44,6 +45,7 @@ void Menu::HandleEvent()
 void Menu::Update(Time timeElapsed)
 {
 	menuGUI.update();
+	NetworkManager::i().getNetPlayer()->receiveSteamPackets();
 }
 
 void Menu::Render(float interpolation, Time elapsedTime)
