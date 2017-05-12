@@ -47,17 +47,11 @@ namespace Motor{
 
 		void injectMousePosition(float x, float y);
 
-		void injectLeftMouseButton() {
-			m_context->injectMouseButtonDown(CEGUI::MouseButton::LeftButton);
-		}
+		void injectLeftMouseButton() { m_context->injectMouseButtonDown(CEGUI::MouseButton::LeftButton); }
 
-		void injectLeftMouseButtonUp() {
-			m_context->injectMouseButtonUp(CEGUI::MouseButton::LeftButton);
-		}
+		void injectLeftMouseButtonUp() { m_context->injectMouseButtonUp(CEGUI::MouseButton::LeftButton); }
 
-		void injectRightMouseButton() {
-			m_context->injectMouseButtonDown(CEGUI::MouseButton::RightButton);
-		}
+		void injectRightMouseButton() { m_context->injectMouseButtonDown(CEGUI::MouseButton::RightButton); }
 
 
 		static void setWidgetDestRect(CEGUI::Window* widget, const vec4f& destRectPerc, const vec4f& destRectPix);
@@ -70,9 +64,7 @@ namespace Motor{
 		bool escapeInput = false;
 
 
-		void toggleVisible() {
-			getContext()->getRootWindow()->setVisible(!getContext()->getRootWindow()->isVisible());
-		}
+		void toggleVisible() { getContext()->getRootWindow()->setVisible(!getContext()->getRootWindow()->isVisible()); }
 
 	private:
 		CEGUI::OpenGL3Renderer* m_renderer;

@@ -127,6 +127,15 @@
                 <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
                 <Property name="Text" value="Back" />
             </Window>
+            <Window type="AlfiskoSkin/Button" name="Button22" >
+                <Property name="ID" value="201" />
+                <Property name="Area" value="{{0,51},{0,487},{0,147},{0,519}}" />
+                <Property name="Text" value="Connect" />
+            </Window>
+            <Window type="AlfiskoSkin/Editbox" name="Editbox2" >
+                <Property name="ID" value="200" />
+                <Property name="Area" value="{{0,53},{0,431},{0,309},{0,463}}" />
+            </Window>
         </Window>
         <Window type="Generic/Image" name="Image2" >
             <Property name="ID" value="3" />

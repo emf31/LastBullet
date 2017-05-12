@@ -70,6 +70,12 @@ void MenuGUI::inicializar() {
 	Actualizar = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(3));
 	Actualizar->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onUnirPartidaClicked, this));
 
+	connect = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(201));
+	connect->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onConnectClicked, this));
+
+	editBox = static_cast<CEGUI::Editbox*>(UnirWindow->getChild(200));
+	editBox->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onEditBoxClicked, this));
+
 	Atras1 = static_cast<CEGUI::PushButton*>(UnirWindow->getChild(99));
 	Atras1->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
 
@@ -226,6 +232,22 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
 {
 	changeState(stateMenu::enumPrincipal);
 	return true;
+}
+
+bool MenuGUI::onConnectClicked(const CEGUI::EventArgs & e)
+{
+	
+	netPlayer->unirseLobby("2.155.130.30");
+
+	return false;
+}
+
+bool MenuGUI::onEditBoxClicked(const CEGUI::EventArgs & e)
+{
+
+
+
+	return false;
 }
 
 void MenuGUI::updateFondo(int velocidad)

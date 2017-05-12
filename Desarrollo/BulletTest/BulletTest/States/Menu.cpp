@@ -44,6 +44,8 @@ void Menu::HandleEvent()
 void Menu::Update(Time timeElapsed)
 {
 	menuGUI.update();
+
+
 }
 
 void Menu::Render(float interpolation, Time elapsedTime)
@@ -56,6 +58,7 @@ void Menu::Render(float interpolation, Time elapsedTime)
 	//GUI
 	menuGUI.injectMousePosition(mouseX, mouseY);
 
+	
 	GraphicEngine::i().renderAll();
 }
 

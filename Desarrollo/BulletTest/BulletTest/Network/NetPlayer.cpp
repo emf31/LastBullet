@@ -314,7 +314,8 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
 
 			if (e != NULL) {
-				e->getNetworkPrediction()->addMovement(m);
+				//e->getNetworkPrediction()->addMovement(m);
+				e->encolaMovimiento(m);
 			}
 			/*countMovementPacketsIn++;*/
 

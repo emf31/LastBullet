@@ -37,10 +37,10 @@ void Enemy::inicializar()
 
 void Enemy::update(Time elapsedTime)
 {
-	//desencolaMovimiento();
+	desencolaMovimiento();
 
 
-	nPrediction.interpolate(elapsedTime);
+	//nPrediction.interpolate(elapsedTime);
 
 
 	updateState();

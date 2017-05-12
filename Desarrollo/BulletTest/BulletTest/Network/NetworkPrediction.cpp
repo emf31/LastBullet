@@ -16,7 +16,10 @@ void NetworkPrediction::addMovement(TMovimiento & mov)
 	//if (m_positions.size() > 0) {
 		//m_positions.push(mov);
 	//}
-		updateMovement(mov);
+		//updateMovement(mov);
+
+
+		//mov.time
 
 		/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
 		menu->addPrintText("LLega Movimiento");*/
