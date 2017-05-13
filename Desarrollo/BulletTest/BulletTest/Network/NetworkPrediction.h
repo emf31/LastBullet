@@ -18,7 +18,8 @@ public:
 
 	
 
-	void interpolate();
+	void interpolateWithPrediction();
+	void interpolateWithoutPrediction();
 
 private:
 	bool compareVec3(const Vec3<float>& lhs, const Vec3<float>& rhs);

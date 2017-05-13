@@ -40,7 +40,7 @@ void Enemy::update(Time elapsedTime)
 	//desencolaMovimiento();
 
 
-	nPrediction.interpolate();
+	nPrediction.interpolateWithPrediction();
 
 
 	updateState();

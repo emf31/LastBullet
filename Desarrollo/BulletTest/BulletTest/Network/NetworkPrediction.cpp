@@ -32,7 +32,7 @@ void NetworkPrediction::updateMovement(TMovimiento & mov)
 	//Calcular target time y target position
 	Vec3<float> delta = (newPosition - prevPosition);
 	Time deltaTime = milliseconds(RakNet::GetTimeMS()) - milliseconds(mov.timeStamp);
-	targetPosition = newPosition + (delta * deltaTime.asSeconds());
+	targetPosition = newPosition + (delta * deltaTime.asSeconds());-
 	
 	//TargetTime = tiempo actual + tiempo en recibir pauete
 	targetTime = milliseconds(RakNet::GetTimeMS()) + (milliseconds(RakNet::GetTimeMS()) - milliseconds(mov.timeStamp));
@@ -51,7 +51,7 @@ bool NetworkPrediction::compareVec3(const Vec3<float>& lhs, const Vec3<float>& r
 		&& (lhs.getZ() == rhs.getZ());
 }
 
-void NetworkPrediction::interpolate()
+void NetworkPrediction::interpolateWithPrediction()
 {
 	if (compareVec3(targetPosition, newPosition)) {
 		Enemy* ene = static_cast<Enemy*>(m_character);
@@ -86,42 +86,9 @@ void NetworkPrediction::interpolate()
 
 		m_character->updateEnemigo(finalPos);
 	}
+}
 
-	
-
-	/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-	menu->addPrintText(std::to_string(interpolation));*/
-
-	//Time time = milliseconds(RakNet::GetTimeMS() - newMovement.time);
-
-	//interpolation = (float)std::min(1.f, (time.asSeconds())  / elapsedTime.asSeconds());
-
-	/*if (interpolation == 1.f) {
-		updateMovement(m_positions.top());
-
-		while (!m_positions.empty()) {
-			m_positions.pop();
-		}
-	}*/
-
-	
-
-	//New Pos
-	/*Vec3<float> m_renderPos = Vec3<float>(
-		prevMovement.position.getX() + ((newMovement.position.getX() - prevMovement.position.getX()) * interpolation),
-		prevMovement.position.getY() + ((newMovement.position.getY() - prevMovement.position.getY()) * interpolation),
-		prevMovement.position.getZ() + ((newMovement.position.getZ() - prevMovement.position.getZ()) * interpolation)
-		);
-
-	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-
-	std::string display = "( ";
-	display.append(std::to_string(m_renderPos.getX()));
-	display.append(" ,");
-	display.append(std::to_string(m_renderPos.getY()));
-	display.append(" ,");
-	display.append(std::to_string(m_renderPos.getZ()));
-	display.append(" )");
-
-	menu->addPrintText(std::to_string(time.asSeconds()));*/
+void NetworkPrediction::interpolateWithoutPrediction()
+{
+	m_character->updateEnemigo(newPosition);
 }
