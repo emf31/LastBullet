@@ -282,6 +282,7 @@
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
+    <ClInclude Include="Motor\SoundManager.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
     <ClInclude Include="Network\NetBot.h" />
@@ -407,6 +408,7 @@
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
+    <ClCompile Include="Motor\SoundManager.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Network\NetBot.cpp" />
     <ClCompile Include="Network\NetObject.cpp" />

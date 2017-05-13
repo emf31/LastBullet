@@ -336,6 +336,7 @@
     </ClCompile>
     <ClCompile Include="Motor\ClippingZone.cpp" />
     <ClCompile Include="Motor\ClippingManager.cpp" />
+    <ClCompile Include="Motor\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -788,6 +789,9 @@
       <Filter>Headers\Motor</Filter>
     </ClInclude>
     <ClInclude Include="Motor\ClippingManager.h">
+      <Filter>Headers\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\SoundManager.h">
       <Filter>Headers\Motor</Filter>
     </ClInclude>
   </ItemGroup>

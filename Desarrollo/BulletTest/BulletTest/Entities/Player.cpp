@@ -19,6 +19,7 @@
 #include <TriggerSystem.h>
 #include <Map.h>
 #include <TimePerFrame.h>
+#include <SoundManager.h>
 
 
 #include <NetworkManager.h>
@@ -191,6 +192,8 @@ void Player::update(Time elapsedTime)
 	if (m_renderState.getPosition().getY() < -200) {
 		getLifeComponent().restaVida(100, m_guid);
 	}
+
+	SoundManager::i().setListenerPosition(m_renderState.getPosition(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
 
 	updateRelojes();
 
