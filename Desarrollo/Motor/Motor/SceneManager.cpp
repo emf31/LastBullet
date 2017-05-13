@@ -13,19 +13,17 @@ void SceneManager::inicializar() {
 	m_matrizActual = glm::mat4();
 	//camaraActiva = crearNodoCamara();
 	sunlight = nullptr;
-	//shaderGeometria = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	shaderGeometria = ResourceManager::i().getShader("assets/geometria.vs", "assets/geometria.frag");
 	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
-	//shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
+	shaderSkybox = ResourceManager::i().getShader("assets/skybox.vs", "assets/skybox.frag");
 
 	inicializarBuffers();
-	//inicializarBufferDeferred();
 	inicializarBuffersBlur();
-	//inicializarBufferBloom();
 	inicializarBuffersLineas();
+	inicializarBufferSkybox();
 	numLines = 0;
 	drawTarget = false;
 }
@@ -46,6 +44,7 @@ void SceneManager::draw() {
 	
 	//std::cout << "activo gBuffer" << std::endl;
 	glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
+	
 	
 
 	//****************RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
@@ -91,6 +90,8 @@ void SceneManager::draw() {
 			drawAllLines();
 		}
 	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+
+		renderSkybox();
 
 		//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 	
@@ -204,10 +205,93 @@ void SceneManager::inicializarBuffersBlur()
 	}
 }
 
-void SceneManager::inicializarBufferBloom() {
-	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "scene"), 0);
-	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "bloomBlur"), 1);
+void SceneManager::inicializarBufferSkybox()
+{
+	GLfloat skyboxVertices[] = {
+		// Positions          
+		-1.0f,  1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		-1.0f,  1.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		1.0f, -1.0f,  1.0f
+	};
+
+	
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glBindVertexArray(0);
+
+	
+	faces.push_back("assets/skybox/right.jpg");
+	faces.push_back("assets/skybox/left.jpg");
+	faces.push_back("assets/skybox/top.jpg");
+	faces.push_back("assets/skybox/bottom.jpg");
+	faces.push_back("assets/skybox/back.jpg");
+	faces.push_back("assets/skybox/front.jpg");
+
+	
+	glGenTextures(1, &skyboxTexture);
+
+	int width, height;
+	unsigned char* image;
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
+	for (GLuint i = 0; i < faces.size(); i++)
+	{
+		image = SOIL_load_image(faces[i], &width, &height, 0, SOIL_LOAD_RGB);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		SOIL_free_image_data(image);
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
+
+
 
 void SceneManager::inicializarBuffersLineas() {
 	glGenVertexArrays(1, &LVAO);
@@ -216,20 +300,7 @@ void SceneManager::inicializarBuffersLineas() {
 	glLineWidth(1.0f);
 }
 
-void SceneManager::inicializarBufferDeferred()
-{
-	GLuint screenWidth = 1280, screenHeight = 720;
 
-	glGenFramebuffers(1, &gDeferred);
-	glBindFramebuffer(GL_FRAMEBUFFER, gDeferred);
-
-	glGenTextures(1, &gEscena);
-	glBindTexture(GL_TEXTURE_2D, gEscena);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gEscena, 0);
-}
 
 void SceneManager::renderLuces()
 {
@@ -323,6 +394,27 @@ void SceneManager::renderBloom()
 	//RenderQuad();
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+}
+
+void SceneManager::renderSkybox()
+{
+	// Draw skybox first
+	//glDepthMask(GL_FALSE);// Remember to turn depth writing off
+	glDepthFunc(GL_LEQUAL);
+	shaderSkybox->Use();
+	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	// Remove any translation component of the view matrix
+	glm::mat4 projec = camaraActiva->getProjectionMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
+	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
+	// skybox cube
+	glBindVertexArray(skyboxVAO);
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(shaderSkybox->Program, "skybox"), 0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+	//glDepthMask(GL_TRUE);
+	glDepthFunc(GL_LESS);
 }
 
 bool SceneManager::removeNode(TNode * node) {
