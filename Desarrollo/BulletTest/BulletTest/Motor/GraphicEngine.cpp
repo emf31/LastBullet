@@ -304,7 +304,7 @@ void GraphicEngine::setDebugDraw()
 
 
 
-	debug_draw_bullet = true;
+	debug_draw_bullet = false;
 }
 
 void GraphicEngine::apuntar()

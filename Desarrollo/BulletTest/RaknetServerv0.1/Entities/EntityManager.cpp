@@ -39,21 +39,21 @@ void EntityManager::sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::
 	}
 }
 
-void EntityManager::enviaNuevaPos(TMovimiento2 p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
+void EntityManager::enviaNuevaPos(RakNet::BitStream& bitStream, RakNet::RakNetGUID packetOwner, RakNet::RakNetGUID gameOwner, RakNet::RakPeerInterface *peer)
 {
-	Entity* ent = EntityManager::i().getRaknetEntity(p.guid);
+	Entity* ent = EntityManager::i().getRaknetEntity(packetOwner);
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a todos menos a nosotros mismos
-		if (i->second->getGuid() != p.guid) {
+		if (i->second->getGuid() != packetOwner) {
 
 			//No se envia al propietario de la partida, si el que se mueve es un bot
-			if (ent->getClassName() == "Bot" && i->second->getGuid() == owner) {
+			if (ent->getClassName() == "Bot" && i->second->getGuid() == gameOwner) {
 				continue;
 			}
 			
-			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			peer->Send(&bitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 
 			
 

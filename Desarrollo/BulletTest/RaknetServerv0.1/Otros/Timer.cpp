@@ -3,8 +3,8 @@
 
 Timer::Timer()
 {
-	//Updateamos cada 30 para asegurarnos que el servidor no ralentiza el trafico
-	m_rakNetFrameTime = 1000.0 / 60.0; //60 fps 
+	//Updateamos cada 60 para asegurarnos que el servidor no ralentiza el trafico
+	m_rakNetFrameTime = 1000.0 / 120.0; //60 fps 
 	m_deltaTime = 0.0; //no time has elapsed yet
 
 	QueryPerformanceFrequency(&m_frequency); //get frequency
@@ -33,7 +33,7 @@ bool Timer::shouldUpdate()
 
 	if (m_deltaTime >= m_rakNetFrameTime) //comprueba si hay que updatear raknet
 	{
-		m_deltaTime = m_deltaTime - m_rakNetFrameTime; //don't forget excess time
+		m_deltaTime = m_deltaTime - m_rakNetFrameTime; //no olvidar el tiempo excedido
 
 		shouldUpdate = true; //return true
 	}

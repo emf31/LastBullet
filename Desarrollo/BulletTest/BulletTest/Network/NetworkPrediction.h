@@ -4,33 +4,36 @@
 #include <time.h>
 #include <TimePerFrame.h>
 
-class Character;
+class Enemy;
 
 //Esta clase es un componente para un Character. Se encarga de realizar la interpolación de la entidad
 //para suavizar el movimiento en caso de perdida de paquetes debido al lag en la comunicación.
 class NetworkPrediction {
 
 public:
-	NetworkPrediction(Character* character);
+	NetworkPrediction(Enemy* character);
 	~NetworkPrediction();
 
 	void addMovement(TMovimiento & mov);
 
 	
 
-	void interpolate(Time elapsedTime);
+	void interpolate();
 
 private:
+	bool compareVec3(const Vec3<float>& lhs, const Vec3<float>& rhs);
 	void updateMovement(TMovimiento& mov);
 
-	std::stack<TMovimiento> m_positions;
+	Enemy* m_character;
 
-	Character* m_character;
+	Time currentTime;
+	Time startTime;
+	Time targetTime;
 
-	Time lastPacketReceived;
-
-	TMovimiento newMovement;
-	TMovimiento prevMovement;
+	
+	Vec3<float> prevPosition;	//Hace un paquete
+	Vec3<float> newPosition; //Para predecir el movimiento
+	Vec3<float> targetPosition;	//Posicion destino
 
 
 	//Valor actual de interpolacion entre 0 - 1

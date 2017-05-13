@@ -184,16 +184,26 @@ void getPackets() {
 			unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
 			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 			unsigned char typeId;
+			bool isDying;
+			Vec3<float> position;
+			Vec3<float> rotation;
+			RakNet::RakNetGUID guid;
 
 			RakNet::BitStream myBitStream(packet->data, packet->length, false); // The false is for efficiency so we don't make a copy of the passed data
 			myBitStream.Read(useTimeStamp);
 			myBitStream.Read(timeStamp);
 			myBitStream.Read(typeId);
+			myBitStream.Read(isDying);
+			myBitStream.Read(position);
+			myBitStream.Read(rotation);
+			myBitStream.Read(guid);
 
-			if (packet->guid == gameinfo.creador) {
+			EntityManager::i().enviaNuevaPos(myBitStream, packet->guid, gameinfo.creador, peer);
+
+			/*if (packet->guid == gameinfo.creador) {
 				Time time = milliseconds(RakNet::GetTimeMS() - timeStamp);
 				std::cout << std::to_string(time.asMilliseconds()) << std::endl;
-			}
+			}*/
 
 			
 

@@ -312,18 +312,38 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		break;
 		case MOVIMIENTO:
 		{
-			TMovimiento2 m = *reinterpret_cast<TMovimiento2*>(packet->data);
+			unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
+			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
+			unsigned char typeId;
+			bool isDying;
+			Vec3<float> position;
+			Vec3<float> rotation;
+			RakNet::RakNetGUID guid;
 
+
+			RakNet::BitStream myBitStream(packet->data, packet->length, false); // The false is for efficiency so we don't make a copy of the passed data
+			myBitStream.Read(useTimeStamp);
+			myBitStream.Read(timeStamp);
+			myBitStream.Read(typeId);
+			myBitStream.Read(isDying);
+			myBitStream.Read(position);
+			myBitStream.Read(rotation);
+			myBitStream.Read(guid);
+
+			
 			//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
-			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
+			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(guid));
 
 			if (e != NULL) {
-				//e->getNetworkPrediction()->addMovement(m);
+				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, position, rotation, guid });
 				//e->encolaMovimiento(m);
-				DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-				Time time = milliseconds(m.timeStamp);
-				menu->addPrintText(std::to_string(time.asSeconds()));
+
+				/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+				Time time = milliseconds(RakNet::GetTimeMS() - timeStamp);
+				menu->addPrintText(std::to_string(time.asMilliseconds()));*/
+				
 			}
+
 			/*countMovementPacketsIn++;*/
 
 #ifdef NETWORK_DEBUG
@@ -345,7 +365,12 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 		case TERMINAR_PARTIDA:
 		{
+			//Volvemos al menu
 			StateStack::i().GetCurrentState()->Clear();
+			StateStack::i().SetCurrentState(States::ID::Menu);
+			StateStack::i().GetCurrentState()->Inicializar();
+
+			return;
 
 			break;
 		}

@@ -37,10 +37,10 @@ void Enemy::inicializar()
 
 void Enemy::update(Time elapsedTime)
 {
-	desencolaMovimiento();
+	//desencolaMovimiento();
 
 
-	//nPrediction.interpolate(elapsedTime);
+	nPrediction.interpolate();
 
 
 	updateState();
@@ -131,11 +131,12 @@ void Enemy::borrarContenido()
 //Teletransporta un enemigo a la posicion que le pasas
 void Enemy::setPosition(const Vec3<float>& pos)
 {
-	m_renderState.setPosition(pos);
+	Vec3<float> aux = pos;
+	aux.setY(aux.getY() - 0.5f);
+	m_renderState.setPosition(aux);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
-	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2)/* + radius*/, pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo.get()->setPosition(pos);
 }
 
 
