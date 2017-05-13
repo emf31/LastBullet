@@ -24,7 +24,7 @@ public:
 	void enviaNuevaPos(RakNet::BitStream& bitStream, RakNet::RakNetGUID packetOwner, RakNet::RakNetGUID gameOwner, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
-	void enviarTerminarPartida(RakNet::RakPeerInterface *peer);
+	void enviarTerminarPartida(RakNet::RakNetGUID& owner, RakNet::RakPeerInterface *peer);
 	void enviaDisparado(TImpactoBala &imp, RakNet::RakNetGUID &dispara, RakNet::RakPeerInterface *peer);
 	void enviaDisparadoRocket(TImpactoRocket &impact, RakNet::RakPeerInterface *peer);
 	void notificarMuerte(RakID &p, RakNet::RakPeerInterface *peer);
@@ -37,7 +37,7 @@ public:
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
 	void enviaCambioArma(TCambioArma &cambio, RakNet::RakPeerInterface *peer);
-	void aumentaKill(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
+	void aumentaKill(RakNet::RakNetGUID &guid, int MaxKills, RakNet::RakPeerInterface * peer);
 	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
 	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);;
@@ -57,7 +57,6 @@ public:
 	void removeEntity(Entity* entity);
 	Entity * getRaknetEntity(RakNet::RakNetGUID guid);
 	Entity * getEntityID(int id);
-	int MaxScore = 5;
 
 	int getNumJugadores() const { return m_jugadores.size(); }
 

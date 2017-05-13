@@ -111,7 +111,7 @@ void getPackets() {
 			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
 			if (ent->getGuid() == gameinfo.creador) {
-				EntityManager::i().enviarTerminarPartida(peer);
+				EntityManager::i().enviarTerminarPartida(gameinfo.creador, peer);
 			}
 
 			break;
@@ -164,23 +164,7 @@ void getPackets() {
 		case MOVIMIENTO: {
 
 
-			/*TMovimiento2 mov = *reinterpret_cast<TMovimiento2*>(packet->data);
 
-			if (mov.guid != gameinfo.creador) {
-				Time time = milliseconds(RakNet::GetTimeMS() - mov.timeStamp);
-				std::cout << std::to_string(time.asMilliseconds()) << std::endl;
-			}
-			
-			//mov.timeStamp = RakNet::GetTimeMS() - mov.timeStamp;
-
-			EntityManager::i().enviaNuevaPos(mov, gameinfo.creador, peer);
-
-			Entity* ent = EntityManager::i().getRaknetEntity(mov.guid);
-
-			if (ent != NULL) {
-				ent->setPosition(mov.position);
-			}
-			*/
 			unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
 			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 			unsigned char typeId;
@@ -200,10 +184,6 @@ void getPackets() {
 
 			EntityManager::i().enviaNuevaPos(myBitStream, packet->guid, gameinfo.creador, peer);
 
-			/*if (packet->guid == gameinfo.creador) {
-				Time time = milliseconds(RakNet::GetTimeMS() - timeStamp);
-				std::cout << std::to_string(time.asMilliseconds()) << std::endl;
-			}*/
 
 			
 
@@ -386,13 +366,10 @@ void getPackets() {
 			TKill kill = *reinterpret_cast<TKill*>(packet->data);
 
 			EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
-			std::cout << "Aumenta muerte: " << EntityManager::i().getRaknetEntity(kill.guidDeath)->getName() << std::endl;
 
 			if (kill.guidDeath != kill.guidKill) {
 				//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado
-				EntityManager::i().aumentaKill(kill.guidKill, peer);
-
-				std::cout << "Aumenta kill: " << EntityManager::i().getRaknetEntity(kill.guidKill)->getName() << std::endl;
+				EntityManager::i().aumentaKill(kill.guidKill, gameinfo.maxKills, peer);
 			}
 
 
@@ -463,6 +440,7 @@ void getPackets() {
 			info.gameMode = gameinfo.gameMode;
 			info.numBots = gameinfo.numBots;
 			info.playersTotales = EntityManager::i().getNumJugadores() - 1;
+			info.maxKills = gameinfo.maxKills;
 
 			//Esto es temporal
 			peer->Send((const char*)&info, sizeof(info), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p->getGuid(), false);
@@ -478,6 +456,7 @@ void getPackets() {
 
 			if (p != nullptr) {
 				enviarFilaTabla(p->getGuid(), p->getName());
+
 				p->setAvailable(true);
 				EntityManager::i().notificarDisponibilidad(rak, peer);
 			}

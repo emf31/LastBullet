@@ -156,6 +156,7 @@ struct TGameInfo {
 	std::string name;
 	int gameMode;
 	int numBots;
+	int maxKills;
 	int playersTotales;
 	std::string map;
 };

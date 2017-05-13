@@ -74,7 +74,7 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	NetworkManager::i().createServer();
+	//NetworkManager::i().createServer();
 	RakSleep(1000);
 	int a = 1;
 	conectar("127.0.0.1", server_port);
@@ -89,38 +89,16 @@ void NetPlayer::crearPartida()
 	gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
 	gameinfo.map = Settings::i().GetValue("mapa");
 	gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+	gameinfo.maxKills = std::stoi(Settings::i().GetValue("maxkills"));
 
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
 	TPlayer p;
 	p.name = "Nixon";
-	//TPlayer p2;
-	//p2.name = "Kennedy";
 
 	m_bots.push_back(p);
-	//m_bots.push_back(p2);
 
-
-	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
-	//bot2->m_network->inicializar();
-
-
-	
-	//Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
-	//bot3->m_network->inicializar();
-	
-	/*Enemy_Bot *bot4 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot4->m_network->inicializar();*/
-
-
-	
-	
-
-	
-	/*while (World::i().gamestarted == false) {
-		NetworkManager::i().updateNetwork(Time::Zero);
-	}*/
 }
 
 void NetPlayer::setPlayerObject(Player * player)
@@ -357,8 +335,10 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		{
 			RakID rakID = *reinterpret_cast<RakID*>(packet->data);
 
-			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
-
+			Entity* ent = EntityManager::i().getRaknetEntity(rakID.guid);
+			GraphicEngine::i().removeNode(ent->getNode());
+			EntityManager::i().removeEntity(ent);
+			
 
 		}
 		break;
@@ -555,9 +535,9 @@ void NetPlayer::handlePackets(Time elapsedTime)
 
 			PlayerEvent* evento = new PlayerEvent(nuevaFila);
 
-			World::i().getPartida()->muestraMarcador();
-
 			EventSystem::i().dispatchNow(evento);
+
+			World::i().getPartida()->muestraMarcador();
 
 		}
 		break;
@@ -568,6 +548,8 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			KillEvent* killEvent = new KillEvent(guidTabla.guid);
 
 			EventSystem::i().dispatchNow(killEvent);
+
+			World::i().getPartida()->muestraMarcador();
 
 
 #ifdef NETWORK_DEBUG
@@ -584,6 +566,8 @@ void NetPlayer::handlePackets(Time elapsedTime)
 			MuerteEvent* deathEvent = new MuerteEvent(guidTabla.guid);
 
 			EventSystem::i().dispatchNow(deathEvent);
+
+			World::i().getPartida()->muestraMarcador();
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(guidTabla.guid, mPacketIdentifier);

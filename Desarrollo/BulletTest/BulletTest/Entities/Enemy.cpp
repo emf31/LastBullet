@@ -130,6 +130,7 @@ void Enemy::borrarContenido()
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
+	//GraphicEngine::i().removeNode(m_nodo);
 	
 }
 
