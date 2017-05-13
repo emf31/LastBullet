@@ -39,4 +39,6 @@ private:
 
 	//Valor actual de interpolacion entre 0 - 1
 	float interpolation;
+
+	float interpolation_time = 50.f;
 };

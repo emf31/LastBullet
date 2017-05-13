@@ -32,7 +32,7 @@ void NetworkPrediction::updateMovement(TMovimiento & mov)
 	//Calcular target time y target position
 	Vec3<float> delta = (newPosition - prevPosition);
 	Time deltaTime = milliseconds(RakNet::GetTimeMS()) - milliseconds(mov.timeStamp);
-	targetPosition = newPosition + (delta * deltaTime.asSeconds());-
+	targetPosition = newPosition + (delta * deltaTime.asSeconds());
 	
 	//TargetTime = tiempo actual + tiempo en recibir pauete
 	targetTime = milliseconds(RakNet::GetTimeMS()) + (milliseconds(RakNet::GetTimeMS()) - milliseconds(mov.timeStamp));
@@ -59,7 +59,7 @@ void NetworkPrediction::interpolateWithPrediction()
 
 		return;
 	}
-	//No hacemos nada
+	//No hacemos nada 0/0 error
 	if (targetTime == startTime)
 	{
 		return;
@@ -71,20 +71,28 @@ void NetworkPrediction::interpolateWithPrediction()
 
 	if (interpolation >= 1.0f)
 	{
-		m_character->setPosition(targetPosition);
+		m_character->setPosition(newPosition);
 	}
 	else if (interpolation < 0)
 	{
-		m_character->setPosition(targetPosition);
+		m_character->setPosition(newPosition);
+		DebugMenuGUI* debug = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+
+		debug->addPrintText("<0");
 	}
 	else {
-		Vec3<float> finalPos = Vec3<float>(
-			newPosition.getX() + ((targetPosition.getX() - newPosition.getX()) * interpolation),
-			newPosition.getY() + ((targetPosition.getY() - newPosition.getY()) * interpolation),
-			newPosition.getZ() + ((targetPosition.getZ() - newPosition.getZ()) * interpolation)
-			);
+		float oneMinusT = (1 - interpolation);
+		float newX = oneMinusT*newPosition.getX() + interpolation*targetPosition.getX();
+		float newY = oneMinusT*newPosition.getY() + interpolation*targetPosition.getY();
+		float newZ = oneMinusT*newPosition.getZ() + interpolation*targetPosition.getZ();
 
-		m_character->updateEnemigo(finalPos);
+		Vec3<float> finalpos(newX,newY,newZ);
+
+		m_character->updateEnemigo(finalpos);
+
+		DebugMenuGUI* debug = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+
+		debug->addPrintText("Interpolo");
 	}
 }
 
