@@ -523,7 +523,6 @@ int main() {
 	sd.socketFamily = AF_INET;
 	timer = new Timer();
 
-	//peer->ApplyNetworkSimulator(0.2f, 200, 10);
 	peer->SetOccasionalPing(true);
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);

@@ -6,7 +6,7 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
         <Window type="AlfiskoSkin/Label" name="Label" >
-            <Property name="Area" value="{{0.00234375,1057},{0.0430556,22},{0.14375,1057},{0.0902778,22}}" />
+            <Property name="Area" value="{{0.00234375,937},{0.0430556,-18},{0.14375,937},{0.0902778,-18}}" />
             <Property name="Text" value="F1 - Debug menu" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="MouseCursorImage" value="AlfiskoSkin/MouseArrow" />
@@ -517,7 +517,7 @@
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="FrameWindow" >
             <Property name="ID" value="10" />
-            <Property name="Area" value="{{0.0539063,894},{0.00277778,95},{0.28125,896},{0.780556,152}}" />
+            <Property name="Area" value="{{0.0539063,911},{0.00277778,49},{0.28125,913},{0.780556,146}}" />
             <Property name="Text" value="Debug Menu" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="SizingEnabled" value="false" />
@@ -567,7 +567,7 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
                 <Property name="ID" value="6" />
-                <Property name="Area" value="{{0.355366,-75},{0.869656,-178},{0.355366,161},{0.869656,-146}}" />
+                <Property name="Area" value="{{0.355366,-76},{0.869656,-207},{0.355366,160},{0.869656,-175}}" />
                 <Property name="Text" value="Bot A" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button4" >
@@ -587,10 +587,15 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button7" >
                 <Property name="ID" value="10" />
-                <Property name="Area" value="{{0,24},{0,279},{0,260},{0,311}}" />
+                <Property name="Area" value="{{0,27},{0,288},{0,263},{0,320}}" />
                 <Property name="Text" value="Ver estados de la IA" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button62" >
+                <Property name="ID" value="16" />
+                <Property name="Area" value="{{0,23},{0,576},{0,259},{0,608}}" />
+                <Property name="Text" value="Disable MovPrediction" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button622" >
                 <Property name="ID" value="15" />
                 <Property name="Area" value="{{0,23},{0,530},{0,259},{0,562}}" />
                 <Property name="Text" value="God mode" />

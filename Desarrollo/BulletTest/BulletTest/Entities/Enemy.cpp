@@ -39,8 +39,13 @@ void Enemy::update(Time elapsedTime)
 {
 	//desencolaMovimiento();
 
+	if (NetworkManager::i().isMovementPrediction()) {
+		nPrediction.interpolateWithPrediction();
+	}
+	else {
+		nPrediction.interpolateWithoutPrediction();
+	}
 
-	nPrediction.interpolateWithPrediction();
 
 
 	updateState();
@@ -186,49 +191,7 @@ bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-//pila posiciones
-void Enemy::encolaMovimiento(TMovimiento& mov)
-{
-	// Añadir a la cola
-	m_positions.push(mov);
-}
 
-void Enemy::desencolaMovimiento()
-{
-	
-
-
-	if (m_positions.size() > 3) {
-		TMovimiento mov;
-		while (!m_positions.empty()) {
-			mov = m_positions.front();
-			//lo borramos de la cola
-			m_positions.pop();
-			//llamamos al update con la nueva posicion
-		}
-		updateEnemigo(mov.position);
-		m_renderState.updateRotations(mov.rotation);
-		m_isDying = mov.isDying;
-	}
-
-	else if (m_positions.size() > 0) {
-		TMovimiento mov;
-		mov = m_positions.front();
-		//lo borramos de la cola
-		m_positions.pop();
-		//llamamos al update con la nueva posicion
-		updateEnemigo(mov.position);
-		m_renderState.updateRotations(mov.rotation);
-		m_isDying = mov.isDying;
-	}
-	else {
-		//updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
-
-	}
-
-	
-
-}
 
 void Enemy::lanzarGranada(TGranada g)
 {

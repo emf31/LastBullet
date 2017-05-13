@@ -51,6 +51,10 @@ public:
 	const std::vector<TPlayer>& getEnemies() const { return m_netPlayer->getEnemies(); }
 	const std::vector<TPlayer>& getBots() const { return m_netPlayer->getBots(); }
 	std::shared_ptr<NetPlayer> getNetPlayer() const { return m_netPlayer; }
+
+	bool isMovementPrediction() const { return movementPrediction; }
+	void setMovementPrediction(bool a) { movementPrediction = a; }
+
 private:
 
 	void startup(LPCTSTR lpApplicationName);
@@ -67,7 +71,7 @@ private:
 
 	std::string serverIP;
 
-	
+	bool movementPrediction;
 
 	NetworkManager() { }
 };

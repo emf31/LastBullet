@@ -3,8 +3,10 @@
 #include <GUIManager.h>
 #include <DebugMenuGUI.h>
 #include <Enemy.h>
+#include <Util.h>
 
-NetworkPrediction::NetworkPrediction(Enemy * character)
+NetworkPrediction::NetworkPrediction(Enemy * character) :
+	interpolation(0.f)
 {
 	m_character = character;
 }
@@ -16,49 +18,49 @@ NetworkPrediction::~NetworkPrediction()
 void NetworkPrediction::addMovement(TMovimiento & mov)
 {
 		updateMovement(mov);
+		updateState(mov);
 }
 
 
-
+//A este metodo se llama cada vez que se recibe un mensaje de movimiento del cliente que representa este enemigo.
 void NetworkPrediction::updateMovement(TMovimiento & mov)
 {
 	//Tiempo en el que recibimos paquete
 	startTime = milliseconds(RakNet::GetTimeMS());
 
+	//Calculamos delta time (tiempo que pasa entre 2 movimientos)
+	Time deltaTime = milliseconds(mov.timeStamp - prevTime);
+
+	prevTime = mov.timeStamp;
 
 	prevPosition = newPosition;
 	newPosition = mov.position;
 
+	//Deberiamos corregir la posicion predecida???
+	if (!compareVec3(newPosition, targetPosition)) {
+		//m_character->updateEnemigo(newPosition);
+	}
+
 	//Calcular target time y target position
 	Vec3<float> delta = (newPosition - prevPosition);
-	Time deltaTime = milliseconds(RakNet::GetTimeMS()) - milliseconds(mov.timeStamp);
+	
 	targetPosition = newPosition + (delta * deltaTime.asSeconds());
 	
-	//TargetTime = tiempo actual + tiempo en recibir pauete
-	targetTime = milliseconds(RakNet::GetTimeMS()) + (milliseconds(RakNet::GetTimeMS()) - milliseconds(mov.timeStamp));
-
-	if (!compareVec3(targetPosition, newPosition)) {
-		int a = 0;
-	}
+	//TargetTime = tiempo actual + tiempo en moverse de posPrev a PosNew
+	targetTime = milliseconds(RakNet::GetTimeMS()) + deltaTime;
 
 
 }
 
-
-bool NetworkPrediction::compareVec3(const Vec3<float>& lhs, const Vec3<float>& rhs) {
-	return (lhs.getX() == rhs.getX())
-		&& (lhs.getY() == rhs.getY())
-		&& (lhs.getZ() == rhs.getZ());
-}
-
-void NetworkPrediction::interpolateWithPrediction()
+void NetworkPrediction::updateState(TMovimiento & mov)
 {
-	if (compareVec3(targetPosition, newPosition)) {
-		Enemy* ene = static_cast<Enemy*>(m_character);
-		ene->setPosition(targetPosition);
+	newRotation = mov.rotation;
+	m_character->setIsDying(mov.isDying);
 
-		return;
-	}
+}
+
+void NetworkPrediction::interpolate()
+{
 	//No hacemos nada 0/0 error
 	if (targetTime == startTime)
 	{
@@ -71,32 +73,45 @@ void NetworkPrediction::interpolateWithPrediction()
 
 	if (interpolation >= 1.0f)
 	{
-		m_character->setPosition(newPosition);
-	}
-	else if (interpolation < 0)
-	{
-		m_character->setPosition(newPosition);
-		DebugMenuGUI* debug = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+		m_character->updateEnemigo(targetPosition);
 
-		debug->addPrintText("<0");
 	}
 	else {
-		float oneMinusT = (1 - interpolation);
-		float newX = oneMinusT*newPosition.getX() + interpolation*targetPosition.getX();
-		float newY = oneMinusT*newPosition.getY() + interpolation*targetPosition.getY();
-		float newZ = oneMinusT*newPosition.getZ() + interpolation*targetPosition.getZ();
+		Vec3<float> finalPos = Vec3<float>(
+			newPosition.getX() + ((targetPosition.getX() - newPosition.getX()) * interpolation),
+			newPosition.getY() + ((targetPosition.getY() - newPosition.getY()) * interpolation),
+			newPosition.getZ() + ((targetPosition.getZ() - newPosition.getZ()) * interpolation)
+			);
 
-		Vec3<float> finalpos(newX,newY,newZ);
+		m_character->updateEnemigo(finalPos);
 
-		m_character->updateEnemigo(finalpos);
-
-		DebugMenuGUI* debug = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-
-		debug->addPrintText("Interpolo");
 	}
+}
+
+
+
+
+void NetworkPrediction::interpolateWithPrediction()
+{
+	//Updateamos Rotacion
+	m_character->getRenderState()->updateRotations(newRotation);
+
+	//No hacemos nada
+	if (compareVec3(targetPosition, newPosition)) {
+		Enemy* ene = static_cast<Enemy*>(m_character);
+		ene->setPosition(targetPosition);
+
+		return;
+	}
+
+	//Ahora si interpolamos
+	interpolate();
 }
 
 void NetworkPrediction::interpolateWithoutPrediction()
 {
 	m_character->updateEnemigo(newPosition);
+
+	//Updateamos Rotacion
+	m_character->getRenderState()->updateRotations(newRotation);
 }

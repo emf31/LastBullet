@@ -37,7 +37,7 @@ int Randi(int min, int max);
 
 float clip(float n, float lower, float upper);
 
-
+bool compareVec3(const Vec3<float>& lhs, const Vec3<float>& rhs);
 
 
 btVector3 bt(const Vec3<float> &vec);

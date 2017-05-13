@@ -63,6 +63,8 @@ private:
 
 	bool onGodMode(const CEGUI::EventArgs & e);
 
+	bool onMovementPrediction(const CEGUI::EventArgs & e);
+
 	Vec3<float> elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);

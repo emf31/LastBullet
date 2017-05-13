@@ -79,6 +79,9 @@ void DebugMenuGUI::inicializar() {
 	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
 	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
 
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMovementPrediction, this));
+
 	
 
 	//MENU LOG NETWORK
@@ -638,6 +641,22 @@ bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
 bool DebugMenuGUI::onGodMode(const CEGUI::EventArgs & e)
 {
 	static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->godMode();
+	return true;
+}
+
+bool DebugMenuGUI::onMovementPrediction(const CEGUI::EventArgs & e)
+{
+	NetworkManager::i().setMovementPrediction(!NetworkManager::i().isMovementPrediction());
+
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+
+	if (NetworkManager::i().isMovementPrediction()) {
+		DebugIA->setText("Disable MovPrediction");
+	}
+	else {
+		DebugIA->setText("Enable MovPrediction");
+	}
+
 	return true;
 }
 

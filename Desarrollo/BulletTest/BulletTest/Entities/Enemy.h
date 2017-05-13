@@ -39,10 +39,6 @@ public:
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 
-
-	void encolaMovimiento(TMovimiento& mov);
-	void desencolaMovimiento();
-
 	void lanzarGranada(TGranada g);
 
 	virtual bool isDying() override;
@@ -78,7 +74,6 @@ private:
 
 
 	btRigidBody* m_rigidBody;
-	std::queue<TMovimiento> m_positions;
 	
 
 	

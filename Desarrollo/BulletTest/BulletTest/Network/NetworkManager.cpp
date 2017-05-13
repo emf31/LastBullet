@@ -117,6 +117,8 @@ void NetworkManager::configureNetwork()
 {
 	std::shared_ptr<NetPlayer> netPlayer = NetworkManager::i().createNetPlayer();
 	netPlayer->inicializar();
+
+	movementPrediction = true;
 }
 
 #include <StringCompressor.h>
