@@ -209,6 +209,18 @@ std::list<Character*> EntityManager::getPlayerAndBots()
 	return characters;
 }
 
+
+std::list<Character*> EntityManager::getPlayer()
+{
+	std::list<Character*>characters;
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		if (i->second->getClassName() == "Player")
+			characters.push_back(static_cast<Character*>(i->second));
+	}
+	return characters;
+}
+
+
 std::list<Character*> EntityManager::getCharacters()
 {
 	std::list<Character*>characters;

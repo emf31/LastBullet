@@ -23,6 +23,8 @@ void Disparar::Execute(Enemy_Bot* pEnemy) {
 	else {
 
 		if (pEnemy->getTargetSys()->GetTarget()->isDying()) {
+			pEnemy->getTargetSys()->ClearTarget();
+
 			pEnemy->getMachineState()->RevertToPreviousState();
 		}
 

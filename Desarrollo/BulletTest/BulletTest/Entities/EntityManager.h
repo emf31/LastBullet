@@ -73,6 +73,7 @@ public:
 	std::list<Entity*> getAsalto();
 	std::list<Entity*> getSniper();
 	std::list<Character*> getPlayerAndBots();
+	std::list<Character*> getPlayer();
 
 	
 

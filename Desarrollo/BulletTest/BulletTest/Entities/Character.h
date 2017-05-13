@@ -44,11 +44,17 @@ public:
 	void setAvailable(bool a) { available = a; }
 	bool isAvailable() { return available; }
 
+	void setLoD(bool a) { calcularLOD = a; };
+	bool getLOD() { return calcularLOD; }
+
 protected:
 
 	LifeComponent* life_component;
 
 	//Say if this player is ready to play
 	bool available;
+
+	bool calcularLOD = true;
+
 };
 

@@ -66,8 +66,6 @@ void Enemy_Bot::inicializar()
 
 void Enemy_Bot::resetAll() {
 
-
-
 	weaponSystem->WeaponSystemResetAll();
 
 	life_component->resetVida();
@@ -89,6 +87,7 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
+	calcularCiclosLOD();
 
 	if (valorCiclos < 25) {
 
@@ -112,15 +111,20 @@ void Enemy_Bot::update(Time elapsedTime)
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - radius,
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
-			targetingSystem->Update();
-			sense->updateVision();
+
+				targetingSystem->Update();
+			
+
+				sense->updateVision();
+			
 
 			weaponSystem->TakeAimAndShoot();
 
 			if (!this->getMachineState()->isInState("BuscarVida"))
 				FuzzyLifeObject();
 
-			m_pStateMachine->Update();
+				m_pStateMachine->Update();
+			
 
 
 			if (GraphicEngine::i().getActiveCamera()->getNameCamera() == m_name) {
@@ -644,10 +648,55 @@ std::string Enemy_Bot::getStateActual() {
 
 void Enemy_Bot::setNumCiclos(int num) {
 
-	if (num == 0)
+	if (num <= 0)
 		valorCiclos = 1;
 	else
 		valorCiclos = num;
 
 	ciclo = 0;
+}
+
+void Enemy_Bot::calcularCiclosLOD() {
+
+	if (calcularLOD==false) {
+
+		if (!getTargetSys()->isTargetShootable() && !getMachineState()->isInState("Perseguir") && !getMachineState()->isInState("Disparar")) {
+
+			std::list<Character*> player = EntityManager::i().getPlayer();
+
+			if (player.size() == 1) {
+
+				for (std::list<Character*>::iterator it = player.begin(); it != player.end(); it++) {
+
+					Character* myentity = *it;
+
+					Vec3<float> AimingPos = myentity->getRenderState()->getPosition();
+
+					float DistToTarget = Vec3<float>::getDistance(getRenderState()->getPosition(), AimingPos);
+
+
+					if (DistToTarget > 30) {
+						valorCiclos = 2;
+					}
+					else {
+						valorCiclos = 1;
+
+					}
+
+				}
+
+			}
+
+		}
+		else {
+
+
+		}
+
+	}
+	else {
+		valorCiclos = 1;
+
+	}
+
 }

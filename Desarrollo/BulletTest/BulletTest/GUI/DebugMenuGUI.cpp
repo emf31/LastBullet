@@ -59,10 +59,12 @@ void DebugMenuGUI::inicializar() {
 	CamaraAerea = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(20));
 	CamaraAerea->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCamaraAerea, this));
 
-	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
-	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
+	botonGodMode = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
+	botonGodMode->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
 
-	
+	botonLoD = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+	botonLoD->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onLoD, this));
+
 
 	//MENU LOG NETWORK
 	NetworkLogWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(200));
@@ -622,6 +624,28 @@ bool DebugMenuGUI::onGodMode(const CEGUI::EventArgs & e)
 	static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->godMode();
 	return true;
 }
+
+bool DebugMenuGUI::onLoD(const CEGUI::EventArgs & e)
+{
+
+	std::vector<Character*>bots = EntityManager::i().getBots();
+
+	for (std::vector<Character*>::iterator it = bots.begin(); it != bots.end(); it++) {
+
+		Character* myentity = *it;
+
+
+		if (myentity->getLOD() == false) {
+			myentity->setLoD(true);
+		}
+		else {
+			myentity->setLoD(false);
+		}
+
+	}
+	return true;
+}
+
 
 
 bool DebugMenuGUI::onDebugIAPISTOLAClicked(const CEGUI::EventArgs & e) {

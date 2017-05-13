@@ -251,6 +251,7 @@
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
+    <ClInclude Include="IA\RegulatorIA.h" />
     <ClInclude Include="IA\SensorySystem\Memory.h" />
     <ClInclude Include="IA\SensorySystem\SensoryMemory.h" />
     <ClInclude Include="IA\StatesIA\BuscarVida.h" />
@@ -465,6 +466,7 @@
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="ParticleSystem\ExplosionParticleSystem.cpp" />
     <ClCompile Include="ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="RegulatorIA.cpp" />
     <ClCompile Include="States\InGame.cpp" />
     <ClCompile Include="States\LoadingState.cpp" />
     <ClCompile Include="States\Menu.cpp" />

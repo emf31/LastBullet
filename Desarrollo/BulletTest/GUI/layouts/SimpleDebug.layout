@@ -517,7 +517,7 @@
         </Window>
         <Window type="AlfiskoSkin/FrameWindow" name="FrameWindow" >
             <Property name="ID" value="10" />
-            <Property name="Area" value="{{0.0539063,894},{0.00277778,95},{0.28125,896},{0.780556,152}}" />
+            <Property name="Area" value="{{0.0539063,910},{0.00277778,79},{0.28125,912},{0.780556,149}}" />
             <Property name="Text" value="Debug Menu" />
             <Property name="AlwaysOnTop" value="true" />
             <Property name="SizingEnabled" value="false" />
@@ -562,12 +562,12 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotB" >
                 <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,25},{0,381},{0,261},{0,413}}" />
+                <Property name="Area" value="{{0,24},{0,367},{0,260},{0,399}}" />
                 <Property name="Text" value="Bot B" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
                 <Property name="ID" value="6" />
-                <Property name="Area" value="{{0.355366,-75},{0.869656,-178},{0.355366,161},{0.869656,-146}}" />
+                <Property name="Area" value="{{0.355366,-76},{0.869656,-194},{0.355366,160},{0.869656,-162}}" />
                 <Property name="Text" value="Bot A" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button4" >
@@ -577,12 +577,12 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button5" >
                 <Property name="ID" value="8" />
-                <Property name="Area" value="{{0,24},{0,432},{0,260},{0,464}}" />
+                <Property name="Area" value="{{0,24},{0,406},{0,260},{0,438}}" />
                 <Property name="Text" value="Bot C" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button6" >
                 <Property name="ID" value="9" />
-                <Property name="Area" value="{{0,23},{0,482},{0,259},{0,514}}" />
+                <Property name="Area" value="{{0,24},{0,450},{0,260},{0,482}}" />
                 <Property name="Text" value="Bot D" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button7" >
@@ -592,8 +592,13 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button62" >
                 <Property name="ID" value="15" />
-                <Property name="Area" value="{{0,23},{0,530},{0,259},{0,562}}" />
+                <Property name="Area" value="{{0,23},{0,503},{0,259},{0,535}}" />
                 <Property name="Text" value="God mode" />
+            </Window>
+            <Window type="AlfiskoSkin/Button" name="Button622" >
+                <Property name="ID" value="16" />
+                <Property name="Area" value="{{0,22},{0,549},{0,258},{0,581}}" />
+                <Property name="Text" value="LoD" />
             </Window>
         </Window>
     </Window>

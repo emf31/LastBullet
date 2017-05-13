@@ -61,6 +61,8 @@ private:
 
 	bool onGodMode(const CEGUI::EventArgs & e);
 
+	bool onLoD(const CEGUI::EventArgs & e);
+
 	Vec3<float> elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);
@@ -122,6 +124,8 @@ private:
 	CEGUI::PushButton *BuscarRocket;
 	CEGUI::PushButton *BuscarAsalto;
 	CEGUI::PushButton *BotonMapa;
+	CEGUI::PushButton *botonGodMode;
+	CEGUI::PushButton *botonLoD;
 
 	CEGUI::PushButton *VaciarAsalto;
 	CEGUI::PushButton *VaciarRocket;
