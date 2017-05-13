@@ -1,16 +1,50 @@
-﻿  Button.cpp
-  Generando código...
-  Compilando...
-  World.cpp
+﻿  World.cpp
+  TriggerSystem.cpp
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\triggersystem\triggersystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+          with
+          [
+              _Kty=unsigned short,
+              _Ty=TriggerRecordStruct *,
+              _Other1=unsigned long &,
+              _Other2=TriggerRecordStruct *&
+          ]
+  e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\triggersystem\triggersystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+          with
+          [
+              _Kty=unsigned short,
+              _Ty=TriggerRecordStruct *,
+              _Other1=unsigned long &,
+              _Other2=TriggerRecordStruct *&
+          ]
+  StateStack.cpp
   StateFactory.cpp
+  State.cpp
   Menu.cpp
   LoadingState.cpp
   InGame.cpp
+  ParticleSystem.cpp
+  ExplosionParticleSystem.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(114): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(114): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(218): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(240): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(254): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  ClockImpl.cpp
+  Vec2f.cpp
+  Util.cpp
+  TimePerFrame.cpp
+  Time.cpp
+  Settings.cpp
+  PriorityQueue.cpp
   Lista.cpp
   LifeComponent.cpp
   DebugMarks.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\otros\debugmarks.cpp(42): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\otros\debugmarks.cpp(84): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  Generando código...
+  Compilando...
+  Clock.cpp
   AssetsReader.cpp
   NetworkManager.cpp
   NetworkDebugger.cpp
@@ -18,6 +52,10 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\
   NetPlayer.cpp
   NetObject.cpp
   NetBot.cpp
+  Lobby.cpp
+  SceneNode.cpp
+  BasicSceneNode.cpp
+  RenderState.cpp
   PhysicsEngine.cpp
   MapLoader.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
@@ -28,13 +66,19 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
   GunRecoil.cpp
   GraphicEngine.cpp
+  Color4f.cpp
   CameraShake.cpp
   Camera.cpp
+  BillboardSceneNode.cpp
+  Animation.cpp
   Generando código...
   Compilando...
-  BasicSceneNode.cpp
+  AnimatedSceneNode.cpp
+  main.cpp
+  Game.cpp
   PathPlanner.cpp
   Map.cpp
+  Dijkstra.cpp
   Celda.cpp
   WeaponSystem.cpp
   TargetingSystem.cpp
@@ -45,20 +89,44 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\
   BuscarVida.cpp
   SensoryMemory.cpp
   PathFollow.cpp
+  MachineState.cpp
+  LogIA.cpp
+  FzVery.cpp
+  FzSet.cpp
+  Generando código...
+  Compilando...
+  FzOR.cpp
+  FzFairly.cpp
+  FzAND.cpp
+  FuzzyVariable.cpp
+  FuzzySetTriangle.cpp
+  FuzzySetSingleton.cpp
+  FuzzySetRightShoulder.cpp
+  FuzzySetLeftShoulder.cpp
+  FuzzySet.cpp
+  FuzzyRule.cpp
+  FuzzyModule.cpp
   Partida.cpp
+  MessageHandler.cpp
   InputHandler.cpp
-  SparseGraph.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(11): warning C4018: '>=': no coinciden signed/unsigned
-  Game.cpp
+  SalirHUD.cpp
   ParalellTask.cpp
   MenuGUI.cpp
   LoadingStateGUI.cpp
-  Generando código...
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
-  Compilando...
   InGameHUD.cpp
+  GUIManager.cpp
+  Generando código...
+  Compilando...
+  GUI.cpp
   DebugMenuGUI.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\gui\debugmenugui.cpp(233): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  SparseGraph.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(11): warning C4018: '>=': no coinciden signed/unsigned
+  GraphNode.cpp
+  GraphEdge.cpp
+  AStarSearch.cpp
+  EventSystem.cpp
+  EventListener.cpp
   Weapon.cpp
   Sniper.cpp
   RocketLauncher.cpp
@@ -71,19 +139,27 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\
   AsaltoDrop.cpp
   RocketBulletEnemy.cpp
   RocketBullet.cpp
+  Generando código...
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
+  Compilando...
   Player.cpp
   PhysicsEntity.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\entities\physicsentity.cpp(50): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\entities\physicsentity.cpp(56): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\entities\physicsentity.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
   LifeObject.cpp
-  GunBullet.cpp
-  Granada.cpp
+  KinematicCharacterController.cpp
   EntityManager.cpp
-  Generando código...
-  Compilando...
-  Enemy_Bot.cpp
+  Entity.cpp
   Enemy.cpp
+  GunBullet.cpp
+  GroupEntity.cpp
+  Granada.cpp
+  EntPassive.cpp
+  EntActive.cpp
+  Enemy_Bot.cpp
+  Character.cpp
+  Button.cpp
   Generando código...
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'

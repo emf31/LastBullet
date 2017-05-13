@@ -42,12 +42,12 @@ public:
 	void inicializar();
 	void inicializarBuffers();
 	void inicializarBuffersBlur();
-	void inicializarBufferBloom();
+	void inicializarBufferSkybox();
 	void inicializarBuffersLineas();
-	void inicializarBufferDeferred();
 	void renderLuces();
 	void renderBlur();
 	void renderBloom();
+	void renderSkybox();
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
@@ -99,17 +99,24 @@ public:
 	Shader* shaderBombillas;
 	Shader* shaderLineas;
 	Shader* shaderBlur;
-	//Shader* shaderBloom;
+	Shader* shaderSkybox;
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
 	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gEscena;
 	GLuint rboDepth;
+	
 	GLuint draw_mode=1;
 
 	//Buffers Bloom
 	GLuint bloomFBO[2];
 	GLuint bloomBuffers[2];
+
+	//Skybox
+	GLuint skyboxVAO, skyboxVBO;
+	GLuint skyboxTexture;
+	std::vector<const GLchar*> faces;
+
 
 	std::vector<GLfloat> vertices3;
 	std::vector<GLuint> indices;
@@ -208,6 +215,7 @@ private:
 	GLuint quadVBO;
 
 	void RenderQuad();
+
 
 	friend class EngineDevice;
 
