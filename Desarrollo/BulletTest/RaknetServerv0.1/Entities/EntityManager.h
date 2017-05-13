@@ -21,7 +21,7 @@ public:
 	void sendPlayer(TPlayer &p, RakNet::RakPeerInterface *peer);
 	void sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::RakPeerInterface *peer);
 	//este metodo ahora envia la posicion y la rotacion del jugador
-	void enviaNuevaPos(TMovimiento p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
+	void enviaNuevaPos(TMovimiento2 p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
 	void lanzarGranda(TGranada &g, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer);
 	void enviaDesconexion(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface *peer);
 	void enviarTerminarPartida(RakNet::RakPeerInterface *peer);

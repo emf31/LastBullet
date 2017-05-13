@@ -30,10 +30,10 @@ public:
 	const RakNet::RakNetGUID& getServerGUID() const { return servidor; }
 	const RakNet::RakNetGUID getMyGUID() const { return peer->GetMyGUID(); }
 
-
+	RakNet::RakPeerInterface *peer;
 protected:
 	RakNet::Packet *packet;
-	RakNet::RakPeerInterface *peer;
+	
 
 	unsigned char mPacketIdentifier;
 	unsigned char getPacketIdentifier(RakNet::Packet* pPacket);

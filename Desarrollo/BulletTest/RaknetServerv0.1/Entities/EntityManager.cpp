@@ -20,7 +20,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		nuevocli.mID = NUEVO_CLIENTE;
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
-		//nuevocli.position = i->second->getPosition();
+		nuevocli.available = i->second->isAvailable();
 		
 		peer->Send((const char*)&nuevocli, sizeof(nuevocli), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p.guid, false);
 	}
@@ -39,7 +39,7 @@ void EntityManager::sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::
 	}
 }
 
-void EntityManager::enviaNuevaPos(TMovimiento p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
+void EntityManager::enviaNuevaPos(TMovimiento2 p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
 {
 	Entity* ent = EntityManager::i().getRaknetEntity(p.guid);
 
@@ -270,12 +270,12 @@ void EntityManager::registerEntity(Entity * entity)
 	else {
 		if (m_entities.find(entity->getID()) != m_entities.end()) {
 			//mostramos error
-			std::cout << "ESA VIDA o ARMA YA HA SIDO CREADA " + entity->getID() << std::endl;
+			//std::cout << "ESA VIDA o ARMA YA HA SIDO CREADA " + entity->getID() << std::endl;
 
 		}
 		else {
 			//si todo ha ido bien le asignamos el entity al map
-			std::cout << "CREO UNA VIDA o ARMA CON ID : " + entity->getID() << std::endl;
+			//std::cout << "CREO UNA VIDA o ARMA CON ID : " + entity->getID() << std::endl;
 			m_entities[entity->getID()] = entity;
 		}
 

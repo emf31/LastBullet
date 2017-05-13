@@ -199,6 +199,10 @@ void InGame::Update(Time timeElapsed)
 
 void InGame::Render(float interpolation, Time elapsedTime)
 {
+
+	
+
+
 	EntityManager::i().updateRender(interpolation);
 
 	

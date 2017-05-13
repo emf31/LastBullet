@@ -58,6 +58,8 @@ unsigned char getPacketIdentifier(RakNet::Packet * pPacket)
 	}
 	else
 		return (unsigned char)pPacket->data[0];
+
+
 }
 
 void enviarFilaTabla(RakNet::RakNetGUID& rakID, const std::string& name);
@@ -162,12 +164,14 @@ void getPackets() {
 		case MOVIMIENTO: {
 
 
-			TMovimiento mov = *reinterpret_cast<TMovimiento*>(packet->data);
+			/*TMovimiento2 mov = *reinterpret_cast<TMovimiento2*>(packet->data);
 
-
-			RakNet::TimeMS currtime = RakNet::GetTimeMS() - mov.time;
-
-			mov.time = currtime + RakNet::GetTimeMS();
+			if (mov.guid != gameinfo.creador) {
+				Time time = milliseconds(RakNet::GetTimeMS() - mov.timeStamp);
+				std::cout << std::to_string(time.asMilliseconds()) << std::endl;
+			}
+			
+			//mov.timeStamp = RakNet::GetTimeMS() - mov.timeStamp;
 
 			EntityManager::i().enviaNuevaPos(mov, gameinfo.creador, peer);
 
@@ -176,10 +180,22 @@ void getPackets() {
 			if (ent != NULL) {
 				ent->setPosition(mov.position);
 			}
+			*/
+			unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
+			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
+			unsigned char typeId;
 
-			if (mov.guid != gameinfo.creador) {
-				std::cout << currtime << std::endl;
+			RakNet::BitStream myBitStream(packet->data, packet->length, false); // The false is for efficiency so we don't make a copy of the passed data
+			myBitStream.Read(useTimeStamp);
+			myBitStream.Read(timeStamp);
+			myBitStream.Read(typeId);
+
+			if (packet->guid == gameinfo.creador) {
+				Time time = milliseconds(RakNet::GetTimeMS() - timeStamp);
+				std::cout << std::to_string(time.asMilliseconds()) << std::endl;
 			}
+
+			
 
 			break;
 		}
@@ -487,6 +503,7 @@ void update() {
 	getPackets();
 
 	//other stuff
+	
 }
 
 int main() {
@@ -497,7 +514,7 @@ int main() {
 	timer = new Timer();
 
 
-
+	peer->SetOccasionalPing(true);
 
 	peer->Startup(MAX_CLIENTS, &sd, 1);
 

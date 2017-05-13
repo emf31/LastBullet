@@ -18,6 +18,8 @@
 #include <StateStack.h>
 #include <thread>
 #include <Settings.h>
+#include <DebugMenuGUI.h>
+#include <GUIManager.h>
 
 NetPlayer::NetPlayer() : NetObject(), m_player(nullptr), m_world(World::i())
 {
@@ -202,6 +204,8 @@ void NetPlayer::unirseLobby(const std::string& str)
 void NetPlayer::handlePackets(Time elapsedTime)
 {
 
+	
+
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
 		// Recibimos un paquete, tenemos que obtener el tipo de mensaje
@@ -308,14 +312,17 @@ void NetPlayer::handlePackets(Time elapsedTime)
 		break;
 		case MOVIMIENTO:
 		{
-			TMovimiento m = *reinterpret_cast<TMovimiento*>(packet->data);
+			TMovimiento2 m = *reinterpret_cast<TMovimiento2*>(packet->data);
 
 			//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
 
 			if (e != NULL) {
 				//e->getNetworkPrediction()->addMovement(m);
-				e->encolaMovimiento(m);
+				//e->encolaMovimiento(m);
+				DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+				Time time = milliseconds(m.timeStamp);
+				menu->addPrintText(std::to_string(time.asSeconds()));
 			}
 			/*countMovementPacketsIn++;*/
 

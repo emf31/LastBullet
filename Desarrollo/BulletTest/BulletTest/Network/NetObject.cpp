@@ -42,6 +42,12 @@ unsigned char NetObject::getPacketIdentifier(RakNet::Packet * pPacket)
 	if (pPacket == 0)
 		return 255;
 
-	return (unsigned char)pPacket->data[0];
+	if ((unsigned char)pPacket->data[0] == ID_TIMESTAMP)
+	{
+		RakAssert(pPacket->length > sizeof(RakNet::MessageID) + sizeof(RakNet::Time));
+		return (unsigned char)pPacket->data[sizeof(RakNet::MessageID) + sizeof(RakNet::Time)];
+	}
+	else
+		return (unsigned char)pPacket->data[0];
 }
 

@@ -183,16 +183,18 @@ void Player::update(Time elapsedTime)
 
 	if (m_network->isConnected()) {
 
-		TMovimiento mov;
-		mov.isDying = getLifeComponent().isDying();
-		mov.position = getRenderState()->getPosition();
-		mov.rotation = getRenderState()->getRotation();
-		mov.guid = getGuid();
-		mov.time = RakNet::GetTimeMS() - m_network->getConnectTime();
+		unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
+		RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
+		unsigned char typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINE
+		useTimeStamp = ID_TIMESTAMP;
+		timeStamp = RakNet::GetTime();
+		typeId = MOVIMIENTO;
+		RakNet::BitStream myBitStream;
+		myBitStream.Write(useTimeStamp);
+		myBitStream.Write(timeStamp);
+		myBitStream.Write(typeId);
 
-		//RakSleep(20);
-	
-		m_network->dispatchMessage(mov, MOVIMIENTO);
+		m_network->peer->Send(&myBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_network->getServerGUID(), false);
 		
 	}
 

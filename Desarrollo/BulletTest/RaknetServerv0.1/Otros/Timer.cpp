@@ -4,7 +4,7 @@
 Timer::Timer()
 {
 	//Updateamos cada 30 para asegurarnos que el servidor no ralentiza el trafico
-	m_rakNetFrameTime = 1000.0 / 30.0; //30 fps 
+	m_rakNetFrameTime = 1000.0 / 60.0; //60 fps 
 	m_deltaTime = 0.0; //no time has elapsed yet
 
 	QueryPerformanceFrequency(&m_frequency); //get frequency
