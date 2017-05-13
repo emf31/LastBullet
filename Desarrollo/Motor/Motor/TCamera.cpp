@@ -179,6 +179,10 @@ void TCamera::beginDraw() {
 
 }
 
+void TCamera::beginDraw2()
+{
+}
+
 void TCamera::endDraw() {
 }
 

@@ -16,9 +16,6 @@
     <Filter Include="Archivos de código fuente\Nodes">
       <UniqueIdentifier>{640bd803-3fdf-490d-80c2-5722a230d926}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Nodes">
-      <UniqueIdentifier>{03499c56-6c34-4185-b4be-f3022bacef4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\Otros">
       <UniqueIdentifier>{e3a9297c-7726-415a-9507-46814b7a4c7a}</UniqueIdentifier>
     </Filter>
@@ -128,9 +125,6 @@
     <ClInclude Include="TModel.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="TNode.h">
-      <Filter>Archivos de encabezado\Nodes</Filter>
-    </ClInclude>
     <ClInclude Include="vec3.hpp">
       <Filter>Archivos de encabezado\Otros</Filter>
     </ClInclude>
@@ -174,6 +168,9 @@
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
     <ClInclude Include="AnimationMesh.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TNode.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

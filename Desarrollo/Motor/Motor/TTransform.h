@@ -44,6 +44,7 @@ public:
 	
 
 	virtual void beginDraw();
+	virtual void beginDraw2();
 	virtual void endDraw();
 
 

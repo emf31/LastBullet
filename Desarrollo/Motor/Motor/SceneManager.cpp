@@ -183,10 +183,10 @@ void SceneManager::inicializarBuffersSombras()
 	glBindTexture(GL_TEXTURE_2D, shadowMap);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMap, 0);
@@ -331,8 +331,9 @@ void SceneManager::renderSombras()
 	glBindTexture(GL_TEXTURE_2D, gPosition);
 	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(sunlight->getLightSpaceMatrix()));
 	//RenderScene();
-	glBindTexture(GL_TEXTURE_2D, shadowMap);
-	RenderQuad();
+	scene->draw2();
+	//glBindTexture(GL_TEXTURE_2D, shadowMap);
+	//RenderQuad();
 	// reset viewport
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);

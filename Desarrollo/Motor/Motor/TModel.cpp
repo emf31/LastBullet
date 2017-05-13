@@ -51,6 +51,26 @@ void TModel::beginDraw() {
 
 }
 
+void TModel::beginDraw2() {
+	if (visible) {
+
+
+		const glm::mat4& view = sm.getViewMatrix();
+		const glm::mat4& projection = sm.getProjectionMatrix();
+		glm::mat4& model = sm.getMatrizActual();
+		sm.shaderSombras->Use();
+
+
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderSombras->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+
+		//Dibujamos el modelo
+		m_meshGroup->draw();
+
+	}
+
+}
+
 void TModel::endDraw() {
 	//std::cout << u8"Adiós" << std::endl;
 	//TEntity::endDraw();

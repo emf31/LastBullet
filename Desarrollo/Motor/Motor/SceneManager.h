@@ -131,6 +131,8 @@ public:
 	void ziZoom(float z);
 	void zoomZout();
 
+	std::vector<glm::mat4> matricesModelo;
+
 
 
 private:

@@ -103,6 +103,12 @@ void TTransform::beginDraw()
 	sm.setMatrizActual(m_matrix * sm.getMatrizActual());
 }
 
+void TTransform::beginDraw2()
+{
+	sm.getPilaMatrices().push_back(sm.getMatrizActual());
+	sm.setMatrizActual(m_matrix * sm.getMatrizActual());
+}
+
 void TTransform::endDraw()
 {
 	sm.setMatrizActual(sm.getPilaMatrices().back());

@@ -68,7 +68,7 @@ int main() {
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	l1->setPosition(Vec3<float>(-30.0f, 0.0f, 0.0f));
 	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
 
 	
@@ -224,6 +224,10 @@ int main() {
 		else if (Input::i().keyReleased(GLFW_KEY_8)) {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_9)) {
+			std::cout << "Modo de color : Sombras " << std::endl;
+			sm.draw_mode = 9;
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
 			pruebaAnim->setCurrentAnimation("saltar");

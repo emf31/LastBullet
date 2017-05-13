@@ -47,6 +47,7 @@ uniform sampler2D shadowMap;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
+uniform mat4 invView;
 
 uniform int draw_mode;
 
@@ -74,7 +75,11 @@ void main()
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
     vec3 bloom = texture(gBloom, TexCoords).rgb;
+    float sombras = texture(shadowMap, TexCoords).r;
     vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
+   // vec4 FragPosLightSpace = vec4(FragPos, 1.0);
+    vec4 FragPosLightSpace2 = vec4(FragPos, 1.0);
+
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
@@ -124,6 +129,8 @@ void main()
         FragColor = vec4(emissive, 1.0);
     else if(draw_mode == 8)
         FragColor = vec4(bloom, 1.0);
+    else if(draw_mode == 9)
+        FragColor = vec4(vec3(sombras), 1.0);
 
 
     //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
