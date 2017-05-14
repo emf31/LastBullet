@@ -402,6 +402,13 @@
       <Filter>Source Code\Network</Filter>
     </ClCompile>
     <ClCompile Include="RegulatorIA.cpp" />
+    <ClCompile Include="Animations\AnimationMachine.cpp">
+      <Filter>Source Code\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\AnimationCharacter.cpp">
+      <Filter>Source Code\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\Run.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -918,6 +925,13 @@
       <Filter>Headers\Network</Filter>
     </ClInclude>
     <ClInclude Include="IA\RegulatorIA.h" />
+    <ClInclude Include="Animations\AnimationMachine.h">
+      <Filter>Headers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\AnimationCharacter.h">
+      <Filter>Headers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\Run.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -1120,6 +1134,12 @@
     </Filter>
     <Filter Include="Headers\Network\Lobby2\Rooms">
       <UniqueIdentifier>{38b262ec-fef1-4146-93d1-0720673df850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Animations">
+      <UniqueIdentifier>{f5c0a77f-2a4f-4c42-be6c-9b63be67869d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Animations">
+      <UniqueIdentifier>{63dcde9c-ef84-495f-806d-2a5bcbcdbcea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

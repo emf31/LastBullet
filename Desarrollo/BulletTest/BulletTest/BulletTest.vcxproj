@@ -164,6 +164,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animations\AnimationCharacter.h" />
+    <ClInclude Include="Animations\AnimationMachine.h" />
+    <ClInclude Include="Animations\Run.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
     <ClInclude Include="Command\ListWeaponDown.h" />
@@ -338,6 +341,9 @@
     <ClInclude Include="World\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animations\AnimationCharacter.cpp" />
+    <ClCompile Include="Animations\AnimationMachine.cpp" />
+    <ClCompile Include="Animations\Run.cpp" />
     <ClCompile Include="Entities\Button.cpp" />
     <ClCompile Include="Entities\Character.cpp" />
     <ClCompile Include="Entities\Enemy_Bot.cpp" />
