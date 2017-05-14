@@ -102,6 +102,7 @@ void SceneManager::inicializarBuffers()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gEmisivo"), 5); 
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gObjectColor"), 6);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBloom"), 7);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "shadowMap"), 8);
 
 	
 	glGenFramebuffers(1, &gBuffer);
@@ -179,21 +180,42 @@ void SceneManager::inicializarBuffersSombras()
 	
 	
 	glGenFramebuffers(1, &shadowMapDepthFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
+	
 	glGenTextures(1, &shadowMap);
 	glBindTexture(GL_TEXTURE_2D, shadowMap);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
+	
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMap, 0);
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	
+	biasMatrix[0][0] = 0.5f;
+	biasMatrix[0][1] = 0.0f;
+	biasMatrix[0][2] = 0.0f;
+	biasMatrix[0][3] = 0.0f;
+
+	biasMatrix[1][0] = 0.0f;
+	biasMatrix[1][1] = 0.5f;
+	biasMatrix[1][2] = 0.0f;
+	biasMatrix[1][3] = 0.0f;
+
+	biasMatrix[2][0] = 0.0f;
+	biasMatrix[2][1] = 0.0f;
+	biasMatrix[2][2] = 0.5f;
+	biasMatrix[2][3] = 0.0f;
+
+	biasMatrix[3][0] = 0.5f;
+	biasMatrix[3][1] = 0.5f;
+	biasMatrix[3][2] = 0.5f;
+	biasMatrix[3][3] = 1.0f;
 }
 
 void SceneManager::inicializarBuffersBlur()
@@ -262,6 +284,9 @@ void SceneManager::renderLuces()
 		vecFlashLight[i]->pasarDatosAlShader(shaderLuces, i);
 	}
 
+	glm::mat4 depthBiasMVP = biasMatrix*sunlight->getLightSpaceMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "depthBiasMVP"), 1, GL_FALSE, glm::value_ptr(depthBiasMVP));
+	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "invView"), 1, GL_FALSE, glm::value_ptr(glm::inverse(camaraActiva->GetViewMatrix())));
 	//numero luces
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_pointlight"), vecPointLight.size());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_flashlight"), vecFlashLight.size());

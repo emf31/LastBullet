@@ -48,6 +48,9 @@ uniform sampler2D shadowMap;
 uniform vec3 objectColor;
 uniform vec3 viewPos;
 
+uniform mat4 depthBiasMVP;
+uniform mat4 invView;
+
 uniform int draw_mode;
 
 //luces
@@ -75,6 +78,10 @@ void main()
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
     vec3 bloom = texture(gBloom, TexCoords).rgb;
     vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
+     float sombras = texture(shadowMap, TexCoords).r;
+
+     //probar a multiplicar esto por la inversa de la matriz vista por si no va
+     vec4 ShadowCoord = depthBiasMVP * invView * vec4(FragPos,1);
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
@@ -93,9 +100,18 @@ void main()
         
     }
 
-    // Calculate shadow
+    
     float shadow = ShadowCalculation(FragPosLightSpace);       
-    colorFinal= (shadow * colorFinal) * modelColor;
+    colorFinal= ((1-shadow) * colorFinal) * modelColor;
+/*
+    float visibility = 1.0;
+if ( texture( shadowMap, ShadowCoord.xy ).z  <  ShadowCoord.z){
+    visibility = 0.2;
+}
+colorFinal= (visibility * colorFinal) * modelColor;
+*/
+
+    
 
     //colorFinal += emissive;
     //colorFinal = colorFinal * modelColor;
@@ -124,6 +140,8 @@ void main()
         FragColor = vec4(emissive, 1.0);
     else if(draw_mode == 8)
         FragColor = vec4(bloom, 1.0);
+    else if(draw_mode == 9)
+        FragColor = vec4(vec3(sombras), 1.0);
 
 
     //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
@@ -262,7 +280,7 @@ float ShadowCalculation(vec4 fragPosLightSpace)
     // Get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
     // Check whether current frag pos is in shadow
-    float shadow = currentDepth > closestDepth  ? 1.0 : 0.0;
+    float shadow = currentDepth > closestDepth  ? 0.8 : 0.0;
 
     return shadow;
 }  

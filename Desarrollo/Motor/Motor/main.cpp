@@ -225,6 +225,10 @@ int main() {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
 		}
+		else if (Input::i().keyReleased(GLFW_KEY_9)) {
+			std::cout << "Modo de color : Sombras " << std::endl;
+			sm.draw_mode = 9;
+		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
 			pruebaAnim->setCurrentAnimation("saltar");
 		}
