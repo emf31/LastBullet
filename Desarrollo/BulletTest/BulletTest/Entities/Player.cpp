@@ -334,6 +334,7 @@ void Player::shoot() {
 
 	if (listaWeapons->valorActual()->canShoot()) {	
 		
+		SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
 		hitted = listaWeapons->valorActual()->shoot(GraphicEngine::i().getActiveCamera()->getTarget());
 		GraphicEngine::i().getActiveCamera()->cameraRecoil();
 		TriggerSystem::i().RegisterTrigger(kTrig_EnemyShootSound, 1002, m_id, m_renderState.getPosition(), 50, milliseconds(50), false);
@@ -471,6 +472,7 @@ void Player::DownWeapon()
 }
 
 void Player::reload() {
+	SoundManager::i().playSound("../media/Reload.mp3", false);
 	listaWeapons->valorActual()->recargar();
 }
 
@@ -479,10 +481,12 @@ void Player::apuntar()
 
 	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
 		if (!apuntando) {
+			SoundManager::i().playSound("../media/Aim.mp3", false);
 			SceneManager::i().ziZoom(38.0f);
 			apuntando = true;
 		}
 		else {
+			SoundManager::i().playSound("../media/Aim.mp3", false);
 			SceneManager::i().zoomZout();
 			apuntando = false;
 		}

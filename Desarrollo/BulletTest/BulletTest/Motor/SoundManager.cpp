@@ -23,7 +23,7 @@ void SoundManager::playSound(std::string sound, bool loop)
 void SoundManager::playSound(std::string sound, Vec3<float> pos, bool loop)
 {
 	ISound* music = engine->play3D(sound.c_str(), vec3df(pos.getX(), pos.getY(), pos.getZ()), loop,false,true);
-	music->setVolume(0.5f);
+	//music->setVolume(0.5f);
 	music->setMinDistance(15.f);
 	sounds.push_back(music);
 	
@@ -32,6 +32,11 @@ void SoundManager::playSound(std::string sound, Vec3<float> pos, bool loop)
 void SoundManager::setListenerPosition(Vec3<float> pos,Vec3<float> dir)
 {
 	engine->setListenerPosition(vec3df(pos.getX(), pos.getY(), pos.getZ()), vec3df(dir.getX(), dir.getY(), dir.getZ()));
+}
+
+void SoundManager::stopAllSounds()
+{
+	engine->stopAllSounds();
 }
 
 void SoundManager::update()

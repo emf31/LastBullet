@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <SoundManager.h>
 
 
 Menu::Menu()
@@ -17,6 +18,10 @@ void Menu::Inicializar()
 
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	GraphicEngine::i().enableMouse(true);
+
+	SoundManager::i().stopAllSounds();
+	SoundManager::i().playSound("../media/MenuSong2.mp3",true);
+	//SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
 }
 
 void Menu::Clear()

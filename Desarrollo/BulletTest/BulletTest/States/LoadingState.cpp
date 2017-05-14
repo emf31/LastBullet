@@ -2,6 +2,7 @@
 #include <StateStack.h>
 #include <AssetsReader.h>
 #include <TimePerFrame.h>
+#include <SoundManager.h>
 
 
 LoadingState::LoadingState()
@@ -14,6 +15,8 @@ LoadingState::~LoadingState()
 
 void LoadingState::Inicializar()
 {
+	SoundManager::i().stopAllSounds();
+	SoundManager::i().playSound("../media/LoadingSong.mp3", true);
 	loadingStateGUI.inicializar();
 	TimePerFrameClass::timePerFrameLoadingState();
 	readAllAssets();

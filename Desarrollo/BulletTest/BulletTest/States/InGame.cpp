@@ -23,7 +23,7 @@ InGame::~InGame()
 
 void InGame::Inicializar()
 {
-
+	SoundManager::i().stopAllSounds();
 	PhysicsEngine::i().inicializar();
 
 	ingameGUI.inicializar();
@@ -169,8 +169,7 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {
 		//GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
 		ClippingManager::i().canUpdate = true;
-		SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
-		SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
+
 
 
 	}
