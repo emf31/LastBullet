@@ -48,6 +48,7 @@ uniform sampler2D shadowMap;
 uniform vec3 objectColor;
 uniform vec3 viewPos;
 uniform mat4 invView;
+uniform mat4 depthBiasMVP;
 
 uniform int draw_mode;
 
@@ -80,6 +81,9 @@ void main()
    // vec4 FragPosLightSpace = vec4(FragPos, 1.0);
     vec4 FragPosLightSpace2 = vec4(FragPos, 1.0);
 
+    vec4 ShadowCoord = depthBiasMVP * vec4(FragPos,1);
+
+
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
@@ -99,8 +103,12 @@ void main()
     }
 
     // Calculate shadow
-    float shadow = ShadowCalculation(FragPosLightSpace);       
-    colorFinal= (shadow * colorFinal) * modelColor;
+    //float shadow = ShadowCalculation(FragPosLightSpace);  
+    float visibility = 1.0;
+    if ( texture( shadowMap, ShadowCoord.xy ).z  <  ShadowCoord.z){
+    visibility = 0.2;
+    }      
+    colorFinal= (visibility * colorFinal);
 
     //colorFinal += emissive;
     //colorFinal = colorFinal * modelColor;

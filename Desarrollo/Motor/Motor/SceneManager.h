@@ -166,6 +166,10 @@ private:
 	GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 	GLuint SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 720;
 
+	glm::mat4 biasMatrix;
+
+
+
 	friend class EngineDevice;
 
 
