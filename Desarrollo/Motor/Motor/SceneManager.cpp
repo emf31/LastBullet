@@ -354,7 +354,7 @@ void SceneManager::renderSombras()
 	shaderSombras->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
-	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(sunlight->getLightSpaceMatrix()));
+	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(sunlight->getLightSpaceMatrix()*camaraActiva->GetViewMatrix()));
 	//RenderScene();
 	glBindTexture(GL_TEXTURE_2D, shadowMap);
 	RenderQuad();

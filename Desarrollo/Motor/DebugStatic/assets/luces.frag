@@ -81,7 +81,7 @@ void main()
      float sombras = texture(shadowMap, TexCoords).r;
 
      //probar a multiplicar esto por la inversa de la matriz vista por si no va
-     vec4 ShadowCoord = depthBiasMVP * invView * vec4(FragPos,1);
+     vec4 ShadowCoord = depthBiasMVP * vec4(FragPos,1);
     
         vec3 colorFinal;
     //calculamos el vector vista (desde donde el observador ve el objeto)
