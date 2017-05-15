@@ -17,6 +17,7 @@
 #include <World.h>
 #include <StateStack.h>
 #include <thread>
+#include <SoundManager.h>
 
 
 NetPlayer::NetPlayer(Player* player) : NetObject(), m_player(player), m_world(World::i())
@@ -339,7 +340,7 @@ void NetPlayer::handlePackets(Time elapsedTime)
         case DISPARAR_BALA:
         {
             TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
-
+			SoundManager::i().playSound("../media/shoot.mp3", balaDisparada.position);
             GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
             bala->cargarContenido();
 
