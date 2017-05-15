@@ -58,6 +58,8 @@ void InGame::Inicializar()
 	
 	NetworkManager::i().getNetPlayer()->getEnemyFactory().createEnemiesIfAvailable();
 
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), true);
+
 }
 
 void InGame::Clear()

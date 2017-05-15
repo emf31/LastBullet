@@ -4,6 +4,8 @@
 #include <NetworkManager.h>
 #include <Character.h>
 #include <InGameHUD.h>
+#include <CharacterTypes.h>
+#include <SoundManager.h>
 
 LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)
@@ -17,6 +19,11 @@ LifeComponent::~LifeComponent()
 void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 {
 	m_vida -= cantidad;
+
+	if (m_vida <= 0) {
+		m_vida = 0;
+	}
+
 	if (m_vida <= 0 && m_isDying == false) {
 
 		GraphicEngine::i().updateDeathCamera();
@@ -27,7 +34,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		m_isDying = true;
 		relojMuerte.restart();
 
-
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename(CharacterTypes::getRandomDeath(), "sounds"), m_pOwner->getPosition());
 
 		RakID nuevoplayer;
 		nuevoplayer.guid = m_pOwner->getGuid();

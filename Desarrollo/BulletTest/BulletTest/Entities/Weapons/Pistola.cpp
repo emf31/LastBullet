@@ -20,8 +20,8 @@ void Pistola::inicializar()
 	damage = 35;
 	capacidadAmmo = 6;
 	disparos = 0;
-	recarga = milliseconds(1000);
-	cadencia = milliseconds(250);
+	recarga = milliseconds(1350);
+	cadencia = milliseconds(300);
 	numCargadores = numCargadoresPistola;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 	FUERZA = btVector3(10, 10, 10);
@@ -94,6 +94,9 @@ bool Pistola::handleTrigger(TriggerRecordStruct * Trigger)
 Character* Pistola::shoot(const Vec3<float>& target) {
 	//si impacta con algun personaje devuelve true
 	Character* hitted = nullptr;
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), m_ent->getRenderState()->getPosition());
+	
 
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 		//aumentamos en uno el numero de disparos, para reducir la municion
@@ -180,4 +183,11 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 
 	return hitted;
 
+}
+
+void Pistola::recargar()
+{
+	Weapon::recargar();
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadPistola.mp3", "sounds"), false);
 }

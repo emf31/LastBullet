@@ -31,6 +31,8 @@ public:
 
 	virtual Character* shoot(const Vec3<float>& target);
 
+	virtual void recargar() override;
+
 	virtual void updatePositionAndRotation() override {
 
 		Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();

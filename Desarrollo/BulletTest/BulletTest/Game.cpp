@@ -131,6 +131,7 @@ void Game::inicializarRutas() {
 
 	resourceProvider.setResourceGroupDirectory("characters", "../media/Personaje");
 	resourceProvider.setResourceGroupDirectory("weapons", "../media/Weapons");
+	resourceProvider.setResourceGroupDirectory("sounds", "../media/Sounds");
 }
 
 void Game::inicializar()

@@ -1,4 +1,123 @@
-﻿  SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
+﻿  Menu.cpp
+  LoadingState.cpp
+  InGame.cpp
+  LifeComponent.cpp
+  CharacterTypes.cpp
+  NetPlayer.cpp
+  SoundManager.cpp
+  GunRecoil.cpp
+  GraphicEngine.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(40): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(45): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(46): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(47): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(52): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(53): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(54): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(55): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(59): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(60): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(61): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(62): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(66): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(67): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(68): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(69): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(73): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(74): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(75): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\graphicengine.cpp(76): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  Game.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(151): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(151): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(157): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\game.cpp(157): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+  InGameHUD.cpp
+  Sniper.cpp
+  RocketLauncher.cpp
+  Pistola.cpp
+  Asalto.cpp
+  WeaponDrop.cpp
+  Player.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\player.cpp(198): warning C4101: 'isDying': variable local sin referencia
+  LifeObject.cpp
+  Enemy.cpp
+  Generando código...
+  Compilando...
+  World.cpp
+  StateFactory.cpp
+  Lista.cpp
+  SteamResults.cpp
+  NetworkPrediction.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\networkprediction.cpp(32): warning C4244: 'argumento': conversión de 'RakNet::Time' a 'int'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\networkprediction.cpp(34): warning C4244: '=': conversión de 'RakNet::Time' a 'RakNet::TimeMS'; posible pérdida de datos
+  NetworkManager.cpp
+  NetworkLog.cpp
+  NetworkDebugger.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\network\networkdebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  NetObject.cpp
+  NetBot.cpp
+  AsyncEnemyFactory.cpp
+  MapLoader.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(184): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(195): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(206): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\motor\maploader.cpp(228): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+  ClippingZone.cpp
+  CameraShake.cpp
+  Camera.cpp
+  PathPlanner.cpp
+  WeaponSystem.cpp
+  TargetingSystem.cpp
+  Perseguir.cpp
+  Patrullar.cpp
+  Generando código...
+  Compilando...
+  Disparar.cpp
+  BuscarWeapon.cpp
+  BuscarVida.cpp
+  SensoryMemory.cpp
+  PathFollow.cpp
+  Partida.cpp
+  InputHandler.cpp
+  MenuGUI.cpp
+  LoadingStateGUI.cpp
+  DebugMenuGUI.cpp
+  Weapon.cpp
+  SniperDrop.cpp
+  RocketLauncherDrop.cpp
+  PistolaDrop.cpp
+  AsaltoDrop.cpp
+  RocketBullet.cpp
+  Granada.cpp
+  EntityManager.cpp
+  Enemy_Bot.cpp
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\entities\enemy_bot.cpp(142): warning C4101: 'isDying': variable local sin referencia
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  TriggerSystem.cpp
+  DebugMarks.cpp
+  Lobby.cpp
+  PhysicsEngine.cpp
+  ClippingManager.cpp
+  BasicSceneNode.cpp
+  Map.cpp
+  Celda.cpp
+  MessageHandler.cpp
+  SparseGraph.cpp
+  ParalellTask.cpp
+  RocketBulletEnemy.cpp
+  GunBullet.cpp
+  Entity.cpp
+  EntPassive.cpp
+  EntActive.cpp
+  SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'
      Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exp

@@ -20,7 +20,7 @@ void Menu::Inicializar()
 	GraphicEngine::i().enableMouse(true);
 
 	SoundManager::i().stopAllSounds();
-	SoundManager::i().playSound("../media/MenuSong2.mp3",true);
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("MenuSong2.mp3", "sounds"),true);
 	//SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
 }
 

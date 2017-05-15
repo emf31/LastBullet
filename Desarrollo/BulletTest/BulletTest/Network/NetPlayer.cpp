@@ -541,7 +541,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 		case DISPARAR_BALA:
 		{
 			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
-			SoundManager::i().playSound("../media/shoot.mp3", balaDisparada.position);
+			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), balaDisparada.position);
 			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 			bala->cargarContenido();
 

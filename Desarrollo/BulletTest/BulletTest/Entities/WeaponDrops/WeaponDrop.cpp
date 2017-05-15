@@ -2,7 +2,7 @@
 #include "../../Motor/PhysicsEngine.h"
 
 
-WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name), timeRespawnWeapon(3)
+WeaponDrop::WeaponDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name), timeRespawnWeapon(3), m_ghostObject(nullptr)
 {
 }
 
@@ -47,4 +47,6 @@ void WeaponDrop::ArmaCogida()
 		clockRespawnWeapon.restart();
 		m_nodo->setVisible(false);
 	//}
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("pickup.wav", "sounds"), getPosition());
 }

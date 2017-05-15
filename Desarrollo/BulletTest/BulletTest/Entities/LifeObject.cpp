@@ -3,7 +3,7 @@
 #include <TriggerSystem.h>
 #include <NetworkManager.h>
 
-LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name)
+LifeObject::LifeObject(std::shared_ptr<SceneNode> nodo, const std::string& name) : EntActive(-1, nodo, name), m_ghostObject(nullptr)
 {
 	//TriggerSystem::i().RegisterEntity(this);
 }
@@ -72,6 +72,9 @@ void LifeObject::handleMessage(const Message & message)
 		if (ClassName == "Player" || ClassName == "Enemy_Bot") {
 
 			if (estado == DISPONIBLE) {
+
+				SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("health.mp3", "sounds"), getPosition());
+
 				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
 				clockRecargaLife.restart();
@@ -146,16 +149,24 @@ void LifeObject::asignaTiempo(Clock tiempo) {
 	
 	estado = USADO;
 	m_nodo->setVisible(false);
-	PhysicsEngine::i().removeGhostObject(m_ghostObject);
+	if (m_ghostObject) {
+		PhysicsEngine::i().removeGhostObject(m_ghostObject);
+		m_ghostObject = nullptr;
+	}
 }
 
 void LifeObject::VidaCogida()
 {
-	
+
+	if (m_ghostObject) {
 		PhysicsEngine::i().removeGhostObject(m_ghostObject);
-		estado = USADO;
-		m_nodo->setVisible(false);
-		clockRecargaLife.restart();
+		m_ghostObject = nullptr;
+	}
+	estado = USADO;
+	m_nodo->setVisible(false);
+	clockRecargaLife.restart();
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("health.mp3", "sounds"), getPosition());
 
 }
 

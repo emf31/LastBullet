@@ -1,7 +1,14 @@
 #include "CharacterTypes.h"
-
+#include "Util.h"
 
 std::list<TPlayer> CharacterTypes::botsNames = std::list<TPlayer>();
+
+std::vector<std::string> CharacterTypes::deathSounds = {
+	"death1.wav",
+	"death2.wav",
+	"death3.wav",
+	"death4.wav"
+};
 
 //Gets one different character data every time is called
 
@@ -12,6 +19,11 @@ TPlayer CharacterTypes::getOneCharacterData() {
 
 	return p;
 
+}
+
+std::string CharacterTypes::getRandomDeath()
+{
+	return deathSounds.at(Randi(0,deathSounds.size() - 1));
 }
 
 std::string CharacterTypes::parseColorIntoPath(CharacterColor color) {
