@@ -3,7 +3,6 @@
 #include <Time.hpp>
 #include <StateStack.h>
 class TimePerFrame;
-
 class Game
 {
 public:

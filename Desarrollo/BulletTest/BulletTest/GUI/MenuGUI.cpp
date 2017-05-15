@@ -4,6 +4,7 @@
 #include <StateStack.h>
 #include <NetworkManager.h>
 #include <steam_api.h>
+#include "../global.h"
 
 MenuGUI::MenuGUI() : GUI() {
 }
@@ -185,11 +186,14 @@ void MenuGUI::handleEvent(Event * ev)
 }
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 {
-	changeState(stateMenu::enumLobby);
+	if(USING_STEAM) {
+		changeState(stateMenu::enumLobby);
+	}
 	
 	NetworkManager::i().getNetPlayer()->crearPartida();
-	NetworkManager::i().getNetPlayer()->crearLobby();
-
+	if (USING_STEAM) {
+		NetworkManager::i().getNetPlayer()->crearLobby();
+	}
 	return true;
 }
 
@@ -268,8 +272,8 @@ bool  MenuGUI::onReadyBtnClicked(const CEGUI::EventArgs & e) {
 }
 bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
 
-	
-	SteamFriends()->ActivateGameOverlayInviteDialog(NetworkManager::i().getNetPlayer()->crearLobby());
+	if(USING_STEAM)
+		SteamFriends()->ActivateGameOverlayInviteDialog(NetworkManager::i().getNetPlayer()->crearLobby());
 	return true;
 }
 

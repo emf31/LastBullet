@@ -1,6 +1,7 @@
 #include "Menu.h"
 
 #include <NetworkManager.h>
+#include "../global.h"
 Menu::Menu()
 {
 }
@@ -45,7 +46,9 @@ void Menu::HandleEvent()
 void Menu::Update(Time timeElapsed)
 {
 	menuGUI.update();
-	NetworkManager::i().getNetPlayer()->receiveSteamPackets();
+	if (USING_STEAM) {
+		NetworkManager::i().getNetPlayer()->receiveSteamPackets();
+	}
 }
 
 void Menu::Render(float interpolation, Time elapsedTime)

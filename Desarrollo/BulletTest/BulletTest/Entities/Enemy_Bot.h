@@ -125,7 +125,7 @@ private:
 	float FOV;
 
 	int ciclo = 0;
-	int valorCiclos = 25;//CAMBIALO A 25 TODO
+	int valorCiclos = 1;//CAMBIALO A 25 TODO
 
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 

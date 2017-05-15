@@ -916,6 +916,9 @@
     <ClInclude Include="Network\SteamResults.h">
       <Filter>Headers\Network</Filter>
     </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
