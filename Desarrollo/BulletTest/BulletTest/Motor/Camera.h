@@ -50,6 +50,7 @@ public:
 	void setRotationX(float angulo);
 	void setRotationY(float angulo);
 	void setRotationZ(float angulo);
+	void setDir(Vec3<float>& dir) { m_camera->setRotationDir(dir); }
 
 
 

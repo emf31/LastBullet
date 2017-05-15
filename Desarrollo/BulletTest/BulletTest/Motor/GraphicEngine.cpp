@@ -82,6 +82,19 @@ void GraphicEngine::updateClippingPlanes()
 	}*/
 }
 
+void GraphicEngine::updateDeathCamera()
+{
+	auto found = cameras.find("CameraDeath");
+	if (found != cameras.end()) {
+		Vec3<float> playerPos = getActiveCamera()->getPosition();
+		Vec3<float> cameraPos = Vec3<float>(playerPos.getX() + 2, playerPos.getY() + 2, playerPos.getZ() + 2);
+		Vec3<float> vector = playerPos - cameraPos;
+		(*found).second->setPosition(cameraPos);
+		//(*found).second->setTarget(playerPos-vector);
+	}
+
+}
+
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh)
 {
 
@@ -289,6 +302,7 @@ void GraphicEngine::inicializar()
 	dsa->setIntensidadEspecular(0.6f);
 
 	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	createCamera("CameraDeath", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 	setActiveCamera("CamaraPlayer");
 	sm.camaraActiva->setFarPlane(1000.f);
 	

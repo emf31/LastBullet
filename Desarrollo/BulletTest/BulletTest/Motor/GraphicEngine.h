@@ -76,6 +76,8 @@ public:
 
 	void updateClippingPlanes();
 
+	void updateDeathCamera();
+
 	float planes[6][4] = {
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 },

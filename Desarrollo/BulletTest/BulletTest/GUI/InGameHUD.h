@@ -59,6 +59,8 @@ public:
 
 	bool isInCuentaAtras() { return activeCuentaAtras; }
 
+	bool setVisibleAllHUD(bool visible);
+
 	fila_tabla player1;
 	fila_tabla player2;
 	fila_tabla player3;
@@ -71,6 +73,9 @@ public:
 	void updateCuentaAtras();
 
 private:
+
+	CEGUI::DefaultWindow* AllHUD;
+
 	CEGUI::DefaultWindow* scope;
 
 	CEGUI::DefaultWindow* LabelVida;

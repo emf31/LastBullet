@@ -26,6 +26,8 @@ void InGameHUD::inicializar() {
 		CEGUI::Font::getDefaultResourceGroup(), CEGUI::ASM_Vertical, CEGUI::Sizef(1280.0f, 720.0f));
 
 
+	AllHUD = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0));
+
 	m_WindowCuenta = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(6));
 
 	m_LabelCuentaInfo = static_cast<CEGUI::DefaultWindow*>(m_WindowCuenta->getChild(7));
@@ -124,6 +126,12 @@ void InGameHUD::muestraFinPartida() {
 	LabelEndGame->setVisible(true);
 	setTablaVisible(true);
 
+}
+
+bool InGameHUD::setVisibleAllHUD(bool visible)
+{
+	AllHUD->setVisible(visible);
+	return true;
 }
 
 void InGameHUD::desactivarCuentaAtras() {

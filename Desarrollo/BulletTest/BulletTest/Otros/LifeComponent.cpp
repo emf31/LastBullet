@@ -3,6 +3,7 @@
 #include <Map.h>
 #include <NetworkManager.h>
 #include <Character.h>
+#include <InGameHUD.h>
 
 LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)
@@ -17,6 +18,11 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 {
 	m_vida -= cantidad;
 	if (m_vida <= 0 && m_isDying == false) {
+
+		GraphicEngine::i().updateDeathCamera();
+		GraphicEngine::i().setActiveCamera("CameraDeath");
+		static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(false);
+
 
 		m_isDying = true;
 		relojMuerte.restart();
@@ -62,6 +68,8 @@ void LifeComponent::update()
 {
 	//Una vez termine la animacion de muerte, volvemos a movernos
 	if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
+		GraphicEngine::i().setActiveCamera("CamaraPlayer");
+		static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(true);
 		m_isDying = false;
 		m_vida = 100;
 
