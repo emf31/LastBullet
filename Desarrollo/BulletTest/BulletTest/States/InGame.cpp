@@ -36,14 +36,14 @@ void InGame::Inicializar()
 
 	World::i().inicializar();
 
-	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
+	/*const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 
 	for (auto it = bots.begin(); it != bots.end(); ++it) {
 		Enemy_Bot *bot = new Enemy_Bot(it->name, RakNet::UNASSIGNED_RAKNET_GUID);
 		bot->m_network->inicializar();
 		bot->inicializar();
 		bot->cargarContenido();
-	}
+	}*/
 
 	
 	
@@ -55,6 +55,7 @@ void InGame::Inicializar()
 	particleSystem.inicializar();
 	
 	NetworkManager::i().getNetPlayer()->getEnemyFactory().createEnemiesIfAvailable();
+
 }
 
 void InGame::Clear()
@@ -72,9 +73,7 @@ void InGame::Clear()
 
 void InGame::HandleEvent()
 {
-
-
-	if (!debugMenu.debugInput && !salirGUI.escapeInput) {
+	if (!debugMenu.debugInput && !salirGUI.escapeInput && World::i().getPartida()->isAllReady()) {
 		EntityManager::i().getEntity(PLAYER)->handleInput();
 	}
 
@@ -179,9 +178,11 @@ void InGame::Update(Time timeElapsed)
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
 
-
-	EntityManager::i().update(timeElapsed);
-
+	//Solo updateamos entities si esta todo listo
+	if (World::i().getPartida()->isAllReady()) {
+		EntityManager::i().update(timeElapsed);
+	}
+	
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
@@ -192,13 +193,17 @@ void InGame::Update(Time timeElapsed)
 
 	EventSystem::i().update();
 
-	particleSystem.update(timeElapsed);
+	//particleSystem.update(timeElapsed);
 
 	GUIManager::i().updateAllGuis();
 }
 
 void InGame::Render(float interpolation, Time elapsedTime)
 {
+
+	
+
+
 	EntityManager::i().updateRender(interpolation);
 
 	

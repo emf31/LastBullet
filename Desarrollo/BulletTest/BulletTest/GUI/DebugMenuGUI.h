@@ -3,10 +3,10 @@
 #include <GraphicEngine.h>
 #include <GUI.h>
 #include <Enemy_Bot.h>
-#include <EntityManager.h>
-#include <events\Event.h>
-#include <NetworkDebugger.h>
-#include <NetworkLog.h>
+#include <PrintableText.h>
+
+class Event;
+class NetworkLog;
 
 class DebugMenuGUI : public Motor::GUI {
 public:
@@ -15,6 +15,8 @@ public:
 
 	virtual void update() override;
 	virtual void handleEvent(Event * ev) override;
+
+	void addPrintText(const std::string & str);
 
 	void inicializar();
 	
@@ -61,6 +63,8 @@ private:
 
 	bool onGodMode(const CEGUI::EventArgs & e);
 
+	bool onMovementPrediction(const CEGUI::EventArgs & e);
+
 	Vec3<float> elegirColor(std::string estadoActual);
 
 	void updateProgressBars(NetworkDebugger* deb);
@@ -71,9 +75,12 @@ private:
 
 	void crearNodoBot(Entity* myentity);
 
+	
+	
+	//Debug
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
-	
+	CEGUI::DefaultWindow *debugPrintText;
 
 	//NetworkLog
 	CEGUI::PushButton *NetworkLogButton;
@@ -161,6 +168,7 @@ private:
 
 	std::shared_ptr<BasicSceneNode> nodos[4];
 
-	NetworkLog netWorkLog;
+	NetworkLog* netWorkLog;
 
+	PrintableText printable;
 };

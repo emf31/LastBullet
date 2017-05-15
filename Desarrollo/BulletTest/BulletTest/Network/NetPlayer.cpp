@@ -18,6 +18,8 @@
 #include <StateStack.h>
 #include <thread>
 #include <Settings.h>
+#include <DebugMenuGUI.h>
+#include <GUIManager.h>
 
 NetPlayer::NetPlayer() : NetObject(), m_player(nullptr), m_world(World::i())
 {
@@ -63,8 +65,9 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	NetworkManager::i().createServer();
+	//NetworkManager::i().createServer();
 	RakSleep(1000);
+	int a = 1;
 	conectar("127.0.0.1", server_port);
 
 	while (isConnected() == false) {
@@ -78,14 +81,13 @@ void NetPlayer::crearPartida()
 	gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
 	gameinfo.map = Settings::i().GetValue("mapa");
 	gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+	gameinfo.maxKills = std::stoi(Settings::i().GetValue("maxkills"));
 
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
 	TPlayer p;
 	p.name = "Nixon";
-	//TPlayer p2;
-	//p2.name = "Kennedy";
 
 	m_bots.push_back(p);*/
 	//m_bots.push_back(p2);
@@ -103,13 +105,6 @@ void NetPlayer::crearPartida()
 	bot4->m_network->inicializar();*/
 
 
-	
-	
-
-	
-	/*while (World::i().gamestarted == false) {
-		NetworkManager::i().updateNetwork(Time::Zero);
-	}*/
 }
 
 void NetPlayer::setPlayerObject(Player * player)
@@ -363,6 +358,8 @@ void NetPlayer::substractPlayerInLobby(uint64_t steamID) {
 
 void NetPlayer::handlePackets(Time elapsedTime) {
 
+	
+
 	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
 
 		// Recibimos un paquete, tenemos que obtener el tipo de mensaje
@@ -397,7 +394,12 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			//Esta variable indica que el servidor ha aceptado la conexion
 			connected = true;
 
+<<<<<<< HEAD
 
+=======
+			connectTime = RakNet::GetTimeMS();
+		
+>>>>>>> refs/remotes/origin/PrediccionMovimiento
 
 			break;
 		}
@@ -457,7 +459,6 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 
 			TPlayer p = *reinterpret_cast<TPlayer*>(packet->data);
 
-
 			m_enemyFactory.addEnemyToBeCreated(p);
 
 #ifdef NETWORK_DEBUG
@@ -469,14 +470,38 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 		break;
 		case MOVIMIENTO:
 		{
-			TMovimiento m = *reinterpret_cast<TMovimiento*>(packet->data);
+			unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
+			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
+			unsigned char typeId;
+			bool isDying;
+			Vec3<float> position;
+			Vec3<float> rotation;
+			RakNet::RakNetGUID guid;
 
+
+			RakNet::BitStream myBitStream(packet->data, packet->length, false); // The false is for efficiency so we don't make a copy of the passed data
+			myBitStream.Read(useTimeStamp);
+			myBitStream.Read(timeStamp);
+			myBitStream.Read(typeId);
+			myBitStream.Read(isDying);
+			myBitStream.Read(position);
+			myBitStream.Read(rotation);
+			myBitStream.Read(guid);
+
+			
 			//recibimos la nueva posicion del cliente que se ha movido y la actualizamos
-			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(m.guid));
+			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(guid));
 
 			if (e != NULL) {
-				e->encolaMovimiento(m);
+				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, position, rotation, guid });
+				//e->encolaMovimiento(m);
+
+				/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+				Time time = milliseconds(RakNet::GetTimeMS() - timeStamp);
+				menu->addPrintText(std::to_string(time.asMilliseconds()));*/
+				
 			}
+
 			/*countMovementPacketsIn++;*/
 
 #ifdef NETWORK_DEBUG
@@ -490,15 +515,22 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 		{
 			RakID rakID = *reinterpret_cast<RakID*>(packet->data);
 
-			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(rakID.guid));
-
+			Entity* ent = EntityManager::i().getRaknetEntity(rakID.guid);
+			GraphicEngine::i().removeNode(ent->getNode());
+			EntityManager::i().removeEntity(ent);
+			
 
 		}
 		break;
 
 		case TERMINAR_PARTIDA:
 		{
+			//Volvemos al menu
 			StateStack::i().GetCurrentState()->Clear();
+			StateStack::i().SetCurrentState(States::ID::Menu);
+			StateStack::i().GetCurrentState()->Inicializar();
+
+			return;
 
 			break;
 		}
@@ -682,9 +714,9 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 
 			PlayerEvent* evento = new PlayerEvent(nuevaFila);
 
-			World::i().getPartida()->muestraMarcador();
-
 			EventSystem::i().dispatchNow(evento);
+
+			World::i().getPartida()->muestraMarcador();
 
 		}
 		break;
@@ -695,6 +727,8 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			KillEvent* killEvent = new KillEvent(guidTabla.guid);
 
 			EventSystem::i().dispatchNow(killEvent);
+
+			World::i().getPartida()->muestraMarcador();
 
 
 #ifdef NETWORK_DEBUG
@@ -711,6 +745,8 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			MuerteEvent* deathEvent = new MuerteEvent(guidTabla.guid);
 
 			EventSystem::i().dispatchNow(deathEvent);
+
+			World::i().getPartida()->muestraMarcador();
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(guidTabla.guid, mPacketIdentifier);
@@ -781,4 +817,78 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 
 	}
 
+<<<<<<< HEAD
 }
+=======
+	/*if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC && mPacketIdentifier != PING)
+		countPacketsIn++;*/
+
+	//std::cout << (unsigned int)mPacketIdentifier << std::endl;
+
+
+
+
+	/*countPacketsTotal = countPacketsIn + countPacketsOut;
+	countMovementPacketsTotal = countMovementPacketsIn + countMovementPacketsOut;
+	duracionFor = timeFor.getElapsedTime().asMilliseconds();
+	//pingMS = pingMS - (elapsedTime.asMilliseconds() - duracionFor);
+	//pingMS = duracionFor;
+	timeFor.restart();*/
+}
+
+void NetPlayer::apagar()
+{
+	if (isConnected()) {
+		//First call shutdown from base class
+		NetObject::apagar();
+
+		//Do what you need here
+		m_servers.clear();
+	}
+	
+}
+
+
+
+void NetPlayer::searchServersOnLAN() {
+	//Creo un RakPeer para lanzar un paquete de b�squeda
+	RakNet::RakPeerInterface *client;
+	client = RakNet::RakPeerInterface::GetInstance();
+
+	RakNet::SocketDescriptor socketDescriptor(65534, 0);
+	socketDescriptor.socketFamily = AF_INET;
+
+	client->Startup(1, &socketDescriptor, 1);
+
+	RakNet::RakNetGUID rakID = client->GetMyGUID();
+
+	//Hacemos ping a bradcast en el puerto en el que sabemos que est� escuchando el server
+	client->Ping("255.255.255.255", 65535, false);
+	std::cout << "Buscando servidores en la red local..." << std::endl;
+	RakSleep(1000);
+	RakNet::Packet *packet;
+	//Limpiamos la lista de servidores primero.
+	m_servers.clear();
+
+	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
+		if (packet == 0) {
+			RakSleep(1000);
+			continue;
+		}
+		if (packet->data[0] == ID_UNCONNECTED_PONG) {
+			RakNet::TimeMS time;
+			RakNet::BitStream bsIn(packet->data, packet->length, false);
+
+			bsIn.IgnoreBytes(1);
+			bsIn.Read(time);
+			//printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
+			m_servers.push_back(packet->systemAddress.ToString());
+		}
+
+		RakSleep(1000);
+	}
+	//Destruyo el RakPeer. Ya no hace falta
+	RakNet::RakPeerInterface::DestroyInstance(client);
+
+}
+>>>>>>> refs/remotes/origin/PrediccionMovimiento

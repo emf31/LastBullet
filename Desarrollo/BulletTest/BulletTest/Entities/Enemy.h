@@ -2,7 +2,7 @@
 #include <Character.h>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicscommon.h>
-
+#include <NetworkPrediction.h>
 
 #include <Estructuras.h>
 #include <Message.h>
@@ -39,10 +39,6 @@ public:
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 
-
-	void encolaMovimiento(TMovimiento& mov);
-	void desencolaMovimiento();
-
 	void lanzarGranada(TGranada g);
 
 	virtual bool isDying() override;
@@ -54,6 +50,8 @@ public:
 	}
 
 	void setVisibilidadBilboardSync();
+
+	NetworkPrediction* getNetworkPrediction() { return &nPrediction; }
 	
 
 private:
@@ -72,11 +70,10 @@ private:
 
 	Clock relojMuerte;
 	
-	
+	NetworkPrediction nPrediction;
 
 
 	btRigidBody* m_rigidBody;
-	std::queue<TMovimiento> m_positions;
 	
 
 	

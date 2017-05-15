@@ -20,7 +20,7 @@ void EntityManager::sendPlayer(TPlayer & p, RakNet::RakPeerInterface *peer)
 		nuevocli.mID = NUEVO_CLIENTE;
 		nuevocli.guid = i->second->getGuid();
 		nuevocli.name = i->second->getName();
-		//nuevocli.position = i->second->getPosition();
+		nuevocli.available = i->second->isAvailable();
 		
 		peer->Send((const char*)&nuevocli, sizeof(nuevocli), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, p.guid, false);
 	}
@@ -39,21 +39,21 @@ void EntityManager::sendBot(TPlayer &p, const RakNet::RakNetGUID& host, RakNet::
 	}
 }
 
-void EntityManager::enviaNuevaPos(TMovimiento p, RakNet::RakNetGUID owner, RakNet::RakPeerInterface *peer)
+void EntityManager::enviaNuevaPos(RakNet::BitStream& bitStream, RakNet::RakNetGUID packetOwner, RakNet::RakNetGUID gameOwner, RakNet::RakPeerInterface *peer)
 {
-	Entity* ent = EntityManager::i().getRaknetEntity(p.guid);
+	Entity* ent = EntityManager::i().getRaknetEntity(packetOwner);
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a todos menos a nosotros mismos
-		if (i->second->getGuid() != p.guid) {
+		if (i->second->getGuid() != packetOwner) {
 
 			//No se envia al propietario de la partida, si el que se mueve es un bot
-			if (ent->getClassName() == "Bot" && i->second->getGuid() == owner) {
+			if (ent->getClassName() == "Bot" && i->second->getGuid() == gameOwner) {
 				continue;
 			}
 			
-			peer->Send((const char*)&p, sizeof(p), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+			peer->Send(&bitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 
 			
 
@@ -82,13 +82,17 @@ void EntityManager::lanzarGranda(TGranada & g, RakNet::RakNetGUID owner, RakNet:
 
 }
 
-void EntityManager::enviarTerminarPartida(RakNet::RakPeerInterface *peer)
+void EntityManager::enviarTerminarPartida(RakNet::RakNetGUID& owner, RakNet::RakPeerInterface *peer)
 {
 	RakID rakiD;
 	rakiD.mID = TERMINAR_PARTIDA;
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
+
+		if (i->second->getGuid() == owner) {
+			peer->Send((const char*)&rakiD, sizeof(rakiD), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
+		}
 		
-		peer->Send((const char*)&rakiD, sizeof(rakiD), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, i->second->getGuid(), false);
+		
 
 	}
 }
@@ -270,12 +274,12 @@ void EntityManager::registerEntity(Entity * entity)
 	else {
 		if (m_entities.find(entity->getID()) != m_entities.end()) {
 			//mostramos error
-			std::cout << "ESA VIDA o ARMA YA HA SIDO CREADA " + entity->getID() << std::endl;
+			//std::cout << "ESA VIDA o ARMA YA HA SIDO CREADA " + entity->getID() << std::endl;
 
 		}
 		else {
 			//si todo ha ido bien le asignamos el entity al map
-			std::cout << "CREO UNA VIDA o ARMA CON ID : " + entity->getID() << std::endl;
+			//std::cout << "CREO UNA VIDA o ARMA CON ID : " + entity->getID() << std::endl;
 			m_entities[entity->getID()] = entity;
 		}
 
@@ -367,7 +371,7 @@ void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterfa
 }
 
 
-void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
+void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, int MaxKills, RakNet::RakPeerInterface * peer)
 {
 	TFilaTabla *fila;
 	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
@@ -386,7 +390,7 @@ void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, RakNet::RakPeerInterf
 
 
 	}
-	if (fila->kills >= MaxScore) {
+	if (fila->kills >= MaxKills) {
 		for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 			//se envia a TODOS para que todos actualicen la tabla de puntuacion
@@ -426,22 +430,18 @@ void EntityManager::enviaFila(RakNet::RakPeerInterface * peer, TFilaTabla fila)
 	m_tabla[RakNet::RakNetGUID::ToUint32(fila.guid)] = fila;
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-
-		
 		if (i->second->getGuid() != fila.guid) {
-			//se envia la fila del nuevo jugador a todos los clientes menos a el
+			//se envia la fila del nuevo jugador a todos los clientes
 
 			peer->Send((const char*)&fila, sizeof(fila), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		}
+	}
 
-		}
-		else {
-			//se envian todas las filas que ya hay en la tabla al nuevo cliente (incluyendo su propia fila que antes no se envio)
-			for (auto j = m_tabla.begin(); j != m_tabla.end(); ++j) {
-				
-				fila2 = j->second;
-				peer->Send((const char*)&fila2, sizeof(fila2), HIGH_PRIORITY, RELIABLE_ORDERED, 0, fila.guid, false);
-			}
-		}
+	//se envian todas las filas que ya hay en la tabla al nuevo cliente (incluyendo su propia fila que antes no se envio)
+	for (auto j = m_tabla.begin(); j != m_tabla.end(); ++j) {
+
+		fila2 = j->second;
+		peer->Send((const char*)&fila2, sizeof(fila2), HIGH_PRIORITY, RELIABLE_ORDERED, 0, fila.guid, false);
 	}
 
 }

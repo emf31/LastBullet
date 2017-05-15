@@ -91,5 +91,4 @@ Desarrollo/Motor/Motor/Debug
 Desarrollo/Motor/Motor/Release
 Desarrollo/Motor/Motor/x64
 
-
-
+*.log

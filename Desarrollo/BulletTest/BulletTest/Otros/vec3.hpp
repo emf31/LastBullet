@@ -189,6 +189,7 @@ public:
 		std::cout << "X: " << x << "\t Y: " << y << "\t Z: " << z << std::endl;
 	}
 
+
 	// ------------ Overloaded operators ------------
 
 	// Overloaded addition operator to add Vec3s together

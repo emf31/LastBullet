@@ -1,7 +1,8 @@
 resolucionx:1280
 resoluciony:720
 fullscreen:0
-name:WhiteHost
+name:Host
 gamemode:0
-mapa:landing.json
+mapa:testonline.json
 bots:3
+maxkills:5

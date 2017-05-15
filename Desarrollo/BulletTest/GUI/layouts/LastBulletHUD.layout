@@ -259,5 +259,24 @@
             <Property name="AlwaysOnTop" value="true" />
             <Property name="AutoRenderingSurface" value="true" />
         </Window>
+        <Window type="DefaultWindow" name="CuentaWindow" >
+            <Property name="ID" value="6" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
+            <Window type="AlfiskoSkin/Label" name="CuentaAtras" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,554},{0,239},{0,728},{0,287}}" />
+                <Property name="Text" value="10" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="NormalTextColour" value="FFFFB300" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="CuentaMensaje" >
+                <Property name="ID" value="7" />
+                <Property name="Area" value="{{0,505},{0,190},{0,767},{0,233}}" />
+                <Property name="Text" value="Match begins in:" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+        </Window>
     </Window>
 </GUILayout>

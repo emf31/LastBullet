@@ -162,6 +162,7 @@
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="MainServer.cpp" />
     <ClCompile Include="Otros\NetworkLog.cpp" />
+    <ClCompile Include="Otros\Timer.cpp" />
     <ClCompile Include="Otros\Vec3f.cpp" />
     <ClCompile Include="RenderState.cpp" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="Estructuras.h" />
     <ClInclude Include="MastEventReceiver.hpp" />
     <ClInclude Include="Otros\NetworkLog.h" />
+    <ClInclude Include="Otros\Timer.h" />
     <ClInclude Include="Otros\Vec3f.h" />
     <ClInclude Include="RenderState.h" />
   </ItemGroup>

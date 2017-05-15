@@ -29,6 +29,8 @@ struct RakID {
 
 #pragma pack(push, 1)
 struct TMovimiento {
+	unsigned char useTimeStamp;
+	RakNet::Time timeStamp;
 	unsigned char mID;
 	bool isDying;
 	Vec3<float> position;
@@ -154,6 +156,7 @@ struct TGameInfo {
 	std::string name;
 	int gameMode;
 	int numBots;
+	int maxKills;
 	int playersTotales;
 	std::string map;
 };

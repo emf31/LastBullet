@@ -53,6 +53,7 @@ public:
 
 	AsyncEnemyFactory& getEnemyFactory() { return m_enemyFactory; }
 
+
 	uint64_t getLobbyID();
 	RakNet::Lobby2MessageFactory_Steam* getMessageFactory();
 	RakNet::Lobby2Client_Steam* getLobby2Client();
@@ -207,10 +208,10 @@ public:
 	}
 
 
-
 	bool isReady() {
 		return IamReady;
 	}
+
 private:
 
 	Player* m_player;
@@ -231,6 +232,7 @@ private:
 
 	AsyncEnemyFactory m_enemyFactory;
 
+
 	RakNet::Lobby2MessageFactory_Steam *messageFactory;
 	RakNet::Lobby2Client_Steam *lobby2Client;
 	RakNet::FullyConnectedMesh2 *fcm2;
@@ -244,6 +246,7 @@ private:
 	bool IamReady = false;
 
 	bool inLobby = true;
+
 
 #ifdef NETWORK_DEBUG
 	std::shared_ptr<NetworkDebugger> debugger;

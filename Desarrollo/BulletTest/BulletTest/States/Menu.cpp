@@ -45,7 +45,9 @@ void Menu::HandleEvent()
 void Menu::Update(Time timeElapsed)
 {
 	menuGUI.update();
+
 	NetworkManager::i().getNetPlayer()->receiveSteamPackets();
+
 }
 
 void Menu::Render(float interpolation, Time elapsedTime)
@@ -58,6 +60,7 @@ void Menu::Render(float interpolation, Time elapsedTime)
 	//GUI
 	menuGUI.injectMousePosition(mouseX, mouseY);
 
+	
 	GraphicEngine::i().renderAll();
 }
 

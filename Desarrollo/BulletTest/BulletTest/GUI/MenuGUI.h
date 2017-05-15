@@ -66,6 +66,7 @@ public:
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
+
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
 	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
 	bool onBackButtonClicked(const CEGUI::EventArgs & e);
@@ -110,6 +111,12 @@ public:
 		}
 		return nullptr;
 	}
+
+	bool onConnectClicked(const CEGUI::EventArgs & e);
+	bool onEditBoxClicked(const CEGUI::EventArgs & e);
+
+	CEGUI::Editbox *editBox;
+
 private:
 
 	int imagen1_x;
@@ -145,6 +152,8 @@ private:
 	CEGUI::PushButton *Conexion1;
 	CEGUI::PushButton *Conexion2;
 	CEGUI::PushButton *Actualizar;
+	CEGUI::PushButton *connect;
+	
 
 	CEGUI::PushButton *Atras1;
 	CEGUI::PushButton *Atras2;

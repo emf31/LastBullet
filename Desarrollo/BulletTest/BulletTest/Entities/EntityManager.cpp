@@ -101,6 +101,13 @@ void EntityManager::apagar()
 
 	m_jugadores.clear();
 
+	for (auto i = m_entPassive.begin(); i != m_entPassive.end(); ++i) {
+		//borramos la entities
+		i->second->borrarContenido();
+		delete i->second;
+		i->second = 0;
+	}
+
 }
 
 void EntityManager::registerEntityActive(EntActive * entity)

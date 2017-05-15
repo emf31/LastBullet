@@ -7,12 +7,14 @@
 #include <iostream>
 #include <NetworkManager.h>
 #include <Settings.h>
+#include <GUIManager.h>
+#include <DebugMenuGUI.h>
 
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
 {
 
 
@@ -35,7 +37,16 @@ void Enemy::inicializar()
 
 void Enemy::update(Time elapsedTime)
 {
-	desencolaMovimiento();
+	//desencolaMovimiento();
+
+	if (NetworkManager::i().isMovementPrediction()) {
+		nPrediction.interpolateWithPrediction();
+	}
+	else {
+		nPrediction.interpolateWithoutPrediction();
+	}
+
+
 
 	updateState();
 	//updateAnimation();
@@ -119,17 +130,19 @@ void Enemy::borrarContenido()
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
+	//GraphicEngine::i().removeNode(m_nodo);
 	
 }
 
 //Teletransporta un enemigo a la posicion que le pasas
 void Enemy::setPosition(const Vec3<float>& pos)
 {
-	m_renderState.setPosition(pos);
+	Vec3<float> aux = pos;
+	aux.setY(aux.getY() - 0.5f);
+	m_renderState.setPosition(aux);
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
-	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
+	transform.setOrigin(btVector3(pos.getX(), pos.getY() + (height / 2)/* + radius*/, pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo.get()->setPosition(pos);
 }
 
 
@@ -179,45 +192,7 @@ bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-//pila posiciones
-void Enemy::encolaMovimiento(TMovimiento& mov)
-{
-	// Añadir a la cola
-	m_positions.push(mov);
-}
 
-void Enemy::desencolaMovimiento()
-{
-
-	if (m_positions.size() > 3) {
-		TMovimiento mov;
-		while (!m_positions.empty()) {
-			mov = m_positions.front();
-			//lo borramos de la cola
-			m_positions.pop();
-			//llamamos al update con la nueva posicion
-		}
-		updateEnemigo(mov.position);
-		m_renderState.updateRotations(mov.rotation);
-		m_isDying = mov.isDying;
-	}
-
-	else if (m_positions.size() > 0) {
-		TMovimiento mov;
-		mov = m_positions.front();
-		//lo borramos de la cola
-		m_positions.pop();
-		//llamamos al update con la nueva posicion
-		updateEnemigo(mov.position);
-		m_renderState.updateRotations(mov.rotation);
-		m_isDying = mov.isDying;
-	}
-	else {
-		updateEnemigo(m_renderState.getPosition() + m_renderState.getVelocity() * (1.f / 15.f));
-
-	}
-
-}
 
 void Enemy::lanzarGranada(TGranada g)
 {

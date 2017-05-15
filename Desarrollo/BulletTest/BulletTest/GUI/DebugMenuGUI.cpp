@@ -3,14 +3,22 @@
 #include <events\DebugNetEvent.h>
 #include <NetworkManager.h>
 #include <GUIManager.h>
+#include <NetworkDebugger.h>
+#include <NetworkLog.h>
+#include <events\Event.h>
+#include <EntityManager.h>
 
-DebugMenuGUI::DebugMenuGUI() : GUI()
+
+DebugMenuGUI::DebugMenuGUI() : 
+	GUI()
 {
+	netWorkLog = new NetworkLog();
 
 }
 
 DebugMenuGUI::~DebugMenuGUI()
 {
+	delete netWorkLog;
 }
 
 
@@ -27,6 +35,13 @@ void DebugMenuGUI::handleEvent(Event * ev)
 	}
 }
 
+
+//Imprime un texto por pantalla
+
+void DebugMenuGUI::addPrintText(const std::string & str) {
+	debugPrintText->setText(printable.addPrintText(str));
+}
+
 void DebugMenuGUI::inicializar() {
 	init("../GUI", "DebugMenuGUI");
 
@@ -40,6 +55,8 @@ void DebugMenuGUI::inicializar() {
 	GraphicEngine::i().createCamera("CamaraAerea",Vec3<float>(40, 150, -40), Vec3<float>(40, 0, -40));
 	getContext()->getRootWindow()->getChild(0)->getChild(10)->setVisible(false);
 
+	//PrintText
+	debugPrintText = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(110));
 	
 	//MENU PRINCIPAL
 	DebugShapesButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(12));
@@ -61,6 +78,9 @@ void DebugMenuGUI::inicializar() {
 
 	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
 	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
+
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMovementPrediction, this));
 
 	
 
@@ -192,8 +212,9 @@ void DebugMenuGUI::inicializar() {
 }
 
 void DebugMenuGUI::update() {
-	/*updateProgressBars();
-	updateNetworkWindowInfo();*/
+	
+	//Check duration of printable text
+	//if (printable.checkIfShouldClearText()) { debugPrintText->setText(""); }
 
 	updateFuzzyProgressBars();
 
@@ -599,7 +620,7 @@ bool DebugMenuGUI::onUpdateLogButtonClicked(const CEGUI::EventArgs & e)
 	//Llamar a NetworkManager?
 	serverLog->setText(NetworkManager::i().serverLogInfo());
 
-	clientLog->setText(netWorkLog.updateAndGenerateTable());
+	clientLog->setText(netWorkLog->updateAndGenerateTable());
 
 	return false;
 }
@@ -620,6 +641,22 @@ bool DebugMenuGUI::onUpdateSlider(const CEGUI::EventArgs & e) {
 bool DebugMenuGUI::onGodMode(const CEGUI::EventArgs & e)
 {
 	static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->godMode();
+	return true;
+}
+
+bool DebugMenuGUI::onMovementPrediction(const CEGUI::EventArgs & e)
+{
+	NetworkManager::i().setMovementPrediction(!NetworkManager::i().isMovementPrediction());
+
+	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+
+	if (NetworkManager::i().isMovementPrediction()) {
+		DebugIA->setText("Disable MovPrediction");
+	}
+	else {
+		DebugIA->setText("Enable MovPrediction");
+	}
+
 	return true;
 }
 

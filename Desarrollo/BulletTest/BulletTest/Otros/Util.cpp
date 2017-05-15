@@ -48,6 +48,13 @@ float clip(float n, float lower, float upper) {
 	return std::max(lower, std::min(n, upper));
 }
 
+bool compareVec3(const Vec3<float>& lhs, const Vec3<float>& rhs)
+{
+	return (lhs.getX() == rhs.getX())
+			&& (lhs.getY() == rhs.getY())
+			&& (lhs.getZ() == rhs.getZ());
+}
+
 btVector3 bt(const Vec3<float>& vec)
 {
 	return btVector3(vec.getX(), vec.getY(), vec.getZ());

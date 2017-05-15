@@ -186,7 +186,7 @@ void GraphicEngine::renderAll()
 	SceneManager::i().draw();
 	
 
-	ParticleSystem::i().render();
+	//ParticleSystem::i().render();
 	//if (StateStack::i().GetCurrentState()->id == States::ID::InGame) {
 
 
@@ -304,7 +304,7 @@ void GraphicEngine::setDebugDraw()
 
 
 
-	debug_draw_bullet = true;
+	debug_draw_bullet = false;
 }
 
 void GraphicEngine::apuntar()

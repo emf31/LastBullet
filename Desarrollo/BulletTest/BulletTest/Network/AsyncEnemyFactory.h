@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <RakNetTypes.h>
 
+
 //This class concern about creating enemies only if available
 //NOTE: Available means that the player behind that enemy is prepared
 //to start the game. Creating enemies without this factory could give an error during a game.
@@ -26,9 +27,12 @@ public:
 
 	std::list<TPlayer> getEnemies();
 
+	void checkIfAllEnemiesReady();
+
+
 private:
 	typedef std::unordered_map<unsigned long, TPlayer> EnemyMap;
 	EnemyMap m_enemies;
 
-
+	
 };

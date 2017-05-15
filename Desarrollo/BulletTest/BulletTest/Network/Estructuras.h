@@ -29,8 +29,12 @@ struct RakID {
 };
 #pragma pack(pop)
 
+
+
 #pragma pack(push, 1)
 struct TMovimiento {
+	unsigned char useTimeStamp;
+	RakNet::Time timeStamp;
 	unsigned char mID;
 	bool isDying;
 	Vec3<float> position;
@@ -38,6 +42,7 @@ struct TMovimiento {
 	RakNet::RakNetGUID guid;
 };
 #pragma pack(pop)
+
 
 #pragma pack(push, 1)
 struct TPing {
@@ -173,8 +178,10 @@ struct TGameInfo {
 	std::string name;
 	int gameMode;
 	int numBots;
+	int maxKills;
 	int playersTotales;
 	std::string map;
+
 };
 #pragma pack(pop)
 
