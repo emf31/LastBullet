@@ -11,6 +11,8 @@
 
 #include <EventListener.h>
 
+#include <AsyncEnemyFactory.h>
+
 class Partida : public EventListener {
 public:
 
@@ -21,7 +23,6 @@ public:
 
 	virtual void handleEvent(Event* e) override;
 
-
 	void muestraTabla();
 
 	void muestraMarcador();
@@ -30,7 +31,12 @@ public:
 
 	const std::string& getCurrentMap() const { return gameInfo.map; }
 
+	bool isAllReady() { return allPlayerReady; }
+
+	void setPlayerReady(bool t) { allPlayerReady = t; }
 private:
+
+	void empezarCuentaAtras();
 
 	void nuevoPlayer(TFilaTabla fila);
 
@@ -45,4 +51,7 @@ private:
 	TGameInfo gameInfo;
 
 	std::vector<TFilaTabla> ordenado;
+
+	bool allPlayerReady;
+
 };

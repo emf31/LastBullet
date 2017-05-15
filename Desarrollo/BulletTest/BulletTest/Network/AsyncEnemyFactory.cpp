@@ -1,6 +1,7 @@
 #include "AsyncEnemyFactory.h"
 #include <Enemy.h>
 #include <EntityManager.h>
+#include <EventSystem.h>
 
 AsyncEnemyFactory::AsyncEnemyFactory() : m_enemies()
 {
@@ -19,8 +20,6 @@ void AsyncEnemyFactory::addEnemyToBeCreated(TPlayer & p)
 	}
 
 	m_enemies[RakNet::RakNetGUID::ToUint32(p.guid)] = p;
-
-	//createEnemyIfAvailable(p.guid);
 }
 
 void AsyncEnemyFactory::createEnemiesIfAvailable()
@@ -42,7 +41,8 @@ void AsyncEnemyFactory::createEnemiesIfAvailable()
 		}
 	}
 
-	
+	//Si todos los enemigos estan listos notificamos a la partida
+	checkIfAllEnemiesReady();
 }
 
 void AsyncEnemyFactory::createEnemyIfAvailable(RakNet::RakNetGUID & rakID)
@@ -58,8 +58,13 @@ void AsyncEnemyFactory::createEnemyIfAvailable(RakNet::RakNetGUID & rakID)
 			EntityManager::i().registerRaknetEntity(e);
 
 			m_enemies.erase(RakNet::RakNetGUID::ToUint32(rakID));
+
+			
 		}
 	}
+
+	//Si todos los enemigos estan listos notificamos a la partida
+	checkIfAllEnemiesReady();
 }
 
 void AsyncEnemyFactory::markEnemyAsAvailable(RakNet::RakNetGUID & rakID)
@@ -88,4 +93,21 @@ std::list<TPlayer> AsyncEnemyFactory::getEnemies()
 	}
 
 	return lista;
+}
+
+void AsyncEnemyFactory::checkIfAllEnemiesReady()
+{
+	bool ready = true;
+	for (auto it = m_enemies.begin(); it != m_enemies.end(); it++) {
+		if (!it->second.available) {
+			ready = false;
+		}
+	}
+	
+	//Todos los enemigos estan listos
+	if (ready) {
+		Event* ev = new Event();
+		ev->event_type = E_ALLPLAYERS_READY;
+		EventSystem::i().dispatchNow(ev);
+	}
 }

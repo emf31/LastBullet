@@ -55,6 +55,7 @@ void InGame::Inicializar()
 	particleSystem.inicializar();
 	
 	NetworkManager::i().getNetPlayer()->getEnemyFactory().createEnemiesIfAvailable();
+
 }
 
 void InGame::Clear()
@@ -72,9 +73,7 @@ void InGame::Clear()
 
 void InGame::HandleEvent()
 {
-
-
-	if (!debugMenu.debugInput && !salirGUI.escapeInput) {
+	if (!debugMenu.debugInput && !salirGUI.escapeInput && World::i().getPartida()->isAllReady()) {
 		EntityManager::i().getEntity(PLAYER)->handleInput();
 	}
 
@@ -179,9 +178,11 @@ void InGame::Update(Time timeElapsed)
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
 
-
-	EntityManager::i().update(timeElapsed);
-
+	//Solo updateamos entities si esta todo listo
+	if (World::i().getPartida()->isAllReady()) {
+		EntityManager::i().update(timeElapsed);
+	}
+	
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();

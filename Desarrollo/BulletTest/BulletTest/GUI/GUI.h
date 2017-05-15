@@ -66,7 +66,7 @@ namespace Motor{
 
 		void toggleVisible() { getContext()->getRootWindow()->setVisible(!getContext()->getRootWindow()->isVisible()); }
 
-	private:
+	protected:
 		CEGUI::OpenGL3Renderer* m_renderer;
 
 		CEGUI::GUIContext* m_context = nullptr;

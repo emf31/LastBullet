@@ -212,6 +212,7 @@
     <ClInclude Include="EventSystem\events\KillEvent.h" />
     <ClInclude Include="EventSystem\events\MuerteEvent.h" />
     <ClInclude Include="EventSystem\events\PlayerEvent.h" />
+    <ClInclude Include="EventSystem\events\PlayerReadyEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph\AStarSearch.h" />
     <ClInclude Include="Graph\GraphEdge.h" />

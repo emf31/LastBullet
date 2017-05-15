@@ -5,9 +5,9 @@
 #include <events\GameStartEvent.h>
 #include <EventSystem.h>
 #include <GUIManager.h>
- 
+#include <NetworkManager.h>
 
-Partida::Partida() : EventListener()
+Partida::Partida() : EventListener(), allPlayerReady(false)
 {
 	
 }
@@ -52,6 +52,15 @@ void Partida::handleEvent(Event* e)
 		case E_GAME_START: {
 			GameStartEvent* g_ev = static_cast<GameStartEvent*>(e);
 			gameInfo = g_ev->m_info;
+
+
+			break;
+		}
+		case E_ALLPLAYERS_READY: {
+			//Todos los enemigos estan listos empieza la cuenta atras
+
+			empezarCuentaAtras();
+
 			break;
 		}
 
@@ -144,6 +153,12 @@ void Partida::ordenaTabla()
 		max = -1;
 	}
 
+}
+
+void Partida::empezarCuentaAtras()
+{
+	InGameHUD* ingame = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+	ingame->empezarCuentaAtras();
 }
 
 void Partida::nuevoPlayer(TFilaTabla fila) {

@@ -826,6 +826,9 @@
     <ClInclude Include="Network\NetworkPrediction.h">
       <Filter>Headers\Network</Filter>
     </ClInclude>
+    <ClInclude Include="EventSystem\events\PlayerReadyEvent.h">
+      <Filter>Headers\EventSystem\events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

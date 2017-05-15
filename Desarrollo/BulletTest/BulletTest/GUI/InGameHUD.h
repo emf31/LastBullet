@@ -57,13 +57,18 @@ public:
 
 	void muestraFinPartida();
 
+	bool isInCuentaAtras() { return activeCuentaAtras; }
+
 	fila_tabla player1;
 	fila_tabla player2;
 	fila_tabla player3;
 	fila_tabla player4;
 
+	void desactivarCuentaAtras();
 	
-	
+	void empezarCuentaAtras();
+
+	void updateCuentaAtras();
 
 private:
 	CEGUI::DefaultWindow* scope;
@@ -91,6 +96,13 @@ private:
 	CEGUI::DefaultWindow* m_kills;
 	CEGUI::DefaultWindow* m_deaths;
 
+	CEGUI::DefaultWindow* m_LabelCuenta;
+	CEGUI::DefaultWindow* m_LabelCuentaInfo;
+	CEGUI::DefaultWindow* m_WindowCuenta;
+
 	Player *p;
 
+	int count;
+	Clock countTime;
+	bool activeCuentaAtras;
 };

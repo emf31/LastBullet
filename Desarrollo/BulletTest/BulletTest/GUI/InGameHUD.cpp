@@ -1,7 +1,8 @@
 #include "InGameHUD.h"
+#include "CEGUI/Font.h"
+#include <World.h>
 
-
-InGameHUD::InGameHUD() : GUI() {	
+InGameHUD::InGameHUD() : GUI(), count(10), activeCuentaAtras(){
 }
 
 void InGameHUD::inicializar() {
@@ -11,6 +12,28 @@ void InGameHUD::inicializar() {
 	loadScheme("LastBulletHUD.scheme");
 	loadScheme("sniper.scheme");
 	loadLayout("LastBulletHUD.layout");
+
+	// Create a custom font which we use to draw the list items. This custom
+	// font won't get effected by the scaler and such.
+	CEGUI::FontManager& fontManager(CEGUI::FontManager::getSingleton());
+	CEGUI::Font& font(fontManager.createFromFile("DejaVuSans-12.font"));
+	// Set it as the default
+	m_context->setDefaultFont(&font);
+
+	
+	//Here we create a font and apply it to the renew font name button
+	CEGUI::Font& labelFont = fontManager.createFreeTypeFont("DejaVuSans-20", 20.f, true, "DejaVuSans.ttf",
+		CEGUI::Font::getDefaultResourceGroup(), CEGUI::ASM_Vertical, CEGUI::Sizef(1280.0f, 720.0f));
+
+
+	m_WindowCuenta = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(6));
+
+	m_LabelCuentaInfo = static_cast<CEGUI::DefaultWindow*>(m_WindowCuenta->getChild(7));
+	m_LabelCuentaInfo->setFont(&labelFont);
+
+	m_LabelCuenta = static_cast<CEGUI::DefaultWindow*>(m_WindowCuenta->getChild(5));
+	m_LabelCuenta->setFont(&labelFont);
+
 	
 
 
@@ -64,7 +87,13 @@ void InGameHUD::inicializar() {
 	p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 }
 void InGameHUD::update() {
-	//p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+	
+	if (activeCuentaAtras) {
+		updateCuentaAtras();
+	}
+
+
+
 	updateLabelVida();
 	updateLabelArma();
 	updateLabelMunicion();
@@ -95,6 +124,34 @@ void InGameHUD::muestraFinPartida() {
 	LabelEndGame->setVisible(true);
 	setTablaVisible(true);
 
+}
+
+void InGameHUD::desactivarCuentaAtras() {
+	activeCuentaAtras = false;
+
+	m_WindowCuenta->setVisible(false);
+}
+
+void InGameHUD::empezarCuentaAtras() {
+	countTime.restart();
+	activeCuentaAtras = true;
+
+	m_WindowCuenta->setVisible(true);
+}
+
+void InGameHUD::updateCuentaAtras() {
+	if (countTime.getElapsedTime().asSeconds() > 1.f) {
+		countTime.restart();
+		count--;
+
+		m_LabelCuenta->setText(std::to_string(count));
+
+		if (count == 0) {
+			activeCuentaAtras = false;
+			desactivarCuentaAtras();
+			World::i().getPartida()->setPlayerReady(true);
+		}
+	}
 }
 
 void InGameHUD::updateLabelVida() {
