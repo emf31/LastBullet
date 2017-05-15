@@ -29,6 +29,8 @@
 	NetworkManager::i().getNetPlayer()->addPlayerInLobby(msgSteam->srcMemberId);
 
 	NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+
+	NetworkManager::i().getNetPlayer()->sendReadyPlayersToNewClient();
 	
 }
 
@@ -76,6 +78,8 @@
 			 //Not ready
 			 NetworkManager::i().getNetPlayer()->playerNotReadyCallback(name);
 		 }
+	 } else if (token == "RC") {
+		 NetworkManager::i().getNetPlayer()->setReadyPlayers(stoi(value));
 	 }
  }
 

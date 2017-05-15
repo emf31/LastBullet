@@ -159,6 +159,22 @@ void NetPlayer::sendServerIPtoNewClient() {
 	}
 }
 
+void NetPlayer::sendReadyPlayersToNewClient() {
+	if (IamHost) {
+		std::string readyClients = "RC|";
+		RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
+		readyClients = readyClients + std::to_string(playersReady);
+		msg->message = readyClients.c_str();
+		msg->roomId = lobby2Client->GetRoomID();
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+	}
+}
+
+void NetPlayer::setReadyPlayers(int ready) {
+	playersReady = ready;
+}
+
 
 void NetPlayer::unirseLobby(const std::string& str)
 {
