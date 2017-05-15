@@ -28,24 +28,54 @@ TModel::~TModel() {
 void TModel::beginDraw() {
 	if (visible) {
 
-		
-		const glm::mat4& view = sm.getViewMatrix();
-		const glm::mat4& projection = sm.getProjectionMatrix();
-		glm::mat4& model = sm.getMatrizActual();
+		if (sm.billboardrendering == false) {
+			const glm::mat4& view = sm.getViewMatrix();
+			const glm::mat4& projection = sm.getProjectionMatrix();
+			glm::mat4& model = sm.getMatrizActual();
 
-		glm::mat4 modelview = projection * view * model;
+			glm::mat4 modelview = projection * view * model;
 
 
-		sm.shaderGeometria->Use();
+			sm.shaderGeometria->Use();
 
-		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
-		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		//color emisivo antes el emisivo era un color ahora es una textura
-		//glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.emisivo"), m_emisivo.getX(), m_emisivo.getY(), m_emisivo.getZ());
-		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
+			glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
+			glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+			//color emisivo antes el emisivo era un color ahora es una textura
+			//glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.emisivo"), m_emisivo.getX(), m_emisivo.getY(), m_emisivo.getZ());
+			glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
 
-		//Dibujamos el modelo
-		m_meshGroup->draw();
+			//Dibujamos el modelo
+			m_meshGroup->draw();
+		}
+		else {
+			const glm::mat4& view = sm.getViewMatrix();
+			const glm::mat4& projection = sm.getProjectionMatrix();
+			glm::mat4& model = getPositionMatrix()*getScaleMatrix();
+
+			glm::mat4 modelview = view * model;
+
+			modelview[0][0] = 1.0;
+			modelview[0][1] = 0.0;
+			modelview[0][2] = 0.0;
+
+
+			modelview[1][0] = 0.0;
+			modelview[1][1] = 1.0;
+			modelview[1][2] = 0.0;
+
+			modelview[2][0] = 0.0;
+			modelview[2][1] = 0.0;
+			modelview[2][2] = 1.0;
+
+			glm::mat4 mvp = projection * modelview;
+			sm.shaderBildboard->Use();
+
+			glUniformMatrix4fv(glGetUniformLocation(sm.shaderBildboard->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(mvp));
+
+			//Dibujamos el modelo
+			m_meshGroup->draw();
+		}
+
 			
 	}
 

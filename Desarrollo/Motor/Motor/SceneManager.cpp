@@ -25,7 +25,7 @@ void SceneManager::inicializar() {
 	inicializarBuffersBlur();
 	inicializarBuffersLineas();
 	inicializarBufferSkybox();
-	inicializarBufferBildboard();
+	//inicializarBufferBildboard();
 	numLines = 0;
 	drawTarget = false;
 }
@@ -69,8 +69,9 @@ void SceneManager::draw() {
 			renderBlur();
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			
 			renderLuces();
-
+			
 	//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
 			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			//renderBlur();
@@ -92,7 +93,7 @@ void SceneManager::draw() {
 			drawAllLines();
 		}
 	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
-
+		
 		renderSkybox();
 
 		renderBildboard();
@@ -463,23 +464,30 @@ void SceneManager::renderSkybox()
 void SceneManager::renderBildboard()
 {
 
-	glEnable(GL_BLEND);
-	
+	//glEnable(GL_BLEND);
+	//shaderBildboard->Use();
+	//glm::mat4 viewWithOutTras = camaraActiva->GetViewMatrix();	
+	//glm::mat4 projec = camaraActiva->getProjectionMatrix();
+	//glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
+	//glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
+	//
+
+	//glBindVertexArray(bildboardVAO);
+	//glActiveTexture(GL_TEXTURE0);
+	//glUniform1i(glGetUniformLocation(shaderBildboard->Program, "muzzle"), 0);
+	//glBindTexture(GL_TEXTURE_2D, bildboardTexture);
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+	//glBindVertexArray(0);
+
+
 	shaderBildboard->Use();
-	glm::mat4 viewWithOutTras = camaraActiva->GetViewMatrix();	
-	glm::mat4 projec = camaraActiva->getProjectionMatrix();
-	glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
-	glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
-	
+	billboardrendering = true;
+	for (int i = 0; i < vectorBillboards.size(); i++) {
+		vectorBillboards[i]->beginDraw();
+	}
 
-	glBindVertexArray(bildboardVAO);
-	glActiveTexture(GL_TEXTURE0);
-	glUniform1i(glGetUniformLocation(shaderBildboard->Program, "muzzle"), 0);
-	glBindTexture(GL_TEXTURE_2D, bildboardTexture);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
-
-	glDisable(GL_BLEND);
+	//glDisable(GL_BLEND);
+	billboardrendering = false;
 }
 
 bool SceneManager::removeNode(TNode * node) {
@@ -527,6 +535,47 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	nuevoNodoMalla->setEntity(model);
 	//nuevoNodoMalla->setModel(model);
 	//nuevoNodoMalla->getEntity()->setModel();
+
+	return model;
+}
+
+TModel * SceneManager::crearBillBoard()
+{
+
+	
+
+	TNode * nuevoNodoMalla;
+	TNode * nuevoNodoEscalado;
+	TNode * nuevoNodoTraslacion;
+
+	TModel* model = new TModel(getMesh("assets/billboard.obj"));
+
+	//creamos los nodos malla y los nodos transformaciones necesaria para esta
+	int id = model->getID();
+
+	//rotacion antes de traslacion
+	
+	nuevoNodoEscalado = crearNodoEscalado(nullptr, id);
+	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado, id);
+	nuevoNodoMalla = new TNode(id, nuevoNodoTraslacion);
+
+	//asignamos los hijos
+	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
+	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
+
+
+
+
+	//asignamos matrices de transformacion
+	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
+	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
+	model->setMiNodo(nuevoNodoMalla);
+
+	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
+	nuevoNodoMalla->setEntity(model);
+	//nuevoNodoMalla->setModel(model);
+	//nuevoNodoMalla->getEntity()->setModel();
+	vectorBillboards.push_back(model);
 
 	return model;
 }

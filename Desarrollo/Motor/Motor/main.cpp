@@ -84,7 +84,11 @@ int main() {
 	pruebaAnim->setAnimation("correr", 110, 190);
 	pruebaAnim->setCurrentAnimation("idle");
 
-
+	//billboards
+	TModel* bill1 = sm.crearBillBoard();
+	TModel* bill2 = sm.crearBillBoard();
+	bill2->setScale(Vec3<float>(20.2f, 20.02f, 20.02f));
+	bill2->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
 	
 	//pruebaAnim->setFrameTime(seconds(2.0));
 

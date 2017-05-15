@@ -53,6 +53,7 @@ public:
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
+	TModel* crearBillBoard();
 	TAnimation* crearNodoAnimacion(TAnimationGroupMesh * animGroup);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
@@ -94,6 +95,7 @@ public:
 	std::vector<TPointLight*> vecPointLight;
 	std::vector<TFlashLight*> vecFlashLight;
 	std::vector<TCamera*> vectorCamaras;
+	std::vector<TModel*> vectorBillboards;
 	TCamera* camaraActiva;
 
 	Shader* shaderGeometria;
@@ -119,6 +121,8 @@ public:
 	GLuint skyboxVAO, skyboxVBO;
 	GLuint skyboxTexture;
 	std::vector<const GLchar*> faces;
+
+	bool billboardrendering = false;
 
 	//bildboard
 	GLuint bildboardVAO, bildboardVBO;
