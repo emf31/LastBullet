@@ -1,5 +1,4 @@
-﻿  LoadingState.cpp
-  SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
+﻿  SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'
      Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Debug\BulletTest.exp

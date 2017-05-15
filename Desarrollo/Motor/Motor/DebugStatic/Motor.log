@@ -1,4 +1,4 @@
-﻿  main.cpp
+﻿  ClockImpl.cpp
   TTransform.cpp
   TSunLight.cpp
   TPointLight.cpp
@@ -7,15 +7,22 @@
   TMeshGroup.cpp
   TMesh.cpp
   TLuz.cpp
+  Time.cpp
   TFlashLight.cpp
+  Texture.cpp
   TEntity.cpp
   TCamera.cpp
   TAnimationGroupMesh.cpp
   TAnimation.cpp
+  Shader.cpp
   SceneManager.cpp
   ResourceManager.cpp
+  main.cpp
+  Generando código...
+  Compilando...
   Input.cpp
   EngineDevice.cpp
+  Clock.cpp
   AnimationReader.cpp
   AnimationMesh.cpp
   Generando código...
