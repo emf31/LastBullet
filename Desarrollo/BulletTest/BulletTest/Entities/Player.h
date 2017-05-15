@@ -162,5 +162,5 @@ private:
 
 	
 
-	
+	ISound* footsteps;
 };

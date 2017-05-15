@@ -23,7 +23,7 @@ void Asalto::inicializar()
 	capacidadAmmo = 30;
 	disparos = 0;
 	cadencia = milliseconds(80);
-	recarga = milliseconds(1000);
+	recarga = milliseconds(1450);
 	numCargadores = numCargadoresAsalto;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 	FUERZA = btVector3(60.f, 60.f, 60.f);
@@ -100,6 +100,8 @@ Character* Asalto::shoot(const Vec3<float>& target)
 
 	//si impacta con algun personaje devuelve true
 	Character* hitted = nullptr;
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shootPistola.mp3", "sounds"), m_ent->getRenderState()->getPosition());
 
 	//aumentamos en uno el numero de disparos, para reducir la municion
 	disparos++;
@@ -180,5 +182,12 @@ Character* Asalto::shoot(const Vec3<float>& target)
 	}
 
 	return hitted;
+}
+
+void Asalto::recargar()
+{
+	Weapon::recargar();
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadAssault.mp3", "sounds"), false);
 }
 

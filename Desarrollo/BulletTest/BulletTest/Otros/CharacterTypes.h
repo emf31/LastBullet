@@ -26,9 +26,14 @@ public:
 	//Gets one different character data every time is called
 	static TPlayer getOneCharacterData();
 
+	//Get Random death
+	static std::string getRandomDeath();
+
 	static std::string parseColorIntoPath(CharacterColor color);
 private:
 	static std::list<TPlayer> botsNames;
+
+	static std::vector<std::string> deathSounds;
 
 	CharacterTypes();
 };

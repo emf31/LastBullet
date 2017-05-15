@@ -25,10 +25,10 @@
 #include <NetworkManager.h>
 #include <glm\glm.hpp>
 
+#include "irrKlang/ik_ISound.h"
 
 
-
-Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false)
+Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false), footsteps(NULL), isMoving(false)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
@@ -107,8 +107,8 @@ void Player::inicializar()
 	asalto->setEquipada(true);
 	bindWeapon();
 
-
-
+	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
+	footsteps->setIsPaused(true);
 	/*listaWeapons->insertar(sniper);
 	tieneSniper = true;
 
@@ -136,6 +136,8 @@ void Player::inicializar()
 void Player::calcularMovimiento() {
 	isMoving = false;
 	isShooting = false;
+
+	
 
 	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
 	if (p_controller->onGround() && p_controller->jumpedOnAir) {
@@ -165,6 +167,12 @@ void Player::calcularMovimiento() {
 
 void Player::update(Time elapsedTime)
 {
+	if (isMoving && p_controller->onGround()) {
+		footsteps->setIsPaused(false);
+	}
+	else if (footsteps != NULL) {
+		footsteps->setIsPaused(true);
+	}
 
 	calcularMovimiento();
 
@@ -243,9 +251,9 @@ void Player::cargarContenido()
 
 	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
 
-	p_controller->m_acceleration_walk = 0.8f;
-	p_controller->m_deceleration_walk = 5.f;
-	p_controller->m_maxSpeed_walk = 0.7f;
+	p_controller->m_acceleration_walk = 1.1f;
+	p_controller->m_deceleration_walk = 8.f;
+	p_controller->m_maxSpeed_walk = 1.f;
 
 
 	life_component->resetVida();
@@ -352,7 +360,7 @@ void Player::shoot() {
 
 	if (listaWeapons->valorActual()->canShoot()) {	
 
-		SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
+		
 
 		//Devuelve una entity si le ha dado a alguien
 		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
@@ -507,7 +515,7 @@ void Player::DownWeapon()
 }
 
 void Player::reload() {
-	SoundManager::i().playSound("../media/Reload.mp3", false);
+	
 	listaWeapons->valorActual()->recargar();
 }
 
@@ -516,12 +524,12 @@ void Player::apuntar()
 
 	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
 		if (!apuntando) {
-			SoundManager::i().playSound("../media/Aim.mp3", false);
+			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), false);
 			SceneManager::i().ziZoom(38.0f);
 			apuntando = true;
 		}
 		else {
-			SoundManager::i().playSound("../media/Aim.mp3", false);
+			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), false);
 			SceneManager::i().zoomZout();
 			apuntando = false;
 		}
@@ -632,6 +640,10 @@ void Player::resetAll() {
 	tienePistola = true;
 
 	life_component->resetVida();
+
+	SceneManager::i().zoomZout();
+
+	GraphicEngine::i().getActiveCamera()->restablecerMira();
 
 }
 

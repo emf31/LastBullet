@@ -13,6 +13,8 @@
 #include <BasicSceneNode.h>
 #include <Granada.h>
 
+#include <SoundManager.h>
+
 class Enemy : public Character
 {
 public:
@@ -76,7 +78,7 @@ private:
 	btRigidBody* m_rigidBody;
 	
 
-	
+	ISound* footsteps;
 	
 };
 

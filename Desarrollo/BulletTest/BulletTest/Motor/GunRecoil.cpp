@@ -55,7 +55,7 @@ void GunRecoil::update(bool isShooting)
 
 		}
 		else if (m_recoilTime.getElapsedTime().asSeconds() < tiempo*2) {
-			std::cout << "Te odioooo" << std::endl;
+
 			m_camera.setTarget(xini+(velocidad*(m_recoilTime.getElapsedTime().asSeconds()- tiempo)));
 			
 		}

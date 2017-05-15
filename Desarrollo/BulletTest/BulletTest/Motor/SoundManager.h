@@ -21,8 +21,8 @@ public:
 	
 	void drop();
 	void setVolume(float volume);
-	void playSound(std::string sound, bool loop=false);
-	void playSound(std::string sound,Vec3<float>pos,bool loop=false);
+	ISound* playSound(std::string sound, bool loop=false);
+	ISound* playSound(std::string sound,Vec3<float>pos,bool loop=false);
 	void setListenerPosition(Vec3<float>pos, Vec3<float> dir);
 	void stopAllSounds();
 	void update();

@@ -10,6 +10,7 @@
 #include <GUIManager.h>
 #include <DebugMenuGUI.h>
 
+
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
@@ -32,6 +33,9 @@ void Enemy::inicializar()
 	animation = new Animation();
 	granada = new Granada(this);
 	//m_isDying = false;
+
+	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
+	footsteps->setIsPaused(true);
 	
 }
 
@@ -67,6 +71,13 @@ void Enemy::update(Time elapsedTime)
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
 		isMoving = false;
+
+	if (isMoving) {
+		footsteps->setIsPaused(false);
+	}
+	else if (footsteps != NULL) {
+		footsteps->setIsPaused(true);
+	}
 
 
 	//m_pStateMachine->Update();

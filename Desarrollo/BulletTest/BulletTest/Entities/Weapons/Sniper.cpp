@@ -91,6 +91,9 @@ Character* Sniper::shoot(const Vec3<float>& target)
 	//si impacta con algun personaje devuelve true
 	Character* hitted = nullptr;
 
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shootSniper.mp3", "sounds"), m_ent->getRenderState()->getPosition());
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadRifle.mp3", "sounds"), false);
 
 	//aumentamos en uno el numero de disparos, para reducir la municion
 	disparos++;
@@ -173,4 +176,11 @@ Character* Sniper::shoot(const Vec3<float>& target)
 
 	return hitted;
 
+}
+
+void Sniper::recargar()
+{
+	Weapon::recargar();
+
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadRifle.mp3", "sounds"), false);
 }
