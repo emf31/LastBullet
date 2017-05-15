@@ -42,15 +42,14 @@ public:
 	void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset);
 	void ProcessMouseScroll(GLfloat yoffset);
 
-	glm::vec3 calcularPosicionVista();
+	void calcularPosicionVista();
 
 	Vec3<float> getVectorDireccion() const { return Vec3<float>(direccion.x, direccion.y, direccion.z); }
 
 	void setTarget(const Vec3<float>& target);
 	
 	Vec3<float> getTarget();
-
-	void setRotationDir(const Vec3<float>& dir);
+	void setRotationDir(Vec3<float>& dir);
 
 	void setInputEnable(bool b) { inputEnable = b; }
 
@@ -66,20 +65,26 @@ public:
 		mouseSensitivity = SENSITIVTY;
 	}
 
+
+	//projection
+	void setNearPlane(float near);
+
+	void setFarPlane(float far);
+
+	void setPerspective(float fov, float screenwidth, float screeheight, float nearplane, float farplane);
+
+	glm::mat4 getProjectionMatrix();
+
 private:
 	bool inputEnable;
 
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionTraslacion(TTransform* tras);
 	glm::vec3 getPositionglm();
 	void updateCameraVectors();
 
 
-	TTransform* transRotacion;
-	TTransform* transTraslacion;
-
 	glm::mat4 view;
 	glm::mat4 vista;
+	glm::mat4 projection;
 	glm::vec3 direccion;
 	glm::vec3 derecha;
 	glm::vec3 worldUp;
@@ -90,6 +95,8 @@ private:
 	GLfloat movementSpeed;
 	GLfloat mouseSensitivity;
 	GLfloat zoom;
+	float nearPlane = 0.1f, farPlane = 100.0f;
+
 
 
 

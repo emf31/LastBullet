@@ -23,11 +23,9 @@ public:
 	void setPosition(Vec3<float> pos);
 	void updatePosition(Vec3<float> pos);
 
-	void setOrientation(Vec3<float> rot);
+
 	void setRotationXYZ(Vec3<float> rot);
-	void setRotation(Vec3<float> rot);
-	void setRotationLeftHand(Vec3<float> rot);
-	void setRotationRadians(Vec3<float> rot);
+
 
 	void setScale(Vec3<float> esc);
 	Vec3<float> getRotation();
@@ -57,9 +55,6 @@ private:
 	SceneManager &sm;
 
 
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionEscalado(TTransform* esc);
-	void setTransformacionTraslacion(TTransform* tras);
 
 	bool visible;
 
@@ -78,11 +73,6 @@ private:
 	Time timeFrame;
 	Clock currentTime;
 	void selectCurrentFrame();
-
-
-	TTransform* transRotacion;
-	TTransform* transEscalado;
-	TTransform* transTraslacion;
 
 	float m_r;
 	float m_g;

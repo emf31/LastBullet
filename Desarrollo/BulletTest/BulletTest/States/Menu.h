@@ -18,8 +18,10 @@ public:
 	virtual void Update(Time timeElapsed) override;
 	virtual void Render(float interpolation, Time elapsedTime) override;
 
+
 private:
 
+	
 	float interpolation;
 	MenuGUI menuGUI;
 

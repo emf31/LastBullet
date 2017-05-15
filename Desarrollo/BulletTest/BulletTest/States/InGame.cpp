@@ -8,8 +8,10 @@
 #include <GUIManager.h>
 #include <World.h>
 #include <LogIA.h>
-
+#include <ClippingManager.h>
+#include <SoundManager.h>
 #include <ParticleSystem.h>
+
 InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
 {
 	
@@ -23,7 +25,7 @@ InGame::~InGame()
 
 void InGame::Inicializar()
 {
-
+	SoundManager::i().stopAllSounds();
 	PhysicsEngine::i().inicializar();
 
 
@@ -150,8 +152,20 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
 
 		LogIA::writeLog();
-	} else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
+	}/* else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
 		particleSystem.createExplosion(EntityManager::i().getEntity(PLAYER)->getPosition());
+	}*/
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
+		//GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
+		ClippingManager::i().printZonesVisibility();
+
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {
+		//GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
+		ClippingManager::i().canUpdate = true;
+
+
+
 	}
 	
 	else if (Input::i().leftMouseDown()) {
@@ -183,6 +197,10 @@ void InGame::Update(Time timeElapsed)
 		EntityManager::i().update(timeElapsed);
 	}
 	
+	ClippingManager::i().update();
+
+	EntityManager::i().update(timeElapsed);
+
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
@@ -196,6 +214,8 @@ void InGame::Update(Time timeElapsed)
 	//particleSystem.update(timeElapsed);
 
 	GUIManager::i().updateAllGuis();
+
+	SoundManager::i().update();
 }
 
 void InGame::Render(float interpolation, Time elapsedTime)

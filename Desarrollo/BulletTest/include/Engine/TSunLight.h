@@ -10,8 +10,9 @@ public:
 	~TSunLight();
 
 	void pasarDatosAlShader(Shader *shader, int i=0);
-	void setDirection(Vec3<float> dir);
 	Vec3<float> getDireccion();
+	void setRotationXYZ(Vec3<float> dir);
+	void updateVectorDireccion();
 
 private:
 	Vec3<float> m_direccion;

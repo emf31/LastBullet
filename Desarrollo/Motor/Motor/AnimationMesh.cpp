@@ -19,11 +19,11 @@ AnimationMesh::~AnimationMesh() {
 	meshes.clear();
 }
 
-void AnimationMesh::beginDraw() {
+void AnimationMesh::draw() {
 
 	//Dibujamos los hijos (Si los hay)
-	for (GLuint i = 0; i < this->meshes.size(); i++) {
-		this->meshes[i]->beginDraw();
+	for (std::vector<TMesh*>::iterator it = meshes.begin(); it != meshes.end(); it++) {
+		(*it)->draw();
 	}
 
 }
@@ -69,9 +69,19 @@ void AnimationMesh::processNode(aiMaterial** mat) {
 
 TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Datos básicos de las mallas (vértices, índices y texturas)
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
+
 	std::vector<Texture*> textures;
+	int numIndices = 0;
+
+	for (GLuint i = 0; i < mesh->mNumFaces; i++) {
+		aiFace face = mesh->mFaces[i];
+		// Nos guardamos todos los índices
+		for (GLuint j = 0; j < face.mNumIndices; j++)
+			numIndices++;
+	}
+
+	Vertex *vertices = new Vertex[mesh->mNumVertices];
+	GLuint *indices = new GLuint[numIndices];
 
 	// Recorremos todos los vértices de la malla
 	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -108,23 +118,33 @@ TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 			vec.x = mesh->mTextureCoords[0][i].x;
 			vec.y = mesh->mTextureCoords[0][i].y;
 			vertex.TexCoords = vec;
-		} else {
+		}
+		else {
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 		}
 		//Si no las tiene le ponemos unas por defecto
-		vertices.push_back(vertex);
+		vertices[i] = vertex;
 	}
 	// Recorremos todas las caras de la malla (triángulos) y nos guardamos sus vertex index
+	int cont = 0;
 	for (GLuint i = 0; i < mesh->mNumFaces; i++) {
 		aiFace face = mesh->mFaces[i];
 		// Nos guardamos todos los índices
-		for (GLuint j = 0; j < face.mNumIndices; j++)
-			indices.push_back(face.mIndices[j]);
+		for (GLuint j = 0; j < face.mNumIndices; j++) {
+			indices[cont] = face.mIndices[j];
+			cont++;
+		}
 	}
-
 	// Materiales!
 	if (mesh->mMaterialIndex >= 0) {
-		aiMaterial* material = materialArray[mesh->mMaterialIndex];
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+
+		// Diffuse: texture_diffuseN
+		//vector<Texture*> diffuseMaps;
+		// Specular: texture_specularN
+		//vector<Texture*> specularMaps;
+		// Normal: texture_normalN
+		//vector<Texture*> normalMaps;
 
 		// 1. Diffuse maps
 		this->loadMaterialTextures(textures, material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -143,9 +163,8 @@ TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 		this->loadMaterialTextures(textures, material, aiTextureType_EMISSIVE, "texture_emisivo");
 	}
 
-
 	// Return del mesh preparado
-	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria);
+	return new TMesh(vertices, indices, textures, SceneManager::i().shaderGeometria, mesh->mNumVertices, numIndices);
 }
 
 void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial * mat, aiTextureType type, const std::string& typeName) {
@@ -161,8 +180,5 @@ void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMater
 }
 
 
-void AnimationMesh::endDraw() {
-
-}
 
 

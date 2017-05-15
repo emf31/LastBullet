@@ -15,7 +15,23 @@ using namespace std;
 //#include <SPARK/SPARK.h>
 //#include <SPARK/SPARK_GL.h>
 
+void addChild(TNode* miNodo, TEntity * ent) {
+	TNode* nuevoHijo = ent->getMiNodo();
+	TNode* padre = ent->getMiNodo()->getParentNode();
 
+	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() != miNodo->getMyNodeEntityID()) {
+		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
+		nuevoHijo = nuevoHijo->getParentNode();
+		padre = padre->getParentNode();
+	}
+	padre->removeChild(nuevoHijo);
+	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el madre de miNodo y no directamente miNodo
+	//pues es bien sencillo, simplemente pork estamos en un nodo malla que son a los que se tiene acceso desde el juego
+	//y el padre no puede ser el nodo malla sino la transformacion de la que depende este nodo malla , es decir, el padre del nodo malla. De nada futuro yo ;)
+	nuevoHijo->setParentNode(miNodo->getParentNode());
+	miNodo->getParentNode()->addChild(nuevoHijo);
+
+}
 
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
@@ -35,8 +51,11 @@ int main() {
 	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
 	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
+	TNode* nodo = new TNode(-1, SceneManager::i().getRootNode());
+	addChild(nodo, window);
+	addChild(nodo, window2);
+	nodo->setVisible(false);
 	
-
 
 	//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
@@ -122,14 +141,14 @@ int main() {
 
 
 	//linterna
-	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 0.0f, 0.0f));
+	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 45.0f, 0.0f));
 	flash->setColor(0.0f, 1.0f, 0.0f);
 	//linterna
-	TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
-	flash1->setColor(1.0f, 1.0f, 1.0f);
-	//linterna
-	TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
-	flash2->setColor(0.0f, 0.0f, 1.0f);
+	//TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
+	//flash1->setColor(1.0f, 1.0f, 1.0f);
+	////linterna
+	//TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
+	//flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
 	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
 	flash3->setColor(1.0f, 1.0f, 1.0f);
@@ -253,11 +272,11 @@ int main() {
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
-		p1->setOrientation(vecDir);
+		//p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
 		flash3->setPosition(sm.camaraActiva->getPosition());
-		flash3->setDirection(vecDir);
+		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 
 		//p->setPosition(newPos);
 		/*p1->setRotation(vecDir);

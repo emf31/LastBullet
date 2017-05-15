@@ -404,6 +404,18 @@
     <ClCompile Include="Network\NetworkPrediction.cpp">
       <Filter>Headers\Network</Filter>
     </ClCompile>
+    <ClCompile Include="Otros\PrintableText.cpp">
+      <Filter>Headers\Otros</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\SoundManager.cpp">
+      <Filter>Headers\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\ClippingManager.cpp">
+      <Filter>Headers\Motor</Filter>
+    </ClCompile>
+    <ClCompile Include="Motor\ClippingZone.cpp">
+      <Filter>Headers\Motor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -921,6 +933,18 @@
     </ClInclude>
     <ClInclude Include="Network\NetworkPrediction.h">
       <Filter>Headers\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Otros\PrintableText.h">
+      <Filter>Headers\Otros</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\SoundManager.h">
+      <Filter>Headers\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\ClippingManager.h">
+      <Filter>Headers\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\ClippingZone.h">
+      <Filter>Headers\Motor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

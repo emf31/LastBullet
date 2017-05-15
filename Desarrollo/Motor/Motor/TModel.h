@@ -30,21 +30,13 @@ public:
 	TModel(TMeshGroup* meshGroup);
 	~TModel();
 
-
-	
-
-
-
 	void setPosition(Vec3<float> pos);
 	void updatePosition(Vec3<float> pos);
-
-	void setOrientation(Vec3<float> rot);
 	void setRotationXYZ(Vec3<float> rot);
-	void setRotation(Vec3<float> rot);
-	void setRotationLeftHand(Vec3<float> rot);
-	void setRotationRadians(Vec3<float> rot);
-
 	void setScale(Vec3<float> esc);
+
+	void setRotationMatrix(glm::mat4 matRot);
+
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
@@ -55,10 +47,7 @@ public:
 
 
 
-	void setVisible(bool b) { visible = b; }
-	bool isVisible() const { return visible; }
-
-
+	
 	void setModelColor(float r, float g, float b) {
 		m_r = r;
 		m_g = g;
@@ -71,30 +60,19 @@ public:
 private:
 
 	SceneManager &sm;
-
-
-	void setTransformacionRotacion(TTransform* rot);
-	void setTransformacionEscalado(TTransform* esc);
-	void setTransformacionTraslacion(TTransform* tras);
-
-	bool visible;
-
+	
 	virtual void beginDraw();
-
 	virtual void endDraw();
-
 
 	/*  Model Data  */
 	TMeshGroup* m_meshGroup;
 
-	TTransform* transRotacion;
-	TTransform* transEscalado;
-	TTransform* transTraslacion;
-	
 	float m_r;
 	float m_g;
 	float m_b;
 	
+	//necesitamos mantaner esto porque sino lo hacemos asi tendriamos que hacer los metodos setRotationMatrix, setTraslationMatrix... publicos y si lo hacemos publicos luego desde el juego 
+	//el usuario podria llamarlos y eso es algo que no queremos, es decir, usamos la friendclass para poder hacer bien la interfaz y no darle el control total al usuario.
 	friend class SceneManager;
 };
 

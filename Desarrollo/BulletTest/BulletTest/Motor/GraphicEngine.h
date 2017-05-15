@@ -74,7 +74,16 @@ public:
 	void apuntar();
 	void restablecerMirilla();
 
+	void updateClippingPlanes();
 
+	float planes[6][4] = {
+		{ 0, 0, 0, 0 },
+		{ 0, 0, 0, 0 },
+		{ 0, 0, 0, 0 },
+		{ 0, 0, 0, 0 },
+		{ 0, 0, 0, 0 },
+		{ 0, 0, 0, 0 },
+	};
 
 	EngineDevice& getDevice() { return engine; }
 private:
@@ -102,6 +111,9 @@ private:
 	GraphicEngine();
 
 	AssetsReader reader;
+	
+
+	
 
 };
 

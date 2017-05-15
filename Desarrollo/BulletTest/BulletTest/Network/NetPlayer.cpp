@@ -20,6 +20,7 @@
 #include <Settings.h>
 #include <DebugMenuGUI.h>
 #include <GUIManager.h>
+#include <SoundManager.h>
 
 NetPlayer::NetPlayer() : NetObject(), m_player(nullptr), m_world(World::i())
 {
@@ -65,7 +66,7 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	//NetworkManager::i().createServer();
+	NetworkManager::i().createServer();
 	RakSleep(1000);
 	int a = 1;
 	conectar("127.0.0.1", server_port);
@@ -394,13 +395,6 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			//Esta variable indica que el servidor ha aceptado la conexion
 			connected = true;
 
-<<<<<<< HEAD
-
-=======
-			connectTime = RakNet::GetTimeMS();
-		
->>>>>>> refs/remotes/origin/PrediccionMovimiento
-
 			break;
 		}
 
@@ -529,18 +523,18 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			StateStack::i().GetCurrentState()->Clear();
 			StateStack::i().SetCurrentState(States::ID::Menu);
 			StateStack::i().GetCurrentState()->Inicializar();
-
 			return;
 
 			break;
 		}
 
-		case DISPARAR_BALA:
-		{
-			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 
-			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
-			bala->cargarContenido();
+        case DISPARAR_BALA:
+        {
+            TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
+			SoundManager::i().playSound("../media/shoot.mp3", balaDisparada.position);
+            GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+            bala->cargarContenido();
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
@@ -817,78 +811,5 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 
 	}
 
-<<<<<<< HEAD
-}
-=======
-	/*if (mPacketIdentifier != MOVIMIENTO && mPacketIdentifier != SYNC && mPacketIdentifier != PING)
-		countPacketsIn++;*/
-
-	//std::cout << (unsigned int)mPacketIdentifier << std::endl;
-
-
-
-
-	/*countPacketsTotal = countPacketsIn + countPacketsOut;
-	countMovementPacketsTotal = countMovementPacketsIn + countMovementPacketsOut;
-	duracionFor = timeFor.getElapsedTime().asMilliseconds();
-	//pingMS = pingMS - (elapsedTime.asMilliseconds() - duracionFor);
-	//pingMS = duracionFor;
-	timeFor.restart();*/
-}
-
-void NetPlayer::apagar()
-{
-	if (isConnected()) {
-		//First call shutdown from base class
-		NetObject::apagar();
-
-		//Do what you need here
-		m_servers.clear();
-	}
-	
-}
-
-
-
-void NetPlayer::searchServersOnLAN() {
-	//Creo un RakPeer para lanzar un paquete de b�squeda
-	RakNet::RakPeerInterface *client;
-	client = RakNet::RakPeerInterface::GetInstance();
-
-	RakNet::SocketDescriptor socketDescriptor(65534, 0);
-	socketDescriptor.socketFamily = AF_INET;
-
-	client->Startup(1, &socketDescriptor, 1);
-
-	RakNet::RakNetGUID rakID = client->GetMyGUID();
-
-	//Hacemos ping a bradcast en el puerto en el que sabemos que est� escuchando el server
-	client->Ping("255.255.255.255", 65535, false);
-	std::cout << "Buscando servidores en la red local..." << std::endl;
-	RakSleep(1000);
-	RakNet::Packet *packet;
-	//Limpiamos la lista de servidores primero.
-	m_servers.clear();
-
-	for (packet = client->Receive(); packet; client->DeallocatePacket(packet), packet = client->Receive()) {
-		if (packet == 0) {
-			RakSleep(1000);
-			continue;
-		}
-		if (packet->data[0] == ID_UNCONNECTED_PONG) {
-			RakNet::TimeMS time;
-			RakNet::BitStream bsIn(packet->data, packet->length, false);
-
-			bsIn.IgnoreBytes(1);
-			bsIn.Read(time);
-			//printf("Ping is %i\n", (unsigned int)(RakNet::GetTimeMS() - time));
-			m_servers.push_back(packet->systemAddress.ToString());
-		}
-
-		RakSleep(1000);
-	}
-	//Destruyo el RakPeer. Ya no hace falta
-	RakNet::RakPeerInterface::DestroyInstance(client);
 
 }
->>>>>>> refs/remotes/origin/PrediccionMovimiento

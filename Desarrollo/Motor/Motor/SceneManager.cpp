@@ -10,7 +10,6 @@ void SceneManager::inicializar() {
 
 	//gui.createWidget("AlfiskoSkin/Button", perc, perx, "Test");
 	scene = new TNode(-1);
-	scene->setType(T_RAIZ);
 	m_matrizActual = glm::mat4();
 	//camaraActiva = crearNodoCamara();
 	sunlight = nullptr;
@@ -56,7 +55,7 @@ void SceneManager::draw() {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 			// Update matrices
-			projection = glm::perspective(camaraActiva->zoom, (float)*screenWidth / (float)*screenHeight, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
+			projection = camaraActiva->getProjectionMatrix();
 			view = camaraActiva->GetViewMatrix();
 			//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 			activeCameraPos = camaraActiva->getPosition();
@@ -366,7 +365,6 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 
 	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoMalla->setEntity(model);
-	nuevoNodoMalla->setType(T_MALLA);
 	//nuevoNodoMalla->setModel(model);
 	//nuevoNodoMalla->getEntity()->setModel();
 
@@ -408,7 +406,6 @@ TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)
 
 	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoAnimacion->setEntity(animation);
-	nuevoNodoAnimacion->setType(T_ANIMATION);
 	//nuevoNodoMalla->setModel(model);
 	//nuevoNodoMalla->getEntity()->setModel();
 
@@ -421,7 +418,6 @@ TNode * SceneManager::crearNodoTransformacion(int entityID)
 	//DUDA aqui tendriamos que tener tambien algun identificador en el nodo no? porque yo estoy creando 3 nodos de transformacion pero no se cual es cual.
 	TNode* transNode = new TNode(entityID, scene);
 	TTransform* trans = new TTransform();
-	transNode->setType(T_TRANSFORM);
 	transNode->setEntity(trans);
 
 	return transNode;
@@ -430,7 +426,6 @@ TNode * SceneManager::crearNodoTransformacion(int entityID)
 TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre, int entityID)
 {
 	TNode* transNode = new TNode(entityID, nodoPadre);
-	transNode->setType(T_TRASLACION);
 	TTransform* trans = new TTransform();
 	trans->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	transNode->setEntity(trans);
@@ -440,7 +435,6 @@ TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre, int entityID)
 TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre, int entityID)
 {
 	TNode* transNode = new TNode(entityID, nodoPadre);
-	transNode->setType(T_ROTACION);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
 	return transNode;
@@ -449,7 +443,6 @@ TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre, int entityID)
 TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre, int entityID)
 {
 	TNode* transNode = new TNode(entityID, nodoPadre);
-	transNode->setType(T_ESCALADO);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
 	
@@ -486,7 +479,6 @@ TSunLight * SceneManager::crearNodoSunLight(Vec3<float> direccion)
 
 	//seteamos la entity
 	luzNode->setEntity(luz);
-	luzNode->setType(T_SUNLIGHT);
 
 	//la añadimos al sceneManager
 	setSunLight(luz);
@@ -522,7 +514,6 @@ TPointLight * SceneManager::crearNodoPointLight(Vec3<float> posicion, float radi
 
 	//seteamos la entity
 	luzNode->setEntity(luz);
-	luzNode->setType(T_POINTLIGHT);
 
 	//la añadimos al sceneManager
 	vecPointLight.push_back(luz);
@@ -563,7 +554,6 @@ TFlashLight * SceneManager::crearNodoFlashLight(Vec3<float> posicion, Vec3<float
 
 	//seteamos la entity
 	luzNode->setEntity(luz);
-	luzNode->setType(T_FLASHLIGHT);
 
 
 	//luz->setDirection(direccion);
@@ -605,7 +595,6 @@ TCamera * SceneManager::crearNodoCamara()
 
 	//seteamos la entity
 	cameraNode->setEntity(camara);
-	cameraNode->setType(T_CAMARA);
 
 	//la añadimos al vector de camaras
 	vectorCamaras.push_back(camara);
@@ -614,17 +603,10 @@ TCamera * SceneManager::crearNodoCamara()
 	return camara;
 }
 
-void SceneManager::setNearPlane(float near) {
-	nearPlane = near;
-}
-
-void SceneManager::setFarPlane(float far) {
-	farPlane = far;
-}
 
 
-// RenderQuad() Renders a 1x1 quad in NDC, best used for framebuffer color targets
-// and post-processing effects.
+
+
 
 void SceneManager::RenderQuad()
 {

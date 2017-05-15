@@ -13,6 +13,75 @@ public class Exporter : MonoBehaviour
 
     public string fileName = "";
 
+    public Objeto createObject(GameObject g)
+    {
+        Objeto objeto = new Objeto();
+        objeto.nombre = g.name;
+        objeto.posX = g.transform.position.x;
+        objeto.posY = g.transform.position.y;
+        objeto.posZ = g.transform.position.z;
+
+        objeto.sizeX = g.transform.lossyScale.x;
+        objeto.sizeY = g.transform.lossyScale.y;
+        objeto.sizeZ = g.transform.lossyScale.z;
+
+        objeto.rotX = g.transform.rotation.eulerAngles.x;
+        objeto.rotY = g.transform.rotation.eulerAngles.y;
+        objeto.rotZ = g.transform.rotation.eulerAngles.z;
+
+        objeto.forwardX = g.transform.forward.x;
+        objeto.forwardY = g.transform.forward.y;
+        objeto.forwardZ = g.transform.forward.z;
+
+
+        objeto.tag = g.tag;
+
+        if (g.transform.childCount == 1)
+        {
+            GameObject child = g.transform.GetChild(0).gameObject;
+            if (child.GetComponent<Renderer>().material.mainTexture != null)
+            {
+                //Debug.Log(child.GetComponent<Renderer>().material.mainTexture.name);
+                objeto.textura = child.GetComponent<Renderer>().material.mainTexture.name;
+                //Debug.Log(child.GetComponent<MeshFilter>().name);
+                objeto.mesh = child.GetComponent<MeshFilter>().name;
+            }
+
+        }
+
+
+        multipleTags mt = g.GetComponent<multipleTags>();
+        if (mt != null)
+        {
+            objeto.extraTags = mt.extratags.ToString();
+        }
+        BoxCollider col = g.GetComponentInChildren<BoxCollider>();
+        if (col != null)
+        {
+            objeto.colliderX = col.center.x;
+            objeto.colliderY = col.center.y;
+            objeto.colliderZ = col.center.z;
+
+            objeto.colliderSizeX = col.size.x;
+            objeto.colliderSizeY = col.size.y;
+            objeto.colliderSizeZ = col.size.z;
+        }
+        else
+        {
+            objeto.masa = 0;
+            objeto.colliderX = 0;
+            objeto.colliderY = 0;
+            objeto.colliderZ = 0;
+
+            objeto.colliderSizeX = objeto.sizeX;
+            objeto.colliderSizeY = objeto.sizeY;
+            objeto.colliderSizeZ = objeto.sizeZ;
+        }
+
+        return objeto;
+    }
+
+
     // Use this for initialization
     void Start()
     {
@@ -30,41 +99,18 @@ public class Exporter : MonoBehaviour
                 {
                     if (parent.name.Equals("Script"))
                     {
-                        Objeto objeto = new Objeto();
-                        objeto.nombre = g.name;
-                        objeto.posX = g.transform.position.x;
-                        objeto.posY = g.transform.position.y;
-                        objeto.posZ = g.transform.position.z;
-
-                        objeto.sizeX = g.transform.lossyScale.x;
-                        objeto.sizeY = g.transform.lossyScale.y;
-                        objeto.sizeZ = g.transform.lossyScale.z;
-
-                        objeto.rotX = g.transform.rotation.eulerAngles.x;
-                        objeto.rotY = g.transform.rotation.eulerAngles.y;
-                        objeto.rotZ = g.transform.rotation.eulerAngles.z;
-
-                        objeto.forwardX = g.transform.forward.x;
-                        objeto.forwardY = g.transform.forward.y;
-                        objeto.forwardZ = g.transform.forward.z;
+                        Objeto objeto = createObject(g);
 
 
-                        objeto.tag = g.tag;
-                        if (g.transform.childCount == 1)
+                        if (g.tag == "Zona")
                         {
-                            GameObject child = g.transform.GetChild(0).gameObject;
-                            if (child.GetComponent<Renderer>().material.mainTexture != null)
+                            int total= g.transform.childCount;
+                            for(int i=0;i<total;i++)
                             {
-                                //Debug.Log(child.GetComponent<Renderer>().material.mainTexture.name);
-                                objeto.textura = child.GetComponent<Renderer>().material.mainTexture.name;
-                                //Debug.Log(child.GetComponent<MeshFilter>().name);
-                                objeto.mesh = child.GetComponent<MeshFilter>().name;
+                                GameObject child = g.transform.GetChild(i).gameObject;
+                                objeto.o_children.Add(createObject(child));
                             }
-                                
                         }
-                        
-                        
-                        multipleTags mt = g.GetComponent<multipleTags>();
 
                         if (g.tag == "Grafo")
                         {
@@ -75,6 +121,7 @@ public class Exporter : MonoBehaviour
                                 nodo.posX = waypoint.transform.position.x;
                                 nodo.posY = waypoint.transform.position.y;
                                 nodo.posZ = waypoint.transform.position.z;
+                                Debug.Log(waypoint.name);
                                 foreach (WayPointPercent p in waypoint.outs) {
                                     objeto.hasChild = true;
 
@@ -82,7 +129,7 @@ public class Exporter : MonoBehaviour
 
                                 }
                                 //if(nodo.conexiones.Count>0)
-                                    objeto.children.Add(nodo);
+                                    objeto.n_children.Add(nodo);
 
                             }
                         }
@@ -93,38 +140,7 @@ public class Exporter : MonoBehaviour
                             objeto.color_g = l.color.g;
                             objeto.color_b = l.color.b;
                         }
-                        if (mt != null)
-                        {
-                            objeto.extraTags = mt.extratags.ToString();
-                        }
-
-                        BoxCollider col = g.GetComponentInChildren<BoxCollider>();
-                        if (col != null)
-                        {
-                            objeto.colliderX = col.center.x;
-                            objeto.colliderY = col.center.y;
-                            objeto.colliderZ = col.center.z;
-
-                            objeto.colliderSizeX = col.size.x;
-                            objeto.colliderSizeY = col.size.y;
-                            objeto.colliderSizeZ = col.size.z;
-                        }
-                        else
-                        {
-                            objeto.masa = 0;
-                            objeto.colliderX = 0;
-                            objeto.colliderY = 0;
-                            objeto.colliderZ = 0;
-
-                            objeto.colliderSizeX = objeto.sizeX;
-                            objeto.colliderSizeY = objeto.sizeY;
-                            objeto.colliderSizeZ = objeto.sizeZ;
-                        }
-                        // g.scene.path.ToString();
-
-                        if (g.name.Equals("terminal"))
-                            Debug.Log(AssetDatabase.GetAssetPath(g.gameObject));
-                        //objeto.processChildren();
+                     
                         raiz.addChild(objeto);
                     }
                 }
@@ -149,6 +165,22 @@ public class Exporter : MonoBehaviour
 }
 
 [System.Serializable]
+public class Zona
+{
+    public string nombre;
+    public float posX, posY, posZ;
+    public float sizeX, sizeY, sizeZ;
+
+    public List<Nodo> children;
+    public Zona()
+    {
+        children = new List<Nodo>();
+    }
+
+}
+
+
+
 public class Objeto
 {
     public string nombre;
@@ -171,12 +203,37 @@ public class Objeto
 
 
     [SerializeField]
-    public List<Nodo> children;
+    public List<Objeto> o_children;
+    [SerializeField]
+    public List<Nodo> n_children;
 
     public Objeto()
     {
-        children = new List<Nodo>();
+        n_children = new List<Nodo>();
+        o_children = new List<Objeto>();
     }
+
+    public string toJson()
+    {
+        string s=JsonUtility.ToJson(this);
+        string modify = s.Substring(0,s.Length-1);
+        // =s.Split('}')[0];
+        int count=o_children.Count;
+        int i = 0;
+        modify += ",\"o_children\":[";
+        foreach (Objeto child in o_children)
+        {
+            if (child.tag == "PhysicEntity")
+            {
+                modify += child.toJson();
+                if (i < count - 1)
+                    modify += ",";
+                i++;
+            }  
+        }
+        return modify+ "]}";
+    }
+    
 }
 
 
@@ -215,7 +272,7 @@ public class Raiz
         string json = "[";
         for (int i = 0; i < children.Count; i++)
         {
-            string objeto = JsonUtility.ToJson(children[i]);
+            string objeto = children.ElementAt(i).toJson() ;
             if (i < children.Count - 1)
             {
                 json += objeto + ",";

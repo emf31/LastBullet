@@ -271,6 +271,8 @@
     <ClInclude Include="Motor\BillboardSceneNode.h" />
     <ClInclude Include="Motor\Camera.h" />
     <ClInclude Include="Motor\CameraShake.h" />
+    <ClInclude Include="Motor\ClippingManager.h" />
+    <ClInclude Include="Motor\ClippingZone.h" />
     <ClInclude Include="Motor\Color4f.h" />
     <ClInclude Include="Motor\DebugDraw.h" />
     <ClInclude Include="Motor\GraphicEngine.h" />
@@ -280,6 +282,7 @@
     <ClInclude Include="Motor\RenderState.h" />
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
+    <ClInclude Include="Motor\SoundManager.h" />
     <ClInclude Include="Network\AsyncEnemyFactory.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
@@ -314,6 +317,7 @@
     <ClInclude Include="Otros\LifeComponent.h" />
     <ClInclude Include="Otros\Lista.h" />
     <ClInclude Include="Otros\Nodo.h" />
+    <ClInclude Include="Otros\PrintableText.h" />
     <ClInclude Include="Otros\PriorityQueue.h" />
     <ClInclude Include="Otros\Quaternion.h" />
     <ClInclude Include="Otros\ResourceProvider.h" />
@@ -417,6 +421,8 @@
     <ClCompile Include="Motor\BillboardSceneNode.cpp" />
     <ClCompile Include="Motor\Camera.cpp" />
     <ClCompile Include="Motor\CameraShake.cpp" />
+    <ClCompile Include="Motor\ClippingManager.cpp" />
+    <ClCompile Include="Motor\ClippingZone.cpp" />
     <ClCompile Include="Motor\Color4f.cpp" />
     <ClCompile Include="Motor\GraphicEngine.cpp" />
     <ClCompile Include="Motor\GunRecoil.cpp" />
@@ -425,6 +431,7 @@
     <ClCompile Include="Motor\RenderState.cpp" />
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
+    <ClCompile Include="Motor\SoundManager.cpp" />
     <ClCompile Include="Network\AsyncEnemyFactory.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Network\Lobby2\LibVoice\LibVoice.cpp" />
@@ -457,6 +464,7 @@
     <ClCompile Include="Otros\DebugMarks.cpp" />
     <ClCompile Include="Otros\LifeComponent.cpp" />
     <ClCompile Include="Otros\Lista.cpp" />
+    <ClCompile Include="Otros\PrintableText.cpp" />
     <ClCompile Include="Otros\PriorityQueue.cpp" />
     <ClCompile Include="Otros\ResourceProvider.cpp" />
     <ClCompile Include="Otros\Settings.cpp" />

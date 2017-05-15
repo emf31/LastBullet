@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "../TNode.h"
+/*#include "../TNode.h"
 #include "../SceneManager.h"
 class Billboard {
 public:	
@@ -21,4 +21,4 @@ private:
 	glm::vec4 m_screenspace;
 
 	TNode *m_node;
-};
+};*/

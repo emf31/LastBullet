@@ -4,6 +4,7 @@
 #include <TimePerFrame.h>
 #include <Estructuras.h>
 #include <NetworkManager.h>
+#include <SoundManager.h>
 
 LoadingState::LoadingState()
 {
@@ -15,6 +16,8 @@ LoadingState::~LoadingState()
 
 void LoadingState::Inicializar()
 {
+	SoundManager::i().stopAllSounds();
+	SoundManager::i().playSound("../media/LoadingSong.mp3", true);
 	loadingStateGUI.inicializar();
 	TimePerFrameClass::timePerFrameLoadingState();
 	readAllAssets();
@@ -94,11 +97,11 @@ void LoadingState::Render(float interpolation, Time elapsedTime)
 
 void LoadingState::readAllAssets()
 {
-	/*AssetsReader::read("../media/Personaje", colaAssets);
+	AssetsReader::read("../media/Personaje", colaAssets);
 	AssetsReader::read("../media/Props",colaAssets);
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
-	AssetsReader::read("../media/Granada", colaAssets);*/
+	AssetsReader::read("../media/Granada", colaAssets);
 
 }
 

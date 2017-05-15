@@ -1,1 +1,23 @@
-﻿
+﻿  main.cpp
+  TTransform.cpp
+  TSunLight.cpp
+  TPointLight.cpp
+  TNode.cpp
+  TModel.cpp
+  TMeshGroup.cpp
+  TMesh.cpp
+  TLuz.cpp
+  TFlashLight.cpp
+  TEntity.cpp
+  TCamera.cpp
+  TAnimationGroupMesh.cpp
+  TAnimation.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  Input.cpp
+  EngineDevice.cpp
+  AnimationReader.cpp
+  AnimationMesh.cpp
+  Generando código...
+Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  Motor.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\Motor\DebugStatic\Motor.lib

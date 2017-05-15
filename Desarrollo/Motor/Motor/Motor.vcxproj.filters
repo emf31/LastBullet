@@ -140,9 +140,6 @@
     <ClInclude Include="Texture.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="enum.h">
-      <Filter>Archivos de encabezado\Otros</Filter>
-    </ClInclude>
     <ClInclude Include="TLuz.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

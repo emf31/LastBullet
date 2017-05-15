@@ -30,19 +30,19 @@ struct Vertex {
 	glm::vec3 Bitangent;
 };
 
-class TMesh : public TEntity {
+class TMesh {
 public:
 
 	/*  Mesh Data  */
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
+	Vertex *vertices;
+	GLuint *indices;
 	std::vector<Texture*> textures;
 
-	TMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<Texture*>& textures, Shader *shader);
+	TMesh(Vertex* vertices, GLuint *indices, const std::vector<Texture*>& textures, Shader *shader, int tamVertices, int tamIndices);
 	~TMesh();
 
-	void beginDraw();
-	void endDraw();
+	void draw();
+
 
 
 private:
@@ -50,6 +50,7 @@ private:
 	Shader *shader;
 	GLuint VAO, VBO, EBO;
 	void setupMesh();
+	int vertexCount, indexCount;
 
 };
 
