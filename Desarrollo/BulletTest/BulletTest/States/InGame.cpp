@@ -199,8 +199,6 @@ void InGame::Update(Time timeElapsed)
 	
 	ClippingManager::i().update();
 
-	EntityManager::i().update(timeElapsed);
-
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
