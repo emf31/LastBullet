@@ -43,11 +43,13 @@ public:
 	void inicializarBuffers();
 	void inicializarBuffersBlur();
 	void inicializarBufferSkybox();
+	void inicializarBufferBildboard();
 	void inicializarBuffersLineas();
 	void renderLuces();
 	void renderBlur();
 	void renderBloom();
 	void renderSkybox();
+	void renderBildboard();
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
@@ -100,6 +102,7 @@ public:
 	Shader* shaderLineas;
 	Shader* shaderBlur;
 	Shader* shaderSkybox;
+	Shader* shaderBildboard;
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
@@ -117,6 +120,9 @@ public:
 	GLuint skyboxTexture;
 	std::vector<const GLchar*> faces;
 
+	//bildboard
+	GLuint bildboardVAO, bildboardVBO;
+	GLuint bildboardTexture;
 
 	std::vector<GLfloat> vertices3;
 	std::vector<GLuint> indices;

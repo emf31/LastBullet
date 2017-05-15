@@ -19,11 +19,13 @@ void SceneManager::inicializar() {
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
 	shaderSkybox = ResourceManager::i().getShader("assets/skybox.vs", "assets/skybox.frag");
+	shaderBildboard = ResourceManager::i().getShader("assets/bildboard.vs", "assets/bildboard.frag");
 
 	inicializarBuffers();
 	inicializarBuffersBlur();
 	inicializarBuffersLineas();
 	inicializarBufferSkybox();
+	inicializarBufferBildboard();
 	numLines = 0;
 	drawTarget = false;
 }
@@ -92,6 +94,8 @@ void SceneManager::draw() {
 	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 
 		renderSkybox();
+
+		renderBildboard();
 
 		//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 	
@@ -291,6 +295,45 @@ void SceneManager::inicializarBufferSkybox()
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
+void SceneManager::inicializarBufferBildboard()
+{
+	const GLfloat bildboardVertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		-0.5f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.0f,
+	};
+
+	glGenVertexArrays(1, &bildboardVAO);
+	glGenBuffers(1, &bildboardVBO);
+	glBindVertexArray(bildboardVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, bildboardVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(bildboardVertices), &bildboardVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glBindVertexArray(0);
+
+
+	glGenTextures(1, &bildboardTexture);
+
+	int width, height;
+	unsigned char* image;
+
+	glBindTexture(GL_TEXTURE_2D, bildboardTexture);
+
+	image = SOIL_load_image("assets/muzzle.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+}
+
 
 
 void SceneManager::inicializarBuffersLineas() {
@@ -402,7 +445,7 @@ void SceneManager::renderSkybox()
 	//glDepthMask(GL_FALSE);// Remember to turn depth writing off
 	glDepthFunc(GL_LEQUAL);
 	shaderSkybox->Use();
-	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	// Remove any translation component of the view matrix
+	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	
 	glm::mat4 projec = camaraActiva->getProjectionMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
 	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
@@ -415,6 +458,28 @@ void SceneManager::renderSkybox()
 	glBindVertexArray(0);
 	//glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LESS);
+}
+
+void SceneManager::renderBildboard()
+{
+
+	glEnable(GL_BLEND);
+	
+	shaderBildboard->Use();
+	glm::mat4 viewWithOutTras = camaraActiva->GetViewMatrix();	
+	glm::mat4 projec = camaraActiva->getProjectionMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
+	glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
+	
+
+	glBindVertexArray(bildboardVAO);
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(shaderBildboard->Program, "muzzle"), 0);
+	glBindTexture(GL_TEXTURE_2D, bildboardTexture);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+
+	glDisable(GL_BLEND);
 }
 
 bool SceneManager::removeNode(TNode * node) {
