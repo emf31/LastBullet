@@ -42,4 +42,5 @@ private:
 
 	float explosion(Character* player, const Vec3<float>& posExplosion, float radio);
 
+
 };

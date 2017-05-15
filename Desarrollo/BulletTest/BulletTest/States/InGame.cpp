@@ -38,14 +38,14 @@ void InGame::Inicializar()
 
 	World::i().inicializar();
 
-	/*const std::vector<TPlayer> bots = NetworkManager::i().getBots();
+	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 
 	for (auto it = bots.begin(); it != bots.end(); ++it) {
 		Enemy_Bot *bot = new Enemy_Bot(it->name, RakNet::UNASSIGNED_RAKNET_GUID);
 		bot->m_network->inicializar();
 		bot->inicializar();
 		bot->cargarContenido();
-	}*/
+	}
 
 	
 	

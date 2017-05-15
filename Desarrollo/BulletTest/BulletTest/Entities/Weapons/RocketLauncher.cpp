@@ -88,7 +88,7 @@ bool RocketLauncher::handleTrigger(TriggerRecordStruct * Trigger)
 
 
 
-Entity* RocketLauncher::shoot(const Vec3<float>& target) {
+Character* RocketLauncher::shoot(const Vec3<float>& target) {
 	
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 
@@ -110,7 +110,7 @@ Entity* RocketLauncher::shoot(const Vec3<float>& target) {
 			btVector3 direccion = tg - start;
 			direccion.normalize();
 
-			start += direccion * 3.f;
+			start += direccion * 2.f;
 
 			RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
 			bala->cargarContenido();

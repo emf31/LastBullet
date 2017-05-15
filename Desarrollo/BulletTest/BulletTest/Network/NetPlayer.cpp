@@ -86,8 +86,8 @@ void NetPlayer::crearPartida()
 
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
-
-	TPlayer p;
+	*/
+	/*TPlayer p;
 	p.name = "Nixon";
 
 	m_bots.push_back(p);*/
@@ -372,6 +372,14 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			break;
 		case 22:
 			printf("EL SERVIDOR SE HA CAIDO.\n");
+
+			//Volvemos al menu
+			StateStack::i().GetCurrentState()->Clear();
+			StateStack::i().SetCurrentState(States::ID::Menu);
+			StateStack::i().GetCurrentState()->Inicializar();
+
+			return;
+
 			break;
 		case ID_REMOTE_CONNECTION_LOST:
 			printf("Otro cliente ha perdido la conexion.\n");
@@ -523,18 +531,19 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			StateStack::i().GetCurrentState()->Clear();
 			StateStack::i().SetCurrentState(States::ID::Menu);
 			StateStack::i().GetCurrentState()->Inicializar();
+
 			return;
 
 			break;
 		}
 
 
-        case DISPARAR_BALA:
-        {
-            TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
+		case DISPARAR_BALA:
+		{
+			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 			SoundManager::i().playSound("../media/shoot.mp3", balaDisparada.position);
-            GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
-            bala->cargarContenido();
+			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+			bala->cargarContenido();
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(balaDisparada.guid, mPacketIdentifier);

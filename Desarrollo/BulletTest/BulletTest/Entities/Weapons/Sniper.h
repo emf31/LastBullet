@@ -30,7 +30,7 @@ public:
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
-	virtual Entity* shoot(const Vec3<float>& target);
+	virtual Character* shoot(const Vec3<float>& target);
 
 	virtual void updatePositionAndRotation() override {
 

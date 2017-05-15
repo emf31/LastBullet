@@ -20,6 +20,8 @@ public:
 
 	bool isDying();
 
+	void setIsDying(bool a) { m_isDying = a; }
+
 private:
 	float m_vida;
 	bool m_isDying;

@@ -39,7 +39,7 @@ public:
 
 	virtual void setPosition(const Vec3<float> &pos) override;
 
-	virtual Entity* shoot(const Vec3<float>& target) = 0;
+	virtual Character* shoot(const Vec3<float>& target) = 0;
 
 	virtual bool canShoot();
 

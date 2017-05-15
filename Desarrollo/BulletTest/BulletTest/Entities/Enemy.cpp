@@ -31,7 +31,7 @@ void Enemy::inicializar()
 {
 	animation = new Animation();
 	granada = new Granada(this);
-	m_isDying = false;
+	//m_isDying = false;
 	
 }
 
@@ -159,7 +159,7 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		if (!m_isDying) {
+		if (!isDying()) {
 			
 			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
 
@@ -180,7 +180,11 @@ void Enemy::handleMessage(const Message & message)
 
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 
-		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+		Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+
+		if (p && !isDying()) {
+			p->relojHit.restart();
+		}
 
 		delete message.data;
 
@@ -249,5 +253,5 @@ void Enemy::updateState()
 
 
 bool Enemy::isDying() {
-	return m_isDying;
+	return getLifeComponent()->isDying();
 }

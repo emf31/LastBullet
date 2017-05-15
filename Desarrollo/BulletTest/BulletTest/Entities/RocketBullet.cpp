@@ -4,7 +4,7 @@
 #include <PhysicsEngine.h>
 #include <Util.h>
 #include <NetworkManager.h>
-
+#include <DebugMenuGUI.h>
 
 #include <list>
 
@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(120), m_rotation(rotation), radioExplosion(5), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(10), m_owner(owner)
 {
 
 	m_lifetime = seconds(3);
@@ -68,6 +68,7 @@ void RocketBullet::cargarContenido()
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 	proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
+
 	//Sin respuesta a la colision mejor asi porque es mas optimo
 	m_rigidBody->setCollisionFlags(4);
 }
@@ -85,7 +86,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
-
+		
 
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
@@ -93,7 +94,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 			Character* myentity = *it;
 
-			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion) / 1.5f;
+			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion);
 
 			if (damage > 0) {
 
@@ -154,21 +155,26 @@ float RocketBullet::explosion(Character* player, const Vec3<float>& posExplosion
 {
 	float vidaRestada = 0;
 
-	Vec3<float> vector = posExplosion - player->getRenderPosition();
+	Vec3<float> playerPos = player->getRenderState()->getPosition();
+	playerPos.addY(3.f);
+
+	Vec3<float> vector = posExplosion - playerPos;
 	float distancia = vector.Magnitude();
+
+
 	if (distancia < radio) {
-		if (distancia < radio / 3) {
+		if (distancia < radio / 6) {
 			vidaRestada = 100;
 		}
 		else {
-			vidaRestada = 100 * ((radio - distancia) / ((2 * radio) / 3));
+			vidaRestada = 100 * ((radio - distancia) / ((3 * radio) / 3));
 		}
 
 
-		btVector3 FUERZA(vidaRestada / 3, vidaRestada / 3, vidaRestada / 3);
+		btVector3 FUERZA(vidaRestada / 5, vidaRestada / 5, vidaRestada / 5);
 
 		Vec3<float> posExplosion = cons(m_rigidBody->getCenterOfMassPosition());
-		Vec3<float> posPlayer = player->getRenderPosition();
+		Vec3<float> posPlayer = playerPos;
 
 		Vec3<float> direccion = posPlayer - posExplosion;
 		direccion.normalise();

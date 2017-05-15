@@ -108,6 +108,8 @@ void EntityManager::apagar()
 		i->second = 0;
 	}
 
+	m_entPassive.clear();
+
 }
 
 void EntityManager::registerEntityActive(EntActive * entity)

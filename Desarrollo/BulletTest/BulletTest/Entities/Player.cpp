@@ -348,11 +348,12 @@ void Player::jump() {
 void Player::shoot() {
 
 	isShooting = true;
-	Entity* hitted = nullptr;
+	Character* hitted = nullptr;
 
 	if (listaWeapons->valorActual()->canShoot()) {	
 
 		SoundManager::i().playSound("../media/shoot.mp3", static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->getRenderState()->getPosition());
+
 		//Devuelve una entity si le ha dado a alguien
 		Vec3<float> target = GraphicEngine::i().getActiveCamera()->getTarget();
 		targetToWorld(target);
@@ -364,7 +365,7 @@ void Player::shoot() {
 	}
 	
 
-	if (hitted != nullptr) {
+	if (hitted != nullptr && !hitted->getLifeComponent()->isDying()) {
 		relojHit.restart();
 	}
 

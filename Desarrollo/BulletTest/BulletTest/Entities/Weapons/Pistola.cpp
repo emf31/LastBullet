@@ -177,6 +177,7 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 		estadoWeapon = DESCARGADA;
 	}
 
+
 	return hitted;
 
 }

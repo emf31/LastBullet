@@ -44,6 +44,8 @@ public:
 	void setAvailable(bool a) { available = a; }
 	bool isAvailable() { return available; }
 
+	LifeComponent* getLifeComponent() { return life_component; }
+
 protected:
 
 	LifeComponent* life_component;

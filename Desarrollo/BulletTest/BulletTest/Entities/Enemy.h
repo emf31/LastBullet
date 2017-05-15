@@ -43,7 +43,7 @@ public:
 
 	virtual bool isDying() override;
 
-	void setIsDying(bool die) { m_isDying = die; }
+	void setIsDying(bool die) { getLifeComponent()->setIsDying(die); }
 
 	float getRadio(){
 		return radius;
@@ -66,7 +66,7 @@ private:
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 	bool isMoving;
 
-	bool m_isDying;
+	//bool m_isDying;
 
 	Clock relojMuerte;
 	
