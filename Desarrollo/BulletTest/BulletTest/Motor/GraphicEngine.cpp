@@ -87,7 +87,8 @@ void GraphicEngine::updateDeathCamera()
 	auto found = cameras.find("CameraDeath");
 	if (found != cameras.end()) {
 		Vec3<float> playerPos = getActiveCamera()->getPosition();
-		Vec3<float> cameraPos = Vec3<float>(playerPos.getX() + 2, playerPos.getY() + 2, playerPos.getZ() + 2);
+		Vec3<float> cameraDir = (*found).second->getVectorDirection()*-1;
+		Vec3<float> cameraPos = Vec3<float>(playerPos.getX(), playerPos.getY(), playerPos.getZ()+10);
 		Vec3<float> vector = playerPos - cameraPos;
 		(*found).second->setPosition(cameraPos);
 		//(*found).second->setTarget(playerPos-vector);

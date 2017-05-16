@@ -26,9 +26,13 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 
 	if (m_vida <= 0 && m_isDying == false) {
 
-		GraphicEngine::i().updateDeathCamera();
-		GraphicEngine::i().setActiveCamera("CameraDeath");
-		static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(false);
+		if (m_pOwner->getClassName() == "Player") {
+			GraphicEngine::i().updateDeathCamera();
+			GraphicEngine::i().setActiveCamera("CameraDeath");
+			static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(false);
+			static_cast<Player*>(m_pOwner)->setNodoPersonajeVisibility(true);
+		}
+
 
 
 		m_isDying = true;
@@ -75,8 +79,11 @@ void LifeComponent::update()
 {
 	//Una vez termine la animacion de muerte, volvemos a movernos
 	if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
-		GraphicEngine::i().setActiveCamera("CamaraPlayer");
-		static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(true);
+		if (m_pOwner->getClassName() == "Player") {
+			GraphicEngine::i().setActiveCamera("CamaraPlayer");
+			static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(true);
+			static_cast<Player*>(m_pOwner)->setNodoPersonajeVisibility(false);
+		}
 		m_isDying = false;
 		m_vida = 100;
 
