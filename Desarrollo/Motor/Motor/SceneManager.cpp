@@ -313,25 +313,35 @@ void SceneManager::inicializarBufferBildboard()
 	//glEnableVertexAttribArray(0);
 	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 	//glBindVertexArray(0);
+	billboardFrameName.push_back("assets/muzzle1.png");
+	billboardFrameName.push_back("assets/muzzle2.png");
+	billboardFrameName.push_back("assets/muzzle3.png");
+	billboardFrameName.push_back("assets/muzzle4.png");
+	billboardFrameName.push_back("assets/muzzle5.png");
+	billboardFrameName.push_back("assets/muzzle6.png");
+	billboardFrameName.push_back("assets/muzzle7.png");
+	billboardFrameName.push_back("assets/muzzle8.png");
+	billboardFrameName.push_back("assets/muzzle9.png");
 
-
-	glGenTextures(1, &bildboardTexture);
+	glGenTextures(billboardFrameName.size(), billboardFrameAnimation);
 
 	int width, height;
 	unsigned char* image;
+	for (int i = 0; i < billboardFrameName.size(); i++) {
+		glBindTexture(GL_TEXTURE_2D, billboardFrameAnimation[i]);
 
-	glBindTexture(GL_TEXTURE_2D, bildboardTexture);
+		image = SOIL_load_image(billboardFrameName[i], &width, &height, 0, SOIL_LOAD_RGBA);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+		SOIL_free_image_data(image);
 
-	image = SOIL_load_image("assets/muzzle.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glBindTexture(GL_TEXTURE_2D, 0);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	billboardCurrentTime.restart();
 
 }
 

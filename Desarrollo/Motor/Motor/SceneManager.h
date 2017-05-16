@@ -122,11 +122,17 @@ public:
 	GLuint skyboxTexture;
 	std::vector<const GLchar*> faces;
 
-	bool billboardrendering = false;
+
 
 	//bildboard
 	GLuint bildboardVAO, bildboardVBO;
-	GLuint bildboardTexture;
+	//GLuint bildboardTexture;
+	GLuint billboardFrameAnimation[9];
+	std::vector<const GLchar*> billboardFrameName;
+	bool billboardrendering = false;
+	int frameBillboard = 0;
+	Time billBoardTimeFrame = seconds(0.175f);
+	Clock billboardCurrentTime;
 
 	std::vector<GLfloat> vertices3;
 	std::vector<GLuint> indices;

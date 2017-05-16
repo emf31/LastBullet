@@ -37,7 +37,15 @@ void TMesh::draw() {
 		// Bindeamos la textura
 		if (SceneManager::i().billboardrendering) {
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
+			glBindTexture(GL_TEXTURE_2D, SceneManager::i().billboardFrameAnimation[SceneManager::i().frameBillboard]);
+			
+			if (SceneManager::i().billboardCurrentTime.getElapsedTime().asMilliseconds() > SceneManager::i().billBoardTimeFrame.asMilliseconds()) {
+				SceneManager::i().frameBillboard++;
+				SceneManager::i().billboardCurrentTime.restart();
+			}
+			if (SceneManager::i().frameBillboard >= 9) {
+				SceneManager::i().frameBillboard=0;
+			}
 		}
 		else {
 			glActiveTexture(GL_TEXTURE0 + cont); // Activamos la textura que toca primero

@@ -73,22 +73,23 @@ int main() {
 
 	
 	//animacion
-	int velocidadAnim = 10;
-	std::cout << "Cargando animaciones..." << std::endl;
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
-	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
-	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	pruebaAnim->setAnimation("idle",0,34);
-	pruebaAnim->setAnimation("saltar", 40, 109);
-	pruebaAnim->setAnimation("correr", 110, 190);
-	pruebaAnim->setCurrentAnimation("idle");
+	//int velocidadAnim = 10;
+	//std::cout << "Cargando animaciones..." << std::endl;
+	//TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
+	//pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	//pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+	//pruebaAnim->setAnimation("idle",0,34);
+	//pruebaAnim->setAnimation("saltar", 40, 109);
+	//pruebaAnim->setAnimation("correr", 110, 190);
+	//pruebaAnim->setCurrentAnimation("idle");
 
 	//billboards
 	TModel* bill1 = sm.crearBillBoard();
 	TModel* bill2 = sm.crearBillBoard();
 	bill2->setScale(Vec3<float>(20.2f, 20.02f, 20.02f));
 	bill2->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	bill2->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
 	
 	//pruebaAnim->setFrameTime(seconds(2.0));
 
@@ -229,22 +230,22 @@ int main() {
 			sm.draw_mode = 8;
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
-			pruebaAnim->setCurrentAnimation("saltar");
+			//pruebaAnim->setCurrentAnimation("saltar");
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_C)) {
-			pruebaAnim->setCurrentAnimation("correr");
+			//pruebaAnim->setCurrentAnimation("correr");
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_I)) {
-			pruebaAnim->setCurrentAnimation("idle");
+			//pruebaAnim->setCurrentAnimation("idle");
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_R)) {
-			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+			//velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_L)) {
-			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+			//velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
@@ -257,9 +258,12 @@ int main() {
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
-		//p1->setOrientation(vecDir);
+		p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
+		bill2->setPosition(sm.camaraActiva->getPosition());
+		bill2->updatePosition(newPos*0.5);
+
 		flash3->setPosition(sm.camaraActiva->getPosition());
 		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 
