@@ -1,4 +1,5 @@
 #include "TMesh.h"
+#include "SceneManager.h"
 
 TMesh::TMesh(Vertex* vertices, GLuint *indices, const std::vector<Texture*>& textures, Shader *shader, int tamVertices, int tamIndices) {
 	this->vertices = vertices;
@@ -31,28 +32,37 @@ void TMesh::draw() {
 	int cont = 0;
 
 	for (std::vector<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) {
-		glActiveTexture(GL_TEXTURE0 + cont); // Activamos la textura que toca primero
-										  // + cont para la que toca ahora diffuseI (siendo I el número de la textura difusa)
 
-		std::string name = (*it)->type;
-		// Ponemos en el sampler la textura que toca
-		if (name == "texture_diffuse")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_diffuse"), cont);
-		else if (name == "texture_specular")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_specular"), cont);
-		else if (name == "texture_normal")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), cont);
-		else if (name == "texture_tangent")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_tangent"), cont);
-		else if (name == "texture_bitangent")
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), cont); 
-		else if (name == "texture_emisivo") {
-			glUniform1i(glGetUniformLocation(shader->Program, "material.texture_emisivo"), cont);
-		}
 		
 		// Bindeamos la textura
-		glBindTexture(GL_TEXTURE_2D, (*it)->id);
-		cont++;
+		if (SceneManager::i().billboardrendering) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
+		}
+		else {
+			glActiveTexture(GL_TEXTURE0 + cont); // Activamos la textura que toca primero
+												 // + cont para la que toca ahora diffuseI (siendo I el número de la textura difusa)
+
+			std::string name = (*it)->type;
+			// Ponemos en el sampler la textura que toca
+			if (name == "texture_diffuse")
+				glUniform1i(glGetUniformLocation(shader->Program, "material.texture_diffuse"), cont);
+			else if (name == "texture_specular")
+				glUniform1i(glGetUniformLocation(shader->Program, "material.texture_specular"), cont);
+			else if (name == "texture_normal")
+				glUniform1i(glGetUniformLocation(shader->Program, "material.texture_normal"), cont);
+			else if (name == "texture_tangent")
+				glUniform1i(glGetUniformLocation(shader->Program, "material.texture_tangent"), cont);
+			else if (name == "texture_bitangent")
+				glUniform1i(glGetUniformLocation(shader->Program, "material.texture_bitangent"), cont);
+			else if (name == "texture_emisivo") {
+				glUniform1i(glGetUniformLocation(shader->Program, "material.texture_emisivo"), cont);
+			}
+			glBindTexture(GL_TEXTURE_2D, (*it)->id);
+			cont++;
+		}
+		//glBindTexture(GL_TEXTURE_2D, (*it)->id);
+		
 	}
 
 	// Ponemos el brillo a su valor por defecto (se podría cambiar el valor??)

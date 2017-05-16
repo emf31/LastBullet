@@ -3,20 +3,14 @@ out vec4 FragColor;
 
 in vec2 TexCoords;
 
-struct Material {
-	sampler2D texture_diffuse;
-    sampler2D texture_specular;
-	sampler2D texture_normal;
-    sampler2D texture_tangent;
-    sampler2D texture_bitangent;
-    sampler2D texture_emisivo;
-    vec3 objectColor;
-    float brillo;
-}; 
-
-uniform Material material;
+uniform sampler2D text;
 
 void main()
 {    
-    FragColor = vec4(texture(material.texture_diffuse, TexCoords).rgb,1.0);
+    vec4 color = texture(text, TexCoords);
+    if(color.a<0.1){
+    	discard;
+    } 
+    FragColor = color;
+
 }

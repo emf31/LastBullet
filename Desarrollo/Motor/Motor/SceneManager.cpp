@@ -25,7 +25,7 @@ void SceneManager::inicializar() {
 	inicializarBuffersBlur();
 	inicializarBuffersLineas();
 	inicializarBufferSkybox();
-	//inicializarBufferBildboard();
+	inicializarBufferBildboard();
 	numLines = 0;
 	drawTarget = false;
 }
@@ -298,21 +298,21 @@ void SceneManager::inicializarBufferSkybox()
 
 void SceneManager::inicializarBufferBildboard()
 {
-	const GLfloat bildboardVertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, 0.5f, 0.0f,
-		0.5f, 0.5f, 0.0f,
-	};
+	//const GLfloat bildboardVertices[] = {
+	//	-0.5f, -0.5f, 0.0f,
+	//	0.5f, -0.5f, 0.0f,
+	//	-0.5f, 0.5f, 0.0f,
+	//	0.5f, 0.5f, 0.0f,
+	//};
 
-	glGenVertexArrays(1, &bildboardVAO);
-	glGenBuffers(1, &bildboardVBO);
-	glBindVertexArray(bildboardVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, bildboardVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(bildboardVertices), &bildboardVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glBindVertexArray(0);
+	//glGenVertexArrays(1, &bildboardVAO);
+	//glGenBuffers(1, &bildboardVBO);
+	//glBindVertexArray(bildboardVAO);
+	//glBindBuffer(GL_ARRAY_BUFFER, bildboardVBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(bildboardVertices), &bildboardVertices, GL_STATIC_DRAW);
+	//glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	//glBindVertexArray(0);
 
 
 	glGenTextures(1, &bildboardTexture);
@@ -464,7 +464,7 @@ void SceneManager::renderSkybox()
 void SceneManager::renderBildboard()
 {
 
-	//glEnable(GL_BLEND);
+	glEnable(GL_BLEND);
 	//shaderBildboard->Use();
 	//glm::mat4 viewWithOutTras = camaraActiva->GetViewMatrix();	
 	//glm::mat4 projec = camaraActiva->getProjectionMatrix();
@@ -481,12 +481,14 @@ void SceneManager::renderBildboard()
 
 
 	shaderBildboard->Use();
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
 	billboardrendering = true;
 	for (int i = 0; i < vectorBillboards.size(); i++) {
 		vectorBillboards[i]->beginDraw();
 	}
 
-	//glDisable(GL_BLEND);
+	glDisable(GL_BLEND);
 	billboardrendering = false;
 }
 
