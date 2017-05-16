@@ -130,7 +130,13 @@ void Player::inicializar()
 	tieneSniper = true;
 	bindWeapon();*/
 
-	
+	ResourceProvider& rp = Settings::i().GetResourceProvider();
+	m_nodoPersonaje = GraphicEngine::i().createNode(
+		m_renderState.getPosition(),
+		Vec3<float>(0.075f, 0.075f, 0.075f),
+		"",
+		rp.getFinalFilename("personaje2.obj", "characters"));
+	m_nodoPersonaje->setVisible(false);
 }
 
 void Player::calcularMovimiento() {
@@ -221,6 +227,8 @@ void Player::update(Time elapsedTime)
 	}
 
 	SoundManager::i().setListenerPosition(m_renderState.getPosition(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
+
+	m_nodoPersonaje->setPosition(m_renderState.getPosition());
 
 	updateRelojes();
 

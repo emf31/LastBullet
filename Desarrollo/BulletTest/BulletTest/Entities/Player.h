@@ -68,6 +68,7 @@ public:
 
 	void godMode();
 
+	void setNodoPersonajeVisibility(bool visibility) { m_nodoPersonaje->setVisible(visibility); }
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
@@ -132,7 +133,7 @@ private:
 	RocketLauncher* rocket;
 	Sniper* sniper;
 
-	
+	std::shared_ptr<SceneNode> m_nodoPersonaje;
 
 	//ESTADOS DEL PLAYER
 	enum PlayerState { quieto,andando,corriendo,saltando,saltando2 } m_playerState;
