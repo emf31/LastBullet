@@ -29,7 +29,7 @@ void NetworkPrediction::updateMovement(TMovimiento & mov)
 	startTime = milliseconds(RakNet::GetTimeMS());
 
 	//Calculamos delta time (tiempo que pasa entre 2 movimientos)
-	Time deltaTime = milliseconds(mov.timeStamp - prevTime);
+	deltaTime = milliseconds(mov.timeStamp - prevTime);
 
 	prevTime = mov.timeStamp;
 
@@ -42,13 +42,30 @@ void NetworkPrediction::updateMovement(TMovimiento & mov)
 	}
 
 	//Calcular target time y target position
-	Vec3<float> delta = (newPosition - prevPosition);
+	delta = (newPosition - prevPosition);
 	
 	targetPosition = newPosition + (delta * deltaTime.asSeconds());
 	
 	//TargetTime = tiempo actual + tiempo en moverse de posPrev a PosNew
 	targetTime = milliseconds(RakNet::GetTimeMS()) + deltaTime;
 
+
+}
+
+//Esto se llama cuando hay que calcular una nueva posicion a partir de una ya predecida
+void NetworkPrediction::calculateNextPositionFromPredictedOne() {
+	//Tiempo en el que recibimos paquete
+	startTime = milliseconds(RakNet::GetTimeMS());
+
+	prevTime = RakNet::GetTimeMS() - deltaTime.asMilliseconds();
+
+	prevPosition = newPosition;
+	newPosition = targetPosition;
+
+	targetPosition = newPosition + (delta * deltaTime.asSeconds());
+
+	//TargetTime = tiempo actual + tiempo en moverse de posPrev a PosNew
+	targetTime = milliseconds(RakNet::GetTimeMS()) + deltaTime;
 
 }
 
@@ -61,7 +78,7 @@ void NetworkPrediction::updateState(TMovimiento & mov)
 
 void NetworkPrediction::interpolate()
 {
-	//No hacemos nada 0/0 error
+	//No hacemos nada 0/0 = runtime_error
 	if (targetTime == startTime)
 	{
 		return;
@@ -71,10 +88,10 @@ void NetworkPrediction::interpolate()
 
 	float interpolation = (float)(currentTime.asSeconds() - startTime.asSeconds()) / (float)(targetTime.asSeconds() - startTime.asSeconds());
 
+	//Ya hemos alcanzado la posicion predecida, calcularmos una nueva a partir de la ya predecida
 	if (interpolation >= 1.0f)
-	{
-		m_character->updateEnemigo(targetPosition);
-
+	{	
+		calculateNextPositionFromPredictedOne();
 	}
 	else {
 		Vec3<float> finalPos = Vec3<float>(

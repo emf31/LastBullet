@@ -26,6 +26,8 @@ private:
 	void updateMovement(TMovimiento& mov);
 	void updateState(TMovimiento& mov);
 
+	void calculateNextPositionFromPredictedOne();
+
 	void interpolate();
 
 	Enemy* m_character;
@@ -41,6 +43,9 @@ private:
 	Vec3<float> prevPosition;	//Hace un paquete
 	Vec3<float> newPosition;	//Paquete actual
 	Vec3<float> targetPosition;	//Posicion predecida
+
+	Time deltaTime; //Tiempo entre el paquete actual y el anterior
+	Vec3<float> delta; //Distancia entre el paquete actual y el anterior
 
 	Vec3<float> newRotation;
 
