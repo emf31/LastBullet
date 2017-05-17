@@ -72,11 +72,6 @@ void Player::inicializar()
 	
 	
 
-
-	granada = new Granada(this);
-	granada->inicializar();
-	granada->cargarContenido();
-
 	animation = new Animation;
 
 	/*******************************/
@@ -139,12 +134,7 @@ void Player::inicializar()
 	m_nodoPersonaje->setVisible(false);*/
 
 	//Creas el nodo(grafico)
-	m_nodoPersonaje = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 89);
-	m_nodoPersonaje->setAnimation("muerte", 0, 86);
-	m_nodoPersonaje->setCurrentAnimation("muerte");
-	m_nodoPersonaje->setFrameTime(milliseconds(10));
-	m_nodoPersonaje->setVisible(false);
+
 }
 
 void Player::calcularMovimiento() {
@@ -236,7 +226,7 @@ void Player::update(Time elapsedTime)
 
 	SoundManager::i().setListenerPosition(m_renderState.getPosition(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
 
-	m_nodoPersonaje->setPosition(m_renderState.getPosition());
+	//m_nodoPersonaje->setPosition(m_renderState.getPosition());
 
 	updateRelojes();
 
@@ -309,11 +299,7 @@ void Player::handleMessage(const Message & message)
 				//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 		
 		}
-		else if (message.mensaje == "COLISION_GRANADA") {
-			TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
-			getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
-			relojSangre.restart();
-		}
+
 	}
 }
 
@@ -399,7 +385,7 @@ void Player::shoot() {
 
 void Player::shootGranada() {
 
-	granada->shoot(p_controller->getGhostObject()->getWorldTransform().getOrigin());
+	//granada->shoot(p_controller->getGhostObject()->getWorldTransform().getOrigin());
 
 }
 

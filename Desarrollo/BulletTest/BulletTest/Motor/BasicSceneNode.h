@@ -20,7 +20,7 @@ public:
 
 	virtual void setFrameTime(Time time) override {}
 	virtual void setCurrentAnimation(const std::string& str) override {}
-	virtual void setAnimation(const std::string& str, int desde, int hasta) override{}
+	virtual void setAnimation(const std::string& str, int desde, int hasta, bool loop) override{}
 
 	virtual void setOrientation(Vec3<float>& orientation) override;
 

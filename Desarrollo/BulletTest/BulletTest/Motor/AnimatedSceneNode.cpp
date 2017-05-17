@@ -113,9 +113,9 @@ void AnimatedSceneNode::setCurrentAnimation(const std::string & str)
 	m_node->setCurrentAnimation(str);
 }
 
-void AnimatedSceneNode::setAnimation(const std::string & str, int desde, int hasta)
+void AnimatedSceneNode::setAnimation(const std::string & str, int desde, int hasta, bool loop)
 {
-	m_node->setAnimation(str, desde, hasta);
+	m_node->setAnimation(str, desde, hasta, loop);
 }
 
 void AnimatedSceneNode::setColor(const Vec3<float> color)

@@ -2,6 +2,7 @@
 
 #include "AnimationCharacter.h"
 
+
 class Run :
 	public AnimationCharacter
 {

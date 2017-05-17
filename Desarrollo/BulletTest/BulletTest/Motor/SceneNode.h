@@ -37,7 +37,7 @@ public:
 
 	virtual void setFrameTime(Time time) = 0;
 	virtual void setCurrentAnimation(const std::string& str) = 0;
-	virtual void setAnimation(const std::string& str, int desde, int hasta) = 0;
+	virtual void setAnimation(const std::string& str, int desde, int hasta, bool loop) = 0;
 
 	
 	virtual void setColor(const Vec3<float> color) = 0;

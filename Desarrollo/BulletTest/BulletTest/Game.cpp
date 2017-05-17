@@ -129,9 +129,10 @@ void Game::inicializarRutas() {
 	//We get the resource provider
 	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
 
-	resourceProvider.setResourceGroupDirectory("characters", "../media/Personaje");
+	resourceProvider.setResourceGroupDirectory("characters", "../media/personaje1");
 	resourceProvider.setResourceGroupDirectory("weapons", "../media/Weapons");
 	resourceProvider.setResourceGroupDirectory("sounds", "../media/Sounds");
+	resourceProvider.setResourceGroupDirectory("bullets", "../media/Bullets");
 }
 
 void Game::inicializar()

@@ -4,6 +4,13 @@
 #include "AnimationReader.h"
 #include "Clock.hpp"
 
+struct CurrentAnim {
+	std::vector<AnimationMesh*> animacion;
+	bool paused;
+	bool finished;
+	bool loop;
+};
+
 
 class TAnimation : public TEntity {
 
@@ -13,15 +20,22 @@ public:
 	TAnimation(TAnimationGroupMesh* meshGroup);
 	~TAnimation();
 
+	
 
 
-
-	bool setAnimation(const std::string& animName, int desde, int hasta);
+	bool setAnimation(const std::string& animName, int desde, int hasta, bool loop);
 	void setCurrentAnimation(const std::string& animName);
 	void setFrameTime(Time time);
 
 	void setPosition(Vec3<float> pos);
 	void updatePosition(Vec3<float> pos);
+
+	void setPaused(bool a);
+	void setLooped(bool a) { currentAnimation->loop = a; }
+	void restartAnimation();
+	bool isFinished() const { return currentAnimation->finished; }
+	bool isPaused() const { return currentAnimation->paused; }
+	bool isLooped() const { return currentAnimation->loop; }
 
 
 	void setRotationXYZ(Vec3<float> rot);
@@ -65,9 +79,12 @@ private:
 	TAnimationGroupMesh* meshes;
 
 	//std::vector<TMeshGroup*> vectorModelos;
-	std::vector<AnimationMesh*> currentAnimation;
+	CurrentAnim* currentAnimation;
 
-	std::unordered_map<std::string, std::vector<AnimationMesh*>> animMap;
+	std::vector<bool> whoIsLoop;
+
+	std::unordered_map<std::string, CurrentAnim*> animMap;
+
 	int numAnims;
 	int currentFrame;
 	Time timeFrame;

@@ -122,9 +122,6 @@ private:
 
 	Animation* animation;
 
-	//EQUIPO
-	Granada* granada;
-
 	//LISTA DE ARMAS
 	Lista* listaWeapons;
 

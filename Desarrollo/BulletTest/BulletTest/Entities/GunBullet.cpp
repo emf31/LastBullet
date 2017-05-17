@@ -39,7 +39,8 @@ void GunBullet::handleInput()
 
 void GunBullet::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/bullet.obj");
+	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.05f, 0.05f, 0.05f), "", resourceProvider.getFinalFilename("bullet.obj", "bullets"));
 	m_renderState.setPosition(m_position);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);

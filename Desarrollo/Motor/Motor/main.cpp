@@ -98,9 +98,9 @@ int main() {
 	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
 	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
 	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	pruebaAnim->setAnimation("idle",0,34);
-	pruebaAnim->setAnimation("saltar", 40, 109);
-	pruebaAnim->setAnimation("correr", 110, 190);
+	pruebaAnim->setAnimation("idle",0,34, true);
+	pruebaAnim->setAnimation("saltar", 40, 109, false);
+	pruebaAnim->setAnimation("correr", 110, 190, true);
 	pruebaAnim->setCurrentAnimation("idle");
 
 

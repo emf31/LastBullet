@@ -5,6 +5,7 @@
 #include <Estructuras.h>
 #include <NetworkManager.h>
 #include <SoundManager.h>
+#include <Settings.h>
 
 LoadingState::LoadingState()
 {
@@ -97,12 +98,15 @@ void LoadingState::Render(float interpolation, Time elapsedTime)
 
 void LoadingState::readAllAssets()
 {
-	AssetsReader::read("../media/Personaje", colaAssets);
+	/*AssetsReader::read("../media/Personaje", colaAssets);
 	AssetsReader::read("../media/Props",colaAssets);
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
-	AssetsReader::read("../media/Granada", colaAssets);
-
+	AssetsReader::read("../media/Granada", colaAssets);*/
+	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
+	
+	AssetsReader::read(resourceProvider.getResourceGroupDirectory("weapons"), colaAssets);
+	AssetsReader::read(resourceProvider.getResourceGroupDirectory("bullets"), colaAssets);
 }
 
 

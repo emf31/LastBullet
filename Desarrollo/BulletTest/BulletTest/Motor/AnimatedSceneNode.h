@@ -30,7 +30,7 @@ public:
 
 	virtual void setFrameTime(Time time) override;
 	virtual void setCurrentAnimation(const std::string& str) override;
-	virtual void setAnimation(const std::string& str, int desde, int hasta) override;
+	virtual void setAnimation(const std::string& str, int desde, int hasta, bool loop) override;
 
 	//TModel* getNodo();
 	virtual void setColor(const Vec3<float> color) override;

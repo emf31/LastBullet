@@ -31,15 +31,14 @@ Enemy::~Enemy()
 
 void Enemy::inicializar()
 {
-	animation = new Animation();
-	granada = new Granada(this);
-	//m_isDying = false;
 
 	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
 	footsteps->setIsPaused(true);
 
+	animationMachine = new AnimationMachine(this);
+
 	//Start runing
-	animationMachine->ChangeState(&Death::i());
+	animationMachine->SetCurrentAnimation(&Run::i());
 	
 }
 
@@ -52,14 +51,6 @@ void Enemy::update(Time elapsedTime)
 	}
 	else {
 		nPrediction.interpolateWithoutPrediction();
-	}
-
-	if (life_component->isDying()) {
-		m_nodoPersonaje->setVisible(true);
-	}
-	else {
-		m_nodoPersonaje->setVisible(false);
-		
 	}
 
 	updateState();
@@ -97,16 +88,14 @@ void Enemy::cargarContenido()
 	ResourceProvider& rp = Settings::i().GetResourceProvider();
 
 	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(
-		Vec3<float>(0, 100, 0),
-		Vec3<float>(0.075f, 0.075f, 0.075f),
-		"",
-		rp.getFinalFilename("personaje2.obj", "characters"));
-
-
-	granada->inicializar();
-	granada->cargarContenido();
-
+	m_nodo = GraphicEngine::i().createAnimatedNode(
+		rp.getResourceGroupDirectory("characters"), 70
+		);
+	m_nodo->setAnimation("correr", 0, 16, true);
+	m_nodo->setAnimation("muerte", 17, 69, false);
+	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setFrameTime(milliseconds(25));
+	m_nodo->setScale(Vec3<float>(0.04f, 0.04f, 0.04f));
 
 	radius = 0.5f;
 	height = 3.f;
@@ -119,12 +108,6 @@ void Enemy::cargarContenido()
 	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
 	proxy->m_collisionFilterMask = col::enemyCollidesWith;
 
-	m_nodoPersonaje = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 89);
-	m_nodoPersonaje->setAnimation("muerte", 0, 86);
-	m_nodoPersonaje->setCurrentAnimation("muerte");
-	m_nodoPersonaje->setFrameTime(milliseconds(10));
-	m_nodoPersonaje->setVisible(false);
 
 }
 
@@ -204,7 +187,7 @@ bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 
 void Enemy::lanzarGranada(TGranada g)
 {
-	granada->serverShoot(g);
+	//granada->serverShoot(g);
 }
 
 void Enemy::setVisibilidadBilboardSync()

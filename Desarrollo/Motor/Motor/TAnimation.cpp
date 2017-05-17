@@ -13,25 +13,45 @@ TAnimation::TAnimation(TAnimationGroupMesh* meshGroup) : sm(SceneManager::i()), 
 
 TAnimation::~TAnimation()
 {
+	for (auto it = animMap.begin(); it != animMap.end(); it++) {
+		delete it->second;
+		it->second = nullptr;
+	}
+
+	animMap.clear();
 }
 
-bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta)
+void TAnimation::restartAnimation()
+{
+	currentFrame = 0;
+	currentTime.restart();
+	currentAnimation->finished = false;
+	currentAnimation->paused = false;
+}
+
+bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta, bool loop)
 {
 	int tam = hasta - desde;
 	if (tam < 0 || ((size_t)(tam + numAnims) >= meshes->vectorModelos.size())) {
 		std::cout << "error, estas intentando poner mas animaciones que obj" << std::endl;
 		return false;
 	}
-	std::vector<AnimationMesh*> animacion;
+
+	CurrentAnim* curr = new CurrentAnim();
+
+	curr->loop = loop;
+	curr->finished = false;
+	curr->paused = false;
+
 	for (int i = desde; i <= hasta; i++) {
-		animacion.push_back(meshes->vectorModelos[i]);
+		curr->animacion.push_back(meshes->vectorModelos[i]);
 	}
 
 	//al salir del moto animacion se borra pork es local pero su contenido no ya que son punteros a TMeshGroup
 	//la duda es si animMAp se iguala a animacion cuando se borre animacion que va a pasar? (creo que esta bien pork se hace una copia del vector pero no del contenido)
-	animMap[animName] = animacion;
+	animMap[animName] = curr;
 	
-	numAnims += animacion.size();
+	numAnims += curr->animacion.size();
 
 	return true;
 }
@@ -42,21 +62,31 @@ void TAnimation::setCurrentAnimation(const std::string & animName)
 	currentAnimation = animMap[animName];
 	currentFrame = 0;
 	currentTime.restart();
+	currentAnimation->finished = false;
 }
 
 
 
 void TAnimation::selectCurrentFrame()
 {	
+	if (!currentAnimation->finished && !currentAnimation->paused) {
+		if (currentTime.getElapsedTime().asMilliseconds() > timeFrame.asMilliseconds()) {
 
-	if (currentTime.getElapsedTime().asMilliseconds() > timeFrame.asMilliseconds()) {
-		
-		currentFrame++;
-		currentTime.restart();
-		if ((size_t)currentFrame >= currentAnimation.size()) {
-			currentFrame = 0;
+			currentFrame++;
+			currentTime.restart();
+
+			if ((size_t)currentFrame >= currentAnimation->animacion.size()) {
+				if (currentAnimation->loop) {
+					currentFrame = 0;
+				}
+				else {
+					currentAnimation->finished = true;
+					currentFrame--;
+				}
+			}
 		}
 	}
+	
 
 }
 
@@ -83,7 +113,7 @@ void TAnimation::beginDraw() {
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo
-		currentAnimation[currentFrame]->draw();
+		currentAnimation->animacion[currentFrame]->draw();
 		selectCurrentFrame();
 
 	}
@@ -104,6 +134,11 @@ void TAnimation::setPosition(Vec3<float> pos) {
 void TAnimation::updatePosition(Vec3<float> pos)
 {
 	transTraslacion->updatePosition(pos);
+}
+
+void TAnimation::setPaused(bool a)
+{
+	currentAnimation->paused = a;
 }
 
 void TAnimation::setRotationXYZ(Vec3<float> rot) {

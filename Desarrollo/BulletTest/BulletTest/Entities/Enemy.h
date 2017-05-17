@@ -64,7 +64,6 @@ private:
 	float height;
 	float mass;
 	Animation* animation;
-	Granada* granada;
 
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 	bool isMoving;
