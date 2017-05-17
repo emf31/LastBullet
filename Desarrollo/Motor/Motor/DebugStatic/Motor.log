@@ -1,5 +1,19 @@
-﻿  main.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(258): warning C4305: '-=': truncamiento de 'double' a 'float'
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(262): warning C4305: '+=': truncamiento de 'double' a 'float'
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)
+﻿  TSunLight.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  main.cpp
+  TTransform.cpp
+  TNode.cpp
+  TModel.cpp
+  TMeshGroup.cpp
+  TLuz.cpp
+  TCamera.cpp
+  TAnimationGroupMesh.cpp
+  TAnimation.cpp
+  SceneManager.cpp
+  Input.cpp
+  EngineDevice.cpp
+  AnimationMesh.cpp
+Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib

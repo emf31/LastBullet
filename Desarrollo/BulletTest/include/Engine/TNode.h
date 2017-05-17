@@ -29,6 +29,7 @@ public:
 	virtual void endDraw();
 	*/
 	void draw();
+	void draw2();
 	TEntity* getEntity();
 	void setEntity(TEntity* entidad);
 	int getMyNodeEntityID();

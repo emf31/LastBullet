@@ -26,6 +26,7 @@ class TCamera : public TEntity {
 public:
 	~TCamera();
 	virtual void beginDraw();
+	virtual void beginDraw2();
 	virtual void endDraw();
 
 	void setPosition(Vec3<float> pos);

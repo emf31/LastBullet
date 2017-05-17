@@ -151,7 +151,7 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F9)) {
 
-		SceneManager::i().draw_mode = 8;
+		SceneManager::i().draw_mode = 9;
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
 

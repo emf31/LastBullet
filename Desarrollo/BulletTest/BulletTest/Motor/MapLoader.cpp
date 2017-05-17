@@ -62,6 +62,7 @@ void MapLoader::readMap(const std::string & name)
 			UnityCoordsToOpenGL(pos, rot, es);
 
 			nameMesh = "../media/Props/" + nameMesh+ ".obj";
+
 			std::string mesh = nameMesh.c_str();
 
 

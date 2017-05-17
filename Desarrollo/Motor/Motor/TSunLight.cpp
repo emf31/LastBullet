@@ -64,14 +64,4 @@ glm::mat4 TSunLight::getLightSpaceMatrix()
 	return lightSpaceMatrix;
 }
 
-void TSunLight::calcularMatrices()
-{
-	GLfloat z = 45.0f;
-	//lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -1000.0f, 1000.0f);
-	lightProjection = glm::perspective(z, (float)1280 / (float)720, 1.0f, 1000.0f);
-	lightView = glm::lookAt(glm::vec3(-30.0,15.f,-5.f), glm::vec3(0.0,0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-	//lightView = lightView * glm::inverse(SceneManager::i().getViewMatrix());
-	//glm::inverse(view);
-	//glm::mat4 depthModelMatrix = glm::mat4(1.0);
-	lightSpaceMatrix = lightProjection * lightView;
-}
+

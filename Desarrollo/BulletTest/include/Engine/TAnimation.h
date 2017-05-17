@@ -59,6 +59,7 @@ private:
 	bool visible;
 
 	virtual void beginDraw();
+	virtual void beginDraw2();
 
 	virtual void endDraw();
 
