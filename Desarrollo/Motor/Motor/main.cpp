@@ -68,8 +68,12 @@ int main() {
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(6.0f, 0.0f, -3.0f));
+	l1->setPosition(Vec3<float>(-7.0f, 4.0f, -3.0f));
 	//l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+
+	TModel* l2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	l2->setPosition(Vec3<float>(-10.0f, 5.0f, 8.0f));
 
 	
 	//animacion
