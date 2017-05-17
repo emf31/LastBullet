@@ -27,6 +27,7 @@ public:
 	Character* GetTarget()const { return m_pCurrentTarget; }
 
 	void       ClearTarget() { m_pCurrentTarget = 0; }
+
 private:
 	
 	Enemy_Bot* m_pOwner;

@@ -15,7 +15,6 @@
 #include "MachineState.h"
 
 
-
 class PathPlanner;
 class PathFollow;
 
@@ -109,6 +108,7 @@ public:
 
 	virtual std::string getStateActual() override;
 
+	void calcularCiclosLOD();
 
 private:
 
@@ -126,6 +126,7 @@ private:
 
 	int ciclo = 0;
 	int valorCiclos = 1;//CAMBIALO A 25 TODO
+
 
 	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 
@@ -149,6 +150,7 @@ private:
 	Animation animation;
 
 	KinematicCharacterController* p_controller;
+
 
 	//LifeComponent life_component;
 

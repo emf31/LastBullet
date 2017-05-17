@@ -8,6 +8,7 @@
 #include <Color4f.h>
 #include <Engine/TEntity.h>
 
+#include <Time.hpp>
 
 class SceneNode
 {
@@ -34,6 +35,9 @@ public:
 	virtual Vec3<float> getRotation() = 0;
 	virtual Vec3<float> getScale() = 0;
 
+	virtual void setFrameTime(Time time) = 0;
+	virtual void setCurrentAnimation(const std::string& str) = 0;
+	virtual void setAnimation(const std::string& str, int desde, int hasta) = 0;
 
 	
 	virtual void setColor(const Vec3<float> color) = 0;

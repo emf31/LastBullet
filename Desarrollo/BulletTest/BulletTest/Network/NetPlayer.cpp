@@ -75,6 +75,11 @@ void NetPlayer::crearPartida()
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
 
+	
+	/*TPlayer p;
+	p.name = "Nixon";
+	m_bots.push_back(p);*/
+	
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
 	/*TGameInfo gameinfo;
 	gameinfo.creador = getMyGUID();
@@ -86,9 +91,16 @@ void NetPlayer::crearPartida()
 
 	dispatchMessage(gameinfo, CREAR_PARTIDA);
 	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
+<<<<<<< HEAD
 	*/
 	/*TPlayer p;
 	p.name = "Nixon";
+=======
+
+
+	//TPlayer p2;
+	//p2.name = "Kennedy";
+>>>>>>> refs/remotes/origin/LoD
 
 	m_bots.push_back(p);*/
 	//m_bots.push_back(p2);

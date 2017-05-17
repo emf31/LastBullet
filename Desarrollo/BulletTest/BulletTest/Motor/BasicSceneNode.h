@@ -18,6 +18,10 @@ public:
 	virtual void setScale(Vec3<float>& scale) override;
 	virtual void setRotationXYZ(Vec3<float>& rot) override;
 
+	virtual void setFrameTime(Time time) override {}
+	virtual void setCurrentAnimation(const std::string& str) override {}
+	virtual void setAnimation(const std::string& str, int desde, int hasta) override{}
+
 	virtual void setOrientation(Vec3<float>& orientation) override;
 
 	virtual void updatePosition(Vec3<float> pos) override { m_node->updatePosition(pos); }

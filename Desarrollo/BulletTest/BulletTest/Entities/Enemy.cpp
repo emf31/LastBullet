@@ -9,8 +9,9 @@
 #include <Settings.h>
 #include <GUIManager.h>
 #include <DebugMenuGUI.h>
-
-
+#include <Run.h>
+#include <Death.h>
+#include <ResourceProvider.h>
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
@@ -36,12 +37,15 @@ void Enemy::inicializar()
 
 	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
 	footsteps->setIsPaused(true);
+
+	//Start runing
+	animationMachine->ChangeState(&Death::i());
 	
 }
 
 void Enemy::update(Time elapsedTime)
 {
-	//desencolaMovimiento();
+	animationMachine->Update();
 
 	if (NetworkManager::i().isMovementPrediction()) {
 		nPrediction.interpolateWithPrediction();
@@ -50,20 +54,16 @@ void Enemy::update(Time elapsedTime)
 		nPrediction.interpolateWithoutPrediction();
 	}
 
-
+	if (life_component->isDying()) {
+		m_nodoPersonaje->setVisible(true);
+	}
+	else {
+		m_nodoPersonaje->setVisible(false);
+		
+	}
 
 	updateState();
-	//updateAnimation();
 
-	/*//si estas 5 segundo sin recibir paquetes de sincronizacion se pone en rojo
-	if (lastSyncPacket.getElapsedTime().asSeconds() >= 5) {
-		m_nodo->setTexture("../media/body01red.png", 1);
-	}
-	//si el verde supera los 2 segundos se reestablece la skin original
-	if (billboardTime.getElapsedTime().asSeconds() >= 2) {
-		m_nodo->setTexture("../media/body01.png", 1);
-		billboardTime.restart();
-	}*/
 
 	isMoving = true;
 
@@ -95,32 +95,18 @@ void Enemy::handleInput()
 void Enemy::cargarContenido()
 {
 	ResourceProvider& rp = Settings::i().GetResourceProvider();
-	
+
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createNode(
-		Vec3<float>(0, 100, 0), 
-		Vec3<float>(0.075f, 0.075f, 0.075f), 
-		"", 
+		Vec3<float>(0, 100, 0),
+		Vec3<float>(0.075f, 0.075f, 0.075f),
+		"",
 		rp.getFinalFilename("personaje2.obj", "characters"));
-
-
-	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(100, 10), Vec3<float>(0, 30, 0), Color4f(255,255,255,0));
-	
-
-	animation->addAnimation("Default", 0, 0);
-	animation->addAnimation("Run_Forwards", 1, 69);
-	animation->addAnimation("Run_backwards", 70, 138);
-	animation->addAnimation("Walk", 139, 183);
-	animation->addAnimation("Jump", 184, 219);
-	animation->addAnimation("Jump2", 184, 219);
-	animation->addAnimation("Idle", 220, 472);
-	animation->addAnimation("AimRunning", 473, 524);
 
 
 	granada->inicializar();
 	granada->cargarContenido();
 
-	m_animState = quieto;
 
 	radius = 0.5f;
 	height = 3.f;
@@ -132,6 +118,13 @@ void Enemy::cargarContenido()
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Enemy;
 	proxy->m_collisionFilterMask = col::enemyCollidesWith;
+
+	m_nodoPersonaje = GraphicEngine::i().createAnimatedNode(
+		"../media/personaje1", 89);
+	m_nodoPersonaje->setAnimation("muerte", 0, 86);
+	m_nodoPersonaje->setCurrentAnimation("muerte");
+	m_nodoPersonaje->setFrameTime(milliseconds(10));
+	m_nodoPersonaje->setVisible(false);
 
 }
 

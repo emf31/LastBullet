@@ -119,6 +119,29 @@ std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPo
 	return sharedptr;
 }
 
+std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const std::string & directory, int numFrames)
+{
+	TAnimation* node;
+	node = SceneManager::i().crearNodoAnimacion(ResourceManager::i().getAnimationMesh(directory, numFrames));
+
+	if (!node) {
+		throw std::runtime_error("No se ha encontrado la animacion: " + std::string(directory.c_str()));
+	}
+
+
+	//node->setScale(Vec3<float>(TScale.getX(), TScale.getY(), TScale.getZ()));
+	//node->setPosition(Vec3<float>(TPosition.getX(), TPosition.getY(), TPosition.getZ()));
+
+
+	std::shared_ptr<AnimatedSceneNode> sharedptr(new AnimatedSceneNode(node));
+	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
+
+	//Le pasamos irrDriver para que se encargue el de asignar la textura
+	return sharedptr;
+}
+
+
+
 /*std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const io::path & texture, const io::path & mesh)
 {
 	IAnimatedMeshSceneNode *Node;

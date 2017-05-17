@@ -58,6 +58,7 @@ public:
 
 private:
 
+	std::shared_ptr<SceneNode> m_nodoPersonaje;
 
 	float radius;
 	float height;

@@ -416,6 +416,19 @@
     <ClCompile Include="Motor\ClippingZone.cpp">
       <Filter>Headers\Motor</Filter>
     </ClCompile>
+    <ClCompile Include="RegulatorIA.cpp" />
+    <ClCompile Include="Animation\AnimationCharacter.cpp">
+      <Filter>Headers\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\AnimationMachine.cpp">
+      <Filter>Headers\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Death.cpp">
+      <Filter>Headers\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Run.cpp">
+      <Filter>Headers\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -946,6 +959,19 @@
     <ClInclude Include="Motor\ClippingZone.h">
       <Filter>Headers\Motor</Filter>
     </ClInclude>
+    <ClInclude Include="IA\RegulatorIA.h" />
+    <ClInclude Include="Animation\AnimationCharacter.h">
+      <Filter>Headers\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\AnimationMachine.h">
+      <Filter>Headers\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Death.h">
+      <Filter>Headers\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Run.h">
+      <Filter>Headers\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -1148,6 +1174,9 @@
     </Filter>
     <Filter Include="Headers\Network\Lobby2\Rooms">
       <UniqueIdentifier>{38b262ec-fef1-4146-93d1-0720673df850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Animation">
+      <UniqueIdentifier>{11c07210-e9bf-4930-b9aa-521444a5f6f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

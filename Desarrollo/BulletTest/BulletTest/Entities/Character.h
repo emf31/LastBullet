@@ -7,7 +7,8 @@
 
 #include <EntActive.h>
 #include <LifeComponent.h>
-
+#include <AnimationMachine.h>
+#include <Engine/TAnimation.h>
 
 class Character : public EntActive
 {
@@ -45,12 +46,21 @@ public:
 	bool isAvailable() { return available; }
 
 	LifeComponent* getLifeComponent() { return life_component; }
+	AnimationMachine* getAnimationMachine() { return animationMachine; }
+	void setLoD(bool a) { calcularLOD = a; };
+	bool getLOD() { return calcularLOD; }
+
 
 protected:
 
 	LifeComponent* life_component;
-
+	AnimationMachine* animationMachine;
 	//Say if this player is ready to play
 	bool available;
+
+	bool calcularLOD = true;
+
+	TAnimation* pruebaAnim;
+
 };
 

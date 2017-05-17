@@ -562,12 +562,14 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotB" >
                 <Property name="ID" value="7" />
-                <Property name="Area" value="{{0,25},{0,381},{0,261},{0,413}}" />
+                <Property name="Area" value="{{0,24},{0,367},{0,260},{0,399}}" />
                 <Property name="Text" value="Bot B" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="ButtonBotA" >
                 <Property name="ID" value="6" />
+
                 <Property name="Area" value="{{0.355366,-76},{0.869656,-207},{0.355366,160},{0.869656,-175}}" />
+
                 <Property name="Text" value="Bot A" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button4" >
@@ -577,12 +579,12 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button5" >
                 <Property name="ID" value="8" />
-                <Property name="Area" value="{{0,24},{0,432},{0,260},{0,464}}" />
+                <Property name="Area" value="{{0,24},{0,406},{0,260},{0,438}}" />
                 <Property name="Text" value="Bot C" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button6" >
                 <Property name="ID" value="9" />
-                <Property name="Area" value="{{0,23},{0,482},{0,259},{0,514}}" />
+                <Property name="Area" value="{{0,24},{0,450},{0,260},{0,482}}" />
                 <Property name="Text" value="Bot D" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button7" >
@@ -597,9 +599,10 @@
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button622" >
                 <Property name="ID" value="15" />
-                <Property name="Area" value="{{0,23},{0,530},{0,259},{0,562}}" />
+                <Property name="Area" value="{{0,23},{0,503},{0,259},{0,535}}" />
                 <Property name="Text" value="God mode" />
             </Window>
+           
         </Window>
         <Window type="AlfiskoSkin/Label" name="PrintText" >
             <Property name="ID" value="110" />

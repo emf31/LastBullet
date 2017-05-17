@@ -34,7 +34,7 @@ public:
 	}
 
 	std::shared_ptr<BasicSceneNode> createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const std::string& texture = "", const std::string& mesh = "");
-	//std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const io::path& mesh, const io::path& texture = "");
+	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const std::string& directory, int numFrames);
 
 	//std::shared_ptr<SceneNode> createBillboard(std::shared_ptr<SceneNode>, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color);
 	//std::shared_ptr<SceneNode> createBillboardText(std::shared_ptr<SceneNode>, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color);

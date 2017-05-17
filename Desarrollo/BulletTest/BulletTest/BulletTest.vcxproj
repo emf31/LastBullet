@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam;Network\Lobby2\;Network\Lobby2\Steam</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Animation;World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam;Network\Lobby2\;Network\Lobby2\Steam</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -124,7 +124,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>GLEW_STATIC;CEGUI_STATIC;_CRT_SECURE_NO_WARNINGS;NOMINMAX;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam;Network\Lobby2\;Network\Lobby2\Steam</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Animation;World;EventSystem;Mapa;GUI;Graph;Otros;Motor;IA;Handlers;TriggerSystem;States;Entities;Command;Network;../include/SPARK;..\include\irrlitch;..\include\bullet;..\include\Raknet;../include;ParticleSystem;../include/Steam;Network\Lobby2\;Network\Lobby2\Steam</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -164,6 +164,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\AnimationCharacter.h" />
+    <ClInclude Include="Animation\AnimationMachine.h" />
+    <ClInclude Include="Animation\Death.h" />
+    <ClInclude Include="Animation\Run.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
     <ClInclude Include="Command\ListWeaponDown.h" />
@@ -251,6 +255,7 @@
     <ClInclude Include="IA\MachineState.h" />
     <ClInclude Include="IA\Path.h" />
     <ClInclude Include="IA\PathFollow.h" />
+    <ClInclude Include="IA\RegulatorIA.h" />
     <ClInclude Include="IA\SensorySystem\Memory.h" />
     <ClInclude Include="IA\SensorySystem\SensoryMemory.h" />
     <ClInclude Include="IA\StatesIA\BuscarVida.h" />
@@ -342,6 +347,10 @@
     <ClInclude Include="World\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\AnimationCharacter.cpp" />
+    <ClCompile Include="Animation\AnimationMachine.cpp" />
+    <ClCompile Include="Animation\Death.cpp" />
+    <ClCompile Include="Animation\Run.cpp" />
     <ClCompile Include="Entities\Button.cpp" />
     <ClCompile Include="Entities\Character.cpp" />
     <ClCompile Include="Entities\Enemy_Bot.cpp" />
@@ -475,6 +484,7 @@
     <ClCompile Include="Otros\Win32\ClockImpl.cpp" />
     <ClCompile Include="ParticleSystem\ExplosionParticleSystem.cpp" />
     <ClCompile Include="ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="RegulatorIA.cpp" />
     <ClCompile Include="States\InGame.cpp" />
     <ClCompile Include="States\LoadingState.cpp" />
     <ClCompile Include="States\Menu.cpp" />

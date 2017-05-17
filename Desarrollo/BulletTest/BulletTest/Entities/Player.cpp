@@ -130,12 +130,20 @@ void Player::inicializar()
 	tieneSniper = true;
 	bindWeapon();*/
 
-	ResourceProvider& rp = Settings::i().GetResourceProvider();
+	/*ResourceProvider& rp = Settings::i().GetResourceProvider();
 	m_nodoPersonaje = GraphicEngine::i().createNode(
 		m_renderState.getPosition(),
 		Vec3<float>(0.075f, 0.075f, 0.075f),
 		"",
 		rp.getFinalFilename("personaje2.obj", "characters"));
+	m_nodoPersonaje->setVisible(false);*/
+
+	//Creas el nodo(grafico)
+	m_nodoPersonaje = GraphicEngine::i().createAnimatedNode(
+		"../media/personaje1", 89);
+	m_nodoPersonaje->setAnimation("muerte", 0, 86);
+	m_nodoPersonaje->setCurrentAnimation("muerte");
+	m_nodoPersonaje->setFrameTime(milliseconds(10));
 	m_nodoPersonaje->setVisible(false);
 }
 
