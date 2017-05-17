@@ -61,7 +61,7 @@ public:
 	TSunLight* crearNodoSunLight(Vec3<float> direccion);
 	TPointLight* crearNodoPointLight(Vec3<float> posicion, float radioIn = 6.3f, float radioEx = 10.3f);
 	TFlashLight* crearNodoFlashLight(Vec3<float> posicion, Vec3<float> direccion, float radioIn = 13.0f, float radioEx = 18.0f);
-	TCamera* crearNodoCamara();
+	TCamera* crearNodoCamara(bool luz = false);
 
 	void setActiveCamera(TCamera* cam) { camaraActiva = cam; }
 

@@ -7,25 +7,42 @@
 
 // Constructor with vectors
 
-TCamera::TCamera() {
-
+TCamera::TCamera(bool luz) {
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
+	this->luz = luz;
 
 	//paramtros camara
-	movementSpeed = SPEED*3;
+	movementSpeed = SPEED * 3;
 	mouseSensitivity = SENSITIVTY;
-	zoom=ZOOM;
+	zoom = ZOOM;
+	if (luz) {
+		//rotacion y vectores iniciales
+		rotX = 0.0f;
+		rotY = 0.0f;
+		direccion = glm::vec3(0.0f, 0.0f, -1.0f);
+		worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+		derecha = glm::cross(direccion, worldUp);
+		derecha = glm::normalize(derecha);
+		inputEnable = true;
+		projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 50.0f);
+		view = glm::lookAt(glm::vec3(-10.f, 10.f, -5.f), glm::vec3(0, 0, 0), glm::vec3(0.0, 1.0, 0.0));
+	}
+	else {
 
-	//rotacion y vectores iniciales
-	rotX = 0.0f;
-	rotY = 0.0f;
-	direccion = glm::vec3(0.0f, 0.0f, -1.0f);
-	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	derecha= glm::cross(direccion, worldUp);
-	derecha = glm::normalize(derecha);
-	inputEnable = true;
-	projection = glm::perspective(zoom, (float)1280 / (float)720, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
+
+		//rotacion y vectores iniciales
+		rotX = 0.0f;
+		rotY = 0.0f;
+		direccion = glm::vec3(0.0f, 0.0f, -1.0f);
+		worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+		derecha = glm::cross(direccion, worldUp);
+		derecha = glm::normalize(derecha);
+		inputEnable = true;
+		projection = glm::perspective(zoom, (float)1280 / (float)720, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
+		projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, -1000.0f, 1000.0f);
+	}
+
 }
 
 
@@ -35,9 +52,12 @@ TCamera::~TCamera() {
 
 
 glm::mat4 TCamera::GetViewMatrix() {
-	view = glm::mat4();
-	calcularPosicionVista();
-	view = glm::inverse(view);
+	if (!luz) {
+		view = glm::mat4();
+		calcularPosicionVista();
+		view = glm::inverse(view);
+	}
+
 	return view;
 	//return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
 }

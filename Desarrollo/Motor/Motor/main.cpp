@@ -67,9 +67,9 @@ int main() {
 	origen->setModelColor(1.0f,0.2f,0.2f);
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
-	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+	l1->setScale(Vec3<float>(0.5f, 0.5f, 0.5f));
+	l1->setPosition(Vec3<float>(-15.0f, 5.0f, 0.0f));
+	l1->setRotationXYZ(Vec3<float>(0.0f, 0.0f, 0.0f));
 
 	
 	//animacion
@@ -152,7 +152,10 @@ int main() {
 
 	Vec3<float> newPos2 = Vec3<float>(50.0f, 20.0f, 10.0f);
 	newPos2.normalise();
-	sm.setActiveCamera(sm.crearNodoCamara());
+	
+	TCamera* camara = sm.crearNodoCamara();
+	TCamera* camLuz = sm.crearNodoCamara(true);
+	sm.setActiveCamera(camara);
 	
 
 		
@@ -228,6 +231,14 @@ int main() {
 		else if (Input::i().keyReleased(GLFW_KEY_9)) {
 			std::cout << "Modo de color : Sombras " << std::endl;
 			sm.draw_mode = 9;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_Z)) {
+			std::cout << "Camara normal" << std::endl;
+			sm.setActiveCamera(camara);
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_X)) {
+			std::cout << "Camara Luz" << std::endl;
+			sm.setActiveCamera(camLuz);
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
 			pruebaAnim->setCurrentAnimation("saltar");

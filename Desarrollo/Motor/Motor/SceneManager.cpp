@@ -298,10 +298,10 @@ void SceneManager::renderLuces()
 	
 	
 	//copiamos el frame burffer leido
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
-	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
+	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	RenderQuad();
 
@@ -349,7 +349,7 @@ void SceneManager::renderSombras()
 {
 	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
-	glClear(GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_DEPTH_BUFFER_BIT);
 	//ConfigureShaderAndMatrices();
 	shaderSombras->Use();
 	glActiveTexture(GL_TEXTURE0);
@@ -608,14 +608,14 @@ TFlashLight * SceneManager::crearNodoFlashLight(Vec3<float> posicion, Vec3<float
 }
 
 
-TCamera * SceneManager::crearNodoCamara()
+TCamera * SceneManager::crearNodoCamara(bool luz)
 {
 	TNode* cameraNode;
 	TNode * nuevoNodoRotacion;
 	TNode * nuevoNodoTraslacion;
 
 	//importante crear primero la entity y luego su nodo ya que tenemos que pasarle el id de la entity
-	TCamera* camara = new TCamera();
+	TCamera* camara = new TCamera(luz);
 	int id = camara->getID();
 
 	//rotacion antes de traslacion

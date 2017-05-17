@@ -36,7 +36,7 @@ public:
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 
-	TCamera();
+	TCamera(bool luz=false);
 	glm::mat4 GetViewMatrix();
 	void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime);
 	void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset);
@@ -75,8 +75,12 @@ public:
 
 	glm::mat4 getProjectionMatrix();
 
+	glm::mat4 getProjectionOrtho();
+	glm::mat4 getViewLightMatrix();
+
 private:
 	bool inputEnable;
+	bool luz;
 
 	glm::vec3 getPositionglm();
 	void updateCameraVectors();
