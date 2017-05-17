@@ -33,7 +33,7 @@ struct PointLight {
 vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
-float ShadowCalculation(vec4 fragPosLightSpace);
+float ShadowCalculation(vec4 fragPosLightSpace, float bias);
 
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
@@ -49,6 +49,7 @@ uniform vec3 objectColor;
 uniform vec3 viewPos;
 uniform mat4 invView;
 uniform mat4 depthBiasMVP;
+uniform float bias;
 
 uniform int draw_mode;
 
@@ -80,7 +81,8 @@ void main()
     vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
     //vec4 FragPosLightSpace = invView * vec4(FragPos, 1.0);
     //vec4 FragPosLightSpace2 = sunlight.lightSpaceMatrix * FragPosLightSpace;
-
+    //vec3 lightDir = normalize(-sunlight.direction);
+    //float bias = max(0.05 * (1.0 - dot(Normal, lightDir)), 0.005);
     vec4 ShadowCoord = depthBiasMVP * vec4(FragPos,1);
 
 
@@ -103,7 +105,7 @@ void main()
     }
 
     // Calculate shadow
-    float shadow = ShadowCalculation(FragPosLightSpace);  
+    float shadow = ShadowCalculation(FragPosLightSpace, bias);  
     colorFinal = (1.5-shadow)*modelColor * colorFinal;
     /*
 
@@ -268,19 +270,23 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
 
 }
 
-float ShadowCalculation(vec4 fragPosLightSpace)
+
+
+
+float ShadowCalculation(vec4 fragPosLightSpace, float bias)
 {
 
     // perform perspective divide
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
     // Transform to [0,1] range
     projCoords = projCoords * 0.5 + 0.5;
+    //float bias = 0.005;
     // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
     float closestDepth = texture(shadowMap, projCoords.xy).r; 
     // Get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
     // Check whether current frag pos is in shadow
-    float shadow = currentDepth > closestDepth  ? 1.0 : 0.0;
+    float shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
 
     return shadow;
 }  

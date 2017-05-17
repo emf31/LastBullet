@@ -298,6 +298,7 @@ void SceneManager::renderLuces()
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
+	glUniform1f(glGetUniformLocation(shaderLuces->Program, "bias"), bias);
 	glm::mat4 invViewProject =  camaraActiva->GetViewMatrix();
 	invViewProject = glm::inverse(invViewProject);
 	glUniformMatrix4fv(glGetUniformLocation(shaderLuces->Program, "invView"), 1, GL_FALSE, glm::value_ptr(invViewProject));
@@ -354,6 +355,7 @@ void SceneManager::renderBloom()
 
 void SceneManager::renderSombras()
 {
+	//glCullFace(GL_FRONT);
 	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -371,6 +373,7 @@ void SceneManager::renderSombras()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glCullFace(GL_BACK);
 }
 
 bool SceneManager::removeNode(TNode * node) {

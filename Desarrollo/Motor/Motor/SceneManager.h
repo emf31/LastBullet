@@ -133,7 +133,7 @@ public:
 
 	std::vector<glm::mat4> matricesModelo;
 
-
+	float bias = 0.00011;
 
 private:
 
@@ -167,6 +167,7 @@ private:
 	GLuint SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 720;
 
 	glm::mat4 biasMatrix;
+	
 
 
 

@@ -254,7 +254,14 @@ int main() {
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
 		}
-		
+		else if (Input::i().keyPressed(GLFW_KEY_N)) {
+			sm.bias -= 0.0001;
+			std::cout << "disminuyo bias, bias = " << sm.bias << std::endl;
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_M)) {
+			sm.bias += 0.0001;
+			std::cout << "aumento bias, bias = " << sm.bias << std::endl;
+		}
 		Input::i().endEventProcess();
 
 		
