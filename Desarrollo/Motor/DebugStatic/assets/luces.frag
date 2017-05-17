@@ -78,8 +78,8 @@ void main()
     vec3 bloom = texture(gBloom, TexCoords).rgb;
     float sombras = texture(shadowMap, TexCoords).r;
     vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
-   // vec4 FragPosLightSpace = vec4(FragPos, 1.0);
-    vec4 FragPosLightSpace2 = vec4(FragPos, 1.0);
+    //vec4 FragPosLightSpace = invView * vec4(FragPos, 1.0);
+    //vec4 FragPosLightSpace2 = sunlight.lightSpaceMatrix * FragPosLightSpace;
 
     vec4 ShadowCoord = depthBiasMVP * vec4(FragPos,1);
 
@@ -103,13 +103,16 @@ void main()
     }
 
     // Calculate shadow
-    //float shadow = ShadowCalculation(FragPosLightSpace);  
+    float shadow = ShadowCalculation(FragPosLightSpace);  
+    colorFinal = (1.5-shadow)*modelColor * colorFinal;
+    /*
+
     float visibility = 1.0;
     if ( texture( shadowMap, ShadowCoord.xy ).z  <  ShadowCoord.z){
     visibility = 0.2;
     }      
     colorFinal= (visibility * colorFinal);
-
+*/
     //colorFinal += emissive;
     //colorFinal = colorFinal * modelColor;
 

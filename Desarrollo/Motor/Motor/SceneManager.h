@@ -163,7 +163,7 @@ private:
 
 	void RenderQuad();
 
-	GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+	GLuint SHADOW_WIDTH = 1280, SHADOW_HEIGHT = 720;
 	GLuint SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 720;
 
 	glm::mat4 biasMatrix;

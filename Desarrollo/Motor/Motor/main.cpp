@@ -68,21 +68,21 @@ int main() {
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(-30.0f, 0.0f, 0.0f));
-	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+	l1->setPosition(Vec3<float>(6.0f, 0.0f, -3.0f));
+	//l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
 
 	
 	//animacion
-	int velocidadAnim = 10;
-	std::cout << "Cargando animaciones..." << std::endl;
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
-	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
-	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	pruebaAnim->setAnimation("idle",0,34);
-	pruebaAnim->setAnimation("saltar", 40, 109);
-	pruebaAnim->setAnimation("correr", 110, 190);
-	pruebaAnim->setCurrentAnimation("idle");
+	//int velocidadAnim = 10;
+	//std::cout << "Cargando animaciones..." << std::endl;
+	//TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
+	//pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	//pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+	//pruebaAnim->setAnimation("idle",0,34);
+	//pruebaAnim->setAnimation("saltar", 40, 109);
+	//pruebaAnim->setAnimation("correr", 110, 190);
+	//pruebaAnim->setCurrentAnimation("idle");
 
 
 	
@@ -229,24 +229,24 @@ int main() {
 			std::cout << "Modo de color : Sombras " << std::endl;
 			sm.draw_mode = 9;
 		}
-		else if (Input::i().keyReleased(GLFW_KEY_J)) {
-			pruebaAnim->setCurrentAnimation("saltar");
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_C)) {
-			pruebaAnim->setCurrentAnimation("correr");
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_I)) {
-			pruebaAnim->setCurrentAnimation("idle");
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_R)) {
-			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		//else if (Input::i().keyReleased(GLFW_KEY_J)) {
+		//	pruebaAnim->setCurrentAnimation("saltar");
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_C)) {
+		//	pruebaAnim->setCurrentAnimation("correr");
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_I)) {
+		//	pruebaAnim->setCurrentAnimation("idle");
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_R)) {
+		//	velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_L)) {
-			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-		}
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_L)) {
+		//	velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		//}
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
 		}

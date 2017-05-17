@@ -298,6 +298,9 @@ void SceneManager::renderLuces()
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
+	glm::mat4 invViewProject =  camaraActiva->GetViewMatrix();
+	invViewProject = glm::inverse(invViewProject);
+	glUniformMatrix4fv(glGetUniformLocation(shaderLuces->Program, "invView"), 1, GL_FALSE, glm::value_ptr(invViewProject));
 	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
 	
 	
