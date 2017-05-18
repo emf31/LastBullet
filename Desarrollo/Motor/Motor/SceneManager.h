@@ -127,19 +127,18 @@ public:
 
 	void clearLines();
 
-	void setDrawTarget(bool b);
 	void ziZoom(float z);
 	void zoomZout();
 
-	std::vector<glm::mat4> matricesModelo;
+	void renderShadow(bool b);
+
 
 	float bias = 0.00011;
 
 private:
 
 	TNode* scene;
-
-	bool drawTarget;
+	bool castShadow;
 
 	int nodeEntityCount = 0;
 
@@ -165,12 +164,6 @@ private:
 
 	GLuint SHADOW_WIDTH = 1280, SHADOW_HEIGHT = 720;
 	GLuint SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 720;
-
-	glm::mat4 biasMatrix;
-	
-
-
-
 	friend class EngineDevice;
 
 

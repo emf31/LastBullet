@@ -26,7 +26,7 @@ void SceneManager::inicializar() {
 	inicializarBuffersSombras();
 	inicializarBuffersLineas();
 	numLines = 0;
-	drawTarget = false;
+	castShadow = true;
 }
 
 
@@ -56,7 +56,9 @@ void SceneManager::draw() {
 			activeCameraPos = camaraActiva->getPosition();
 			scene->draw();
 			//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
-			renderSombras();
+			if (castShadow) {
+				renderSombras();
+			}
 			//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			renderBlur();
@@ -190,37 +192,14 @@ void SceneManager::inicializarBuffersSombras()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-
-
+	//esto es para que lo que este fuera del campo de vision de la luz no este todo en sombras puesto que estamos haciendo una luz direccional.
+	GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 	
 	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMap, 0);
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadowMap, 0);
 	glDrawBuffer(GL_NONE);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	biasMatrix[0][0] = 0.5f;
-	biasMatrix[0][1] = 0.0f;
-	biasMatrix[0][2] = 0.0f;
-	biasMatrix[0][3] = 0.0f;
-
-	biasMatrix[1][0] = 0.0f;
-	biasMatrix[1][1] = 0.5f;
-	biasMatrix[1][2] = 0.0f;
-	biasMatrix[1][3] = 0.0f;
-
-	biasMatrix[2][0] = 0.0f;
-	biasMatrix[2][1] = 0.0f;
-	biasMatrix[2][2] = 0.5f;
-	biasMatrix[2][3] = 0.0f;
-
-	biasMatrix[3][0] = 0.5f;
-	biasMatrix[3][1] = 0.5f;
-	biasMatrix[3][2] = 0.5f;
-	biasMatrix[3][3] = 1.0f;
-
-
-	
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);	
 }
 
 void SceneManager::inicializarBuffersBlur()
@@ -289,8 +268,6 @@ void SceneManager::renderLuces()
 		vecFlashLight[i]->pasarDatosAlShader(shaderLuces, i);
 	}
 
-	glm::mat4 depthBiasMVP = biasMatrix*sunlight->getLightSpaceMatrix();
-	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "depthBiasMVP"), 1, GL_FALSE, glm::value_ptr(depthBiasMVP));
 	//numero luces
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_pointlight"), vecPointLight.size());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "num_flashlight"), vecFlashLight.size());
@@ -298,6 +275,7 @@ void SceneManager::renderLuces()
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "castShadow"), castShadow);
 	glUniform1f(glGetUniformLocation(shaderLuces->Program, "bias"), bias);
 	glm::mat4 invViewProject =  camaraActiva->GetViewMatrix();
 	invViewProject = glm::inverse(invViewProject);
@@ -355,25 +333,17 @@ void SceneManager::renderBloom()
 
 void SceneManager::renderSombras()
 {
-	//glCullFace(GL_FRONT);
-	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	glDisable(GL_CULL_FACE);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
-	//ConfigureShaderAndMatrices();
 	shaderSombras->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
-
 	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(sunlight->getLightSpaceMatrix()));
-	//RenderScene();
 	scene->draw2();
-	//glBindTexture(GL_TEXTURE_2D, shadowMap);
-	//RenderQuad();
-	// reset viewport
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	glEnable(GL_CULL_FACE);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glCullFace(GL_BACK);
 }
 
 bool SceneManager::removeNode(TNode * node) {
@@ -740,9 +710,7 @@ void SceneManager::clearLines() {
 	vertices3.clear();
 	numLines = 0;
 }
-void SceneManager::setDrawTarget(bool b) {
-	drawTarget = b;
-}
+
 void SceneManager::ziZoom(float z)
 {
 	camaraActiva->aumentarMira(z);
@@ -751,6 +719,9 @@ void SceneManager::ziZoom(float z)
 void SceneManager::zoomZout()
 {
 	camaraActiva->resetMira();
+}
+void SceneManager::renderShadow(bool b) {
+	castShadow = b;
 }
 void SceneManager::shutdown()
 {

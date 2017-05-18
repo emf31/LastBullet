@@ -21,6 +21,7 @@ public:
 	bool removeChild(TNode *child);
 	void removeNode();
 	void addChild(TNode* child);
+	void addChild(TEntity* child);
 	
 
 

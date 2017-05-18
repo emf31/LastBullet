@@ -1,28 +1,43 @@
-﻿  Enemy.cpp
+﻿  ParticleSystem.cpp
+  ExplosionParticleSystem.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(114): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(114): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(218): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(240): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\particlesystem\explosionparticlesystem.cpp(254): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  GraphicEngine.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Generando código...
+  Compilando...
+  InGame.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Generando código...
   Omitiendo... (no se detectaron cambios relevantes)
   World.cpp
+  TriggerSystem.cpp
   StateFactory.cpp
   Menu.cpp
   LoadingState.cpp
-  InGame.cpp
   Lista.cpp
   LifeComponent.cpp
   DebugMarks.cpp
+  AssetsReader.cpp
   NetworkManager.cpp
   NetworkDebugger.cpp
   NetPlayer.cpp
   NetObject.cpp
   NetBot.cpp
+  SceneNode.cpp
+  RenderState.cpp
   PhysicsEngine.cpp
   MapLoader.cpp
   GunRecoil.cpp
-  GraphicEngine.cpp
   CameraShake.cpp
   Camera.cpp
   BasicSceneNode.cpp
   PathPlanner.cpp
+  Map.cpp
+  Dijkstra.cpp
   Celda.cpp
   WeaponSystem.cpp
   TargetingSystem.cpp
@@ -34,8 +49,10 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\
   SensoryMemory.cpp
   PathFollow.cpp
   Partida.cpp
+  MessageHandler.cpp
   InputHandler.cpp
   SparseGraph.cpp
+  AStarSearch.cpp
   Game.cpp
   ParalellTask.cpp
   MenuGUI.cpp
@@ -55,10 +72,19 @@ e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\
   RocketBulletEnemy.cpp
   RocketBullet.cpp
   Player.cpp
+  PhysicsEntity.cpp
   LifeObject.cpp
   GunBullet.cpp
+  GroupEntity.cpp
   Granada.cpp
+  EntityManager.cpp
+  Entity.cpp
+  EntPassive.cpp
+  EntActive.cpp
   Enemy_Bot.cpp
+  Enemy.cpp
+  Character.cpp
+  Button.cpp
   SOIL.lib(SOIL.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
 LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
 Button.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificaci¾n '/OPT:LBR'

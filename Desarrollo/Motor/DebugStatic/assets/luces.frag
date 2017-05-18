@@ -47,9 +47,8 @@ uniform sampler2D shadowMap;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
-uniform mat4 invView;
-uniform mat4 depthBiasMVP;
 uniform float bias;
+uniform bool castShadow;
 
 uniform int draw_mode;
 
@@ -65,8 +64,7 @@ void main()
 {             
     // Retrieve data from gbuffer
     //TexCoords = gCoords.rg;
-    const float gamma = 0.4;
-    const float exposure = 3.2;
+    vec3 colorFinal;
     vec3 FragPos = texture(gPosition, TexCoords).rgb;
     vec3 Normal = texture(gNormal, TexCoords).rgb;
     vec3 Diffuse;
@@ -79,15 +77,8 @@ void main()
     vec3 bloom = texture(gBloom, TexCoords).rgb;
     float sombras = texture(shadowMap, TexCoords).r;
     vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
-    //vec4 FragPosLightSpace = invView * vec4(FragPos, 1.0);
-    //vec4 FragPosLightSpace2 = sunlight.lightSpaceMatrix * FragPosLightSpace;
-    //vec3 lightDir = normalize(-sunlight.direction);
     //float bias = max(0.05 * (1.0 - dot(Normal, lightDir)), 0.005);
-    vec4 ShadowCoord = depthBiasMVP * vec4(FragPos,1);
-
-
-    
-        vec3 colorFinal;
+   
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
@@ -105,27 +96,17 @@ void main()
     }
 
     // Calculate shadow
-    float shadow = ShadowCalculation(FragPosLightSpace, bias);  
-    colorFinal = (1.5-shadow)*modelColor * colorFinal;
-    /*
+    float shadow = 0.0f;
+    if(castShadow){
+    shadow = ShadowCalculation(FragPosLightSpace, bias);  
+    }
+    colorFinal = (1.4-shadow)*modelColor * colorFinal;
+    
 
-    float visibility = 1.0;
-    if ( texture( shadowMap, ShadowCoord.xy ).z  <  ShadowCoord.z){
-    visibility = 0.2;
-    }      
-    colorFinal= (visibility * colorFinal);
-*/
-    //colorFinal += emissive;
-    //colorFinal = colorFinal * modelColor;
-
-    //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
-           
-    //result = pow(result, vec3(1.0 / gamma));
-    //colorFinal = result;
-
-
-
+    //bloom
     colorFinal += bloom;
+
+
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
@@ -146,7 +127,7 @@ void main()
         FragColor = vec4(vec3(sombras), 1.0);
 
 
-    //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
+    
     
 
 }
@@ -275,18 +256,31 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
 
 float ShadowCalculation(vec4 fragPosLightSpace, float bias)
 {
-
-    // perform perspective divide
+    float shadow = 0.0;
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
-    // Transform to [0,1] range
     projCoords = projCoords * 0.5 + 0.5;
+
+    //si esa parte no esta en el depthbuffer consideramos que llega luz
+    if(projCoords.z > 1.0){
+       return shadow;
+    }
+
     //float bias = 0.005;
-    // Get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
     float closestDepth = texture(shadowMap, projCoords.xy).r; 
-    // Get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
-    // Check whether current frag pos is in shadow
-    float shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
+    shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
+
+    //para difuminar las sombras
+    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+    for(int x = -2; x <= 2; ++x)
+    {
+        for(int y = -2; y <= 2; ++y)
+        {
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 25.0;
 
     return shadow;
 }  

@@ -262,6 +262,13 @@ int main() {
 			sm.bias += 0.0001;
 			std::cout << "aumento bias, bias = " << sm.bias << std::endl;
 		}
+		else if (Input::i().keyPressed(GLFW_KEY_B)) {
+			std::cout << "Desactivo Sombras " << sm.bias << std::endl;
+			sm.renderShadow(false);
+		}else if (Input::i().keyPressed(GLFW_KEY_V)) {
+			std::cout << "Activo Sombras " << sm.bias << std::endl;
+			sm.renderShadow(true);
+		}
 		Input::i().endEventProcess();
 
 		

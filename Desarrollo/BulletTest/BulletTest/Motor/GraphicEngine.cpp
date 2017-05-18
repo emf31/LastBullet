@@ -230,8 +230,8 @@ void GraphicEngine::inicializar()
 	dsa->setIntensidadAmbiente(0.45f); 
 	dsa->setIntensidadEspecular(0.6f);
 
-	//dsa->setVectorDireccion(Vec3<float>(0.0f, 1.0f, -1.0f));
-	//dsa->setPosition(Vec3<float>(90.0f, 30.0f, 0.0f));
+	dsa->setVectorDireccion(Vec3<float>(0.0f, 1.0f, -1.0f));
+	dsa->setPosition(Vec3<float>(90.0f, 30.0f, 0.0f));
 	
 	SceneManager::i().setSunLight(dsa); //importante sin esta linea no se dibujan sombras
 

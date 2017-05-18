@@ -1,19 +1,35 @@
-﻿  TSunLight.cpp
+﻿  main.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(258): warning C4305: '-=': truncamiento de 'double' a 'float'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(262): warning C4305: '+=': truncamiento de 'double' a 'float'
+  SceneManager.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  main.cpp
+  Compilando...
   TTransform.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  TSunLight.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TNode.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TModel.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TMeshGroup.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TLuz.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TCamera.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TAnimationGroupMesh.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TAnimation.cpp
-  SceneManager.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Input.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   EngineDevice.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   AnimationMesh.cpp
-Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Generando código...
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)

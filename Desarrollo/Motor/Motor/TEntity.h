@@ -19,6 +19,9 @@ public:
 	void removeNode();
 	void removeChild(TEntity* ent);
 
+	TNode* getMiNodo();
+	int getID();
+
 private:
 	int entityID = -1;
 	TNode * miNodo;
@@ -27,10 +30,9 @@ private:
 
 
 protected:
-	int getID();
+	
 	void setID(int id);
 	void setMiNodo(TNode * nodo);
-	TNode* getMiNodo();
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionEscalado(TTransform* esc);
 	void setTransformacionTraslacion(TTransform* tras);
