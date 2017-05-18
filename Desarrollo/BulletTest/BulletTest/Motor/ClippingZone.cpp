@@ -32,14 +32,12 @@ ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name
 
 	nodo = new TNode(-1, SceneManager::i().getRootNode());
 	SceneManager::i().getRootNode()->addChild(nodo);
-	nodo->setVisible(false);
+	//nodo->setVisible(false);
 }
 
 void ClippingZone::addEntity(Entity * ent)
 {
-	//m_entities.push_back(ent);
 	nodo->addChild(ent->getNode()->getEntityNode());
-	//ent->getNode()->add
 }
 
 std::vector<Vec3<float>> ClippingZone::getPoints()
@@ -51,8 +49,7 @@ void ClippingZone::setVisible(bool visible)
 {
 	if (visible != m_visible) {
 		m_visible = visible;
-		nodo->setVisible(true);
-		//putAllEntitiesInVisible(visible);
+		nodo->setVisible(m_visible);
 	}
 }
 
@@ -70,7 +67,7 @@ bool ClippingZone::isPlayerinside()
 
 void ClippingZone::putAllEntitiesInVisible(bool visible)
 {
-	for (std::vector<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); ++it) {
-		(*it)->getNode()->setVisible(visible);
-	}
+	//for (std::vector<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); ++it) {
+	//	(*it)->getNode()->setVisible(visible);
+	//}
 }
