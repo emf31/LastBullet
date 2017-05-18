@@ -133,6 +133,7 @@ void Game::inicializarRutas() {
 	resourceProvider.setResourceGroupDirectory("weapons", "../media/Weapons");
 	resourceProvider.setResourceGroupDirectory("sounds", "../media/Sounds");
 	resourceProvider.setResourceGroupDirectory("bullets", "../media/Bullets");
+	resourceProvider.setResourceGroupDirectory("props", "../media/Props");
 }
 
 void Game::inicializar()

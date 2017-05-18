@@ -107,6 +107,7 @@ void LoadingState::readAllAssets()
 	
 	AssetsReader::read(resourceProvider.getResourceGroupDirectory("weapons"), colaAssets);
 	AssetsReader::read(resourceProvider.getResourceGroupDirectory("bullets"), colaAssets);
+	AssetsReader::read(resourceProvider.getResourceGroupDirectory("props"), colaAssets);
 }
 
 
