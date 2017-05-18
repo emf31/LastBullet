@@ -45,6 +45,6 @@ private:
 	ParticleSystem &particleSystem;
 
 	Player* m_player;
-
+	Enemy* ene;
 };
 

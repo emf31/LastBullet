@@ -12,6 +12,10 @@
 #include <SoundManager.h>
 #include <ParticleSystem.h>
 
+#include <Map.h>
+#include <Death.h>
+#include <Run.h>
+
 InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
 {
 	
@@ -60,6 +64,11 @@ void InGame::Inicializar()
 
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), true);
 
+	ene = new Enemy("pepe", RakNet::UNASSIGNED_RAKNET_GUID);
+	ene->inicializar();
+	ene->cargarContenido();
+	
+
 }
 
 void InGame::Clear()
@@ -86,6 +95,12 @@ void InGame::HandleEvent()
 
 		GraphicEngine::i().toggleDebug();
 
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
+		ene->getAnimationMachine()->ChangeState(&Death::i());
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_N)) {
+		ene->getAnimationMachine()->ChangeState(&Run::i());
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 
@@ -182,6 +197,7 @@ void InGame::HandleEvent()
 		salirGUI.injectLeftMouseButtonUp();
 
 	}
+	
 
 	Input::i().endEventProcess();
 
@@ -189,7 +205,7 @@ void InGame::HandleEvent()
 
 void InGame::Update(Time timeElapsed)
 {
-
+	ene->setPosition(Map::i().searchSpawnPoint() + Vec3<float>(3,0,3));
 
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();

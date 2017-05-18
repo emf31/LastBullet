@@ -94,16 +94,20 @@ int main() {
 	//animacion
 	int velocidadAnim = 10;
 	std::cout << "Cargando animaciones..." << std::endl;
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
-	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+
+	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje1", 70));
+	pruebaAnim->setAnimation("correr", 0, 16, true);
+	pruebaAnim->setAnimation("muerte", 17, 69, false);
+	pruebaAnim->setCurrentAnimation("correr");
+	pruebaAnim->setFrameTime(milliseconds(35));
+	pruebaAnim->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	pruebaAnim->setAnimation("idle",0,34, true);
-	pruebaAnim->setAnimation("saltar", 40, 109, false);
-	pruebaAnim->setAnimation("correr", 110, 190, true);
-	pruebaAnim->setCurrentAnimation("idle");
 
 
+	//personaje
+	TModel* origen2 = sm.crearNodoMalla(sm.getMesh("assets/personaje1/asd.obj"));
+	origen2->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
+	origen2->setPosition(Vec3<float>(20.0f, 0.f, 0.0f));
 	
 	//pruebaAnim->setFrameTime(seconds(2.0));
 
