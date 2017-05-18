@@ -35,7 +35,7 @@ void TEntity::addChild(TEntity * ent) {
 	TNode* nuevoHijo = ent->getMiNodo();
 	TNode* padre = ent->getMiNodo()->getParentNode();
 	
-	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() != entityID) {
+	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() == entityID) {
 		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
 		nuevoHijo = nuevoHijo->getParentNode();
 		padre = padre->getParentNode();
@@ -58,7 +58,7 @@ void TEntity::removeChild(TEntity * ent)
 	miNodo->removeChild(ent->getMiNodo());
 }
 
-void TEntity::setVisible(bool b) { miNodo->setVisible(b); }
+void TEntity::setVisible(bool b) { miNodo->setVisible(b); transTraslacion->getMiNodo()->setVisible(b); }
 
 bool TEntity::isVisible() const { return miNodo->isVisible(); }
 

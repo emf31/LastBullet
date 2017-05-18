@@ -31,13 +31,14 @@ ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name
 	m_points.push_back(point8);
 
 	nodo = new TNode(-1, SceneManager::i().getRootNode());
+	SceneManager::i().getRootNode()->addChild(nodo);
 	nodo->setVisible(false);
 }
 
 void ClippingZone::addEntity(Entity * ent)
 {
-	m_entities.push_back(ent);
-	nodo->addChild(ent->getNode()->getEntityNode()->getMiNodo());
+	//m_entities.push_back(ent);
+	nodo->addChild(ent->getNode()->getEntityNode());
 	//ent->getNode()->add
 }
 

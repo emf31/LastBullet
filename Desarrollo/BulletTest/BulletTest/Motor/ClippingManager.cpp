@@ -17,7 +17,6 @@ void ClippingManager::update()
 
 	
 	if (canUpdate) {
-		return;
 		//Updateamos los planos del frustrum y nos lo guardamos en variable para analizarla despues
 
 		GraphicEngine::i().updateClippingPlanes();
