@@ -1,106 +1,10 @@
-﻿  Enemy.cpp
-  Enemy_Bot.cpp
-Entities\Enemy_Bot.cpp(146): warning C4101: 'isDying': variable local sin referencia
-  EntityManager.cpp
-  LifeObject.cpp
-  Player.cpp
-Entities\Player.cpp(212): warning C4101: 'isDying': variable local sin referencia
-  RocketBullet.cpp
-  AsaltoDrop.cpp
-  PistolaDrop.cpp
-  RocketLauncherDrop.cpp
-  SniperDrop.cpp
-  WeaponDrop.cpp
-  Asalto.cpp
-  Pistola.cpp
-  RocketLauncher.cpp
-  Sniper.cpp
-  DebugMenuGUI.cpp
-  InGameHUD.cpp
-  LoadingStateGUI.cpp
-  MenuGUI.cpp
-  Game.cpp
-Game.cpp(151): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
-  Game.cpp(151): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
-Game.cpp(157): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
-  Game.cpp(157): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
-  Generando código...
-  Compilando...
-  InputHandler.cpp
-  Partida.cpp
-  PathFollow.cpp
-  SensoryMemory.cpp
-  BuscarVida.cpp
-  BuscarWeapon.cpp
-  Disparar.cpp
-  Patrullar.cpp
-  Perseguir.cpp
-  TargetingSystem.cpp
-  WeaponSystem.cpp
-  PathPlanner.cpp
-  Camera.cpp
-  CameraShake.cpp
-  ClippingZone.cpp
-  GraphicEngine.cpp
-Motor\GraphicEngine.cpp(37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(40): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(45): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(46): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(47): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(52): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(53): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(54): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(55): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(59): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(60): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(61): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(62): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(66): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(67): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(68): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(69): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(73): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(74): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(75): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Motor\GraphicEngine.cpp(76): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  GunRecoil.cpp
-  MapLoader.cpp
-Motor\MapLoader.cpp(33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-Motor\MapLoader.cpp(184): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(195): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(206): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(228): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
-  AsyncEnemyFactory.cpp
-  NetBot.cpp
-  Generando código...
-  Compilando...
-  NetObject.cpp
-  NetPlayer.cpp
-  NetworkDebugger.cpp
-Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  NetworkLog.cpp
-  NetworkManager.cpp
-  NetworkPrediction.cpp
-Network\NetworkPrediction.cpp(32): warning C4244: 'argumento': conversión de 'RakNet::Time' a 'int'; posible pérdida de datos
-Network\NetworkPrediction.cpp(34): warning C4244: '=': conversión de 'RakNet::Time' a 'RakNet::TimeMS'; posible pérdida de datos
-  SteamResults.cpp
-  LifeComponent.cpp
-  InGame.cpp
-  LoadingState.cpp
-  Menu.cpp
-  StateFactory.cpp
-  World.cpp
-  Generando código...
+﻿  LoadingState.cpp
      Creando biblioteca D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LIBCMT.lib(initializers.obj) : warning LNK4098: la biblioteca predeterminada'msvcrt.lib' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  22 of 2895 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  0 of 2923 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    31 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewBlendFuncSeparate definido localmente

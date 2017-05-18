@@ -10,7 +10,7 @@
 #include <events/PlayerEvent.h>
 #include <events/MuerteEvent.h>
 #include <events/KillEvent.h>
-#include <events\GameStartEvent.h>
+#include <events/GameStartEvent.h>
 #include <NetworkManager.h>
 #include <Settings.h>
 #include <Map.h>
@@ -18,9 +18,13 @@
 #include <StateStack.h>
 #include <thread>
 #include <Settings.h>
+
 #include <DebugMenuGUI.h>
 #include <GUIManager.h>
 #include <SoundManager.h>
+
+#include "../global.h"
+
 
 NetPlayer::NetPlayer() : NetObject(), m_player(nullptr), m_world(World::i())
 {
@@ -38,24 +42,20 @@ NetPlayer::~NetPlayer()
 
 void NetPlayer::inicializar()
 {
-	messageFactory = new RakNet::Lobby2MessageFactory_Steam;
-	//fcm2 = RakNet::FullyConnectedMesh2::GetInstance();
-	lobby2Client = RakNet::Lobby2Client_Steam::GetInstance();
+	if (USING_STEAM) {
+		messageFactory = new RakNet::Lobby2MessageFactory_Steam;
+		lobby2Client = RakNet::Lobby2Client_Steam::GetInstance();
 
-	lobby2Client->AddCallbackInterface(&steamResults);
-	lobby2Client->SetMessageFactory(messageFactory);
+		lobby2Client->AddCallbackInterface(&steamResults);
+		lobby2Client->SetMessageFactory(messageFactory);
 
-	peer->AttachPlugin(lobby2Client);
-	//peer->AttachPlugin(fcm2);
+		peer->AttachPlugin(lobby2Client);
 
-
-	//fcm2->SetConnectOnNewRemoteConnection(false, "");
-
-	RakNet::Lobby2Message* msg = messageFactory->Alloc(RakNet::L2MID_Client_Login);
-	lobby2Client->SendMsg(msg);
-	messageFactory->Dealloc(msg);
-
-
+		RakNet::Lobby2Message* msg = messageFactory->Alloc(RakNet::L2MID_Client_Login);
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+	}
+	
 	/*RakNet::Console_SearchRooms *msgSteam = (RakNet::Console_SearchRooms *) messageFactory->Alloc(RakNet::L2MID_Console_SearchRooms);
 
 	lobby2Client->SendMsg(msgSteam);
@@ -74,6 +74,7 @@ void NetPlayer::crearPartida()
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
+
 
 	
 	/*TPlayer p;
@@ -105,6 +106,28 @@ void NetPlayer::crearPartida()
 	m_bots.push_back(p);*/
 	//m_bots.push_back(p2);
 
+	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente (si se usa steam)
+	if (!USING_STEAM) {
+		TGameInfo gameinfo;
+		gameinfo.creador = getMyGUID();
+		gameinfo.name = Settings::i().GetValue("name");
+		gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
+		gameinfo.map = Settings::i().GetValue("mapa");
+		gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+
+		dispatchMessage(gameinfo, CREAR_PARTIDA);
+		//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
+
+		/*TPlayer p;
+		p.name = "Nixon";
+		//TPlayer p2;
+		//p2.name = "Kennedy";
+
+		m_bots.push_back(p);*/
+		//m_bots.push_back(p2);
+	}
+	
+
 
 	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
 	//bot2->m_network->inicializar();
@@ -128,43 +151,64 @@ void NetPlayer::setPlayerObject(Player * player)
 
 uint64_t NetPlayer::crearLobby()
 {
-	if (lobby2Client->GetRoomID() != 0) {
-		printf("Already in a room\n");
+	if (USING_STEAM) {
+		if (lobby2Client->GetRoomID() != 0) {
+			printf("Already in a room\n");
 
-	} else {
-		RakNet::Console_CreateRoom_Steam* msg = (RakNet::Console_CreateRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_CreateRoom);
-		char rgchLobbyName[256];
-		msg->roomIsPublic = true;
-		_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "Sala de %s", SteamFriends()->GetPersonaName());
-		msg->roomName = rgchLobbyName;
-		msg->publicSlots = 4;
-		lobby2Client->SendMsg(msg);
-		messageFactory->Dealloc(msg);
-		IamHost = true;
+		} else {
+			RakNet::Console_CreateRoom_Steam* msg = (RakNet::Console_CreateRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_CreateRoom);
+			char rgchLobbyName[256];
+			msg->roomIsPublic = true;
+			_snprintf(rgchLobbyName, sizeof(rgchLobbyName), "Sala de %s", SteamFriends()->GetPersonaName());
+			msg->roomName = rgchLobbyName;
+			msg->publicSlots = 4;
+			lobby2Client->SendMsg(msg);
+			messageFactory->Dealloc(msg);
+			IamHost = true;
 
-		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-		if (menu != nullptr) {
-			MenuGUI::PlayerSlot* playerSlot;
-			playerSlot = menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
-			if (playerSlot != nullptr) {
-				playerSlot->setReady(false);
+			MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+			if (menu != nullptr) {
+				MenuGUI::PlayerSlot* playerSlot;
+				playerSlot = menu->setNameOnPlayerSlot(SteamFriends()->GetPersonaName());
+				if (playerSlot != nullptr) {
+					playerSlot->setReady(false);
+				}
 			}
+			addPlayerInLobby(lobby2Client->GetMyUserID());
 		}
-		addPlayerInLobby(lobby2Client->GetMyUserID());
+		return lobby2Client->GetRoomID();
 	}
-	return lobby2Client->GetRoomID();
+	return 0;
 }
 
 void NetPlayer::sendServerIPtoNewClient() {
+	if (USING_STEAM) {
+		if (IamHost) {
+			std::string ipMessage = "IP|";
+			RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
+			ipMessage = ipMessage + peer->GetLocalIP(0);
+			msg->message = ipMessage.c_str();
+			msg->roomId = lobby2Client->GetRoomID();
+			lobby2Client->SendMsg(msg);
+			messageFactory->Dealloc(msg);
+		}
+	}
+}
+
+void NetPlayer::sendReadyPlayersToNewClient() {
 	if (IamHost) {
-		std::string ipMessage = "IP|";
+		std::string readyClients = "RC|";
 		RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
-		ipMessage = ipMessage + peer->GetLocalIP(0);
-		msg->message = ipMessage.c_str();
+		readyClients = readyClients + std::to_string(playersReady);
+		msg->message = readyClients.c_str();
 		msg->roomId = lobby2Client->GetRoomID();
 		lobby2Client->SendMsg(msg);
 		messageFactory->Dealloc(msg);
 	}
+}
+
+void NetPlayer::setReadyPlayers(int ready) {
+	playersReady = ready;
 }
 
 
@@ -215,8 +259,12 @@ void NetPlayer::unirseLobby(const std::string& str)
 
 	TPlayer p;
 	p.guid = peer->GetMyGUID();
-	p.name = SteamFriends()->GetPersonaName();
-
+	if (USING_STEAM) {
+		p.name = SteamFriends()->GetPersonaName();
+	} else {
+		p.name = Settings::i().GetValue("name");
+	}
+	
 	dispatchMessage(p, UNIRSE_PARTIDA);
 	
 

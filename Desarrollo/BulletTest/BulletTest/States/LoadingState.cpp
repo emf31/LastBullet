@@ -98,16 +98,16 @@ void LoadingState::Render(float interpolation, Time elapsedTime)
 
 void LoadingState::readAllAssets()
 {
-	/*AssetsReader::read("../media/Personaje", colaAssets);
+	AssetsReader::read("../media/Personaje", colaAssets);
 	AssetsReader::read("../media/Props",colaAssets);
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
-	AssetsReader::read("../media/Granada", colaAssets);*/
-	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
+	AssetsReader::read("../media/Granada", colaAssets);
+	/*ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
 	
 	AssetsReader::read(resourceProvider.getResourceGroupDirectory("weapons"), colaAssets);
 	AssetsReader::read(resourceProvider.getResourceGroupDirectory("bullets"), colaAssets);
-	AssetsReader::read(resourceProvider.getResourceGroupDirectory("props"), colaAssets);
+	AssetsReader::read(resourceProvider.getResourceGroupDirectory("props"), colaAssets);*/
 }
 
 

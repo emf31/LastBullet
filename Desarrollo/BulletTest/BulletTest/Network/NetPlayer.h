@@ -61,6 +61,10 @@ public:
 	void joinSteamLobby(/*const std::string& ip,*/ uint64 lobbyID);
 
 	void sendServerIPtoNewClient();
+	
+	void sendReadyPlayersToNewClient();
+
+	void setReadyPlayers(int ready);
 
 	void leaveLobby() {
 		if (lobby2Client->GetRoomID() != 0) {

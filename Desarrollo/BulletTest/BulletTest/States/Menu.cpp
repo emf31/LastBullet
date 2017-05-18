@@ -2,6 +2,7 @@
 #include <SoundManager.h>
 
 #include <NetworkManager.h>
+#include "../global.h"
 Menu::Menu()
 {
 }
@@ -51,7 +52,9 @@ void Menu::Update(Time timeElapsed)
 {
 	menuGUI.update();
 
-	NetworkManager::i().getNetPlayer()->receiveSteamPackets();
+	if (USING_STEAM) {
+		NetworkManager::i().getNetPlayer()->receiveSteamPackets();
+	}
 
 }
 
