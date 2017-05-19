@@ -1,4 +1,170 @@
-﻿  DebugMenuGUI.cpp
+﻿  Button.cpp
+  Character.cpp
+  Enemy.cpp
+  Enemy_Bot.cpp
+Entities\Enemy_Bot.cpp(142): warning C4101: 'isDying': variable local sin referencia
+  EntActive.cpp
+  EntPassive.cpp
+  Entity.cpp
+  EntityManager.cpp
+  Granada.cpp
+  GroupEntity.cpp
+  GunBullet.cpp
+  LifeObject.cpp
+  PhysicsEntity.cpp
+Entities\PhysicsEntity.cpp(49): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(50): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(54): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(55): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(56): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(60): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(61): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  Player.cpp
+Entities\Player.cpp(204): warning C4101: 'isDying': variable local sin referencia
+  RocketBullet.cpp
+  RocketBulletEnemy.cpp
+  AsaltoDrop.cpp
+  PistolaDrop.cpp
+  RocketLauncherDrop.cpp
+  SniperDrop.cpp
+  Generando código...
+  Compilando...
+  WeaponDrop.cpp
+  Asalto.cpp
+  Pistola.cpp
+  RocketLauncher.cpp
+  Sniper.cpp
+  Weapon.cpp
+  DebugMenuGUI.cpp
+  InGameHUD.cpp
+  LoadingStateGUI.cpp
+  MenuGUI.cpp
+  ParalellTask.cpp
+  Game.cpp
+Game.cpp(151): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  Game.cpp(151): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+Game.cpp(157): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  Game.cpp(157): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+  AStarSearch.cpp
+  SparseGraph.cpp
+Graph\SparseGraph.cpp(11): warning C4018: '>=': no coinciden signed/unsigned
+  InputHandler.cpp
+  MessageHandler.cpp
+  Partida.cpp
+  PathFollow.cpp
+  SensoryMemory.cpp
+  BuscarVida.cpp
+  Generando código...
+c:\users\enrique\documents\github\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
+  Compilando...
+  BuscarWeapon.cpp
+  Disparar.cpp
+  Patrullar.cpp
+  Perseguir.cpp
+  TargetingSystem.cpp
+  WeaponSystem.cpp
+  Celda.cpp
+  Dijkstra.cpp
+  Map.cpp
+  PathPlanner.cpp
+  AnimatedSceneNode.cpp
+  BasicSceneNode.cpp
+  Camera.cpp
+  CameraShake.cpp
+  ClippingManager.cpp
+  ClippingZone.cpp
+  GraphicEngine.cpp
+Motor\GraphicEngine.cpp(37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(40): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(45): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(46): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(47): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(52): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(53): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(54): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(55): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(59): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(60): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(61): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(62): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(66): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(67): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(68): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(69): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(73): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(74): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(75): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(76): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  GunRecoil.cpp
+  MapLoader.cpp
+Motor\MapLoader.cpp(33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+Motor\MapLoader.cpp(184): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(195): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(206): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(228): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+  PhysicsEngine.cpp
+  Generando código...
+  Compilando...
+  RenderState.cpp
+  SceneNode.cpp
+  AsyncEnemyFactory.cpp
+  Lobby.cpp
+  NetBot.cpp
+  NetObject.cpp
+  NetPlayer.cpp
+  NetworkDebugger.cpp
+Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  NetworkLog.cpp
+  NetworkManager.cpp
+  NetworkPrediction.cpp
+Network\NetworkPrediction.cpp(32): warning C4244: 'argumento': conversión de 'RakNet::Time' a 'int'; posible pérdida de datos
+Network\NetworkPrediction.cpp(34): warning C4244: '=': conversión de 'RakNet::Time' a 'RakNet::TimeMS'; posible pérdida de datos
+  SteamResults.cpp
+  AssetsReader.cpp
+  CharacterTypes.cpp
+  DebugMarks.cpp
+Otros\DebugMarks.cpp(42): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+Otros\DebugMarks.cpp(84): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  LifeComponent.cpp
+  Lista.cpp
+  ExplosionParticleSystem.cpp
+ParticleSystem\ExplosionParticleSystem.cpp(114): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+ParticleSystem\ExplosionParticleSystem.cpp(114): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+ParticleSystem\ExplosionParticleSystem.cpp(218): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+ParticleSystem\ExplosionParticleSystem.cpp(240): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+ParticleSystem\ExplosionParticleSystem.cpp(254): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  ParticleSystem.cpp
+  InGame.cpp
+  Generando código...
+  Compilando...
+  LoadingState.cpp
+  Menu.cpp
+  StateFactory.cpp
+  TriggerSystem.cpp
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
+  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+          with
+          [
+              _Kty=unsigned short,
+              _Ty=TriggerRecordStruct *,
+              _Other1=unsigned long &,
+              _Other2=TriggerRecordStruct *&
+          ]
+  TriggerSystem\TriggerSystem.cpp(22): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<const _Kty,_Ty>::pair<unsigned long&,TriggerRecordStruct*&,void,0>(_Other1,_Other2) noexcept' que se está compilando
+          with
+          [
+              _Kty=unsigned short,
+              _Ty=TriggerRecordStruct *,
+              _Other1=unsigned long &,
+              _Other2=TriggerRecordStruct *&
+          ]
+  World.cpp
+  main.cpp
+  Generando código...
      Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LIBCMT.lib(initializers.obj) : warning LNK4098: la biblioteca predeterminada'msvcrt.lib' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código

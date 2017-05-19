@@ -89,6 +89,12 @@ void DebugMenuGUI::inicializar() {
 	Oclusions = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(21));
 	Oclusions->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onOclusions, this));
 
+	StaticShadows = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(23));
+	StaticShadows->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onStaticShadows, this));
+
+	DinamicShadows = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(24));
+	DinamicShadows->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDinamicShadows, this));
+
 	
 
 	//MENU LOG NETWORK
@@ -676,6 +682,18 @@ bool DebugMenuGUI::onOclusions(const CEGUI::EventArgs & e)
 		Oclusions->setText("Enable Oclusions");
 	}
 
+	return true;
+}
+
+bool DebugMenuGUI::onStaticShadows(const CEGUI::EventArgs & e)
+{
+	addPrintText("Sombras Estaticas");
+	return true;
+}
+
+bool DebugMenuGUI::onDinamicShadows(const CEGUI::EventArgs & e)
+{
+	addPrintText("Sombras Dinamicas");
 	return true;
 }
 

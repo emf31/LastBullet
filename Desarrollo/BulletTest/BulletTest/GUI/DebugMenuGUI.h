@@ -65,6 +65,9 @@ private:
 	bool onClipping(const CEGUI::EventArgs & e);
 	bool onOclusions(const CEGUI::EventArgs & e);
 
+	bool onStaticShadows(const CEGUI::EventArgs & e);
+	bool onDinamicShadows(const CEGUI::EventArgs & e);
+
 	bool onMovementPrediction(const CEGUI::EventArgs & e);
 
 	Vec3<float> elegirColor(std::string estadoActual);
@@ -77,7 +80,8 @@ private:
 
 	void crearNodoBot(Entity* myentity);
 
-	
+	CEGUI::PushButton *StaticShadows;
+	CEGUI::PushButton *DinamicShadows;
 	CEGUI::PushButton *godMode;
 	CEGUI::PushButton *prediction;
 	CEGUI::PushButton *Clipping;

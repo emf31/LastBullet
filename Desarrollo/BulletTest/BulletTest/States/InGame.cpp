@@ -192,7 +192,7 @@ void InGame::Update(Time timeElapsed)
 		EntityManager::i().update(timeElapsed);
 	}
 	
-	ClippingManager::i().update();
+	
 
 	TriggerSystem::i().Update();
 
@@ -219,7 +219,7 @@ void InGame::Render(float interpolation, Time elapsedTime)
 
 	EntityManager::i().updateRender(interpolation);
 
-	
+	ClippingManager::i().update();
 
 	GraphicEngine::i().updateCamera();
 
