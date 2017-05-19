@@ -1,0 +1,32 @@
+newmtl BrazosSG
+illum 4
+Kd 0.07 0.00 0.60
+Ka 0.07 0.00 0.60
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl CabezaSG
+illum 4
+Kd 1.00 0.58 0.58
+Ka 1.00 0.58 0.58
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl Object001SG
+illum 4
+Kd 0.59 0.59 0.59
+Ka 0.59 0.59 0.59
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl PiernasSG
+illum 4
+Kd 0.96 0.00 1.00
+Ka 0.96 0.00 1.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
