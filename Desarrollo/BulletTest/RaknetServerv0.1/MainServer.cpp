@@ -153,7 +153,7 @@ void getPackets() {
 
 			//Enviamos el nuevo bot a todos los players menos al host 
 			//EntityManager::i().sendPlayer(t_player, peer);
-			//EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
+			EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
 
 			Bot *bot = new Bot(t_player.name, t_player.guid);
 			bot->setPosition(Vec3<float>(0, 0, 0));
@@ -169,6 +169,7 @@ void getPackets() {
 			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 			unsigned char typeId;
 			bool isDying;
+			bool isOnGround;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -178,6 +179,7 @@ void getPackets() {
 			myBitStream.Read(timeStamp);
 			myBitStream.Read(typeId);
 			myBitStream.Read(isDying);
+			myBitStream.Read(isOnGround);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);
@@ -251,6 +253,7 @@ void getPackets() {
 
 			//notifico a ese cliente que ha sido disparado
 			EntityManager::i().enviarDisparoClienteRocket(p_bala, gameinfo.creador, peer);
+
 			break;
 		}
 

@@ -6,14 +6,13 @@
 
 #include <Estructuras.h>
 #include <Message.h>
-#include <Animation.h>
 
 #include <queue>
 
 #include <BasicSceneNode.h>
 #include <Granada.h>
 
-#include <SoundManager.h>
+
 
 class Enemy : public Character
 {
@@ -33,29 +32,21 @@ public:
 
 	void updateEnemigo(Vec3<float> pos);
 
-	//void updateAnimation();
-	void updateState();
-
 	virtual void handleMessage(const Message & message) override;
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
-
-	void lanzarGranada(TGranada g);
-
+	virtual bool isOnGround() const override;
 	virtual bool isDying() override;
 
 	void setIsDying(bool die) { getLifeComponent()->setIsDying(die); }
 
-	float getRadio(){
-		return radius;
-	}
+	float getRadio(){ return radius; }
 
 	void setVisibilidadBilboardSync();
 
 	NetworkPrediction* getNetworkPrediction() { return &nPrediction; }
 	
-
 private:
 
 	std::shared_ptr<SceneNode> m_nodoPersonaje;
@@ -63,22 +54,15 @@ private:
 	float radius;
 	float height;
 	float mass;
-	Animation* animation;
 
-	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
-	bool isMoving;
-
-	//bool m_isDying;
-
-	Clock relojMuerte;
 	
+	
+
+
 	NetworkPrediction nPrediction;
 
 
 	btRigidBody* m_rigidBody;
-	
-
-	ISound* footsteps;
 	
 };
 

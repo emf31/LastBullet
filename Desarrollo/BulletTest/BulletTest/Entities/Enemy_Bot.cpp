@@ -15,6 +15,7 @@
 #include <Map.h>
 #include <TriggerSystem.h>
 #include <LogIA.h>
+#include <Run.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
@@ -51,16 +52,66 @@ void Enemy_Bot::inicializar()
 	camaraBot->asignarEntity(this);
 
 
-
-	sense = new SensoryMemory(this,20);
+	sense = new SensoryMemory(this, 20);
 
 	//angulo de vision
 	FOV = DegToRad(45) ;
 
 
 	m_pStateMachine = new MachineState(this);
-	//m_pStateMachine->SetGlobalState(&Patrullar::i());
-	//GraphicEngine::i().setActiveCamera("CamaraAerea");
+	
+
+	animationMachine = new AnimationMachine(this);
+
+	
+
+}
+
+void Enemy_Bot::cargarContenido()
+{
+
+	//Creas el nodo(grafico)
+	m_nodo = GraphicEngine::i().createAnimatedNode(
+		"../media/personaje1", 94
+	);
+	m_nodo->setAnimation("correr", 0, 16, true);
+	m_nodo->setAnimation("muerte", 17, 69, false);
+	m_nodo->setAnimation("salto", 70, 93, false);
+	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setFrameTime(milliseconds(20));
+	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
+
+	//Start runing
+	animationMachine->SetCurrentAnimation(&Run::i());
+
+	animationMachine->ChangeState(&Run::i());
+
+
+
+	radius = 0.5f;
+	height = 3.f;
+	mass = 70.f;
+
+
+	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
+
+
+	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
+	proxy->m_collisionFilterGroup = col::Collisions::Bot;
+	proxy->m_collisionFilterMask = col::BotCollidesWith;
+
+
+
+	p_controller->m_acceleration_walk = 1.1f;
+	p_controller->m_deceleration_walk = 8.f;
+	p_controller->m_maxSpeed_walk = 1.f;
+
+	setPosition(Map::i().searchSpawnPoint());
+
+	lookAt(Vec2f(0, 0));
+
+	m_pStateMachine->SetCurrentState(&BuscarWeapon::i());
+
 
 }
 
@@ -97,7 +148,8 @@ void Enemy_Bot::update(Time elapsedTime)
 
 			ciclo = 0;
 
-			updateAnimation();
+			//update animations
+			animationMachine->Update();
 
 			updateMovement();
 
@@ -111,19 +163,33 @@ void Enemy_Bot::update(Time elapsedTime)
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - radius,
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
+			moving = true;
 
-				targetingSystem->Update();
+			if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
+				m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
+				m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
+			{
+				moving = false;
+			}
+
 			
 
-				sense->updateVision();
+
+
+			targetingSystem->Update();
+			
+
+			sense->updateVision();
 			
 
 			weaponSystem->TakeAimAndShoot();
 
-			if (!this->getMachineState()->isInState("BuscarVida"))
+			if (!this->getMachineState()->isInState("BuscarVida")) {
 				FuzzyLifeObject();
+			}
+			
 
-				m_pStateMachine->Update();
+			m_pStateMachine->Update();
 			
 
 
@@ -132,11 +198,10 @@ void Enemy_Bot::update(Time elapsedTime)
 				Vec3<float> posCam = GraphicEngine::i().getActiveCamera()->getPosition();
 
 				GraphicEngine::i().setTargetActiveCamera(Vec3<float>(m_vHeading.x + m_renderState.getRenderPos().getX(), m_renderState.getRenderPos().getY(), m_vHeading.y + m_renderState.getRenderPos().getZ()));
-				std::cout << "TargetCamara" << m_vHeading.x + posCam.getX() << " " << posCam.getY() << " " << m_vHeading.y + posCam.getZ() << std::endl;
 				
 
 			}
-			//GraphicEngine::i().createNode((Vec3<float>(m_vHeading.x  + m_renderState.getRenderPos().getX(), m_renderState.getRenderPos().getY(), m_vHeading.y  + m_renderState.getRenderPos().getZ())), Vec3<float>(1.f, 1.f, 1.f), "", "../media/box.obj");
+			
 			
 			if (m_network->isConnected()) {
 
@@ -156,6 +221,7 @@ void Enemy_Bot::update(Time elapsedTime)
 				myBitStream.Write(timeStamp);
 				myBitStream.Write(typeId);
 				myBitStream.Write(getLifeComponent().isDying());
+				myBitStream.Write(p_controller->onGround());
 				myBitStream.Write(getRenderState()->getPosition());
 				myBitStream.Write(getRenderState()->getRotation());
 				myBitStream.Write(getGuid());
@@ -181,55 +247,7 @@ void Enemy_Bot::handleInput()
 
 }
 
-void Enemy_Bot::cargarContenido()
-{
 
-	//Creas el nodo(grafico)
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 100, 0), Vec3<float>(0.075f, 0.075f, 0.075f), "", "../media/Personaje/personaje.obj");
-	//m_nodo->setTexture("../media/body01.png", 1);
-	//m_nodo->setTexture("../media/head01.png", 0);
-	//m_nodo->setTexture("../media/m4tex.png", 2);
-
-	//nodo, size, relposition, color
-	//GraphicEngine::i().createBillboardText(m_nodo, m_name, Vec2f(9, 3), Vec3<float>(0, 250, 0), Color4f(255, 0, 255, 0));
-
-	animation.addAnimation("Default", 0, 0);
-	animation.addAnimation("Run_Forwards", 1, 69);
-	animation.addAnimation("Run_backwards", 70, 138);
-	animation.addAnimation("Walk", 139, 183);
-	animation.addAnimation("Jump", 184, 219);
-	animation.addAnimation("Jump2", 184, 219);
-	animation.addAnimation("Idle", 220, 472);
-	animation.addAnimation("AimRunning", 473, 524);
-
-	m_animState = andando;
-
-	radius = 0.5f;
-	height = 3.f;
-	mass = 70.f;
-
-
-	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
-
-
-	btBroadphaseProxy* proxy = p_controller->getGhostObject()->getBroadphaseHandle();
-	proxy->m_collisionFilterGroup = col::Collisions::Bot;
-	proxy->m_collisionFilterMask = col::BotCollidesWith;
-
-	
-
-	p_controller->m_acceleration_walk = 0.8f;
-	p_controller->m_deceleration_walk = 5.f;
-	p_controller->m_maxSpeed_walk = 0.7f;
-
-	setPosition(Map::i().searchSpawnPoint());
-
-	lookAt(Vec2f(0, 0));
-
-	m_pStateMachine->SetCurrentState(&BuscarWeapon::i());
-
-
-}
 
 void Enemy_Bot::borrarContenido()
 {
@@ -238,6 +256,7 @@ void Enemy_Bot::borrarContenido()
 	delete sense;
 	delete weaponSystem;
 	delete targetingSystem;
+	delete animationMachine;
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 
@@ -323,6 +342,7 @@ void Enemy_Bot::updateMovement()
 		btVector3 vel = btVector3(direccion.x, 0, direccion.y);
 
 		p_controller->setWalkDirection(vel);
+
 	}
 	else {
 		p_controller->reset(PhysicsEngine::i().m_world);
@@ -337,7 +357,7 @@ void Enemy_Bot::lookAt(Vec2f at) {
 
 	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
 
-	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle) + 180.f, 0));
 
 }
 
@@ -345,7 +365,7 @@ void Enemy_Bot::updateFacing()
 {
 	float angle = std::atan2(m_vHeading.x, m_vHeading.y);
 
-	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle), 0));
+	m_renderState.updateRotations(Vec3<float>(0, RadToDeg(angle) + 180.f, 0));
 }
 
 Vec2f Enemy_Bot::createPathToPosition(Vec3<float> vec) {
@@ -408,35 +428,7 @@ void Enemy_Bot::followPathAlreadyCreated(std::list<Vec3<float>> &camino)
 	m_PathFollow->FollowOn();
 }
 
-void Enemy_Bot::updateAnimation()
-{
-	/*switch (m_animState)
-	{
-	case quieto:
-		if (animation.getActualAnimation() != "Idle") {
-			m_nodo.get()->setAnimation(animation.getAnimationStart("Idle"), animation.getAnimationEnd("Idle"));
-		}
-		break;
 
-	case andando:
-		if (animation.getActualAnimation() != "Walk") {
-			m_nodo.get()->setAnimation(animation.getAnimationStart("Walk"), animation.getAnimationEnd("Walk"));
-		}
-		break;
-
-	case saltando:
-		if (animation.getActualAnimation() != "Jump") {
-			m_nodo.get()->setAnimation(animation.getAnimationStart("Jump"), animation.getAnimationEnd("Jump"));
-		}
-		break;
-	case saltando2:
-		if (animation.getActualAnimation() != "Jump2") {
-			m_nodo.get()->setAnimation(animation.getAnimationStart("Jump2"), animation.getAnimationEnd("Jump2"));
-		}
-		break;
-
-	}*/
-}
 
 void Enemy_Bot::crearFuzzyRules() {
 
@@ -628,6 +620,11 @@ float Enemy_Bot::getVida() {
 
 bool Enemy_Bot::isDying() {
 	return life_component->isDying();
+}
+
+bool Enemy_Bot::isOnGround() const
+{
+	return p_controller->onGround();
 }
 
 float Enemy_Bot::getDesiAsalto() {

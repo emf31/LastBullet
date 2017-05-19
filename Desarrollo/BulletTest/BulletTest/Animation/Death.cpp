@@ -4,10 +4,12 @@
 void Death::Enter(Character * pEnemy)
 {
 	pEnemy->getNode()->setCurrentAnimation("muerte");
+	
 }
 
 void Death::Exit(Character * pEnemy)
 {
+	
 }
 
 void Death::Execute(Character * pCharacter)

@@ -91,6 +91,7 @@ public:
 
 	virtual float getVida() override;
 	virtual bool isDying() override;
+	virtual bool isOnGround() const override;
 	virtual float getDesiAsalto() override;
 	virtual float getDesiRocketLauncher() override;
 	virtual float getDesiSniper()  override;
@@ -126,11 +127,6 @@ private:
 
 	int ciclo = 0;
 	int valorCiclos = 1;//CAMBIALO A 25 TODO
-
-
-	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
-
-	void updateAnimation();
 
 
 	//el bot lo usa para seguir un camino

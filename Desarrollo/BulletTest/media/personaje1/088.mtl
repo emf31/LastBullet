@@ -1,0 +1,51 @@
+newmtl Brazos1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd personaje1/azul_brazos.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl CabezaSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd personaje1/azul_casco.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl Line0010SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd personaje1/Arriba.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks personaje1/Arriba_SPEC.jpg
+map_Kn personaje1/Arriba_NRM.jpg
+map_Ke personaje1/Arriba_EMI.jpg
+Ns 4.31
+newmtl Line0010SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.0
+map_Kd personaje1/Abajo.jpg
+map_Ks personaje1/Abajo_SPEC.jpg
+map_Kn personaje1/Abajo_NRM.jpg
+map_Ke personaje1/Abajo_EMI.jpg
+Ns 4.31
+newmtl PiernasSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd personaje1/azul_piernas.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00

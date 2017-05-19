@@ -429,6 +429,7 @@ TNode * SceneManager::crearNodoTraslacion(TNode * nodoPadre, int entityID)
 	TTransform* trans = new TTransform();
 	trans->setPosition(Vec3<float>(0.0f, 0.0f, 0.0f));
 	transNode->setEntity(trans);
+	trans->setMiNodo(transNode);
 	return transNode;
 }
 
@@ -437,6 +438,7 @@ TNode * SceneManager::crearNodoRotacion(TNode * nodoPadre, int entityID)
 	TNode* transNode = new TNode(entityID, nodoPadre);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
+	trans->setMiNodo(transNode);
 	return transNode;
 }
 
@@ -445,6 +447,7 @@ TNode * SceneManager::crearNodoEscalado(TNode * nodoPadre, int entityID)
 	TNode* transNode = new TNode(entityID, nodoPadre);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
+	trans->setMiNodo(transNode);
 	
 	return transNode;
 }

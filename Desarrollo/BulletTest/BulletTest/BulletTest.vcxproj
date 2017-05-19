@@ -167,6 +167,7 @@
     <ClInclude Include="Animation\AnimationCharacter.h" />
     <ClInclude Include="Animation\AnimationMachine.h" />
     <ClInclude Include="Animation\Death.h" />
+    <ClInclude Include="Animation\Salto.h" />
     <ClInclude Include="Animation\Run.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
@@ -178,7 +179,6 @@
     <ClInclude Include="Command\MoveUp.h" />
     <ClInclude Include="Command\Reload.h" />
     <ClInclude Include="Command\ShootAsalto.h" />
-    <ClInclude Include="Command\ShootCommandGranada.h" />
     <ClInclude Include="Command\ShootPistola.h" />
     <ClInclude Include="Command\ShootRocket.h" />
     <ClInclude Include="Entities\Button.h" />
@@ -351,6 +351,7 @@
     <ClCompile Include="Animation\AnimationCharacter.cpp" />
     <ClCompile Include="Animation\AnimationMachine.cpp" />
     <ClCompile Include="Animation\Death.cpp" />
+    <ClCompile Include="Animation\Salto.cpp" />
     <ClCompile Include="Animation\Run.cpp" />
     <ClCompile Include="Entities\Button.cpp" />
     <ClCompile Include="Entities\Character.cpp" />

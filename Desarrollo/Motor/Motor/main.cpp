@@ -41,23 +41,36 @@ int main() {
 		return -1;
 	}
 	SceneManager &sm = SceneManager::i();
+
+	TNode* nodo = new TNode(1000, SceneManager::i().getRootNode());
+
 	sm.inicializarBuffers();
 	sm.setActiveCamera(sm.crearNodoCamara());
 	//*******MODELOS***********
 
+	
+
 	//window
 	TModel* window2 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
+	//TModel* window3 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
+	//window3->addChild(window2);
+	//window3->addChild(window);
 	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
-	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
+	window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
+	window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
+	//window3->setVisible(true);
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
-	TNode* nodo = new TNode(-1, SceneManager::i().getRootNode());
-	addChild(nodo, window);
-	addChild(nodo, window2);
+	
+	SceneManager::i().getRootNode()->addChild(nodo);
+	nodo->addChild(window);
+	nodo->addChild(window2);
 	nodo->setVisible(false);
+
+
 	
 
-	//pistola
+	/*//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
 	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 
@@ -92,16 +105,17 @@ int main() {
 
 	
 	//animacion
-	int velocidadAnim = 10;
-	std::cout << "Cargando animaciones..." << std::endl;
 
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje1", 70));
-	pruebaAnim->setAnimation("correr", 0, 16, true);
-	pruebaAnim->setAnimation("muerte", 17, 69, false);
-	pruebaAnim->setCurrentAnimation("correr");
-	pruebaAnim->setFrameTime(milliseconds(35));
-	pruebaAnim->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
-	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	//int velocidadAnim = 10;
+	//std::cout << "Cargando animaciones..." << std::endl;
+	//TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
+	//pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	//pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+	//pruebaAnim->setAnimation("idle",0,34);
+	//pruebaAnim->setAnimation("saltar", 40, 109);
+	//pruebaAnim->setAnimation("correr", 110, 190);
+	//pruebaAnim->setCurrentAnimation("idle");
 
 
 	//personaje
@@ -109,7 +123,7 @@ int main() {
 	origen2->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 	origen2->setPosition(Vec3<float>(20.0f, 0.f, 0.0f));
 	
-	//pruebaAnim->setFrameTime(seconds(2.0));
+	//pruebaAnim->setFrameTime(seconds(2.0));*/
 
 
 	//*******LUCES*******
@@ -247,24 +261,24 @@ int main() {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
 		}
-		else if (Input::i().keyReleased(GLFW_KEY_J)) {
-			pruebaAnim->setCurrentAnimation("saltar");
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_C)) {
-			pruebaAnim->setCurrentAnimation("correr");
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_I)) {
-			pruebaAnim->setCurrentAnimation("idle");
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_R)) {
-			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		//else if (Input::i().keyReleased(GLFW_KEY_J)) {
+		//	pruebaAnim->setCurrentAnimation("saltar");
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_C)) {
+		//	pruebaAnim->setCurrentAnimation("correr");
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_I)) {
+		//	pruebaAnim->setCurrentAnimation("idle");
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_R)) {
+		//	velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_L)) {
-			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-		}
+		//}
+		//else if (Input::i().keyReleased(GLFW_KEY_L)) {
+		//	velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		//}
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
 		}
@@ -277,8 +291,8 @@ int main() {
 		newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
 		//p1->setOrientation(vecDir);
-		p1->setPosition(sm.camaraActiva->getPosition());
-		p1->updatePosition(newPos);
+		//p1->setPosition(sm.camaraActiva->getPosition());
+		//p1->updatePosition(newPos);
 		flash3->setPosition(sm.camaraActiva->getPosition());
 		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 

@@ -38,7 +38,10 @@ Object* MapLoader::createObject(json& obj) {
 	//Modify vectors so OpenGL can understand them
 	UnityCoordsToOpenGL(o->pos, o->rot, o->es);
 
-	nameMesh = "../media/Props/" + nameMesh + ".obj";
+	//We get the resource provider
+	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
+
+	nameMesh = resourceProvider.getResourceGroupDirectory("props") + nameMesh + ".obj";
 	o->nameMesh = nameMesh;
 	o->mesh = nameMesh.c_str();
 

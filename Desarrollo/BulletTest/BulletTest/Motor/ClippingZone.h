@@ -16,7 +16,6 @@ public:
 	int id;
 
 private:
-	std::vector<Entity*> m_entities;
 	std::vector<Vec3<float>> m_points;
 	bool m_visible;
 	void putAllEntitiesInVisible(bool visible);

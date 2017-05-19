@@ -9,7 +9,6 @@
 #include "../Command/ShootAsalto.h"
 #include "../Command/ShootRocket.h"
 #include "../Command/ShootPistola.h"
-#include "../Command/ShootCommandGranada.h"
 #include "../Command/Reload.h"
 #include "../Command/Apuntar.h"
 
@@ -30,7 +29,6 @@ InputHandler::InputHandler()
 	shoot_asalto = CommandPtr(new ShootAsalto());
 	shoot_rocket = CommandPtr(new ShootRocket());
 	shoot_pistola = CommandPtr(new ShootPistola());
-	shoot_commandGranada = CommandPtr(new ShootCommandGranada());
 	reload = CommandPtr(new Reload());
 	apuntar = CommandPtr(new Apuntar());
 
@@ -45,7 +43,6 @@ InputHandler::InputHandler()
 	commands[GLFW_KEY_SPACE] = jump;
 	commands[GLFW_MOUSE_BUTTON_1] = shoot_pistola;
 	commands[GLFW_MOUSE_BUTTON_2] = apuntar;
-	commands[GLFW_KEY_G] = shoot_commandGranada;
 
 	
 }

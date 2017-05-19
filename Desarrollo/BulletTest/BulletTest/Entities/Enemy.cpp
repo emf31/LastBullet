@@ -18,8 +18,6 @@
 
 Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
 {
-
-
 	EntityManager::i().registerRaknetEntity(this);
 }
 
@@ -31,56 +29,11 @@ Enemy::~Enemy()
 
 void Enemy::inicializar()
 {
-
-	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
-	footsteps->setIsPaused(true);
-
 	animationMachine = new AnimationMachine(this);
 
-	//Start runing
-	animationMachine->SetCurrentAnimation(&Run::i());
 	
-}
 
-void Enemy::update(Time elapsedTime)
-{
-	animationMachine->Update();
-
-	if (NetworkManager::i().isMovementPrediction()) {
-		//nPrediction.interpolateWithoutPrediction();
-	}
-	else {
-		//nPrediction.interpolateWithoutPrediction();
-	}
-
-	updateState();
-
-
-	isMoving = true;
-
-	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
-		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
-		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
-		isMoving = false;
-
-	if (isMoving) {
-		footsteps->setIsPaused(false);
-	}
-	else if (footsteps != NULL) {
-		footsteps->setIsPaused(true);
-	}
-
-
-	//m_pStateMachine->Update();
-
-	/*if (m_isDying && relojMuerte.getElapsedTime().asSeconds() > 3) {
-	m_isDying = false;
-	}*/
-
-}
-
-void Enemy::handleInput()
-{
+	
 }
 
 void Enemy::cargarContenido()
@@ -89,13 +42,19 @@ void Enemy::cargarContenido()
 
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 70
-		);
+		"../media/personaje1", 94
+	);
 	m_nodo->setAnimation("correr", 0, 16, true);
 	m_nodo->setAnimation("muerte", 17, 69, false);
-	m_nodo->setCurrentAnimation("muerte");
-	m_nodo->setFrameTime(milliseconds(35));
+	m_nodo->setAnimation("salto", 70, 93, false);
+	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
+
+	//Start runing
+	animationMachine->SetCurrentAnimation(&Run::i());
+
+	animationMachine->ChangeState(&Run::i());
 
 	radius = 0.5f;
 	height = 3.f;
@@ -111,9 +70,39 @@ void Enemy::cargarContenido()
 
 }
 
+void Enemy::update(Time elapsedTime)
+{
+	animationMachine->Update();
+
+	if (NetworkManager::i().isMovementPrediction()) {
+		nPrediction.interpolateWithPrediction();
+	}
+	else {
+		nPrediction.interpolateWithoutPrediction();
+	}
+
+
+	moving = true;
+
+	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
+		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
+		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ()) 
+	{
+		moving = false;
+	}
+		
+
+}
+
+void Enemy::handleInput()
+{
+}
+
+
+
 void Enemy::borrarContenido()
 {
-	delete animation;
+	delete animationMachine;
 
 	PhysicsEngine::i().removeRigidBody(m_rigidBody);
 
@@ -167,6 +156,8 @@ void Enemy::handleMessage(const Message & message)
 
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 
+
+		//Solo informar al player del impacto al enemigo si este esta vivo
 		Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
 
 		if (p && !isDying()) {
@@ -183,61 +174,16 @@ bool Enemy::handleTrigger(TriggerRecordStruct * Trigger)
 	return false;
 }
 
-
-
-void Enemy::lanzarGranada(TGranada g)
-{
-	//granada->serverShoot(g);
-}
-
 void Enemy::setVisibilidadBilboardSync()
 {
 	m_nodo->setTexture("../media/body01green.png", 1);
 }
 
 
-/*void Enemy::updateAnimation()
+bool Enemy::isOnGround() const
 {
-	switch (m_animState)
-	{
-	case quieto:
-		if (animation->getActualAnimation() != "Idle") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Idle"), animation->getAnimationEnd("Idle"));
-		}
-		break;
-
-	case andando:
-		if (animation->getActualAnimation() != "Walk") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Walk"), animation->getAnimationEnd("Walk"));
-		}
-		break;
-
-	case saltando:
-		if (animation->getActualAnimation() != "Jump") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump"), animation->getAnimationEnd("Jump"));
-		}
-		break;
-	case saltando2:
-		if (animation->getActualAnimation() != "Jump2") {
-			m_nodo.get()->setAnimation(animation->getAnimationStart("Jump2"), animation->getAnimationEnd("Jump2"));
-		}
-		break;
-
-	}
-}*/
-
-void Enemy::updateState()
-{
-	if (isMoving) {
-		m_animState = andando;
-	}
-	else {
-		m_animState = quieto;
-	}
+	return onGround;
 }
-
-
-
 
 bool Enemy::isDying() {
 	return getLifeComponent()->isDying();

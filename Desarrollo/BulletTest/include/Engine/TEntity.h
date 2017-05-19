@@ -34,13 +34,14 @@ public:
 
 	void setMiNodo(TNode * nodo);
 	TNode* getMiNodo();
+	int getID();
 
 private:
 	int entityID = -1;
 	TNode * miNodo;
 
 protected:
-	int getID();
+
 	void setID(int id);
 	
 	void setTransformacionRotacion(TTransform* rot);

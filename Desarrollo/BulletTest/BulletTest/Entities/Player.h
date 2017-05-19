@@ -50,7 +50,6 @@ public:
 	void jump();
 
 	void shoot();
-	void shootGranada();
 
 	void move_up();
 	void move_down();
@@ -67,8 +66,6 @@ public:
 	void impulsar(Vec3<float> force);
 
 	void godMode();
-
-	void setNodoPersonajeVisibility(bool visibility) { m_nodoPersonaje->setVisible(visibility); }
 
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
@@ -108,6 +105,7 @@ public:
 
 	virtual float getVida() override;
 	virtual bool isDying() override;
+	virtual bool isOnGround() const override;
 
 	bool isShooting;
 
@@ -119,8 +117,6 @@ public:
 private:
 	
 	void targetToWorld(Vec3<float>& target);
-
-	Animation* animation;
 
 	//LISTA DE ARMAS
 	Lista* listaWeapons;

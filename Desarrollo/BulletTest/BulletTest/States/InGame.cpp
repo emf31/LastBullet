@@ -15,6 +15,7 @@
 #include <Map.h>
 #include <Death.h>
 #include <Run.h>
+#include <Salto.h>
 
 InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
 {
@@ -64,11 +65,6 @@ void InGame::Inicializar()
 
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), true);
 
-	ene = new Enemy("pepe", RakNet::UNASSIGNED_RAKNET_GUID);
-	ene->inicializar();
-	ene->cargarContenido();
-	
-
 }
 
 void InGame::Clear()
@@ -97,11 +93,20 @@ void InGame::HandleEvent()
 
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
-		ene->getAnimationMachine()->ChangeState(&Death::i());
+		/*static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime++;
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
+
+		DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));*/
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_N)) {
-		ene->getAnimationMachine()->ChangeState(&Run::i());
+		/*static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime--;
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
+
+		DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));*/
 	}
+
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 
 		GraphicEngine::i().toggleCamera();
@@ -177,13 +182,6 @@ void InGame::HandleEvent()
 		ClippingManager::i().printZonesVisibility();
 
 	}
-	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {
-		//GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
-		ClippingManager::i().canUpdate = true;
-
-
-
-	}
 	
 	else if (Input::i().leftMouseDown()) {
 
@@ -205,7 +203,7 @@ void InGame::HandleEvent()
 
 void InGame::Update(Time timeElapsed)
 {
-	ene->setPosition(Map::i().searchSpawnPoint() + Vec3<float>(3,0,3));
+
 
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();
@@ -215,8 +213,6 @@ void InGame::Update(Time timeElapsed)
 		EntityManager::i().update(timeElapsed);
 	}
 	
-	ClippingManager::i().update();
-
 	TriggerSystem::i().Update();
 
 	PhysicsEngine::i().notifyCollisions();
@@ -237,12 +233,10 @@ void InGame::Update(Time timeElapsed)
 void InGame::Render(float interpolation, Time elapsedTime)
 {
 
-	
-
-
 	EntityManager::i().updateRender(interpolation);
 
-	
+
+	ClippingManager::i().update();
 
 	GraphicEngine::i().updateCamera();
 

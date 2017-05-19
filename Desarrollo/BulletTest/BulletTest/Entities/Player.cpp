@@ -20,15 +20,18 @@
 #include <Map.h>
 #include <TimePerFrame.h>
 #include <SoundManager.h>
+#include <GUIManager.h>
+#include <InGameHUD.h>
 
 
 #include <NetworkManager.h>
 #include <glm\glm.hpp>
+#include <Run.h>
 
-#include "irrKlang/ik_ISound.h"
 
 
-Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false), footsteps(NULL), isMoving(false)
+
+Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false), isMoving(false)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
@@ -72,7 +75,9 @@ void Player::inicializar()
 	
 	
 
-	animation = new Animation;
+	animationMachine = new AnimationMachine(this);
+
+	
 
 	/*******************************/
 	/*******INICIALIZAR ARMAS******/
@@ -102,21 +107,8 @@ void Player::inicializar()
 	asalto->setEquipada(true);
 	bindWeapon();
 
-	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
-	footsteps->setIsPaused(true);
-	/*listaWeapons->insertar(sniper);
-	tieneSniper = true;
 
-	listaWeapons->insertar(asalto);
-	tieneAsalto = true;
 
-	listaWeapons->insertar(rocket);
-	tieneRocketLauncher = true;*/
-
-	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(pistola->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(sniper->getNode());*/
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
@@ -125,15 +117,131 @@ void Player::inicializar()
 	tieneSniper = true;
 	bindWeapon();*/
 
-	/*ResourceProvider& rp = Settings::i().GetResourceProvider();
-	m_nodoPersonaje = GraphicEngine::i().createNode(
-		m_renderState.getPosition(),
-		Vec3<float>(0.075f, 0.075f, 0.075f),
-		"",
-		rp.getFinalFilename("personaje2.obj", "characters"));
-	m_nodoPersonaje->setVisible(false);*/
+	//Creas el nodo(grafico)
+
+}
+
+void Player::cargarContenido()
+{
+	//Creas el nodo(grafico)
+
+
+	ResourceProvider& rp = Settings::i().GetResourceProvider();
 
 	//Creas el nodo(grafico)
+	m_nodo = GraphicEngine::i().createAnimatedNode(
+		"../media/personaje1", 94
+	);
+	m_nodo->setAnimation("correr", 0, 16, true);
+	m_nodo->setAnimation("muerte", 17, 69, false);
+	m_nodo->setAnimation("salto", 70, 93, false);
+	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setFrameTime(milliseconds(20));
+	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
+
+	m_nodo->setVisible(false);
+
+	//Start runing
+	animationMachine->SetCurrentAnimation(&Run::i());
+
+	animationMachine->ChangeState(&Run::i());
+
+
+
+	radius = 0.5f;
+	height = 3.f;
+	mass = 70.f;
+
+	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
+
+	p_controller->m_acceleration_walk = 1.1f;
+	p_controller->m_deceleration_walk = 8.f;
+	p_controller->m_maxSpeed_walk = 1.f;
+
+
+	life_component->resetVida();
+
+	p_controller->reset(PhysicsEngine::i().m_world);
+
+	setPosition(Map::i().searchSpawnPoint());
+
+
+
+}
+
+
+
+
+void Player::update(Time elapsedTime)
+{
+	
+
+	calcularMovimiento();
+
+	life_component->update();
+	
+	p_controller->updateAction(PhysicsEngine::i().m_world, TimePerFrameClass::GetTimePerFrame().asSeconds());
+
+	
+
+	m_renderState.updatePositions(Vec3<float>(
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
+		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
+
+	
+	if (!life_component->isDying()) {
+		m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
+	}
+
+	moving = true;
+
+	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
+		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
+		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
+	{
+		moving = false;
+	}
+
+
+	//update animations
+	animationMachine->Update();
+
+	if (m_network->isConnected()) {
+
+		unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
+		RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
+		unsigned char typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINEf
+		Vec3<float> position;
+		Vec3<float> rotation;
+		RakNet::RakNetGUID guid;
+
+		useTimeStamp = ID_TIMESTAMP;
+		timeStamp = RakNet::GetTime();
+		typeId = MOVIMIENTO;
+		RakNet::BitStream myBitStream;
+		myBitStream.Write(useTimeStamp);
+		myBitStream.Write(timeStamp);
+		myBitStream.Write(typeId);
+		myBitStream.Write(getLifeComponent().isDying());
+		myBitStream.Write(p_controller->onGround());
+		myBitStream.Write(getRenderState()->getPosition());
+		myBitStream.Write(getRenderState()->getRotation());
+		myBitStream.Write(getGuid());
+
+		m_network->peer->Send(&myBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_network->getServerGUID(), false);
+		
+	}
+
+	if (m_renderState.getPosition().getY() < -200) {
+		getLifeComponent().restaVida(100, m_guid);
+	}
+
+	SoundManager::i().setListenerPosition(m_renderState.getPosition(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
+
+	//m_nodoPersonaje->setPosition(m_renderState.getPosition());
+
+	updateRelojes();
 
 }
 
@@ -141,7 +249,7 @@ void Player::calcularMovimiento() {
 	isMoving = false;
 	isShooting = false;
 
-	
+
 
 	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
 	if (p_controller->onGround() && p_controller->jumpedOnAir) {
@@ -169,112 +277,16 @@ void Player::calcularMovimiento() {
 }
 
 
-void Player::update(Time elapsedTime)
-{
-	if (isMoving && p_controller->onGround()) {
-		footsteps->setIsPaused(false);
-	}
-	else if (footsteps != NULL) {
-		footsteps->setIsPaused(true);
-	}
-
-	calcularMovimiento();
-
-	life_component->update();
-	
-	p_controller->updateAction(PhysicsEngine::i().m_world, TimePerFrameClass::GetTimePerFrame().asSeconds());
-
-	
-
-	m_renderState.updatePositions(Vec3<float>(
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2),
-		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-
-	
-	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
-
-	if (m_network->isConnected()) {
-
-		unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
-		RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
-		unsigned char typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINE
-		bool isDying;
-		Vec3<float> position;
-		Vec3<float> rotation;
-		RakNet::RakNetGUID guid;
-
-		useTimeStamp = ID_TIMESTAMP;
-		timeStamp = RakNet::GetTime();
-		typeId = MOVIMIENTO;
-		RakNet::BitStream myBitStream;
-		myBitStream.Write(useTimeStamp);
-		myBitStream.Write(timeStamp);
-		myBitStream.Write(typeId);
-		myBitStream.Write(getLifeComponent().isDying());
-		myBitStream.Write(getRenderState()->getPosition());
-		myBitStream.Write(getRenderState()->getRotation());
-		myBitStream.Write(getGuid());
-
-		m_network->peer->Send(&myBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_network->getServerGUID(), false);
-		
-	}
-
-	if (m_renderState.getPosition().getY() < -200) {
-		getLifeComponent().restaVida(100, m_guid);
-	}
-
-	SoundManager::i().setListenerPosition(m_renderState.getPosition(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
-
-	//m_nodoPersonaje->setPosition(m_renderState.getPosition());
-
-	updateRelojes();
-
-}
-
-
-
-
 void Player::handleInput()
 {
 	InputHandler::i().handleInput();
 }
 
-void Player::cargarContenido()
-{
-	//Creas el nodo(grafico)
 
-
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/Weapons/asalto.obj");
-
-	m_nodo->setVisible(false);
-
-	
-
-	radius = 0.5f;
-	height = 3.f;
-	mass = 70.f;
-
-	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
-
-	p_controller->m_acceleration_walk = 1.1f;
-	p_controller->m_deceleration_walk = 8.f;
-	p_controller->m_maxSpeed_walk = 1.f;
-
-
-	life_component->resetVida();
-
-	p_controller->reset(PhysicsEngine::i().m_world);
-
-	setPosition(Map::i().searchSpawnPoint());
-
-	
-
-}
 
 void Player::borrarContenido()
 {
-
+	delete animationMachine;
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 }
@@ -306,34 +318,6 @@ void Player::handleMessage(const Message & message)
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 {
 
-	/*if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
-		Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
-		if (ent->getID() == 65534) {
-			//Respawns
-			p_controller->reset(PhysicsEngine::i().m_world);
-			setPosition(Map::i().searchSpawnPoint());
-		} else if (ent->getID() == 65535) {
-			//LifeObjects
-			Entity *ge = EntityManager::i().getEntity(9000);
-			ge->handleTrigger(Trigger);
-		} else if (ent->getID() == 65536) {
-			//Button_Trig_Ent_Asalto
-			Entity *grupoAsaltos = EntityManager::i().getEntity(9001);
-			grupoAsaltos->handleTrigger(Trigger);
-
-		} else if (ent->getID() == 65537) {
-			//Button_Trig_Ent_Pistola
-			Entity *grupoPistola = EntityManager::i().getEntity(9002);
-			grupoPistola->handleTrigger(Trigger);
-
-		} else if (ent->getID() == 65538) {
-			//Button_Trig_Ent_Rocket
-			Entity *grupoRocket = EntityManager::i().getEntity(9003);
-			grupoRocket->handleTrigger(Trigger);
-
-		}
-	}
-	return true;*/
 	return true;
 }
 
@@ -378,14 +362,11 @@ void Player::shoot() {
 	if (hitted != nullptr && !hitted->getLifeComponent()->isDying()) {
 		relojHit.restart();
 	}
+	if (hitted != nullptr && hitted->getLifeComponent()->isDying()) {
+			InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+			hud->newFeed(m_name,hitted->getName());
+	}
 
-
-}
-
-
-void Player::shootGranada() {
-
-	//granada->shoot(p_controller->getGhostObject()->getWorldTransform().getOrigin());
 
 }
 
@@ -524,7 +505,7 @@ void Player::reload() {
 void Player::apuntar()
 {
 
-	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
+	if (listaWeapons->valorActual()->getClassName() == "Sniper") {
 		if (!apuntando) {
 			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), false);
 			SceneManager::i().ziZoom(38.0f);
@@ -672,5 +653,10 @@ float Player::getVida() {
 
 bool Player::isDying() {
 	return life_component->isDying();
+}
+
+bool Player::isOnGround() const
+{
+	return p_controller->onGround();
 }
 
