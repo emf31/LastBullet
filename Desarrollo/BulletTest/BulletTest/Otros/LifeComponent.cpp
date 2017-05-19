@@ -67,7 +67,8 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		//std::cout << "KILL: " << entKill->getName() << std::endl;
 		//std::cout << "DEATH: " << entDeath->getName() << std::endl;
 		//std::cout << "HA MATADO " << guid <<std::endl;
-		
+		InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+		hud->newFeed(entKill->getName(), entDeath->getName());
 
 		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
 	

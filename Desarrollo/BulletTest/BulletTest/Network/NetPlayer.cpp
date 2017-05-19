@@ -251,7 +251,7 @@ void NetPlayer::unirseLobby(const std::string& str)
 
 	} while (eleccion == 'a');*/
 
-	conectar(str, server_port);
+	conectar("2.155.130.30", server_port);
 	//RakSleep(1000);
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -376,44 +376,6 @@ void NetPlayer::substractPlayerInLobby(uint64_t steamID) {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -794,6 +756,11 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			EventSystem::i().dispatchNow(killEvent);
 
 			World::i().getPartida()->muestraMarcador();
+
+			
+			
+
+
 
 
 #ifdef NETWORK_DEBUG
