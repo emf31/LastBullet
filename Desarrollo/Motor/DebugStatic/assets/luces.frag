@@ -49,6 +49,7 @@ uniform vec3 objectColor;
 uniform vec3 viewPos;
 uniform float bias;
 uniform bool castShadow;
+uniform bool castStaticShadow;
 
 uniform int draw_mode;
 
@@ -97,7 +98,7 @@ void main()
 
     // Calculate shadow
     float shadow = 0.0f;
-    if(castShadow){
+    if(castShadow || castStaticShadow){
     shadow = ShadowCalculation(FragPosLightSpace, bias);  
     }
     colorFinal = (1.4-shadow)*modelColor * colorFinal;

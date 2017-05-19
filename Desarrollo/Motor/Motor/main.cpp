@@ -263,11 +263,19 @@ int main() {
 			std::cout << "aumento bias, bias = " << sm.bias << std::endl;
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_B)) {
-			std::cout << "Desactivo Sombras " << sm.bias << std::endl;
+			std::cout << "Desactivo Sombras "<< std::endl;
 			sm.renderShadow(false);
 		}else if (Input::i().keyPressed(GLFW_KEY_V)) {
-			std::cout << "Activo Sombras " << sm.bias << std::endl;
+			std::cout << "Activo Sombras "<< std::endl;
 			sm.renderShadow(true);
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_Z)) {
+			std::cout << "Desactivo Sombras Estaticas " << sm.bias << std::endl;
+			sm.castStaticShadow=false;
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_X)) {
+			std::cout << "Activo Sombras Estaticas " << sm.bias << std::endl;
+			sm.castStaticShadow = true;
 		}
 		Input::i().endEventProcess();
 

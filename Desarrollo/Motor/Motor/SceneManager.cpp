@@ -27,6 +27,7 @@ void SceneManager::inicializar() {
 	inicializarBuffersLineas();
 	numLines = 0;
 	castShadow = true;
+	castStaticShadow = false;
 }
 
 
@@ -276,10 +277,9 @@ void SceneManager::renderLuces()
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "castShadow"), castShadow);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "castStaticShadow"), castStaticShadow);
 	glUniform1f(glGetUniformLocation(shaderLuces->Program, "bias"), bias);
-	glm::mat4 invViewProject =  camaraActiva->GetViewMatrix();
-	invViewProject = glm::inverse(invViewProject);
-	glUniformMatrix4fv(glGetUniformLocation(shaderLuces->Program, "invView"), 1, GL_FALSE, glm::value_ptr(invViewProject));
+
 	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
 	
 	

@@ -134,11 +134,13 @@ public:
 
 
 	float bias = 0.00011;
+	bool castStaticShadow;
 
 private:
 
 	TNode* scene;
 	bool castShadow;
+	
 
 	int nodeEntityCount = 0;
 

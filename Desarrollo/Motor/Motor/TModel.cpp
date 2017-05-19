@@ -37,7 +37,9 @@ void TModel::beginDraw() {
 
 
 		sm.shaderGeometria->Use();
-
+		glm::mat4 ViewProjec = projection * view;
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "ViewProjec"), 1, GL_FALSE, glm::value_ptr(ViewProjec));
+		//glUniformMatrix4fv(glGetUniformLocation(shaderLuces->Program, "projec2"), 1, GL_FALSE, glm::value_ptr(projec2));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		//color emisivo antes el emisivo era un color ahora es una textura
