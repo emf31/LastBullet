@@ -62,6 +62,8 @@ private:
 	bool onUpdateSlider(const CEGUI::EventArgs & e);
 
 	bool onGodMode(const CEGUI::EventArgs & e);
+	bool onClipping(const CEGUI::EventArgs & e);
+	bool onOclusions(const CEGUI::EventArgs & e);
 
 	bool onMovementPrediction(const CEGUI::EventArgs & e);
 
@@ -76,11 +78,16 @@ private:
 	void crearNodoBot(Entity* myentity);
 
 	
-	
+	CEGUI::PushButton *godMode;
+	CEGUI::PushButton *prediction;
+	CEGUI::PushButton *Clipping;
+	CEGUI::PushButton *Oclusions;
+
 	//Debug
 	CEGUI::PushButton *DebugShapesButton;
 	CEGUI::PushButton *closePushButton;
 	CEGUI::DefaultWindow *debugPrintText;
+
 
 	//NetworkLog
 	CEGUI::PushButton *NetworkLogButton;
@@ -90,8 +97,8 @@ private:
 	CEGUI::PushButton *UpdateLogButton;
 
 	//Network
-	CEGUI::PushButton *DebugNetwork;
-	CEGUI::DefaultWindow *NetworkWindow;
+	/*CEGUI::PushButton *DebugNetwork;
+	//CEGUI::DefaultWindow *NetworkWindow;
 	CEGUI::DefaultWindow *NetworSyncWindow;
 	CEGUI::ProgressBar *movimientoPB;
 	CEGUI::ProgressBar *disparosPB;
@@ -113,22 +120,24 @@ private:
 	CEGUI::DefaultWindow *labelPacketsIn;
 	CEGUI::DefaultWindow *labelPacketsOut;
 	CEGUI::DefaultWindow *labelServerIp;
-	CEGUI::DefaultWindow *labelNumPlayers;
+	CEGUI::DefaultWindow *labelNumPlayers;*/
 
 	bool networkOpen = false;
 	
 
 	//IA
-	CEGUI::PushButton *DebugIA;
-	CEGUI::DefaultWindow *mapa;
-	CEGUI::DefaultWindow *IAWindow;
+	//CEGUI::PushButton *DebugIA;
+
+
+	//CEGUI::DefaultWindow *mapa;
+	//CEGUI::DefaultWindow *IAWindow;
 	CEGUI::DefaultWindow *DesirabilityWeapons;
 	CEGUI::DefaultWindow *OpcionesIA;
-	CEGUI::PushButton *BuscarVida;
-	CEGUI::PushButton *BuscarPistola;
-	CEGUI::PushButton *BuscarRocket;
-	CEGUI::PushButton *BuscarAsalto;
-	CEGUI::PushButton *BotonMapa;
+	//CEGUI::PushButton *BuscarVida;
+	//CEGUI::PushButton *BuscarPistola;
+	//CEGUI::PushButton *BuscarRocket;
+	//CEGUI::PushButton *BuscarAsalto;
+	//CEGUI::PushButton *BotonMapa;
 
 	CEGUI::PushButton *VaciarAsalto;
 	CEGUI::PushButton *VaciarRocket;

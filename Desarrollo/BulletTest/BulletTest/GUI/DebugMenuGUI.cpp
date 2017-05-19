@@ -7,6 +7,7 @@
 #include <NetworkLog.h>
 #include <events\Event.h>
 #include <EntityManager.h>
+#include <ClippingManager.h>
 
 
 DebugMenuGUI::DebugMenuGUI() : 
@@ -65,22 +66,28 @@ void DebugMenuGUI::inicializar() {
 	closePushButton = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(99)->getChild(100));
 	closePushButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonClicked, this));
 
-	DebugNetwork = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(11));
-	DebugNetwork->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugNetworkClicked, this));
+	//DebugNetwork = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(11));
+	//DebugNetwork->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugNetworkClicked, this));
 
-	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(14));
-	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAClicked, this));
+	//DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(14));
+	//DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAClicked, this));
 
-	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));	
+//	IAWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(30));	
 
 	CamaraAerea = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(20));
 	CamaraAerea->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCamaraAerea, this));
 
-	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
-	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
+	godMode = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(15));
+	godMode->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onGodMode, this));
 
-	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
-	DebugIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMovementPrediction, this));
+	prediction = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+	prediction->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMovementPrediction, this));
+
+	Clipping = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(22));
+	Clipping->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onClipping, this));
+
+	Oclusions = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(21));
+	Oclusions->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onOclusions, this));
 
 	
 
@@ -97,7 +104,7 @@ void DebugMenuGUI::inicializar() {
 
 
 	//MENU NETWORK
-	NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
+	/*NetworkWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(60));
 
 	labelStatus = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(1));
 	labelPing = static_cast<CEGUI::DefaultWindow*>(NetworkWindow->getChild(2));
@@ -125,11 +132,11 @@ void DebugMenuGUI::inicializar() {
 	closePushButtonNetSync = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(80)->getChild(99)->getChild(100));
 	closePushButtonNetSync->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetSyncClicked, this));
 	closePushButtonNetDebug = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(60)->getChild(99)->getChild(100));
-	closePushButtonNetDebug->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetDebugClicked, this));
+	closePushButtonNetDebug->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonNetDebugClicked, this));*/
 
 
 	//MENU IA
-	mapa = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(20));
+	/*mapa = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(20));
 	mapa->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onMapClicked, this));
 
 	BotonMapa = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(5));//ID del menu de IA = 30
@@ -148,7 +155,7 @@ void DebugMenuGUI::inicializar() {
 	BuscarPistola->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onDebugIAPISTOLAClicked, this));
 
 	closePushButtonIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(30)->getChild(99)->getChild(100));
-	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));
+	closePushButtonIA->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&DebugMenuGUI::onCloseMenuButtonIAClicked, this));*/
 
 
 	BotA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(6));
@@ -294,19 +301,19 @@ bool DebugMenuGUI::onDebugShapesClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 bool DebugMenuGUI::onDebugNetworkClicked(const CEGUI::EventArgs & e) {
-	networkOpen = !networkOpen;
+	/*networkOpen = !networkOpen;
 	//Cliente::i().windowsPacketOpen = !Cliente::i().windowsPacketOpen;
 	NetworkWindow->setVisible(networkOpen);
-	//NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);
+	//NetworSyncWindow->setVisible(Cliente::i().windowsPacketOpen);*/
 	
 	return true;
 }
 bool DebugMenuGUI::onDebugIAClicked(const CEGUI::EventArgs & e) {
-	IAWindow->setVisible(!IAWindow->isVisible());
+	/*IAWindow->setVisible(!IAWindow->isVisible());*/
 	return true;
 }
 bool DebugMenuGUI::onDebugIAMapaClicked(const CEGUI::EventArgs & e) {
-	mapa->setVisible(!mapa->isVisible());
+	/*mapa->setVisible(!mapa->isVisible());*/
 	return true;
 }
 
@@ -644,17 +651,45 @@ bool DebugMenuGUI::onGodMode(const CEGUI::EventArgs & e)
 	return true;
 }
 
+bool DebugMenuGUI::onClipping(const CEGUI::EventArgs & e)
+{
+	ClippingManager::i().setUpdateClipping(!ClippingManager::i().getUpdateClipping());
+
+	if (ClippingManager::i().getUpdateClipping()) {
+		Clipping->setText("Disable Clipping");
+	}
+	else {
+		Clipping->setText("Enable Clipping");
+	}
+
+	return true;
+}
+
+bool DebugMenuGUI::onOclusions(const CEGUI::EventArgs & e)
+{
+	ClippingManager::i().setUpdateOclusions(!ClippingManager::i().getUpdateOclusions());
+
+	if (ClippingManager::i().getUpdateOclusions()) {
+		Oclusions->setText("Disable Oclusions");
+	}
+	else {
+		Oclusions->setText("Enable Oclusions");
+	}
+
+	return true;
+}
+
 bool DebugMenuGUI::onMovementPrediction(const CEGUI::EventArgs & e)
 {
 	NetworkManager::i().setMovementPrediction(!NetworkManager::i().isMovementPrediction());
 
-	DebugIA = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
+	//prediction = static_cast<CEGUI::PushButton*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(16));
 
 	if (NetworkManager::i().isMovementPrediction()) {
-		DebugIA->setText("Disable MovPrediction");
+		prediction->setText("Disable MovPrediction");
 	}
 	else {
-		DebugIA->setText("Enable MovPrediction");
+		prediction->setText("Enable MovPrediction");
 	}
 
 	return true;
@@ -685,14 +720,14 @@ bool DebugMenuGUI::onCloseMenuButtonClicked(const CEGUI::EventArgs & e) {
 }
 
 bool DebugMenuGUI::onCloseMenuButtonIAClicked(const CEGUI::EventArgs & e) {
-	getContext()->getRootWindow()->getChild(0)->getChild(30)->setVisible(false);
-	mapa->setVisible(false);
+	/*getContext()->getRootWindow()->getChild(0)->getChild(30)->setVisible(false);
+	mapa->setVisible(false);*/
 	return true;
 }
 
 bool DebugMenuGUI::onCloseMenuButtonNetSyncClicked(const CEGUI::EventArgs & e) {
-	NetworSyncWindow->setVisible(false);
-	//Cliente::i().windowsPacketOpen = false;
+	/*NetworSyncWindow->setVisible(false);
+	//Cliente::i().windowsPacketOpen = false;*/
 	return true;
 }
 
@@ -732,7 +767,7 @@ bool DebugMenuGUI::onCamaraBot(const CEGUI::EventArgs & e) {
 
 bool DebugMenuGUI::onCloseMenuButtonNetDebugClicked(const CEGUI::EventArgs & e)
 {
-	NetworkWindow->setVisible(false);
+	/*NetworkWindow->setVisible(false);*/
 	return true;
 }
 

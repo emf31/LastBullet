@@ -162,13 +162,6 @@ void InGame::HandleEvent()
 		ClippingManager::i().printZonesVisibility();
 
 	}
-	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_9)) {
-		//GraphicEngine::i().createNode(Vec3<float>(x,y,z), Vec3<float>(1, 1, 1), "", "../media/box.obj");
-		ClippingManager::i().canUpdate = true;
-
-
-
-	}
 	
 	else if (Input::i().leftMouseDown()) {
 

@@ -12,14 +12,15 @@ ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name
 	Vec3<float> point6 = Vec3<float>(center.getX() + (size.getX() / 2), center.getY() - (size.getY() / 2), center.getZ() + (size.getZ() / 2));
 	Vec3<float> point7 = Vec3<float>(center.getX() + (size.getX() / 2), center.getY() + (size.getY() / 2), center.getZ() - (size.getZ() / 2));
 	Vec3<float> point8 = Vec3<float>(center.getX() + (size.getX() / 2), center.getY() + (size.getY() / 2), center.getZ() + (size.getZ() / 2));
-	//GraphicEngine::i().createNode(point1, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point2, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point3, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point4, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point5, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point6, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point7, Vec3<float>(1, 1, 1), "", "../media/box.obj");
-	//GraphicEngine::i().createNode(point8, Vec3<float>(1, 1, 1), "", "../media/box.obj");
+
+
+	Vec3<float> point9 = Vec3<float>(center.getX() - (size.getX() / 2), center.getY(), center.getZ() - (size.getZ() / 2));
+	Vec3<float> point10 = Vec3<float>(center.getX() - (size.getX() / 2), center.getY(), center.getZ() + (size.getZ() / 2));
+	Vec3<float> point11 = Vec3<float>(center.getX() + (size.getX() / 2), center.getY(), center.getZ() - (size.getZ() / 2));
+	Vec3<float> point12 = Vec3<float>(center.getX() + (size.getX() / 2), center.getY(), center.getZ() + (size.getZ() / 2));
+	Vec3<float> point13 = Vec3<float>(center.getX(), center.getY(), center.getZ());
+
+
 
 	m_points.push_back(point1);
 	m_points.push_back(point2);
@@ -29,6 +30,11 @@ ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name
 	m_points.push_back(point6);
 	m_points.push_back(point7);
 	m_points.push_back(point8);
+	m_points.push_back(point9);
+	m_points.push_back(point10);
+	m_points.push_back(point11);
+	m_points.push_back(point12);
+	m_points.push_back(point13);
 
 	nodo = new TNode(-1, SceneManager::i().getRootNode());
 	SceneManager::i().getRootNode()->addChild(nodo);

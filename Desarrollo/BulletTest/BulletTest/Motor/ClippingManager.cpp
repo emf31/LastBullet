@@ -17,51 +17,58 @@ ClippingZone* ClippingManager::createClippingZone(Vec3<float> pos, Vec3<float> s
 
 void ClippingManager::update()
 {
-
+	std::vector<ClippingZone*> lastZones;
 	
-	if (canUpdate) {
-		//Updateamos los planos del frustrum y nos lo guardamos en variable para analizarla despues
-
-		/*GraphicEngine::i().updateClippingPlanes();
-		std::vector<std::vector<float>> planos;
-		for (int i = 0; i < 6; i++) {
-				std::vector<float> plane = { GraphicEngine::i().planes[i][0], GraphicEngine::i().planes[i][1], GraphicEngine::i().planes[i][2], GraphicEngine::i().planes[i][3] };
-				planos.push_back(plane);
-		}*/
-
+	if (updateOclusions) {
 		//Oclusiones, elimina del clipping aquellas zonas que por definicion no se pueden ver desde esa zona
-		std::vector<ClippingZone*> lastZones;
-		for (std::size_t i = 0; i < m_clippingZones.size();i++) {
+		for (std::size_t i = 0; i < m_clippingZones.size(); i++) {
 			if (m_clippingZones.at(i)->isPlayerinside()) {
-				updateZoneOclusions(int(i),lastZones);
+				updateZoneOclusions(int(i), lastZones);
 				break;
 			}
 		}
+	}
+	else {
+		lastZones = m_clippingZones;
+	}
 
+
+	if (updateClipping) {
+		//Updateamos los planos del frustrum y nos lo guardamos en variable para analizarla despues
+		GraphicEngine::i().updateClippingPlanes();
+		std::vector<std::vector<float>> planos;
+		for (int i = 0; i < 6; i++) {
+			std::vector<float> plane = { GraphicEngine::i().planes[i][0], GraphicEngine::i().planes[i][1], GraphicEngine::i().planes[i][2], GraphicEngine::i().planes[i][3] };
+			planos.push_back(plane);
+		}
+
+		
 		//Con last zones que son aquellas que se pueden ver desde esa zona se hace el clipping recorre todas las zonas y ver si tienes alguna esquina a la vista
 		bool isVisible;
 		bool pointVisible;
 
-		//if (!lastZones.empty()) {
-		//	for (std::vector<ClippingZone*>::iterator it = lastZones.begin(); it != lastZones.end(); ++it) {
-		//			std::vector<Vec3<float>> points = (*it)->getPoints();
-		//			isVisible = false;
-		//			for (std::vector<Vec3<float>>::iterator it2 = points.begin(); it2 != points.end(); ++it2) {
-		//				pointVisible = true;
-		//				for (int i = 0; i < 6; i++) {
-		//					if (it2->getX()*planos.at(i)[0] + it2->getY()*planos.at(i)[1] + it2->getZ()*planos.at(i)[2] + planos.at(i)[3] < 0) {
-		//						pointVisible = false;
-		//					}
-		//				}
-		//				if (pointVisible) {
-		//					isVisible = true;
-		//					break;
-		//				}
-		//			}
-		//			(*it)->setVisible(isVisible);
-		//		}
-		//	}
+		if (!lastZones.empty()) {
+			for (std::vector<ClippingZone*>::iterator it = lastZones.begin(); it != lastZones.end(); ++it) {
+				if (!(*it)->isPlayerinside()) {
+					std::vector<Vec3<float>> points = (*it)->getPoints();
+					isVisible = false;
+					for (std::vector<Vec3<float>>::iterator it2 = points.begin(); it2 != points.end(); ++it2) {
+						pointVisible = true;
+						for (int i = 0; i < 6; i++) {
+							if (it2->getX()*planos.at(i)[0] + it2->getY()*planos.at(i)[1] + it2->getZ()*planos.at(i)[2] + planos.at(i)[3] < 0) {
+								pointVisible = false;
+							}
+						}
+						if (pointVisible) {
+							isVisible = true;
+							break;
+						}
+					}
+					(*it)->setVisible(isVisible);
+				}
+			}
 		}
+	}
 
 }
 
@@ -76,7 +83,6 @@ void ClippingManager::printZonesVisibility()
 
 void ClippingManager::updateZoneOclusions(int id, std::vector<ClippingZone*> &zonesOclusionOut)
 {
-	clock.restart();
 	for (int i = 0; i < 6; i++) {
 		if (oclusionMatrix[id][i] == true) {
 			if(id!=i)
@@ -89,12 +95,29 @@ void ClippingManager::updateZoneOclusions(int id, std::vector<ClippingZone*> &zo
 	}
 	;
 	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-
-	//if(clock.getElapsedTime().asMilliseconds()>0.03)
-	menu->addPrintText(std::to_string(clock.getElapsedTime().asMicroseconds()));
 }
 
-ClippingManager::ClippingManager():canUpdate(true)
+bool ClippingManager::getUpdateClipping() const
+{
+	return updateClipping;
+}
+
+bool ClippingManager::getUpdateOclusions() const
+{
+	return updateOclusions;
+}
+
+void ClippingManager::setUpdateClipping(bool a)
+{
+	updateClipping = a;
+}
+
+void ClippingManager::setUpdateOclusions(bool a)
+{
+	updateOclusions = a;
+}
+
+ClippingManager::ClippingManager():updateClipping(false), updateOclusions(false)
 {
 	//oclusionMatrix = 
 	//oclusionMatrix = p_oclusionMatrix;
