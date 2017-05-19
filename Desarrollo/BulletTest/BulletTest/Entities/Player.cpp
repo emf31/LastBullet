@@ -20,6 +20,8 @@
 #include <Map.h>
 #include <TimePerFrame.h>
 #include <SoundManager.h>
+#include <GUIManager.h>
+#include <InGameHUD.h>
 
 
 #include <NetworkManager.h>
@@ -209,8 +211,7 @@ void Player::update(Time elapsedTime)
 
 		unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
 		RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
-		unsigned char typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINE
-		bool isDying;
+		unsigned char typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINEf
 		Vec3<float> position;
 		Vec3<float> rotation;
 		RakNet::RakNetGUID guid;
@@ -360,6 +361,10 @@ void Player::shoot() {
 
 	if (hitted != nullptr && !hitted->getLifeComponent()->isDying()) {
 		relojHit.restart();
+	}
+	if (hitted != nullptr && hitted->getLifeComponent()->isDying()) {
+			InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+			hud->newFeed(m_name,hitted->getName());
 	}
 
 

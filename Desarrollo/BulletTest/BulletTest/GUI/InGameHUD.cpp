@@ -26,7 +26,10 @@ void InGameHUD::inicializar() {
 		CEGUI::Font::getDefaultResourceGroup(), CEGUI::ASM_Vertical, CEGUI::Sizef(1280.0f, 720.0f));
 
 
-	AllHUD = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0));
+	AllHUD = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1));
+
+	Feed = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
+	Feed->setFont(&labelFont);
 
 	m_WindowCuenta = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(6));
 
@@ -39,32 +42,34 @@ void InGameHUD::inicializar() {
 	
 
 
-	LabelVida = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1));
+	LabelVida = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(1));
 	//LabelArma = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
-	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
-	LabelMunicionTotal = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(4));
-	m_ranking = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(81));
-	m_kills = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(82));
-	m_deaths = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(83));
-	ProgressBarVida = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(78));
-	ProgressBarMunicion = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(79));
+	LabelMunicion = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(3));
+	LabelMunicionTotal = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(4));
 
-	ImagenPistola = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(61));
+	m_ranking = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2)->getChild(81));
+	m_kills = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2)->getChild(82));
+	m_deaths = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2)->getChild(83));
+
+	ProgressBarVida = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(78));
+	ProgressBarMunicion = static_cast<CEGUI::ProgressBar*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(79));
+
+	ImagenPistola = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(61));
 	ImagenPistola->setVisible(true);
-	ImagenAsalto = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(62));
+	ImagenAsalto = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(62));
 	ImagenAsalto->setVisible(false);
-	ImagenRocket = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(63));
+	ImagenRocket = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(63));
 	ImagenRocket->setVisible(false);
-	ImagenSniper = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(64));
+	ImagenSniper = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(64));
 	ImagenSniper->setVisible(false);
 
-	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(54));
+	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(54));
 
 	windowTabla = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10));
 
-	hitMarker = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(51));
-	sangre = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(52));
-	scope = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(77));
+	hitMarker = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(51));
+	sangre = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(52));
+	scope = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(77));
 
 	player1.label = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(1));
 	player1.bajas = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10)->getChild(0)->getChild(11));
@@ -93,7 +98,9 @@ void InGameHUD::update() {
 	if (activeCuentaAtras) {
 		updateCuentaAtras();
 	}
-
+	if (feedTime.getElapsedTime().asSeconds() >= 2.f && Feed->getText()!="") {
+		Feed->setVisible(false);
+	}
 
 
 	updateLabelVida();
@@ -112,6 +119,25 @@ void InGameHUD::update() {
 
 void InGameHUD::handleEvent(Event * ev)
 {
+}
+
+void InGameHUD::newFeed(const std::string & killer,const std::string & death)
+{
+	
+	if (killer != death) {
+		if (killer == EntityManager::i().getEntity(PLAYER)->getName()) {
+			Feed->setText("YOU killed " + death);
+		}
+		else {
+			Feed->setText(killer+ " killed YOU ");
+		}
+		
+	}
+	else {
+		Feed->setText("YOU suicide");
+	}
+	Feed->setVisible(true);
+	feedTime.restart();
 }
 
 

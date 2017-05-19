@@ -23,6 +23,8 @@ public:
 
 	virtual void handleEvent(Event * ev) override;
 
+	void newFeed(const std::string& killer,const std::string& death);
+
 	void updateLabelVida();
 
 	void updateLabelArma();
@@ -76,6 +78,8 @@ private:
 
 	CEGUI::DefaultWindow* AllHUD;
 
+	CEGUI::DefaultWindow* Feed;
+
 	CEGUI::DefaultWindow* scope;
 
 	CEGUI::DefaultWindow* LabelVida;
@@ -109,5 +113,6 @@ private:
 
 	int count;
 	Clock countTime;
+	Clock feedTime;
 	bool activeCuentaAtras;
 };
