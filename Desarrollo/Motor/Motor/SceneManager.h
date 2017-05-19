@@ -39,24 +39,27 @@ public:
 	TMeshGroup* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw();
 	void renderFrame(GLFWwindow* window);
+
+	//inicializar buffers
 	void inicializar();
 	void inicializarBuffers();
 	void inicializarBuffersSombras();
 	void inicializarBuffersBlur();
 	void inicializarBuffersLineas();
+
+	//pasadas para un render
 	void renderLuces();
 	void renderBlur();
 	void renderBloom();
 	void renderSombras();
 
+	//crear nodos
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
 	TAnimation* crearNodoAnimacion(TAnimationGroupMesh * animGroup);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
 	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);
-	//NOTA : en mi cabeza tiene sentido que lo que devolvamos sea un TModel o un TSpotLight ya que luego desde el juego lo que manejariamos serian estas entities
-	//lo cual a parte de ser mas claro para quien lo use asi no tendriamos acceso a los nodos del arbol desde fuera del motor grafico para que no se pueda corromper este.
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
 	TSunLight* crearNodoSunLight(Vec3<float> direccion);
 	TPointLight* crearNodoPointLight(Vec3<float> posicion, float radioIn = 6.3f, float radioEx = 10.3f);
@@ -85,7 +88,21 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 
+	void setLineWidth(float width);
 
+	void drawLine(glm::vec3 from, glm::vec3 to);
+
+	void rellenaVertices();
+
+	void drawAllLines();
+
+	void clearLines();
+
+	void ziZoom(float z);
+	void zoomZout();
+
+	void activeDynamicShadow(bool b);
+	void activeStaticShadow(bool b);
 	
 	int *screenWidth, *screenHeight;
 	
@@ -103,7 +120,7 @@ public:
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
-	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gEscena;
+	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor;
 	GLuint rboDepth;
 	GLuint shadowMapDepthFBO, shadowMap;
 	GLuint draw_mode=1;
@@ -116,30 +133,14 @@ public:
 	std::vector<GLuint> indices;
 	GLuint LVAO,LVBO;
 	int numLines;
-
-	void setLineWidth(float width);
-
-	void drawLine(glm::vec3 from, glm::vec3 to);
-
-	void rellenaVertices();
-
-	void drawAllLines();
-
-	void clearLines();
-
-	void ziZoom(float z);
-	void zoomZout();
-
-	void renderShadow(bool b);
-
-
 	float bias = 0.00011;
-	bool castStaticShadow;
+	
 
 private:
 
 	TNode* scene;
 	bool castShadow;
+	bool castStaticShadow;
 	
 
 	int nodeEntityCount = 0;

@@ -77,16 +77,16 @@ int main() {
 
 	
 	//animacion
-	//int velocidadAnim = 10;
-	//std::cout << "Cargando animaciones..." << std::endl;
-	//TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
-	//pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
-	//pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	//pruebaAnim->setAnimation("idle",0,34);
-	//pruebaAnim->setAnimation("saltar", 40, 109);
-	//pruebaAnim->setAnimation("correr", 110, 190);
-	//pruebaAnim->setCurrentAnimation("idle");
+	int velocidadAnim = 10;
+	std::cout << "Cargando animaciones..." << std::endl;
+	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
+	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	pruebaAnim->setPosition(Vec3<float>(-10.0f, 5.0f, 0.0f));
+	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+	pruebaAnim->setAnimation("idle",0,34);
+	pruebaAnim->setAnimation("saltar", 40, 109);
+	pruebaAnim->setAnimation("correr", 110, 190);
+	pruebaAnim->setCurrentAnimation("idle");
 
 
 	
@@ -233,24 +233,24 @@ int main() {
 			std::cout << "Modo de color : Sombras " << std::endl;
 			sm.draw_mode = 9;
 		}
-		//else if (Input::i().keyReleased(GLFW_KEY_J)) {
-		//	pruebaAnim->setCurrentAnimation("saltar");
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_C)) {
-		//	pruebaAnim->setCurrentAnimation("correr");
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_I)) {
-		//	pruebaAnim->setCurrentAnimation("idle");
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_R)) {
-		//	velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		else if (Input::i().keyReleased(GLFW_KEY_J)) {
+			pruebaAnim->setCurrentAnimation("saltar");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_C)) {
+			pruebaAnim->setCurrentAnimation("correr");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_I)) {
+			pruebaAnim->setCurrentAnimation("idle");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_R)) {
+			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_L)) {
-		//	velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
-		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-		//}
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_L)) {
+			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		}
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
 		}
@@ -264,18 +264,18 @@ int main() {
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_B)) {
 			std::cout << "Desactivo Sombras "<< std::endl;
-			sm.renderShadow(false);
+			sm.activeDynamicShadow(false);
 		}else if (Input::i().keyPressed(GLFW_KEY_V)) {
 			std::cout << "Activo Sombras "<< std::endl;
-			sm.renderShadow(true);
+			sm.activeDynamicShadow(true);
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_Z)) {
 			std::cout << "Desactivo Sombras Estaticas " << sm.bias << std::endl;
-			sm.castStaticShadow=false;
+			sm.activeStaticShadow(false);
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_X)) {
 			std::cout << "Activo Sombras Estaticas " << sm.bias << std::endl;
-			sm.castStaticShadow = true;
+			sm.activeStaticShadow(true);
 		}
 		Input::i().endEventProcess();
 

@@ -337,7 +337,7 @@ void SceneManager::renderSombras()
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	shaderSombras->Use();
-	scene->draw2();
+	scene->drawSombras();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glEnable(GL_CULL_FACE);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -717,8 +717,11 @@ void SceneManager::zoomZout()
 {
 	camaraActiva->resetMira();
 }
-void SceneManager::renderShadow(bool b) {
+void SceneManager::activeDynamicShadow(bool b) {
 	castShadow = b;
+}
+void SceneManager::activeStaticShadow(bool b) {
+	castStaticShadow = b;
 }
 void SceneManager::shutdown()
 {

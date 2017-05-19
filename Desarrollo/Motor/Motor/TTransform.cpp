@@ -103,7 +103,7 @@ void TTransform::beginDraw()
 	sm.setMatrizActual(m_matrix * sm.getMatrizActual());
 }
 
-void TTransform::beginDraw2()
+void TTransform::beginDrawSombras()
 {
 	sm.getPilaMatrices().push_back(sm.getMatrizActual());
 	sm.setMatrizActual(m_matrix * sm.getMatrizActual());

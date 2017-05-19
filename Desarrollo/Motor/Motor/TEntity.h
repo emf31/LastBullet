@@ -12,7 +12,7 @@ public:
 	virtual ~TEntity();
 
 	virtual void beginDraw()=0;
-	virtual void beginDraw2()=0;
+	virtual void beginDrawSombras()=0;
 	virtual void endDraw()=0;
 	void addChild(TEntity* ent);
 

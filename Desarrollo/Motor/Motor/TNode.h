@@ -30,7 +30,7 @@ public:
 	virtual void endDraw();
 	*/
 	void draw();
-	void draw2();
+	void drawSombras();
 	TEntity* getEntity();
 	void setEntity(TEntity* entidad);
 	int getMyNodeEntityID();

@@ -273,6 +273,18 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias)
 
     //para difuminar las sombras
     vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 9.0;
+
+    /* 25 iteracion mas suavizadas las sombras pero bastante mas costoso
+    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
     for(int x = -2; x <= 2; ++x)
     {
         for(int y = -2; y <= 2; ++y)
@@ -282,6 +294,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias)
         }    
     }
     shadow /= 25.0;
+    */
 
     return shadow;
 }  

@@ -77,7 +77,7 @@ Vec3<float> TLuz::getColor() {
 void TLuz::beginDraw() {
 }
 
-void TLuz::beginDraw2()
+void TLuz::beginDrawSombras()
 {
 }
 
