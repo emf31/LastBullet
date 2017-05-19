@@ -19,6 +19,10 @@ NetBot::~NetBot()
 void NetBot::inicializar()
 {
 	conectar("127.0.0.1", server_port);
+
+	while (isConnected() == false) {
+		NetworkManager::i().updateNetwork(Time::Zero);
+	}
 }
 
 void NetBot::handlePackets(Time elapsedTime)

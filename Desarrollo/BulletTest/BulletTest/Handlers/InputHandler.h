@@ -38,7 +38,6 @@ private:
 	CommandPtr shoot_asalto;
 	CommandPtr shoot_rocket;
 	CommandPtr shoot_pistola;
-	CommandPtr shoot_commandGranada;
 	CommandPtr run_command;
 	CommandPtr list_up;
 	CommandPtr list_down;

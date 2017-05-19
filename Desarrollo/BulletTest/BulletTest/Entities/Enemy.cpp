@@ -16,7 +16,7 @@
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(1001, NULL, name, guid), nPrediction(this)
 {
 	EntityManager::i().registerRaknetEntity(this);
 }
@@ -29,14 +29,10 @@ Enemy::~Enemy()
 
 void Enemy::inicializar()
 {
-
-	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
-	footsteps->setIsPaused(true);
-
 	animationMachine = new AnimationMachine(this);
 
-	//Start runing
-	animationMachine->SetCurrentAnimation(&Run::i());
+	
+
 	
 }
 
@@ -52,8 +48,13 @@ void Enemy::cargarContenido()
 	m_nodo->setAnimation("muerte", 17, 69, false);
 	m_nodo->setAnimation("salto", 70, 93, false);
 	m_nodo->setCurrentAnimation("correr");
-	m_nodo->setFrameTime(milliseconds(35));
+	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
+
+	//Start runing
+	animationMachine->SetCurrentAnimation(&Run::i());
+
+	animationMachine->ChangeState(&Run::i());
 
 	radius = 0.5f;
 	height = 3.f;
@@ -74,29 +75,22 @@ void Enemy::update(Time elapsedTime)
 	animationMachine->Update();
 
 	if (NetworkManager::i().isMovementPrediction()) {
-		//nPrediction.interpolateWithoutPrediction();
+		nPrediction.interpolateWithPrediction();
 	}
 	else {
-		//nPrediction.interpolateWithoutPrediction();
+		nPrediction.interpolateWithoutPrediction();
 	}
 
 
-	isMoving = true;
+	moving = true;
 
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ()) 
 	{
-		isMoving = false;
+		moving = false;
 	}
 		
-
-	if (isMoving) {
-		footsteps->setIsPaused(false);
-	}
-	else if (footsteps != NULL) {
-		footsteps->setIsPaused(true);
-	}
 
 }
 
@@ -185,6 +179,11 @@ void Enemy::setVisibilidadBilboardSync()
 	m_nodo->setTexture("../media/body01green.png", 1);
 }
 
+
+bool Enemy::isOnGround() const
+{
+	return onGround;
+}
 
 bool Enemy::isDying() {
 	return getLifeComponent()->isDying();

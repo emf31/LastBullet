@@ -98,14 +98,20 @@ void InGame::HandleEvent()
 
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
-		ene->getAnimationMachine()->ChangeState(&Death::i());
+		/*static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime++;
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
+
+		DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));*/
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_N)) {
-		ene->getAnimationMachine()->ChangeState(&Run::i());
+		/*static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime--;
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
+
+		DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));*/
 	}
-	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_B)) {
-		ene->getAnimationMachine()->ChangeState(&Salto::i());
-	}
+
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 
 		GraphicEngine::i().toggleCamera();
@@ -241,13 +247,9 @@ void InGame::Update(Time timeElapsed)
 void InGame::Render(float interpolation, Time elapsedTime)
 {
 
-	
-
-
 	EntityManager::i().updateRender(interpolation);
 
 	
-
 	GraphicEngine::i().updateCamera();
 
 	//Hack para el player, no podemos hacer que el arma siga la camara

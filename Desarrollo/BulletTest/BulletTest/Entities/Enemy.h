@@ -6,14 +6,13 @@
 
 #include <Estructuras.h>
 #include <Message.h>
-#include <Animation.h>
 
 #include <queue>
 
 #include <BasicSceneNode.h>
 #include <Granada.h>
 
-#include <SoundManager.h>
+
 
 class Enemy : public Character
 {
@@ -37,7 +36,7 @@ public:
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
-
+	virtual bool isOnGround() const override;
 	virtual bool isDying() override;
 
 	void setIsDying(bool die) { getLifeComponent()->setIsDying(die); }
@@ -48,7 +47,6 @@ public:
 
 	NetworkPrediction* getNetworkPrediction() { return &nPrediction; }
 	
-
 private:
 
 	std::shared_ptr<SceneNode> m_nodoPersonaje;
@@ -57,7 +55,7 @@ private:
 	float height;
 	float mass;
 
-	bool isMoving;
+	
 	
 
 
@@ -65,9 +63,6 @@ private:
 
 
 	btRigidBody* m_rigidBody;
-	
-
-	ISound* footsteps;
 	
 };
 

@@ -560,9 +560,6 @@
     <ClInclude Include="Command\ShootAsalto.h">
       <Filter>Headers\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Command\ShootCommandGranada.h">
-      <Filter>Headers\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Command\ShootPistola.h">
       <Filter>Headers\Command</Filter>
     </ClInclude>

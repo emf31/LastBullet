@@ -24,11 +24,12 @@
 
 #include <NetworkManager.h>
 #include <glm\glm.hpp>
+#include <Run.h>
 
-#include "irrKlang/ik_ISound.h"
 
 
-Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false), footsteps(NULL), isMoving(false)
+
+Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false), isMoving(false)
 {
 	//Registramos la entity en el trigger system
 	dwTriggerFlags = kTrig_Explosion | kTrig_EnemyNear | Button_Spawn | Button_Trig_Ent | Button_Trig_Ent_Pistola| Button_Trig_Ent_Rocket | Button_Trig_Ent_Asalto | kTrig_EnemyShootSound;
@@ -72,7 +73,9 @@ void Player::inicializar()
 	
 	
 
-	animation = new Animation;
+	animationMachine = new AnimationMachine(this);
+
+	
 
 	/*******************************/
 	/*******INICIALIZAR ARMAS******/
@@ -102,21 +105,8 @@ void Player::inicializar()
 	asalto->setEquipada(true);
 	bindWeapon();
 
-	footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), getRenderState()->getPosition(), true);
-	footsteps->setIsPaused(true);
-	/*listaWeapons->insertar(sniper);
-	tieneSniper = true;
 
-	listaWeapons->insertar(asalto);
-	tieneAsalto = true;
 
-	listaWeapons->insertar(rocket);
-	tieneRocketLauncher = true;*/
-
-	/*GraphicEngine::i().getActiveCamera()->addChild(asalto->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(rocket->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(pistola->getNode());
-	GraphicEngine::i().getActiveCamera()->addChild(sniper->getNode());*/
 
 	listaWeapons->valorActual()->getNode()->setVisible(true);
 
@@ -125,58 +115,64 @@ void Player::inicializar()
 	tieneSniper = true;
 	bindWeapon();*/
 
-	/*ResourceProvider& rp = Settings::i().GetResourceProvider();
-	m_nodoPersonaje = GraphicEngine::i().createNode(
-		m_renderState.getPosition(),
-		Vec3<float>(0.075f, 0.075f, 0.075f),
-		"",
-		rp.getFinalFilename("personaje2.obj", "characters"));
-	m_nodoPersonaje->setVisible(false);*/
-
 	//Creas el nodo(grafico)
 
 }
 
-void Player::calcularMovimiento() {
-	isMoving = false;
-	isShooting = false;
+void Player::cargarContenido()
+{
+	//Creas el nodo(grafico)
 
-	
 
-	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
-	if (p_controller->onGround() && p_controller->jumpedOnAir) {
-		p_controller->jumpedOnAir = false;
-	}
+	ResourceProvider& rp = Settings::i().GetResourceProvider();
 
-	//Detectamos si chocamos al suelo con una velocidad previa muy rapida
-	if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
-		//printf("He caido de alto\n");
-		GraphicEngine::i().getActiveCamera()->cameraShake();
-	}
-	p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
+	//Creas el nodo(grafico)
+	m_nodo = GraphicEngine::i().createAnimatedNode(
+		"../media/personaje1", 94
+	);
+	m_nodo->setAnimation("correr", 0, 16, true);
+	m_nodo->setAnimation("muerte", 17, 69, false);
+	m_nodo->setAnimation("salto", 70, 93, false);
+	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setFrameTime(milliseconds(20));
+	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
-	//Deteccion de movimiento
-	speedFinal = Vec3<float>(0, 0, 0);
+	m_nodo->setVisible(false);
 
-	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
-	if (life_component->isDying() == false) {
-		// Ejecuta todos los comandos
-		InputHandler::i().excuteCommands(this);
-	}
+	//Start runing
+	animationMachine->SetCurrentAnimation(&Run::i());
 
-	speedFinal.normalise();
-	p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
+	animationMachine->ChangeState(&Run::i());
+
+
+
+	radius = 0.5f;
+	height = 3.f;
+	mass = 70.f;
+
+	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
+
+	p_controller->m_acceleration_walk = 1.1f;
+	p_controller->m_deceleration_walk = 8.f;
+	p_controller->m_maxSpeed_walk = 1.f;
+
+
+	life_component->resetVida();
+
+	p_controller->reset(PhysicsEngine::i().m_world);
+
+	setPosition(Map::i().searchSpawnPoint());
+
+
+
 }
+
+
 
 
 void Player::update(Time elapsedTime)
 {
-	if (isMoving && p_controller->onGround()) {
-		footsteps->setIsPaused(false);
-	}
-	else if (footsteps != NULL) {
-		footsteps->setIsPaused(true);
-	}
+	
 
 	calcularMovimiento();
 
@@ -193,6 +189,19 @@ void Player::update(Time elapsedTime)
 
 	
 	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
+
+	moving = true;
+
+	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
+		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
+		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
+	{
+		moving = false;
+	}
+
+
+	//update animations
+	animationMachine->Update();
 
 	if (m_network->isConnected()) {
 
@@ -233,7 +242,36 @@ void Player::update(Time elapsedTime)
 
 }
 
+void Player::calcularMovimiento() {
+	isMoving = false;
+	isShooting = false;
 
+
+
+	//Reseteamos la variable de saltado en el aire cuando tocas el suelo
+	if (p_controller->onGround() && p_controller->jumpedOnAir) {
+		p_controller->jumpedOnAir = false;
+	}
+
+	//Detectamos si chocamos al suelo con una velocidad previa muy rapida
+	if (p_controller->onGround() && p_controller->fallDownSpeed < -50) {
+		//printf("He caido de alto\n");
+		GraphicEngine::i().getActiveCamera()->cameraShake();
+	}
+	p_controller->fallDownSpeed = p_controller->getLinearVelocity().y();
+
+	//Deteccion de movimiento
+	speedFinal = Vec3<float>(0, 0, 0);
+
+	//Si es true estamos muriendo por lo que bloqueamos movimiento y acciones
+	if (life_component->isDying() == false) {
+		// Ejecuta todos los comandos
+		InputHandler::i().excuteCommands(this);
+	}
+
+	speedFinal.normalise();
+	p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
+}
 
 
 void Player::handleInput()
@@ -241,41 +279,11 @@ void Player::handleInput()
 	InputHandler::i().handleInput();
 }
 
-void Player::cargarContenido()
-{
-	//Creas el nodo(grafico)
 
-
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(0, 30, 0), Vec3<float>(0.02f, 0.02f, 0.02f), "", "../media/Weapons/asalto.obj");
-
-	m_nodo->setVisible(false);
-
-	
-
-	radius = 0.5f;
-	height = 3.f;
-	mass = 70.f;
-
-	p_controller = PhysicsEngine::i().createCapsuleKinematicCharacter(this, radius, height, mass);
-
-	p_controller->m_acceleration_walk = 1.1f;
-	p_controller->m_deceleration_walk = 8.f;
-	p_controller->m_maxSpeed_walk = 1.f;
-
-
-	life_component->resetVida();
-
-	p_controller->reset(PhysicsEngine::i().m_world);
-
-	setPosition(Map::i().searchSpawnPoint());
-
-	
-
-}
 
 void Player::borrarContenido()
 {
-
+	delete animationMachine;
 
 	PhysicsEngine::i().removeKinematic(p_controller);
 }
@@ -307,34 +315,6 @@ void Player::handleMessage(const Message & message)
 bool Player::handleTrigger(TriggerRecordStruct * Trigger)
 {
 
-	/*if (MastEventReceiver::i().keyDown(KEY_KEY_E)) {
-		Entity* ent = EntityManager::i().getEntity(Trigger->idSource);
-		if (ent->getID() == 65534) {
-			//Respawns
-			p_controller->reset(PhysicsEngine::i().m_world);
-			setPosition(Map::i().searchSpawnPoint());
-		} else if (ent->getID() == 65535) {
-			//LifeObjects
-			Entity *ge = EntityManager::i().getEntity(9000);
-			ge->handleTrigger(Trigger);
-		} else if (ent->getID() == 65536) {
-			//Button_Trig_Ent_Asalto
-			Entity *grupoAsaltos = EntityManager::i().getEntity(9001);
-			grupoAsaltos->handleTrigger(Trigger);
-
-		} else if (ent->getID() == 65537) {
-			//Button_Trig_Ent_Pistola
-			Entity *grupoPistola = EntityManager::i().getEntity(9002);
-			grupoPistola->handleTrigger(Trigger);
-
-		} else if (ent->getID() == 65538) {
-			//Button_Trig_Ent_Rocket
-			Entity *grupoRocket = EntityManager::i().getEntity(9003);
-			grupoRocket->handleTrigger(Trigger);
-
-		}
-	}
-	return true;*/
 	return true;
 }
 
@@ -380,13 +360,6 @@ void Player::shoot() {
 		relojHit.restart();
 	}
 
-
-}
-
-
-void Player::shootGranada() {
-
-	//granada->shoot(p_controller->getGhostObject()->getWorldTransform().getOrigin());
 
 }
 
@@ -525,7 +498,7 @@ void Player::reload() {
 void Player::apuntar()
 {
 
-	if (listaWeapons->valorActual()->getClassName()=="Sniper") {
+	if (listaWeapons->valorActual()->getClassName() == "Sniper") {
 		if (!apuntando) {
 			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), false);
 			SceneManager::i().ziZoom(38.0f);
@@ -673,5 +646,10 @@ float Player::getVida() {
 
 bool Player::isDying() {
 	return life_component->isDying();
+}
+
+bool Player::isOnGround() const
+{
+	return p_controller->onGround();
 }
 

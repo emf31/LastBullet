@@ -153,7 +153,7 @@ void getPackets() {
 
 			//Enviamos el nuevo bot a todos los players menos al host 
 			//EntityManager::i().sendPlayer(t_player, peer);
-			//EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
+			EntityManager::i().sendBot(t_player, gameinfo.creador, peer);
 
 			Bot *bot = new Bot(t_player.name, t_player.guid);
 			bot->setPosition(Vec3<float>(0, 0, 0));
@@ -253,6 +253,7 @@ void getPackets() {
 
 			//notifico a ese cliente que ha sido disparado
 			EntityManager::i().enviarDisparoClienteRocket(p_bala, gameinfo.creador, peer);
+
 			break;
 		}
 

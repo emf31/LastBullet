@@ -8,7 +8,8 @@
 #include <EntActive.h>
 #include <LifeComponent.h>
 #include <AnimationMachine.h>
-#include <Engine/TAnimation.h>
+#include "irrKlang/ik_ISound.h"
+#include <SoundManager.h>
 
 class Character : public EntActive
 {
@@ -52,8 +53,14 @@ public:
 
 	void setOnGround(bool ground) { onGround = ground; }
 
-	bool isOnGround() const { return onGround; }
+	virtual bool isOnGround() const = 0;
 
+	void setIsMoving(bool mov) { moving = mov; }
+
+	bool isMoving() const { return moving; }
+
+
+	ISound* footsteps;
 
 protected:
 
@@ -62,13 +69,15 @@ protected:
 
 
 	bool onGround;
+	bool moving;
 
 	//Say if this player is ready to play
 	bool available;
 
 	bool calcularLOD = true;
 
-	TAnimation* pruebaAnim;
+
+	
 
 };
 

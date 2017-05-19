@@ -77,9 +77,9 @@ void NetPlayer::crearPartida()
 
 
 	
-	/*TPlayer p;
+	TPlayer p;
 	p.name = "Nixon";
-	m_bots.push_back(p);*/
+	m_bots.push_back(p);
 	
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
 	/*TGameInfo gameinfo;

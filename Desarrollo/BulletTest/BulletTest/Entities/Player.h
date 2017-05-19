@@ -50,7 +50,6 @@ public:
 	void jump();
 
 	void shoot();
-	void shootGranada();
 
 	void move_up();
 	void move_down();
@@ -106,6 +105,7 @@ public:
 
 	virtual float getVida() override;
 	virtual bool isDying() override;
+	virtual bool isOnGround() const override;
 
 	bool isShooting;
 
@@ -117,8 +117,6 @@ public:
 private:
 	
 	void targetToWorld(Vec3<float>& target);
-
-	Animation* animation;
 
 	//LISTA DE ARMAS
 	Lista* listaWeapons;

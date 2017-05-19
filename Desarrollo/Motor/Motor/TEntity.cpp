@@ -4,7 +4,12 @@
 
 
 
-TEntity::TEntity() {
+TEntity::TEntity() :
+	miNodo(nullptr),
+	transTraslacion(nullptr),
+	transEscalado(nullptr),
+	transRotacion(nullptr) 
+{
 }
 
 
