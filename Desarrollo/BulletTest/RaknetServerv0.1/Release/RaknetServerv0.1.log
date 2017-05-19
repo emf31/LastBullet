@@ -5,9 +5,18 @@
   Timer.cpp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
+<<<<<<< HEAD
   0 of 1662 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   RaknetServerv0.1.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\RaknetServerv0.1.exe
   RaknetServerv0.1.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\BulletTest\Release\RaknetServerv0.1.pdb (Full PDB)
+=======
+  1658 of 1662 functions (99.8%) were compiled, the rest were copied from previous compilation.
+    40 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+  RaknetServerv0.1.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\RaknetServerv0.1.exe
+  RaknetServerv0.1.vcxproj -> C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\RaknetServerv0.1.pdb (Full PDB)
+>>>>>>> refs/remotes/origin/NewClipping

@@ -21,7 +21,7 @@ public:
 	bool removeChild(TNode *child);
 	void removeNode();
 	void addChild(TNode* child);
-	
+	void addChild(TEntity* ent);
 	void setVisible(bool b) { visible = b; }
 	bool isVisible() const { return visible; }
 	
