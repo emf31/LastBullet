@@ -188,7 +188,9 @@ void Player::update(Time elapsedTime)
 		p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
 
 	
-	m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
+	if (!life_component->isDying()) {
+		m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
+	}
 
 	moving = true;
 

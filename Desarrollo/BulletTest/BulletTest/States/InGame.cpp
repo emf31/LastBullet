@@ -65,11 +65,6 @@ void InGame::Inicializar()
 
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), true);
 
-	ene = new Enemy("pepe", RakNet::UNASSIGNED_RAKNET_GUID);
-	ene->inicializar();
-	ene->cargarContenido();
-	ene->setPosition(Map::i().searchSpawnPoint());
-
 }
 
 void InGame::Clear()
