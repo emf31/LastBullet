@@ -10,7 +10,7 @@ out mat3 normalMatrix;
 
 uniform mat4 model;
 uniform mat4 modelview;
-uniform mat4 ViewProjec;
+uniform mat3 norMatrix;
 
 
 void main()
@@ -20,8 +20,7 @@ void main()
     txtcoords = texCoords;
     vec4 worldPos = model * vec4(position, 1.0f);
 	FrgPs = worldPos.xyz;
-	//gl_Position =  modelview * vec4(position, 1.0f);
-	gl_Position =  ViewProjec* vec4(FrgPs, 1.0f);
+	gl_Position =  modelview * vec4(position, 1.0f);
 	//NOTA: necesitamos pasar el vector normal de coordenadas del mundo a coordenadas de la vista, pero para ello no podemos multiplicarla
 	//por la view directamente como hacemos con la matriz modelo ya que este vector normal no se puede trasladar o dejaria de ser perpendicular a la cara del modelo
 	//entonces lo que hacemos es usar las traspuesta de la inversa del modelo y ademas la pasamos a una matriz de 3x3 para que se pierdan las coordenadas de traslacion.
@@ -29,6 +28,7 @@ void main()
 	//pero entonces tendriamos que asegurarnos de que no hacemos ningun escalado no uniforme o sino las normales no servirian.
 
 	//llevarnos esto fuera del shader
-	normalMatrix = transpose(inverse(mat3(model)));
+	//normalMatrix = transpose(inverse(mat3(model)));
+	normalMatrix = norMatrix;
     Normal = normal;  
 }

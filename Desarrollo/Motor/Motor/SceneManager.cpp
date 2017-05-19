@@ -337,9 +337,6 @@ void SceneManager::renderSombras()
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	shaderSombras->Use();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, gPosition);
-	glUniformMatrix4fv(glGetUniformLocation(shaderSombras->Program, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(sunlight->getLightSpaceMatrix()));
 	scene->draw2();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glEnable(GL_CULL_FACE);

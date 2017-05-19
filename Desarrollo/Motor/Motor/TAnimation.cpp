@@ -94,13 +94,13 @@ void TAnimation::beginDraw2()
 {
 	if (visible) {
 
-		const glm::mat4& view = sm.getViewMatrix();
-		const glm::mat4& projection = sm.getProjectionMatrix();
+		const glm::mat4& viewproj = sm.getSunLight()->getLightSpaceMatrix();
 		glm::mat4& model = sm.getMatrizActual();
 
-		sm.shaderSombras->Use();
+		glm::mat4 Lightmvp = viewproj * model;
 
-		glUniformMatrix4fv(glGetUniformLocation(sm.shaderSombras->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		sm.shaderSombras->Use();
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderSombras->Program, "Lightmvp"), 1, GL_FALSE, glm::value_ptr(Lightmvp));
 
 
 		//Dibujamos el modelo
