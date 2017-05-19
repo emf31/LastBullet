@@ -99,7 +99,10 @@ int main() {
 	//TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
 	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(0.0f, 0.0f, 0.0f));
 	sol->setIntensidadAmbiente(0.5);
+	sol->setPosition(Vec3<float>(-20.0f, 5.0f, -5.0f));
+	sol->setVectorDireccion(Vec3<float>(0.0f, 0.0f, 0.0f));
 	sm.setSunLight(sol);
+	
 
 	//bombilla
 	//TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));

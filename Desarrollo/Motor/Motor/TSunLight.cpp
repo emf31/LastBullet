@@ -75,7 +75,7 @@ void TSunLight::calcularMatrices() {
 	//lightView = glm::lookAt(glm::vec3(-400.0f, 0.0f, 0.0f), glm::vec3(1.0, 0, 0), glm::vec3(0.0, 1.0, 0.0));
 	//perspectiva
 	lightProjection = glm::perspective(z, (float)1280 / (float)720, 1.0f, 1000.0f);
-	lightView = glm::lookAt(glm::vec3(-20.0f, 5.0f, -5.0f), glm::vec3(0, 0, 0), glm::vec3(0.0, 1.0, 0.0));
+	lightView = glm::lookAt(glm::vec3(m_position.getX(), m_position.getY(), m_position.getZ()), glm::vec3(m_direccion.getX(), m_direccion.getX(), m_direccion.getX()), glm::vec3(0.0, 1.0, 0.0));
 	lightSpaceMatrix = lightProjection * lightView;
 }
 
@@ -83,7 +83,9 @@ void TSunLight::calcularMatrices() {
 //metodos para las pruebas de sombras
 void TSunLight::setPosition(Vec3<float> pos) {
 	m_position = pos;
+	calcularMatrices();
 }
 void TSunLight::setVectorDireccion(Vec3<float> dir) {
 	m_direccion = dir;
+	calcularMatrices();
 }
