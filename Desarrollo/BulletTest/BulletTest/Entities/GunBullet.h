@@ -39,5 +39,6 @@ private:
 	Time m_lifetime;
 	Clock timelifeclock;
 
+	int lanzarShoot = 0;
 };
 

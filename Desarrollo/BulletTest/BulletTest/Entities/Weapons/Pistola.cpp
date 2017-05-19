@@ -178,6 +178,8 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadPistola.mp3", "sounds"), false);
+
 	}
 
 
@@ -189,5 +191,4 @@ void Pistola::recargar()
 {
 	Weapon::recargar();
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadPistola.mp3", "sounds"), false);
 }

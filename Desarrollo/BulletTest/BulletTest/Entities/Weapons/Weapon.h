@@ -45,6 +45,8 @@ public:
 
 	virtual bool cadenciaOk();
 
+	virtual void reloadSound() {};
+
 	void vaciar() {
 		disparos = capacidadAmmo;
 		numCargadores = 0;

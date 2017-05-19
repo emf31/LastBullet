@@ -133,6 +133,9 @@ Character* RocketLauncher::shoot(const Vec3<float>& target) {
 			relojrecarga.restart();
 		
 		estadoWeapon = DESCARGADA;
+
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("rocketReload.mp3", "sounds"), false);
+
 	}
 
 
@@ -145,5 +148,4 @@ void RocketLauncher::recargar()
 {
 	Weapon::recargar();
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("rocketReload.mp3", "sounds"), false);
 }

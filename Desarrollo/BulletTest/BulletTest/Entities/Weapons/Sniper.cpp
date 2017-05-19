@@ -172,6 +172,8 @@ Character* Sniper::shoot(const Vec3<float>& target)
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadRifle.mp3", "sounds"), false);
+
 	}
 
 	return hitted;
@@ -182,5 +184,4 @@ void Sniper::recargar()
 {
 	Weapon::recargar();
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadRifle.mp3", "sounds"), false);
 }

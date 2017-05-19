@@ -37,6 +37,7 @@ void Asalto::inicializar()
 		if (estadoWeapon == DESCARGADA) {
 			if (numCargadores > 0) {
 				if (relojrecarga.getElapsedTime() >= recarga) {
+
 					estadoWeapon = CARGADA;
 					disparos = 0;
 					numCargadores--;
@@ -45,6 +46,7 @@ void Asalto::inicializar()
 			}
 			else if (disparosRestantes>0) {
 				if (relojrecarga.getElapsedTime() >= recarga) {
+
 					estadoWeapon = CARGADA;
 					disparos = capacidadAmmo - disparosRestantes;
 					disparosRestantes = 0;
@@ -159,7 +161,7 @@ Character* Asalto::shoot(const Vec3<float>& target)
 
 	}
 
-	GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
+	GunBullet* bala = new GunBullet(cons(bt(m_nodo->getPosition())), cons(direccion), cons(posicionImpacto), getBalaRotation());
 	bala->cargarContenido();
 
 	TBala t_bala;
@@ -179,6 +181,8 @@ Character* Asalto::shoot(const Vec3<float>& target)
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadAssault.mp3", "sounds"), false);
+
 	}
 
 	return hitted;
@@ -188,6 +192,5 @@ void Asalto::recargar()
 {
 	Weapon::recargar();
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadAssault.mp3", "sounds"), false);
 }
 

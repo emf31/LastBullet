@@ -33,6 +33,10 @@ public:
 
 	virtual void recargar() override;
 
+	virtual void reloadSound() {
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadPistola.mp3", "sounds"), false);
+	}
+
 	virtual void updatePositionAndRotation() override {
 
 		Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();

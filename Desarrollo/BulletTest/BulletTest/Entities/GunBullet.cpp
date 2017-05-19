@@ -23,13 +23,22 @@ void GunBullet::inicializar()
 
 void GunBullet::update(Time elapsedTime)
 {
-	m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*m_velocity));
-	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
 
-		//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
-		Message msg1(this, "BORRATE", NULL);
-		MessageHandler::i().sendMessage(msg1);
+	if (lanzarShoot >0) {
+		m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*m_velocity));
+		if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
+
+			//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
+			Message msg1(this, "BORRATE", NULL);
+			MessageHandler::i().sendMessage(msg1);
+		}
 	}
+
+	if (lanzarShoot <= 0) {
+		lanzarShoot++;
+	}
+
+
 	
 }
 
@@ -40,8 +49,16 @@ void GunBullet::handleInput()
 void GunBullet::cargarContenido()
 {
 	ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.05f, 0.05f, 0.05f), "", resourceProvider.getFinalFilename("bullet.obj", "bullets"));
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.05f, 0.05f, 0.05f), "", "../media/bullets/bulletCapsula3.obj");
+
 	m_renderState.setPosition(m_position);
+
+
+	Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();
+	Vec3<float> newPos = vecDir * 0.5f;
+	m_nodo->setOrientation(vecDir);
+	m_renderState.setPosition(m_position);
+	//m_nodo->updatePosition(newPos);
 	m_renderState.setRotation(m_rotation);
 	m_renderState.setRenderRot(m_rotation);
 }

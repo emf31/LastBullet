@@ -34,6 +34,10 @@ public:
 
 	virtual void recargar() override;
 
+	virtual void reloadSound() {
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadRifle.mp3", "sounds"), false);
+
+	};
 	virtual void updatePositionAndRotation() override {
 
 		Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();
@@ -45,6 +49,9 @@ public:
 	}
 
 	virtual void resetAmmoTotal() { numCargadores = numCargadoresSniper; }
+
+
+
 
 private:
 	btVector3 SIZE_OF_WORLD;

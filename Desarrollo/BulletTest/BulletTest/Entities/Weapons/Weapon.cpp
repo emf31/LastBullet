@@ -14,9 +14,12 @@ Weapon::~Weapon()
 
 void Weapon::recargar() {
 
+
 	if (estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
+
+		reloadSound();
 
 		disparosRestantes += capacidadAmmo - disparos;
 		if (disparosRestantes >= capacidadAmmo) {
