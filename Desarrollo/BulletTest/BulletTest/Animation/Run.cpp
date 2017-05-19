@@ -1,6 +1,7 @@
 #include "Run.h"
 #include <Death.h>
 #include <Character.h>
+#include <Salto.h>
 
 void Run::Enter(Character * pEnemy)
 {
@@ -18,6 +19,10 @@ void Run::Execute(Character * pCharacter)
 		pCharacter->getAnimationMachine()->ChangeState(&Death::i());
 	}
 
+	//Compruebo si salto
+	if (!pCharacter->isOnGround()) {
+		pCharacter->getAnimationMachine()->ChangeState(&Salto::i());
+	}
 
 }
 

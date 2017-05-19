@@ -68,8 +68,6 @@ public:
 
 	void godMode();
 
-	void setNodoPersonajeVisibility(bool visibility) { m_nodoPersonaje->setVisible(visibility); }
-
 	Vec3<float> getVelocity() { return Vec3<float>(p_controller->getLinearVelocity().x(), p_controller->getLinearVelocity().y(), p_controller->getLinearVelocity().z()); }
 
 

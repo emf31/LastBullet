@@ -169,6 +169,7 @@ void getPackets() {
 			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 			unsigned char typeId;
 			bool isDying;
+			bool isOnGround;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -178,6 +179,7 @@ void getPackets() {
 			myBitStream.Read(timeStamp);
 			myBitStream.Read(typeId);
 			myBitStream.Read(isDying);
+			myBitStream.Read(isOnGround);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);

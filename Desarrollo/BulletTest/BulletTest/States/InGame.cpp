@@ -15,6 +15,7 @@
 #include <Map.h>
 #include <Death.h>
 #include <Run.h>
+#include <Salto.h>
 
 InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
 {
@@ -67,7 +68,7 @@ void InGame::Inicializar()
 	ene = new Enemy("pepe", RakNet::UNASSIGNED_RAKNET_GUID);
 	ene->inicializar();
 	ene->cargarContenido();
-	
+	ene->setPosition(Map::i().searchSpawnPoint());
 
 }
 
@@ -101,6 +102,9 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_N)) {
 		ene->getAnimationMachine()->ChangeState(&Run::i());
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_B)) {
+		ene->getAnimationMachine()->ChangeState(&Salto::i());
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 
@@ -205,7 +209,7 @@ void InGame::HandleEvent()
 
 void InGame::Update(Time timeElapsed)
 {
-	ene->setPosition(Map::i().searchSpawnPoint() + Vec3<float>(3,0,3));
+
 
 	PhysicsEngine::i().cleanDeleteObjects();
 	EntityManager::i().cleanDeleteQueue();

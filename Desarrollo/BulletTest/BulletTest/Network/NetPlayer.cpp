@@ -536,6 +536,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 			unsigned char typeId;
 			bool isDying;
+			bool isOnGround;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -546,6 +547,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			myBitStream.Read(timeStamp);
 			myBitStream.Read(typeId);
 			myBitStream.Read(isDying);
+			myBitStream.Read(isOnGround);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);
@@ -555,7 +557,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(guid));
 
 			if (e != NULL) {
-				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, position, rotation, guid });
+				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, position, rotation, guid });
 				//e->encolaMovimiento(m);
 
 				/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
@@ -663,7 +665,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			TGranada granada = *reinterpret_cast<TGranada*>(packet->data);
 
 			Enemy* ent = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(granada.guid));
-			ent->lanzarGranada(granada);
+			//ent->lanzarGranada(granada);
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(granada.guid, mPacketIdentifier);

@@ -56,7 +56,7 @@ void NetworkPrediction::updateState(TMovimiento & mov)
 {
 	newRotation = mov.rotation;
 	m_character->setIsDying(mov.isDying);
-
+	m_character->setOnGround(mov.isOnGround);
 }
 
 void NetworkPrediction::interpolate()

@@ -50,11 +50,19 @@ public:
 	void setLoD(bool a) { calcularLOD = a; };
 	bool getLOD() { return calcularLOD; }
 
+	void setOnGround(bool ground) { onGround = ground; }
+
+	bool isOnGround() const { return onGround; }
+
 
 protected:
 
 	LifeComponent* life_component;
 	AnimationMachine* animationMachine;
+
+
+	bool onGround;
+
 	//Say if this player is ready to play
 	bool available;
 

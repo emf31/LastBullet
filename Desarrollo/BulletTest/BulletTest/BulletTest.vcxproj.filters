@@ -429,6 +429,9 @@
     <ClCompile Include="Animation\Run.cpp">
       <Filter>Headers\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Animation\Salto.cpp">
+      <Filter>Headers\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -970,6 +973,10 @@
       <Filter>Headers\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Animation\Run.h">
+      <Filter>Headers\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h" />
+    <ClInclude Include="Animation\Salto.h">
       <Filter>Headers\Animation</Filter>
     </ClInclude>
   </ItemGroup>

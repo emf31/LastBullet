@@ -30,7 +30,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 			GraphicEngine::i().updateDeathCamera();
 			GraphicEngine::i().setActiveCamera("CameraDeath");
 			static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(false);
-			static_cast<Player*>(m_pOwner)->setNodoPersonajeVisibility(true);
+			
 		}
 
 
@@ -82,7 +82,7 @@ void LifeComponent::update()
 		if (m_pOwner->getClassName() == "Player") {
 			GraphicEngine::i().setActiveCamera("CamaraPlayer");
 			static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(true);
-			static_cast<Player*>(m_pOwner)->setNodoPersonajeVisibility(false);
+			//static_cast<Player*>(m_pOwner)->setNodoPersonajeVisibility(false);
 		}
 		m_isDying = false;
 		m_vida = 100;

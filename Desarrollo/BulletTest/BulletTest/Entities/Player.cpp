@@ -212,6 +212,7 @@ void Player::update(Time elapsedTime)
 		myBitStream.Write(timeStamp);
 		myBitStream.Write(typeId);
 		myBitStream.Write(getLifeComponent().isDying());
+		myBitStream.Write(p_controller->onGround());
 		myBitStream.Write(getRenderState()->getPosition());
 		myBitStream.Write(getRenderState()->getRotation());
 		myBitStream.Write(getGuid());

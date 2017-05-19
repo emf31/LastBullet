@@ -33,6 +33,7 @@ struct TMovimiento {
 	RakNet::Time timeStamp;
 	unsigned char mID;
 	bool isDying;
+	bool isOnGround;
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;

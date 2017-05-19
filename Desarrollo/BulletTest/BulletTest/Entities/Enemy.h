@@ -33,23 +33,16 @@ public:
 
 	void updateEnemigo(Vec3<float> pos);
 
-	//void updateAnimation();
-	void updateState();
-
 	virtual void handleMessage(const Message & message) override;
 
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 
-	void lanzarGranada(TGranada g);
-
 	virtual bool isDying() override;
 
 	void setIsDying(bool die) { getLifeComponent()->setIsDying(die); }
 
-	float getRadio(){
-		return radius;
-	}
+	float getRadio(){ return radius; }
 
 	void setVisibilidadBilboardSync();
 
@@ -63,15 +56,11 @@ private:
 	float radius;
 	float height;
 	float mass;
-	Animation* animation;
 
-	enum AnimState { quieto, andando, corriendo, saltando, saltando2 } m_animState;
 	bool isMoving;
-
-	//bool m_isDying;
-
-	Clock relojMuerte;
 	
+
+
 	NetworkPrediction nPrediction;
 
 
