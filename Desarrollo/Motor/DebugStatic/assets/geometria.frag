@@ -6,6 +6,7 @@ layout (location = 3) out vec3 gTangent;
 layout (location = 4) out vec3 gBitangent;
 layout (location = 5) out vec3 gEmisivo;
 layout (location = 6) out vec3 gObjectColor;
+layout (location = 7) out vec3 gShadowMap2;
 
 
 
@@ -24,6 +25,7 @@ in vec2 txtcoords;
 in vec3 FrgPs;
 in vec3 Normal;
 in mat3 normalMatrix;
+in vec4 LightFragPos;
 
 uniform Material material;
 
@@ -32,7 +34,8 @@ void main()
 
     //posicion
     gPosition.xyz = FrgPs;
-
+    //zbuffer luz
+    gShadowMap2 = vec3(LightFragPos.z);
     //leemos las normales de la textura, como la textura identifica un color y va de 0 a 1 tenemos que pasarlo a rango de -1 a 1 para que sea un vector de normales.
     gNormal = texture(material.texture_normal, txtcoords).rgb;
     gNormal = normalize(gNormal * 2.0 - 1.0);   

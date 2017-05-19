@@ -42,8 +42,9 @@ uniform sampler2D gTangent;
 uniform sampler2D gBitangent;
 uniform sampler2D gEmisivo;
 uniform sampler2D gObjectColor;
+uniform sampler2D gShadowMap2;
 uniform sampler2D gBloom;
-uniform sampler2D shadowMap;
+
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
@@ -76,7 +77,7 @@ void main()
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
     vec3 bloom = texture(gBloom, TexCoords).rgb;
-    float sombras = texture(shadowMap, TexCoords).r;
+    float sombras = texture(gShadowMap2, TexCoords).r;
     vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
     //float bias = max(0.05 * (1.0 - dot(Normal, lightDir)), 0.005);
    
@@ -267,17 +268,17 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias)
     }
 
     //float bias = 0.005;
-    float closestDepth = texture(shadowMap, projCoords.xy).r; 
+    float closestDepth = texture(gShadowMap2, projCoords.xy).r; 
     float currentDepth = projCoords.z;
     shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
 
     //para difuminar las sombras
-    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+    vec2 texelSize = 1.0 / textureSize(gShadowMap2, 0);
     for(int x = -2; x <= 2; ++x)
     {
         for(int y = -2; y <= 2; ++y)
         {
-            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            float pcfDepth = texture(gShadowMap2, projCoords.xy + vec2(x, y) * texelSize).r; 
             shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
         }    
     }

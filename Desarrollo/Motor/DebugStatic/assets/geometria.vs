@@ -7,10 +7,11 @@ out vec2 txtcoords;
 out vec3 Normal;
 out vec3 FrgPs;
 out mat3 normalMatrix;
+out vec3 LightFragPos;
 
 uniform mat4 model;
 uniform mat4 modelview;
-uniform mat4 ViewProjec;
+uniform mat4 lightmodelview;
 
 
 void main()
@@ -20,8 +21,10 @@ void main()
     txtcoords = texCoords;
     vec4 worldPos = model * vec4(position, 1.0f);
 	FrgPs = worldPos.xyz;
-	//gl_Position =  modelview * vec4(position, 1.0f);
-	gl_Position =  ViewProjec* vec4(FrgPs, 1.0f);
+	gl_Position =  lightmodelview * vec4(position, 1.0f);
+	LightFragPos =  gl_FragCoord.z;
+	gl_Position =  modelview * vec4(position, 1.0f);
+	
 	//NOTA: necesitamos pasar el vector normal de coordenadas del mundo a coordenadas de la vista, pero para ello no podemos multiplicarla
 	//por la view directamente como hacemos con la matriz modelo ya que este vector normal no se puede trasladar o dejaria de ser perpendicular a la cara del modelo
 	//entonces lo que hacemos es usar las traspuesta de la inversa del modelo y ademas la pasamos a una matriz de 3x3 para que se pierdan las coordenadas de traslacion.

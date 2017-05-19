@@ -58,7 +58,7 @@ void SceneManager::draw() {
 			scene->draw();
 			//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
 			if (castShadow) {
-				renderSombras();
+				//renderSombras();
 			}
 			//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -104,8 +104,9 @@ void SceneManager::inicializarBuffers()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBitangent"), 4);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gEmisivo"), 5); 
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gObjectColor"), 6);
-	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBloom"), 7);
-	glUniform1i(glGetUniformLocation(shaderLuces->Program, "shadowMap"), 8);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gShadowMap2"), 7);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBloom"), 8);
+	
 
 	
 	glGenFramebuffers(1, &gBuffer);
@@ -160,12 +161,20 @@ void SceneManager::inicializarBuffers()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT6, GL_TEXTURE_2D, gObjectColor, 0);
+	glGenTextures(1, &gShadowMap2);
+	glBindTexture(GL_TEXTURE_2D, gShadowMap2);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_RGB, GL_FLOAT, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT7, GL_TEXTURE_2D, gShadowMap2, 0);
 
 
 	// tenemos que juntar los 3 color buffers en el framebuffer que tenemos activo para ello los juntamos en el array
 	// pero como ahora tenemos 3 render targets en el fragment shader vamos a tener que definir 3 capas (layout)
-	GLuint attachments[7] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT5, GL_COLOR_ATTACHMENT6 };
-	glDrawBuffers(7, attachments);
+	GLuint attachments[8] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT5, GL_COLOR_ATTACHMENT6, GL_COLOR_ATTACHMENT7 };
+	glDrawBuffers(8, attachments);
 	
 		//Depthbuffer
 	glGenRenderbuffers(1, &rboDepth);
@@ -251,9 +260,9 @@ void SceneManager::renderLuces()
 	glActiveTexture(GL_TEXTURE6);
 	glBindTexture(GL_TEXTURE_2D, gObjectColor);
 	glActiveTexture(GL_TEXTURE7);
-	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	glBindTexture(GL_TEXTURE_2D, gShadowMap2);
 	glActiveTexture(GL_TEXTURE8);
-	glBindTexture(GL_TEXTURE_2D, shadowMap);
+	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
 	
 
 	//LUZ SOLAR

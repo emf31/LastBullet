@@ -103,7 +103,7 @@ public:
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
-	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gEscena;
+	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gShadowMap2;
 	GLuint rboDepth;
 	GLuint shadowMapDepthFBO, shadowMap;
 	GLuint draw_mode=1;

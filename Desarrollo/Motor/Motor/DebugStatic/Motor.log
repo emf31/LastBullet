@@ -1,7 +1,4 @@
-﻿  TModel.cpp
+﻿  SceneManager.cpp
 e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-  SceneManager.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.h(136): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-  Generando código...
   Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
   Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)
