@@ -12,3 +12,4 @@ illum 2
 map_Bump textura_diff.ppg
 map_Ks textura_diff.ppg
 map_Kd textura_diff.ppg
+map_ke noemisivo.jpg

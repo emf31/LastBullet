@@ -7,6 +7,7 @@ struct SunLight {
     vec3 difusa;
     vec3 ambiente;
     vec3 direction;
+    mat4 lightSpaceMatrix;
 }; 
 
 struct FlashLight {
@@ -32,6 +33,7 @@ struct PointLight {
 vec3 calcularLuzSolar(SunLight sun,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos, vec3 Diffuse, float Specular);
+float ShadowCalculation(vec4 fragPosLightSpace, float bias);
 
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
@@ -41,9 +43,13 @@ uniform sampler2D gBitangent;
 uniform sampler2D gEmisivo;
 uniform sampler2D gObjectColor;
 uniform sampler2D gBloom;
+uniform sampler2D shadowMap;
 
 uniform vec3 objectColor;
 uniform vec3 viewPos;
+uniform float bias;
+uniform bool castShadow;
+uniform bool castStaticShadow;
 
 uniform int draw_mode;
 
@@ -51,16 +57,15 @@ uniform int draw_mode;
 uniform int num_pointlight;
 uniform int num_flashlight;
 uniform SunLight sunlight;
-uniform FlashLight flashlight[32];
-uniform PointLight pointlight[32];
+uniform FlashLight flashlight[10];
+uniform PointLight pointlight[10];
 
 
 void main()
 {             
     // Retrieve data from gbuffer
     //TexCoords = gCoords.rg;
-    const float gamma = 0.4;
-    const float exposure = 3.2;
+    vec3 colorFinal;
     vec3 FragPos = texture(gPosition, TexCoords).rgb;
     vec3 Normal = texture(gNormal, TexCoords).rgb;
     vec3 Diffuse;
@@ -71,8 +76,10 @@ void main()
     vec3 emissive = texture(gEmisivo, TexCoords).rgb;
     vec3 modelColor = texture(gObjectColor, TexCoords).rgb;
     vec3 bloom = texture(gBloom, TexCoords).rgb;
-    
-        vec3 colorFinal;
+    float sombras = texture(shadowMap, TexCoords).r;
+    vec4 FragPosLightSpace = sunlight.lightSpaceMatrix * vec4(FragPos, 1.0);
+    //float bias = max(0.05 * (1.0 - dot(Normal, lightDir)), 0.005);
+   
     //calculamos el vector vista (desde donde el observador ve el objeto)
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
@@ -89,18 +96,18 @@ void main()
         
     }
 
+    // Calculate shadow
+    float shadow = 0.0f;
+    if(castShadow || castStaticShadow){
+    shadow = ShadowCalculation(FragPosLightSpace, bias);  
+    }
+    colorFinal = (1.2-shadow)*modelColor * colorFinal;
+    
 
-    //colorFinal += emissive;
-    colorFinal = colorFinal * modelColor;
-
-    //vec3 result = vec3(1.0) - exp(-colorFinal * exposure);
-           
-    //result = pow(result, vec3(1.0 / gamma));
-    //colorFinal = result;
-
-
-
+    //bloom
     colorFinal += bloom;
+
+
     if(draw_mode == 1)
         FragColor = vec4(colorFinal, 1.0);
     else if(draw_mode == 2)
@@ -117,9 +124,11 @@ void main()
         FragColor = vec4(emissive, 1.0);
     else if(draw_mode == 8)
         FragColor = vec4(bloom, 1.0);
+    else if(draw_mode == 9)
+        FragColor = vec4(vec3(sombras), 1.0);
 
 
-    //FragColor = vec4(0.35f,1.0f,0.9f, 1.0)* vec4(FragPos, 1.0);
+    
     
 
 }
@@ -142,8 +151,8 @@ vec3 calcularPointLight(PointLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
 
 //valores para que la luz deje de afectar cuando esta a una distancia de 100
 float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
-    float linear=0.03; //la cantidad de atenueacion segun las distancia
-    float quadratic=0.0003; //cantidad de atenuacion segun la distancia al cuadrado
+float linear=0.05; //la cantidad de atenueacion segun las distancia
+float quadratic=0.015; //cantidad de atenuacion segun la distancia al cuadrado
 
     //LUZ AMBIENTE
     vec3 ambient = light.ambiente * Diffuse;
@@ -170,7 +179,7 @@ float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es 
     //specular *= attenuation;   
 
 
-    if(distance>13.0f){
+    if(distance>light.radio){
         miatenuacion = (distance-light.radio)*0.15;
         ambient -= miatenuacion;
 
@@ -194,8 +203,8 @@ float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es 
 vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,vec3 Diffuse, float Specular){
     //valores para que la luz deje de afectar cuando esta a una distancia de 100
     float constant=1.0f; //siempre uno para asegurarnos que el denominador nunca es menor que 1
-    float linear=0.03; //la cantidad de atenueacion segun las distancia
-    float quadratic=0.0003; //cantidad de atenuacion segun la distancia al cuadrado
+    float linear=0.005; //la cantidad de atenueacion segun las distancia
+    float quadratic=0.0001; //cantidad de atenuacion segun la distancia al cuadrado
     vec3 colorF=vec3(0.0f,0.0f,0.0f);
 
      vec3 lightDir = normalize(light.position - FragPos);
@@ -242,3 +251,50 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
 
 
 }
+
+
+
+
+float ShadowCalculation(vec4 fragPosLightSpace, float bias)
+{
+    float shadow = 0.0;
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    projCoords = projCoords * 0.5 + 0.5;
+
+    //si esa parte no esta en el depthbuffer consideramos que llega luz
+    if(projCoords.z > 1.0){
+       return shadow;
+    }
+
+    //float bias = 0.005;
+    float closestDepth = texture(shadowMap, projCoords.xy).r; 
+    float currentDepth = projCoords.z;
+    shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
+
+    //para difuminar las sombras
+    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth ? 0.6 : 0.0;        
+        }    
+    }
+    shadow /= 9.0;
+
+    /* 25 iteracion mas suavizadas las sombras pero bastante mas costoso
+    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+    for(int x = -2; x <= 2; ++x)
+    {
+        for(int y = -2; y <= 2; ++y)
+        {
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 25.0;
+    */
+
+    return shadow;
+}  

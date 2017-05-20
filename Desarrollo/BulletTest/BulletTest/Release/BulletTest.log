@@ -1,109 +1,83 @@
 ﻿  Button.cpp
   Character.cpp
   Enemy_Bot.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   EntActive.cpp
   EntPassive.cpp
   Granada.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   GroupEntity.cpp
   GunBullet.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Enemy.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Entity.cpp
   EntityManager.cpp
   KinematicCharacterController.cpp
   LifeObject.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   PhysicsEntity.cpp
 Entities\PhysicsEntity.cpp(50): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
 Entities\PhysicsEntity.cpp(56): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
 Entities\PhysicsEntity.cpp(62): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
   Player.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   RocketBullet.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   RocketBulletEnemy.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   AsaltoDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   PistolaDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   RocketLauncherDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Generando código...
   Compilando...
   SniperDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   WeaponDrop.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Asalto.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Pistola.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   RocketLauncher.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Sniper.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Weapon.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   EventListener.cpp
   EventSystem.cpp
   AStarSearch.cpp
   GraphEdge.cpp
   GraphNode.cpp
   SparseGraph.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 Graph\SparseGraph.cpp(11): warning C4018: '>=': no coinciden signed/unsigned
   DebugMenuGUI.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 GUI\DebugMenuGUI.cpp(233): warning C4305: 'argumento': truncamiento de 'double' a 'float'
   GUI.cpp
   GUIManager.cpp
   InGameHUD.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   LoadingStateGUI.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   MenuGUI.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   ParalellTask.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Generando código...
-d:\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
   Compilando...
   SalirHUD.cpp
   InputHandler.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   MessageHandler.cpp
   Partida.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   FuzzyModule.cpp
   FuzzyRule.cpp
   FuzzySet.cpp
@@ -120,63 +94,84 @@ D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': t
   LogIA.cpp
   MachineState.cpp
   PathFollow.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Generando código...
   Compilando...
   SensoryMemory.cpp
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(60): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-D:\TBA\Desarrollo\BulletTest\include\Engine/TCamera.h(61): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   BuscarVida.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   BuscarWeapon.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Disparar.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Patrullar.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Perseguir.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   TargetingSystem.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   WeaponSystem.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Celda.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Dijkstra.cpp
-D:\TBA\Desarrollo\BulletTest\BulletTest\Mapa\Dijkstra.h(31): warning C4018: '<': no coinciden signed/unsigned
   Map.cpp
   PathPlanner.cpp
-D:\TBA\Desarrollo\BulletTest\BulletTest\Mapa\Dijkstra.h(31): warning C4018: '<': no coinciden signed/unsigned
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Game.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   main.cpp
   AnimatedSceneNode.cpp
   Animation.cpp
   BillboardSceneNode.cpp
   Camera.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   CameraShake.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Color4f.cpp
   Generando código...
   Compilando...
   GraphicEngine.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   GunRecoil.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   MapLoader.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 Motor\MapLoader.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-Motor\MapLoader.cpp(183): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(194): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(205): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(215): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
-Motor\MapLoader.cpp(227): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(184): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(195): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(206): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(216): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(228): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
   PhysicsEngine.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   RenderState.cpp
   BasicSceneNode.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   SceneNode.cpp
   Lobby.cpp
   NetBot.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   NetObject.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   NetPlayer.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   NetworkDebugger.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
   NetworkManager.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   AssetsReader.cpp
   Clock.cpp
   DebugMarks.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 Otros\DebugMarks.cpp(42): warning C4305: 'argumento': truncamiento de 'double' a 'float'
 Otros\DebugMarks.cpp(84): warning C4305: 'argumento': truncamiento de 'double' a 'float'
   LifeComponent.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Lista.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   PriorityQueue.cpp
   Settings.cpp
   Generando código...
@@ -187,16 +182,21 @@ Otros\DebugMarks.cpp(84): warning C4305: 'argumento': truncamiento de 'double' a
   Vec2f.cpp
   ClockImpl.cpp
   ExplosionParticleSystem.cpp
-ParticleSystem\ExplosionParticleSystem.cpp(113): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-ParticleSystem\ExplosionParticleSystem.cpp(217): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-ParticleSystem\ExplosionParticleSystem.cpp(239): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
-ParticleSystem\ExplosionParticleSystem.cpp(253): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+ParticleSystem\ExplosionParticleSystem.cpp(114): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+ParticleSystem\ExplosionParticleSystem.cpp(114): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+ParticleSystem\ExplosionParticleSystem.cpp(218): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+ParticleSystem\ExplosionParticleSystem.cpp(240): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+ParticleSystem\ExplosionParticleSystem.cpp(254): warning C4305: 'argumento': truncamiento de 'double' a 'float'
   ParticleSystem.cpp
   InGame.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   LoadingState.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Menu.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   State.cpp
   StateFactory.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   StateStack.cpp
   TriggerSystem.cpp
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): warning C4244: 'inicializando': conversión de 'unsigned long' a 'const unsigned short'; posible pérdida de datos
@@ -217,12 +217,13 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\utility(172): war
               _Other2=TriggerRecordStruct *&
           ]
   World.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\include\engine\SceneManager.h(149): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
   Generando código...
-     Creando biblioteca D:\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+     Creando biblioteca E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  2688 of 2698 functions (99.6%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
+  2548 of 2659 functions (95.8%) were compiled, the rest were copied from previous compilation.
+    166 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
@@ -281,9 +282,9 @@ CEGUIOpenGLRenderer-0_Static.lib(GL.obj) : warning LNK4049: se importó el símb
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewCompressedTexSubImage2D definido localmente
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
-SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'D:\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  BulletTest.vcxproj -> D:\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> D:\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  BulletTest.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
+  BulletTest.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)

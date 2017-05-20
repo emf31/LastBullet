@@ -159,16 +159,44 @@ void InGame::HandleEvent()
 	} else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
 		particleSystem.createExplosion(EntityManager::i().getEntity(PLAYER)->getPosition());
 	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_R)) {
+		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
+		pos.setX(pos.getX() + 10);
+		SceneManager::i().getSunLight()->setPosition(pos);
+		std::cout << "Posicion sol: ";
+		pos.display();
+	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_T)) {
 		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
-		pos.setY(pos.getY() + 3);
+		pos.setY(pos.getY() + 5);
+		SceneManager::i().getSunLight()->setPosition(pos);
+		std::cout << "Posicion sol: ";
+		pos.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_Y)) {
+		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
+		pos.setZ(pos.getZ() + 10);
 		SceneManager::i().getSunLight()->setPosition(pos);
 		std::cout << "Posicion sol: ";
 		pos.display();
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F)) {
 		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
-		pos.setY(pos.getY() - 3);
+		pos.setX(pos.getX() - 10);
+		SceneManager::i().getSunLight()->setPosition(pos);
+		std::cout << "Posicion sol: ";
+		pos.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_G)) {
+		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
+		pos.setY(pos.getY() - 5);
+		SceneManager::i().getSunLight()->setPosition(pos);
+		std::cout << "Posicion sol: ";
+		pos.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_H)) {
+		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
+		pos.setZ(pos.getZ() - 3);
 		SceneManager::i().getSunLight()->setPosition(pos);
 		std::cout << "Posicion sol: ";
 		pos.display();
@@ -215,7 +243,19 @@ void InGame::HandleEvent()
 		std::cout << "Direccion sol: ";
 		dir.display();
 	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_X)) {
 
+		SceneManager::i().activeStaticShadow(true);
+		SceneManager::i().activeDynamicShadow(false);
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_Z)) {
+		SceneManager::i().activeStaticShadow(false);
+		SceneManager::i().activeDynamicShadow(true);
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_P)) {
+		SceneManager::i().activeStaticShadow(false);
+		SceneManager::i().activeDynamicShadow(false);
+	}
 	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();
