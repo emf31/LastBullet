@@ -148,6 +148,11 @@ void MenuGUI::inicializar() {
 	Atras4 = static_cast<CEGUI::PushButton*>(OpcionesGameWindow->getChild(99));
 	Atras4->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
 
+	sliderBots = static_cast<CEGUI::Slider*>(OpcionesGameWindow->getChild(70));
+	sliderBots->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onBotsSlider, this));
+
+	numBots = static_cast<CEGUI::DefaultWindow*>(OpcionesGameWindow->getChild(71));
+
 	OpcionesGameWindow->setVisible(false);
 
 	//------------------------------------------------
@@ -299,6 +304,12 @@ bool MenuGUI::onUpdateSliderSound(const CEGUI::EventArgs & e)
 bool MenuGUI::onUpdateSliderMusic(const CEGUI::EventArgs & e)
 {
 	MusicLabel->setText(std::to_string(int(MusicSlider->getCurrentValue() * 100)));
+	return true;
+}
+
+bool MenuGUI::onBotsSlider(const CEGUI::EventArgs & e)
+{
+	numBots->setText(std::to_string(int(sliderBots->getCurrentValue())));
 	return true;
 }
 

@@ -69,6 +69,7 @@ public:
 	bool onApplySounds(const CEGUI::EventArgs & e);
 	bool onUpdateSliderSound(const CEGUI::EventArgs & e);
 	bool onUpdateSliderMusic(const CEGUI::EventArgs & e);
+	bool onBotsSlider(const CEGUI::EventArgs & e);
 	
 
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
@@ -169,6 +170,9 @@ private:
 	CEGUI::Slider *MusicSlider;
 	CEGUI::DefaultWindow* SoundLabel;
 	CEGUI::DefaultWindow* MusicLabel;
+
+	CEGUI::Slider *sliderBots;
+	CEGUI::DefaultWindow *numBots;
 
 	CEGUI::DefaultWindow *imagen;
 	CEGUI::DefaultWindow *imagen2;

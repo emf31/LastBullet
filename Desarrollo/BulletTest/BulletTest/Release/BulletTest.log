@@ -1,44 +1,4 @@
-﻿  Enemy.cpp
-  Enemy_Bot.cpp
-  Granada.cpp
-  LifeObject.cpp
-  Player.cpp
-  RocketBullet.cpp
-  AsaltoDrop.cpp
-  PistolaDrop.cpp
-  RocketLauncherDrop.cpp
-  SniperDrop.cpp
-  Asalto.cpp
-  Pistola.cpp
-  RocketLauncher.cpp
-  Sniper.cpp
-  DebugMenuGUI.cpp
-  InGameHUD.cpp
-  LoadingStateGUI.cpp
-  MenuGUI.cpp
-  Game.cpp
-Game.cpp(156): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
-  Game.cpp(156): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
-Game.cpp(162): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
-  Game.cpp(162): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
-  Partida.cpp
-  Generando código...
-  Compilando...
-  NetBot.cpp
-  NetObject.cpp
-  NetPlayer.cpp
-  NetworkDebugger.cpp
-Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  NetworkLog.cpp
-  NetworkManager.cpp
-  SteamResults.cpp
-  LifeComponent.cpp
-  InGame.cpp
-  LoadingState.cpp
-  Menu.cpp
-  StateFactory.cpp
-  World.cpp
-  Generando código...
+﻿  MenuGUI.cpp
      Creando biblioteca C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto C:\Users\Enrique\Documents\GitHub\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LIBCMT.lib(initializers.obj) : warning LNK4098: la biblioteca predeterminada'msvcrt.lib' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código

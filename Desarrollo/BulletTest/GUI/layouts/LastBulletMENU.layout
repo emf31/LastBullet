@@ -253,10 +253,13 @@
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+                <Property name="ID" value="70" />
                 <Property name="Area" value="{{0,645},{0,298},{0,901},{0,330}}" />
-                <Property name="ClickStepSize" value="0.25" />
+                <Property name="MaximumValue" value="4" />
+                <Property name="ClickStepSize" value="1" />
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label4" >
+                <Property name="ID" value="71" />
                 <Property name="Area" value="{{0,903},{0,300},{0,1031},{0,332}}" />
                 <Property name="Text" value="0" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
