@@ -56,7 +56,7 @@ void RocketBullet::handleInput()
 
 void RocketBullet::cargarContenido()
 {
-	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.3f, 0.3f, 0.3f), "", "../media/bullets/rocketbullet.obj");
+	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_nodo->setRotationXYZ(m_rotation);
 
