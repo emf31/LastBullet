@@ -205,6 +205,8 @@ void Game::clear()
 {
 	GraphicEngine::i().apagar();
 
+	SoundManager::i().drop();
+
 	stateStack.GetCurrentState()->Clear();
 }
 

@@ -48,5 +48,5 @@ void WeaponDrop::ArmaCogida()
 		m_nodo->setVisible(false);
 	//}
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("pickup.wav", "sounds"), getPosition());
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("pickup.wav", "sounds"), getPosition(), Sound::type::sound);
 }

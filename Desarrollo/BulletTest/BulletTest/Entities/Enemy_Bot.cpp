@@ -208,7 +208,6 @@ void Enemy_Bot::update(Time elapsedTime)
 				unsigned char useTimeStamp; // Assign this to ID_TIMESTAMP
 				RakNet::Time timeStamp; // Put the system time in here returned by RakNet::GetTime()
 				unsigned char typeId; // This will be assigned to a type I've added after ID_USER_PACKET_ENUM, lets say ID_SET_TIMED_MINE
-				bool isDying;
 				Vec3<float> position;
 				Vec3<float> rotation;
 				RakNet::RakNetGUID guid;

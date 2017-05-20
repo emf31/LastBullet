@@ -11,7 +11,7 @@ void Run::Enter(Character * pEnemy)
 	pEnemy->getNode()->setFrameTime(milliseconds(30));
 
 	if (pEnemy->footsteps == nullptr) {
-		pEnemy->footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), pEnemy->getRenderState()->getPosition(), true);
+		pEnemy->footsteps = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("footsteps.wav", "sounds"), pEnemy->getRenderState()->getPosition(),Sound::type::sound, true);
 	}
 	
 	pEnemy->footsteps->setIsPaused(false);

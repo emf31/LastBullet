@@ -120,6 +120,16 @@ void MenuGUI::inicializar() {
 	Atras2 = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(99));
 	Atras2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
 
+	ApplySounds = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(98));
+	ApplySounds->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onApplySounds, this));
+	SoundSlider = static_cast<CEGUI::Slider*>(OpcionesAudioWindow->getChild(1));
+	SoundSlider->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onUpdateSliderSound, this));
+	MusicSlider = static_cast<CEGUI::Slider*>(OpcionesAudioWindow->getChild(2));
+	MusicSlider->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onUpdateSliderMusic, this));
+	SoundLabel = static_cast<CEGUI::DefaultWindow*>(OpcionesAudioWindow->getChild(3));
+	MusicLabel = static_cast<CEGUI::DefaultWindow*>(OpcionesAudioWindow->getChild(4));
+
+
 	OpcionesAudioWindow->setVisible(false);
 
 	//Opciones Video
@@ -269,6 +279,26 @@ bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
 bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
 {
 	changeState(stateMenu::enumPrincipal);
+	return true;
+}
+
+bool MenuGUI::onApplySounds(const CEGUI::EventArgs & e)
+{
+	std::cout << MusicSlider->getCurrentValue() << std::endl;
+	SoundManager::i().setVolumeMusic(MusicSlider->getCurrentValue());
+	SoundManager::i().setVolumeSounds(SoundSlider->getCurrentValue());
+	return true;
+}
+
+bool MenuGUI::onUpdateSliderSound(const CEGUI::EventArgs & e)
+{
+	SoundLabel->setText(std::to_string(int(SoundSlider->getCurrentValue() * 100)));
+	return true;
+}
+
+bool MenuGUI::onUpdateSliderMusic(const CEGUI::EventArgs & e)
+{
+	MusicLabel->setText(std::to_string(int(MusicSlider->getCurrentValue() * 100)));
 	return true;
 }
 
