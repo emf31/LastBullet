@@ -78,6 +78,10 @@ public:
 
 	PlayerSlot* setNameOnPlayerSlot(const std::string& name);
 
+	int getNumBots() {
+		return sliderBots->getCurrentValue();
+	}
+
 	void setSlotFree(const std::string& str);
 
 	void changeStateToLobbyView() {

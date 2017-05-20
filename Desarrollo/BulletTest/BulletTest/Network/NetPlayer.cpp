@@ -75,11 +75,16 @@ void NetPlayer::crearPartida()
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
 
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	menu->getNumBots();
 
-	
-	/*TPlayer p;
-	p.name = "Nixon";
-	m_bots.push_back(p);*/
+
+	for (int i = 0; i < menu->getNumBots(); i++) {
+		TPlayer p;
+		p.name = "Bot "+ std::to_string((i+1));
+		m_bots.push_back(p);
+	}
+
 	
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
 	/*TGameInfo gameinfo;
