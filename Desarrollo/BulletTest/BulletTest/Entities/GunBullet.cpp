@@ -24,19 +24,17 @@ void GunBullet::inicializar()
 void GunBullet::update(Time elapsedTime)
 {
 
-	if (lanzarShoot >0) {
-		m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*m_velocity));
+		float velocity = 10 * timelifeclock.getElapsedTime().asMilliseconds()+42;
+
+		m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*velocity));
+
 		if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
 
 			//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
 			Message msg1(this, "BORRATE", NULL);
 			MessageHandler::i().sendMessage(msg1);
 		}
-	}
-
-	if (lanzarShoot <= 0) {
-		lanzarShoot++;
-	}
+	
 
 
 	
