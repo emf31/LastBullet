@@ -13,8 +13,19 @@ public:
 	Vec3<float> getDireccion();
 	void setRotationXYZ(Vec3<float> dir);
 	void updateVectorDireccion();
+	glm::mat4 getLightProjection();
+	glm::mat4 getLightView();
+	glm::mat4 getLightSpaceMatrix();
+	void calcularMatrices();
+	//metodos para las pruebas de sombras
+	void setPosition(Vec3<float> pos);
+	void setVectorDireccion(Vec3<float> dir);
+	Vec3<float> getPosition();
 
 private:
 	Vec3<float> m_direccion;
+	Vec3<float> m_position;
+	glm::mat4 lightProjection, lightView;
+	glm::mat4 lightSpaceMatrix;
 
 };

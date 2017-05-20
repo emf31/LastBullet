@@ -32,16 +32,15 @@ void TModel::beginDraw() {
 		const glm::mat4& view = sm.getViewMatrix();
 		const glm::mat4& projection = sm.getProjectionMatrix();
 		glm::mat4& model = sm.getMatrizActual();
-
 		glm::mat4 modelview = projection * view * model;
+		glm::mat4 normMatrix = glm::transpose(glm::inverse(glm::mat3(model)));
 
-
+		
 		sm.shaderGeometria->Use();
-
+		
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "normMatrix"), 1, GL_FALSE, glm::value_ptr(normMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		//color emisivo antes el emisivo era un color ahora es una textura
-		//glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.emisivo"), m_emisivo.getX(), m_emisivo.getY(), m_emisivo.getZ());
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
 
 		//Dibujamos el modelo
@@ -51,9 +50,22 @@ void TModel::beginDraw() {
 
 }
 
+void TModel::beginDrawSombras() {
+	if (visible) {
+
+		const glm::mat4& viewproj = sm.getSunLight()->getLightSpaceMatrix();
+		glm::mat4& model = sm.getMatrizActual();
+		glm::mat4 Lightmvp = viewproj * model;
+		sm.shaderSombras->Use();
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderSombras->Program, "Lightmvp"), 1, GL_FALSE, glm::value_ptr(Lightmvp));
+		//Dibujamos el modelo
+		m_meshGroup->draw();
+
+	}
+
+}
+
 void TModel::endDraw() {
-	//std::cout << u8"Adiós" << std::endl;
-	//TEntity::endDraw();
 }
 
 void TModel::setPosition(Vec3<float> pos) {

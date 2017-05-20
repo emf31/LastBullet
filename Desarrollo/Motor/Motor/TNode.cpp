@@ -22,6 +22,25 @@ void TNode::addChild(TNode* child) {
 	m_childNodes.push_back(child);
 
 }
+
+void TNode::addChild(TEntity * ent) {
+	TNode* nuevoHijo = ent->getMiNodo();
+	TNode* padre = ent->getMiNodo()->getParentNode();
+
+	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() != ent->getID()) {
+		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
+		nuevoHijo = nuevoHijo->getParentNode();
+		padre = padre->getParentNode();
+	}
+	padre->removeChild(nuevoHijo);
+	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el madre de miNodo y no directamente miNodo
+	//pues es bien sencillo, simplemente pork estamos en un nodo malla que son a los que se tiene acceso desde el juego
+	//y el padre no puede ser el nodo malla sino la transformacion de la que depende este nodo malla , es decir, el padre del nodo malla. De nada futuro yo ;)
+	nuevoHijo->setParentNode(this);
+	this->addChild(nuevoHijo);
+
+}
+
 bool TNode::removeChild(TNode * child) {
 	auto result = std::find(m_childNodes.begin(), m_childNodes.end(), child);
 
@@ -69,8 +88,22 @@ void TNode::draw() {
 			sm.setMatrizActual(glm::mat4());
 			(*it)->draw();
 		}
-		//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
+	}
 
+}
+void TNode::drawSombras() {
+	if (getEntity() != nullptr) {
+		getEntity()->beginDrawSombras();
+		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+			(*it)->drawSombras();
+		}
+		getEntity()->endDraw();
+	}
+	else {
+		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+			sm.setMatrizActual(glm::mat4());
+			(*it)->drawSombras();
+		}
 	}
 
 }

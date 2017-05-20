@@ -64,6 +64,7 @@ private:
 
 	bool visible;
 	virtual void beginDraw();
+	virtual void beginDrawSombras();
 	virtual void endDraw();
 
 	/*  Model Data  */

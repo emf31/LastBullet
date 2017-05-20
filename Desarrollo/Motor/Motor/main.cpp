@@ -68,8 +68,12 @@ int main() {
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
-	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+	l1->setPosition(Vec3<float>(-7.0f, 4.0f, -3.0f));
+	//l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+
+	TModel* l2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	l2->setPosition(Vec3<float>(-10.0f, 5.0f, 8.0f));
 
 	
 	//animacion
@@ -77,7 +81,7 @@ int main() {
 	std::cout << "Cargando animaciones..." << std::endl;
 	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
 	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
-	pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	pruebaAnim->setPosition(Vec3<float>(-10.0f, 5.0f, 0.0f));
 	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 	pruebaAnim->setAnimation("idle",0,34);
 	pruebaAnim->setAnimation("saltar", 40, 109);
@@ -92,16 +96,20 @@ int main() {
 	//*******LUCES*******
 
 	//sol
-	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
+	//TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
+	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(0.0f, 0.0f, 0.0f));
 	sol->setIntensidadAmbiente(0.5);
-
+	sol->setPosition(Vec3<float>(-20.0f, 5.0f, -5.0f));
+	sol->setVectorDireccion(Vec3<float>(0.0f, 0.0f, 0.0f));
+	sm.setSunLight(sol);
+	
 
 	//bombilla
-	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
-	luz->setColor(1.0f, 0.5f, 1.f);
-	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f), 100.0f, 150.0f);
-	luz2->setColor(0.0f, 1.f, 0.5f);
-	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
+	//TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
+	//luz->setColor(1.0f, 0.5f, 1.f);
+	//TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f), 100.0f, 150.0f);
+	//luz2->setColor(0.0f, 1.f, 0.5f);
+	//TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
 	//luz3->setColor(1.0f, 0.3f, 0.3f);
 	//luz3->setIntensidadAmbiente(0.5f);
 
@@ -122,8 +130,8 @@ int main() {
 
 
 	//linterna
-	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 45.0f, 0.0f));
-	flash->setColor(0.0f, 1.0f, 0.0f);
+	//TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 45.0f, 0.0f));
+	//flash->setColor(0.0f, 1.0f, 0.0f);
 	//linterna
 	//TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
 	//flash1->setColor(1.0f, 1.0f, 1.0f);
@@ -131,8 +139,8 @@ int main() {
 	//TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
 	//flash2->setColor(0.0f, 0.0f, 1.0f);
 	//linterna
-	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
-	flash3->setColor(1.0f, 1.0f, 1.0f);
+	//TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
+	//flash3->setColor(1.0f, 1.0f, 1.0f);
 	//flash->setIntensidadAmbiente(0.8);
 
 
@@ -173,7 +181,7 @@ int main() {
 	std::cout << "Aumentar velocidad animaciones : R" << std::endl;
 	std::cout << "Disminuir velocidad de animaciones : D" << std::endl;
 	std::cout << "Activar modos de color : 1-8" << std::endl;
-
+	float mira = 45.0f;
 	
 
 	while (!engine.shouldCloseWindw()) {
@@ -224,6 +232,10 @@ int main() {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
 		}
+		else if (Input::i().keyReleased(GLFW_KEY_9)) {
+			std::cout << "Modo de color : Sombras " << std::endl;
+			sm.draw_mode = 9;
+		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
 			pruebaAnim->setCurrentAnimation("saltar");
 		}
@@ -245,7 +257,36 @@ int main() {
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
 		}
-		
+		else if (Input::i().keyPressed(GLFW_KEY_N)) {
+			//sm.bias -= 0.0001;
+			//std::cout << "disminuyo bias, bias = " << sm.bias << std::endl;
+			mira -= 0.3f;
+			sm.ziZoom(mira);
+			std::cout << "disminuyo mira, mira = " << mira << std::endl;
+
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_M)) {
+			//sm.bias += 0.0001;
+			//std::cout << "aumento bias, bias = " << sm.bias << std::endl;
+			mira += 0.3f;
+			sm.ziZoom(mira);
+			std::cout << "aumento mira, mira = " << mira << std::endl;
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_B)) {
+			std::cout << "Desactivo Sombras "<< std::endl;
+			sm.activeDynamicShadow(false);
+		}else if (Input::i().keyPressed(GLFW_KEY_V)) {
+			std::cout << "Activo Sombras "<< std::endl;
+			sm.activeDynamicShadow(true);
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_Z)) {
+			std::cout << "Desactivo Sombras Estaticas " << sm.bias << std::endl;
+			sm.activeStaticShadow(false);
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_X)) {
+			std::cout << "Activo Sombras Estaticas " << sm.bias << std::endl;
+			sm.activeStaticShadow(true);
+		}
 		Input::i().endEventProcess();
 
 		
@@ -256,7 +297,7 @@ int main() {
 		//p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
-		flash3->setPosition(sm.camaraActiva->getPosition());
+		//flash3->setPosition(sm.camaraActiva->getPosition());
 		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 
 		//p->setPosition(newPos);

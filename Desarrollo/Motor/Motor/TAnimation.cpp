@@ -90,6 +90,23 @@ void TAnimation::beginDraw() {
 
 }
 
+void TAnimation::beginDrawSombras()
+{
+	if (visible) {
+
+		const glm::mat4& viewproj = sm.getSunLight()->getLightSpaceMatrix();
+		glm::mat4& model = sm.getMatrizActual();
+		glm::mat4 Lightmvp = viewproj * model;
+		sm.shaderSombras->Use();
+		glUniformMatrix4fv(glGetUniformLocation(sm.shaderSombras->Program, "Lightmvp"), 1, GL_FALSE, glm::value_ptr(Lightmvp));
+		//Dibujamos el modelo
+		currentAnimation[currentFrame]->draw();
+		selectCurrentFrame();
+
+	}
+
+}
+
 void TAnimation::endDraw() {
 	//std::cout << u8"Adiós" << std::endl;
 	//TEntity::endDraw();

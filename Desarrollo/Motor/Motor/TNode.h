@@ -21,6 +21,7 @@ public:
 	bool removeChild(TNode *child);
 	void removeNode();
 	void addChild(TNode* child);
+	void addChild(TEntity* child);
 	
 
 
@@ -29,6 +30,7 @@ public:
 	virtual void endDraw();
 	*/
 	void draw();
+	void drawSombras();
 	TEntity* getEntity();
 	void setEntity(TEntity* entidad);
 	int getMyNodeEntityID();

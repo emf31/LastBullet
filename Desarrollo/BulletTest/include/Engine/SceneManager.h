@@ -39,24 +39,30 @@ public:
 	TMeshGroup* getMesh(const std::string& path, Shader* shader=nullptr);
 	void draw();
 	void renderFrame(GLFWwindow* window);
+
+	//inicializar buffers
 	void inicializar();
 	void inicializarBuffers();
+	void inicializarBuffersSombras();
 	void inicializarBuffersBlur();
 	void inicializarBufferSkybox();
 	void inicializarBuffersLineas();
+
+	//pasadas para un render
 	void renderLuces();
 	void renderBlur();
 	void renderBloom();
+	void renderSombras();
 	void renderSkybox();
 
+
+	//crear nodos
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
 	TAnimation* crearNodoAnimacion(TAnimationGroupMesh * animGroup);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
 	TNode* crearNodoRotacion(TNode* nodoPadre, int entityID);
-	//NOTA : en mi cabeza tiene sentido que lo que devolvamos sea un TModel o un TSpotLight ya que luego desde el juego lo que manejariamos serian estas entities
-	//lo cual a parte de ser mas claro para quien lo use asi no tendriamos acceso a los nodos del arbol desde fuera del motor grafico para que no se pueda corromper este.
 	TNode* crearNodoEscalado(TNode* nodoPadre, int entityID);
 	TSunLight* crearNodoSunLight(Vec3<float> direccion);
 	TPointLight* crearNodoPointLight(Vec3<float> posicion, float radioIn = 6.3f, float radioEx = 10.3f);
@@ -85,7 +91,21 @@ public:
 
 	TSunLight* getSunLight() { return sunlight; }
 
+	void setLineWidth(float width);
 
+	void drawLine(glm::vec3 from, glm::vec3 to);
+
+	void rellenaVertices();
+
+	void drawAllLines();
+
+	void clearLines();
+
+	void ziZoom(float z);
+	void zoomZout();
+
+	void activeDynamicShadow(bool b);
+	void activeStaticShadow(bool b);
 	
 	int *screenWidth, *screenHeight;
 	
@@ -100,12 +120,16 @@ public:
 	Shader* shaderLineas;
 	Shader* shaderBlur;
 	Shader* shaderSkybox;
+	Shader* shaderSombras;
+
 
 	//Buffers
 	GLuint gBuffer,gDeferred;
-	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor, gEscena;
+	GLuint gPosition, gNormal, gTextura,gTangent, gBitangent, gSpecular, gCoords, gEmisivo, gObjectColor;
 	GLuint rboDepth;
-	
+
+	GLuint shadowMapDepthFBO, shadowMap;
+
 	GLuint draw_mode=1;
 
 	//Buffers Bloom
@@ -122,77 +146,15 @@ public:
 	std::vector<GLuint> indices;
 	GLuint LVAO,LVBO;
 	int numLines;
-
-	void setLineWidth(float width) { glLineWidth(width); }
-
-
-
-	void drawLine(glm::vec3 from, glm::vec3 to) {
-		vertices3.push_back(from.x);
-		vertices3.push_back(from.y);
-		vertices3.push_back(from.z);
-		numLines++;
-		vertices3.push_back(to.x);
-		vertices3.push_back(to.y);
-		vertices3.push_back(to.z);
-		numLines++;
-		
-	}
-
-	void rellenaVertices() {
-
-		glBindVertexArray(LVAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, LVBO);
-		glBufferData(GL_ARRAY_BUFFER, vertices3.size()* sizeof(GLfloat), &vertices3[0], GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-		glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
-
-		///////
-
-	}
-
-	void drawAllLines() {
-		rellenaVertices();
-		shaderLineas->Use();
-		
-		const glm::mat4& view = getViewMatrix();
-		const glm::mat4& projection = getProjectionMatrix();
-		glm::mat4& model = glm::mat4();
-
-		glm::mat4 modelview = projection * view * model;
-		glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
-		glBindVertexArray(LVAO);
-
-		glDrawArrays(GL_LINES, 0, numLines);
-		glBindVertexArray(0);
-
-		clearLines();
-
-	}
-
-	void clearLines() {
-		vertices3.clear();
-		numLines = 0;
-	}
-
-	void setDrawTarget(bool b) {
-		drawTarget = b;
-	}
-	void ziZoom(float z);
-	void zoomZout();
-
-
+	float bias = 0.00011;
+	
 
 private:
-	TNode* scene;
 
-	bool drawTarget;
+	TNode* scene;
+	bool castShadow;
+	bool castStaticShadow;
+	
 
 	int nodeEntityCount = 0;
 
@@ -216,6 +178,8 @@ private:
 
 	void RenderQuad();
 
+	GLuint SHADOW_WIDTH = 1280, SHADOW_HEIGHT = 720;
+	GLuint SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 720;
 
 	friend class EngineDevice;
 

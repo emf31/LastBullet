@@ -25,7 +25,7 @@ TCamera::TCamera() {
 	derecha= glm::cross(direccion, worldUp);
 	derecha = glm::normalize(derecha);
 	inputEnable = true;
-	projection = glm::perspective(zoom, (float)1280 / (float)720, nearPlane, farPlane); // Cambiar el plano cercano (así la interfaz no se corta?)
+	projection = glm::perspective(zoom, (float)1280 / (float)720, nearPlane, farPlane);
 }
 
 
@@ -171,12 +171,33 @@ void TCamera::setRotationDir(Vec3<float>& vecDir)
 	transTraslacion->loadMatrix(m_matrix);
 }
 
+void TCamera::aumentarMira(float z)
+{
+	//38.0f
+	zoom = z;
+	movementSpeed = (GLfloat)SPEED*0.3f;
+	mouseSensitivity = (GLfloat)SENSITIVTY*0.4f;
+	setPerspective(zoom, 1280.0f ,720.0f, nearPlane, farPlane);
+}
+
+void TCamera::resetMira()
+{
+	zoom = ZOOM;
+	movementSpeed = SPEED;
+	mouseSensitivity = SENSITIVTY;
+	setPerspective(zoom, 1280.0f, 720.0f, nearPlane, farPlane);
+}
+
 
 
 
 
 void TCamera::beginDraw() {
 
+}
+
+void TCamera::beginDrawSombras()
+{
 }
 
 void TCamera::endDraw() {

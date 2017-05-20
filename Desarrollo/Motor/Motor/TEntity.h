@@ -12,11 +12,15 @@ public:
 	virtual ~TEntity();
 
 	virtual void beginDraw()=0;
+	virtual void beginDrawSombras()=0;
 	virtual void endDraw()=0;
 	void addChild(TEntity* ent);
 
 	void removeNode();
 	void removeChild(TEntity* ent);
+
+	TNode* getMiNodo();
+	int getID();
 
 private:
 	int entityID = -1;
@@ -26,10 +30,9 @@ private:
 
 
 protected:
-	int getID();
+	
 	void setID(int id);
 	void setMiNodo(TNode * nodo);
-	TNode* getMiNodo();
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionEscalado(TTransform* esc);
 	void setTransformacionTraslacion(TTransform* tras);

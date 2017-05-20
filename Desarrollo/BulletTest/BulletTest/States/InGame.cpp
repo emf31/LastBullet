@@ -151,7 +151,7 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F9)) {
 
-		SceneManager::i().draw_mode = 8;
+		SceneManager::i().draw_mode = 9;
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
 
@@ -159,7 +159,63 @@ void InGame::HandleEvent()
 	} else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F11)) {
 		particleSystem.createExplosion(EntityManager::i().getEntity(PLAYER)->getPosition());
 	}
-	
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_T)) {
+		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
+		pos.setY(pos.getY() + 3);
+		SceneManager::i().getSunLight()->setPosition(pos);
+		std::cout << "Posicion sol: ";
+		pos.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F)) {
+		Vec3<float> pos = SceneManager::i().getSunLight()->getPosition();
+		pos.setY(pos.getY() - 3);
+		SceneManager::i().getSunLight()->setPosition(pos);
+		std::cout << "Posicion sol: ";
+		pos.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_U)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setX(dir.getX() + 1);
+		SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		std::cout << "Direccion sol: ";
+		dir.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_I)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setY(dir.getY() + 1);
+		SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		std::cout << "Direccion sol: ";
+		dir.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_O)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setZ(dir.getZ() + 1);
+		SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		std::cout << "Direccion sol: ";
+		dir.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_J)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setX(dir.getX() - 1);
+		SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		std::cout << "Direccion sol: ";
+		dir.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_K)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setY(dir.getY() - 1);
+		SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		std::cout << "Direccion sol: ";
+		dir.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_L)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setZ(dir.getZ() - 1);
+		SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		std::cout << "Direccion sol: ";
+		dir.display();
+	}
+
 	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();
