@@ -432,6 +432,9 @@
     <ClCompile Include="Animation\Salto.cpp">
       <Filter>Headers\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Animation\Idle.cpp">
+      <Filter>Headers\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\Command.h">
@@ -974,6 +977,9 @@
     </ClInclude>
     <ClInclude Include="global.h" />
     <ClInclude Include="Animation\Salto.h">
+      <Filter>Headers\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Idle.h">
       <Filter>Headers\Animation</Filter>
     </ClInclude>
   </ItemGroup>

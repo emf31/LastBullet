@@ -6,6 +6,7 @@
 #include <InGameHUD.h>
 #include <CharacterTypes.h>
 #include <SoundManager.h>
+#include <Death.h>
 
 LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)
@@ -31,6 +32,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 			GraphicEngine::i().setActiveCamera("CameraDeath");
 			static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"))->setVisibleAllHUD(false);
 			m_pOwner->getNode()->setVisible(true);
+			m_pOwner->getAnimationMachine()->ChangeState(&Death::i());
 			
 		}
 

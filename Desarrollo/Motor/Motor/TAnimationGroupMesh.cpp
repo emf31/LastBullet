@@ -29,23 +29,13 @@ void TAnimationGroupMesh::processAnimations()
 {
 	//Cargamos el primero para obtener los materiales
 	//y texturas
-	AnimationMesh* fAnim = new AnimationMesh(paths.at(0));
-	material = fAnim->getMaterials();
 
-	//Procesamos el nodo con el material cargado
-	fAnim->processNode(material);
-
-	//Lo añadimos al vector de meshes
-	vectorModelos.push_back(fAnim);
-
-	for (std::size_t i = 1; i < NumFrames; i++) {
+	for (std::size_t i = 0; i < NumFrames; i++) {
 		AnimationMesh* anim = new AnimationMesh(paths.at(i));
-		anim->processNode(material);
+
 		vectorModelos.push_back(anim);
-		anim->importer.FreeScene();
 	}
 
-	fAnim->importer.FreeScene();
 }
 
 

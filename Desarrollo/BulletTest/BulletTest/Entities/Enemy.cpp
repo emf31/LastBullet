@@ -42,11 +42,12 @@ void Enemy::cargarContenido()
 
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 94
+		"../media/personaje1", 118
 	);
 	m_nodo->setAnimation("correr", 0, 16, true);
-	m_nodo->setAnimation("muerte", 17, 69, false);
-	m_nodo->setAnimation("salto", 70, 93, false);
+	m_nodo->setAnimation("idle", 17, 47, true);
+	m_nodo->setAnimation("muerte", 48, 93, false);
+	m_nodo->setAnimation("salto", 94, 117, false);
 	m_nodo->setCurrentAnimation("correr");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
@@ -75,10 +76,10 @@ void Enemy::update(Time elapsedTime)
 	animationMachine->Update();
 
 	if (NetworkManager::i().isMovementPrediction()) {
-		nPrediction.interpolateWithPrediction();
+		//nPrediction.interpolateWithPrediction();
 	}
 	else {
-		nPrediction.interpolateWithoutPrediction();
+		//nPrediction.interpolateWithoutPrediction();
 	}
 
 

@@ -63,7 +63,13 @@ void InGame::Inicializar()
 	
 	NetworkManager::i().getNetPlayer()->getEnemyFactory().createEnemiesIfAvailable();
 
+
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), true);
+
+	/*Enemy *pepe = new Enemy("Pepe", RakNet::UNASSIGNED_RAKNET_GUID);
+	pepe->inicializar();
+	pepe->cargarContenido();
+	pepe->setPosition(Map::i().searchSpawnPoint());*/
 
 }
 
@@ -92,20 +98,37 @@ void InGame::HandleEvent()
 		GraphicEngine::i().toggleDebug();
 
 	}
-	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
-		/*static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime++;
+	/*else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime++;
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 
 		DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));*/
+		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_N)) {
-		/*static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime--;
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime--;
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 
 		DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));*/
+		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_B)) {
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("correr");
+
+		
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_V)) {
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("idle");
+
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_C)) {
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("muerte");
+
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_X)) {
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("salto");
+
+	}*/
 
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 

@@ -4,6 +4,7 @@
 void Death::Enter(Character * pEnemy)
 {
 	pEnemy->getNode()->setCurrentAnimation("muerte");
+	pEnemy->getNode()->setFrameTime(milliseconds(24));
 	
 }
 

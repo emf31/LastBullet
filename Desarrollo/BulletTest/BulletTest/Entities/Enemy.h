@@ -46,6 +46,8 @@ public:
 	void setVisibilidadBilboardSync();
 
 	NetworkPrediction* getNetworkPrediction() { return &nPrediction; }
+
+	int animFrameTime;
 	
 private:
 

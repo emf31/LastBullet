@@ -15,23 +15,6 @@ using namespace std;
 //#include <SPARK/SPARK.h>
 //#include <SPARK/SPARK_GL.h>
 
-void addChild(TNode* miNodo, TEntity * ent) {
-	TNode* nuevoHijo = ent->getMiNodo();
-	TNode* padre = ent->getMiNodo()->getParentNode();
-
-	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() != miNodo->getMyNodeEntityID()) {
-		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
-		nuevoHijo = nuevoHijo->getParentNode();
-		padre = padre->getParentNode();
-	}
-	padre->removeChild(nuevoHijo);
-	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el madre de miNodo y no directamente miNodo
-	//pues es bien sencillo, simplemente pork estamos en un nodo malla que son a los que se tiene acceso desde el juego
-	//y el padre no puede ser el nodo malla sino la transformacion de la que depende este nodo malla , es decir, el padre del nodo malla. De nada futuro yo ;)
-	nuevoHijo->setParentNode(miNodo->getParentNode());
-	miNodo->getParentNode()->addChild(nuevoHijo);
-
-}
 
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
@@ -65,10 +48,19 @@ int main() {
 	SceneManager::i().getRootNode()->addChild(nodo);
 	nodo->addChild(window);
 	nodo->addChild(window2);
-	nodo->setVisible(false);
+	nodo->setVisible(true);
 
 
-	
+	//Creas el nodo(grafico)
+	TAnimation* m_nodo = SceneManager::i().crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje1", 18));
+
+	m_nodo->setAnimation("correr", 0, 17, true);
+	/*m_nodo->setAnimation("muerte", 18, 69, true);
+	m_nodo->setAnimation("salto", 70, 93, false);
+	m_nodo->setAnimation("muerte60", 94, 139, true);*/
+	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setFrameTime(milliseconds(20));
+	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
 	/*//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
@@ -102,6 +94,8 @@ int main() {
 	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
 	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+
+	
 
 	
 	//animacion
@@ -139,8 +133,8 @@ int main() {
 	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f), 100.0f, 150.0f);
 	luz2->setColor(0.0f, 1.f, 0.5f);
 	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
-	//luz3->setColor(1.0f, 0.3f, 0.3f);
-	//luz3->setIntensidadAmbiente(0.5f);
+	luz3->setColor(1.0f, 0.3f, 0.3f);
+	luz3->setIntensidadAmbiente(0.5f);
 
 
 

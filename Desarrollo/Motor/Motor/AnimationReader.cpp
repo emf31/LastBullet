@@ -15,6 +15,8 @@ void AnimationReader::LoadMeshesFromDirectory(const std::string & directory, uns
 		std::string path = directory + "/0" + std::to_string(i) + ".obj";
 		vector.push_back(path);
 		//ResourceManager::i().getAnimationMesh();
+
+		std::cout << path << std::endl;
 	}
 	//std::string carpeta = "assets/";
 

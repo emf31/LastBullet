@@ -35,9 +35,6 @@ public:
 	void draw();
 
 	
-	aiMaterial ** AnimationMesh::getMaterials() const { return scene->mMaterials; }
-
-	void processNode(aiMaterial** mat);
 
 private:
 
@@ -48,22 +45,17 @@ private:
 
 	std::vector<TMesh*> meshes;
 	std::string directory;
-	std::vector<Texture*> textures_loaded;	// Guardamos todas las texturas que hemos guardado hasta ahora (así no las cargamos dos veces, OPTIMIZACIÓN)
-	aiMaterial** materialArray;
 
 	/*  Funciones   */
 	// Carga el modelo con ASSIMP
 	void loadModel(const std::string& path);
 
-	void processNodeRecursively(aiNode * node, const aiScene * scene);
+	void processNode(aiNode * node, const aiScene * scene);
 
 	TMesh* processMesh(aiMesh* mesh, const aiScene* scene);
 
 	void loadMaterialTextures(std::vector<Texture*>& textVec, aiMaterial* mat, aiTextureType type, const std::string& typeName);
 
-	const aiScene* scene;
-
-	Assimp::Importer importer;
 
 
 

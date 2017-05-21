@@ -1,6 +1,7 @@
 #include "ResourceManager.h"
 #include "TAnimationGroupMesh.h"
-
+#include <sstream>
+#include <exception>
 
 ResourceManager::ResourceManager() {
 }
@@ -55,11 +56,24 @@ Texture* ResourceManager::getTexture(const std::string& path, const std::string&
 			// Si la textura ya está en nuestro mapa la devolvemos.
 			return textures[path];
 		} else {
+			GLint textID;
+
+			try {
+				textID = TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
+			}
+			catch (std::exception e) {
+				std::cout << e.what() << std::endl;
+				return nullptr;
+			}
+
 			// Si no lop está, primero la cargamos :))
 			Texture* texture = new Texture();
-			texture->id = TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
+			
+			texture->id = textID;
+			
 			texture->type = type;
 			textures[path] = texture;
+
 			return textures[path];
 		}
 	}
@@ -111,12 +125,21 @@ GLint ResourceManager::TextureFromFile(const char * path, std::string directory)
 	// Generamos un ID de textura y cargamos la imagen con SOIL 
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
-	std::cout << filename << std::endl;
-	GLuint textureID;
-	glGenTextures(1, &textureID);
+	
+
 	int width, height;
 	unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB); // Podrian cambiarse a RGBA para imagenes con Alpha channel (es mejor?)
 																								 // Assignamos la textura al nuevo ID
+	if (!image) {
+		std::string errorMessage = "ERROR: No se ha podido cargar la textura -> " + filename;
+		throw std::runtime_error(errorMessage);
+	}
+
+	std::cout << filename << std::endl;
+
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);

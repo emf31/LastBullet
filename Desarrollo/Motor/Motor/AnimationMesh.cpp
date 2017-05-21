@@ -30,7 +30,8 @@ void AnimationMesh::draw() {
 
 void AnimationMesh::loadModel(const std::string& path) {
 	// Leemos con ASSIMP
-	scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	// Miramos si hay algún error
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // Si no es 0
 	{
@@ -41,11 +42,12 @@ void AnimationMesh::loadModel(const std::string& path) {
 	this->directory = path.substr(0, path.find_last_of('/'));
 
 	// Recorremos el nodo padre de ASSIMP recursivamente
-	//this->processNode(scene->mRootNode, scene);
+	this->processNode(scene->mRootNode, scene);
 }
 
-void AnimationMesh::processNodeRecursively(aiNode * node, const aiScene * scene)
-{
+
+
+void AnimationMesh::processNode(aiNode * node, const aiScene * scene) {
 	// Procesamos cada malla
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
@@ -55,15 +57,8 @@ void AnimationMesh::processNodeRecursively(aiNode * node, const aiScene * scene)
 
 	// Procesamos los hijos de este nodo (recursivamente)
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		this->processNodeRecursively(node->mChildren[i], scene);
+		this->processNode(node->mChildren[i], scene);
 	}
-}
-
-void AnimationMesh::processNode(aiMaterial** mat) {
-	materialArray = mat;
-
-	processNodeRecursively(scene->mRootNode, scene);
-
 	
 }
 
@@ -139,22 +134,12 @@ TMesh* AnimationMesh::processMesh(aiMesh * mesh, const aiScene * scene) {
 	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-		// Diffuse: texture_diffuseN
-		//vector<Texture*> diffuseMaps;
-		// Specular: texture_specularN
-		//vector<Texture*> specularMaps;
-		// Normal: texture_normalN
-		//vector<Texture*> normalMaps;
-
 		// 1. Diffuse maps
 		this->loadMaterialTextures(textures, material, aiTextureType_DIFFUSE, "texture_diffuse");
-		//textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 		// 2. Specular maps
 		this->loadMaterialTextures(textures, material, aiTextureType_SPECULAR, "texture_specular");
-		//textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		//3. Normal maps
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_normal");
-		//textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		//4.Tangent
 		this->loadMaterialTextures(textures, material, aiTextureType_NORMALS, "texture_tangent");
 		//5.Bitangent
@@ -175,7 +160,11 @@ void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMater
 		// Si no se ha cargado, el RM la carga. Si ya se había cargado, el RM nos da un puntero a ella :)
 		ResourceManager& rm = ResourceManager::i();
 		Texture* text = rm.getTexture(str.C_Str(), typeName, this->directory);
-		textVec.push_back(text);
+
+		if (text != nullptr) {
+			textVec.push_back(text);
+		}
+		
 	}
 }
 
