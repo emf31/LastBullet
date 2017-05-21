@@ -76,10 +76,10 @@ void Enemy::update(Time elapsedTime)
 	animationMachine->Update();
 
 	if (NetworkManager::i().isMovementPrediction()) {
-		//nPrediction.interpolateWithPrediction();
+		nPrediction.interpolateWithPrediction();
 	}
 	else {
-		//nPrediction.interpolateWithoutPrediction();
+		nPrediction.interpolateWithoutPrediction();
 	}
 
 
