@@ -1,6 +1,11 @@
-﻿  TMesh.cpp
-  SceneManager.cpp
-e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\scenemanager.cpp(487): warning C4018: '<': no coinciden signed/unsigned
+﻿  main.cpp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(268): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(274): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(280): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(286): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(292): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\main.cpp(305): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+  TEntity.cpp
   Generando código...
   Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
   Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)

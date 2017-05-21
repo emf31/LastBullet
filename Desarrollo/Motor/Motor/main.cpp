@@ -60,16 +60,19 @@ int main() {
 	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
+
 	//personaje
-	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
-	origen->setModelColor(1.0f,0.2f,0.2f);
+	TModel* pruebaPadre = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	pruebaPadre->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	pruebaPadre->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	pruebaPadre->setRotationXYZ(Vec3<float>(0.0f, 0.0f, 0.0f));
+	pruebaPadre->setModelColor(1.0f, 0.5f, 0.31f);
 	//personaje
-	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	l1->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l1->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
-	l1->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 0.0f));
+	TModel* pruebaHijo = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
+	pruebaHijo->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
+	pruebaHijo->setPosition(Vec3<float>(0.0f, 5.0f, 0.0f));
+	pruebaHijo->setRotationXYZ(Vec3<float>(0.0f, 0.0f, 0.0f));
+	pruebaPadre->addChild(pruebaHijo);
 
 	
 	//animacion
@@ -85,13 +88,19 @@ int main() {
 	pruebaAnim->setCurrentAnimation("idle");
 
 	//billboards
-	TModel* bill1 = sm.crearBillBoard();
+	//TModel* bill1 = sm.crearBillBoard();
 	TModel* bill2 = sm.crearBillBoard();
-	bill2->setScale(Vec3<float>(20.2f, 20.02f, 20.02f));
-	bill2->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	
+	bill2->setScale(Vec3<float>(0.5f, 0.5f, 0.5f));
+	bill2->setPosition(Vec3<float>(0.0f, 0.0f,0.0f));
+	//p1->addChild(bill2);
 	//pruebaAnim->setFrameTime(seconds(2.0));
-
+	//origen bildboard
+	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/bildboard.obj"));
+	//origen->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	origen->setPosition(Vec3<float>(0.0f, 0.0f, -1.0f));
+	origen->setModelColor(1.0f, 0.2f, 0.2f);
+	p1->addChild(origen);
+	//p1->addChild(origen);
 
 	//*******LUCES*******
 
@@ -178,7 +187,7 @@ int main() {
 	std::cout << "Disminuir velocidad de animaciones : D" << std::endl;
 	std::cout << "Activar modos de color : 1-8" << std::endl;
 
-	
+	Vec3<float> aumentoPos = Vec3<float>(0.0f, 0.0f, 0.0f);
 
 	while (!engine.shouldCloseWindw()) {
 
@@ -193,6 +202,15 @@ int main() {
 		engine.setWindowTitle(title.str());
 
 		engine.doMovement();
+
+		vecDir = sm.camaraActiva->getVectorDireccion();
+		newPos = vecDir *0.3f;
+		//p->setPosition(newPos);
+		p1->setOrientation(vecDir);
+		p1->setPosition(sm.camaraActiva->getPosition());
+		p1->updatePosition(newPos);
+
+
 
 		//std::cout << "Scroll: " << Input::i().getMouseScroll() << std::endl;
 		
@@ -237,14 +255,56 @@ int main() {
 		else if (Input::i().keyReleased(GLFW_KEY_I)) {
 			pruebaAnim->setCurrentAnimation("idle");
 		}
-		else if (Input::i().keyReleased(GLFW_KEY_R)) {
-			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		//else if (Input::i().keyReleased(GLFW_KEY_R)) {
+		//	velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 
-		}
+		//}
 		else if (Input::i().keyReleased(GLFW_KEY_L)) {
 			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
 			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_R)) {
+			aumentoPos.setX(aumentoPos.getX() + 0.5);
+			pruebaPadre->updatePosition(aumentoPos);
+			std::cout << "aumento pos = ";
+			aumentoPos.display();
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_F)) {
+			aumentoPos.setX(aumentoPos.getX() - 0.5);
+			pruebaPadre->updatePosition(aumentoPos);
+			std::cout << "aumento pos = ";
+			aumentoPos.display();
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_T)) {
+			aumentoPos.setY(aumentoPos.getY() + 0.5);
+			pruebaPadre->updatePosition(aumentoPos);
+			std::cout << "aumento pos = ";
+			aumentoPos.display();
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_G)) {
+			aumentoPos.setY(aumentoPos.getY() - 0.5);
+			pruebaPadre->updatePosition(aumentoPos);
+			std::cout << "aumento pos = ";
+			aumentoPos.display();
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_Y)) {
+			aumentoPos.setZ(aumentoPos.getZ() + 0.5);
+			pruebaPadre->updatePosition(aumentoPos);
+			std::cout << "aumento pos = ";
+			aumentoPos.display();
+
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_E)) {
+			origen->setPosition(sm.camaraActiva->getPosition());
+			origen->updatePosition(newPos * 5);
+			
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_H)) {
+			pruebaPadre->updatePosition(aumentoPos);
+			aumentoPos.setZ(aumentoPos.getZ() - 0.5);
+			std::cout << "aumento pos = ";
+			aumentoPos.display();
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
@@ -253,13 +313,12 @@ int main() {
 		Input::i().endEventProcess();
 
 		
+		//origen->setPosition(sm.camaraActiva->getPosition());
+		//origen->updatePosition(newPos * 7);
+		//origen->updatePosition(aumentoPos);
 
-		vecDir = sm.camaraActiva->getVectorDireccion();
-		newPos = vecDir *0.3f;
-		//p->setPosition(newPos);
-		//p1->setOrientation(vecDir);
-		p1->setPosition(sm.camaraActiva->getPosition());
-		p1->updatePosition(newPos);
+		//origen->setOrientation(vecDir);
+
 		flash3->setPosition(sm.camaraActiva->getPosition());
 		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 
