@@ -3,8 +3,8 @@
 #include <GraphicEngine.h>
 #include <TimePerFrame.h>
 
-GunBullet::GunBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(450), m_rotation(rotation)
+GunBullet::GunBullet(Vec3<float> position, Vec3<float> direction, Vec3<float> finalposition, Vec3<float> rotation, Vec3<float> orientation) : EntActive(-1, NULL, "bala"),
+m_position(position), m_direction(direction), m_velocity(450), m_rotation(rotation), m_orientation(orientation)
 {
 	float distancia = Vec3<float>::getDistance(position, finalposition);
 	m_lifetime = seconds(distancia / m_velocity);
@@ -51,10 +51,9 @@ void GunBullet::cargarContenido()
 
 	m_renderState.setPosition(m_position);
 
+	//Vec3<float> newPos = m_direction * 0.5f;
+	m_nodo->setOrientation(m_orientation);
 
-	Vec3<float> vecDir = GraphicEngine::i().getActiveCamera()->getVectorDirection();
-	Vec3<float> newPos = vecDir * 0.5f;
-	m_nodo->setOrientation(vecDir);
 	m_renderState.setPosition(m_position);
 	//m_nodo->updatePosition(newPos);
 	m_renderState.setRotation(m_rotation);

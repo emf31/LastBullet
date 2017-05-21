@@ -9,7 +9,7 @@
 #include <Settings.h>
 #include <GUIManager.h>
 #include <DebugMenuGUI.h>
-#include <Run.h>
+#include <Idle.h>
 #include <Death.h>
 #include <ResourceProvider.h>
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
@@ -53,9 +53,9 @@ void Enemy::cargarContenido()
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
 	//Start runing
-	animationMachine->SetCurrentAnimation(&Run::i());
+	animationMachine->SetCurrentAnimation(&Idle::i());
 
-	animationMachine->ChangeState(&Run::i());
+	animationMachine->ChangeState(&Idle::i());
 
 	radius = 0.5f;
 	height = 3.f;
@@ -81,7 +81,6 @@ void Enemy::update(Time elapsedTime)
 	else {
 		nPrediction.interpolateWithoutPrediction();
 	}
-
 
 	moving = true;
 
@@ -157,15 +156,21 @@ void Enemy::handleMessage(const Message & message)
 
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
 
+		TImpactoRocket* imp = static_cast<TImpactoRocket*>(message.data);
 
-		//Solo informar al player del impacto al enemigo si este esta vivo
-		Player* p = static_cast<Player*>(EntityManager::i().getEntity(PLAYER));
+		if (imp != nullptr) {
 
-		if (p && !isDying()) {
-			p->relojHit.restart();
+			Entity* ent = EntityManager::i().getRaknetEntity(imp->guidDisparado);
+
+			//Solo informar al player del impacto al enemigo si este esta vivo
+			if (ent->getClassName() == "Player" && !isDying()) {
+				Player* p = static_cast<Player*>(ent);
+
+				p->relojHit.restart();
+			}
+
+			delete message.data;
 		}
-
-		delete message.data;
 
 	}
 }

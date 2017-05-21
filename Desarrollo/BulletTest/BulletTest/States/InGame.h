@@ -42,8 +42,6 @@ private:
 	SalirHUD salirGUI;
 	float interpolation;
 
-	ParticleSystem &particleSystem;
-
 	Player* m_player;
 	Enemy* ene;
 };

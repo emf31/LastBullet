@@ -26,7 +26,7 @@
 
 #include <NetworkManager.h>
 #include <glm\glm.hpp>
-#include <Run.h>
+#include <Idle.h>
 
 
 
@@ -143,9 +143,9 @@ void Player::cargarContenido()
 	m_nodo->setVisible(false);
 
 	//Start runing
-	animationMachine->SetCurrentAnimation(&Run::i());
+	animationMachine->SetCurrentAnimation(&Idle::i());
 
-	animationMachine->ChangeState(&Run::i());
+	animationMachine->ChangeState(&Idle::i());
 
 
 
@@ -301,6 +301,14 @@ void Player::handleMessage(const Message & message)
 		
 		}else if (message.mensaje == "COLISION_ROCKET") {
 			NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
+
+			TImpactoRocket* imp = static_cast<TImpactoRocket*>(message.data);
+			if (imp != nullptr) {
+				getLifeComponent().restaVida(imp->damage, imp->guidDisparado);
+				relojSangre.restart();
+			}
+			
+
 			delete message.data;
 		}
 		else if (message.mensaje == "COLISION_BALA") {
@@ -363,9 +371,9 @@ void Player::shoot() {
 	if (hitted != nullptr && !hitted->getLifeComponent()->isDying()) {
 		relojHit.restart();
 	}
+
 	if (hitted != nullptr && hitted->getLifeComponent()->isDying()) {
-			InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
-			hud->newFeed(m_name,hitted->getName());
+			
 	}
 
 

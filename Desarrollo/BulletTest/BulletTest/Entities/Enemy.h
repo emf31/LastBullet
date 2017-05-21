@@ -48,6 +48,8 @@ public:
 	NetworkPrediction* getNetworkPrediction() { return &nPrediction; }
 
 	int animFrameTime;
+
+	virtual void resetAll() override { }
 	
 private:
 

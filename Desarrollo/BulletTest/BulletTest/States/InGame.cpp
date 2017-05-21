@@ -17,7 +17,7 @@
 #include <Run.h>
 #include <Salto.h>
 
-InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), particleSystem(ParticleSystem::i())
+InGame::InGame() : ingameGUI(), debugMenu(), salirGUI()
 {
 	
 }
@@ -57,9 +57,6 @@ void InGame::Inicializar()
 	GraphicEngine::i().getActiveCamera()->setInputReceiver(true);
 
 	GraphicEngine::i().enableMouse(false);
-
-
-	particleSystem.inicializar();
 	
 	NetworkManager::i().getNetPlayer()->getEnemyFactory().createEnemiesIfAvailable();
 
@@ -83,7 +80,6 @@ void InGame::Clear()
 
 	MessageHandler::i().borrarContenido();
 
-	particleSystem.apagar();
 }
 
 void InGame::HandleEvent()
@@ -305,13 +301,10 @@ void InGame::Update(Time timeElapsed)
 
 	PhysicsEngine::i().notifyCollisions();
 
-	//World::i().getPartida()->muestraMarcador();
 
 	MessageHandler::i().update();
 
 	EventSystem::i().update();
-
-	//particleSystem.update(timeElapsed);
 
 	GUIManager::i().updateAllGuis();
 

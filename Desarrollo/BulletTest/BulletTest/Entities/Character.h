@@ -59,6 +59,7 @@ public:
 
 	bool isMoving() const { return moving; }
 
+	virtual void resetAll() = 0;
 
 	ISound* footsteps;
 

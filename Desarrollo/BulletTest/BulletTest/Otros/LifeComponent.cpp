@@ -54,25 +54,28 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 			MessageHandler::i().sendMessageNow(msg);
 		}
 
-
-
 		NetworkManager::i().dispatchMessage(nuevoplayer, MUERTE);
+
+		m_pOwner->resetAll();
 
 
 		TKill kill;
 		kill.guidKill = guid;
 		kill.guidDeath = m_pOwner->getGuid();
 
-		Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
-		Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
+		if (kill.guidKill == EntityManager::i().getEntity(PLAYER)->getGuid() 
+			|| kill.guidDeath == EntityManager::i().getEntity(PLAYER)->getGuid()) {
 
-		//std::cout << "KILL: " << entKill->getName() << std::endl;
-		//std::cout << "DEATH: " << entDeath->getName() << std::endl;
-		//std::cout << "HA MATADO " << guid <<std::endl;
-		InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
-		hud->newFeed(entKill->getName(), entDeath->getName());
+			Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
+			Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
+
+			InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+			hud->newFeed(entKill->getName(), entDeath->getName());
+		}
 
 		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
+
+		
 	
 
 	}

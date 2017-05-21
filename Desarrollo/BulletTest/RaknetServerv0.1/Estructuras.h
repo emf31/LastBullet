@@ -54,6 +54,7 @@ struct TBala {
 	Vec3<float> direction;
 	Vec3<float> finalposition;
 	Vec3<float> rotation;
+	Vec3<float> orientation;
 	RakNet::RakNetGUID guid;
 };
 #pragma pack(pop)

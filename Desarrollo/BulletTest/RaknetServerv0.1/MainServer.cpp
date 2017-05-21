@@ -157,6 +157,7 @@ void getPackets() {
 
 			Bot *bot = new Bot(t_player.name, t_player.guid);
 			bot->setPosition(Vec3<float>(0, 0, 0));
+			bot->setAvailable(true);
 
 			break;
 		}

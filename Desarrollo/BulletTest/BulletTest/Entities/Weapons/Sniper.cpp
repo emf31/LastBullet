@@ -152,14 +152,15 @@ Character* Sniper::shoot(const Vec3<float>& target)
 
 	}
 
-	GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), getBalaRotation());
+	GunBullet* bala = new GunBullet(cons(bt(m_nodo->getPosition())), cons(direccion), cons(posicionImpacto), getBalaRotation(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
 	bala->cargarContenido();
 
 	TBala t_bala;
-	t_bala.position = cons(start);
+	t_bala.position = m_nodo->getPosition();
 	t_bala.direction = cons(direccion);
 	t_bala.finalposition = cons(posicionImpacto);
-	t_bala.rotation = m_nodo->getRotation();
+	t_bala.rotation = getBalaRotation();
+	t_bala.orientation = GraphicEngine::i().getActiveCamera()->getVectorDirection();
 	t_bala.guid = m_ent->getGuid();
 
 	//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla

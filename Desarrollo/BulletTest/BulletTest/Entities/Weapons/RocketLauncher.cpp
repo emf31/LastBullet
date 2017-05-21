@@ -2,7 +2,7 @@
 #include <Estructuras.h>
 #include <NetworkManager.h>
 #include <Player.h>
-
+#include <GraphicEngine.h>
 
 RocketLauncher::RocketLauncher(Character* ent) : Weapon(ent)
 {
@@ -113,14 +113,21 @@ Character* RocketLauncher::shoot(const Vec3<float>& target) {
 
 			start += direccion * 2.f;
 
-			RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
-			bala->cargarContenido();
+			if (m_ent->getClassName() == "Player") {
+				RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());
+				bala->cargarContenido();
+			}
+			else {
+				RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), m_ent->getNode()->getRotation());
+				bala->cargarContenido();
+			}
+			
 
 		
 			TBala tBala;
 			tBala.position = cons(start);
 			tBala.direction = cons(direccion);
-			tBala.rotation = m_ent->getNode()->getRotation();
+			tBala.rotation = GraphicEngine::i().getActiveCamera()->getRotation();
 			tBala.guid = m_ent->getGuid();
 
 			//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla

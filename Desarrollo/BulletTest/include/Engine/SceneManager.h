@@ -150,7 +150,7 @@ public:
 	std::vector<GLuint> indices;
 	GLuint LVAO,LVBO;
 	int numLines;
-	float bias = 0.00011;
+	float bias = 0.00011f;
 	
 
 private:

@@ -40,7 +40,7 @@ std::string CharacterTypes::parseColorIntoPath(CharacterColor color) {
 }
 
 CharacterTypes::CharacterTypes() {
-	botsNames.push_back(TPlayer{ NUEVO_PLAYER, RakNet::UNASSIGNED_RAKNET_GUID, "Nixon", CharacterColor::RED, false });
+	botsNames.push_back(TPlayer{ NUEVO_PLAYER, RakNet::UNASSIGNED_RAKNET_GUID, "Nixon", CharacterColor::RED, true });
 	botsNames.push_back(TPlayer{ NUEVO_PLAYER, RakNet::UNASSIGNED_RAKNET_GUID, "Obama", CharacterColor::GREEN, false });
 	botsNames.push_back(TPlayer{ NUEVO_PLAYER, RakNet::UNASSIGNED_RAKNET_GUID, "PPlu", CharacterColor::BLUE, false });
 	botsNames.push_back(TPlayer{ NUEVO_PLAYER, RakNet::UNASSIGNED_RAKNET_GUID, "Nixon", CharacterColor::ORANGE, false });

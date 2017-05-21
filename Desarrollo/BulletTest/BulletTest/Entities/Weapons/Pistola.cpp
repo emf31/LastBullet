@@ -17,11 +17,11 @@ Pistola::~Pistola()
 
 void Pistola::inicializar()
 {
-	damage = 35;
-	capacidadAmmo = 6;
+	damage = 15;
+	capacidadAmmo = 12;
 	disparos = 0;
-	recarga = milliseconds(1350);
-	cadencia = milliseconds(300);
+	recarga = milliseconds(1000);
+	cadencia = milliseconds(200);
 	numCargadores = numCargadoresPistola;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 	FUERZA = btVector3(10, 10, 10);
@@ -156,7 +156,7 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 
 		}
 
-		GunBullet* bala = new GunBullet(cons(start), cons(direccion), cons(posicionImpacto), m_ent->getNode()->getRotation());
+		GunBullet* bala = new GunBullet(cons(bt(m_nodo->getPosition())), cons(direccion), cons(posicionImpacto), getBalaRotation(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
 		bala->cargarContenido();
 
 		TBala p_bala;
@@ -164,6 +164,7 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 		p_bala.direction = cons(direccion);
 		p_bala.finalposition = cons(posicionImpacto);
 		p_bala.rotation = m_nodo->getRotation();
+		p_bala.orientation = GraphicEngine::i().getActiveCamera()->getVectorDirection();
 		p_bala.guid = m_ent->getGuid();
 
 		//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla

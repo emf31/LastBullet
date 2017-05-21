@@ -358,6 +358,39 @@ void MenuGUI::setSlotFree(const std::string & str) {
 	}
 }
 
+MenuGUI::PlayerSlot* MenuGUI::findSlotByName(const std::string & name) {
+	if (PlayerSlot1.getName() == name) {
+		return &PlayerSlot1;
+	}
+	if (PlayerSlot2.getName() == name) {
+		return &PlayerSlot2;
+	}
+	if (PlayerSlot3.getName() == name) {
+		return &PlayerSlot3;
+	}
+	if (PlayerSlot4.getName() == name) {
+		return &PlayerSlot4;
+	}
+	return nullptr;
+}
+
+MenuGUI::PlayerSlot* MenuGUI::findEmptyNameSlot() {
+
+	if (PlayerSlot1.isEmpty()) {
+		return &PlayerSlot1;
+	}
+	if (PlayerSlot2.isEmpty()) {
+		return &PlayerSlot2;
+	}
+	if (PlayerSlot3.isEmpty()) {
+		return &PlayerSlot3;
+	}
+	if (PlayerSlot4.isEmpty()) {
+		return &PlayerSlot4;
+	}
+	return nullptr;
+}
+
 
 bool MenuGUI::onConnectClicked(const CEGUI::EventArgs & e)
 {

@@ -79,7 +79,7 @@ public:
 	PlayerSlot* setNameOnPlayerSlot(const std::string& name);
 
 	int getNumBots() {
-		return sliderBots->getCurrentValue();
+		return (int)sliderBots->getCurrentValue();
 	}
 
 	void setSlotFree(const std::string& str);
@@ -88,38 +88,9 @@ public:
 		changeState(stateMenu::enumLobby);
 	}
 
-	PlayerSlot* findSlotByName(const std::string& name) {
-		if (PlayerSlot1.getName() == name) {
-			return &PlayerSlot1;
-		}
-		if (PlayerSlot2.getName() == name) {
-			return &PlayerSlot2;
-		}
-		if (PlayerSlot3.getName() == name) {
-			return &PlayerSlot3;
-		}
-		if (PlayerSlot4.getName() == name) {
-			return &PlayerSlot4;
-		}
-		return nullptr;
-	}
+	PlayerSlot* findSlotByName(const std::string& name);
 
-	PlayerSlot* findEmptyNameSlot() {
-
-		if (PlayerSlot1.isEmpty()) {
-			return &PlayerSlot1;
-		}
-		if (PlayerSlot2.isEmpty()) {
-			return &PlayerSlot2;
-		}
-		if (PlayerSlot3.isEmpty()) {
-			return &PlayerSlot3;
-		}
-		if (PlayerSlot4.isEmpty()) {
-			return &PlayerSlot4;
-		}
-		return nullptr;
-	}
+	PlayerSlot* findEmptyNameSlot();
 
 	bool onConnectClicked(const CEGUI::EventArgs & e);
 	bool onEditBoxClicked(const CEGUI::EventArgs & e);
@@ -193,20 +164,6 @@ private:
 	PlayerSlot PlayerSlot3;
 	PlayerSlot PlayerSlot4;
 
-	/*CEGUI::DefaultWindow* PlayerSlot1Lbl;
-	CEGUI::DefaultWindow* PlayerSlot2Lbl;
-	CEGUI::DefaultWindow* PlayerSlot3Lbl;
-	CEGUI::DefaultWindow* PlayerSlot4Lbl;
-	CEGUI::DefaultWindow* Player1Ready;
-	CEGUI::DefaultWindow* Player2Ready;
-	CEGUI::DefaultWindow* Player3Ready;
-	CEGUI::DefaultWindow* Player4Ready;
-	CEGUI::DefaultWindow* Player1NotReady;
-	CEGUI::DefaultWindow* Player2NotReady;
-	CEGUI::DefaultWindow* Player3NotReady;
-	CEGUI::DefaultWindow* Player4NotReady;*/
-
-	//std::thread t;
 
 	std::shared_ptr<NetPlayer> netPlayer;
 	int FrameActual;

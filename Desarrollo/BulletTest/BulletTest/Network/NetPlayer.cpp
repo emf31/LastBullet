@@ -66,7 +66,7 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	NetworkManager::i().createServer();
+	//NetworkManager::i().createServer();
 	RakSleep(1000);
 	int a = 1;
 	conectar("127.0.0.1", server_port);
@@ -82,34 +82,11 @@ void NetPlayer::crearPartida()
 	for (int i = 0; i < menu->getNumBots(); i++) {
 		TPlayer p;
 		p.name = "Bot "+ std::to_string((i+1));
+		p.available = true;
 		m_bots.push_back(p);
 	}
 
 	
-	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
-	/*TGameInfo gameinfo;
-	gameinfo.creador = getMyGUID();
-	gameinfo.name = Settings::i().GetValue("name");
-	gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
-	gameinfo.map = Settings::i().GetValue("mapa");
-	gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
-	gameinfo.maxKills = std::stoi(Settings::i().GetValue("maxkills"));
-
-	dispatchMessage(gameinfo, CREAR_PARTIDA);
-	//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
-<<<<<<< HEAD
-	*/
-	/*TPlayer p;
-	p.name = "Nixon";
-=======
-
-
-	//TPlayer p2;
-	//p2.name = "Kennedy";
->>>>>>> refs/remotes/origin/LoD
-
-	m_bots.push_back(p);*/
-	//m_bots.push_back(p2);
 
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente (si se usa steam)
 	if (!USING_STEAM) {
@@ -119,31 +96,11 @@ void NetPlayer::crearPartida()
 		gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
 		gameinfo.map = Settings::i().GetValue("mapa");
 		gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+		gameinfo.maxKills = std::stoi(Settings::i().GetValue("maxkills"));
 
 		dispatchMessage(gameinfo, CREAR_PARTIDA);
-		//dispatchMessage(gameinfo, UNIRSE_PARTIDA);
 
-		/*TPlayer p;
-		p.name = "Nixon";
-		//TPlayer p2;
-		//p2.name = "Kennedy";
-
-		m_bots.push_back(p);*/
-		//m_bots.push_back(p2);
 	}
-	
-
-
-	//Enemy_Bot *bot2 = new Enemy_Bot("Washington", RakNet::UNASSIGNED_RAKNET_GUID);
-	//bot2->m_network->inicializar();
-
-
-	
-	//Enemy_Bot *bot3 = new Enemy_Bot("Kennedy", RakNet::UNASSIGNED_RAKNET_GUID);
-	//bot3->m_network->inicializar();
-	
-	/*Enemy_Bot *bot4 = new Enemy_Bot("Obama", RakNet::UNASSIGNED_RAKNET_GUID);
-	bot4->m_network->inicializar();*/
 
 
 }
@@ -216,48 +173,153 @@ void NetPlayer::setReadyPlayers(int ready) {
 	playersReady = ready;
 }
 
+void NetPlayer::leaveLobby() {
+	if (lobby2Client->GetRoomID() != 0) {
+		RakNet::Console_LeaveRoom_Steam* msg = (RakNet::Console_LeaveRoom_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_LeaveRoom);
+		msg->roomId = lobby2Client->GetRoomID();
+
+		lobby2Client->SendMsg(msg);
+		messageFactory->Dealloc(msg);
+	}
+}
+
+void NetPlayer::sendReadyStatus() {
+	std::string mensaje = "R|";
+	RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
+	IamReady = !IamReady;
+	if (IamReady) {
+		mensaje = mensaje + "1|" + SteamFriends()->GetPersonaName();
+	}
+	else {
+		mensaje = mensaje + "0|" + SteamFriends()->GetPersonaName();
+	}
+	msg->message = mensaje.c_str();
+	msg->roomId = lobby2Client->GetRoomID();
+	lobby2Client->SendMsg(msg);
+	messageFactory->Dealloc(msg);
+}
+
+void NetPlayer::playerReadyCallback(const std::string & name) {
+	//IamReady = true;
+	playersReady = playersReady + 1;
+
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	if (menu != nullptr) {
+		MenuGUI::PlayerSlot* playerSlot;
+		playerSlot = menu->findSlotByName(name);
+		playerSlot->setReady(true);
+	}
+
+	if ((size_t)playersReady >= SteamIDs.size()) {
+		//EMPEZAR PARTIDA AQUI
+		std::cout << "EMPEZANDO PARTIDA" << std::endl;
+		inLobby = false;
+		if (IamHost) {
+			comenzarPartida();
+		}
+		else {
+			unirseLobby(hostIp);
+		}
+	}
+	std::cout << "Ready players: " << playersReady << " / " << SteamIDs.size() << std::endl;
+}
+
+void NetPlayer::comenzarPartida() {
+	TGameInfo gameinfo;
+	gameinfo.creador = getMyGUID();
+	gameinfo.name = SteamFriends()->GetPersonaName();
+	gameinfo.gameMode = std::stoi(Settings::i().GetValue("gamemode"));
+	gameinfo.map = Settings::i().GetValue("mapa");
+	gameinfo.numBots = std::stoi(Settings::i().GetValue("bots"));
+	gameinfo.maxKills = std::stoi(Settings::i().GetValue("maxkills"));
+
+	dispatchMessage(gameinfo, CREAR_PARTIDA);
+}
+
+void NetPlayer::playerNotReadyCallback(const std::string & name) {
+	//IamReady = false;
+	playersReady = playersReady - 1;
+
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	if (menu != nullptr) {
+		MenuGUI::PlayerSlot* playerSlot;
+		playerSlot = menu->findSlotByName(name);
+		playerSlot->setReady(false);
+	}
+
+	if (playersReady < 0) {
+		playersReady = 0;
+	}
+	std::cout << "Ready players: " << playersReady << " / " << SteamIDs.size() << std::endl;
+}
+
+void NetPlayer::receiveSteamPackets() {
+	if (inLobby) {
+		RakNet::Packet *packet;
+		for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
+			switch (packet->data[0]) {
+			case ID_DISCONNECTION_NOTIFICATION:
+				// Connection lost normally
+				printf("ID_DISCONNECTION_NOTIFICATION\n");
+				break;
+			case ID_ALREADY_CONNECTED:
+				// Connection lost normally
+				printf("ID_ALREADY_CONNECTED\n");
+				break;
+			case ID_REMOTE_DISCONNECTION_NOTIFICATION: // Server telling the clients of another client disconnecting gracefully.  You can manually broadcast this in a peer to peer enviroment if you want.
+				printf("ID_REMOTE_DISCONNECTION_NOTIFICATION\n");
+				break;
+			case ID_REMOTE_CONNECTION_LOST: // Server telling the clients of another client disconnecting forcefully.  You can manually broadcast this in a peer to peer enviroment if you want.
+				printf("ID_REMOTE_CONNECTION_LOST\n");
+				break;
+			case ID_REMOTE_NEW_INCOMING_CONNECTION: // Server telling the clients of another client connecting.  You can manually broadcast this in a peer to peer enviroment if you want.
+				printf("ID_REMOTE_NEW_INCOMING_CONNECTION\n");
+				break;
+			case ID_CONNECTION_BANNED: // Banned from this server
+				printf("We are banned from this server.\n");
+				break;
+			case ID_CONNECTION_ATTEMPT_FAILED:
+				printf("Connection attempt failed\n");
+				break;
+			case ID_NO_FREE_INCOMING_CONNECTIONS:
+				// Sorry, the server is full.  I don't do anything here but
+				// A real app should tell the user
+				printf("ID_NO_FREE_INCOMING_CONNECTIONS\n");
+				break;
+			case ID_INVALID_PASSWORD:
+				printf("ID_INVALID_PASSWORD\n");
+				break;
+
+			case ID_CONNECTION_LOST:
+				// Couldn't deliver a reliable packet - i.e. the other system was abnormally
+				// terminated
+				printf("ID_CONNECTION_LOST\n");
+				break;
+
+			case ID_CONNECTION_REQUEST_ACCEPTED:
+				// This tells the client they have connected
+				printf("ID_CONNECTION_REQUEST_ACCEPTED to %s with GUID %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
+				break;
+
+			case ID_NEW_INCOMING_CONNECTION:
+				printf("ID_NEW_INCOMING_CONNECTION\n");
+				break;
+			default:
+				// It's a client, so just show the message
+				printf("Unknown Message ID %i\n", packet->data[0]);
+				break;
+			}
+		}
+	}
+}
+
 
 void NetPlayer::unirseLobby(const std::string& str)
 {
 
-	//char eleccion;
-	//int elec;
-
-	//std::string str;
-
-	/*do {
-		searchServersOnLAN();
-
-		//Lista de servidores en la red
-		std::cout << m_servers.size() << " servidor(es) encontrado(s): " << std::endl;
-		for (std::size_t i = 0; i < m_servers.size(); ++i) {
-			std::cout << "\t[" << i << "] - " << m_servers.at(i) << std::endl;
-		}
-		std::cout << "\t[a] - Actualizar" << std::endl;
-		std::cout << "\t[m] - Introducir IP manualmente" << std::endl;
-		std::cout << "Elige una opcion: ";
-		std::cin >> eleccion;
-		if (eleccion != 'a' && eleccion != 'm') {
-			elec = eleccion - '0';
-			std::string ipConPuerto = m_servers.at((elec));
-			std::string ip = ipConPuerto.substr(0, ipConPuerto.find("|"));
-			str = ip;
-		}
-		else if (eleccion == 'm') {
-			printf("Introduce la IP \n");
-			std::cin >> str;
-			if (str != "a") {
-				break;
-			}
-			else {
-				eleccion = 'a';
-			}
-		}
-
-	} while (eleccion == 'a');*/
 
 	conectar("2.155.130.30", server_port);
-	//RakSleep(1000);
+	RakSleep(1000);
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
@@ -266,20 +328,12 @@ void NetPlayer::unirseLobby(const std::string& str)
 	p.guid = peer->GetMyGUID();
 	if (USING_STEAM) {
 		p.name = SteamFriends()->GetPersonaName();
-	} else {
+	}
+	else {
 		p.name = Settings::i().GetValue("name");
 	}
-	
+
 	dispatchMessage(p, UNIRSE_PARTIDA);
-	
-
-	/*swhile (World::i().gamestarted == false) {
-		NetworkManager::i().updateNetwork(Time::Zero);
-	}
-
-	StateStack::i().GetCurrentState()->Clear();
-	StateStack::i().SetCurrentState(States::ID::InGame);
-	StateStack::i().GetCurrentState()->Inicializar();*/
 }
 
 
@@ -524,16 +578,8 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(guid));
 
 			if (e != NULL) {
-				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, position, rotation, guid });
-				//e->encolaMovimiento(m);
-
-				/*DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-				Time time = milliseconds(RakNet::GetTimeMS() - timeStamp);
-				menu->addPrintText(std::to_string(time.asMilliseconds()));*/
-				
+				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, position, rotation, guid });	
 			}
-
-			/*countMovementPacketsIn++;*/
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(m.guid, mPacketIdentifier);
@@ -571,7 +617,8 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 		{
 			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), balaDisparada.position, Sound::type::sound);
-			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
+
+			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation, balaDisparada.orientation);
 			bala->cargarContenido();
 
 #ifdef NETWORK_DEBUG
@@ -603,6 +650,9 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
 
 			RocketBulletEnemy* balaRocket = new RocketBulletEnemy(balaDisparada.position, balaDisparada.direction, balaDisparada.rotation);
+
+			ISound* sound = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shootRocket.wav", "sounds"), balaDisparada.position, Sound::type::sound);
+			sound->setVolume(1);
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(balaDisparada.guid, mPacketIdentifier);
@@ -723,15 +773,9 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			Entity* ent = EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 
 			//Si ha muerto el player
-			if (ent == m_player) {
-				//es el player
-				Player* player = (Player*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-				player->resetAll();
-
-			} else if (ent->getClassName() == "Enemy_Bot") {
-				Enemy_Bot* bot = (Enemy_Bot*)EntityManager::i().getRaknetEntity(nuevoplayer.guid);
-				bot->resetAll();
-
+			if (ent->getClassName() == "Enemy") {
+				InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+				hud->newFeed(m_player->getName(), ent->getName());
 			}
 
 #ifdef NETWORK_DEBUG
@@ -761,11 +805,6 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			EventSystem::i().dispatchNow(killEvent);
 
 			World::i().getPartida()->muestraMarcador();
-
-			
-			
-
-
 
 
 #ifdef NETWORK_DEBUG
@@ -833,17 +872,6 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 #endif
 			break;
 		}
-
-		/*case PING:
-		{
-		//Ping
-
-		TPing pingStruct = *reinterpret_cast<TPing*>(packet->data);
-		//+1 milisegundo que tarda en hacer el for
-		//pingMS = RakNet::GetTimeMS() - pingStruct.ping - duracionFor + 1;
-
-		break;
-		}*/
 		default:
 			printf("Un mensaje con identificador %i ha llegado.\n", mPacketIdentifier);
 			break;

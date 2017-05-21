@@ -32,9 +32,12 @@ void TargetingSystem::Update()
 
 				if (distancia < ClosestDistSoFar)
 				{
-					ClosestDistSoFar = distancia;
-					m_pCurrentTarget = *curBot;
-					m_pOwner->lookAt(vec3ToVec2(m_pCurrentTarget->getRenderState()->getPosition()));
+					if (m_pCurrentTarget->isDying()) {
+						ClosestDistSoFar = distancia;
+						m_pCurrentTarget = *curBot;
+						m_pOwner->lookAt(vec3ToVec2(m_pCurrentTarget->getRenderState()->getPosition()));
+					}
+					
 				}
 
 		}

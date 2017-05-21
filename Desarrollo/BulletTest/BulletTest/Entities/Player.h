@@ -90,7 +90,7 @@ public:
 		return apuntando;
 	}
 
-	void resetAll();
+	virtual void resetAll() override;
 
 	void updateRelojes();
 

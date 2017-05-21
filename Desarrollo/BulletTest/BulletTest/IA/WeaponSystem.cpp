@@ -127,7 +127,7 @@ void WeaponSystem::TakeAimAndShoot()const
 
 			if (!m_pOwner->getTargetBot()->isDying() && !m_pOwner->isDying()) {
 
-				if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible()>m_dReactionTime) {
+				if (m_pOwner->getTargetSys()->GetTimeTargetHasBeenVisible() > m_dReactionTime) {
 
 					//m_pOwner->lookAt(vec3ToVec2(m_pOwner->getTargetSys()->GetTarget()->getRenderState()->getPosition()));
 

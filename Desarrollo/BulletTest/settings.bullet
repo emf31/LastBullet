@@ -5,4 +5,4 @@ name:Host
 gamemode:0
 mapa:landing.json
 bots:3
-maxkills:5
+maxkills:15

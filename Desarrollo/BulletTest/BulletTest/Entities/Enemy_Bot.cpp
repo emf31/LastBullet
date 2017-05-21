@@ -15,7 +15,7 @@
 #include <Map.h>
 #include <TriggerSystem.h>
 #include <LogIA.h>
-#include <Run.h>
+#include <Idle.h>
 
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
@@ -44,7 +44,7 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 1, 1.5, 20);
+	weaponSystem = new WeaponSystem(this, 0.7f, 1.3, 10);
 
 	weaponSystem->Inicializar();
 
@@ -82,9 +82,9 @@ void Enemy_Bot::cargarContenido()
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
 	//Start runing
-	animationMachine->SetCurrentAnimation(&Run::i());
+	animationMachine->SetCurrentAnimation(&Idle::i());
 
-	animationMachine->ChangeState(&Run::i());
+	animationMachine->ChangeState(&Idle::i());
 
 
 
@@ -138,7 +138,7 @@ float Enemy_Bot::getFOV()
 void Enemy_Bot::update(Time elapsedTime)
 {
 
-	calcularCiclosLOD();
+	//calcularCiclosLOD();
 
 	if (valorCiclos < 25) {
 
@@ -162,18 +162,6 @@ void Enemy_Bot::update(Time elapsedTime)
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().x(),
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().y() - (height / 2) - radius,
 				p_controller->getGhostObject()->getWorldTransform().getOrigin().z()));
-
-			moving = true;
-
-			if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
-				m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
-				m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
-			{
-				moving = false;
-			}
-
-			
-
 
 
 			targetingSystem->Update();
@@ -271,23 +259,30 @@ void Enemy_Bot::handleMessage(const Message & message)
 
 			getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
 
-			static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
-
 		}
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);
-		delete message.data;
 
-		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+		TImpactoRocket* imp = static_cast<TImpactoRocket*>(message.data);
+
+		if (imp != nullptr) {
+
+			Entity* ent = EntityManager::i().getRaknetEntity(imp->guidDisparado);
+
+			//Solo informar al player del impacto al enemigo si este esta vivo
+			if (ent->getClassName() == "Player" && !isDying()) {
+				Player* p = static_cast<Player*>(ent);
+
+				p->relojHit.restart();
+			}
+
+			delete message.data;
+		}
+
 	}
 	else if (message.mensaje == "MATASTE") {
 		decisionAfterKill();
-	}
-	else if (message.mensaje == "COLISION_GRANADA") {
-		TImpactoRocket granada = *static_cast<TImpactoRocket*>(message.data);
-		getLifeComponent().restaVida(granada.damage, granada.guidDisparado);
-		static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
 	}
 	
 }
@@ -341,6 +336,14 @@ void Enemy_Bot::updateMovement()
 		btVector3 vel = btVector3(direccion.x, 0, direccion.y);
 
 		p_controller->setWalkDirection(vel);
+
+		if (vel.getX() == 0 && vel.getZ() == 0) {
+			moving = false;
+		}
+		else {
+			moving = true;
+		}
+
 
 	}
 	else {
@@ -577,7 +580,7 @@ void Enemy_Bot::elegirWeapon(float Dist) {
 
 void Enemy_Bot::FuzzyLifeObject() {
 
-	if (getTargetBot()) {
+	if (getTargetBot() != nullptr) {
 
 
 		std::list<Vec2f> m_camino;

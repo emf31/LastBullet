@@ -105,7 +105,7 @@ public:
 
 	void decisionAfterKill();
 
-	void resetAll();
+	virtual void resetAll() override;
 
 	virtual std::string getStateActual() override;
 
