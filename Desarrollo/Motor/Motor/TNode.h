@@ -21,9 +21,11 @@ public:
 	bool removeChild(TNode *child);
 	void removeNode();
 	void addChild(TNode* child);
+
 	void addChild(TEntity* ent);
 	void setVisible(bool b) { visible = b; }
 	bool isVisible() const { return visible; }
+
 	
 
 	//TODOOO antes estaba asi, pero creo que los nodos no tienen begin draw y end draw, solo tienen un draw, que ya llama al begin y end draw de las entities asociadas
@@ -31,6 +33,7 @@ public:
 	virtual void endDraw();
 	*/
 	void draw();
+	void drawSombras();
 	TEntity* getEntity();
 	void setEntity(TEntity* entidad);
 	int getMyNodeEntityID();

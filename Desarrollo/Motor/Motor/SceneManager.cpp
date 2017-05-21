@@ -13,21 +13,23 @@ void SceneManager::inicializar() {
 	m_matrizActual = glm::mat4();
 	//camaraActiva = crearNodoCamara();
 	sunlight = nullptr;
-	//shaderGeometria = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
 	shaderGeometria = ResourceManager::i().getShader("assets/geometria.vs", "assets/geometria.frag");
 	shaderLuces = ResourceManager::i().getShader("assets/luces.vs", "assets/luces.frag");
 	shaderBombillas = ResourceManager::i().getShader("assets/luz_loading.vs", "assets/luz_loading.frag");
 	shaderLineas = ResourceManager::i().getShader("assets/lines.vs", "assets/lines.frag");
 	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
-	//shaderBloom = ResourceManager::i().getShader("assets/bloom.vs", "assets/bloom.frag");
+	shaderSkybox = ResourceManager::i().getShader("assets/skybox.vs", "assets/skybox.frag");
+	shaderSombras = ResourceManager::i().getShader("assets/sombras.vs", "assets/sombras.frag");
+	
 
 	inicializarBuffers();
-	//inicializarBufferDeferred();
 	inicializarBuffersBlur();
-	//inicializarBufferBloom();
+	inicializarBuffersSombras();
 	inicializarBuffersLineas();
+	inicializarBufferSkybox();
 	numLines = 0;
-	drawTarget = false;
+	castShadow = true;
+	castStaticShadow = false;
 }
 
 
@@ -41,46 +43,44 @@ TMeshGroup* SceneManager::getMesh(const std::string& path,Shader* shader) {
 }
 
 void SceneManager::draw() {
-	//enlazamos el buffer sobre el que queremos escribir
-	//activamos el g buffer cuando vamos a dibujar modelos
-	
-	//std::cout << "activo gBuffer" << std::endl;
+
 	glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
 	
-
+	
+	
 	//****************RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
-		//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
+		
 			//activamos el gBuffer donde nos vamos a guardar toda la informacion de geometria y texturas
 			glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+			
+			//-------RENDER DEL SKYBOX--------
+			renderSkybox();
+
+			//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
 			// Update matrices
 			projection = camaraActiva->getProjectionMatrix();
 			view = camaraActiva->GetViewMatrix();
-			//activeCameraPos = Vec3<float>(camaraActiva->getPosition().x, camaraActiva->getPosition().y, camaraActiva->getPosition().z) ;
 			activeCameraPos = camaraActiva->getPosition();
-	
 			scene->draw();
-			//gui.draw();
-			//std::cout << "desactivo gBuffer" << std::endl;
-		//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
+			//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
+			if (castShadow) {
+				renderSombras();
+			}
+			//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			renderBlur();
+			//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			renderLuces();
 
 	//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
-			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			//renderBlur();
-			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			//renderBloom();
 
 
 	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 		
-		//hacemos un clear de la profundidad para que las lineas salgas por delante del resto de la escena
-		//glClear(GL_DEPTH_BUFFER_BIT);
+
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 		glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
@@ -92,7 +92,8 @@ void SceneManager::draw() {
 		}
 	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 
-		//glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+		
+
 	
 }
 
@@ -102,7 +103,7 @@ void SceneManager::renderFrame(GLFWwindow* window) {
 
 void SceneManager::inicializarBuffers()
 {
-	GLuint screenWidth = 1280, screenHeight = 720;
+	
 
 	shaderLuces->Use();
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gPosition"), 0);
@@ -113,6 +114,7 @@ void SceneManager::inicializarBuffers()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gEmisivo"), 5); 
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gObjectColor"), 6);
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "gBloom"), 7);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "shadowMap"), 8);
 
 	
 	glGenFramebuffers(1, &gBuffer);
@@ -121,49 +123,49 @@ void SceneManager::inicializarBuffers()
 	// Posicion
 	glGenTextures(1, &gPosition);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPosition, 0);
 	//Normales
 	glGenTextures(1, &gNormal);
 	glBindTexture(GL_TEXTURE_2D, gNormal);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gNormal, 0);
 	// Difuso + especular
 	glGenTextures(1, &gTextura);
 	glBindTexture(GL_TEXTURE_2D, gTextura);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, screenWidth, screenHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gTextura, 0);
 	//tangente
 	glGenTextures(1, &gTangent);
 	glBindTexture(GL_TEXTURE_2D, gTangent);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gTangent, 0);
 	//bitangente
 	glGenTextures(1, &gBitangent);
 	glBindTexture(GL_TEXTURE_2D, gBitangent);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, gBitangent, 0);
 	//emisivo
 	glGenTextures(1, &gEmisivo);
 	glBindTexture(GL_TEXTURE_2D, gEmisivo);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT5, GL_TEXTURE_2D, gEmisivo, 0);
 	//objectColor
 	glGenTextures(1, &gObjectColor);
 	glBindTexture(GL_TEXTURE_2D, gObjectColor);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT6, GL_TEXTURE_2D, gObjectColor, 0);
@@ -177,7 +179,7 @@ void SceneManager::inicializarBuffers()
 		//Depthbuffer
 	glGenRenderbuffers(1, &rboDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, screenWidth, screenHeight);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -185,9 +187,34 @@ void SceneManager::inicializarBuffers()
 	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
+void SceneManager::inicializarBuffersSombras()
+{
+	
+	
+	glGenFramebuffers(1, &shadowMapDepthFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
+
+	glGenTextures(1, &shadowMap);
+
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	//esto es para que lo que este fuera del campo de vision de la luz no este todo en sombras puesto que estamos haciendo una luz direccional.
+	GLfloat borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+	
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMap, 0);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadowMap, 0);
+	glDrawBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);	
+}
+
 void SceneManager::inicializarBuffersBlur()
 {
-	GLuint screenWidth = 1280, screenHeight = 720;
+	
 
 	glGenFramebuffers(2, bloomFBO);
 	glGenTextures(2, bloomBuffers);
@@ -195,7 +222,7 @@ void SceneManager::inicializarBuffersBlur()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, bloomFBO[i]);
 		glBindTexture(GL_TEXTURE_2D, bloomBuffers[i]);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -204,10 +231,95 @@ void SceneManager::inicializarBuffersBlur()
 	}
 }
 
-void SceneManager::inicializarBufferBloom() {
-	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "scene"), 0);
-	//glUniform1i(glGetUniformLocation(shaderBloom->Program, "bloomBlur"), 1);
+
+void SceneManager::inicializarBufferSkybox()
+{
+	GLfloat skyboxVertices[] = {
+		// Positions          
+		-1.0f,  1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		-1.0f,  1.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		1.0f, -1.0f,  1.0f
+	};
+
+	
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glBindVertexArray(0);
+
+	
+	faces.push_back("assets/skybox/right.jpg");
+	faces.push_back("assets/skybox/left.jpg");
+	faces.push_back("assets/skybox/top.jpg");
+	faces.push_back("assets/skybox/bottom.jpg");
+	faces.push_back("assets/skybox/back.jpg");
+	faces.push_back("assets/skybox/front.jpg");
+
+	
+	glGenTextures(1, &skyboxTexture);
+
+	int width, height;
+	unsigned char* image;
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
+	for (GLuint i = 0; i < faces.size(); i++)
+	{
+		image = SOIL_load_image(faces[i], &width, &height, 0, SOIL_LOAD_RGB);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		SOIL_free_image_data(image);
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
+
+
+
 
 void SceneManager::inicializarBuffersLineas() {
 	glGenVertexArrays(1, &LVAO);
@@ -216,24 +328,10 @@ void SceneManager::inicializarBuffersLineas() {
 	glLineWidth(1.0f);
 }
 
-void SceneManager::inicializarBufferDeferred()
-{
-	GLuint screenWidth = 1280, screenHeight = 720;
-
-	glGenFramebuffers(1, &gDeferred);
-	glBindFramebuffer(GL_FRAMEBUFFER, gDeferred);
-
-	glGenTextures(1, &gEscena);
-	glBindTexture(GL_TEXTURE_2D, gEscena);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenWidth, screenHeight, 0, GL_RGB, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gEscena, 0);
-}
 
 void SceneManager::renderLuces()
 {
-	//GLuint screenWidth = 1280, screenHeight = 720;
+	;
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
@@ -252,6 +350,8 @@ void SceneManager::renderLuces()
 	glBindTexture(GL_TEXTURE_2D, gObjectColor);
 	glActiveTexture(GL_TEXTURE7);
 	glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
+	glActiveTexture(GL_TEXTURE8);
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
 	
 
 	//LUZ SOLAR
@@ -274,6 +374,10 @@ void SceneManager::renderLuces()
 	//camaras
 	glUniform3f(glGetUniformLocation(shaderLuces->Program, "viewPos"), activeCameraPos.getX(), activeCameraPos.getY(), activeCameraPos.getZ());
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "draw_mode"), draw_mode);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "castShadow"), castShadow);
+	glUniform1i(glGetUniformLocation(shaderLuces->Program, "castStaticShadow"), castStaticShadow);
+	glUniform1f(glGetUniformLocation(shaderLuces->Program, "bias"), bias);
+
 	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
 	
 	
@@ -323,6 +427,40 @@ void SceneManager::renderBloom()
 	//RenderQuad();
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+}
+
+
+void SceneManager::renderSkybox()
+{
+	// Draw skybox first
+	//glDepthMask(GL_FALSE);// Remember to turn depth writing off
+	glDepthFunc(GL_LEQUAL);
+	shaderSkybox->Use();
+	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	// Remove any translation component of the view matrix
+	glm::mat4 projec = camaraActiva->getProjectionMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
+	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
+	// skybox cube
+	glBindVertexArray(skyboxVAO);
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(shaderSkybox->Program, "skybox"), 0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+	//glDepthMask(GL_TRUE);
+	glDepthFunc(GL_LESS);
+}
+
+void SceneManager::renderSombras()
+{
+	glDisable(GL_CULL_FACE);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMapDepthFBO);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	shaderSombras->Use();
+	scene->drawSombras();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glEnable(GL_CULL_FACE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 bool SceneManager::removeNode(TNode * node) {
@@ -637,6 +775,58 @@ void SceneManager::RenderQuad()
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);
 }
+void SceneManager::setLineWidth(float width) { glLineWidth(width); }
+void SceneManager::drawLine(glm::vec3 from, glm::vec3 to) {
+	vertices3.push_back(from.x);
+	vertices3.push_back(from.y);
+	vertices3.push_back(from.z);
+	numLines++;
+	vertices3.push_back(to.x);
+	vertices3.push_back(to.y);
+	vertices3.push_back(to.z);
+	numLines++;
+
+}
+void SceneManager::rellenaVertices() {
+
+	glBindVertexArray(LVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, LVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices3.size() * sizeof(GLfloat), &vertices3[0], GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+
+	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+
+						  ///////
+
+}
+void SceneManager::drawAllLines() {
+	rellenaVertices();
+	shaderLineas->Use();
+
+	const glm::mat4& view = getViewMatrix();
+	const glm::mat4& projection = getProjectionMatrix();
+	glm::mat4& model = glm::mat4();
+
+	glm::mat4 modelview = projection * view * model;
+	glUniformMatrix4fv(glGetUniformLocation(shaderLineas->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(modelview));
+	glBindVertexArray(LVAO);
+
+	glDrawArrays(GL_LINES, 0, numLines);
+	glBindVertexArray(0);
+
+	clearLines();
+
+}
+void SceneManager::clearLines() {
+	vertices3.clear();
+	numLines = 0;
+}
+
 void SceneManager::ziZoom(float z)
 {
 	camaraActiva->aumentarMira(z);
@@ -645,6 +835,12 @@ void SceneManager::ziZoom(float z)
 void SceneManager::zoomZout()
 {
 	camaraActiva->resetMira();
+}
+void SceneManager::activeDynamicShadow(bool b) {
+	castShadow = b;
+}
+void SceneManager::activeStaticShadow(bool b) {
+	castStaticShadow = b;
 }
 void SceneManager::shutdown()
 {

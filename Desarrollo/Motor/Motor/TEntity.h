@@ -12,6 +12,7 @@ public:
 	virtual ~TEntity();
 
 	virtual void beginDraw()=0;
+	virtual void beginDrawSombras()=0;
 	virtual void endDraw()=0;
 	void addChild(TEntity* ent);
 	/*void addParent(TNode* node){
@@ -29,10 +30,12 @@ public:
 	void removeNode();
 	void removeChild(TEntity* ent);
 
+
 	void setVisible(bool b);
 	bool isVisible() const;
 
 	void setMiNodo(TNode * nodo);
+
 	TNode* getMiNodo();
 	int getID();
 
@@ -41,9 +44,9 @@ private:
 	TNode * miNodo;
 
 protected:
-
-	void setID(int id);
 	
+	void setID(int id);
+
 	void setTransformacionRotacion(TTransform* rot);
 	void setTransformacionEscalado(TTransform* esc);
 	void setTransformacionTraslacion(TTransform* tras);

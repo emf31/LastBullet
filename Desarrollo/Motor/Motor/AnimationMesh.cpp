@@ -161,9 +161,9 @@ void AnimationMesh::loadMaterialTextures(std::vector<Texture*>& textVec, aiMater
 		ResourceManager& rm = ResourceManager::i();
 		Texture* text = rm.getTexture(str.C_Str(), typeName, this->directory);
 
-		if (text != nullptr) {
+		//if (text != nullptr) {
 			textVec.push_back(text);
-		}
+		//}
 		
 	}
 }

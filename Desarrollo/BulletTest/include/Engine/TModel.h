@@ -62,6 +62,7 @@ private:
 	SceneManager &sm;
 	
 	virtual void beginDraw();
+	virtual void beginDrawSombras();
 	virtual void endDraw();
 
 	/*  Model Data  */

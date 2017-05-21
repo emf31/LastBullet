@@ -10,9 +10,9 @@ layout (location = 6) out vec3 gObjectColor;
 
 
 struct Material {
-	sampler2D texture_diffuse;
+    sampler2D texture_diffuse;
     sampler2D texture_specular;
-	sampler2D texture_normal;
+    sampler2D texture_normal;
     sampler2D texture_tangent;
     sampler2D texture_bitangent;
     sampler2D texture_emisivo;

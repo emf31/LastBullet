@@ -23,11 +23,13 @@ void TNode::addChild(TNode* child) {
 	m_childNodes.push_back(child);
 
 }
+
 void TNode::addChild(TEntity * ent) {
 	TNode* nuevoHijo = ent->getMiNodo();
 	TNode* padre = ent->getMiNodo()->getParentNode();
 
 	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() == ent->getID()) {
+
 		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
 		nuevoHijo = nuevoHijo->getParentNode();
 		padre = padre->getParentNode();
@@ -40,6 +42,7 @@ void TNode::addChild(TEntity * ent) {
 	this->addChild(nuevoHijo);
 
 }
+
 bool TNode::removeChild(TNode * child) {
 	auto result = std::find(m_childNodes.begin(), m_childNodes.end(), child);
 
@@ -83,17 +86,35 @@ void TNode::draw() {
 			getEntity()->endDraw();//desapilo la transformacion que hice antes
 
 		}
+
 		else {
 			//si es el nodo raiz se dibuja sus hijos directamente
 			for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
 				//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
 				//if (getEntity() == nullptr) {
-					sm.setMatrizActual(glm::mat4());
+				sm.setMatrizActual(glm::mat4());
 				//}
-				
+
 				(*it)->draw();
 			}
 			//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
+
+		}
+	}
+
+}
+void TNode::drawSombras() {
+	if (getEntity() != nullptr) {
+		getEntity()->beginDrawSombras();
+		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+			(*it)->drawSombras();
+		}
+		getEntity()->endDraw();
+	}
+	else {
+		for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
+			sm.setMatrizActual(glm::mat4());
+			(*it)->drawSombras();
 
 		}
 	}

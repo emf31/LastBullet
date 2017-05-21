@@ -9,6 +9,7 @@ public:
 	TLuz();
 	virtual ~TLuz();
 	void beginDraw();
+	void beginDrawSombras();
 	void endDraw();
 	virtual void pasarDatosAlShader(Shader *shader, int i=0) = 0;
 

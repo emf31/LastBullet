@@ -42,9 +42,6 @@ void EntityManager::update(Time elapsedTime)
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		i->second->update(elapsedTime);
 	}
-	/*for (auto i = m_entPassive.begin(); i != m_entPassive.end(); ++i) {
-		i->second->update(elapsedTime);
-	}*/
 
 }
 

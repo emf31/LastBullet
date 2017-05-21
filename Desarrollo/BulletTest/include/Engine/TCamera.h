@@ -26,6 +26,7 @@ class TCamera : public TEntity {
 public:
 	~TCamera();
 	virtual void beginDraw();
+	virtual void beginDrawSombras();
 	virtual void endDraw();
 
 	void setPosition(Vec3<float> pos);
@@ -53,17 +54,8 @@ public:
 
 	void setInputEnable(bool b) { inputEnable = b; }
 
-	void aumentarMira(float z) {
-		//38.0f
-		zoom = z;
-		movementSpeed = (GLfloat)SPEED*0.3f;
-		mouseSensitivity = (GLfloat)SENSITIVTY*0.4f;
-	}
-	void resetMira() {
-		zoom = ZOOM;
-		movementSpeed = SPEED;
-		mouseSensitivity = SENSITIVTY;
-	}
+	void aumentarMira(float z);
+	void resetMira();
 
 
 	//projection

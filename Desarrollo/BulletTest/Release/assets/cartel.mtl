@@ -14,3 +14,4 @@ newmtl Material__301
 	Ke 0.0000 0.0000 0.0000
 	map_Ka cartelon.jpg
 	map_Kd cartelon.jpg
+	map_Ke cartelon.jpg

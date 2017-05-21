@@ -192,7 +192,7 @@ void InGame::HandleEvent()
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F9)) {
 
-		SceneManager::i().draw_mode = 8;
+		SceneManager::i().draw_mode = 9;
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_F10)) {
 
@@ -205,7 +205,72 @@ void InGame::HandleEvent()
 		ClippingManager::i().printZonesVisibility();
 
 	}
-	
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_R)) {
+		std::cout << "Posicion 1: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(110, 66 , -121));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(49, -6, -25));
+		
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_T)) {
+		std::cout << "Posicion 2: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(50, 106, -124));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(49, -43, 17));
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_Y)) {
+		std::cout << "Posicion 3: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(0, 61, -106));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(51, -43, 18));
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_U)) {
+		std::cout << "Posicion 4: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(10, 71, 15));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(46, 136, -31));
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_I)) {
+		std::cout << "Posicion 5: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(-20, 46, -75));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(46, -4, -31));
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_O)) {
+		std::cout << "Posicion 6: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(-10, 53, -65));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(71, -22, -31));
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_P)) {
+		std::cout << "Posicion 7: " << std::endl;
+		SceneManager::i().getSunLight()->setPosition(Vec3<float>(-10, 61, -70));
+		SceneManager::i().getSunLight()->setVectorDireccion(Vec3<float>(71, -47, -31));
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_I)) {
+		Vec3<float> dir = SceneManager::i().getSunLight()->getDireccion();
+		dir.setY(dir.getY() + 1);
+		//SceneManager::i().getSunLight()->setVectorDireccion(dir);
+		//std::cout << "Direccion sol: ";
+		//dir.display();
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_L)) {
+		SceneManager::i().bias += 0.0001;
+		std::cout << "Aumento bias, bias = " << SceneManager::i().bias << std::endl;
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_K)) {
+		SceneManager::i().bias -= 0.0001;
+		std::cout << "Aumento bias, bias = " << SceneManager::i().bias << std::endl;
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_J)) {
+		std::cout << "Activo sombras Estaticas"<< std::endl;
+		SceneManager::i().activeStaticShadow(true);
+		SceneManager::i().activeDynamicShadow(false);
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_H)) {
+		std::cout << "Activo sombras Dinamicas" << std::endl;
+		SceneManager::i().activeStaticShadow(false);
+		SceneManager::i().activeDynamicShadow(true);
+	}
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_G)) {
+		std::cout << "Desactivo sombras Estaticas" << std::endl;
+		SceneManager::i().activeStaticShadow(false);
+		SceneManager::i().activeDynamicShadow(false);
+	}
 	else if (Input::i().leftMouseDown()) {
 
 		debugMenu.injectLeftMouseButton();

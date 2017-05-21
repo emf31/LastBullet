@@ -78,7 +78,9 @@ void MapLoader::readMap(const std::string & name)
 			
 			json obj = *it;
 
+
 			Object* o=createObject(obj);
+
 
 			if (obj["tag"] == "Zona") {
 				
