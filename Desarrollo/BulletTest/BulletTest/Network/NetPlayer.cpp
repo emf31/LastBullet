@@ -75,11 +75,16 @@ void NetPlayer::crearPartida()
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
 
+	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+	menu->getNumBots();
 
-	
-	/*TPlayer p;
-	p.name = "Nixon";
-	m_bots.push_back(p);*/
+
+	for (int i = 0; i < menu->getNumBots(); i++) {
+		TPlayer p;
+		p.name = "Bot "+ std::to_string((i+1));
+		m_bots.push_back(p);
+	}
+
 	
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente
 	/*TGameInfo gameinfo;
@@ -565,7 +570,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 		case DISPARAR_BALA:
 		{
 			TBala balaDisparada = *reinterpret_cast<TBala*>(packet->data);
-			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), balaDisparada.position);
+			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), balaDisparada.position, Sound::type::sound);
 			GunBullet* bala = new GunBullet(balaDisparada.position, balaDisparada.direction, balaDisparada.finalposition, balaDisparada.rotation);
 			bala->cargarContenido();
 

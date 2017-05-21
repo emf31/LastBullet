@@ -66,12 +66,21 @@ public:
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
+	bool onApplySounds(const CEGUI::EventArgs & e);
+	bool onUpdateSliderSound(const CEGUI::EventArgs & e);
+	bool onUpdateSliderMusic(const CEGUI::EventArgs & e);
+	bool onBotsSlider(const CEGUI::EventArgs & e);
+	
 
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
 	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
 	bool onBackButtonClicked(const CEGUI::EventArgs & e);
 
 	PlayerSlot* setNameOnPlayerSlot(const std::string& name);
+
+	int getNumBots() {
+		return sliderBots->getCurrentValue();
+	}
 
 	void setSlotFree(const std::string& str);
 
@@ -159,6 +168,15 @@ private:
 	CEGUI::PushButton *Atras2;
 	CEGUI::PushButton *Atras3;
 	CEGUI::PushButton *Atras4;
+
+	CEGUI::PushButton *ApplySounds;
+	CEGUI::Slider *SoundSlider;
+	CEGUI::Slider *MusicSlider;
+	CEGUI::DefaultWindow* SoundLabel;
+	CEGUI::DefaultWindow* MusicLabel;
+
+	CEGUI::Slider *sliderBots;
+	CEGUI::DefaultWindow *numBots;
 
 	CEGUI::DefaultWindow *imagen;
 	CEGUI::DefaultWindow *imagen2;

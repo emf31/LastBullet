@@ -41,7 +41,7 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		m_isDying = true;
 		relojMuerte.restart();
 
-		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename(CharacterTypes::getRandomDeath(), "sounds"), m_pOwner->getPosition());
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename(CharacterTypes::getRandomDeath(), "sounds"), m_pOwner->getPosition(), Sound::type::sound);
 
 		RakID nuevoplayer;
 		nuevoplayer.guid = m_pOwner->getGuid();

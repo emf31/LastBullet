@@ -73,7 +73,7 @@ void LifeObject::handleMessage(const Message & message)
 
 			if (estado == DISPONIBLE) {
 
-				SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("health.mp3", "sounds"), getPosition());
+				SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("health.mp3", "sounds"), getPosition(), Sound::type::sound);
 
 				//PhysicsEngine::i().removeGhostObject(m_ghostObject);
 				estado = USADO;
@@ -166,7 +166,7 @@ void LifeObject::VidaCogida()
 	m_nodo->setVisible(false);
 	clockRecargaLife.restart();
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("health.mp3", "sounds"), getPosition());
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("health.mp3", "sounds"), getPosition(),Sound::type::sound);
 
 }
 

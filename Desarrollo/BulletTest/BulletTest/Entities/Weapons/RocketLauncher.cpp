@@ -92,7 +92,7 @@ Character* RocketLauncher::shoot(const Vec3<float>& target) {
 	
 		if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
 
-			ISound* sound = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shootRocket.wav", "sounds"), m_ent->getRenderState()->getPosition());
+			ISound* sound = SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shootRocket.wav", "sounds"), m_ent->getRenderState()->getPosition(), Sound::type::sound);
 			sound->setVolume(1);
 
 			//aumentamos en uno el numero de disparos, para reducir la municion
@@ -134,7 +134,7 @@ Character* RocketLauncher::shoot(const Vec3<float>& target) {
 		
 		estadoWeapon = DESCARGADA;
 
-		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("rocketReload.mp3", "sounds"), false);
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("rocketReload.mp3", "sounds"), Sound::type::sound);
 
 	}
 

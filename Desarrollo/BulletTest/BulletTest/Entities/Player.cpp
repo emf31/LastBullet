@@ -508,12 +508,12 @@ void Player::apuntar()
 
 	if (listaWeapons->valorActual()->getClassName() == "Sniper") {
 		if (!apuntando) {
-			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), false);
+			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), Sound::type::sound);
 			SceneManager::i().ziZoom(38.0f);
 			apuntando = true;
 		}
 		else {
-			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), false);
+			SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("Aim.mp3", "sounds"), Sound::type::sound);
 			SceneManager::i().zoomZout();
 			apuntando = false;
 		}

@@ -18,7 +18,7 @@ LoadingState::~LoadingState()
 void LoadingState::Inicializar()
 {
 	SoundManager::i().stopAllSounds();
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("LoadingSong.mp3", "sounds"), true);
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("LoadingSong.mp3", "sounds"), Sound::type::music,true);
 	loadingStateGUI.inicializar();
 	TimePerFrameClass::timePerFrameLoadingState();
 	readAllAssets();

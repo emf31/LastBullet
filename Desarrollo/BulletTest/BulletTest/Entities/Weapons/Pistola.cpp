@@ -95,7 +95,7 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 	//si impacta con algun personaje devuelve true
 	Character* hitted = nullptr;
 
-	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), m_ent->getRenderState()->getPosition());
+	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("shoot.mp3", "sounds"), m_ent->getRenderState()->getPosition(), Sound::type::sound);
 	
 
 	if (relojCadencia.getElapsedTime().asMilliseconds() > cadencia.asMilliseconds()) {
@@ -178,7 +178,7 @@ Character* Pistola::shoot(const Vec3<float>& target) {
 	if (disparos == capacidadAmmo && estadoWeapon == CARGADA) {
 		relojrecarga.restart();
 		estadoWeapon = DESCARGADA;
-		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadPistola.mp3", "sounds"), false);
+		SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("reloadPistola.mp3", "sounds"), Sound::type::sound);
 
 	}
 
