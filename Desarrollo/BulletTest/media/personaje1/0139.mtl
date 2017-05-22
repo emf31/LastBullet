@@ -1,4 +1,4 @@
-newmtl cascoSG
+newmtl blinn1SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -6,7 +6,7 @@ Tf 1.00 1.00 1.00
 map_Kd personaje1/azul_casco.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
-newmtl cuerpoSG
+newmtl blinn2SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -14,7 +14,7 @@ Tf 1.00 1.00 1.00
 map_Kd personaje1/cuerpo_azul.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
-newmtl piernasSG
+newmtl blinn3SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -22,3 +22,36 @@ Tf 1.00 1.00 1.00
 map_Kd personaje1/azul_piernas.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
+newmtl group1_polySurface4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Weapons/Cilindros.jpg
+map_Ks Weapons/Cilindros_SPEC.jpg
+map_Kn Weapons/Cilindros_NRM.jpg
+map_Ke Props/noemisivo.jpg
+newmtl group1_polySurface4SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Weapons/AbajoRocketLauncher.jpg
+map_Ks Weapons/AbajoRocketLauncher_SPEC.jpg
+map_Kn Weapons/AbajoRocketLauncher_NRM.jpg
+map_Ke Props/noemisivo.jpg
+newmtl group1_polySurface4SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Kd Weapons/CentroMira.jpg
+map_Ks Weapons/CentroMira_SPEC2.jpg
+map_Kn Weapons/CentroMira_NRM.jpg
+map_Ke Props/noemisivo.jpg

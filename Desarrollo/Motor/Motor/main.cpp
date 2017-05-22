@@ -19,23 +19,11 @@ using namespace std;
 GLuint screenWidth = 1280, screenHeight = 720;
 EngineDevice engine;
 
-int main() {
-	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
-		return -1;
-	}
-	SceneManager &sm = SceneManager::i();
-
-	TNode* nodo = new TNode(1000, SceneManager::i().getRootNode());
-
-	sm.inicializarBuffers();
-	sm.setActiveCamera(sm.crearNodoCamara());
-	//*******MODELOS***********
-
-	
-
+void inicialize() {
+	SceneManager::i().setActiveCamera(SceneManager::i().crearNodoCamara());
 	//window
-	TModel* window2 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
-	TModel* window = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
+	TModel* window2 = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj"));
+	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj"));
 	//TModel* window3 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	//window3->addChild(window2);
 	//window3->addChild(window);
@@ -44,23 +32,20 @@ int main() {
 	window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
 	//window3->setVisible(true);
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
-	
-	SceneManager::i().getRootNode()->addChild(nodo);
-	nodo->addChild(window);
-	nodo->addChild(window2);
-	nodo->setVisible(true);
+
+	window2->removeEntity();
 
 
 	//Creas el nodo(grafico)
-	TAnimation* m_nodo = SceneManager::i().crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje1", 18));
+	/*TAnimation* m_nodo = SceneManager::i().crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje1", 18));
 
 	m_nodo->setAnimation("correr", 0, 17, true);
 	/*m_nodo->setAnimation("muerte", 18, 69, true);
 	m_nodo->setAnimation("salto", 70, 93, false);
-	m_nodo->setAnimation("muerte60", 94, 139, true);*/
+	m_nodo->setAnimation("muerte60", 94, 139, true);
 	m_nodo->setCurrentAnimation("correr");
 	m_nodo->setFrameTime(milliseconds(20));
-	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
+	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));*/
 
 	/*//pistola
 	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
@@ -99,12 +84,12 @@ int main() {
 	l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
 	l2->setPosition(Vec3<float>(-10.0f, 5.0f, 8.0f));
 
-	
 
-	
+
+
 	//animacion
-<<<<<<< HEAD
-=======
+	<<<<<<< HEAD
+	=======
 	int velocidadAnim = 10;
 	std::cout << "Cargando animaciones..." << std::endl;
 	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
@@ -115,7 +100,7 @@ int main() {
 	pruebaAnim->setAnimation("saltar", 40, 109);
 	pruebaAnim->setAnimation("correr", 110, 190);
 	pruebaAnim->setCurrentAnimation("idle");
->>>>>>> refs/remotes/origin/Arreglar-motor-grafico
+	>>>>>>> refs/remotes/origin/Arreglar-motor-grafico
 
 	//int velocidadAnim = 10;
 	//std::cout << "Cargando animaciones..." << std::endl;
@@ -133,7 +118,7 @@ int main() {
 	TModel* origen2 = sm.crearNodoMalla(sm.getMesh("assets/personaje1/asd.obj"));
 	origen2->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 	origen2->setPosition(Vec3<float>(20.0f, 0.f, 0.0f));
-	
+
 	//pruebaAnim->setFrameTime(seconds(2.0));*/
 
 
@@ -141,11 +126,26 @@ int main() {
 
 	//sol
 	//TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
-	TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(0.0f, 0.0f, 0.0f));
+	TSunLight* sol = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, 0.0f));
 	sol->setIntensidadAmbiente(0.5);
 	sol->setPosition(Vec3<float>(-20.0f, 5.0f, -5.0f));
 	sol->setVectorDireccion(Vec3<float>(0.0f, 0.0f, 0.0f));
-	sm.setSunLight(sol);
+	SceneManager::i().setSunLight(sol);
+
+}
+
+int main() {
+	if (!engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet")) {
+		return -1;
+	}
+	SceneManager &sm = SceneManager::i();
+
+
+	sm.inicializarBuffers();
+	
+	//*******MODELOS***********
+	inicialize();
+	
 	
 
 	//bombilla
@@ -331,12 +331,28 @@ int main() {
 			std::cout << "Activo Sombras Estaticas " << sm.bias << std::endl;
 			sm.activeStaticShadow(true);
 		}
+		else if (Input::i().keyPressed(GLFW_KEY_H)) {
+			inicialize();
+		}
+		else if (Input::i().keyPressed(GLFW_KEY_J)) {
+			TNode* root = sm.getRootNode();
+			for (auto it = root->getChildNodes().begin(); it != root->getChildNodes().end(); it++) {
+				delete *it;
+			}
+			root->getChildNodes().clear();
+			sm.setActiveCamera(nullptr);
+			
+			sm.cleanScreen();
+
+		
+
+		}
 		Input::i().endEventProcess();
 
 		
 
-		vecDir = sm.camaraActiva->getVectorDireccion();
-		newPos = vecDir *0.3f;
+		//vecDir = sm.camaraActiva->getVectorDireccion();
+		//newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
 		//p1->setOrientation(vecDir);
 

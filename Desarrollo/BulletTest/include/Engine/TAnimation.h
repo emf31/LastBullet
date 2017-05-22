@@ -21,6 +21,8 @@ public:
 	~TAnimation();
 
 	
+	//Llamar a esto desencadena que todos los hijos de este TAnimation se borren
+	virtual void removeEntity() override;
 
 
 	bool setAnimation(const std::string& animName, int desde, int hasta, bool loop);
@@ -61,6 +63,9 @@ public:
 		m_g = g;
 		m_b = b;
 	}
+
+	int getCurrentFrame() const { return currentFrame; }
+	void setCurrentFrame(int frame) { currentFrame = frame; }
 
 
 

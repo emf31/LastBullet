@@ -7,9 +7,11 @@
 
 #include <EntActive.h>
 #include <LifeComponent.h>
-#include <AnimationMachine.h>
+
 #include "irrKlang/ik_ISound.h"
 #include <SoundManager.h>
+
+class AnimationMachine;
 
 class Character : public EntActive
 {
@@ -42,12 +44,13 @@ public:
 	virtual void vaciarArma(std::string arma) {};
 	virtual void InsertarArmaDebug(std::string arma) {};
 
+	virtual int getCurrentWeaponType() = 0;
 
 	void setAvailable(bool a) { available = a; }
 	bool isAvailable() { return available; }
 
 	LifeComponent* getLifeComponent() { return life_component; }
-	AnimationMachine* getAnimationMachine() { return animationMachine; }
+	AnimationMachine* getAnimationMachine();
 	void setLoD(bool a) { calcularLOD = a; };
 	bool getLOD() { return calcularLOD; }
 

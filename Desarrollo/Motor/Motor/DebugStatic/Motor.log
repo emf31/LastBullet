@@ -1,6 +1,1 @@
-﻿  ResourceManager.cpp
-  AnimationMesh.cpp
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\scenemanager.h(153): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-  Generando código...
-Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
-  Motor.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\Motor\DebugStatic\Motor.lib
+﻿

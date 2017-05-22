@@ -63,10 +63,10 @@ void InGame::Inicializar()
 
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), Sound::type::music);
 
-	/*Enemy *pepe = new Enemy("Pepe", RakNet::UNASSIGNED_RAKNET_GUID);
+	Enemy *pepe = new Enemy("Pepe", RakNet::UNASSIGNED_RAKNET_GUID);
 	pepe->inicializar();
 	pepe->cargarContenido();
-	pepe->setPosition(Map::i().searchSpawnPoint());*/
+	pepe->setPosition(Map::i().searchSpawnPoint());
 
 }
 
@@ -94,7 +94,7 @@ void InGame::HandleEvent()
 		GraphicEngine::i().toggleDebug();
 
 	}
-	/*else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
+	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime++;
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 
@@ -109,12 +109,12 @@ void InGame::HandleEvent()
 		menu->addPrintText(std::to_string(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_B)) {
-		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("correr");
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("correrRocket");
 
 		
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_V)) {
-		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("idle");
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("idleRocket");
 
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_C)) {
@@ -122,9 +122,9 @@ void InGame::HandleEvent()
 
 	}
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_X)) {
-		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("salto");
+		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("saltoRocket");
 
-	}*/
+	}
 
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 

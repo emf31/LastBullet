@@ -59,6 +59,7 @@ void TNode::removeNode()
 {
 	m_parentNode->removeChild(this);
 	setParentNode(NULL);
+
 	delete this;
 }
 

@@ -12,6 +12,11 @@ TSunLight::~TSunLight()
 {
 }
 
+void TSunLight::removeEntity()
+{
+	transRotacion->getMiNodo()->removeNode();
+}
+
 void TSunLight::pasarDatosAlShader(Shader * shader, int i)
 {
 	glUniform3f(glGetUniformLocation(shader->Program, "sunlight.ambiente"),ambiente.getX(), ambiente.getY(), ambiente.getZ());

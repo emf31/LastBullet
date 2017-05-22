@@ -15,6 +15,16 @@
 #define CARGADA 0
 #define DESCARGADA 1
 
+namespace Type {
+	enum eWeapon : int {
+		Asalto = 0,
+		Rocket = 1,
+		Pistola = 2,
+		Sniper = 3
+	};
+}
+
+
 class Weapon : public EntActive
 {
 public:
@@ -74,7 +84,12 @@ public:
 
 
 	virtual void updatePositionAndRotation() = 0;
+
+
+	virtual int getCurrentWeaponType() = 0;
+
 protected:
+
 	Time cadencia;
 	Clock relojCadencia;
 

@@ -28,6 +28,8 @@ public:
 
 	virtual std::string getClassName() { return "Sniper"; }
 
+	virtual int getCurrentWeaponType() override { return Type::eWeapon::Sniper; }
+
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 	virtual Character* shoot(const Vec3<float>& target);

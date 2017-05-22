@@ -53,6 +53,7 @@ void RocketBulletEnemy::cargarContenido()
 	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_nodo->setRotationXYZ(m_rotation);
+	m_renderState.setRotation(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(1.f, 1.f, 1.f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();

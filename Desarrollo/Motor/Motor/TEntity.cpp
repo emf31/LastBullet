@@ -58,9 +58,6 @@ void TEntity::addChild(TEntity * ent) {
 
 
 
- void TEntity::removeNode() {
-	miNodo->removeNode();
-}
 
 void TEntity::removeChild(TEntity * ent)
 {

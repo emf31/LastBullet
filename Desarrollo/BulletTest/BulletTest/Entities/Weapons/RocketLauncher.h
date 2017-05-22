@@ -30,6 +30,8 @@ public:
 
 	virtual std::string getClassName() { return "RocketLauncher"; }
 
+	virtual int getCurrentWeaponType() override { return Type::eWeapon::Rocket; }
+
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 	virtual Character* shoot(const Vec3<float>& target);

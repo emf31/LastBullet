@@ -171,6 +171,7 @@ void getPackets() {
 			unsigned char typeId;
 			bool isDying;
 			bool isOnGround;
+			int currentWeapon;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -181,6 +182,7 @@ void getPackets() {
 			myBitStream.Read(typeId);
 			myBitStream.Read(isDying);
 			myBitStream.Read(isOnGround);
+			myBitStream.Read(currentWeapon);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);
@@ -352,17 +354,6 @@ void getPackets() {
 
 			break;
 		}
-
-
-		case CAMBIO_ARMA: {
-
-			TCambioArma cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
-
-			//notifico a ese cliente que ha sido disparado
-			EntityManager::i().enviaCambioArma(cambioArma, peer);
-			break;
-		}
-
 
 
 		case ACTUALIZA_TABLA: {

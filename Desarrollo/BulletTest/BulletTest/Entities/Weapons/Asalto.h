@@ -27,6 +27,8 @@ public:
 
 	virtual std::string getClassName() { return "Asalto"; }
 
+	virtual int getCurrentWeaponType() override { return Type::eWeapon::Asalto; }
+
 	virtual bool handleTrigger(TriggerRecordStruct* Trigger) override;
 
 	virtual Character* shoot(const Vec3<float>& target);

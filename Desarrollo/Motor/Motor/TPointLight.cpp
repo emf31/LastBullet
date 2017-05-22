@@ -11,6 +11,11 @@ TPointLight::~TPointLight()
 {
 }
 
+void TPointLight::removeEntity()
+{
+	transRotacion->getMiNodo()->removeNode();
+}
+
 void TPointLight::pasarDatosAlShader(Shader * shader, int i)
 {
 	glUniform3f(glGetUniformLocation(shader->Program, std::string("pointlight[" + std::to_string(i) + "].ambiente").c_str()), ambiente.getX(), ambiente.getY(), ambiente.getZ());

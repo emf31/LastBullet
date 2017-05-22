@@ -97,9 +97,11 @@ void Input::mouse_callbackImpl(GLFWwindow * window, double xpos, double ypos) {
 	mouse.Y = (unsigned int)lastY;
 
 	
-
-	sm.camaraActiva->ProcessMouseMovement(xoffset, yoffset);
+	if (sm.camaraActiva != nullptr) {
+		sm.camaraActiva->ProcessMouseMovement(xoffset, yoffset);
+	}
 }
+	
 
 void Input::mouseButtonCallbackImpl(int key, int action, int mods) {
 	

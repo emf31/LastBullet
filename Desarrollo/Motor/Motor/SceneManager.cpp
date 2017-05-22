@@ -30,6 +30,8 @@ void SceneManager::inicializar() {
 	numLines = 0;
 	castShadow = true;
 	castStaticShadow = false;
+
+	camaraActiva = nullptr;
 }
 
 
@@ -44,42 +46,45 @@ TMeshGroup* SceneManager::getMesh(const std::string& path,Shader* shader) {
 
 void SceneManager::draw() {
 
-	glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
 	
-	
-	
-	//****************RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
-		
-			//activamos el gBuffer donde nos vamos a guardar toda la informacion de geometria y texturas
-			glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glPolygonMode(GL_FRONT_AND_BACK, 0 ? GL_LINE : GL_FILL);
+
 			
-			//-------RENDER DEL SKYBOX--------
-			renderSkybox();
-
-			//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
-			// Update matrices
-			projection = camaraActiva->getProjectionMatrix();
-			view = camaraActiva->GetViewMatrix();
-			activeCameraPos = camaraActiva->getPosition();
-			scene->draw();
-			//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
-			if (castShadow) {
-				renderSombras();
-			}
-			//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			renderBlur();
-			//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			renderLuces();
-
-	//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
 
 
-	//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
-		
+		//****************RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
+
+		//activamos el gBuffer donde nos vamos a guardar toda la informacion de geometria y texturas
+		glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	if (camaraActiva != nullptr) {
+		//-------RENDER DEL SKYBOX--------
+		renderSkybox();
+
+		//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
+		// Update matrices
+		projection = camaraActiva->getProjectionMatrix();
+		view = camaraActiva->GetViewMatrix();
+		activeCameraPos = camaraActiva->getPosition();
+		scene->draw();
+		//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
+		if (castShadow) {
+			renderSombras();
+		}
+		//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		renderBlur();
+		//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		renderLuces();
+
+		//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
+
+
+		//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+
 
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
@@ -90,10 +95,11 @@ void SceneManager::draw() {
 		if (vertices3.size() > 0) {
 			drawAllLines();
 		}
-	//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+		//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
 
-		
 
+
+	}
 	
 }
 

@@ -9,6 +9,9 @@ public:
 	TSunLight(Vec3<float> direccion);
 	~TSunLight();
 
+	//Llamar a esto desencadena que todos los hijos de este TSunLight se borren
+	virtual void removeEntity() override;
+
 	void pasarDatosAlShader(Shader *shader, int i=0);
 	Vec3<float> getDireccion();
 	void setRotationXYZ(Vec3<float> dir);

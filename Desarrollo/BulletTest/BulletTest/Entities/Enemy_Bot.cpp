@@ -17,6 +17,8 @@
 #include <LogIA.h>
 #include <Idle.h>
 
+#include <AnimationMachine.h>
+
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
 	//Creates object to send and receive packets
@@ -71,13 +73,16 @@ void Enemy_Bot::cargarContenido()
 {
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 118
+		"../media/personaje1", 191
 	);
-	m_nodo->setAnimation("correr", 0, 16, true);
-	m_nodo->setAnimation("idle", 17, 47, true);
+	m_nodo->setAnimation("correrAsalto", 0, 16, true);
+	m_nodo->setAnimation("idleAsalto", 17, 47, true);
 	m_nodo->setAnimation("muerte", 48, 93, false);
-	m_nodo->setAnimation("salto", 94, 117, false);
-	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setAnimation("saltoAsalto", 94, 117, false);
+	m_nodo->setAnimation("correrRocket", 118, 134, true);
+	m_nodo->setAnimation("idleRocket", 136, 166, true);
+	m_nodo->setAnimation("saltoRocket", 168, 190, true);
+	m_nodo->setCurrentAnimation("correrAsalto");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
@@ -209,6 +214,7 @@ void Enemy_Bot::update(Time elapsedTime)
 				myBitStream.Write(typeId);
 				myBitStream.Write(getLifeComponent().isDying());
 				myBitStream.Write(p_controller->onGround());
+				myBitStream.Write(getCurrentWeaponType());
 				myBitStream.Write(getRenderState()->getPosition());
 				myBitStream.Write(getRenderState()->getRotation());
 				myBitStream.Write(getGuid());

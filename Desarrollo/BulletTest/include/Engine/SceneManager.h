@@ -55,6 +55,8 @@ public:
 	void renderSombras();
 	void renderSkybox();
 
+	
+
 
 	//crear nodos
 	bool removeNode(TNode* node);
@@ -110,6 +112,11 @@ public:
 	void activeDynamicShadow(bool b);
 	void activeStaticShadow(bool b);
 
+	void cleanScreen() {
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
 	
 	int *screenWidth, *screenHeight;
 	
@@ -151,6 +158,7 @@ public:
 	GLuint LVAO,LVBO;
 	int numLines;
 	float bias = 0.00011f;
+
 	
 
 private:

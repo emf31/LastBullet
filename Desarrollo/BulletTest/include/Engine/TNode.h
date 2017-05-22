@@ -38,6 +38,8 @@ public:
 	void setEntity(TEntity* entidad);
 	int getMyNodeEntityID();
 
+	std::vector<TNode*>& getChildNodes() { return m_childNodes; }
+
 private:
 	TEntity *m_entity;
 	TNode *m_parentNode;

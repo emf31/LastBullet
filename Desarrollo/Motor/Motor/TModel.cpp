@@ -123,3 +123,9 @@ glm::mat4 TModel::getScaleMatrix()
 {
 	return transEscalado->getScaleMatrix();
 }
+
+//Llamar a esto desencadena que todos los hijos de este TModel se borren
+void TModel::removeEntity()
+{
+	transRotacion->getMiNodo()->removeNode();
+}

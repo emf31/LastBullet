@@ -387,7 +387,7 @@ void GraphicEngine::cargarTexturas() {
 }
 
 void GraphicEngine::removeNode(std::shared_ptr<SceneNode> nodo) {
-	nodo->getEntityNode()->removeNode();
+	nodo->getEntityNode()->removeEntity();
 }
 
 
