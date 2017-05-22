@@ -332,6 +332,10 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
 	}
+	if (lastState == stateMenu::enumPrincipal) {
+		//Creamos la red (abrir server, crear peer, conectarse, etc.) 
+		NetworkManager::i().configureNetwork();
+	}
 	changeState(lastState);
 	return true;
 }

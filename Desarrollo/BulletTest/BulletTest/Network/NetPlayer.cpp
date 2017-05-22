@@ -209,7 +209,9 @@ void NetPlayer::leaveLobby() {
 		}
 		//substractPlayerInLobby(SteamUser()->GetSteamID().ConvertToUint64());
 		SteamIDs.clear();
+		IamHost = false;
 
+		
 	}
 }
 
@@ -592,7 +594,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			unsigned char typeId;
 			bool isDying;
 			bool isOnGround;
-			bool currentWeapon;
+			int currentWeapon;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;

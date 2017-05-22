@@ -18,7 +18,7 @@
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(1001, NULL, name, guid), nPrediction(this)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
 {
 	EntityManager::i().registerRaknetEntity(this);
 }
@@ -81,10 +81,10 @@ void Enemy::update(Time elapsedTime)
 	animationMachine->Update();
 
 	if (NetworkManager::i().isMovementPrediction()) {
-		//nPrediction.interpolateWithPrediction();
+		nPrediction.interpolateWithPrediction();
 	}
 	else {
-		//nPrediction.interpolateWithoutPrediction();
+		nPrediction.interpolateWithoutPrediction();
 	}
 
 	moving = true;

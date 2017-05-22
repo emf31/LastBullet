@@ -1,10 +1,10 @@
 resolucionx:1280
-resoluciony:720
 bots:2
-fullscreen:0
-gamemode:0
-Lan:0
-mapa:landing.json
+resoluciony:720
 WANIP:2.155.130.30
+Lan:1
+mapa:landing.json
+gamemode:0
+fullscreen:0
 name:Host
 maxkills:15
