@@ -20,6 +20,7 @@ public:
 
 	bool onContinuarClicked();
 	bool onSalirClicked();
+	void clear();
 	CEGUI::DefaultWindow *Window;
 
 private:

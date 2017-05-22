@@ -1,3 +1,8 @@
+
+#include <GraphicEngine.h>
+#include <GUIManager.h>
+#include <IngameHUD.h>
+#include <StateStack.h>
 #include "SalirHUD.h"
 
 SalirHUD::SalirHUD() : GUI()
@@ -39,10 +44,26 @@ void SalirHUD::handleEvent(Event * ev)
 
 bool SalirHUD::onContinuarClicked()
 {
+	clear();
+	InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+	hud->getContext()->getRootWindow()->getChild(0)->setVisible(!escapeInput);
 	return true;
 }
 
 bool SalirHUD::onSalirClicked()
 {
+	clear();
+	StateStack::i().GetCurrentState()->Clear();
+	StateStack::i().SetCurrentState(States::ID::Menu);
+	StateStack::i().GetCurrentState()->Inicializar();
 	return true;
+}
+
+void SalirHUD::clear()
+{
+		escapeInput = !escapeInput;
+		GraphicEngine::i().enableMouse(escapeInput);
+		showMouseCursor(escapeInput);
+		GraphicEngine::i().getActiveCamera()->setInputReceiver(!escapeInput);
+		Window->setVisible(escapeInput);
 }
