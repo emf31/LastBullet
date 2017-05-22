@@ -40,6 +40,29 @@ const std::string Settings::GetValue(const std::string & value)
 	return "";
 }
 
+void Settings::SetValue(const std::string & property, const std::string & value) {
+	auto found = mSettings.find(property);
+	if (found != mSettings.end()) {
+		found->second = value;
+	}
+
+	WriteMapToFile();
+}
+
+void Settings::WriteMapToFile() {
+	std::ofstream file;
+	file.open(fileConfiguration, std::ios::out);
+
+	if (!file) {
+		throw std::string("El fichero " + fileConfiguration + " no existe");
+	}
+	for (auto it = mSettings.begin(); it != mSettings.end(); ++it) {
+		std::string str = it->first + ":" + it->second;
+		file << it->first << ":" << it->second << std::endl;
+	}
+
+	file.close();
+}
 
 
 bool Settings::FileExists(const std::string& filename)

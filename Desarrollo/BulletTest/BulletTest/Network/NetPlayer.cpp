@@ -22,6 +22,8 @@
 #include <DebugMenuGUI.h>
 #include <GUIManager.h>
 #include <SoundManager.h>
+#include <TCPInterface.h>
+#include <HTTPConnection.h>
 
 #include "../global.h"
 
@@ -75,8 +77,15 @@ void NetPlayer::crearPartida()
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
 
+	int lnsvr = std::stoi(Settings::i().GetValue("Lan"));
+	if (lnsvr) {
+		LanServer = 1;
+	} else {
+		LanServer = 0;
+	}
+
 	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	menu->getNumBots();
+	//menu->getNumBots();
 
 
 	for (int i = 0; i < menu->getNumBots(); i++) {
@@ -86,6 +95,7 @@ void NetPlayer::crearPartida()
 		m_bots.push_back(p);
 	}
 
+	
 	
 
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente (si se usa steam)
@@ -135,6 +145,7 @@ uint64_t NetPlayer::crearLobby()
 				if (playerSlot != nullptr) {
 					playerSlot->setReady(false);
 				}
+				menu->setServerType(std::stoi(Settings::i().GetValue("Lan")));
 			}
 			addPlayerInLobby(lobby2Client->GetMyUserID());
 		}
@@ -146,16 +157,27 @@ uint64_t NetPlayer::crearLobby()
 void NetPlayer::sendServerIPtoNewClient() {
 	if (USING_STEAM) {
 		if (IamHost) {
+			MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
 			std::string ipMessage = "IP|";
 			RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
-			ipMessage = ipMessage + peer->GetLocalIP(0);
+			if (LanServer) {
+				ipMessage = ipMessage + peer->GetLocalIP(0);
+			} else {
+				
+				ipMessage = ipMessage + Settings::i().GetValue("WANIP");
+			}
 			msg->message = ipMessage.c_str();
 			msg->roomId = lobby2Client->GetRoomID();
 			lobby2Client->SendMsg(msg);
 			messageFactory->Dealloc(msg);
+
+
+			menu->setServerType(std::stoi(Settings::i().GetValue("Lan")));
+			
 		}
 	}
 }
+
 
 void NetPlayer::sendReadyPlayersToNewClient() {
 	if (IamHost) {
@@ -326,7 +348,7 @@ void NetPlayer::unirseLobby(const std::string& str)
 {
 
 
-	conectar("2.155.130.30", server_port);
+	conectar(str, server_port);
 	RakSleep(1000);
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
@@ -442,6 +464,10 @@ void NetPlayer::substractPlayerInLobby(uint64_t steamID) {
 			break;
 		}
 	}
+}
+
+void NetPlayer::setLanServer(bool lan) {
+	LanServer = lan;
 }
 
 

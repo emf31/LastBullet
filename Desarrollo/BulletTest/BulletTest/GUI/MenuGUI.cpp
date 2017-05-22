@@ -29,6 +29,7 @@ void MenuGUI::inicializar() {
 	imagen2_x = -1280;
 	FrameActual = 0;
 	m_stateMenu = stateMenu::enumPrincipal;
+	lastState = m_stateMenu;
 
 	imagen = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
 	imagen2 = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(3));
@@ -69,6 +70,18 @@ void MenuGUI::inicializar() {
 	BackBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(203));
 	BackBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onBackButtonClicked, this));
 
+	OptionsBtn = static_cast<CEGUI::PushButton*>(LobbyWindow->getChild(202));
+	OptionsBtn->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onOpcionesGameClicked, this));
+
+	ServerLbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1001));
+	ServerLbl->setVisible(false);
+
+	InternetLbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1002));
+	InternetLbl->setVisible(false);
+
+	LanLbl = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1003));
+	LanLbl->setVisible(false);
+	
 	PlayerSlot1.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(1));
 	PlayerSlot2.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(2));
 	PlayerSlot3.name = static_cast<CEGUI::DefaultWindow*>(LobbyWindow->getChild(3));
@@ -153,7 +166,19 @@ void MenuGUI::inicializar() {
 
 	numBots = static_cast<CEGUI::DefaultWindow*>(OpcionesGameWindow->getChild(71));
 
+	numBots->setText(Settings::i().GetValue("bots"));
+	sliderBots->setCurrentValue(std::stof(Settings::i().GetValue("bots")));
+
 	OpcionesGameWindow->setVisible(false);
+
+	LanServerBtn = static_cast<CEGUI::ToggleButton*>(OpcionesGameWindow->getChild(10));
+
+	int lan = std::stoi(Settings::i().GetValue("Lan"));
+	if (lan) {
+		LanServerBtn->setSelected(true);
+	} else {
+		LanServerBtn->setSelected(false);
+	}
 
 	//------------------------------------------------
 	
@@ -202,15 +227,13 @@ void MenuGUI::update()
 	}*/
 }
 
-void MenuGUI::handleEvent(Event * ev)
-{
+void MenuGUI::handleEvent(Event * ev) {
 }
-bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
-{
-	if(USING_STEAM) {
+bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e) {
+	if (USING_STEAM) {
 		changeState(stateMenu::enumLobby);
 	}
-	
+
 	NetworkManager::i().getNetPlayer()->crearPartida();
 	if (USING_STEAM) {
 		NetworkManager::i().getNetPlayer()->crearLobby();
@@ -218,11 +241,21 @@ bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e)
 	return true;
 }
 
-bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
-{
+void MenuGUI::setServerType(int type) {
+	if (type == 1) {
+		InternetLbl->setVisible(false);
+		LanLbl->setVisible(true);
+	} else {
+		LanLbl->setVisible(false);
+		InternetLbl->setVisible(true);
+	}
+	ServerLbl->setVisible(true);
+}
+
+bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e) {
 	changeState(stateMenu::enumUnir);
 	netPlayer->searchServersOnLAN();
-	std::vector<std::string> servers= netPlayer->getServers();
+	std::vector<std::string> servers = netPlayer->getServers();
 	int size = servers.size();
 	std::cout << size << std::endl;
 	if (size == 2) {
@@ -233,57 +266,73 @@ bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e)
 		Conexion1->setText(servers.at(0));
 		Conexion2->setVisible(false);
 	}
-	if (size == 0){
+	if (size == 0) {
 		Conexion1->setVisible(false);
 		Conexion2->setVisible(false);
 	}
-		
+
 	//std::cout << "Le has dado a unir" << std::endl;
 	return true;
 }
 
-bool MenuGUI::onOpcionesAudioClicked(const CEGUI::EventArgs & e)
-{
+bool MenuGUI::onOpcionesAudioClicked(const CEGUI::EventArgs & e) {
 	changeState(stateMenu::enumOpcionesAudio);
 	std::cout << "Le has dado a opciones audio" << std::endl;
 	return false;
 }
 
-bool MenuGUI::onOpcionesVideoClicked(const CEGUI::EventArgs & e)
-{
+bool MenuGUI::onOpcionesVideoClicked(const CEGUI::EventArgs & e) {
 	changeState(stateMenu::enumOpcionesVideo);
 	std::cout << "Le has dado a opciones video" << std::endl;
 	return false;
 }
 
-bool MenuGUI::onOpcionesGameClicked(const CEGUI::EventArgs & e)
-{
+bool MenuGUI::onOpcionesGameClicked(const CEGUI::EventArgs & e) {
+	lastState = m_stateMenu;
 	changeState(stateMenu::enumOpcionesGame);
 	std::cout << "Le has dado a opciones game" << std::endl;
 	return false;
 }
 
-bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e)
-{
+bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e) {
 	std::cout << "Le has dado a salir" << std::endl;
 	return true;
 }
 
-bool MenuGUI::onConexion1Clicked(const CEGUI::EventArgs & e)
-{
+bool MenuGUI::onConexion1Clicked(const CEGUI::EventArgs & e) {
 	netPlayer->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }
 
-bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e)
-{
+bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e) {
 	netPlayer->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }
 
-bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e)
-{
-	changeState(stateMenu::enumPrincipal);
+bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
+	if (m_stateMenu == stateMenu::enumOpcionesGame){
+		//LAN
+		if (LanServerBtn->isSelected()) {
+			Settings::i().SetValue("Lan", "1");
+			if (NetworkManager::i().getNetPlayer()->isConnected()) {
+				NetworkManager::i().getNetPlayer()->setLanServer(true);
+				NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+			}
+		} else {
+			//WAN
+			Settings::i().SetValue("Lan", "0");
+			if (NetworkManager::i().getNetPlayer()->isConnected()) {
+				NetworkManager::i().getNetPlayer()->setLanServer(false);
+				NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+			}
+				
+
+			
+		}
+		
+		Settings::i().SetValue("bots", std::to_string(getNumBots()));
+	}
+	changeState(lastState);
 	return true;
 }
 
@@ -313,6 +362,32 @@ bool MenuGUI::onBotsSlider(const CEGUI::EventArgs & e)
 	return true;
 }
 
+bool MenuGUI::onLanServerBtnActivated(const CEGUI::EventArgs & e) {
+	//LAN
+	if (LanServerBtn->isActive()) {
+		if (NetworkManager::i().getNetPlayer()->isConnected())
+			NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+
+		Settings::i().SetValue("Lan", "1");
+	} else {
+		//WAN
+		if (NetworkManager::i().getNetPlayer()->isConnected())
+			NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+
+		Settings::i().SetValue("Lan", "0");
+	}
+	
+	return true;
+}
+
+bool MenuGUI::onLanServerBtnDeactivated(const CEGUI::EventArgs & e) {
+	//WAN
+	if(NetworkManager::i().getNetPlayer()->isConnected())
+		NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
+
+	Settings::i().SetValue("Lan", "0");
+	return true;
+}
 
 bool  MenuGUI::onReadyBtnClicked(const CEGUI::EventArgs & e) {
 	NetworkManager::i().getNetPlayer()->sendReadyStatus();

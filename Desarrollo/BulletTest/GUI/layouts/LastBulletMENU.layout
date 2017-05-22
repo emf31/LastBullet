@@ -11,7 +11,7 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow" >
-            <Property name="Area" value="{{0.00078125,3},{0,0},{1.00078,1283},{1,-12}}" />
+            <Property name="Area" value="{{0.00078125,2},{0,0},{1.00078,1282},{1,-12}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="Generic/Image" name="Image2" >
@@ -99,7 +99,7 @@
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow2" >
             <Property name="ID" value="1" />
-            <Property name="Area" value="{{0,0},{0,-1},{1,-4},{1,-1}}" />
+            <Property name="Area" value="{{0,-1},{0,-1},{1,-5},{1,-1}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
@@ -151,7 +151,7 @@
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow3" >
             <Property name="ID" value="5" />
-            <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,168},{0,732},{0,250}}" />
@@ -235,7 +235,7 @@
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow4" >
             <Property name="ID" value="7" />
-            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+            <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,171},{0,732},{0,248}}" />
@@ -248,8 +248,8 @@
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label3" >
-                <Property name="Area" value="{{0,419},{0,347},{0,601},{0,401}}" />
-                <Property name="Text" value="Map" />
+                <Property name="Area" value="{{0,416},{0,353},{0,598},{0,407}}" />
+                <Property name="Text" value="LAN Server" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
@@ -260,17 +260,19 @@
             </Window>
             <Window type="AlfiskoSkin/Label" name="Label4" >
                 <Property name="ID" value="71" />
-                <Property name="Area" value="{{0,903},{0,300},{0,1031},{0,332}}" />
+                <Property name="Area" value="{{0,901},{0,299},{0,1029},{0,331}}" />
                 <Property name="Text" value="0" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            </Window>
-            <Window type="AlfiskoSkin/Editbox" name="Editbox" >
-                <Property name="Area" value="{{0,651},{0,361},{0,907},{0,393}}" />
             </Window>
             <Window type="AlfiskoSkin/Button" name="Button" >
                 <Property name="ID" value="99" />
                 <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
                 <Property name="Text" value="Back" />
+            </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox" >
+                <Property name="ID" value="10" />
+                <Property name="Area" value="{{0,651},{0,359},{0,674},{0,391}}" />
+                <Property name="Selected" value="true" />
             </Window>
         </Window>
         <Window type="DefaultWindow" name="LobbyWindow" >
@@ -396,7 +398,7 @@
                 <Property name="AlwaysOnTop" value="true" />
             </Window>
             <Window type="Generic/Image" name="HorizontalLine" >
-                <Property name="Area" value="{{0,233},{0,269},{0,443},{0,277}}" />
+                <Property name="Area" value="{{0,234},{0,309},{0,444},{0,317}}" />
                 <Property name="Alpha" value="0.8" />
                 <Property name="Image" value="AssetsMenu/HorizontalWhiteLine" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -438,6 +440,35 @@
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="Visible" value="false" />
                 <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/ImageButton" name="OptionsBtn" >
+                <Property name="ID" value="202" />
+                <Property name="Area" value="{{0,249},{0,266},{0,442},{0,304}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="OptionsImg" >
+                <Property name="Area" value="{{0,279},{0,272},{0,416},{0,301}}" />
+                <Property name="Image" value="AssetsMenu/Options" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Server" >
+                <Property name="ID" value="1001" />
+                <Property name="Area" value="{{0,727},{0,559},{0,832},{0,582}}" />
+                <Property name="Image" value="AssetsMenu/Server" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="WAN" >
+                <Property name="ID" value="1002" />
+                <Property name="Area" value="{{0,839},{0,559},{0,951},{0,583}}" />
+                <Property name="Image" value="AssetsMenu/Internet" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="LAN" >
+                <Property name="ID" value="1003" />
+                <Property name="Area" value="{{0,840},{0,556},{0,890},{0,583}}" />
+                <Property name="Image" value="AssetsMenu/Lan" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
         </Window>
     </Window>

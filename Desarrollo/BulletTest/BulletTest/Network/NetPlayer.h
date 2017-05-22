@@ -84,8 +84,10 @@ public:
 
 	void setHostIp(const std::string& ip) { hostIp = ip; }
 
+	void setLanServer(bool lan);
 
 	bool isReady() const { return IamReady; }
+
 
 private:
 
@@ -122,6 +124,9 @@ private:
 
 	bool inLobby = true;
 
+	bool LanServer = true;
+
+	
 
 #ifdef NETWORK_DEBUG
 	std::shared_ptr<NetworkDebugger> debugger;

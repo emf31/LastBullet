@@ -70,6 +70,8 @@ public:
 	bool onUpdateSliderSound(const CEGUI::EventArgs & e);
 	bool onUpdateSliderMusic(const CEGUI::EventArgs & e);
 	bool onBotsSlider(const CEGUI::EventArgs & e);
+	bool onLanServerBtnActivated(const CEGUI::EventArgs & e);
+	bool onLanServerBtnDeactivated(const CEGUI::EventArgs & e);
 	
 
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
@@ -96,6 +98,7 @@ public:
 
 	bool onConnectClicked(const CEGUI::EventArgs & e);
 	bool onEditBoxClicked(const CEGUI::EventArgs & e);
+	void setServerType(int type);
 
 	CEGUI::Editbox *editBox;
 
@@ -160,6 +163,13 @@ private:
 	CEGUI::PushButton *ReadyBtn;
 	CEGUI::PushButton *InviteBtn;
 	CEGUI::PushButton *BackBtn;
+	CEGUI::PushButton *OptionsBtn;
+
+	CEGUI::ToggleButton *LanServerBtn;
+
+	CEGUI::DefaultWindow *ServerLbl;
+	CEGUI::DefaultWindow *InternetLbl;
+	CEGUI::DefaultWindow *LanLbl;
 
 	PlayerSlot PlayerSlot1;
 	PlayerSlot PlayerSlot2;
@@ -176,8 +186,9 @@ private:
 	void changeState(stateMenu Newstate);
 	void setStateVisible(stateMenu state, bool visible);
 	void actualizarTopOpciones();
-
 	
+
+	stateMenu lastState;
 
 	
 };

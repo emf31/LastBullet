@@ -24,4 +24,8 @@
     <Image height="32" name="ReadyText" width="110" xPos="406" yPos="486" />
     <Image height="36" name="Players" width="148" xPos="408" yPos="533" />
     <Image height="6" name="HorizontalWhiteLine" width="539" xPos="708" yPos="705" />
+    <Image height="29" name="Options" width="142" xPos="409" yPos="592" />
+    <Image height="29" name="Server" width="136" xPos="560" yPos="592" />
+    <Image height="32" name="Lan" width="70" xPos="409" yPos="635" />
+    <Image height="29" name="Internet" width="155" xPos="501" yPos="639" />
 </Imageset>

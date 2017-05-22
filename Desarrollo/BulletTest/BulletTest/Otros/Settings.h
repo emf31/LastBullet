@@ -17,6 +17,8 @@ public:
 	void LoadSettings();
 	const std::string GetValue(const std::string& value);
 
+	void SetValue(const std::string& property, const std::string& value);
+
 	ResourceProvider& GetResourceProvider() { return m_resourceProvider; }
 
 private:
@@ -33,4 +35,6 @@ private:
 	std::unordered_map<std::string, std::string> mSettings;
 
 	ResourceProvider m_resourceProvider;
+
+	void Settings::WriteMapToFile();
 };
