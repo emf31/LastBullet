@@ -11,8 +11,8 @@ TBillboard::TBillboard(TMeshGroup* meshGroup, Vec3<float> posicion) : sm(SceneMa
 	modelMatrix.setPosition(posicion);
 	conVida = true;
 	frameBillboard = 0;
-	numFrames = 12;
-	billBoardTimeFrame = seconds(0.175f);
+	numFrames = 46;
+	billBoardTimeFrame = seconds(0.05f);
 	billboardCurrentTime.restart();
 
 }
@@ -41,18 +41,18 @@ glm::mat4 TBillboard::calcularMVP()
 
 	glm::mat4 modelview = view * modelMatrix.getPositionMatrix();
 
-	modelview[0][0] = 1.0;
+	modelview[0][0] = 8.0;
 	modelview[0][1] = 0.0;
 	modelview[0][2] = 0.0;
 
 
 	modelview[1][0] = 0.0;
-	modelview[1][1] = 1.0;
+	modelview[1][1] = 8.0;
 	modelview[1][2] = 0.0;
 
 	modelview[2][0] = 0.0;
 	modelview[2][1] = 0.0;
-	modelview[2][2] = 1.0;
+	modelview[2][2] = 8.0;
 
 	return (projection * modelview);
 }
