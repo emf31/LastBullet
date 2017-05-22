@@ -298,21 +298,7 @@ void SceneManager::inicializarBufferSkybox()
 
 void SceneManager::inicializarBufferBildboard()
 {
-	//const GLfloat bildboardVertices[] = {
-	//	-0.5f, -0.5f, 0.0f,
-	//	0.5f, -0.5f, 0.0f,
-	//	-0.5f, 0.5f, 0.0f,
-	//	0.5f, 0.5f, 0.0f,
-	//};
 
-	//glGenVertexArrays(1, &bildboardVAO);
-	//glGenBuffers(1, &bildboardVBO);
-	//glBindVertexArray(bildboardVAO);
-	//glBindBuffer(GL_ARRAY_BUFFER, bildboardVBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(bildboardVertices), &bildboardVertices, GL_STATIC_DRAW);
-	//glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	//glBindVertexArray(0);
 	billboardFrameName.push_back("assets/muzzle1.png");
 	billboardFrameName.push_back("assets/muzzle2.png");
 	billboardFrameName.push_back("assets/muzzle3.png");
@@ -341,7 +327,7 @@ void SceneManager::inicializarBufferBildboard()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	billboardCurrentTime.restart();
+	
 
 }
 
@@ -495,7 +481,14 @@ void SceneManager::renderBildboard()
 	//glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
 	billboardrendering = true;
 	for (int i = 0; i < vectorBillboards.size(); i++) {
-		vectorBillboards[i]->beginDraw();
+		if (vectorBillboards[i]->isAlive()) {
+			vectorBillboards[i]->draw();
+		}
+		else {
+			//JULIYO I NEED HELP!
+			//TODO aqui habria que borrar el bildboard y sacarlo del vector
+		}
+		
 	}
 
 	glDisable(GL_BLEND);
@@ -551,45 +544,13 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	return model;
 }
 
-TModel * SceneManager::crearBillBoard()
+TBillboard * SceneManager::crearBillBoard(Vec3<float> posicion)
 {
+	TBillboard* billboard = new TBillboard(getMesh("assets/billboard.obj"),posicion);
 
-	
+	vectorBillboards.push_back(billboard);
 
-	TNode * nuevoNodoMalla;
-	TNode * nuevoNodoEscalado;
-	TNode * nuevoNodoTraslacion;
-
-	TModel* model = new TModel(getMesh("assets/billboard.obj"));
-
-	//creamos los nodos malla y los nodos transformaciones necesaria para esta
-	int id = model->getID();
-
-	//rotacion antes de traslacion
-	
-	nuevoNodoEscalado = crearNodoEscalado(nullptr, id);
-	nuevoNodoTraslacion = crearNodoTraslacion(nuevoNodoEscalado, id);
-	nuevoNodoMalla = new TNode(id, nuevoNodoTraslacion);
-
-	//asignamos los hijos
-	nuevoNodoEscalado->addChild(nuevoNodoTraslacion);
-	nuevoNodoTraslacion->addChild(nuevoNodoMalla);
-
-
-
-
-	//asignamos matrices de transformacion
-	model->setTransformacionEscalado(static_cast<TTransform*> (nuevoNodoEscalado->getEntity()));
-	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
-	model->setMiNodo(nuevoNodoMalla);
-
-	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
-	nuevoNodoMalla->setEntity(model);
-	//nuevoNodoMalla->setModel(model);
-	//nuevoNodoMalla->getEntity()->setModel();
-	vectorBillboards.push_back(model);
-
-	return model;
+	return billboard;
 }
 
 TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)

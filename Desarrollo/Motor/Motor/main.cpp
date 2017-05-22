@@ -63,7 +63,7 @@ int main() {
 	//personaje
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
+	origen->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
 	origen->setModelColor(1.0f,0.2f,0.2f);
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
@@ -85,11 +85,11 @@ int main() {
 	//pruebaAnim->setCurrentAnimation("idle");
 
 	//billboards
-	TModel* bill1 = sm.crearBillBoard();
-	TModel* bill2 = sm.crearBillBoard();
-	bill2->setScale(Vec3<float>(20.2f, 20.02f, 20.02f));
-	bill2->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	bill2->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
+	//TModel* bill1 = sm.crearBillBoard();
+	//TModel* bill2 = sm.crearBillBoard();
+	//bill2->setScale(Vec3<float>(20.2f, 20.02f, 20.02f));
+	//bill2->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
+	//bill2->setScale(Vec3<float>(0.05f, 0.05f, 0.05f));
 	
 	//pruebaAnim->setFrameTime(seconds(2.0));
 
@@ -231,21 +231,31 @@ int main() {
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_J)) {
 			//pruebaAnim->setCurrentAnimation("saltar");
+			std::cout << "creo bildboard en: 20.0f, 5.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(20.0f, 5.0f, 0.0f));
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_C)) {
 			//pruebaAnim->setCurrentAnimation("correr");
+			std::cout << "creo bildboard en: -20.0f, 5.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(-20.0f, 5.0f, 0.0f));
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_I)) {
 			//pruebaAnim->setCurrentAnimation("idle");
+			std::cout << "creo bildboard en: 20.0f, 5.0f, -10.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(20.0f, 5.0f, -10.0f));
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_R)) {
 			//velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
 			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+			std::cout << "creo bildboard en: -20.0f, -5.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(-20.0f, -5.0f, 0.0f));
 
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_L)) {
 			//velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
 			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+			std::cout << "creo bildboard en: 0.0f, 0.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(0.0f, 0.0f, 0.0f));
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
@@ -261,8 +271,8 @@ int main() {
 		p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
-		bill2->setPosition(sm.camaraActiva->getPosition());
-		bill2->updatePosition(newPos*0.5);
+		//bill2->setPosition(sm.camaraActiva->getPosition());
+		//bill2->updatePosition(newPos*0.5);
 
 		flash3->setPosition(sm.camaraActiva->getPosition());
 		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());

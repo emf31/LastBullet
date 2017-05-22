@@ -28,7 +28,6 @@ TModel::~TModel() {
 void TModel::beginDraw() {
 	if (visible) {
 
-		if (sm.billboardrendering == false) {
 			const glm::mat4& view = sm.getViewMatrix();
 			const glm::mat4& projection = sm.getProjectionMatrix();
 			glm::mat4& model = sm.getMatrizActual();
@@ -45,38 +44,7 @@ void TModel::beginDraw() {
 			glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
 
 			//Dibujamos el modelo
-			m_meshGroup->draw();
-		}
-		else {
-			const glm::mat4& view = sm.getViewMatrix();
-			const glm::mat4& projection = sm.getProjectionMatrix();
-			glm::mat4& model = getPositionMatrix()*getScaleMatrix();
-			
-			glm::mat4 modelview = view * model;
-
-			modelview[0][0] = getScale().getX();
-			modelview[0][1] = 0.0;
-			modelview[0][2] = 0.0;
-
-
-			modelview[1][0] = 0.0;
-			modelview[1][1] = getScale().getY();
-			modelview[1][2] = 0.0;
-
-			modelview[2][0] = 0.0;
-			modelview[2][1] = 0.0;
-			modelview[2][2] = getScale().getZ();
-
-			glm::mat4 mvp = projection * modelview;
-			sm.shaderBildboard->Use();
-
-			glUniformMatrix4fv(glGetUniformLocation(sm.shaderBildboard->Program, "mvp"), 1, GL_FALSE, glm::value_ptr(mvp));
-
-			//Dibujamos el modelo
-			m_meshGroup->draw();
-		}
-
-			
+			m_meshGroup->draw();	
 	}
 
 }

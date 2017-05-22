@@ -8,6 +8,7 @@
 #include "TFlashLight.h"
 #include "TCamera.h"
 #include "TAnimation.h"
+#include "TBillboard.h"
 #include <deque>
 
 #include <GLEW/glew.h>
@@ -53,7 +54,7 @@ public:
 
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
-	TModel* crearBillBoard();
+	TBillboard* crearBillBoard(Vec3<float> posicion);
 	TAnimation* crearNodoAnimacion(TAnimationGroupMesh * animGroup);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
@@ -95,7 +96,7 @@ public:
 	std::vector<TPointLight*> vecPointLight;
 	std::vector<TFlashLight*> vecFlashLight;
 	std::vector<TCamera*> vectorCamaras;
-	std::vector<TModel*> vectorBillboards;
+
 	TCamera* camaraActiva;
 
 	Shader* shaderGeometria;
@@ -125,14 +126,13 @@ public:
 
 
 	//bildboard
+	std::vector<TBillboard*> vectorBillboards;
 	GLuint bildboardVAO, bildboardVBO;
-	//GLuint bildboardTexture;
 	GLuint billboardFrameAnimation[9];
 	std::vector<const GLchar*> billboardFrameName;
 	bool billboardrendering = false;
-	int frameBillboard = 0;
-	Time billBoardTimeFrame = seconds(0.175f);
-	Clock billboardCurrentTime;
+	
+
 
 	std::vector<GLfloat> vertices3;
 	std::vector<GLuint> indices;
