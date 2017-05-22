@@ -5,7 +5,7 @@
 #include <iostream>
 #include <MessageIdentifiers.h>
 #include <RakString.h>
-
+#include <Clock.hpp>
 
 
 
@@ -34,6 +34,7 @@ struct TMovimiento {
 	unsigned char mID;
 	bool isDying;
 	bool isOnGround;
+	int currentWeapon;
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
@@ -132,14 +133,7 @@ struct TId {
 };
 #pragma pack(pop)
 
-#pragma pack(push, 1)
-struct TCambioArma {
-	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
-	unsigned char mID;
-	int cambio;
-	RakNet::RakNetGUID guid;
-};
-#pragma pack(pop)
+
 #pragma pack(push, 1)
 struct TSyncMessage {
 	unsigned char mID;

@@ -25,6 +25,10 @@ class TCamera : public TEntity {
 	friend class SceneManager;
 public:
 	~TCamera();
+
+	//Llamar a esto desencadena que todos los hijos de este TAnimation se borren
+	virtual void removeEntity() override;
+
 	virtual void beginDraw();
 	virtual void beginDrawSombras();
 	virtual void endDraw();

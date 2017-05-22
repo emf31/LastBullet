@@ -7,6 +7,7 @@
 #include <CharacterTypes.h>
 #include <SoundManager.h>
 #include <Death.h>
+#include <AnimationMachine.h>
 
 LifeComponent::LifeComponent(Character * owner) 
 	: m_pOwner(owner), m_isDying(false), m_vida(100)

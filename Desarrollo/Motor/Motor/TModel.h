@@ -45,7 +45,8 @@ public:
 	glm::mat4 getPositionMatrix();
 	glm::mat4 getScaleMatrix();
 
-
+	//Llamar a esto desencadena que todos los hijos de este TModel se borren
+	virtual void removeEntity() override;
 
 	
 	void setModelColor(float r, float g, float b) {

@@ -15,6 +15,9 @@ public:
 	TTransform();
 	~TTransform();
 
+	//No hace nada porque no trabajamos desde fuera con transformaciones
+	virtual void removeEntity() override { }
+
 	void transpose();
 	void invert();
 

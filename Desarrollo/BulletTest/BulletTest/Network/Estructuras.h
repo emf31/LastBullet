@@ -29,8 +29,6 @@ struct RakID {
 };
 #pragma pack(pop)
 
-
-
 #pragma pack(push, 1)
 struct TMovimiento {
 	unsigned char useTimeStamp;
@@ -38,6 +36,7 @@ struct TMovimiento {
 	unsigned char mID;
 	bool isDying;
 	bool isOnGround;
+	int currentWeapon;
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;
@@ -149,16 +148,6 @@ struct TId {
 	unsigned char mID;
 	int id;
 	RakNet::RakNetGUID guid;
-};
-#pragma pack(pop)
-
-#pragma pack(push, 1)
-struct TCambioArma {
-	//cambio sera 1 o 2, si es un 1 cambia de arma hacia arriba y si es un 2 cambia de arma hacia abajo.
-	unsigned char mID;
-	int cambio;
-	RakNet::RakNetGUID guid;
-
 };
 #pragma pack(pop)
 

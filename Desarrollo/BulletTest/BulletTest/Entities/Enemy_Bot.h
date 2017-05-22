@@ -100,6 +100,8 @@ public:
 	virtual void InsertarArmaDebug(std::string arma) override;
 	virtual void setNumCiclos(int num) override;
 
+	virtual int getCurrentWeaponType() override { return weaponSystem->GetCurrentWeapon()->getCurrentWeaponType(); };
+
 	virtual void resetMachineState() { m_pStateMachine->resetMachineState(); }
 
 

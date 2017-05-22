@@ -8,6 +8,9 @@ public:
 	TFlashLight(Vec3<float> pos, Vec3<float> direccion, float radioIn = 12.0f, float radioEx=17.0f);
 	~TFlashLight();
 
+	//Llamar a esto desencadena que todos los hijos de este TFlashLight se borren
+	virtual void removeEntity() override;
+
 	void pasarDatosAlShader(Shader *shader, int i = 0);
 	
 	void setPosition(Vec3<float> pos);

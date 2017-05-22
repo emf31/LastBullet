@@ -1,6 +1,8 @@
 #include "Death.h"
 #include <Run.h>
 #include <Character.h>
+#include <AnimationMachine.h>
+
 void Death::Enter(Character * pEnemy)
 {
 	pEnemy->getNode()->setCurrentAnimation("muerte");

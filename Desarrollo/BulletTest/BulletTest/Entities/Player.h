@@ -16,7 +16,7 @@
 #include "Weapons/Pistola.h"
 #include "Weapons/RocketLauncher.h"
 #include "Weapons/Sniper.h"
-
+#include <Weapons/Weapon.h>
 
 
 #include <Character.h>
@@ -72,9 +72,11 @@ public:
 
 	LifeComponent& getLifeComponent() { return *life_component; }
 
-	std::string getCurrentWeaponName() { return listaWeapons->valorActual()->getClassName(); };
+	virtual int getCurrentWeaponType() override { return listaWeapons->valorActual()->getCurrentWeaponType(); };
 
 	Weapon* getCurrentWeapon() { return listaWeapons->valorActual(); };
+
+	std::string getCurrentWeaponName() { return  listaWeapons->valorActual()->getClassName(); }
 
 	int getAmmoActual() { return listaWeapons->valorActual()->getAmmo(); }
 
@@ -86,9 +88,7 @@ public:
 	btPairCachingGhostObject* getGhostObject() const{ return p_controller->getGhostObject(); }
 
 
-	bool getApuntando() {
-		return apuntando;
-	}
+	bool getApuntando() const { return apuntando; }
 
 	virtual void resetAll() override;
 
@@ -110,9 +110,7 @@ public:
 	bool isShooting;
 
 
-	void updateCurrentWeaponPosition() {
-		listaWeapons->valorActual()->updatePositionAndRotation();
-	}
+	void updateCurrentWeaponPosition() { listaWeapons->valorActual()->updatePositionAndRotation(); }
 	
 private:
 	

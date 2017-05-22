@@ -2,6 +2,7 @@
 
 
 #include "AnimationCharacter.h"
+#include <Weapons/Weapon.h>
 
 class Character;
 
@@ -9,7 +10,7 @@ class AnimationMachine
 {
 public:
 
-	AnimationMachine(Character* owner) :m_pOwner(owner) {}
+	AnimationMachine(Character* owner) :m_pOwner(owner), currWeapon(Type::eWeapon::Asalto){}
 	~AnimationMachine() { }
 
 	void Update() const;
@@ -17,6 +18,8 @@ public:
 	void SetCurrentAnimation(AnimationCharacter* s);
 
 	void ChangeState(AnimationCharacter* pNewState);
+
+	Type::eWeapon currWeapon;
 
 private:
 
@@ -27,6 +30,6 @@ private:
 
 	AnimationCharacter* m_pPreviousAnimation;
 
-
+	
 };
 

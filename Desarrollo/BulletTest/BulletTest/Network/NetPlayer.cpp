@@ -592,6 +592,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			unsigned char typeId;
 			bool isDying;
 			bool isOnGround;
+			bool currentWeapon;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -603,6 +604,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			myBitStream.Read(typeId);
 			myBitStream.Read(isDying);
 			myBitStream.Read(isOnGround);
+			myBitStream.Read(currentWeapon);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);
@@ -612,7 +614,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(guid));
 
 			if (e != NULL) {
-				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, position, rotation, guid });	
+				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, currentWeapon, position, rotation, guid });
 			}
 
 #ifdef NETWORK_DEBUG
@@ -877,21 +879,6 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			//Notificamos al HUD que es el fin de la partida
 			EventSystem::i().dispatchNow(ev);
 
-
-		}
-		break;
-
-		case CAMBIO_ARMA:
-		{
-			TCambioArma t_cambioArma = *reinterpret_cast<TCambioArma*>(packet->data);
-
-			if (t_cambioArma.cambio == 1) {
-				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMAUP", NULL);
-				MessageHandler::i().sendMessage(msg1);
-			} else {
-				Message msg1(EntityManager::i().getRaknetEntity(t_cambioArma.guid), "ARMADOWN", NULL);
-				MessageHandler::i().sendMessage(msg1);
-			}
 
 		}
 		break;

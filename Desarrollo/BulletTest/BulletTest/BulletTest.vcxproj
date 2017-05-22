@@ -128,7 +128,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
       <ShowIncludes>false</ShowIncludes>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
@@ -169,8 +169,8 @@
     <ClInclude Include="Animation\AnimationMachine.h" />
     <ClInclude Include="Animation\Death.h" />
     <ClInclude Include="Animation\Idle.h" />
-    <ClInclude Include="Animation\Salto.h" />
     <ClInclude Include="Animation\Run.h" />
+    <ClInclude Include="Animation\Salto.h" />
     <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\Jump.h" />
     <ClInclude Include="Command\ListWeaponDown.h" />
@@ -354,8 +354,8 @@
     <ClCompile Include="Animation\AnimationMachine.cpp" />
     <ClCompile Include="Animation\Death.cpp" />
     <ClCompile Include="Animation\Idle.cpp" />
-    <ClCompile Include="Animation\Salto.cpp" />
     <ClCompile Include="Animation\Run.cpp" />
+    <ClCompile Include="Animation\Salto.cpp" />
     <ClCompile Include="Entities\Button.cpp" />
     <ClCompile Include="Entities\Character.cpp" />
     <ClCompile Include="Entities\Enemy_Bot.cpp" />

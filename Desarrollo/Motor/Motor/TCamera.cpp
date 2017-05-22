@@ -192,6 +192,11 @@ void TCamera::resetMira()
 
 
 
+void TCamera::removeEntity()
+{
+	transRotacion->getMiNodo()->removeNode();
+}
+
 void TCamera::beginDraw() {
 
 }

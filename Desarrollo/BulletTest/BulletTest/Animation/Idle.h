@@ -13,6 +13,7 @@ public:
 		return singleton;
 	}	
 
+	~Idle();
 
 	virtual void Enter(Character* pEnemy);
 	virtual void Exit(Character* pEnemy);
@@ -20,7 +21,11 @@ public:
 
 	virtual std::string getAnimationName() { return "Idle"; }
 
+private:
 
-	~Idle();
+	void setCurrentAnimationByWeapon(Character* pEnemy);
+
+
+	
 };
 

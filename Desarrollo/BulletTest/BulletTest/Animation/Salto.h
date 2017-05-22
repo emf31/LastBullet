@@ -13,6 +13,7 @@ public:
 		return singleton;
 	}	
 
+	~Salto();
 
 	virtual void Enter(Character* pEnemy);
 	virtual void Exit(Character* pEnemy);
@@ -21,6 +22,10 @@ public:
 	virtual std::string getAnimationName() { return "Salto"; }
 
 
-	~Salto();
+
+private:
+	void setCurrentAnimationByWeapon(Character* pEnemy);
+
+	
 };
 

@@ -29,6 +29,11 @@ void TAnimation::restartAnimation()
 	currentAnimation->paused = false;
 }
 
+void TAnimation::removeEntity()
+{
+	transRotacion->getMiNodo()->removeNode();
+}
+
 bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta, bool loop)
 {
 	int tam = hasta - desde;
@@ -55,6 +60,8 @@ bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta, 
 
 	return true;
 }
+
+
 
 void TAnimation::setCurrentAnimation(const std::string & animName)
 {

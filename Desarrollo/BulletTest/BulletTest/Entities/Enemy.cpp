@@ -12,11 +12,13 @@
 #include <Idle.h>
 #include <Death.h>
 #include <ResourceProvider.h>
+#include <AnimationMachine.h>
+
 //Clase que representa a un enemigo, esta clase recibe mensajes de sincronizacion de movimiento. 
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(1001, NULL, name, guid), nPrediction(this)
 {
 	EntityManager::i().registerRaknetEntity(this);
 }
@@ -42,13 +44,16 @@ void Enemy::cargarContenido()
 
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 118
+		"../media/personaje1", 191
 	);
-	m_nodo->setAnimation("correr", 0, 16, true);
-	m_nodo->setAnimation("idle", 17, 47, true);
+	m_nodo->setAnimation("correrAsalto", 0, 16, true);
+	m_nodo->setAnimation("idleAsalto", 17, 47, true);
 	m_nodo->setAnimation("muerte", 48, 93, false);
-	m_nodo->setAnimation("salto", 94, 117, false);
-	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setAnimation("saltoAsalto", 94, 117, false);
+	m_nodo->setAnimation("correrRocket", 118, 134, true);
+	m_nodo->setAnimation("idleRocket", 136, 166, true);
+	m_nodo->setAnimation("saltoRocket", 168, 190, true);
+	m_nodo->setCurrentAnimation("correrAsalto");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
@@ -76,10 +81,10 @@ void Enemy::update(Time elapsedTime)
 	animationMachine->Update();
 
 	if (NetworkManager::i().isMovementPrediction()) {
-		nPrediction.interpolateWithPrediction();
+		//nPrediction.interpolateWithPrediction();
 	}
 	else {
-		nPrediction.interpolateWithoutPrediction();
+		//nPrediction.interpolateWithoutPrediction();
 	}
 
 	moving = true;

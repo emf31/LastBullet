@@ -39,9 +39,6 @@ void RocketBullet::update(Time elapsedTime)
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 	m_renderState.updatePositions(Vec3<float>((float)Point[0], (float)Point[1], (float)Point[2]));
 
-	m_renderState.setRotation(m_nodo->getRotation());
-
-
 	if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds()) {
 
 		//Enviamos mensaje de borrado para no borrar la entity mientras iteramos el mapa de entities
@@ -59,9 +56,7 @@ void RocketBullet::cargarContenido()
 	m_nodo = GraphicEngine::i().createNode(m_position, Vec3<float>(0.03f, 0.03f, 0.03f), "", "../media/bullets/rocketbullet.obj");
 	m_renderState.setPosition(m_position);
 	m_nodo->setRotationXYZ(m_rotation);
-
-	//m_rotation.display();
-	//m_renderState.setRenderRot(m_rotation);
+	m_renderState.setRotation(m_rotation);
 
 	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.5f, 0.3f, 0.2f), 1, false);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
@@ -86,7 +81,6 @@ void RocketBullet::handleMessage(const Message & message)
 
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
-		
 
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion

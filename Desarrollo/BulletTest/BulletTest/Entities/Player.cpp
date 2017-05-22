@@ -26,9 +26,9 @@
 
 #include <NetworkManager.h>
 #include <glm\glm.hpp>
-#include <Idle.h>
+#include <Death.h>
 
-
+#include <AnimationMachine.h>
 
 
 Player::Player(const std::string& name, std::shared_ptr<NetPlayer> netPlayer, RakNet::RakNetGUID guid) : Character(1000, NULL, name, guid), m_godMode(false), isMoving(false)
@@ -130,22 +130,25 @@ void Player::cargarContenido()
 
 	//Creas el nodo(grafico)
 	m_nodo = GraphicEngine::i().createAnimatedNode(
-		"../media/personaje1", 118
+		"../media/personaje1", 191
 	);
-	m_nodo->setAnimation("correr", 0, 16, true);
-	m_nodo->setAnimation("idle", 17, 47, true);
+	m_nodo->setAnimation("correrAsalto", 0, 16, true);
+	m_nodo->setAnimation("idleAsalto", 17, 47, true);
 	m_nodo->setAnimation("muerte", 48, 93, false);
-	m_nodo->setAnimation("salto", 94, 117, false);
-	m_nodo->setCurrentAnimation("correr");
+	m_nodo->setAnimation("saltoAsalto", 94, 117, false);
+	m_nodo->setAnimation("correrRocket", 118, 134, true);
+	m_nodo->setAnimation("idleRocket", 136, 166, true);
+	m_nodo->setAnimation("saltoRocket", 168, 190, true);
+	m_nodo->setCurrentAnimation("correrAsalto");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
 
 	m_nodo->setVisible(false);
 
 	//Start runing
-	animationMachine->SetCurrentAnimation(&Idle::i());
+	animationMachine->SetCurrentAnimation(&Death::i());
 
-	animationMachine->ChangeState(&Idle::i());
+	animationMachine->ChangeState(&Death::i());
 
 
 
@@ -195,18 +198,8 @@ void Player::update(Time elapsedTime)
 		m_renderState.updateRotations(Vec3<float>(0, GraphicEngine::i().getActiveCamera()->getRotation().getY(), 0));
 	}
 
-	moving = true;
-
-	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
-		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
-		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ())
-	{
-		moving = false;
-	}
-
-
 	//update animations
-	animationMachine->Update();
+	//animationMachine->Update();
 
 	if (m_network->isConnected()) {
 
@@ -226,6 +219,7 @@ void Player::update(Time elapsedTime)
 		myBitStream.Write(typeId);
 		myBitStream.Write(getLifeComponent().isDying());
 		myBitStream.Write(p_controller->onGround());
+		myBitStream.Write(getCurrentWeaponType());
 		myBitStream.Write(getRenderState()->getPosition());
 		myBitStream.Write(getRenderState()->getRotation());
 		myBitStream.Write(getGuid());
@@ -272,6 +266,8 @@ void Player::calcularMovimiento() {
 		// Ejecuta todos los comandos
 		InputHandler::i().excuteCommands(this);
 	}
+
+	setIsMoving(isMoving);
 
 	speedFinal.normalise();
 	p_controller->setWalkDirection(btVector3(speedFinal.getX(), speedFinal.getY(), speedFinal.getZ()));
@@ -634,9 +630,7 @@ void Player::resetAll() {
 	life_component->resetVida();
 
 	SceneManager::i().zoomZout();
-
-	GraphicEngine::i().getActiveCamera()->restablecerMira();
-
+	apuntando = false;
 }
 
 void Player::updateRelojes() {

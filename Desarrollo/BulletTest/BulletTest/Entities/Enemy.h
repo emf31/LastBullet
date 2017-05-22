@@ -11,7 +11,7 @@
 
 #include <BasicSceneNode.h>
 #include <Granada.h>
-
+#include <Weapons/Weapon.h>
 
 
 class Enemy : public Character
@@ -29,6 +29,10 @@ public:
 	virtual void borrarContenido() override;
 	virtual void setPosition(const Vec3<float> &pos) override;
 	virtual std::string getClassName() { return "Enemy"; }
+
+
+
+	virtual int getCurrentWeaponType() override { return currWeapon; }
 
 	void updateEnemigo(Vec3<float> pos);
 
@@ -50,17 +54,17 @@ public:
 	int animFrameTime;
 
 	virtual void resetAll() override { }
+
+	void setCurrentWeapon(int curr) { currWeapon = (Type::eWeapon)curr; }
 	
 private:
-
-	std::shared_ptr<SceneNode> m_nodoPersonaje;
 
 	float radius;
 	float height;
 	float mass;
 
 	
-	
+	Type::eWeapon currWeapon;
 
 
 	NetworkPrediction nPrediction;

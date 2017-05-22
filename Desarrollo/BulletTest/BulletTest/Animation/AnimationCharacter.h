@@ -16,6 +16,5 @@ public:
 
 	virtual std::string getAnimationName() = 0;
 
-
 };
 

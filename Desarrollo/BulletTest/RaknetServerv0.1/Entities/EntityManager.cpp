@@ -356,20 +356,6 @@ void EntityManager::enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *pe
 
 }
 
-void EntityManager::enviaCambioArma(TCambioArma & cambio, RakNet::RakPeerInterface * peer)
-{
-
-	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
-
-		//se envia a todos menos a nosotros mismos
-		if (i->second->getGuid() != cambio.guid) {
-			peer->Send((const char*)&cambio, sizeof(cambio), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
-		}
-
-	}
-
-}
-
 
 void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, int MaxKills, RakNet::RakPeerInterface * peer)
 {
