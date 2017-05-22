@@ -107,8 +107,8 @@ void PhysicsEngine::notifyCollisions() {
 			Message msg2(collider1, "COLLISION", collider0);
 
 
-			MessageHandler::i().sendMessage(msg1);
-			MessageHandler::i().sendMessage(msg2);
+			MessageHandler::i().sendMessageNow(msg1);
+			MessageHandler::i().sendMessageNow(msg2);
 
 		}
 	}

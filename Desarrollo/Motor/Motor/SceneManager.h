@@ -126,9 +126,9 @@ public:
 
 
 	//bildboard
-	std::vector<TBillboard*> vectorBillboards;
+	std::list<TBillboard*> vectorBillboards;
 	GLuint bildboardVAO, bildboardVBO;
-	GLuint billboardFrameAnimation[9];
+	GLuint billboardFrameAnimation[14];
 	std::vector<const GLchar*> billboardFrameName;
 	bool billboardrendering = false;
 	

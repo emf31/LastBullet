@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(120), m_rotation(rotation), radioExplosion(5), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(5), m_owner(owner)
 {
 
 	m_lifetime = seconds(3);
@@ -85,8 +85,11 @@ void RocketBullet::handleMessage(const Message & message)
 
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
+		//m_nodo->getPosition()
+		Vec3<float> media = m_renderState.getRenderPos() + m_renderState.getPosition();
+		media /= 2;
 
-
+		SceneManager::i().crearBillBoard(media);
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
 		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {

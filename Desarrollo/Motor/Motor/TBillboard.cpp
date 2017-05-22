@@ -11,7 +11,7 @@ TBillboard::TBillboard(TMeshGroup* meshGroup, Vec3<float> posicion) : sm(SceneMa
 	modelMatrix.setPosition(posicion);
 	conVida = true;
 	frameBillboard = 0;
-	numFrames = 9;
+	numFrames = 12;
 	billBoardTimeFrame = seconds(0.175f);
 	billboardCurrentTime.restart();
 
@@ -63,7 +63,7 @@ void TBillboard::selectCurrentFrame()
 		frameBillboard++;
 		billboardCurrentTime.restart();
 	}
-	if (frameBillboard >= 9) {
+	if (frameBillboard >= numFrames) {
 		conVida = false;
 	}
 }

@@ -298,16 +298,42 @@ void SceneManager::inicializarBufferSkybox()
 
 void SceneManager::inicializarBufferBildboard()
 {
+	billboardFrameName.push_back("assets/explosion/explosion0.png");
+	billboardFrameName.push_back("assets/explosion/explosion1.png");
+	billboardFrameName.push_back("assets/explosion/explosion2.png");
+	billboardFrameName.push_back("assets/explosion/explosion3.png");
+	billboardFrameName.push_back("assets/explosion/explosion4.png");
+	billboardFrameName.push_back("assets/explosion/explosion5.png");
+	billboardFrameName.push_back("assets/explosion/explosion6.png");
+	billboardFrameName.push_back("assets/explosion/explosion7.png");
+	billboardFrameName.push_back("assets/explosion/explosion8.png");
+	billboardFrameName.push_back("assets/explosion/explosion9.png");
+	billboardFrameName.push_back("assets/explosion/explosion10.png");
+	billboardFrameName.push_back("assets/explosion/explosion11.png");
+	billboardFrameName.push_back("assets/explosion/explosion12.png");
+	billboardFrameName.push_back("assets/explosion/explosion13.png");
+	//billboardFrameName.push_back("assets/muzzle1.png");
+	//billboardFrameName.push_back("assets/muzzle2.png");
+	//billboardFrameName.push_back("assets/muzzle3.png");
+	//billboardFrameName.push_back("assets/muzzle4.png");
+	//billboardFrameName.push_back("assets/muzzle5.png");
+	//billboardFrameName.push_back("assets/muzzle6.png");
+	//billboardFrameName.push_back("assets/muzzle7.png");
+	//billboardFrameName.push_back("assets/muzzle8.png");
+	//billboardFrameName.push_back("assets/muzzle9.png");
+	//billboardFrameName.push_back("assets/m1.png");
+	//billboardFrameName.push_back("assets/m2.png");
+	//billboardFrameName.push_back("assets/m3.png");
+	//billboardFrameName.push_back("assets/m4.png");
+	//billboardFrameName.push_back("assets/m5.png");
+	//billboardFrameName.push_back("assets/m6.png");
+	//billboardFrameName.push_back("assets/m7.png");
+	//billboardFrameName.push_back("assets/m8.png");
+	//billboardFrameName.push_back("assets/m9.png");
+	//billboardFrameName.push_back("assets/m10.png");
+	//billboardFrameName.push_back("assets/m11.png");
+	//billboardFrameName.push_back("assets/m12.png");
 
-	billboardFrameName.push_back("assets/muzzle1.png");
-	billboardFrameName.push_back("assets/muzzle2.png");
-	billboardFrameName.push_back("assets/muzzle3.png");
-	billboardFrameName.push_back("assets/muzzle4.png");
-	billboardFrameName.push_back("assets/muzzle5.png");
-	billboardFrameName.push_back("assets/muzzle6.png");
-	billboardFrameName.push_back("assets/muzzle7.png");
-	billboardFrameName.push_back("assets/muzzle8.png");
-	billboardFrameName.push_back("assets/muzzle9.png");
 
 	glGenTextures(billboardFrameName.size(), billboardFrameAnimation);
 
@@ -480,15 +506,16 @@ void SceneManager::renderBildboard()
 	//glActiveTexture(GL_TEXTURE0);
 	//glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
 	billboardrendering = true;
-	for (int i = 0; i < vectorBillboards.size(); i++) {
-		if (vectorBillboards[i]->isAlive()) {
-			vectorBillboards[i]->draw();
+
+	for (auto i = vectorBillboards.cbegin(); i != vectorBillboards.cend();) {
+		if ((*i)->isAlive()) {
+			(*i)->draw();
+			i++;
 		}
 		else {
-			//JULIYO I NEED HELP!
-			//TODO aqui habria que borrar el bildboard y sacarlo del vector
-		}
-		
+			delete (*i);
+			i = vectorBillboards.erase(i);
+		}	
 	}
 
 	glDisable(GL_BLEND);
