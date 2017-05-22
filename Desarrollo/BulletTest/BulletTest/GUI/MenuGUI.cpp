@@ -358,6 +358,13 @@ void MenuGUI::setSlotFree(const std::string & str) {
 	}
 }
 
+void MenuGUI::freeAllSlots() {
+	PlayerSlot1.setFree();
+	PlayerSlot2.setFree();
+	PlayerSlot3.setFree();
+	PlayerSlot4.setFree();
+}
+
 MenuGUI::PlayerSlot* MenuGUI::findSlotByName(const std::string & name) {
 	if (PlayerSlot1.getName() == name) {
 		return &PlayerSlot1;
@@ -373,6 +380,7 @@ MenuGUI::PlayerSlot* MenuGUI::findSlotByName(const std::string & name) {
 	}
 	return nullptr;
 }
+
 
 MenuGUI::PlayerSlot* MenuGUI::findEmptyNameSlot() {
 

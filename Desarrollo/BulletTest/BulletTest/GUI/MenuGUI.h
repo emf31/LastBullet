@@ -84,6 +84,8 @@ public:
 
 	void setSlotFree(const std::string& str);
 
+	void freeAllSlots();
+
 	void changeStateToLobbyView() {
 		changeState(stateMenu::enumLobby);
 	}

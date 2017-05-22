@@ -66,7 +66,7 @@ void NetPlayer::inicializar()
 
 void NetPlayer::crearPartida()
 {
-	//NetworkManager::i().createServer();
+	NetworkManager::i().createServer();
 	RakSleep(1000);
 	int a = 1;
 	conectar("127.0.0.1", server_port);
@@ -180,6 +180,14 @@ void NetPlayer::leaveLobby() {
 
 		lobby2Client->SendMsg(msg);
 		messageFactory->Dealloc(msg);
+
+		MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+		if (menu != nullptr) {
+			menu->freeAllSlots();
+		}
+		//substractPlayerInLobby(SteamUser()->GetSteamID().ConvertToUint64());
+		SteamIDs.clear();
+
 	}
 }
 
