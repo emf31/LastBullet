@@ -21,7 +21,7 @@ void Idle::Exit(Character * pEnemy)
 
 void Idle::Execute(Character * pCharacter)
 {
-	//Muero y pongo animacion de correr
+	//Muero y pongo animacion de muerte
 	if (pCharacter->getLifeComponent()->isDying()) {
 		pCharacter->getAnimationMachine()->ChangeState(&Death::i());
 	}
@@ -33,13 +33,18 @@ void Idle::Execute(Character * pCharacter)
 	
 	//Si por alguna razon cambio de arma cambiamos de animacion al vuelo
 	if (pCharacter->getCurrentWeaponType() != pCharacter->getAnimationMachine()->currWeapon) {
+		
 		setCurrentAnimationByWeapon(pCharacter);
+		
 	}
 
 }
 
 void Idle::setCurrentAnimationByWeapon(Character* pEnemy)
 {
+	//Continuamos la animacion por donde iba
+	int currentFrame = pEnemy->getNode()->getCurrentFrame();
+
 	if (pEnemy->getCurrentWeaponType() == Type::eWeapon::Asalto) {
 		pEnemy->getNode()->setCurrentAnimation("idleAsalto");
 	}
@@ -52,6 +57,8 @@ void Idle::setCurrentAnimationByWeapon(Character* pEnemy)
 	else if (pEnemy->getCurrentWeaponType() == Type::eWeapon::Sniper) {
 		pEnemy->getNode()->setCurrentAnimation("idleAsalto");
 	}
+
+	pEnemy->getNode()->setCurrentFrame(currentFrame);
 }
 
 Idle::~Idle()

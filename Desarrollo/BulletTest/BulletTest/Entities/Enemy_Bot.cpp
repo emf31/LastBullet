@@ -81,7 +81,7 @@ void Enemy_Bot::cargarContenido()
 	m_nodo->setAnimation("saltoAsalto", 94, 117, false);
 	m_nodo->setAnimation("correrRocket", 118, 134, true);
 	m_nodo->setAnimation("idleRocket", 136, 166, true);
-	m_nodo->setAnimation("saltoRocket", 168, 190, true);
+	m_nodo->setAnimation("saltoRocket", 168, 190, false);
 	m_nodo->setCurrentAnimation("correrAsalto");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
@@ -124,7 +124,7 @@ void Enemy_Bot::resetAll() {
 
 	weaponSystem->WeaponSystemResetAll();
 
-	life_component->resetVida();
+	//life_component->resetVida();
 
 }
 
@@ -215,6 +215,7 @@ void Enemy_Bot::update(Time elapsedTime)
 				myBitStream.Write(getLifeComponent().isDying());
 				myBitStream.Write(p_controller->onGround());
 				myBitStream.Write(getCurrentWeaponType());
+				myBitStream.Write(moving);
 				myBitStream.Write(getRenderState()->getPosition());
 				myBitStream.Write(getRenderState()->getRotation());
 				myBitStream.Write(getGuid());
@@ -259,13 +260,18 @@ void Enemy_Bot::borrarContenido()
 void Enemy_Bot::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		if (life_component->isDying() == false) {
 
-			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
+		TImpactoBala* impacto = static_cast<TImpactoBala*>(message.data);
 
-			getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
+		if (impacto != nullptr) {
+			if (life_component->isDying() == false) {
+				getLifeComponent().restaVida(impacto->damage, impacto->guidDisparado);
+			}
 
+			delete impacto;
 		}
+
+		
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {
 		NetworkManager::i().dispatchMessage(*(TImpactoRocket*)message.data, IMPACTO_ROCKET);

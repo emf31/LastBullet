@@ -67,8 +67,8 @@ void NetworkManager::apagar()
 
 	m_netPlayer->apagar();
 	
-	
-
+	//cerrar el server
+	TerminateProcess(pi.hProcess, 0);
 }
 
 //Creates net player object and stores it in shared ptr

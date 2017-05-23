@@ -166,8 +166,7 @@ void Game::inicializar()
 
 	GraphicEngine::i().inicializar();
 	
-	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
-	NetworkManager::i().configureNetwork();
+	
 
 	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 

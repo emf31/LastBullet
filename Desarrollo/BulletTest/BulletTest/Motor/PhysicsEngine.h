@@ -30,7 +30,7 @@ namespace col {
 	const int rocketCollidesWith = Collisions::Static | Collisions::Bot | Collisions::Enemy;
 	const int rocketenemyCollidesWith = Collisions::Static | Collisions::Character | Collisions::Bot;
 	const int sensorCollidesWith = Collisions::Character | Collisions::Bot;
-	const int BotCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static| Collisions::Character | Collisions::Sensor | Collisions::RocketEnemy | Collisions::Enemy | Collisions::Bot;
+	const int BotCollidesWith = Collisions::RAY_CAST | Collisions::Rocket | Collisions::Static/*| Collisions::Character */ | Collisions::Sensor | Collisions::RocketEnemy /*| Collisions::Enemy | Collisions::Bot*/;
 	const int enemyCollidesWith = Collisions::RAY_CAST | Collisions::Static | Collisions::Character | Collisions::Rocket | Collisions::Bot | Collisions::Enemy;
 }
 

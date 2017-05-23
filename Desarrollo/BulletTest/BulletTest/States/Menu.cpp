@@ -13,6 +13,9 @@ Menu::~Menu()
 
 void Menu::Inicializar()
 {
+	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
+	NetworkManager::i().configureNetwork();
+
 	menuGUI.inicializar();
 
 	//GraphicEngine::i().getActiveCamera()->setInputReceiver(false);

@@ -58,6 +58,7 @@ void NetworkPrediction::updateState(TMovimiento & mov)
 	m_character->setIsDying(mov.isDying);
 	m_character->setOnGround(mov.isOnGround);
 	m_character->setCurrentWeapon(mov.currentWeapon);
+	m_character->setIsMoving(mov.isMoving);
 }
 
 void NetworkPrediction::interpolate()

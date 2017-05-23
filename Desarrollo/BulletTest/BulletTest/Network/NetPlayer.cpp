@@ -376,6 +376,8 @@ void NetPlayer::apagar()
 
 		//Do what you need here
 		m_servers.clear();
+
+		
 	}
 	
 }
@@ -592,7 +594,8 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			unsigned char typeId;
 			bool isDying;
 			bool isOnGround;
-			bool currentWeapon;
+			int currentWeapon;
+			bool isMoving;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -605,6 +608,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			myBitStream.Read(isDying);
 			myBitStream.Read(isOnGround);
 			myBitStream.Read(currentWeapon);
+			myBitStream.Read(isMoving);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);
@@ -614,7 +618,13 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			Enemy *e = static_cast<Enemy*>(EntityManager::i().getRaknetEntity(guid));
 
 			if (e != NULL) {
-				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, currentWeapon, position, rotation, guid });
+				e->getNetworkPrediction()->addMovement( TMovimiento{ useTimeStamp, timeStamp, typeId, isDying, isOnGround, currentWeapon, isMoving, position, rotation, guid });
+
+				/*DebugMenuGUI* debug = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
+				std::string mes = "( " + std::to_string(position.getX());
+				mes.append(", " + std::to_string(position.getY()));
+				mes.append(", " + std::to_string(position.getZ()));
+				debug->addPrintText(mes);*/
 			}
 
 #ifdef NETWORK_DEBUG
@@ -629,7 +639,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			RakID rakID = *reinterpret_cast<RakID*>(packet->data);
 
 			Entity* ent = EntityManager::i().getRaknetEntity(rakID.guid);
-			GraphicEngine::i().removeNode(ent->getNode());
+			//GraphicEngine::i().removeNode(ent->getNode());
 			EntityManager::i().removeEntity(ent);
 			
 

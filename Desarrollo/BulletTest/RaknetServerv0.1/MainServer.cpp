@@ -172,6 +172,7 @@ void getPackets() {
 			bool isDying;
 			bool isOnGround;
 			int currentWeapon;
+			bool isMoving;
 			Vec3<float> position;
 			Vec3<float> rotation;
 			RakNet::RakNetGUID guid;
@@ -183,6 +184,7 @@ void getPackets() {
 			myBitStream.Read(isDying);
 			myBitStream.Read(isOnGround);
 			myBitStream.Read(currentWeapon);
+			myBitStream.Read(isMoving);
 			myBitStream.Read(position);
 			myBitStream.Read(rotation);
 			myBitStream.Read(guid);

@@ -63,11 +63,6 @@ void InGame::Inicializar()
 
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), Sound::type::music);
 
-	Enemy *pepe = new Enemy("Pepe", RakNet::UNASSIGNED_RAKNET_GUID);
-	pepe->inicializar();
-	pepe->cargarContenido();
-	pepe->setPosition(Map::i().searchSpawnPoint());
-
 }
 
 void InGame::Clear()
@@ -94,7 +89,7 @@ void InGame::HandleEvent()
 		GraphicEngine::i().toggleDebug();
 
 	}
-	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
+	/*else if (Input::i().keyReleased((unsigned int)GLFW_KEY_M)) {
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime++;
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setFrameTime(milliseconds(static_cast<Enemy*>(EntityManager::i().getEntity(1001))->animFrameTime));
 
@@ -124,7 +119,7 @@ void InGame::HandleEvent()
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_X)) {
 		static_cast<Enemy*>(EntityManager::i().getEntity(1001))->getNode()->setCurrentAnimation("saltoRocket");
 
-	}
+	}*/
 
 	else if (Input::i().keyReleased((unsigned int)GLFW_KEY_2)) {
 

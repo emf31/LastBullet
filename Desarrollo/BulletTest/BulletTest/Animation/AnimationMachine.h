@@ -19,6 +19,8 @@ public:
 
 	void ChangeState(AnimationCharacter* pNewState);
 
+	AnimationCharacter* GetCurrentState() { return m_pCurrentAnimation; }
+
 	Type::eWeapon currWeapon;
 
 private:
