@@ -196,15 +196,15 @@ Vec3<float> TAnimation::getScale()
 
 glm::mat4 TAnimation::getRotationMatrix()
 {
-	return transRotacion->getRotationMatrix();
+	return transRotacion->getMatrix();
 }
 
 glm::mat4 TAnimation::getPositionMatrix()
 {
-	return transTraslacion->getPositionMatrix();
+	return transTraslacion->getMatrix();
 }
 
 glm::mat4 TAnimation::getScaleMatrix()
 {
-	return transEscalado->getScaleMatrix();
+	return transEscalado->getMatrix();
 }

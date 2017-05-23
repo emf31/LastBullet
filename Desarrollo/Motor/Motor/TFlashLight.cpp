@@ -77,7 +77,7 @@ void TFlashLight::updateVectorDireccion()
 	//nuestra matriz de rotacion
 	glm::vec4 destino = glm::vec4(0, 0, 1, 1);
 	//matriz de rotacion actual modificada con los setRotation anteriores
-	glm::mat4 rot = transRotacion->getRotationMatrix();
+	glm::mat4 rot = transRotacion->getMatrix();
 	rot = glm::inverse(rot);
 	destino = destino* rot;
 	destino = glm::normalize(destino);

@@ -515,6 +515,27 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	return model;
 }
 
+TModelEstatico * SceneManager::crearNodoMallaEstatica(TMeshGroup * mesh, Vec3<float> posicion, Vec3<float> rotacion, Vec3<float> escala)
+{
+	TNode * nuevoNodoMallaEstatico;
+
+	TModelEstatico* modelEstatico = new TModelEstatico(mesh, posicion, rotacion, escala);
+
+	
+	int id = modelEstatico->getID();
+
+
+	//creamos el nodo y lo hacemos hijo de la escena
+	nuevoNodoMallaEstatico = new TNode(id, scene);
+	scene->addChild(nuevoNodoMallaEstatico);
+
+
+	modelEstatico->setMiNodo(nuevoNodoMallaEstatico);
+	nuevoNodoMallaEstatico->setEntity(modelEstatico);
+
+	return modelEstatico;
+}
+
 TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)
 {
 	TNode * nuevoNodoAnimacion;

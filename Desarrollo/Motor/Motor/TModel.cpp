@@ -111,17 +111,17 @@ Vec3<float> TModel::getScale()
 
 glm::mat4 TModel::getRotationMatrix()
 {
-	return transRotacion->getRotationMatrix();
+	return transRotacion->getMatrix();
 }
 
 glm::mat4 TModel::getPositionMatrix()
 {
-	return transTraslacion->getPositionMatrix();
+	return transTraslacion->getMatrix();
 }
 
 glm::mat4 TModel::getScaleMatrix()
 {
-	return transEscalado->getScaleMatrix();
+	return transEscalado->getMatrix();
 }
 
 //Llamar a esto desencadena que todos los hijos de este TModel se borren

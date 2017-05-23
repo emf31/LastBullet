@@ -326,6 +326,7 @@
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshGroup.cpp" />
     <ClCompile Include="TModel.cpp" />
+    <ClCompile Include="TModelEstatico.cpp" />
     <ClCompile Include="TNode.cpp" />
     <ClCompile Include="TPointLight.cpp" />
     <ClCompile Include="TSunLight.cpp" />
@@ -352,6 +353,7 @@
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshGroup.h" />
     <ClInclude Include="TModel.h" />
+    <ClInclude Include="TModelEstatico.h" />
     <ClInclude Include="TNode.h" />
     <ClInclude Include="TPointLight.h" />
     <ClInclude Include="TSunLight.h" />
