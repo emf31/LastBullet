@@ -317,6 +317,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TAnimation.cpp" />
     <ClCompile Include="TAnimationGroupMesh.cpp" />
+    <ClCompile Include="TBillboard.cpp" />
     <ClCompile Include="TCamera.cpp" />
     <ClCompile Include="TEntity.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -344,6 +345,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="TAnimation.h" />
     <ClInclude Include="TAnimationGroupMesh.h" />
+    <ClInclude Include="TBillboard.h" />
     <ClInclude Include="TCamera.h" />
     <ClInclude Include="TEntity.h" />
     <ClInclude Include="Texture.h" />

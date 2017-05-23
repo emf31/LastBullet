@@ -20,13 +20,14 @@ void SceneManager::inicializar() {
 	shaderBlur = ResourceManager::i().getShader("assets/blur.vs", "assets/blur.frag");
 	shaderSkybox = ResourceManager::i().getShader("assets/skybox.vs", "assets/skybox.frag");
 	shaderSombras = ResourceManager::i().getShader("assets/sombras.vs", "assets/sombras.frag");
-	
+	shaderBildboard = ResourceManager::i().getShader("assets/bildboard.vs", "assets/bildboard.frag");
 
 	inicializarBuffers();
 	inicializarBuffersBlur();
 	inicializarBuffersSombras();
 	inicializarBuffersLineas();
 	inicializarBufferSkybox();
+	inicializarBufferBildboard();
 	numLines = 0;
 	castShadow = true;
 	castStaticShadow = false;
@@ -58,49 +59,47 @@ void SceneManager::draw() {
 		glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if (camaraActiva != nullptr) {
-		//-------RENDER DEL SKYBOX--------
-		renderSkybox();
+		if (camaraActiva != nullptr) {
+			//-------RENDER DEL SKYBOX--------
+			renderSkybox();
 
-		//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
-		// Update matrices
-		projection = camaraActiva->getProjectionMatrix();
-		view = camaraActiva->GetViewMatrix();
-		activeCameraPos = camaraActiva->getPosition();
-		scene->draw();
-		//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
-		if (castShadow) {
-			renderSombras();
+			//-------GUARDAMOS INFORMACION DE GEOMETRIA Y TEXTURA---------
+			// Update matrices
+			projection = camaraActiva->getProjectionMatrix();
+			view = camaraActiva->GetViewMatrix();
+			activeCameraPos = camaraActiva->getPosition();
+			scene->draw();
+			//-------RENDER PARA OBTENER LAS TEXTURAS DE SOMBRAS --------
+			if (castShadow) {
+				renderSombras();
+			}
+			//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			renderBlur();
+			//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			renderLuces();
+
+			//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
+
+
+			//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+
+
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+			glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			if (vertices3.size() > 0) {
+				drawAllLines();
+			}
+
+			//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+			renderBildboard();
 		}
-		//-------RENDER DE BLUR PARA EL DIFUMINADO DE LAS TEXTURAS EMISIVAS --------
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		renderBlur();
-		//-------APLICAMOS LAS LUCES (TODAS A LA VEZ) A LA INFORMACION GUARDADA EN GBUFFER --------
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		renderLuces();
-
-		//**************** FIN RENDER DE ESCENA COMPLETA CON DEFERRED SHADING**************
-
-
-		//****************RENDER DE LINEAS PARA DEBUG DE FISICAS**************
-
-
-		glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-		glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		if (vertices3.size() > 0) {
-			drawAllLines();
-		}
-		//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
-
-
-
-	}
-	
 }
 
 void SceneManager::renderFrame(GLFWwindow* window) {
@@ -324,6 +323,101 @@ void SceneManager::inicializarBufferSkybox()
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
+void SceneManager::inicializarBufferBildboard()
+{
+	billboardFrameName.push_back("assets/explosionbuena/explosion0.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion1.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion2.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion3.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion4.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion5.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion6.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion7.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion8.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion9.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion10.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion11.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion12.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion13.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion14.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion15.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion16.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion17.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion18.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion19.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion20.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion21.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion22.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion23.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion24.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion25.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion26.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion27.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion28.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion29.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion30.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion31.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion32.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion33.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion34.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion35.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion36.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion37.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion38.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion39.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion40.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion41.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion42.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion43.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion44.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion45.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion46.png");
+
+	//billboardFrameName.push_back("assets/muzzle1.png");
+	//billboardFrameName.push_back("assets/muzzle2.png");
+	//billboardFrameName.push_back("assets/muzzle3.png");
+	//billboardFrameName.push_back("assets/muzzle4.png");
+	//billboardFrameName.push_back("assets/muzzle5.png");
+	//billboardFrameName.push_back("assets/muzzle6.png");
+	//billboardFrameName.push_back("assets/muzzle7.png");
+	//billboardFrameName.push_back("assets/muzzle8.png");
+	//billboardFrameName.push_back("assets/muzzle9.png");
+	//billboardFrameName.push_back("assets/m1.png");
+	//billboardFrameName.push_back("assets/m2.png");
+	//billboardFrameName.push_back("assets/m3.png");
+	//billboardFrameName.push_back("assets/m4.png");
+	//billboardFrameName.push_back("assets/m5.png");
+	//billboardFrameName.push_back("assets/m6.png");
+	//billboardFrameName.push_back("assets/m7.png");
+	//billboardFrameName.push_back("assets/m8.png");
+	//billboardFrameName.push_back("assets/m9.png");
+	//billboardFrameName.push_back("assets/m10.png");
+	//billboardFrameName.push_back("assets/m11.png");
+	//billboardFrameName.push_back("assets/m12.png");
+
+
+	glGenTextures(billboardFrameName.size(), billboardFrameAnimation);
+
+	int width, height;
+	unsigned char* image;
+	for (int i = 0; i < billboardFrameName.size(); i++) {
+		glBindTexture(GL_TEXTURE_2D, billboardFrameAnimation[i]);
+
+		image = SOIL_load_image(billboardFrameName[i], &width, &height, 0, SOIL_LOAD_RGBA);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+		SOIL_free_image_data(image);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	
+
+}
+
 
 
 
@@ -442,7 +536,7 @@ void SceneManager::renderSkybox()
 	//glDepthMask(GL_FALSE);// Remember to turn depth writing off
 	glDepthFunc(GL_LEQUAL);
 	shaderSkybox->Use();
-	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	// Remove any translation component of the view matrix
+	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	
 	glm::mat4 projec = camaraActiva->getProjectionMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
 	glUniformMatrix4fv(glGetUniformLocation(shaderSkybox->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
@@ -457,6 +551,7 @@ void SceneManager::renderSkybox()
 	glDepthFunc(GL_LESS);
 }
 
+
 void SceneManager::renderSombras()
 {
 	glDisable(GL_CULL_FACE);
@@ -467,6 +562,44 @@ void SceneManager::renderSombras()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glEnable(GL_CULL_FACE);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+void SceneManager::renderBildboard()
+{
+
+	glEnable(GL_BLEND);
+	//shaderBildboard->Use();
+	//glm::mat4 viewWithOutTras = camaraActiva->GetViewMatrix();	
+	//glm::mat4 projec = camaraActiva->getProjectionMatrix();
+	//glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
+	//glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
+	//
+
+	//glBindVertexArray(bildboardVAO);
+	//glActiveTexture(GL_TEXTURE0);
+	//glUniform1i(glGetUniformLocation(shaderBildboard->Program, "muzzle"), 0);
+	//glBindTexture(GL_TEXTURE_2D, bildboardTexture);
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+	//glBindVertexArray(0);
+
+
+	shaderBildboard->Use();
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
+	billboardrendering = true;
+
+	for (auto i = vectorBillboards.cbegin(); i != vectorBillboards.cend();) {
+		if ((*i)->isAlive()) {
+			(*i)->draw();
+			i++;
+		}
+		else {
+			delete (*i);
+			i = vectorBillboards.erase(i);
+		}	
+	}
+
+	glDisable(GL_BLEND);
+	billboardrendering = false;
 }
 
 bool SceneManager::removeNode(TNode * node) {
@@ -515,13 +648,14 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	return model;
 }
 
+
 TModelEstatico * SceneManager::crearNodoMallaEstatica(TMeshGroup * mesh, Vec3<float> posicion, Vec3<float> rotacion, Vec3<float> escala)
 {
 	TNode * nuevoNodoMallaEstatico;
 
 	TModelEstatico* modelEstatico = new TModelEstatico(mesh, posicion, rotacion, escala);
 
-	
+
 	int id = modelEstatico->getID();
 
 
@@ -534,6 +668,16 @@ TModelEstatico * SceneManager::crearNodoMallaEstatica(TMeshGroup * mesh, Vec3<fl
 	nuevoNodoMallaEstatico->setEntity(modelEstatico);
 
 	return modelEstatico;
+}
+
+TBillboard * SceneManager::crearBillBoard(Vec3<float> posicion)
+{
+	TBillboard* billboard = new TBillboard(getMesh("assets/billboard.obj"),posicion);
+
+	vectorBillboards.push_back(billboard);
+
+	return billboard;
+
 }
 
 TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)

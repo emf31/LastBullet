@@ -81,13 +81,17 @@ void RocketBullet::handleMessage(const Message & message)
 
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
+		//m_nodo->getPosition()
+		/*Vec3<float> media = m_renderState.getRenderPos() + m_renderState.getPosition();
+		media /= 2;*/
 
 		btManifoldPoint* point = static_cast<btManifoldPoint*>(message.data2);
 		btVector3 body = m_rigidBody->getCenterOfMassPosition();
 
-		Vec3<float> impactPoint = cons(point->getPositionWorldOnA());
+		Vec3<float> impactPoint = cons(point->getPositionWorldOnB());
 		
 		
+		SceneManager::i().crearBillBoard(impactPoint);
 
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion

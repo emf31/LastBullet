@@ -13,13 +13,15 @@
   Texture.cpp
   TEntity.cpp
   TCamera.cpp
+  TBillboard.cpp
   TAnimationGroupMesh.cpp
   TAnimation.cpp
   Shader.cpp
   SceneManager.cpp
-  ResourceManager.cpp
+d:\4ºcurso\repositorios\tba\desarrollo\motor\motor\scenemanager.cpp(403): warning C4018: '<': no coinciden signed/unsigned
   Generando código...
   Compilando...
+  ResourceManager.cpp
   main.cpp
   Input.cpp
   EngineDevice.cpp
@@ -28,4 +30,4 @@
   AnimationMesh.cpp
   Generando código...
 Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib
+  Motor.vcxproj -> D:\4ºcurso\Repositorios\TBA\Desarrollo\Motor\DebugStatic\Motor.lib
