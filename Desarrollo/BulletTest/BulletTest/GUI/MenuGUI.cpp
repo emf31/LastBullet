@@ -332,7 +332,7 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
 	}
-	if (lastState == stateMenu::enumPrincipal) {
+	if (lastState == stateMenu::enumPrincipal && m_stateMenu == stateMenu::enumLobby) {
 		//Creamos la red (abrir server, crear peer, conectarse, etc.) 
 		NetworkManager::i().configureNetwork();
 	}
@@ -558,6 +558,8 @@ void MenuGUI::reproducirAnimacionPlaneta()
 void MenuGUI::changeState(stateMenu Newstate)
 {
 	setStateVisible(m_stateMenu, false);
+
+	lastState = m_stateMenu;
 
 	m_stateMenu = Newstate;
 
