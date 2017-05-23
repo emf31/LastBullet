@@ -30,9 +30,6 @@ void NetObject::apagar()
 {
 	connected = false;
 
-	
-
-
 
 	//shut down the client
 	peer->Shutdown(300);

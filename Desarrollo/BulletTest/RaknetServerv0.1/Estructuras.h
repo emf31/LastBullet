@@ -35,6 +35,7 @@ struct TMovimiento {
 	bool isDying;
 	bool isOnGround;
 	int currentWeapon;
+	bool isMoving;
 	Vec3<float> position;
 	Vec3<float> rotation;
 	RakNet::RakNetGUID guid;

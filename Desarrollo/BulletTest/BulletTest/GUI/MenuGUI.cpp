@@ -182,7 +182,7 @@ void MenuGUI::inicializar() {
 
 	//------------------------------------------------
 	
-	netPlayer = NetworkManager::i().getNetPlayer();
+	
 
 	rellenarAnimacionPlaneta();
 	
@@ -254,8 +254,8 @@ void MenuGUI::setServerType(int type) {
 
 bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e) {
 	changeState(stateMenu::enumUnir);
-	netPlayer->searchServersOnLAN();
-	std::vector<std::string> servers = netPlayer->getServers();
+	NetworkManager::i().getNetPlayer()->searchServersOnLAN();
+	std::vector<std::string> servers = NetworkManager::i().getNetPlayer()->getServers();
 	int size = servers.size();
 	std::cout << size << std::endl;
 	if (size == 2) {
@@ -300,12 +300,12 @@ bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e) {
 }
 
 bool MenuGUI::onConexion1Clicked(const CEGUI::EventArgs & e) {
-	netPlayer->unirseLobby(Conexion1->getText().c_str());
+	NetworkManager::i().getNetPlayer()->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }
 
 bool MenuGUI::onConexion2Clicked(const CEGUI::EventArgs & e) {
-	netPlayer->unirseLobby(Conexion1->getText().c_str());
+	NetworkManager::i().getNetPlayer()->unirseLobby(Conexion1->getText().c_str());
 	return true;
 }
 
@@ -332,6 +332,7 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
 	}
+	
 	changeState(lastState);
 	return true;
 }
@@ -402,7 +403,11 @@ bool  MenuGUI::onInviteBtnClicked(const CEGUI::EventArgs & e) {
 
 bool MenuGUI::onBackButtonClicked(const CEGUI::EventArgs & e) {
 	NetworkManager::i().getNetPlayer()->leaveLobby();
+	NetworkManager::i().apagar();
+	//Creamos la red (abrir server, crear peer, conectarse, etc.) 
+	NetworkManager::i().configureNetwork();
 	changeState(stateMenu::enumPrincipal);
+
 	return true;
 }
 
@@ -478,7 +483,7 @@ MenuGUI::PlayerSlot* MenuGUI::findEmptyNameSlot() {
 bool MenuGUI::onConnectClicked(const CEGUI::EventArgs & e)
 {
 	
-	netPlayer->unirseLobby("2.155.130.30");
+	NetworkManager::i().getNetPlayer()->unirseLobby("2.155.130.30");
 
 	return false;
 }
@@ -554,6 +559,8 @@ void MenuGUI::reproducirAnimacionPlaneta()
 void MenuGUI::changeState(stateMenu Newstate)
 {
 	setStateVisible(m_stateMenu, false);
+
+	lastState = m_stateMenu;
 
 	m_stateMenu = Newstate;
 

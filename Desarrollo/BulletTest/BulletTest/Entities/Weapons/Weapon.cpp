@@ -38,6 +38,7 @@ bool Weapon::canShoot()
 
 	if (disparos < capacidadAmmo && estadoWeapon == CARGADA && cadenciaOk())
 		return true;
+
 	return false;
 }
 

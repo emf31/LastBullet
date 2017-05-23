@@ -34,6 +34,9 @@ public:
 
 	//TModel* getNodo();
 	virtual void setColor(const Vec3<float> color) override;
+
+	virtual void setCurrentFrame(int frame) override { m_node->setCurrentFrame(frame); }
+	virtual int getCurrentFrame() const override { return m_node->getCurrentFrame(); }
 	
 
 private:

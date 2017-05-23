@@ -32,6 +32,9 @@ public:
 	virtual void setVisible(bool visible) override;
 	//TModel* getNodo();
 	virtual void setColor(const Vec3<float> color) override;
+
+	virtual void setCurrentFrame(int frame) override { }
+	virtual int getCurrentFrame() const override { return 0; }
 	
 private:
 

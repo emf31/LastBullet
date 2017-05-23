@@ -18,7 +18,7 @@
 //Tambien se encarga de enviar los mensajes apropiados al servidor cuando halla recibido un impacto
 //de bala o de rocket.
 
-Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(1001, NULL, name, guid), nPrediction(this)
+Enemy::Enemy(const std::string& name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid), nPrediction(this)
 {
 	EntityManager::i().registerRaknetEntity(this);
 }
@@ -52,7 +52,7 @@ void Enemy::cargarContenido()
 	m_nodo->setAnimation("saltoAsalto", 94, 117, false);
 	m_nodo->setAnimation("correrRocket", 118, 134, true);
 	m_nodo->setAnimation("idleRocket", 136, 166, true);
-	m_nodo->setAnimation("saltoRocket", 168, 190, true);
+	m_nodo->setAnimation("saltoRocket", 168, 190, false);
 	m_nodo->setCurrentAnimation("correrAsalto");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
@@ -80,21 +80,22 @@ void Enemy::update(Time elapsedTime)
 {
 	animationMachine->Update();
 
+
 	if (NetworkManager::i().isMovementPrediction()) {
-		//nPrediction.interpolateWithPrediction();
+		nPrediction.interpolateWithPrediction();
 	}
 	else {
-		//nPrediction.interpolateWithoutPrediction();
+		nPrediction.interpolateWithoutPrediction();
 	}
 
-	moving = true;
+	/*moving = true;
 
 	if (m_renderState.getPreviousPosition().getX() == m_renderState.getPosition().getX() &&
 		m_renderState.getPreviousPosition().getY() == m_renderState.getPosition().getY() &&
 		m_renderState.getPreviousPosition().getZ() == m_renderState.getPosition().getZ()) 
 	{
 		moving = false;
-	}
+	}*/
 		
 
 }
@@ -140,21 +141,18 @@ void Enemy::updateEnemigo(Vec3<float> pos) {
 void Enemy::handleMessage(const Message & message)
 {
 	if (message.mensaje == "COLISION_BALA") {
-		if (!isDying()) {
-			
-			TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
+		TImpactoBala* impacto = static_cast<TImpactoBala*>(message.data);
 
-			NetworkManager::i().dispatchMessage(impacto, IMPACTO_BALA);
+		if (impacto != nullptr) {
+			if (!isDying()) {
 
+				NetworkManager::i().dispatchMessage(*impacto, IMPACTO_BALA);
+
+				delete impacto;
+
+			}
 		}
-
-	}
-	else if (message.mensaje == "ARMAUP") {
-		//TODO poner el codigo de cambiar el modelo del arma hacia arriba
-
-	}
-	else if (message.mensaje == "ARMADOWN") {
-		//TODO poner el codigo de cambiar el modelo del arma hacia abajo
+		
 
 	}
 	else if (message.mensaje == "COLISION_ROCKET") {

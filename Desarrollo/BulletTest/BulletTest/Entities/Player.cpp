@@ -138,7 +138,7 @@ void Player::cargarContenido()
 	m_nodo->setAnimation("saltoAsalto", 94, 117, false);
 	m_nodo->setAnimation("correrRocket", 118, 134, true);
 	m_nodo->setAnimation("idleRocket", 136, 166, true);
-	m_nodo->setAnimation("saltoRocket", 168, 190, true);
+	m_nodo->setAnimation("saltoRocket", 168, 190, false);
 	m_nodo->setCurrentAnimation("correrAsalto");
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
@@ -220,6 +220,7 @@ void Player::update(Time elapsedTime)
 		myBitStream.Write(getLifeComponent().isDying());
 		myBitStream.Write(p_controller->onGround());
 		myBitStream.Write(getCurrentWeaponType());
+		myBitStream.Write(moving);
 		myBitStream.Write(getRenderState()->getPosition());
 		myBitStream.Write(getRenderState()->getRotation());
 		myBitStream.Write(getGuid());
@@ -309,11 +310,16 @@ void Player::handleMessage(const Message & message)
 		}
 		else if (message.mensaje == "COLISION_BALA") {
 				//Este float * es una referencia a una variable de clase asi que no hay problema
-				TImpactoBala impacto = *static_cast<TImpactoBala*>(message.data);
+				TImpactoBala* impacto = static_cast<TImpactoBala*>(message.data);
 
-				getLifeComponent().restaVida(impacto.damage, impacto.guidDisparado);
-				relojSangre.restart();
-				//static_cast<Player*>(EntityManager::i().getEntity(PLAYER))->relojHit.restart();
+				if (impacto != nullptr) {
+					getLifeComponent().restaVida(impacto->damage, impacto->guidDisparado);
+					relojSangre.restart();
+
+					delete impacto;
+				}
+
+				
 		
 		}
 
@@ -359,17 +365,14 @@ void Player::shoot() {
 
 		hitted = listaWeapons->valorActual()->shoot(target);
 
-		GraphicEngine::i().getActiveCamera()->cameraRecoil();
+		//GraphicEngine::i().getActiveCamera()->cameraRecoil();
+
 		TriggerSystem::i().RegisterTrigger(kTrig_EnemyShootSound, 1002, m_id, m_renderState.getPosition(), 50, milliseconds(50), false);
 	}
 	
 
 	if (hitted != nullptr && !hitted->getLifeComponent()->isDying()) {
 		relojHit.restart();
-	}
-
-	if (hitted != nullptr && hitted->getLifeComponent()->isDying()) {
-			
 	}
 
 
@@ -627,7 +630,7 @@ void Player::resetAll() {
 	pistola->setEquipada(true);
 	tienePistola = true;
 
-	life_component->resetVida();
+	//life_component->resetVida();
 
 	SceneManager::i().zoomZout();
 	apuntando = false;

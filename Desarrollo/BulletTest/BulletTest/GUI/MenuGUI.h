@@ -176,8 +176,6 @@ private:
 	PlayerSlot PlayerSlot3;
 	PlayerSlot PlayerSlot4;
 
-
-	std::shared_ptr<NetPlayer> netPlayer;
 	int FrameActual;
 
 	void updateFondo(int velocidad);

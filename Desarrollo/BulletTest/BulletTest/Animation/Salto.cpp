@@ -25,21 +25,21 @@ void Salto::Execute(Character * pCharacter)
 	//Muero y pongo animacion de muerte
 	if (pCharacter->getLifeComponent()->isDying()) {
 		pCharacter->getAnimationMachine()->ChangeState(&Death::i());
-	}
-
-	//Compruebo si estoy quieto
-	if (!pCharacter->isMoving()) {
-		pCharacter->getAnimationMachine()->ChangeState(&Idle::i());
+		return;
 	}
 
 	//Compruebo si salto
 	if (pCharacter->isOnGround()) {
 		pCharacter->getAnimationMachine()->ChangeState(&Run::i());
+		return;
 	}
 
 	//Si por alguna razon cambio de arma cambiamos de animacion al vuelo
 	if (pCharacter->getCurrentWeaponType() != pCharacter->getAnimationMachine()->currWeapon) {
+		//Continuamos la animacion por donde iba
+		int currentFrame = pCharacter->getNode()->getCurrentFrame();
 		setCurrentAnimationByWeapon(pCharacter);
+		pCharacter->getNode()->setCurrentFrame(currentFrame);
 	}
 }
 

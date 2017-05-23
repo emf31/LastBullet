@@ -118,7 +118,6 @@ Character* Sniper::shoot(const Vec3<float>& target)
 	btVector3 posicionImpacto;
 
 
-
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
 
@@ -127,30 +126,26 @@ Character* Sniper::shoot(const Vec3<float>& target)
 
 			if (ent != m_ent)
 			{
-				if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot"){
+				if (ent->getClassName() == "Enemy" || ent->getClassName() == "Player" || ent->getClassName() == "Enemy_Bot") {
+
 					hitted = static_cast<Character*>(ent);
 
-					TImpactoBala impacto;
-					impacto.damage = damage;
-					impacto.guidImpactado = ent->getGuid();
-					impacto.guidDisparado = m_ent->getGuid();
+					TImpactoBala* impacto = new TImpactoBala();
+					impacto->damage = damage;
+					impacto->guidImpactado = ent->getGuid();
+					impacto->guidDisparado = m_ent->getGuid();
 
-					Message msg(ent, "COLISION_BALA", &impacto);
-					MessageHandler::i().sendMessageNow(msg);
-
-					}
-
+					Message msg(ent, "COLISION_BALA", impacto);
+					MessageHandler::i().sendMessage(msg);
+				}
 				//Para mover objetos del mapa
 				posicionImpacto = ray.m_hitPointWorld;
 
-				if (ent->getClassName() == "PhysicsEntity") {
-					btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-					btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-				}
 			}
 		}
 
 	}
+
 
 	GunBullet* bala = new GunBullet(cons(bt(m_nodo->getPosition())), cons(direccion), cons(posicionImpacto), getBalaRotation(), GraphicEngine::i().getActiveCamera()->getVectorDirection());
 	bala->cargarContenido();
@@ -162,6 +157,7 @@ Character* Sniper::shoot(const Vec3<float>& target)
 	t_bala.rotation = getBalaRotation();
 	t_bala.orientation = GraphicEngine::i().getActiveCamera()->getVectorDirection();
 	t_bala.guid = m_ent->getGuid();
+
 
 	//enviamos el disparo de la bala al servidor para que el resto de clientes puedan dibujarla
 	NetworkManager::i().dispatchMessage(t_bala, DISPARAR_BALA);

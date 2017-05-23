@@ -67,8 +67,8 @@ void NetworkManager::apagar()
 
 	m_netPlayer->apagar();
 	
-	
-
+	//cerrar el server
+	TerminateProcess(pi.hProcess, 0);
 }
 
 //Creates net player object and stores it in shared ptr
@@ -79,6 +79,7 @@ std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer()
 	// takes ownership of pointer
 	// if acquires new pointer, deletes managed object 
 	m_netPlayer.reset(netp);
+
 
 	return m_netPlayer;
 	

@@ -128,7 +128,6 @@ Character* Asalto::shoot(const Vec3<float>& target)
 	btVector3 posicionImpacto;
 
 
-
 	if (ray.hasHit())//si ray ha golpeado algo entro
 	{
 
@@ -141,21 +140,17 @@ Character* Asalto::shoot(const Vec3<float>& target)
 
 					hitted = static_cast<Character*>(ent);
 
-					TImpactoBala impacto;
-					impacto.damage = damage;
-					impacto.guidImpactado = ent->getGuid();
-					impacto.guidDisparado = m_ent->getGuid();
 
-					Message msg(ent, "COLISION_BALA", &impacto);
-					MessageHandler::i().sendMessageNow(msg);
+					TImpactoBala* impacto = new TImpactoBala();
+					impacto->damage = damage;
+					impacto->guidImpactado = ent->getGuid();
+					impacto->guidDisparado = m_ent->getGuid();
+
+					Message msg(ent, "COLISION_BALA", impacto);
+					MessageHandler::i().sendMessage(msg);
 				}
 				//Para mover objetos del mapa
 				posicionImpacto = ray.m_hitPointWorld;
-
-				if (ent->getClassName() == "PhysicsEntity") {
-					btRigidBody::upcast(ray.m_collisionObject)->activate(true);
-					btRigidBody::upcast(ray.m_collisionObject)->applyImpulse(direccion*FUERZA, posicionImpacto);
-				}
 			}
 		}
 
