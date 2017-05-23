@@ -85,13 +85,17 @@ void RocketBullet::handleMessage(const Message & message)
 		btManifoldPoint* point = static_cast<btManifoldPoint*>(message.data2);
 		btVector3 body = m_rigidBody->getCenterOfMassPosition();
 
+		Vec3<float> impactPoint = cons(point->getPositionWorldOnA());
+		
+		
+
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
 		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {
 
 			Character* myentity = *it;
 
-			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion);
+			damage = explosion(myentity, impactPoint, radioExplosion);
 
 			if (damage > 0) {
 
