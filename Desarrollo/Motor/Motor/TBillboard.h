@@ -33,6 +33,9 @@ public:
 	void draw();
 	bool isAlive();
 
+	void setFrameTime(Time time) { billBoardTimeFrame = time; }
+	void setScale(const Vec3<float>& scale) { m_scale = scale; }
+
 
 private:
 
@@ -40,7 +43,7 @@ private:
 	glm::mat4 calcularMVP();
 	void selectCurrentFrame();
 
-
+	Vec3<float> m_scale;
 
 	SceneManager &sm;
 

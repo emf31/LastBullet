@@ -372,6 +372,52 @@ void SceneManager::inicializarBufferBildboard()
 	billboardFrameName.push_back("assets/explosionbuena/explosion44.png");
 	billboardFrameName.push_back("assets/explosionbuena/explosion45.png");
 	billboardFrameName.push_back("assets/explosionbuena/explosion46.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion47.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion48.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion46.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion50.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion51.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion52.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion53.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion54.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion55.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion56.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion57.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion58.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion59.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion60.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion61.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion62.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion63.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion64.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion65.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion66.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion67.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion68.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion69.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion70.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion71.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion72.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion73.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion74.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion75.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion76.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion77.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion78.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion79.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion80.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion81.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion82.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion83.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion84.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion85.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion86.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion87.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion88.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion89.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion90.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion91.png");
+	billboardFrameName.push_back("assets/explosionbuena/explosion92.png");
 
 	//billboardFrameName.push_back("assets/muzzle1.png");
 	//billboardFrameName.push_back("assets/muzzle2.png");
@@ -394,9 +440,14 @@ void SceneManager::inicializarBufferBildboard()
 	//billboardFrameName.push_back("assets/m10.png");
 	//billboardFrameName.push_back("assets/m11.png");
 	//billboardFrameName.push_back("assets/m12.png");
+	GLuint text;
+	for (int i = 0; i < billboardFrameName.size(); i++) {
+		glGenTextures(1, &text);
+		billboardFrameAnimation.push_back(text);
 
+	}
 
-	glGenTextures(billboardFrameName.size(), billboardFrameAnimation);
+	//glGenTextures(billboardFrameName.size(), billboardFrameAnimation);
 
 	int width, height;
 	unsigned char* image;
