@@ -48,7 +48,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugStatic|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
@@ -133,7 +133,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>..\includes;$(IncludePath)</IncludePath>
     <LibraryPath>..\lib\Debug;$(LibraryPath)</LibraryPath>
-    <TargetExt>.lib</TargetExt>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -326,6 +326,7 @@
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshGroup.cpp" />
     <ClCompile Include="TModel.cpp" />
+    <ClCompile Include="TModelEstatico.cpp" />
     <ClCompile Include="TNode.cpp" />
     <ClCompile Include="TPointLight.cpp" />
     <ClCompile Include="TSunLight.cpp" />
@@ -352,6 +353,7 @@
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshGroup.h" />
     <ClInclude Include="TModel.h" />
+    <ClInclude Include="TModelEstatico.h" />
     <ClInclude Include="TNode.h" />
     <ClInclude Include="TPointLight.h" />
     <ClInclude Include="TSunLight.h" />

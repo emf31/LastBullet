@@ -8,6 +8,7 @@
 #include "TFlashLight.h"
 #include "TCamera.h"
 #include "TAnimation.h"
+#include "TModelEstatico.h"
 #include <deque>
 
 #include <GLEW/glew.h>
@@ -61,6 +62,7 @@ public:
 	//crear nodos
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
+	TModelEstatico* crearNodoMallaEstatica(TMeshGroup * mesh, Vec3<float> posicion, Vec3<float> rotacion = Vec3<float>(0.0f,0.0f,0.0f), Vec3<float> escala = Vec3<float>(1.0f, 1.0f, 1.0f));
 	TAnimation* crearNodoAnimacion(TAnimationGroupMesh * animGroup);
 	TNode* crearNodoTransformacion(int entityID);
 	TNode* crearNodoTraslacion(TNode* nodoPadre, int entityID);
