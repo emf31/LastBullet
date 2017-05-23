@@ -84,22 +84,21 @@ void NetPlayer::crearPartida()
 		LanServer = 0;
 	}
 
-	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	//menu->getNumBots();
-
-
-	for (int i = 0; i < menu->getNumBots(); i++) {
-		TPlayer p;
-		p.name = "Bot "+ std::to_string((i+1));
-		p.available = true;
-		m_bots.push_back(p);
-	}
+	
 
 	
 	
 
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente (si se usa steam)
 	if (!USING_STEAM) {
+
+		for (int i = 0; i < std::stoi(Settings::i().GetValue("bots")); i++) {
+			TPlayer p;
+			p.name = "Bot " + std::to_string((i + 1));
+			p.available = true;
+			m_bots.push_back(p);
+		}
+
 		TGameInfo gameinfo;
 		gameinfo.creador = getMyGUID();
 		gameinfo.name = Settings::i().GetValue("name");
@@ -257,6 +256,14 @@ void NetPlayer::playerReadyCallback(const std::string & name) {
 }
 
 void NetPlayer::comenzarPartida() {
+
+	for (int i = 0; i < std::stoi(Settings::i().GetValue("bots")); i++) {
+		TPlayer p;
+		p.name = "Bot " + std::to_string((i + 1));
+		p.available = true;
+		m_bots.push_back(p);
+	}
+
 	TGameInfo gameinfo;
 	gameinfo.creador = getMyGUID();
 	gameinfo.name = SteamFriends()->GetPersonaName();

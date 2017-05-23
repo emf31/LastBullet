@@ -80,6 +80,7 @@ std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer()
 	// if acquires new pointer, deletes managed object 
 	m_netPlayer.reset(netp);
 
+
 	return m_netPlayer;
 	
 }

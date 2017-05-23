@@ -80,8 +80,6 @@ void Enemy::update(Time elapsedTime)
 {
 	animationMachine->Update();
 
-	DebugMenuGUI* menu = static_cast<DebugMenuGUI*>(GUIManager::i().getGUIbyName("DebugMenuGUI"));
-	menu->addPrintText(animationMachine->GetCurrentState()->getAnimationName());
 
 	if (NetworkManager::i().isMovementPrediction()) {
 		nPrediction.interpolateWithPrediction();
