@@ -63,6 +63,7 @@ void InGame::Inicializar()
 
 	SoundManager::i().playSound(Settings::i().GetResourceProvider().getFinalFilename("sonidoAmbiente.mp3", "sounds"), Sound::type::music);
 
+
 }
 
 void InGame::Clear()

@@ -166,7 +166,6 @@ void Game::inicializar()
 
 	GraphicEngine::i().inicializar();
 	
-	
 
 	GraphicEngine::i().createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
 

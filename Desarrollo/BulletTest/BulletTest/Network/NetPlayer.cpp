@@ -209,7 +209,9 @@ void NetPlayer::leaveLobby() {
 		}
 		//substractPlayerInLobby(SteamUser()->GetSteamID().ConvertToUint64());
 		SteamIDs.clear();
+		IamHost = false;
 
+		
 	}
 }
 
