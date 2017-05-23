@@ -13,7 +13,7 @@
 
 #include <GraphicEngine.h>
 
-std::unordered_map<Entity*, std::set<Entity*>> contacts;
+std::unordered_map<Entity*, std::set<EntCollision, lex_compare>> contacts;
 
 const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
 
@@ -22,10 +22,12 @@ const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
 //El value es un std::set(igual que un array pero no admite duplicados)
 //Este es el metodo al que llama bullet cuando se produce un contacto
 bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisionObject* body1) {
-	
+
 	//Cogemos las 2 entities que colisionan 
 	Entity* entity0 = (Entity*)body0->getUserPointer();
 	Entity* entity1 = (Entity*)body1->getUserPointer();
+
+	EntCollision col1{ entity1, &point };
 
 	if (body0->getUserPointer() != NULL && body1->getUserPointer() != NULL) {
 		//En la key guardamos una entity y en su value un array con las entities con las que colisiona
@@ -34,12 +36,12 @@ bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisio
 		if (found != contacts.end()) {
 			//Entity en mapa. Añadimod entity2 al set.
 			//Como set no admite duplicados si ya esta dentro no se añade.
-			found->second.insert(entity1);
+			found->second.insert(col1);
 		}
 		else {
 			//entity1 no esta en el mapa. Creamos nuevo set y añadimos entity1
-			std::set<Entity*> set;
-			set.insert(entity1);
+			std::set<EntCollision, lex_compare> set;
+			set.insert(col1);
 			//añadimos entity0 al nuevo set
 			contacts[entity0] = set;
 		}
@@ -97,14 +99,14 @@ void PhysicsEngine::notifyCollisions() {
 		//coger la key 
 		Entity* collider0 = contactsIter->first;
 		//obtenemos el set con las entities que colisiona
-		std::set<Entity*>& set = contactsIter->second;
+		std::set<EntCollision, lex_compare>& set = contactsIter->second;
 		//iteramos todas las entities en el set
 		for (auto entityIter = set.begin(); entityIter != set.end(); ++entityIter) {
-			Entity* collider1 = *entityIter;
+			Entity* collider1 = entityIter->ent;
 			//enviamos 2 mensajes uno para la entity que colisiona y otra a la entity con la que colisiona
 
-			Message msg1(collider0, "COLLISION", collider1);
-			Message msg2(collider1, "COLLISION", collider0);
+			Message msg1(collider0, "COLLISION", collider1, entityIter->punto);
+			Message msg2(collider1, "COLLISION", collider0, entityIter->punto);
 
 
 			MessageHandler::i().sendMessage(msg1);

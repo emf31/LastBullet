@@ -82,6 +82,9 @@ void RocketBullet::handleMessage(const Message & message)
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
+		btManifoldPoint* point = static_cast<btManifoldPoint*>(message.data2);
+		btVector3 body = m_rigidBody->getCenterOfMassPosition();
+
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
 		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {

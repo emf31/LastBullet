@@ -79,8 +79,15 @@ public:
 	int m_shapeIndex;
 };
 
-struct Shape {
+struct EntCollision {
+	Entity* ent;
+	btManifoldPoint* punto;
+};
 
+struct lex_compare {
+	bool operator() (const EntCollision& lhs, const EntCollision& rhs) const {
+		return lhs.ent < rhs.ent;
+	}
 };
 
 
