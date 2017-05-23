@@ -23,15 +23,15 @@ void inicialize() {
 	SceneManager::i().setActiveCamera(SceneManager::i().crearNodoCamara());
 	//window
 	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"), Vec3<float>(25.0f, 0.0f, 0.0f), Vec3<float>(90.0f, 0.0f, 90.0f));
-	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj"));
+	TModelEstatico* window = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"), Vec3<float>(10.0f, 0.0f, 0.0f), Vec3<float>(45.0f, 0.0f, 0.0f));
 	//TModel* window3 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	//window3->addChild(window2);
 	//window3->addChild(window);
 	
 	//window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
 	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
-	window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
-	window->setRotationXYZ(Vec3<float>(45.0f, 0.0f, 45.0f));
+	//window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
+	//window->setRotationXYZ(Vec3<float>(45.0f, 0.0f, 0.0f));
 	//window3->setVisible(true);
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
 
@@ -279,6 +279,10 @@ int main() {
 		else if (Input::i().keyReleased(GLFW_KEY_8)) {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_9)) {
+			std::cout << "Modo de color : Zbuffer luz " << std::endl;
+			sm.draw_mode = 9;
 		}
 
 		//else if (Input::i().keyReleased(GLFW_KEY_J)) {

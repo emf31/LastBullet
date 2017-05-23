@@ -1,3 +1,31 @@
-﻿  main.cpp
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.exe
-  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.pdb (Full PDB)
+﻿  ClockImpl.cpp
+  TTransform.cpp
+  TSunLight.cpp
+  TPointLight.cpp
+  TNode.cpp
+  TModelEstatico.cpp
+  TModel.cpp
+  TMeshGroup.cpp
+  TMesh.cpp
+  TLuz.cpp
+  Time.cpp
+  TFlashLight.cpp
+  Texture.cpp
+  TEntity.cpp
+  TCamera.cpp
+  TAnimationGroupMesh.cpp
+  TAnimation.cpp
+  Shader.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  Generando código...
+  Compilando...
+  main.cpp
+  Input.cpp
+  EngineDevice.cpp
+  Clock.cpp
+  AnimationReader.cpp
+  AnimationMesh.cpp
+  Generando código...
+Texture.obj : warning LNK4221: Este archivo de objeto no define ning·n sÝmbolo p·blico que no se haya definido previamente, por lo que no se usarß en ninguna vinculaci¾n que utilice esta biblioteca
+  Motor.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\Motor\DebugStatic\Motor.lib

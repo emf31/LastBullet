@@ -10,9 +10,17 @@ TModelEstatico::TModelEstatico(TMeshGroup* meshGroup, Vec3<float> posicion, Vec3
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
 	setModelColor(1.0f, 1.0f, 1.0f);
+
 	setRotationXYZ(rotacion);
+	glm::mat4 rot = transformMatrix.getMatrix();
 	setScale(escala);
+	glm::mat4 esc = transformMatrix.getMatrix();
 	setPosition(posicion);
+	glm::mat4 pos = transformMatrix.getMatrix();
+
+	glm::mat4 model = pos * esc * rot ;
+	transformMatrix.loadMatrix(model);
+	
 }
 
 TModelEstatico::~TModelEstatico() {
@@ -48,7 +56,7 @@ void TModelEstatico::beginDrawSombras() {
 	if (getMiNodo()->isVisible()) {
 
 		const glm::mat4& viewproj = sm.getSunLight()->getLightSpaceMatrix();
-		glm::mat4& model = sm.getMatrizActual();
+		glm::mat4& model = transformMatrix.getMatrix();
 		glm::mat4 Lightmvp = viewproj * model;
 		sm.shaderSombras->Use();
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderSombras->Program, "Lightmvp"), 1, GL_FALSE, glm::value_ptr(Lightmvp));
