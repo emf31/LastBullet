@@ -3,8 +3,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_ScopeAndBarrel_Diffuse.png
-map_Ke Props/noemisivo.jpg
+map_Kd Channel_ScopeAndBarrel_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl blinn5SG
@@ -12,8 +11,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_BackSniper_Diffuse.png
-map_Ke Weapons/BackSniper_EMI_FIX.jpg
+map_Kd Channel_BackSniper_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl blinn6SG
@@ -21,8 +19,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_Trigger_Diffuse.png
-map_ke Weapons/BottomSniper_EMI.jpg
+map_Kd Channel_Trigger_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl blinn7SG
@@ -30,8 +27,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_MiddleSniper_Diffuse.png
-map_ke Weapons/MiddleSniper_EMI_fix.jpg
+map_Kd Channel_MiddleSniper_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl sniperFinalv2_blinn4SG
@@ -39,8 +35,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_ScopeAndBarrel_Diffuse.png
-map_Ke Props/noemisivo.jpg
+map_Kd Channel_ScopeAndBarrel_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 0.06
@@ -49,8 +44,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_BackSniper_Diffuse.png
-map_Ke Weapons/BackSniper_EMI_FIX.jpg
+map_Kd Channel_BackSniper_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 0.06
@@ -59,8 +53,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_Trigger_Diffuse.png
-map_ke Weapons/BottomSniper_EMI.jpg
+map_Kd Channel_Trigger_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 0.06
@@ -69,8 +62,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_MiddleSniper_Diffuse.png
-map_ke Weapons/MiddleSniper_EMI_fix.jpg
+map_Kd Channel_MiddleSniper_Diffuse.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 0.06
