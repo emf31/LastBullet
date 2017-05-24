@@ -29,7 +29,7 @@ public:
 	
 	//Creates a pointer of NetPlayer
 	std::shared_ptr<NetPlayer> createNetPlayer();
-	std::shared_ptr<NetBot> createNetBot(Enemy_Bot* bot);
+	std::shared_ptr<NetBot> createNetBot();
 
 	//Call handle packets for every netobject
 	void updateNetwork(Time elapsedTime);
@@ -56,6 +56,10 @@ public:
 	bool isMovementPrediction() const { return movementPrediction; }
 	void setMovementPrediction(bool a) { movementPrediction = a; }
 
+	std::list<std::shared_ptr<NetBot>>& getNetBots() {
+		return m_netBots;
+	}
+	
 private:
 
 	void startup(LPCTSTR lpApplicationName);
@@ -69,6 +73,8 @@ private:
 	std::shared_ptr<NetPlayer> m_netPlayer;
 
 	std::list<std::shared_ptr<NetBot>> m_netBots;
+
+	
 
 	std::string serverIP;
 

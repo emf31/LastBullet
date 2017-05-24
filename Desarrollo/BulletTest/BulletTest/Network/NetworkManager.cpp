@@ -85,9 +85,9 @@ std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer()
 	
 }
 
-std::shared_ptr<NetBot> NetworkManager::createNetBot(Enemy_Bot * bot)
+std::shared_ptr<NetBot> NetworkManager::createNetBot()
 {
-	NetBot* netp = new NetBot(bot);
+	NetBot* netp = new NetBot();
 
 	std::shared_ptr<NetBot> ptr(netp);
 

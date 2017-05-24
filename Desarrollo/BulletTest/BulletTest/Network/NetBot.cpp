@@ -5,10 +5,16 @@
 #include <NetworkManager.h>
 
 
-NetBot::NetBot(Enemy_Bot* bot) : NetObject(), m_bot(bot)
+NetBot::NetBot() : NetObject(), m_bot()
 {
 
 
+}
+
+void NetBot::SetBot(Enemy_Bot *bot) {
+	m_bot = bot;
+	m_bot->setGUID(peer->GetMyGUID());
+	EntityManager::i().registerRaknetEntity(bot);
 }
 
 NetBot::~NetBot()
@@ -23,6 +29,8 @@ void NetBot::inicializar()
 	while (isConnected() == false) {
 		NetworkManager::i().updateNetwork(Time::Zero);
 	}
+
+	
 }
 
 void NetBot::handlePackets(Time elapsedTime)
@@ -62,13 +70,9 @@ void NetBot::handlePackets(Time elapsedTime)
 
 			TPlayer nuevoplayer;
 			nuevoplayer.guid = peer->GetMyGUID();
-			nuevoplayer.name = m_bot->getName();
+			nuevoplayer.name = BotName;
 			nuevoplayer.color = 1;
 			nuevoplayer.available = 1;
-
-			m_bot->setGUID(peer->GetMyGUID());
-
-			EntityManager::i().registerRaknetEntity(m_bot);
 
 			dispatchMessage(nuevoplayer, NUEVO_BOT);
 

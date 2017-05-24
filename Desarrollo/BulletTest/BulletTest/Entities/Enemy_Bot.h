@@ -113,6 +113,9 @@ public:
 
 	void calcularCiclosLOD();
 
+
+	void SetNetBot(std::shared_ptr<NetBot> bot);
+
 private:
 
 	
