@@ -36,6 +36,7 @@ public:
 	void setScale(Vec3<float> esc);
 
 	void setRotationMatrix(glm::mat4 matRot);
+	void setOrientation(const Vec3<float>& orientation);
 
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();

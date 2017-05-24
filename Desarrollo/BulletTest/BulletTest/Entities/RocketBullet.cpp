@@ -58,14 +58,16 @@ void RocketBullet::cargarContenido()
 	m_nodo->setRotationXYZ(m_rotation);
 	m_renderState.setRotation(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.5f, 0.3f, 0.2f), 1, false);
+	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 0.3f, 1);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 	proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
+	m_rigidBody->setCcdMotionThreshold(4.f);
+	m_rigidBody->setCcdSweptSphereRadius(0.3f);
 
 	//Sin respuesta a la colision mejor asi porque es mas optimo
-	m_rigidBody->setCollisionFlags(4);
+	//m_rigidBody->setCollisionFlags(4);
 }
 
 void RocketBullet::borrarContenido()
@@ -81,9 +83,17 @@ void RocketBullet::handleMessage(const Message & message)
 
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
+		//m_nodo->getPosition()
+		/*Vec3<float> media = m_renderState.getRenderPos() + m_renderState.getPosition();
+		media /= 2;*/
 
 		btManifoldPoint* point = static_cast<btManifoldPoint*>(message.data2);
 		btVector3 body = m_rigidBody->getCenterOfMassPosition();
+
+		Vec3<float> impactPoint = cons(point->getPositionWorldOnB());
+		
+		TBillboard* bill = SceneManager::i().crearBillBoard(impactPoint);
+		bill->setFrameTime(milliseconds(20.f));
 
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
@@ -91,7 +101,7 @@ void RocketBullet::handleMessage(const Message & message)
 
 			Character* myentity = *it;
 
-			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion);
+			damage = explosion(myentity, impactPoint, radioExplosion);
 
 			if (damage > 0) {
 

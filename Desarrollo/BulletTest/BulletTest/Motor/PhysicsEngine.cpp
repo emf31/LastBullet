@@ -85,7 +85,7 @@ void PhysicsEngine::update(Time elapsedTime)
 
 	if (m_world) {
 		//Como la simulacion va lenta multiplicamos por 1.25
-		m_world->stepSimulation(btScalar(elapsedTime.asSeconds() /** 1.25f*/), 20, tickPhysics.asSeconds());
+		m_world->stepSimulation(btScalar(elapsedTime.asSeconds() /** 1.25f*/), 50, tickPhysics.asSeconds());
 	}
 	
 	
@@ -109,8 +109,8 @@ void PhysicsEngine::notifyCollisions() {
 			Message msg2(collider1, "COLLISION", collider0, entityIter->punto);
 
 
-			MessageHandler::i().sendMessage(msg1);
-			MessageHandler::i().sendMessage(msg2);
+			MessageHandler::i().sendMessageNow(msg1);
+			MessageHandler::i().sendMessageNow(msg2);
 
 		}
 	}
