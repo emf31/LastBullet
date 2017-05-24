@@ -170,7 +170,7 @@ public:
 	//bildboard
 	std::list<TBillboard*> vectorBillboards;
 	GLuint bildboardVAO, bildboardVBO;
-	GLuint billboardFrameAnimation[47];
+	std::vector<GLuint> billboardFrameAnimation;
 	std::vector<const GLchar*> billboardFrameName;
 	bool billboardrendering = false;
 	

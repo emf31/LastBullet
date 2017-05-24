@@ -21,7 +21,7 @@ void RocketLauncher::inicializar()
 	capacidadAmmo = 5;
 	disparos = 0;
 	recarga = milliseconds(1500);
-	cadencia = milliseconds(400);
+	cadencia = milliseconds(350);
 	numCargadores = numCargadoresRocket;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 }

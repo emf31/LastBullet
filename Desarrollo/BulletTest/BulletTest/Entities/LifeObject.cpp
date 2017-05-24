@@ -26,6 +26,7 @@ void LifeObject::rotate(Vec3<float> rot)
 
 void LifeObject::inicializar()
 {
+	timeRecargaLife = 4;
 }
 
 void LifeObject::update(Time elapsedTime)

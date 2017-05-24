@@ -11,10 +11,10 @@ TBillboard::TBillboard(TMeshGroup* meshGroup, Vec3<float> posicion) : sm(SceneMa
 	modelMatrix.setPosition(posicion);
 	conVida = true;
 	frameBillboard = 0;
-	numFrames = 91;
-	billBoardTimeFrame = seconds(0.015f);
+	numFrames = 83;
+	billBoardTimeFrame = seconds(0.008f);
 	billboardCurrentTime.restart();
-
+	m_scale = Vec3<float>(1.f, 1.f, 1.f);
 }
 
 TBillboard::~TBillboard() {
@@ -33,7 +33,7 @@ void TBillboard::draw()
 	//Dibujamos el modelo
 	m_meshGroup->draw();
 
-	m_scale = Vec3<float>(1.f, 1.f, 1.f);
+	
 }
 
 glm::mat4 TBillboard::calcularMVP()

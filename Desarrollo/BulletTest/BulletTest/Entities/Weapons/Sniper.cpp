@@ -21,7 +21,7 @@ void Sniper::inicializar()
 		damage = 100;
 		capacidadAmmo = 5;
 		disparos = 0;
-		cadencia = milliseconds(2000);
+		cadencia = milliseconds(1500);
 		recarga = milliseconds(1000);
 		numCargadores = numCargadoresSniper;
 		SIZE_OF_WORLD = btVector3(1500, 1500, 1500);

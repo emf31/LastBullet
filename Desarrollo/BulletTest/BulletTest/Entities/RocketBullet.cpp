@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(6), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(8), m_owner(owner)
 {
 
 	m_lifetime = seconds(3);
@@ -91,7 +91,7 @@ void RocketBullet::handleMessage(const Message & message)
 		
 		TBillboard* bill = SceneManager::i().crearBillBoard(cons(body));
 		bill->setFrameTime(milliseconds(20.f));
-		//bill->setScale(Vec3<float>(20.f, 20.f, 20.f));
+		bill->setScale(Vec3<float>(3.f, 3.f, 3.f));
 
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
