@@ -193,6 +193,14 @@ void EntityManager::cleanDeleteQueue()
 	delete_set.clear();
 }
 
+void EntityManager::stopInterpolateAllEntities()
+{
+	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
+		RenderState* render = i->second->getRenderState();
+		render->setPosition(render->getPosition());
+	}
+}
+
 Entity * EntityManager::getEntity(int id)
 {
 	auto found = m_entities.find(id);

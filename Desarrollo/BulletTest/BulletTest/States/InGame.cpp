@@ -294,8 +294,9 @@ void InGame::Update(Time timeElapsed)
 	EntityManager::i().cleanDeleteQueue();
 
 	//Solo updateamos entities si esta todo listo
-	if (World::i().getPartida()->isAllReady()) {
+	if (World::i().getPartida()->isAllReady() && !World::i().getPartida()->isFinished()) {
 		EntityManager::i().update(timeElapsed);
+		
 	}
 	
 	TriggerSystem::i().Update();
