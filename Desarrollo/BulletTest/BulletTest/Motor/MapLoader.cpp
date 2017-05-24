@@ -150,9 +150,11 @@ std::shared_ptr<BasicSceneNode> MapLoader::CreateNodeExceptionSafe(const Vec3<fl
 std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass, ClippingZone* zone)
 {
 	//Creates node
-	std::shared_ptr<BasicSceneNode> sceneNode = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	TModelEstatico* sceneNode = SceneManager::i().crearNodoMallaEstatica(ResourceManager::i().getMesh(mesh), posicion);
+	sceneNode->setTransformMatrix(posicion, rotacion, escala);
 
-	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
+
+	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name, posicion, rotacion, escala);
 
 	float mymass=0;
 	//si la masa es muy pequeña la consideraremos 0
@@ -180,7 +182,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 	}
 	zone->addEntity(physicent);
 
-	return sceneNode;
+	return nullptr;
 }
 
 
