@@ -4,7 +4,7 @@
 
 class Player;
 
-#define numCargadoresRocket 3
+#define numCargadoresRocket 4
 
 
 class RocketLauncher : public Weapon

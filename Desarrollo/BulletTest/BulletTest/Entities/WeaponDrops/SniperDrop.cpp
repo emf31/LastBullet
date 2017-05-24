@@ -22,7 +22,7 @@ void SniperDrop::update(Time elapsedTime)
 	if (estado == USADO) {
 		if (clockRespawnWeapon.getElapsedTime().asSeconds() >= timeRespawnWeapon) {
 			estado = DISPONIBLE;
-			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(5.f, 5.f, 5.f));
+			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(3.f, 3.f, 3.f));
 			m_nodo->setVisible(true);
 
 		}

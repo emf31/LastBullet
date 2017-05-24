@@ -17,7 +17,7 @@ Pistola::~Pistola()
 
 void Pistola::inicializar()
 {
-	damage = 20;
+	damage = 16;
 	capacidadAmmo = 12;
 	disparos = 0;
 	recarga = milliseconds(500);
