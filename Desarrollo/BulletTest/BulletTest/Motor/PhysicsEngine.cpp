@@ -15,6 +15,7 @@
 
 std::unordered_map<Entity*, std::set<Entity*>> contacts;
 
+
 const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
 
 
@@ -22,7 +23,6 @@ const Time PhysicsEngine::tickPhysics = seconds(1.f / 80.f);
 //El value es un std::set(igual que un array pero no admite duplicados)
 //Este es el metodo al que llama bullet cuando se produce un contacto
 bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisionObject* body1) {
-	
 	//Cogemos las 2 entities que colisionan 
 	Entity* entity0 = (Entity*)body0->getUserPointer();
 	Entity* entity1 = (Entity*)body1->getUserPointer();
@@ -45,7 +45,7 @@ bool HandleContacts(btManifoldPoint& point, btCollisionObject* body0, btCollisio
 		}
 	}
 
-	
+
 	return true;
 }
 
@@ -83,7 +83,7 @@ void PhysicsEngine::update(Time elapsedTime)
 
 	if (m_world) {
 		//Como la simulacion va lenta multiplicamos por 1.25
-		m_world->stepSimulation(btScalar(elapsedTime.asSeconds() /** 1.25f*/), 20, tickPhysics.asSeconds());
+		m_world->stepSimulation(btScalar(elapsedTime.asSeconds() /** 1.25f*/), 50, tickPhysics.asSeconds());
 	}
 	
 	

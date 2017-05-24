@@ -2,7 +2,8 @@ music:100
 sound:0
 resolucionx:1280
 resoluciony:720
-bots:2
+bots:1
+fullscreen:0
 gamemode:0
 Lan:1
 mapa:landing.json

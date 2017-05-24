@@ -189,6 +189,7 @@ private:
 	CEGUI::ToggleButton* Oclusions;
 
 	std::shared_ptr<NetPlayer> netPlayer;
+
 	int FrameActual;
 
 	void updateFondo(int velocidad);

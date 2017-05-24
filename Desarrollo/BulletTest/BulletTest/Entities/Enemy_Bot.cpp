@@ -22,8 +22,8 @@
 Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Character(-1, NULL, name, guid)
 {
 	//Creates object to send and receive packets
-	m_network.reset();
-	m_network = NetworkManager::i().createNetBot(this);
+	//m_network.reset();
+	//m_network = NetworkManager::i().createNetBot(this);
 
 	dwTriggerFlags = kTrig_EnemyShootSound;
 	TriggerSystem::i().RegisterEntity(this);
@@ -32,7 +32,9 @@ Enemy_Bot::Enemy_Bot(const std::string & name, RakNet::RakNetGUID guid) : Charac
 Enemy_Bot::~Enemy_Bot()
 {
 }
-
+void Enemy_Bot::SetNetBot(std::shared_ptr<NetBot> bot) {
+	m_network = bot;
+}
 
 
 void Enemy_Bot::inicializar()

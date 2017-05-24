@@ -22,18 +22,20 @@ EngineDevice engine;
 void inicialize() {
 	SceneManager::i().setActiveCamera(SceneManager::i().crearNodoCamara());
 	//window
-	TModel* window2 = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj"));
-	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj"));
+	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"), Vec3<float>(25.0f, 0.0f, 0.0f), Vec3<float>(90.0f, 0.0f, 90.0f));
+	TModelEstatico* window = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"), Vec3<float>(10.0f, 0.0f, 0.0f), Vec3<float>(45.0f, 0.0f, 0.0f));
 	//TModel* window3 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	//window3->addChild(window2);
 	//window3->addChild(window);
-	window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
-	window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
-	window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
+	
+	//window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
+	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
+	//window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
+	//window->setRotationXYZ(Vec3<float>(45.0f, 0.0f, 0.0f));
 	//window3->setVisible(true);
 	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
 
-	window2->removeEntity();
+	//window2->removeEntity();
 
 
 	//Creas el nodo(grafico)
@@ -72,7 +74,7 @@ void inicialize() {
 	//personaje
 	TModel* origen = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	origen->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	origen->setPosition(Vec3<float>(4.0f, 0.0f, 0.0f));
+	origen->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
 	origen->setModelColor(1.0f,0.2f,0.2f);
 	//personaje
 	TModel* l1 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
@@ -88,6 +90,7 @@ void inicialize() {
 
 
 	//animacion
+<<<<<<< HEAD
 	<<<<<<< HEAD
 	=======
 	int velocidadAnim = 10;
@@ -102,6 +105,8 @@ void inicialize() {
 	pruebaAnim->setCurrentAnimation("idle");
 	>>>>>>> refs/remotes/origin/Arreglar-motor-grafico
 
+=======
+>>>>>>> refs/remotes/origin/bildboard
 	//int velocidadAnim = 10;
 	//std::cout << "Cargando animaciones..." << std::endl;
 	//TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
@@ -113,6 +118,7 @@ void inicialize() {
 	//pruebaAnim->setAnimation("correr", 110, 190);
 	//pruebaAnim->setCurrentAnimation("idle");
 
+<<<<<<< HEAD
 
 	//personaje
 	TModel* origen2 = sm.crearNodoMalla(sm.getMesh("assets/personaje1/asd.obj"));
@@ -120,6 +126,7 @@ void inicialize() {
 	origen2->setPosition(Vec3<float>(20.0f, 0.f, 0.0f));
 
 	//pruebaAnim->setFrameTime(seconds(2.0));*/
+
 
 
 	//*******LUCES*******
@@ -278,6 +285,10 @@ int main() {
 			std::cout << "Modo de color : Bloom " << std::endl;
 			sm.draw_mode = 8;
 		}
+		else if (Input::i().keyReleased(GLFW_KEY_9)) {
+			std::cout << "Modo de color : Zbuffer luz " << std::endl;
+			sm.draw_mode = 9;
+		}
 
 		//else if (Input::i().keyReleased(GLFW_KEY_J)) {
 		//	pruebaAnim->setCurrentAnimation("saltar");
@@ -316,6 +327,34 @@ int main() {
 			sm.ziZoom(mira);
 			std::cout << "aumento mira, mira = " << mira << std::endl;
 		}
+		else if (Input::i().keyReleased(GLFW_KEY_J)) {
+			//pruebaAnim->setCurrentAnimation("saltar");
+			std::cout << "creo bildboard en: 20.0f, 5.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(20.0f, 5.0f, 0.0f));
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_C)) {
+			//pruebaAnim->setCurrentAnimation("correr");
+			std::cout << "creo bildboard en: -20.0f, 5.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(-20.0f, 5.0f, 0.0f));
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_I)) {
+			//pruebaAnim->setCurrentAnimation("idle");
+			std::cout << "creo bildboard en: 20.0f, 5.0f, -10.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(20.0f, 5.0f, -10.0f));
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_R)) {
+			//velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+			std::cout << "creo bildboard en: -20.0f, -5.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(-20.0f, -5.0f, 0.0f));
+
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_L)) {
+			//velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+			std::cout << "creo bildboard en: 0.0f, 0.0f, 0.0f " << std::endl;
+			sm.crearBillBoard(Vec3<float>(0.0f, 0.0f, 0.0f));
+		}
 		else if (Input::i().keyPressed(GLFW_KEY_B)) {
 			std::cout << "Desactivo Sombras "<< std::endl;
 			sm.activeDynamicShadow(false);
@@ -335,14 +374,14 @@ int main() {
 			inicialize();
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_J)) {
-			TNode* root = sm.getRootNode();
+			/*TNode* root = sm.getRootNode();
 			for (auto it = root->getChildNodes().begin(); it != root->getChildNodes().end(); it++) {
 				delete *it;
 			}
 			root->getChildNodes().clear();
 			sm.setActiveCamera(nullptr);
 			
-			sm.cleanScreen();
+			sm.cleanScreen();*/
 
 		
 
@@ -354,10 +393,6 @@ int main() {
 		//vecDir = sm.camaraActiva->getVectorDireccion();
 		//newPos = vecDir *0.3f;
 		//p->setPosition(newPos);
-		//p1->setOrientation(vecDir);
-
-		//p1->setPosition(sm.camaraActiva->getPosition());
-		//p1->updatePosition(newPos);
 
 		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
 

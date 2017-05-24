@@ -111,7 +111,7 @@ Character* RocketLauncher::shoot(const Vec3<float>& target) {
 			btVector3 direccion = tg - start;
 			direccion.normalize();
 
-			start += direccion * 2.f;
+			start += direccion * 3.f;
 
 			if (m_ent->getClassName() == "Player") {
 				RocketBullet* bala = new RocketBullet(m_ent, cons(start), cons(direccion), GraphicEngine::i().getActiveCamera()->getRotation());

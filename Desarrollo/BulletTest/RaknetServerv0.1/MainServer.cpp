@@ -101,18 +101,22 @@ void getPackets() {
 
 			Entity* ent = EntityManager::i().getRaknetEntity(packet->guid);
 
-			printf("Un cliente se ha desconectado.\n");
+			if (ent != nullptr) {
+				printf("Un cliente se ha desconectado.\n");
 
-			std::cout << "su nombre es:" << ent->getName() << std::endl;
+				std::cout << "su nombre es:" << ent->getName() << std::endl;
 
-			//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
-			EntityManager::i().enviaDesconexion(packet->guid, peer);
-			//lo borramos de los clientes actuales del servidor
-			EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
+				//enviamos a todos los clientes el cliente que se ha desconectado para que lo borren
+				EntityManager::i().enviaDesconexion(packet->guid, peer);
+				//lo borramos de los clientes actuales del servidor
+				EntityManager::i().removeEntity(EntityManager::i().getRaknetEntity(packet->guid));
 
-			if (ent->getGuid() == gameinfo.creador) {
-				EntityManager::i().enviarTerminarPartida(gameinfo.creador, peer);
+				if (ent->getGuid() == gameinfo.creador) {
+					EntityManager::i().enviarTerminarPartida(gameinfo.creador, peer);
+				}
 			}
+
+			
 
 			break;
 		}

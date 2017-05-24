@@ -48,7 +48,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugStatic|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
@@ -61,7 +61,7 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseStatic|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -133,7 +133,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>..\includes;$(IncludePath)</IncludePath>
     <LibraryPath>..\lib\Debug;$(LibraryPath)</LibraryPath>
-    <TargetExt>.lib</TargetExt>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -152,7 +152,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>..\includes;$(IncludePath)</IncludePath>
     <LibraryPath>..\lib\Release;$(LibraryPath)</LibraryPath>
-    <TargetExt>.lib</TargetExt>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -317,6 +317,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TAnimation.cpp" />
     <ClCompile Include="TAnimationGroupMesh.cpp" />
+    <ClCompile Include="TBillboard.cpp" />
     <ClCompile Include="TCamera.cpp" />
     <ClCompile Include="TEntity.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -326,6 +327,7 @@
     <ClCompile Include="TMesh.cpp" />
     <ClCompile Include="TMeshGroup.cpp" />
     <ClCompile Include="TModel.cpp" />
+    <ClCompile Include="TModelEstatico.cpp" />
     <ClCompile Include="TNode.cpp" />
     <ClCompile Include="TPointLight.cpp" />
     <ClCompile Include="TSunLight.cpp" />
@@ -343,6 +345,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="TAnimation.h" />
     <ClInclude Include="TAnimationGroupMesh.h" />
+    <ClInclude Include="TBillboard.h" />
     <ClInclude Include="TCamera.h" />
     <ClInclude Include="TEntity.h" />
     <ClInclude Include="Texture.h" />
@@ -352,6 +355,7 @@
     <ClInclude Include="TMesh.h" />
     <ClInclude Include="TMeshGroup.h" />
     <ClInclude Include="TModel.h" />
+    <ClInclude Include="TModelEstatico.h" />
     <ClInclude Include="TNode.h" />
     <ClInclude Include="TPointLight.h" />
     <ClInclude Include="TSunLight.h" />

@@ -1,13 +1,143 @@
-﻿  Idle.cpp
+﻿  AnimationMachine.cpp
+  Death.cpp
+  Idle.cpp
   Run.cpp
   Salto.cpp
+  Button.cpp
+  Enemy.cpp
+  Enemy_Bot.cpp
+  EntityManager.cpp
+  Granada.cpp
+  GunBullet.cpp
+Entities\GunBullet.cpp(27): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  LifeObject.cpp
+  PhysicsEntity.cpp
+Entities\PhysicsEntity.cpp(49): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(50): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(54): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(55): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(56): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(60): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+Entities\PhysicsEntity.cpp(61): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
   Player.cpp
+  RocketBullet.cpp
+Entities\RocketBullet.cpp(96): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  RocketBulletEnemy.cpp
+  AsaltoDrop.cpp
+  PistolaDrop.cpp
+  RocketLauncherDrop.cpp
+  SniperDrop.cpp
   Generando código...
-     Creando biblioteca D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
+  Compilando...
+  WeaponDrop.cpp
+  Asalto.cpp
+  Pistola.cpp
+  RocketLauncher.cpp
+  Sniper.cpp
+  Weapon.cpp
+  DebugMenuGUI.cpp
+  InGameHUD.cpp
+  LoadingStateGUI.cpp
+  MenuGUI.cpp
+  ParalellTask.cpp
+  SalirHUD.cpp
+  Game.cpp
+Game.cpp(156): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  Game.cpp(156): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+Game.cpp(162): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  Game.cpp(162): note: los marcadores de posición y sus parámetros esperan 0 argumentos variádicos, pero se proporcionaron 1
+  SparseGraph.cpp
+Graph\SparseGraph.cpp(11): warning C4018: '>=': no coinciden signed/unsigned
+  InputHandler.cpp
+  Partida.cpp
+  PathFollow.cpp
+  SensoryMemory.cpp
+  BuscarVida.cpp
+  BuscarWeapon.cpp
+  Generando código...
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\bullettest\bullettest\graph\sparsegraph.cpp(27): warning C4715: 'SparseGraph::getEdge': no todas las rutas de acceso de control devuelven un valor
+  Compilando...
+  Disparar.cpp
+  Patrullar.cpp
+  Perseguir.cpp
+  TargetingSystem.cpp
+  WeaponSystem.cpp
+  Celda.cpp
+  Map.cpp
+  PathPlanner.cpp
+  AnimatedSceneNode.cpp
+  BasicSceneNode.cpp
+  Camera.cpp
+  CameraShake.cpp
+  ClippingManager.cpp
+  ClippingZone.cpp
+  GraphicEngine.cpp
+Motor\GraphicEngine.cpp(37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(40): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(45): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(46): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(47): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(52): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(53): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(54): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(55): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(59): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(60): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(61): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(62): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(66): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(67): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(68): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(69): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(73): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(74): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(75): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+Motor\GraphicEngine.cpp(76): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  GunRecoil.cpp
+  MapLoader.cpp
+Motor\MapLoader.cpp(33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+Motor\MapLoader.cpp(189): warning C4316: 'LifeObject': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(200): warning C4316: 'AsaltoDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(211): warning C4316: 'PistolaDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(221): warning C4316: 'RocketLauncherDrop': puede que el objeto asignado en el montón no esté alineado 16
+Motor\MapLoader.cpp(233): warning C4316: 'SniperDrop': puede que el objeto asignado en el montón no esté alineado 16
+  PhysicsEngine.cpp
+  AsyncEnemyFactory.cpp
+  NetBot.cpp
+  Generando código...
+  Compilando...
+  NetObject.cpp
+  NetPlayer.cpp
+  NetworkDebugger.cpp
+Network\NetworkDebugger.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  NetworkLog.cpp
+  NetworkManager.cpp
+  NetworkPrediction.cpp
+Network\NetworkPrediction.cpp(32): warning C4244: 'argumento': conversión de 'RakNet::Time' a 'int'; posible pérdida de datos
+Network\NetworkPrediction.cpp(34): warning C4244: '=': conversión de 'RakNet::Time' a 'RakNet::TimeMS'; posible pérdida de datos
+  SteamResults.cpp
+  AssetsReader.cpp
+  DebugMarks.cpp
+Otros\DebugMarks.cpp(42): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+Otros\DebugMarks.cpp(84): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  LifeComponent.cpp
+  Lista.cpp
+  InGame.cpp
+States\InGame.cpp(244): warning C4305: '+=': truncamiento de 'double' a 'float'
+States\InGame.cpp(248): warning C4305: '-=': truncamiento de 'double' a 'float'
+  LoadingState.cpp
+  Menu.cpp
+  StateFactory.cpp
+  World.cpp
+  Generando código...
+     Creando biblioteca E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.lib y objeto E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.exp
 LIBCMT.lib(initializers.obj) : warning LNK4098: la biblioteca predeterminada'msvcrt.lib' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  0 of 3064 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
+  3052 of 3160 functions (96.6%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
 CEGUIOpenGLRenderer-0_Static.lib(GL3Renderer.obj) : warning LNK4049: se importó el símbolo ___glewActiveTexture definido localmente
@@ -68,33 +198,59 @@ CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el 
 CEGUIOpenGLRenderer-0_Static.lib(Texture.obj) : warning LNK4049: se importó el símbolo ___glewGetCompressedTexImage definido localmente
 zlibstatic.lib(zutil.obj) : warning LNK4049: se importó el símbolo _free definido localmente
 zlibstatic.lib(zutil.obj) : warning LNK4049: se importó el símbolo _malloc definido localmente
-RakNet_Release.lib(BitStream.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(BitStream.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(CCRakNetSlidingWindow.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(CCRakNetSlidingWindow.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(DR_SHA1.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DR_SHA1.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(DS_ByteQueue.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DS_ByteQueue.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(DS_HuffmanEncodingTree.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DS_HuffmanEncodingTree.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(DS_Table.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DS_Table.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(GetTime.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(GetTime.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(Itoa.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(Itoa.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(LocklessTypes.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(LocklessTypes.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(PluginInterface2.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(PluginInterface2.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakMemoryOverride.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakMemoryOverride.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakNetSocket2.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakNetSocket2.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakNetTypes.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakNetTypes.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakPeer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakPeer.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakSleep.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakSleep.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakString.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakString.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(RakThread.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakThread.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(Rand.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(Rand.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(ReliabilityLayer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(ReliabilityLayer.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(SignaledEvent.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SignaledEvent.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(SimpleMutex.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SimpleMutex.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(SocketLayer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SocketLayer.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(StringCompressor.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(StringCompressor.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(StringTable.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(StringTable.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(SuperFastHash.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SuperFastHash.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(TableSerializer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(TableSerializer.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(TCPInterface.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(TCPInterface.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-RakNet_Release.lib(WSAStartupSingleton.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(WSAStartupSingleton.obj)' o en 'D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
-  BulletTest.vcxproj -> D:\4ºcurso\Repositorios\asd\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(SOIL.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_helper.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'SOIL.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\SOIL.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(EngineDevice.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(EngineDevice.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(SceneManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(SceneManager.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(Input.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Input.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TAnimation.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TAnimation.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TCamera.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TCamera.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TNode.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TNode.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TModel.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TModel.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(ResourceManager.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(ResourceManager.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TLuz.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TLuz.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TSunLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TSunLight.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TEntity.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TEntity.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TModelEstatico.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TModelEstatico.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TPointLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TPointLight.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TTransform.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TTransform.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TBillboard.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TBillboard.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TFlashLight.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TFlashLight.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(AnimationMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(AnimationMesh.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TMeshGroup.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMeshGroup.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(Shader.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(Shader.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TAnimationGroupMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TAnimationGroupMesh.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(TMesh.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(TMesh.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Motor.lib(AnimationReader.obj) : warning LNK4099: no se encontró PDB 'Motor.pdb' con 'Motor.lib(AnimationReader.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\Motor.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(BitStream.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(BitStream.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(CCRakNetSlidingWindow.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(CCRakNetSlidingWindow.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(DR_SHA1.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DR_SHA1.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(DS_ByteQueue.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DS_ByteQueue.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(DS_HuffmanEncodingTree.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DS_HuffmanEncodingTree.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(DS_Table.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(DS_Table.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(GetTime.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(GetTime.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(Itoa.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(Itoa.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(LocklessTypes.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(LocklessTypes.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(PluginInterface2.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(PluginInterface2.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakMemoryOverride.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakMemoryOverride.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakNetSocket2.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakNetSocket2.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakNetTypes.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakNetTypes.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakPeer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakPeer.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakSleep.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakSleep.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakString.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakString.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(RakThread.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(RakThread.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(Rand.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(Rand.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(ReliabilityLayer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(ReliabilityLayer.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(SignaledEvent.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SignaledEvent.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(SimpleMutex.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SimpleMutex.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(SocketLayer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SocketLayer.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(StringCompressor.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(StringCompressor.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(StringTable.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(StringTable.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(SuperFastHash.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(SuperFastHash.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(TableSerializer.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(TableSerializer.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(TCPInterface.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(TCPInterface.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+RakNet_Release.lib(WSAStartupSingleton.obj) : warning LNK4099: no se encontró PDB 'RakNet_VS2008_LibStatic_Release_Win32.pdb' con 'RakNet_Release.lib(WSAStartupSingleton.obj)' o en 'E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\RakNet_VS2008_LibStatic_Release_Win32.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  BulletTest.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.exe
+  BulletTest.vcxproj -> E:\Usuario\Ruben\UNIVERSIDAD\4o Curso (2016-2017)\ABP\TBA\Desarrollo\BulletTest\Release\BulletTest.pdb (Full PDB)

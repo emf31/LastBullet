@@ -13,7 +13,7 @@
 //de liberar todos los recursos asignados a ella cuando colisiona con algun objeto o cuando termina su tiempo de vida.
 
 RocketBullet::RocketBullet(Character* owner, Vec3<float> position, Vec3<float> direction, Vec3<float> rotation) : EntActive(-1, NULL, "bala"),
-m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(10), m_owner(owner)
+m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation), radioExplosion(6), m_owner(owner)
 {
 
 	m_lifetime = seconds(3);
@@ -58,14 +58,16 @@ void RocketBullet::cargarContenido()
 	m_nodo->setRotationXYZ(m_rotation);
 	m_renderState.setRotation(m_rotation);
 
-	m_rigidBody = PhysicsEngine::i().createBoxRigidBody(this, Vec3<float>(0.5f, 0.3f, 0.2f), 1, false);
+	m_rigidBody = PhysicsEngine::i().createSphereRigidBody(this, 0.1f, 1);
 	btBroadphaseProxy* proxy = m_rigidBody->getBroadphaseProxy();
 	proxy->m_collisionFilterGroup = col::Collisions::Rocket;
 	proxy->m_collisionFilterMask = col::rocketCollidesWith;
 
+	m_rigidBody->setCcdMotionThreshold(5.f);
+	m_rigidBody->setCcdSweptSphereRadius(0.3f);
 
 	//Sin respuesta a la colision mejor asi porque es mas optimo
-	m_rigidBody->setCollisionFlags(4);
+	//m_rigidBody->setCollisionFlags(4);
 }
 
 void RocketBullet::borrarContenido()
@@ -82,13 +84,22 @@ void RocketBullet::handleMessage(const Message & message)
 	//Si llega un mensaje de colision o de borrado ejecutamos las comprobaciones necesarias
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
+		//btManifoldPoint* point = static_cast<btManifoldPoint*>(message.data2);
+		btVector3 body = m_rigidBody->getCenterOfMassPosition();
+
+		//Vec3<float> impactPoint = cons(point->getPositionWorldOnB());
+		
+		TBillboard* bill = SceneManager::i().crearBillBoard(cons(body));
+		bill->setFrameTime(milliseconds(20.f));
+		//bill->setScale(Vec3<float>(20.f, 20.f, 20.f));
+
 		std::list<Character*>characters = EntityManager::i().getCharacters();
 		///Explosion
 		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {
 
 			Character* myentity = *it;
 
-			damage = explosion(myentity, cons(m_rigidBody->getCenterOfMassPosition()), radioExplosion);
+			damage = explosion(myentity, cons(body), radioExplosion);
 
 			if (damage > 0) {
 

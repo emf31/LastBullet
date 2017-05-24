@@ -84,22 +84,26 @@ void NetPlayer::crearPartida()
 		LanServer = 0;
 	}
 
-	MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
-	//menu->getNumBots();
-
-
-	for (int i = 0; i < menu->getNumBots(); i++) {
-		TPlayer p;
-		p.name = "Bot "+ std::to_string((i+1));
-		p.available = true;
-		m_bots.push_back(p);
-	}
+	
 
 	
 	
 
 	//Hasta aqui se ha creado la sala y el server. Parar hasta que se una la gente (si se usa steam)
 	if (!USING_STEAM) {
+
+		for (int i = 0; i < std::stoi(Settings::i().GetValue("bots")); i++) {
+			TPlayer p;
+			p.name = "Bot " + std::to_string((i + 1));
+			p.available = true;
+			m_bots.push_back(p);
+		}
+
+		for (auto it = m_bots.begin(); it != m_bots.end(); ++it) {
+			std::shared_ptr<NetBot> bot = NetworkManager::i().createNetBot();
+			bot->inicializar();
+		}
+
 		TGameInfo gameinfo;
 		gameinfo.creador = getMyGUID();
 		gameinfo.name = Settings::i().GetValue("name");
@@ -157,7 +161,7 @@ uint64_t NetPlayer::crearLobby()
 void NetPlayer::sendServerIPtoNewClient() {
 	if (USING_STEAM) {
 		if (IamHost) {
-			MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+			
 			std::string ipMessage = "IP|";
 			RakNet::Console_SendRoomChatMessage_Steam* msg = (RakNet::Console_SendRoomChatMessage_Steam*) messageFactory->Alloc(RakNet::L2MID_Console_SendRoomChatMessage);
 			if (LanServer) {
@@ -172,8 +176,10 @@ void NetPlayer::sendServerIPtoNewClient() {
 			messageFactory->Dealloc(msg);
 
 
-			menu->setServerType(std::stoi(Settings::i().GetValue("Lan")));
-			
+			MenuGUI* menu = static_cast<MenuGUI*>(GUIManager::i().getGUIbyName("MenuGUI"));
+			if (menu != nullptr) {
+				menu->setServerType(std::stoi(Settings::i().GetValue("Lan")));
+			}
 		}
 	}
 }
@@ -257,6 +263,19 @@ void NetPlayer::playerReadyCallback(const std::string & name) {
 }
 
 void NetPlayer::comenzarPartida() {
+
+	for (int i = 0; i < std::stoi(Settings::i().GetValue("bots")); i++) {
+		TPlayer p;
+		p.name = "Bot " + std::to_string((i + 1));
+		p.available = true;
+		m_bots.push_back(p);
+
+		std::shared_ptr<NetBot> bot = NetworkManager::i().createNetBot();
+		bot->SetBotName(p.name);
+		bot->inicializar();
+	}
+
+
 	TGameInfo gameinfo;
 	gameinfo.creador = getMyGUID();
 	gameinfo.name = SteamFriends()->GetPersonaName();

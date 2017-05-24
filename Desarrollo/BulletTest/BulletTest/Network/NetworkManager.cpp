@@ -80,13 +80,14 @@ std::shared_ptr<NetPlayer> NetworkManager::createNetPlayer()
 	// if acquires new pointer, deletes managed object 
 	m_netPlayer.reset(netp);
 
+
 	return m_netPlayer;
 	
 }
 
-std::shared_ptr<NetBot> NetworkManager::createNetBot(Enemy_Bot * bot)
+std::shared_ptr<NetBot> NetworkManager::createNetBot()
 {
-	NetBot* netp = new NetBot(bot);
+	NetBot* netp = new NetBot();
 
 	std::shared_ptr<NetBot> ptr(netp);
 

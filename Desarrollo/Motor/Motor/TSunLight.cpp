@@ -45,7 +45,7 @@ Vec3<float> TSunLight::getDireccion()
 void TSunLight::updateVectorDireccion()
 {
 	glm::vec4 destino = glm::vec4(0, 0, 1, 1);
-	glm::mat4 rot = transRotacion->getRotationMatrix();
+	glm::mat4 rot = transRotacion->getMatrix();
 	rot = glm::inverse(rot);
 	destino = destino* rot;
 	destino = glm::normalize(destino);

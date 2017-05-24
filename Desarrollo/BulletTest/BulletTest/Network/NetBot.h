@@ -8,7 +8,8 @@ class Enemy_Bot;
 
 class NetBot : public NetObject {
 public:
-	NetBot(Enemy_Bot* bot);
+	NetBot();
+	void SetBot(Enemy_Bot *bot);
 	~NetBot();
 
 	virtual void inicializar() override;
@@ -25,7 +26,11 @@ public:
 		peer->Send((const char*)&estructura, sizeof(estructura), HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, getServerGUID(), false);
 	}
 
+	void SetBotName(const std::string& name) {
+		BotName = name;
+	}
+
 private:
 	Enemy_Bot* m_bot;
-
+	std::string BotName;
 };

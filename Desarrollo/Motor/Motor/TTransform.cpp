@@ -78,15 +78,12 @@ Vec3<float> TTransform::getScale()
 {
 	return m_scale;
 }
-glm::mat4 TTransform::getRotationMatrix() {
+
+glm::mat4 TTransform::getMatrix()
+{
 	return m_matrix;
 }
-glm::mat4 TTransform::getPositionMatrix() {
-	return m_matrix;
-}
-glm::mat4 TTransform::getScaleMatrix() {
-	return m_matrix;
-}
+
 void TTransform::multiply(glm::mat4 mat) {
 	m_matrix = m_matrix * mat;
 }

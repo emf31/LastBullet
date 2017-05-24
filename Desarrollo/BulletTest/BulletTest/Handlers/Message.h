@@ -12,8 +12,8 @@ struct Message {
 	Message(Entity* entity, const std::string& mensaje, void* data) :
 		entity(entity), 
 		mensaje(mensaje),
-		data(data) {
-
+		data(data)
+	{
 	}
 	Message() {
 		

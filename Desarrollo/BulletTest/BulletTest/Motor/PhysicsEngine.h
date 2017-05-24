@@ -79,11 +79,6 @@ public:
 	int m_shapeIndex;
 };
 
-struct Shape {
-
-};
-
-
 class PhysicsEngine
 {
 public:

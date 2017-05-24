@@ -35,21 +35,26 @@ void InGame::Inicializar()
 
 
 	m_player = new Player("UNDEFINED", NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
-	 
 
+	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
+
+	
 	ingameGUI.inicializar();
 	debugMenu.inicializar();
 	salirGUI.inicializar();
 
 	World::i().inicializar();
 
-	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
-
+	std::list<std::shared_ptr<NetBot>>::iterator netbotit = NetworkManager::i().getNetBots().begin();
 	for (auto it = bots.begin(); it != bots.end(); ++it) {
 		Enemy_Bot *bot = new Enemy_Bot(it->name, RakNet::UNASSIGNED_RAKNET_GUID);
-		bot->m_network->inicializar();
 		bot->inicializar();
 		bot->cargarContenido();
+
+		(*netbotit)->SetBot(bot);
+		bot->SetNetBot(*netbotit);
+
+		++netbotit;
 	}
 
 	

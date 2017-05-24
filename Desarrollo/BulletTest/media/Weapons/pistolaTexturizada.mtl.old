@@ -1,0 +1,41 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/azul_brazos.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pistolaTexturizada:___Default
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/pistola1.png
+map_Ka Weapons/pistola1.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+
+Ns 10.00
+newmtl pistolaTexturizada:___Default2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/pistola9.png
+map_Ka Weapons/pistola9.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+
+Ns 10.00
+newmtl pistolaTexturizada:___Default4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/pistola2.png
+map_Ka Weapons/pistola2.png
+Ni 1.50
+Ks 0.00 0.00 0.00
+
+Ns 10.00

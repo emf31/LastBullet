@@ -1,45 +1,54 @@
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.pdb
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.idb
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\main.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\resourcemanager.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\scenemanager.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\shader.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tanimation.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tanimationgroupmesh.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tcamera.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tentity.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\texture.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tflashlight.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\time.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tluz.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tmesh.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tmeshgroup.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tmodel.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tnode.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tpointlight.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\tsunlight.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\ttransform.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\clockimpl.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\animationmesh.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\animationreader.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\clock.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\enginedevice.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\input.obj
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\vc140.pdb
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\vc140.idb
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\debugstatic\motor.lib
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\debugstatic\motor.ilk
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\debugstatic\motor.exe
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\debugstatic\motor.pdb
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\debugstatic\motor.exp
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\animationmesh.obj.enc
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\cl.command.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\cl.read.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\cl.write.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\lib-link.read.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\lib-link.write.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\lib.command.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\link.command.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\link.read.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\link.write.1.tlog
-d:\4ºcurso\repositorios\asd\tba\desarrollo\motor\motor\debugstatic\motor.tlog\motor.write.1u.tlog
+<<<<<<< HEAD
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\vc140.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\vc140.idb
+=======
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.idb
+>>>>>>> refs/remotes/origin/bildboard
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\resourcemanager.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\scenemanager.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\shader.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tanimation.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tanimationgroupmesh.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tbillboard.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tcamera.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tentity.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\texture.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tflashlight.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\time.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tluz.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tmesh.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tmeshgroup.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tmodel.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tmodelestatico.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tnode.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tpointlight.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\tsunlight.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\ttransform.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\clockimpl.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\animationmesh.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\animationreader.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\clock.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\enginedevice.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\input.obj
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\main.obj
+<<<<<<< HEAD
+=======
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\vc140.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\vc140.idb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\debugstatic\motor.lib
+>>>>>>> refs/remotes/origin/bildboard
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\debugstatic\motor.ilk
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\debugstatic\motor.exe
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\debugstatic\motor.pdb
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\debugstatic\motor.exp
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\cl.command.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\cl.read.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\cl.write.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\lib-link.read.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\lib-link.write.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\lib.command.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\link.command.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\link.read.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\link.write.1.tlog
+e:\usuario\ruben\universidad\4o curso (2016-2017)\abp\tba\desarrollo\motor\motor\debugstatic\motor.tlog\motor.write.1u.tlog

@@ -37,9 +37,7 @@ public:
 	Vec3<float> getPosition();
 	Vec3<float> getScale();
 
-	glm::mat4 getRotationMatrix();
-	glm::mat4 getPositionMatrix();
-	glm::mat4 getScaleMatrix();
+	glm::mat4 getMatrix();
 
 	void multiply(glm::mat4 mat);
 	void loadMatrix(glm::mat4 mat);

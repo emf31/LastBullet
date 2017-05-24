@@ -109,8 +109,8 @@ void TCamera::ProcessMouseScroll(GLfloat yoffset) {
 void TCamera::calcularPosicionVista()
 {
 
-	glm::mat4 tras = transTraslacion->getPositionMatrix() ;
-	glm::mat4 rotmatrix = transRotacion->getRotationMatrix();
+	glm::mat4 tras = transTraslacion->getMatrix() ;
+	glm::mat4 rotmatrix = transRotacion->getMatrix();
 	view = tras * rotmatrix;
 }
 
@@ -244,7 +244,7 @@ Vec3<float> TCamera::getRotation() {
 void TCamera::updateCameraVectors() {
 
 	glm::vec4 destino = glm::vec4(0, 0, -1, 1);
-	glm::mat4 rot = transRotacion->getRotationMatrix();
+	glm::mat4 rot = transRotacion->getMatrix();
 	rot = glm::inverse(rot);
 	destino = destino* rot;
 	destino = glm::normalize(destino);

@@ -1,22 +1,4 @@
-newmtl TriggerSniperAndScope
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_Trigger_Diffuse.png
-map_Ke Weapons/BottomSniper_EMI.jpg
-Ni 1.00
-Ks 0.50 0.50 0.50
-newmtl blinn1SG
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Weapons/Channel_BackSniper_Diffuse.png
-map_Ke Weapons/BackSniper_EMI.jpg
-Ni 1.00
-Ks 0.50 0.50 0.50
-newmtl blinn2SG
+newmtl blinn4SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -25,12 +7,70 @@ map_Kd Weapons/Channel_ScopeAndBarrel_Diffuse.png
 map_Ke Props/noemisivo.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
-newmtl blinn3SG
+newmtl blinn5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_BackSniper_Diffuse.png
+map_Ke Weapons/BackSniper_EMI_FIX.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_Trigger_Diffuse.png
+map_ke Weapons/BottomSniper_EMI.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn7SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd Weapons/Channel_MiddleSniper_Diffuse.png
-map_Ke Weapons/MiddleSniper_EMI.jpg
+map_ke Weapons/MiddleSniper_EMI_fix.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
+newmtl sniperFinalv2_blinn4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_ScopeAndBarrel_Diffuse.png
+map_Ke Props/noemisivo.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl sniperFinalv2_blinn5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_BackSniper_Diffuse.png
+map_Ke Weapons/BackSniper_EMI_FIX.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl sniperFinalv2_blinn6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_Trigger_Diffuse.png
+map_ke Weapons/BottomSniper_EMI.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl sniperFinalv2_blinn7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Weapons/Channel_MiddleSniper_Diffuse.png
+map_ke Weapons/MiddleSniper_EMI_fix.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
