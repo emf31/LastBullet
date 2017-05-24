@@ -168,7 +168,7 @@ float RocketBullet::explosion(Character* player, const Vec3<float>& posExplosion
 
 
 	if (distancia < radio) {
-		if (distancia < radio / 6) {
+		if (distancia < radio) {
 			vidaRestada = 100;
 		}
 		else {
@@ -176,7 +176,7 @@ float RocketBullet::explosion(Character* player, const Vec3<float>& posExplosion
 		}
 
 
-		btVector3 FUERZA(vidaRestada / 5, vidaRestada / 5, vidaRestada / 5);
+		btVector3 FUERZA(vidaRestada / 4, vidaRestada / 4, vidaRestada / 4);
 
 		Vec3<float> posExplosion = cons(m_rigidBody->getCenterOfMassPosition());
 		Vec3<float> posPlayer = playerPos;

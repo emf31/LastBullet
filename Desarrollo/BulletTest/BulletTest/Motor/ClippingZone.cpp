@@ -43,7 +43,7 @@ ClippingZone::ClippingZone(Vec3<float> center, Vec3<float> size,std::string name
 
 void ClippingZone::addEntity(Entity * ent)
 {
-	nodo->addChild(ent->getNode()->getEntityNode());
+	//nodo->addChild(ent->getNode()->getEntityNode());
 }
 
 std::vector<Vec3<float>> ClippingZone::getPoints()

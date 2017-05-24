@@ -30,6 +30,8 @@ public:
 	TModelEstatico(TMeshGroup* meshGroup, Vec3<float> posicion , Vec3<float> rotacion, Vec3<float> escala);
 	~TModelEstatico();
 
+	void setTransformMatrix(Vec3<float> posicion, Vec3<float> rotacion, Vec3<float> escala);
+
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
 	Vec3<float> getScale();

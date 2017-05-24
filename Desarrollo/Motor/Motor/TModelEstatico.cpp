@@ -27,6 +27,19 @@ TModelEstatico::~TModelEstatico() {
 
 }
 
+void TModelEstatico::setTransformMatrix(Vec3<float> posicion, Vec3<float> rotacion, Vec3<float> escala)
+{
+	setRotationXYZ(rotacion);
+	glm::mat4 rot = transformMatrix.getMatrix();
+	setScale(escala);
+	glm::mat4 esc = transformMatrix.getMatrix();
+	setPosition(posicion);
+	glm::mat4 pos = transformMatrix.getMatrix();
+
+	glm::mat4 model = pos * esc * rot;
+	transformMatrix.loadMatrix(model);
+}
+
 void TModelEstatico::beginDraw() {
 	
 

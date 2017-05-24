@@ -150,9 +150,11 @@ std::shared_ptr<BasicSceneNode> MapLoader::CreateNodeExceptionSafe(const Vec3<fl
 std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass, ClippingZone* zone)
 {
 	//Creates node
-	std::shared_ptr<BasicSceneNode> sceneNode = CreateNodeExceptionSafe(posicion, escala, "", mesh);
+	TModelEstatico* sceneNode = SceneManager::i().crearNodoMallaEstatica(ResourceManager::i().getMesh(mesh), posicion);
+	sceneNode->setTransformMatrix(posicion, rotacion, escala);
 
-	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name);
+
+	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name, posicion, rotacion, escala);
 
 	float mymass=0;
 	//si la masa es muy pequeña la consideraremos 0
@@ -180,7 +182,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 	}
 	zone->addEntity(physicent);
 
-	return sceneNode;
+	return nullptr;
 }
 
 
@@ -188,7 +190,7 @@ Entity* MapLoader::createLifeObject(Vec3<float> posicion, Vec3<float> escala, co
 {
 	LifeObject *vidaEnt = new LifeObject(nullptr, "LifeObject");
 	vidaEnt->getRenderState()->setPosition(posicion);
-	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(2.f, 4.f, 2.f)));
+	vidaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(vidaEnt, Vec3<float>(3.f, 3.f, 3.f)));
 
 	return vidaEnt;
 }
@@ -199,7 +201,7 @@ Entity* MapLoader::createAsaltoDrop(Vec3<float> posicion, Vec3<float> escala, co
 	//Creates node
 	AsaltoDrop *AsaltoDropEnt = new AsaltoDrop(nullptr, "AsaltoDrop");
 	AsaltoDropEnt->getRenderState()->setPosition(posicion);
-	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, Vec3<float>(2.f, 4.f, 2.f)));
+	AsaltoDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(AsaltoDropEnt, Vec3<float>(3.f, 3.f, 3.f)));
 
 	return AsaltoDropEnt;
 }
@@ -210,7 +212,7 @@ Entity* MapLoader::createPistolaDrop(Vec3<float> posicion, Vec3<float> escala, c
 	//Creates node
 	PistolaDrop *pistolaEnt = new PistolaDrop(nullptr, "PistolaDrop");
 	pistolaEnt->getRenderState()->setPosition(posicion);
-	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, Vec3<float>(2.f, 4.f, 2.f)));
+	pistolaEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(pistolaEnt, Vec3<float>(3.f, 3.f, 3.f)));
 
 	return pistolaEnt;
 }
@@ -220,7 +222,7 @@ Entity* MapLoader::createRocektLauncherDrop(Vec3<float> posicion, Vec3<float> es
 	//Creates node
 	RocketLauncherDrop *RocketLauncherDropEnt = new RocketLauncherDrop(nullptr, "RocketDrop");
 	RocketLauncherDropEnt->getRenderState()->setPosition(posicion);
-	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, Vec3<float>(2.f, 4.f, 2.f)));
+	RocketLauncherDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(RocketLauncherDropEnt, Vec3<float>(3.f, 3.f, 3.f)));
 
 
 	return RocketLauncherDropEnt;
@@ -232,7 +234,7 @@ Entity* MapLoader::createSniperDrop(Vec3<float> posicion, Vec3<float> escala, co
 	//std::shared_ptr<BasicSceneNode> sniper = CreateNodeExceptionSafe(posicion, escala, "", mesh);
 	SniperDrop *SniperDropEnt = new SniperDrop(nullptr, "SniperDrop");
 	SniperDropEnt->getRenderState()->setPosition(posicion);
-	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, Vec3<float>(2.f, 4.f, 2.f)));
+	SniperDropEnt->setGhostObject(PhysicsEngine::i().createBoxGhostObject(SniperDropEnt, Vec3<float>(3.f, 3.f, 3.f)));
 	//SniperDropEnt->setPosition(posicion);
 
 	return SniperDropEnt;

@@ -2,7 +2,7 @@
 #include "Weapon.h"
 
 
-#define numCargadoresSniper 3
+#define numCargadoresSniper 2
 
 
 class Sniper : public Weapon
