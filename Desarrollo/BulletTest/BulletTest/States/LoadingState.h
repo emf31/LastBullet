@@ -6,6 +6,11 @@
 #include <ParalellTask.h>
 
 
+struct AnimationStruct {
+	std::string path;
+	int numAnimations;
+};
+
 
 
 class LoadingState : public State {
@@ -29,6 +34,7 @@ private:
 	LoadingStateGUI loadingStateGUI;
 	ParalellTask* task;
 	std::queue<std::string> colaAssets;
+	std::queue<AnimationStruct> queueAnimaciones;
 	Clock pruebas;
 	bool needRender;
 

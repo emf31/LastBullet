@@ -6,6 +6,7 @@
 #include <NetworkManager.h>
 #include <SoundManager.h>
 #include <Settings.h>
+#include <Engine/AnimationReader.h>
 
 LoadingState::LoadingState()
 {
@@ -72,15 +73,27 @@ void LoadingState::Update(Time timeElapsed)
 		}
 
 		if (colaAssets.empty()) {
-			TimePerFrameClass::timePerFrameDefault();
 
-			StateStack::i().GetCurrentState()->Clear();
-			StateStack::i().SetCurrentState(States::ID::InGame);
-			StateStack::i().GetCurrentState()->Inicializar();
+			if (queueAnimaciones.empty()) {
+				TimePerFrameClass::timePerFrameDefault();
 
-			//Notify to other players
-			NotificarServerCargaCompletada();
+				StateStack::i().GetCurrentState()->Clear();
+				StateStack::i().SetCurrentState(States::ID::InGame);
+				StateStack::i().GetCurrentState()->Inicializar();
+
+				//Notify to other players
+				NotificarServerCargaCompletada();
+			}
+			
+			AnimationStruct& pathAnim = queueAnimaciones.front();
+			ResourceManager::i().getAnimationMesh(pathAnim.path, pathAnim.numAnimations);
+			queueAnimaciones.pop();
+
+			loadingStateGUI.setAssetName(pathAnim.path);
+			loadingStateGUI.update();
 		}
+
+		
 
 		needRender = true;
 	}
@@ -98,16 +111,11 @@ void LoadingState::Render(float interpolation, Time elapsedTime)
 
 void LoadingState::readAllAssets()
 {
-	AssetsReader::read("../media/Personaje", colaAssets);
 	AssetsReader::read("../media/Props",colaAssets);
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
-	AssetsReader::read("../media/Granada", colaAssets);
-	/*ResourceProvider& resourceProvider = Settings::i().GetResourceProvider();
-	
-	AssetsReader::read(resourceProvider.getResourceGroupDirectory("weapons"), colaAssets);
-	AssetsReader::read(resourceProvider.getResourceGroupDirectory("bullets"), colaAssets);
-	AssetsReader::read(resourceProvider.getResourceGroupDirectory("props"), colaAssets);*/
+	queueAnimaciones.push(AnimationStruct{ "../media/personaje1", 191 });
+
 }
 
 

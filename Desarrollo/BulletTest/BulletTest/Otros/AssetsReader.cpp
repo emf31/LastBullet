@@ -29,3 +29,4 @@ void AssetsReader::read(std::string directory, std::queue<std::string>& colaAsse
 		closedir(dir);
 	}
 }
+

@@ -839,7 +839,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 
 			Entity* ent = EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 
-			//Si ha muerto el player
+			//Si ha muerto un enemigo
 			if (ent->getClassName() == "Enemy") {
 				InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
 				hud->newFeed(m_player->getName(), ent->getName());
