@@ -148,9 +148,6 @@ void MenuGUI::inicializar() {
 	MusicLabel = static_cast<CEGUI::DefaultWindow*>(OpcionesAudioWindow->getChild(4));
 	MusicLabel->setText(std::to_string(int(musicVolume * 100)));
 
-	ApplySounds = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(98));
-	ApplySounds->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onApplySounds, this));
-
 	SoundManager::i().setVolumeMusic(MusicSlider->getCurrentValue());
 	SoundManager::i().setVolumeSounds(SoundSlider->getCurrentValue());
 
@@ -218,7 +215,6 @@ void MenuGUI::inicializar() {
 
 void MenuGUI::update()
 {
-
 	updateFondo(2);
 	reproducirAnimacionPlaneta();
 
@@ -324,6 +320,7 @@ bool MenuGUI::onOpcionesGameClicked(const CEGUI::EventArgs & e) {
 
 bool MenuGUI::onSalirClicked(const CEGUI::EventArgs & e) {
 	std::cout << "Le has dado a salir" << std::endl;
+	throw std::exception("Salir");
 	return true;
 }
 
@@ -365,6 +362,10 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		ClippingManager::i().setUpdateClipping(Clipping->isSelected());
 		ClippingManager::i().setUpdateOclusions(Oclusions->isSelected());
 	}
+	else if (m_stateMenu == stateMenu::enumOpcionesAudio) {
+		Settings::i().SetValue("sound", std::to_string(int(SoundSlider->getCurrentValue() * 100)));
+		Settings::i().SetValue("music", std::to_string(int(MusicSlider->getCurrentValue() * 100)));
+	}
 	if (lastState == stateMenu::enumPrincipal && m_stateMenu == stateMenu::enumLobby) {
 		//Creamos la red (abrir server, crear peer, conectarse, etc.) 
 		NetworkManager::i().configureNetwork();
@@ -374,24 +375,17 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 	return true;
 }
 
-bool MenuGUI::onApplySounds(const CEGUI::EventArgs & e)
-{
-	SoundManager::i().setVolumeMusic(MusicSlider->getCurrentValue());
-	SoundManager::i().setVolumeSounds(SoundSlider->getCurrentValue());
-	Settings::i().SetValue("sound", std::to_string(int(SoundSlider->getCurrentValue()*100)));
-	Settings::i().SetValue("music", std::to_string(int(MusicSlider->getCurrentValue()*100)));
-	return true;
-}
-
 bool MenuGUI::onUpdateSliderSound(const CEGUI::EventArgs & e)
 {
 	SoundLabel->setText(std::to_string(int(SoundSlider->getCurrentValue() * 100)));
+	SoundManager::i().setVolumeSounds(SoundSlider->getCurrentValue());
 	return true;
 }
 
 bool MenuGUI::onUpdateSliderMusic(const CEGUI::EventArgs & e)
 {
 	MusicLabel->setText(std::to_string(int(MusicSlider->getCurrentValue() * 100)));
+	SoundManager::i().setVolumeMusic(MusicSlider->getCurrentValue());
 	return true;
 }
 
@@ -461,7 +455,7 @@ std::string MenuGUI::numberShadowToString(int number)
 {
 	std::string p;
 	if (number == 2) {
-		p ="Dinamic";
+		p ="Dynamic";
 	}
 	else if (number == 1) {
 		p = "Static";

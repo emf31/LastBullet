@@ -13,7 +13,7 @@
 
 
 
-GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i())
+GraphicEngine::GraphicEngine() : debug_camera(true), sm(SceneManager::i()), exit(false)
 {
 	
 }
@@ -346,6 +346,7 @@ bool GraphicEngine::apagar()
 	engine.end();
 	engine.shutdown();
 	
+
 	return true;
 }
 
