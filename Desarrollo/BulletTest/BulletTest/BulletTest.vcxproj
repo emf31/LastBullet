@@ -339,6 +339,7 @@
     <ClInclude Include="Otros\Win32\ClockImpl.hpp" />
     <ClInclude Include="ParticleSystem\ExplosionParticleSystem.h" />
     <ClInclude Include="ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="States\InGame.h" />
     <ClInclude Include="States\LoadingState.h" />
     <ClInclude Include="States\Menu.h" />
@@ -498,6 +499,13 @@
     <ClCompile Include="States\StateStack.cpp" />
     <ClCompile Include="TriggerSystem\TriggerSystem.cpp" />
     <ClCompile Include="World\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BulletTest1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Toni\Desktop\Iconnn.ico" />
+    <Image Include="C:\Users\Toni\Desktop\iconolb.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

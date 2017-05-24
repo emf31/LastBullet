@@ -290,7 +290,7 @@ void GraphicEngine::renderAll()
 	// FPS
 	int fps = GraphicEngine::i().getDevice().getFPS();
 	std::ostringstream title;
-	title << u8"Motor gráfico / Visor OpenGL - Last Bullet FPS: " << fps;
+	title << u8"Last Bullet - Final Release FPS: " << fps;
 	GraphicEngine::i().getDevice().setWindowTitle(title.str());
 	//}
 	
@@ -304,7 +304,7 @@ void GraphicEngine::inicializar()
 {
 	screenWidth = 1280;
 	screenHeight = 720;
-	engine.createEngineDevice(screenWidth, screenHeight, u8"Motor gráfico / Visor OpenGL - Last Bullet");
+	engine.createEngineDevice(screenWidth, screenHeight, u8"Last Bullet - Final Release");
 	
 	
 

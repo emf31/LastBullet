@@ -982,6 +982,7 @@
     <ClInclude Include="Animation\Salto.h">
       <Filter>Headers\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -1188,5 +1189,12 @@
     <Filter Include="Headers\Animation">
       <UniqueIdentifier>{11c07210-e9bf-4930-b9aa-521444a5f6f8}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BulletTest1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Toni\Desktop\iconolb.ico" />
+    <Image Include="C:\Users\Toni\Desktop\Iconnn.ico" />
   </ItemGroup>
 </Project>
