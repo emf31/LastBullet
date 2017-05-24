@@ -28,4 +28,5 @@
     <Image height="29" name="Server" width="136" xPos="560" yPos="592" />
     <Image height="32" name="Lan" width="70" xPos="409" yPos="635" />
     <Image height="29" name="Internet" width="155" xPos="501" yPos="639" />
+    <Image height="31" name="mOptions" width="267" xPos="509" yPos="260" />
 </Imageset>

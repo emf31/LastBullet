@@ -4,32 +4,47 @@
     <Window type="DefaultWindow" name="DefaultWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="Generic/Image" name="Image" >
-            <Property name="Area" value="{{0,1},{0,0},{0.1,1281},{0.177778,720}}" />
-            <Property name="Image" value="LastBulletSalir/SalirBackground" />
+        <Window type="DefaultWindow" name="DefaultWindow" >
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        </Window>
-        <Window type="Generic/ImageButton" name="ImageButton" >
-            <Property name="ID" value="1" />
-            <Property name="Area" value="{{0.673437,-819},{0.138889,62},{0.845312,-723},{0.170833,94}}" />
-            <Property name="HoverImage" value="AssetsMenu/Seleccion_copy" />
-            <Property name="AlwaysOnTop" value="true" />
-        </Window>
-        <Window type="Generic/ImageButton" name="ImageButton2" >
-            <Property name="ID" value="2" />
-            <Property name="Area" value="{{0.671875,-819},{0.254167,62},{0.91875,-819},{0.330556,62}}" />
-            <Property name="HoverImage" value="AssetsMenu/Seleccion_copy" />
-            <Property name="AlwaysOnTop" value="true" />
-        </Window>
-        <Window type="Generic/Image" name="Image2" >
-            <Property name="Area" value="{{0.00703125,81},{-0.00277778,257},{0.00703125,348},{-0.00277778,288}}" />
-            <Property name="Image" value="AssetsMenu/mExit" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        </Window>
-        <Window type="Generic/Image" name="Image3" >
-            <Property name="Area" value="{{0,92},{0,171},{0,359},{0,202}}" />
-            <Property name="Image" value="AssetsMenu/mExit_copy" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Generic/Image" name="Image" >
+                <Property name="Area" value="{{0,0},{0,0},{0,1280},{0,720}}" />
+                <Property name="Image" value="LastBulletSalir/SalirBackground" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image2" >
+                <Property name="Area" value="{{0.00703125,80},{-0.00277778,331},{0.00703125,347},{-0.00277778,362}}" />
+                <Property name="Image" value="AssetsMenu/mExit" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image22" >
+                <Property name="Area" value="{{0.00703125,82},{-0.00277778,255},{0.00703125,349},{-0.00277778,286}}" />
+                <Property name="Image" value="AssetsMenu/mOptions" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="Image3" >
+                <Property name="Area" value="{{0,92},{0,171},{0,359},{0,202}}" />
+                <Property name="Image" value="AssetsMenu/mExit_copy" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton" >
+                <Property name="ID" value="1" />
+                <Property name="Area" value="{{0.673437,-819},{0.138889,62},{0.845312,-723},{0.170833,94}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion_copy" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton2" >
+                <Property name="ID" value="2" />
+                <Property name="Area" value="{{0.671875,-820},{0.254167,136},{0.91875,-820},{0.330556,136}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion_copy" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ImageButton22" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0.671875,-817},{0.254167,58},{0.91875,-817},{0.330556,58}}" />
+                <Property name="HoverImage" value="AssetsMenu/Seleccion_copy" />
+                <Property name="AlwaysOnTop" value="true" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>

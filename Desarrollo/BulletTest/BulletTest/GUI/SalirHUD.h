@@ -20,6 +20,7 @@ public:
 
 	bool onContinuarClicked();
 	bool onSalirClicked();
+	bool onOpcionesClicked();
 	void clear();
 	CEGUI::DefaultWindow *Window;
 
@@ -27,6 +28,7 @@ private:
 
 	CEGUI::PushButton *Salir;
 	CEGUI::PushButton *Continuar;
+	CEGUI::PushButton *Opciones;
 	
 
 };
