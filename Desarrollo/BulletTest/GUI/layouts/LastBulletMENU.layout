@@ -101,6 +101,7 @@
             <Property name="ID" value="1" />
             <Property name="Area" value="{{0,-1},{0,-1},{1,-5},{1,-1}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,499},{0,155},{1,-510},{1,-451}}" />
@@ -153,6 +154,7 @@
             <Property name="ID" value="5" />
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,168},{0,732},{0,250}}" />
                 <Property name="Text" value="Audio Options" />
@@ -222,7 +224,7 @@
                 <Property name="Text" value="Window" />
                 <Property name="Selected" value="true" />
             </Window>
-            <Window type="AlfiskoSkin/Label" name="Label2" >
+            <Window type="AlfiskoSkin/Label" name="typeScreen" >
                 <Property name="Area" value="{{0,414},{0,291},{0,598},{0,339}}" />
                 <Property name="Text" value="Type of screen" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -232,11 +234,48 @@
                 <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
                 <Property name="Text" value="Back" />
             </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox22" >
+                <Property name="ID" value="5" />
+                <Property name="Area" value="{{0,667},{0,486},{0,690},{0,518}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="OclusionsLabel" >
+                <Property name="Area" value="{{0,413},{0,478},{0,594},{0,528}}" />
+                <Property name="Text" value="Oclusions" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Checkbox" name="Checkbox23" >
+                <Property name="ID" value="4" />
+                <Property name="Area" value="{{0,668},{0,433},{0,691},{0,465}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="ClippingLabel" >
+                <Property name="Area" value="{{0,414},{0,424},{0,595},{0,474}}" />
+                <Property name="Text" value="Clippling" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="resultShadowsLabel" >
+                <Property name="ID" value="31" />
+                <Property name="Area" value="{{0,905},{0,368},{0,1032},{0,407}}" />
+                <Property name="Text" value="Dinamic" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="ShadowsLabel" >
+                <Property name="Area" value="{{0,415},{0,370},{0,596},{0,420}}" />
+                <Property name="Text" value="Shadows" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider2" >
+                <Property name="ID" value="3" />
+                <Property name="Area" value="{{0,663},{0,374},{0,919},{0,406}}" />
+                <Property name="CurrentValue" value="2" />
+                <Property name="MaximumValue" value="2" />
+                <Property name="ClickStepSize" value="1" />
+            </Window>
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow4" >
             <Property name="ID" value="7" />
             <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,171},{0,732},{0,248}}" />
                 <Property name="Text" value="Game Options" />

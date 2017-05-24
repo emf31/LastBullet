@@ -345,8 +345,9 @@ int main() {
 		else if (Input::i().keyReleased(GLFW_KEY_R)) {
 			//velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
 			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-			std::cout << "creo bildboard en: -20.0f, -5.0f, 0.0f " << std::endl;
-			sm.crearBillBoard(Vec3<float>(-20.0f, -5.0f, 0.0f));
+			std::cout << "creo bildboard en: 0.0f, 0.0f, 0.0f " << std::endl;
+			TBillboard* b = sm.crearBillBoard(Vec3<float>(0.0f, 0.0f, 0.0f));
+			b->setScale(Vec3<float>(20.0f, 20.0f, 20.0f));
 
 		}
 		else if (Input::i().keyReleased(GLFW_KEY_L)) {

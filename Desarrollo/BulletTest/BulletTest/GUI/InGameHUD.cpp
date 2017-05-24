@@ -237,7 +237,7 @@ void InGameHUD::updateLabelVida() {
 	CEGUI::String str;
 	int ammoTotal = p->getAmmoTotal();
 	if (ammoTotal == -1) {
-		LabelMunicionTotal->setText("RECARGANDO");
+		LabelMunicionTotal->setText("REL.");
 	}
 	else {
 		oss << p->getAmmoTotal();

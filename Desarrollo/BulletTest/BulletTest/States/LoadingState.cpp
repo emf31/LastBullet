@@ -70,6 +70,7 @@ void LoadingState::Update(Time timeElapsed) {
 			if (queueAnimaciones.empty()) {
 				TimePerFrameClass::timePerFrameDefault();
 
+
 				StateStack::i().GetCurrentState()->Clear();
 				StateStack::i().SetCurrentState(States::ID::InGame);
 				StateStack::i().GetCurrentState()->Inicializar();
@@ -87,7 +88,6 @@ void LoadingState::Update(Time timeElapsed) {
 		}
 
 
-
 		needRender = true;
 	}
 
@@ -101,10 +101,10 @@ void LoadingState::Render(float interpolation, Time elapsedTime) {
 	needRender = false;
 }
 
+
 void LoadingState::readAllAssets() {
 	AssetsReader::read("../media/Props", colaAssets);
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
 	queueAnimaciones.push(AnimationStruct{ "../media/personaje1", 191 });
-
 }

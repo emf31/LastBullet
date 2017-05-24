@@ -5,6 +5,7 @@
 #include <NetworkManager.h>
 #include <steam_api.h>
 #include "../global.h"
+#include <ClippingManager.h>
 
 MenuGUI::MenuGUI() : GUI() {
 }
@@ -133,21 +134,48 @@ void MenuGUI::inicializar() {
 	Atras2 = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(99));
 	Atras2->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
 
-	ApplySounds = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(98));
-	ApplySounds->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onApplySounds, this));
+
 	SoundSlider = static_cast<CEGUI::Slider*>(OpcionesAudioWindow->getChild(1));
+	float soundVolume = std::stof(Settings::i().GetValue("sound")) / 100.f;
+	float musicVolume = std::stof(Settings::i().GetValue("music")) / 100.f;
+	SoundSlider->setCurrentValue(soundVolume);
 	SoundSlider->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onUpdateSliderSound, this));
 	MusicSlider = static_cast<CEGUI::Slider*>(OpcionesAudioWindow->getChild(2));
+	MusicSlider->setCurrentValue(musicVolume);
 	MusicSlider->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onUpdateSliderMusic, this));
 	SoundLabel = static_cast<CEGUI::DefaultWindow*>(OpcionesAudioWindow->getChild(3));
+	SoundLabel->setText(std::to_string(int(soundVolume * 100)));
 	MusicLabel = static_cast<CEGUI::DefaultWindow*>(OpcionesAudioWindow->getChild(4));
+	MusicLabel->setText(std::to_string(int(musicVolume * 100)));
 
+	ApplySounds = static_cast<CEGUI::PushButton*>(OpcionesAudioWindow->getChild(98));
+	ApplySounds->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onApplySounds, this));
+
+	SoundManager::i().setVolumeMusic(MusicSlider->getCurrentValue());
+	SoundManager::i().setVolumeSounds(SoundSlider->getCurrentValue());
 
 	OpcionesAudioWindow->setVisible(false);
 
 	//Opciones Video
 
 	OpcionesVideoWindow = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(6));
+
+	Sombras = static_cast<CEGUI::Slider*>(OpcionesVideoWindow->getChild(3));
+	Sombras->setCurrentValue(std::stof(Settings::i().GetValue("shadow")));
+	Sombras->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onShadowsChange, this));
+	
+
+	SombrasLabel = static_cast<CEGUI::DefaultWindow*>(OpcionesVideoWindow->getChild(31));
+	SombrasLabel->setText(numberShadowToString(std::stoi(Settings::i().GetValue("shadow"))));
+
+	Clipping = static_cast<CEGUI::ToggleButton*>(OpcionesVideoWindow->getChild(4));
+	int clip = std::stoi(Settings::i().GetValue("clipping"));
+	Clipping->setSelected((bool)clip);
+	
+
+	Oclusions = static_cast<CEGUI::ToggleButton*>(OpcionesVideoWindow->getChild(5));
+	int ocl = std::stoi(Settings::i().GetValue("oclusions"));
+	Oclusions->setSelected((bool)ocl);
 
 	Atras3 = static_cast<CEGUI::PushButton*>(OpcionesVideoWindow->getChild(99));
 	Atras3->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
@@ -328,20 +356,30 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 				
 
 			
+
 		}
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
 	}
-	
+	else if (m_stateMenu == stateMenu::enumOpcionesVideo) {
+		ClippingManager::i().setUpdateClipping(Clipping->isSelected());
+		ClippingManager::i().setUpdateOclusions(Oclusions->isSelected());
+	}
+	if (lastState == stateMenu::enumPrincipal && m_stateMenu == stateMenu::enumLobby) {
+		//Creamos la red (abrir server, crear peer, conectarse, etc.) 
+		NetworkManager::i().configureNetwork();
+	}
+
 	changeState(lastState);
 	return true;
 }
 
 bool MenuGUI::onApplySounds(const CEGUI::EventArgs & e)
 {
-	std::cout << MusicSlider->getCurrentValue() << std::endl;
 	SoundManager::i().setVolumeMusic(MusicSlider->getCurrentValue());
 	SoundManager::i().setVolumeSounds(SoundSlider->getCurrentValue());
+	Settings::i().SetValue("sound", std::to_string(int(SoundSlider->getCurrentValue()*100)));
+	Settings::i().SetValue("music", std::to_string(int(MusicSlider->getCurrentValue()*100)));
 	return true;
 }
 
@@ -390,6 +428,14 @@ bool MenuGUI::onLanServerBtnDeactivated(const CEGUI::EventArgs & e) {
 	return true;
 }
 
+bool MenuGUI::onShadowsChange(const CEGUI::EventArgs & e)
+{
+	m_shadows = (int)Sombras->getCurrentValue();
+	SombrasLabel->setText(numberShadowToString(m_shadows));
+	Settings::i().SetValue("shadow", std::to_string(m_shadows));
+	return true;
+}
+
 bool  MenuGUI::onReadyBtnClicked(const CEGUI::EventArgs & e) {
 	NetworkManager::i().getNetPlayer()->sendReadyStatus();
 	return true;
@@ -409,6 +455,21 @@ bool MenuGUI::onBackButtonClicked(const CEGUI::EventArgs & e) {
 	changeState(stateMenu::enumPrincipal);
 
 	return true;
+}
+
+std::string MenuGUI::numberShadowToString(int number)
+{
+	std::string p;
+	if (number == 2) {
+		p ="Dinamic";
+	}
+	else if (number == 1) {
+		p = "Static";
+	}
+	else if (number == 0) {
+		p ="No Shadows";
+	}
+	return p;
 }
 
 MenuGUI::PlayerSlot* MenuGUI::setNameOnPlayerSlot(const std::string & name) {
@@ -517,11 +578,12 @@ void MenuGUI::updateFondo(int velocidad)
 		CEGUI::UVector2 newposition(CEGUI::UDim(imagen->getPosition().d_x) - resta, CEGUI::UDim(imagen->getPosition().d_y));
 		imagen->setPosition(newposition);
 		imagen1_x = -1280;
+		std::cout << newposition << std::endl;
 	}
 	if (imagen2_x >= 1280) {
-		CEGUI::UDim resta;
-		resta.d_offset = 2560;
-		CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) - resta, CEGUI::UDim(imagen2->getPosition().d_y));
+		CEGUI::UDim resta2;
+		resta2.d_offset = 2560;
+		CEGUI::UVector2 newposition2(CEGUI::UDim(imagen2->getPosition().d_x) - resta2, CEGUI::UDim(imagen2->getPosition().d_y));
 		imagen2->setPosition(newposition2);
 		imagen2_x = -1280;
 	}

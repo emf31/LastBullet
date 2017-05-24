@@ -72,11 +72,15 @@ public:
 	bool onBotsSlider(const CEGUI::EventArgs & e);
 	bool onLanServerBtnActivated(const CEGUI::EventArgs & e);
 	bool onLanServerBtnDeactivated(const CEGUI::EventArgs & e);
+	bool onShadowsChange(const CEGUI::EventArgs & e);
+	
 	
 
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
 	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
 	bool onBackButtonClicked(const CEGUI::EventArgs & e);
+
+	std::string numberShadowToString(int number);
 
 	PlayerSlot* setNameOnPlayerSlot(const std::string& name);
 
@@ -104,8 +108,9 @@ public:
 
 private:
 
-	int imagen1_x;
-	int imagen2_x;
+	long int imagen1_x;
+	long int imagen2_x;
+	int m_shadows;
 
 	enum stateMenu {
 		enumPrincipal, enumUnir, enumOpcionesAudio, enumOpcionesVideo, enumOpcionesGame, enumLobby
@@ -175,6 +180,15 @@ private:
 	PlayerSlot PlayerSlot2;
 	PlayerSlot PlayerSlot3;
 	PlayerSlot PlayerSlot4;
+
+	//Video
+
+	CEGUI::Slider* Sombras;
+	CEGUI::DefaultWindow* SombrasLabel;
+	CEGUI::ToggleButton* Clipping;
+	CEGUI::ToggleButton* Oclusions;
+
+	std::shared_ptr<NetPlayer> netPlayer;
 
 	int FrameActual;
 

@@ -17,11 +17,11 @@ Pistola::~Pistola()
 
 void Pistola::inicializar()
 {
-	damage = 15;
+	damage = 20;
 	capacidadAmmo = 12;
 	disparos = 0;
-	recarga = milliseconds(1000);
-	cadencia = milliseconds(200);
+	recarga = milliseconds(500);
+	cadencia = milliseconds(100);
 	numCargadores = numCargadoresPistola;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 	FUERZA = btVector3(10, 10, 10);

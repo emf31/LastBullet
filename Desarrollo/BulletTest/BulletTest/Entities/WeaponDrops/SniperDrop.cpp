@@ -4,6 +4,7 @@
 
 SniperDrop::SniperDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
+	timeRespawnWeapon = 8;
 }
 
 

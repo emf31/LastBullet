@@ -73,9 +73,12 @@ void RocketBulletEnemy::handleMessage(const Message & message)
 
 	if (message.mensaje == "COLLISION" || message.mensaje == "BORRATE") {
 
+		TBillboard* bill = SceneManager::i().crearBillBoard(cons(m_rigidBody->getWorldTransform().getOrigin()));
+		bill->setFrameTime(milliseconds(20.f));
+		bill->setScale(Vec3<float>(3.f, 3.f, 3.f));
 		PhysicsEngine::i().removeRigidBody(m_rigidBody);
 		EntityManager::i().removeEntity(this);
-	
+
 	}
 }
 

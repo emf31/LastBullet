@@ -65,13 +65,19 @@ void LifeComponent::restaVida(float cantidad, RakNet::RakNetGUID guid)
 		kill.guidDeath = m_pOwner->getGuid();
 
 		if (kill.guidKill == EntityManager::i().getEntity(PLAYER)->getGuid() 
-			|| kill.guidDeath == EntityManager::i().getEntity(PLAYER)->getGuid()) {
+			|| kill.guidDeath == EntityManager::i().getEntity(PLAYER)->getGuid())
+		{
+			Entity* bot = EntityManager::i().getRaknetEntity(kill.guidKill);
 
-			Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
-			Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
+			if (bot->getClassName() != "Enemy_Bot") {
+				Entity* entKill = EntityManager::i().getRaknetEntity(kill.guidKill);
+				Entity* entDeath = EntityManager::i().getRaknetEntity(kill.guidDeath);
 
-			InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
-			hud->newFeed(entKill->getName(), entDeath->getName());
+				InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+				hud->newFeed(entKill->getName(), entDeath->getName());
+			}
+
+			
 		}
 
 		NetworkManager::i().dispatchMessage(kill, ACTUALIZA_TABLA);
