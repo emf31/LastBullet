@@ -40,7 +40,7 @@ void InGameHUD::inicializar() {
 	m_LabelCuenta->setFont(&labelFont);
 
 	
-
+	
 
 	LabelVida = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(1));
 	//LabelArma = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(2));
@@ -63,7 +63,8 @@ void InGameHUD::inicializar() {
 	ImagenSniper = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(64));
 	ImagenSniper->setVisible(false);
 
-	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(1)->getChild(54));
+	LabelEndGame = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(54));
+	LabelEndGame->setFont(&labelFont);
 
 	windowTabla = static_cast<CEGUI::DefaultWindow*>(getContext()->getRootWindow()->getChild(0)->getChild(10));
 
@@ -142,15 +143,28 @@ void InGameHUD::newFeed(const std::string & killer,const std::string & death)
 
 
 void InGameHUD::updateRelojes() {
-	hitMarker->setVisible(p->hit);
-	sangre->setVisible(p->sangre);
+
+	if (!World::i().getPartida()->isFinished()) {
+		hitMarker->setVisible(p->hit);
+		sangre->setVisible(p->sangre);
+	}
+
 }
 void InGameHUD::updateApuntando() {
-	scope->setVisible(p->getApuntando());
+	if (!World::i().getPartida()->isFinished()) {
+		scope->setVisible(p->getApuntando());
+	}
 }
 void InGameHUD::muestraFinPartida() {
+
 	LabelEndGame->setVisible(true);
-	setTablaVisible(true);
+	World::i().getPartida()->setFinished(true);
+	hitMarker->setVisible(false);
+	scope->setVisible(false);
+	SceneManager::i().zoomZout();
+	EntityManager::i().stopInterpolateAllEntities();
+	
+	//setTablaVisible(true);
 
 }
 
@@ -248,6 +262,10 @@ void InGameHUD::updateLabelVida() {
 
  void InGameHUD::setTablaVisible(bool visible) {
 	windowTabla->setVisible(visible);
+	if (World::i().getPartida()->isFinished()) {
+		LabelEndGame->setVisible(!visible);
+	}
+	
  }
 
  void InGameHUD::setPlayerKills(int player, int kills) {

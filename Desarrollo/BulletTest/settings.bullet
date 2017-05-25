@@ -1,6 +1,7 @@
-music:100
+music:0
 sound:100
 resolucionx:1280
+bots:0
 resoluciony:720
 bots:1
 fullscreen:0
@@ -10,6 +11,6 @@ mapa:landing.json
 WANIP:2.155.130.30
 name:Host
 maxkills:15
-shadow:2
+shadow:0
 clipping:1
 oclusions:0

@@ -91,6 +91,8 @@ public:
 	};
 
 	EngineDevice& getDevice() { return engine; }
+
+	bool exit;
 private:
 
 	int screenWidth, screenHeight;
