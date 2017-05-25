@@ -168,11 +168,13 @@ void MenuGUI::inicializar() {
 	Clipping = static_cast<CEGUI::ToggleButton*>(OpcionesVideoWindow->getChild(4));
 	int clip = std::stoi(Settings::i().GetValue("clipping"));
 	Clipping->setSelected((bool)clip);
+	ClippingManager::i().setUpdateClipping((bool)clip);
 	
 
 	Oclusions = static_cast<CEGUI::ToggleButton*>(OpcionesVideoWindow->getChild(5));
 	int ocl = std::stoi(Settings::i().GetValue("oclusions"));
 	Oclusions->setSelected((bool)ocl);
+	ClippingManager::i().setUpdateOclusions((bool)ocl);
 
 	Atras3 = static_cast<CEGUI::PushButton*>(OpcionesVideoWindow->getChild(99));
 	Atras3->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
@@ -198,6 +200,8 @@ void MenuGUI::inicializar() {
 
 	MaxKillEb = static_cast<CEGUI::Editbox*>(OpcionesGameWindow->getChild(1005));
 	MaxKillEb->setText(Settings::i().GetValue("maxkills"));
+
+	MaxKillEb->subscribeEvent(CEGUI::Editbox::EventActivated, CEGUI::Event::Subscriber(&MenuGUI::onMaxKillClicked, this));
 
 	LanServerBtn = static_cast<CEGUI::ToggleButton*>(OpcionesGameWindow->getChild(10));
 
@@ -225,11 +229,11 @@ void MenuGUI::update()
 	static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();*/
 	/*injectKeyDown(Input::i().getLatestKeyReleased());
 	injectKeyUp(Input::i().getLatestKeyReleased());*/
-	if (lastKey != Input::i().getLatestKeyReleased()) {
-		injectChar(Input::i().getLatestKeyReleased());
+	//if (lastKey != Input::i().getLatestKeyReleased()) {
+		
 		//std::cout << "Latest Key: " << GlfwToCeguiKey(Input::i().getLatestKeyReleased()) << std::endl;
-		lastKey = Input::i().getLatestKeyReleased();
-	}
+		//lastKey = Input::i().getLastTextInput();
+	//}
 	
 
 	
@@ -263,7 +267,11 @@ void MenuGUI::update()
 		Salir->setVisible(false);
 	}*/
 }
+bool MenuGUI::	onMaxKillClicked(const CEGUI::EventArgs & e) {
+	
 
+	return true;
+}
 void MenuGUI::handleEvent(Event * ev) {
 }
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e) {
@@ -364,17 +372,20 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 				NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
 			}
 				
-
-			
-
 		}
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
 		Settings::i().SetValue("maxkills", MaxKillEb->getText().c_str());
+
+		for (int i = 2; i <= 7; i++)
+			static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesVideo) {
 		ClippingManager::i().setUpdateClipping(Clipping->isSelected());
+		Settings::i().SetValue("clipping", std::to_string((int)Clipping->isSelected()));
 		ClippingManager::i().setUpdateOclusions(Oclusions->isSelected());
+		Settings::i().SetValue("oclusions", std::to_string((int)Oclusions->isSelected()));
+
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesAudio) {
 		Settings::i().SetValue("sound", std::to_string(int(SoundSlider->getCurrentValue() * 100)));

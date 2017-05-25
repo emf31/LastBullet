@@ -3,14 +3,15 @@
 #include <Map.h>
 #include <PhysicsEngine.h>
 
-World::World()
+World::World() : partida(nullptr)
 {
 	partida = new Partida();
 }
 
 World::~World()
 {
-	
+	delete partida;
+	partida = nullptr;
 }
 
 
@@ -52,6 +53,5 @@ void World::inicializar()
 
 void World::apagar()
 {
-	delete partida;
-	partida = nullptr;
+	partida->apagar();
 }

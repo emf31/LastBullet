@@ -3,6 +3,7 @@
 #include <events/KillEvent.h>
 #include <events/MuerteEvent.h>
 #include <events\GameStartEvent.h>
+#include <events/EndGameEvent.h>
 #include <EventSystem.h>
 #include <GUIManager.h>
 #include <NetworkManager.h>
@@ -45,8 +46,9 @@ void Partida::handleEvent(Event* e)
 		}
 
 		case E_FIN_PARTIDA: {
+			EndGameEvent* end_ev = static_cast<EndGameEvent*>(e);
 			muestraTabla();
-			ingame->muestraFinPartida();
+			ingame->muestraFinPartida(EntityManager::i().getRaknetEntity(end_ev->guid)->getName());
 			break;
 		}
 		case E_GAME_START: {
@@ -153,6 +155,17 @@ void Partida::ordenaTabla()
 		max = -1;
 	}
 
+}
+
+void Partida::apagar()
+{
+	allPlayerReady = false; 
+	finished = false;
+
+	ordenado.clear();
+	m_tabla.clear();
+
+	ingame->clear();
 }
 
 void Partida::empezarCuentaAtras()

@@ -32,7 +32,7 @@ void Input::endEventProcess() {
 			mouseButtonState[i] = DOWN;
 	}
 
-	
+	textInput = 0;
 
 }
 
@@ -55,11 +55,11 @@ void Input::key_callbackImpl(GLFWwindow * window, int key, int scancode, int act
 		// if the key is down
 		if (keys[key] != UP) {
 			keys[key] = RELEASED; // Set to Released
-			LatestKey = key;
 		}
 			
 	}
 	else if (action == GLFW_REPEAT) {
+		
 		keys[key] = DOWN;
 	}
 	
@@ -133,6 +133,10 @@ void Input::mouseButtonCallbackImpl(int key, int action, int mods) {
 
 void Input::scroll_callbackImpl(GLFWwindow * window, double xoffset, double yoffset) {
 	yScroll = (float)yoffset;
+}
+
+void Input::textInput_callbackImpl(GLFWwindow* window, unsigned int codePoint, int mods) {
+	textInput = codePoint;
 }
 
 void Input::Do_Movement(GLfloat deltaTime) {
@@ -268,6 +272,6 @@ bool Input::keyReleased(unsigned int keycode) {
 		return false;
 }
 
-unsigned int Input::getLatestKeyReleased() {
-	return LatestKey;
+unsigned int Input::getLastTextInput() {
+	return textInput;
 }

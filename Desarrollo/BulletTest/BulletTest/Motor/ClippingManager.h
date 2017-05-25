@@ -25,16 +25,21 @@ private:
 	std::vector<ClippingZone*> m_clippingZones;
 	bool updateClipping;
 	bool updateOclusions;
+	std::string mizona;
 
-	bool oclusionMatrix[6][6]{
+	bool oclusionMatrix[10][10]{
 
-					/*Window	Ct2		PtoA	Window2		Mid		Ct*/	
-		/*Window*/	{ true,		true,	true,	true,		true,	true },
-		/*Ct2*/		{ true,		true,	true,	false,		true,	true },
-		/*PtoA*/	{ true,		true,	true,	true,		true,	true},
-		/*Window2*/	{ true,		false,	true,	true,		true,	true },
-		/*Mid*/		{ true,		true,	true,	true,		true,	true },
-		/*Ct*/		{ true,		true,	true,	true,		true,	true }
+					/*PtoA2		CT3		Mid2	Conector	Window	Ct2		PtoA	Window2		Mid		Ct	*/	
+		/*PtoA2*/	{ true,		false,	false,	true,		true,	true ,	 true ,		true ,	false ,	true },
+		/*Ct3*/		{ false,	true,	false,	false,		true,	true ,	 true ,		false ,	false ,	true },
+		/*Mid2*/	{ false,	false,	true,	true,		true,	false ,	 true ,		false ,	true ,	true },
+		/*Conector*/{ true,		false,	true,	true,		true,	true ,	 true ,		true ,	true ,	false },
+		/*Window*/	{ true,		true,	true,	true,		true,	false ,	 true ,		true ,	true ,	true },
+		/*Ct2*/		{ true,		true,	false,	true,		false,	true ,	 true ,		false ,	true ,	true },
+		/*PtoA*/	{ true, 	true,	true,	true,		true,	true ,	 true ,		true ,	true ,	true },
+		/*Window2*/	{ true	,	false,	false,	true,		true,	false ,	 true ,		true ,	true ,	true },
+		/*Mid*/		{ false,	false,	true,	true,		true,	true ,	 true ,		true ,	true ,	true },
+		/*Ct*/		{ true,		true,	true,	false,		true,	true ,	 true ,		true ,	true ,	true }
 
 	};
 

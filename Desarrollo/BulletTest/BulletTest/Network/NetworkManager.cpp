@@ -48,7 +48,7 @@ void NetworkManager::startup(LPCTSTR lpApplicationName)
 
 
 	// Close process and thread handles. 
-	CloseHandle(pi.hProcess);
+	//CloseHandle(pi.hProcess);
 	CloseHandle(pi.hThread);
 }
 
@@ -69,6 +69,10 @@ void NetworkManager::apagar()
 	
 	//cerrar el server
 	TerminateProcess(pi.hProcess, 0);
+	//CloseHandle(pi.hProcess);
+
+
+
 }
 
 //Creates net player object and stores it in shared ptr

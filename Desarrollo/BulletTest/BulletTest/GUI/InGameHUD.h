@@ -57,7 +57,7 @@ public:
 
 	void updateApuntando();
 
-	void muestraFinPartida();
+	void muestraFinPartida(const std::string& name);
 
 	bool isInCuentaAtras() { return activeCuentaAtras; }
 
@@ -73,6 +73,13 @@ public:
 	void empezarCuentaAtras();
 
 	void updateCuentaAtras();
+
+	void clear() {
+		countTime.restart();
+		feedTime.restart();
+		count = 10;
+		activeCuentaAtras = true;
+	}
 
 private:
 
@@ -111,8 +118,9 @@ private:
 
 	Player *p;
 
-	int count;
+	
 	Clock countTime;
 	Clock feedTime;
+	int count;
 	bool activeCuentaAtras;
 };
