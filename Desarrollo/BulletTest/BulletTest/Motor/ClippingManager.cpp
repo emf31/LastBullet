@@ -66,6 +66,7 @@ void ClippingManager::update()
 					}
 					(*it)->setVisible(isVisible);
 				}
+
 			}
 		}
 	}
@@ -75,15 +76,17 @@ void ClippingManager::update()
 void ClippingManager::printZonesVisibility()
 {
 	std::cout << "---------------------------------------------------"<< std::endl;
+
 	for (std::vector<ClippingZone*>::iterator it = m_clippingZones.begin(); it != m_clippingZones.end(); ++it) {
 		std::cout << (*it)->m_name << "        " << (*it)->getVisible() << std::endl;
 	}
 	std::cout << "---------------------------------------------------" << std::endl;
+	std::cout << "Mi zona es: " << mizona<<std::endl;
 }
 
 void ClippingManager::updateZoneOclusions(int id, std::vector<ClippingZone*> &zonesOclusionOut)
 {
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 10; i++) {
 		if (oclusionMatrix[id][i] == true) {
 			if(id!=i)
 				zonesOclusionOut.push_back(m_clippingZones.at(i));

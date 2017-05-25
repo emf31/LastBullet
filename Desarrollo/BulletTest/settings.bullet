@@ -2,7 +2,6 @@ music:0
 sound:100
 resolucionx:1280
 resoluciony:720
-bots:1
 fullscreen:0
 gamemode:0
 Lan:1
@@ -11,5 +10,5 @@ WANIP:2.155.130.30
 name:Host
 maxkills:80
 shadow:0
-clipping:1
-oclusions:0
+clipping:0
+oclusions:1
