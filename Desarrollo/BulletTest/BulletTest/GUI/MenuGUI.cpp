@@ -385,6 +385,19 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		Settings::i().SetValue("clipping", std::to_string((int)Clipping->isSelected()));
 		ClippingManager::i().setUpdateOclusions(Oclusions->isSelected());
 		Settings::i().SetValue("oclusions", std::to_string((int)Oclusions->isSelected()));
+		if ((int)Sombras->getCurrentValue() == 0) {
+			SceneManager::i().activeStaticShadow(false);
+			SceneManager::i().activeDynamicShadow(false);
+		}
+		else if ((int)Sombras->getCurrentValue() == 1) {
+			SceneManager::i().activeStaticShadow(true);
+			SceneManager::i().activeDynamicShadow(false);
+		}
+		else if ((int)Sombras->getCurrentValue() == 2) {
+			SceneManager::i().activeStaticShadow(true);
+			SceneManager::i().activeDynamicShadow(true);
+		}
+		
 
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesAudio) {
