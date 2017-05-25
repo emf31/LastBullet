@@ -204,7 +204,7 @@ void InGameHUD::updateCuentaAtras() {
 
 void InGameHUD::updateLabelVida() {
 	std::ostringstream oss;
-	oss << p->getLifeComponent().getVida();
+	oss << (int)p->getLifeComponent().getVida();
 	CEGUI::String str(oss.str());
 	LabelVida->setText(str);
 }
