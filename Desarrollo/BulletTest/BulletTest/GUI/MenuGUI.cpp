@@ -291,7 +291,7 @@ void MenuGUI::update()
 		Salir->setVisible(false);
 	}*/
 }
-bool MenuGUI::	onMaxKillClicked(const CEGUI::EventArgs & e) {
+bool MenuGUI::onMaxKillClicked(const CEGUI::EventArgs & e) {
 	MaxKillLbl->setText(std::to_string((int)MaxKillEb->getCurrentValue()));
 	return true;
 }

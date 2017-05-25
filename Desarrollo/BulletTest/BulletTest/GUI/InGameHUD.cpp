@@ -127,15 +127,15 @@ void InGameHUD::newFeed(const std::string & killer,const std::string & death)
 	
 	if (killer != death) {
 		if (killer == EntityManager::i().getEntity(PLAYER)->getName()) {
-			Feed->setText("YOU killed " + death);
+			Feed->setText("You killed " + death);
 		}
 		else {
-			Feed->setText(killer+ " killed YOU ");
+			Feed->setText(killer+ " killed You ");
 		}
 		
 	}
 	else {
-		Feed->setText("YOU suicide");
+		Feed->setText("You killed yourself");
 	}
 	Feed->setVisible(true);
 	feedTime.restart();
