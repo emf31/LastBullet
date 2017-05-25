@@ -80,6 +80,7 @@ public:
 	bool onReadyBtnClicked(const CEGUI::EventArgs & e);
 	bool onInviteBtnClicked(const CEGUI::EventArgs & e);
 	bool onBackButtonClicked(const CEGUI::EventArgs & e);
+	bool DifficultySliderChanged(const CEGUI::EventArgs & e);
 
 	std::string numberShadowToString(int number);
 
@@ -177,7 +178,12 @@ private:
 	CEGUI::DefaultWindow *InternetLbl;
 	CEGUI::DefaultWindow *LanLbl;
 
-	CEGUI::Editbox *MaxKillEb;
+	CEGUI::Slider *MaxKillEb;
+	CEGUI::DefaultWindow *MaxKillLbl;
+
+	CEGUI::Slider *BotDifficultySlider;
+	CEGUI::DefaultWindow *BotDifficultyLbl;
+
 
 	PlayerSlot PlayerSlot1;
 	PlayerSlot PlayerSlot2;
@@ -202,6 +208,9 @@ private:
 	void setStateVisible(stateMenu state, bool visible);
 	void actualizarTopOpciones();
 	
+	std::string intToBotDifficulty(int diff);
+
+	int stringToBotDifficulty(const std::string& diff);
 
 	stateMenu lastState;
 

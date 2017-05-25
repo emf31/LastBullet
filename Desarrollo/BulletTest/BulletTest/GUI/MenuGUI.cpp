@@ -198,10 +198,20 @@ void MenuGUI::inicializar() {
 
 	OpcionesGameWindow->setVisible(false);
 
-	MaxKillEb = static_cast<CEGUI::Editbox*>(OpcionesGameWindow->getChild(1005));
-	MaxKillEb->setText(Settings::i().GetValue("maxkills"));
+	MaxKillEb = static_cast<CEGUI::Slider*>(OpcionesGameWindow->getChild(1005));
+	MaxKillEb->setCurrentValue(std::stof(Settings::i().GetValue("maxkills")));
+	MaxKillEb->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::onMaxKillClicked, this));
 
-	MaxKillEb->subscribeEvent(CEGUI::Editbox::EventActivated, CEGUI::Event::Subscriber(&MenuGUI::onMaxKillClicked, this));
+	MaxKillLbl = static_cast<CEGUI::DefaultWindow*>(OpcionesGameWindow->getChild(1006));
+	MaxKillLbl->setText(Settings::i().GetValue("maxkills"));
+
+	BotDifficultySlider = static_cast<CEGUI::Slider*>(OpcionesGameWindow->getChild(1007));
+	BotDifficultySlider->setCurrentValue(std::stof(Settings::i().GetValue("difficulty")));
+	BotDifficultySlider->subscribeEvent(CEGUI::Slider::EventValueChanged, CEGUI::Event::Subscriber(&MenuGUI::DifficultySliderChanged, this));
+
+	BotDifficultyLbl = static_cast<CEGUI::DefaultWindow*>(OpcionesGameWindow->getChild(1008));
+	std::string diff = intToBotDifficulty(std::stoi(Settings::i().GetValue("difficulty")));
+	BotDifficultyLbl->setText(diff);
 
 	LanServerBtn = static_cast<CEGUI::ToggleButton*>(OpcionesGameWindow->getChild(10));
 
@@ -268,8 +278,7 @@ void MenuGUI::update()
 	}*/
 }
 bool MenuGUI::	onMaxKillClicked(const CEGUI::EventArgs & e) {
-	
-
+	MaxKillLbl->setText(std::to_string((int)MaxKillEb->getCurrentValue()));
 	return true;
 }
 void MenuGUI::handleEvent(Event * ev) {
@@ -375,10 +384,16 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		}
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
-		Settings::i().SetValue("maxkills", MaxKillEb->getText().c_str());
+		if((int)(MaxKillEb->getCurrentValue())>0){
+			Settings::i().SetValue("maxkills", std::to_string((int)MaxKillEb->getCurrentValue()));
+		} else {
+			Settings::i().SetValue("maxkills", std::to_string(10));
+		}
+		
+		Settings::i().SetValue("difficulty", std::to_string(stringToBotDifficulty(BotDifficultyLbl->getText().c_str())));
 
-		for (int i = 2; i <= 7; i++)
-			static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();
+		/*for (int i = 2; i <= 7; i++)
+			static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();*/
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesVideo) {
 		ClippingManager::i().setUpdateClipping(Clipping->isSelected());
@@ -397,6 +412,11 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 	}
 
 	changeState(lastState);
+	return true;
+}
+
+bool MenuGUI::DifficultySliderChanged(const CEGUI::EventArgs & e) {
+	BotDifficultyLbl->setText(intToBotDifficulty((int)BotDifficultySlider->getCurrentValue()));
 	return true;
 }
 
@@ -640,14 +660,15 @@ void MenuGUI::reproducirAnimacionPlaneta()
 void MenuGUI::changeState(stateMenu Newstate)
 {
 	setStateVisible(m_stateMenu, false);
+	std::cout << "LastState: " << lastState << std::endl;
+	std::cout << "NewState: " << Newstate << std::endl;
+	if (Newstate != m_stateMenu) {
+		lastState = m_stateMenu;
 
-	lastState = m_stateMenu;
-
-	m_stateMenu = Newstate;
+		m_stateMenu = Newstate;
+	}
 
 	setStateVisible(m_stateMenu, true);
-
-
 
 }
 
@@ -675,4 +696,27 @@ void MenuGUI::setStateVisible(stateMenu state, bool visible)
 void MenuGUI::actualizarTopOpciones()
 {
 	
+}
+
+std::string MenuGUI::intToBotDifficulty(int diff) {
+	switch (diff) {
+	case 0: return "Easy";
+	case 1: return "Medium";
+	case 2: return "Hard";
+	case 3: return "Nightmare";
+	default: return "Medium";
+	}
+}
+
+int MenuGUI::stringToBotDifficulty(const std::string& diff) {
+	if (diff == "Easy") {
+		return 0;
+	} else if (diff == "Medium") {
+		return 1;
+	} else if (diff == "Hard") {
+		return 2;
+	} else if (diff == "Nightmare") {
+		return 3;
+	}
+	return 1;
 }
