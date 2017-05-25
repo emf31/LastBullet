@@ -12,11 +12,14 @@ void Input::endEventProcess() {
 	{
 		if (keys[i] == RELEASED) {
 			keys[i] = UP;
+			
 		}
 			
 
-		if (keys[i] == PRESSED)
+		if (keys[i] == PRESSED) {
 			keys[i] = DOWN;
+		}
+			
 	}
 
 	//Mouse Button States
@@ -50,8 +53,11 @@ void Input::key_callbackImpl(GLFWwindow * window, int key, int scancode, int act
 	else if(action == GLFW_RELEASE)
 	{
 		// if the key is down
-		if (keys[key] != UP)
+		if (keys[key] != UP) {
 			keys[key] = RELEASED; // Set to Released
+			LatestKey = key;
+		}
+			
 	}
 	else if (action == GLFW_REPEAT) {
 		keys[key] = DOWN;
@@ -259,4 +265,8 @@ bool Input::keyReleased(unsigned int keycode) {
 		return true;
 	else
 		return false;
+}
+
+unsigned int Input::getLatestKeyReleased() {
+	return LatestKey;
 }

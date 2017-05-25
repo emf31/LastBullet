@@ -99,6 +99,8 @@ public:
 
 	bool keyReleased(unsigned int keycode);
 
+	unsigned int getLatestKeyReleased();
+
 private:
 	Input();
 
@@ -110,4 +112,6 @@ private:
 	void key_callbackImpl(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 	void toggleWindowMode();
+
+	unsigned int LatestKey = 0;
 };

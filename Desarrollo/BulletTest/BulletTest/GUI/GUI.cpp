@@ -130,6 +130,42 @@ CEGUI::Key::Scan Motor::GUI::GlfwToCeguiKey(int glfwKey)
 	case GLFW_KEY_HOME: return CEGUI::Key::Home;
 	case GLFW_KEY_END: return CEGUI::Key::End;
 	case GLFW_KEY_KP_ENTER: return CEGUI::Key::NumpadEnter;
+	case GLFW_KEY_A: return CEGUI::Key::A;
+	case GLFW_KEY_B: return CEGUI::Key::B;
+	case GLFW_KEY_C: return CEGUI::Key::C;
+	case GLFW_KEY_D: return CEGUI::Key::D;
+	case GLFW_KEY_E: return CEGUI::Key::E;
+	case GLFW_KEY_F: return CEGUI::Key::F;
+	case GLFW_KEY_G: return CEGUI::Key::G;
+	case GLFW_KEY_H: return CEGUI::Key::H;
+	case GLFW_KEY_I: return CEGUI::Key::I;
+	case GLFW_KEY_J: return CEGUI::Key::J;
+	case GLFW_KEY_K: return CEGUI::Key::K;
+	case GLFW_KEY_L: return CEGUI::Key::L;
+	case GLFW_KEY_M: return CEGUI::Key::M;
+	case GLFW_KEY_N: return CEGUI::Key::N;
+	case GLFW_KEY_O: return CEGUI::Key::O;
+	case GLFW_KEY_P: return CEGUI::Key::P;
+	case GLFW_KEY_Q: return CEGUI::Key::Q;
+	case GLFW_KEY_R: return CEGUI::Key::R;
+	case GLFW_KEY_S: return CEGUI::Key::S;
+	case GLFW_KEY_T: return CEGUI::Key::T;
+	case GLFW_KEY_U: return CEGUI::Key::U;
+	case GLFW_KEY_V: return CEGUI::Key::V;
+	case GLFW_KEY_W: return CEGUI::Key::W;
+	case GLFW_KEY_X: return CEGUI::Key::X;
+	case GLFW_KEY_Y: return CEGUI::Key::Y;
+	case GLFW_KEY_Z: return CEGUI::Key::Z;
+	case GLFW_KEY_0: return CEGUI::Key::Numpad0;
+	case GLFW_KEY_1: return CEGUI::Key::Numpad1;
+	case GLFW_KEY_2: return CEGUI::Key::Numpad2;
+	case GLFW_KEY_3: return CEGUI::Key::Numpad3;
+	case GLFW_KEY_4: return CEGUI::Key::Numpad4;
+	case GLFW_KEY_5: return CEGUI::Key::Numpad5;
+	case GLFW_KEY_6: return CEGUI::Key::Numpad6;
+	case GLFW_KEY_7: return CEGUI::Key::Numpad7;
+	case GLFW_KEY_8: return CEGUI::Key::Numpad8;
+	case GLFW_KEY_9: return CEGUI::Key::Numpad9;
 	default: return CEGUI::Key::Unknown;
 	}
 }
@@ -213,6 +249,10 @@ CEGUI::MouseButton  Motor::GUI::GlfwToCeguiButton(int glfwButton)
 	}
 
 }*/
+
+void Motor::GUI::injectChar(unsigned int key) {
+	m_context->injectChar((char)key);
+}
 
 void Motor::GUI::injectKeyDown(int key) {
 	m_context->injectKeyDown(GlfwToCeguiKey(key));

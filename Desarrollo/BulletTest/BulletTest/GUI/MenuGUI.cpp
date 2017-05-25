@@ -199,6 +199,9 @@ void MenuGUI::inicializar() {
 
 	OpcionesGameWindow->setVisible(false);
 
+	MaxKillEb = static_cast<CEGUI::Editbox*>(OpcionesGameWindow->getChild(1005));
+	MaxKillEb->setText(Settings::i().GetValue("maxkills"));
+
 	LanServerBtn = static_cast<CEGUI::ToggleButton*>(OpcionesGameWindow->getChild(10));
 
 	int lan = std::stoi(Settings::i().GetValue("Lan"));
@@ -222,8 +225,18 @@ void MenuGUI::update()
 	updateFondo(2);
 	reproducirAnimacionPlaneta();
 
-	for(int i=2;i<=7;i++)
-	static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();
+	/*for(int i=2;i<=7;i++)
+	static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();*/
+	/*injectKeyDown(Input::i().getLatestKeyReleased());
+	injectKeyUp(Input::i().getLatestKeyReleased());*/
+	if (lastKey != Input::i().getLatestKeyReleased()) {
+		injectChar(Input::i().getLatestKeyReleased());
+		//std::cout << "Latest Key: " << GlfwToCeguiKey(Input::i().getLatestKeyReleased()) << std::endl;
+		lastKey = Input::i().getLatestKeyReleased();
+	}
+	
+
+	
 
 	//Planeta->setProperty("Image","Planeta/1Planeta2");
 
@@ -360,6 +373,7 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		}
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
+		Settings::i().SetValue("maxkills", MaxKillEb->getText().c_str());
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesVideo) {
 		ClippingManager::i().setUpdateClipping(Clipping->isSelected());

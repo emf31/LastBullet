@@ -176,6 +176,8 @@ private:
 	CEGUI::DefaultWindow *InternetLbl;
 	CEGUI::DefaultWindow *LanLbl;
 
+	CEGUI::Editbox *MaxKillEb;
+
 	PlayerSlot PlayerSlot1;
 	PlayerSlot PlayerSlot2;
 	PlayerSlot PlayerSlot3;
@@ -202,5 +204,5 @@ private:
 
 	stateMenu lastState;
 
-	
+	unsigned int lastKey = 0;
 };
