@@ -59,6 +59,7 @@ void Menu::Update(Time timeElapsed)
 		NetworkManager::i().getNetPlayer()->receiveSteamPackets();
 	}
 
+	Input::i().endEventProcess();
 }
 
 void Menu::Render(float interpolation, Time elapsedTime)

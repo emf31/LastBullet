@@ -101,7 +101,6 @@
             <Property name="ID" value="1" />
             <Property name="Area" value="{{0,-1},{0,-1},{1,-5},{1,-1}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="Visible" value="false" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,499},{0,155},{1,-510},{1,-451}}" />
@@ -154,7 +153,6 @@
             <Property name="ID" value="5" />
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,168},{0,732},{0,250}}" />
                 <Property name="Text" value="Audio Options" />
@@ -270,7 +268,6 @@
             <Property name="ID" value="7" />
             <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,171},{0,732},{0,248}}" />
                 <Property name="Text" value="Game Options" />
@@ -281,8 +278,8 @@
                 <Property name="Text" value="Number of bots" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="AlfiskoSkin/Label" name="Label3" >
-                <Property name="Area" value="{{0,416},{0,353},{0,598},{0,407}}" />
+            <Window type="AlfiskoSkin/Label" name="LanLabel" >
+                <Property name="Area" value="{{0,416},{0,417},{0,598},{0,471}}" />
                 <Property name="Text" value="LAN Server" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
@@ -303,10 +300,20 @@
                 <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
                 <Property name="Text" value="Back" />
             </Window>
-            <Window type="AlfiskoSkin/Checkbox" name="Checkbox" >
+            <Window type="AlfiskoSkin/Checkbox" name="LanCheckbox" >
                 <Property name="ID" value="10" />
-                <Property name="Area" value="{{0,651},{0,359},{0,674},{0,391}}" />
+                <Property name="Area" value="{{0,651},{0,423},{0,674},{0,455}}" />
                 <Property name="Selected" value="true" />
+            </Window>
+            <Window type="AlfiskoSkin/Label" name="Label3" >
+                <Property name="Area" value="{{0,423},{0,370},{0,588},{0,402}}" />
+                <Property name="Text" value="Max. kills" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="AlfiskoSkin/Editbox" name="Editbox" >
+                <Property name="ID" value="1005" />
+                <Property name="Area" value="{{0,642},{0,369},{0,710},{0,401}}" />
+                <Property name="MaxTextLength" value="50" />
             </Window>
         </Window>
         <Window type="DefaultWindow" name="LobbyWindow" >

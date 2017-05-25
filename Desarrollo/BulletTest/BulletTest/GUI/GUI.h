@@ -41,6 +41,8 @@ namespace Motor{
 		CEGUI::Key::Scan GlfwToCeguiKey( int glfwKey);
 		CEGUI::MouseButton GlfwToCeguiButton( int glfwButton);
 
+		void injectChar(unsigned int key);
+
 		void injectKeyDown(int key);
 
 		void injectKeyUp(int key);
