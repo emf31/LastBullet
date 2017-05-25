@@ -152,6 +152,8 @@ void EngineDevice::setKeyCallbacks() {
 	glfwSetCursorPosCallback(window, &Input::mouse_callback);
 	glfwSetMouseButtonCallback(window, &Input::mouseButtonCallback);
 	glfwSetScrollCallback(window, &Input::scroll_callback);
+	//glfwSetCharCallback(window, &Input::textInput_callback);
+	glfwSetCharModsCallback(window, &Input::textInput_callback);
 }
 
 void EngineDevice::setWindowTitle(std::string title) {
