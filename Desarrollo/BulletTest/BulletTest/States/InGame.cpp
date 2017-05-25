@@ -37,7 +37,7 @@ void InGame::Inicializar()
 	PhysicsEngine::i().inicializar();
 
 
-	m_player = new Player("UNDEFINED", NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
+	m_player = new Player(SteamFriends()->GetPersonaName(), NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
 
 	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 

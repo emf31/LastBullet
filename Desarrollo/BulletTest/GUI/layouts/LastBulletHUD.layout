@@ -286,7 +286,7 @@
         </Window>
         <Window type="AlfiskoSkin/Label" name="Label9" >
             <Property name="ID" value="54" />
-            <Property name="Area" value="{{0.367969,0},{-0.313889,0},{0.638281,0},{-0.269444,0}}" />
+            <Property name="Area" value="{{0.367969,-21},{-0.313889,3},{0.638281,30},{-0.269444,51}}" />
             <Property name="Font" value="DejaVuSans-12" />
             <Property name="Text" value="FIN DE LA PARTIDA" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
