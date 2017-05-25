@@ -1,7 +1,7 @@
 #include "NetObject.h"
 #include <NetworkManager.h>
 
-NetObject::NetObject()
+NetObject::NetObject() : peer(nullptr)
 {
 	peer = RakNet::RakPeerInterface::GetInstance();
 	peer->AllowConnectionResponseIPMigration(false);

@@ -23,7 +23,7 @@
 
 
 
-class ParticleSystem;
+
 class InGame : public State {
 public:
 	InGame();
@@ -35,6 +35,8 @@ public:
 	virtual void HandleEvent() override;
 	virtual void Update(Time timeElapsed) override;
 	virtual void Render(float interpolation, Time elapsedTime) override;
+
+	bool wantToExit;
 
 private:
 	InGameHUD ingameGUI;

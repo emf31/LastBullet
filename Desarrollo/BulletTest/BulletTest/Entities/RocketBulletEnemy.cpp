@@ -16,7 +16,7 @@ RocketBulletEnemy::RocketBulletEnemy(Vec3<float> position, Vec3<float> direction
 m_position(position), m_direction(direction), m_velocity(80), m_rotation(rotation)
 {
 	m_lifetime = seconds(3);
-	cargarContenido();
+	//cargarContenido();
 }
 
 

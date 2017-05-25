@@ -16,8 +16,9 @@
 #include <Death.h>
 #include <Run.h>
 #include <Salto.h>
+#include <StateStack.h>
 
-InGame::InGame() : ingameGUI(), debugMenu(), salirGUI()
+InGame::InGame() : ingameGUI(), debugMenu(), salirGUI(), wantToExit(false)
 {
 	
 }
@@ -30,6 +31,8 @@ InGame::~InGame()
 
 void InGame::Inicializar()
 {
+	wantToExit = false;
+
 	SoundManager::i().stopAllSounds();
 	PhysicsEngine::i().inicializar();
 
@@ -73,6 +76,7 @@ void InGame::Inicializar()
 
 void InGame::Clear()
 {
+	World::i().apagar();
 	EntityManager::i().apagar();
 	PhysicsEngine::i().apagar();
 	TriggerSystem::i().apagar();
@@ -82,6 +86,10 @@ void InGame::Clear()
 	MessageHandler::i().borrarContenido();
 
 	GraphicEngine::i().cleanScreen();
+
+	//NetworkManager::i().getNetPlayer()->leaveLobby();
+	NetworkManager::i().apagar();
+
 
 }
 
@@ -247,6 +255,17 @@ void InGame::Update(Time timeElapsed)
 	GUIManager::i().updateAllGuis();
 
 	SoundManager::i().update();
+
+	if (wantToExit) {
+		SalirHUD* menu = static_cast<SalirHUD*>(GUIManager::i().getGUIbyName("SalirHUD"));
+		menu->clear();
+
+		StateStack::i().GetCurrentState()->Clear();
+		StateStack::i().SetCurrentState(States::ID::Menu);
+		StateStack::i().GetCurrentState()->Inicializar();
+	}
+
+	
 }
 
 void InGame::Render(float interpolation, Time elapsedTime)

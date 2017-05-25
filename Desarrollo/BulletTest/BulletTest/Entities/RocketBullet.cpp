@@ -93,7 +93,7 @@ void RocketBullet::handleMessage(const Message & message)
 		bill->setFrameTime(milliseconds(20.f));
 		bill->setScale(Vec3<float>(3.f, 3.f, 3.f));
 
-		std::list<Character*>characters = EntityManager::i().getCharacters();
+		std::list<Character*> characters = EntityManager::i().getCharacters();
 		///Explosion
 		for (std::list<Character*>::iterator it = characters.begin(); it != characters.end(); it++) {
 
@@ -168,11 +168,11 @@ float RocketBullet::explosion(Character* player, const Vec3<float>& posExplosion
 
 
 	if (distancia < radio) {
-		if (distancia < radio) {
-			vidaRestada = 100;
+		if (distancia < radio / 3) {
+			vidaRestada = 120;
 		}
 		else {
-			vidaRestada = 100 * ((radio - distancia) / ((3 * radio) / 3));
+			vidaRestada = 120 * ((radio - distancia) / ((2 * radio) / 3));
 		}
 
 

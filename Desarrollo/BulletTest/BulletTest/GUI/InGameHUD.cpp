@@ -155,7 +155,7 @@ void InGameHUD::updateApuntando() {
 		scope->setVisible(p->getApuntando());
 	}
 }
-void InGameHUD::muestraFinPartida() {
+void InGameHUD::muestraFinPartida(const std::string& name) {
 
 	LabelEndGame->setVisible(true);
 	World::i().getPartida()->setFinished(true);
@@ -163,7 +163,10 @@ void InGameHUD::muestraFinPartida() {
 	scope->setVisible(false);
 	SceneManager::i().zoomZout();
 	EntityManager::i().stopInterpolateAllEntities();
-	
+	std::string finalText = "GAME FINISHED! \n";
+	finalText.append(name);
+	finalText.append(" won the game.");
+	LabelEndGame->setText(finalText);
 	//setTablaVisible(true);
 
 }
