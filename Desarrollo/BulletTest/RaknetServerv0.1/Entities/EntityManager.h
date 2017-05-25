@@ -36,7 +36,7 @@ public:
 	void ArmaCogida(TId &idArma, RakNet::RakPeerInterface *peer);
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
-	void aumentaKill(RakNet::RakNetGUID &guid, int MaxKills, RakNet::RakPeerInterface * peer);
+	void aumentaKill(TKill& kill, int MaxKills, RakNet::RakPeerInterface * peer);
 	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
 	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);;
