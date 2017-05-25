@@ -213,11 +213,13 @@
     <ClInclude Include="EventSystem\EventListener.h" />
     <ClInclude Include="EventSystem\EventSystem.h" />
     <ClInclude Include="EventSystem\events\DebugNetEvent.h" />
+    <ClInclude Include="EventSystem\events\EndGameEvent.h" />
     <ClInclude Include="EventSystem\events\Event.h" />
     <ClInclude Include="EventSystem\events\GameStartEvent.h" />
     <ClInclude Include="EventSystem\events\KillEvent.h" />
     <ClInclude Include="EventSystem\events\MuerteEvent.h" />
     <ClInclude Include="EventSystem\events\PlayerEvent.h" />
+    <ClInclude Include="EventSystem\events\PlayerReadyEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="Graph\AStarSearch.h" />

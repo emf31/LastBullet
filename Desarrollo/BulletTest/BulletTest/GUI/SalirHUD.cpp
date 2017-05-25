@@ -4,6 +4,7 @@
 #include <IngameHUD.h>
 #include <StateStack.h>
 #include "SalirHUD.h"
+#include <InGame.h>
 
 SalirHUD::SalirHUD() : GUI()
 {
@@ -11,7 +12,7 @@ SalirHUD::SalirHUD() : GUI()
 
 void SalirHUD::inicializar()
 {
-	init("../GUI", "LastBulletSalir");
+	init("../GUI", "SalirHUD");
 	loadScheme("SampleBrowser.scheme");
 	loadScheme("AlfiskoSkin.scheme");
 	loadScheme("Generic.scheme");
@@ -55,10 +56,9 @@ bool SalirHUD::onContinuarClicked()
 
 bool SalirHUD::onSalirClicked()
 {
-	clear();
-	StateStack::i().GetCurrentState()->Clear();
-	StateStack::i().SetCurrentState(States::ID::Menu);
-	StateStack::i().GetCurrentState()->Inicializar();
+	InGame* ingame = static_cast<InGame*>(StateStack::i().GetCurrentState());
+	ingame->wantToExit = true;
+	
 	return true;
 }
 

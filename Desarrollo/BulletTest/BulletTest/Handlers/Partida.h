@@ -38,6 +38,9 @@ public:
 	void setPlayerReady(bool t) { allPlayerReady = t; }
 
 	void setFinished(bool finish) { finished = finish; }
+
+	void apagar();
+
 private:
 
 	void empezarCuentaAtras();

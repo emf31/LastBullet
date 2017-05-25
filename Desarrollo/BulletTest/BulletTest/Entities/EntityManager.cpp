@@ -89,7 +89,9 @@ void EntityManager::apagar()
 {
 	for (auto i = m_entities.begin(); i != m_entities.end(); ++i) {
 		//borramos la entities
+
 		i->second->borrarContenido();
+		
 		delete i->second;
 		i->second = 0;
 	}

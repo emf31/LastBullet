@@ -112,7 +112,6 @@ private:
 
 	RakNet::Lobby2MessageFactory_Steam *messageFactory;
 	RakNet::Lobby2Client_Steam *lobby2Client;
-	RakNet::FullyConnectedMesh2 *fcm2;
 	SteamResults steamResults;
 	
 	std::vector<uint64_t> SteamIDs;
