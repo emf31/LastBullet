@@ -370,7 +370,7 @@ void getPackets() {
 
 			if (kill.guidDeath != kill.guidKill) {
 				//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado
-				EntityManager::i().aumentaKill(kill.guidKill, gameinfo.maxKills, peer);
+				EntityManager::i().aumentaKill(kill, gameinfo.maxKills, peer);
 			}
 
 

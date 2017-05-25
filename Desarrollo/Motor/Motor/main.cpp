@@ -25,21 +25,10 @@ void inicialize() {
 	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj")/*, Vec3<float>(25.0f, 0.0f, 0.0f), Vec3<float>(90.0f, 0.0f, 90.0f)*/);
 	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj")/*, Vec3<float>(10.0f, 0.0f, 0.0f), Vec3<float>(45.0f, 0.0f, 0.0f)*/);
 
-	window->setPosition(Vec3<float>(0, 0, 0));
-	window->setRotationXYZ(Vec3<float>(45,45,0));
-	window2->setTransformMatrix(Vec3<float>(50, 0, 0), Vec3<float>(45, 45, 0), Vec3<float>(5, 5, 5));
-	//TModel* window3 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
-	//window3->addChild(window2);
-	//window3->addChild(window);
-	
-	//window2->setPosition(Vec3<float>(25.0f, 0.0f, 0.0f));
-	//window2->setRotationXYZ(Vec3<float>(90.0f, 0.0f, 90.0f));
-	//window->setPosition(Vec3<float>(10.0f, 0.0f, 0.0f));
-	//window->setRotationXYZ(Vec3<float>(45.0f, 0.0f, 0.0f));
-	//window3->setVisible(true);
-	//window->setRotation(Vec3<float>(90.0f, 0.0f, 90.0f));
+	window->setPosition(Vec3<float>(5, 0, 0));
+	window->setRotationXYZ(Vec3<float>(0,0,0));
+	window2->setTransformMatrix(Vec3<float>(25, 0, 0), Vec3<float>(0, 0, 0), Vec3<float>(1, 1, 1));
 
-	//window2->removeEntity();
 
 
 	//Creas el nodo(grafico)
@@ -53,26 +42,20 @@ void inicialize() {
 	m_nodo->setFrameTime(milliseconds(20));
 	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));*/
 
-	/*//pistola
-	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
-	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	SceneManager &sm = SceneManager::i();
 
 
 	//contenedor
 	TModel* n = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	n->setPosition(Vec3<float>(3.0f, 2.0f, 3.0f));
-
 	TModel* n2 = sm.crearNodoMalla(sm.getMesh("assets/contenedor.obj"));
 	n2->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
 	n2->setPosition(Vec3<float>(-3.0f, 0.0f, -3.0f));
-
-
 	//cartel
 	TModel* m = sm.crearNodoMalla(sm.getMesh("assets/cartel.obj"));
 	m->setScale(Vec3<float>(0.2f, 0.2f, 0.2f));
 	m->setPosition(Vec3<float>(0.f, 5.0f, 0.0f));
-	//m->setModelColor(1.0f, 0.5f, 0.31f);
 
 
 	//personaje
@@ -88,53 +71,9 @@ void inicialize() {
 
 	TModel* l2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
 	l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	l2->setPosition(Vec3<float>(-10.0f, 5.0f, 8.0f));
-
-
-
-
-	//animacion
-<<<<<<< HEAD
-	<<<<<<< HEAD
-	=======
-	int velocidadAnim = 10;
-	std::cout << "Cargando animaciones..." << std::endl;
-	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
-	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
-	pruebaAnim->setPosition(Vec3<float>(-10.0f, 5.0f, 0.0f));
-	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	pruebaAnim->setAnimation("idle",0,34);
-	pruebaAnim->setAnimation("saltar", 40, 109);
-	pruebaAnim->setAnimation("correr", 110, 190);
-	pruebaAnim->setCurrentAnimation("idle");
-	>>>>>>> refs/remotes/origin/Arreglar-motor-grafico
-
-=======
->>>>>>> refs/remotes/origin/bildboard
-	//int velocidadAnim = 10;
-	//std::cout << "Cargando animaciones..." << std::endl;
-	//TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
-	//pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
-	//pruebaAnim->setPosition(Vec3<float>(20.0f, 5.0f, 0.0f));
-	//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-	//pruebaAnim->setAnimation("idle",0,34);
-	//pruebaAnim->setAnimation("saltar", 40, 109);
-	//pruebaAnim->setAnimation("correr", 110, 190);
-	//pruebaAnim->setCurrentAnimation("idle");
-
-<<<<<<< HEAD
-
-	//personaje
-	TModel* origen2 = sm.crearNodoMalla(sm.getMesh("assets/personaje1/asd.obj"));
-	origen2->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));
-	origen2->setPosition(Vec3<float>(20.0f, 0.f, 0.0f));
-
-	//pruebaAnim->setFrameTime(seconds(2.0));*/
-
-
+	l2->setPosition(Vec3<float>(-10.0f, 2.0f, 3.0f));
 
 	//*******LUCES*******
-
 	//sol
 	//TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
 	TSunLight* sol = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, 0.0f));
@@ -142,6 +81,30 @@ void inicialize() {
 	sol->setPosition(Vec3<float>(-20.0f, 5.0f, -5.0f));
 	sol->setVectorDireccion(Vec3<float>(0.0f, 0.0f, 0.0f));
 	SceneManager::i().setSunLight(sol);
+
+	//linterna
+	TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 45.0f, 0.0f));
+	flash->setColor(0.0f, 1.0f, 0.0f);
+	//linterna
+	TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
+	flash1->setColor(1.0f, 1.0f, 1.0f);
+	//linterna
+	TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
+	flash2->setColor(0.0f, 0.0f, 1.0f);
+	//linterna
+	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
+	flash3->setColor(1.0f, 1.0f, 1.0f);
+	flash->setIntensidadAmbiente(0.8);
+
+	//bombilla
+
+	TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
+	luz->setColor(1.0f, 0.5f, 1.f);
+	TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f), 100.0f, 150.0f);
+	luz2->setColor(0.0f, 1.f, 0.5f);
+	TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
+	luz3->setColor(1.0f, 0.3f, 0.3f);
+	luz3->setIntensidadAmbiente(0.5f);
 
 }
 
@@ -153,63 +116,26 @@ int main() {
 
 
 	sm.inicializarBuffers();
-	
+	std::cout << "Esperar mientras la pantalla esta en blanco (se estan cargando modelos, animaciones, texturas,etc)--" << std::endl;
 	//*******MODELOS***********
 	inicialize();
 	
-	
-
-	//bombilla
-
-	//TPointLight* luz = sm.crearNodoPointLight(Vec3<float>(0.0f, 3.0f, 2.0f));
-	//luz->setColor(1.0f, 0.5f, 1.f);
-	//TPointLight* luz2 = sm.crearNodoPointLight(Vec3<float>(5.0f, 4.0f, -4.0f), 100.0f, 150.0f);
-	//luz2->setColor(0.0f, 1.f, 0.5f);
-	//TPointLight* luz3 = sm.crearNodoPointLight(Vec3<float>(7.0f, 2.0f, 1.0f));
-	//luz3->setColor(1.0f, 0.3f, 0.3f);
-	//luz3->setIntensidadAmbiente(0.5f);
-
-
-
-
-	////personaje
-	//TModel* l2 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	//l2->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	//l2->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
-	////personaje
-	//TModel* l3 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	//l3->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	//l3->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
-	////personaje
-	//TModel* l4 = sm.crearNodoMalla(sm.getMesh("assets/nanosuit.obj"));
-	//l4->setScale(Vec3<float>(0.3f, 0.3f, 0.3f));
-	//l4->setPosition(Vec3<float>(8.0f, 5.0f, 4.0f));
+	//pistola
+	TModel* p1 = sm.crearNodoMalla(sm.getMesh("assets/pistolaTexturizada.obj"));
+	p1->setScale(Vec3<float>(0.1f, 0.1f, 0.1f));
+	//animacion
+	int velocidadAnim = 10;
+	std::cout << "Cargando animaciones..." << std::endl;
+	TAnimation* pruebaAnim = sm.crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje4", 192));
+	pruebaAnim->setScale(Vec3<float>(0.02f, 0.02f, 0.02f));
+	pruebaAnim->setPosition(Vec3<float>(-3.0f, 0.0f, 5.0f));
+	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+	pruebaAnim->setAnimation("idle", 0, 34, true);
+	pruebaAnim->setAnimation("saltar", 40, 109, true);
+	pruebaAnim->setAnimation("correr", 110, 190, true);
+	pruebaAnim->setCurrentAnimation("idle");
 
 
-	//linterna
-	//TFlashLight* flash = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(90.0f, 45.0f, 0.0f));
-	//flash->setColor(0.0f, 1.0f, 0.0f);
-	//linterna
-	//TFlashLight* flash1 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 90.0f, 0.0f));
-	//flash1->setColor(1.0f, 1.0f, 1.0f);
-	////linterna
-	//TFlashLight* flash2 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(0.0f, 180.0f, 0.0f));
-	//flash2->setColor(0.0f, 0.0f, 1.0f);
-	//linterna
-	//TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
-	//flash3->setColor(1.0f, 1.0f, 1.0f);
-	//flash->setIntensidadAmbiente(0.8);
-
-
-
-	//*******CAMARAS*******
-	//TCamera* cam2 = sm.crearNodoCamara();
-	//sm.setActiveCamera(cam2);
-
-	long int cont = 0;
-	long int tiempoCamara = 0;
-	int contCam = 0;
-	Vec3<float> rot;
 	Vec3<float> vecDir = Vec3<float>(0.0f, 0.0f, -1.0f);
 	Vec3<float> newPos;
 
@@ -219,32 +145,29 @@ int main() {
 	sm.setActiveCamera(sm.crearNodoCamara());
 	
 
-		
-	
-	
-
-
-	Vec3<float> posCam;
-	Vec3<float> target;
 	std::cout << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
-	std::cout << "Instrucciones :" << std::endl;
-	std::cout << "Esperar mientras la pantalla esta en blanco (se estan cargando modelos, animaciones, texturas,etc)--" << std::endl;
+	std::cout << "*****************Instrucciones :*****************************" << std::endl;
 	std::cout << "Mover camara: WASD" << std::endl;
-	std::cout << "Activar animacion Idle : I" << std::endl;
+	std::cout << "Activar animacion Idle : X" << std::endl;
 	std::cout << "Activar animacion Correr: C" << std::endl;
-	std::cout << "Activar animacion Saltar: J" << std::endl;
+	std::cout << "Activar animacion Saltar: Z" << std::endl;
 	std::cout << "Aumentar velocidad animaciones : R" << std::endl;
-	std::cout << "Disminuir velocidad de animaciones : D" << std::endl;
+	std::cout << "Disminuir velocidad de animaciones : L" << std::endl;
 	std::cout << "Activar modos de color : 1-8" << std::endl;
-	float mira = 45.0f;
+	std::cout << "Aumentar bias (para sombras): M" << std::endl;
+	std::cout << "Disminuir bias (para sombras): N" << std::endl;
+	std::cout << "Activar sombras dinamicas : H" << std::endl;
+	std::cout << "Activar sombras estaticas : J" << std::endl;
+	std::cout << "Desactivar todas las sombras : K" << std::endl;
+	std::cout << "Crear Billboard animado en pos (0,0,10) : G" << std::endl;
+
 	
 
 	while (!engine.shouldCloseWindw()) {
 
-		//glfwPollEvents();
-		//std::cout << "inicio iteracion" << std::endl;
+
 		engine.updateCurrentFrame();
 
 		// FPS
@@ -255,7 +178,6 @@ int main() {
 
 		engine.doMovement();
 
-		//std::cout << "Scroll: " << Input::i().getMouseScroll() << std::endl;
 		
 		if (Input::i().keyReleased(GLFW_KEY_1)) {
 			std::cout << "Modo de color : Color Final" << std::endl;
@@ -294,131 +216,71 @@ int main() {
 			sm.draw_mode = 9;
 		}
 
-		//else if (Input::i().keyReleased(GLFW_KEY_J)) {
-		//	pruebaAnim->setCurrentAnimation("saltar");
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_C)) {
-		//	pruebaAnim->setCurrentAnimation("correr");
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_I)) {
-		//	pruebaAnim->setCurrentAnimation("idle");
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_R)) {
-		//	velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		else if (Input::i().keyReleased(GLFW_KEY_Z)) {
+			pruebaAnim->setCurrentAnimation("saltar");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_C)) {
+			pruebaAnim->setCurrentAnimation("correr");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_X)) {
+			pruebaAnim->setCurrentAnimation("idle");
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_R)) {
+			std::cout << "Aumento velocidad animacion" << std::endl;
+			velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
+			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
 
-		//}
-		//else if (Input::i().keyReleased(GLFW_KEY_L)) {
-		//	velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
-		//	pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-		//}
+		}
+		else if (Input::i().keyReleased(GLFW_KEY_L)) {
+			std::cout << "Disminuyo velocidad animacion" << std::endl;
+			velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
+			pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
+		}
 
 		else if (Input::i().keyPressed(GLFW_KEY_P)) {
 			engine.toggleWindowMode();
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_N)) {
-			//sm.bias -= 0.0001;
-			//std::cout << "disminuyo bias, bias = " << sm.bias << std::endl;
-			mira -= 0.3f;
-			sm.ziZoom(mira);
-			std::cout << "disminuyo mira, mira = " << mira << std::endl;
+			sm.bias -= 0.0001;
+			std::cout << "disminuyo bias, bias = " << sm.bias << std::endl;
 
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_M)) {
-			//sm.bias += 0.0001;
-			//std::cout << "aumento bias, bias = " << sm.bias << std::endl;
-			mira += 0.3f;
-			sm.ziZoom(mira);
-			std::cout << "aumento mira, mira = " << mira << std::endl;
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_J)) {
-			//pruebaAnim->setCurrentAnimation("saltar");
-			std::cout << "creo bildboard en: 20.0f, 5.0f, 0.0f " << std::endl;
-			sm.crearBillBoard(Vec3<float>(20.0f, 5.0f, 0.0f));
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_C)) {
-			//pruebaAnim->setCurrentAnimation("correr");
-			std::cout << "creo bildboard en: -20.0f, 5.0f, 0.0f " << std::endl;
-			sm.crearBillBoard(Vec3<float>(-20.0f, 5.0f, 0.0f));
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_I)) {
-			//pruebaAnim->setCurrentAnimation("idle");
-			std::cout << "creo bildboard en: 20.0f, 5.0f, -10.0f " << std::endl;
-			sm.crearBillBoard(Vec3<float>(20.0f, 5.0f, -10.0f));
-		}
-		else if (Input::i().keyReleased(GLFW_KEY_R)) {
-			//velocidadAnim = (velocidadAnim - 5 > 0 ? velocidadAnim - 5 : 1);
-			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-			std::cout << "creo bildboard en: 0.0f, 0.0f, 0.0f " << std::endl;
-			TBillboard* b = sm.crearBillBoard(Vec3<float>(0.0f, 0.0f, 0.0f));
-			b->setScale(Vec3<float>(20.0f, 20.0f, 20.0f));
+			sm.bias += 0.0001;
+			std::cout << "aumento bias, bias = " << sm.bias << std::endl;
 
 		}
-		else if (Input::i().keyReleased(GLFW_KEY_L)) {
-			//velocidadAnim = (velocidadAnim + 5 < 1000 ? velocidadAnim + 5 : 1000);
-			//pruebaAnim->setFrameTime(milliseconds(velocidadAnim));
-			std::cout << "creo bildboard en: 0.0f, 0.0f, 0.0f " << std::endl;
-			sm.crearBillBoard(Vec3<float>(0.0f, 0.0f, 0.0f));
+		else if (Input::i().keyReleased(GLFW_KEY_G)) {
+			std::cout << "creo bildboard en: 0.0f, 0.0f, 10.0f " << std::endl;
+			TBillboard* b = sm.crearBillBoard(Vec3<float>(0.0f, 0.0f, 10.0f));
+			b->setScale(Vec3<float>(5.0f, 5.0f, 5.0f));
 		}
-		else if (Input::i().keyPressed(GLFW_KEY_B)) {
-			std::cout << "Desactivo Sombras "<< std::endl;
-			sm.activeDynamicShadow(false);
-		}else if (Input::i().keyPressed(GLFW_KEY_V)) {
-			std::cout << "Activo Sombras "<< std::endl;
+		else if (Input::i().keyReleased(GLFW_KEY_H)) {
+			std::cout << "Activo Sombras Dinamicas" << std::endl;
 			sm.activeDynamicShadow(true);
-		}
-		else if (Input::i().keyPressed(GLFW_KEY_Z)) {
-			std::cout << "Desactivo Sombras Estaticas " << sm.bias << std::endl;
 			sm.activeStaticShadow(false);
 		}
-		else if (Input::i().keyPressed(GLFW_KEY_X)) {
-			std::cout << "Activo Sombras Estaticas " << sm.bias << std::endl;
-			sm.activeStaticShadow(true);
-		}
-		else if (Input::i().keyPressed(GLFW_KEY_H)) {
-			inicialize();
-		}
 		else if (Input::i().keyPressed(GLFW_KEY_J)) {
-			/*TNode* root = sm.getRootNode();
-			for (auto it = root->getChildNodes().begin(); it != root->getChildNodes().end(); it++) {
-				delete *it;
-			}
-			root->getChildNodes().clear();
-			sm.setActiveCamera(nullptr);
-			
-			sm.cleanScreen();*/
-
-		
-
+			std::cout << "Activo Sombras Estaticas " << std::endl;
+			sm.activeStaticShadow(true);
+			sm.activeDynamicShadow(false);
+		}else if (Input::i().keyPressed(GLFW_KEY_K)) {
+			std::cout << "Desactivo Sombras " << std::endl;
+			sm.activeDynamicShadow(false);
+			sm.activeStaticShadow(false);
 		}
 		Input::i().endEventProcess();
 
 		
 
-		//vecDir = sm.camaraActiva->getVectorDireccion();
-		//newPos = vecDir *0.3f;
-		//p->setPosition(newPos);
-
-		//flash3->setRotationXYZ(sm.camaraActiva->getRotation());
-
-		//p->setPosition(newPos);
-		/*p1->setRotation(vecDir);
+		vecDir = sm.camaraActiva->getVectorDireccion();
+		newPos = vecDir *0.3f;
+		p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
-		p1->updatePosition(newPos);*/
-		/*posCam = sm.camaraActiva->getPosition();
-		target = sm.camaraActiva->getTarget();*/
-		//sm.drawLine(glm::vec3(posCam.getX(), posCam.getY()-0.08f, posCam.getZ()), glm::vec3(target.getX(), target.getY(), target.getZ()));
-
-		//sm.drawLine(glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(15.0f, 15.f, 0.0f));
-		//sm.drawLine(glm::vec3(-0.5f, 0.0f, 0.0f), glm::vec3(0.5f, 0.f, 0.0f));
-		//sm.drawLine(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.0f, 0.5f, 0.0f));
-
+		p1->updatePosition(newPos);
 
 		sm.draw();
 		glfwSwapBuffers(engine.getWindow());
-
-		//sm.LINES.clear();
-
 
 	}
 	engine.end();
@@ -426,36 +288,3 @@ int main() {
 
 	return 0;
 }
-
-
-
-//NOTA PREGUNTAR PROFE: queremos que una malla en este caso la pistola sea hermana de la camara, es decir qeu dependa de sus transformaciones
-//para que asi si desplazamos o rotamos la camara tambien lo haga la pistola, hay 3 problemas:
-// 1- si ponemos la malla en exactamente la misma posicion que la camara esta no se ve, pero si desplazamos la malla un poco hacia delante para que se vea todo el rato
-//el desplazamiento lo hace bien pero a la hora de rotar como estas rotando un objeto que esta trasladado ya no lo hace bien
-//2-si escalamos la malla, por ejemplo la pistola el modelo es muy grande y hay que escalarlo a la hora de multiplicar la matriz actual que le llega con la posicion y rotacion 
-// de la camara por su matriz de escalado entonces si escalamos 0.3 esta reduciendo no solo el tamaño sino toda la matriz de la transformacion asi si la camara se ha desplazado
-//5 unidades por ejemplo el modelo pone que se habria desplazado 1.5 unidades que es el resultado de 0.3*5
-//3- tendriamos que poder hacer las transformadas de la pistola antes que la camara pork asi la desplazamos en z para alejarla y dejarla en su posicion buena y luego cuando pongamos 
-//la rotacion de la camra esta rotara un objeto trasladado quedando esta siempre en la buena posicion de la camara
-
-//POSIBLE SOLUCION: hacer una nueva variable que sea posRealativa que sea una posicion relativa al padre que este en TModel, por defecto esta es 0, lo que haria esta posicion es en cada
-//draw hacer un update position de este valor multiplicado por el vec dir de la camara y asi esta posicion se la pondriamos una vez solo al crear el objeto y ya el en el draw se encargaria
-//de desplazarse relativo al padre segun la posicion que tu has dicho.
-
-
-/*Shader billboardShader("assets/billboard_shader.vs", "assets/model_loading.frag");
-TNode *billNode = sm->addMesh(sm->getMesh("assets/billboard.obj", &billboardShader));
-billNode->setPosition(Vec3<float>(0.0f, 3.0f, 0.0f));*/
-
-//pistola
-
-/*Texture* tex = ResourceManager::i().getTexture("res/explosion.bmp", , "texture_diffuse");
-
-//vector<Texture> normalMaps = this->loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
-
-// Loads particle texture
-GLuint textureParticle;
-if (!loadTexture(textureParticle, "res/explosion.bmp", GL_LUMINANCE, GL_CLAMP, true))
-{
-}//	return 1;*/

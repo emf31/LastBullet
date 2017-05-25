@@ -106,6 +106,9 @@ public:
 	bool onEditBoxClicked(const CEGUI::EventArgs & e);
 	void setServerType(int type);
 
+	bool onFullscreenChange(const CEGUI::EventArgs & e);
+	bool onWindowedChange(const CEGUI::EventArgs & e);
+
 	CEGUI::Editbox *editBox;
 
 private:
@@ -196,6 +199,8 @@ private:
 	CEGUI::DefaultWindow* SombrasLabel;
 	CEGUI::ToggleButton* Clipping;
 	CEGUI::ToggleButton* Oclusions;
+	CEGUI::RadioButton* Windowed;
+	CEGUI::RadioButton* Fullscreen;
 
 	std::shared_ptr<NetPlayer> netPlayer;
 

@@ -10,7 +10,7 @@ out mat3 normalMatrix;
 
 uniform mat4 model;
 uniform mat4 modelview;
-uniform mat3 norMatrix;
+
 
 
 void main()
@@ -27,8 +27,7 @@ void main()
 	//Nota2: esto es bastante costoso, para ganar rendimiento podriamos multiplicar el vector normal por la Normal Matrix (cuya 4 coordenada es 0 para perder la traslacion)
 	//pero entonces tendriamos que asegurarnos de que no hacemos ningun escalado no uniforme o sino las normales no servirian.
 
-	//llevarnos esto fuera del shader
-	//normalMatrix = transpose(inverse(mat3(model)));
-	normalMatrix = norMatrix;
+	
+	normalMatrix = transpose(inverse(mat3(model)));
     Normal = normal;  
 }

@@ -16,4 +16,4 @@ newmtl Material__3
 	map_Kd Contenedor.jpg
 	map_Ks Contenedor_spec.jpg
 	map_Kn Contenedor_NRM.jpg
-	map_Ke Contenedor.jpg
+	map_Ke Contenedor_NRM.jpg

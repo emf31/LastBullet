@@ -140,7 +140,8 @@ void Input::textInput_callbackImpl(GLFWwindow* window, unsigned int codePoint, i
 }
 
 void Input::Do_Movement(GLfloat deltaTime) {
-	// Camera controls
+	
+	//NOTA: esto no se usa en el juego, solo se usa para el debug del motor grafico sin usarse en ninguna aplicacion.
 	if (keys[GLFW_KEY_W] == DOWN)
 		sm.camaraActiva->ProcessKeyboard(FORWARD, deltaTime);
 	if (keys[GLFW_KEY_S] == DOWN)

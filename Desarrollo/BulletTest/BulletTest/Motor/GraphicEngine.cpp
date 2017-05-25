@@ -359,14 +359,11 @@ void GraphicEngine::inicializar()
 	screenHeight = 720;
 	engine.createEngineDevice(screenWidth, screenHeight, u8"Last Bullet - Final Release");
 	
-	
+	if (std::stoi(Settings::i().GetValue("fullscreen")) == 1) {
+		engine.toggleWindowMode();
+	}
 
 	sm = SceneManager::i();
-	
-
-	
-
-	
 
 	engine.vSync(0);
 

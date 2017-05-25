@@ -48,12 +48,10 @@ void TModelEstatico::beginDraw() {
 	const glm::mat4& projection = sm.getProjectionMatrix();
 	glm::mat4& model = transformMatrix.getMatrix();
 	glm::mat4 modelview = projection * view * model;
-	glm::mat4 normMatrix = glm::transpose(glm::inverse(glm::mat3(model)));
 
 
 	sm.shaderGeometria->Use();
 
-	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "normMatrix"), 1, GL_FALSE, glm::value_ptr(normMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 	glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);

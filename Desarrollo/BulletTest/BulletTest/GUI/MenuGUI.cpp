@@ -176,6 +176,20 @@ void MenuGUI::inicializar() {
 	Oclusions->setSelected((bool)ocl);
 	ClippingManager::i().setUpdateOclusions((bool)ocl);
 
+	Windowed = static_cast<CEGUI::RadioButton*>(OpcionesVideoWindow->getChild(11));
+	//Windowed->subscribeEvent(CEGUI::ToggleButton::EventSelectStateChanged, CEGUI::Event::Subscriber(&MenuGUI::onWindowedChange, this));
+	Fullscreen = static_cast<CEGUI::RadioButton*>(OpcionesVideoWindow->getChild(12));
+	//Fullscreen->subscribeEvent(CEGUI::ToggleButton::EventSelectStateChanged, CEGUI::Event::Subscriber(&MenuGUI::onFullscreenChange, this));
+
+	bool val = (bool)std::stoi(Settings::i().GetValue("fullscreen"));
+
+	if (val) {
+		Fullscreen->setSelected(true);
+	}
+	else {
+		Windowed->setSelected(true);
+	}
+
 	Atras3 = static_cast<CEGUI::PushButton*>(OpcionesVideoWindow->getChild(99));
 	Atras3->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MenuGUI::onAtrasClicked, this));
 
@@ -306,6 +320,22 @@ void MenuGUI::setServerType(int type) {
 	ServerLbl->setVisible(true);
 }
 
+bool MenuGUI::onFullscreenChange(const CEGUI::EventArgs & e)
+{
+	Windowed->setSelected(false);
+	Fullscreen->setSelected(true);
+
+	return true;
+}
+
+bool MenuGUI::onWindowedChange(const CEGUI::EventArgs & e)
+{
+	Windowed->setSelected(true);
+	Fullscreen->setSelected(false);
+
+	return true;
+}
+
 bool MenuGUI::onUnirPartidaClicked(const CEGUI::EventArgs & e) {
 	changeState(stateMenu::enumUnir);
 	NetworkManager::i().getNetPlayer()->searchServersOnLAN();
@@ -400,6 +430,27 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 		Settings::i().SetValue("clipping", std::to_string((int)Clipping->isSelected()));
 		ClippingManager::i().setUpdateOclusions(Oclusions->isSelected());
 		Settings::i().SetValue("oclusions", std::to_string((int)Oclusions->isSelected()));
+
+		if (Windowed->isSelected()) {
+			Settings::i().SetValue("fullscreen", std::to_string((int)0));
+		}
+		else {
+			Settings::i().SetValue("fullscreen", std::to_string((int)1));
+		}
+
+		if ((int)Sombras->getCurrentValue() == 0) {
+			SceneManager::i().activeStaticShadow(false);
+			SceneManager::i().activeDynamicShadow(false);
+		}
+		else if ((int)Sombras->getCurrentValue() == 1) {
+			SceneManager::i().activeStaticShadow(true);
+			SceneManager::i().activeDynamicShadow(false);
+		}
+		else if ((int)Sombras->getCurrentValue() == 2) {
+			SceneManager::i().activeStaticShadow(true);
+			SceneManager::i().activeDynamicShadow(true);
+		}
+		
 
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesAudio) {
