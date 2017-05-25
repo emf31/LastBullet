@@ -853,11 +853,7 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 
 			Entity* ent = EntityManager::i().getRaknetEntity(nuevoplayer.guid);
 
-			//Si ha muerto un enemigo
-			if (ent->getClassName() == "Enemy") {
-				InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
-				hud->newFeed(m_player->getName(), ent->getName());
-			}
+			
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(nuevoplayer.guid, mPacketIdentifier);
@@ -879,13 +875,21 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 		break;
 		case AUMENTA_KILL:
 		{
-			RakID guidTabla = *reinterpret_cast<RakID*>(packet->data);
+			TKill guidTabla = *reinterpret_cast<TKill*>(packet->data);
 
-			KillEvent* killEvent = new KillEvent(guidTabla.guid);
+			KillEvent* killEvent = new KillEvent(guidTabla.guidKill);
 
 			EventSystem::i().dispatchNow(killEvent);
 
 			World::i().getPartida()->muestraMarcador();
+
+			Entity* ent = EntityManager::i().getRaknetEntity(guidTabla.guidKill);
+
+			//Si ha muerto un enemigo
+			if (ent == EntityManager::i().getEntity(PLAYER)) {
+				InGameHUD* hud = static_cast<InGameHUD*>(GUIManager::i().getGUIbyName("InGameHUD"));
+				hud->newFeed(m_player->getName(), EntityManager::i().getRaknetEntity(guidTabla.guidDeath)->getName());
+			}
 
 
 #ifdef NETWORK_DEBUG
@@ -904,6 +908,8 @@ void NetPlayer::handlePackets(Time elapsedTime) {
 			EventSystem::i().dispatchNow(deathEvent);
 
 			World::i().getPartida()->muestraMarcador();
+
+
 
 #ifdef NETWORK_DEBUG
 			debugger->sendSyncPackage(guidTabla.guid, mPacketIdentifier);

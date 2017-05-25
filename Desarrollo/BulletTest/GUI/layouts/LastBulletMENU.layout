@@ -101,6 +101,7 @@
             <Property name="ID" value="1" />
             <Property name="Area" value="{{0,-1},{0,-1},{1,-5},{1,-1}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Property name="AlwaysOnTop" value="true" />
             <Window type="SampleBrowserSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,499},{0,155},{1,-510},{1,-451}}" />
@@ -153,6 +154,7 @@
             <Property name="ID" value="5" />
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,168},{0,732},{0,250}}" />
                 <Property name="Text" value="Audio Options" />
@@ -203,19 +205,11 @@
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="Text" value="Video Options" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,516},{0,168},{0,732},{0,252}}" />
                 <Property name="Text" value="Video Options" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            </Window>
-            <Window type="AlfiskoSkin/Checkbox" name="Checkbox" >
-                <Property name="Area" value="{{0,671},{0,278},{0,820},{0,316}}" />
-                <Property name="Text" value="Full Screen" />
-            </Window>
-            <Window type="AlfiskoSkin/Checkbox" name="Checkbox2" >
-                <Property name="Area" value="{{0,671},{0,324},{0,824},{0,361}}" />
-                <Property name="Text" value="Window" />
-                <Property name="Selected" value="true" />
             </Window>
             <Window type="AlfiskoSkin/Label" name="typeScreen" >
                 <Property name="Area" value="{{0,414},{0,291},{0,598},{0,339}}" />
@@ -263,11 +257,22 @@
                 <Property name="MaximumValue" value="2" />
                 <Property name="ClickStepSize" value="1" />
             </Window>
+            <Window type="AlfiskoSkin/RadioButton" name="RadioButtonWindowed" >
+                <Property name="ID" value="11" />
+                <Property name="Area" value="{{0,669},{0,280},{0,817},{0,312}}" />
+                <Property name="Text" value="Windowed" />
+            </Window>
+            <Window type="AlfiskoSkin/RadioButton" name="RadioButtonFull" >
+                <Property name="ID" value="12" />
+                <Property name="Area" value="{{0,670},{0,324},{0,814},{0,356}}" />
+                <Property name="Text" value="FullScreen" />
+            </Window>
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow4" >
             <Property name="ID" value="7" />
             <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Label" name="Label" >
                 <Property name="Area" value="{{0,515},{0,171},{0,732},{0,248}}" />
                 <Property name="Text" value="Game Options" />
@@ -313,6 +318,7 @@
             <Window type="AlfiskoSkin/Editbox" name="Editbox" >
                 <Property name="ID" value="1005" />
                 <Property name="Area" value="{{0,642},{0,369},{0,710},{0,401}}" />
+                <Property name="Visible" value="false" />
                 <Property name="MaxTextLength" value="50" />
             </Window>
         </Window>
@@ -320,6 +326,7 @@
             <Property name="ID" value="1000" />
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Visible" value="false" />
             <Window type="AlfiskoSkin/Button" name="ReadyBtn" >
                 <Property name="ID" value="2000" />
                 <Property name="Area" value="{{0,935},{0,535},{0,1061},{0,579}}" />

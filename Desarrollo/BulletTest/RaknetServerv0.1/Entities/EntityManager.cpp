@@ -358,10 +358,10 @@ void EntityManager::enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *pe
 }
 
 
-void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, int MaxKills, RakNet::RakPeerInterface * peer)
+void EntityManager::aumentaKill(TKill& kill, int MaxKills, RakNet::RakPeerInterface * peer)
 {
 	TFilaTabla *fila;
-	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(kill.guidKill))->second;
 	fila->kills++;
 
 	RakID s_guid;
@@ -370,10 +370,10 @@ void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, int MaxKills, RakNet:
 
 		//se envia a TODOS para que todos actualicen la tabla de puntuacion
 		
-		s_guid.mID = AUMENTA_KILL;
-		s_guid.guid = guid;
+		kill.mID = AUMENTA_KILL;
+		s_guid.guid = kill.guidKill;
 
-		peer->Send((const char*)&s_guid, sizeof(s_guid), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		peer->Send((const char*)&kill, sizeof(kill), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 
 
 	}
