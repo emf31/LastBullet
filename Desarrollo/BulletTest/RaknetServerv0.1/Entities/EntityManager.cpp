@@ -211,6 +211,7 @@ void EntityManager::enviarDisparoClienteRocket(TBala & b, RakNet::RakNetGUID own
 		}
 
 	}
+
 }
 
 void EntityManager::VidaCogida(TId &idVida, RakNet::RakPeerInterface * peer)
@@ -381,6 +382,8 @@ void EntityManager::aumentaKill(RakNet::RakNetGUID & guid, int MaxKills, RakNet:
 
 			//se envia a TODOS para que todos actualicen la tabla de puntuacion
 			s_guid.mID = FIN_PARTIDA;
+
+			s_guid.guid = fila->guid;
 
 			peer->Send((const char*)&s_guid, sizeof(s_guid), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 

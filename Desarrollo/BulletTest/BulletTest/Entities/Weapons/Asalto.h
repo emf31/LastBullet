@@ -1,7 +1,7 @@
 #pragma once
 #include "Weapon.h"
 
-#define numCargadoresAsalto 5
+#define numCargadoresAsalto 4
 
 
 class Asalto : public Weapon

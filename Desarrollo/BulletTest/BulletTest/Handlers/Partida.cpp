@@ -7,7 +7,7 @@
 #include <GUIManager.h>
 #include <NetworkManager.h>
 
-Partida::Partida() : EventListener(), allPlayerReady(false)
+Partida::Partida() : EventListener(), allPlayerReady(false), finished(false)
 {
 	
 }

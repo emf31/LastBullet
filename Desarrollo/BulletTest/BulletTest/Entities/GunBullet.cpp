@@ -24,9 +24,9 @@ void GunBullet::inicializar()
 void GunBullet::update(Time elapsedTime)
 {
 
-		float velocity = 8 * timelifeclock.getElapsedTime().asMilliseconds()+90;
+	//	float velocity = 8 * timelifeclock.getElapsedTime().asMilliseconds()+90;
 
-		m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*velocity));
+		m_renderState.updateVelocity(TimePerFrameClass::GetTimePerFrame().asSeconds(), (m_direction*m_velocity));
 
 		if (timelifeclock.getElapsedTime().asSeconds() > m_lifetime.asSeconds() || timelifeclock.getElapsedTime().asSeconds() > 4) {
 

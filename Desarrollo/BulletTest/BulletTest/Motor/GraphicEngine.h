@@ -3,7 +3,7 @@
 #include <Color4f.h>
 #include "BasicSceneNode.h"
 #include "AnimatedSceneNode.h"
-#include <BillboardSceneNode.h>
+#include <StaticSceneNode.h>
 #include "Camera.h"
 
 
@@ -35,7 +35,7 @@ public:
 
 	std::shared_ptr<BasicSceneNode> createNode(const Vec3<float> &TPosition, const Vec3<float> &TScale, const std::string& texture = "", const std::string& mesh = "");
 	std::shared_ptr<AnimatedSceneNode> createAnimatedNode(const std::string& directory, int numFrames);
-
+	std::shared_ptr<StaticSceneNode> createStaticNode(const Vec3<float> &TPosition, const Vec3<float>& TRotation, const Vec3<float> &TScale, const std::string& mesh = "");
 	//std::shared_ptr<SceneNode> createBillboard(std::shared_ptr<SceneNode>, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color);
 	//std::shared_ptr<SceneNode> createBillboardText(std::shared_ptr<SceneNode>, const std::string& text, const Vec2f& vector2d, const Vec3<float>& relPosition, const Color4f& color);
 
@@ -78,6 +78,9 @@ public:
 
 	void updateDeathCamera();
 
+	void cleanScreen();
+
+
 	float planes[6][4] = {
 		{ 0, 0, 0, 0 },
 		{ 0, 0, 0, 0 },
@@ -88,6 +91,8 @@ public:
 	};
 
 	EngineDevice& getDevice() { return engine; }
+
+	bool exit;
 private:
 
 	int screenWidth, screenHeight;

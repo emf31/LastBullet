@@ -66,7 +66,6 @@ public:
 	bool onConexion1Clicked(const CEGUI::EventArgs & e);
 	bool onConexion2Clicked(const CEGUI::EventArgs & e);
 	bool onAtrasClicked(const CEGUI::EventArgs & e);
-	bool onApplySounds(const CEGUI::EventArgs & e);
 	bool onUpdateSliderSound(const CEGUI::EventArgs & e);
 	bool onUpdateSliderMusic(const CEGUI::EventArgs & e);
 	bool onBotsSlider(const CEGUI::EventArgs & e);

@@ -10,6 +10,7 @@ SensoryMemory::SensoryMemory(Enemy_Bot* myBot, double span):m_bot(myBot),m_memor
 
 SensoryMemory::~SensoryMemory()
 {
+	m_botMemory.clear();
 }
 
 void SensoryMemory::updateVision()

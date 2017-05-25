@@ -33,7 +33,11 @@ public:
 
 	bool isAllReady() { return allPlayerReady; }
 
+	bool isFinished() { return finished; }
+
 	void setPlayerReady(bool t) { allPlayerReady = t; }
+
+	void setFinished(bool finish) { finished = finish; }
 private:
 
 	void empezarCuentaAtras();
@@ -53,5 +57,7 @@ private:
 	std::vector<TFilaTabla> ordenado;
 
 	bool allPlayerReady;
+
+	bool finished;
 
 };

@@ -4,10 +4,12 @@
 #include <btBulletDynamicsCommon.h>
 #include "../Motor/BasicSceneNode.h"
 #include <PhysicsEngine.h>
+#include <StaticSceneNode.h>
+
 class PhysicsEntity : public EntPassive
 {
 public:
-	PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name);
+	PhysicsEntity(std::shared_ptr<StaticSceneNode> nodo, const std::string& name, Vec3<float> position, Vec3<float> rotation, Vec3<float> scale);
 	~PhysicsEntity();
 
 	void setRigidBody(btRigidBody* rigidBody) { 
@@ -35,6 +37,8 @@ public:
 	Vec3<float> centerCollision;
 private:
 	btRigidBody* m_rigidBody;
+
+	//TModelEstatico *model;
 	
 };
 

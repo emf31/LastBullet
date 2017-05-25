@@ -197,11 +197,6 @@
                 <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />
                 <Property name="Text" value="Back" />
             </Window>
-            <Window type="AlfiskoSkin/Button" name="Button2" >
-                <Property name="ID" value="98" />
-                <Property name="Area" value="{{0,934},{0,536},{0,1060},{0,579}}" />
-                <Property name="Text" value="Apply" />
-            </Window>
         </Window>
         <Window type="DefaultWindow" name="DefaultWindow5" >
             <Property name="ID" value="6" />

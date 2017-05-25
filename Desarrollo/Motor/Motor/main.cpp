@@ -22,8 +22,12 @@ EngineDevice engine;
 void inicialize() {
 	SceneManager::i().setActiveCamera(SceneManager::i().crearNodoCamara());
 	//window
-	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"), Vec3<float>(25.0f, 0.0f, 0.0f), Vec3<float>(90.0f, 0.0f, 90.0f));
-	TModelEstatico* window = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"), Vec3<float>(10.0f, 0.0f, 0.0f), Vec3<float>(45.0f, 0.0f, 0.0f));
+	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj")/*, Vec3<float>(25.0f, 0.0f, 0.0f), Vec3<float>(90.0f, 0.0f, 90.0f)*/);
+	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj")/*, Vec3<float>(10.0f, 0.0f, 0.0f), Vec3<float>(45.0f, 0.0f, 0.0f)*/);
+
+	window->setPosition(Vec3<float>(0, 0, 0));
+	window->setRotationXYZ(Vec3<float>(45,45,0));
+	window2->setTransformMatrix(Vec3<float>(50, 0, 0), Vec3<float>(45, 45, 0), Vec3<float>(5, 5, 5));
 	//TModel* window3 = sm.crearNodoMalla(sm.getMesh("assets/WindowTest.obj"));
 	//window3->addChild(window2);
 	//window3->addChild(window);

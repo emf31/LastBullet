@@ -46,7 +46,7 @@ Game::~Game()
 
 void Game::run()
 {
-
+	try{
 	//Game loop from Bullet Physics documentation example
 	TimePerFrameClass::timePerFrameDefault();
 
@@ -101,7 +101,9 @@ void Game::run()
 				time_client_prev = time_client_curr;
 
 			}
-
+			if (GraphicEngine::i().exit) {
+				break;
+			}
 			if (GraphicEngine::i().isWindowActive()) {
 				interpolation = (float)std::min(1.f, dt.asSeconds() / TimePerFrameClass::GetTimePerFrame().asSeconds());
 
@@ -114,7 +116,11 @@ void Game::run()
 	}
 
 	clear();
-	
+	}
+	catch(std::exception e){
+		clear();
+		std::cout << e.what() << std::endl;
+	}
 	/*EntityManager::i().apagar();
 	GraphicEngine::i().apagar();
 	PhysicsEngine::i().apagar();

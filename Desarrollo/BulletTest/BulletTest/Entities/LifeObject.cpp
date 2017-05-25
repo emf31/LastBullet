@@ -35,7 +35,7 @@ void LifeObject::update(Time elapsedTime)
 	if (estado == USADO) {
 		if (clockRecargaLife.getElapsedTime().asSeconds() >= timeRecargaLife) {
 			estado = DISPONIBLE;
-			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(1.f, 1.f, 1.f));
+			m_ghostObject = PhysicsEngine::i().createBoxGhostObject(this, Vec3<float>(3.f, 3.f, 3.f));
 			m_nodo->setVisible(true);
 		}
 	}

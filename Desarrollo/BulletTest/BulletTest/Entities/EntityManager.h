@@ -61,6 +61,8 @@ public:
 	//Borra la cola de borrado de entities, se llama en cada iteracion
 	void cleanDeleteQueue();
 
+	void stopInterpolateAllEntities();
+
 	Entity* getEntity(int id);
 	Entity* getRaknetEntity(RakNet::RakNetGUID guid);
 	std::list<Character*> getCharacters();

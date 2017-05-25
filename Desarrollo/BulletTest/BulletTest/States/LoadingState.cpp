@@ -27,6 +27,8 @@ void LoadingState::Inicializar() {
 
 void LoadingState::Clear() {
 	loadingStateGUI.destroy();
+	
+
 }
 
 void LoadingState::HandleEvent() {
@@ -67,7 +69,14 @@ void LoadingState::Update(Time timeElapsed) {
 
 		if (colaAssets.empty()) {
 
-			if (queueAnimaciones.empty()) {
+
+			ResourceManager::i().getAnimationMesh(animation.path, animation.numAnimations);
+
+
+			loadingStateGUI.setAssetName(animation.path);
+			loadingStateGUI.update();
+
+			//if (queueAnimaciones.empty()) {
 				TimePerFrameClass::timePerFrameDefault();
 
 
@@ -77,14 +86,9 @@ void LoadingState::Update(Time timeElapsed) {
 
 				//Notify to other players
 				NotificarServerCargaCompletada();
-			}
+			//}
 
-			AnimationStruct& pathAnim = queueAnimaciones.front();
-			ResourceManager::i().getAnimationMesh(pathAnim.path, pathAnim.numAnimations);
-			queueAnimaciones.pop();
-
-			loadingStateGUI.setAssetName(pathAnim.path);
-			loadingStateGUI.update();
+			
 		}
 
 
@@ -106,5 +110,8 @@ void LoadingState::readAllAssets() {
 	AssetsReader::read("../media/Props", colaAssets);
 	AssetsReader::read("../media/Weapons", colaAssets);
 	AssetsReader::read("../media/bullets", colaAssets);
-	queueAnimaciones.push(AnimationStruct{ "../media/personaje1", 191 });
+
+	animation.numAnimations = 191;
+	animation.path = "../media/personaje1";
+	
 }

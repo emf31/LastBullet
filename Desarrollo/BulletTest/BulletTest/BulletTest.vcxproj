@@ -291,6 +291,7 @@
     <ClInclude Include="Motor\BasicSceneNode.h" />
     <ClInclude Include="Motor\SceneNode.h" />
     <ClInclude Include="Motor\SoundManager.h" />
+    <ClInclude Include="Motor\StaticSceneNode.h" />
     <ClInclude Include="Network\AsyncEnemyFactory.h" />
     <ClInclude Include="Network\Estructuras.h" />
     <ClInclude Include="Network\Lobby.h" />
@@ -447,6 +448,7 @@
     <ClCompile Include="Motor\BasicSceneNode.cpp" />
     <ClCompile Include="Motor\SceneNode.cpp" />
     <ClCompile Include="Motor\SoundManager.cpp" />
+    <ClCompile Include="Motor\StaticSceneNode.cpp" />
     <ClCompile Include="Network\AsyncEnemyFactory.cpp" />
     <ClCompile Include="Network\Lobby.cpp" />
     <ClCompile Include="Network\Lobby2\LibVoice\LibVoice.cpp" />

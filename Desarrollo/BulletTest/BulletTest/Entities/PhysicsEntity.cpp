@@ -2,9 +2,13 @@
 #include "PhysicsEntity.h"
 #include <Quaternion.h>
 
-PhysicsEntity::PhysicsEntity(std::shared_ptr<BasicSceneNode> nodo, const std::string& name) : EntPassive(-1, nodo, name)
+
+PhysicsEntity::PhysicsEntity(std::shared_ptr<StaticSceneNode> nodo, const std::string& name, Vec3<float> position, Vec3<float> rotation, Vec3<float> scale) : 
+	EntPassive(-1, nodo, name)
 {
-	
+	m_scale = scale;
+	m_position = position;
+	m_rotation = rotation;
 }
 
 
@@ -78,14 +82,15 @@ void PhysicsEntity::update(Time elapsedTime)
 	Euler *= RADTODEG;
 
 	m_rotation = Vec3<float>(-Euler.getX(), Euler.getY() + 180, -Euler.getZ());
-	m_nodo->setRotationXYZ(m_rotation);
-
+	
 
 	// Set position restando el center collision para centrar la colision al centro del objeto
 	btVector3 Point = m_rigidBody->getCenterOfMassPosition();
 
 	m_position = Vec3<float>((float)Point[0] - centerCollision.getX(), (float)Point[1] - centerCollision.getY(), (float)Point[2] - centerCollision.getX());
-	m_nodo->setPosition(m_position);
+
+
+	m_nodo->setTransformationMatriz(m_position, m_rotation, m_scale);
 }
 
 void PhysicsEntity::handleInput()
@@ -117,6 +122,5 @@ void PhysicsEntity::setPosition(const Vec3<float>& pos)
 	btTransform transform = m_rigidBody->getCenterOfMassTransform();
 	transform.setOrigin(btVector3(pos.getX(), pos.getY(), pos.getZ()));
 	m_rigidBody->setCenterOfMassTransform(transform);
-	m_nodo->setPosition(pos);
 	update(Time::Zero);
 }

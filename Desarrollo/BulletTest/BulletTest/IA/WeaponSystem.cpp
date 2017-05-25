@@ -17,6 +17,10 @@ WeaponSystem::WeaponSystem(Enemy_Bot* Owner, double ReactionTime, double AimAccu
 
 WeaponSystem::~WeaponSystem()
 {
+	EntityManager::i().removeEntity(asalto);
+	EntityManager::i().removeEntity(pistola);
+	EntityManager::i().removeEntity(rocket);
+	EntityManager::i().removeEntity(sniper);
 }
 
 void WeaponSystem::Inicializar() {
