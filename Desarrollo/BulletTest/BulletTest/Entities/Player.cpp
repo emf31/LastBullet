@@ -287,6 +287,7 @@ void Player::borrarContenido()
 	delete animationMachine;
 
 	PhysicsEngine::i().removeKinematic(p_controller);
+
 }
 
 void Player::handleMessage(const Message & message)

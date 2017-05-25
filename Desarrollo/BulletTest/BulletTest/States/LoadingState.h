@@ -34,7 +34,7 @@ private:
 	LoadingStateGUI loadingStateGUI;
 	ParalellTask* task;
 	std::queue<std::string> colaAssets;
-	std::queue<AnimationStruct> queueAnimaciones;
+	AnimationStruct animation;
 	Clock pruebas;
 	bool needRender;
 

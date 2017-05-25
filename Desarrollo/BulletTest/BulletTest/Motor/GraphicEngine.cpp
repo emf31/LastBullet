@@ -96,6 +96,37 @@ void GraphicEngine::updateDeathCamera()
 
 }
 
+void GraphicEngine::cleanScreen() {
+	TNode* root = sm.getRootNode();
+	for (auto it = root->getChildNodes().begin(); it != root->getChildNodes().end(); it++) {
+		delete *it;
+	}
+	root->getChildNodes().clear();
+	sm.setActiveCamera(nullptr);
+
+	sm.cleanScreen();
+
+	sm.vecPointLight.clear();
+	sm.vecFlashLight.clear();
+	sm.vectorCamaras.clear();
+
+	TSunLight* dsa = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, -1.0f));
+	dsa->setIntensidadAmbiente(0.45f);
+	dsa->setIntensidadEspecular(0.6f);
+
+	dsa->setVectorDireccion(Vec3<float>(38.0f, -13.0f, -76.0f));
+	dsa->setPosition(Vec3<float>(90.0f, 76.0f, 10.0f));
+
+	SceneManager::i().setSunLight(dsa); //importante sin esta linea no se dibujan sombras
+
+	createCamera("CamaraPlayer", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	createCamera("CameraDeath", Vec3<float>(10, 10, 10), Vec3<float>(0, 0, 0));
+	setActiveCamera("CamaraPlayer");
+	sm.camaraActiva->setFarPlane(1000.f);
+
+	
+}
+
 std::shared_ptr<BasicSceneNode> GraphicEngine::createNode(const Vec3<float>& TPosition, const Vec3<float>& TScale, const std::string & texture, const std::string & mesh)
 {
 
@@ -134,6 +165,24 @@ std::shared_ptr<AnimatedSceneNode> GraphicEngine::createAnimatedNode(const std::
 
 
 	std::shared_ptr<AnimatedSceneNode> sharedptr(new AnimatedSceneNode(node));
+	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
+
+	//Le pasamos irrDriver para que se encargue el de asignar la textura
+	return sharedptr;
+}
+
+std::shared_ptr<StaticSceneNode> GraphicEngine::createStaticNode(const Vec3<float>& TPosition, const Vec3<float>& TRotation, const Vec3<float>& TScale, const std::string & mesh)
+{
+	TModelEstatico* node;
+	node = SceneManager::i().crearNodoMallaEstatica(sm.getMesh(mesh), TPosition);
+
+	if (!node) {
+		throw std::runtime_error("No se ha encontrado la malla: " + std::string(mesh.c_str()));
+	}
+
+	node->setTransformMatrix(TPosition, TScale, TRotation);
+
+	std::shared_ptr<StaticSceneNode> sharedptr(new StaticSceneNode(node));
 	//Node->getMaterial(0).getTextureMatrix(0).setScale(500*0.75);
 
 	//Le pasamos irrDriver para que se encargue el de asignar la textura
@@ -283,9 +332,12 @@ void GraphicEngine::renderAll()
 
 	}
 
+	if (StateStack::i().currentState == States::ID::InGame) {
+		SceneManager::i().draw();
 
-	SceneManager::i().draw();
-
+		
+	}
+	
 
 	// FPS
 	int fps = GraphicEngine::i().getDevice().getFPS();
@@ -293,6 +345,7 @@ void GraphicEngine::renderAll()
 	title << u8"Last Bullet - Final Release FPS: " << fps;
 	GraphicEngine::i().getDevice().setWindowTitle(title.str());
 	//}
+
 	
 	GUIManager::i().drawAllGuis();
 	

@@ -81,6 +81,8 @@ void InGame::Clear()
 
 	MessageHandler::i().borrarContenido();
 
+	GraphicEngine::i().cleanScreen();
+
 }
 
 void InGame::HandleEvent()

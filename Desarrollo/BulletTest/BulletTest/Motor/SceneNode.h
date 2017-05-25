@@ -40,11 +40,14 @@ public:
 	virtual void setAnimation(const std::string& str, int desde, int hasta, bool loop) = 0;
 	virtual void setCurrentFrame(int frame) = 0;
 	virtual int getCurrentFrame() const = 0;
+
+	virtual void setTransformationMatriz(Vec3<float> position, Vec3<float> rotation, Vec3<float> scale) { }
 	
 	virtual void setColor(const Vec3<float> color) = 0;
+	virtual TEntity* getEntityNode() = 0;
 
 private:
-	virtual TEntity* getEntityNode() = 0;
+	
 
 	
 };

@@ -3,10 +3,8 @@
 #include <Quaternion.h>
 
 
-PhysicsEntity::PhysicsEntity(TModelEstatico* nodo, const std::string& name, Vec3<float> position, Vec3<float> rotation, Vec3<float> scale) : 
-	EntPassive(-1, nullptr, name), 
-	model(nodo)
-	
+PhysicsEntity::PhysicsEntity(std::shared_ptr<StaticSceneNode> nodo, const std::string& name, Vec3<float> position, Vec3<float> rotation, Vec3<float> scale) : 
+	EntPassive(-1, nodo, name)
 {
 	m_scale = scale;
 	m_position = position;
@@ -92,7 +90,7 @@ void PhysicsEntity::update(Time elapsedTime)
 	m_position = Vec3<float>((float)Point[0] - centerCollision.getX(), (float)Point[1] - centerCollision.getY(), (float)Point[2] - centerCollision.getX());
 
 
-	model->setTransformMatrix(m_position, m_rotation, m_scale);
+	m_nodo->setTransformationMatriz(m_position, m_rotation, m_scale);
 }
 
 void PhysicsEntity::handleInput()

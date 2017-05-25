@@ -16,7 +16,6 @@
 
 
 
-
 // for convenience
 using json = nlohmann::json;
 
@@ -91,7 +90,7 @@ void MapLoader::readMap(const std::string & name)
 					json objzone = *arrayIt;
 					Object* o_child = createObject(objzone);
 					if (objzone["tag"] == "PhysicEntity") {
-						std::shared_ptr<BasicSceneNode> node = createPhysicEntity(o_child->pos, o_child->es, o_child->rot, o_child->centerCollider, o_child->sizeColllider, o_child->mesh, o_child->nameMesh, o_child->mass,zone);
+						std::shared_ptr<StaticSceneNode> node = createPhysicEntity(o_child->pos, o_child->es, o_child->rot, o_child->centerCollider, o_child->sizeColllider, o_child->mesh, o_child->nameMesh, o_child->mass,zone);
 					}
 					delete o_child;
 				}
@@ -147,11 +146,11 @@ std::shared_ptr<BasicSceneNode> MapLoader::CreateNodeExceptionSafe(const Vec3<fl
 
 	return sceneNode;
 }
-std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass, ClippingZone* zone)
+std::shared_ptr<StaticSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicion, Vec3<float>escala, Vec3<float>rotacion, Vec3<float>centerCol, Vec3<float>sizeCol, const std::string & mesh, std::string &name, float mass, ClippingZone* zone)
 {
 	//Creates node
-	TModelEstatico* sceneNode = SceneManager::i().crearNodoMallaEstatica(ResourceManager::i().getMesh(mesh), posicion);
-	sceneNode->setTransformMatrix(posicion, rotacion, escala);
+	std::shared_ptr<StaticSceneNode> sceneNode = GraphicEngine::i().createStaticNode(posicion, rotacion, escala, mesh);
+	sceneNode->setTransformationMatriz(posicion, rotacion, escala);
 
 
 	PhysicsEntity *physicent = new PhysicsEntity(sceneNode, name, posicion, rotacion, escala);
@@ -182,7 +181,7 @@ std::shared_ptr<BasicSceneNode> MapLoader::createPhysicEntity(Vec3<float>posicio
 	}
 	zone->addEntity(physicent);
 
-	return nullptr;
+	return sceneNode;
 }
 
 
