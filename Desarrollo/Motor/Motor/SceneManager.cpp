@@ -411,35 +411,12 @@ void SceneManager::inicializarBufferBildboard()
 	billboardFrameName.push_back("assets/explosionbuenaAzul/explosion83.png");
 
 
-	//billboardFrameName.push_back("assets/muzzle1.png");
-	//billboardFrameName.push_back("assets/muzzle2.png");
-	//billboardFrameName.push_back("assets/muzzle3.png");
-	//billboardFrameName.push_back("assets/muzzle4.png");
-	//billboardFrameName.push_back("assets/muzzle5.png");
-	//billboardFrameName.push_back("assets/muzzle6.png");
-	//billboardFrameName.push_back("assets/muzzle7.png");
-	//billboardFrameName.push_back("assets/muzzle8.png");
-	//billboardFrameName.push_back("assets/muzzle9.png");
-	//billboardFrameName.push_back("assets/m1.png");
-	//billboardFrameName.push_back("assets/m2.png");
-	//billboardFrameName.push_back("assets/m3.png");
-	//billboardFrameName.push_back("assets/m4.png");
-	//billboardFrameName.push_back("assets/m5.png");
-	//billboardFrameName.push_back("assets/m6.png");
-	//billboardFrameName.push_back("assets/m7.png");
-	//billboardFrameName.push_back("assets/m8.png");
-	//billboardFrameName.push_back("assets/m9.png");
-	//billboardFrameName.push_back("assets/m10.png");
-	//billboardFrameName.push_back("assets/m11.png");
-	//billboardFrameName.push_back("assets/m12.png");
 	GLuint text;
 	for (int i = 0; i < billboardFrameName.size(); i++) {
 		glGenTextures(1, &text);
 		billboardFrameAnimation.push_back(text);
 
 	}
-
-	//glGenTextures(billboardFrameName.size(), billboardFrameAnimation);
 
 	int width, height;
 	unsigned char* image;

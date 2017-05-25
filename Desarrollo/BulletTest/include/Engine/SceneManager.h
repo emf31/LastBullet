@@ -66,7 +66,7 @@ public:
 	bool removeNode(TNode* node);
 	TModel* crearNodoMalla(TMeshGroup * mesh);
 
-	TModelEstatico* crearNodoMallaEstatica(TMeshGroup * mesh, Vec3<float> posicion, Vec3<float> rotacion = Vec3<float>(0.0f,0.0f,0.0f), Vec3<float> escala = Vec3<float>(1.0f, 1.0f, 1.0f));
+	TModelEstatico* crearNodoMallaEstatica(TMeshGroup * mesh, Vec3<float> posicion = Vec3<float>(0.0f, 0.0f, 0.0f), Vec3<float> rotacion = Vec3<float>(0.0f,0.0f,0.0f), Vec3<float> escala = Vec3<float>(1.0f, 1.0f, 1.0f));
 
 	TBillboard* crearBillBoard(Vec3<float> posicion);
 

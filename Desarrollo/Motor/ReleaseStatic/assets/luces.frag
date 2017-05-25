@@ -84,6 +84,12 @@ void main()
     vec3 viewDir = normalize(viewPos - FragPos);
     //*********************************LUZ SOLAR*****************************************
    colorFinal=calcularLuzSolar(sunlight,Normal,viewDir,FragPos, Diffuse, Specular );
+           // Calculate shadow
+    float shadow = 0.0f;
+    if(castShadow || castStaticShadow){
+    shadow = ShadowCalculation(FragPosLightSpace, bias);  
+    }
+    colorFinal = (1.4-shadow)*modelColor * colorFinal;
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
         float distancia = length(pointlight[i].position - FragPos);
@@ -96,13 +102,8 @@ void main()
         
     }
 
-    // Calculate shadow
-    float shadow = 0.0f;
-    if(castShadow || castStaticShadow){
-    shadow = ShadowCalculation(FragPosLightSpace, bias);  
-    }
-    colorFinal = (1.4-shadow)*modelColor * colorFinal;
-    
+
+
 
     //bloom
     colorFinal += bloom;
@@ -258,6 +259,8 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
 float ShadowCalculation(vec4 fragPosLightSpace, float bias)
 {
     float shadow = 0.0;
+    fragPosLightSpace.z = 2.0*log(fragPosLightSpace.w)/log(200.0f) - 1; 
+    fragPosLightSpace.z *= fragPosLightSpace.w;
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
     projCoords = projCoords * 0.5 + 0.5;
 
@@ -272,25 +275,26 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias)
     shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
 
     //para difuminar las sombras
+    
     vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
     for(int x = -1; x <= 1; ++x)
     {
         for(int y = -1; y <= 1; ++y)
         {
             float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
-            shadow += currentDepth - bias > pcfDepth ? 0.8 : 0.0;        
+            shadow += currentDepth - bias > pcfDepth ? 0.5 : 0.0;        
         }    
     }
-    shadow /= 9.0;
-
-    /* 25 iteracion mas suavizadas las sombras pero bastante mas costoso
+    shadow /= 9;
+/*
+     //25 iteracion mas suavizadas las sombras pero bastante mas costoso
     vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
     for(int x = -2; x <= 2; ++x)
     {
         for(int y = -2; y <= 2; ++y)
         {
             float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
-            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
+            shadow += currentDepth - bias > pcfDepth ? 0.8 : 0.0;        
         }    
     }
     shadow /= 25.0;

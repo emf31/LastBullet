@@ -33,12 +33,10 @@ void TModel::beginDraw() {
 		const glm::mat4& projection = sm.getProjectionMatrix();
 		glm::mat4& model = sm.getMatrizActual();
 		glm::mat4 modelview = projection * view * model;
-		glm::mat4 normMatrix = glm::transpose(glm::inverse(glm::mat3(model)));
+		
 
 		
 		sm.shaderGeometria->Use();
-		
-		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "normMatrix"), 1, GL_FALSE, glm::value_ptr(normMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "modelview"), 1, GL_FALSE, glm::value_ptr(modelview));
 		glUniformMatrix4fv(glGetUniformLocation(sm.shaderGeometria->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		glUniform3f(glGetUniformLocation(sm.shaderGeometria->Program, "material.objectColor"), m_r, m_g, m_b);
@@ -134,7 +132,7 @@ void TModel::removeEntity()
 void TModel::setOrientation(const Vec3<float>& orientation)
 {
 
-	//m_node->setOrientation(orientation);
+	//NOTA: este metodo en la version final del juego no esta aqui en el motor, sino que pertecene a la fachada del juego.
 
 	glm::mat4 m_matrix = glm::mat4();
 	glm::vec3 column1;

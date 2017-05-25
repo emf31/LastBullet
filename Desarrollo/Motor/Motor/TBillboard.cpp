@@ -10,7 +10,7 @@ TBillboard::TBillboard(TMeshGroup* meshGroup, Vec3<float> posicion) : sm(SceneMa
 	modelMatrix.resetMatrix();
 	modelMatrix.setPosition(posicion);
 	conVida = true;
-	frameBillboard = 0;
+	frameBillboard = 1;
 	numFrames = 83;
 	billBoardTimeFrame = seconds(0.008f);
 	billboardCurrentTime.restart();

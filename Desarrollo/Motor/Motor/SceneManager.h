@@ -181,9 +181,6 @@ public:
 	GLuint LVAO,LVBO;
 	int numLines;
 	float bias = 0.00011f;
-
-	
-
 private:
 
 	TNode* scene;

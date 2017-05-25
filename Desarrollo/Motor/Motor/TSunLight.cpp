@@ -79,7 +79,7 @@ void TSunLight::calcularMatrices() {
 	//lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 700.5f);
 	//lightView = glm::lookAt(glm::vec3(-400.0f, 0.0f, 0.0f), glm::vec3(1.0, 0, 0), glm::vec3(0.0, 1.0, 0.0));
 	//perspectiva
-	lightProjection = glm::perspective(z, (float)1280 / (float)720, 1.0f, 1000.0f);
+	lightProjection = glm::perspective(z, (float)1280 / (float)720, 1.0f, 500.0f);
 	lightView = glm::lookAt(glm::vec3(m_position.getX(), m_position.getY(), m_position.getZ()), glm::vec3(m_direccion.getX(), m_direccion.getY(), m_direccion.getZ()), glm::vec3(0.0, 1.0, 0.0));
 	lightSpaceMatrix = lightProjection * lightView;
 }
