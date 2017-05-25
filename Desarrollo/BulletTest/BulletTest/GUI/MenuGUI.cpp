@@ -201,6 +201,8 @@ void MenuGUI::inicializar() {
 	MaxKillEb = static_cast<CEGUI::Editbox*>(OpcionesGameWindow->getChild(1005));
 	MaxKillEb->setText(Settings::i().GetValue("maxkills"));
 
+	MaxKillEb->subscribeEvent(CEGUI::Editbox::EventActivated, CEGUI::Event::Subscriber(&MenuGUI::onMaxKillClicked, this));
+
 	LanServerBtn = static_cast<CEGUI::ToggleButton*>(OpcionesGameWindow->getChild(10));
 
 	int lan = std::stoi(Settings::i().GetValue("Lan"));
@@ -227,11 +229,11 @@ void MenuGUI::update()
 	static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();*/
 	/*injectKeyDown(Input::i().getLatestKeyReleased());
 	injectKeyUp(Input::i().getLatestKeyReleased());*/
-	if (lastKey != Input::i().getLatestKeyReleased()) {
-		injectChar(Input::i().getLatestKeyReleased());
+	//if (lastKey != Input::i().getLatestKeyReleased()) {
+		
 		//std::cout << "Latest Key: " << GlfwToCeguiKey(Input::i().getLatestKeyReleased()) << std::endl;
-		lastKey = Input::i().getLatestKeyReleased();
-	}
+		//lastKey = Input::i().getLastTextInput();
+	//}
 	
 
 	
@@ -265,7 +267,11 @@ void MenuGUI::update()
 		Salir->setVisible(false);
 	}*/
 }
+bool MenuGUI::	onMaxKillClicked(const CEGUI::EventArgs & e) {
+	
 
+	return true;
+}
 void MenuGUI::handleEvent(Event * ev) {
 }
 bool MenuGUI::onCrearPartidaClicked(const CEGUI::EventArgs & e) {
@@ -366,13 +372,13 @@ bool MenuGUI::onAtrasClicked(const CEGUI::EventArgs & e) {
 				NetworkManager::i().getNetPlayer()->sendServerIPtoNewClient();
 			}
 				
-
-			
-
 		}
 		
 		Settings::i().SetValue("bots", std::to_string(getNumBots()));
 		Settings::i().SetValue("maxkills", MaxKillEb->getText().c_str());
+
+		for (int i = 2; i <= 7; i++)
+			static_cast<CEGUI::PushButton*>(LastBullet->getChild(i))->moveToFront();
 	}
 	else if (m_stateMenu == stateMenu::enumOpcionesVideo) {
 		ClippingManager::i().setUpdateClipping(Clipping->isSelected());

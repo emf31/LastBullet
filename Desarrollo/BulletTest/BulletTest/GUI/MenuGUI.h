@@ -72,6 +72,8 @@ public:
 	bool onLanServerBtnActivated(const CEGUI::EventArgs & e);
 	bool onLanServerBtnDeactivated(const CEGUI::EventArgs & e);
 	bool onShadowsChange(const CEGUI::EventArgs & e);
+
+	bool onMaxKillClicked(const CEGUI::EventArgs & e);
 	
 	
 

@@ -47,6 +47,8 @@ void Menu::HandleEvent()
 		menuGUI.injectLeftMouseButtonUp();
 
 	}
+	menuGUI.injectKeyUp(Input::i().getLastTextInput());
+	menuGUI.injectChar(Input::i().getLastTextInput());
 
 
 }

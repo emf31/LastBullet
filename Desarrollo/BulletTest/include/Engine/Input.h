@@ -59,6 +59,10 @@ public:
 		i().scroll_callbackImpl(window, xoffset, yoffset);
 	}
 
+	static void textInput_callback(GLFWwindow* window, unsigned int codepoint) {
+		i().textInput_callbackImpl(window, codepoint);
+	}
+
 	void endEventProcess();
 
 	void Do_Movement(GLfloat deltaTime);
@@ -99,7 +103,7 @@ public:
 
 	bool keyReleased(unsigned int keycode);
 
-	unsigned int getLatestKeyReleased();
+	unsigned int getLastTextInput();
 
 private:
 	Input();
@@ -110,8 +114,9 @@ private:
 	void mouse_callbackImpl(GLFWwindow* window, double xpos, double ypos);
 	void scroll_callbackImpl(GLFWwindow* window, double xoffset, double yoffset);
 	void key_callbackImpl(GLFWwindow* window, int key, int scancode, int action, int mode);
+	void textInput_callbackImpl(GLFWwindow* window, unsigned int codePoint);
 
 	void toggleWindowMode();
 
-	unsigned int LatestKey = 0;
+	unsigned int textInput = 0;
 };
