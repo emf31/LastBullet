@@ -1,4 +1,5 @@
 #include "InGame.h"
+#include <../global.h>
 #include <EntityManager.h>
 #include <TriggerSystem.h>
 #include <EventSystem.h>
@@ -36,8 +37,13 @@ void InGame::Inicializar()
 	SoundManager::i().stopAllSounds();
 	PhysicsEngine::i().inicializar();
 
-
-	m_player = new Player(SteamFriends()->GetPersonaName(), NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
+	if (USING_STEAM) {
+		m_player = new Player(SteamFriends()->GetPersonaName(), NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
+	}
+	else {
+		m_player = new Player(Settings::i().GetValue("name"), NetworkManager::i().getNetPlayer(), RakNet::UNASSIGNED_RAKNET_GUID);
+	}
+	
 
 	const std::vector<TPlayer> bots = NetworkManager::i().getBots();
 
