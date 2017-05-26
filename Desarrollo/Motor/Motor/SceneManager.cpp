@@ -98,6 +98,7 @@ void SceneManager::draw() {
 			}
 
 			//**************** FIN RENDER DE LINEAS PARA DEBUG DE FISICAS**************
+			//-------RENDER DEL BILLBOARDANIMADO--------
 			renderBildboard();
 		}
 }
@@ -325,6 +326,8 @@ void SceneManager::inicializarBufferSkybox()
 
 void SceneManager::inicializarBufferBildboard()
 {
+
+	//nos guardamos todos los frames que usara el billboard animado
 	billboardFrameName.push_back("assets/explosionbuenaAzul/explosion0.png");
 	billboardFrameName.push_back("assets/explosionbuenaAzul/explosion1.png");
 	billboardFrameName.push_back("assets/explosionbuenaAzul/explosion2.png");
@@ -444,7 +447,6 @@ void SceneManager::inicializarBufferBildboard()
 void SceneManager::inicializarBuffersLineas() {
 	glGenVertexArrays(1, &LVAO);
 	glGenBuffers(1, &LVBO);
-	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
 	glLineWidth(1.0f);
 }
 
@@ -452,7 +454,6 @@ void SceneManager::inicializarBuffersLineas() {
 void SceneManager::renderLuces()
 {
 	
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaderLuces->Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gPosition);
@@ -498,7 +499,6 @@ void SceneManager::renderLuces()
 	glUniform1i(glGetUniformLocation(shaderLuces->Program, "castStaticShadow"), castStaticShadow);
 	glUniform1f(glGetUniformLocation(shaderLuces->Program, "bias"), bias);
 
-	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
 	
 	
 	//copiamos el frame burffer leido
@@ -506,7 +506,7 @@ void SceneManager::renderLuces()
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); 
 	glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+	// renderizamos el plano pegado a la pantalla donde se visualiza nuestra imagen
 	RenderQuad();
 
 }
@@ -516,9 +516,7 @@ void SceneManager::renderBlur()
 	GLboolean horizontal = true, first_iteration = true;
 	GLuint amount = 10;
 	shaderBlur->Use();
-	//glBindFramebuffer(GL_READ_FRAMEBUFFER, gDeferred);
-	//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-	//glBlitFramebuffer(0, 0, (GLint)screenWidth, (GLint)screenHeight, 0, 0, (GLint)screenWidth, (GLint)screenHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+
 	glActiveTexture(GL_TEXTURE0);
 	for (GLuint i = 0; i < amount; i++)
 	{
@@ -534,26 +532,11 @@ void SceneManager::renderBlur()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void SceneManager::renderBloom()
-{
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//shaderBloom->Use();
-
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, bloomBuffers[0]);
-	//glActiveTexture(GL_TEXTURE1);
-	//glBindTexture(GL_TEXTURE_2D, gEscena);
-	////glUniform1f(glGetUniformLocation(shaderBloom->Program, "exposure"), exposure);
-	//RenderQuad();
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-}
 
 
 void SceneManager::renderSkybox()
 {
-	// Draw skybox first
-	//glDepthMask(GL_FALSE);// Remember to turn depth writing off
+
 	glDepthFunc(GL_LEQUAL);
 	shaderSkybox->Use();
 	glm::mat4 viewWithOutTras = glm::mat4(glm::mat3(camaraActiva->GetViewMatrix()));	
@@ -567,7 +550,6 @@ void SceneManager::renderSkybox()
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
-	//glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LESS);
 }
 
@@ -587,24 +569,7 @@ void SceneManager::renderBildboard()
 {
 
 	glEnable(GL_BLEND);
-	//shaderBildboard->Use();
-	//glm::mat4 viewWithOutTras = camaraActiva->GetViewMatrix();	
-	//glm::mat4 projec = camaraActiva->getProjectionMatrix();
-	//glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "view"), 1, GL_FALSE, glm::value_ptr(viewWithOutTras));
-	//glUniformMatrix4fv(glGetUniformLocation(shaderBildboard->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projec));
-	//
-
-	//glBindVertexArray(bildboardVAO);
-	//glActiveTexture(GL_TEXTURE0);
-	//glUniform1i(glGetUniformLocation(shaderBildboard->Program, "muzzle"), 0);
-	//glBindTexture(GL_TEXTURE_2D, bildboardTexture);
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
-	//glBindVertexArray(0);
-
-
 	shaderBildboard->Use();
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, SceneManager::i().bildboardTexture);
 	billboardrendering = true;
 
 	for (auto i = vectorBillboards.cbegin(); i != vectorBillboards.cend();) {
@@ -660,10 +625,8 @@ TModel * SceneManager::crearNodoMalla(TMeshGroup * mesh)
 	model->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
 	model->setMiNodo(nuevoNodoMalla);
 
-	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoMalla->setEntity(model);
-	//nuevoNodoMalla->setModel(model);
-	//nuevoNodoMalla->getEntity()->setModel();
+
 
 	return model;
 }
@@ -733,10 +696,8 @@ TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)
 	animation->setTransformacionTraslacion(static_cast<TTransform*> (nuevoNodoTraslacion->getEntity()));
 	animation->setMiNodo(nuevoNodoAnimacion);
 
-	//TODOOO aqui no tendriamos qeu setearle el modelo al TModel?
 	nuevoNodoAnimacion->setEntity(animation);
-	//nuevoNodoMalla->setModel(model);
-	//nuevoNodoMalla->getEntity()->setModel();
+
 
 	return animation;
 
@@ -744,7 +705,6 @@ TAnimation * SceneManager::crearNodoAnimacion(TAnimationGroupMesh * animGroup)
 
 TNode * SceneManager::crearNodoTransformacion(int entityID)
 {
-	//DUDA aqui tendriamos que tener tambien algun identificador en el nodo no? porque yo estoy creando 3 nodos de transformacion pero no se cual es cual.
 	TNode* transNode = new TNode(entityID, scene);
 	TTransform* trans = new TTransform();
 	transNode->setEntity(trans);
@@ -1032,6 +992,10 @@ void SceneManager::activeDynamicShadow(bool b) {
 }
 void SceneManager::activeStaticShadow(bool b) {
 	castStaticShadow = b;
+}
+void SceneManager::cleanScreen() {
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 void SceneManager::shutdown()
 {

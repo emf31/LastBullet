@@ -52,8 +52,7 @@ bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta, 
 		curr->animacion.push_back(meshes->vectorModelos[i]);
 	}
 
-	//al salir del moto animacion se borra pork es local pero su contenido no ya que son punteros a TMeshGroup
-	//la duda es si animMAp se iguala a animacion cuando se borre animacion que va a pasar? (creo que esta bien pork se hace una copia del vector pero no del contenido)
+
 	animMap[animName] = curr;
 	
 	numAnims += curr->animacion.size();
@@ -65,7 +64,6 @@ bool TAnimation::setAnimation(const std::string& animName,int desde, int hasta, 
 
 void TAnimation::setCurrentAnimation(const std::string & animName)
 {
-	//TODO mostrar mensaje de error si no encuentra la animacion que le pasas
 	currentAnimation = animMap[animName];
 	currentFrame = 0;
 	currentTime.restart();
@@ -145,8 +143,6 @@ void TAnimation::beginDrawSombras()
 }
 
 void TAnimation::endDraw() {
-	//std::cout << u8"Adiós" << std::endl;
-	//TEntity::endDraw();
 }
 
 

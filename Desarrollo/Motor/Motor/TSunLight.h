@@ -20,7 +20,9 @@ public:
 	glm::mat4 getLightView();
 	glm::mat4 getLightSpaceMatrix();
 	void calcularMatrices();
-	//metodos para las pruebas de sombras
+
+
+	//metodos para las sombras
 	void setPosition(Vec3<float> pos);
 	void setVectorDireccion(Vec3<float> dir);
 	Vec3<float> getPosition();

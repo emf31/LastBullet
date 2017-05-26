@@ -72,7 +72,6 @@ Vec3<float> TTransform::getPosition()
 {
 	//este metodo lo necesitamos porque cuando enviamos paquetes de movimiento en el multijugador no podemos enviar matrices, enviamos vectores de 3 con la posicion en X,Y,Z del personaje.
 	return m_position;
-	//return Vec3<float>(m_matrix[3][0], m_matrix[3][1], m_matrix[3][2]);
 }
 Vec3<float> TTransform::getScale()
 {

@@ -25,8 +25,7 @@
 class TModel : public TEntity {
 	
 public:
-	/*  Funciones   */
-	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
+
 	TModel(TMeshGroup* meshGroup);
 	~TModel();
 
@@ -36,7 +35,6 @@ public:
 	void setScale(Vec3<float> esc);
 
 	void setRotationMatrix(glm::mat4 matRot);
-	void setOrientation(const Vec3<float>& orientation);
 
 	Vec3<float> getRotation();
 	Vec3<float> getPosition();
@@ -67,7 +65,7 @@ private:
 	virtual void beginDrawSombras();
 	virtual void endDraw();
 
-	/*  Model Data  */
+	
 	TMeshGroup* m_meshGroup;
 
 	float m_r;

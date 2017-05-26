@@ -5,19 +5,10 @@
 
 
 TModel::TModel(TMeshGroup* meshGroup) : sm(SceneManager::i()) {
-	/*Shader* shader;
-	if (*shaderPath) {
-		shader = ResourceManager::i().getShader(shaderPath);
-	} else {
-		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
-	}*/
-
-
 	m_meshGroup = meshGroup;
 
 	setID(SceneManager::i().getEntityCount());
 	SceneManager::i().aumentaEntityCount();
-	//visible = true;
 	setModelColor(1.0f, 1.0f, 1.0f);
 }
 
@@ -26,7 +17,7 @@ TModel::~TModel() {
 }
 
 void TModel::beginDraw() {
-	//if (visible) {
+
 
 		
 		const glm::mat4& view = sm.getViewMatrix();
@@ -44,7 +35,6 @@ void TModel::beginDraw() {
 		//Dibujamos el modelo
 		m_meshGroup->draw();
 			
-	//}
 
 }
 
@@ -129,49 +119,3 @@ void TModel::removeEntity()
 	transRotacion->getMiNodo()->removeNode();
 }
 
-void TModel::setOrientation(const Vec3<float>& orientation)
-{
-
-	//NOTA: este metodo en la version final del juego no esta aqui en el motor, sino que pertecene a la fachada del juego.
-
-	glm::mat4 m_matrix = glm::mat4();
-	glm::vec3 column1;
-	glm::vec3 column2;
-	glm::vec3 column3;
-	glm::vec3 up = glm::vec3(0, 1, 0);
-	glm::vec3 direction = glm::vec3(orientation.getX(), orientation.getY(), orientation.getZ());
-
-	glm::vec3 xaxis = glm::cross(up, direction);
-	xaxis = glm::normalize(xaxis);
-
-	glm::vec3 yaxis = glm::cross(direction, xaxis);
-
-	yaxis = glm::normalize(yaxis);
-
-	column1.x = xaxis.x;
-	column1.y = yaxis.x;
-	column1.z = direction.x;
-
-	column2.x = xaxis.y;
-	column2.y = yaxis.y;
-	column2.z = direction.y;
-
-	column3.x = xaxis.z;
-	column3.y = yaxis.z;
-	column3.z = direction.z;
-
-	m_matrix[0][0] = column1.x;
-	m_matrix[1][0] = column1.y;
-	m_matrix[2][0] = column1.z;
-
-	m_matrix[0][1] = column2.x;
-	m_matrix[1][1] = column2.y;
-	m_matrix[2][1] = column2.z;
-
-	m_matrix[0][2] = column3.x;
-	m_matrix[1][2] = column3.y;
-	m_matrix[2][2] = column3.z;
-
-	setRotationMatrix(m_matrix);
-
-}

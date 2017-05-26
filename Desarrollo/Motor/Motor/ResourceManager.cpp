@@ -63,7 +63,6 @@ Texture* ResourceManager::getTexture(const std::string& path, const std::string&
 			}
 			catch (std::exception e) {
 				std::cout << e.what() << std::endl;
-				//return nullptr;
 			}
 
 			// Si no lop está, primero la cargamos :))

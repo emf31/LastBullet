@@ -27,8 +27,7 @@ TAnimationGroupMesh::~TAnimationGroupMesh() {
 
 void TAnimationGroupMesh::processAnimations()
 {
-	//Cargamos el primero para obtener los materiales
-	//y texturas
+	//Cargamos el primero para obtener los materiales y texturas
 
 	for (std::size_t i = 0; i < NumFrames; i++) {
 		AnimationMesh* anim = new AnimationMesh(paths.at(i));

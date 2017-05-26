@@ -26,7 +26,6 @@ class TCamera : public TEntity {
 public:
 	~TCamera();
 
-	//Llamar a esto desencadena que todos los hijos de este TAnimation se borren
 	virtual void removeEntity() override;
 
 	virtual void beginDraw();

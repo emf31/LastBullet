@@ -1,6 +1,6 @@
 #pragma once
 #include "TEntity.h"
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/gtc/matrix_transform.hpp> 
 #include <glm/gtc/type_ptr.hpp>
 #include "TTransform.h"
 class TLuz : public TEntity {

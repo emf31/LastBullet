@@ -5,14 +5,6 @@
 
 
 TMeshGroup::TMeshGroup(GLchar * path, Shader* shaderPath) : sm(SceneManager::i()) {
-	/*Shader* shader;
-	if (*shaderPath) {
-		shader = ResourceManager::i().getShader(shaderPath);
-	} else {
-		shader = ResourceManager::i().getShader("assets/model_loading.vs", "assets/model_loading.frag");
-	}*/
-
-
 	// Carmamos el modelo
 	this->loadModel(path);
 }
@@ -134,13 +126,6 @@ TMesh* TMeshGroup::processMesh(aiMesh * mesh, const aiScene * scene) {
 	// Materiales!
 	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
-		// Diffuse: texture_diffuseN
-		//vector<Texture*> diffuseMaps;
-		// Specular: texture_specularN
-		//vector<Texture*> specularMaps;
-		// Normal: texture_normalN
-		//vector<Texture*> normalMaps;
 
 		// 1. Diffuse maps
 		this->loadMaterialTextures(textures, material, aiTextureType_DIFFUSE, "texture_diffuse");

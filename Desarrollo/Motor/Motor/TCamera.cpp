@@ -39,7 +39,6 @@ glm::mat4 TCamera::GetViewMatrix() {
 	calcularPosicionVista();
 	view = glm::inverse(view);
 	return view;
-	//return glm::lookAt(posCamara, posCamara + direccion, glm::vec3(0.0f,1.0f,0.0f));
 }
 
 void TCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime) {

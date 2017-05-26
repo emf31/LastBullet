@@ -33,7 +33,7 @@ struct Vertex {
 class TMesh {
 public:
 
-	/*  Mesh Data  */
+	
 	Vertex *vertices;
 	GLuint *indices;
 	std::vector<Texture*> textures;
@@ -46,7 +46,7 @@ public:
 
 
 private:
-	/*  Render data  */
+	
 	Shader *shader;
 	GLuint VAO, VBO, EBO;
 	void setupMesh();

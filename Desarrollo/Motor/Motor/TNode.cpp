@@ -30,13 +30,12 @@ void TNode::addChild(TEntity * ent) {
 
 	while (padre->getParentNode() != nullptr && padre->getMyNodeEntityID() == ent->getID()) {
 
-		//haciendo esta asignacion si luego cambio padre tambien se cambia nuevoHijo? al ser un puntero que apunta a otro puntero
 		nuevoHijo = nuevoHijo->getParentNode();
 		padre = padre->getParentNode();
 	}
 	padre->removeChild(nuevoHijo);
-	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el madre de miNodo y no directamente miNodo
-	//pues es bien sencillo, simplemente pork estamos en un nodo malla que son a los que se tiene acceso desde el juego
+	//NOTA PARA NUESTROS FUTUROS YO: ¿porque en setParent se pasa el madre de miNodo y no directamente miNodo?
+	//pues es bien sencillo, simplemente porque estamos en un nodo malla que son a los que se tiene acceso desde el juego
 	//y el padre no puede ser el nodo malla sino la transformacion de la que depende este nodo malla , es decir, el padre del nodo malla. De nada futuro yo ;)
 	nuevoHijo->setParentNode(this);
 	this->addChild(nuevoHijo);
@@ -75,31 +74,24 @@ void TNode::draw() {
 	//Solo continua el arbol(recorrido de sus hijos) si el nodo es visible
 	if (visible) {
 		if (getEntity() != nullptr) {
-			//primero se dibuja el nodo actual (la entity) y luego los hijos
-			//explicacion: el primer begin draw sera el nodo rotacion, se encarga de multiplicar la matriz actual por su rotacion
-			//el segundo nodo es el de escala multiplica la matriz actual que ya estaba rotada y la escala
-			//el tercer nodo seria el de traslacion que se encargaria de aplicar una traslacion a la matriz que ya ha sido rotada y escalada
-			//el cuarto nodo ya seria el nodo malla que su begin draw se encargaria de dibujar el modelo con la rotacion,escala y posicion de la matriz actual
-			getEntity()->beginDraw();//apilo la transformacion de la entidad a la matriz correspondiente
+
+			getEntity()->beginDraw();
 			for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
 				(*it)->draw();
 			}
-			getEntity()->endDraw();//desapilo la transformacion que hice antes
+			getEntity()->endDraw();
 
 		}
 
 		else {
-			//si es el nodo raiz se dibuja sus hijos directamente
+			//si es el nodo raiz o un nodo zona (para el clipping y oclusion mediante portales) se dibuja sus hijos directamente
 			for (std::vector<TNode*>::iterator it = m_childNodes.begin(); it != m_childNodes.end(); it++) {
 				//si hemos vuelto a la raiz antes de pasar al siguiente hijo volvemos a resetear la matrizActual a la Identidad
-				//if (getEntity() == nullptr) {
+				
 				sm.setMatrizActual(glm::mat4());
-				//}
 
 				(*it)->draw();
 			}
-			//desactivo el gBuffer que estaba activo pork hemos ido recorriendo el arbol dibujando todos los modelos
-
 		}
 	}
 

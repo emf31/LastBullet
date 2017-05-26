@@ -14,7 +14,6 @@ TMesh::TMesh(Vertex* vertices, GLuint *indices, const std::vector<Texture*>& tex
 
 
 TMesh::~TMesh() {
-	// Properly de-allocate all resources once they've outlived their purpose
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
@@ -58,12 +57,10 @@ void TMesh::draw() {
 			glBindTexture(GL_TEXTURE_2D, (*it)->id);
 			cont++;
 		}
-		//glBindTexture(GL_TEXTURE_2D, (*it)->id);
 		
 	}
 
-	// Ponemos el brillo a su valor por defecto (se podría cambiar el valor??)
-	//glUniform1f(glGetUniformLocation(shader->Program, "material.brillo"), 128.0f);
+
 
 	// Dibujamos!
 	glBindVertexArray(this->VAO);

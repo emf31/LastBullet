@@ -16,7 +16,7 @@ public:
 		return rm;
 	}
 	
-	//TODO Métodos para añadr resources, para buscar resources, meterlos al árbol de la escena...
+	
 	TMeshGroup* getMesh(const std::string& path, Shader* shader=NULL);
 	Shader* getShader(const std::string& vertexShader, std::string fragmentShader="");
 	Texture* getTexture(const std::string& path, const std::string& type, const std::string& directory);

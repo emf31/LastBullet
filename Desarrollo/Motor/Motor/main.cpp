@@ -22,25 +22,13 @@ EngineDevice engine;
 void inicialize() {
 	SceneManager::i().setActiveCamera(SceneManager::i().crearNodoCamara());
 	//window
-	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj")/*, Vec3<float>(25.0f, 0.0f, 0.0f), Vec3<float>(90.0f, 0.0f, 90.0f)*/);
-	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj")/*, Vec3<float>(10.0f, 0.0f, 0.0f), Vec3<float>(45.0f, 0.0f, 0.0f)*/);
+	TModelEstatico* window2 = SceneManager::i().crearNodoMallaEstatica(SceneManager::i().getMesh("assets/WindowTest.obj"));
+	TModel* window = SceneManager::i().crearNodoMalla(SceneManager::i().getMesh("assets/WindowTest.obj"));
 
 	window->setPosition(Vec3<float>(5, 0, 0));
 	window->setRotationXYZ(Vec3<float>(0,0,0));
 	window2->setTransformMatrix(Vec3<float>(25, 0, 0), Vec3<float>(0, 0, 0), Vec3<float>(1, 1, 1));
 
-
-
-	//Creas el nodo(grafico)
-	/*TAnimation* m_nodo = SceneManager::i().crearNodoAnimacion(ResourceManager::i().getAnimationMesh("assets/personaje1", 18));
-
-	m_nodo->setAnimation("correr", 0, 17, true);
-	/*m_nodo->setAnimation("muerte", 18, 69, true);
-	m_nodo->setAnimation("salto", 70, 93, false);
-	m_nodo->setAnimation("muerte60", 94, 139, true);
-	m_nodo->setCurrentAnimation("correr");
-	m_nodo->setFrameTime(milliseconds(20));
-	m_nodo->setScale(Vec3<float>(0.023f, 0.023f, 0.023f));*/
 
 	SceneManager &sm = SceneManager::i();
 
@@ -75,7 +63,6 @@ void inicialize() {
 
 	//*******LUCES*******
 	//sol
-	//TSunLight* sol = sm.crearNodoSunLight(Vec3<float>(-0.8f, -3.0f, -0.8f));
 	TSunLight* sol = SceneManager::i().crearNodoSunLight(Vec3<float>(0.0f, 0.0f, 0.0f));
 	sol->setIntensidadAmbiente(0.5);
 	sol->setPosition(Vec3<float>(-20.0f, 5.0f, -5.0f));
@@ -275,7 +262,6 @@ int main() {
 
 		vecDir = sm.camaraActiva->getVectorDireccion();
 		newPos = vecDir *0.3f;
-		p1->setOrientation(vecDir);
 		p1->setPosition(sm.camaraActiva->getPosition());
 		p1->updatePosition(newPos);
 

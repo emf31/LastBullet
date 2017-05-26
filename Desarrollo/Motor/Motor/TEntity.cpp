@@ -19,7 +19,6 @@ TEntity::~TEntity() {
 
 
 void TEntity::endDraw() {
-	//std::cout << "Hola" << std::endl;
 }
 
 TNode * TEntity::getMiNodo() {
@@ -48,7 +47,7 @@ void TEntity::addChild(TEntity * ent) {
 		padre = padre->getParentNode();
 	}
 	padre->removeChild(nuevoHijo);
-	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el madre de miNodo y no directamente miNodo
+	//NOTA PARA NUESTROS FUTUROS YO: porque en setParent se pasa el padre de miNodo y no directamente miNodo
 	//pues es bien sencillo, simplemente pork estamos en un nodo malla que son a los que se tiene acceso desde el juego
 	//y el padre no puede ser el nodo malla sino la transformacion de la que depende este nodo malla , es decir, el padre del nodo malla. De nada futuro yo ;)
 	nuevoHijo->setParentNode(miNodo->getParentNode());
