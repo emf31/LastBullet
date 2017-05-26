@@ -35,6 +35,8 @@ public:
 
 	virtual void setCurrentFrame(int frame) override { }
 	virtual int getCurrentFrame() const override { return 0; }
+
+	virtual bool isVisible() override { return m_node->isVisible(); }
 	
 private:
 

@@ -253,17 +253,6 @@
                 <Property name="Text" value="Shadows" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="AlfiskoSkin/Checkbox" name="Checkbox" >
-                <Property name="Area" value="{{0,671},{0,278},{0,820},{0,316}}" />
-                <Property name="Text" value="Full Screen" />
-                <Property name="AlwaysOnTop" value="true" />
-            </Window>
-            <Window type="AlfiskoSkin/Checkbox" name="Checkbox2" >
-                <Property name="Area" value="{{0,671},{0,324},{0,824},{0,361}}" />
-                <Property name="Text" value="Window" />
-                <Property name="Selected" value="true" />
-                <Property name="AlwaysOnTop" value="true" />
-            </Window>
             <Window type="AlfiskoSkin/Button" name="Button" >
                 <Property name="ID" value="99" />
                 <Property name="Area" value="{{0,1068},{0,535},{0,1194},{0,578}}" />

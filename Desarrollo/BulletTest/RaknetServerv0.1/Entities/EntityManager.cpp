@@ -391,21 +391,19 @@ void EntityManager::aumentaKill(TKill& kill, int MaxKills, RakNet::RakPeerInterf
 	}
 }
 
-void EntityManager::aumentaMuerte(RakNet::RakNetGUID & guid, RakNet::RakPeerInterface * peer)
+void EntityManager::aumentaMuerte(TKill& kill, RakNet::RakPeerInterface * peer)
 {
 	TFilaTabla *fila;
-	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
+	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(kill.guidDeath))->second;
 	fila->deaths++;
 
 	for (auto i = m_jugadores.begin(); i != m_jugadores.end(); ++i) {
 
 		//se envia a TODOS para que todos actualicen la tabla de puntuacion
 
-		RakID s_guid;
-		s_guid.mID = AUMENTA_MUERTE;
-		s_guid.guid = guid;
+		kill.mID = AUMENTA_MUERTE;
 
-		peer->Send((const char*)&s_guid, sizeof(s_guid), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
+		peer->Send((const char*)&kill, sizeof(kill), HIGH_PRIORITY, RELIABLE_ORDERED, 0, i->second->getGuid(), false);
 
 	}
 

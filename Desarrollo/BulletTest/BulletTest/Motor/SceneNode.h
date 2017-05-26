@@ -41,6 +41,8 @@ public:
 	virtual void setCurrentFrame(int frame) = 0;
 	virtual int getCurrentFrame() const = 0;
 
+	virtual bool isVisible() { return true; }
+
 	virtual void setTransformationMatriz(Vec3<float> position, Vec3<float> rotation, Vec3<float> scale) { }
 	
 	virtual void setColor(const Vec3<float> color) = 0;

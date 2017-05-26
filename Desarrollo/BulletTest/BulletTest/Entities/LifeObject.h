@@ -42,6 +42,10 @@ public:
 
 	int estado = DISPONIBLE;
 
+	bool isAvailable() {
+		return m_nodo->isVisible();
+	}
+
 private:
 	btGhostObject* m_ghostObject;
 	

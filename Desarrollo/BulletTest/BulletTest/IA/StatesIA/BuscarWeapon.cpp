@@ -42,6 +42,7 @@ void BuscarWeapon::Enter(Enemy_Bot* pEnemy) {
 		}
 	}
 
+
 	pEnemy->followPathAlreadyCreated(caminos[indice]);
 	
 

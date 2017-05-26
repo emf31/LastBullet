@@ -1,6 +1,7 @@
 #include <Dijkstra.h>
 #include <PriorityQueue.h>
-
+#include <LifeObject.h>
+#include <WeaponDrops/WeaponDrop.h>
 void Dijkstra::Search()
 {
 	IndexedPriorityQLow<float> pq(m_CostToThisNode, m_grafo.numNodes());
@@ -34,8 +35,21 @@ bool Dijkstra::isSatisfied(int NextClosestNode)
 	NavGraphNode& nodo = m_grafo.getNode(NextClosestNode);
 
 	if (nodo.extraInfo() != NULL && nodo.extraInfo()->getClassName() == m_tipo) {
-		satisfied = true;
-		m_Target = nodo.Index();
+		bool visible;
+		if (m_tipo == "LifeObject") {
+			LifeObject* life = static_cast<LifeObject*>(nodo.extraInfo());
+			visible = life->isAvailable();
+		}
+		else {
+			WeaponDrop* drop = static_cast<WeaponDrop*>(nodo.extraInfo());
+			visible = drop->isAvailable();
+		}
+		//Solo si el nodo esta visible entonces lo marcamos
+		if (visible) {
+			satisfied = true;
+			m_Target = nodo.Index();
+		}
+		
 	}
 	return satisfied;
 }

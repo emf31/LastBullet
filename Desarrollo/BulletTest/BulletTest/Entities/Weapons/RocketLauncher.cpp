@@ -18,7 +18,7 @@ RocketLauncher::~RocketLauncher()
 
 void RocketLauncher::inicializar()
 {
-	capacidadAmmo = 6;
+	capacidadAmmo = 5;
 	disparos = 0;
 	recarga = milliseconds(1500);
 	cadencia = milliseconds(350);

@@ -182,6 +182,7 @@ void Partida::aumentaKill(RakNet::RakNetGUID & guid) {
 	TFilaTabla *fila;
 	fila = &m_tabla.find(RakNet::RakNetGUID::ToUint32(guid))->second;
 	fila->kills++;
+	fila->puntuacion = fila->puntuacion + 100;
 }
 
 void Partida::aumentaMuerte(RakNet::RakNetGUID & guid) {

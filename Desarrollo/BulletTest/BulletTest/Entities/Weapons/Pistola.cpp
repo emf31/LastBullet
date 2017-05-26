@@ -17,11 +17,11 @@ Pistola::~Pistola()
 
 void Pistola::inicializar()
 {
-	damage = 16;
+	damage = 20;
 	capacidadAmmo = 12;
 	disparos = 0;
 	recarga = milliseconds(500);
-	cadencia = milliseconds(100);
+	cadencia = milliseconds(180);
 	numCargadores = numCargadoresPistola;
 	SIZE_OF_WORLD = btVector3(1500, 1500, 1500);
 	FUERZA = btVector3(10, 10, 10);
@@ -65,7 +65,7 @@ void Pistola::handleInput()
 void Pistola::cargarContenido()
 {
 	Vec3<float> player_pos = m_ent->getRenderState()->getPosition();
-	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.1f, 0.1f, 0.1f), "", "../media/Weapons/pistolaTexturizada.obj");
+	m_nodo = GraphicEngine::i().createNode(Vec3<float>(player_pos.getX(), player_pos.getY(), player_pos.getZ()), Vec3<float>(0.08f, 0.08f, 0.08f), "", "../media/Weapons/pistolaTexturizada.obj");
 	
 	m_nodo->setVisible(true);
 

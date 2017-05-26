@@ -105,6 +105,7 @@ float PathPlanner::CreatePathToItem(const std::string& tipo, std::list<Vec3<floa
 	Map::i().ConvertirNodosAPosiciones(listaNodos, camino);
 	SuavizarCamino(camino);
 
+
 	return dij.getCostToTarget();
 		
 	

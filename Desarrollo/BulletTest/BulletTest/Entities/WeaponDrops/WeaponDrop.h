@@ -41,6 +41,9 @@ public:
 	void asignaTiempo(Clock tiempo);
 	void ArmaCogida();
 
+	bool isAvailable() {
+		return m_nodo->isVisible();
+	}
 protected:
 	Clock clockRespawnWeapon;
 	float timeRespawnWeapon;

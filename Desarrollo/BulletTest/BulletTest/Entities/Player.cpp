@@ -102,9 +102,9 @@ void Player::inicializar()
 
 	listaWeapons = new Lista();
 
-	listaWeapons->insertar(asalto);
-	tieneAsalto = true;
-	asalto->setEquipada(true);
+	listaWeapons->insertar(pistola);
+	tienePistola = true;
+	pistola->setEquipada(true);
 	bindWeapon();
 
 
@@ -631,7 +631,7 @@ void Player::resetAll() {
 	pistola->setEquipada(true);
 	tienePistola = true;
 
-	//life_component->resetVida();
+	bindWeapon();
 
 	SceneManager::i().zoomZout();
 	apuntando = false;

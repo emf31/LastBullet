@@ -37,7 +37,7 @@ public:
 	void mostrarClientes();
 	void enviaImpulso(TImpulso &impulso, RakNet::RakPeerInterface *peer);
 	void aumentaKill(TKill& kill, int MaxKills, RakNet::RakPeerInterface * peer);
-	void aumentaMuerte(RakNet::RakNetGUID &guid, RakNet::RakPeerInterface * peer);
+	void aumentaMuerte(TKill& kill, RakNet::RakPeerInterface * peer);
 	void enviaFila(RakNet::RakPeerInterface *peer, TFilaTabla fila);
 	void enviaSync(RakNet::RakPeerInterface *peer,TSyncMessage sync);;
 	void empezarPartida(RakNet::RakPeerInterface *peer, TGameInfo& info);;

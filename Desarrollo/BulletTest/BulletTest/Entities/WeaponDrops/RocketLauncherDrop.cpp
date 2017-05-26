@@ -3,7 +3,7 @@
 
 RocketLauncherDrop::RocketLauncherDrop(std::shared_ptr<SceneNode> nodo, const std::string& name) : WeaponDrop(nodo, name)
 {
-	timeRespawnWeapon = 23;
+	timeRespawnWeapon = 3;
 }
 
 

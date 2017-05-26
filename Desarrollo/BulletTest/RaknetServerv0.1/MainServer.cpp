@@ -366,7 +366,7 @@ void getPackets() {
 
 			TKill kill = *reinterpret_cast<TKill*>(packet->data);
 
-			EntityManager::i().aumentaMuerte(kill.guidDeath, peer);
+			EntityManager::i().aumentaMuerte(kill, peer);
 
 			if (kill.guidDeath != kill.guidKill) {
 				//si el jugador que mata es distinto del que muere aumenta la kill, sino aumenta solo la muerte porque te has suicidado

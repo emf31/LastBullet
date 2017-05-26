@@ -57,8 +57,8 @@ uniform int draw_mode;
 uniform int num_pointlight;
 uniform int num_flashlight;
 uniform SunLight sunlight;
-uniform FlashLight flashlight[10];
-uniform PointLight pointlight[10];
+uniform FlashLight flashlight[25];
+uniform PointLight pointlight[25];
 
 
 void main()
