@@ -59,8 +59,8 @@ public:
 		i().scroll_callbackImpl(window, xoffset, yoffset);
 	}
 
-	static void textInput_callback(GLFWwindow* window, unsigned int codepoint) {
-		i().textInput_callbackImpl(window, codepoint);
+	static void textInput_callback(GLFWwindow* window, unsigned int codepoint, int mods) {
+		i().textInput_callbackImpl(window, codepoint, mods);
 	}
 
 	void endEventProcess();
@@ -114,7 +114,7 @@ private:
 	void mouse_callbackImpl(GLFWwindow* window, double xpos, double ypos);
 	void scroll_callbackImpl(GLFWwindow* window, double xoffset, double yoffset);
 	void key_callbackImpl(GLFWwindow* window, int key, int scancode, int action, int mode);
-	void textInput_callbackImpl(GLFWwindow* window, unsigned int codePoint);
+	void textInput_callbackImpl(GLFWwindow* window, unsigned int codePoint, int mods);
 
 	void toggleWindowMode();
 

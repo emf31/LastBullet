@@ -36,6 +36,9 @@ void Enemy_Bot::SetNetBot(std::shared_ptr<NetBot> bot) {
 	m_network = bot;
 }
 
+void Enemy_Bot::SetDifficulty(eDifficulty selectedDiff) {
+	botDifficulty = selectedDiff;
+}
 
 void Enemy_Bot::inicializar()
 {
@@ -48,7 +51,25 @@ void Enemy_Bot::inicializar()
 
 	targetingSystem = new TargetingSystem(this);
 
-	weaponSystem = new WeaponSystem(this, 0.7f, 1.3, 10);
+	switch (botDifficulty) {
+	case eDifficulty::Easy:
+		weaponSystem = new WeaponSystem(this, 1.f, 1.6f, 10.f);
+		break;
+	case eDifficulty::Medium:
+		weaponSystem = new WeaponSystem(this, 0.7f, 1.3f, 10.f);
+		break;
+
+	case eDifficulty::Hard:
+		weaponSystem = new WeaponSystem(this, 0.3f, 0.6f, 10.f);
+		break;
+
+	case eDifficulty::Nightmare:
+		weaponSystem = new WeaponSystem(this, 0.0f, 0.0f, 10.f);
+		break;
+
+	default:
+		weaponSystem = new WeaponSystem(this, 0.7f, 1.3f, 10.f);
+	}
 
 	weaponSystem->Inicializar();
 

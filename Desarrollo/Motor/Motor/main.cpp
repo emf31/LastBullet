@@ -81,7 +81,7 @@ void inicialize() {
 	//linterna
 	TFlashLight* flash3 = sm.crearNodoFlashLight(Vec3<float>(8.0f, 5.0f, 4.0f), Vec3<float>(-45.0f, 270.0f, 0.0f));
 	flash3->setColor(1.0f, 1.0f, 1.0f);
-	flash->setIntensidadAmbiente(0.8);
+	flash->setIntensidadAmbiente(0.8f);
 
 	//bombilla
 
@@ -228,12 +228,12 @@ int main() {
 			engine.toggleWindowMode();
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_N)) {
-			sm.bias -= 0.0001;
+			sm.bias -= 0.0001f;
 			std::cout << "disminuyo bias, bias = " << sm.bias << std::endl;
 
 		}
 		else if (Input::i().keyPressed(GLFW_KEY_M)) {
-			sm.bias += 0.0001;
+			sm.bias += 0.0001f;
 			std::cout << "aumento bias, bias = " << sm.bias << std::endl;
 
 		}

@@ -415,7 +415,7 @@ void SceneManager::inicializarBufferBildboard()
 
 
 	GLuint text;
-	for (int i = 0; i < billboardFrameName.size(); i++) {
+	for (size_t i = 0; i < billboardFrameName.size(); i++) {
 		glGenTextures(1, &text);
 		billboardFrameAnimation.push_back(text);
 
@@ -423,7 +423,7 @@ void SceneManager::inicializarBufferBildboard()
 
 	int width, height;
 	unsigned char* image;
-	for (int i = 0; i < billboardFrameName.size(); i++) {
+	for (size_t i = 0; i < billboardFrameName.size(); i++) {
 		glBindTexture(GL_TEXTURE_2D, billboardFrameAnimation[i]);
 
 		image = SOIL_load_image(billboardFrameName[i], &width, &height, 0, SOIL_LOAD_RGBA);

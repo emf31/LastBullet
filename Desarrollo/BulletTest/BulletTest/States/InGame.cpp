@@ -57,6 +57,28 @@ void InGame::Inicializar()
 	std::list<std::shared_ptr<NetBot>>::iterator netbotit = NetworkManager::i().getNetBots().begin();
 	for (auto it = bots.begin(); it != bots.end(); ++it) {
 		Enemy_Bot *bot = new Enemy_Bot(it->name, RakNet::UNASSIGNED_RAKNET_GUID);
+		Enemy_Bot::eDifficulty dificultad;
+		switch (std::stoi(Settings::i().GetValue("difficulty"))) {
+		case 0:
+			dificultad = Enemy_Bot::eDifficulty::Easy;
+			break;
+
+		case 1:
+			dificultad = Enemy_Bot::eDifficulty::Medium;
+			break;
+
+		case 2:
+			dificultad = Enemy_Bot::eDifficulty::Hard;
+			break;
+
+		case 3:
+			dificultad = Enemy_Bot::eDifficulty::Nightmare;
+			break;
+
+		default:
+			dificultad = Enemy_Bot::eDifficulty::Medium;
+		}
+		bot->SetDifficulty(dificultad);
 		bot->inicializar();
 		bot->cargarContenido();
 

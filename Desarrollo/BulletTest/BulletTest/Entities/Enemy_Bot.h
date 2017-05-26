@@ -23,6 +23,13 @@ class Enemy_Bot : public Character {
 
 public:
 
+	enum eDifficulty {
+		Easy,
+		Medium,
+		Hard,
+		Nightmare
+	};
+
 	Enemy_Bot(const std::string& name, RakNet::RakNetGUID guid = RakNet::UNASSIGNED_RAKNET_GUID);
 
 	~Enemy_Bot();
@@ -116,9 +123,12 @@ public:
 
 	void SetNetBot(std::shared_ptr<NetBot> bot);
 
+	void SetDifficulty(eDifficulty selectedDiff);
+
 private:
 
-	
+	eDifficulty botDifficulty = eDifficulty::Medium;
+
 	float desiAsalto = 0;
 	float desiRocketLauncher = 0;
 	float desiSniper = 0;
