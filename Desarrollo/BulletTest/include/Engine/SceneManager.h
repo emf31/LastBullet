@@ -54,7 +54,6 @@ public:
 	//pasadas para un render
 	void renderLuces();
 	void renderBlur();
-	void renderBloom();
 	void renderSombras();
 	void renderSkybox();
 	void renderBildboard();
@@ -121,10 +120,7 @@ public:
 	void activeDynamicShadow(bool b);
 	void activeStaticShadow(bool b);
 
-	void cleanScreen() {
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
+	void cleanScreen();
 
 	
 	int *screenWidth, *screenHeight;

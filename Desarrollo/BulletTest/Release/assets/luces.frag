@@ -89,7 +89,7 @@ void main()
     if(castShadow || castStaticShadow){
     shadow = ShadowCalculation(FragPosLightSpace, bias);  
     }
-    colorFinal = (1.4-shadow)*modelColor * colorFinal;
+    colorFinal = (1.3-shadow)*modelColor * colorFinal;
     //*********************************POINT LIGHT*****************************************
     for(int i=0;i<num_pointlight;i++){
         float distancia = length(pointlight[i].position - FragPos);
@@ -223,6 +223,7 @@ vec3 calcularFlashLight(FlashLight light,vec3 norm, vec3 viewDir,vec3 FragPos,ve
         vec3 reflectDir = reflect(-lightDir, norm);  
         float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128.0f);
         vec3 specular = light.especular * spec * Specular;
+        specular *= 0.8f;
         
 
         // para el suavizado de la luz del flash, se va interpolando desde el radio exterior hasata el radio interior
@@ -272,7 +273,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias)
     //float bias = 0.005;
     float closestDepth = texture(shadowMap, projCoords.xy).r; 
     float currentDepth = projCoords.z;
-    shadow = currentDepth-bias > closestDepth  ? 1.0 : 0.0;
+    shadow = currentDepth-bias > closestDepth  ? 0.7 : 0.0;
 
     //para difuminar las sombras
     
@@ -282,7 +283,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias)
         for(int y = -1; y <= 1; ++y)
         {
             float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
-            shadow += currentDepth - bias > pcfDepth ? 0.5 : 0.0;        
+            shadow += currentDepth - bias > pcfDepth ? 0.7 : 0.0;        
         }    
     }
     shadow /= 9;

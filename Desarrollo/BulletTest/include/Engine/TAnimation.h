@@ -15,8 +15,7 @@ struct CurrentAnim {
 class TAnimation : public TEntity {
 
 public:
-	/*  Funciones   */
-	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
+
 	TAnimation(TAnimationGroupMesh* meshGroup);
 	~TAnimation();
 
@@ -84,7 +83,6 @@ private:
 
 	TAnimationGroupMesh* meshes;
 
-	//std::vector<TMeshGroup*> vectorModelos;
 	CurrentAnim* currentAnimation;
 
 	std::vector<bool> whoIsLoop;

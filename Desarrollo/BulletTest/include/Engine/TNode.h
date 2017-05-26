@@ -26,12 +26,6 @@ public:
 	void setVisible(bool b) { visible = b; }
 	bool isVisible() const { return visible; }
 
-	
-
-	//TODOOO antes estaba asi, pero creo que los nodos no tienen begin draw y end draw, solo tienen un draw, que ya llama al begin y end draw de las entities asociadas
-	/*virtual void beginDraw(glm::mat4 projection, glm::mat4 view, glm::mat4 model);
-	virtual void endDraw();
-	*/
 	void draw();
 	void drawSombras();
 	TEntity* getEntity();

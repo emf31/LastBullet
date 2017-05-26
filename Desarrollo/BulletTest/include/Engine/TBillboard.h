@@ -21,13 +21,12 @@
 
 #include "TMeshGroup.h"
 
-//class TNode;
+
 
 class TBillboard {
 
 public:
-	/*  Funciones   */
-	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
+
 	TBillboard(TMeshGroup* meshGroup, Vec3<float> posicion);
 	~TBillboard();
 	void draw();
@@ -47,7 +46,7 @@ private:
 
 	SceneManager &sm;
 
-	/*  Model Data  */
+	
 	TMeshGroup* m_meshGroup;
 	TTransform modelMatrix;
 	glm::mat4 mvp;

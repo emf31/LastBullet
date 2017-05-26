@@ -15,7 +15,7 @@ void main()
 	mat4 modelView = view * model;
 
   	modelView[0][0] = 1.0; 
- 	modelView[0][1] = 0.0; 
+ 	  modelView[0][1] = 0.0; 
   	modelView[0][2] = 0.0; 
 
 

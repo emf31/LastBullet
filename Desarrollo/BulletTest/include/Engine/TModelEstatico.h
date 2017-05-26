@@ -20,13 +20,11 @@
 
 #include "TMeshGroup.h"
 
-//class TNode;
 
 class TModelEstatico : public TEntity {
 
 public:
-	/*  Funciones   */
-	// Constructor, espera una ruta al recurso (y opcionalmente un shader).
+
 	TModelEstatico(TMeshGroup* meshGroup, Vec3<float> posicion , Vec3<float> rotacion, Vec3<float> escala);
 	~TModelEstatico();
 
@@ -63,7 +61,7 @@ private:
 	virtual void beginDrawSombras();
 	virtual void endDraw();
 
-	/*  Model Data  */
+	
 	TMeshGroup* m_meshGroup;
 
 	float m_r;
