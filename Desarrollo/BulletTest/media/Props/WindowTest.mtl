@@ -3,9 +3,11 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd WindowTestDiff.png
 Ni 1.00
 Ks 0.00 0.00 0.00
-map_Ka WindowTestDiff.png
-map_Ks WindowTestSpec.png
+map_Ka Props\texturasMapa\Window_Diffuse.png
+map_Kd Props\texturasMapa\Window_Diffuse.png
+map_Ks Props\texturasMapa\Window_Specular.png
+map_Kn Props\texturasMapa\Window_Normal.jpg
+map_Ke Props\noemisivo.jpg
 

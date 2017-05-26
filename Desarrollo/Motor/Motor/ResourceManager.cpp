@@ -56,7 +56,7 @@ Texture* ResourceManager::getTexture(const std::string& path, const std::string&
 			// Si la textura ya está en nuestro mapa la devolvemos.
 			return textures[path];
 		} else {
-			GLint textID;
+			GLint textID=0;
 
 			try {
 				textID = TextureFromFile(path.c_str(), directory.substr(0, directory.find_last_of('/')));
