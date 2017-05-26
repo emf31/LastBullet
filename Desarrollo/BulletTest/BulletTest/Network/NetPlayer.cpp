@@ -402,12 +402,17 @@ void NetPlayer::apagar()
 		if (USING_STEAM) {
 			lobby2Client->ClearCallbackInterfaces();
 			peer->DetachPlugin(lobby2Client);
+			//First call shutdown from base class
+			//Borrar instancia de raknet antes que de steam
+			NetObject::apagar();
 			RakNet::Lobby2Client_Steam::DestroyInstance(lobby2Client);
+		}
+		else {
+			NetObject::apagar();
 		}
 		//Do what you need here
 		m_servers.clear();
-		//First call shutdown from base class
-		NetObject::apagar();
+		
 		
 		
 	}
