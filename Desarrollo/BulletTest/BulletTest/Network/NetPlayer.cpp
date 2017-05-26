@@ -399,17 +399,15 @@ void NetPlayer::apagar()
 		/*RakNet::Lobby2Message* logoffMsg = messageFactory->Alloc(RakNet::L2MID_Client_Logoff);
 		lobby2Client->SendMsg(logoffMsg);
 		messageFactory->Dealloc(logoffMsg);*/
-		lobby2Client->ClearCallbackInterfaces();
-		peer->DetachPlugin(lobby2Client);
-		//First call shutdown from base class
-		NetObject::apagar();
-		RakNet::Lobby2Client_Steam::DestroyInstance(lobby2Client);
-
-		
-
+		if (USING_STEAM) {
+			lobby2Client->ClearCallbackInterfaces();
+			peer->DetachPlugin(lobby2Client);
+			RakNet::Lobby2Client_Steam::DestroyInstance(lobby2Client);
+		}
 		//Do what you need here
 		m_servers.clear();
-
+		//First call shutdown from base class
+		NetObject::apagar();
 		
 		
 	}
